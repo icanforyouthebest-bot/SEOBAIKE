@@ -1,0 +1,37 @@
+{
+  "permissions": {
+    "allow": [
+      "mcp__supabase__list_tables",
+      "mcp__supabase__list_migrations",
+      "mcp__supabase__apply_migration",
+      "mcp__supabase__execute_sql",
+      "mcp__supabase__get_advisors",
+      "Bash(python3:*)",
+      "Bash(python:*)",
+      "mcp__supabase__deploy_edge_function",
+      "mcp__supabase__list_edge_functions",
+      "Bash(dir:*)",
+      "Bash(grep:*)",
+      "Bash(ls:*)",
+      "WebSearch",
+      "Bash(powershell -Command \"Get-Content ''mcp-supabase-get_advisors-1770893833329.txt'' | ConvertFrom-Json | ForEach-Object { $_text } | ConvertFrom-Json | ForEach-Object { $_lints } | ForEach-Object { $_} | Group-Object -Property level | Select-Object Name, Count | Format-Table -AutoSize\")",
+      "Bash(powershell -Command \"$json = Get-Content ''C:\\\\Users\\\\user\\\\.claude\\\\projects\\\\C--SEOBAIKE\\\\40da25ef-c21e-420f-833d-001c2059355f\\\\tool-results\\\\mcp-supabase-get_advisors-1770893833329.txt'' -Raw | ConvertFrom-Json; $lints = \\($json[0].text | ConvertFrom-Json\\).lints; $lints | Group-Object level | Select-Object Name, Count | Format-Table -AutoSize\")",
+      "Bash(powershell -Command:*)",
+      "Bash(node:*)",
+      "Bash(where:*)",
+      "Bash(gh auth:*)",
+      "Bash(winget install:*)",
+      "Bash(\"C:\\\\Program Files\\\\GitHub CLI\\\\gh.exe\" auth status)",
+      "Bash(\"C:\\\\Program Files\\\\GitHub CLI\\\\gh.exe\" auth login --hostname github.com --git-protocol https --web)",
+      "Bash(cmd /c \"\"\"C:\\\\Program Files\\\\GitHub CLI\\\\gh.exe\"\" auth status\")",
+      "Bash(cmd /c \"\"\"C:\\\\Program Files\\\\GitHub CLI\\\\gh.exe\"\" auth status 2>&1\")",
+      "Bash(\"C:\\\\Program Files\\\\GitHub CLI\\\\gh.exe\" auth login --with-token)",
+      "Bash(git init:*)",
+      "Bash(git add:*)"
+    ]
+  },
+  "enableAllProjectMcpServers": true,
+  "enabledMcpjsonServers": [
+    "supabase"
+  ]
+}

@@ -1,0 +1,115 @@
+# CI/CD 流水線配置（L4）
+# 微軟提供之 GitHub Actions 參考範例
+# 實際 SEOBAIKE 部署透過 Supabase CLI + Cloudflare
+
+name: MCP Server CI/CD
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main ]
+
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: ${{ github.repository }}
+  PYTHON_VERSION: "3.11"
+
+jobs:
+  quality-check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 檢出代碼
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: 配置Python環境
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+      - name: 安裝依賴
+        run: |
+          pip install --upgrade pip
+          pip install poetry
+          poetry install --with dev
+      - name: 代碼格式檢查
+        run: |
+          poetry run black --check .
+          poetry run isort --check-only .
+      - name: 代碼質量檢查
+        run: |
+          poetry run flake8 .
+          poetry run pylint src/
+          poetry run mypy src/
+      - name: 安全掃描
+        run: |
+          poetry run bandit -r src/
+          poetry run safety check
+
+  unit-tests:
+    runs-on: ubuntu-latest
+    needs: quality-check
+    strategy:
+      matrix:
+        python-version: ["3.9", "3.10", "3.11", "3.12"]
+    steps:
+      - uses: actions/checkout@v4
+      - name: 配置Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: 安裝依賴
+        run: |
+          pip install poetry
+          poetry install --with dev
+      - name: 運行測試
+        run: |
+          poetry run pytest \
+            --cov=src \
+            --cov-report=xml \
+            --cov-report=html \
+            --junit-xml=test-results.xml
+      - name: 上傳覆蓋率報告
+        uses: codecov/codecov-action@v3
+        with:
+          file: ./coverage.xml
+          flags: unittests
+          name: codecov-umbrella
+
+  integration-tests:
+    runs-on: ubuntu-latest
+    needs: unit-tests
+    services:
+      postgres:
+        image: postgres:15
+        env:
+          POSTGRES_PASSWORD: testpass
+          POSTGRES_DB: testdb
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+      redis:
+        image: redis:7
+        options: >-
+          --health-cmd "redis-cli ping"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+    steps:
+      - uses: actions/checkout@v4
+      - name: 配置Python環境
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+      - name: 安裝依賴
+        run: |
+          pip install poetry
+          poetry install --with dev
+      - name: 運行集成測試
+        env:
+          DATABASE_URL: postgresql://postgres:testpass@localhost:5432/testdb
+          REDIS_URL: redis://localhost:6379
+        run: |
+          poetry run pytest tests/integration/ -v
