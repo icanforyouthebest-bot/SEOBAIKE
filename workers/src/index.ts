@@ -21,6 +21,7 @@ export default {
     if (path === '/') return json(200, { status: 'ok', service: 'BAIKE Remote Control', version: '2.0.0', ai: 'cloudflare-workers-ai' })
 
     if (request.method === 'GET') {
+      if (path === '/api/compliance-badge') return await handleComplianceBadge(env, url)
       if (path === '/api/webhook/whatsapp') {
         const mode = url.searchParams.get('hub.mode')
         const token = url.searchParams.get('hub.verify_token')
@@ -420,6 +421,54 @@ async function notifyRequester(env: Env, approvalResult: any, action: string): P
       await replyMessenger(platformUserId, text, token)
     }
   }
+}
+
+// ============================================================
+// 合規徽章（Framer 嵌入用，預設開啟）
+// ============================================================
+async function handleComplianceBadge(env: Env, url: URL): Promise<Response> {
+  const format = url.searchParams.get('format') || 'svg'
+
+  const res = await fetch(`${env.SUPABASE_URL}/rest/v1/rpc/get_compliance_badge_data`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', 'apikey': env.SUPABASE_SERVICE_ROLE_KEY, 'Authorization': `Bearer ${env.SUPABASE_SERVICE_ROLE_KEY}` },
+    body: '{}',
+  })
+  const data = await res.json() as any
+
+  if (format === 'json') {
+    return json(200, data)
+  }
+
+  // SVG badge — embeddable via <img> or <iframe> in Framer
+  const score = data.score ?? 0
+  const grade = data.grade ?? 'N/A'
+  const color = data.badge_color ?? '#6b7280'
+  const iso = data.iso_42001_score ?? 0
+
+  const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="280" height="40" viewBox="0 0 280 40">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#1e1b4b"/>
+      <stop offset="100%" stop-color="#312e81"/>
+    </linearGradient>
+  </defs>
+  <rect width="280" height="40" rx="8" fill="url(#bg)"/>
+  <rect x="170" width="110" height="40" rx="8" fill="${color}"/>
+  <rect x="170" width="8" height="40" fill="${color}"/>
+  <text x="14" y="25" fill="#e0e7ff" font-family="system-ui,sans-serif" font-size="13" font-weight="600">AI Compliance</text>
+  <text x="100" y="25" fill="#a5b4fc" font-family="system-ui,sans-serif" font-size="11">ISO 42001</text>
+  <text x="225" y="25" fill="#fff" font-family="system-ui,sans-serif" font-size="14" font-weight="700" text-anchor="middle">${score}/100 ${grade}</text>
+</svg>`
+
+  return new Response(svg, {
+    status: 200,
+    headers: {
+      ...SECURITY_HEADERS,
+      'Content-Type': 'image/svg+xml',
+      'Cache-Control': 'public, max-age=300',
+    },
+  })
 }
 
 // ============================================================
