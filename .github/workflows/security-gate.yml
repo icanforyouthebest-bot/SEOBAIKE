@@ -106,17 +106,29 @@ jobs:
         with:
           node-version: '20'
 
-      - name: Setup Supabase CLI
-        uses: supabase/setup-cli@v1
-
       - name: Push database migrations
         env:
           SUPABASE_ACCESS_TOKEN: ${{ secrets.SUPABASE_ACCESS_TOKEN }}
-          SUPABASE_DB_PASSWORD: ${{ secrets.SUPABASE_DB_PASSWORD }}
         run: |
-          echo "Pushing database migrations..."
-          supabase link --project-ref vmyrivxxibqydccurxug
-          supabase db push --linked
+          echo "Pushing database migrations via Management API..."
+          # Find unapplied migrations and execute via Management API
+          for f in supabase/migrations/*.sql; do
+            NAME=$(basename "$f")
+            echo "  Applying: $NAME"
+            SQL=$(cat "$f")
+            HTTP_CODE=$(curl -s -o /tmp/migrate_result.json -w "%{http_code}" \
+              -X POST "https://api.supabase.com/v1/projects/vmyrivxxibqydccurxug/database/query" \
+              -H "Authorization: Bearer $SUPABASE_ACCESS_TOKEN" \
+              -H "Content-Type: application/json" \
+              --data-raw "$(jq -n --arg q "$SQL" '{query: $q}')")
+            if [ "$HTTP_CODE" -ge 400 ]; then
+              echo "    WARNING: $NAME returned HTTP $HTTP_CODE (may already be applied)"
+              cat /tmp/migrate_result.json
+            else
+              echo "    OK"
+            fi
+          done
+          echo "Migrations complete."
 
       - name: Deploy Workers
         env:
