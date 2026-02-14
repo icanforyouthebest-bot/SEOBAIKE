@@ -2,3 +2,7 @@
 .env
 .env.*
 nul
+node_modules/
+package-lock.json
+tmp_*
+supabase/.temp/
