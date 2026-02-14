@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>BAIKE AI — Physical AI Avatar</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    overflow: hidden;
+    background: #0a0a1a;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    color: #e0e0e0;
+    height: 100dvh;
+    width: 100vw;
+  }
+  #canvas-container {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    z-index: 0;
+  }
+  canvas { display: block; }
+
+  /* Industry Badge */
+  #industry-badge {
+    position: fixed;
+    top: 16px; left: 50%;
+    transform: translateX(-50%);
+    background: rgba(108, 99, 255, 0.15);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(108, 99, 255, 0.3);
+    border-radius: 24px;
+    padding: 8px 20px;
+    font-size: 14px;
+    color: #b8b0ff;
+    z-index: 10;
+    display: none;
+    white-space: nowrap;
+  }
+  #industry-badge.active { display: block; }
+
+  /* Status indicator */
+  #status-dot {
+    position: fixed;
+    top: 16px; right: 16px;
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    background: #00d9ff;
+    box-shadow: 0 0 8px #00d9ff;
+    z-index: 10;
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+  }
+
+  /* Chat Container */
+  #chat-container {
+    position: fixed;
+    bottom: 0; left: 0; right: 0;
+    max-height: 55vh;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    pointer-events: none;
+  }
+
+  /* Messages */
+  #messages {
+    flex: 1;
+    overflow-y: auto;
+    padding: 12px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    pointer-events: auto;
+    mask-image: linear-gradient(transparent 0%, black 20%);
+    -webkit-mask-image: linear-gradient(transparent 0%, black 20%);
+  }
+  .msg {
+    max-width: 85%;
+    padding: 10px 14px;
+    border-radius: 16px;
+    font-size: 14px;
+    line-height: 1.5;
+    word-break: break-word;
+    animation: fadeIn 0.3s ease;
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .msg.user {
+    align-self: flex-end;
+    background: rgba(108, 99, 255, 0.25);
+    border: 1px solid rgba(108, 99, 255, 0.4);
+    color: #d4d0ff;
+  }
+  .msg.bot {
+    align-self: flex-start;
+    background: rgba(0, 217, 255, 0.08);
+    border: 1px solid rgba(0, 217, 255, 0.2);
+    color: #c0f0ff;
+  }
+  .msg.denied {
+    align-self: flex-start;
+    background: rgba(255, 60, 60, 0.1);
+    border: 1px solid rgba(255, 60, 60, 0.3);
+    color: #ffaaaa;
+  }
+  .msg-label {
+    font-size: 11px;
+    opacity: 0.6;
+    margin-bottom: 4px;
+  }
+
+  /* Input */
+  #input-bar {
+    display: flex;
+    gap: 8px;
+    padding: 12px 16px;
+    background: rgba(10, 10, 26, 0.85);
+    backdrop-filter: blur(20px);
+    border-top: 1px solid rgba(108, 99, 255, 0.15);
+    pointer-events: auto;
+  }
+  #msg-input {
+    flex: 1;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(108, 99, 255, 0.2);
+    border-radius: 24px;
+    padding: 10px 18px;
+    color: #e0e0e0;
+    font-size: 15px;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  #msg-input:focus {
+    border-color: rgba(108, 99, 255, 0.5);
+  }
+  #msg-input::placeholder { color: rgba(255,255,255,0.3); }
+  #send-btn {
+    width: 44px; height: 44px;
+    border-radius: 50%;
+    border: none;
+    background: linear-gradient(135deg, #6C63FF, #00D9FF);
+    color: white;
+    font-size: 18px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.15s, box-shadow 0.15s;
+  }
+  #send-btn:active { transform: scale(0.92); }
+  #send-btn:hover { box-shadow: 0 0 16px rgba(108, 99, 255, 0.5); }
+  #send-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+  /* Mobile adjustments */
+  @media (max-width: 640px) {
+    #chat-container { max-height: 50vh; }
+    .msg { max-width: 90%; font-size: 13px; }
+    #msg-input { font-size: 16px; }
+  }
+
+  /* Typing indicator */
+  .typing-dots { display: inline-flex; gap: 4px; }
+  .typing-dots span {
+    width: 6px; height: 6px;
+    background: #00d9ff;
+    border-radius: 50%;
+    animation: blink 1.4s infinite both;
+  }
+  .typing-dots span:nth-child(2) { animation-delay: 0.2s; }
+  .typing-dots span:nth-child(3) { animation-delay: 0.4s; }
+  @keyframes blink {
+    0%, 80%, 100% { opacity: 0.2; }
+    40% { opacity: 1; }
+  }
+</style>
+</head>
+<body>
+
+<div id="canvas-container"></div>
+<div id="industry-badge"></div>
+<div id="status-dot"></div>
+
+<div id="chat-container">
+  <div id="messages"></div>
+  <div id="input-bar">
+    <input id="msg-input" type="text" placeholder="輸入問題或指令..." autocomplete="off">
+    <button id="send-btn" aria-label="Send">&#9654;</button>
+  </div>
+</div>
+
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+    "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+  }
+}
+</script>
+
+<script type="module">
+import * as THREE from 'three';
+
+// ============================================================
+// CONFIG
+// ============================================================
+const WORKER_URL = 'https://seobaike-remote-control.icanforyouthebest.workers.dev';
+const BRAND_PRIMARY = 0x6C63FF;
+const BRAND_GLOW = 0x00D9FF;
+const BRAND_DENIED = 0xFF3C3C;
+
+// ============================================================
+// STATE
+// ============================================================
+let currentAnimation = 'idle';
+let animationTime = 0;
+let targetAnimation = 'idle';
+let transitionProgress = 1;
+let deniedFlashTime = 0;
+let particles = [];
+let currentUserId = 'web-' + Math.random().toString(36).substring(2, 10);
+let currentIndustry = null;
+let isSending = false;
+
+// ============================================================
+// THREE.JS SCENE
+// ============================================================
+const container = document.getElementById('canvas-container');
+const scene = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight, 0.1, 100);
+camera.position.set(0, 1.2, 4.5);
+camera.lookAt(0, 0.8, 0);
+
+const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+renderer.setSize(window.innerWidth, window.innerHeight);
+renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+renderer.toneMapping = THREE.ACESFilmicToneMapping;
+container.appendChild(renderer.domElement);
+
+// Background gradient
+const bgGeo = new THREE.PlaneGeometry(20, 20);
+const bgMat = new THREE.ShaderMaterial({
+  uniforms: {
+    uColor1: { value: new THREE.Color(0x0a0a1a) },
+    uColor2: { value: new THREE.Color(0x1a0a2e) },
+  },
+  vertexShader: `varying vec2 vUv; void main() { vUv = uv; gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0); }`,
+  fragmentShader: `uniform vec3 uColor1; uniform vec3 uColor2; varying vec2 vUv; void main() { gl_FragColor = vec4(mix(uColor1, uColor2, vUv.y), 1.0); }`,
+  depthWrite: false,
+});
+const bg = new THREE.Mesh(bgGeo, bgMat);
+bg.position.z = -5;
+scene.add(bg);
+
+// Lights
+const ambLight = new THREE.AmbientLight(0x404060, 0.6);
+scene.add(ambLight);
+const mainLight = new THREE.DirectionalLight(0xffffff, 1.2);
+mainLight.position.set(3, 5, 4);
+scene.add(mainLight);
+const fillLight = new THREE.DirectionalLight(BRAND_GLOW, 0.3);
+fillLight.position.set(-3, 2, 2);
+scene.add(fillLight);
+const rimLight = new THREE.PointLight(BRAND_PRIMARY, 0.8, 10);
+rimLight.position.set(0, 3, -2);
+scene.add(rimLight);
+
+// Ground
+const groundGeo = new THREE.CircleGeometry(3, 64);
+const groundMat = new THREE.MeshStandardMaterial({
+  color: 0x0a0a1a,
+  metalness: 0.8,
+  roughness: 0.3,
+  transparent: true,
+  opacity: 0.6,
+});
+const ground = new THREE.Mesh(groundGeo, groundMat);
+ground.rotation.x = -Math.PI / 2;
+ground.position.y = -0.5;
+scene.add(ground);
+
+// Ground ring
+const ringGeo = new THREE.RingGeometry(1.2, 1.25, 64);
+const ringMat = new THREE.MeshBasicMaterial({ color: BRAND_PRIMARY, transparent: true, opacity: 0.4, side: THREE.DoubleSide });
+const ring = new THREE.Mesh(ringGeo, ringMat);
+ring.rotation.x = -Math.PI / 2;
+ring.position.y = -0.49;
+scene.add(ring);
+
+// ============================================================
+// ROBOT AVATAR
+// ============================================================
+const robot = new THREE.Group();
+scene.add(robot);
+
+// Materials
+const bodyMat = new THREE.MeshStandardMaterial({ color: 0x2a2a40, metalness: 0.6, roughness: 0.3 });
+const accentMat = new THREE.MeshStandardMaterial({ color: BRAND_PRIMARY, metalness: 0.7, roughness: 0.2 });
+const glowMat = new THREE.MeshStandardMaterial({ color: BRAND_GLOW, emissive: BRAND_GLOW, emissiveIntensity: 0.8 });
+const deniedMat = new THREE.MeshStandardMaterial({ color: BRAND_DENIED, emissive: BRAND_DENIED, emissiveIntensity: 0.8 });
+
+// Head
+const headGroup = new THREE.Group();
+const headGeo = new THREE.SphereGeometry(0.35, 32, 32);
+const head = new THREE.Mesh(headGeo, bodyMat);
+headGroup.add(head);
+
+// Face visor
+const visorGeo = new THREE.SphereGeometry(0.32, 32, 16, 0, Math.PI * 2, 0, Math.PI * 0.5);
+const visorMat = new THREE.MeshStandardMaterial({ color: 0x1a1a30, metalness: 0.9, roughness: 0.1, transparent: true, opacity: 0.8 });
+const visor = new THREE.Mesh(visorGeo, visorMat);
+visor.rotation.x = Math.PI * 0.1;
+headGroup.add(visor);
+
+// Eyes
+const eyeGeo = new THREE.SphereGeometry(0.05, 16, 16);
+const leftEye = new THREE.Mesh(eyeGeo, glowMat);
+leftEye.position.set(-0.12, 0.05, 0.28);
+headGroup.add(leftEye);
+const rightEye = new THREE.Mesh(eyeGeo, glowMat);
+rightEye.position.set(0.12, 0.05, 0.28);
+headGroup.add(rightEye);
+
+// Antenna
+const antennaGeo = new THREE.CylinderGeometry(0.015, 0.015, 0.15, 8);
+const antenna = new THREE.Mesh(antennaGeo, accentMat);
+antenna.position.y = 0.4;
+headGroup.add(antenna);
+const antennaBall = new THREE.Mesh(new THREE.SphereGeometry(0.035, 16, 16), glowMat);
+antennaBall.position.y = 0.48;
+headGroup.add(antennaBall);
+
+headGroup.position.y = 1.1;
+robot.add(headGroup);
+
+// Neck
+const neckGeo = new THREE.CylinderGeometry(0.08, 0.1, 0.12, 16);
+const neck = new THREE.Mesh(neckGeo, accentMat);
+neck.position.y = 0.85;
+robot.add(neck);
+
+// Torso
+const torsoGeo = new THREE.CylinderGeometry(0.25, 0.3, 0.55, 16);
+const torso = new THREE.Mesh(torsoGeo, bodyMat);
+torso.position.y = 0.55;
+robot.add(torso);
+
+// Chest light
+const chestGeo = new THREE.SphereGeometry(0.06, 16, 16);
+const chestLight = new THREE.Mesh(chestGeo, glowMat);
+chestLight.position.set(0, 0.65, 0.26);
+robot.add(chestLight);
+
+// Arms
+function createArm(side) {
+  const armGroup = new THREE.Group();
+  // Shoulder
+  const shoulderGeo = new THREE.SphereGeometry(0.07, 16, 16);
+  const shoulder = new THREE.Mesh(shoulderGeo, accentMat);
+  armGroup.add(shoulder);
+  // Upper arm
+  const upperGeo = new THREE.CylinderGeometry(0.05, 0.045, 0.3, 12);
+  const upper = new THREE.Mesh(upperGeo, bodyMat);
+  upper.position.y = -0.18;
+  armGroup.add(upper);
+  // Forearm
+  const foreGroup = new THREE.Group();
+  const foreGeo = new THREE.CylinderGeometry(0.04, 0.035, 0.25, 12);
+  const fore = new THREE.Mesh(foreGeo, bodyMat);
+  fore.position.y = -0.14;
+  foreGroup.add(fore);
+  // Hand
+  const handGeo = new THREE.SphereGeometry(0.05, 12, 12);
+  const hand = new THREE.Mesh(handGeo, accentMat);
+  hand.position.y = -0.28;
+  foreGroup.add(hand);
+  foreGroup.position.y = -0.33;
+  armGroup.add(foreGroup);
+
+  const x = side === 'left' ? -0.35 : 0.35;
+  armGroup.position.set(x, 0.72, 0);
+  armGroup.userData = { foreGroup, side };
+  return armGroup;
+}
+
+const leftArm = createArm('left');
+const rightArm = createArm('right');
+robot.add(leftArm);
+robot.add(rightArm);
+
+// Legs
+function createLeg(side) {
+  const legGroup = new THREE.Group();
+  const hipGeo = new THREE.SphereGeometry(0.06, 16, 16);
+  const hip = new THREE.Mesh(hipGeo, accentMat);
+  legGroup.add(hip);
+  const upperGeo = new THREE.CylinderGeometry(0.055, 0.05, 0.3, 12);
+  const upper = new THREE.Mesh(upperGeo, bodyMat);
+  upper.position.y = -0.18;
+  legGroup.add(upper);
+  const lowerGroup = new THREE.Group();
+  const lowerGeo = new THREE.CylinderGeometry(0.045, 0.04, 0.25, 12);
+  const lower = new THREE.Mesh(lowerGeo, bodyMat);
+  lower.position.y = -0.14;
+  lowerGroup.add(lower);
+  const footGeo = new THREE.BoxGeometry(0.1, 0.04, 0.14);
+  const foot = new THREE.Mesh(footGeo, accentMat);
+  foot.position.set(0, -0.28, 0.02);
+  lowerGroup.add(foot);
+  lowerGroup.position.y = -0.33;
+  legGroup.add(lowerGroup);
+
+  const x = side === 'left' ? -0.13 : 0.13;
+  legGroup.position.set(x, 0.24, 0);
+  return legGroup;
+}
+
+const leftLeg = createLeg('left');
+const rightLeg = createLeg('right');
+robot.add(leftLeg);
+robot.add(rightLeg);
+
+robot.position.y = -0.2;
+
+// ============================================================
+// PARTICLE SYSTEM
+// ============================================================
+const particleCount = 50;
+const particleGeo = new THREE.BufferGeometry();
+const particlePositions = new Float32Array(particleCount * 3);
+const particleSizes = new Float32Array(particleCount);
+
+for (let i = 0; i < particleCount; i++) {
+  particlePositions[i * 3] = (Math.random() - 0.5) * 4;
+  particlePositions[i * 3 + 1] = Math.random() * 3 - 0.5;
+  particlePositions[i * 3 + 2] = (Math.random() - 0.5) * 4;
+  particleSizes[i] = Math.random() * 3 + 1;
+}
+
+particleGeo.setAttribute('position', new THREE.BufferAttribute(particlePositions, 3));
+particleGeo.setAttribute('size', new THREE.BufferAttribute(particleSizes, 1));
+
+const particleMat = new THREE.PointsMaterial({
+  color: BRAND_PRIMARY,
+  size: 0.02,
+  transparent: true,
+  opacity: 0.4,
+  blending: THREE.AdditiveBlending,
+  depthWrite: false,
+});
+const particleSystem = new THREE.Points(particleGeo, particleMat);
+scene.add(particleSystem);
+
+// ============================================================
+// ANIMATION SYSTEM
+// ============================================================
+function playAnimation(name) {
+  if (name === currentAnimation) return;
+  targetAnimation = name;
+  transitionProgress = 0;
+  if (name === 'denied') deniedFlashTime = 0;
+}
+
+function updateAnimations(dt) {
+  animationTime += dt;
+  if (transitionProgress < 1) transitionProgress = Math.min(1, transitionProgress + dt * 3);
+  if (transitionProgress >= 1 && targetAnimation !== currentAnimation) currentAnimation = targetAnimation;
+
+  const t = animationTime;
+  const anim = currentAnimation;
+
+  // Base position reset
+  robot.position.y = -0.2;
+  robot.rotation.y = 0;
+  headGroup.rotation.x = 0;
+  headGroup.rotation.z = 0;
+  leftArm.rotation.x = 0;
+  leftArm.rotation.z = 0;
+  rightArm.rotation.x = 0;
+  rightArm.rotation.z = 0;
+
+  if (anim === 'idle') {
+    // Gentle floating + breathing
+    robot.position.y += Math.sin(t * 1.5) * 0.03 - 0.2;
+    chestLight.scale.setScalar(1 + Math.sin(t * 2) * 0.15);
+    leftArm.rotation.z = -0.1 + Math.sin(t * 1.2) * 0.03;
+    rightArm.rotation.z = 0.1 - Math.sin(t * 1.2) * 0.03;
+    // Ring rotation
+    ring.rotation.z = t * 0.2;
+  }
+
+  else if (anim === 'thinking') {
+    // Head tilt + slow body rotation + particles glow
+    robot.rotation.y = Math.sin(t * 0.8) * 0.3;
+    headGroup.rotation.x = -0.15;
+    headGroup.rotation.z = Math.sin(t * 1.5) * 0.1;
+    robot.position.y += Math.sin(t * 2) * 0.02 - 0.2;
+    // Right arm "chin stroke"
+    rightArm.rotation.x = -0.5;
+    rightArm.rotation.z = 0.3;
+    // Particles brighten
+    particleMat.opacity = 0.4 + Math.sin(t * 3) * 0.3;
+    ring.material.opacity = 0.4 + Math.sin(t * 2) * 0.3;
+    // Eye color cycle
+    const hue = (t * 0.3) % 1;
+    leftEye.material.emissive.setHSL(hue, 1, 0.5);
+    rightEye.material.emissive.setHSL(hue, 1, 0.5);
+  }
+
+  else if (anim === 'talking') {
+    // Arm gestures + head nods
+    robot.position.y += Math.sin(t * 2) * 0.02 - 0.2;
+    headGroup.rotation.x = Math.sin(t * 3) * 0.08;
+    leftArm.rotation.x = Math.sin(t * 2.5) * 0.3;
+    leftArm.rotation.z = -0.2 + Math.sin(t * 2) * 0.15;
+    rightArm.rotation.x = Math.sin(t * 2.5 + 1) * 0.25;
+    rightArm.rotation.z = 0.2 - Math.sin(t * 2 + 1) * 0.15;
+    chestLight.scale.setScalar(1 + Math.sin(t * 4) * 0.2);
+    // Reset eye color
+    leftEye.material.emissive.set(BRAND_GLOW);
+    rightEye.material.emissive.set(BRAND_GLOW);
+  }
+
+  else if (anim === 'celebrating') {
+    // Jump + spin
+    const jumpPhase = (t * 2) % (Math.PI * 2);
+    const jumpY = Math.max(0, Math.sin(jumpPhase)) * 0.5;
+    robot.position.y = jumpY - 0.2;
+    robot.rotation.y = t * 3;
+    leftArm.rotation.z = -Math.PI * 0.6;
+    rightArm.rotation.z = Math.PI * 0.6;
+    leftArm.rotation.x = Math.sin(t * 5) * 0.3;
+    rightArm.rotation.x = Math.sin(t * 5 + Math.PI) * 0.3;
+    chestLight.scale.setScalar(1.5 + Math.sin(t * 6) * 0.5);
+    ring.material.opacity = 0.6 + Math.sin(t * 4) * 0.4;
+    leftEye.material.emissive.set(BRAND_GLOW);
+    rightEye.material.emissive.set(BRAND_GLOW);
+  }
+
+  else if (anim === 'waving') {
+    robot.position.y += Math.sin(t * 1.5) * 0.03 - 0.2;
+    // Right arm wave
+    rightArm.rotation.z = Math.PI * 0.6;
+    rightArm.rotation.x = Math.sin(t * 4) * 0.4;
+    // Slight body lean
+    headGroup.rotation.z = 0.1;
+    leftEye.material.emissive.set(BRAND_GLOW);
+    rightEye.material.emissive.set(BRAND_GLOW);
+  }
+
+  else if (anim === 'denied') {
+    deniedFlashTime += dt;
+    // Head shake
+    headGroup.rotation.z = Math.sin(t * 12) * 0.2 * Math.max(0, 1 - deniedFlashTime * 0.5);
+    robot.position.y += Math.sin(t * 1.5) * 0.02 - 0.2;
+    // Arms crossed
+    leftArm.rotation.x = -0.4;
+    leftArm.rotation.z = 0.5;
+    rightArm.rotation.x = -0.4;
+    rightArm.rotation.z = -0.5;
+    // Red flash on eyes
+    const flash = Math.sin(t * 8) > 0;
+    leftEye.material.emissive.set(flash ? BRAND_DENIED : 0x330000);
+    rightEye.material.emissive.set(flash ? BRAND_DENIED : 0x330000);
+    chestLight.material.emissive.set(flash ? BRAND_DENIED : BRAND_GLOW);
+    // Return to idle after 3s
+    if (deniedFlashTime > 3) {
+      playAnimation('idle');
+      chestLight.material.emissive.set(BRAND_GLOW);
+    }
+  }
+
+  // Particle animation
+  const positions = particleGeo.attributes.position.array;
+  for (let i = 0; i < particleCount; i++) {
+    positions[i * 3 + 1] += dt * 0.15;
+    if (positions[i * 3 + 1] > 3) positions[i * 3 + 1] = -0.5;
+  }
+  particleGeo.attributes.position.needsUpdate = true;
+}
+
+// ============================================================
+// RENDER LOOP
+// ============================================================
+const clock = new THREE.Clock();
+
+function animate() {
+  requestAnimationFrame(animate);
+  const dt = Math.min(clock.getDelta(), 0.05);
+  updateAnimations(dt);
+  renderer.render(scene, camera);
+}
+animate();
+
+// Initial wave
+setTimeout(() => playAnimation('waving'), 500);
+setTimeout(() => playAnimation('idle'), 3000);
+
+// Resize
+window.addEventListener('resize', () => {
+  camera.aspect = window.innerWidth / window.innerHeight;
+  camera.updateProjectionMatrix();
+  renderer.setSize(window.innerWidth, window.innerHeight);
+});
+
+// ============================================================
+// CHAT UI
+// ============================================================
+const messagesEl = document.getElementById('messages');
+const inputEl = document.getElementById('msg-input');
+const sendBtn = document.getElementById('send-btn');
+const badgeEl = document.getElementById('industry-badge');
+
+function addMessage(text, type = 'bot', label = null) {
+  const div = document.createElement('div');
+  div.className = `msg ${type}`;
+  if (label) {
+    const labelEl = document.createElement('div');
+    labelEl.className = 'msg-label';
+    labelEl.textContent = label;
+    div.appendChild(labelEl);
+  }
+  const content = document.createElement('div');
+  content.textContent = text;
+  div.appendChild(content);
+  messagesEl.appendChild(div);
+  messagesEl.scrollTop = messagesEl.scrollHeight;
+  return div;
+}
+
+function addTyping() {
+  const div = document.createElement('div');
+  div.className = 'msg bot';
+  div.id = 'typing-indicator';
+  div.innerHTML = '<div class="typing-dots"><span></span><span></span><span></span></div>';
+  messagesEl.appendChild(div);
+  messagesEl.scrollTop = messagesEl.scrollHeight;
+  return div;
+}
+
+function removeTyping() {
+  const el = document.getElementById('typing-indicator');
+  if (el) el.remove();
+}
+
+function setBadge(industry) {
+  if (industry) {
+    badgeEl.textContent = `🔒 ${industry}`;
+    badgeEl.classList.add('active');
+    currentIndustry = industry;
+  }
+}
+
+// Initial greeting
+addMessage('嗨！我是 BAIKE，你的 AI 管理助手。\n請輸入問題或指令開始互動。\n\n— BAIKE AI', 'bot');
+
+async function sendMessage() {
+  const text = inputEl.value.trim();
+  if (!text || isSending) return;
+
+  isSending = true;
+  sendBtn.disabled = true;
+  inputEl.value = '';
+
+  addMessage(text, 'user');
+  playAnimation('thinking');
+  addTyping();
+
+  try {
+    const res = await fetch(WORKER_URL + '/api/ai/chat', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        message: text,
+        platform: 'web',
+        platform_user_id: currentUserId,
+      }),
+    });
+
+    removeTyping();
+    const data = await res.json();
+
+    if (data.constrained && data.allowed === false) {
+      playAnimation('denied');
+      addMessage(data.reason || data.reply || '此問題超出行業範圍', 'denied', '⚠️ 行業約束');
+    } else if (data.reply) {
+      playAnimation('talking');
+      setBadge(data.industry);
+      addMessage(data.reply, 'bot', data.industry ? `🔒 ${data.industry}` : null);
+      // Return to idle after talking
+      setTimeout(() => playAnimation('idle'), 4000);
+    } else if (data.error) {
+      playAnimation('idle');
+      addMessage(`錯誤：${data.error}`, 'denied');
+    } else {
+      playAnimation('idle');
+      addMessage(JSON.stringify(data), 'bot');
+    }
+  } catch (err) {
+    removeTyping();
+    playAnimation('idle');
+    addMessage('無法連線到 BAIKE 伺服器，請稍後再試。', 'denied');
+  }
+
+  isSending = false;
+  sendBtn.disabled = false;
+  inputEl.focus();
+}
+
+sendBtn.addEventListener('click', sendMessage);
+inputEl.addEventListener('keydown', (e) => {
+  if (e.key === 'Enter' && !e.isComposing) sendMessage();
+});
+
+// Focus input on load (desktop)
+if (window.innerWidth > 768) inputEl.focus();
+
+</script>
+</body>
+</html>

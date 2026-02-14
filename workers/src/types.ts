@@ -29,6 +29,9 @@ export interface Env {
   MESSENGER_APP_SECRET: string
   MESSENGER_PAGE_ACCESS_TOKEN: string
 
+  // NVIDIA NIM
+  NVIDIA_API_KEY: string
+
   // KV for rate limiting
   RATE_LIMIT: KVNamespace
 }

@@ -43,6 +43,57 @@ export async function aiChat(ai: any, text: string): Promise<string> {
   }
 }
 
+// 約束式 AI 聊天 — 經過 L1-L4 行業約束閘道
+export async function aiConstrainedChat(
+  supabaseUrl: string,
+  supabaseKey: string,
+  message: string,
+  platform: string,
+  platformUserId: string
+): Promise<{ reply: string; allowed: boolean; constrained: boolean; industry?: string; reason?: string; session_id?: string }> {
+  try {
+    const res = await fetch(`${supabaseUrl}/functions/v1/ai-gateway`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${supabaseKey}`,
+      },
+      body: JSON.stringify({
+        message,
+        platform,
+        platform_user_id: platformUserId,
+      }),
+    })
+    const data = await res.json() as any
+
+    if (data.allowed === false) {
+      return {
+        reply: data.reason || '此問題超出您的行業範圍。',
+        allowed: false,
+        constrained: true,
+        industry: data.industry,
+        reason: data.reason,
+        session_id: data.session_id,
+      }
+    }
+
+    return {
+      reply: data.reply || '抱歉，AI 暫時無法回應。\n\n— BAIKE AI',
+      allowed: true,
+      constrained: true,
+      industry: data.industry,
+      session_id: data.session_id,
+    }
+  } catch (err) {
+    console.error('aiConstrainedChat error:', err)
+    return {
+      reply: '抱歉，AI 約束系統暫時無法連線。\n\n— BAIKE AI',
+      allowed: false,
+      constrained: false,
+    }
+  }
+}
+
 function fallback(data: any): string {
   if (!data) return '沒有資料。\n\n— BAIKE AI'
   if (data.error) return `發生錯誤：${data.error}\n\n— BAIKE AI`

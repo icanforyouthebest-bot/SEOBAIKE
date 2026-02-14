@@ -11,7 +11,7 @@ import { replyLine, pushLine } from './reply/line-reply'
 import { replyTelegram, answerCallback, type TelegramReplyOptions } from './reply/telegram-reply'
 import { replyWhatsApp } from './reply/whatsapp-reply'
 import { replyMessenger } from './reply/messenger-reply'
-import { aiFormat, aiChat } from './ai/brain'
+import { aiFormat, aiChat, aiConstrainedChat } from './ai/brain'
 
 export default {
   async fetch(request: Request, env: Env): Promise<Response> {
@@ -47,6 +47,7 @@ export default {
         case '/api/webhook/whatsapp': return await handleWebhook(request, env, 'whatsapp')
         case '/api/webhook/messenger': return await handleWebhook(request, env, 'messenger')
         case '/api/gateway': return await handleGateway(request, env)
+        case '/api/ai/chat': return await handleAiChat(request, env)
         default: return json(404, { error: 'Not found' })
       }
     } catch (err: any) {
@@ -121,11 +122,12 @@ async function handleTelegram(request: Request, env: Env): Promise<Response> {
     return json(200, { status: 'ok' })
   }
 
-  // 非指令 → AI 自由對話
+  // 非指令 → AI 約束式對話（經 L1-L4 行業約束閘道）
   if (!parsed.command.startsWith('/')) {
     if (botToken && msg.chat_id) {
-      const reply = await aiChat(env.AI, msg.text)
-      await replyTelegram(msg.chat_id, { text: reply, buttons: [[{ text: '🏠 主選單', callback_data: '/start' }]] }, botToken)
+      const result = await aiConstrainedChat(env.SUPABASE_URL, env.SUPABASE_SERVICE_ROLE_KEY, msg.text, 'telegram', msg.source_user_id)
+      const prefix = result.constrained && !result.allowed ? '⚠️ ' : result.industry ? `🔒 ${result.industry}\n\n` : ''
+      await replyTelegram(msg.chat_id, { text: prefix + result.reply, buttons: [[{ text: '🏠 主選單', callback_data: '/start' }]] }, botToken)
     }
     return json(200, { status: 'ok' })
   }
@@ -243,6 +245,27 @@ async function handleWebhook(request: Request, env: Env, platform: 'line' | 'wha
 async function handleGateway(request: Request, env: Env): Promise<Response> {
   const body = await request.json() as any
   const result = await callEdge(env, body.command, body.userId, 'web', body.sub_command, body.args)
+  return json(200, result)
+}
+
+// ============================================================
+// AI 約束聊天（L1-L4 行業約束 + NVIDIA NIM）
+// ============================================================
+async function handleAiChat(request: Request, env: Env): Promise<Response> {
+  const body = await request.json() as any
+  const { message, platform, platform_user_id } = body
+
+  if (!message) return json(400, { error: 'message is required' })
+  if (!platform_user_id) return json(400, { error: 'platform_user_id is required' })
+
+  const result = await aiConstrainedChat(
+    env.SUPABASE_URL,
+    env.SUPABASE_SERVICE_ROLE_KEY,
+    message,
+    platform || 'web',
+    platform_user_id
+  )
+
   return json(200, result)
 }
 
