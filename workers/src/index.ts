@@ -18,7 +18,21 @@ export default {
     const url = new URL(request.url)
     const path = url.pathname
 
+    // CORS preflight — 所有路徑統一處理
+    if (request.method === 'OPTIONS') {
+      return new Response(null, {
+        status: 204,
+        headers: {
+          ...SECURITY_HEADERS,
+          'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
+          'Access-Control-Allow-Headers': 'Content-Type, Authorization, X-API-Key',
+          'Access-Control-Max-Age': '86400',
+        },
+      })
+    }
+
     if (path === '/') return json(200, { status: 'ok', service: 'BAIKE Remote Control', version: '2.0.0', ai: 'cloudflare-workers-ai' })
+    if (path === '/health') return json(200, { status: 'ok', timestamp: new Date().toISOString(), version: '2.0.0' })
 
     if (request.method === 'GET') {
       if (path === '/api/compliance-badge') return await handleComplianceBadge(env, url)
@@ -53,6 +67,7 @@ export default {
       }
     } catch (err: any) {
       console.error('Worker error:', err)
+      if (err instanceof SyntaxError) return json(400, { error: 'Invalid JSON body' })
       return json(500, { error: 'Internal error', message: err.message })
     }
   },
@@ -207,12 +222,12 @@ async function callEdge(env: Env, command: string, userId: string, source: strin
 // 其他平台
 // ============================================================
 async function handleWebhook(request: Request, env: Env, platform: 'line' | 'whatsapp' | 'messenger'): Promise<Response> {
-  const hasSecret = platform === 'line' ? !!env.LINE_CHANNEL_SECRET : platform === 'whatsapp' ? !!env.WHATSAPP_ACCESS_TOKEN : !!env.MESSENGER_APP_SECRET
-  if (hasSecret) {
-    const verifiers = { line: verifyLine, whatsapp: verifyWhatsApp, messenger: verifyMessenger }
-    const isValid = await verifiers[platform](request, env)
-    if (!isValid) return json(401, { error: 'Invalid signature' })
-  }
+  // 強制 signature 驗證 — 未設定 secret 時拒絕請求（不允許 bypass）
+  const secrets: Record<string, string | undefined> = { line: env.LINE_CHANNEL_SECRET, whatsapp: env.WHATSAPP_ACCESS_TOKEN, messenger: env.MESSENGER_APP_SECRET }
+  if (!secrets[platform]) return json(503, { error: `${platform} webhook not configured` })
+  const verifiers = { line: verifyLine, whatsapp: verifyWhatsApp, messenger: verifyMessenger }
+  const isValid = await verifiers[platform](request, env)
+  if (!isValid) return json(401, { error: 'Invalid signature' })
   const body = await request.json()
   const normalizers = { line: normalizeLine, whatsapp: normalizeWhatsApp, messenger: normalizeMessenger }
   const msg = normalizers[platform](body)
@@ -244,8 +259,15 @@ async function handleWebhook(request: Request, env: Env, platform: 'line' | 'wha
 }
 
 async function handleGateway(request: Request, env: Env): Promise<Response> {
-  const body = await request.json() as any
-  const result = await callEdge(env, body.command, body.userId, 'web', body.sub_command, body.args)
+  // Gateway 認證 — 必須帶 Authorization header
+  const authHeader = request.headers.get('Authorization')
+  if (!authHeader || authHeader !== `Bearer ${env.SUPABASE_SERVICE_ROLE_KEY}`) {
+    return json(401, { error: 'Unauthorized' })
+  }
+  let body: any
+  try { body = await request.json() } catch { return json(400, { error: 'Invalid JSON body' }) }
+  if (!body.command) return json(400, { error: 'command is required' })
+  const result = await callEdge(env, body.command, body.userId || 'anonymous', 'web', body.sub_command, body.args)
   return json(200, result)
 }
 

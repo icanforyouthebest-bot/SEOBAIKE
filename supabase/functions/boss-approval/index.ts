@@ -10,9 +10,33 @@ Deno.serve(async (req) => {
     return new Response('ok', { headers: corsHeaders })
   }
 
+  // 只允許 POST
+  if (req.method !== 'POST' && req.method !== 'OPTIONS') {
+    return new Response(JSON.stringify({ error: 'Method not allowed' }), {
+      headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+      status: 405,
+    })
+  }
+
   try {
+    let parsed: any
+    try { parsed = await req.json() } catch {
+      return new Response(JSON.stringify({ error: 'Invalid JSON body' }), {
+        headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+        status: 400,
+      })
+    }
+
     const { action, queue_id, approval_code, platform, platform_user_id, reason,
-            command, sub_command, args, request_metadata } = await req.json()
+            command, sub_command, args, request_metadata } = parsed
+
+    // action 必填驗證
+    if (!action) {
+      return new Response(JSON.stringify({ error: 'action is required (approve|reject|pending|queue)' }), {
+        headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+        status: 400,
+      })
+    }
 
     const supabaseClient = createClient(
       Deno.env.get('SUPABASE_URL') ?? '',

@@ -318,7 +318,7 @@ INSERT INTO remote_command_templates (
   ('/certification', 'compliance', 'ISO 42001 認證證據包生成', 'founder',
    'compliance-handler', true, 300, '/certification',
    'medium', '生成認證申請文件並歸檔'),
-  ('/badge', 'compliance', '合規徽章即時數據', 'viewer',
+  ('/badge', 'compliance', '合規徽章即時數據', 'user',
    'compliance-handler', false, 10, '/badge',
    'low', '只讀查詢，不影響系統')
 ON CONFLICT (command) DO NOTHING;

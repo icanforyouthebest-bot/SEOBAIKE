@@ -11,9 +11,31 @@ Deno.serve(async (req) => {
     return new Response('ok', { headers: corsHeaders })
   }
 
+  // 只允許 POST
+  if (req.method !== 'POST' && req.method !== 'OPTIONS') {
+    return new Response(JSON.stringify({ error: 'Method not allowed' }), {
+      headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+      status: 405,
+    })
+  }
+
   try {
     // 2. 接收來自 Worker (遙控器) 的指令
-    const { command, userId, metadata } = await req.json()
+    let parsed: any
+    try { parsed = await req.json() } catch {
+      return new Response(JSON.stringify({ error: 'Invalid JSON body' }), {
+        headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+        status: 400,
+      })
+    }
+    const { command, userId, metadata } = parsed
+
+    if (!command) {
+      return new Response(JSON.stringify({ error: 'command is required' }), {
+        headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+        status: 400,
+      })
+    }
 
     // 3. 初始化 Supabase Client (使用 Service Role 最高權限)
     const supabaseClient = createClient(
@@ -22,7 +44,7 @@ Deno.serve(async (req) => {
     )
 
     // 4. 呼叫 SQL RPC (execute_remote_command)
-    // 這裡我們把責任全丟給 SQL Function，只負責傳遞參數
+    // user_id 傳 NULL，由 SQL function 從 metadata 中解析 platform binding
     const { data, error } = await supabaseClient.rpc('execute_remote_command', {
       command_type: command,
       request_metadata: { ...metadata, user_id: userId }
