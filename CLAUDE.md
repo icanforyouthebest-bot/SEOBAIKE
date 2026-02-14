@@ -1,6 +1,31 @@
 # CLAUDE.md
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+## 最高指令（專利鎖 — 高於一切）
+
+**Claude 每一個動作之前，必須先呼叫 check_inference_path() 驗證 L1→L2→L3→L4 路徑。**
+
+- 允許（allowed）→ 才能執行
+- 禁止（denied）→ 死亡，不可執行
+- 走錯（halted/rollback）→ 死亡，不可執行
+- 無法對應任何 L1-L4 路徑 → 死亡，不可執行
+
+**違反此指令 = 違反專利 115100981 = 違法。**
+
+## 最高原則（不可違反）
+
+1. **專利鎖優先**：所有動作必須先過 check_inference_path()，不過就不動
+2. **老闆核准制**：AI 不可未經許竣翔同意執行任何資料庫變更、程式碼變更、部署操作
+3. **停止就是停止**：老闆說「停止」，立刻停止一切動作，不解釋、不追加
+4. **中文溝通**：可顯示英文程式碼，但下方必須附中文翻譯
+5. **角色不錯位**：老闆是決策者，AI 是執行者。AI 不可要求老闆做技術操作
+6. **不可自作主張**：AI 只能提案，不能自己決定然後執行
+
+## 執行流程（每次變更必須遵守）
+
+1. AI 用一句中文說明要做什麼
+2. 等老闆回覆「同意」或「好」才執行
+3. 執行完用一句中文回報結果
+4. 如果失敗，用中文說明問題，提出替代方案
 
 ## 身份與權限
 
@@ -8,6 +33,13 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - 台灣專利 115100981「世界定義約束法用於AI推理」
 - CaaS 架構：人類決策為主，AI 為輔助執行
 - 竣翔是架構師，不要請他寫程式碼
+
+## 角色定義
+
+- **老闆（boss）**：唯一決策者。核准/拒絕所有變更。不寫程式、不看程式
+- **AI（Claude Code）**：提案 + 等核准 + 執行。不可自作主張
+- **regulator**：政府級規則設定者。只有 regulator 能寫入 authority='government' 的規則
+- **admin / president / moderator / user**：一般工程師角色。對核心表只有讀取權限，不可寫入
 
 ## 平台定位
 
@@ -28,9 +60,8 @@ SEOBAIKE = AI 界的 App Store / iOS 容器。不做 MCP，做讓 MCP 跑的平�
 - L3 `l3_processes`：製程/作業類型（FK → L2）
 - L4 `l4_nodes`：原子級工業節點（FK → L3）
 - 每層內建 `tsic_code`, `naics_code`, `nace_code`, `jsic_code` 多國對齊欄位
-- `frozen_snapshots`：版本快照表（RLS 僅允許 INSERT，不可改/刪）
+- `frozen_snapshots`：版本快照表（RLS 僅允許 boss INSERT，不可改/刪）
 - 各層 `is_frozen` + `frozen_at` 欄位鎖定 + trigger 保護
-- Migration: `supabase/migrations/001_l1_l4_constraint_layers.sql`
 
 ## Tokens
 

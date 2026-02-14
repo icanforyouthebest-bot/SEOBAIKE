@@ -1,0 +1,32 @@
+name = "seobaike-remote-control"
+main = "src/index.ts"
+compatibility_date = "2024-01-01"
+workers_dev = true
+
+# Custom domain — API 路徑走 Worker，其餘走 Framer
+routes = [
+  { pattern = "aiforseo.vip/api/*", zone_name = "aiforseo.vip" }
+]
+
+# KV for rate limiting (MVP: disabled, rate-limiter gracefully handles undefined KV)
+# [[kv_namespaces]]
+# binding = "RATE_LIMIT"
+# id = "" # Fill after `wrangler kv:namespace create RATE_LIMIT`
+
+# Cloudflare Workers AI (免費、內建)
+[ai]
+binding = "AI"
+
+# Environment variables (set via `wrangler secret put`)
+# SUPABASE_URL
+# SUPABASE_SERVICE_ROLE_KEY
+# LINE_CHANNEL_SECRET
+# LINE_CHANNEL_ACCESS_TOKEN
+# TELEGRAM_BOT_TOKEN
+# TELEGRAM_SECRET_TOKEN
+# WHATSAPP_VERIFY_TOKEN
+# WHATSAPP_ACCESS_TOKEN
+# WHATSAPP_PHONE_NUMBER_ID
+# MESSENGER_VERIFY_TOKEN
+# MESSENGER_APP_SECRET
+# MESSENGER_PAGE_ACCESS_TOKEN
