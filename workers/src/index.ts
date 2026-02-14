@@ -25,15 +25,15 @@ export default {
         const mode = url.searchParams.get('hub.mode')
         const token = url.searchParams.get('hub.verify_token')
         const challenge = url.searchParams.get('hub.challenge')
-        if (mode === 'subscribe' && token === env.WHATSAPP_VERIFY_TOKEN) return new Response(challenge, { status: 200 })
-        return new Response('Forbidden', { status: 403 })
+        if (mode === 'subscribe' && token === env.WHATSAPP_VERIFY_TOKEN) return new Response(challenge, { status: 200, headers: SECURITY_HEADERS })
+        return new Response('Forbidden', { status: 403, headers: SECURITY_HEADERS })
       }
       if (path === '/api/webhook/messenger') {
         const mode = url.searchParams.get('hub.mode')
         const token = url.searchParams.get('hub.verify_token')
         const challenge = url.searchParams.get('hub.challenge')
-        if (mode === 'subscribe' && token === env.MESSENGER_VERIFY_TOKEN) return new Response(challenge, { status: 200 })
-        return new Response('Forbidden', { status: 403 })
+        if (mode === 'subscribe' && token === env.MESSENGER_VERIFY_TOKEN) return new Response(challenge, { status: 200, headers: SECURITY_HEADERS })
+        return new Response('Forbidden', { status: 403, headers: SECURITY_HEADERS })
       }
       return json(404, { error: 'Not found' })
     }
@@ -425,6 +425,15 @@ async function notifyRequester(env: Env, approvalResult: any, action: string): P
 // ============================================================
 // 工具
 // ============================================================
+const SECURITY_HEADERS: Record<string, string> = {
+  'Content-Type': 'application/json',
+  'Access-Control-Allow-Origin': '*',
+  'Strict-Transport-Security': 'max-age=31536000; includeSubDomains; preload',
+  'Content-Security-Policy': "default-src 'none'",
+  'X-Frame-Options': 'DENY',
+  'X-Content-Type-Options': 'nosniff',
+}
+
 function json(status: number, data: any): Response {
-  return new Response(JSON.stringify(data), { status, headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' } })
+  return new Response(JSON.stringify(data), { status, headers: SECURITY_HEADERS })
 }
