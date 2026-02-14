@@ -136,44 +136,12 @@ jobs:
 
       - name: Deploy Workers
         env:
-          CF_REFRESH_TOKEN: ${{ secrets.CLOUDFLARE_OAUTH_REFRESH_TOKEN }}
-          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
         run: |
           cd workers
           npm ci
 
-          # Path 1: API Token (permanent, preferred)
-          if [ -n "$CLOUDFLARE_API_TOKEN" ]; then
-            npx wrangler deploy
-            exit $?
-          fi
-
-          # Path 2: OAuth refresh → write wrangler config → wrangler deploy
-          echo "Refreshing Cloudflare OAuth token..."
-          TOKEN_RESP=$(curl -s -X POST "https://dash.cloudflare.com/oauth2/token" \
-            -d "grant_type=refresh_token" \
-            -d "refresh_token=$CF_REFRESH_TOKEN" \
-            -d "client_id=54d11594-84e4-41aa-b438-e81b8fa78ee7")
-          CF_TOKEN=$(echo "$TOKEN_RESP" | jq -r '.access_token // empty')
-          NEW_REFRESH=$(echo "$TOKEN_RESP" | jq -r '.refresh_token // empty')
-          if [ -z "$CF_TOKEN" ]; then
-            echo "FAIL: Could not refresh OAuth token"
-            echo "$TOKEN_RESP" | jq .
-            exit 1
-          fi
-          echo "OAuth token refreshed."
-
-          # Write wrangler config so wrangler deploy works natively
-          mkdir -p ~/.wrangler/config
-          cat > ~/.wrangler/config/default.toml << WRANGLER_EOF
-          oauth_token = "$CF_TOKEN"
-          refresh_token = "$NEW_REFRESH"
-          expiration_time = "2099-01-01T00:00:00Z"
-          scopes = ["account:read","user:read","workers:write","workers_kv:write","workers_routes:write","workers_scripts:write","workers_tail:read","d1:write","pages:write","zone:read","ssl_certs:write","ai:write","queues:write","pipelines:write","offline_access"]
-          WRANGLER_EOF
-
-          echo "Deploying via wrangler..."
           npx wrangler deploy
 
       - name: Post-deploy compliance verification
