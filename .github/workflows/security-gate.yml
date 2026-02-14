@@ -7,6 +7,10 @@ on:
     branches: [master, main]
   workflow_dispatch:
 
+concurrency:
+  group: security-gate-${{ github.ref }}
+  cancel-in-progress: true
+
 env:
   WORKERS_URL: https://seobaike-remote-control.icanforyouthebest.workers.dev
 
