@@ -1,4 +1,4 @@
-name: Security Gate
+name: Security Gate  # v2 — permanent API Token
 
 on:
   push:
