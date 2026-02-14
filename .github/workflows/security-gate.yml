@@ -130,11 +130,30 @@ jobs:
           done
           echo "Migrations complete."
 
+      - name: Setup Wrangler auth
+        env:
+          CF_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CF_REFRESH_TOKEN: ${{ secrets.CLOUDFLARE_OAUTH_REFRESH_TOKEN }}
+        run: |
+          if [ -n "$CF_API_TOKEN" ]; then
+            echo "Using API Token for Wrangler auth"
+          else
+            echo "Using OAuth refresh token for Wrangler auth"
+            mkdir -p "$HOME/.wrangler/config"
+            printf 'oauth_token = ""\nexpiration_time = "2000-01-01T00:00:00Z"\nrefresh_token = "%s"\nscopes = ["account:read","user:read","workers:write","workers_kv:write","workers_routes:write","workers_scripts:write","workers_tail:read","d1:write","pages:write","zone:read","ssl_certs:write","ai:write","queues:write","pipelines:write","offline_access"]\n' "$CF_REFRESH_TOKEN" > "$HOME/.wrangler/config/default.toml"
+          fi
+
       - name: Deploy Workers
         env:
-          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          XDG_CONFIG_HOME: ${{ github.workspace }}/.xdg
         run: |
+          # Copy wrangler config if using OAuth
+          if [ -z "$CLOUDFLARE_API_TOKEN" ] && [ -f "$HOME/.wrangler/config/default.toml" ]; then
+            mkdir -p "$XDG_CONFIG_HOME/.wrangler/config"
+            cp "$HOME/.wrangler/config/default.toml" "$XDG_CONFIG_HOME/.wrangler/config/default.toml"
+          fi
           cd workers
           npm ci
           npx wrangler deploy
