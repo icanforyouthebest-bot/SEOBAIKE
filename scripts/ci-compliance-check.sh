@@ -101,12 +101,12 @@ echo ""
 echo "============================================================"
 SCORE_INT=$(echo "$SCORE" | python3 -c "import sys; print(int(float(sys.stdin.read().strip())))" 2>/dev/null || echo "0")
 
-if [ "$SCORE_INT" -ge 98 ]; then
-  echo "  GATE: PASS (score $SCORE >= 98)"
+if [ "$SCORE_INT" -ge 100 ]; then
+  echo "  GATE: PASS (score $SCORE = 100)"
   echo "============================================================"
   exit 0
 else
-  echo "  GATE: FAIL (score $SCORE < 98 — deployment blocked)"
+  echo "  GATE: FAIL (score $SCORE < 100 — deployment blocked)"
   echo "============================================================"
   exit 1
 fi

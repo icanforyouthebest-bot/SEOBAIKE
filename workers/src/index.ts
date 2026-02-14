@@ -12,6 +12,7 @@ import { replyTelegram, answerCallback, type TelegramReplyOptions } from './repl
 import { replyWhatsApp } from './reply/whatsapp-reply'
 import { replyMessenger } from './reply/messenger-reply'
 import { aiFormat, aiChat, aiConstrainedChat } from './ai/brain'
+import { lookupAuth } from './middleware/auth'
 
 export default {
   async fetch(request: Request, env: Env): Promise<Response> {
@@ -234,6 +235,10 @@ async function handleWebhook(request: Request, env: Env, platform: 'line' | 'wha
   if (!msg) return json(200, { status: 'ignored' })
   const parsed = parseCommand(msg.text)
   const replyCtx: ReplyContext = { source: platform, reply_token: msg.reply_token, chat_id: msg.chat_id, phone_number: msg.phone_number, sender_id: msg.sender_id }
+
+  // 用戶身份查詢（接上 auth 中介層）
+  const auth = await lookupAuth(env.SUPABASE_URL, env.SUPABASE_SERVICE_ROLE_KEY, platform, msg.source_user_id)
+  console.log(`[AUTH] ${platform}:${msg.source_user_id} → ${auth.permission_level} (bound=${auth.is_bound})`)
 
   // 審批閘門
   const approvalInfo = await checkRequiresApproval(env, parsed.command)
@@ -498,7 +503,7 @@ async function handleComplianceBadge(env: Env, url: URL): Promise<Response> {
 // ============================================================
 const SECURITY_HEADERS: Record<string, string> = {
   'Content-Type': 'application/json',
-  'Access-Control-Allow-Origin': '*',
+  'Access-Control-Allow-Origin': 'https://aiforseo.vip',
   'Strict-Transport-Security': 'max-age=31536000; includeSubDomains; preload',
   'Content-Security-Policy': "default-src 'none'",
   'X-Frame-Options': 'DENY',
