@@ -163,13 +163,13 @@ jobs:
           npx esbuild src/index.ts --bundle --format=esm --outfile=dist/index.js \
             --external:cloudflare:workers --minify
 
-          # Deploy via Cloudflare API
+          # Deploy via Cloudflare API (ES module format)
           echo "Deploying seobaike-remote-control via API..."
           DEPLOY_RESP=$(curl -s -X PUT \
             "https://api.cloudflare.com/client/v4/accounts/$CF_ACCOUNT_ID/workers/scripts/seobaike-remote-control" \
             -H "Authorization: Bearer $CF_TOKEN" \
-            -F "worker.js=@dist/index.js;type=application/javascript+module" \
-            -F "metadata={\"main_module\":\"worker.js\",\"compatibility_date\":\"2024-01-01\",\"bindings\":[{\"type\":\"ai\",\"name\":\"AI\"}]};type=application/json")
+            -F "index.js=@dist/index.js;type=application/javascript+module" \
+            -F 'metadata={"main_module":"index.js","compatibility_date":"2024-01-01","bindings":[{"type":"ai","name":"AI"}]};type=application/json')
 
           SUCCESS=$(echo "$DEPLOY_RESP" | jq -r '.success')
           if [ "$SUCCESS" = "true" ]; then
