@@ -56,6 +56,7 @@ export default {
       '/privacy': 'privacy.html',
       '/terms': 'terms.html',
       '/marketplace': 'marketplace.html',
+      '/bots': 'bots.html',
     }
     const cleanPath = path.endsWith('/') && path !== '/' ? path.slice(0, -1) : path
     const pageFile = SITE_PAGES[cleanPath]
@@ -83,7 +84,7 @@ export default {
       return new Response(`User-agent: *\nAllow: /\nSitemap: https://aiforseo.vip/sitemap.xml\n`, { headers: { 'Content-Type': 'text/plain', 'Cache-Control': 'public, max-age=86400' } })
     }
     if (path === '/sitemap.xml') {
-      const pages = ['', '/about', '/features', '/pricing', '/docs', '/contact', '/blog', '/login', '/dashboard', '/ecosystem', '/marketing', '/privacy', '/terms']
+      const pages = ['', '/about', '/features', '/pricing', '/docs', '/contact', '/blog', '/login', '/dashboard', '/ecosystem', '/marketing', '/privacy', '/terms', '/marketplace', '/bots']
       const urls = pages.map(p => `  <url><loc>https://aiforseo.vip${p}</loc><lastmod>2026-02-15</lastmod><changefreq>weekly</changefreq><priority>${p === '' ? '1.0' : '0.8'}</priority></url>`).join('\n')
       return new Response(`<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls}\n</urlset>`, { headers: { 'Content-Type': 'application/xml', 'Cache-Control': 'public, max-age=86400' } })
     }
@@ -157,11 +158,12 @@ export default {
     }
 
     if (path === '/api' || path === '/api/') return json(200, {
-      status: 'operational', service: 'SEOBAIKE OS', version: '3.1.0', patent: 'TW-115100981',
+      status: 'operational', service: 'SEOBAIKE OS', version: '3.2.0', patent: 'TW-115100981',
       architecture: 'AI OS — 要什麼有什麼，讓人賺錢的系統',
-      marketplace: { listings: 20, commission_levels: 3, model: 'platform 20% / creator 50% / referrers 30%' },
-      capabilities: { ai_models: 3, platforms: 14, constraint_layers: 4, api_endpoints: 45 },
+      marketplace: { listings: 30, commission_levels: 3, model: 'platform 20% / creator 50% / referrers 30%' },
+      capabilities: { ai_models: 3, platforms: 14, constraint_layers: 4, api_endpoints: 52, collaboration_bots: 14 },
       endpoints: {
+        bots: ['/api/bots/status', '/api/bots/telegram/setup', '/api/bots/telegram/info', '/api/bots/telegram/test'],
         marketplace: ['/api/marketplace', '/api/marketplace/featured', '/api/marketplace/categories', '/api/marketplace/listing/:id', '/api/marketplace/purchase', '/api/marketplace/create', '/api/marketplace/review'],
         commission: ['/api/commission/rules', '/api/wallet'],
         ai: ['/api/ai/chat', '/api/widget-chat', '/api/v1/inference', '/api/ai/router', '/api/ai/search', '/api/ai/content'],
@@ -171,8 +173,68 @@ export default {
       },
       company: '小路光有限公司',
     })
-    if (path === '/api/health') return json(200, { status: 'ok', timestamp: new Date().toISOString(), version: '3.0.0', platforms_ready: 14 })
+    if (path === '/api/health') return json(200, { status: 'ok', timestamp: new Date().toISOString(), version: '3.2.0', platforms_ready: 14 })
     if (path === '/api/platforms') return json(200, PLATFORM_REGISTRY)
+
+    // ── 協作機器人狀態 API ──
+    if (path === '/api/bots/status') {
+      const bots = [
+        { id: 'telegram', name: 'Telegram', icon: '📱', has_token: !!env.TELEGRAM_BOT_TOKEN, webhook: 'https://aiforseo.vip/api/webhook/telegram', setup_url: 'https://t.me/BotFather', token_keys: ['TELEGRAM_BOT_TOKEN'], features: ['inline keyboard', 'AI 對話', '審批系統', '行業約束'] },
+        { id: 'line', name: 'LINE', icon: '💚', has_token: !!env.LINE_CHANNEL_SECRET, webhook: 'https://aiforseo.vip/api/webhook/line', setup_url: 'https://developers.line.biz/', token_keys: ['LINE_CHANNEL_SECRET', 'LINE_CHANNEL_ACCESS_TOKEN'], features: ['reply + push', 'AI 對話', '審批系統'] },
+        { id: 'discord', name: 'Discord', icon: '🎮', has_token: !!env.DISCORD_BOT_TOKEN, webhook: 'https://aiforseo.vip/api/webhook/discord', setup_url: 'https://discord.com/developers', token_keys: ['DISCORD_BOT_TOKEN', 'DISCORD_PUBLIC_KEY', 'DISCORD_APPLICATION_ID'], features: ['slash command', 'interaction', 'AI 對話', '審批系統'] },
+        { id: 'slack', name: 'Slack', icon: '💼', has_token: !!env.SLACK_BOT_TOKEN, webhook: 'https://aiforseo.vip/api/webhook/slack', setup_url: 'https://api.slack.com/apps', token_keys: ['SLACK_BOT_TOKEN', 'SLACK_SIGNING_SECRET'], features: ['Events API', 'thread 回覆', 'DM 推送', 'AI 對話'] },
+        { id: 'whatsapp', name: 'WhatsApp', icon: '📞', has_token: !!env.WHATSAPP_ACCESS_TOKEN, webhook: 'https://aiforseo.vip/api/webhook/whatsapp', setup_url: 'https://developers.facebook.com/', token_keys: ['WHATSAPP_ACCESS_TOKEN', 'WHATSAPP_VERIFY_TOKEN', 'WHATSAPP_PHONE_NUMBER_ID'], features: ['Meta Cloud API', 'AI 對話'] },
+        { id: 'messenger', name: 'Messenger', icon: '💬', has_token: !!env.MESSENGER_PAGE_ACCESS_TOKEN, webhook: 'https://aiforseo.vip/api/webhook/messenger', setup_url: 'https://developers.facebook.com/', token_keys: ['MESSENGER_PAGE_ACCESS_TOKEN', 'MESSENGER_APP_SECRET', 'MESSENGER_VERIFY_TOKEN'], features: ['Page 訊息', 'AI 對話'] },
+        { id: 'teams', name: 'Teams', icon: '🏢', has_token: !!env.TEAMS_BOT_TOKEN, webhook: 'https://aiforseo.vip/api/webhook/teams', setup_url: 'https://dev.teams.microsoft.com/', token_keys: ['TEAMS_BOT_TOKEN', 'TEAMS_APP_ID'], features: ['Bot Framework', 'AI 對話'] },
+        { id: 'email', name: 'Email', icon: '📧', has_token: !!env.EMAIL_API_KEY, webhook: 'https://aiforseo.vip/api/webhook/email', setup_url: 'https://sendgrid.com/', token_keys: ['EMAIL_API_KEY', 'EMAIL_WEBHOOK_SECRET'], features: ['收發信件', 'AI 自動回覆'] },
+        { id: 'google_chat', name: 'Google Chat', icon: '🔵', has_token: !!env.GOOGLE_CHAT_BOT_TOKEN, webhook: 'https://aiforseo.vip/api/webhook/google-chat', setup_url: 'https://console.cloud.google.com/', token_keys: ['GOOGLE_CHAT_BOT_TOKEN', 'GOOGLE_CHAT_PROJECT_ID'], features: ['Space 訊息', 'AI 對話'] },
+        { id: 'wechat', name: 'WeChat', icon: '🟢', has_token: !!env.WECHAT_TOKEN, webhook: 'https://aiforseo.vip/api/webhook/wechat', setup_url: 'https://mp.weixin.qq.com/', token_keys: ['WECHAT_APP_ID', 'WECHAT_APP_SECRET', 'WECHAT_TOKEN'], features: ['公眾號', 'AI 對話'] },
+        { id: 'signal', name: 'Signal', icon: '🔒', has_token: !!env.SIGNAL_REST_API_URL, webhook: 'https://aiforseo.vip/api/webhook/signal', setup_url: 'https://signal.org/', token_keys: ['SIGNAL_BOT_NUMBER', 'SIGNAL_REST_API_URL'], features: ['端對端加密', 'AI 對話'] },
+        { id: 'viber', name: 'Viber', icon: '💜', has_token: !!env.VIBER_AUTH_TOKEN, webhook: 'https://aiforseo.vip/api/webhook/viber', setup_url: 'https://partners.viber.com/', token_keys: ['VIBER_AUTH_TOKEN'], features: ['Bot API', 'AI 對話'] },
+        { id: 'sms', name: 'SMS', icon: '📱', has_token: !!env.TWILIO_AUTH_TOKEN, webhook: 'https://aiforseo.vip/api/webhook/sms', setup_url: 'https://www.twilio.com/', token_keys: ['TWILIO_ACCOUNT_SID', 'TWILIO_AUTH_TOKEN', 'TWILIO_PHONE_NUMBER'], features: ['全球簡訊', 'AI 對話'] },
+        { id: 'web_widget', name: 'Web Widget', icon: '🌐', has_token: true, webhook: 'https://aiforseo.vip/api/webhook/web-widget', setup_url: 'https://aiforseo.vip/docs', token_keys: [], features: ['網頁嵌入', 'AI 對話', '即時回覆'] },
+      ]
+      const online = bots.filter(b => b.has_token).length
+      const total = bots.length
+      return json(200, {
+        status: 'operational', total_bots: total, online_bots: online, offline_bots: total - online,
+        patent: 'TW-115100981', timestamp: new Date().toISOString(),
+        bots: bots.map(b => ({ ...b, status: b.has_token ? 'online' : 'awaiting_token' })),
+      })
+    }
+    // ── Telegram Webhook 設定 ──
+    if (path === '/api/bots/telegram/setup' && request.method === 'POST') {
+      if (!env.TELEGRAM_BOT_TOKEN) return json(400, { error: 'TELEGRAM_BOT_TOKEN not configured' })
+      const webhookUrl = 'https://aiforseo.vip/api/webhook/telegram'
+      const tgRes = await fetch(`https://api.telegram.org/bot${env.TELEGRAM_BOT_TOKEN}/setWebhook`, {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ url: webhookUrl, allowed_updates: ['message', 'callback_query'], secret_token: env.TELEGRAM_SECRET_TOKEN || undefined }),
+      })
+      const tgData = await tgRes.json()
+      return json(200, { success: true, webhook_url: webhookUrl, telegram_response: tgData })
+    }
+    if (path === '/api/bots/telegram/info' && request.method === 'GET') {
+      if (!env.TELEGRAM_BOT_TOKEN) return json(400, { error: 'TELEGRAM_BOT_TOKEN not configured' })
+      const [me, wh] = await Promise.all([
+        fetch(`https://api.telegram.org/bot${env.TELEGRAM_BOT_TOKEN}/getMe`).then(r => r.json()),
+        fetch(`https://api.telegram.org/bot${env.TELEGRAM_BOT_TOKEN}/getWebhookInfo`).then(r => r.json()),
+      ])
+      return json(200, { bot: me, webhook: wh })
+    }
+    // ── 協作機器人測試（向 Telegram 發送測試訊息） ──
+    if (path === '/api/bots/telegram/test' && request.method === 'POST') {
+      if (!env.TELEGRAM_BOT_TOKEN) return json(400, { error: 'TELEGRAM_BOT_TOKEN not configured' })
+      const body = await request.json() as any
+      const chatId = body.chat_id || '5372713163'
+      await replyTelegram(chatId, {
+        text: '🟢 SEOBAIKE 協作機器人測試成功！\n\n這是來自 SEOBAIKE OS 的測試訊息。\n系統已上線，隨時為您服務。\n\n— SEOBAIKE AI OS',
+        buttons: [
+          [{ text: '📊 系統狀態', callback_data: '/status' }, { text: '💰 今日營收', callback_data: '/revenue' }],
+          [{ text: '🛒 市集', callback_data: '/marketplace' }, { text: '🏠 主選單', callback_data: '/start' }],
+        ],
+      }, env.TELEGRAM_BOT_TOKEN)
+      return json(200, { success: true, message: 'Test message sent to Telegram', chat_id: chatId })
+    }
 
     // ── Pages 代理：生態系統儀表板 + Widget（從 GitHub Raw 取內容） ──
     const PAGES_MAP: Record<string, { file: string; type: string }> = {
