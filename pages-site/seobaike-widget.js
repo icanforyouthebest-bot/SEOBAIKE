@@ -11,7 +11,7 @@
   // ── 設定 ──
   var CONFIG = {
     apiUrl: '/api/widget-chat',
-    fallbackMessage: '小百目前忙碌中，請透過 /contact 頁面聯繫我們，或稍後再試。',
+    fallbackMessage: '系統忙碌中，請稍後再試或到 /contact 留言。',
     greetingDelay: 3000,
     greetingAutoHide: 8000,
     inactivityDelay: 30000,
@@ -26,54 +26,48 @@
     }
   };
 
-  // ── 頁面上下文建議 ──
+  // ── 頁面上下文建議（可愛親切，不分人） ──
   var PAGE_SUGGESTIONS = {
     '/': {
-      greeting: '想了解我們能幫你什麼嗎？',
+      greeting: '想做什麼呀？隨便問～',
       pills: [
-        { icon: '\uD83D\uDE80', text: '快速了解' },
-        { icon: '\uD83D\uDCBC', text: '適合我的行業' },
-        { icon: '\uD83C\uDF81', text: '免費體驗' }
+        { icon: '\uD83D\uDC4B', text: '逛逛看' },
+        { icon: '\uD83C\uDF1F', text: '新手上路' }
       ]
     },
     '/pricing': {
-      greeting: '需要幫你比較哪個方案最適合嗎？',
+      greeting: '找適合自己的就好，不急～',
       pills: [
-        { icon: '\uD83D\uDD0D', text: '比較方案' },
-        { icon: '\uD83C\uDF81', text: '免費體驗' },
-        { icon: '\uD83D\uDCDE', text: '聯繫我們' }
+        { icon: '\uD83E\uDD14', text: '怎麼選' },
+        { icon: '\uD83D\uDCAC', text: '問問題' }
       ]
     },
     '/features': {
-      greeting: '想看看哪個功能最適合你的行業嗎？',
+      greeting: '看到喜歡的功能可以問我～',
       pills: [
-        { icon: '\u2B50', text: '熱門功能' },
-        { icon: '\uD83C\uDFAF', text: '依行業推薦' },
-        { icon: '\uD83D\uDCCA', text: '效果展示' }
+        { icon: '\u2B50', text: '推薦功能' },
+        { icon: '\uD83D\uDCAC', text: '問問題' }
       ]
     },
     '/dashboard': {
-      greeting: '需要幫你分析今天的數據嗎？',
+      greeting: '今天狀況怎樣？有什麼要看的嗎',
       pills: [
-        { icon: '\uD83D\uDCCA', text: '看今日報表' },
-        { icon: '\uD83D\uDCE2', text: '發推文' },
-        { icon: '\uD83D\uDCAC', text: '回客戶' }
+        { icon: '\uD83D\uDCCA', text: '看數據' },
+        { icon: '\uD83D\uDCAC', text: '問問題' }
       ]
     },
     '/marketplace': {
-      greeting: '在找特定的工具嗎？告訴我你的需求！',
+      greeting: '歡迎逛逛～有什麼想找的嗎',
       pills: [
-        { icon: '\uD83D\uDD0D', text: '搜尋工具' },
-        { icon: '\uD83C\uDF1F', text: '熱門推薦' },
-        { icon: '\uD83C\uDFF7\uFE0F', text: '依類別瀏覽' }
+        { icon: '\uD83D\uDD0D', text: '找東西' },
+        { icon: '\uD83C\uDF1F', text: '熱門' }
       ]
     },
     '/ai': {
-      greeting: '直接試試！問我任何問題。',
+      greeting: '直接打字就行，問什麼都可以～',
       pills: [
-        { icon: '\uD83E\uDD16', text: '寫一篇文章' },
-        { icon: '\uD83D\uDCDD', text: '翻譯內容' },
-        { icon: '\uD83D\uDCA1', text: '給我建議' }
+        { icon: '\uD83D\uDCDD', text: '幫我寫' },
+        { icon: '\uD83D\uDCA1', text: '給建議' }
       ]
     }
   };
@@ -543,10 +537,10 @@
     }
     // 預設
     return {
-      greeting: '有什麼我能幫你的嗎？',
+      greeting: '想了解什麼？直接問就行',
       pills: [
-        { icon: '\uD83D\uDE80', text: '了解 SEOBAIKE' },
-        { icon: '\uD83D\uDCAC', text: '跟小百聊聊' },
+        { icon: '\uD83D\uDE80', text: '平台怎麼用' },
+        { icon: '\uD83D\uDCAC', text: '直接問問題' },
         { icon: '\uD83C\uDF1F', text: '熱門功能' }
       ]
     };
@@ -958,11 +952,7 @@
 
   /** 建構個人化招呼語 */
   function buildPersonalGreeting() {
-    var profile = getProfile();
-    if (profile && profile.industry) {
-      return '\u55E8 ' + profile.industry + '\u8001\u95C6\uFF01\u6709\u4EC0\u9EBC\u6211\u80FD\u5E6B\u5FD9\u7684\uFF1F';
-    }
-    return '\u55E8\uFF01\u6211\u662F\u4F60\u7684 AI \u52A9\u624B\uFF0C\u6709\u4EC0\u9EBC\u80FD\u5E6B\u4F60\u7684\u55CE\uFF1F';
+    return '\u55E8\uFF5E\u60F3\u505A\u4EC0\u9EBC\u5440';
   }
 
   /** 建構初次/回訪招呼語 */
@@ -971,23 +961,14 @@
     var lastPage = getLastPage();
     var visitCount = getVisitCount();
 
-    // 完全新訪客（無聊天記錄 + 無造訪記錄）
+    // 完全新訪客
     if (visitCount <= 1 && history.length === 0) {
-      return '\u7B2C\u4E00\u6B21\u4F86\uFF1F\u8B93\u6211\u5E36\u4F60\u770B\u770B\uFF01';
+      return '\u55E8\uFF5E\u6B61\u8FCE\u4F86\u73A9';
     }
 
     // 回訪用戶
-    if (lastPage && lastPage !== getCurrentPath()) {
-      var pageNames = {
-        '/': '\u9996\u9801',
-        '/pricing': '\u65B9\u6848\u9801',
-        '/features': '\u529F\u80FD\u9801',
-        '/dashboard': '\u5100\u8868\u677F',
-        '/marketplace': '\u5DE5\u5177\u5E02\u96C6',
-        '/ai': 'AI \u52A9\u624B'
-      };
-      var pageName = pageNames[lastPage] || lastPage;
-      return '\u6B61\u8FCE\u56DE\u4F86\uFF01\u4E0A\u6B21\u4F60\u5728\u770B' + pageName + '\uFF0C\u8981\u7E7C\u7E8C\u55CE\uFF1F';
+    if (visitCount > 1) {
+      return '\u55E8\uFF5E\u53C8\u898B\u9762\u4E86';
     }
 
     return null;
@@ -1019,13 +1000,13 @@
         if (!hasShownProactive('inactivity-chat')) {
           markProactiveShown('inactivity-chat');
           var ctx = getPageContext();
-          appendBotMessage('\u9700\u8981\u5E6B\u5FD9\u55CE\uFF1F' + ctx.greeting);
+          appendBotMessage('\u6709\u4EC0\u9EBC\u60F3\u554F\u7684\u55CE\uFF5E');
         }
       } else {
         // 面板關閉 — 顯示氣泡
         if (!hasShownProactive('inactivity-bubble')) {
           markProactiveShown('inactivity-bubble');
-          showGreeting('\u9700\u8981\u5E6B\u5FD9\u55CE\uFF1F\u6211\u53EF\u4EE5\u5E6B\u4F60...');
+          showGreeting('\u55E8\uFF5E\u9700\u8981\u5E6B\u624B\u55CE');
         }
       }
     }, CONFIG.inactivityDelay);
@@ -1077,12 +1058,12 @@
     var profile = getProfile();
     var ctx = getPageContext();
 
-    // 歡迎語
+    // 歡迎語（禁止自我介紹、禁止報價、像朋友聊天）
     var welcomeText;
     if (profile && profile.industry) {
-      welcomeText = '\u55E8 ' + profile.industry + '\u8001\u95C6\uFF01' + ctx.greeting;
+      welcomeText = '\u55E8\uFF5E' + ctx.greeting;
     } else {
-      welcomeText = '\u4F60\u597D\uFF01\u6211\u662F\u5C0F\u767E\uFF0CSEOBAIKE \u7684 AI \u52A9\u624B\u3002\n' + ctx.greeting;
+      welcomeText = '\u55E8\uFF5E' + ctx.greeting;
     }
 
     appendBotMessage(welcomeText);

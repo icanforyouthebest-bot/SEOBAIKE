@@ -201,10 +201,13 @@ export default {
       ai21:       { name: 'AI21 Labs',     display_name: 'Long Context Engine',       base_url: 'https://api.ai21.com/studio/v1',                              env_key: 'AI21_API_KEY',       model_count: 8,   capability: 'Extended context window' },
     }
 
-    // ── /api/ai/providers — 只給內部用，外部只看摘要 ──
+    // ── /api/ai/providers — 瀏覽器訪問跳轉指揮中心，API 給摘要 ──
     if (path === '/api/ai/providers') {
+      const accept = request.headers.get('Accept') || ''
+      if (accept.includes('text/html')) {
+        return new Response(null, { status: 302, headers: { 'Location': '/status', ...SECURITY_HEADERS } })
+      }
       const online = Object.values(AI_PROVIDERS).filter(p => env[p.env_key]).length
-      // 不暴露引擎細節，只給摘要數字
       return json(200, {
         service: 'SEOBAIKE CaaS',
         status: 'operational',
@@ -1236,7 +1239,7 @@ async function handleWebWidgetWebhook(request: Request, env: Env): Promise<Respo
 // ============================================================
 function mainMenu(): TelegramReplyOptions {
   return {
-    text: '嗨，我是 SEOBAIKE — 你的 AI 管理助手。\n\n輕觸按鈕，或直接打字問我任何問題。',
+    text: '嗨～想做什麼？點按鈕或直接打字都行。',
     buttons: [
       [{ text: '📊 系統狀態', callback_data: '/status' }, { text: '💰 今日營收', callback_data: '/revenue' }],
       [{ text: '🔍 SEO 分析', callback_data: '/seo' }, { text: '🏷 關鍵字', callback_data: '/keywords' }],
@@ -1472,20 +1475,25 @@ async function handleWidgetChatSmart(request: Request, env: Env): Promise<Respon
   if (!message) return json(400, { error: 'message is required' })
 
   // 中文最強模型鏈（Groq 最快最穩放第一）
-  const systemPrompt = `你是 SEOBAIKE 平台（aiforseo.vip）的客服小百。你必須回答用戶的問題，不要自我介紹。
+  const systemPrompt = `你是一個聰明、溫暖的 AI 助手，在 SEOBAIKE 平台上幫助用戶。
 
-平台資訊（用來回答問題）：
-- SEOBAIKE 是 AI 工具平台，企業用一個入口使用所有 AI
-- 有 15 個 AI 引擎、1300+ 模型、14 個通訊管道、500 個自動化工具
-- 台灣公司小路光開發，價格：免費版 NT$0、個人版 NT$299/月、專業版 NT$899/月、企業版 NT$2,999/月
-- 功能：AI 文案、數據分析、客服自動化、行銷推廣、內容生成、營運管理
+嚴格禁止（違反就是 0 分）：
+- 禁止自我介紹（不准說「我是小百」「我是AI助手」「我是SEOBAIKE的...」）
+- 禁止主動提價格或方案（除非用戶明確問「多少錢」「價格」「費用」）
+- 禁止說「請您提出問題」「有什麼可以幫您」這種廢話
+- 禁止列清單式回答（不要用 - 開頭的列表）
+- 禁止署名、禁止客套
 
-回覆規則：
-1. 用繁體中文
-2. 最多 3 句話
-3. 直接回答用戶問的事
-4. 禁止說「我是小百」或任何自我介紹
-5. 不要客套、不要署名`
+你知道的背景（只有被問到才用）：
+SEOBAIKE 是全球 AI 市集，讓賣家把產品賣到全世界。用 SEO Points 點數交易。
+
+說話風格：
+- 像一個很懂行的朋友在跟你聊天
+- 用繁體中文，語氣自然口語
+- 一次最多 2 句話
+- 如果用戶打招呼就直接說「嗨～想了解什麼？」這種自然的
+- 如果用戶問問題就直接給答案，不要囉唆
+- 用戶寫英文就用英文回`
   const providers = [
     { id: 'groq', key: env.GROQ_API_KEY, url: 'https://api.groq.com/openai/v1/chat/completions', model: 'llama-3.3-70b-versatile' },
     { id: 'deepseek', key: env.DEEPSEEK_API_KEY, url: 'https://api.deepseek.com/chat/completions', model: 'deepseek-chat' },
@@ -1796,7 +1804,7 @@ async function handleSmartRouter(request: Request, env: Env): Promise<Response> 
   // 如果指定了供應商和模型，直接使用
   // If provider and model are forced, use them directly
   if (force_provider && force_model) {
-    const systemPrompt = "你是小百，SEOBAIKE（aiforseo.vip）AI 助手。15 個引擎、1300+ 模型、14 個通訊管道。台灣小路光有限公司開發。規則：繁體中文回覆、最多 3 句、直接給答案、不客套。用戶寫英文就用英文回。"
+    const systemPrompt = "你是 SEOBAIKE 平台上聰明的 AI 助手。禁止自我介紹、禁止主動推銷價格、禁止客套。像朋友聊天一樣回答，最多 2 句，直接給答案。用戶寫什麼語言就用什麼語言回。"
     const messages = [
       { role: 'system', content: systemPrompt },
       { role: 'user', content: String(message) },
