@@ -2,288 +2,285 @@
   "bottlenecks": {
     "legion_stats": {
       "NVIDIA": {
-        "total": 17,
-        "success": 17,
-        "failed": 0,
-        "total_tokens": 16090,
-        "total_latency": 74908,
-        "max_latency": 7980,
-        "avg_latency": 4406,
-        "success_rate": 100.0
+        "total": 21,
+        "success": 20,
+        "failed": 1,
+        "total_tokens": 21913,
+        "total_latency": 83116,
+        "max_latency": 7017,
+        "avg_latency": 3958,
+        "success_rate": 95.2
       },
       "OpenAI": {
-        "total": 12,
-        "success": 11,
-        "failed": 1,
-        "total_tokens": 12284,
-        "total_latency": 42455,
-        "max_latency": 6152,
-        "avg_latency": 3538,
-        "success_rate": 91.7
+        "total": 8,
+        "success": 8,
+        "failed": 0,
+        "total_tokens": 7312,
+        "total_latency": 44368,
+        "max_latency": 7858,
+        "avg_latency": 5546,
+        "success_rate": 100.0
       },
       "Perplexity": {
-        "total": 5,
-        "success": 5,
+        "total": 4,
+        "success": 4,
         "failed": 0,
-        "total_tokens": 5025,
-        "total_latency": 16495,
-        "max_latency": 6150,
-        "avg_latency": 3299,
+        "total_tokens": 3667,
+        "total_latency": 15673,
+        "max_latency": 5554,
+        "avg_latency": 3918,
         "success_rate": 100.0
       },
       "Google": {
-        "total": 16,
-        "success": 15,
+        "total": 9,
+        "success": 8,
         "failed": 1,
-        "total_tokens": 17319,
-        "total_latency": 68840,
-        "max_latency": 7123,
-        "avg_latency": 4302,
-        "success_rate": 93.8
+        "total_tokens": 9161,
+        "total_latency": 39737,
+        "max_latency": 7180,
+        "avg_latency": 4415,
+        "success_rate": 88.9
       },
       "DeepSeek": {
         "total": 4,
-        "success": 3,
-        "failed": 1,
-        "total_tokens": 3467,
-        "total_latency": 14844,
-        "max_latency": 7655,
-        "avg_latency": 3711,
-        "success_rate": 75.0
-      },
-      "Mistral": {
-        "total": 3,
-        "success": 2,
-        "failed": 1,
-        "total_tokens": 2850,
-        "total_latency": 9341,
-        "max_latency": 3483,
-        "avg_latency": 3114,
-        "success_rate": 66.7
-      },
-      "Groq": {
-        "total": 4,
         "success": 4,
         "failed": 0,
-        "total_tokens": 2827,
-        "total_latency": 13762,
-        "max_latency": 5279,
-        "avg_latency": 3440,
+        "total_tokens": 3160,
+        "total_latency": 22071,
+        "max_latency": 7269,
+        "avg_latency": 5518,
         "success_rate": 100.0
       },
-      "Cohere": {
-        "total": 4,
-        "success": 4,
+      "Mistral": {
+        "total": 8,
+        "success": 8,
         "failed": 0,
-        "total_tokens": 4065,
-        "total_latency": 21394,
-        "max_latency": 6840,
-        "avg_latency": 5348,
+        "total_tokens": 8498,
+        "total_latency": 38291,
+        "max_latency": 7985,
+        "avg_latency": 4786,
+        "success_rate": 100.0
+      },
+      "Groq": {
+        "total": 6,
+        "success": 5,
+        "failed": 1,
+        "total_tokens": 5268,
+        "total_latency": 25597,
+        "max_latency": 7419,
+        "avg_latency": 4266,
+        "success_rate": 83.3
+      },
+      "Cohere": {
+        "total": 5,
+        "success": 5,
+        "failed": 0,
+        "total_tokens": 4854,
+        "total_latency": 17983,
+        "max_latency": 6357,
+        "avg_latency": 3597,
         "success_rate": 100.0
       },
       "Together": {
         "total": 5,
         "success": 5,
         "failed": 0,
-        "total_tokens": 5604,
-        "total_latency": 27918,
-        "max_latency": 7607,
-        "avg_latency": 5584,
+        "total_tokens": 3807,
+        "total_latency": 23763,
+        "max_latency": 6270,
+        "avg_latency": 4753,
         "success_rate": 100.0
       },
       "HuggingFace": {
-        "total": 6,
-        "success": 6,
+        "total": 3,
+        "success": 3,
         "failed": 0,
-        "total_tokens": 5617,
-        "total_latency": 31756,
-        "max_latency": 7853,
-        "avg_latency": 5293,
+        "total_tokens": 4049,
+        "total_latency": 14914,
+        "max_latency": 7991,
+        "avg_latency": 4971,
         "success_rate": 100.0
       },
       "Anthropic": {
-        "total": 4,
-        "success": 4,
+        "total": 7,
+        "success": 7,
         "failed": 0,
-        "total_tokens": 3520,
-        "total_latency": 13848,
-        "max_latency": 5963,
-        "avg_latency": 3462,
+        "total_tokens": 5453,
+        "total_latency": 30144,
+        "max_latency": 7953,
+        "avg_latency": 4306,
         "success_rate": 100.0
       },
       "Replicate": {
+        "total": 5,
+        "success": 3,
+        "failed": 2,
+        "total_tokens": 4628,
+        "total_latency": 18344,
+        "max_latency": 5631,
+        "avg_latency": 3669,
+        "success_rate": 60.0
+      },
+      "Stability": {
         "total": 6,
         "success": 6,
         "failed": 0,
-        "total_tokens": 5847,
-        "total_latency": 22687,
-        "max_latency": 7103,
-        "avg_latency": 3781,
-        "success_rate": 100.0
-      },
-      "Stability": {
-        "total": 9,
-        "success": 9,
-        "failed": 0,
-        "total_tokens": 9842,
-        "total_latency": 30002,
-        "max_latency": 6315,
-        "avg_latency": 3334,
+        "total_tokens": 5281,
+        "total_latency": 29372,
+        "max_latency": 7651,
+        "avg_latency": 4895,
         "success_rate": 100.0
       },
       "Claude": {
         "total": 2,
         "success": 2,
         "failed": 0,
-        "total_tokens": 1853,
-        "total_latency": 10473,
-        "max_latency": 6802,
-        "avg_latency": 5236,
+        "total_tokens": 1564,
+        "total_latency": 7889,
+        "max_latency": 5785,
+        "avg_latency": 3944,
         "success_rate": 100.0
       },
       "Meta": {
-        "total": 3,
-        "success": 3,
+        "total": 7,
+        "success": 7,
         "failed": 0,
-        "total_tokens": 2678,
-        "total_latency": 12548,
-        "max_latency": 5664,
-        "avg_latency": 4183,
+        "total_tokens": 6604,
+        "total_latency": 36007,
+        "max_latency": 7962,
+        "avg_latency": 5144,
         "success_rate": 100.0
       }
     },
     "overloaded_legions": [
-      "NVIDIA",
-      "OpenAI",
-      "Google"
+      "NVIDIA"
     ],
     "underloaded_legions": [
-      "Mistral",
-      "Claude",
-      "Meta"
+      "HuggingFace",
+      "Claude"
     ],
     "top_10_slowest": [
       {
-        "task_number": 52,
-        "description": "分析 aiforseo.vip 網站效能與速度",
-        "assigned_to": "NVIDIA",
-        "latency_ms": 7980
-      },
-      {
-        "task_number": 60,
-        "description": "生成 客戶行為預測 影片腳本",
-        "assigned_to": "NVIDIA",
-        "latency_ms": 7961
-      },
-      {
-        "task_number": 28,
-        "description": "生成 物流運輸 內容行事曆",
+        "task_number": 17,
+        "description": "生成 edu-platform.com 結構化資料標記",
         "assigned_to": "HuggingFace",
-        "latency_ms": 7853
+        "latency_ms": 7991
       },
       {
-        "task_number": 90,
-        "description": "生成 不動產 白皮書草稿",
+        "task_number": 48,
+        "description": "執行 保險科技 客戶情感分析",
+        "assigned_to": "Mistral",
+        "latency_ms": 7985
+      },
+      {
+        "task_number": 54,
+        "description": "生成 電子商務 關鍵字研究報告",
+        "assigned_to": "Meta",
+        "latency_ms": 7962
+      },
+      {
+        "task_number": 8,
+        "description": "呼叫 DeepSeek 程式碼審查",
+        "assigned_to": "Anthropic",
+        "latency_ms": 7953
+      },
+      {
+        "task_number": 95,
+        "description": "執行 L1→L4 約束路徑檢查",
+        "assigned_to": "OpenAI",
+        "latency_ms": 7858
+      },
+      {
+        "task_number": 65,
+        "description": "呼叫 OpenAI GPT-4o 摘要 AI推理效能",
+        "assigned_to": "OpenAI",
+        "latency_ms": 7835
+      },
+      {
+        "task_number": 9,
+        "description": "生成 遊戲娛樂 社群媒體策略",
+        "assigned_to": "Stability",
+        "latency_ms": 7651
+      },
+      {
+        "task_number": 1,
+        "description": "生成 餐飲服務 關鍵字研究報告",
+        "assigned_to": "Mistral",
+        "latency_ms": 7501
+      },
+      {
+        "task_number": 52,
+        "description": "生成 半導體 白皮書草稿",
+        "assigned_to": "Groq",
+        "latency_ms": 7419
+      },
+      {
+        "task_number": 92,
+        "description": "分析 ecommerce-shop.tw 使用者行為數據",
         "assigned_to": "DeepSeek",
-        "latency_ms": 7655
-      },
-      {
-        "task_number": 47,
-        "description": "生成 遊戲娛樂 白皮書草稿",
-        "assigned_to": "NVIDIA",
-        "latency_ms": 7633
-      },
-      {
-        "task_number": 98,
-        "description": "執行 startup-demo.tw 技術 SEO 稽核",
-        "assigned_to": "Together",
-        "latency_ms": 7607
-      },
-      {
-        "task_number": 2,
-        "description": "生成 半導體 產業分析報告",
-        "assigned_to": "Google",
-        "latency_ms": 7123
-      },
-      {
-        "task_number": 97,
-        "description": "呼叫 Perplexity 搜尋 精準醫療 最新資訊",
-        "assigned_to": "Replicate",
-        "latency_ms": 7103
-      },
-      {
-        "task_number": 93,
-        "description": "生成 媒體傳播 內容行事曆",
-        "assigned_to": "NVIDIA",
-        "latency_ms": 6898
-      },
-      {
-        "task_number": 62,
-        "description": "生成 遊戲娛樂 電子報模板",
-        "assigned_to": "Google",
-        "latency_ms": 6859
+        "latency_ms": 7269
       }
     ],
     "avg_load_per_legion": 6.7
   },
   "efficiency_scores": {
-    "NVIDIA": 22.7,
-    "OpenAI": 25.92,
-    "Perplexity": 30.31,
-    "Google": 21.8,
-    "DeepSeek": 20.21,
-    "Mistral": 21.42,
-    "Groq": 29.07,
-    "Cohere": 18.7,
-    "Together": 17.91,
-    "HuggingFace": 18.89,
-    "Anthropic": 28.89,
-    "Replicate": 26.45,
-    "Stability": 29.99,
-    "Claude": 19.1,
-    "Meta": 23.91
+    "NVIDIA": 24.05,
+    "OpenAI": 18.03,
+    "Perplexity": 25.52,
+    "Google": 20.14,
+    "DeepSeek": 18.12,
+    "Mistral": 20.89,
+    "Groq": 19.53,
+    "Cohere": 27.8,
+    "Together": 21.04,
+    "HuggingFace": 20.12,
+    "Anthropic": 23.22,
+    "Replicate": 16.35,
+    "Stability": 20.43,
+    "Claude": 25.35,
+    "Meta": 19.44
   },
   "original_allocation": {
-    "NVIDIA": 17,
-    "OpenAI": 12,
-    "Perplexity": 5,
-    "Google": 16,
+    "NVIDIA": 21,
+    "OpenAI": 8,
+    "Perplexity": 4,
+    "Google": 9,
     "DeepSeek": 4,
-    "Mistral": 3,
-    "Groq": 4,
-    "Cohere": 4,
+    "Mistral": 8,
+    "Groq": 6,
+    "Cohere": 5,
     "Together": 5,
-    "HuggingFace": 6,
-    "Anthropic": 4,
-    "Replicate": 6,
-    "Stability": 9,
+    "HuggingFace": 3,
+    "Anthropic": 7,
+    "Replicate": 5,
+    "Stability": 6,
     "Claude": 2,
-    "Meta": 3
+    "Meta": 7
   },
   "optimized_allocation": {
-    "Perplexity": 9,
-    "Stability": 8,
-    "Groq": 8,
-    "Anthropic": 8,
-    "Replicate": 7,
-    "OpenAI": 7,
-    "Meta": 7,
-    "NVIDIA": 6,
+    "Cohere": 9,
+    "Perplexity": 8,
+    "Claude": 8,
+    "NVIDIA": 8,
+    "Anthropic": 7,
+    "Together": 7,
+    "Mistral": 7,
+    "Stability": 6,
     "Google": 6,
-    "Mistral": 6,
+    "HuggingFace": 6,
+    "Groq": 6,
+    "Meta": 6,
     "DeepSeek": 6,
-    "Claude": 5,
-    "HuggingFace": 5,
-    "Cohere": 5,
-    "Together": 5
+    "OpenAI": 6,
+    "Replicate": 5
   },
   "comparison": {
-    "original_time_ms": 493929,
-    "optimized_time_ms": 419840,
-    "time_saved_ms": 74089,
+    "original_time_ms": 512883,
+    "optimized_time_ms": 435951,
+    "time_saved_ms": 76932,
     "time_improvement": "15.0%",
-    "original_tokens": 118107,
-    "optimized_tokens": 108658,
-    "tokens_saved": 9449
+    "original_tokens": 109050,
+    "optimized_tokens": 100326,
+    "tokens_saved": 8724
   }
 }
