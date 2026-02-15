@@ -289,3 +289,369 @@ body { animation: pageIn 0.6s ease-out; }
   .particles { display: none; }
   .cursor-dot, .cursor-ring { display: none; }
 }
+
+
+/* ═══════════════════════════════════════════════════════════
+   VOLCANIC ERUPTION FX — 火山爆發級視覺效果
+   ═══════════════════════════════════════════════════════════ */
+
+/* ── SVG Filter for Heat Distortion (referenced by .heat-distort) ── */
+/* The filter is injected via JS; this comment documents it */
+
+/* ── 1. Eruption Background — 全屏岩漿漸層脈動 ── */
+@keyframes eruptionPulse {
+  0%   { background-position: 50% 100%; background-size: 200% 200%; }
+  50%  { background-position: 50% 60%;  background-size: 220% 220%; }
+  100% { background-position: 50% 100%; background-size: 200% 200%; }
+}
+@keyframes eruptionGlow {
+  0%, 100% { opacity: 0.5; }
+  50%      { opacity: 0.8; }
+}
+.eruption-bg {
+  position: relative;
+  overflow: hidden;
+}
+.eruption-bg::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse at 50% 120%, #e8850c 0%, #b85a00 20%, #3d1500 50%, #06060f 80%),
+    radial-gradient(ellipse at 30% 100%, rgba(245,166,35,0.4) 0%, transparent 60%),
+    radial-gradient(ellipse at 70% 100%, rgba(255,68,68,0.3) 0%, transparent 60%);
+  background-size: 200% 200%;
+  animation: eruptionPulse 8s ease-in-out infinite;
+}
+.eruption-bg::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 40%;
+  z-index: 0;
+  pointer-events: none;
+  background: radial-gradient(ellipse at 50% 100%, rgba(232,133,12,0.25) 0%, transparent 70%);
+  animation: eruptionGlow 4s ease-in-out infinite;
+}
+
+/* ── 2. Lava Glow — 岩漿底部金色光芒 ── */
+@keyframes lavaPulse {
+  0%, 100% {
+    box-shadow:
+      0 4px 15px rgba(232,133,12,0.4),
+      0 8px 30px rgba(245,166,35,0.25),
+      0 12px 50px rgba(255,68,68,0.15),
+      0 0 60px rgba(232,133,12,0.1);
+  }
+  50% {
+    box-shadow:
+      0 4px 20px rgba(232,133,12,0.6),
+      0 8px 40px rgba(245,166,35,0.4),
+      0 12px 60px rgba(255,68,68,0.25),
+      0 0 80px rgba(232,133,12,0.2),
+      0 0 120px rgba(139,0,0,0.1);
+  }
+}
+.lava-glow {
+  animation: lavaPulse 3s ease-in-out infinite;
+  border-bottom: 2px solid rgba(232,133,12,0.3);
+}
+
+/* ── 3. Ember Float — 餘燼粒子上飄（CSS 部分） ── */
+@keyframes emberRise {
+  0% {
+    transform: translateY(0) rotate(0deg) scale(1);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.8;
+  }
+  100% {
+    transform: translateY(-100vh) rotate(var(--ember-rot, 360deg)) scale(0.3);
+    opacity: 0;
+  }
+}
+@keyframes emberFlicker {
+  0%, 100% { filter: brightness(1); }
+  25%      { filter: brightness(1.5); }
+  50%      { filter: brightness(0.8); }
+  75%      { filter: brightness(1.3); }
+}
+.ember-float {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  overflow: hidden;
+}
+.ember {
+  position: absolute;
+  border-radius: 50%;
+  animation:
+    emberRise var(--ember-dur, 8s) ease-out infinite,
+    emberFlicker 0.6s ease-in-out infinite;
+  animation-delay: var(--ember-delay, 0s);
+  background: var(--ember-color, #e8850c);
+  box-shadow:
+    0 0 6px var(--ember-color, #e8850c),
+    0 0 12px rgba(232,133,12,0.5);
+  bottom: -10px;
+}
+
+/* ── 4. Heat Distort — 熱浪扭曲效果 ── */
+@keyframes heatDistort {
+  0%   { filter: url(#volcanic-heat) brightness(1); }
+  50%  { filter: url(#volcanic-heat) brightness(1.02); }
+  100% { filter: url(#volcanic-heat) brightness(1); }
+}
+.heat-distort {
+  animation: heatDistort 3s ease-in-out infinite;
+}
+
+/* ── 5. Magma Border — 岩漿流動邊框 ── */
+@keyframes magmaRotate {
+  0%   { --magma-angle: 0deg; }
+  100% { --magma-angle: 360deg; }
+}
+@property --magma-angle {
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: false;
+}
+.magma-border {
+  position: relative;
+  border-radius: 12px;
+  isolation: isolate;
+}
+.magma-border::before {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border-radius: inherit;
+  padding: 2px;
+  background: conic-gradient(
+    from var(--magma-angle),
+    #e8850c 0%,
+    #ff4444 15%,
+    #8b0000 30%,
+    #e8850c 45%,
+    #ffd700 55%,
+    #f5a623 70%,
+    #ff4444 85%,
+    #e8850c 100%
+  );
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  z-index: -1;
+  animation: magmaRotate 4s linear infinite;
+}
+/* Fallback: for browsers without @property support */
+@supports not (background: conic-gradient(from 0deg, red, red)) {
+  .magma-border::before {
+    background: linear-gradient(135deg, #e8850c, #ff4444, #8b0000, #ffd700);
+    background-size: 300% 300%;
+    animation: magmaFallback 4s linear infinite;
+  }
+}
+@keyframes magmaFallback {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* ── 6. Volcanic Title — 裂開岩漿標題 ── */
+@keyframes volcanicFlicker {
+  0%, 100% {
+    text-shadow:
+      0 0 10px rgba(232,133,12,0.8),
+      0 0 20px rgba(245,166,35,0.5),
+      0 0 40px rgba(255,68,68,0.3),
+      0 2px 4px rgba(0,0,0,0.8);
+  }
+  25% {
+    text-shadow:
+      0 0 15px rgba(255,215,0,0.9),
+      0 0 30px rgba(232,133,12,0.6),
+      0 0 60px rgba(255,68,68,0.4),
+      0 0 80px rgba(139,0,0,0.2),
+      0 2px 4px rgba(0,0,0,0.8);
+  }
+  50% {
+    text-shadow:
+      0 0 8px rgba(232,133,12,0.6),
+      0 0 20px rgba(245,166,35,0.4),
+      0 0 35px rgba(255,68,68,0.2),
+      0 2px 4px rgba(0,0,0,0.8);
+  }
+  75% {
+    text-shadow:
+      0 0 12px rgba(255,215,0,0.7),
+      0 0 25px rgba(232,133,12,0.5),
+      0 0 50px rgba(255,68,68,0.35),
+      0 0 70px rgba(139,0,0,0.15),
+      0 2px 4px rgba(0,0,0,0.8);
+  }
+}
+.volcanic-title {
+  color: #ffd700;
+  animation: volcanicFlicker 3s ease-in-out infinite;
+  background: linear-gradient(
+    180deg,
+    #ffd700 0%,
+    #f5a623 30%,
+    #e8850c 60%,
+    #ff4444 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  position: relative;
+}
+/* Glowing underline crack */
+.volcanic-title::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 10%;
+  right: 10%;
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    #e8850c 20%,
+    #ffd700 50%,
+    #e8850c 80%,
+    transparent 100%
+  );
+  box-shadow: 0 0 8px rgba(232,133,12,0.6), 0 0 20px rgba(245,166,35,0.3);
+  border-radius: 1px;
+}
+
+/* ── 7. Seismic Shake — 微震效果 (hover) ── */
+@keyframes seismicShake {
+  0%   { transform: translate(0, 0) rotate(0deg); }
+  10%  { transform: translate(-1px, -1px) rotate(-0.3deg); }
+  20%  { transform: translate(2px, 0px) rotate(0.3deg); }
+  30%  { transform: translate(-1px, 1px) rotate(0deg); }
+  40%  { transform: translate(1px, -1px) rotate(0.3deg); }
+  50%  { transform: translate(-1px, 0px) rotate(-0.3deg); }
+  60%  { transform: translate(1px, 1px) rotate(0deg); }
+  70%  { transform: translate(0px, -1px) rotate(-0.3deg); }
+  80%  { transform: translate(-1px, 0px) rotate(0.3deg); }
+  90%  { transform: translate(1px, 0px) rotate(0deg); }
+  100% { transform: translate(0, 0) rotate(0deg); }
+}
+.seismic-shake {
+  transition: transform 0.1s;
+}
+.seismic-shake:hover {
+  animation: seismicShake 0.4s ease-in-out;
+}
+
+/* ── 8. Heat Wave — 底部熱浪波動 ── */
+@keyframes heatWaveShift {
+  0%   { filter: hue-rotate(0deg) blur(0px); transform: scaleY(1) translateY(0); }
+  25%  { filter: hue-rotate(5deg) blur(0.5px); transform: scaleY(1.01) translateY(-1px); }
+  50%  { filter: hue-rotate(0deg) blur(0px); transform: scaleY(1) translateY(0); }
+  75%  { filter: hue-rotate(-5deg) blur(0.5px); transform: scaleY(1.01) translateY(-1px); }
+  100% { filter: hue-rotate(0deg) blur(0px); transform: scaleY(1) translateY(0); }
+}
+.heat-wave {
+  position: relative;
+  overflow: hidden;
+}
+.heat-wave::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: -10%;
+  right: -10%;
+  height: 60px;
+  pointer-events: none;
+  background: linear-gradient(
+    to top,
+    rgba(232,133,12,0.08) 0%,
+    rgba(245,166,35,0.04) 40%,
+    transparent 100%
+  );
+  animation: heatWaveShift 4s ease-in-out infinite;
+  z-index: 1;
+}
+
+/* ── Volcanic Click Ripple (CSS part — JS creates elements) ── */
+@keyframes volcanicRipple {
+  0% {
+    transform: translate(-50%, -50%) scale(0);
+    opacity: 0.7;
+    border-width: 3px;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 0;
+    border-width: 0.5px;
+  }
+}
+.volcanic-ripple {
+  position: fixed;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  border: 3px solid rgba(232,133,12,0.6);
+  box-shadow:
+    0 0 20px rgba(232,133,12,0.3),
+    inset 0 0 20px rgba(245,166,35,0.1);
+  pointer-events: none;
+  z-index: 99997;
+  animation: volcanicRipple 0.6s ease-out forwards;
+}
+
+/* ── Counter Spark (CSS part — JS creates elements) ── */
+@keyframes sparkBurst {
+  0%   { transform: translate(0, 0) scale(1); opacity: 1; }
+  100% { transform: translate(var(--spark-x, 20px), var(--spark-y, -30px)) scale(0); opacity: 0; }
+}
+.counter-spark {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: #ffd700;
+  box-shadow: 0 0 6px #e8850c, 0 0 12px rgba(245,166,35,0.5);
+  pointer-events: none;
+  animation: sparkBurst 0.5s ease-out forwards;
+}
+
+/* ── Volcanic FX: Mobile disable ── */
+@media (max-width: 768px) {
+  .eruption-bg::before,
+  .eruption-bg::after { animation: none; opacity: 0.3; }
+  .ember-float { display: none; }
+  .heat-distort { animation: none; filter: none; }
+  .magma-border::before { animation: none; }
+  .volcanic-ripple { display: none; }
+  .heat-wave::after { animation: none; }
+}
+
+/* ── Volcanic FX: Reduced motion ── */
+@media (prefers-reduced-motion: reduce) {
+  .eruption-bg::before,
+  .eruption-bg::after { animation: none !important; }
+  .lava-glow { animation: none !important; box-shadow: 0 4px 15px rgba(232,133,12,0.3); }
+  .ember-float { display: none !important; }
+  .heat-distort { animation: none !important; filter: none !important; }
+  .magma-border::before { animation: none !important; }
+  .volcanic-title { animation: none !important; }
+  .seismic-shake:hover { animation: none !important; }
+  .heat-wave::after { animation: none !important; }
+  .volcanic-ripple { display: none !important; }
+}
