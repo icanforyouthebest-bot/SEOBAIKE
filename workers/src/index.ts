@@ -57,6 +57,7 @@ export default {
       '/terms': 'terms.html',
       '/marketplace': 'marketplace.html',
       '/bots': 'bots.html',
+      '/ai': 'ai.html',
     }
     const cleanPath = path.endsWith('/') && path !== '/' ? path.slice(0, -1) : path
     const pageFile = SITE_PAGES[cleanPath]
@@ -84,7 +85,7 @@ export default {
       return new Response(`User-agent: *\nAllow: /\nSitemap: https://aiforseo.vip/sitemap.xml\n`, { headers: { 'Content-Type': 'text/plain', 'Cache-Control': 'public, max-age=86400' } })
     }
     if (path === '/sitemap.xml') {
-      const pages = ['', '/about', '/features', '/pricing', '/docs', '/contact', '/blog', '/login', '/dashboard', '/ecosystem', '/marketing', '/privacy', '/terms', '/marketplace', '/bots']
+      const pages = ['', '/about', '/features', '/pricing', '/docs', '/contact', '/blog', '/login', '/dashboard', '/ecosystem', '/marketing', '/privacy', '/terms', '/marketplace', '/bots', '/ai']
       const urls = pages.map(p => `  <url><loc>https://aiforseo.vip${p}</loc><lastmod>2026-02-15</lastmod><changefreq>weekly</changefreq><priority>${p === '' ? '1.0' : '0.8'}</priority></url>`).join('\n')
       return new Response(`<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls}\n</urlset>`, { headers: { 'Content-Type': 'application/xml', 'Cache-Control': 'public, max-age=86400' } })
     }
@@ -161,12 +162,12 @@ export default {
       status: 'operational', service: 'SEOBAIKE OS', version: '3.2.0', patent: 'TW-115100981',
       architecture: 'AI OS — 要什麼有什麼，讓人賺錢的系統',
       marketplace: { listings: 30, commission_levels: 3, model: 'platform 20% / creator 50% / referrers 30%' },
-      capabilities: { ai_models: 3, platforms: 14, constraint_layers: 4, api_endpoints: 52, collaboration_bots: 14 },
+      capabilities: { ai_models: 185, platforms: 14, constraint_layers: 4, api_endpoints: 55, collaboration_bots: 185 },
       endpoints: {
         bots: ['/api/bots/status', '/api/bots/telegram/setup', '/api/bots/telegram/info', '/api/bots/telegram/test'],
         marketplace: ['/api/marketplace', '/api/marketplace/featured', '/api/marketplace/categories', '/api/marketplace/listing/:id', '/api/marketplace/purchase', '/api/marketplace/create', '/api/marketplace/review'],
         commission: ['/api/commission/rules', '/api/wallet'],
-        ai: ['/api/ai/chat', '/api/widget-chat', '/api/v1/inference', '/api/ai/router', '/api/ai/search', '/api/ai/content'],
+        ai: ['/api/ai/models', '/api/ai/nim', '/api/ai/chat', '/api/widget-chat', '/api/v1/inference', '/api/ai/router', '/api/ai/search', '/api/ai/content'],
         data: ['/api/v1/l1', '/api/v1/l2', '/api/v1/l3', '/api/v1/l4', '/api/v1/nodes', '/api/v1/check', '/api/v1/search', '/api/v1/export'],
         system: ['/api/health', '/api/v1/analytics', '/api/v1/system', '/api/v1/status', '/api/platforms'],
         webhooks: ['/api/webhook/telegram', '/api/webhook/line', '/api/webhook/whatsapp', '/api/webhook/messenger', '/api/webhook/discord', '/api/webhook/slack', '/api/webhook/teams', '/api/webhook/email', '/api/webhook/google-chat', '/api/webhook/wechat', '/api/webhook/signal', '/api/webhook/viber', '/api/webhook/sms', '/api/webhook/web-widget'],
@@ -175,6 +176,27 @@ export default {
     })
     if (path === '/api/health') return json(200, { status: 'ok', timestamp: new Date().toISOString(), version: '3.2.0', platforms_ready: 14 })
     if (path === '/api/platforms') return json(200, PLATFORM_REGISTRY)
+
+    // ── NVIDIA NIM 怪物軍團 API ──
+    if (path === '/api/ai/models') {
+      const NIM_KEY = env.NVIDIA_API_KEY
+      if (!NIM_KEY) return json(503, { error: 'NVIDIA API not configured' })
+      try {
+        const res = await fetch('https://integrate.api.nvidia.com/v1/models', { headers: { 'Authorization': `Bearer ${NIM_KEY}` } })
+        const data = await res.json() as any
+        const models = (data.data || []).map((m: any) => ({ id: m.id, owned_by: m.owned_by || m.id.split('/')[0], created: m.created }))
+        const owners: Record<string, number> = {}
+        models.forEach((m: any) => { owners[m.owned_by] = (owners[m.owned_by] || 0) + 1 })
+        return json(200, {
+          total: models.length, source: 'NVIDIA NIM', patent: 'TW-115100981',
+          providers: Object.entries(owners).sort((a, b) => b[1] - a[1]).map(([name, count]) => ({ name, count })),
+          models,
+        })
+      } catch (e: any) { return json(500, { error: e.message }) }
+    }
+    if (path === '/api/ai/nim' && request.method === 'GET') {
+      return json(200, { info: 'SEOBAIKE AI OS — 185 個 NVIDIA NIM 怪物模型', method: 'POST', endpoint: '/api/ai/nim', body: { model: 'meta/llama-3.1-405b-instruct', message: 'your question' }, available_models: '/api/ai/models' })
+    }
 
     // ── 協作機器人狀態 API ──
     if (path === '/api/bots/status') {
@@ -463,6 +485,7 @@ export default {
         case '/api/webhook/web-widget': return await handleWebWidgetWebhook(request, env)
         case '/api/gateway': return await handleGateway(request, env)
         case '/api/ai/chat': return await handleAiChat(request, env)
+        case '/api/ai/nim': return await handleNimChat(request, env)
         case '/api/widget-chat': return await handleWidgetChat(request, env)
         // ── SEOBAIKE 世界級 API 路由 ──
         case '/api/ai/router': return await proxyEdge(request, env, 'ai-universal-router')
@@ -1145,6 +1168,41 @@ async function handleAiChat(request: Request, env: Env): Promise<Response> {
   )
 
   return json(200, result)
+}
+
+// ── NVIDIA NIM — 185 個怪物模型直連 ──
+async function handleNimChat(request: Request, env: Env): Promise<Response> {
+  const NIM_KEY = env.NVIDIA_API_KEY
+  if (!NIM_KEY) return json(503, { error: 'NVIDIA API not configured' })
+
+  const body = await request.json() as any
+  const model = body.model || 'meta/llama-3.1-70b-instruct'
+  const message = body.message || body.messages
+  if (!message) return json(400, { error: 'message is required', example: { model: 'meta/llama-3.1-405b-instruct', message: 'Hello' } })
+
+  const messages = Array.isArray(message) ? message : [
+    { role: 'system', content: 'You are SEOBAIKE AI, a helpful assistant. Answer in the same language the user writes in. Be concise and helpful.' },
+    { role: 'user', content: String(message) },
+  ]
+
+  try {
+    const nimRes = await fetch('https://integrate.api.nvidia.com/v1/chat/completions', {
+      method: 'POST',
+      headers: { 'Authorization': `Bearer ${NIM_KEY}`, 'Content-Type': 'application/json' },
+      body: JSON.stringify({ model, messages, max_tokens: body.max_tokens || 1024, temperature: body.temperature ?? 0.7 }),
+    })
+    const nimData = await nimRes.json() as any
+    if (nimData.choices?.[0]?.message?.content) {
+      return json(200, {
+        reply: nimData.choices[0].message.content,
+        model, source: 'nvidia-nim', patent: 'TW-115100981',
+        usage: nimData.usage,
+      })
+    }
+    return json(nimRes.status, { error: nimData.error || nimData, model })
+  } catch (e: any) {
+    return json(500, { error: e.message, model })
+  }
 }
 
 // ── Widget Chat — 直接用 Workers AI（真的 AI，不經 ai-gateway）──
