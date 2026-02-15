@@ -55,22 +55,39 @@ export default {
     const cleanPath = path.endsWith('/') && path !== '/' ? path.slice(0, -1) : path
     const pageFile = SITE_PAGES[cleanPath]
     if (pageFile) {
+      // ── Cloudflare 邊緣快取：毫秒級響應 ──
+      const cache = caches.default
+      const cacheKey = new Request(url.toString(), request)
+      const purge = url.searchParams.get('purge')
+      if (!purge) {
+        const cached = await cache.match(cacheKey)
+        if (cached) return cached
+      }
       const rawRes = await fetch(`https://raw.githubusercontent.com/icanforyouthebest-bot/SEOBAIKE/master/pages-site/${pageFile}`)
-      return new Response(rawRes.body, {
+      const body = await rawRes.text()
+      const resp = new Response(body, {
         status: rawRes.status,
-        headers: { ...SITE_SECURITY_HEADERS, 'Content-Type': 'text/html; charset=utf-8', 'Cache-Control': 'public, max-age=60' },
+        headers: { ...SITE_SECURITY_HEADERS, 'Content-Type': 'text/html; charset=utf-8', 'Cache-Control': 'public, max-age=300, s-maxage=600', 'X-Cache': 'MISS' },
       })
+      if (rawRes.ok) { const toCache = new Response(body, { status: 200, headers: { ...SITE_SECURITY_HEADERS, 'Content-Type': 'text/html; charset=utf-8', 'Cache-Control': 'public, max-age=300, s-maxage=600', 'X-Cache': 'HIT' } }); cache.put(cacheKey, toCache) }
+      return resp
     }
 
-    // ── 靜態資源 → 代理到 GitHub pages-site/ ──
+    // ── 靜態資源 → 代理到 GitHub pages-site/ + 邊緣快取 ──
     if (path.startsWith('/assets/') || path === '/favicon.svg' || path === '/favicon.ico' || path === '/og-image.png' || path === '/manifest.json' || path === '/seobaike-config.js' || path === '/seobaike-widget.js') {
+      const cache = caches.default
+      const cacheKey = new Request(url.toString(), request)
+      const cached = await cache.match(cacheKey)
+      if (cached) return cached
       const assetFile = path.startsWith('/') ? path.slice(1) : path
       const rawRes = await fetch(`https://raw.githubusercontent.com/icanforyouthebest-bot/SEOBAIKE/master/pages-site/${assetFile}`)
       const contentType = path.endsWith('.js') ? 'application/javascript' : path.endsWith('.css') ? 'text/css' : path.endsWith('.svg') ? 'image/svg+xml' : path.endsWith('.png') ? 'image/png' : path.endsWith('.ico') ? 'image/x-icon' : 'application/octet-stream'
-      return new Response(rawRes.body, {
+      const resp = new Response(rawRes.body, {
         status: rawRes.status,
-        headers: { ...SITE_SECURITY_HEADERS, 'Content-Type': contentType, 'Cache-Control': 'public, max-age=3600' },
+        headers: { ...SITE_SECURITY_HEADERS, 'Content-Type': contentType, 'Cache-Control': 'public, max-age=86400, s-maxage=604800' },
       })
+      if (rawRes.ok) cache.put(cacheKey, resp.clone())
+      return resp
     }
 
     // ── 其他非 /api/ 路徑 → 404 真實回應（不再 fallback 到 Framer 空殼） ──
