@@ -48,6 +48,55 @@ body { font-family: 'Segoe UI', sans-serif; background: #0a0a1a; color: #eee; mi
 .route .name { color: #e8850c; font-weight: bold; }
 .route .path { color: #888; }
 .footer { text-align: center; padding: 16px; color: #333; font-size: 11px; }
+
+/* === Real-Time Data Panels === */
+.data-panels { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; padding: 0 30px 16px; }
+.data-panel { background: linear-gradient(135deg, #16213e, #1a1a2e); border: 1px solid #333; border-radius: 16px; padding: 20px; position: relative; overflow: hidden; }
+.data-panel:hover { border-color: #e8850c; }
+.data-panel h3 { font-size: 14px; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; color: #e8850c; }
+.data-panel h3 .icon { font-size: 18px; }
+.data-panel .big-num { font-size: 36px; font-weight: bold; color: #76b900; line-height: 1.2; }
+.data-panel .sub-stats { display: flex; gap: 12px; margin-top: 10px; flex-wrap: wrap; }
+.data-panel .sub-stat { text-align: center; flex: 1; min-width: 60px; }
+.data-panel .sub-stat .sv { font-size: 20px; font-weight: bold; color: #cc785c; }
+.data-panel .sub-stat .sk { font-size: 10px; color: #888; margin-top: 2px; }
+.data-panel .status-badge { display: inline-block; padding: 4px 10px; border-radius: 10px; font-size: 11px; font-weight: bold; margin-top: 8px; }
+.data-panel .status-ok { background: rgba(118,185,0,0.15); color: #76b900; border: 1px solid #76b900; }
+.data-panel .status-down { background: rgba(255,68,68,0.15); color: #ff4444; border: 1px solid #ff4444; }
+.data-panel .status-loading { background: rgba(232,133,12,0.15); color: #e8850c; border: 1px solid #e8850c; }
+.data-panel .recent-list { list-style: none; margin-top: 10px; max-height: 120px; overflow-y: auto; }
+.data-panel .recent-list li { font-size: 11px; padding: 3px 0; border-bottom: 1px solid #1a1a2e; display: flex; justify-content: space-between; gap: 6px; }
+.data-panel .recent-list li .rp { color: #76b900; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 160px; }
+.data-panel .recent-list li .rt { color: #555; white-space: nowrap; font-size: 10px; }
+.refresh-indicator { position: absolute; top: 8px; right: 12px; font-size: 10px; color: #444; }
+.refresh-indicator.active { color: #e8850c; }
+@keyframes spin { from { transform:rotate(0deg); } to { transform:rotate(360deg); } }
+.spinner { display: inline-block; animation: spin 1s linear infinite; }
+
+/* Live Activity Feed */
+.activity-feed { padding: 0 30px 20px; }
+.activity-feed h3 { font-size: 14px; color: #76b900; margin-bottom: 8px; display: flex; align-items: center; gap: 8px; }
+.activity-feed h3 .auto-label { font-size: 11px; color: #555; font-weight: normal; }
+.feed-table { width: 100%; background: #0d1117; border: 1px solid #222; border-radius: 12px; overflow: hidden; }
+.feed-table table { width: 100%; border-collapse: collapse; font-size: 12px; }
+.feed-table th { background: #16213e; color: #e8850c; text-align: left; padding: 8px 12px; font-size: 11px; font-weight: 600; letter-spacing: 0.5px; }
+.feed-table td { padding: 6px 12px; border-top: 1px solid #1a1a2e; color: #ccc; }
+.feed-table tr:hover td { background: rgba(118,185,0,0.05); }
+.feed-table .fp { color: #76b900; font-weight: 600; }
+.feed-table .fts { color: #888; font-size: 11px; }
+.feed-table .fua { color: #555; font-size: 10px; max-width: 300px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.feed-table .fc { color: #cc785c; font-size: 11px; }
+
+/* Responsive: stack panels on smaller screens */
+@media (max-width: 1200px) {
+  .data-panels { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 768px) {
+  .grid { grid-template-columns: repeat(2, 1fr); }
+  .data-panels { grid-template-columns: 1fr; }
+  .engines { grid-template-columns: 1fr; }
+  .header { flex-wrap: wrap; }
+}
 </style>
 </head>
 <body>
@@ -69,6 +118,67 @@ body { font-family: 'Segoe UI', sans-serif; background: #0a0a1a; color: #eee; mi
   <div class="card"><div class="num" id="d-audit" style="color:#e8850c;">--</div><div class="lbl">稽核記錄</div></div>
   <div class="card"><div class="num" id="d-allow" style="color:#76b900;">--</div><div class="lbl">Allow 規則</div></div>
   <div class="card"><div class="num" id="d-deny" style="color:#ff6b6b;">--</div><div class="lbl">Deny 規則</div></div>
+</div>
+
+<!-- Real-Time Data Panels -->
+<div class="data-panels">
+  <!-- Panel 1: Page Views -->
+  <div class="data-panel">
+    <span class="refresh-indicator" id="pv-refresh">--</span>
+    <h3><span class="icon">&#128202;</span> 頁面瀏覽</h3>
+    <div class="big-num" id="pv-total">--</div>
+    <div style="font-size:11px;color:#888;margin-top:2px;">總頁面瀏覽次數</div>
+    <div class="sub-stats">
+      <div class="sub-stat"><div class="sv" id="pv-today">--</div><div class="sk">今日</div></div>
+      <div class="sub-stat"><div class="sv" id="pv-unique">--</div><div class="sk">不重複路徑</div></div>
+    </div>
+    <ul class="recent-list" id="pv-recent"></ul>
+  </div>
+
+  <!-- Panel 2: API / System Status -->
+  <div class="data-panel">
+    <span class="refresh-indicator" id="api-refresh">--</span>
+    <h3><span class="icon">&#9889;</span> API 狀態</h3>
+    <div id="api-status-badge" class="status-badge status-loading">檢查中...</div>
+    <div class="sub-stats" style="margin-top:14px;">
+      <div class="sub-stat"><div class="sv" id="api-l1">--</div><div class="sk">L1</div></div>
+      <div class="sub-stat"><div class="sv" id="api-l2">--</div><div class="sk">L2</div></div>
+      <div class="sub-stat"><div class="sv" id="api-l3">--</div><div class="sk">L3</div></div>
+      <div class="sub-stat"><div class="sv" id="api-l4">--</div><div class="sk">L4</div></div>
+    </div>
+    <div style="margin-top:10px;text-align:center;">
+      <div style="font-size:28px;font-weight:bold;color:#76b900;" id="api-total-nodes">--</div>
+      <div style="font-size:10px;color:#888;">節點總數</div>
+    </div>
+  </div>
+
+  <!-- Panel 3: Users / Submissions -->
+  <div class="data-panel">
+    <span class="refresh-indicator" id="usr-refresh">--</span>
+    <h3><span class="icon">&#128101;</span> 用戶互動</h3>
+    <div class="sub-stats" style="margin-top:4px;">
+      <div class="sub-stat">
+        <div class="sv" style="font-size:28px;color:#76b900;" id="usr-contacts">--</div>
+        <div class="sk">聯絡表單</div>
+      </div>
+      <div class="sub-stat">
+        <div class="sv" style="font-size:28px;color:#e8850c;" id="usr-newsletter">--</div>
+        <div class="sk">電子報訂閱</div>
+      </div>
+    </div>
+    <div style="margin-top:14px;text-align:center;">
+      <div style="font-size:36px;font-weight:bold;color:#cc785c;" id="usr-total">--</div>
+      <div style="font-size:10px;color:#888;">互動總計</div>
+    </div>
+  </div>
+
+  <!-- Panel 4: Live Mini Feed -->
+  <div class="data-panel">
+    <span class="refresh-indicator" id="feed-refresh">--</span>
+    <h3><span class="icon">&#128640;</span> 即時動態</h3>
+    <div style="font-size:11px;color:#888;margin-bottom:6px;">最近 5 筆瀏覽</div>
+    <ul class="recent-list" id="mini-feed" style="max-height:180px;"></ul>
+  </div>
 </div>
 
 <div class="engines">
@@ -95,6 +205,17 @@ body { font-family: 'Segoe UI', sans-serif; background: #0a0a1a; color: #eee; mi
 <div class="routes">
   <h3>SEOBAIKE 路由配置</h3>
   <div class="route-grid" id="routeGrid"></div>
+</div>
+
+<!-- Live Activity Feed (last 10 page views) -->
+<div class="activity-feed">
+  <h3>&#128205; 即時瀏覽記錄 <span class="auto-label">(每 30 秒自動刷新)</span></h3>
+  <div class="feed-table">
+    <table>
+      <thead><tr><th>路徑</th><th>時間</th><th>國家</th><th>User Agent</th></tr></thead>
+      <tbody id="activity-tbody"><tr><td colspan="4" style="text-align:center;color:#555;padding:20px;">載入中...</td></tr></tbody>
+    </table>
+  </div>
 </div>
 
 <div class="log-section">
@@ -268,6 +389,273 @@ async function tick() {
 
 tick();
 setInterval(tick, 15000);
+
+// ============================================================
+// Real-Time Data Panels — 每 30 秒自動刷新
+// ============================================================
+
+const COUNT_HDR = { ...REST_HDR, "Prefer": "count=exact", "Range": "0-0" };
+
+function timeAgo(dateStr) {
+  var d = new Date(dateStr);
+  var now = new Date();
+  var sec = Math.floor((now - d) / 1000);
+  if (sec < 60) return sec + " 秒前";
+  if (sec < 3600) return Math.floor(sec / 60) + " 分鐘前";
+  if (sec < 86400) return Math.floor(sec / 3600) + " 小時前";
+  return Math.floor(sec / 86400) + " 天前";
+}
+
+function shortUA(ua) {
+  if (!ua) return "--";
+  // Extract browser name roughly
+  if (ua.indexOf("Chrome") > -1 && ua.indexOf("Edg") > -1) return "Edge";
+  if (ua.indexOf("Chrome") > -1) return "Chrome";
+  if (ua.indexOf("Firefox") > -1) return "Firefox";
+  if (ua.indexOf("Safari") > -1 && ua.indexOf("Chrome") === -1) return "Safari";
+  if (ua.indexOf("bot") > -1 || ua.indexOf("Bot") > -1 || ua.indexOf("crawl") > -1) return "Bot";
+  return ua.substring(0, 30) + "...";
+}
+
+function setRefresh(id) {
+  var el = document.getElementById(id);
+  if (el) {
+    el.textContent = new Date().toLocaleTimeString("zh-TW");
+    el.className = "refresh-indicator active";
+    setTimeout(function() { el.className = "refresh-indicator"; }, 2000);
+  }
+}
+
+// Panel 1: Page Views
+async function loadPageViews() {
+  try {
+    // Get total count via HEAD-like approach
+    var countRes = await fetch(SUPA_URL + "/rest/v1/page_views?select=id", {
+      method: "HEAD",
+      headers: { ...REST_HDR, "Prefer": "count=exact" }
+    });
+    var range = countRes.headers.get("content-range");
+    if (range) {
+      var total = range.split("/")[1];
+      if (total && total !== "*") updateNum("pv-total", Number(total).toLocaleString());
+    } else {
+      // Fallback: GET with count header
+      var countRes2 = await fetch(SUPA_URL + "/rest/v1/page_views?select=id", {
+        headers: { ...REST_HDR, "Prefer": "count=exact", "Range": "0-0" }
+      });
+      var range2 = countRes2.headers.get("content-range");
+      if (range2) {
+        var total2 = range2.split("/")[1];
+        if (total2 && total2 !== "*") updateNum("pv-total", Number(total2).toLocaleString());
+      }
+    }
+
+    // Get today's count
+    var todayStart = new Date();
+    todayStart.setHours(0, 0, 0, 0);
+    var todayISO = todayStart.toISOString();
+    var todayRes = await fetch(SUPA_URL + "/rest/v1/page_views?select=id&created_at=gte." + todayISO, {
+      headers: { ...REST_HDR, "Prefer": "count=exact", "Range": "0-0" }
+    });
+    var todayRange = todayRes.headers.get("content-range");
+    if (todayRange) {
+      var todayTotal = todayRange.split("/")[1];
+      if (todayTotal && todayTotal !== "*") document.getElementById("pv-today").textContent = todayTotal;
+    }
+
+    // Get unique paths count
+    var pathsRes = await fetch(SUPA_URL + "/rest/v1/rpc/get_unique_paths_count", {
+      method: "POST",
+      headers: { ...REST_HDR, "Content-Type": "application/json" },
+      body: "{}"
+    });
+    if (pathsRes.ok) {
+      var pathCount = await pathsRes.json();
+      document.getElementById("pv-unique").textContent = pathCount;
+    } else {
+      // Fallback: get recent paths and count unique
+      var recentPaths = await fetch(SUPA_URL + "/rest/v1/page_views?select=path&order=created_at.desc&limit=500", { headers: REST_HDR });
+      if (recentPaths.ok) {
+        var pp = await recentPaths.json();
+        var unique = {};
+        pp.forEach(function(r) { unique[r.path] = true; });
+        document.getElementById("pv-unique").textContent = Object.keys(unique).length;
+      }
+    }
+
+    // Recent 5 visits for the panel list
+    var recentRes = await fetch(SUPA_URL + "/rest/v1/page_views?select=path,created_at&order=created_at.desc&limit=5", { headers: REST_HDR });
+    if (recentRes.ok) {
+      var recent = await recentRes.json();
+      var html = "";
+      recent.forEach(function(r) {
+        html += '<li><span class="rp">' + (r.path || "/") + '</span><span class="rt">' + timeAgo(r.created_at) + '</span></li>';
+      });
+      document.getElementById("pv-recent").innerHTML = html;
+    }
+
+    setRefresh("pv-refresh");
+    addLog("頁面瀏覽面板已更新", "ok");
+  } catch (e) {
+    addLog("頁面瀏覽面板錯誤: " + e.message, "err");
+  }
+}
+
+// Panel 2: API / System Status
+async function loadAPIStatus() {
+  try {
+    var statusBadge = document.getElementById("api-status-badge");
+
+    // Try the external API status endpoint
+    var apiOk = false;
+    try {
+      var statusRes = await fetch("https://aiforseo.vip/api/v1/status", { signal: AbortSignal.timeout(8000) });
+      if (statusRes.ok) {
+        apiOk = true;
+        statusBadge.textContent = "營運中 Operational";
+        statusBadge.className = "status-badge status-ok";
+      }
+    } catch (e) {
+      // Status endpoint not reachable, check Supabase directly
+      var pingRes = await fetch(SUPA_URL + "/rest/v1/l1_categories?select=id&limit=1", { headers: REST_HDR });
+      if (pingRes.ok) {
+        apiOk = true;
+        statusBadge.textContent = "資料庫正常";
+        statusBadge.className = "status-badge status-ok";
+      }
+    }
+
+    if (!apiOk) {
+      statusBadge.textContent = "連線異常";
+      statusBadge.className = "status-badge status-down";
+    }
+
+    // Load L1-L4 node counts (reuse from main grid but for API panel)
+    var l1r = await fetch(SUPA_URL + "/rest/v1/l1_categories?select=id", { headers: { ...REST_HDR, "Prefer": "count=exact", "Range": "0-0" } });
+    var l2r = await fetch(SUPA_URL + "/rest/v1/l2_subcategories?select=id", { headers: { ...REST_HDR, "Prefer": "count=exact", "Range": "0-0" } });
+    var l3r = await fetch(SUPA_URL + "/rest/v1/l3_processes?select=id", { headers: { ...REST_HDR, "Prefer": "count=exact", "Range": "0-0" } });
+    var l4r = await fetch(SUPA_URL + "/rest/v1/l4_nodes?select=id", { headers: { ...REST_HDR, "Prefer": "count=exact", "Range": "0-0" } });
+
+    var total = 0;
+    [["api-l1", l1r], ["api-l2", l2r], ["api-l3", l3r], ["api-l4", l4r]].forEach(function(pair) {
+      var cr = pair[1].headers.get("content-range");
+      if (cr) {
+        var n = cr.split("/")[1];
+        if (n && n !== "*") {
+          document.getElementById(pair[0]).textContent = n;
+          total += Number(n);
+        }
+      }
+    });
+
+    if (total > 0) {
+      document.getElementById("api-total-nodes").textContent = total.toLocaleString();
+    }
+
+    setRefresh("api-refresh");
+    addLog("API 狀態面板已更新 — 節點總數: " + total, "ok");
+  } catch (e) {
+    addLog("API 面板錯誤: " + e.message, "err");
+    document.getElementById("api-status-badge").textContent = "錯誤";
+    document.getElementById("api-status-badge").className = "status-badge status-down";
+  }
+}
+
+// Panel 3: Users / Submissions
+async function loadUserStats() {
+  try {
+    var contactRes = await fetch(SUPA_URL + "/rest/v1/contact_submissions?select=id", {
+      headers: { ...REST_HDR, "Prefer": "count=exact", "Range": "0-0" }
+    });
+    var newsletterRes = await fetch(SUPA_URL + "/rest/v1/newsletter_subscriptions?select=id", {
+      headers: { ...REST_HDR, "Prefer": "count=exact", "Range": "0-0" }
+    });
+
+    var contacts = 0, newsletters = 0;
+
+    var cr1 = contactRes.headers.get("content-range");
+    if (cr1) {
+      var n1 = cr1.split("/")[1];
+      if (n1 && n1 !== "*") { contacts = Number(n1); document.getElementById("usr-contacts").textContent = contacts; }
+    } else {
+      // Fallback: read full array
+      var cData = await fetch(SUPA_URL + "/rest/v1/contact_submissions?select=id", { headers: REST_HDR });
+      if (cData.ok) { var cArr = await cData.json(); contacts = cArr.length; document.getElementById("usr-contacts").textContent = contacts; }
+    }
+
+    var cr2 = newsletterRes.headers.get("content-range");
+    if (cr2) {
+      var n2 = cr2.split("/")[1];
+      if (n2 && n2 !== "*") { newsletters = Number(n2); document.getElementById("usr-newsletter").textContent = newsletters; }
+    } else {
+      var nData = await fetch(SUPA_URL + "/rest/v1/newsletter_subscriptions?select=id", { headers: REST_HDR });
+      if (nData.ok) { var nArr = await nData.json(); newsletters = nArr.length; document.getElementById("usr-newsletter").textContent = newsletters; }
+    }
+
+    document.getElementById("usr-total").textContent = (contacts + newsletters).toLocaleString();
+    setRefresh("usr-refresh");
+    addLog("用戶互動面板已更新 — 聯絡: " + contacts + " / 訂閱: " + newsletters, "ok");
+  } catch (e) {
+    addLog("用戶面板錯誤: " + e.message, "err");
+  }
+}
+
+// Panel 4: Mini Live Feed (sidebar) + Full Activity Feed Table
+async function loadActivityFeed() {
+  try {
+    var feedRes = await fetch(SUPA_URL + "/rest/v1/page_views?select=path,created_at,user_agent,country&order=created_at.desc&limit=10", { headers: REST_HDR });
+    if (!feedRes.ok) throw new Error("HTTP " + feedRes.status);
+    var data = await feedRes.json();
+
+    // Mini feed (panel 4 — 5 items)
+    var miniHtml = "";
+    data.slice(0, 5).forEach(function(r) {
+      miniHtml += '<li><span class="rp">' + (r.path || "/") + '</span><span class="rt">' + timeAgo(r.created_at) + '</span></li>';
+    });
+    document.getElementById("mini-feed").innerHTML = miniHtml;
+
+    // Full activity feed table (10 items)
+    var tbody = document.getElementById("activity-tbody");
+    if (data.length === 0) {
+      tbody.innerHTML = '<tr><td colspan="4" style="text-align:center;color:#555;padding:20px;">尚無瀏覽記錄</td></tr>';
+    } else {
+      var thtml = "";
+      data.forEach(function(r) {
+        var dt = new Date(r.created_at);
+        var tsStr = dt.toLocaleString("zh-TW", { month:"2-digit", day:"2-digit", hour:"2-digit", minute:"2-digit", second:"2-digit" });
+        thtml += '<tr>';
+        thtml += '<td class="fp">' + (r.path || "/") + '</td>';
+        thtml += '<td class="fts">' + tsStr + ' <span style="color:#555;">(' + timeAgo(r.created_at) + ')</span></td>';
+        thtml += '<td class="fc">' + (r.country || "--") + '</td>';
+        thtml += '<td class="fua" title="' + (r.user_agent || "").replace(/"/g, '&quot;') + '">' + shortUA(r.user_agent) + '</td>';
+        thtml += '</tr>';
+      });
+      tbody.innerHTML = thtml;
+    }
+
+    setRefresh("feed-refresh");
+    addLog("即時動態已更新 — " + data.length + " 筆記錄", "ok");
+  } catch (e) {
+    addLog("即時動態錯誤: " + e.message, "err");
+  }
+}
+
+// Master refresh function
+async function refreshAllPanels() {
+  addLog("--- 面板自動刷新 ---", "ok");
+  await Promise.allSettled([
+    loadPageViews(),
+    loadAPIStatus(),
+    loadUserStats(),
+    loadActivityFeed()
+  ]);
+}
+
+// Initial load
+refreshAllPanels();
+
+// Auto-refresh every 30 seconds
+setInterval(refreshAllPanels, 30000);
 </script>
 <script>
 (function(){
