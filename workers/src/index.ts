@@ -152,10 +152,10 @@ export default {
       const data = await res.json()
       return json(200, { count: (data as any[]).length, data })
     }
-    if (path === '/api/v1/check') {
-      return json(200, { info: 'Use POST /api/v1/check with body {"l1":"code","l2":"code","l3":"code","l4":"code"} to validate inference path', method: 'POST', example: { l1: 'MFG', l2: 'SEMI', l3: 'ETCH', l4: 'PHOTO_RESIST' } })
+    if (path === '/api/v1/check' && request.method === 'GET') {
+      return json(200, { info: 'Use POST /api/v1/check to validate inference path', method: 'POST', patent: 'TW-115100981', examples: [{ mode: 'uuid', body: { l1_id: 'uuid', l2_id: 'uuid', l3_id: 'uuid', l4_id: 'uuid' } }, { mode: 'code', body: { l1_code: 'L1-01', l4_code: 'L4-01010101' } }] })
     }
-    if (path === '/api/v1/inference') {
+    if (path === '/api/v1/inference' && request.method === 'GET') {
       return json(200, { info: 'Use POST /api/v1/inference with body {"message":"your query","l4_node":"code"} to run constrained inference', method: 'POST' })
     }
     if (path === '/api/docs') {
