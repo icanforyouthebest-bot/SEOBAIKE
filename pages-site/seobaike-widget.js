@@ -9,8 +9,8 @@
 
   // ── 設定 ──
   var CONFIG = {
-    edgeUrl: 'https://vmyrivxxibqydccurxug.supabase.co/functions/v1/ai-gateway',
-    apiKey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZteXJpdnh4aWJxeWRjY3VyeHVnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzAwNDAwMjksImV4cCI6MjA4NTYxNjAyOX0.iBV-23LGdm_uKffAExgqSV34-NWoAyv8_-M_cJQZ8Gg',
+    edgeUrl: '/api/widget-chat',
+    apiKey: '',
     platform: 'web-widget',
     fallbackMessage: '\u5c0f\u767e\u76ee\u524d\u5fd9\u7921\u4e2d\uff0c\u8acb\u900f\u904e /contact \u9801\u9762\u806f\u7e6b\u6211\u5011\uff0c\u6216\u7a0d\u5f8c\u518d\u8a66\u3002',
     welcomeMessage: '\u4f60\u597d\uff01\u6211\u662f\u5c0f\u767e\uff0cSEOBAIKE \u7684 AI \u52a9\u624b\u3002\u6709\u4ec0\u9ebc\u6211\u53ef\u4ee5\u5e6b\u4f60\u7684\u55ce\uff1f'
@@ -551,14 +551,10 @@
     return fetch(CONFIG.edgeUrl, {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json',
-        'apikey': CONFIG.apiKey,
-        'Authorization': 'Bearer ' + CONFIG.apiKey
+        'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        message: message,
-        platform: CONFIG.platform,
-        platform_user_id: visitorId
+        message: message
       })
     })
       .then(function (res) {

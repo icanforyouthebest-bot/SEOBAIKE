@@ -103,6 +103,29 @@ export default {
       return resp
     }
 
+    // ── Apple / Google 驗證檔案（App Store + Play Store 上架必備） ──
+    if (path === '/.well-known/apple-developer-domain-association.txt') {
+      return new Response('// Apple Developer Domain Association\n// Domain: aiforseo.vip\n// Organization: 小路光有限公司 (Xiao Lu Guang Limited Company)\n// Tax ID: 60475510\n// Patent: TW-115100981\n', {
+        headers: { ...SITE_SECURITY_HEADERS, 'Content-Type': 'text/plain', 'Cache-Control': 'public, max-age=3600' },
+      })
+    }
+    if (path === '/apple-app-site-association' || path === '/.well-known/apple-app-site-association') {
+      return new Response(JSON.stringify({
+        applinks: { details: [{ appIDs: [], components: [{ '/': '/*' }] }] },
+        webcredentials: { apps: [] },
+      }), {
+        headers: { ...SITE_SECURITY_HEADERS, 'Content-Type': 'application/json', 'Cache-Control': 'public, max-age=3600' },
+      })
+    }
+    if (path === '/.well-known/assetlinks.json') {
+      return new Response(JSON.stringify([{
+        relation: ['delegate_permission/common.handle_all_urls'],
+        target: { namespace: 'android_app', package_name: 'vip.aiforseo.app', sha256_cert_fingerprints: [] },
+      }]), {
+        headers: { ...SITE_SECURITY_HEADERS, 'Content-Type': 'application/json', 'Cache-Control': 'public, max-age=3600' },
+      })
+    }
+
     // ── 其他非 /api/ 路徑 → 404 真實回應（不再 fallback 到 Framer 空殼） ──
     if (!path.startsWith('/api/') && path !== '/api') {
       return new Response('<!DOCTYPE html><html lang="zh-TW"><head><meta charset="UTF-8"><title>404 — SEOBAIKE</title><style>body{font-family:sans-serif;background:#0a0a1a;color:#eee;display:flex;justify-content:center;align-items:center;min-height:100vh;text-align:center;}h1{font-size:72px;color:#e8850c;margin-bottom:8px;}p{color:#888;}a{color:#76b900;}</style></head><body><div><h1>404</h1><p>頁面不存在</p><a href="/">回到首頁</a></div></body></html>', {
@@ -234,6 +257,7 @@ export default {
         case '/api/webhook/web-widget': return await handleWebWidgetWebhook(request, env)
         case '/api/gateway': return await handleGateway(request, env)
         case '/api/ai/chat': return await handleAiChat(request, env)
+        case '/api/widget-chat': return await handleWidgetChat(request, env)
         case '/api/v1/check': {
           const body = await request.json() as any
           if (!body.l1_id && !body.l1_code) return json(400, { error: 'l1_id (uuid) or l1_code (e.g. L1-01) is required', example: { l1_code: 'L1-01', l4_code: 'L4-01010101' } })
@@ -842,6 +866,20 @@ async function handleAiChat(request: Request, env: Env): Promise<Response> {
   )
 
   return json(200, result)
+}
+
+// ── Widget Chat — 直接用 Workers AI（真的 AI，不經 ai-gateway）──
+async function handleWidgetChat(request: Request, env: Env): Promise<Response> {
+  const body = await request.json() as any
+  const { message } = body
+  if (!message) return json(400, { error: 'message is required' })
+
+  try {
+    const reply = await aiChat(env.AI, message)
+    return json(200, { reply, source: 'cloudflare-workers-ai', model: '@cf/meta/llama-3.1-8b-instruct' })
+  } catch (err) {
+    return json(500, { reply: '抱歉，AI 暫時無法回應。\n\n— 小百', error: String(err) })
+  }
 }
 
 // ============================================================
