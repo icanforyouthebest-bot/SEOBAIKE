@@ -239,8 +239,9 @@ a:hover{color:var(--copper)}
   </div>
 </footer>
 
+<script src="/seobaike-config.js"></script>
 <script>
-function subscribeNewsletter() {
+async function subscribeNewsletter() {
   const email = document.getElementById('newsletter-email').value.trim();
   const msg = document.getElementById('newsletter-msg');
   if (!email || !email.includes('@')) {
@@ -249,10 +250,41 @@ function subscribeNewsletter() {
     msg.textContent = '請輸入有效的電子郵件地址';
     return;
   }
-  msg.style.display = 'block';
-  msg.style.color = '#76b900';
-  msg.textContent = '感謝訂閱！您將收到 SEOBAIKE 的最新消息。';
-  document.getElementById('newsletter-email').value = '';
+
+  var SUPA_URL = (window.__SEOBAIKE__ && window.__SEOBAIKE__.supabaseUrl) || '';
+  var SUPA_KEY = (window.__SEOBAIKE__ && window.__SEOBAIKE__.anonKey) || '';
+
+  try {
+    var res = await fetch(SUPA_URL + '/rest/v1/newsletter_subscriptions', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'apikey': SUPA_KEY,
+        'Authorization': 'Bearer ' + SUPA_KEY,
+        'Prefer': 'return=minimal'
+      },
+      body: JSON.stringify({ email: email, source: 'blog' })
+    });
+
+    if (res.ok || res.status === 201) {
+      msg.style.display = 'block';
+      msg.style.color = '#76b900';
+      msg.textContent = '感謝訂閱！您將收到 SEOBAIKE 的最新消息。';
+      document.getElementById('newsletter-email').value = '';
+    } else if (res.status === 409) {
+      msg.style.display = 'block';
+      msg.style.color = '#e8850c';
+      msg.textContent = '此信箱已訂閱過囉！';
+    } else {
+      msg.style.display = 'block';
+      msg.style.color = '#e8850c';
+      msg.textContent = '訂閱失敗，請稍後再試';
+    }
+  } catch (err) {
+    msg.style.display = 'block';
+    msg.style.color = '#e8850c';
+    msg.textContent = '網路錯誤，請稍後再試';
+  }
 }
 </script>
 
