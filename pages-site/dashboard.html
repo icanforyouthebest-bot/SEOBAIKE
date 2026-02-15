@@ -499,6 +499,300 @@ body { font-family: 'Segoe UI', sans-serif; background: #0a0a1a; color: #eee; mi
 @media (max-width: 480px) {
   .channel-grid { grid-template-columns: repeat(2, 1fr); }
 }
+
+/* === SEO 點數面板 === */
+.seo-points-panel {
+  background: linear-gradient(135deg, rgba(232,133,12,0.08) 0%, rgba(26,15,0,0.95) 50%, rgba(10,10,26,0.98) 100%);
+  border: 1px solid rgba(232,133,12,0.3);
+  border-radius: 20px;
+  padding: 32px;
+  margin: 20px 30px;
+  position: relative;
+  overflow: hidden;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+.seo-points-panel::before {
+  content: '';
+  position: absolute;
+  top: -80%;
+  left: -30%;
+  width: 160%;
+  height: 260%;
+  background: radial-gradient(ellipse at 30% 20%, rgba(232,133,12,0.08) 0%, transparent 50%);
+  pointer-events: none;
+}
+.seo-points-panel::after {
+  content: '';
+  position: absolute;
+  bottom: -50%;
+  right: -20%;
+  width: 100%;
+  height: 150%;
+  background: radial-gradient(ellipse at 70% 80%, rgba(118,185,0,0.04) 0%, transparent 50%);
+  pointer-events: none;
+}
+.seo-points-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+  position: relative;
+}
+.seo-points-title {
+  font-size: 20px;
+  font-weight: 800;
+  color: #e8850c;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.seo-points-title .pts-live {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #4ade80;
+  animation: pulse 1s infinite;
+}
+.seo-points-tagline {
+  font-size: 12px;
+  color: rgba(255,255,255,0.4);
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+.seo-points-balance-row {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  margin-bottom: 28px;
+  position: relative;
+}
+.seo-points-balance-main {
+  flex: 1;
+  text-align: center;
+  padding: 28px 20px;
+  background: rgba(0,0,0,0.35);
+  border: 1px solid rgba(232,133,12,0.2);
+  border-radius: 16px;
+  position: relative;
+}
+.seo-points-balance-main .pts-label {
+  font-size: 13px;
+  color: rgba(255,255,255,0.45);
+  margin-bottom: 8px;
+}
+.seo-points-balance-main .pts-big-num {
+  font-size: 56px;
+  font-weight: 900;
+  color: #e8850c;
+  font-variant-numeric: tabular-nums;
+  line-height: 1.1;
+  transition: transform 0.3s, color 0.3s;
+}
+.seo-points-balance-main .pts-big-num.counting {
+  animation: ptsBump 0.4s ease;
+}
+@keyframes ptsBump {
+  0% { transform: scale(1); }
+  40% { transform: scale(1.08); color: #f5a623; }
+  100% { transform: scale(1); }
+}
+.seo-points-balance-main .pts-unit {
+  font-size: 18px;
+  color: rgba(232,133,12,0.6);
+  margin-left: 6px;
+  font-weight: 600;
+}
+.seo-points-balance-sub {
+  display: flex;
+  gap: 12px;
+  flex-direction: column;
+  min-width: 160px;
+}
+.pts-stat-card {
+  padding: 14px 18px;
+  background: rgba(0,0,0,0.25);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 12px;
+  text-align: center;
+}
+.pts-stat-card .ps-num {
+  font-size: 22px;
+  font-weight: 700;
+  color: #cc785c;
+}
+.pts-stat-card .ps-lbl {
+  font-size: 11px;
+  color: rgba(255,255,255,0.35);
+  margin-top: 2px;
+}
+.seo-points-actions {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 24px;
+  position: relative;
+}
+.pts-action-btn {
+  flex: 1;
+  padding: 14px 20px;
+  border: none;
+  border-radius: 12px;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+.pts-action-btn.topup {
+  background: linear-gradient(135deg, #e8850c, #f5a623);
+  color: #fff;
+  box-shadow: 0 4px 16px rgba(232,133,12,0.3);
+}
+.pts-action-btn.topup:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 24px rgba(232,133,12,0.4);
+}
+.pts-action-btn.cashout {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(232,133,12,0.3);
+  color: #e8850c;
+}
+.pts-action-btn.cashout:hover {
+  background: rgba(232,133,12,0.1);
+  transform: translateY(-2px);
+}
+.seo-exchange-ticker {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 14px 20px;
+  background: rgba(0,0,0,0.3);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 12px;
+  margin-bottom: 20px;
+  overflow-x: auto;
+  position: relative;
+}
+.seo-exchange-ticker::-webkit-scrollbar { height: 0; }
+.exchange-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+  font-size: 13px;
+  color: rgba(255,255,255,0.6);
+  padding: 4px 10px;
+  border-radius: 8px;
+  background: rgba(255,255,255,0.03);
+  flex-shrink: 0;
+}
+.exchange-item .ex-flag { font-size: 16px; }
+.exchange-item .ex-val { color: #76b900; font-weight: 700; }
+.exchange-item .ex-cur { color: rgba(255,255,255,0.4); font-size: 11px; }
+.seo-tx-history {
+  position: relative;
+}
+.seo-tx-history h4 {
+  font-size: 13px;
+  color: rgba(255,255,255,0.5);
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+.tx-list {
+  list-style: none;
+}
+.tx-list li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 14px;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+  font-size: 13px;
+  transition: background 0.2s;
+}
+.tx-list li:hover {
+  background: rgba(232,133,12,0.04);
+}
+.tx-list li:last-child {
+  border-bottom: none;
+}
+.tx-list .tx-icon {
+  font-size: 18px;
+  margin-right: 10px;
+}
+.tx-list .tx-desc {
+  flex: 1;
+  color: rgba(255,255,255,0.7);
+}
+.tx-list .tx-time {
+  font-size: 11px;
+  color: rgba(255,255,255,0.3);
+  margin-left: 12px;
+}
+.tx-list .tx-amount {
+  font-weight: 700;
+  font-size: 14px;
+  min-width: 80px;
+  text-align: right;
+}
+.tx-list .tx-amount.positive { color: #76b900; }
+.tx-list .tx-amount.negative { color: #ff6b6b; }
+.pts-global-badge {
+  text-align: center;
+  margin-top: 16px;
+  position: relative;
+}
+.pts-global-badge span {
+  display: inline-block;
+  padding: 8px 24px;
+  background: linear-gradient(135deg, rgba(232,133,12,0.12), rgba(118,185,0,0.08));
+  border: 1px solid rgba(232,133,12,0.2);
+  border-radius: 20px;
+  font-size: 13px;
+  color: rgba(255,255,255,0.6);
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+.pts-toast {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background: rgba(26,15,0,0.95);
+  border: 1px solid rgba(232,133,12,0.4);
+  border-radius: 12px;
+  padding: 16px 24px;
+  color: #e8850c;
+  font-size: 14px;
+  font-weight: 600;
+  z-index: 9999;
+  transform: translateX(120%);
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  backdrop-filter: blur(20px);
+  max-width: 360px;
+}
+.pts-toast.show {
+  transform: translateX(0);
+}
+.pts-toast .toast-sub {
+  font-size: 12px;
+  color: rgba(255,255,255,0.5);
+  margin-top: 4px;
+  font-weight: normal;
+}
+@media (max-width: 768px) {
+  .seo-points-panel { padding: 20px 16px; margin: 16px 16px; }
+  .seo-points-balance-row { flex-direction: column; gap: 16px; }
+  .seo-points-balance-main .pts-big-num { font-size: 40px; }
+  .seo-points-balance-sub { flex-direction: row; width: 100%; }
+  .pts-stat-card { flex: 1; }
+  .seo-points-actions { flex-direction: column; }
+  .seo-exchange-ticker { gap: 10px; }
+  .seo-points-header { flex-direction: column; gap: 6px; align-items: flex-start; }
+}
 </style>
 <link rel="stylesheet" href="/assets/framer-style.css">
 </head>
@@ -525,6 +819,91 @@ body { font-family: 'Segoe UI', sans-serif; background: #0a0a1a; color: #eee; mi
   <span>自帶 API 金鑰，解鎖 AI 引擎無限制使用</span>
   <a href="/ai#byok">前往 AI 引擎設定金鑰 &#8594;</a>
   <span class="byok-dash-count" id="byokDashCount" style="display:none"></span>
+</div>
+
+<!-- ============ 我的 SEO 點數 ============ -->
+<div class="seo-points-panel">
+  <div class="seo-points-header">
+    <div class="seo-points-title">
+      &#128178; 我的 SEO 點數
+      <span class="pts-live"></span>
+    </div>
+    <div class="seo-points-tagline">&#127758; 全球通用 &#183; 在哪都能買賣</div>
+  </div>
+
+  <div class="seo-points-balance-row">
+    <div class="seo-points-balance-main">
+      <div class="pts-label">可用餘額</div>
+      <div>
+        <span class="pts-big-num" id="pts-balance">0</span>
+        <span class="pts-unit">SEO</span>
+      </div>
+    </div>
+    <div class="seo-points-balance-sub">
+      <div class="pts-stat-card">
+        <div class="ps-num" id="pts-earned">0</div>
+        <div class="ps-lbl">累計獲得</div>
+      </div>
+      <div class="pts-stat-card">
+        <div class="ps-num" id="pts-spent">0</div>
+        <div class="ps-lbl">累計使用</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="seo-points-actions">
+    <button class="pts-action-btn topup" onclick="window.location.href='/pricing'">
+      &#128179; 儲值點數
+    </button>
+    <button class="pts-action-btn cashout" onclick="showPtsToast()">
+      &#128182; 提領現金
+    </button>
+  </div>
+
+  <div class="seo-exchange-ticker" id="exchange-ticker">
+    <span style="color:rgba(255,255,255,0.4);font-size:12px;font-weight:600;white-space:nowrap;">1 SEO =</span>
+    <div class="exchange-item"><span class="ex-flag">&#127481;&#127484;</span><span class="ex-val">NT$1</span><span class="ex-cur">TWD</span></div>
+    <div class="exchange-item"><span class="ex-flag">&#127472;&#127479;</span><span class="ex-val">&#8361;45</span><span class="ex-cur">KRW</span></div>
+    <div class="exchange-item"><span class="ex-flag">&#127471;&#127477;</span><span class="ex-val">&#165;5</span><span class="ex-cur">JPY</span></div>
+    <div class="exchange-item"><span class="ex-flag">&#127482;&#127480;</span><span class="ex-val">$0.03</span><span class="ex-cur">USD</span></div>
+    <div class="exchange-item"><span class="ex-flag">&#127480;&#127468;</span><span class="ex-val">S$0.042</span><span class="ex-cur">SGD</span></div>
+    <div class="exchange-item"><span class="ex-flag">&#127481;&#127469;</span><span class="ex-val">&#3647;1.1</span><span class="ex-cur">THB</span></div>
+    <div class="exchange-item"><span class="ex-flag">&#127483;&#127475;</span><span class="ex-val">&#8363;780</span><span class="ex-cur">VND</span></div>
+    <div class="exchange-item"><span class="ex-flag">&#127466;&#127482;</span><span class="ex-val">&#8364;0.028</span><span class="ex-cur">EUR</span></div>
+    <div class="exchange-item"><span class="ex-flag">&#127468;&#127463;</span><span class="ex-val">&#163;0.024</span><span class="ex-cur">GBP</span></div>
+    <div class="exchange-item"><span class="ex-flag">&#127462;&#127482;</span><span class="ex-val">A$0.047</span><span class="ex-cur">AUD</span></div>
+  </div>
+
+  <div class="seo-tx-history">
+    <h4>&#128196; 近期交易記錄</h4>
+    <ul class="tx-list" id="pts-tx-list">
+      <li>
+        <span class="tx-icon">&#128178;</span>
+        <span class="tx-desc">帳戶開通獎勵</span>
+        <span class="tx-time">剛才</span>
+        <span class="tx-amount positive">+100 SEO</span>
+      </li>
+      <li>
+        <span class="tx-icon">&#127873;</span>
+        <span class="tx-desc">新手禮包</span>
+        <span class="tx-time">剛才</span>
+        <span class="tx-amount positive">+50 SEO</span>
+      </li>
+      <li style="text-align:center;color:rgba(255,255,255,0.3);font-size:12px;padding:16px;">
+        儲值後即可開始交易 &#8594;
+      </li>
+    </ul>
+  </div>
+
+  <div class="pts-global-badge">
+    <span>&#127758; 全球通用 &#183; 跨國免匯差 &#183; 即時到帳 &#183; 第三方安全金流</span>
+  </div>
+</div>
+
+<!-- Toast 提示 -->
+<div class="pts-toast" id="ptsToast">
+  &#128182; 提領功能即將開放
+  <div class="toast-sub">點數滿 1,000 SEO 即可提領至當地銀行帳戶，由第三方國際金流處理。</div>
 </div>
 
 <!-- ============ 我的收入面板 ============ -->
@@ -1888,6 +2267,61 @@ function bulkSend() {
     }).catch(function(){});
   } catch(e){}
 })();
+</script>
+<script>
+/* === SEO 點數面板 — 動畫計數器 + Toast === */
+(function() {
+  // 動畫計數器
+  function animateCount(el, target, duration) {
+    var start = 0;
+    var startTime = null;
+    function step(ts) {
+      if (!startTime) startTime = ts;
+      var progress = Math.min((ts - startTime) / duration, 1);
+      var eased = 1 - Math.pow(1 - progress, 3);
+      var current = Math.floor(eased * target);
+      el.textContent = current.toLocaleString();
+      if (progress < 1) {
+        requestAnimationFrame(step);
+      } else {
+        el.textContent = target.toLocaleString();
+        el.classList.add('counting');
+        setTimeout(function() { el.classList.remove('counting'); }, 400);
+      }
+    }
+    requestAnimationFrame(step);
+  }
+
+  // 頁面載入時啟動動畫
+  setTimeout(function() {
+    var balEl = document.getElementById('pts-balance');
+    var earnEl = document.getElementById('pts-earned');
+    var spentEl = document.getElementById('pts-spent');
+    if (balEl) animateCount(balEl, 150, 1200);
+    if (earnEl) animateCount(earnEl, 150, 1400);
+    if (spentEl) animateCount(spentEl, 0, 800);
+  }, 600);
+
+  // 匯率 ticker 自動捲動
+  var ticker = document.getElementById('exchange-ticker');
+  if (ticker) {
+    var scrollDir = 1;
+    setInterval(function() {
+      if (!ticker) return;
+      ticker.scrollLeft += scrollDir;
+      if (ticker.scrollLeft >= ticker.scrollWidth - ticker.clientWidth) scrollDir = -1;
+      if (ticker.scrollLeft <= 0) scrollDir = 1;
+    }, 40);
+  }
+})();
+
+// Toast 顯示
+function showPtsToast() {
+  var toast = document.getElementById('ptsToast');
+  if (!toast) return;
+  toast.classList.add('show');
+  setTimeout(function() { toast.classList.remove('show'); }, 4000);
+}
 </script>
 <script src="/assets/smart-align.js"></script>
 <script src="/seobaike-widget.js"></script>

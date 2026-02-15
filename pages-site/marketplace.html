@@ -99,6 +99,39 @@ a:hover{text-decoration:underline}
 .why-cta-btn{display:inline-block;padding:14px 36px;border-radius:24px;background:linear-gradient(135deg,#e8850c,#cc785c);color:#fff;font-weight:700;font-size:16px;border:none;cursor:pointer;transition:all 0.3s}
 .why-cta-btn:hover{transform:scale(1.05);box-shadow:0 8px 30px rgba(232,133,12,0.3)}
 
+/* Points Balance Bar */
+.points-bar{background:linear-gradient(90deg,#0a0a1a 0%,#16213e 50%,#0a0a1a 100%);border-bottom:1px solid #333;padding:10px 30px;display:flex;align-items:center;justify-content:space-between;gap:16px;position:sticky;top:52px;z-index:99}
+.points-bar .my-points{font-size:15px;font-weight:700;color:#e8850c;white-space:nowrap;display:flex;align-items:center;gap:6px}
+.points-bar .my-points .sp-icon{display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;border-radius:50%;background:linear-gradient(135deg,#e8850c,#cc785c);color:#fff;font-size:12px;font-weight:800}
+.ticker-wrap{flex:1;overflow:hidden;position:relative;max-width:500px;margin:0 auto}
+.ticker-wrap::before,.ticker-wrap::after{content:'';position:absolute;top:0;width:40px;height:100%;z-index:2}
+.ticker-wrap::before{left:0;background:linear-gradient(90deg,#0a0a1a,transparent)}
+.ticker-wrap::after{right:0;background:linear-gradient(90deg,transparent,#0a0a1a)}
+.ticker{display:inline-flex;animation:tickerScroll 20s linear infinite;white-space:nowrap;gap:32px;padding:0 16px}
+.ticker span{font-size:13px;color:#888;display:flex;align-items:center;gap:6px}
+.ticker span b{color:#e8850c;font-weight:700}
+@keyframes tickerScroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+.topup-btn{padding:8px 20px;border-radius:20px;border:1px solid #e8850c;background:transparent;color:#e8850c;font-weight:700;font-size:13px;cursor:pointer;transition:all 0.2s;white-space:nowrap;text-decoration:none;display:inline-block}
+.topup-btn:hover{background:#e8850c;color:#fff;text-decoration:none}
+
+/* Global Trade Badge */
+.global-trade-badge{background:linear-gradient(135deg,rgba(232,133,12,0.12),rgba(232,133,12,0.04));border:1px solid rgba(232,133,12,0.3);border-radius:16px;padding:20px 30px;margin:0 auto 20px;max-width:620px;text-align:center}
+.global-trade-badge .badge-title{font-size:20px;font-weight:800;color:#eee;margin-bottom:6px}
+.global-trade-badge .badge-title span{color:#e8850c}
+.global-trade-badge .badge-sub{font-size:13px;color:#999;line-height:1.6}
+
+/* SP Price Display */
+.sp-price{font-size:18px;font-weight:800;color:#e8850c}
+.sp-price.free{color:#76b900}
+.sp-equiv{font-size:10px;color:#777;margin-top:2px;line-height:1.4}
+.sp-toggle{font-size:10px;color:#555;cursor:pointer;margin-top:2px;user-select:none;transition:color 0.2s}
+.sp-toggle:hover{color:#e8850c}
+
+/* SP Form Conversion */
+.sp-live-conversion{font-size:12px;color:#888;margin-top:6px;padding:6px 10px;background:rgba(232,133,12,0.06);border-radius:8px;border:1px solid rgba(232,133,12,0.15);transition:all 0.3s}
+.sp-live-conversion b{color:#e8850c}
+.sp-helper-text{font-size:12px;color:#999;margin-top:6px;line-height:1.6}
+
 /* Footer */
 .footer{text-align:center;padding:30px;color:#555;font-size:12px;border-top:1px solid #222;margin-top:20px}
 .footer a{color:#e8850c}
@@ -207,6 +240,11 @@ a:hover{text-decoration:underline}
   .hero-stats{gap:20px}
   .commission-bar{flex-direction:column;text-align:center}
   .nav{flex-wrap:wrap;gap:8px}
+  .points-bar{flex-wrap:wrap;gap:8px;padding:8px 16px;top:auto;position:relative}
+  .points-bar .my-points{font-size:13px}
+  .ticker-wrap{order:3;width:100%;max-width:100%}
+  .global-trade-badge{margin:0 16px 16px;padding:16px 20px}
+  .global-trade-badge .badge-title{font-size:17px}
   .cat-grid{grid-template-columns:repeat(2,1fr);gap:10px}
   .cat-card{padding:18px 12px}
   .cat-card .cat-emoji{font-size:32px}
@@ -237,6 +275,26 @@ a:hover{text-decoration:underline}
   <a class="earn" href="#" onclick="event.preventDefault();switchMode('sell')">我要上架</a>
 </nav>
 
+<!-- Points Balance Bar -->
+<div class="points-bar">
+  <div class="my-points"><span class="sp-icon">S</span> 我的點數: <span id="myPointsBalance">0</span> SP</div>
+  <div class="ticker-wrap">
+    <div class="ticker" id="rateTicker">
+      <span><b>1 SP</b> = NT$1</span>
+      <span><b>1 SP</b> = &#8361;45</span>
+      <span><b>1 SP</b> = &yen;5</span>
+      <span><b>1 SP</b> = $0.03</span>
+      <span>在台灣買、在火星賣，都用點數</span>
+      <span><b>1 SP</b> = NT$1</span>
+      <span><b>1 SP</b> = &#8361;45</span>
+      <span><b>1 SP</b> = &yen;5</span>
+      <span><b>1 SP</b> = $0.03</span>
+      <span>在台灣買、在火星賣，都用點數</span>
+    </div>
+  </div>
+  <a href="/pricing" class="topup-btn">儲值</a>
+</div>
+
 <section class="hero">
   <h1>你的東西，<span>賣到全世界</span></h1>
   <p>台灣、韓國、日本、東南亞 — AI 幫你翻譯、行銷、客服。<br>B2B + B2C 全球通路，點一點就上架。</p>
@@ -249,6 +307,10 @@ a:hover{text-decoration:underline}
     <div class="hero-stat"><div class="num" id="stat-users">--</div><div class="lbl">使用者</div></div>
     <div class="hero-stat"><div class="num" id="stat-categories">--</div><div class="lbl">商品類別</div></div>
     <div class="hero-stat"><div class="num" id="stat-commission">70%</div><div class="lbl">賣家分潤</div></div>
+  </div>
+  <div class="global-trade-badge" style="margin-top:24px">
+    <div class="badge-title">&#x1F30D; 全球通用 — 一個點數，<span>全球買賣</span></div>
+    <div class="badge-sub">不用煩惱匯率。你的 SEO Points 在台灣、韓國、日本、全世界都能用。</div>
   </div>
 </section>
 
@@ -442,16 +504,13 @@ a:hover{text-decoration:underline}
           <input type="text" id="pf-name" placeholder="你的商品叫什麼？">
         </div>
         <div class="pf-field">
-          <label>價格</label>
+          <label>價格（SEO Points）</label>
           <div class="pf-price-row">
-            <input type="number" id="pf-price" placeholder="0 = 免費" min="0">
-            <select id="pf-currency">
-              <option value="TWD">TWD 台幣</option>
-              <option value="USD">USD 美元</option>
-              <option value="KRW">KRW 韓圓</option>
-              <option value="JPY">JPY 日圓</option>
-            </select>
+            <input type="number" id="pf-price" placeholder="0 = 免費" min="0" oninput="updatePriceConversion()">
+            <div style="display:flex;align-items:center;padding:0 14px;background:#0a0a1a;border:2px solid #333;border-radius:14px;color:#e8850c;font-weight:700;font-size:15px;white-space:nowrap;min-width:60px;justify-content:center">SP</div>
           </div>
+          <div class="sp-helper-text">設定你的 SEO Points 售價。買家用當地貨幣支付，你收到等值的 SEO Points。</div>
+          <div class="sp-live-conversion" id="spLiveConversion" style="display:none"></div>
         </div>
         <div class="pf-field">
           <label>商品照片或連結</label>
@@ -519,7 +578,10 @@ function renderListings(items) {
     return;
   }
   document.getElementById('listingsGrid').innerHTML = items.map(l => {
-    const priceText = l.price_twd === 0 ? '免費' : 'NT$ ' + l.price_twd.toLocaleString() + (l.pricing_model === 'monthly' ? '/月' : l.pricing_model === 'per_use' ? '/次' : '');
+    const sp = l.price_twd || 0;
+    const suffix = l.pricing_model === 'monthly' ? '/月' : l.pricing_model === 'per_use' ? '/次' : '';
+    const spText = sp === 0 ? '免費' : sp.toLocaleString() + ' SP' + suffix;
+    const equivLine = sp === 0 ? '' : spToMultiCurrency(sp);
     const stars = l.avg_rating ? '★ ' + Number(l.avg_rating).toFixed(1) : '';
     const tags = (l.tags || []).slice(0, 3);
     return '<div class="card" onclick="showDetail(\'' + l.id + '\')">' +
@@ -527,7 +589,9 @@ function renderListings(items) {
       '<div class="card-head"><div class="card-icon">' + (l.icon || '🤖') + '</div><div class="card-info"><h3>' + esc(l.title) + '</h3><div class="sub">' + esc(l.subtitle || l.category || '') + '</div></div></div>' +
       '<div class="card-body"><p>' + esc(l.description || '') + '</p></div>' +
       '<div class="card-tags">' + tags.map(t => '<span class="tag">' + esc(t) + '</span>').join('') + '</div>' +
-      '<div class="card-foot"><div class="price' + (l.price_twd === 0 ? ' free' : '') + '">' + priceText + '</div><div class="stats"><span>' + stars + '</span><span>' + (l.total_users || 0).toLocaleString() + ' 人用</span></div></div>' +
+      '<div class="card-foot"><div style="min-width:0"><div class="sp-price' + (sp === 0 ? ' free' : '') + '">' + spText + '</div>' +
+      (equivLine ? '<div class="sp-equiv">' + equivLine + '</div>' : '') +
+      '</div><div class="stats"><span>' + stars + '</span><span>' + (l.total_users || 0).toLocaleString() + ' 人用</span></div></div>' +
       '</div>';
   }).join('');
 }
@@ -551,9 +615,11 @@ function setFilter(f, btn) {
 function showDetail(id) {
   const l = allListings.find(x => x.id === id);
   if (!l) return;
-  const priceText = l.price_twd === 0 ? '免費' : 'NT$ ' + l.price_twd.toLocaleString();
+  const sp = l.price_twd || 0;
+  const priceText = sp === 0 ? '免費' : sp.toLocaleString() + ' SP';
+  const equiv = sp === 0 ? '' : '\n' + spToMultiCurrency(sp);
   const shareUrl = window.location.origin + '/marketplace?tool=' + id;
-  alert(l.icon + ' ' + l.title + '\n\n' + (l.description || '') + '\n\n價格：' + priceText + '\n用戶：' + (l.total_users || 0).toLocaleString() + ' 人\n評分：' + (l.avg_rating || 'N/A') + '\n\n分享連結（推薦賺 15%）：\n' + shareUrl);
+  alert(l.icon + ' ' + l.title + '\n\n' + (l.description || '') + '\n\n價格：' + priceText + equiv + '\n用戶：' + (l.total_users || 0).toLocaleString() + ' 人\n評分：' + (l.avg_rating || 'N/A') + '\n\n分享連結（推薦賺 15%）：\n' + shareUrl);
 }
 
 function esc(s) { return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
@@ -581,7 +647,7 @@ function switchMode(mode, btn) {
 }
 
 /* ===== 3-Step Listing Flow ===== */
-let listingData = { category: '', countries: [], name: '', price: 0, currency: 'TWD', file: null, url: '' };
+let listingData = { category: '', countries: [], name: '', price: 0, file: null, url: '' };
 let currentStep = 1;
 
 function goToStep(step) {
@@ -693,15 +759,13 @@ async function submitNewListing() {
   if (!name) { alert('請輸入商品名稱'); return; }
   listingData.name = name;
   listingData.price = parseInt(document.getElementById('pf-price').value) || 0;
-  listingData.currency = document.getElementById('pf-currency').value;
   listingData.url = document.getElementById('pf-url').value.trim();
 
   // Icon mapping
   const iconMap = { '數位商品': '\u{1F6D2}', 'AI 工具': '\u{1F916}', '設計素材': '\u{1F3A8}', '教學課程': '\u{1F4DA}', '顧問服務': '\u{1F4BC}', '行銷方案': '\u{1F4E2}' };
 
-  // Convert price to TWD for API
-  const currencyRates = { TWD: 1, USD: 32, KRW: 0.024, JPY: 0.22 };
-  const priceTwd = Math.round(listingData.price * (currencyRates[listingData.currency] || 1));
+  // SP = price_twd (1 SP = 1 TWD base rate)
+  const priceSp = listingData.price;
 
   const body = {
     title: listingData.name,
@@ -709,12 +773,12 @@ async function submitNewListing() {
     description: '銷售市場：' + listingData.countries.join('、'),
     category: listingData.category,
     icon: iconMap[listingData.category] || '\u{1F916}',
-    price_twd: priceTwd,
-    pricing_model: priceTwd === 0 ? 'free' : 'one_time',
+    price_twd: priceSp,
+    pricing_model: priceSp === 0 ? 'free' : 'one_time',
     api_endpoint: listingData.url,
     target_countries: listingData.countries,
-    original_price: listingData.price,
-    original_currency: listingData.currency,
+    original_price: priceSp,
+    original_currency: 'SP',
   };
 
   try {
@@ -742,7 +806,7 @@ async function submitNewListing() {
 
 /* Reset flow */
 function resetListingFlow() {
-  listingData = { category: '', countries: [], name: '', price: 0, currency: 'TWD', file: null, url: '' };
+  listingData = { category: '', countries: [], name: '', price: 0, file: null, url: '' };
   currentStep = 1;
   document.querySelectorAll('.cat-card').forEach(c => c.classList.remove('selected'));
   document.querySelectorAll('.country-btn').forEach(b => b.classList.remove('selected'));
@@ -796,6 +860,40 @@ fetch(window.__SEOBAIKE__?.supabaseUrl + '/rest/v1/page_views', {
   body: JSON.stringify({ path: '/marketplace', referrer: document.referrer || null, user_agent: navigator.userAgent, country: null })
 }).catch(() => {});
 
+/* ===== SEO Points Utility Functions ===== */
+// Hardcoded exchange rates (1 SP = 1 TWD base)
+const SP_RATES = { TWD: 1, KRW: 45, JPY: 5, USD: 0.03 };
+
+function spToMultiCurrency(sp) {
+  const twd = (sp * SP_RATES.TWD).toLocaleString();
+  const krw = (sp * SP_RATES.KRW).toLocaleString();
+  const jpy = (sp * SP_RATES.JPY).toLocaleString();
+  const usd = (sp * SP_RATES.USD).toFixed(2);
+  return '\u2248 NT$' + twd + ' | \u20A9' + krw + ' | \u00A5' + jpy + ' | $' + usd;
+}
+
+function updatePriceConversion() {
+  const val = parseInt(document.getElementById('pf-price').value) || 0;
+  const box = document.getElementById('spLiveConversion');
+  if (val > 0) {
+    box.style.display = 'block';
+    box.innerHTML = '<b>' + val.toLocaleString() + ' SP</b> ' + spToMultiCurrency(val);
+  } else {
+    box.style.display = 'none';
+  }
+}
+
+// Load points balance from localStorage
+function initPointsBalance() {
+  try {
+    const pts = localStorage.getItem('seobaike_points');
+    if (pts !== null) {
+      document.getElementById('myPointsBalance').textContent = parseInt(pts).toLocaleString();
+    }
+  } catch(e) {}
+}
+
+initPointsBalance();
 loadMarketplace();
 </script>
 <script src="/assets/smart-align.js"></script>
