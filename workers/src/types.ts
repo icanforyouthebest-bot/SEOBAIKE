@@ -29,15 +29,53 @@ export interface Env {
   MESSENGER_APP_SECRET: string
   MESSENGER_PAGE_ACCESS_TOKEN: string
 
+  // Discord
+  DISCORD_BOT_TOKEN: string
+  DISCORD_PUBLIC_KEY: string
+  DISCORD_APPLICATION_ID: string
+
+  // Slack
+  SLACK_BOT_TOKEN: string
+  SLACK_SIGNING_SECRET: string
+
+  // Microsoft Teams
+  TEAMS_BOT_TOKEN: string
+  TEAMS_APP_ID: string
+
+  // Email (SendGrid)
+  EMAIL_API_KEY: string
+  EMAIL_WEBHOOK_SECRET: string
+
+  // Google Chat
+  GOOGLE_CHAT_BOT_TOKEN: string
+  GOOGLE_CHAT_PROJECT_ID: string
+
   // NVIDIA NIM
   NVIDIA_API_KEY: string
+
+  // WeChat
+  WECHAT_APP_ID: string
+  WECHAT_APP_SECRET: string
+  WECHAT_TOKEN: string
+
+  // Signal
+  SIGNAL_BOT_NUMBER: string
+  SIGNAL_REST_API_URL: string
+
+  // Viber
+  VIBER_AUTH_TOKEN: string
+
+  // SMS (Twilio)
+  TWILIO_ACCOUNT_SID: string
+  TWILIO_AUTH_TOKEN: string
+  TWILIO_PHONE_NUMBER: string
 
   // KV for rate limiting
   RATE_LIMIT: KVNamespace
 }
 
 export interface NormalizedMessage {
-  source: 'line' | 'telegram' | 'whatsapp' | 'messenger' | 'web'
+  source: 'line' | 'telegram' | 'whatsapp' | 'messenger' | 'discord' | 'slack' | 'teams' | 'email' | 'google_chat' | 'web' | 'wechat' | 'signal' | 'viber' | 'sms' | 'web_widget'
   source_user_id: string
   platform_message_id: string
   text: string
@@ -47,6 +85,19 @@ export interface NormalizedMessage {
   chat_id?: string       // Telegram
   phone_number?: string  // WhatsApp
   sender_id?: string     // Messenger
+  channel_id?: string    // Discord / Slack
+  // Discord Interaction 回覆用
+  interaction_id?: string
+  interaction_token?: string
+  // WeChat
+  open_id?: string            // WeChat OpenID
+  // Viber
+  viber_user_id?: string      // Viber user ID
+  // SMS / Twilio
+  from_number?: string        // 發送者電話號碼
+  // Web Widget
+  callback_url?: string       // Web Widget 回呼 URL
+  session_token?: string      // Web Widget session token
 }
 
 export interface CommandPayload {
@@ -69,4 +120,13 @@ export interface ReplyContext {
   chat_id?: string
   phone_number?: string
   sender_id?: string
+  channel_id?: string        // Discord / Slack
+  service_url?: string       // Teams
+  space_name?: string        // Google Chat
+  email_subject?: string     // Email
+  open_id?: string           // WeChat
+  viber_user_id?: string     // Viber
+  from_number?: string       // SMS / Twilio
+  callback_url?: string      // Web Widget
+  session_token?: string     // Web Widget
 }

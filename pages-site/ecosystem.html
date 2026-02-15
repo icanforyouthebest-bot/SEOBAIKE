@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SEOBAIKE 生態圈 — AI 夥伴 & 協作平台</title>
+<meta name="description" content="SEOBAIKE 生態圈：14個AI夥伴 + 18個協作平台，全部即時運作">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#0a0a0f;--card:#12121a;--border:#1e1e2e;--accent:#f97316;--accent2:#8b5cf6;--text:#e2e8f0;--dim:#64748b;--green:#22c55e;--red:#ef4444;--blue:#3b82f6}
+body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;min-height:100vh}
+.header{background:linear-gradient(135deg,#1a1a2e 0%,#16213e 100%);border-bottom:1px solid var(--border);padding:20px 24px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px}
+.header h1{font-size:24px;background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.header .stats{display:flex;gap:16px;flex-wrap:wrap}
+.stat{text-align:center;padding:8px 16px;background:var(--card);border-radius:8px;border:1px solid var(--border)}
+.stat .num{font-size:24px;font-weight:700;color:var(--accent)}
+.stat .label{font-size:11px;color:var(--dim);text-transform:uppercase}
+.tabs{display:flex;gap:8px;padding:16px 24px;border-bottom:1px solid var(--border);flex-wrap:wrap}
+.tab{padding:8px 20px;border-radius:20px;cursor:pointer;font-size:14px;border:1px solid var(--border);background:transparent;color:var(--dim);transition:.2s}
+.tab.active,.tab:hover{background:var(--accent);color:#fff;border-color:var(--accent)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:16px;padding:24px}
+.card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:20px;transition:.2s;position:relative;overflow:hidden}
+.card:hover{border-color:var(--accent);transform:translateY(-2px)}
+.card .badge{position:absolute;top:12px;right:12px;padding:4px 10px;border-radius:12px;font-size:11px;font-weight:600}
+.badge.active{background:rgba(34,197,94,.15);color:var(--green)}
+.badge.nvidia{background:rgba(139,92,246,.15);color:var(--accent2)}
+.badge.setup{background:rgba(239,68,68,.15);color:var(--red)}
+.card h3{font-size:16px;margin-bottom:4px}
+.card .provider{font-size:12px;color:var(--dim);margin-bottom:12px}
+.card .caps{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px}
+.cap{padding:3px 8px;background:rgba(249,115,22,.1);border:1px solid rgba(249,115,22,.2);border-radius:6px;font-size:11px;color:var(--accent)}
+.card .actions{display:flex;gap:8px}
+.btn{padding:8px 16px;border-radius:8px;border:none;cursor:pointer;font-size:12px;font-weight:600;transition:.2s}
+.btn-primary{background:var(--accent);color:#fff}
+.btn-primary:hover{background:#ea580c}
+.btn-secondary{background:var(--border);color:var(--text)}
+.btn-secondary:hover{background:#2a2a3e}
+.chat-panel{position:fixed;bottom:0;right:0;width:400px;max-height:600px;background:var(--card);border:1px solid var(--border);border-radius:12px 12px 0 0;display:none;flex-direction:column;z-index:100;box-shadow:0 -4px 24px rgba(0,0,0,.5)}
+.chat-panel.open{display:flex}
+.chat-header{padding:16px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
+.chat-header h3{font-size:14px}
+.chat-messages{flex:1;overflow-y:auto;padding:16px;max-height:400px}
+.msg{margin-bottom:12px;padding:10px 14px;border-radius:10px;font-size:13px;line-height:1.5;max-width:85%;word-wrap:break-word}
+.msg.user{background:var(--accent);color:#fff;margin-left:auto}
+.msg.bot{background:var(--border);color:var(--text)}
+.msg .meta{font-size:10px;color:var(--dim);margin-top:4px}
+.chat-input{display:flex;padding:12px;border-top:1px solid var(--border);gap:8px}
+.chat-input input{flex:1;padding:10px;border-radius:8px;border:1px solid var(--border);background:var(--bg);color:var(--text);font-size:13px}
+.chat-input input:focus{outline:none;border-color:var(--accent)}
+.chat-toggle{position:fixed;bottom:20px;right:20px;width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--accent2));border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:24px;color:#fff;z-index:101;box-shadow:0 4px 12px rgba(249,115,22,.4)}
+.loading{display:inline-block;width:12px;height:12px;border:2px solid var(--dim);border-top-color:var(--accent);border-radius:50%;animation:spin .6s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.section-title{padding:24px 24px 8px;font-size:18px;font-weight:700;display:flex;align-items:center;gap:8px}
+.section-title .count{font-size:13px;color:var(--dim);font-weight:400}
+@media(max-width:600px){.grid{grid-template-columns:1fr;padding:12px}.header{padding:12px}.chat-panel{width:100%}}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div>
+    <h1>SEOBAIKE 生態圈</h1>
+    <div style="font-size:12px;color:var(--dim);margin-top:4px">AI 界的 App Store — 小路光有限公司</div>
+  </div>
+  <div class="stats">
+    <div class="stat"><div class="num" id="ai-count">0</div><div class="label">AI 夥伴</div></div>
+    <div class="stat"><div class="num" id="platform-count">0</div><div class="label">協作平台</div></div>
+    <div class="stat"><div class="num" id="active-count">0</div><div class="label">即時運作</div></div>
+  </div>
+</div>
+
+<div class="tabs">
+  <div class="tab active" onclick="showTab('all')">全部</div>
+  <div class="tab" onclick="showTab('ai')">AI 夥伴</div>
+  <div class="tab" onclick="showTab('collab')">協作平台</div>
+  <div class="tab" onclick="showTab('active')">已啟用</div>
+</div>
+
+<div class="section-title" id="ai-section">AI 夥伴 <span class="count" id="ai-section-count"></span></div>
+<div class="grid" id="ai-grid"></div>
+
+<div class="section-title" id="collab-section">協作平台 <span class="count" id="collab-section-count"></span></div>
+<div class="grid" id="collab-grid"></div>
+
+<!-- Chat Panel -->
+<button class="chat-toggle" onclick="toggleChat()" title="AI 對話">💬</button>
+<div class="chat-panel" id="chatPanel">
+  <div class="chat-header">
+    <h3>🤖 AI 夥伴對話</h3>
+    <div style="display:flex;align-items:center;gap:8px">
+      <select id="chatPartner" style="padding:4px 8px;border-radius:6px;border:1px solid var(--border);background:var(--bg);color:var(--text);font-size:12px">
+        <option value="partner-openai">OpenAI GPT-4o</option>
+        <option value="partner-anthropic">Anthropic Claude</option>
+        <option value="partner-deepseek">DeepSeek</option>
+        <option value="partner-grok">Grok (xAI)</option>
+        <option value="partner-groq">Groq (fast)</option>
+        <option value="partner-mistral">Mistral</option>
+        <option value="partner-google">Google Gemini</option>
+        <option value="partner-cohere">Cohere</option>
+        <option value="partner-together">Together AI</option>
+        <option value="partner-huggingface">HuggingFace</option>
+        <option value="partner-perplexity">Perplexity</option>
+        <option value="partner-qwen">Qwen (通義)</option>
+      </select>
+      <button onclick="toggleChat()" style="background:none;border:none;color:var(--dim);cursor:pointer;font-size:18px">✕</button>
+    </div>
+  </div>
+  <div class="chat-messages" id="chatMessages">
+    <div class="msg bot">你好！選擇任何 AI 夥伴開始對話。所有夥伴都已上線。</div>
+  </div>
+  <div class="chat-input">
+    <input type="text" id="chatInput" placeholder="輸入訊息..." onkeydown="if(event.key==='Enter')sendChat()">
+    <button class="btn btn-primary" onclick="sendChat()">發送</button>
+  </div>
+</div>
+
+<script>
+const BASE = 'https://vmyrivxxibqydccurxug.supabase.co/functions/v1';
+
+const AI_PARTNERS = [
+  { slug: 'partner-openai', name: 'OpenAI', provider: 'OpenAI Inc.', caps: ['chat','embeddings','images','tts','vision'] },
+  { slug: 'partner-anthropic', name: 'Anthropic Claude', provider: 'Anthropic', caps: ['chat','vision','code','analysis'] },
+  { slug: 'partner-deepseek', name: 'DeepSeek', provider: 'DeepSeek AI', caps: ['chat','code','reasoning'] },
+  { slug: 'partner-grok', name: 'Grok', provider: 'xAI', caps: ['chat','code','reasoning','vision'] },
+  { slug: 'partner-groq', name: 'Groq', provider: 'Groq Inc.', caps: ['chat','fast-inference'] },
+  { slug: 'partner-mistral', name: 'Mistral', provider: 'Mistral AI', caps: ['chat','code','embeddings'] },
+  { slug: 'partner-google', name: 'Google Gemini', provider: 'Google', caps: ['chat','vision','code'] },
+  { slug: 'partner-perplexity', name: 'Perplexity', provider: 'Perplexity AI', caps: ['search','chat','research'] },
+  { slug: 'partner-cohere', name: 'Cohere', provider: 'Cohere Inc.', caps: ['chat','embed','rerank'] },
+  { slug: 'partner-together', name: 'Together AI', provider: 'Together', caps: ['chat','image','code'] },
+  { slug: 'partner-huggingface', name: 'HuggingFace', provider: 'Hugging Face', caps: ['chat','inference','models'] },
+  { slug: 'partner-qwen', name: 'Qwen (通義千問)', provider: 'Alibaba Cloud', caps: ['chat','code','vision','math'] },
+  { slug: 'partner-replicate', name: 'Replicate', provider: 'Replicate', caps: ['image','video','audio','text'] },
+  { slug: 'partner-stability', name: 'Stability AI', provider: 'Stability AI', caps: ['image-generation','upscale'] },
+];
+
+const PLATFORMS = [
+  { slug: 'connect-slack', name: 'Slack', type: 'Team Communication' },
+  { slug: 'connect-github', name: 'GitHub', type: 'Code Collaboration' },
+  { slug: 'connect-notion', name: 'Notion', type: 'Knowledge Management' },
+  { slug: 'connect-figma', name: 'Figma', type: 'Design Collaboration' },
+  { slug: 'connect-clickup', name: 'ClickUp', type: 'Project Management' },
+  { slug: 'connect-monday', name: 'Monday.com', type: 'Work Management' },
+  { slug: 'connect-asana', name: 'Asana', type: 'Task Management' },
+  { slug: 'connect-jira', name: 'Jira', type: 'Software Development' },
+  { slug: 'connect-miro', name: 'Miro', type: 'Visual Collaboration' },
+  { slug: 'connect-airtable', name: 'Airtable', type: 'Database Platform' },
+  { slug: 'connect-trello', name: 'Trello', type: 'Kanban Board' },
+  { slug: 'connect-hubspot', name: 'HubSpot', type: 'CRM & Marketing' },
+  { slug: 'connect-teams', name: 'Microsoft Teams', type: 'Enterprise Communication' },
+  { slug: 'connect-google-workspace', name: 'Google Workspace', type: 'Cloud Collaboration' },
+  { slug: 'connect-confluence', name: 'Confluence', type: 'Wiki & Documentation' },
+  { slug: 'connect-canva', name: 'Canva', type: 'AI Visual Design' },
+  { slug: 'connect-streamline', name: 'Streamline', type: 'Supply Chain AI' },
+  { slug: 'connect-motiff', name: 'Motiff', type: 'AI UI Design' },
+  { slug: 'connect-mokahr', name: 'MokaHR', type: 'AI Recruitment' },
+  { slug: 'connect-linear', name: 'Linear', type: 'Issue Tracking' },
+  { slug: 'connect-basecamp', name: 'Basecamp', type: 'Project Management' },
+  { slug: 'connect-coda', name: 'Coda', type: 'Doc Automation' },
+  { slug: 'connect-zapier', name: 'Zapier', type: 'Workflow Automation' },
+  { slug: 'connect-n8n', name: 'n8n', type: 'Open-Source Automation' },
+  { slug: 'connect-pipedream', name: 'Pipedream', type: 'Developer Automation' },
+  { slug: 'connect-svix', name: 'Svix', type: 'Webhook Management' },
+];
+
+let allStatuses = {};
+let activeCount = 0;
+
+function renderCard(item, type) {
+  const status = allStatuses[item.slug];
+  const isActive = status && (status.status === 'active' || status.status === 'live' || status.api_key_configured || status.nvidia_fallback);
+  const isNvidia = status && (status.status === 'active_via_nvidia' || status.nvidia_fallback) && !status.api_key_configured && !status.key_configured;
+  const badgeClass = isActive ? (isNvidia ? 'nvidia' : 'active') : 'setup';
+  const badgeText = isActive ? (isNvidia ? 'NVIDIA NIM' : '運作中') : '待設定';
+
+  return `<div class="card" data-type="${type}" data-active="${isActive}">
+    <span class="badge ${badgeClass}">${badgeText}</span>
+    <h3>${item.name}</h3>
+    <div class="provider">${item.provider || item.type || ''}</div>
+    <div class="caps">${(item.caps || []).map(c => `<span class="cap">${c}</span>`).join('')}</div>
+    <div class="actions">
+      ${type === 'ai' ? `<button class="btn btn-primary" onclick="openChatWith('${item.slug}')">對話</button>` : ''}
+      <button class="btn btn-secondary" onclick="checkHealth('${item.slug}')">檢查狀態</button>
+    </div>
+  </div>`;
+}
+
+async function fetchStatus(slug) {
+  try {
+    const res = await fetch(`${BASE}/${slug}`, { signal: AbortSignal.timeout(5000) });
+    if (res.ok) return await res.json();
+  } catch {}
+  return null;
+}
+
+async function loadAll() {
+  const all = [...AI_PARTNERS.map(p => p.slug), ...PLATFORMS.map(p => p.slug)];
+  const results = await Promise.allSettled(all.map(slug => fetchStatus(slug)));
+  results.forEach((r, i) => {
+    if (r.status === 'fulfilled' && r.value) allStatuses[all[i]] = r.value;
+  });
+
+  activeCount = Object.values(allStatuses).filter(s => s.status === 'active' || s.status === 'live' || s.status === 'active_via_nvidia' || s.api_key_configured || s.nvidia_fallback).length;
+
+  document.getElementById('ai-count').textContent = AI_PARTNERS.length;
+  document.getElementById('platform-count').textContent = PLATFORMS.length;
+  document.getElementById('active-count').textContent = activeCount;
+  document.getElementById('ai-section-count').textContent = `(${AI_PARTNERS.length} 個)`;
+  document.getElementById('collab-section-count').textContent = `(${PLATFORMS.length} 個)`;
+
+  document.getElementById('ai-grid').innerHTML = AI_PARTNERS.map(p => renderCard(p, 'ai')).join('');
+  document.getElementById('collab-grid').innerHTML = PLATFORMS.map(p => renderCard(p, 'collab')).join('');
+}
+
+function showTab(tab) {
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  event.target.classList.add('active');
+  const aiSection = document.getElementById('ai-section');
+  const aiGrid = document.getElementById('ai-grid');
+  const collabSection = document.getElementById('collab-section');
+  const collabGrid = document.getElementById('collab-grid');
+
+  aiSection.style.display = (tab === 'collab') ? 'none' : '';
+  aiGrid.style.display = (tab === 'collab') ? 'none' : '';
+  collabSection.style.display = (tab === 'ai') ? 'none' : '';
+  collabGrid.style.display = (tab === 'ai') ? 'none' : '';
+
+  if (tab === 'active') {
+    document.querySelectorAll('.card').forEach(c => {
+      c.style.display = c.dataset.active === 'true' ? '' : 'none';
+    });
+  } else {
+    document.querySelectorAll('.card').forEach(c => c.style.display = '');
+  }
+}
+
+function toggleChat() {
+  document.getElementById('chatPanel').classList.toggle('open');
+}
+
+function openChatWith(slug) {
+  document.getElementById('chatPartner').value = slug;
+  document.getElementById('chatPanel').classList.add('open');
+  document.getElementById('chatInput').focus();
+}
+
+async function sendChat() {
+  const input = document.getElementById('chatInput');
+  const msg = input.value.trim();
+  if (!msg) return;
+  input.value = '';
+
+  const partner = document.getElementById('chatPartner').value;
+  const msgsDiv = document.getElementById('chatMessages');
+
+  msgsDiv.innerHTML += `<div class="msg user">${escHtml(msg)}</div>`;
+  msgsDiv.innerHTML += `<div class="msg bot" id="typing"><div class="loading"></div> 思考中...</div>`;
+  msgsDiv.scrollTop = msgsDiv.scrollHeight;
+
+  try {
+    const res = await fetch(`${BASE}/${partner}/chat`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(partner === 'partner-perplexity'
+        ? { messages: [{ role: 'user', content: msg }] }
+        : { prompt: msg, max_tokens: 1024 }),
+    });
+    const data = await res.json();
+    const reply = data.response || data.choices?.[0]?.message?.content || data.answer || JSON.stringify(data);
+    const via = data.via ? ` (via ${data.via})` : '';
+    const model = data.model || '';
+
+    document.getElementById('typing').remove();
+    msgsDiv.innerHTML += `<div class="msg bot">${escHtml(reply)}<div class="meta">${model}${via}</div></div>`;
+  } catch (err) {
+    document.getElementById('typing').remove();
+    msgsDiv.innerHTML += `<div class="msg bot" style="color:var(--red)">Error: ${escHtml(err.message)}</div>`;
+  }
+  msgsDiv.scrollTop = msgsDiv.scrollHeight;
+}
+
+async function checkHealth(slug) {
+  try {
+    const res = await fetch(`${BASE}/${slug}`);
+    const data = await res.json();
+    alert(JSON.stringify(data, null, 2));
+  } catch (err) {
+    alert('Error: ' + err.message);
+  }
+}
+
+function escHtml(s) { const d = document.createElement('div'); d.textContent = s; return d.innerHTML; }
+
+loadAll();
+</script>
+</body>
+</html>

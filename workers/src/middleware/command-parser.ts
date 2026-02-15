@@ -31,6 +31,9 @@ const ALIASES: Record<string, string> = {
   '拒絕': '/reject',
   '待審批': '/pending',
   '審批': '/pending',
+  '掃描': '/scan',
+  'SEO掃描': '/seo scan',
+  '報告': '/report',
 }
 
 export function parseCommand(text: string): ParsedCommand {

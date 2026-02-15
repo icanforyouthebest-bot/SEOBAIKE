@@ -1,16 +1,36 @@
 // ============================================================
-// BAIKE 萬能遙控器 — Physical AI Remote Control
+// SEOBAIKE 遙控器 — AI Remote Control
 // Cloudflare Workers AI (免費) + Telegram Inline Keyboard
 // ============================================================
 
 import type { Env, NormalizedMessage, ReplyContext } from './types'
 import { normalizeLine, normalizeTelegram, normalizeWhatsApp, normalizeMessenger } from './middleware/normalizer'
-import { verifyLine, verifyTelegram, verifyWhatsApp, verifyMessenger } from './middleware/signature-verify'
+import { normalizeDiscord } from './middleware/normalizer-discord'
+import { normalizeSlack } from './middleware/normalizer-slack'
+import { normalizeTeams } from './middleware/normalizer-teams'
+import { normalizeEmail } from './middleware/normalizer-email'
+import { normalizeGoogleChat } from './middleware/normalizer-google-chat'
+import { normalizeWechat } from './middleware/normalizer-wechat'
+import { normalizeSignal } from './middleware/normalizer-signal'
+import { normalizeViber } from './middleware/normalizer-viber'
+import { normalizeSms } from './middleware/normalizer-sms'
+import { normalizeWebWidget } from './middleware/normalizer-web-widget'
+import { verifyLine, verifyTelegram, verifyWhatsApp, verifyMessenger, verifyDiscord, verifySlack } from './middleware/signature-verify'
 import { parseCommand } from './middleware/command-parser'
 import { replyLine, pushLine } from './reply/line-reply'
 import { replyTelegram, answerCallback, type TelegramReplyOptions } from './reply/telegram-reply'
 import { replyWhatsApp } from './reply/whatsapp-reply'
 import { replyMessenger } from './reply/messenger-reply'
+import { replyDiscordInteraction, replyDiscordChannel } from './reply/discord-reply'
+import { replySlack, pushSlackDM } from './reply/slack-reply'
+import { replyTeams } from './reply/teams-reply'
+import { replyEmail } from './reply/email-reply'
+import { replyGoogleChat } from './reply/google-chat-reply'
+import { replyWechat } from './reply/wechat-reply'
+import { replySignal } from './reply/signal-reply'
+import { replyViber } from './reply/viber-reply'
+import { replySms } from './reply/sms-reply'
+import { replyWebWidget } from './reply/web-widget-reply'
 import { aiFormat, aiChat, aiConstrainedChat } from './ai/brain'
 import { lookupAuth } from './middleware/auth'
 
@@ -19,7 +39,18 @@ export default {
     const url = new URL(request.url)
     const path = url.pathname
 
-    // CORS preflight — 所有路徑統一處理
+    // ── 非 /api/ 路徑 → proxy 到 origin 並注入全站安全標頭 ──
+    if (!path.startsWith('/api/') && path !== '/api') {
+      const originResponse = await fetch(request)
+      const response = new Response(originResponse.body, originResponse)
+      // 注入缺失的安全標頭（CSP, X-Frame-Options, Permissions-Policy）
+      for (const [key, value] of Object.entries(SITE_SECURITY_HEADERS)) {
+        response.headers.set(key, value)
+      }
+      return response
+    }
+
+    // CORS preflight — API 路徑統一處理
     if (request.method === 'OPTIONS') {
       return new Response(null, {
         status: 204,
@@ -32,10 +63,12 @@ export default {
       })
     }
 
-    if (path === '/') return json(200, { status: 'ok', service: 'BAIKE Remote Control', version: '2.0.0', ai: 'cloudflare-workers-ai' })
-    if (path === '/health') return json(200, { status: 'ok', timestamp: new Date().toISOString(), version: '2.0.0' })
+    if (path === '/api' || path === '/api/') return json(200, { status: 'ok', service: 'SEOBAIKE OS', version: '3.0.0', ai: 'cloudflare-workers-ai', platforms: 14, architecture: 'CaaS — 人類決策為主，AI 為輔助執行' })
+    if (path === '/api/health') return json(200, { status: 'ok', timestamp: new Date().toISOString(), version: '3.0.0', platforms_ready: 14 })
+    if (path === '/api/platforms') return json(200, PLATFORM_REGISTRY)
 
     if (request.method === 'GET') {
+      if (path === '/api/chat') return serveChatWidget()
       if (path === '/api/compliance-badge') return await handleComplianceBadge(env, url)
       if (path === '/api/webhook/whatsapp') {
         const mode = url.searchParams.get('hub.mode')
@@ -62,6 +95,16 @@ export default {
         case '/api/webhook/telegram': return await handleTelegram(request, env)
         case '/api/webhook/whatsapp': return await handleWebhook(request, env, 'whatsapp')
         case '/api/webhook/messenger': return await handleWebhook(request, env, 'messenger')
+        case '/api/webhook/discord': return await handleDiscord(request, env)
+        case '/api/webhook/slack': return await handleSlack(request, env)
+        case '/api/webhook/teams': return await handleTeamsWebhook(request, env)
+        case '/api/webhook/email': return await handleEmailWebhook(request, env)
+        case '/api/webhook/google-chat': return await handleGoogleChatWebhook(request, env)
+        case '/api/webhook/wechat': return await handleWechatWebhook(request, env)
+        case '/api/webhook/signal': return await handleSignalWebhook(request, env)
+        case '/api/webhook/viber': return await handleViberWebhook(request, env)
+        case '/api/webhook/sms': return await handleSmsWebhook(request, env)
+        case '/api/webhook/web-widget': return await handleWebWidgetWebhook(request, env)
         case '/api/gateway': return await handleGateway(request, env)
         case '/api/ai/chat': return await handleAiChat(request, env)
         default: return json(404, { error: 'Not found' })
@@ -180,11 +223,355 @@ async function handleTelegram(request: Request, env: Env): Promise<Response> {
 }
 
 // ============================================================
+// Discord（Interaction webhook + Gateway relay）
+// ============================================================
+async function handleDiscord(request: Request, env: Env): Promise<Response> {
+  // OS 就緒 — 等待遙控器連入
+  if (!env.DISCORD_PUBLIC_KEY) return json(200, { status: 'os_ready', platform: 'discord', message: 'SEOBAIKE OS 就緒，Discord 遙控器等待連入', webhook: 'https://api.aiforseo.vip/api/webhook/discord' })
+
+  // Ed25519 簽名驗證
+  const isValid = await verifyDiscord(request, env)
+  if (!isValid) return json(401, { error: 'Invalid signature' })
+
+  const body = await request.json() as any
+
+  // PING（Discord 驗證 endpoint 用，type=1）
+  if (body.type === 1) {
+    return json(200, { type: 1 })
+  }
+
+  // 標準化訊息
+  const msg = normalizeDiscord(body)
+  if (!msg) return json(200, { status: 'ignored' })
+
+  const parsed = parseCommand(msg.text)
+
+  // 用戶身份查詢
+  const auth = await lookupAuth(env.SUPABASE_URL, env.SUPABASE_SERVICE_ROLE_KEY, 'discord', msg.source_user_id)
+  console.log(`[AUTH] discord:${msg.source_user_id} → ${auth.permission_level} (bound=${auth.is_bound})`)
+
+  // Interaction 類型（type 2 或 3）需要用 Interaction 回覆
+  const isInteraction = body.type === 2 || body.type === 3
+  const interactionId = body.id
+  const interactionToken = body.token
+
+  // 非指令 → AI 約束式對話
+  if (!parsed.command.startsWith('/')) {
+    const result = await aiConstrainedChat(env.SUPABASE_URL, env.SUPABASE_SERVICE_ROLE_KEY, msg.text, 'discord', msg.source_user_id)
+    const prefix = result.constrained && !result.allowed ? '>>> ' : result.industry ? `**${result.industry}**\n\n` : ''
+    const replyText = prefix + result.reply
+
+    if (isInteraction) {
+      await replyDiscordInteraction(interactionId, interactionToken, replyText)
+    } else if (msg.channel_id && env.DISCORD_BOT_TOKEN) {
+      await replyDiscordChannel(msg.channel_id, replyText, env.DISCORD_BOT_TOKEN)
+    }
+    return json(200, { status: 'ok' })
+  }
+
+  // 審批閘門
+  const approvalInfo = await checkRequiresApproval(env, parsed.command)
+  if (approvalInfo.requires) {
+    const queueResult = await callApprovalEdge(env, 'queue', {
+      command: parsed.command,
+      sub_command: parsed.sub_command,
+      args: parsed.args,
+      platform: 'discord',
+      platform_user_id: msg.source_user_id,
+      request_metadata: { source: 'discord', source_user_id: msg.source_user_id, session_id: `discord:${msg.source_user_id}:${Date.now()}` },
+    })
+    const pendingText = await aiFormat(env.AI, parsed.command, queueResult)
+
+    if (isInteraction) {
+      await replyDiscordInteraction(interactionId, interactionToken, pendingText)
+    } else if (msg.channel_id && env.DISCORD_BOT_TOKEN) {
+      await replyDiscordChannel(msg.channel_id, pendingText, env.DISCORD_BOT_TOKEN)
+    }
+    await sendApprovalNotification(env, queueResult, approvalInfo)
+    return json(200, { status: 'queued_for_approval' })
+  }
+
+  // 指令 → SQL + AI 潤稿
+  const result = await callEdge(env, parsed.command, msg.source_user_id, 'discord', parsed.sub_command, parsed.args)
+  const replyText = await aiFormat(env.AI, parsed.command, result)
+
+  if (isInteraction) {
+    await replyDiscordInteraction(interactionId, interactionToken, replyText)
+  } else if (msg.channel_id && env.DISCORD_BOT_TOKEN) {
+    await replyDiscordChannel(msg.channel_id, replyText, env.DISCORD_BOT_TOKEN)
+  }
+  return json(200, { status: 'ok', result })
+}
+
+// ============================================================
+// Slack（Events API）
+// ============================================================
+async function handleSlack(request: Request, env: Env): Promise<Response> {
+  if (!env.SLACK_SIGNING_SECRET) return json(200, { status: 'os_ready', platform: 'slack', message: 'SEOBAIKE OS 就緒，Slack 遙控器等待連入', webhook: 'https://api.aiforseo.vip/api/webhook/slack' })
+
+  // HMAC-SHA256 簽名驗證
+  const isValid = await verifySlack(request, env)
+  if (!isValid) return json(401, { error: 'Invalid signature' })
+
+  const body = await request.json() as any
+
+  // URL 驗證挑戰（Slack 設定 Events API 時的一次性驗證）
+  if (body.type === 'url_verification') {
+    return new Response(JSON.stringify({ challenge: body.challenge }), {
+      status: 200,
+      headers: { 'Content-Type': 'application/json' },
+    })
+  }
+
+  // 標準化訊息
+  const msg = normalizeSlack(body)
+  if (!msg) return json(200, { status: 'ignored' })
+
+  const parsed = parseCommand(msg.text)
+  const botToken = env.SLACK_BOT_TOKEN
+  const channelId = msg.channel_id
+
+  // 用戶身份查詢
+  const auth = await lookupAuth(env.SUPABASE_URL, env.SUPABASE_SERVICE_ROLE_KEY, 'slack', msg.source_user_id)
+  console.log(`[AUTH] slack:${msg.source_user_id} → ${auth.permission_level} (bound=${auth.is_bound})`)
+
+  // 非指令 → AI 約束式對話
+  if (!parsed.command.startsWith('/')) {
+    const result = await aiConstrainedChat(env.SUPABASE_URL, env.SUPABASE_SERVICE_ROLE_KEY, msg.text, 'slack', msg.source_user_id)
+    const prefix = result.constrained && !result.allowed ? ':warning: ' : result.industry ? `*${result.industry}*\n\n` : ''
+    const replyText = prefix + result.reply
+
+    if (botToken && channelId) {
+      await replySlack(channelId, replyText, botToken)
+    }
+    return json(200, { status: 'ok' })
+  }
+
+  // 審批閘門
+  const approvalInfo = await checkRequiresApproval(env, parsed.command)
+  if (approvalInfo.requires) {
+    const queueResult = await callApprovalEdge(env, 'queue', {
+      command: parsed.command,
+      sub_command: parsed.sub_command,
+      args: parsed.args,
+      platform: 'slack',
+      platform_user_id: msg.source_user_id,
+      request_metadata: { source: 'slack', source_user_id: msg.source_user_id, session_id: `slack:${msg.source_user_id}:${Date.now()}` },
+    })
+    const pendingText = await aiFormat(env.AI, parsed.command, queueResult)
+
+    if (botToken && channelId) {
+      await replySlack(channelId, pendingText, botToken)
+    }
+    await sendApprovalNotification(env, queueResult, approvalInfo)
+    return json(200, { status: 'queued_for_approval' })
+  }
+
+  // 指令 → SQL + AI 潤稿
+  const result = await callEdge(env, parsed.command, msg.source_user_id, 'slack', parsed.sub_command, parsed.args)
+  const replyText = await aiFormat(env.AI, parsed.command, result)
+
+  if (botToken && channelId) {
+    await replySlack(channelId, replyText, botToken)
+  }
+  return json(200, { status: 'ok', result })
+}
+
+// ============================================================
+// Microsoft Teams
+// ============================================================
+async function handleTeamsWebhook(request: Request, env: Env): Promise<Response> {
+  if (!env.TEAMS_BOT_TOKEN) return json(200, { status: 'os_ready', platform: 'teams', message: 'SEOBAIKE OS 就緒，Teams 遙控器等待連入', webhook: 'https://api.aiforseo.vip/api/webhook/teams' })
+
+  const body = await request.json() as any
+  const msg = normalizeTeams(body)
+  if (!msg) return json(200, { status: 'ignored' })
+
+  const parsed = parseCommand(msg.text)
+  const serviceUrl = body.serviceUrl || ''
+  const conversationId = body.conversation?.id || ''
+
+  if (!parsed.command.startsWith('/')) {
+    const result = await aiConstrainedChat(env.SUPABASE_URL, env.SUPABASE_SERVICE_ROLE_KEY, msg.text, 'teams', msg.source_user_id)
+    const prefix = result.constrained && !result.allowed ? '> ' : result.industry ? `**${result.industry}**\n\n` : ''
+    if (serviceUrl && conversationId) await replyTeams(serviceUrl, conversationId, prefix + result.reply, env.TEAMS_BOT_TOKEN)
+    return json(200, { status: 'ok' })
+  }
+
+  const result = await callEdge(env, parsed.command, msg.source_user_id, 'teams', parsed.sub_command, parsed.args)
+  const replyText = await aiFormat(env.AI, parsed.command, result)
+  if (serviceUrl && conversationId) await replyTeams(serviceUrl, conversationId, replyText, env.TEAMS_BOT_TOKEN)
+  return json(200, { status: 'ok', result })
+}
+
+// ============================================================
+// Email Webhook
+// ============================================================
+async function handleEmailWebhook(request: Request, env: Env): Promise<Response> {
+  if (!env.EMAIL_API_KEY) return json(200, { status: 'os_ready', platform: 'email', message: 'SEOBAIKE OS 就緒，Email 遙控器等待連入', webhook: 'https://api.aiforseo.vip/api/webhook/email' })
+
+  const body = await request.json() as any
+  const msg = normalizeEmail(body)
+  if (!msg) return json(200, { status: 'ignored' })
+
+  const parsed = parseCommand(msg.text)
+
+  if (!parsed.command.startsWith('/')) {
+    const result = await aiConstrainedChat(env.SUPABASE_URL, env.SUPABASE_SERVICE_ROLE_KEY, msg.text, 'email', msg.source_user_id)
+    await replyEmail(msg.source_user_id, body.subject || 'SEOBAIKE AI', result.reply, env.EMAIL_API_KEY)
+    return json(200, { status: 'ok' })
+  }
+
+  const result = await callEdge(env, parsed.command, msg.source_user_id, 'email', parsed.sub_command, parsed.args)
+  const replyText = await aiFormat(env.AI, parsed.command, result)
+  await replyEmail(msg.source_user_id, body.subject || 'SEOBAIKE AI', replyText, env.EMAIL_API_KEY)
+  return json(200, { status: 'ok', result })
+}
+
+// ============================================================
+// Google Chat
+// ============================================================
+async function handleGoogleChatWebhook(request: Request, env: Env): Promise<Response> {
+  if (!env.GOOGLE_CHAT_BOT_TOKEN) return json(200, { status: 'os_ready', platform: 'google_chat', message: 'SEOBAIKE OS 就緒，Google Chat 遙控器等待連入', webhook: 'https://api.aiforseo.vip/api/webhook/google-chat' })
+
+  const body = await request.json() as any
+  const msg = normalizeGoogleChat(body)
+  if (!msg) return json(200, { status: 'ignored' })
+
+  const parsed = parseCommand(msg.text)
+  const spaceName = body.space?.name || ''
+
+  if (!parsed.command.startsWith('/')) {
+    const result = await aiConstrainedChat(env.SUPABASE_URL, env.SUPABASE_SERVICE_ROLE_KEY, msg.text, 'google_chat', msg.source_user_id)
+    const prefix = result.constrained && !result.allowed ? '> ' : result.industry ? `*${result.industry}*\n\n` : ''
+    if (spaceName) await replyGoogleChat(spaceName, prefix + result.reply, env.GOOGLE_CHAT_BOT_TOKEN)
+    return json(200, { status: 'ok' })
+  }
+
+  const result = await callEdge(env, parsed.command, msg.source_user_id, 'google_chat', parsed.sub_command, parsed.args)
+  const replyText = await aiFormat(env.AI, parsed.command, result)
+  if (spaceName) await replyGoogleChat(spaceName, replyText, env.GOOGLE_CHAT_BOT_TOKEN)
+  return json(200, { status: 'ok', result })
+}
+
+// ============================================================
+// WeChat 微信
+// ============================================================
+async function handleWechatWebhook(request: Request, env: Env): Promise<Response> {
+  if (!env.WECHAT_TOKEN) return json(200, { status: 'os_ready', platform: 'wechat', message: 'SEOBAIKE OS 就緒，WeChat 遙控器等待連入', webhook: 'https://api.aiforseo.vip/api/webhook/wechat' })
+
+  const body = await request.text()
+  const msg = normalizeWechat(body)
+  if (!msg) return json(200, { status: 'ignored' })
+
+  const parsed = parseCommand(msg.text)
+  if (!parsed.command.startsWith('/')) {
+    const result = await aiConstrainedChat(env.SUPABASE_URL, env.SUPABASE_SERVICE_ROLE_KEY, msg.text, 'wechat', msg.source_user_id)
+    if (msg.open_id) await replyWechat(msg.open_id, result.reply, env.WECHAT_APP_ID, env.WECHAT_APP_SECRET)
+    return json(200, { status: 'ok' })
+  }
+
+  const result = await callEdge(env, parsed.command, msg.source_user_id, 'wechat', parsed.sub_command, parsed.args)
+  const replyText = await aiFormat(env.AI, parsed.command, result)
+  if (msg.open_id) await replyWechat(msg.open_id, replyText, env.WECHAT_APP_ID, env.WECHAT_APP_SECRET)
+  return json(200, { status: 'ok', result })
+}
+
+// ============================================================
+// Signal
+// ============================================================
+async function handleSignalWebhook(request: Request, env: Env): Promise<Response> {
+  if (!env.SIGNAL_REST_API_URL) return json(200, { status: 'os_ready', platform: 'signal', message: 'SEOBAIKE OS 就緒，Signal 遙控器等待連入', webhook: 'https://api.aiforseo.vip/api/webhook/signal' })
+
+  const body = await request.json() as any
+  const msg = normalizeSignal(body)
+  if (!msg) return json(200, { status: 'ignored' })
+
+  const parsed = parseCommand(msg.text)
+  if (!parsed.command.startsWith('/')) {
+    const result = await aiConstrainedChat(env.SUPABASE_URL, env.SUPABASE_SERVICE_ROLE_KEY, msg.text, 'signal', msg.source_user_id)
+    await replySignal(msg.source_user_id, result.reply, env.SIGNAL_BOT_NUMBER, env.SIGNAL_REST_API_URL)
+    return json(200, { status: 'ok' })
+  }
+
+  const result = await callEdge(env, parsed.command, msg.source_user_id, 'signal', parsed.sub_command, parsed.args)
+  const replyText = await aiFormat(env.AI, parsed.command, result)
+  await replySignal(msg.source_user_id, replyText, env.SIGNAL_BOT_NUMBER, env.SIGNAL_REST_API_URL)
+  return json(200, { status: 'ok', result })
+}
+
+// ============================================================
+// Viber
+// ============================================================
+async function handleViberWebhook(request: Request, env: Env): Promise<Response> {
+  if (!env.VIBER_AUTH_TOKEN) return json(200, { status: 'os_ready', platform: 'viber', message: 'SEOBAIKE OS 就緒，Viber 遙控器等待連入', webhook: 'https://api.aiforseo.vip/api/webhook/viber' })
+
+  const body = await request.json() as any
+  const msg = normalizeViber(body)
+  if (!msg) return json(200, { status: 'ignored' })
+
+  const parsed = parseCommand(msg.text)
+  if (!parsed.command.startsWith('/')) {
+    const result = await aiConstrainedChat(env.SUPABASE_URL, env.SUPABASE_SERVICE_ROLE_KEY, msg.text, 'viber', msg.source_user_id)
+    if (msg.viber_user_id) await replyViber(msg.viber_user_id, result.reply, env.VIBER_AUTH_TOKEN)
+    return json(200, { status: 'ok' })
+  }
+
+  const result = await callEdge(env, parsed.command, msg.source_user_id, 'viber', parsed.sub_command, parsed.args)
+  const replyText = await aiFormat(env.AI, parsed.command, result)
+  if (msg.viber_user_id) await replyViber(msg.viber_user_id, replyText, env.VIBER_AUTH_TOKEN)
+  return json(200, { status: 'ok', result })
+}
+
+// ============================================================
+// SMS (Twilio)
+// ============================================================
+async function handleSmsWebhook(request: Request, env: Env): Promise<Response> {
+  if (!env.TWILIO_AUTH_TOKEN) return json(200, { status: 'os_ready', platform: 'sms', message: 'SEOBAIKE OS 就緒，SMS 遙控器等待連入', webhook: 'https://api.aiforseo.vip/api/webhook/sms' })
+
+  const body = await request.text()
+  const msg = normalizeSms(body)
+  if (!msg) return json(200, { status: 'ignored' })
+
+  const parsed = parseCommand(msg.text)
+  if (!parsed.command.startsWith('/')) {
+    const result = await aiConstrainedChat(env.SUPABASE_URL, env.SUPABASE_SERVICE_ROLE_KEY, msg.text, 'sms', msg.source_user_id)
+    if (msg.from_number) await replySms(msg.from_number, result.reply, env.TWILIO_ACCOUNT_SID, env.TWILIO_AUTH_TOKEN, env.TWILIO_PHONE_NUMBER)
+    return json(200, { status: 'ok' })
+  }
+
+  const result = await callEdge(env, parsed.command, msg.source_user_id, 'sms', parsed.sub_command, parsed.args)
+  const replyText = await aiFormat(env.AI, parsed.command, result)
+  if (msg.from_number) await replySms(msg.from_number, replyText, env.TWILIO_ACCOUNT_SID, env.TWILIO_AUTH_TOKEN, env.TWILIO_PHONE_NUMBER)
+  return json(200, { status: 'ok', result })
+}
+
+// ============================================================
+// Web Widget 網頁聊天
+// ============================================================
+async function handleWebWidgetWebhook(request: Request, env: Env): Promise<Response> {
+  const body = await request.json() as any
+  const msg = normalizeWebWidget(body)
+  if (!msg) return json(200, { status: 'ignored' })
+
+  const parsed = parseCommand(msg.text)
+  if (!parsed.command.startsWith('/')) {
+    const result = await aiConstrainedChat(env.SUPABASE_URL, env.SUPABASE_SERVICE_ROLE_KEY, msg.text, 'web_widget', msg.source_user_id)
+    // Web Widget 直接回 JSON，不走 callback
+    return json(200, { status: 'ok', reply: result.reply, constrained: result.constrained, industry: result.industry })
+  }
+
+  const result = await callEdge(env, parsed.command, msg.source_user_id, 'web_widget', parsed.sub_command, parsed.args)
+  const replyText = await aiFormat(env.AI, parsed.command, result)
+  return json(200, { status: 'ok', reply: replyText, result })
+}
+
+// ============================================================
 // 主選單
 // ============================================================
 function mainMenu(): TelegramReplyOptions {
   return {
-    text: '嗨，我是 BAIKE — 你的 AI 管理助手。\n\n輕觸按鈕，或直接打字問我任何問題。',
+    text: '嗨，我是 SEOBAIKE — 你的 AI 管理助手。\n\n輕觸按鈕，或直接打字問我任何問題。',
     buttons: [
       [{ text: '📊 系統狀態', callback_data: '/status' }, { text: '💰 今日營收', callback_data: '/revenue' }],
       [{ text: '🔍 SEO 分析', callback_data: '/seo' }, { text: '🏷 關鍵字', callback_data: '/keywords' }],
@@ -223,9 +610,9 @@ async function callEdge(env: Env, command: string, userId: string, source: strin
 // 其他平台
 // ============================================================
 async function handleWebhook(request: Request, env: Env, platform: 'line' | 'whatsapp' | 'messenger'): Promise<Response> {
-  // 強制 signature 驗證 — 未設定 secret 時拒絕請求（不允許 bypass）
+  // OS 就緒 — 未設定 secret 時回應就緒狀態
   const secrets: Record<string, string | undefined> = { line: env.LINE_CHANNEL_SECRET, whatsapp: env.WHATSAPP_ACCESS_TOKEN, messenger: env.MESSENGER_APP_SECRET }
-  if (!secrets[platform]) return json(503, { error: `${platform} webhook not configured` })
+  if (!secrets[platform]) return json(200, { status: 'os_ready', platform, message: `SEOBAIKE OS 就緒，${platform} 遙控器等待連入`, webhook: `https://api.aiforseo.vip/api/webhook/${platform}` })
   const verifiers = { line: verifyLine, whatsapp: verifyWhatsApp, messenger: verifyMessenger }
   const isValid = await verifiers[platform](request, env)
   if (!isValid) return json(401, { error: 'Invalid signature' })
@@ -316,6 +703,16 @@ async function sendReply(env: Env, ctx: ReplyContext, text: string): Promise<voi
     case 'line': { const token = env.LINE_CHANNEL_ACCESS_TOKEN || await fetchToken(env, 'line', 'channel_access_token'); if (ctx.reply_token && token) await replyLine(ctx.reply_token, text, token); break }
     case 'whatsapp': { const pid = env.WHATSAPP_PHONE_NUMBER_ID || await fetchToken(env, 'whatsapp', 'phone_number_id'); const token = env.WHATSAPP_ACCESS_TOKEN || await fetchToken(env, 'whatsapp', 'access_token'); if (ctx.phone_number && pid && token) await replyWhatsApp(ctx.phone_number, text, pid, token); break }
     case 'messenger': { const token = env.MESSENGER_PAGE_ACCESS_TOKEN || await fetchToken(env, 'messenger', 'page_access_token'); if (ctx.sender_id && token) await replyMessenger(ctx.sender_id, text, token); break }
+    case 'discord': { if (ctx.channel_id && env.DISCORD_BOT_TOKEN) await replyDiscordChannel(ctx.channel_id, text, env.DISCORD_BOT_TOKEN); break }
+    case 'slack': { if (ctx.channel_id && env.SLACK_BOT_TOKEN) await replySlack(ctx.channel_id, text, env.SLACK_BOT_TOKEN); break }
+    case 'teams': { if (ctx.service_url && ctx.chat_id && env.TEAMS_BOT_TOKEN) await replyTeams(ctx.service_url, ctx.chat_id, text, env.TEAMS_BOT_TOKEN); break }
+    case 'email': { if (ctx.sender_id && env.EMAIL_API_KEY) await replyEmail(ctx.sender_id, ctx.email_subject || 'SEOBAIKE AI', text, env.EMAIL_API_KEY); break }
+    case 'google_chat': { if (ctx.space_name && env.GOOGLE_CHAT_BOT_TOKEN) await replyGoogleChat(ctx.space_name, text, env.GOOGLE_CHAT_BOT_TOKEN); break }
+    case 'wechat': { if (ctx.open_id && env.WECHAT_APP_ID) await replyWechat(ctx.open_id, text, env.WECHAT_APP_ID, env.WECHAT_APP_SECRET); break }
+    case 'signal': { if (env.SIGNAL_REST_API_URL) await replySignal(ctx.sender_id || '', text, env.SIGNAL_BOT_NUMBER, env.SIGNAL_REST_API_URL); break }
+    case 'viber': { if (ctx.viber_user_id && env.VIBER_AUTH_TOKEN) await replyViber(ctx.viber_user_id, text, env.VIBER_AUTH_TOKEN); break }
+    case 'sms': { if (ctx.from_number && env.TWILIO_AUTH_TOKEN) await replySms(ctx.from_number, text, env.TWILIO_ACCOUNT_SID, env.TWILIO_AUTH_TOKEN, env.TWILIO_PHONE_NUMBER); break }
+    case 'web_widget': { if (ctx.callback_url) await replyWebWidget(ctx.callback_url, text, ctx.session_token); break }
   }
 }
 
@@ -412,6 +809,10 @@ async function sendApprovalNotification(env: Env, queueResult: any, approvalInfo
       const { replyMessenger } = await import('./reply/messenger-reply')
       await replyMessenger(chatId, text + `\n\n回覆 /approve ${code} 核准\n回覆 /reject ${code} 拒絕`, token)
     }
+  } else if (platform === 'discord' && chatId && env.DISCORD_BOT_TOKEN) {
+    await replyDiscordChannel(chatId, text + `\n\n回覆 /approve ${code} 核准\n回覆 /reject ${code} 拒絕`, env.DISCORD_BOT_TOKEN)
+  } else if (platform === 'slack' && chatId && env.SLACK_BOT_TOKEN) {
+    await replySlack(chatId, text + `\n\n回覆 /approve ${code} 核准\n回覆 /reject ${code} 拒絕`, env.SLACK_BOT_TOKEN)
   }
 }
 
@@ -426,7 +827,7 @@ async function notifyRequester(env: Env, approvalResult: any, action: string): P
     `指令：${approvalResult.command}`,
     approvalResult.result?.message || approvalResult.reason || '',
     '',
-    '— BAIKE AI',
+    '— SEOBAIKE AI',
   ].join('\n')
 
   if (platform === 'telegram' && env.TELEGRAM_BOT_TOKEN) {
@@ -447,6 +848,12 @@ async function notifyRequester(env: Env, approvalResult: any, action: string): P
       const { replyMessenger } = await import('./reply/messenger-reply')
       await replyMessenger(platformUserId, text, token)
     }
+  } else if (platform === 'discord' && env.DISCORD_BOT_TOKEN) {
+    // Discord: platformUserId 在此情境是 channel_id（審批通知發送到頻道）
+    await replyDiscordChannel(platformUserId, text, env.DISCORD_BOT_TOKEN)
+  } else if (platform === 'slack' && env.SLACK_BOT_TOKEN) {
+    // Slack: 使用 DM 通知請求者
+    await pushSlackDM(platformUserId, text, env.SLACK_BOT_TOKEN)
   }
 }
 
@@ -501,6 +908,44 @@ async function handleComplianceBadge(env: Env, url: URL): Promise<Response> {
 // ============================================================
 // 工具
 // ============================================================
+// ============================================================
+// 14 平台登錄表
+// ============================================================
+const PLATFORM_REGISTRY = {
+  os: 'SEOBAIKE OS v3.0.0',
+  patent: '115100981',
+  company: '小路光有限公司',
+  total_platforms: 14,
+  platforms: [
+    { id: 'telegram', name: 'Telegram', status: 'connected', webhook: '/api/webhook/telegram' },
+    { id: 'line', name: 'LINE', status: 'os_ready', webhook: '/api/webhook/line' },
+    { id: 'whatsapp', name: 'WhatsApp', status: 'os_ready', webhook: '/api/webhook/whatsapp' },
+    { id: 'messenger', name: 'Messenger', status: 'os_ready', webhook: '/api/webhook/messenger' },
+    { id: 'discord', name: 'Discord', status: 'os_ready', webhook: '/api/webhook/discord' },
+    { id: 'slack', name: 'Slack', status: 'os_ready', webhook: '/api/webhook/slack' },
+    { id: 'teams', name: 'Microsoft Teams', status: 'os_ready', webhook: '/api/webhook/teams' },
+    { id: 'email', name: 'Email', status: 'os_ready', webhook: '/api/webhook/email' },
+    { id: 'google_chat', name: 'Google Chat', status: 'os_ready', webhook: '/api/webhook/google-chat' },
+    { id: 'wechat', name: 'WeChat 微信', status: 'os_ready', webhook: '/api/webhook/wechat' },
+    { id: 'signal', name: 'Signal', status: 'os_ready', webhook: '/api/webhook/signal' },
+    { id: 'viber', name: 'Viber', status: 'os_ready', webhook: '/api/webhook/viber' },
+    { id: 'sms', name: 'SMS (Twilio)', status: 'os_ready', webhook: '/api/webhook/sms' },
+    { id: 'web_widget', name: 'Web Widget', status: 'os_ready', webhook: '/api/webhook/web-widget' },
+  ],
+}
+
+// 全站安全標頭 — 針對 HTML 頁面（proxy 到 origin 的回應）
+const SITE_SECURITY_HEADERS: Record<string, string> = {
+  'Strict-Transport-Security': 'max-age=31536000; includeSubDomains; preload',
+  'Content-Security-Policy': "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https:; style-src 'self' 'unsafe-inline' https:; img-src 'self' data: https:; font-src 'self' https:; connect-src 'self' https:; frame-ancestors 'none'; base-uri 'self'; form-action 'self'",
+  'X-Frame-Options': 'DENY',
+  'X-Content-Type-Options': 'nosniff',
+  'Referrer-Policy': 'strict-origin-when-cross-origin',
+  'Permissions-Policy': 'camera=(), microphone=(), geolocation=(), payment=()',
+  'X-XSS-Protection': '1; mode=block',
+}
+
+// API 安全標頭 — 針對 JSON API 回應
 const SECURITY_HEADERS: Record<string, string> = {
   'Content-Type': 'application/json',
   'Access-Control-Allow-Origin': 'https://aiforseo.vip',
@@ -508,6 +953,7 @@ const SECURITY_HEADERS: Record<string, string> = {
   'Content-Security-Policy': "default-src 'none'",
   'X-Frame-Options': 'DENY',
   'X-Content-Type-Options': 'nosniff',
+  'Permissions-Policy': 'camera=(), microphone=(), geolocation=(), payment=()',
 }
 
 function json(status: number, data: any): Response {
