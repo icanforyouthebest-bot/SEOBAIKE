@@ -328,6 +328,243 @@
 
     .comparison-note strong { color: var(--orange); }
 
+    /* ========== COST CALCULATOR ========== */
+    .calculator-section {
+      padding: 5rem 2rem;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .calculator-section h2 {
+      text-align: center;
+      font-size: 1.8rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+
+    .calculator-section .calc-subtitle {
+      text-align: center;
+      color: var(--text-muted);
+      margin-bottom: 2.5rem;
+      font-size: 1rem;
+    }
+
+    .calculator-box {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 2.5rem;
+    }
+
+    .calc-input-group {
+      margin-bottom: 2rem;
+    }
+
+    .calc-input-group label {
+      display: block;
+      font-size: 1rem;
+      font-weight: 600;
+      color: #fff;
+      margin-bottom: 0.8rem;
+    }
+
+    .calc-slider-row {
+      display: flex;
+      align-items: center;
+      gap: 1.2rem;
+    }
+
+    .calc-slider-row input[type="range"] {
+      flex: 1;
+      -webkit-appearance: none;
+      appearance: none;
+      height: 8px;
+      background: var(--border);
+      border-radius: 4px;
+      outline: none;
+    }
+
+    .calc-slider-row input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: var(--orange);
+      cursor: pointer;
+      box-shadow: 0 2px 8px rgba(232,133,12,0.4);
+    }
+
+    .calc-slider-row input[type="range"]::-moz-range-thumb {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: var(--orange);
+      cursor: pointer;
+      border: none;
+      box-shadow: 0 2px 8px rgba(232,133,12,0.4);
+    }
+
+    .calc-value {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--orange);
+      min-width: 120px;
+      text-align: right;
+      white-space: nowrap;
+    }
+
+    .calc-results {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.2rem;
+      margin-top: 1rem;
+    }
+
+    .calc-result-card {
+      background: rgba(42,42,74,0.3);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.5rem;
+      text-align: center;
+      transition: border-color 0.3s, box-shadow 0.3s;
+    }
+
+    .calc-result-card.recommended {
+      border-color: var(--orange);
+      box-shadow: 0 0 0 1px var(--orange), 0 4px 20px rgba(232,133,12,0.12);
+    }
+
+    .calc-result-card .calc-rec-badge {
+      display: none;
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: #fff;
+      background: linear-gradient(135deg, var(--orange), #d0770a);
+      padding: 0.2rem 0.8rem;
+      border-radius: 999px;
+      margin-bottom: 0.6rem;
+    }
+
+    .calc-result-card.recommended .calc-rec-badge {
+      display: inline-block;
+    }
+
+    .calc-result-card h4 {
+      font-size: 1rem;
+      color: #fff;
+      margin-bottom: 0.4rem;
+    }
+
+    .calc-result-card .calc-price {
+      font-size: 1.6rem;
+      font-weight: 800;
+      color: var(--orange);
+      margin-bottom: 0.3rem;
+    }
+
+    .calc-result-card .calc-detail {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+    }
+
+    .calc-comparison-bar {
+      margin-top: 2rem;
+      background: rgba(42,42,74,0.3);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.5rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .calc-comparison-bar .comp-label {
+      font-size: 0.92rem;
+      color: var(--text-muted);
+    }
+
+    .calc-comparison-bar .comp-savings {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--green);
+    }
+
+    /* ========== MODEL COST COMPARISON ========== */
+    .model-cost-section {
+      padding: 4rem 2rem 5rem;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .model-cost-section h2 {
+      text-align: center;
+      font-size: 1.8rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+
+    .model-cost-section .mc-subtitle {
+      text-align: center;
+      color: var(--text-muted);
+      margin-bottom: 2.5rem;
+      font-size: 1rem;
+    }
+
+    .model-cost-table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+
+    .model-cost-table thead th {
+      background: rgba(42,42,74,0.5);
+      color: #fff;
+      font-size: 0.85rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      padding: 1rem 1.2rem;
+      text-align: left;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .model-cost-table tbody td {
+      padding: 0.9rem 1.2rem;
+      font-size: 0.92rem;
+      color: var(--text-muted);
+      border-bottom: 1px solid rgba(42,42,74,0.4);
+    }
+
+    .model-cost-table tbody tr:last-child td {
+      border-bottom: none;
+    }
+
+    .model-cost-table tbody tr.highlight {
+      background: rgba(232,133,12,0.06);
+    }
+
+    .model-cost-table tbody tr.highlight td {
+      color: #fff;
+      font-weight: 600;
+    }
+
+    .model-cost-table .cost-badge {
+      display: inline-block;
+      background: rgba(118,185,0,0.12);
+      color: var(--green);
+      padding: 0.15rem 0.6rem;
+      border-radius: 999px;
+      font-size: 0.78rem;
+      font-weight: 700;
+    }
+
     /* ========== FAQ ========== */
     .faq-section {
       padding: 5rem 2rem;
@@ -529,6 +766,12 @@
         margin: 0 auto;
       }
       .pricing-card.featured { margin-top: 0.5rem; }
+      .calc-results { grid-template-columns: 1fr; }
+      .calc-slider-row { flex-direction: column; align-items: stretch; }
+      .calc-value { text-align: center; min-width: auto; }
+      .calc-comparison-bar { flex-direction: column; text-align: center; }
+      .model-cost-table { font-size: 0.82rem; }
+      .model-cost-table thead th, .model-cost-table tbody td { padding: 0.7rem 0.6rem; }
       .footer-grid { grid-template-columns: 1fr 1fr; }
     }
 
@@ -570,66 +813,66 @@
       <!-- FREE -->
       <div class="pricing-card">
         <div class="pricing-tier">Free</div>
-        <div class="pricing-name">免費版</div>
+        <div class="pricing-name">免費方案</div>
         <div class="pricing-price">
           <span class="amount">$0</span>
           <span class="period">/月</span>
           <span class="note">永久免費，無需信用卡</span>
         </div>
         <ul class="pricing-features">
-          <li><span class="check">&#10003;</span>每月 100 次約束推理</li>
-          <li><span class="check">&#10003;</span>基本 L1-L2 約束層</li>
-          <li><span class="check">&#10003;</span>社群支援（論壇）</li>
-          <li><span class="check">&#10003;</span>基本稽核日誌（7 天）</li>
-          <li><span class="cross">&#10005;</span>L3-L4 進階約束</li>
-          <li><span class="cross">&#10005;</span>多模型路由</li>
-          <li><span class="cross">&#10005;</span>API 存取</li>
-          <li><span class="cross">&#10005;</span>客製化約束規則</li>
+          <li><span class="check">&#10003;</span>1,000 API 呼叫/月</li>
+          <li><span class="check">&#10003;</span>100 約束驗證/月</li>
+          <li><span class="check">&#10003;</span>1 個 AI 模型路由</li>
+          <li><span class="check">&#10003;</span>社群支援</li>
+          <li><span class="check">&#10003;</span>基礎 Dashboard</li>
+          <li><span class="cross">&#10005;</span>Webhook 通知</li>
+          <li><span class="cross">&#10005;</span>API Key 管理</li>
+          <li><span class="cross">&#10005;</span>白標部署</li>
         </ul>
         <a href="/login" class="btn-pricing secondary">免費開始</a>
       </div>
 
       <!-- PRO -->
       <div class="pricing-card featured">
-        <div class="pricing-tier">Pro</div>
-        <div class="pricing-name">專業版</div>
+        <div class="pricing-tier">Professional</div>
+        <div class="pricing-name">專業方案</div>
         <div class="pricing-price">
           <span class="amount">NT$2,990</span>
           <span class="period">/月</span>
-          <span class="note">年繳享 8 折（NT$2,392/月）</span>
+          <span class="note">約 $99 USD / 年繳享 8 折（NT$2,392/月）</span>
         </div>
         <ul class="pricing-features">
-          <li><span class="check">&#10003;</span>每月 10,000 次約束推理</li>
-          <li><span class="check">&#10003;</span>完整 L1-L4 約束層</li>
-          <li><span class="check">&#10003;</span>多模型路由</li>
-          <li><span class="check">&#10003;</span>API 存取（REST + SDK）</li>
-          <li><span class="check">&#10003;</span>電子郵件支援</li>
-          <li><span class="check">&#10003;</span>完整稽核日誌（90 天）</li>
-          <li><span class="check">&#10003;</span>多國代碼對齊</li>
-          <li><span class="cross">&#10005;</span>客製化約束規則</li>
+          <li><span class="check">&#10003;</span>50,000 API 呼叫/月</li>
+          <li><span class="check">&#10003;</span>10,000 約束驗證/月</li>
+          <li><span class="check">&#10003;</span>5 個 AI 模型路由</li>
+          <li><span class="check">&#10003;</span>優先客服</li>
+          <li><span class="check">&#10003;</span>進階 Dashboard + Analytics</li>
+          <li><span class="check">&#10003;</span>Webhook 通知</li>
+          <li><span class="check">&#10003;</span>API Key 管理</li>
+          <li><span class="check">&#10003;</span>99.9% SLA 保證</li>
         </ul>
-        <a href="/login" class="btn-pricing primary">開始 14 天免費試用</a>
+        <a href="/contact" class="btn-pricing primary">立即升級</a>
       </div>
 
       <!-- ENTERPRISE -->
       <div class="pricing-card">
         <div class="pricing-tier">Enterprise</div>
-        <div class="pricing-name">企業版</div>
+        <div class="pricing-name">企業方案</div>
         <div class="pricing-price">
-          <span class="amount" style="font-size: 2rem;">聯繫銷售</span>
-          <span class="note">依需求客製化報價</span>
+          <span class="amount" style="font-size: 2rem;">客製報價</span>
+          <span class="note">依需求量身打造</span>
         </div>
         <ul class="pricing-features">
-          <li><span class="check">&#10003;</span>無限次約束推理</li>
-          <li><span class="check">&#10003;</span>完整 L1-L4 約束層</li>
-          <li><span class="check">&#10003;</span>客製化約束規則</li>
-          <li><span class="check">&#10003;</span>專屬客服經理</li>
-          <li><span class="check">&#10003;</span>SLA 保證（99.9%）</li>
-          <li><span class="check">&#10003;</span>稽核日誌永久保存</li>
-          <li><span class="check">&#10003;</span>on-premise 部署選項</li>
-          <li><span class="check">&#10003;</span>優先功能開發</li>
+          <li><span class="check">&#10003;</span>無限 API 呼叫</li>
+          <li><span class="check">&#10003;</span>無限約束驗證</li>
+          <li><span class="check">&#10003;</span>全部 AI 模型路由</li>
+          <li><span class="check">&#10003;</span>專屬客戶經理</li>
+          <li><span class="check">&#10003;</span>白標部署 (White-label)</li>
+          <li><span class="check">&#10003;</span>自訂約束規則</li>
+          <li><span class="check">&#10003;</span>合規報告</li>
+          <li><span class="check">&#10003;</span>99.99% SLA 保證</li>
         </ul>
-        <a href="/contact" class="btn-pricing enterprise">聯繫銷售團隊</a>
+        <a href="/contact" class="btn-pricing enterprise">聯繫銷售</a>
       </div>
 
     </div>
@@ -640,6 +883,103 @@
     </div>
   </section>
 
+  <!-- COST CALCULATOR -->
+  <section class="calculator-section" id="calculator">
+    <h2>成本計算器</h2>
+    <p class="calc-subtitle">輸入您的預估用量，找到最適合的方案</p>
+
+    <div class="calculator-box">
+      <div class="calc-input-group">
+        <label for="apiSlider">每月預估 API 呼叫次數</label>
+        <div class="calc-slider-row">
+          <input type="range" id="apiSlider" min="0" max="1000000" step="1000" value="5000">
+          <span class="calc-value" id="apiValue">5,000 次</span>
+        </div>
+      </div>
+
+      <div class="calc-results" id="calcResults">
+        <div class="calc-result-card" id="calcFree">
+          <span class="calc-rec-badge">推薦方案</span>
+          <h4>免費方案</h4>
+          <div class="calc-price">$0</div>
+          <div class="calc-detail">1,000 API 呼叫/月<br>100 約束驗證/月</div>
+        </div>
+        <div class="calc-result-card" id="calcPro">
+          <span class="calc-rec-badge">推薦方案</span>
+          <h4>專業方案</h4>
+          <div class="calc-price">NT$2,990</div>
+          <div class="calc-detail">50,000 API 呼叫/月<br>10,000 約束驗證/月</div>
+        </div>
+        <div class="calc-result-card" id="calcEnterprise">
+          <span class="calc-rec-badge">推薦方案</span>
+          <h4>企業方案</h4>
+          <div class="calc-price">客製報價</div>
+          <div class="calc-detail">無限 API 呼叫<br>無限約束驗證</div>
+        </div>
+      </div>
+
+      <div class="calc-comparison-bar">
+        <span class="comp-label">自建同等功能預估成本：<strong id="inHouseCost" style="color: var(--text);">NT$29,900/月</strong></span>
+        <span class="comp-savings" id="savingsText">使用 SEOBAIKE 節省約 90%</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- MODEL COST COMPARISON -->
+  <section class="model-cost-section">
+    <h2>模型成本對標</h2>
+    <p class="mc-subtitle">每 1,000 次 API 呼叫的成本比較</p>
+
+    <table class="model-cost-table">
+      <thead>
+        <tr>
+          <th>平台 / 方式</th>
+          <th>每 1,000 次呼叫成本</th>
+          <th>約束驗證</th>
+          <th>備註</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="highlight">
+          <td>SEOBAIKE 免費方案</td>
+          <td><span class="cost-badge">$0</span></td>
+          <td>包含</td>
+          <td>1,000 次/月免費額度</td>
+        </tr>
+        <tr class="highlight">
+          <td>SEOBAIKE 專業方案</td>
+          <td><span class="cost-badge">~NT$0.06</span></td>
+          <td>包含</td>
+          <td>50,000 次/月，含完整 L1-L4</td>
+        </tr>
+        <tr>
+          <td>自建約束推理系統</td>
+          <td>NT$15 ~ NT$30</td>
+          <td>需自行開發</td>
+          <td>需要工程師 + 伺服器 + 維護</td>
+        </tr>
+        <tr>
+          <td>一般 AI Gateway</td>
+          <td>NT$3 ~ NT$8</td>
+          <td>不包含</td>
+          <td>僅代理轉發，無約束層</td>
+        </tr>
+        <tr>
+          <td>直接呼叫大型模型 API</td>
+          <td>NT$5 ~ NT$50</td>
+          <td>不包含</td>
+          <td>依模型與 token 用量計費</td>
+        </tr>
+        <tr>
+          <td>傳統規則引擎</td>
+          <td>NT$10 ~ NT$25</td>
+          <td>部分</td>
+          <td>無 AI 推理，僅靜態規則</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
   <!-- FAQ -->
   <section class="faq-section">
     <h2>常見問題</h2>
@@ -647,51 +987,51 @@
 
     <div class="faq-item">
       <button class="faq-question" onclick="toggleFaq(this)">
-        <span>免費版有什麼限制？</span>
+        <span>免費方案有什麼限制？適合誰使用？</span>
         <span class="arrow">&#9660;</span>
       </button>
       <div class="faq-answer">
-        <p>免費版每月提供 100 次約束推理呼叫，僅支援 L1 和 L2 兩層約束。這適合個人開發者體驗平台功能，或在小型專案中測試 AI 約束推理的概念。免費版不包含 API 存取、多模型路由及進階稽核日誌功能。</p>
+        <p>免費方案每月提供 1,000 次 API 呼叫與 100 次約束驗證，支援 1 個 AI 模型路由及基礎 Dashboard。適合個人開發者體驗平台功能、小型專案測試，或是評估 SEOBAIKE 是否符合需求的企業。免費方案不包含 Webhook、API Key 管理及白標部署功能。</p>
       </div>
     </div>
 
     <div class="faq-item">
       <button class="faq-question" onclick="toggleFaq(this)">
-        <span>專業版的 14 天免費試用期結束後會怎樣？</span>
+        <span>API 呼叫次數與約束驗證次數有什麼不同？</span>
         <span class="arrow">&#9660;</span>
       </button>
       <div class="faq-answer">
-        <p>試用期結束後，您可以選擇正式訂閱專業版（NT$2,990/月），或自動降級為免費版繼續使用。我們不會在您未確認的情況下收取任何費用。試用期間的所有資料和設定都會完整保留。</p>
+        <p>API 呼叫次數是您透過 SEOBAIKE 平台發出的所有 API 請求總數，包含查詢、資料寫入、模型路由等。約束驗證次數則是呼叫 check_inference_path() 進行 L1&#8594;L2&#8594;L3&#8594;L4 路徑驗證的次數。一次 API 呼叫可能觸發零次或多次約束驗證，取決於業務邏輯的設定。兩者獨立計算，皆可在 Dashboard 即時查看。</p>
       </div>
     </div>
 
     <div class="faq-item">
       <button class="faq-question" onclick="toggleFaq(this)">
-        <span>什麼是「約束推理次數」？怎麼計算？</span>
+        <span>超過方案上限後會怎樣？會直接斷線嗎？</span>
         <span class="arrow">&#9660;</span>
       </button>
       <div class="faq-answer">
-        <p>每一次 AI 執行動作前呼叫 check_inference_path() 進行 L1→L4 路徑驗證，即計為一次約束推理。無論驗證結果為 allowed 或 denied，都會計入用量。批次操作中的每個獨立推理動作分別計算。您可以在儀表板即時查看當月用量。</p>
+        <p>不會直接斷線。當您接近方案上限的 80% 時，系統會透過 Dashboard 和 Email 發送提醒。達到上限後，免費方案會暫停服務至下個月重置；專業方案則提供 10% 的彈性超額空間，超出部分按比例計費（每 1,000 次呼叫 NT$0.08）。企業方案為無限額度，不受此限制。</p>
       </div>
     </div>
 
     <div class="faq-item">
       <button class="faq-question" onclick="toggleFaq(this)">
-        <span>企業版的 SLA 保證具體內容是什麼？</span>
+        <span>可以隨時升級或降級方案嗎？有綁約嗎？</span>
         <span class="arrow">&#9660;</span>
       </button>
       <div class="faq-answer">
-        <p>企業版提供 99.9% 的服務可用性保證（每月停機時間不超過 43 分鐘）。若未達到承諾標準，我們將依合約條款提供服務費用抵免。此外，企業客戶享有專屬客服經理、優先技術支援（響應時間 &lt; 2 小時），以及每季度的服務檢討會議。</p>
+        <p>所有方案皆無綁約限制，您可以隨時在帳戶設定中升級或降級。升級立即生效，依剩餘天數比例計費；降級則在當期結束後生效。您的約束規則設定和稽核紀錄不會因方案變更而遺失，但降級後超出方案範圍的功能將暫停存取。年繳方案提供 8 折優惠，中途取消可依比例退款。</p>
       </div>
     </div>
 
     <div class="faq-item">
       <button class="faq-question" onclick="toggleFaq(this)">
-        <span>可以隨時升級或降級方案嗎？</span>
+        <span>企業方案的白標部署和自訂約束規則是什麼？</span>
         <span class="arrow">&#9660;</span>
       </button>
       <div class="faq-answer">
-        <p>可以。所有方案無綁約限制，您可以隨時在帳戶設定中升級或降級。升級時立即生效，依比例計費；降級則在當期結束後生效。您的約束規則設定和稽核紀錄不會因方案變更而遺失，但降級後超出方案範圍的功能將暫停存取。</p>
+        <p>白標部署讓您可以用自己的品牌和網域提供 SEOBAIKE 平台服務，適合將 AI 約束推理整合進現有產品的 SaaS 企業。自訂約束規則允許您定義超越標準 L1-L4 架構的企業專屬規則，例如特定產業法規、公司內部合規政策等。這些功能由專屬客戶經理協助配置，並享有 99.99% SLA 保證。</p>
       </div>
     </div>
   </section>
@@ -756,6 +1096,65 @@
         item.classList.add('open');
       }
     }
+
+    // Cost Calculator
+    (function () {
+      var slider = document.getElementById('apiSlider');
+      var valueDisplay = document.getElementById('apiValue');
+      var cardFree = document.getElementById('calcFree');
+      var cardPro = document.getElementById('calcPro');
+      var cardEnterprise = document.getElementById('calcEnterprise');
+      var inHouseCost = document.getElementById('inHouseCost');
+      var savingsText = document.getElementById('savingsText');
+
+      function formatNumber(n) {
+        return n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+      }
+
+      function updateCalculator() {
+        var calls = parseInt(slider.value, 10);
+        valueDisplay.textContent = formatNumber(calls) + ' 次';
+
+        // Remove recommended from all
+        cardFree.classList.remove('recommended');
+        cardPro.classList.remove('recommended');
+        cardEnterprise.classList.remove('recommended');
+
+        // Determine recommended tier and cost
+        var monthlyCost = 0;
+        var monthlyCostLabel = '';
+        if (calls <= 1000) {
+          cardFree.classList.add('recommended');
+          monthlyCost = 0;
+          monthlyCostLabel = '$0（免費方案）';
+        } else if (calls <= 50000) {
+          cardPro.classList.add('recommended');
+          monthlyCost = 2990;
+          monthlyCostLabel = 'NT$2,990（專業方案）';
+        } else {
+          cardEnterprise.classList.add('recommended');
+          monthlyCost = Math.ceil(calls / 1000) * 2;
+          monthlyCostLabel = '客製報價（企業方案）';
+        }
+
+        // In-house cost estimate: roughly 10x
+        var inHouseEstimate = calls <= 0 ? 0 : Math.max(monthlyCost * 10, Math.ceil(calls / 1000) * 60);
+        inHouseCost.textContent = inHouseEstimate <= 0 ? 'NT$0/月' : 'NT$' + formatNumber(inHouseEstimate) + '/月';
+
+        // Savings
+        if (inHouseEstimate > 0 && monthlyCost > 0) {
+          var pct = Math.round((1 - monthlyCost / inHouseEstimate) * 100);
+          savingsText.textContent = '使用 SEOBAIKE 節省約 ' + pct + '%';
+        } else if (calls <= 1000) {
+          savingsText.textContent = '免費方案 — 零成本開始';
+        } else {
+          savingsText.textContent = '聯繫我們取得最優報價';
+        }
+      }
+
+      slider.addEventListener('input', updateCalculator);
+      updateCalculator();
+    })();
   </script>
 <script>
 (function(){

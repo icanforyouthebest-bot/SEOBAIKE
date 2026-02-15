@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>隱私權政策 — SEOBAIKE | 小路光有限公司</title>
+  <meta name="description" content="SEOBAIKE 隱私權政策：了解我們如何收集、使用及保護您的個人資料。符合台灣個資法、GDPR、CCPA。">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --orange: #e8850c;
+      --copper: #cc785c;
+      --green: #76b900;
+      --bg: #0a0a1a;
+      --bg-card: #12122a;
+      --bg-elevated: #1a1a3a;
+      --text: #e8e8f0;
+      --text-dim: #9999b0;
+      --border: #2a2a4a;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans TC", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+      min-height: 100vh;
+    }
+
+    a { color: var(--orange); text-decoration: none; transition: color 0.2s; }
+    a:hover { color: var(--copper); }
+
+    /* ── Navigation ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+      background: rgba(10, 10, 26, 0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-inner {
+      max-width: 1200px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 24px; height: 64px;
+    }
+    .nav-brand {
+      font-size: 1.3rem; font-weight: 800; color: var(--orange);
+      letter-spacing: 1px;
+    }
+    .nav-brand span { color: var(--green); }
+    .nav-links { display: flex; gap: 28px; list-style: none; }
+    .nav-links a {
+      color: var(--text-dim); font-size: 0.92rem; font-weight: 500;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover, .nav-links a.active { color: var(--orange); }
+    .nav-toggle { display: none; background: none; border: none; color: var(--text); font-size: 1.5rem; cursor: pointer; }
+
+    /* ── Hero ── */
+    .hero {
+      padding: 140px 24px 60px;
+      text-align: center;
+      background: linear-gradient(180deg, #0f0f2a 0%, var(--bg) 100%);
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: "";
+      position: absolute; top: 60px; left: 50%; transform: translateX(-50%);
+      width: 600px; height: 600px;
+      background: radial-gradient(circle, rgba(232,133,12,0.08) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero h1 {
+      font-size: clamp(2.2rem, 5vw, 3.2rem);
+      font-weight: 800;
+      background: linear-gradient(135deg, var(--orange), var(--copper));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 16px;
+    }
+    .hero p {
+      font-size: 1.1rem; color: var(--text-dim);
+      max-width: 600px; margin: 0 auto;
+    }
+    .hero .last-updated {
+      font-size: 0.88rem; color: var(--text-dim);
+      margin-top: 12px; opacity: 0.7;
+    }
+
+    /* ── Legal Content ── */
+    .legal-content {
+      max-width: 860px; margin: 0 auto;
+      padding: 60px 24px 80px;
+    }
+
+    .legal-section {
+      margin-bottom: 48px;
+    }
+
+    .legal-section-number {
+      display: inline-block;
+      font-size: 0.78rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 2px; color: var(--green);
+      margin-bottom: 8px;
+    }
+
+    .legal-section h2 {
+      font-size: 1.5rem; font-weight: 700; color: #fff;
+      margin-bottom: 20px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .legal-section h3 {
+      font-size: 1.15rem; font-weight: 600; color: var(--orange);
+      margin: 24px 0 12px;
+    }
+
+    .legal-section p {
+      color: var(--text-dim); font-size: 0.98rem;
+      line-height: 1.85; margin-bottom: 14px;
+    }
+
+    .legal-section ul, .legal-section ol {
+      color: var(--text-dim); font-size: 0.98rem;
+      line-height: 1.85; margin: 12px 0 16px 24px;
+    }
+
+    .legal-section li {
+      margin-bottom: 8px;
+    }
+
+    .legal-section li strong {
+      color: var(--text);
+    }
+
+    .legal-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 24px 28px;
+      margin: 20px 0;
+    }
+
+    .legal-card h4 {
+      color: var(--orange); font-size: 1rem; font-weight: 600;
+      margin-bottom: 10px;
+    }
+
+    .legal-card p, .legal-card ul {
+      color: var(--text-dim); font-size: 0.92rem; line-height: 1.8;
+    }
+
+    .legal-highlight {
+      background: rgba(232,133,12,0.08);
+      border-left: 3px solid var(--orange);
+      padding: 16px 20px;
+      border-radius: 0 8px 8px 0;
+      margin: 16px 0;
+    }
+
+    .legal-highlight p {
+      color: var(--text); font-size: 0.95rem;
+      margin-bottom: 0;
+    }
+
+    .legal-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 16px 0;
+      font-size: 0.92rem;
+    }
+
+    .legal-table th {
+      background: var(--bg-elevated);
+      color: var(--orange);
+      text-align: left;
+      padding: 12px 16px;
+      border: 1px solid var(--border);
+      font-weight: 600;
+    }
+
+    .legal-table td {
+      padding: 12px 16px;
+      border: 1px solid var(--border);
+      color: var(--text-dim);
+    }
+
+    .contact-box {
+      background: linear-gradient(135deg, #12122a 0%, #1a1030 100%);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 36px 32px;
+      text-align: center;
+      margin-top: 48px;
+    }
+
+    .contact-box h3 {
+      color: #fff; font-size: 1.3rem; margin-bottom: 12px;
+    }
+
+    .contact-box p {
+      color: var(--text-dim); font-size: 0.95rem; margin-bottom: 4px;
+    }
+
+    .contact-box a {
+      font-size: 1.1rem; font-weight: 600;
+    }
+
+    /* ── Footer ── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 48px 24px 32px;
+      margin-top: 40px;
+    }
+    .footer-inner {
+      max-width: 1000px; margin: 0 auto;
+      display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 48px;
+    }
+    .footer-brand { font-size: 1.2rem; font-weight: 700; color: var(--orange); margin-bottom: 12px; }
+    .footer-desc { color: var(--text-dim); font-size: 0.9rem; line-height: 1.7; }
+    .footer-col h4 { color: #fff; font-size: 0.9rem; margin-bottom: 12px; }
+    .footer-col ul { list-style: none; }
+    .footer-col li { margin-bottom: 8px; }
+    .footer-col a { color: var(--text-dim); font-size: 0.88rem; }
+    .footer-col a:hover { color: var(--orange); }
+    .footer-bottom {
+      max-width: 1000px; margin: 32px auto 0;
+      padding-top: 24px; border-top: 1px solid var(--border);
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: 12px;
+      color: var(--text-dim); font-size: 0.82rem;
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .nav-links.open {
+        display: flex; flex-direction: column;
+        position: absolute; top: 64px; left: 0; right: 0;
+        background: rgba(10,10,26,0.97);
+        padding: 20px 24px; gap: 16px;
+        border-bottom: 1px solid var(--border);
+      }
+      .nav-toggle { display: block; }
+      .legal-content { padding: 40px 16px 60px; }
+      .legal-card { padding: 20px; }
+      .contact-box { padding: 28px 20px; }
+      .legal-table { font-size: 0.82rem; }
+      .legal-table th, .legal-table td { padding: 8px 10px; }
+      .footer-inner { grid-template-columns: 1fr; gap: 32px; }
+      .footer-bottom { flex-direction: column; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ════ Navigation ════ -->
+  <nav>
+    <div class="nav-inner">
+      <a href="/" class="nav-brand">SEO<span>BAIKE</span></a>
+      <button class="nav-toggle" onclick="document.querySelector('.nav-links').classList.toggle('open')" aria-label="選單">&#9776;</button>
+      <ul class="nav-links">
+        <li><a href="/">首頁</a></li>
+        <li><a href="/features">功能</a></li>
+        <li><a href="/pricing">方案</a></li>
+        <li><a href="/docs">文件</a></li>
+        <li><a href="/about">關於</a></li>
+        <li><a href="/contact">聯絡</a></li>
+        <li><a href="/login">登入</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- ════ Hero ════ -->
+  <section class="hero">
+    <h1>隱私權政策</h1>
+    <p>Privacy Policy — 了解 SEOBAIKE 如何收集、使用、儲存及保護您的個人資料。</p>
+    <div class="last-updated">最後更新日期 (Last Updated)：2026 年 2 月 15 日</div>
+  </section>
+
+  <!-- ════ Legal Content ════ -->
+  <div class="legal-content">
+
+    <!-- Section 1 -->
+    <div class="legal-section">
+      <div class="legal-section-number">Section 1</div>
+      <h2>一、前言 (Introduction)</h2>
+      <p>
+        歡迎使用 SEOBAIKE 平台（以下簡稱「本平台」）。本平台由<strong>小路光有限公司</strong>（統一編號：60475510，以下簡稱「本公司」）營運，負責人為許竣翔。本公司致力於保護您的個人資料及隱私權。
+      </p>
+      <p>
+        本隱私權政策（以下簡稱「本政策」）說明當您造訪 <strong>aiforseo.vip</strong> 網站及使用本平台 Constraint-as-a-Service (CaaS) 服務時，本公司如何收集、處理、利用及保護您的個人資料。
+      </p>
+      <div class="legal-highlight">
+        <p>使用本平台即表示您已閱讀並同意本政策之內容。若您不同意本政策之任何條款，請勿使用本平台服務。</p>
+      </div>
+    </div>
+
+    <!-- Section 2 -->
+    <div class="legal-section">
+      <div class="legal-section-number">Section 2</div>
+      <h2>二、適用法規 (Applicable Laws)</h2>
+      <p>本政策之制定及執行遵循以下法規：</p>
+      <ul>
+        <li><strong>台灣個人資料保護法</strong>（Personal Data Protection Act, PDPA）— 適用於所有使用者</li>
+        <li><strong>歐盟一般資料保護規則</strong>（General Data Protection Regulation, GDPR）— 適用於歐盟地區使用者</li>
+        <li><strong>加州消費者隱私法</strong>（California Consumer Privacy Act, CCPA）— 適用於美國加州使用者</li>
+      </ul>
+      <p>
+        針對不同地區之使用者，本公司將依據其所在地適用之法律提供相應之隱私保護措施。若各法規間有所衝突，將以提供較高保護標準之法規為準。
+      </p>
+    </div>
+
+    <!-- Section 3 -->
+    <div class="legal-section">
+      <div class="legal-section-number">Section 3</div>
+      <h2>三、個人資料之收集 (Data Collection)</h2>
+      <p>本公司收集之個人資料類型如下：</p>
+
+      <h3>3.1 您主動提供之資料 (Data You Provide)</h3>
+      <ul>
+        <li><strong>帳號註冊資料</strong>：電子信箱 (email)、使用者名稱、密碼（經加密儲存）</li>
+        <li><strong>聯絡資訊</strong>：姓名、公司名稱、電話號碼（於您主動聯繫時）</li>
+        <li><strong>付款資訊</strong>：交易記錄、發票資訊（信用卡資料由第三方支付處理商處理，本公司不直接儲存）</li>
+        <li><strong>API 使用資料</strong>：API 金鑰、呼叫記錄、約束路徑 (L1-L4) 查詢內容</li>
+      </ul>
+
+      <h3>3.2 自動收集之資料 (Automatically Collected Data)</h3>
+      <ul>
+        <li><strong>頁面瀏覽記錄</strong> (Page Views)：造訪頁面路徑、來源網址 (referrer)、瀏覽器資訊 (user agent)</li>
+        <li><strong>裝置資訊</strong>：作業系統、螢幕解析度、瀏覽器類型及版本</li>
+        <li><strong>網路資訊</strong>：IP 位址（經 Cloudflare CDN 處理）、地理位置（國家/城市層級）</li>
+        <li><strong>使用行為</strong>：功能使用頻率、API 呼叫次數、錯誤記錄</li>
+      </ul>
+
+      <h3>3.3 Cookies 與追蹤技術 (Cookies and Tracking)</h3>
+      <p>本平台使用以下 Cookies 及追蹤技術：</p>
+      <table class="legal-table">
+        <tr>
+          <th>類型</th>
+          <th>用途</th>
+          <th>保存期限</th>
+        </tr>
+        <tr>
+          <td>必要性 Cookies (Essential)</td>
+          <td>維持登入狀態、安全驗證</td>
+          <td>工作階段 (Session)</td>
+        </tr>
+        <tr>
+          <td>功能性 Cookies (Functional)</td>
+          <td>記住語言偏好、介面設定</td>
+          <td>1 年</td>
+        </tr>
+        <tr>
+          <td>分析性 Cookies (Analytics)</td>
+          <td>頁面瀏覽統計 (page_views)、使用行為分析</td>
+          <td>2 年</td>
+        </tr>
+      </table>
+      <p>您可透過瀏覽器設定停用非必要性 Cookies，但部分功能可能因此無法正常運作。</p>
+    </div>
+
+    <!-- Section 4 -->
+    <div class="legal-section">
+      <div class="legal-section-number">Section 4</div>
+      <h2>四、資料之使用目的 (Purpose of Data Use)</h2>
+      <p>本公司收集之個人資料將用於以下目的：</p>
+      <ol>
+        <li><strong>服務提供與維護</strong>：處理您的 CaaS 約束即服務請求、管理帳號、提供客戶支援</li>
+        <li><strong>服務改善</strong>：分析使用行為以優化平台效能與使用者體驗</li>
+        <li><strong>安全防護</strong>：偵測及防止未經授權之存取、濫用行為或安全威脅</li>
+        <li><strong>法律遵循</strong>：遵守適用法規之要求，回應司法機關合法之資料調取要求</li>
+        <li><strong>通知與行銷</strong>：寄送服務更新通知、安全警告（僅於您同意時寄送行銷資訊）</li>
+        <li><strong>稽核與記錄</strong>：維護 AI 推理路徑之約束驗證記錄，確保合規性</li>
+      </ol>
+    </div>
+
+    <!-- Section 5 -->
+    <div class="legal-section">
+      <div class="legal-section-number">Section 5</div>
+      <h2>五、資料儲存與安全 (Data Storage and Security)</h2>
+
+      <h3>5.1 資料儲存位置 (Storage Location)</h3>
+      <div class="legal-card">
+        <h4>Supabase 資料庫 — 東京區域 (Tokyo Region)</h4>
+        <p>您的資料儲存於 Supabase 雲端資料庫，伺服器位於日本東京。Supabase 採用 PostgreSQL 資料庫，提供列級安全策略 (Row Level Security, RLS) 保護，確保資料存取權限之嚴格控管。</p>
+      </div>
+      <div class="legal-card">
+        <h4>Cloudflare CDN — 全球邊緣網路</h4>
+        <p>本平台透過 Cloudflare 內容傳遞網路提供服務。Cloudflare 會處理您的 IP 位址及連線資訊以提供 DDoS 防護及效能優化。靜態內容可能暫存於全球各地之邊緣節點。</p>
+      </div>
+
+      <h3>5.2 安全措施 (Security Measures)</h3>
+      <ul>
+        <li>傳輸層安全 (TLS/SSL) 加密所有網路通訊</li>
+        <li>密碼經 bcrypt 雜湊處理，不以明文儲存</li>
+        <li>API 金鑰採用安全亂數生成，並支援金鑰輪換</li>
+        <li>資料庫存取透過 Row Level Security (RLS) 策略控管</li>
+        <li>定期安全稽核與弱點掃描</li>
+        <li>員工僅在業務必要時存取個人資料，並受保密協議約束</li>
+      </ul>
+    </div>
+
+    <!-- Section 6 -->
+    <div class="legal-section">
+      <div class="legal-section-number">Section 6</div>
+      <h2>六、第三方服務 (Third-Party Services)</h2>
+      <p>本平台整合以下第三方服務，這些服務可能收集或處理您的資料：</p>
+      <table class="legal-table">
+        <tr>
+          <th>服務類型</th>
+          <th>用途</th>
+          <th>資料處理範圍</th>
+        </tr>
+        <tr>
+          <td>AI 推理服務</td>
+          <td>CaaS 約束驗證、AI 模型推理</td>
+          <td>API 請求內容、推理路徑 (L1-L4)</td>
+        </tr>
+        <tr>
+          <td>Cloudflare</td>
+          <td>CDN、DDoS 防護、DNS</td>
+          <td>IP 位址、連線資訊</td>
+        </tr>
+        <tr>
+          <td>Supabase</td>
+          <td>資料庫、身分驗證</td>
+          <td>帳號資料、使用記錄</td>
+        </tr>
+        <tr>
+          <td>支付處理商</td>
+          <td>訂閱與付款處理</td>
+          <td>交易資訊（本公司不儲存信用卡號）</td>
+        </tr>
+      </table>
+      <p>
+        各第三方服務皆有其隱私權政策，本公司建議您另行閱讀。本公司僅與符合適當資料保護標準之第三方合作。
+      </p>
+    </div>
+
+    <!-- Section 7 -->
+    <div class="legal-section">
+      <div class="legal-section-number">Section 7</div>
+      <h2>七、資料保存期限 (Data Retention)</h2>
+      <table class="legal-table">
+        <tr>
+          <th>資料類型</th>
+          <th>保存期限</th>
+          <th>說明</th>
+        </tr>
+        <tr>
+          <td>分析資料 (Analytics)</td>
+          <td>2 年</td>
+          <td>頁面瀏覽記錄、使用行為統計等</td>
+        </tr>
+        <tr>
+          <td>稽核日誌 (Audit Logs)</td>
+          <td>5 年</td>
+          <td>API 呼叫記錄、約束路徑驗證記錄、安全事件</td>
+        </tr>
+        <tr>
+          <td>帳號資料</td>
+          <td>帳號存續期間 + 刪除後 30 日</td>
+          <td>帳號刪除後保留 30 日以利帳號復原</td>
+        </tr>
+        <tr>
+          <td>交易記錄</td>
+          <td>依稅法規定（至少 5 年）</td>
+          <td>配合台灣稅務法規要求</td>
+        </tr>
+      </table>
+      <p>
+        超過保存期限之資料，本公司將以安全方式刪除或進行去識別化處理。
+      </p>
+    </div>
+
+    <!-- Section 8 -->
+    <div class="legal-section">
+      <div class="legal-section-number">Section 8</div>
+      <h2>八、您的權利 (Your Rights)</h2>
+
+      <h3>8.1 所有使用者之權利 (All Users)</h3>
+      <p>依據台灣個人資料保護法，您享有以下權利：</p>
+      <ol>
+        <li><strong>查詢或請求閱覽</strong> (Right of Access)：查詢本公司是否持有您的個人資料，並請求閱覽</li>
+        <li><strong>請求製給複本</strong> (Right to Copy)：請求本公司提供您個人資料之複本</li>
+        <li><strong>請求補充或更正</strong> (Right to Rectification)：要求更正不正確或不完整之資料</li>
+        <li><strong>請求停止蒐集、處理或利用</strong> (Right to Restrict Processing)：要求停止處理您的個人資料</li>
+        <li><strong>請求刪除</strong> (Right to Erasure)：要求刪除您的個人資料</li>
+      </ol>
+
+      <h3>8.2 歐盟使用者之額外權利 (GDPR Additional Rights)</h3>
+      <p>若您位於歐盟/歐洲經濟區，您另享有以下權利：</p>
+      <ul>
+        <li><strong>資料可攜權</strong> (Right to Data Portability)：以結構化、常用且機器可讀之格式取得您的資料</li>
+        <li><strong>反對權</strong> (Right to Object)：反對基於合法利益之資料處理</li>
+        <li><strong>撤回同意權</strong> (Right to Withdraw Consent)：隨時撤回先前之同意，不影響撤回前之合法處理</li>
+        <li><strong>向監管機關申訴之權利</strong> (Right to Lodge a Complaint)</li>
+      </ul>
+
+      <h3>8.3 加州使用者之額外權利 (CCPA Additional Rights)</h3>
+      <p>若您為美國加州居民，您另享有以下權利：</p>
+      <ul>
+        <li><strong>知情權</strong> (Right to Know)：了解本公司收集了哪些類別之個人資訊</li>
+        <li><strong>刪除權</strong> (Right to Delete)：要求刪除本公司所持有之您的個人資訊</li>
+        <li><strong>拒絕出售權</strong> (Right to Opt-Out)：本公司<strong>不出售</strong>您的個人資訊予第三方</li>
+        <li><strong>不受歧視權</strong> (Right to Non-Discrimination)：行使隱私權利不會影響您所獲得的服務品質</li>
+      </ul>
+
+      <div class="legal-highlight">
+        <p>如欲行使上述任何權利，請寄送電子郵件至 <a href="mailto:contact@aiforseo.vip">contact@aiforseo.vip</a>，本公司將於收到申請後 30 日內回覆。</p>
+      </div>
+    </div>
+
+    <!-- Section 9 -->
+    <div class="legal-section">
+      <div class="legal-section-number">Section 9</div>
+      <h2>九、兒童隱私 (Children's Privacy)</h2>
+      <p>
+        本平台不針對未滿 16 歲之兒童提供服務，亦不會故意收集兒童之個人資料。若本公司發現意外收集了兒童之個人資料，將立即刪除。若您認為本公司可能持有兒童之個人資料，請聯繫 <a href="mailto:contact@aiforseo.vip">contact@aiforseo.vip</a>。
+      </p>
+    </div>
+
+    <!-- Section 10 -->
+    <div class="legal-section">
+      <div class="legal-section-number">Section 10</div>
+      <h2>十、跨境資料傳輸 (Cross-Border Data Transfer)</h2>
+      <p>
+        您的資料可能傳輸至您所在國家以外之地區（包括日本東京之 Supabase 伺服器及 Cloudflare 全球節點）。本公司確保所有跨境傳輸均符合適用法律之要求，並採取適當之安全措施（如標準契約條款 Standard Contractual Clauses）保護您的資料。
+      </p>
+    </div>
+
+    <!-- Section 11 -->
+    <div class="legal-section">
+      <div class="legal-section-number">Section 11</div>
+      <h2>十一、政策變更 (Policy Changes)</h2>
+      <p>
+        本公司保留隨時修改本政策之權利。若有重大變更，本公司將透過平台公告或電子郵件通知您。修改後之政策將於公布日起生效。建議您定期檢視本政策以了解最新內容。
+      </p>
+      <p>
+        若修改涉及您個人資料處理方式之重大變更，本公司將提供至少 30 日之通知期間，並於必要時重新取得您的同意。
+      </p>
+    </div>
+
+    <!-- Section 12 -->
+    <div class="legal-section">
+      <div class="legal-section-number">Section 12</div>
+      <h2>十二、聯絡我們 (Contact Us)</h2>
+      <div class="contact-box">
+        <h3>隱私權相關問題</h3>
+        <p><strong>小路光有限公司</strong>（統一編號：60475510）</p>
+        <p>負責人：許竣翔</p>
+        <p style="margin-top: 12px;">電子信箱 (Email)：</p>
+        <p><a href="mailto:contact@aiforseo.vip">contact@aiforseo.vip</a></p>
+        <p style="margin-top: 12px; color: var(--text-dim); font-size: 0.85rem;">
+          本公司將盡力於收到您的申請後 30 日內回覆。<br>
+          We will endeavor to respond to your request within 30 days of receipt.
+        </p>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ════ Footer ════ -->
+  <footer>
+    <div class="footer-inner">
+      <div>
+        <div class="footer-brand">SEOBAIKE</div>
+        <p class="footer-desc">
+          小路光有限公司（統編 60475510）<br>
+          台灣專利 TW-115100981<br>
+          Constraint-as-a-Service 平台<br>
+          讓 AI 在約束下運行。
+        </p>
+      </div>
+      <div class="footer-col">
+        <h4>平台</h4>
+        <ul>
+          <li><a href="/features">功能介紹</a></li>
+          <li><a href="/pricing">方案價格</a></li>
+          <li><a href="/docs">技術文件</a></li>
+          <li><a href="/login">登入平台</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>公司</h4>
+        <ul>
+          <li><a href="/about">關於我們</a></li>
+          <li><a href="/contact">聯絡方式</a></li>
+          <li><a href="/privacy">隱私權政策</a></li>
+          <li><a href="/terms">服務條款</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2024-2026 小路光有限公司. All rights reserved.</span>
+      <span>台灣專利 TW-115100981 | aiforseo.vip</span>
+    </div>
+  </footer>
+
+  <!-- ════ Page Views Tracking ════ -->
+  <script>
+  (function(){
+    try {
+      var cfg = window.__SEOBAIKE__ || {};
+      var sUrl = cfg.supabaseUrl || 'https://vmyrivxxibqydccurxug.supabase.co';
+      var sKey = cfg.anonKey || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZteXJpdnh4aWJxeWRjY3VyeHVnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzAwNDAwMjksImV4cCI6MjA4NTYxNjAyOX0.iBV-23LGdm_uKffAExgqSV34-NWoAyv8_-M_cJQZ8Gg';
+      fetch(sUrl + '/rest/v1/page_views', {
+        method: 'POST',
+        headers: { 'Content-Type':'application/json', 'apikey':sKey, 'Authorization':'Bearer '+sKey, 'Prefer':'return=minimal' },
+        body: JSON.stringify({ path: location.pathname, referrer: document.referrer || null, user_agent: navigator.userAgent })
+      }).catch(function(){});
+    } catch(e){}
+  })();
+  </script>
+</body>
+</html>

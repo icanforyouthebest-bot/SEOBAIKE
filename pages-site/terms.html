@@ -1,0 +1,761 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>服務條款 — SEOBAIKE | 小路光有限公司</title>
+  <meta name="description" content="SEOBAIKE 服務條款：CaaS 約束即服務平台之使用規範、API 用量限制、專利保護條款及責任限制。">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --orange: #e8850c;
+      --copper: #cc785c;
+      --green: #76b900;
+      --bg: #0a0a1a;
+      --bg-card: #12122a;
+      --bg-elevated: #1a1a3a;
+      --text: #e8e8f0;
+      --text-dim: #9999b0;
+      --border: #2a2a4a;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans TC", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+      min-height: 100vh;
+    }
+
+    a { color: var(--orange); text-decoration: none; transition: color 0.2s; }
+    a:hover { color: var(--copper); }
+
+    /* ── Navigation ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+      background: rgba(10, 10, 26, 0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-inner {
+      max-width: 1200px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 24px; height: 64px;
+    }
+    .nav-brand {
+      font-size: 1.3rem; font-weight: 800; color: var(--orange);
+      letter-spacing: 1px;
+    }
+    .nav-brand span { color: var(--green); }
+    .nav-links { display: flex; gap: 28px; list-style: none; }
+    .nav-links a {
+      color: var(--text-dim); font-size: 0.92rem; font-weight: 500;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover, .nav-links a.active { color: var(--orange); }
+    .nav-toggle { display: none; background: none; border: none; color: var(--text); font-size: 1.5rem; cursor: pointer; }
+
+    /* ── Hero ── */
+    .hero {
+      padding: 140px 24px 60px;
+      text-align: center;
+      background: linear-gradient(180deg, #0f0f2a 0%, var(--bg) 100%);
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: "";
+      position: absolute; top: 60px; left: 50%; transform: translateX(-50%);
+      width: 600px; height: 600px;
+      background: radial-gradient(circle, rgba(232,133,12,0.08) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero h1 {
+      font-size: clamp(2.2rem, 5vw, 3.2rem);
+      font-weight: 800;
+      background: linear-gradient(135deg, var(--orange), var(--copper));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 16px;
+    }
+    .hero p {
+      font-size: 1.1rem; color: var(--text-dim);
+      max-width: 600px; margin: 0 auto;
+    }
+    .hero .last-updated {
+      font-size: 0.88rem; color: var(--text-dim);
+      margin-top: 12px; opacity: 0.7;
+    }
+
+    /* ── Legal Content ── */
+    .legal-content {
+      max-width: 860px; margin: 0 auto;
+      padding: 60px 24px 80px;
+    }
+
+    .legal-section {
+      margin-bottom: 48px;
+    }
+
+    .legal-section-number {
+      display: inline-block;
+      font-size: 0.78rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 2px; color: var(--green);
+      margin-bottom: 8px;
+    }
+
+    .legal-section h2 {
+      font-size: 1.5rem; font-weight: 700; color: #fff;
+      margin-bottom: 20px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .legal-section h3 {
+      font-size: 1.15rem; font-weight: 600; color: var(--orange);
+      margin: 24px 0 12px;
+    }
+
+    .legal-section p {
+      color: var(--text-dim); font-size: 0.98rem;
+      line-height: 1.85; margin-bottom: 14px;
+    }
+
+    .legal-section ul, .legal-section ol {
+      color: var(--text-dim); font-size: 0.98rem;
+      line-height: 1.85; margin: 12px 0 16px 24px;
+    }
+
+    .legal-section li {
+      margin-bottom: 8px;
+    }
+
+    .legal-section li strong {
+      color: var(--text);
+    }
+
+    .legal-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 24px 28px;
+      margin: 20px 0;
+    }
+
+    .legal-card h4 {
+      color: var(--orange); font-size: 1rem; font-weight: 600;
+      margin-bottom: 10px;
+    }
+
+    .legal-card p, .legal-card ul {
+      color: var(--text-dim); font-size: 0.92rem; line-height: 1.8;
+    }
+
+    .legal-highlight {
+      background: rgba(232,133,12,0.08);
+      border-left: 3px solid var(--orange);
+      padding: 16px 20px;
+      border-radius: 0 8px 8px 0;
+      margin: 16px 0;
+    }
+
+    .legal-highlight p {
+      color: var(--text); font-size: 0.95rem;
+      margin-bottom: 0;
+    }
+
+    .legal-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 16px 0;
+      font-size: 0.92rem;
+    }
+
+    .legal-table th {
+      background: var(--bg-elevated);
+      color: var(--orange);
+      text-align: left;
+      padding: 12px 16px;
+      border: 1px solid var(--border);
+      font-weight: 600;
+    }
+
+    .legal-table td {
+      padding: 12px 16px;
+      border: 1px solid var(--border);
+      color: var(--text-dim);
+    }
+
+    /* ── Pricing Tier Cards ── */
+    .tier-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 20px;
+      margin: 24px 0;
+    }
+
+    .tier-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 28px 24px;
+      text-align: center;
+      transition: border-color 0.3s, transform 0.3s;
+    }
+
+    .tier-card:hover {
+      border-color: var(--orange);
+      transform: translateY(-3px);
+    }
+
+    .tier-card.featured {
+      border-color: var(--orange);
+      position: relative;
+    }
+
+    .tier-card.featured::before {
+      content: "熱門";
+      position: absolute; top: -10px; right: 16px;
+      background: var(--orange); color: #fff;
+      font-size: 0.72rem; font-weight: 700;
+      padding: 3px 10px; border-radius: 4px;
+    }
+
+    .tier-card .tier-name {
+      font-size: 1.1rem; font-weight: 700; color: #fff;
+      margin-bottom: 8px;
+    }
+
+    .tier-card .tier-calls {
+      font-size: 2rem; font-weight: 800; color: var(--orange);
+      margin-bottom: 4px;
+    }
+
+    .tier-card .tier-unit {
+      font-size: 0.82rem; color: var(--text-dim);
+      margin-bottom: 12px;
+    }
+
+    .tier-card .tier-desc {
+      font-size: 0.88rem; color: var(--text-dim);
+      line-height: 1.6;
+    }
+
+    .patent-warning {
+      background: linear-gradient(135deg, rgba(118,185,0,0.08), rgba(118,185,0,0.03));
+      border: 1px solid rgba(118,185,0,0.3);
+      border-radius: 12px;
+      padding: 24px 28px;
+      margin: 20px 0;
+    }
+
+    .patent-warning h4 {
+      color: var(--green); font-size: 1rem; font-weight: 700;
+      margin-bottom: 10px;
+    }
+
+    .patent-warning p {
+      color: var(--text-dim); font-size: 0.92rem; line-height: 1.8;
+    }
+
+    .patent-warning code {
+      background: rgba(118,185,0,0.12);
+      padding: 2px 8px;
+      border-radius: 4px;
+      color: var(--green);
+      font-family: "SF Mono", "Fira Code", monospace;
+      font-size: 0.88rem;
+    }
+
+    .contact-box {
+      background: linear-gradient(135deg, #12122a 0%, #1a1030 100%);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 36px 32px;
+      text-align: center;
+      margin-top: 48px;
+    }
+
+    .contact-box h3 {
+      color: #fff; font-size: 1.3rem; margin-bottom: 12px;
+    }
+
+    .contact-box p {
+      color: var(--text-dim); font-size: 0.95rem; margin-bottom: 4px;
+    }
+
+    .contact-box a {
+      font-size: 1.1rem; font-weight: 600;
+    }
+
+    /* ── Footer ── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 48px 24px 32px;
+      margin-top: 40px;
+    }
+    .footer-inner {
+      max-width: 1000px; margin: 0 auto;
+      display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 48px;
+    }
+    .footer-brand { font-size: 1.2rem; font-weight: 700; color: var(--orange); margin-bottom: 12px; }
+    .footer-desc { color: var(--text-dim); font-size: 0.9rem; line-height: 1.7; }
+    .footer-col h4 { color: #fff; font-size: 0.9rem; margin-bottom: 12px; }
+    .footer-col ul { list-style: none; }
+    .footer-col li { margin-bottom: 8px; }
+    .footer-col a { color: var(--text-dim); font-size: 0.88rem; }
+    .footer-col a:hover { color: var(--orange); }
+    .footer-bottom {
+      max-width: 1000px; margin: 32px auto 0;
+      padding-top: 24px; border-top: 1px solid var(--border);
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: 12px;
+      color: var(--text-dim); font-size: 0.82rem;
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .nav-links.open {
+        display: flex; flex-direction: column;
+        position: absolute; top: 64px; left: 0; right: 0;
+        background: rgba(10,10,26,0.97);
+        padding: 20px 24px; gap: 16px;
+        border-bottom: 1px solid var(--border);
+      }
+      .nav-toggle { display: block; }
+      .legal-content { padding: 40px 16px 60px; }
+      .legal-card { padding: 20px; }
+      .patent-warning { padding: 20px; }
+      .contact-box { padding: 28px 20px; }
+      .tier-grid { grid-template-columns: 1fr; }
+      .legal-table { font-size: 0.82rem; }
+      .legal-table th, .legal-table td { padding: 8px 10px; }
+      .footer-inner { grid-template-columns: 1fr; gap: 32px; }
+      .footer-bottom { flex-direction: column; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ════ Navigation ════ -->
+  <nav>
+    <div class="nav-inner">
+      <a href="/" class="nav-brand">SEO<span>BAIKE</span></a>
+      <button class="nav-toggle" onclick="document.querySelector('.nav-links').classList.toggle('open')" aria-label="選單">&#9776;</button>
+      <ul class="nav-links">
+        <li><a href="/">首頁</a></li>
+        <li><a href="/features">功能</a></li>
+        <li><a href="/pricing">方案</a></li>
+        <li><a href="/docs">文件</a></li>
+        <li><a href="/about">關於</a></li>
+        <li><a href="/contact">聯絡</a></li>
+        <li><a href="/login">登入</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- ════ Hero ════ -->
+  <section class="hero">
+    <h1>服務條款</h1>
+    <p>Terms of Service — SEOBAIKE CaaS 約束即服務平台之使用規範與條件。</p>
+    <div class="last-updated">最後更新日期 (Last Updated)：2026 年 2 月 15 日</div>
+  </section>
+
+  <!-- ════ Legal Content ════ -->
+  <div class="legal-content">
+
+    <!-- Section 1 -->
+    <div class="legal-section">
+      <div class="legal-section-number">Section 1</div>
+      <h2>一、總則 (General Provisions)</h2>
+      <p>
+        本服務條款（以下簡稱「本條款」）構成您（以下簡稱「使用者」或「您」）與<strong>小路光有限公司</strong>（統一編號：60475510，負責人：許竣翔，以下簡稱「本公司」）之間，就使用 SEOBAIKE 平台（網址：<strong>aiforseo.vip</strong>，以下簡稱「本平台」）所提供之 Constraint-as-a-Service (CaaS) 約束即服務及相關服務所訂立之契約。
+      </p>
+      <div class="legal-highlight">
+        <p>使用本平台即表示您已閱讀、理解並同意受本條款之約束。若您不同意本條款之任何內容，請立即停止使用本平台。若您代表法人實體使用本平台，即表示您有權代表該法人實體接受本條款。</p>
+      </div>
+    </div>
+
+    <!-- Section 2 -->
+    <div class="legal-section">
+      <div class="legal-section-number">Section 2</div>
+      <h2>二、名詞定義 (Definitions)</h2>
+      <ul>
+        <li><strong>CaaS (Constraint-as-a-Service)</strong>：約束即服務，本平台之核心商業模式，提供 AI 推理約束驗證服務</li>
+        <li><strong>L1-L4 約束路徑</strong>：由台灣專利 TW-115100981 定義之四層式產業分類約束架構，包含 L1 產業類別、L2 次分類、L3 製程作業、L4 原子節點</li>
+        <li><strong>check_inference_path()</strong>：專利核心函式，用於驗證 AI 推理路徑是否合法</li>
+        <li><strong>API</strong>：Application Programming Interface，應用程式介面，本平台提供之程式化存取方式</li>
+        <li><strong>API 呼叫 (API Call)</strong>：使用者透過 API 向本平台發出之單次請求</li>
+        <li><strong>使用者資料</strong>：使用者透過本平台上傳、輸入、傳輸或儲存之任何資料</li>
+      </ul>
+    </div>
+
+    <!-- Section 3 -->
+    <div class="legal-section">
+      <div class="legal-section-number">Section 3</div>
+      <h2>三、專利保護條款 (Patent Protection Clause)</h2>
+
+      <div class="patent-warning">
+        <h4>台灣專利 TW-115100981 保護聲明</h4>
+        <p>
+          本平台之核心技術「世界定義約束法用於 AI 推理」受台灣智慧財產局核准之專利 TW-115100981 保護。該專利涵蓋 L1-L4 四層約束架構、<code>check_inference_path()</code> 推理路徑驗證機制，以及基於多國產業分類碼（TSIC、NAICS、NACE、JSIC）之對齊系統。
+        </p>
+      </div>
+
+      <h3>3.1 專利授權範圍 (Patent License Scope)</h3>
+      <p>
+        使用者透過本平台使用 CaaS 服務時，本公司授予使用者非專屬、不可轉讓、可撤銷之有限授權，僅限於透過本平台 API 呼叫專利技術。此授權不包含以下行為：
+      </p>
+      <ol>
+        <li>逆向工程 (Reverse Engineering)、反編譯 (Decompilation) 或反組譯 (Disassembly) 本平台之任何元件</li>
+        <li>複製、修改或衍生本專利所涵蓋之 L1-L4 約束架構</li>
+        <li>在本平台以外之系統中實作 <code style="background:rgba(118,185,0,0.12);padding:2px 8px;border-radius:4px;color:var(--green);">check_inference_path()</code> 或功能等同之機制</li>
+        <li>將本平台技術轉授權 (Sublicense) 予第三方</li>
+        <li>繞過或試圖繞過本平台之約束驗證機制</li>
+      </ol>
+
+      <h3>3.2 侵權後果 (Infringement Consequences)</h3>
+      <p>
+        違反專利保護條款之使用者，本公司有權立即終止其服務、凍結帳號，並依據台灣專利法及相關法律追究民事及刑事責任。本公司保留向侵權方求償之一切法律權利。
+      </p>
+    </div>
+
+    <!-- Section 4 -->
+    <div class="legal-section">
+      <div class="legal-section-number">Section 4</div>
+      <h2>四、服務方案與 API 用量 (Service Tiers and API Usage)</h2>
+      <p>本平台提供以下服務方案：</p>
+
+      <div class="tier-grid">
+        <div class="tier-card">
+          <div class="tier-name">Free 免費方案</div>
+          <div class="tier-calls">1,000</div>
+          <div class="tier-unit">API 呼叫 / 月</div>
+          <div class="tier-desc">適合個人開發者及概念驗證。包含基本 L1-L4 約束驗證功能。</div>
+        </div>
+        <div class="tier-card featured">
+          <div class="tier-name">Professional 專業方案</div>
+          <div class="tier-calls">50,000</div>
+          <div class="tier-unit">API 呼叫 / 月</div>
+          <div class="tier-desc">適合中小型企業。包含進階分析、優先支援及完整稽核日誌。</div>
+        </div>
+        <div class="tier-card">
+          <div class="tier-name">Enterprise 企業方案</div>
+          <div class="tier-calls">Unlimited</div>
+          <div class="tier-unit">無限制 API 呼叫</div>
+          <div class="tier-desc">適合大型企業。包含專屬客戶經理、SLA 保證及客製化約束規則。</div>
+        </div>
+      </div>
+
+      <h3>4.1 公平使用政策 (Fair Use Policy)</h3>
+      <p>所有方案均適用以下公平使用政策：</p>
+      <ul>
+        <li><strong>速率限制 (Rate Limiting)</strong>：免費方案每分鐘 10 次、專業方案每分鐘 100 次、企業方案依合約約定</li>
+        <li><strong>單次請求限制</strong>：每次 API 請求之酬載 (payload) 不得超過 1MB</li>
+        <li><strong>禁止濫用</strong>：不得使用自動化工具大量傳送無意義之請求</li>
+        <li><strong>不得共享帳號</strong>：API 金鑰僅供帳號持有者使用，不得分享予第三方</li>
+      </ul>
+
+      <h3>4.2 超額使用 (Overage)</h3>
+      <p>
+        若使用者於計費週期內超過其方案之 API 呼叫限額，本平台將發送通知並於當月限額耗盡後暫停 API 服務，直到下一計費週期開始或使用者升級方案。企業方案之超額處理方式依個別合約約定。
+      </p>
+    </div>
+
+    <!-- Section 5 -->
+    <div class="legal-section">
+      <div class="legal-section-number">Section 5</div>
+      <h2>五、帳號與安全 (Accounts and Security)</h2>
+
+      <h3>5.1 帳號註冊 (Account Registration)</h3>
+      <p>使用者於註冊帳號時，應提供真實、準確且完整之資訊，並於資訊變更時即時更新。使用虛假身分或冒用他人身分註冊，本公司有權立即停權。</p>
+
+      <h3>5.2 帳號安全 (Account Security)</h3>
+      <ul>
+        <li>使用者應妥善保管其帳號密碼及 API 金鑰，不得分享予他人</li>
+        <li>如發現帳號遭未經授權之使用，應立即通知本公司</li>
+        <li>因使用者未善盡保管責任導致之損失，本公司不負賠償責任</li>
+        <li>本公司建議使用者定期更換密碼並啟用多因素驗證 (MFA)</li>
+      </ul>
+
+      <h3>5.3 帳號終止 (Account Termination)</h3>
+      <p>
+        使用者得隨時向本公司申請終止帳號。本公司於確認後 30 日內刪除帳號資料（法律要求保留之資料除外）。本公司亦有權因使用者違反本條款而終止其帳號。
+      </p>
+    </div>
+
+    <!-- Section 6 -->
+    <div class="legal-section">
+      <div class="legal-section-number">Section 6</div>
+      <h2>六、資料所有權 (Data Ownership)</h2>
+
+      <div class="legal-highlight">
+        <p><strong>使用者擁有其資料之所有權。</strong>您透過本平台上傳、傳輸或儲存之資料，其智慧財產權及所有權歸您所有。本公司不會主張對使用者資料之所有權。</p>
+      </div>
+
+      <h3>6.1 資料授權 (Data License)</h3>
+      <p>
+        為提供服務之必要，使用者授予本公司非專屬之有限授權，允許本公司處理、儲存及傳輸使用者資料，僅限於提供 CaaS 服務所需之範圍。此授權於使用者帳號終止後自動失效。
+      </p>
+
+      <h3>6.2 匿名化統計資料 (Anonymized Statistics)</h3>
+      <p>
+        本公司得將使用者資料進行去識別化處理後，用於產生整體統計資料（例如：API 使用量趨勢、產業分布等），以改善服務品質。此類資料不包含任何可識別個人之資訊。
+      </p>
+
+      <h3>6.3 資料可攜性 (Data Portability)</h3>
+      <p>
+        使用者得隨時透過 API 或聯繫客服，以結構化、常用且機器可讀之格式匯出其資料。
+      </p>
+    </div>
+
+    <!-- Section 7 -->
+    <div class="legal-section">
+      <div class="legal-section-number">Section 7</div>
+      <h2>七、服務水準 (Service Level)</h2>
+
+      <div class="legal-card">
+        <h4>服務水準目標 (Service Level Objective, SLO)</h4>
+        <p>
+          本平台以 <strong>99.9% 之月度正常運行時間</strong> (Monthly Uptime) 為服務水準目標。正常運行時間之計算排除以下情形：
+        </p>
+        <ul style="margin-top: 8px;">
+          <li>預先公告之計畫性維護（至少提前 48 小時通知）</li>
+          <li>不可抗力事件（Force Majeure）</li>
+          <li>使用者端之網路或設備問題</li>
+          <li>第三方服務商之中斷</li>
+        </ul>
+      </div>
+
+      <h3>7.1 維護通知 (Maintenance Notice)</h3>
+      <p>
+        計畫性維護將至少提前 48 小時透過平台公告及電子郵件通知。緊急維護（因安全漏洞等因素）不在此限，但本公司將盡力縮短維護時間並於事後公告說明。
+      </p>
+
+      <h3>7.2 服務中斷補償 (Service Credit)</h3>
+      <p>
+        若本平台於單一月份之正常運行時間低於 99.9%，付費使用者得依以下標準申請服務補償：
+      </p>
+      <table class="legal-table">
+        <tr>
+          <th>月度正常運行時間</th>
+          <th>服務補償比例</th>
+        </tr>
+        <tr>
+          <td>99.0% - 99.9%</td>
+          <td>當月費用之 10%</td>
+        </tr>
+        <tr>
+          <td>95.0% - 99.0%</td>
+          <td>當月費用之 25%</td>
+        </tr>
+        <tr>
+          <td>低於 95.0%</td>
+          <td>當月費用之 50%</td>
+        </tr>
+      </table>
+      <p>
+        服務補償以服務信用額度 (Service Credit) 方式發放，可折抵後續帳單，不提供現金退款。申請期限為事件發生後 30 日內。
+      </p>
+    </div>
+
+    <!-- Section 8 -->
+    <div class="legal-section">
+      <div class="legal-section-number">Section 8</div>
+      <h2>八、禁止行為 (Prohibited Activities)</h2>
+      <p>使用者不得從事以下行為：</p>
+      <ol>
+        <li><strong>違法行為</strong>：利用本平台從事任何違反中華民國法律或使用者所在地法律之行為</li>
+        <li><strong>侵害智慧財產權</strong>：侵害本公司或第三方之專利、商標、著作權或其他智慧財產權</li>
+        <li><strong>濫用 API</strong>：發送惡意請求、分散式阻斷服務攻擊 (DDoS)、注入攻擊或其他安全攻擊</li>
+        <li><strong>逆向工程</strong>：對本平台之軟體、API 或約束規則進行逆向工程、反編譯或反組譯</li>
+        <li><strong>未授權存取</strong>：試圖存取其他使用者之帳號、資料或本平台之內部系統</li>
+        <li><strong>規避限制</strong>：透過技術手段規避 API 速率限制、用量限額或其他平台限制</li>
+        <li><strong>轉售服務</strong>：未經本公司書面同意，將本平台服務轉售或轉授權予第三方</li>
+        <li><strong>有害內容</strong>：透過本平台傳播惡意軟體、病毒或其他有害程式碼</li>
+        <li><strong>繞過約束</strong>：試圖繞過或停用 L1-L4 推理約束驗證機制</li>
+      </ol>
+      <p>違反上述規定者，本公司有權立即停止其服務並保留法律追訴之權利。</p>
+    </div>
+
+    <!-- Section 9 -->
+    <div class="legal-section">
+      <div class="legal-section-number">Section 9</div>
+      <h2>九、免責聲明 (Disclaimer)</h2>
+
+      <h3>9.1 服務現狀提供 (As-Is Basis)</h3>
+      <p>
+        本平台以「現狀」(AS IS) 及「可用狀態」(AS AVAILABLE) 提供服務。在法律允許之最大範圍內，本公司不就本平台之適用性、可靠性、可用性、時效性、安全性或準確性提供任何明示或暗示之保證。
+      </p>
+
+      <h3>9.2 AI 推理結果 (AI Inference Results)</h3>
+      <p>
+        本平台提供之 CaaS 服務係對 AI 推理路徑進行約束驗證，並非對 AI 生成結果之正確性或品質提供保證。使用者應自行判斷 AI 生成結果之適用性。
+      </p>
+
+      <h3>9.3 責任限制 (Limitation of Liability)</h3>
+      <p>
+        在法律允許之最大範圍內，本公司對因使用本平台而導致之任何間接損害、附帶損害、特殊損害、懲罰性損害或衍生損害（包括但不限於營業損失、資料遺失、利潤損失）不負賠償責任。本公司之最大累計賠償責任，不超過使用者於損害發生前 12 個月內實際支付予本公司之服務費用總額。
+      </p>
+    </div>
+
+    <!-- Section 10 -->
+    <div class="legal-section">
+      <div class="legal-section-number">Section 10</div>
+      <h2>十、智慧財產權 (Intellectual Property)</h2>
+      <p>
+        本平台及其所有內容（包括但不限於軟體、程式碼、設計、文字、圖像、標誌、專利技術）均為本公司或其授權者之智慧財產，受中華民國著作權法、專利法、商標法及國際智慧財產權條約之保護。
+      </p>
+      <p>
+        「SEOBAIKE」、「小路光」及相關標誌為本公司之商標。未經本公司書面同意，不得使用。
+      </p>
+    </div>
+
+    <!-- Section 11 -->
+    <div class="legal-section">
+      <div class="legal-section-number">Section 11</div>
+      <h2>十一、條款變更 (Amendments)</h2>
+      <p>
+        本公司保留隨時修改本條款之權利。修改後之條款將於本頁面公布並標示更新日期。重大變更將透過平台公告或電子郵件通知。
+      </p>
+      <p>
+        修改後繼續使用本平台即視為同意修改後之條款。若您不同意修改後之條款，應停止使用本平台並依本條款申請終止帳號。
+      </p>
+    </div>
+
+    <!-- Section 12 -->
+    <div class="legal-section">
+      <div class="legal-section-number">Section 12</div>
+      <h2>十二、準據法與管轄法院 (Governing Law and Jurisdiction)</h2>
+
+      <div class="legal-card">
+        <h4>準據法 (Governing Law)</h4>
+        <p>
+          本條款之解釋、適用及爭議之處理，均以<strong>中華民國（台灣）法律</strong>為準據法。
+        </p>
+      </div>
+
+      <div class="legal-card">
+        <h4>管轄法院 (Jurisdiction)</h4>
+        <p>
+          因本條款所生之任何爭議，雙方同意以<strong>台灣台北地方法院</strong>為第一審管轄法院。若使用者為消費者，依消費者保護法規定，得由其住所地法院管轄。
+        </p>
+      </div>
+
+      <h3>12.1 爭議解決程序 (Dispute Resolution)</h3>
+      <p>雙方就本條款發生爭議時，應依以下順序處理：</p>
+      <ol>
+        <li><strong>協商</strong> (Negotiation)：雙方先以誠信原則進行協商，期間 30 日</li>
+        <li><strong>調解</strong> (Mediation)：協商未果者，提交台北市商業仲裁中心調解</li>
+        <li><strong>訴訟</strong> (Litigation)：調解未果者，向台灣台北地方法院提起訴訟</li>
+      </ol>
+    </div>
+
+    <!-- Section 13 -->
+    <div class="legal-section">
+      <div class="legal-section-number">Section 13</div>
+      <h2>十三、一般條款 (General Terms)</h2>
+
+      <h3>13.1 完整協議 (Entire Agreement)</h3>
+      <p>
+        本條款（連同隱私權政策）構成使用者與本公司間就本平台服務之完整協議，取代雙方先前就同一事項所為之一切口頭或書面約定。
+      </p>
+
+      <h3>13.2 可分割性 (Severability)</h3>
+      <p>
+        若本條款之任何條款被認定為無效或不可執行，該條款應在法律允許之最大範圍內進行調整，其餘條款仍然有效。
+      </p>
+
+      <h3>13.3 權利不棄權 (No Waiver)</h3>
+      <p>
+        本公司未行使或延遲行使本條款之任何權利，不構成對該權利之拋棄。
+      </p>
+
+      <h3>13.4 轉讓 (Assignment)</h3>
+      <p>
+        使用者不得將本條款之權利或義務轉讓予第三方。本公司得於公司合併、收購或資產轉讓時，將本條款轉讓予繼受方。
+      </p>
+
+      <h3>13.5 不可抗力 (Force Majeure)</h3>
+      <p>
+        因天災、戰爭、恐怖攻擊、流行病、政府行為、網路中斷或其他非本公司合理控制範圍內之事件，導致本公司無法履行本條款之義務時，本公司不負違約責任。
+      </p>
+    </div>
+
+    <!-- Section 14 -->
+    <div class="legal-section">
+      <div class="legal-section-number">Section 14</div>
+      <h2>十四、聯絡資訊 (Contact Information)</h2>
+      <div class="contact-box">
+        <h3>服務條款相關問題</h3>
+        <p><strong>小路光有限公司</strong>（統一編號：60475510）</p>
+        <p>負責人：許竣翔</p>
+        <p style="margin-top: 12px;">電子信箱 (Email)：</p>
+        <p><a href="mailto:contact@aiforseo.vip">contact@aiforseo.vip</a></p>
+        <p style="margin-top: 16px;">
+          <a href="/privacy" style="font-size: 0.92rem;">隱私權政策 (Privacy Policy)</a>
+        </p>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ════ Footer ════ -->
+  <footer>
+    <div class="footer-inner">
+      <div>
+        <div class="footer-brand">SEOBAIKE</div>
+        <p class="footer-desc">
+          小路光有限公司（統編 60475510）<br>
+          台灣專利 TW-115100981<br>
+          Constraint-as-a-Service 平台<br>
+          讓 AI 在約束下運行。
+        </p>
+      </div>
+      <div class="footer-col">
+        <h4>平台</h4>
+        <ul>
+          <li><a href="/features">功能介紹</a></li>
+          <li><a href="/pricing">方案價格</a></li>
+          <li><a href="/docs">技術文件</a></li>
+          <li><a href="/login">登入平台</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>公司</h4>
+        <ul>
+          <li><a href="/about">關於我們</a></li>
+          <li><a href="/contact">聯絡方式</a></li>
+          <li><a href="/privacy">隱私權政策</a></li>
+          <li><a href="/terms">服務條款</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2024-2026 小路光有限公司. All rights reserved.</span>
+      <span>台灣專利 TW-115100981 | aiforseo.vip</span>
+    </div>
+  </footer>
+
+  <!-- ════ Page Views Tracking ════ -->
+  <script>
+  (function(){
+    try {
+      var cfg = window.__SEOBAIKE__ || {};
+      var sUrl = cfg.supabaseUrl || 'https://vmyrivxxibqydccurxug.supabase.co';
+      var sKey = cfg.anonKey || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZteXJpdnh4aWJxeWRjY3VyeHVnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzAwNDAwMjksImV4cCI6MjA4NTYxNjAyOX0.iBV-23LGdm_uKffAExgqSV34-NWoAyv8_-M_cJQZ8Gg';
+      fetch(sUrl + '/rest/v1/page_views', {
+        method: 'POST',
+        headers: { 'Content-Type':'application/json', 'apikey':sKey, 'Authorization':'Bearer '+sKey, 'Prefer':'return=minimal' },
+        body: JSON.stringify({ path: location.pathname, referrer: document.referrer || null, user_agent: navigator.userAgent })
+      }).catch(function(){});
+    } catch(e){}
+  })();
+  </script>
+</body>
+</html>

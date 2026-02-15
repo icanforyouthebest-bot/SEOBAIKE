@@ -52,6 +52,8 @@ export default {
       '/dashboard': 'dashboard.html',
       '/ecosystem': 'ecosystem.html',
       '/marketing': 'marketing.html',
+      '/privacy': 'privacy.html',
+      '/terms': 'terms.html',
     }
     const cleanPath = path.endsWith('/') && path !== '/' ? path.slice(0, -1) : path
     const pageFile = SITE_PAGES[cleanPath]
@@ -79,7 +81,7 @@ export default {
       return new Response(`User-agent: *\nAllow: /\nSitemap: https://aiforseo.vip/sitemap.xml\n`, { headers: { 'Content-Type': 'text/plain', 'Cache-Control': 'public, max-age=86400' } })
     }
     if (path === '/sitemap.xml') {
-      const pages = ['', '/about', '/features', '/pricing', '/docs', '/contact', '/blog', '/login', '/dashboard', '/ecosystem', '/marketing']
+      const pages = ['', '/about', '/features', '/pricing', '/docs', '/contact', '/blog', '/login', '/dashboard', '/ecosystem', '/marketing', '/privacy', '/terms']
       const urls = pages.map(p => `  <url><loc>https://aiforseo.vip${p}</loc><lastmod>2026-02-15</lastmod><changefreq>weekly</changefreq><priority>${p === '' ? '1.0' : '0.8'}</priority></url>`).join('\n')
       return new Response(`<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls}\n</urlset>`, { headers: { 'Content-Type': 'application/xml', 'Cache-Control': 'public, max-age=86400' } })
     }
