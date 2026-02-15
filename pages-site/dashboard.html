@@ -104,12 +104,14 @@ body { font-family: 'Segoe UI', sans-serif; background: #0a0a1a; color: #eee; mi
 
 <div class="footer">SEOBAIKE — 專利 115100981 — 小路光有限公司 — AI FOR SEO</div>
 
-<script src="seobaike-config.js"></script>
+<script src="/seobaike-config.js"></script>
 <script>
-const EP = (window.__SEOBAIKE__ && window.__SEOBAIKE__.supabaseUrl || "") + "/functions/v1/nvidia-boss";
-const GW = (window.__SEOBAIKE__ && window.__SEOBAIKE__.supabaseUrl || "") + "/functions/v1/ai-gateway";
-const KEY = (window.__SEOBAIKE__ && window.__SEOBAIKE__.anonKey) || "";
-const HDR = { "Authorization": "Bearer " + KEY, "Content-Type": "application/json" };
+const SUPA_URL = (window.__SEOBAIKE__ && window.__SEOBAIKE__.supabaseUrl) || "";
+const SUPA_KEY = (window.__SEOBAIKE__ && window.__SEOBAIKE__.anonKey) || "";
+const EP = SUPA_URL + "/functions/v1/nvidia-boss";
+const GW = SUPA_URL + "/functions/v1/ai-gateway";
+const HDR = { "Authorization": "Bearer " + SUPA_KEY, "Content-Type": "application/json" };
+const REST_HDR = { "apikey": SUPA_KEY, "Authorization": "Bearer " + SUPA_KEY };
 
 let nvOk=0, nvFail=0, gwOk=0, gwFail=0, round=0;
 const msgs = ["system status","patent check","L1 L2 L3 L4 count","constraint rules","audit report","binding list","allow industries","path check stats","performance","health"];
@@ -127,7 +129,7 @@ document.getElementById("routeGrid").innerHTML = routes.map(r =>
 
 function updateNum(id, val) {
   const el = document.getElementById(id);
-  if (el.textContent !== String(val)) {
+  if (el && el.textContent !== String(val)) {
     el.textContent = val;
     el.classList.add("changed");
     setTimeout(() => el.classList.remove("changed"), 600);
@@ -146,6 +148,65 @@ function addLog(text, cls) {
 setInterval(() => {
   document.getElementById("clock").textContent = new Date().toLocaleString("zh-TW");
 }, 1000);
+
+// 直接從 Supabase REST API 讀取真實節點數據
+async function loadRealData() {
+  try {
+    const queries = [
+      fetch(SUPA_URL + "/rest/v1/l1_categories?select=id", { headers: REST_HDR }),
+      fetch(SUPA_URL + "/rest/v1/l2_subcategories?select=id", { headers: REST_HDR }),
+      fetch(SUPA_URL + "/rest/v1/l3_processes?select=id", { headers: REST_HDR }),
+      fetch(SUPA_URL + "/rest/v1/l4_nodes?select=id", { headers: REST_HDR }),
+      fetch(SUPA_URL + "/rest/v1/inference_audit_trail?select=id&order=created_at.desc&limit=1", { headers: { ...REST_HDR, "Prefer": "count=exact" } }),
+      fetch(SUPA_URL + "/rest/v1/constraint_rules?select=id&effect=eq.allow", { headers: REST_HDR }),
+      fetch(SUPA_URL + "/rest/v1/constraint_rules?select=id&effect=eq.deny", { headers: REST_HDR }),
+    ];
+    const results = await Promise.allSettled(queries);
+
+    if (results[0].status === 'fulfilled' && results[0].value.ok) {
+      const l1 = await results[0].value.json();
+      updateNum("d-l1", l1.length);
+    }
+    if (results[1].status === 'fulfilled' && results[1].value.ok) {
+      const l2 = await results[1].value.json();
+      updateNum("d-l2", l2.length);
+    }
+    if (results[2].status === 'fulfilled' && results[2].value.ok) {
+      const l3 = await results[2].value.json();
+      updateNum("d-l3", l3.length);
+    }
+    if (results[3].status === 'fulfilled' && results[3].value.ok) {
+      const l4 = await results[3].value.json();
+      updateNum("d-l4", l4.length);
+    }
+    if (results[4].status === 'fulfilled') {
+      const countHeader = results[4].value.headers.get('content-range');
+      if (countHeader) {
+        const total = countHeader.split('/')[1];
+        if (total && total !== '*') updateNum("d-audit", total);
+      } else {
+        const audit = await results[4].value.json();
+        if (Array.isArray(audit)) updateNum("d-audit", audit.length > 0 ? audit.length + '+' : '0');
+      }
+    }
+    if (results[5].status === 'fulfilled' && results[5].value.ok) {
+      const allow = await results[5].value.json();
+      updateNum("d-allow", allow.length);
+    }
+    if (results[6].status === 'fulfilled' && results[6].value.ok) {
+      const deny = await results[6].value.json();
+      updateNum("d-deny", deny.length);
+    }
+
+    addLog("Supabase REST 直連：節點數據已載入", "ok");
+    document.getElementById("status").textContent = "資料庫已連線";
+  } catch (err) {
+    addLog("REST 直連失敗: " + err.message + " — 切換到引擎模式", "err");
+  }
+}
+
+// 頁面載入時先讀真實數據
+loadRealData();
 
 async function tick() {
   round++;
@@ -167,10 +228,10 @@ async function tick() {
         updateNum("d-l2", data.real_data.l2_count);
         updateNum("d-l3", data.real_data.l3_count);
         updateNum("d-l4", data.real_data.l4_count);
-        updateNum("d-checks", data.real_data.total_path_checks);
-        updateNum("d-audit", data.real_data.total_audit_entries);
-        updateNum("d-allow", data.real_data.allow_paths);
-        updateNum("d-deny", data.real_data.deny_paths);
+        if (data.real_data.total_path_checks) updateNum("d-checks", data.real_data.total_path_checks);
+        if (data.real_data.total_audit_entries) updateNum("d-audit", data.real_data.total_audit_entries);
+        if (data.real_data.allow_paths) updateNum("d-allow", data.real_data.allow_paths);
+        if (data.real_data.deny_paths) updateNum("d-deny", data.real_data.deny_paths);
       }
     } else { nvFail++; document.getElementById("nv-status").className = "status fail"; addLog("主引擎 #" + round + " FAIL: " + JSON.stringify(data).substring(0,60), "err"); }
   })().catch(e => { nvFail++; addLog("主引擎 #" + round + " ERROR: " + e.message, "err"); });
@@ -206,7 +267,7 @@ async function tick() {
 }
 
 tick();
-setInterval(tick, 5000);
+setInterval(tick, 15000);
 </script>
 </body>
 </html>

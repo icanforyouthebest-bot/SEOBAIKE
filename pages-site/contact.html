@@ -478,32 +478,32 @@
           <h3>傳送訊息</h3>
           <p class="form-desc">填寫以下表單，我們的團隊會盡快與您聯繫。</p>
 
-          <form onsubmit="event.preventDefault(); document.getElementById('form-success').style.display='block'; this.style.display='none';">
+          <form id="contactForm">
             <div class="form-row">
               <div class="form-group">
                 <label>姓名 <span class="required">*</span></label>
-                <input type="text" placeholder="您的姓名" required>
+                <input type="text" id="cf-name" placeholder="您的姓名" required>
               </div>
               <div class="form-group">
                 <label>公司名稱</label>
-                <input type="text" placeholder="公司或組織名稱">
+                <input type="text" id="cf-company" placeholder="公司或組織名稱">
               </div>
             </div>
 
             <div class="form-row">
               <div class="form-group">
                 <label>電子信箱 <span class="required">*</span></label>
-                <input type="email" placeholder="your@email.com" required>
+                <input type="email" id="cf-email" placeholder="your@email.com" required>
               </div>
               <div class="form-group">
                 <label>聯絡電話</label>
-                <input type="tel" placeholder="09xx-xxx-xxx">
+                <input type="tel" id="cf-phone" placeholder="09xx-xxx-xxx">
               </div>
             </div>
 
             <div class="form-group">
               <label>詢問類別 <span class="required">*</span></label>
-              <select required>
+              <select id="cf-category" required>
                 <option value="" disabled selected>請選擇</option>
                 <option value="product">產品諮詢</option>
                 <option value="pricing">方案與價格</option>
@@ -516,10 +516,12 @@
 
             <div class="form-group">
               <label>訊息內容 <span class="required">*</span></label>
-              <textarea placeholder="請描述您的需求或問題..." required></textarea>
+              <textarea id="cf-message" placeholder="請描述您的需求或問題..." required></textarea>
             </div>
 
-            <button type="submit" class="form-submit">送出訊息</button>
+            <div id="cf-error" style="display:none;padding:10px 16px;border-radius:8px;margin-bottom:12px;font-size:0.9rem;background:rgba(255,68,68,0.1);border:1px solid rgba(255,68,68,0.3);color:#ff6b6b;"></div>
+
+            <button type="submit" class="form-submit" id="cf-submit">送出訊息</button>
             <p class="form-note">帶 <span style="color:var(--orange);">*</span> 為必填欄位。我們重視您的隱私，不會將您的資料提供給第三方。</p>
           </form>
 
@@ -701,8 +703,10 @@
     </div>
   </footer>
 
-  <!-- ════ Live status script ════ -->
+  <script src="/seobaike-config.js"></script>
+  <!-- ════ Live status + Contact form script ════ -->
   <script>
+    // 營業時間狀態
     (function() {
       var now = new Date();
       var day = now.getDay();
@@ -716,6 +720,66 @@
         badge.className = 'status status-closed';
         text.textContent = '休息中';
       }
+    })();
+
+    // 聯絡表單 → Supabase
+    (function() {
+      var SUPA_URL = (window.__SEOBAIKE__ && window.__SEOBAIKE__.supabaseUrl) || '';
+      var SUPA_KEY = (window.__SEOBAIKE__ && window.__SEOBAIKE__.anonKey) || '';
+      var form = document.getElementById('contactForm');
+      var errEl = document.getElementById('cf-error');
+      var submitBtn = document.getElementById('cf-submit');
+
+      form.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        errEl.style.display = 'none';
+
+        var payload = {
+          name: document.getElementById('cf-name').value.trim(),
+          company: document.getElementById('cf-company').value.trim() || null,
+          email: document.getElementById('cf-email').value.trim(),
+          phone: document.getElementById('cf-phone').value.trim() || null,
+          category: document.getElementById('cf-category').value,
+          message: document.getElementById('cf-message').value.trim()
+        };
+
+        if (!payload.name || !payload.email || !payload.category || !payload.message) {
+          errEl.textContent = '請填寫所有必填欄位';
+          errEl.style.display = 'block';
+          return;
+        }
+
+        submitBtn.disabled = true;
+        submitBtn.textContent = '送出中...';
+
+        try {
+          var res = await fetch(SUPA_URL + '/rest/v1/contact_submissions', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'apikey': SUPA_KEY,
+              'Authorization': 'Bearer ' + SUPA_KEY,
+              'Prefer': 'return=minimal'
+            },
+            body: JSON.stringify(payload)
+          });
+
+          if (res.ok || res.status === 201) {
+            form.style.display = 'none';
+            document.getElementById('form-success').style.display = 'block';
+          } else {
+            var data = await res.json().catch(function() { return {}; });
+            errEl.textContent = data.message || '送出失敗，請稍後再試或直接來電 04-7776342';
+            errEl.style.display = 'block';
+          }
+        } catch (err) {
+          errEl.textContent = '網路錯誤，請稍後再試或直接來電 04-7776342';
+          errEl.style.display = 'block';
+        }
+
+        submitBtn.disabled = false;
+        submitBtn.textContent = '送出訊息';
+      });
     })();
   </script>
 

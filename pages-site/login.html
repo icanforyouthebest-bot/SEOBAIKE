@@ -327,10 +327,204 @@
     &copy; 2026 <span>小路光有限公司</span>（統編 60475510）— 專利 TW-115100981「世界定義約束法用於AI推理」
   </footer>
 
+  <script src="/seobaike-config.js"></script>
   <script>
     document.getElementById('hamburger').addEventListener('click', function () {
       document.getElementById('navLinks').classList.toggle('open');
     });
+
+    // Supabase Auth
+    const SUPA_URL = (window.__SEOBAIKE__ && window.__SEOBAIKE__.supabaseUrl) || '';
+    const SUPA_KEY = (window.__SEOBAIKE__ && window.__SEOBAIKE__.anonKey) || '';
+
+    const loginForm = document.querySelector('form');
+    const btnPrimary = document.querySelector('.btn-primary');
+    const btnGoogle = document.querySelector('.btn-outline');
+
+    // 顯示訊息
+    function showMsg(text, isError) {
+      let msgEl = document.getElementById('login-msg');
+      if (!msgEl) {
+        msgEl = document.createElement('div');
+        msgEl.id = 'login-msg';
+        msgEl.style.cssText = 'text-align:center;padding:12px;border-radius:8px;margin-bottom:16px;font-size:0.9rem;';
+        loginForm.parentNode.insertBefore(msgEl, loginForm);
+      }
+      msgEl.style.display = 'block';
+      msgEl.style.background = isError ? 'rgba(255,68,68,0.1)' : 'rgba(118,185,0,0.1)';
+      msgEl.style.border = isError ? '1px solid rgba(255,68,68,0.3)' : '1px solid rgba(118,185,0,0.3)';
+      msgEl.style.color = isError ? '#ff6b6b' : '#76b900';
+      msgEl.textContent = text;
+    }
+
+    // Email + Password 登入
+    loginForm.addEventListener('submit', async function(e) {
+      e.preventDefault();
+      const email = document.getElementById('email').value.trim();
+      const password = document.getElementById('password').value;
+
+      if (!email || !password) {
+        showMsg('請輸入電子郵件和密碼', true);
+        return;
+      }
+
+      btnPrimary.disabled = true;
+      btnPrimary.textContent = '登入中...';
+
+      try {
+        const res = await fetch(SUPA_URL + '/auth/v1/token?grant_type=password', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'apikey': SUPA_KEY
+          },
+          body: JSON.stringify({ email, password })
+        });
+        const data = await res.json();
+
+        if (res.ok && data.access_token) {
+          localStorage.setItem('sb-access-token', data.access_token);
+          localStorage.setItem('sb-refresh-token', data.refresh_token);
+          localStorage.setItem('sb-user', JSON.stringify(data.user));
+          showMsg('登入成功！正在跳轉...', false);
+          setTimeout(function() { window.location.href = '/dashboard'; }, 800);
+        } else {
+          const msg = data.error_description || data.msg || data.error || '登入失敗';
+          if (msg.includes('Invalid login')) {
+            showMsg('電子郵件或密碼錯誤', true);
+          } else if (msg.includes('Email not confirmed')) {
+            showMsg('請先至信箱確認帳號', true);
+          } else {
+            showMsg(msg, true);
+          }
+        }
+      } catch (err) {
+        showMsg('網路錯誤，請稍後再試', true);
+      }
+
+      btnPrimary.disabled = false;
+      btnPrimary.textContent = '登入';
+    });
+
+    // Google OAuth 登入
+    btnGoogle.addEventListener('click', function() {
+      const redirectTo = window.location.origin + '/dashboard';
+      const googleUrl = SUPA_URL + '/auth/v1/authorize?provider=google&redirect_to=' + encodeURIComponent(redirectTo);
+      window.location.href = googleUrl;
+    });
+
+    // 註冊連結
+    document.querySelector('.login-footer a').addEventListener('click', function(e) {
+      e.preventDefault();
+      const card = document.querySelector('.login-card');
+      const header = card.querySelector('.login-header p');
+      const isLogin = header.textContent.includes('登入');
+
+      if (isLogin) {
+        header.textContent = '建立您的 SEOBAIKE 帳號';
+        btnPrimary.textContent = '註冊';
+        document.querySelector('.login-footer').innerHTML = '已有帳號？ <a href="#">返回登入</a>';
+        loginForm.dataset.mode = 'signup';
+      } else {
+        header.textContent = '登入您的 AI 約束推理平台帳號';
+        btnPrimary.textContent = '登入';
+        document.querySelector('.login-footer').innerHTML = '還沒有帳號？ <a href="#">立即註冊</a>';
+        loginForm.dataset.mode = 'login';
+      }
+
+      // 重新綁定註冊連結
+      document.querySelector('.login-footer a').addEventListener('click', arguments.callee);
+    });
+
+    // 攔截 form submit，如果是 signup mode
+    const origSubmit = loginForm.onsubmit;
+    loginForm.addEventListener('submit', async function(e) {
+      if (loginForm.dataset.mode !== 'signup') return;
+      e.preventDefault();
+      e.stopImmediatePropagation();
+
+      const email = document.getElementById('email').value.trim();
+      const password = document.getElementById('password').value;
+
+      if (!email || !password) {
+        showMsg('請輸入電子郵件和密碼', true);
+        return;
+      }
+      if (password.length < 6) {
+        showMsg('密碼至少需要 6 個字元', true);
+        return;
+      }
+
+      btnPrimary.disabled = true;
+      btnPrimary.textContent = '註冊中...';
+
+      try {
+        const res = await fetch(SUPA_URL + '/auth/v1/signup', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'apikey': SUPA_KEY
+          },
+          body: JSON.stringify({ email, password })
+        });
+        const data = await res.json();
+
+        if (res.ok) {
+          if (data.access_token) {
+            localStorage.setItem('sb-access-token', data.access_token);
+            showMsg('註冊成功！正在跳轉...', false);
+            setTimeout(function() { window.location.href = '/dashboard'; }, 800);
+          } else {
+            showMsg('註冊成功！請至信箱確認帳號後再登入。', false);
+          }
+        } else {
+          const msg = data.error_description || data.msg || data.error || '註冊失敗';
+          if (msg.includes('already registered')) {
+            showMsg('此電子郵件已註冊，請直接登入', true);
+          } else {
+            showMsg(msg, true);
+          }
+        }
+      } catch (err) {
+        showMsg('網路錯誤，請稍後再試', true);
+      }
+
+      btnPrimary.disabled = false;
+      btnPrimary.textContent = '註冊';
+    }, true);
+
+    // 忘記密碼
+    document.querySelector('.form-meta a').addEventListener('click', async function(e) {
+      e.preventDefault();
+      const email = document.getElementById('email').value.trim();
+      if (!email) {
+        showMsg('請先輸入電子郵件，再點擊忘記密碼', true);
+        return;
+      }
+      try {
+        const res = await fetch(SUPA_URL + '/auth/v1/recover', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'apikey': SUPA_KEY
+          },
+          body: JSON.stringify({ email })
+        });
+        if (res.ok) {
+          showMsg('密碼重設信已寄出，請查收信箱', false);
+        } else {
+          showMsg('無法寄出重設信，請確認電子郵件', true);
+        }
+      } catch (err) {
+        showMsg('網路錯誤，請稍後再試', true);
+      }
+    });
+
+    // 如果已登入，自動跳轉
+    if (localStorage.getItem('sb-access-token')) {
+      showMsg('您已登入，正在跳轉到儀表板...', false);
+      setTimeout(function() { window.location.href = '/dashboard'; }, 500);
+    }
   </script>
 </body>
 </html>
