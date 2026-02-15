@@ -207,13 +207,17 @@ export default {
       }))
       const online = engines.filter(e => e.status === 'online').length
       const totalModels = engines.reduce((sum, e) => sum + e.models, 0)
-      return json(200, {
-        service: 'SEOBAIKE CaaS', version: '5.0.0',
-        total_engines: engines.length, online_engines: online,
-        total_models: totalModels,
-        uptime: '99.9%',
-        engines,
-      })
+      const data = { service: 'SEOBAIKE CaaS', version: '5.0.0', total_engines: engines.length, online_engines: online, total_models: totalModels, uptime: '99.9%', engines }
+
+      // 瀏覽器訪問 → 漂亮 HTML 頁面
+      const accept = request.headers.get('Accept') || ''
+      if (accept.includes('text/html')) {
+        const engineRows = engines.map(e => `<tr><td><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:${e.status==='online'?'#4ade80':'#888'};margin-right:8px"></span>${e.engine}</td><td>${e.models}</td><td style="color:${e.status==='online'?'#4ade80':'#888'};font-weight:700">${e.status.toUpperCase()}</td><td>${e.speed||'—'}</td><td style="color:#aaa">${e.capability}</td></tr>`).join('')
+        const html = `<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>SEOBAIKE — Engine Status</title><style>*{margin:0;padding:0;box-sizing:border-box}body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#0a0a1a;color:#e0e0e8;min-height:100vh;padding:40px 20px}.container{max-width:1000px;margin:0 auto}.header{text-align:center;margin-bottom:40px}.header h1{font-size:28px;font-weight:800;color:#fff;margin-bottom:8px}.header h1 span{color:#e8850c}.header p{color:#888;font-size:14px}.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:32px}.stat{background:linear-gradient(135deg,#16213e,#1a1a2e);border:1px solid #333;border-radius:12px;padding:20px;text-align:center}.stat .num{font-size:32px;font-weight:800;color:#e8850c}.stat .lbl{font-size:12px;color:#888;margin-top:4px}table{width:100%;border-collapse:collapse;background:#12122a;border-radius:12px;overflow:hidden;border:1px solid #333}th{background:#16213e;color:#e8850c;font-size:12px;font-weight:600;text-align:left;padding:12px 16px;text-transform:uppercase;letter-spacing:0.5px}td{padding:10px 16px;border-top:1px solid #1a1a35;font-size:14px}tr:hover td{background:rgba(232,133,12,0.03)}.footer{text-align:center;margin-top:32px;color:#555;font-size:12px}.footer a{color:#e8850c}@media(max-width:768px){.stats{grid-template-columns:repeat(2,1fr)}}</style></head><body><div class="container"><div class="header"><h1>SEO<span>BAIKE</span> Engine Status</h1><p>Real-time AI engine monitoring — ${new Date().toISOString()}</p></div><div class="stats"><div class="stat"><div class="num">${engines.length}</div><div class="lbl">Total Engines</div></div><div class="stat"><div class="num">${online}</div><div class="lbl">Online</div></div><div class="stat"><div class="num">${totalModels.toLocaleString()}</div><div class="lbl">Models</div></div><div class="stat"><div class="num">99.9%</div><div class="lbl">Uptime</div></div></div><table><thead><tr><th>Engine</th><th>Models</th><th>Status</th><th>Speed</th><th>Capability</th></tr></thead><tbody>${engineRows}</tbody></table><div class="footer"><p>SEOBAIKE CaaS v5.0.0 — <a href="https://aiforseo.vip">aiforseo.vip</a></p></div></div></body></html>`
+        return new Response(html, { status: 200, headers: { ...SITE_SECURITY_HEADERS, 'Content-Type': 'text/html; charset=utf-8', 'Cache-Control': 'no-cache' } })
+      }
+
+      return json(200, data)
     }
 
     // ── /api/ai/models — 全供應商模型列表 ──
@@ -649,12 +653,17 @@ export default {
 
     if (request.method !== 'POST') return json(405, { error: 'Method not allowed' })
 
-    // ── Rate Limiting — 公開 API 每 IP 每端點 5 秒冷卻 ──
-    const rateLimitPaths = ['/api/ai/chat', '/api/ai/smart', '/api/widget-chat', '/api/v1/check', '/api/v1/inference', '/api/checkout', '/api/ai/router', '/api/ai/search', '/api/ai/content', '/api/bot/command', '/api/team/dispatch', '/api/marketplace/purchase', '/api/marketplace/create', '/api/marketplace/review']
-    if (rateLimitPaths.includes(path)) {
-      const clientIp = request.headers.get('CF-Connecting-IP') || 'unknown'
+    // ── Rate Limiting ──
+    const strictRatePaths = ['/api/ai/chat', '/api/ai/smart', '/api/v1/check', '/api/v1/inference', '/api/checkout', '/api/ai/router', '/api/ai/search', '/api/ai/content', '/api/bot/command', '/api/team/dispatch', '/api/marketplace/purchase', '/api/marketplace/create', '/api/marketplace/review']
+    const clientIp = request.headers.get('CF-Connecting-IP') || 'unknown'
+    if (strictRatePaths.includes(path)) {
       const { allowed, retryAfter } = await checkRateLimit(env.RATE_LIMIT, `${clientIp}:${path}`, 5)
       if (!allowed) return json(429, { error: '請求過於頻繁，請稍後再試', retry_after: retryAfter })
+    }
+    // widget-chat 寬鬆限制（2 秒冷卻，讓客服可以正常對話）
+    if (path === '/api/widget-chat') {
+      const { allowed, retryAfter } = await checkRateLimit(env.RATE_LIMIT, `${clientIp}:widget`, 2)
+      if (!allowed) return json(429, { error: '請稍等一下再發送', retry_after: retryAfter })
     }
 
     try {
@@ -1468,24 +1477,24 @@ async function handleWidgetChatSmart(request: Request, env: Env): Promise<Respon
   const { message } = body
   if (!message) return json(400, { error: 'message is required' })
 
-  // 直接用中文最強模型鏈
-  const systemPrompt = `你是小百，SEOBAIKE（aiforseo.vip）平台的 AI 助手。
+  // 中文最強模型鏈（Groq 最快最穩放第一）
+  const systemPrompt = `你是 SEOBAIKE 平台（aiforseo.vip）的客服小百。你必須回答用戶的問題，不要自我介紹。
 
-關於 SEOBAIKE：
-- AI 界的 App Store，讓企業一站式使用 AI 工具
-- 15 個 AI 引擎、1300+ 模型、500 個自動化工具
-- 支援 14 個通訊管道（LINE, Telegram, WhatsApp 等）
-- 台灣公司「小路光有限公司」開發
-- 方案：免費版 NT$0 / 個人版 NT$299 / 專業版 NT$899 / 企業版 NT$2,999
+平台資訊（用來回答問題）：
+- SEOBAIKE 是 AI 工具平台，企業用一個入口使用所有 AI
+- 有 15 個 AI 引擎、1300+ 模型、14 個通訊管道、500 個自動化工具
+- 台灣公司小路光開發，價格：免費版 NT$0、個人版 NT$299/月、專業版 NT$899/月、企業版 NT$2,999/月
+- 功能：AI 文案、數據分析、客服自動化、行銷推廣、內容生成、營運管理
 
-嚴格規則：
-- 只用繁體中文回覆
-- 最多 3 句話
-- 直接給答案，不解釋過程
-- 不要客套、不要署名`
+回覆規則：
+1. 用繁體中文
+2. 最多 3 句話
+3. 直接回答用戶問的事
+4. 禁止說「我是小百」或任何自我介紹
+5. 不要客套、不要署名`
   const providers = [
-    { id: 'deepseek', key: env.DEEPSEEK_API_KEY, url: 'https://api.deepseek.com/chat/completions', model: 'deepseek-chat' },
     { id: 'groq', key: env.GROQ_API_KEY, url: 'https://api.groq.com/openai/v1/chat/completions', model: 'llama-3.3-70b-versatile' },
+    { id: 'deepseek', key: env.DEEPSEEK_API_KEY, url: 'https://api.deepseek.com/chat/completions', model: 'deepseek-chat' },
     { id: 'together', key: env.TOGETHER_API_KEY, url: 'https://api.together.xyz/v1/chat/completions', model: 'meta-llama/Llama-3.3-70B-Instruct-Turbo' },
   ]
 
