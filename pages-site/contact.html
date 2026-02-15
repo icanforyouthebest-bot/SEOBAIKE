@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>聯絡我們 — SEOBAIKE | 小路光有限公司</title>
+  <meta name="description" content="聯絡 SEOBAIKE 小路光有限公司。電話 04-7776342，信箱 seobaike@aiforseo.vip，彰化縣埔鹽鄉。">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --orange: #e8850c;
+      --copper: #cc785c;
+      --green: #76b900;
+      --bg: #0a0a1a;
+      --bg-card: #12122a;
+      --bg-elevated: #1a1a3a;
+      --text: #e8e8f0;
+      --text-dim: #9999b0;
+      --border: #2a2a4a;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans TC", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+      min-height: 100vh;
+    }
+
+    a { color: var(--orange); text-decoration: none; transition: color 0.2s; }
+    a:hover { color: var(--copper); }
+
+    /* ── Navigation ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+      background: rgba(10, 10, 26, 0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-inner {
+      max-width: 1200px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 24px; height: 64px;
+    }
+    .nav-brand {
+      font-size: 1.3rem; font-weight: 800; color: var(--orange);
+      letter-spacing: 1px;
+    }
+    .nav-brand span { color: var(--green); }
+    .nav-links { display: flex; gap: 28px; list-style: none; }
+    .nav-links a {
+      color: var(--text-dim); font-size: 0.92rem; font-weight: 500;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover, .nav-links a.active { color: var(--orange); }
+    .nav-toggle { display: none; background: none; border: none; color: var(--text); font-size: 1.5rem; cursor: pointer; }
+
+    /* ── Hero ── */
+    .hero {
+      padding: 140px 24px 80px;
+      text-align: center;
+      background: linear-gradient(180deg, #0f0f2a 0%, var(--bg) 100%);
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: "";
+      position: absolute; top: 60px; left: 50%; transform: translateX(-50%);
+      width: 600px; height: 600px;
+      background: radial-gradient(circle, rgba(232,133,12,0.08) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero h1 {
+      font-size: clamp(2.2rem, 5vw, 3.6rem);
+      font-weight: 800;
+      background: linear-gradient(135deg, var(--orange), var(--copper));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 20px;
+    }
+    .hero p {
+      font-size: 1.15rem; color: var(--text-dim);
+      max-width: 640px; margin: 0 auto;
+    }
+
+    /* ── Sections ── */
+    section { padding: 80px 24px; }
+    .container { max-width: 1000px; margin: 0 auto; }
+
+    .section-label {
+      display: inline-block;
+      font-size: 0.78rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 2px; color: var(--green);
+      margin-bottom: 12px;
+    }
+    .section-title {
+      font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+      font-weight: 700; margin-bottom: 24px;
+      color: #fff;
+    }
+
+    /* ── Contact Grid ── */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 48px;
+      margin-top: 40px;
+    }
+
+    /* ── Info Cards ── */
+    .info-cards { display: flex; flex-direction: column; gap: 20px; }
+
+    .info-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 28px 24px;
+      transition: border-color 0.3s, transform 0.3s;
+    }
+    .info-card:hover { border-color: var(--orange); transform: translateY(-2px); }
+    .info-card .icon-row {
+      display: flex; align-items: center; gap: 12px;
+      margin-bottom: 12px;
+    }
+    .info-card .icon-circle {
+      width: 44px; height: 44px;
+      background: rgba(232,133,12,0.1);
+      border: 1px solid rgba(232,133,12,0.25);
+      border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.3rem;
+    }
+    .info-card .icon-row h3 {
+      font-size: 1rem; color: #fff; font-weight: 600;
+    }
+    .info-card p {
+      color: var(--text-dim); font-size: 0.95rem; line-height: 1.7;
+      padding-left: 56px;
+    }
+    .info-card a { color: var(--orange); }
+
+    /* ── Contact Form ── */
+    .form-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 40px 36px;
+    }
+    .form-card h3 {
+      font-size: 1.3rem; color: #fff; margin-bottom: 8px;
+    }
+    .form-card .form-desc {
+      color: var(--text-dim); font-size: 0.92rem; margin-bottom: 28px;
+    }
+
+    .form-group { margin-bottom: 20px; }
+    .form-group label {
+      display: block;
+      font-size: 0.88rem; font-weight: 600; color: var(--text);
+      margin-bottom: 6px;
+    }
+    .form-group label .required { color: var(--orange); margin-left: 2px; }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 12px 16px;
+      color: var(--text);
+      font-size: 0.95rem;
+      font-family: inherit;
+      transition: border-color 0.2s, box-shadow 0.2s;
+      outline: none;
+    }
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      border-color: var(--orange);
+      box-shadow: 0 0 0 3px rgba(232,133,12,0.15);
+    }
+    .form-group input::placeholder,
+    .form-group textarea::placeholder {
+      color: #555570;
+    }
+    .form-group textarea { resize: vertical; min-height: 120px; }
+    .form-group select { cursor: pointer; }
+    .form-group select option { background: var(--bg-card); color: var(--text); }
+
+    .form-row {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+    }
+
+    .form-submit {
+      width: 100%;
+      padding: 14px;
+      background: linear-gradient(135deg, var(--orange), var(--copper));
+      border: none;
+      border-radius: 10px;
+      color: #fff;
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+      margin-top: 8px;
+    }
+    .form-submit:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(232,133,12,0.3);
+    }
+    .form-submit:active { transform: translateY(0); }
+
+    .form-note {
+      text-align: center;
+      color: var(--text-dim);
+      font-size: 0.8rem;
+      margin-top: 14px;
+    }
+
+    /* ── Business Hours ── */
+    .hours-section { margin-top: 60px; }
+    .hours-card {
+      background: linear-gradient(135deg, #12122a 0%, #1a1030 100%);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 40px;
+      display: flex;
+      align-items: center;
+      gap: 48px;
+    }
+    .hours-visual {
+      min-width: 160px; text-align: center;
+    }
+    .hours-visual .clock {
+      font-size: 4rem;
+      margin-bottom: 8px;
+    }
+    .hours-visual .status {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 6px 16px;
+      border-radius: 20px;
+      font-size: 0.85rem; font-weight: 600;
+    }
+    .status-open {
+      background: rgba(118,185,0,0.12);
+      border: 1px solid rgba(118,185,0,0.3);
+      color: var(--green);
+    }
+    .status-closed {
+      background: rgba(232,133,12,0.12);
+      border: 1px solid rgba(232,133,12,0.3);
+      color: var(--orange);
+    }
+    .status-dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      display: inline-block;
+    }
+    .status-open .status-dot { background: var(--green); }
+    .status-closed .status-dot { background: var(--orange); }
+
+    .hours-detail { flex: 1; }
+    .hours-detail h3 { font-size: 1.3rem; color: #fff; margin-bottom: 20px; }
+    .hours-table { width: 100%; }
+    .hours-table tr { border-bottom: 1px solid var(--border); }
+    .hours-table tr:last-child { border: none; }
+    .hours-table td {
+      padding: 12px 0;
+      color: var(--text-dim);
+      font-size: 0.95rem;
+    }
+    .hours-table td:first-child { font-weight: 600; color: var(--text); min-width: 120px; }
+    .hours-table .highlight td { color: var(--orange); }
+
+    /* ── Map placeholder ── */
+    .map-section { margin-top: 60px; }
+    .map-embed {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+      height: 320px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 12px;
+      position: relative;
+    }
+    .map-embed .pin { font-size: 3rem; }
+    .map-embed .addr {
+      color: var(--text-dim); font-size: 0.95rem; text-align: center;
+    }
+    .map-embed .addr strong { color: #fff; display: block; margin-bottom: 4px; }
+    .map-grid {
+      position: absolute; inset: 0; opacity: 0.06;
+      background-image:
+        linear-gradient(var(--border) 1px, transparent 1px),
+        linear-gradient(90deg, var(--border) 1px, transparent 1px);
+      background-size: 40px 40px;
+      pointer-events: none;
+    }
+
+    /* ── FAQ ── */
+    .faq-section { margin-top: 60px; }
+    .faq-list { display: flex; flex-direction: column; gap: 16px; margin-top: 32px; }
+    .faq-item {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 24px 28px;
+      cursor: pointer;
+      transition: border-color 0.3s;
+    }
+    .faq-item:hover { border-color: var(--orange); }
+    .faq-q {
+      font-size: 1rem; font-weight: 600; color: #fff;
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .faq-q .arrow {
+      color: var(--orange); font-size: 1.2rem;
+      transition: transform 0.3s;
+    }
+    .faq-item.open .arrow { transform: rotate(180deg); }
+    .faq-a {
+      color: var(--text-dim); font-size: 0.92rem;
+      line-height: 1.7;
+      max-height: 0; overflow: hidden;
+      transition: max-height 0.4s ease, margin-top 0.3s;
+    }
+    .faq-item.open .faq-a {
+      max-height: 300px;
+      margin-top: 14px;
+    }
+
+    /* ── Footer ── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 48px 24px 32px;
+      margin-top: 40px;
+    }
+    .footer-inner {
+      max-width: 1000px; margin: 0 auto;
+      display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 48px;
+    }
+    .footer-brand { font-size: 1.2rem; font-weight: 700; color: var(--orange); margin-bottom: 12px; }
+    .footer-desc { color: var(--text-dim); font-size: 0.9rem; line-height: 1.7; }
+    .footer-col h4 { color: #fff; font-size: 0.9rem; margin-bottom: 12px; }
+    .footer-col ul { list-style: none; }
+    .footer-col li { margin-bottom: 8px; }
+    .footer-col a { color: var(--text-dim); font-size: 0.88rem; }
+    .footer-col a:hover { color: var(--orange); }
+    .footer-bottom {
+      max-width: 1000px; margin: 32px auto 0;
+      padding-top: 24px; border-top: 1px solid var(--border);
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: 12px;
+      color: var(--text-dim); font-size: 0.82rem;
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .nav-links.open {
+        display: flex; flex-direction: column;
+        position: absolute; top: 64px; left: 0; right: 0;
+        background: rgba(10,10,26,0.97);
+        padding: 20px 24px; gap: 16px;
+        border-bottom: 1px solid var(--border);
+      }
+      .nav-toggle { display: block; }
+      .contact-grid { grid-template-columns: 1fr; }
+      .form-card { padding: 28px 20px; }
+      .form-row { grid-template-columns: 1fr; }
+      .hours-card { flex-direction: column; gap: 24px; padding: 28px 20px; }
+      .footer-inner { grid-template-columns: 1fr; gap: 32px; }
+      .footer-bottom { flex-direction: column; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ════ Navigation ════ -->
+  <nav>
+    <div class="nav-inner">
+      <a href="/" class="nav-brand">SEO<span>BAIKE</span></a>
+      <button class="nav-toggle" onclick="document.querySelector('.nav-links').classList.toggle('open')" aria-label="選單">&#9776;</button>
+      <ul class="nav-links">
+        <li><a href="/">首頁</a></li>
+        <li><a href="/features">功能</a></li>
+        <li><a href="/pricing">方案</a></li>
+        <li><a href="/docs">文件</a></li>
+        <li><a href="/about">關於</a></li>
+        <li><a href="/contact" class="active">聯絡</a></li>
+        <li><a href="/login">登入</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- ════ Hero ════ -->
+  <section class="hero">
+    <h1>聯絡我們</h1>
+    <p>無論您是想了解 CaaS 平台、洽談合作，還是有技術問題需要協助，我們都樂意為您服務。</p>
+  </section>
+
+  <!-- ════ Contact Section ════ -->
+  <section>
+    <div class="container">
+      <span class="section-label">Get in Touch</span>
+      <h2 class="section-title">與我們聯繫</h2>
+
+      <div class="contact-grid">
+        <!-- Left: Info Cards -->
+        <div class="info-cards">
+          <div class="info-card">
+            <div class="icon-row">
+              <div class="icon-circle">&#x1F3E2;</div>
+              <h3>公司資訊</h3>
+            </div>
+            <p>
+              <strong style="color:#fff;">小路光有限公司</strong><br>
+              統一編號：60475510<br>
+              台灣專利：TW-115100981
+            </p>
+          </div>
+
+          <div class="info-card">
+            <div class="icon-row">
+              <div class="icon-circle">&#x1F4CD;</div>
+              <h3>公司地址</h3>
+            </div>
+            <p>
+              彰化縣埔鹽鄉埔南村埔菜路67號
+            </p>
+          </div>
+
+          <div class="info-card">
+            <div class="icon-row">
+              <div class="icon-circle">&#x1F4DE;</div>
+              <h3>聯絡電話</h3>
+            </div>
+            <p>
+              市話：<a href="tel:047776342">04-7776342</a><br>
+              手機：<a href="tel:0980434242">0980-434-242</a>
+            </p>
+          </div>
+
+          <div class="info-card">
+            <div class="icon-row">
+              <div class="icon-circle">&#x2709;</div>
+              <h3>電子信箱</h3>
+            </div>
+            <p>
+              <a href="mailto:seobaike@aiforseo.vip">seobaike@aiforseo.vip</a><br>
+              <span style="font-size:0.85rem;color:var(--text-dim);">我們將在 1-2 個工作天內回覆</span>
+            </p>
+          </div>
+
+          <div class="info-card">
+            <div class="icon-row">
+              <div class="icon-circle">&#x1F310;</div>
+              <h3>線上平台</h3>
+            </div>
+            <p>
+              網站：<a href="https://aiforseo.vip" target="_blank">aiforseo.vip</a>
+            </p>
+          </div>
+        </div>
+
+        <!-- Right: Contact Form -->
+        <div class="form-card">
+          <h3>傳送訊息</h3>
+          <p class="form-desc">填寫以下表單，我們的團隊會盡快與您聯繫。</p>
+
+          <form onsubmit="event.preventDefault(); document.getElementById('form-success').style.display='block'; this.style.display='none';">
+            <div class="form-row">
+              <div class="form-group">
+                <label>姓名 <span class="required">*</span></label>
+                <input type="text" placeholder="您的姓名" required>
+              </div>
+              <div class="form-group">
+                <label>公司名稱</label>
+                <input type="text" placeholder="公司或組織名稱">
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label>電子信箱 <span class="required">*</span></label>
+                <input type="email" placeholder="your@email.com" required>
+              </div>
+              <div class="form-group">
+                <label>聯絡電話</label>
+                <input type="tel" placeholder="09xx-xxx-xxx">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label>詢問類別 <span class="required">*</span></label>
+              <select required>
+                <option value="" disabled selected>請選擇</option>
+                <option value="product">產品諮詢</option>
+                <option value="pricing">方案與價格</option>
+                <option value="partnership">商業合作</option>
+                <option value="technical">技術支援</option>
+                <option value="patent">專利授權</option>
+                <option value="other">其他</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label>訊息內容 <span class="required">*</span></label>
+              <textarea placeholder="請描述您的需求或問題..." required></textarea>
+            </div>
+
+            <button type="submit" class="form-submit">送出訊息</button>
+            <p class="form-note">帶 <span style="color:var(--orange);">*</span> 為必填欄位。我們重視您的隱私，不會將您的資料提供給第三方。</p>
+          </form>
+
+          <div id="form-success" style="display:none; text-align:center; padding:40px 20px;">
+            <div style="font-size:3rem; margin-bottom:16px;">&#x2705;</div>
+            <h3 style="color:#fff; margin-bottom:8px;">訊息已送出</h3>
+            <p style="color:var(--text-dim);">感謝您的來信，我們將在 1-2 個工作天內回覆。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════ Business Hours ════ -->
+  <section style="padding-top:0;">
+    <div class="container">
+      <div class="hours-section">
+        <span class="section-label">Business Hours</span>
+        <h2 class="section-title">營業時間</h2>
+
+        <div class="hours-card">
+          <div class="hours-visual">
+            <div class="clock">&#x1F570;</div>
+            <div class="status status-closed" id="status-badge">
+              <span class="status-dot"></span>
+              <span id="status-text">休息中</span>
+            </div>
+          </div>
+          <div class="hours-detail">
+            <h3>服務時間表</h3>
+            <table class="hours-table">
+              <tr>
+                <td>週一</td>
+                <td>09:00 — 18:00</td>
+              </tr>
+              <tr>
+                <td>週二</td>
+                <td>09:00 — 18:00</td>
+              </tr>
+              <tr>
+                <td>週三</td>
+                <td>09:00 — 18:00</td>
+              </tr>
+              <tr>
+                <td>週四</td>
+                <td>09:00 — 18:00</td>
+              </tr>
+              <tr>
+                <td>週五</td>
+                <td>09:00 — 18:00</td>
+              </tr>
+              <tr>
+                <td>週六</td>
+                <td style="color:var(--orange);">休息</td>
+              </tr>
+              <tr>
+                <td>週日</td>
+                <td style="color:var(--orange);">休息</td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════ Map ════ -->
+  <section style="padding-top:0;">
+    <div class="container">
+      <div class="map-section">
+        <span class="section-label">Location</span>
+        <h2 class="section-title">公司位置</h2>
+        <div class="map-embed">
+          <div class="map-grid"></div>
+          <div class="pin">&#x1F4CD;</div>
+          <div class="addr">
+            <strong>小路光有限公司</strong>
+            彰化縣埔鹽鄉埔南村埔菜路67號
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════ FAQ ════ -->
+  <section style="padding-top:0;">
+    <div class="container">
+      <div class="faq-section">
+        <span class="section-label">FAQ</span>
+        <h2 class="section-title">常見問題</h2>
+
+        <div class="faq-list">
+          <div class="faq-item" onclick="this.classList.toggle('open')">
+            <div class="faq-q">
+              <span>SEOBAIKE 平台適合哪些企業使用？</span>
+              <span class="arrow">&#x25BC;</span>
+            </div>
+            <div class="faq-a">
+              任何需要導入 AI 並確保推理行為合規的企業都適用。特別是金融、醫療、製造等受法規嚴格約束的產業，SEOBAIKE 的 L1-L4 約束架構能確保 AI 不會超出授權範圍。
+            </div>
+          </div>
+
+          <div class="faq-item" onclick="this.classList.toggle('open')">
+            <div class="faq-q">
+              <span>什麼是 Constraint-as-a-Service（CaaS）？</span>
+              <span class="arrow">&#x25BC;</span>
+            </div>
+            <div class="faq-a">
+              CaaS 是我們的核心服務模式。企業不需要自行建置 AI 約束系統，只需透過 API 接入 SEOBAIKE 平台，即可為任何 AI 模型加上產業級的推理約束。就像 SaaS 提供軟體即服務，CaaS 提供約束即服務。
+            </div>
+          </div>
+
+          <div class="faq-item" onclick="this.classList.toggle('open')">
+            <div class="faq-q">
+              <span>如何開始使用 SEOBAIKE？</span>
+              <span class="arrow">&#x25BC;</span>
+            </div>
+            <div class="faq-a">
+              您可以透過本頁表單聯絡我們，或直接寄信到 seobaike@aiforseo.vip。我們的團隊會依據您的產業和需求，為您規劃最適合的方案，並協助完成平台整合。
+            </div>
+          </div>
+
+          <div class="faq-item" onclick="this.classList.toggle('open')">
+            <div class="faq-q">
+              <span>專利 TW-115100981 的授權方式是什麼？</span>
+              <span class="arrow">&#x25BC;</span>
+            </div>
+            <div class="faq-a">
+              我們提供多種授權模式，包含平台訂閱（透過 aiforseo.vip 使用）以及企業級專屬授權。具體授權條件和價格請直接與我們聯繫，我們會根據您的規模和用途提供報價。
+            </div>
+          </div>
+
+          <div class="faq-item" onclick="this.classList.toggle('open')">
+            <div class="faq-q">
+              <span>平台支援哪些 AI 模型？</span>
+              <span class="arrow">&#x25BC;</span>
+            </div>
+            <div class="faq-a">
+              SEOBAIKE 採用插拔式架構，理論上支援任何遵循標準 API 的 AI 模型。約束層獨立於模型之上運作，不綁定特定供應商。無論您使用的是哪一家的大型語言模型，都可以透過平台加上約束。
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════ Footer ════ -->
+  <footer>
+    <div class="footer-inner">
+      <div>
+        <div class="footer-brand">SEOBAIKE</div>
+        <p class="footer-desc">
+          小路光有限公司（統編 60475510）<br>
+          台灣專利 TW-115100981<br>
+          Constraint-as-a-Service 平台<br>
+          讓 AI 在約束下運行。
+        </p>
+      </div>
+      <div class="footer-col">
+        <h4>平台</h4>
+        <ul>
+          <li><a href="/features">功能介紹</a></li>
+          <li><a href="/pricing">方案價格</a></li>
+          <li><a href="/docs">技術文件</a></li>
+          <li><a href="/login">登入平台</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>公司</h4>
+        <ul>
+          <li><a href="/about">關於我們</a></li>
+          <li><a href="/contact">聯絡方式</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2024-2026 小路光有限公司. All rights reserved.</span>
+      <span>aiforseo.vip</span>
+    </div>
+  </footer>
+
+  <!-- ════ Live status script ════ -->
+  <script>
+    (function() {
+      var now = new Date();
+      var day = now.getDay();
+      var hour = now.getHours();
+      var badge = document.getElementById('status-badge');
+      var text = document.getElementById('status-text');
+      if (day >= 1 && day <= 5 && hour >= 9 && hour < 18) {
+        badge.className = 'status status-open';
+        text.textContent = '營業中';
+      } else {
+        badge.className = 'status status-closed';
+        text.textContent = '休息中';
+      }
+    })();
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>方案與定價 — SEOBAIKE | AI 約束推理平台</title>
+  <meta name="description" content="SEOBAIKE 定價方案：免費版、專業版、企業版。從 100 次免費約束推理到無限次企業級部署，找到最適合你的 AI 合規方案。">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --orange: #e8850c;
+      --copper: #cc785c;
+      --green: #76b900;
+      --bg: #0a0a1a;
+      --bg-card: #12122a;
+      --bg-card-hover: #1a1a3a;
+      --text: #e0e0e0;
+      --text-muted: #9a9ab0;
+      --border: #2a2a4a;
+      --radius: 12px;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans TC", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+      min-height: 100vh;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    /* ========== NAVBAR ========== */
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      background: rgba(10, 10, 26, 0.92);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 2rem;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .navbar-brand {
+      font-size: 1.4rem;
+      font-weight: 800;
+      color: var(--orange);
+      letter-spacing: 1px;
+    }
+
+    .navbar-brand span { color: var(--green); }
+
+    .navbar-links {
+      display: flex;
+      gap: 1.6rem;
+      align-items: center;
+    }
+
+    .navbar-links a {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      transition: color 0.2s;
+      white-space: nowrap;
+    }
+
+    .navbar-links a:hover,
+    .navbar-links a.active {
+      color: var(--orange);
+    }
+
+    .navbar-links .btn-login {
+      background: var(--orange);
+      color: #fff;
+      padding: 0.45rem 1.2rem;
+      border-radius: 6px;
+      font-weight: 600;
+      transition: background 0.2s;
+    }
+
+    .navbar-links .btn-login:hover {
+      background: #d0770a;
+      color: #fff;
+    }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 4px;
+    }
+
+    .hamburger span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--text);
+      border-radius: 2px;
+    }
+
+    /* ========== HERO ========== */
+    .hero {
+      padding: 140px 2rem 80px;
+      text-align: center;
+      background: linear-gradient(180deg, rgba(232,133,12,0.08) 0%, transparent 60%);
+    }
+
+    .hero-badge {
+      display: inline-block;
+      background: rgba(118,185,0,0.12);
+      color: var(--green);
+      padding: 0.3rem 1rem;
+      border-radius: 999px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-bottom: 1.2rem;
+      border: 1px solid rgba(118,185,0,0.25);
+    }
+
+    .hero h1 {
+      font-size: clamp(2.2rem, 5vw, 3.6rem);
+      font-weight: 800;
+      margin-bottom: 1rem;
+      background: linear-gradient(135deg, var(--orange), var(--copper));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero p {
+      font-size: 1.15rem;
+      color: var(--text-muted);
+      max-width: 580px;
+      margin: 0 auto;
+    }
+
+    /* ========== PRICING CARDS ========== */
+    .pricing-section {
+      padding: 2rem 2rem 5rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      align-items: stretch;
+    }
+
+    .pricing-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 2.5rem 2rem;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      transition: transform 0.25s, box-shadow 0.25s;
+    }
+
+    .pricing-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.3);
+    }
+
+    .pricing-card.featured {
+      border-color: var(--orange);
+      box-shadow: 0 0 0 1px var(--orange), 0 8px 32px rgba(232,133,12,0.15);
+    }
+
+    .pricing-card.featured::before {
+      content: "最受歡迎";
+      position: absolute;
+      top: -12px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: linear-gradient(135deg, var(--orange), #d0770a);
+      color: #fff;
+      padding: 0.25rem 1rem;
+      border-radius: 999px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .pricing-tier {
+      font-size: 0.85rem;
+      color: var(--green);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 0.3rem;
+    }
+
+    .pricing-name {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 1rem;
+    }
+
+    .pricing-price {
+      margin-bottom: 1.5rem;
+    }
+
+    .pricing-price .amount {
+      font-size: 2.8rem;
+      font-weight: 800;
+      color: var(--orange);
+    }
+
+    .pricing-price .period {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+    }
+
+    .pricing-price .note {
+      display: block;
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      margin-top: 0.2rem;
+    }
+
+    .pricing-features {
+      list-style: none;
+      margin-bottom: 2rem;
+      flex: 1;
+    }
+
+    .pricing-features li {
+      padding: 0.5rem 0;
+      font-size: 0.92rem;
+      color: var(--text-muted);
+      border-bottom: 1px solid rgba(42,42,74,0.5);
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .pricing-features li:last-child { border-bottom: none; }
+
+    .pricing-features .check {
+      color: var(--green);
+      font-weight: 700;
+      font-size: 1rem;
+      flex-shrink: 0;
+    }
+
+    .pricing-features .cross {
+      color: #555;
+      font-weight: 700;
+      font-size: 1rem;
+      flex-shrink: 0;
+    }
+
+    .btn-pricing {
+      display: block;
+      text-align: center;
+      padding: 0.85rem 1.5rem;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      border: none;
+      transition: transform 0.2s, box-shadow 0.2s;
+      width: 100%;
+    }
+
+    .btn-pricing.primary {
+      background: linear-gradient(135deg, var(--orange), #d0770a);
+      color: #fff;
+    }
+
+    .btn-pricing.primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(232,133,12,0.3);
+    }
+
+    .btn-pricing.secondary {
+      background: transparent;
+      color: var(--orange);
+      border: 2px solid var(--orange);
+    }
+
+    .btn-pricing.secondary:hover {
+      background: rgba(232,133,12,0.08);
+      transform: translateY(-2px);
+    }
+
+    .btn-pricing.enterprise {
+      background: transparent;
+      color: var(--green);
+      border: 2px solid var(--green);
+    }
+
+    .btn-pricing.enterprise:hover {
+      background: rgba(118,185,0,0.08);
+      transform: translateY(-2px);
+    }
+
+    /* ========== COMPARISON NOTE ========== */
+    .comparison-note {
+      text-align: center;
+      padding: 2rem 2rem 0;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .comparison-note p {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      padding: 1.2rem 1.5rem;
+      border-radius: 8px;
+    }
+
+    .comparison-note strong { color: var(--orange); }
+
+    /* ========== FAQ ========== */
+    .faq-section {
+      padding: 5rem 2rem;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .faq-section h2 {
+      text-align: center;
+      font-size: 1.8rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+
+    .faq-section .faq-subtitle {
+      text-align: center;
+      color: var(--text-muted);
+      margin-bottom: 2.5rem;
+      font-size: 1rem;
+    }
+
+    .faq-item {
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      margin-bottom: 1rem;
+      background: var(--bg-card);
+      overflow: hidden;
+    }
+
+    .faq-question {
+      width: 100%;
+      background: none;
+      border: none;
+      color: #fff;
+      padding: 1.2rem 1.5rem;
+      font-size: 1rem;
+      font-weight: 600;
+      text-align: left;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: background 0.2s;
+      font-family: inherit;
+    }
+
+    .faq-question:hover { background: rgba(232,133,12,0.05); }
+
+    .faq-question .arrow {
+      color: var(--orange);
+      font-size: 1.2rem;
+      transition: transform 0.3s;
+      flex-shrink: 0;
+      margin-left: 1rem;
+    }
+
+    .faq-item.open .faq-question .arrow {
+      transform: rotate(180deg);
+    }
+
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.35s ease, padding 0.35s ease;
+    }
+
+    .faq-item.open .faq-answer {
+      max-height: 300px;
+      padding: 0 1.5rem 1.2rem;
+    }
+
+    .faq-answer p {
+      font-size: 0.92rem;
+      color: var(--text-muted);
+      line-height: 1.7;
+    }
+
+    /* ========== CTA BOTTOM ========== */
+    .cta-section {
+      padding: 4rem 2rem 5rem;
+      text-align: center;
+      background: linear-gradient(180deg, transparent, rgba(232,133,12,0.06));
+    }
+
+    .cta-section h2 {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+
+    .cta-section p {
+      color: var(--text-muted);
+      margin-bottom: 2rem;
+      font-size: 1.05rem;
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+      margin-bottom: 2rem;
+    }
+
+    .btn-cta {
+      display: inline-block;
+      background: linear-gradient(135deg, var(--orange), #d0770a);
+      color: #fff;
+      padding: 0.85rem 2.4rem;
+      border-radius: 8px;
+      font-size: 1.05rem;
+      font-weight: 700;
+      border: none;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .btn-cta:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(232,133,12,0.3);
+    }
+
+    /* ========== FOOTER ========== */
+    .footer {
+      border-top: 1px solid var(--border);
+      padding: 3rem 2rem 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    .footer-brand h3 {
+      font-size: 1.2rem;
+      color: var(--orange);
+      margin-bottom: 0.5rem;
+    }
+
+    .footer-brand p {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    .footer-col h4 {
+      font-size: 0.85rem;
+      color: #fff;
+      margin-bottom: 0.8rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .footer-col a {
+      display: block;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-bottom: 0.5rem;
+      transition: color 0.2s;
+    }
+
+    .footer-col a:hover { color: var(--orange); }
+
+    .footer-bottom {
+      border-top: 1px solid var(--border);
+      padding-top: 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .footer-bottom p {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    /* ========== RESPONSIVE ========== */
+    @media (max-width: 768px) {
+      .navbar-links { display: none; }
+      .navbar-links.open {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: 64px;
+        left: 0;
+        right: 0;
+        background: rgba(10,10,26,0.98);
+        padding: 1.5rem 2rem;
+        gap: 1rem;
+        border-bottom: 1px solid var(--border);
+      }
+      .hamburger { display: flex; }
+      .pricing-grid {
+        grid-template-columns: 1fr;
+        max-width: 420px;
+        margin: 0 auto;
+      }
+      .pricing-card.featured { margin-top: 0.5rem; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+    }
+
+    @media (max-width: 480px) {
+      .footer-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <a href="/" class="navbar-brand">SEO<span>BAIKE</span></a>
+    <div class="navbar-links" id="navLinks">
+      <a href="/">首頁</a>
+      <a href="/features">功能</a>
+      <a href="/pricing" class="active">方案</a>
+      <a href="/docs">文件</a>
+      <a href="/about">關於</a>
+      <a href="/contact">聯繫</a>
+      <a href="/login" class="btn-login">登入</a>
+    </div>
+    <button class="hamburger" id="hamburger" aria-label="選單">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-badge">14 天免費試用專業版</div>
+    <h1>方案與定價</h1>
+    <p>從個人開發者到大型企業，選擇最適合你的 AI 約束推理方案。所有方案皆受專利架構保護。</p>
+  </section>
+
+  <!-- PRICING CARDS -->
+  <section class="pricing-section">
+    <div class="pricing-grid">
+
+      <!-- FREE -->
+      <div class="pricing-card">
+        <div class="pricing-tier">Free</div>
+        <div class="pricing-name">免費版</div>
+        <div class="pricing-price">
+          <span class="amount">$0</span>
+          <span class="period">/月</span>
+          <span class="note">永久免費，無需信用卡</span>
+        </div>
+        <ul class="pricing-features">
+          <li><span class="check">&#10003;</span>每月 100 次約束推理</li>
+          <li><span class="check">&#10003;</span>基本 L1-L2 約束層</li>
+          <li><span class="check">&#10003;</span>社群支援（論壇）</li>
+          <li><span class="check">&#10003;</span>基本稽核日誌（7 天）</li>
+          <li><span class="cross">&#10005;</span>L3-L4 進階約束</li>
+          <li><span class="cross">&#10005;</span>多模型路由</li>
+          <li><span class="cross">&#10005;</span>API 存取</li>
+          <li><span class="cross">&#10005;</span>客製化約束規則</li>
+        </ul>
+        <a href="/login" class="btn-pricing secondary">免費開始</a>
+      </div>
+
+      <!-- PRO -->
+      <div class="pricing-card featured">
+        <div class="pricing-tier">Pro</div>
+        <div class="pricing-name">專業版</div>
+        <div class="pricing-price">
+          <span class="amount">NT$2,990</span>
+          <span class="period">/月</span>
+          <span class="note">年繳享 8 折（NT$2,392/月）</span>
+        </div>
+        <ul class="pricing-features">
+          <li><span class="check">&#10003;</span>每月 10,000 次約束推理</li>
+          <li><span class="check">&#10003;</span>完整 L1-L4 約束層</li>
+          <li><span class="check">&#10003;</span>多模型路由</li>
+          <li><span class="check">&#10003;</span>API 存取（REST + SDK）</li>
+          <li><span class="check">&#10003;</span>電子郵件支援</li>
+          <li><span class="check">&#10003;</span>完整稽核日誌（90 天）</li>
+          <li><span class="check">&#10003;</span>多國代碼對齊</li>
+          <li><span class="cross">&#10005;</span>客製化約束規則</li>
+        </ul>
+        <a href="/login" class="btn-pricing primary">開始 14 天免費試用</a>
+      </div>
+
+      <!-- ENTERPRISE -->
+      <div class="pricing-card">
+        <div class="pricing-tier">Enterprise</div>
+        <div class="pricing-name">企業版</div>
+        <div class="pricing-price">
+          <span class="amount" style="font-size: 2rem;">聯繫銷售</span>
+          <span class="note">依需求客製化報價</span>
+        </div>
+        <ul class="pricing-features">
+          <li><span class="check">&#10003;</span>無限次約束推理</li>
+          <li><span class="check">&#10003;</span>完整 L1-L4 約束層</li>
+          <li><span class="check">&#10003;</span>客製化約束規則</li>
+          <li><span class="check">&#10003;</span>專屬客服經理</li>
+          <li><span class="check">&#10003;</span>SLA 保證（99.9%）</li>
+          <li><span class="check">&#10003;</span>稽核日誌永久保存</li>
+          <li><span class="check">&#10003;</span>on-premise 部署選項</li>
+          <li><span class="check">&#10003;</span>優先功能開發</li>
+        </ul>
+        <a href="/contact" class="btn-pricing enterprise">聯繫銷售團隊</a>
+      </div>
+
+    </div>
+
+    <!-- COMPARISON NOTE -->
+    <div class="comparison-note">
+      <p>所有方案皆包含 <strong>check_inference_path() 專利約束驗證</strong>、基本角色權限系統、以及 SSL 加密傳輸。升級或降級隨時可行，無綁約限制。</p>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="faq-section">
+    <h2>常見問題</h2>
+    <p class="faq-subtitle">關於定價與方案的疑問，我們在這裡解答</p>
+
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggleFaq(this)">
+        <span>免費版有什麼限制？</span>
+        <span class="arrow">&#9660;</span>
+      </button>
+      <div class="faq-answer">
+        <p>免費版每月提供 100 次約束推理呼叫，僅支援 L1 和 L2 兩層約束。這適合個人開發者體驗平台功能，或在小型專案中測試 AI 約束推理的概念。免費版不包含 API 存取、多模型路由及進階稽核日誌功能。</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggleFaq(this)">
+        <span>專業版的 14 天免費試用期結束後會怎樣？</span>
+        <span class="arrow">&#9660;</span>
+      </button>
+      <div class="faq-answer">
+        <p>試用期結束後，您可以選擇正式訂閱專業版（NT$2,990/月），或自動降級為免費版繼續使用。我們不會在您未確認的情況下收取任何費用。試用期間的所有資料和設定都會完整保留。</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggleFaq(this)">
+        <span>什麼是「約束推理次數」？怎麼計算？</span>
+        <span class="arrow">&#9660;</span>
+      </button>
+      <div class="faq-answer">
+        <p>每一次 AI 執行動作前呼叫 check_inference_path() 進行 L1→L4 路徑驗證，即計為一次約束推理。無論驗證結果為 allowed 或 denied，都會計入用量。批次操作中的每個獨立推理動作分別計算。您可以在儀表板即時查看當月用量。</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggleFaq(this)">
+        <span>企業版的 SLA 保證具體內容是什麼？</span>
+        <span class="arrow">&#9660;</span>
+      </button>
+      <div class="faq-answer">
+        <p>企業版提供 99.9% 的服務可用性保證（每月停機時間不超過 43 分鐘）。若未達到承諾標準，我們將依合約條款提供服務費用抵免。此外，企業客戶享有專屬客服經理、優先技術支援（響應時間 &lt; 2 小時），以及每季度的服務檢討會議。</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggleFaq(this)">
+        <span>可以隨時升級或降級方案嗎？</span>
+        <span class="arrow">&#9660;</span>
+      </button>
+      <div class="faq-answer">
+        <p>可以。所有方案無綁約限制，您可以隨時在帳戶設定中升級或降級。升級時立即生效，依比例計費；降級則在當期結束後生效。您的約束規則設定和稽核紀錄不會因方案變更而遺失，但降級後超出方案範圍的功能將暫停存取。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-section">
+    <h2>準備好開始了嗎？</h2>
+    <p>立即註冊免費帳號，體驗 SEOBAIKE 如何為你的 AI 建立安全合規的約束框架。</p>
+    <a href="/login" class="btn-cta">免費註冊，立即體驗</a>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <h3>SEOBAIKE</h3>
+        <p>小路光有限公司（統編 60475510）<br>AI 約束推理平台 — AI 界的 App Store<br>台灣專利 TW-115100981</p>
+      </div>
+      <div class="footer-col">
+        <h4>產品</h4>
+        <a href="/features">平台功能</a>
+        <a href="/pricing">方案定價</a>
+        <a href="/docs">技術文件</a>
+      </div>
+      <div class="footer-col">
+        <h4>公司</h4>
+        <a href="/about">關於我們</a>
+        <a href="/contact">聯繫我們</a>
+        <a href="/about#careers">加入團隊</a>
+      </div>
+      <div class="footer-col">
+        <h4>資源</h4>
+        <a href="/docs#api">API 文件</a>
+        <a href="/docs#changelog">更新日誌</a>
+        <a href="/docs#status">系統狀態</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2025-2026 小路光有限公司。保留所有權利。</p>
+      <p>aiforseo.vip</p>
+    </div>
+  </footer>
+
+  <script>
+    // Mobile hamburger menu
+    document.getElementById('hamburger').addEventListener('click', function () {
+      document.getElementById('navLinks').classList.toggle('open');
+    });
+
+    // FAQ accordion
+    function toggleFaq(button) {
+      var item = button.parentElement;
+      var wasOpen = item.classList.contains('open');
+
+      // Close all
+      document.querySelectorAll('.faq-item').forEach(function (el) {
+        el.classList.remove('open');
+      });
+
+      // Toggle current
+      if (!wasOpen) {
+        item.classList.add('open');
+      }
+    }
+  </script>
+
+</body>
+</html>

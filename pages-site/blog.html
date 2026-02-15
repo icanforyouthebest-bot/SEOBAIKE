@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>最新消息 - SEOBAIKE 約束推理平台</title>
+<meta name="description" content="SEOBAIKE 最新消息：平台上線公告、技術架構說明、產業節點建置進度、CaaS 白皮書發布等最新動態。">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#0a0a1a;--card:#111122;--card2:#161630;--border:#1e1e3a;
+  --orange:#e8850c;--copper:#cc785c;--green:#76b900;
+  --text:#e2e8f0;--dim:#8892a4;--white:#ffffff;
+}
+body{background:var(--bg);color:var(--text);font-family:'Segoe UI',-apple-system,BlinkMacSystemFont,sans-serif;line-height:1.7}
+a{color:var(--orange);text-decoration:none;transition:color .2s}
+a:hover{color:var(--copper)}
+
+/* Navigation */
+.nav{position:sticky;top:0;z-index:100;background:rgba(10,10,26,.92);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);padding:0 24px}
+.nav-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:64px}
+.nav-logo{font-size:20px;font-weight:800;background:linear-gradient(135deg,var(--orange),var(--copper));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.nav-links{display:flex;gap:24px;align-items:center}
+.nav-links a{color:var(--dim);font-size:14px;font-weight:500;transition:color .2s}
+.nav-links a:hover,.nav-links a.active{color:var(--orange)}
+.nav-toggle{display:none;background:none;border:none;color:var(--text);font-size:24px;cursor:pointer}
+
+/* Hero */
+.hero{background:linear-gradient(160deg,#0f0f2a 0%,#1a1020 50%,#0a0a1a 100%);padding:80px 24px 60px;text-align:center;border-bottom:1px solid var(--border)}
+.hero h1{font-size:48px;font-weight:800;background:linear-gradient(135deg,var(--orange),var(--copper),var(--green));-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:16px}
+.hero p{font-size:18px;color:var(--dim);max-width:600px;margin:0 auto}
+
+/* Container */
+.container{max-width:900px;margin:0 auto;padding:60px 24px}
+
+/* Blog Cards */
+.blog-list{display:flex;flex-direction:column;gap:32px}
+
+.blog-card{background:var(--card);border:1px solid var(--border);border-radius:16px;overflow:hidden;transition:border-color .3s,transform .3s}
+.blog-card:hover{border-color:var(--orange);transform:translateY(-3px)}
+
+.blog-card-inner{padding:32px}
+
+.blog-meta{display:flex;align-items:center;gap:12px;margin-bottom:16px;flex-wrap:wrap}
+.blog-date{font-size:13px;color:var(--dim);font-weight:500;display:flex;align-items:center;gap:6px}
+.blog-date::before{content:'';display:inline-block;width:8px;height:8px;background:var(--orange);border-radius:50%}
+.blog-tag{display:inline-block;padding:3px 10px;border-radius:6px;font-size:11px;font-weight:600;background:rgba(232,133,12,.1);color:var(--orange);border:1px solid rgba(232,133,12,.2)}
+
+.blog-title{font-size:24px;font-weight:700;color:var(--white);margin-bottom:12px;line-height:1.4}
+.blog-title a{color:var(--white);transition:color .2s}
+.blog-title a:hover{color:var(--orange)}
+
+.blog-excerpt{font-size:15px;color:var(--dim);line-height:1.8;margin-bottom:20px}
+
+.blog-read-more{display:inline-flex;align-items:center;gap:8px;color:var(--orange);font-size:14px;font-weight:600;padding:8px 20px;border:1px solid rgba(232,133,12,.3);border-radius:8px;transition:all .2s}
+.blog-read-more:hover{background:rgba(232,133,12,.1);border-color:var(--orange);color:var(--copper)}
+.blog-read-more .arrow{transition:transform .2s}
+.blog-read-more:hover .arrow{transform:translateX(4px)}
+
+/* Featured card (first one) */
+.blog-card.featured{border-color:rgba(232,133,12,.3);background:linear-gradient(135deg,var(--card) 0%,rgba(232,133,12,.04) 100%)}
+.blog-card.featured .blog-tag{background:rgba(118,185,0,.12);color:var(--green);border-color:rgba(118,185,0,.25)}
+
+/* Divider line between date group */
+.blog-divider{display:flex;align-items:center;gap:16px;margin:16px 0}
+.blog-divider span{font-size:13px;color:var(--dim);white-space:nowrap}
+.blog-divider::after{content:'';flex:1;height:1px;background:var(--border)}
+
+/* Sidebar / Newsletter */
+.newsletter{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:32px;margin-top:48px;text-align:center}
+.newsletter h3{font-size:20px;font-weight:700;color:var(--white);margin-bottom:8px}
+.newsletter p{font-size:14px;color:var(--dim);margin-bottom:20px}
+.newsletter-form{display:flex;gap:8px;max-width:420px;margin:0 auto}
+.newsletter-form input{flex:1;padding:12px 16px;border:1px solid var(--border);border-radius:8px;background:var(--bg);color:var(--text);font-size:14px}
+.newsletter-form input:focus{outline:none;border-color:var(--orange)}
+.newsletter-form button{padding:12px 24px;background:linear-gradient(135deg,var(--orange),var(--copper));border:none;border-radius:8px;color:var(--white);font-weight:600;font-size:14px;cursor:pointer;transition:opacity .2s;white-space:nowrap}
+.newsletter-form button:hover{opacity:.9}
+
+/* Footer */
+.footer{background:var(--card);border-top:1px solid var(--border);padding:40px 24px;text-align:center;margin-top:64px}
+.footer-inner{max-width:1000px;margin:0 auto}
+.footer-brand{font-size:18px;font-weight:700;background:linear-gradient(135deg,var(--orange),var(--copper));-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:8px}
+.footer-company{font-size:13px;color:var(--dim);margin-bottom:16px}
+.footer-links{display:flex;justify-content:center;gap:24px;flex-wrap:wrap;margin-bottom:16px}
+.footer-links a{color:var(--dim);font-size:13px}
+.footer-links a:hover{color:var(--orange)}
+.footer-copy{font-size:12px;color:#444}
+
+/* Responsive */
+@media(max-width:768px){
+  .nav-links{display:none;position:absolute;top:64px;left:0;right:0;background:rgba(10,10,26,.98);flex-direction:column;padding:20px 24px;gap:16px;border-bottom:1px solid var(--border)}
+  .nav-links.open{display:flex}
+  .nav-toggle{display:block}
+  .hero h1{font-size:32px}
+  .hero p{font-size:15px}
+  .blog-card-inner{padding:20px}
+  .blog-title{font-size:20px}
+  .newsletter-form{flex-direction:column}
+}
+</style>
+</head>
+<body>
+
+<!-- Navigation -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="/" class="nav-logo">SEOBAIKE</a>
+    <button class="nav-toggle" onclick="document.querySelector('.nav-links').classList.toggle('open')">&#9776;</button>
+    <div class="nav-links">
+      <a href="/">首頁</a>
+      <a href="/features">功能</a>
+      <a href="/pricing">價格</a>
+      <a href="/docs">API 文件</a>
+      <a href="/about">關於</a>
+      <a href="/contact">聯絡</a>
+      <a href="/login">登入</a>
+    </div>
+  </div>
+</nav>
+
+<!-- Hero -->
+<section class="hero">
+  <h1>最新消息</h1>
+  <p>SEOBAIKE 平台公告、技術文章、產業動態與白皮書發布</p>
+</section>
+
+<div class="container">
+
+  <!-- Blog Posts -->
+  <div class="blog-list">
+
+    <!-- Post 1: Featured -->
+    <article class="blog-card featured">
+      <div class="blog-card-inner">
+        <div class="blog-meta">
+          <span class="blog-date">2026 年 2 月 15 日</span>
+          <span class="blog-tag" style="background:rgba(118,185,0,.12);color:var(--green);border-color:rgba(118,185,0,.25)">平台公告</span>
+        </div>
+        <h2 class="blog-title">
+          <a href="/blog/seobaike-launch">SEOBAIKE 平台正式上線</a>
+        </h2>
+        <p class="blog-excerpt">
+          SEOBAIKE 約束推理平台今日正式開放公測！作為全球首個基於「世界定義約束法」（專利 TW-115100981）的 AI 推理平台，SEOBAIKE 透過 L1-L4 四層產業約束結構，確保每一次 AI 推理都在合法且可驗證的路徑上執行。平台目前已整合 14 個 AI 夥伴與 26 個協作平台，涵蓋 766 個產業節點。開發者可立即註冊取得 API 金鑰，開始體驗約束推理的全新範式。
+        </p>
+        <a href="/blog/seobaike-launch" class="blog-read-more">
+          閱讀更多 <span class="arrow">&rarr;</span>
+        </a>
+      </div>
+    </article>
+
+    <!-- Post 2 -->
+    <article class="blog-card">
+      <div class="blog-card-inner">
+        <div class="blog-meta">
+          <span class="blog-date">2026 年 2 月 14 日</span>
+          <span class="blog-tag">技術更新</span>
+        </div>
+        <h2 class="blog-title">
+          <a href="/blog/l1-l4-complete">L1-L4 約束結構完成</a>
+        </h2>
+        <p class="blog-excerpt">
+          歷時數月的資料建置工程，SEOBAIKE 的 L1-L4 約束結構已全面完成。共計 766 個產業節點已全數建置並通過驗證，涵蓋製造業、服務業、農業、資訊科技等主要產業類別。每個節點皆對齊 TSIC、NAICS、NACE、JSIC 四大國際產業標準代碼，確保跨國合規性。所有節點已啟用 is_frozen 凍結保護機制，透過資料庫 Trigger 防止未授權修改。
+        </p>
+        <a href="/blog/l1-l4-complete" class="blog-read-more">
+          閱讀更多 <span class="arrow">&rarr;</span>
+        </a>
+      </div>
+    </article>
+
+    <!-- Post 3 -->
+    <article class="blog-card">
+      <div class="blog-card-inner">
+        <div class="blog-meta">
+          <span class="blog-date">2026 年 2 月 10 日</span>
+          <span class="blog-tag">技術解析</span>
+        </div>
+        <h2 class="blog-title">
+          <a href="/blog/patent-tw115100981">專利 TW-115100981 技術說明</a>
+        </h2>
+        <p class="blog-excerpt">
+          「世界定義約束法用於 AI 推理」（TW-115100981）是 SEOBAIKE 平台的核心專利技術。本文深入解析其四層約束架構：L1 宏觀產業類別、L2 次產業分類、L3 製程作業類型、L4 原子級工業節點。每一次 AI 推理動作前，系統必須呼叫 check_inference_path() 驗證路徑合法性，只有取得「allowed」狀態才能執行，從根本上解決了 AI 幻覺與越權推理的問題。
+        </p>
+        <a href="/blog/patent-tw115100981" class="blog-read-more">
+          閱讀更多 <span class="arrow">&rarr;</span>
+        </a>
+      </div>
+    </article>
+
+    <!-- Post 4 -->
+    <article class="blog-card">
+      <div class="blog-card-inner">
+        <div class="blog-meta">
+          <span class="blog-date">2026 年 2 月 1 日</span>
+          <span class="blog-tag">白皮書</span>
+        </div>
+        <h2 class="blog-title">
+          <a href="/blog/caas-whitepaper">CaaS 架構白皮書發布</a>
+        </h2>
+        <p class="blog-excerpt">
+          Constraint-as-a-Service（CaaS）是 SEOBAIKE 提出的全新 AI 治理架構。不同於傳統的 SaaS 模式，CaaS 將「約束」本身作為服務提供：人類負責決策、AI 負責執行，而約束結構確保 AI 永遠在授權範圍內運作。本白皮書完整闡述 CaaS 的設計哲學、技術實現、商業模式（過路費 + 分潤），以及如何將 SEOBAIKE 定位為「AI 界的 App Store」——不做 MCP，而是做讓 MCP 跑的平台。
+        </p>
+        <a href="/blog/caas-whitepaper" class="blog-read-more">
+          閱讀更多 <span class="arrow">&rarr;</span>
+        </a>
+      </div>
+    </article>
+
+  </div>
+
+  <!-- Newsletter -->
+  <div class="newsletter">
+    <h3>訂閱最新動態</h3>
+    <p>輸入您的電子郵件，第一時間接收 SEOBAIKE 平台公告與技術文章</p>
+    <div class="newsletter-form">
+      <input type="email" id="newsletter-email" placeholder="your@email.com" aria-label="電子郵件">
+      <button onclick="subscribeNewsletter()">訂閱</button>
+    </div>
+    <p id="newsletter-msg" style="margin-top:12px;font-size:13px;display:none"></p>
+  </div>
+
+</div>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-brand">SEOBAIKE</div>
+    <div class="footer-company">小路光有限公司 | 統編 60475510</div>
+    <div class="footer-links">
+      <a href="/">首頁</a>
+      <a href="/features">功能</a>
+      <a href="/pricing">價格</a>
+      <a href="/docs">API 文件</a>
+      <a href="/about">關於我們</a>
+      <a href="/contact">聯絡我們</a>
+      <a href="/ecosystem">生態圈</a>
+    </div>
+    <div class="footer-copy">&copy; 2024-2026 SEOBAIKE. 台灣專利 TW-115100981. All rights reserved.</div>
+  </div>
+</footer>
+
+<script>
+function subscribeNewsletter() {
+  const email = document.getElementById('newsletter-email').value.trim();
+  const msg = document.getElementById('newsletter-msg');
+  if (!email || !email.includes('@')) {
+    msg.style.display = 'block';
+    msg.style.color = '#e8850c';
+    msg.textContent = '請輸入有效的電子郵件地址';
+    return;
+  }
+  msg.style.display = 'block';
+  msg.style.color = '#76b900';
+  msg.textContent = '感謝訂閱！您將收到 SEOBAIKE 的最新消息。';
+  document.getElementById('newsletter-email').value = '';
+}
+</script>
+
+</body>
+</html>

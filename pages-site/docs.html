@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>API 文件 - SEOBAIKE 約束推理平台</title>
+<meta name="description" content="SEOBAIKE API 文件：約束推理引擎、AI 閘道、L1-L4 產業節點查詢、路徑驗證等完整 API 參考。">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#0a0a1a;--card:#111122;--card2:#161630;--border:#1e1e3a;
+  --orange:#e8850c;--copper:#cc785c;--green:#76b900;
+  --text:#e2e8f0;--dim:#8892a4;--white:#ffffff;
+  --code-bg:#0d0d20;--code-border:#252545;
+}
+body{background:var(--bg);color:var(--text);font-family:'Segoe UI',-apple-system,BlinkMacSystemFont,sans-serif;line-height:1.7}
+a{color:var(--orange);text-decoration:none;transition:color .2s}
+a:hover{color:var(--copper)}
+
+/* Navigation */
+.nav{position:sticky;top:0;z-index:100;background:rgba(10,10,26,.92);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);padding:0 24px}
+.nav-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:64px}
+.nav-logo{font-size:20px;font-weight:800;background:linear-gradient(135deg,var(--orange),var(--copper));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.nav-links{display:flex;gap:24px;align-items:center}
+.nav-links a{color:var(--dim);font-size:14px;font-weight:500;transition:color .2s}
+.nav-links a:hover,.nav-links a.active{color:var(--orange)}
+.nav-toggle{display:none;background:none;border:none;color:var(--text);font-size:24px;cursor:pointer}
+
+/* Hero */
+.hero{background:linear-gradient(160deg,#0f0f2a 0%,#1a1020 50%,#0a0a1a 100%);padding:80px 24px 60px;text-align:center;border-bottom:1px solid var(--border)}
+.hero h1{font-size:48px;font-weight:800;background:linear-gradient(135deg,var(--orange),var(--copper),var(--green));-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:16px}
+.hero p{font-size:18px;color:var(--dim);max-width:600px;margin:0 auto}
+
+/* Container */
+.container{max-width:1000px;margin:0 auto;padding:60px 24px}
+
+/* Section */
+.section{margin-bottom:64px}
+.section-title{font-size:28px;font-weight:700;color:var(--white);margin-bottom:8px;display:flex;align-items:center;gap:12px}
+.section-title::before{content:'';display:inline-block;width:4px;height:28px;background:var(--orange);border-radius:2px}
+.section-desc{color:var(--dim);font-size:15px;margin-bottom:32px}
+
+/* Quick Start Steps */
+.steps{display:flex;flex-direction:column;gap:24px}
+.step{display:flex;gap:20px;align-items:flex-start}
+.step-num{flex-shrink:0;width:40px;height:40px;background:linear-gradient(135deg,var(--orange),var(--copper));border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:16px;color:var(--white)}
+.step-content h3{font-size:17px;font-weight:600;color:var(--white);margin-bottom:4px}
+.step-content p{font-size:14px;color:var(--dim)}
+
+/* API Endpoint Table */
+.endpoint-list{display:flex;flex-direction:column;gap:16px}
+.endpoint{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:24px;transition:border-color .2s}
+.endpoint:hover{border-color:var(--orange)}
+.endpoint-header{display:flex;align-items:center;gap:12px;margin-bottom:10px;flex-wrap:wrap}
+.method{padding:4px 12px;border-radius:6px;font-size:12px;font-weight:700;font-family:'Consolas','Courier New',monospace;letter-spacing:.5px}
+.method.post{background:rgba(232,133,12,.15);color:var(--orange);border:1px solid rgba(232,133,12,.3)}
+.method.get{background:rgba(118,185,0,.15);color:var(--green);border:1px solid rgba(118,185,0,.3)}
+.endpoint-path{font-family:'Consolas','Courier New',monospace;font-size:14px;color:var(--white);word-break:break-all}
+.endpoint-name{font-size:16px;font-weight:600;color:var(--copper);margin-bottom:6px}
+.endpoint-desc{font-size:14px;color:var(--dim);line-height:1.6}
+.endpoint-tag{display:inline-block;padding:2px 8px;border-radius:4px;font-size:11px;background:rgba(204,120,92,.12);color:var(--copper);border:1px solid rgba(204,120,92,.25);margin-left:auto}
+
+/* Code Block */
+.code-block{background:var(--code-bg);border:1px solid var(--code-border);border-radius:10px;overflow:hidden;margin:16px 0}
+.code-header{background:rgba(30,30,58,.6);padding:10px 16px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--code-border)}
+.code-header span{font-size:12px;color:var(--dim);font-family:'Consolas','Courier New',monospace}
+.code-copy{background:none;border:1px solid var(--border);color:var(--dim);padding:4px 10px;border-radius:6px;font-size:11px;cursor:pointer;transition:all .2s}
+.code-copy:hover{color:var(--orange);border-color:var(--orange)}
+.code-body{padding:16px 20px;overflow-x:auto}
+.code-body pre{margin:0;font-family:'Consolas','Courier New',monospace;font-size:13px;line-height:1.8;color:#c4c8d4;white-space:pre;tab-size:2}
+.code-body .comment{color:#5a6070}
+.code-body .string{color:var(--green)}
+.code-body .keyword{color:var(--orange)}
+.code-body .key{color:var(--copper)}
+
+/* Auth Section */
+.auth-box{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:28px;margin-top:20px}
+.auth-box h3{font-size:17px;font-weight:600;color:var(--white);margin-bottom:12px}
+.auth-box p{font-size:14px;color:var(--dim);margin-bottom:12px}
+.auth-flow{display:flex;flex-wrap:wrap;gap:12px;margin-top:16px}
+.auth-step{flex:1;min-width:200px;background:var(--card2);border:1px solid var(--border);border-radius:8px;padding:16px;text-align:center}
+.auth-step .num{font-size:24px;font-weight:700;color:var(--orange);margin-bottom:4px}
+.auth-step .label{font-size:13px;color:var(--dim)}
+
+/* Rate Limit Table */
+.rate-table{width:100%;border-collapse:collapse;margin-top:20px}
+.rate-table th,.rate-table td{padding:14px 16px;text-align:left;border-bottom:1px solid var(--border);font-size:14px}
+.rate-table th{background:var(--card);color:var(--copper);font-weight:600;font-size:13px;text-transform:uppercase;letter-spacing:.5px}
+.rate-table td{color:var(--dim)}
+.rate-table tr:hover td{color:var(--text)}
+.rate-table .limit-val{color:var(--orange);font-weight:600;font-family:'Consolas','Courier New',monospace}
+
+/* Response Format */
+.response-block{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:24px;margin-top:16px}
+.response-block h4{font-size:15px;color:var(--white);margin-bottom:12px}
+.status-badge{display:inline-block;padding:3px 10px;border-radius:4px;font-size:12px;font-weight:600;font-family:'Consolas','Courier New',monospace}
+.status-badge.s200{background:rgba(118,185,0,.15);color:var(--green)}
+.status-badge.s401{background:rgba(232,133,12,.15);color:var(--orange)}
+.status-badge.s429{background:rgba(204,120,92,.15);color:var(--copper)}
+
+/* Footer */
+.footer{background:var(--card);border-top:1px solid var(--border);padding:40px 24px;text-align:center}
+.footer-inner{max-width:1000px;margin:0 auto}
+.footer-brand{font-size:18px;font-weight:700;background:linear-gradient(135deg,var(--orange),var(--copper));-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:8px}
+.footer-company{font-size:13px;color:var(--dim);margin-bottom:16px}
+.footer-links{display:flex;justify-content:center;gap:24px;flex-wrap:wrap;margin-bottom:16px}
+.footer-links a{color:var(--dim);font-size:13px}
+.footer-links a:hover{color:var(--orange)}
+.footer-copy{font-size:12px;color:#444}
+
+/* Responsive */
+@media(max-width:768px){
+  .nav-links{display:none;position:absolute;top:64px;left:0;right:0;background:rgba(10,10,26,.98);flex-direction:column;padding:20px 24px;gap:16px;border-bottom:1px solid var(--border)}
+  .nav-links.open{display:flex}
+  .nav-toggle{display:block}
+  .hero h1{font-size:32px}
+  .hero p{font-size:15px}
+  .endpoint-header{flex-direction:column;align-items:flex-start;gap:8px}
+  .endpoint-tag{margin-left:0}
+  .auth-flow{flex-direction:column}
+  .rate-table{font-size:12px}
+  .rate-table th,.rate-table td{padding:10px 8px}
+}
+</style>
+</head>
+<body>
+
+<!-- Navigation -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="/" class="nav-logo">SEOBAIKE</a>
+    <button class="nav-toggle" onclick="document.querySelector('.nav-links').classList.toggle('open')">&#9776;</button>
+    <div class="nav-links">
+      <a href="/">首頁</a>
+      <a href="/features">功能</a>
+      <a href="/pricing">價格</a>
+      <a href="/docs" class="active">API 文件</a>
+      <a href="/about">關於</a>
+      <a href="/contact">聯絡</a>
+      <a href="/login">登入</a>
+    </div>
+  </div>
+</nav>
+
+<!-- Hero -->
+<section class="hero">
+  <h1>API 文件</h1>
+  <p>完整的約束推理平台 API 參考文件，涵蓋推理引擎、AI 閘道、產業節點查詢及路徑驗證</p>
+</section>
+
+<div class="container">
+
+  <!-- Quick Start -->
+  <section class="section">
+    <h2 class="section-title">快速開始</h2>
+    <p class="section-desc">只需三個步驟即可開始使用 SEOBAIKE 約束推理 API</p>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-content">
+          <h3>取得 API 金鑰</h3>
+          <p>在 SEOBAIKE 平台註冊帳號後，前往控制台取得您的 Bearer Token。所有 API 呼叫都需要透過 Supabase Auth 進行身份驗證。</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-content">
+          <h3>設定 Base URL</h3>
+          <p>所有 API 請求的基礎網址為 <code style="background:var(--code-bg);padding:2px 8px;border-radius:4px;font-family:Consolas,monospace;font-size:13px;color:var(--orange)">https://vmyrivxxibqydccurxug.supabase.co</code></p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-content">
+          <h3>發送第一個請求</h3>
+          <p>使用下方的 curl 範例進行測試。建議先呼叫 <code style="background:var(--code-bg);padding:2px 8px;border-radius:4px;font-family:Consolas,monospace;font-size:13px;color:var(--green)">check_inference_path</code> 驗證路徑是否合法。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- API Endpoints -->
+  <section class="section">
+    <h2 class="section-title">API 端點</h2>
+    <p class="section-desc">以下列出所有可用的 API 端點，包含約束推理引擎、AI 閘道、產業節點查詢與路徑驗證</p>
+
+    <div class="endpoint-list">
+
+      <!-- Endpoint 1 -->
+      <div class="endpoint">
+        <div class="endpoint-header">
+          <span class="method post">POST</span>
+          <span class="endpoint-path">/functions/v1/nvidia-boss</span>
+          <span class="endpoint-tag">核心引擎</span>
+        </div>
+        <div class="endpoint-name">約束推理引擎</div>
+        <div class="endpoint-desc">SEOBAIKE 主要 AI 推理引擎。接收使用者提示詞後，經過 L1-L4 約束層驗證，產生符合專利規範的推理結果。支援多輪對話與上下文記憶。</div>
+      </div>
+
+      <!-- Endpoint 2 -->
+      <div class="endpoint">
+        <div class="endpoint-header">
+          <span class="method post">POST</span>
+          <span class="endpoint-path">/functions/v1/ai-gateway</span>
+          <span class="endpoint-tag">閘道路由</span>
+        </div>
+        <div class="endpoint-name">AI 閘道</div>
+        <div class="endpoint-desc">多平台 AI 路由閘道。根據請求內容自動分配至最適合的 AI 夥伴（OpenAI、Anthropic、DeepSeek 等），實現負載均衡與容錯切換。</div>
+      </div>
+
+      <!-- Endpoint 3 -->
+      <div class="endpoint">
+        <div class="endpoint-header">
+          <span class="method get">GET</span>
+          <span class="endpoint-path">/rest/v1/l1_categories</span>
+          <span class="endpoint-tag">約束結構</span>
+        </div>
+        <div class="endpoint-name">L1 產業類別查詢</div>
+        <div class="endpoint-desc">查詢 L1 層級的宏觀產業分類。包含 TSIC、NAICS、NACE、JSIC 多國標準代碼對齊。支援 is_frozen 欄位篩選及分頁查詢。</div>
+      </div>
+
+      <!-- Endpoint 4 -->
+      <div class="endpoint">
+        <div class="endpoint-header">
+          <span class="method get">GET</span>
+          <span class="endpoint-path">/rest/v1/l2_subcategories</span>
+          <span class="endpoint-tag">約束結構</span>
+        </div>
+        <div class="endpoint-name">L2 次產業查詢</div>
+        <div class="endpoint-desc">查詢 L2 層級的次產業分類。透過外鍵關聯至 L1 類別，可使用 select 參數展開父層資料。支援 PostgREST 過濾語法。</div>
+      </div>
+
+      <!-- Endpoint 5 -->
+      <div class="endpoint">
+        <div class="endpoint-header">
+          <span class="method get">GET</span>
+          <span class="endpoint-path">/rest/v1/l3_processes</span>
+          <span class="endpoint-tag">約束結構</span>
+        </div>
+        <div class="endpoint-name">L3 製程查詢</div>
+        <div class="endpoint-desc">查詢 L3 層級的製程與作業類型。透過外鍵關聯至 L2 次產業，涵蓋各產業的標準化製程定義與工序描述。</div>
+      </div>
+
+      <!-- Endpoint 6 -->
+      <div class="endpoint">
+        <div class="endpoint-header">
+          <span class="method get">GET</span>
+          <span class="endpoint-path">/rest/v1/l4_nodes</span>
+          <span class="endpoint-tag">約束結構</span>
+        </div>
+        <div class="endpoint-name">L4 原子節點查詢</div>
+        <div class="endpoint-desc">查詢 L4 層級的原子級工業節點。每個節點為約束結構中最細粒度的單元，包含 766 個產業節點的完整定義與屬性。</div>
+      </div>
+
+      <!-- Endpoint 7 -->
+      <div class="endpoint">
+        <div class="endpoint-header">
+          <span class="method post">POST</span>
+          <span class="endpoint-path">/rest/v1/rpc/check_inference_path</span>
+          <span class="endpoint-tag">路徑驗證</span>
+        </div>
+        <div class="endpoint-name">路徑驗證</div>
+        <div class="endpoint-desc">驗證 L1 &rarr; L2 &rarr; L3 &rarr; L4 推理路徑是否合法。每次 AI 動作前必須先呼叫此端點。回傳 allowed / denied / halted 狀態。這是專利 TW-115100981 的核心機制。</div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Code Examples -->
+  <section class="section">
+    <h2 class="section-title">程式碼範例</h2>
+    <p class="section-desc">使用 curl 呼叫 API 的完整範例，可直接複製貼上至終端機執行</p>
+
+    <!-- Example 1: nvidia-boss -->
+    <h3 style="color:var(--white);font-size:16px;margin-bottom:8px">呼叫約束推理引擎</h3>
+    <div class="code-block">
+      <div class="code-header">
+        <span>bash</span>
+        <button class="code-copy" onclick="copyCode(this)">複製</button>
+      </div>
+      <div class="code-body">
+<pre><span class="comment"># 呼叫 SEOBAIKE 約束推理引擎</span>
+<span class="keyword">curl</span> -X POST \
+  https://vmyrivxxibqydccurxug.supabase.co/functions/v1/nvidia-boss \
+  -H <span class="string">"Authorization: Bearer YOUR_ACCESS_TOKEN"</span> \
+  -H <span class="string">"Content-Type: application/json"</span> \
+  -d <span class="string">'{
+    "prompt": "分析半導體產業的 L1-L4 約束路徑",
+    "max_tokens": 1024,
+    "l1_id": "manufacturing",
+    "l2_id": "semiconductor"
+  }'</span></pre>
+      </div>
+    </div>
+
+    <!-- Example 2: check_inference_path -->
+    <h3 style="color:var(--white);font-size:16px;margin:24px 0 8px">驗證推理路徑</h3>
+    <div class="code-block">
+      <div class="code-header">
+        <span>bash</span>
+        <button class="code-copy" onclick="copyCode(this)">複製</button>
+      </div>
+      <div class="code-body">
+<pre><span class="comment"># 驗證 L1 → L2 → L3 → L4 路徑是否合法</span>
+<span class="keyword">curl</span> -X POST \
+  https://vmyrivxxibqydccurxug.supabase.co/rest/v1/rpc/check_inference_path \
+  -H <span class="string">"Authorization: Bearer YOUR_ACCESS_TOKEN"</span> \
+  -H <span class="string">"apikey: YOUR_ANON_KEY"</span> \
+  -H <span class="string">"Content-Type: application/json"</span> \
+  -d <span class="string">'{
+    "p_l1_id": 1,
+    "p_l2_id": 5,
+    "p_l3_id": 12,
+    "p_l4_id": 42
+  }'</span></pre>
+      </div>
+    </div>
+
+    <!-- Example 3: Query L1 -->
+    <h3 style="color:var(--white);font-size:16px;margin:24px 0 8px">查詢 L1 產業類別</h3>
+    <div class="code-block">
+      <div class="code-header">
+        <span>bash</span>
+        <button class="code-copy" onclick="copyCode(this)">複製</button>
+      </div>
+      <div class="code-body">
+<pre><span class="comment"># 取得所有 L1 產業類別</span>
+<span class="keyword">curl</span> -X GET \
+  <span class="string">"https://vmyrivxxibqydccurxug.supabase.co/rest/v1/l1_categories?select=*"</span> \
+  -H <span class="string">"Authorization: Bearer YOUR_ACCESS_TOKEN"</span> \
+  -H <span class="string">"apikey: YOUR_ANON_KEY"</span>
+
+<span class="comment"># 查詢特定類別並展開 L2 子分類</span>
+<span class="keyword">curl</span> -X GET \
+  <span class="string">"https://vmyrivxxibqydccurxug.supabase.co/rest/v1/l1_categories?select=*,l2_subcategories(*)&amp;id=eq.1"</span> \
+  -H <span class="string">"Authorization: Bearer YOUR_ACCESS_TOKEN"</span> \
+  -H <span class="string">"apikey: YOUR_ANON_KEY"</span></pre>
+      </div>
+    </div>
+
+    <!-- Example 4: AI Gateway -->
+    <h3 style="color:var(--white);font-size:16px;margin:24px 0 8px">呼叫 AI 閘道</h3>
+    <div class="code-block">
+      <div class="code-header">
+        <span>bash</span>
+        <button class="code-copy" onclick="copyCode(this)">複製</button>
+      </div>
+      <div class="code-body">
+<pre><span class="comment"># 透過 AI 閘道路由至最佳 AI 夥伴</span>
+<span class="keyword">curl</span> -X POST \
+  https://vmyrivxxibqydccurxug.supabase.co/functions/v1/ai-gateway \
+  -H <span class="string">"Authorization: Bearer YOUR_ACCESS_TOKEN"</span> \
+  -H <span class="string">"Content-Type: application/json"</span> \
+  -d <span class="string">'{
+    "messages": [
+      {"role": "user", "content": "分析台灣製造業趨勢"}
+    ],
+    "preferred_provider": "auto",
+    "max_tokens": 2048
+  }'</span></pre>
+      </div>
+    </div>
+  </section>
+
+  <!-- Response Format -->
+  <section class="section">
+    <h2 class="section-title">回應格式</h2>
+    <p class="section-desc">所有 API 回應均為 JSON 格式，以下為各端點的回應範例</p>
+
+    <div class="response-block">
+      <h4>約束推理引擎回應 <span class="status-badge s200">200 OK</span></h4>
+      <div class="code-block" style="margin-top:12px">
+        <div class="code-header"><span>json</span></div>
+        <div class="code-body">
+<pre>{
+  <span class="key">"status"</span>: <span class="string">"success"</span>,
+  <span class="key">"response"</span>: <span class="string">"半導體產業的約束路徑分析結果..."</span>,
+  <span class="key">"model"</span>: <span class="string">"nvidia/llama-3.1-nemotron-70b"</span>,
+  <span class="key">"constraint_path"</span>: {
+    <span class="key">"l1"</span>: <span class="string">"製造業"</span>,
+    <span class="key">"l2"</span>: <span class="string">"半導體製造"</span>,
+    <span class="key">"l3"</span>: <span class="string">"晶圓製程"</span>,
+    <span class="key">"l4"</span>: <span class="string">"光罩對準"</span>,
+    <span class="key">"validation"</span>: <span class="string">"allowed"</span>
+  },
+  <span class="key">"usage"</span>: {
+    <span class="key">"prompt_tokens"</span>: 156,
+    <span class="key">"completion_tokens"</span>: 892,
+    <span class="key">"total_tokens"</span>: 1048
+  }
+}</pre>
+        </div>
+      </div>
+    </div>
+
+    <div class="response-block" style="margin-top:16px">
+      <h4>路徑驗證回應 <span class="status-badge s200">200 OK</span></h4>
+      <div class="code-block" style="margin-top:12px">
+        <div class="code-header"><span>json</span></div>
+        <div class="code-body">
+<pre>{
+  <span class="key">"result"</span>: <span class="string">"allowed"</span>,
+  <span class="key">"path"</span>: {
+    <span class="key">"l1"</span>: { <span class="key">"id"</span>: 1, <span class="key">"name"</span>: <span class="string">"製造業"</span>, <span class="key">"tsic_code"</span>: <span class="string">"C"</span> },
+    <span class="key">"l2"</span>: { <span class="key">"id"</span>: 5, <span class="key">"name"</span>: <span class="string">"半導體製造"</span> },
+    <span class="key">"l3"</span>: { <span class="key">"id"</span>: 12, <span class="key">"name"</span>: <span class="string">"晶圓製程"</span> },
+    <span class="key">"l4"</span>: { <span class="key">"id"</span>: 42, <span class="key">"name"</span>: <span class="string">"光罩對準"</span>, <span class="key">"is_frozen"</span>: false }
+  },
+  <span class="key">"patent"</span>: <span class="string">"TW-115100981"</span>
+}</pre>
+        </div>
+      </div>
+    </div>
+
+    <div class="response-block" style="margin-top:16px">
+      <h4>錯誤回應範例 <span class="status-badge s401">401</span> <span class="status-badge s429" style="margin-left:6px">429</span></h4>
+      <div class="code-block" style="margin-top:12px">
+        <div class="code-header"><span>json</span></div>
+        <div class="code-body">
+<pre><span class="comment">// 401 未授權</span>
+{
+  <span class="key">"error"</span>: <span class="string">"unauthorized"</span>,
+  <span class="key">"message"</span>: <span class="string">"缺少有效的 Bearer Token，請先登入取得授權"</span>
+}
+
+<span class="comment">// 429 超過速率限制</span>
+{
+  <span class="key">"error"</span>: <span class="string">"rate_limit_exceeded"</span>,
+  <span class="key">"message"</span>: <span class="string">"請求過於頻繁，請稍後再試"</span>,
+  <span class="key">"retry_after"</span>: 60
+}</pre>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Authentication -->
+  <section class="section">
+    <h2 class="section-title">身份驗證</h2>
+    <p class="section-desc">所有 API 請求都需要有效的 Bearer Token 進行身份驗證</p>
+
+    <div class="auth-box">
+      <h3>驗證流程</h3>
+      <p>SEOBAIKE 使用 Supabase Auth 進行身份管理。您需要先註冊帳號並取得存取令牌，然後在每個 API 請求的 Header 中附帶 Bearer Token。</p>
+
+      <div class="auth-flow">
+        <div class="auth-step">
+          <div class="num">01</div>
+          <div class="label">註冊帳號<br><small style="color:#555">至 aiforseo.vip 註冊</small></div>
+        </div>
+        <div class="auth-step">
+          <div class="num">02</div>
+          <div class="label">取得 Token<br><small style="color:#555">控制台 &rarr; API 金鑰</small></div>
+        </div>
+        <div class="auth-step">
+          <div class="num">03</div>
+          <div class="label">附加 Header<br><small style="color:#555">Authorization: Bearer ...</small></div>
+        </div>
+        <div class="auth-step">
+          <div class="num">04</div>
+          <div class="label">開始使用<br><small style="color:#555">呼叫任何 API 端點</small></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="code-block" style="margin-top:20px">
+      <div class="code-header"><span>HTTP Header</span></div>
+      <div class="code-body">
+<pre><span class="comment"># 每個 API 請求都需要包含以下 Header</span>
+<span class="key">Authorization</span>: <span class="string">Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...</span>
+<span class="key">apikey</span>: <span class="string">YOUR_SUPABASE_ANON_KEY</span>
+<span class="key">Content-Type</span>: <span class="string">application/json</span></pre>
+      </div>
+    </div>
+  </section>
+
+  <!-- Rate Limits -->
+  <section class="section">
+    <h2 class="section-title">速率限制</h2>
+    <p class="section-desc">為確保服務品質與公平使用，各端點設有不同的速率限制</p>
+
+    <table class="rate-table">
+      <thead>
+        <tr>
+          <th>端點</th>
+          <th>限制</th>
+          <th>時間窗口</th>
+          <th>備註</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>約束推理引擎</td>
+          <td class="limit-val">60 次</td>
+          <td>每分鐘</td>
+          <td>含 L1-L4 路徑驗證</td>
+        </tr>
+        <tr>
+          <td>AI 閘道</td>
+          <td class="limit-val">120 次</td>
+          <td>每分鐘</td>
+          <td>依 AI 夥伴各自限制</td>
+        </tr>
+        <tr>
+          <td>L1-L4 查詢</td>
+          <td class="limit-val">300 次</td>
+          <td>每分鐘</td>
+          <td>RESTful 讀取操作</td>
+        </tr>
+        <tr>
+          <td>路徑驗證</td>
+          <td class="limit-val">200 次</td>
+          <td>每分鐘</td>
+          <td>RPC 呼叫</td>
+        </tr>
+        <tr>
+          <td>全域限制</td>
+          <td class="limit-val">1,000 次</td>
+          <td>每小時</td>
+          <td>所有端點合計</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p style="margin-top:16px;font-size:13px;color:var(--dim)">超過速率限制將收到 HTTP 429 回應，請等待 <code style="background:var(--code-bg);padding:2px 6px;border-radius:4px;font-family:Consolas,monospace;font-size:12px;color:var(--orange)">retry_after</code> 秒後再重試。需要更高的配額請聯繫 seobaike@aiforseo.vip。</p>
+  </section>
+
+</div>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-brand">SEOBAIKE</div>
+    <div class="footer-company">小路光有限公司 | 統編 60475510</div>
+    <div class="footer-links">
+      <a href="/">首頁</a>
+      <a href="/features">功能</a>
+      <a href="/pricing">價格</a>
+      <a href="/docs">API 文件</a>
+      <a href="/about">關於我們</a>
+      <a href="/contact">聯絡我們</a>
+      <a href="/ecosystem">生態圈</a>
+    </div>
+    <div class="footer-copy">&copy; 2024-2026 SEOBAIKE. 台灣專利 TW-115100981. All rights reserved.</div>
+  </div>
+</footer>
+
+<script>
+function copyCode(btn) {
+  const codeBody = btn.closest('.code-block').querySelector('pre');
+  const text = codeBody.textContent;
+  navigator.clipboard.writeText(text).then(() => {
+    btn.textContent = '已複製';
+    setTimeout(() => { btn.textContent = '複製'; }, 2000);
+  });
+}
+</script>
+
+</body>
+</html>

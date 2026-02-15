@@ -39,30 +39,46 @@ export default {
     const url = new URL(request.url)
     const path = url.pathname
 
-    // ── 總部儀表板 → 從 GitHub 取 pages-site/dashboard.html ──
-    if (path === '/dashboard' || path === '/dashboard/') {
-      const rawRes = await fetch('https://raw.githubusercontent.com/icanforyouthebest-bot/SEOBAIKE/master/pages-site/dashboard.html')
+    // ── 真實頁面路由 → 從 GitHub 取 pages-site/*.html ──
+    const SITE_PAGES: Record<string, string> = {
+      '/': 'index.html',
+      '/about': 'about.html',
+      '/features': 'features.html',
+      '/pricing': 'pricing.html',
+      '/docs': 'docs.html',
+      '/contact': 'contact.html',
+      '/blog': 'blog.html',
+      '/login': 'login.html',
+      '/dashboard': 'dashboard.html',
+      '/ecosystem': 'ecosystem.html',
+    }
+    const cleanPath = path.endsWith('/') && path !== '/' ? path.slice(0, -1) : path
+    const pageFile = SITE_PAGES[cleanPath]
+    if (pageFile) {
+      const rawRes = await fetch(`https://raw.githubusercontent.com/icanforyouthebest-bot/SEOBAIKE/master/pages-site/${pageFile}`)
       return new Response(rawRes.body, {
         status: rawRes.status,
         headers: { ...SITE_SECURITY_HEADERS, 'Content-Type': 'text/html; charset=utf-8', 'Cache-Control': 'public, max-age=60' },
       })
     }
 
-    // ── 非 /api/ 路徑 → 代理到 Cloudflare Pages（Framer SPA） ──
-    if (!path.startsWith('/api/') && path !== '/api') {
-      const pagesUrl = new URL(request.url)
-      pagesUrl.hostname = 'seobaike-site.pages.dev'
-      const pagesRes = await fetch(pagesUrl.toString(), {
-        method: request.method,
-        headers: request.headers,
-        redirect: 'follow',
+    // ── 靜態資源 → 代理到 GitHub pages-site/ ──
+    if (path.startsWith('/assets/') || path === '/favicon.svg' || path === '/favicon.ico' || path === '/og-image.png' || path === '/manifest.json' || path === '/seobaike-config.js' || path === '/seobaike-widget.js') {
+      const assetFile = path.startsWith('/') ? path.slice(1) : path
+      const rawRes = await fetch(`https://raw.githubusercontent.com/icanforyouthebest-bot/SEOBAIKE/master/pages-site/${assetFile}`)
+      const contentType = path.endsWith('.js') ? 'application/javascript' : path.endsWith('.css') ? 'text/css' : path.endsWith('.svg') ? 'image/svg+xml' : path.endsWith('.png') ? 'image/png' : path.endsWith('.ico') ? 'image/x-icon' : 'application/octet-stream'
+      return new Response(rawRes.body, {
+        status: rawRes.status,
+        headers: { ...SITE_SECURITY_HEADERS, 'Content-Type': contentType, 'Cache-Control': 'public, max-age=3600' },
       })
-      const res = new Response(pagesRes.body, pagesRes)
-      // 注入安全標頭
-      for (const [k, v] of Object.entries(SITE_SECURITY_HEADERS)) {
-        res.headers.set(k, v)
-      }
-      return res
+    }
+
+    // ── 其他非 /api/ 路徑 → 404 真實回應（不再 fallback 到 Framer 空殼） ──
+    if (!path.startsWith('/api/') && path !== '/api') {
+      return new Response('<!DOCTYPE html><html lang="zh-TW"><head><meta charset="UTF-8"><title>404 — SEOBAIKE</title><style>body{font-family:sans-serif;background:#0a0a1a;color:#eee;display:flex;justify-content:center;align-items:center;min-height:100vh;text-align:center;}h1{font-size:72px;color:#e8850c;margin-bottom:8px;}p{color:#888;}a{color:#76b900;}</style></head><body><div><h1>404</h1><p>頁面不存在</p><a href="/">回到首頁</a></div></body></html>', {
+        status: 404,
+        headers: { ...SITE_SECURITY_HEADERS, 'Content-Type': 'text/html; charset=utf-8' },
+      })
     }
 
     // CORS preflight — API 路徑統一處理

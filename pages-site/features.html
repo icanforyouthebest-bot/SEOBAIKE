@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>平台功能 — SEOBAIKE | AI 約束推理平台</title>
+  <meta name="description" content="SEOBAIKE 平台功能總覽：CaaS 約束即服務、L1-L4 產業節點、多國代碼對齊、即時稽核軌跡，為企業打造安全可控的 AI 推理環境。">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --orange: #e8850c;
+      --copper: #cc785c;
+      --green: #76b900;
+      --bg: #0a0a1a;
+      --bg-card: #12122a;
+      --bg-card-hover: #1a1a3a;
+      --text: #e0e0e0;
+      --text-muted: #9a9ab0;
+      --border: #2a2a4a;
+      --radius: 12px;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans TC", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+      min-height: 100vh;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    /* ========== NAVBAR ========== */
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      background: rgba(10, 10, 26, 0.92);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 2rem;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .navbar-brand {
+      font-size: 1.4rem;
+      font-weight: 800;
+      color: var(--orange);
+      letter-spacing: 1px;
+    }
+
+    .navbar-brand span { color: var(--green); }
+
+    .navbar-links {
+      display: flex;
+      gap: 1.6rem;
+      align-items: center;
+    }
+
+    .navbar-links a {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      transition: color 0.2s;
+      white-space: nowrap;
+    }
+
+    .navbar-links a:hover,
+    .navbar-links a.active {
+      color: var(--orange);
+    }
+
+    .navbar-links .btn-login {
+      background: var(--orange);
+      color: #fff;
+      padding: 0.45rem 1.2rem;
+      border-radius: 6px;
+      font-weight: 600;
+      transition: background 0.2s;
+    }
+
+    .navbar-links .btn-login:hover {
+      background: #d0770a;
+      color: #fff;
+    }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 4px;
+    }
+
+    .hamburger span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--text);
+      border-radius: 2px;
+      transition: transform 0.3s;
+    }
+
+    /* ========== HERO ========== */
+    .hero {
+      padding: 140px 2rem 80px;
+      text-align: center;
+      background: linear-gradient(180deg, rgba(232,133,12,0.08) 0%, transparent 60%);
+    }
+
+    .hero-badge {
+      display: inline-block;
+      background: rgba(232,133,12,0.15);
+      color: var(--orange);
+      padding: 0.3rem 1rem;
+      border-radius: 999px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-bottom: 1.2rem;
+      border: 1px solid rgba(232,133,12,0.25);
+    }
+
+    .hero h1 {
+      font-size: clamp(2.2rem, 5vw, 3.6rem);
+      font-weight: 800;
+      margin-bottom: 1rem;
+      background: linear-gradient(135deg, var(--orange), var(--copper));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero p {
+      font-size: 1.15rem;
+      color: var(--text-muted);
+      max-width: 640px;
+      margin: 0 auto;
+    }
+
+    /* ========== FEATURES GRID ========== */
+    .features-section {
+      padding: 2rem 2rem 6rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .features-section .section-label {
+      text-align: center;
+      font-size: 0.85rem;
+      color: var(--green);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 0.5rem;
+    }
+
+    .features-section .section-title {
+      text-align: center;
+      font-size: 1.8rem;
+      font-weight: 700;
+      margin-bottom: 3rem;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .feature-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 2rem 1.8rem;
+      transition: transform 0.25s, border-color 0.25s, box-shadow 0.25s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .feature-card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--orange), var(--copper));
+      opacity: 0;
+      transition: opacity 0.25s;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(232,133,12,0.3);
+      box-shadow: 0 12px 40px rgba(232,133,12,0.08);
+    }
+
+    .feature-card:hover::before { opacity: 1; }
+
+    .feature-icon {
+      font-size: 2.4rem;
+      margin-bottom: 1rem;
+      display: block;
+    }
+
+    .feature-card h3 {
+      font-size: 1.15rem;
+      font-weight: 700;
+      margin-bottom: 0.3rem;
+      color: #fff;
+    }
+
+    .feature-card .feature-tag {
+      display: inline-block;
+      font-size: 0.75rem;
+      color: var(--green);
+      background: rgba(118,185,0,0.12);
+      padding: 0.15rem 0.6rem;
+      border-radius: 4px;
+      margin-bottom: 0.8rem;
+      font-weight: 600;
+    }
+
+    .feature-card p {
+      font-size: 0.92rem;
+      color: var(--text-muted);
+      line-height: 1.65;
+    }
+
+    /* ========== ARCHITECTURE SECTION ========== */
+    .architecture-section {
+      padding: 4rem 2rem 5rem;
+      max-width: 900px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .architecture-section h2 {
+      font-size: 1.8rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+
+    .architecture-section p {
+      color: var(--text-muted);
+      margin-bottom: 2.5rem;
+      font-size: 1.05rem;
+    }
+
+    .arch-flow {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+      margin-bottom: 2rem;
+    }
+
+    .arch-node {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1rem 1.4rem;
+      min-width: 140px;
+      text-align: center;
+    }
+
+    .arch-node strong {
+      display: block;
+      color: var(--orange);
+      font-size: 0.95rem;
+      margin-bottom: 0.2rem;
+    }
+
+    .arch-node span {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .arch-arrow {
+      font-size: 1.4rem;
+      color: var(--green);
+      font-weight: 700;
+    }
+
+    .patent-note {
+      display: inline-block;
+      background: rgba(118,185,0,0.1);
+      border: 1px solid rgba(118,185,0,0.2);
+      padding: 0.8rem 1.5rem;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      color: var(--green);
+    }
+
+    /* ========== CTA ========== */
+    .cta-section {
+      padding: 4rem 2rem;
+      text-align: center;
+      background: linear-gradient(180deg, transparent, rgba(232,133,12,0.06));
+    }
+
+    .cta-section h2 {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+
+    .cta-section p {
+      color: var(--text-muted);
+      margin-bottom: 2rem;
+      font-size: 1.05rem;
+    }
+
+    .btn-cta {
+      display: inline-block;
+      background: linear-gradient(135deg, var(--orange), #d0770a);
+      color: #fff;
+      padding: 0.85rem 2.4rem;
+      border-radius: 8px;
+      font-size: 1.05rem;
+      font-weight: 700;
+      border: none;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .btn-cta:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(232,133,12,0.3);
+    }
+
+    /* ========== FOOTER ========== */
+    .footer {
+      border-top: 1px solid var(--border);
+      padding: 3rem 2rem 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    .footer-brand h3 {
+      font-size: 1.2rem;
+      color: var(--orange);
+      margin-bottom: 0.5rem;
+    }
+
+    .footer-brand p {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    .footer-col h4 {
+      font-size: 0.85rem;
+      color: #fff;
+      margin-bottom: 0.8rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .footer-col a {
+      display: block;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-bottom: 0.5rem;
+      transition: color 0.2s;
+    }
+
+    .footer-col a:hover { color: var(--orange); }
+
+    .footer-bottom {
+      border-top: 1px solid var(--border);
+      padding-top: 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .footer-bottom p {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    /* ========== RESPONSIVE ========== */
+    @media (max-width: 768px) {
+      .navbar-links { display: none; }
+      .navbar-links.open {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: 64px;
+        left: 0;
+        right: 0;
+        background: rgba(10,10,26,0.98);
+        padding: 1.5rem 2rem;
+        gap: 1rem;
+        border-bottom: 1px solid var(--border);
+      }
+      .hamburger { display: flex; }
+      .footer-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+      .arch-arrow { display: none; }
+    }
+
+    @media (max-width: 480px) {
+      .footer-grid { grid-template-columns: 1fr; }
+      .features-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <a href="/" class="navbar-brand">SEO<span>BAIKE</span></a>
+    <div class="navbar-links" id="navLinks">
+      <a href="/">首頁</a>
+      <a href="/features" class="active">功能</a>
+      <a href="/pricing">方案</a>
+      <a href="/docs">文件</a>
+      <a href="/about">關於</a>
+      <a href="/contact">聯繫</a>
+      <a href="/login" class="btn-login">登入</a>
+    </div>
+    <button class="hamburger" id="hamburger" aria-label="選單">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-badge">TW 專利 115100981 保護</div>
+    <h1>平台功能</h1>
+    <p>SEOBAIKE 是 AI 界的 App Store — 不做 AI 模型，做讓 AI 安全運行的約束平台。以專利架構確保每一次推理都合規、可控、可追蹤。</p>
+  </section>
+
+  <!-- FEATURES GRID -->
+  <section class="features-section">
+    <div class="section-label">Core Capabilities</div>
+    <h2 class="section-title">八大核心功能</h2>
+
+    <div class="features-grid">
+
+      <!-- 1. CaaS -->
+      <div class="feature-card">
+        <span class="feature-icon">🔗</span>
+        <h3>CaaS — 約束即服務</h3>
+        <span class="feature-tag">核心架構</span>
+        <p>Constraint-as-a-Service 是 SEOBAIKE 的商業核心。如同 iOS 為 App 提供安全沙箱，CaaS 為所有 AI 推理建立約束框架，確保 AI 只在授權範圍內行動。企業無需自建約束系統，即可享受合規 AI 環境。</p>
+      </div>
+
+      <!-- 2. L1-L4 -->
+      <div class="feature-card">
+        <span class="feature-icon">🏗️</span>
+        <h3>L1→L4 約束層架構</h3>
+        <span class="feature-tag">766 個產業節點</span>
+        <p>四層遞進式產業約束結構：L1 宏觀產業類別、L2 次產業分類、L3 製程作業類型、L4 原子級工業節點。總計涵蓋 766 個產業節點，從農業到半導體、從醫療到金融，精確定義 AI 的行為邊界。</p>
+      </div>
+
+      <!-- 3. 多國代碼 -->
+      <div class="feature-card">
+        <span class="feature-icon">🌐</span>
+        <h3>多國產業代碼對齊</h3>
+        <span class="feature-tag">全球通用</span>
+        <p>每一層約束節點內建 TSIC（泰國）、NAICS（北美）、NACE（歐盟）、JSIC（日本）四大國際產業分類代碼。企業在跨國部署時，AI 約束規則自動對齊當地法規標準，實現一套規則、全球合規。</p>
+      </div>
+
+      <!-- 4. check_inference_path() -->
+      <div class="feature-card">
+        <span class="feature-icon">🛡️</span>
+        <h3>check_inference_path()</h3>
+        <span class="feature-tag">專利保護</span>
+        <p>每一個 AI 推理動作執行前，系統強制呼叫此函式驗證 L1→L2→L3→L4 路徑。只有路徑完全合法（allowed）才放行，任何偏離——denied、halted、rollback——一律終止。這是專利 115100981 的技術核心，從根本杜絕 AI 越權。</p>
+      </div>
+
+      <!-- 5. 多模型路由 -->
+      <div class="feature-card">
+        <span class="feature-icon">🔀</span>
+        <h3>多模型路由</h3>
+        <span class="feature-tag">彈性部署</span>
+        <p>支援多個 AI 模型供應商的智慧路由系統。根據任務類型、成本預算、延遲要求，自動選擇最適合的模型執行推理。所有模型皆受同一套 L1-L4 約束管控，確保無論使用哪個模型，行為邊界一致。</p>
+      </div>
+
+      <!-- 6. 即時稽核 -->
+      <div class="feature-card">
+        <span class="feature-icon">📋</span>
+        <h3>即時稽核軌跡</h3>
+        <span class="feature-tag">完整紀錄</span>
+        <p>每次 AI 推理的完整生命週期皆被記錄：誰發起、走哪條路徑、哪個模型執行、結果為何。支援 frozen_snapshots 版本快照，管理者可隨時回溯任意時間點的約束狀態。滿足金融、醫療等高規格稽核需求。</p>
+      </div>
+
+      <!-- 7. 角色權限 -->
+      <div class="feature-card">
+        <span class="feature-icon">👥</span>
+        <h3>角色權限系統</h3>
+        <span class="feature-tag">精細控管</span>
+        <p>四級角色架構確保權責分明：boss（決策者）擁有最高核准權、regulator（政府級）可設定產業約束規則、admin（管理員）負責日常維運、user（使用者）僅可在授權範圍內操作。核心表寫入權限嚴格限制。</p>
+      </div>
+
+      <!-- 8. 安全防護 -->
+      <div class="feature-card">
+        <span class="feature-icon">🔒</span>
+        <h3>安全防護</h3>
+        <span class="feature-tag">多層防禦</span>
+        <p>Row Level Security（RLS）確保資料隔離、速率限制防止濫用、輸入正規化過濾阻擋注入攻擊。所有敏感操作需經 boss 角色核准，frozen 欄位加 trigger 保護防止未授權修改。從網路層到資料層，層層防護。</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ARCHITECTURE FLOW -->
+  <section class="architecture-section">
+    <h2>約束推理流程</h2>
+    <p>每一次 AI 動作，都必須經過完整的四層約束驗證。這不只是功能，而是專利保護的技術規範。</p>
+
+    <div class="arch-flow">
+      <div class="arch-node">
+        <strong>L1</strong>
+        <span>宏觀產業類別</span>
+      </div>
+      <span class="arch-arrow">→</span>
+      <div class="arch-node">
+        <strong>L2</strong>
+        <span>次產業分類</span>
+      </div>
+      <span class="arch-arrow">→</span>
+      <div class="arch-node">
+        <strong>L3</strong>
+        <span>製程作業類型</span>
+      </div>
+      <span class="arch-arrow">→</span>
+      <div class="arch-node">
+        <strong>L4</strong>
+        <span>原子級工業節點</span>
+      </div>
+    </div>
+
+    <div class="patent-note">
+      專利 TW-115100981「世界定義約束法用於AI推理」保護
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-section">
+    <h2>準備好讓 AI 在合規框架下運行？</h2>
+    <p>立即體驗 SEOBAIKE 的約束推理平台，讓每一次 AI 動作都安全、可控、可追蹤。</p>
+    <a href="/pricing" class="btn-cta">查看方案與定價</a>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <h3>SEOBAIKE</h3>
+        <p>小路光有限公司（統編 60475510）<br>AI 約束推理平台 — AI 界的 App Store<br>台灣專利 TW-115100981</p>
+      </div>
+      <div class="footer-col">
+        <h4>產品</h4>
+        <a href="/features">平台功能</a>
+        <a href="/pricing">方案定價</a>
+        <a href="/docs">技術文件</a>
+      </div>
+      <div class="footer-col">
+        <h4>公司</h4>
+        <a href="/about">關於我們</a>
+        <a href="/contact">聯繫我們</a>
+        <a href="/about#careers">加入團隊</a>
+      </div>
+      <div class="footer-col">
+        <h4>資源</h4>
+        <a href="/docs#api">API 文件</a>
+        <a href="/docs#changelog">更新日誌</a>
+        <a href="/docs#status">系統狀態</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2025-2026 小路光有限公司。保留所有權利。</p>
+      <p>aiforseo.vip</p>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('hamburger').addEventListener('click', function () {
+      document.getElementById('navLinks').classList.toggle('open');
+    });
+  </script>
+
+</body>
+</html>
