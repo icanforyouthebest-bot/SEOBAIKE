@@ -591,6 +591,229 @@
       letter-spacing: 0.5px;
     }
 
+    /* ═══════════ GLOBAL REACH — Sci-Fi Tech Section ═══════════ */
+    .global-section {
+      padding: 80px 0;
+      position: relative;
+      overflow: hidden;
+      background: radial-gradient(ellipse at 50% 50%, rgba(232,133,12,0.04) 0%, transparent 70%);
+    }
+    .global-section::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 600px;
+      height: 600px;
+      border-radius: 50%;
+      border: 1px solid rgba(232,133,12,0.06);
+      animation: globalPulseRing 4s ease-in-out infinite;
+    }
+    .global-section::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 400px;
+      height: 400px;
+      border-radius: 50%;
+      border: 1px solid rgba(232,133,12,0.08);
+      animation: globalPulseRing 4s ease-in-out infinite 1s;
+    }
+    @keyframes globalPulseRing {
+      0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.3; }
+      50% { transform: translate(-50%, -50%) scale(1.15); opacity: 0.8; }
+    }
+
+    .global-header {
+      text-align: center;
+      margin-bottom: 48px;
+      position: relative;
+      z-index: 2;
+    }
+    .global-header .live-pulse {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 16px;
+      border-radius: 20px;
+      background: rgba(232,133,12,0.08);
+      border: 1px solid rgba(232,133,12,0.2);
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--orange);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+    .global-header .live-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--orange);
+      animation: liveBlink 1.5s ease-in-out infinite;
+    }
+    @keyframes liveBlink {
+      0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(232,133,12,0.5); }
+      50% { opacity: 0.6; box-shadow: 0 0 12px 4px rgba(232,133,12,0.3); }
+    }
+    .global-header h2 {
+      font-size: 2.4rem;
+      font-weight: 900;
+      color: var(--text-bright);
+      margin-bottom: 8px;
+    }
+    .global-header p {
+      color: var(--text-muted);
+      font-size: 1rem;
+    }
+
+    /* Country Grid — Sci-Fi Tiles */
+    .country-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 16px;
+      max-width: 900px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 2;
+    }
+    .country-tile {
+      position: relative;
+      padding: 28px 16px;
+      text-align: center;
+      border-radius: 16px;
+      border: 1px solid rgba(232,133,12,0.12);
+      background: rgba(18, 18, 42, 0.6);
+      backdrop-filter: blur(8px);
+      transition: all 0.3s ease;
+      overflow: hidden;
+      cursor: default;
+    }
+    .country-tile::before {
+      content: '';
+      position: absolute;
+      top: -1px;
+      left: 20%;
+      right: 20%;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--orange), transparent);
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    .country-tile:hover::before {
+      opacity: 1;
+    }
+    .country-tile:hover {
+      border-color: rgba(232,133,12,0.3);
+      background: rgba(232,133,12,0.05);
+      transform: translateY(-4px);
+      box-shadow: 0 8px 32px rgba(232,133,12,0.1);
+    }
+    .country-flag {
+      font-size: 2.4rem;
+      line-height: 1;
+      margin-bottom: 10px;
+      filter: drop-shadow(0 2px 8px rgba(0,0,0,0.3));
+    }
+    .country-name {
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: var(--text-bright);
+      margin-bottom: 4px;
+    }
+    .country-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 0.72rem;
+      font-weight: 600;
+      padding: 3px 10px;
+      border-radius: 10px;
+    }
+    .country-status.live {
+      color: var(--green);
+      background: rgba(40,200,64,0.1);
+    }
+    .country-status.coming {
+      color: var(--orange);
+      background: rgba(232,133,12,0.1);
+    }
+    .country-status-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      animation: countryDotPulse 2s ease-in-out infinite;
+    }
+    .country-status.live .country-status-dot {
+      background: var(--green);
+      box-shadow: 0 0 6px var(--green);
+    }
+    .country-status.coming .country-status-dot {
+      background: var(--orange);
+      box-shadow: 0 0 6px var(--orange);
+      animation: countryDotPulse 1.2s ease-in-out infinite;
+    }
+    @keyframes countryDotPulse {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.8); opacity: 0.5; }
+    }
+
+    /* Scan line effect across country tiles */
+    .country-tile .scan-sweep {
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(232,133,12,0.04), transparent);
+      animation: countryScan 6s linear infinite;
+      pointer-events: none;
+    }
+    @keyframes countryScan {
+      0% { left: -100%; }
+      100% { left: 200%; }
+    }
+    .country-tile:nth-child(2) .scan-sweep { animation-delay: 0.8s; }
+    .country-tile:nth-child(3) .scan-sweep { animation-delay: 1.6s; }
+    .country-tile:nth-child(4) .scan-sweep { animation-delay: 2.4s; }
+    .country-tile:nth-child(5) .scan-sweep { animation-delay: 3.2s; }
+
+    /* Bottom stats ticker */
+    .global-ticker {
+      display: flex;
+      justify-content: center;
+      gap: 48px;
+      margin-top: 40px;
+      position: relative;
+      z-index: 2;
+    }
+    .ticker-item {
+      text-align: center;
+    }
+    .ticker-value {
+      font-size: 2rem;
+      font-weight: 900;
+      color: var(--orange);
+      line-height: 1;
+      margin-bottom: 4px;
+      text-shadow: 0 0 20px rgba(232,133,12,0.3);
+      animation: tickerGlow 3s ease-in-out infinite;
+    }
+    @keyframes tickerGlow {
+      0%, 100% { text-shadow: 0 0 20px rgba(232,133,12,0.3); }
+      50% { text-shadow: 0 0 40px rgba(232,133,12,0.6), 0 0 80px rgba(232,133,12,0.2); }
+    }
+    .ticker-label {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      font-weight: 500;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
     /* ═══════════════════════════════════════════════════════════
        HOW IT WORKS — Flow
        ═══════════════════════════════════════════════════════════ */
@@ -1426,6 +1649,9 @@
       .stats-grid { grid-template-columns: repeat(2, 1fr); }
       .stat-item::after { display: none !important; }
       .stat-number { font-size: 2.4rem; }
+      .country-grid { grid-template-columns: repeat(3, 1fr); gap: 12px; }
+      .global-ticker { gap: 24px; flex-wrap: wrap; }
+      .global-section::before, .global-section::after { display: none; }
       .cta-final { padding: 60px 0; }
       .cta-final-content h2 { font-size: 1.8rem; }
       .cta-final-content p { font-size: 0.95rem; }
@@ -1457,6 +1683,12 @@
       .stat-item { padding: 12px 8px; }
       .engine-badge { padding: 10px 14px; font-size: 0.8rem; }
       .engine-badge-icon { width: 24px; height: 24px; font-size: 0.8rem; }
+      .country-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+      .country-tile { padding: 20px 12px; }
+      .country-flag { font-size: 1.8rem; }
+      .global-header h2 { font-size: 1.6rem; }
+      .ticker-value { font-size: 1.4rem; }
+      .global-ticker { gap: 20px; }
       .cta-final-content h2 { font-size: 1.4rem; }
       .price-card { padding: 24px 16px; border-radius: 14px; }
       .section { padding: 40px 0; }
@@ -1613,8 +1845,101 @@
           <div class="stat-label">全天候服務</div>
         </div>
         <div class="stat-item fade-in">
-          <div class="stat-number"><span class="counter" data-target="30">0</span><span class="stat-suffix">+</span></div>
-          <div class="stat-label">服務國家</div>
+          <div class="stat-number"><span class="counter" data-target="15">0</span></div>
+          <div class="stat-label">AI 引擎</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ Section 2.5: Global Reach — Sci-Fi ═══════════ -->
+  <section class="global-section fade-in">
+    <div class="container">
+      <div class="global-header">
+        <div class="live-pulse"><div class="live-dot"></div>LIVE — 全球部署中</div>
+        <h2>你的商品，正在這些國家被看見</h2>
+        <p>即時連線，AI 自動翻譯到每個市場</p>
+      </div>
+
+      <div class="country-grid">
+        <div class="country-tile fade-in">
+          <div class="scan-sweep"></div>
+          <div class="country-flag">&#127481;&#127484;</div>
+          <div class="country-name">台灣</div>
+          <div class="country-status live"><span class="country-status-dot"></span>營運中</div>
+        </div>
+        <div class="country-tile fade-in">
+          <div class="scan-sweep"></div>
+          <div class="country-flag">&#127472;&#127479;</div>
+          <div class="country-name">韓國</div>
+          <div class="country-status live"><span class="country-status-dot"></span>營運中</div>
+        </div>
+        <div class="country-tile fade-in">
+          <div class="scan-sweep"></div>
+          <div class="country-flag">&#127471;&#127477;</div>
+          <div class="country-name">日本</div>
+          <div class="country-status live"><span class="country-status-dot"></span>營運中</div>
+        </div>
+        <div class="country-tile fade-in">
+          <div class="scan-sweep"></div>
+          <div class="country-flag">&#127480;&#127468;</div>
+          <div class="country-name">新加坡</div>
+          <div class="country-status live"><span class="country-status-dot"></span>營運中</div>
+        </div>
+        <div class="country-tile fade-in">
+          <div class="scan-sweep"></div>
+          <div class="country-flag">&#127482;&#127480;</div>
+          <div class="country-name">美國</div>
+          <div class="country-status coming"><span class="country-status-dot"></span>即將開放</div>
+        </div>
+        <div class="country-tile fade-in">
+          <div class="scan-sweep"></div>
+          <div class="country-flag">&#127462;&#127482;</div>
+          <div class="country-name">澳洲</div>
+          <div class="country-status coming"><span class="country-status-dot"></span>即將開放</div>
+        </div>
+        <div class="country-tile fade-in">
+          <div class="scan-sweep"></div>
+          <div class="country-flag">&#127468;&#127463;</div>
+          <div class="country-name">英國</div>
+          <div class="country-status coming"><span class="country-status-dot"></span>即將開放</div>
+        </div>
+        <div class="country-tile fade-in">
+          <div class="scan-sweep"></div>
+          <div class="country-flag">&#127481;&#127469;</div>
+          <div class="country-name">泰國</div>
+          <div class="country-status coming"><span class="country-status-dot"></span>即將開放</div>
+        </div>
+        <div class="country-tile fade-in">
+          <div class="scan-sweep"></div>
+          <div class="country-flag">&#127483;&#127475;</div>
+          <div class="country-name">越南</div>
+          <div class="country-status coming"><span class="country-status-dot"></span>即將開放</div>
+        </div>
+        <div class="country-tile fade-in">
+          <div class="scan-sweep"></div>
+          <div class="country-flag">&#127470;&#127465;</div>
+          <div class="country-name">印尼</div>
+          <div class="country-status coming"><span class="country-status-dot"></span>即將開放</div>
+        </div>
+      </div>
+
+      <div class="global-ticker">
+        <div class="ticker-item">
+          <div class="ticker-value" id="tickerCountries">4</div>
+          <div class="ticker-label">營運中國家</div>
+        </div>
+        <div class="ticker-item">
+          <div class="ticker-value" id="tickerExpanding">6</div>
+          <div class="ticker-label">擴展中</div>
+        </div>
+        <div class="ticker-item">
+          <div class="ticker-value" id="tickerLanguages">12+</div>
+          <div class="ticker-label">支援語言</div>
+        </div>
+        <div class="ticker-item">
+          <div class="ticker-value" id="tickerTimezones">24hr</div>
+          <div class="ticker-label">跨時區覆蓋</div>
         </div>
       </div>
     </div>
