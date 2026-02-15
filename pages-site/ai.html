@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SEOBAIKE — AI 超級市集 | 12 供應商 1000+ 模型</title>
-<meta name="description" content="SEOBAIKE AI OS 整合 12 大供應商 1000+ AI 模型：NVIDIA、Google、Anthropic、DeepSeek、Groq、Mistral 等，一個平台全部搞定">
+<title>SEOBAIKE AI 超級引擎 | 8 大能力 1000+ 模型</title>
+<meta name="description" content="SEOBAIKE AI 超級引擎 — 對話、程式碼、視覺、推理、搜尋、嵌入、圖像生成、語音，8 大能力 1000+ AI 模型，一個平台全部搞定">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
@@ -16,16 +16,23 @@ a{color:#e8850c;text-decoration:none}a:hover{text-decoration:underline}
 .nav-links a{color:#999;font-size:13px;padding:6px 10px;border-radius:6px;transition:.2s}
 .nav-links a:hover,.nav-links a.active{color:#fff;background:#1a1a2e;text-decoration:none}
 
-.hero{background:linear-gradient(135deg,#0a0a1a 0%,#1a0a2e 30%,#2a1a0e 60%,#0a0a1a 100%);padding:48px 30px 32px;text-align:center;border-bottom:1px solid #222;position:relative;overflow:hidden}
-.hero::before{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:radial-gradient(circle at 30% 50%,rgba(118,185,0,.08) 0%,transparent 50%),radial-gradient(circle at 70% 50%,rgba(232,133,12,.08) 0%,transparent 50%);pointer-events:none}
-.hero h1{font-size:42px;background:linear-gradient(135deg,#76b900,#e8850c);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:8px;position:relative}
+.hero{background:linear-gradient(135deg,#0a0a1a 0%,#2a1a0e 40%,#1a0a0e 70%,#0a0a1a 100%);padding:48px 30px 32px;text-align:center;border-bottom:1px solid #222;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:radial-gradient(circle at 30% 50%,rgba(232,133,12,.1) 0%,transparent 50%),radial-gradient(circle at 70% 50%,rgba(255,159,48,.08) 0%,transparent 50%);pointer-events:none}
+.hero h1{font-size:42px;background:linear-gradient(135deg,#e8850c,#ff9f30,#e8850c);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:8px;position:relative}
 .hero p{color:#888;font-size:15px;max-width:700px;margin:0 auto;position:relative}
-.hero .count{font-size:72px;font-weight:900;color:#76b900;margin:16px 0 8px;position:relative}
+.hero .count{font-size:72px;font-weight:900;color:#e8850c;margin:16px 0 8px;position:relative}
 
 .stats-row{display:flex;justify-content:center;gap:32px;padding:20px 30px;border-bottom:1px solid #1a1a2e;flex-wrap:wrap}
 .stat-box{text-align:center;min-width:120px}
 .stat-box .n{font-size:32px;font-weight:800;color:#e8850c}
 .stat-box .l{font-size:11px;color:#666;margin-top:2px}
+
+.capability-bar{display:flex;gap:10px;padding:12px 30px;overflow-x:auto;border-bottom:1px solid #1a1a2e;flex-wrap:wrap}
+.cap-chip{background:#16213e;border:1px solid #222;border-radius:10px;padding:8px 14px;min-width:120px;font-size:12px;display:flex;align-items:center;gap:8px;cursor:pointer;transition:.2s}
+.cap-chip:hover{border-color:#e8850c}
+.cap-chip .cap-icon{font-size:16px}
+.cap-chip .cap-name{color:#eee;font-weight:600}
+.cap-chip .cap-count{color:#888;margin-left:auto;font-size:11px}
 
 .controls{display:flex;gap:12px;padding:20px 30px;flex-wrap:wrap;align-items:center}
 .search-box{flex:1;min-width:200px;background:#16213e;border:1px solid #333;border-radius:10px;padding:10px 16px;color:#eee;font-size:14px;outline:none}
@@ -35,11 +42,19 @@ a{color:#e8850c;text-decoration:none}a:hover{text-decoration:underline}
 
 .model-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px;padding:20px 30px}
 .model-card{background:#16213e;border:1px solid #222;border-radius:14px;padding:18px 20px;transition:all .3s;cursor:pointer;position:relative;overflow:hidden}
-.model-card:hover{border-color:#76b900;transform:translateY(-2px);box-shadow:0 8px 30px rgba(118,185,0,.12)}
+.model-card:hover{border-color:#e8850c;transform:translateY(-2px);box-shadow:0 8px 30px rgba(232,133,12,.12)}
 .model-card.active{border-color:#e8850c;box-shadow:0 0 20px rgba(232,133,12,.2)}
-.model-owner{font-size:11px;color:#76b900;font-weight:700;text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+.model-cap-icon{font-size:22px;margin-bottom:6px}
+.model-tier{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px;display:flex;align-items:center;gap:6px}
+.model-tier .tier-label{padding:2px 8px;border-radius:6px;font-size:10px}
+.tier-enterprise{background:#2a1a0e;color:#e8850c;border:1px solid #4a2a0a}
+.tier-opensource{background:#1a2e1a;color:#76b900;border:1px solid #2a4a2a}
+.tier-highspeed{background:#0a2e2e;color:#4ecdc4;border:1px solid #0a4a4a}
 .model-name{font-size:16px;font-weight:700;color:#fff;margin-bottom:6px}
-.model-id{font-size:11px;color:#555;font-family:monospace;margin-bottom:10px}
+.model-speed{display:flex;align-items:center;gap:6px;margin-bottom:10px}
+.speed-bar{height:4px;border-radius:2px;background:#222;flex:1;max-width:80px;overflow:hidden}
+.speed-fill{height:100%;border-radius:2px;background:#e8850c}
+.speed-label{font-size:10px;color:#666}
 .model-tags{display:flex;flex-wrap:wrap;gap:4px}
 .tag{padding:2px 8px;border-radius:10px;font-size:10px;font-weight:600}
 .tag-code{background:#1a2e1a;color:#76b900;border:1px solid #2a4a2a}
@@ -48,6 +63,9 @@ a{color:#e8850c;text-decoration:none}a:hover{text-decoration:underline}
 .tag-embed{background:#0a2e2e;color:#4ecdc4;border:1px solid #0a4a4a}
 .tag-reason{background:#2e0a2e;color:#ff6b9d;border:1px solid #4a0a4a}
 .tag-large{background:#2e2e0a;color:#ffd93d;border:1px solid #4a4a0a}
+.tag-search{background:#2e0a1e;color:#ff6b9d;border:1px solid #4a0a3a}
+.tag-image{background:#1a2e2e;color:#40c9ff;border:1px solid #0a4a5a}
+.tag-audio{background:#2e2a0a;color:#ffc93d;border:1px solid #4a4a0a}
 
 .chat-panel{position:fixed;bottom:0;right:0;width:420px;max-height:70vh;background:#111;border:1px solid #333;border-radius:16px 16px 0 0;display:none;flex-direction:column;z-index:100;box-shadow:0 -8px 40px rgba(0,0,0,.5)}
 .chat-panel.open{display:flex}
@@ -58,7 +76,7 @@ a{color:#e8850c;text-decoration:none}a:hover{text-decoration:underline}
 .chat-msg{margin-bottom:12px;padding:10px 14px;border-radius:12px;font-size:13px;line-height:1.6;max-width:90%}
 .chat-msg.user{background:#2a1a0e;color:#e8850c;margin-left:auto;border-bottom-right-radius:4px}
 .chat-msg.bot{background:#1a2e1a;color:#ddd;border-bottom-left-radius:4px}
-.chat-msg .model-label{font-size:10px;color:#76b900;margin-bottom:4px;font-weight:700}
+.chat-msg .model-label{font-size:10px;color:#e8850c;margin-bottom:4px;font-weight:700}
 .chat-input-row{display:flex;padding:12px;gap:8px;border-top:1px solid #222}
 .chat-input{flex:1;background:#16213e;border:1px solid #333;border-radius:10px;padding:10px 14px;color:#eee;font-size:13px;outline:none}
 .chat-input:focus{border-color:#e8850c}
@@ -66,13 +84,9 @@ a{color:#e8850c;text-decoration:none}a:hover{text-decoration:underline}
 .chat-send:hover{background:#ff9f30}
 .chat-send:disabled{opacity:.4;cursor:not-allowed}
 
-.provider-section{padding:0 30px 8px}
-.provider-section h3{font-size:14px;color:#cc785c;margin-bottom:4px}
-.provider-count{color:#555;font-size:12px;margin-bottom:12px}
-
 .footer{text-align:center;padding:24px;color:#444;font-size:11px;border-top:1px solid #111;margin-top:20px}
 .loading{text-align:center;padding:40px;color:#555}
-@media(max-width:768px){.model-grid{grid-template-columns:1fr}.chat-panel{width:100%;right:0;left:0}.stats-row{gap:16px}}
+@media(max-width:768px){.model-grid{grid-template-columns:1fr}.chat-panel{width:100%;right:0;left:0}.stats-row{gap:16px}.capability-bar{gap:6px}}
 </style>
 </head>
 <body>
@@ -83,7 +97,7 @@ a{color:#e8850c;text-decoration:none}a:hover{text-decoration:underline}
     <a href="/">首頁</a>
     <a href="/features">功能</a>
     <a href="/marketplace">市集</a>
-    <a href="/ai" class="active">AI 怪物</a>
+    <a href="/ai" class="active">AI 引擎</a>
     <a href="/pricing">方案</a>
     <a href="/docs">文件</a>
     <a href="/login">登入</a>
@@ -91,14 +105,15 @@ a{color:#e8850c;text-decoration:none}a:hover{text-decoration:underline}
 </nav>
 
 <div class="hero">
-  <h1>AI 超級市集</h1>
+  <h1>SEOBAIKE AI 超級引擎</h1>
   <div class="count" id="totalCount">--</div>
-  <p>個世界級 AI 模型 × 12 大供應商。NVIDIA、Google、Anthropic、DeepSeek、Groq、Mistral⋯全部在 SEOBAIKE OS 裡。點一下就能對話。</p>
+  <p>個 AI 模型 — 8 大能力類別。對話、程式碼、視覺、推理、搜尋、嵌入、圖像生成、語音，一個平台全部搞定。點一下就能對話。</p>
 </div>
-<div id="providerBar" style="display:flex;gap:10px;padding:12px 30px;overflow-x:auto;border-bottom:1px solid #1a1a2e;flex-wrap:wrap"></div>
+
+<div class="capability-bar" id="capabilityBar"></div>
 
 <div class="stats-row" id="statsRow">
-  <div class="stat-box"><div class="n" id="s-providers">--</div><div class="l">AI 供應商</div></div>
+  <div class="stat-box"><div class="n" id="s-total">--</div><div class="l">模型總數</div></div>
   <div class="stat-box"><div class="n" id="s-chat">--</div><div class="l">對話模型</div></div>
   <div class="stat-box"><div class="n" id="s-code">--</div><div class="l">程式碼模型</div></div>
   <div class="stat-box"><div class="n" id="s-vision">--</div><div class="l">視覺模型</div></div>
@@ -107,23 +122,24 @@ a{color:#e8850c;text-decoration:none}a:hover{text-decoration:underline}
 </div>
 
 <div class="controls">
-  <input type="text" class="search-box" id="searchBox" placeholder="搜尋模型... (例: llama, deepseek, qwen, gemma)">
+  <input type="text" class="search-box" id="searchBox" placeholder="搜尋模型功能... (例: 對話, 程式碼, 視覺, 推理)">
   <button class="filter-btn active" data-filter="all">全部</button>
-  <button class="filter-btn" data-filter="nvidia">NVIDIA</button>
-  <button class="filter-btn" data-filter="anthropic">Anthropic</button>
-  <button class="filter-btn" data-filter="google">Google</button>
-  <button class="filter-btn" data-filter="meta">Meta</button>
-  <button class="filter-btn" data-filter="openai">OpenAI</button>
-  <button class="filter-btn" data-filter="deepseek">DeepSeek</button>
-  <button class="filter-btn" data-filter="mistral">Mistral</button>
-  <button class="filter-btn" data-filter="groq">Groq</button>
-  <button class="filter-btn" data-filter="cohere">Cohere</button>
-  <button class="filter-btn" data-filter="qwen">Qwen</button>
-  <button class="filter-btn" data-filter="microsoft">Microsoft</button>
+  <button class="filter-btn" data-filter="chat">對話</button>
+  <button class="filter-btn" data-filter="code">程式碼</button>
+  <button class="filter-btn" data-filter="vision">視覺</button>
+  <button class="filter-btn" data-filter="reason">推理</button>
+  <button class="filter-btn" data-filter="search">搜尋</button>
+  <button class="filter-btn" data-filter="embed">嵌入</button>
+  <button class="filter-btn" data-filter="image">圖像生成</button>
+  <button class="filter-btn" data-filter="audio">語音</button>
+  <button class="filter-btn" data-filter="large">大型</button>
+  <button class="filter-btn" data-filter="enterprise">企業級</button>
+  <button class="filter-btn" data-filter="opensource">開源</button>
+  <button class="filter-btn" data-filter="highspeed">高速</button>
 </div>
 
 <div class="model-grid" id="modelGrid">
-  <div class="loading">載入 AI 怪物軍團中...</div>
+  <div class="loading">載入 SEOBAIKE AI 引擎中...</div>
 </div>
 
 <div class="chat-panel" id="chatPanel">
@@ -139,7 +155,7 @@ a{color:#e8850c;text-decoration:none}a:hover{text-decoration:underline}
 </div>
 
 <footer class="footer">
-  SEOBAIKE AI OS — 專利 TW-115100981 — 小路光有限公司 — 12 供應商 1000+ AI 模型
+  SEOBAIKE AI 超級引擎 — 專利 TW-115100981 — 小路光有限公司
 </footer>
 
 <script src="/seobaike-config.js"></script>
@@ -148,7 +164,79 @@ let allModels = []
 let currentModel = null
 let currentProvider = null
 let chatHistory = []
-let providerData = []
+
+// Capability definitions with icons
+const CAPABILITIES = {
+  chat:   { icon: '💬', name: '對話',     cls: 'tag-chat' },
+  code:   { icon: '⌨️', name: '程式碼',   cls: 'tag-code' },
+  vision: { icon: '👁️', name: '視覺',     cls: 'tag-vision' },
+  reason: { icon: '🧠', name: '推理',     cls: 'tag-reason' },
+  search: { icon: '🔍', name: '搜尋',     cls: 'tag-search' },
+  embed:  { icon: '📐', name: '嵌入',     cls: 'tag-embed' },
+  image:  { icon: '🎨', name: '圖像生成', cls: 'tag-image' },
+  audio:  { icon: '🔊', name: '語音',     cls: 'tag-audio' },
+  large:  { icon: '⚡', name: '大型',     cls: 'tag-large' }
+}
+
+// Map to SEOBAIKE display names - strips brand, keeps model identifier
+function toBrandedName(id) {
+  const parts = id.split('/')
+  const raw = parts[parts.length - 1]
+  // Clean up common patterns, return a readable name
+  return raw
+    .replace(/^(nvidia|google|anthropic|meta|openai|deepseek|mistral|groq|cohere|qwen|microsoft|perplexity)[\/\-_]/i, '')
+    .replace(/[-_]/g, ' ')
+    .replace(/\b\w/g, c => c.toUpperCase())
+}
+
+// Determine model tier (replaces brand-based owner display)
+function getTier(id, tags) {
+  const lower = id.toLowerCase()
+  // Enterprise-grade indicators
+  if (lower.includes('opus') || lower.includes('pro') || lower.includes('ultra') ||
+      lower.includes('4o') || lower.includes('gpt-4') || lower.includes('sonnet') ||
+      lower.includes('gemini-pro') || lower.includes('command-r-plus')) {
+    return { label: '企業級', cls: 'tier-enterprise' }
+  }
+  // High-speed indicators
+  if (lower.includes('turbo') || lower.includes('flash') || lower.includes('instant') ||
+      lower.includes('haiku') || lower.includes('mini') || lower.includes('nano') ||
+      lower.includes('tiny') || lower.includes('8b') || lower.includes('3b') ||
+      lower.includes('1b') || lower.includes('groq')) {
+    return { label: '高速', cls: 'tier-highspeed' }
+  }
+  // Open source indicators
+  if (lower.includes('llama') || lower.includes('mistral') || lower.includes('qwen') ||
+      lower.includes('gemma') || lower.includes('phi') || lower.includes('starcoder') ||
+      lower.includes('codellama') || lower.includes('deepseek') || lower.includes('yi') ||
+      lower.includes('falcon') || lower.includes('mpt') || lower.includes('bloom') ||
+      lower.includes('vicuna') || lower.includes('granite')) {
+    return { label: '開源', cls: 'tier-opensource' }
+  }
+  return { label: '企業級', cls: 'tier-enterprise' }
+}
+
+// Estimate speed rating (1-5) based on model size hints
+function getSpeedRating(id) {
+  const lower = id.toLowerCase()
+  if (lower.includes('405b') || lower.includes('355b') || lower.includes('235b') || lower.includes('120b')) return 1
+  if (lower.includes('70b') || lower.includes('72b') || lower.includes('65b')) return 2
+  if (lower.includes('34b') || lower.includes('40b') || lower.includes('32b') || lower.includes('27b')) return 3
+  if (lower.includes('13b') || lower.includes('14b') || lower.includes('8b') || lower.includes('7b')) return 4
+  if (lower.includes('3b') || lower.includes('2b') || lower.includes('1b') || lower.includes('mini') ||
+      lower.includes('nano') || lower.includes('tiny') || lower.includes('flash') ||
+      lower.includes('haiku') || lower.includes('turbo') || lower.includes('instant')) return 5
+  return 3
+}
+
+// Primary capability icon for the card
+function getPrimaryCapIcon(tags) {
+  const priority = ['vision', 'code', 'reason', 'search', 'embed', 'image', 'audio', 'chat']
+  for (const p of priority) {
+    if (tags.includes(p)) return CAPABILITIES[p]?.icon || '💬'
+  }
+  return '💬'
+}
 
 function classify(id) {
   const tags = []
@@ -159,52 +247,74 @@ function classify(id) {
   if (lower.includes('r1') || lower.includes('reason') || lower.includes('thinking') || lower.includes('mathstral') || lower.includes('opus') || lower.includes('o1') || lower.includes('o3') || lower.includes('o4')) tags.push('reason')
   if (lower.includes('405b') || lower.includes('235b') || lower.includes('120b') || lower.includes('355b') || lower.includes('100b') || lower.includes('70b') || lower.includes('opus') || lower.includes('4o') || lower.includes('pro')) tags.push('large')
   if (lower.includes('sonar') || lower.includes('search') || lower.includes('perplexity')) tags.push('search')
+  if (lower.includes('dall') || lower.includes('sdxl') || lower.includes('stable-diffusion') || lower.includes('imagen') || lower.includes('flux')) tags.push('image')
+  if (lower.includes('whisper') || lower.includes('tts') || lower.includes('speech') || lower.includes('audio')) tags.push('audio')
   if (!tags.length) tags.push('chat')
   return tags
 }
 
 function tagHtml(tag) {
-  const cls = { code:'tag-code', chat:'tag-chat', vision:'tag-vision', embed:'tag-embed', reason:'tag-reason', large:'tag-large', search:'tag-reason' }
-  const names = { code:'程式碼', chat:'對話', vision:'視覺', embed:'嵌入', reason:'推理', large:'大型', search:'搜尋' }
-  return '<span class="tag ' + (cls[tag]||'tag-chat') + '">' + (names[tag]||tag) + '</span>'
+  const cap = CAPABILITIES[tag]
+  if (!cap) return '<span class="tag tag-chat">' + tag + '</span>'
+  return '<span class="tag ' + cap.cls + '">' + cap.icon + ' ' + cap.name + '</span>'
 }
 
-async function loadProviders() {
-  try {
-    const res = await fetch('/api/ai/providers')
-    const data = await res.json()
-    providerData = data.providers || []
-    const bar = document.getElementById('providerBar')
-    bar.innerHTML = providerData.map(p => {
-      const color = p.status === 'online' ? '#76b900' : '#555'
-      const dot = p.status === 'online' ? '&#x25CF;' : '&#x25CB;'
-      return '<div style="background:#16213e;border:1px solid #222;border-radius:10px;padding:8px 14px;min-width:140px;font-size:12px;display:flex;align-items:center;gap:6px">' +
-        '<span style="color:' + color + '">' + dot + '</span>' +
-        '<strong style="color:#eee">' + p.name + '</strong>' +
-        '<span style="color:#888;margin-left:auto">' + p.model_count + '</span>' +
-      '</div>'
-    }).join('')
-  } catch(e) {}
+function renderCapabilityBar() {
+  const bar = document.getElementById('capabilityBar')
+  const counts = {}
+  for (const key of Object.keys(CAPABILITIES)) {
+    counts[key] = allModels.filter(m => m.tags.includes(key)).length
+  }
+  bar.innerHTML = Object.entries(CAPABILITIES).map(([key, cap]) => {
+    if (counts[key] === 0) return ''
+    return '<div class="cap-chip" data-cap="' + key + '">' +
+      '<span class="cap-icon">' + cap.icon + '</span>' +
+      '<span class="cap-name">' + cap.name + '</span>' +
+      '<span class="cap-count">' + counts[key] + '</span>' +
+    '</div>'
+  }).join('')
+
+  document.querySelectorAll('.cap-chip').forEach(chip => {
+    chip.addEventListener('click', function() {
+      const cap = this.dataset.cap
+      // Activate matching filter button
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'))
+      const btn = document.querySelector('.filter-btn[data-filter="' + cap + '"]')
+      if (btn) btn.classList.add('active')
+      renderModels(allModels.filter(m => m.tags.includes(cap)))
+    })
+  })
 }
 
 async function loadModels() {
   try {
     const res = await fetch('/api/ai/models')
     const data = await res.json()
-    allModels = (data.models || []).map(m => ({
-      ...m, tags: classify(m.id),
-      owner: m.owned_by || m.provider || m.id.split('/')[0],
-      providerName: m.provider_name || m.provider || 'unknown',
-    }))
+    allModels = (data.models || []).map(m => {
+      const tags = classify(m.id)
+      const tier = getTier(m.id, tags)
+      return {
+        ...m,
+        tags: tags,
+        tier: tier,
+        displayName: toBrandedName(m.id),
+        speedRating: getSpeedRating(m.id),
+        primaryIcon: getPrimaryCapIcon(tags),
+        // Keep internal fields for API calls
+        _provider: m.provider || null,
+        _providerName: m.provider_name || m.provider || 'unknown',
+      }
+    })
 
     document.getElementById('totalCount').textContent = allModels.length
-    document.getElementById('s-providers').textContent = (data.providers || []).length
+    document.getElementById('s-total').textContent = allModels.length
     document.getElementById('s-chat').textContent = allModels.filter(m => m.tags.includes('chat')).length
     document.getElementById('s-code').textContent = allModels.filter(m => m.tags.includes('code')).length
     document.getElementById('s-vision').textContent = allModels.filter(m => m.tags.includes('vision')).length
     document.getElementById('s-reason').textContent = allModels.filter(m => m.tags.includes('reason')).length
     document.getElementById('s-embed').textContent = allModels.filter(m => m.tags.includes('embed')).length
 
+    renderCapabilityBar()
     renderModels(allModels)
   } catch(e) {
     document.getElementById('modelGrid').innerHTML = '<div class="loading" style="color:#ff6b6b;">載入失敗: ' + e.message + '</div>'
@@ -215,48 +325,70 @@ function renderModels(models) {
   const grid = document.getElementById('modelGrid')
   if (!models.length) { grid.innerHTML = '<div class="loading">沒有符合的模型</div>'; return }
   grid.innerHTML = models.map(m => {
-    const name = m.id.split('/').pop()
     const tagsHtml = m.tags.map(t => tagHtml(t)).join('')
-    const prov = m.provider || ''
-    const provLabel = m.providerName || m.provider || ''
-    return '<div class="model-card" onclick="openChat(\'' + m.id.replace(/'/g,"\\'") + '\',\'' + prov + '\')" data-id="' + m.id + '" data-owner="' + m.owner + '" data-provider="' + prov + '">' +
-      '<div class="model-owner">' + m.owner + (provLabel ? ' <span style="color:#555;font-size:10px">via ' + provLabel + '</span>' : '') + '</div>' +
-      '<div class="model-name">' + name + '</div>' +
-      '<div class="model-id">' + m.id + '</div>' +
+    const speedPct = (m.speedRating / 5) * 100
+    const speedLabels = ['', '超大', '大型', '中型', '快速', '極速']
+    const prov = m._provider || ''
+    return '<div class="model-card" onclick="openChat(\'' + m.id.replace(/'/g,"\\'") + '\',\'' + prov.replace(/'/g,"\\'") + '\')" data-id="' + m.id + '" data-tags="' + m.tags.join(',') + '" data-tier="' + m.tier.label + '">' +
+      '<div class="model-cap-icon">' + m.primaryIcon + '</div>' +
+      '<div class="model-tier"><span class="tier-label ' + m.tier.cls + '">' + m.tier.label + '</span></div>' +
+      '<div class="model-name">' + m.displayName + '</div>' +
+      '<div class="model-speed">' +
+        '<div class="speed-bar"><div class="speed-fill" style="width:' + speedPct + '%"></div></div>' +
+        '<span class="speed-label">' + speedLabels[m.speedRating] + '</span>' +
+      '</div>' +
       '<div class="model-tags">' + tagsHtml + '</div>' +
     '</div>'
   }).join('')
 }
 
-// Search
+// Search - matches against display name and capability tags
 document.getElementById('searchBox').addEventListener('input', function() {
   const q = this.value.toLowerCase()
-  const filtered = allModels.filter(m => m.id.toLowerCase().includes(q) || m.owner.toLowerCase().includes(q))
+  const capNameMap = {}
+  for (const [key, cap] of Object.entries(CAPABILITIES)) {
+    capNameMap[cap.name] = key
+  }
+  const filtered = allModels.filter(m => {
+    if (m.displayName.toLowerCase().includes(q)) return true
+    if (m.id.toLowerCase().includes(q)) return true
+    if (m.tier.label.includes(q)) return true
+    // Match Chinese capability names
+    for (const [name, key] of Object.entries(capNameMap)) {
+      if (name.includes(q) && m.tags.includes(key)) return true
+    }
+    return m.tags.some(t => t.includes(q))
+  })
   renderModels(filtered)
 })
 
-// Filter buttons
+// Filter buttons - capability-based
 document.querySelectorAll('.filter-btn').forEach(btn => {
   btn.addEventListener('click', function() {
     document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'))
     this.classList.add('active')
     const f = this.dataset.filter
     if (f === 'all') { renderModels(allModels); return }
-    renderModels(allModels.filter(m => {
-      const lf = f.toLowerCase()
-      return m.owner.toLowerCase().includes(lf) || (m.provider || '').toLowerCase().includes(lf) || (m.providerName || '').toLowerCase().includes(lf)
-    }))
+    // Tier-based filters
+    if (f === 'enterprise') { renderModels(allModels.filter(m => m.tier.label === '企業級')); return }
+    if (f === 'opensource') { renderModels(allModels.filter(m => m.tier.label === '開源')); return }
+    if (f === 'highspeed') { renderModels(allModels.filter(m => m.tier.label === '高速')); return }
+    // Capability-based filters
+    renderModels(allModels.filter(m => m.tags.includes(f)))
   })
 })
 
-// Chat
+// Chat - still sends real model id and provider to API internally
 function openChat(modelId, provider) {
   currentModel = modelId
   currentProvider = provider || null
   chatHistory = []
+  const model = allModels.find(m => m.id === modelId)
+  const displayName = model ? model.displayName : modelId.split('/').pop()
+  const tierLabel = model ? model.tier.label : ''
   document.getElementById('chatPanel').classList.add('open')
-  document.getElementById('chatModelName').textContent = modelId.split('/').pop() + (provider ? ' (' + provider + ')' : '')
-  document.getElementById('chatMessages').innerHTML = '<div class="chat-msg bot"><div class="model-label">' + modelId + '</div>我是 SEOBAIKE AI 超級市集的怪物。有什麼可以幫你的？</div>'
+  document.getElementById('chatModelName').textContent = 'SEOBAIKE | ' + displayName + (tierLabel ? ' (' + tierLabel + ')' : '')
+  document.getElementById('chatMessages').innerHTML = '<div class="chat-msg bot"><div class="model-label">SEOBAIKE AI</div>我是 SEOBAIKE AI 超級引擎。有什麼可以幫你的？</div>'
   document.getElementById('chatInput').focus()
   document.querySelectorAll('.model-card').forEach(c => c.classList.remove('active'))
   const card = document.querySelector('[data-id="' + modelId + '"]')
@@ -281,7 +413,7 @@ async function sendChat() {
   const sendBtn = document.getElementById('chatSend')
   sendBtn.disabled = true
   sendBtn.textContent = '...'
-  msgs.innerHTML += '<div class="chat-msg bot" id="typing"><div class="model-label">' + currentModel + '</div>思考中...</div>'
+  msgs.innerHTML += '<div class="chat-msg bot" id="typing"><div class="model-label">SEOBAIKE AI</div>思考中...</div>'
   msgs.scrollTop = msgs.scrollHeight
 
   chatHistory.push({ role: 'user', content: msg })
@@ -300,8 +432,8 @@ async function sendChat() {
 
     const typing = document.getElementById('typing')
     if (typing) typing.remove()
-    const provInfo = data.provider ? ' | ' + data.provider : ''
-    msgs.innerHTML += '<div class="chat-msg bot"><div class="model-label">' + (data.model || currentModel) + provInfo + (data.usage ? ' | ' + (data.usage.total_tokens || 0) + ' tokens' : '') + '</div>' + reply.replace(/</g,'&lt;').replace(/\n/g,'<br>') + '</div>'
+    const tokenInfo = data.usage ? ' | ' + (data.usage.total_tokens || 0) + ' tokens' : ''
+    msgs.innerHTML += '<div class="chat-msg bot"><div class="model-label">SEOBAIKE AI' + tokenInfo + '</div>' + reply.replace(/</g,'&lt;').replace(/\n/g,'<br>') + '</div>'
   } catch(e) {
     const typing = document.getElementById('typing')
     if (typing) typing.remove()
@@ -322,7 +454,6 @@ if (window.__SEOBAIKE__) {
   }).catch(() => {})
 }
 
-loadProviders()
 loadModels()
 </script>
 </body>

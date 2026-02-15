@@ -172,7 +172,7 @@ export default {
         marketplace: ['/api/marketplace', '/api/marketplace/featured', '/api/marketplace/categories', '/api/marketplace/listing/:id', '/api/marketplace/purchase', '/api/marketplace/create', '/api/marketplace/review'],
         commission: ['/api/commission/rules', '/api/wallet'],
         mcp: ['/api/mcp/tools', '/api/mcp/execute'],
-        ai_routes: ['/api/ai/chat', '/api/widget-chat', '/api/v1/inference', '/api/ai/router', '/api/ai/search', '/api/ai/content'],
+        ai_routes: ['/api/ai/chat', '/api/ai/smart', '/api/widget-chat', '/api/v1/inference', '/api/ai/router', '/api/ai/search', '/api/ai/content'],
         data: ['/api/v1/l1', '/api/v1/l2', '/api/v1/l3', '/api/v1/l4', '/api/v1/nodes', '/api/v1/check', '/api/v1/search', '/api/v1/export'],
         system: ['/api/health', '/api/v1/analytics', '/api/v1/system', '/api/v1/status', '/api/platforms'],
         webhooks: ['/api/webhook/telegram', '/api/webhook/line', '/api/webhook/whatsapp', '/api/webhook/messenger', '/api/webhook/discord', '/api/webhook/slack', '/api/webhook/teams', '/api/webhook/email', '/api/webhook/google-chat', '/api/webhook/wechat', '/api/webhook/signal', '/api/webhook/viber', '/api/webhook/sms', '/api/webhook/web-widget'],
@@ -653,7 +653,7 @@ export default {
     if (request.method !== 'POST') return json(405, { error: 'Method not allowed' })
 
     // ── Rate Limiting — 公開 API 每 IP 每端點 5 秒冷卻 ──
-    const rateLimitPaths = ['/api/ai/chat', '/api/widget-chat', '/api/v1/check', '/api/v1/inference', '/api/checkout', '/api/ai/router', '/api/ai/search', '/api/ai/content', '/api/bot/command', '/api/team/dispatch', '/api/marketplace/purchase', '/api/marketplace/create', '/api/marketplace/review']
+    const rateLimitPaths = ['/api/ai/chat', '/api/ai/smart', '/api/widget-chat', '/api/v1/check', '/api/v1/inference', '/api/checkout', '/api/ai/router', '/api/ai/search', '/api/ai/content', '/api/bot/command', '/api/team/dispatch', '/api/marketplace/purchase', '/api/marketplace/create', '/api/marketplace/review']
     if (rateLimitPaths.includes(path)) {
       const clientIp = request.headers.get('CF-Connecting-IP') || 'unknown'
       const { allowed, retryAfter } = await checkRateLimit(env.RATE_LIMIT, `${clientIp}:${path}`, 5)
@@ -680,6 +680,7 @@ export default {
         case '/api/ai/chat': return await handleAiChat(request, env)
         case '/api/ai/nim': return await handleNimChat(request, env)
         case '/api/widget-chat': return await handleWidgetChat(request, env)
+        case '/api/ai/smart': return await handleSmartRouter(request, env)
         // ── SEOBAIKE 世界級 API 路由 ──
         case '/api/ai/router': return await proxyEdge(request, env, 'ai-universal-router')
         case '/api/ai/search': return await proxyEdge(request, env, 'ai-search-engine')
@@ -1477,6 +1478,359 @@ async function handleWidgetChat(request: Request, env: Env): Promise<Response> {
   } catch (err) {
     return json(500, { reply: '抱歉，AI 暫時無法回應。\n\n— 小百', error: String(err) })
   }
+}
+
+// ============================================================
+// SEOBAIKE 智能路由器 — L1-L4 專利約束 + 意圖偵測自動選模型
+// ============================================================
+
+// 意圖類型定義
+type IntentType = 'code' | 'reasoning' | 'search' | 'chat' | 'analysis' | 'chinese' | 'translation' | 'vision' | 'creative'
+
+// 每種意圖的最佳供應商 + 模型 + 降級鏈
+const INTENT_ROUTING_TABLE: Record<IntentType, Array<{ provider: string; model: string; reason_zh: string }>> = {
+  code: [
+    { provider: 'deepseek', model: 'deepseek-coder', reason_zh: '程式碼專精模型' },
+    { provider: 'fireworks', model: 'accounts/fireworks/models/deepseek-coder-v2-lite-instruct', reason_zh: '程式碼快速推理' },
+    { provider: 'groq', model: 'llama-3.3-70b-versatile', reason_zh: '超高速通用推理' },
+    { provider: 'openrouter', model: 'anthropic/claude-sonnet-4', reason_zh: '頂級程式碼能力' },
+    { provider: 'cloudflare', model: '@cf/meta/llama-3.1-8b-instruct', reason_zh: '免費邊緣降級' },
+  ],
+  reasoning: [
+    { provider: 'deepseek', model: 'deepseek-reasoner', reason_zh: 'DeepSeek R1 推理之王' },
+    { provider: 'google', model: 'gemini-2.0-flash-thinking-exp', reason_zh: 'Gemini 思維鏈' },
+    { provider: 'openrouter', model: 'openai/o3-mini', reason_zh: 'OpenAI 推理模型' },
+    { provider: 'anthropic', model: 'claude-sonnet-4-5-20250929', reason_zh: 'Claude 深度分析' },
+    { provider: 'groq', model: 'llama-3.3-70b-versatile', reason_zh: '快速通用降級' },
+  ],
+  search: [
+    { provider: 'perplexity', model: 'sonar-pro', reason_zh: 'Perplexity 搜尋增強 AI' },
+    { provider: 'perplexity', model: 'sonar', reason_zh: 'Perplexity 快速搜尋' },
+    { provider: 'cohere', model: 'command-r-plus', reason_zh: 'Cohere RAG 企業搜尋' },
+    { provider: 'openrouter', model: 'perplexity/sonar-pro', reason_zh: 'OpenRouter 搜尋降級' },
+    { provider: 'groq', model: 'llama-3.3-70b-versatile', reason_zh: '通用降級（無搜尋）' },
+  ],
+  chat: [
+    { provider: 'groq', model: 'llama-3.3-70b-versatile', reason_zh: 'LPU 超高速聊天' },
+    { provider: 'groq', model: 'llama-3.1-8b-instant', reason_zh: 'Groq 極速小模型' },
+    { provider: 'together', model: 'meta-llama/Llama-3.3-70B-Instruct-Turbo', reason_zh: 'Together 快速推理' },
+    { provider: 'fireworks', model: 'accounts/fireworks/models/llama-v3p1-70b-instruct', reason_zh: 'Fireworks 快速推理' },
+    { provider: 'cloudflare', model: '@cf/meta/llama-3.1-8b-instruct', reason_zh: '免費邊緣降級' },
+  ],
+  analysis: [
+    { provider: 'anthropic', model: 'claude-sonnet-4-5-20250929', reason_zh: 'Claude 複雜分析' },
+    { provider: 'openrouter', model: 'anthropic/claude-sonnet-4', reason_zh: 'OpenRouter Claude 降級' },
+    { provider: 'google', model: 'gemini-2.0-flash', reason_zh: 'Gemini 多模態分析' },
+    { provider: 'deepseek', model: 'deepseek-chat', reason_zh: 'DeepSeek 通用分析' },
+    { provider: 'nvidia', model: 'meta/llama-3.1-405b-instruct', reason_zh: 'NVIDIA 企業級大模型' },
+  ],
+  chinese: [
+    { provider: 'deepseek', model: 'deepseek-chat', reason_zh: '中文最強模型' },
+    { provider: 'openrouter', model: 'deepseek/deepseek-chat', reason_zh: 'OpenRouter DeepSeek 降級' },
+    { provider: 'groq', model: 'llama-3.3-70b-versatile', reason_zh: 'Groq 中文通用' },
+    { provider: 'google', model: 'gemini-2.0-flash', reason_zh: 'Gemini 多語言' },
+    { provider: 'cloudflare', model: '@cf/meta/llama-3.1-8b-instruct', reason_zh: '免費邊緣降級' },
+  ],
+  translation: [
+    { provider: 'deepseek', model: 'deepseek-chat', reason_zh: '多語言翻譯優選' },
+    { provider: 'google', model: 'gemini-2.0-flash', reason_zh: 'Google 翻譯能力' },
+    { provider: 'mistral', model: 'mistral-large-latest', reason_zh: 'Mistral 歐洲多語言' },
+    { provider: 'groq', model: 'llama-3.3-70b-versatile', reason_zh: 'Groq 通用翻譯' },
+    { provider: 'cloudflare', model: '@cf/meta/llama-3.1-8b-instruct', reason_zh: '免費邊緣降級' },
+  ],
+  vision: [
+    { provider: 'google', model: 'gemini-2.0-flash', reason_zh: 'Gemini 視覺分析' },
+    { provider: 'openrouter', model: 'anthropic/claude-sonnet-4', reason_zh: 'Claude 圖像理解' },
+    { provider: 'nvidia', model: 'microsoft/phi-3.5-vision-instruct', reason_zh: 'NVIDIA 視覺模型' },
+    { provider: 'together', model: 'meta-llama/Llama-3.2-90B-Vision-Instruct-Turbo', reason_zh: 'Together 視覺降級' },
+    { provider: 'cloudflare', model: '@cf/meta/llama-3.1-8b-instruct', reason_zh: '免費邊緣降級（無視覺）' },
+  ],
+  creative: [
+    { provider: 'anthropic', model: 'claude-sonnet-4-5-20250929', reason_zh: 'Claude 創意寫作' },
+    { provider: 'openrouter', model: 'anthropic/claude-sonnet-4', reason_zh: 'OpenRouter Claude 降級' },
+    { provider: 'mistral', model: 'mistral-large-latest', reason_zh: 'Mistral 創作能力' },
+    { provider: 'groq', model: 'llama-3.3-70b-versatile', reason_zh: 'Groq 通用創作' },
+    { provider: 'cloudflare', model: '@cf/meta/llama-3.1-8b-instruct', reason_zh: '免費邊緣降級' },
+  ],
+}
+
+// 意圖偵測：分析用戶訊息，判斷最佳路由
+// Intent detection: analyze user message to determine best routing
+function detectIntent(message: string, hints?: { l1?: string; l2?: string; l3?: string; l4?: string }): { intent: IntentType; confidence: number; reason_zh: string } {
+  const lower = message.toLowerCase()
+  const len = message.length
+
+  // 程式碼意圖關鍵詞
+  // Code intent keywords
+  const codeKeywords = /\b(code|function|class|import|export|const |let |var |def |async |await |return |console\.|print\(|debug|bug|error|exception|api|endpoint|sql|query|database|html|css|javascript|typescript|python|rust|go |java |react|vue|angular|node|npm|git|docker|deploy|compile|runtime|syntax|algorithm|regex|json|xml|yaml|http|tcp|udp|socket|server|client|backend|frontend|fullstack|devops|ci\/cd|test|unit test|程式|程式碼|寫一個|函數|函式|變數|陣列|迴圈|除錯|部署|編譯|語法)\b/i
+  if (codeKeywords.test(message)) {
+    return { intent: 'code', confidence: 0.9, reason_zh: '偵測到程式碼相關關鍵詞' }
+  }
+
+  // 推理 / 數學 / 邏輯意圖
+  // Reasoning / math / logic intent
+  const reasoningKeywords = /\b(prove|proof|theorem|calculate|equation|formula|logic|reason|deduce|infer|math|mathematics|algebra|calculus|geometry|statistics|probability|hypothesis|paradox|puzzle|solve|solution|step.by.step|think|思考|推理|邏輯|證明|計算|數學|方程式|公式|統計|機率|解題|步驟)\b/i
+  if (reasoningKeywords.test(message)) {
+    return { intent: 'reasoning', confidence: 0.85, reason_zh: '偵測到推理/數學/邏輯關鍵詞' }
+  }
+
+  // 搜尋 / 時事 / 即時資訊意圖
+  // Search / current events / real-time info intent
+  const searchKeywords = /\b(search|find|look up|latest|news|today|current|recent|2025|2026|stock|price|weather|what happened|who is|where is|when did|搜尋|查詢|最新|新聞|今天|即時|股價|天氣|查一下|幫我找|現在|目前)\b/i
+  if (searchKeywords.test(message)) {
+    return { intent: 'search', confidence: 0.85, reason_zh: '偵測到搜尋/即時資訊需求' }
+  }
+
+  // 視覺 / 圖片分析意圖
+  // Vision / image analysis intent
+  const visionKeywords = /\b(image|picture|photo|screenshot|diagram|chart|graph|看圖|圖片|照片|截圖|描述這張|分析這張|看看這)\b/i
+  if (visionKeywords.test(message)) {
+    return { intent: 'vision', confidence: 0.8, reason_zh: '偵測到視覺/圖片分析需求' }
+  }
+
+  // 翻譯意圖
+  // Translation intent
+  const translationKeywords = /\b(translate|translation|翻譯|翻成|translate.*(to|into)|幫我翻|中翻英|英翻中|日翻中|翻成中文|翻成英文|翻成日文)\b/i
+  if (translationKeywords.test(message)) {
+    return { intent: 'translation', confidence: 0.9, reason_zh: '偵測到翻譯需求' }
+  }
+
+  // 創意寫作意圖
+  // Creative writing intent
+  const creativeKeywords = /\b(write|story|poem|essay|creative|blog|article|copywriting|script|novel|寫一篇|故事|詩|文章|部落格|劇本|文案|廣告|小說|創作|寫作)\b/i
+  if (creativeKeywords.test(message)) {
+    return { intent: 'creative', confidence: 0.8, reason_zh: '偵測到創意寫作需求' }
+  }
+
+  // 複雜分析意圖（長訊息 或 分析關鍵詞）
+  // Complex analysis intent (long messages or analysis keywords)
+  const analysisKeywords = /\b(analyze|analysis|compare|evaluate|assess|review|explain|summarize|summary|breakdown|深度分析|比較|評估|摘要|總結|解釋|綜合|報告)\b/i
+  if (analysisKeywords.test(message) || len > 500) {
+    return { intent: 'analysis', confidence: 0.75, reason_zh: len > 500 ? '訊息過長，使用大模型分析' : '偵測到分析需求' }
+  }
+
+  // 中文優先偵測（純中文且無特定意圖）
+  // Chinese language detection (pure Chinese with no specific intent)
+  const chineseRatio = (message.match(/[\u4e00-\u9fff]/g) || []).length / Math.max(len, 1)
+  if (chineseRatio > 0.5) {
+    return { intent: 'chinese', confidence: 0.7, reason_zh: '偵測到中文為主的訊息' }
+  }
+
+  // L1-L4 約束層提示影響路由
+  // L1-L4 constraint layer hints affect routing
+  if (hints?.l1 || hints?.l2 || hints?.l3 || hints?.l4) {
+    return { intent: 'analysis', confidence: 0.7, reason_zh: '有 L1-L4 約束層提示，使用深度分析' }
+  }
+
+  // 預設：一般聊天（走最快的模型）
+  // Default: general chat (use fastest model)
+  return { intent: 'chat', confidence: 0.6, reason_zh: '一般聊天，使用最快速模型' }
+}
+
+// 呼叫指定供應商的 AI 模型
+// Call a specific provider's AI model
+async function callProviderModel(
+  env: Env,
+  provider: string,
+  model: string,
+  messages: Array<{ role: string; content: string }>,
+  maxTokens: number,
+  temperature: number,
+): Promise<{ ok: boolean; reply?: string; model?: string; usage?: any; error?: string }> {
+
+  // Cloudflare Workers AI（免費內建）
+  if (provider === 'cloudflare') {
+    try {
+      const cfModel = model.startsWith('@cf/') ? model : '@cf/meta/llama-3.1-8b-instruct'
+      const result = await env.AI.run(cfModel, { messages, max_tokens: maxTokens })
+      return { ok: true, reply: result.response, model: cfModel }
+    } catch (e: any) {
+      return { ok: false, error: e.message }
+    }
+  }
+
+  // Anthropic Claude（自訂格式）
+  if (provider === 'anthropic') {
+    const key = env.ANTHROPIC_API_KEY
+    if (!key) return { ok: false, error: 'ANTHROPIC_API_KEY not configured' }
+    try {
+      const sysMsg = messages.find(m => m.role === 'system')?.content || ''
+      const userMsgs = messages.filter(m => m.role !== 'system')
+      const res = await fetch('https://api.anthropic.com/v1/messages', {
+        method: 'POST',
+        headers: { 'x-api-key': key, 'anthropic-version': '2023-06-01', 'Content-Type': 'application/json' },
+        body: JSON.stringify({ model, max_tokens: maxTokens, system: sysMsg, messages: userMsgs, temperature }),
+      })
+      const data = await res.json() as any
+      const reply = data.content?.[0]?.text
+      if (reply) return { ok: true, reply, model: data.model, usage: data.usage }
+      return { ok: false, error: data.error?.message || JSON.stringify(data.error || data) }
+    } catch (e: any) {
+      return { ok: false, error: e.message }
+    }
+  }
+
+  // OpenAI 兼容供應商（PROVIDER_CONFIG 中的所有供應商）
+  const config = PROVIDER_CONFIG[provider]
+  if (!config) return { ok: false, error: `Unknown provider: ${provider}` }
+
+  const apiKey = (env as any)[config.env_key] as string
+  if (!apiKey) return { ok: false, error: `${config.env_key} not configured` }
+
+  try {
+    const res = await fetch(`${config.base_url}/chat/completions`, {
+      method: 'POST',
+      headers: { 'Authorization': `Bearer ${apiKey}`, 'Content-Type': 'application/json' },
+      body: JSON.stringify({ model, messages, max_tokens: maxTokens, temperature, stream: false }),
+    })
+    const data = await res.json() as any
+    if (data.choices?.[0]?.message?.content) {
+      return { ok: true, reply: data.choices[0].message.content, model: data.model || model, usage: data.usage }
+    }
+    return { ok: false, error: data.error?.message || JSON.stringify(data.error || data) }
+  } catch (e: any) {
+    return { ok: false, error: e.message }
+  }
+}
+
+async function handleSmartRouter(request: Request, env: Env): Promise<Response> {
+  const body = await request.json() as any
+  const { message, l1, l2, l3, l4, max_tokens, temperature, force_provider, force_model } = body
+
+  if (!message) {
+    return json(400, {
+      error: 'message is required',
+      patent: 'TW-115100981',
+      example: {
+        message: 'Write a Python function to sort a list',
+        l1: 'L1-01',
+        l2: 'L2-0101',
+        l3: 'L3-010101',
+        l4: 'L4-01010101',
+        force_provider: 'groq',
+        force_model: 'llama-3.3-70b-versatile',
+      },
+      supported_intents: Object.keys(INTENT_ROUTING_TABLE),
+    })
+  }
+
+  const t0 = Date.now()
+
+  // L1-L4 約束驗證（如果提供了層級提示）
+  // L1-L4 constraint validation (if layer hints provided)
+  let constraintResult: any = null
+  if (l1 || l2 || l3 || l4) {
+    try {
+      const SUPA_URL = env.SUPABASE_URL || 'https://vmyrivxxibqydccurxug.supabase.co'
+      const checkRes = await fetch(`${SUPA_URL}/rest/v1/rpc/check_inference_path`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'apikey': env.SUPABASE_SERVICE_ROLE_KEY,
+          'Authorization': `Bearer ${env.SUPABASE_SERVICE_ROLE_KEY}`,
+        },
+        body: JSON.stringify({
+          p_session_id: `smart-router-${Date.now()}`,
+          p_l1_id: null,
+          p_l2_id: null,
+          p_l3_id: null,
+          p_l4_id: null,
+          p_context: { l1_code: l1 || null, l2_code: l2 || null, l3_code: l3 || null, l4_code: l4 || null, source: 'smart_router' },
+        }),
+      })
+      if (checkRes.ok) {
+        constraintResult = await checkRes.json()
+      }
+    } catch {
+      // 約束驗證失敗不影響路由，繼續
+    }
+  }
+
+  // 偵測意圖
+  // Detect intent
+  const intentResult = detectIntent(message, { l1, l2, l3, l4 })
+
+  // 取得路由鏈
+  // Get routing chain
+  const routingChain = INTENT_ROUTING_TABLE[intentResult.intent]
+
+  // 如果指定了供應商和模型，直接使用
+  // If provider and model are forced, use them directly
+  if (force_provider && force_model) {
+    const systemPrompt = 'You are SEOBAIKE AI, a helpful assistant powered by the SEOBAIKE OS platform (Patent: TW-115100981). You are routed by the Smart Router based on intent analysis. Answer in the same language the user writes in.'
+    const messages = [
+      { role: 'system', content: systemPrompt },
+      { role: 'user', content: String(message) },
+    ]
+    const result = await callProviderModel(env, force_provider, force_model, messages, max_tokens || 1024, temperature ?? 0.7)
+    return json(result.ok ? 200 : 502, {
+      patent: 'TW-115100981',
+      router: 'smart',
+      intent: intentResult,
+      forced: true,
+      provider: force_provider,
+      model: result.model || force_model,
+      reply: result.reply || null,
+      error: result.error || null,
+      usage: result.usage || null,
+      constraint: constraintResult,
+      latency_ms: Date.now() - t0,
+    })
+  }
+
+  // 依照路由鏈嘗試，失敗自動降級
+  // Try routing chain in order, auto-fallback on failure
+  const systemPrompt = 'You are SEOBAIKE AI, a helpful assistant powered by the SEOBAIKE OS platform (Patent: TW-115100981). You are routed by the Smart Router based on intent analysis. Answer in the same language the user writes in.'
+  const chatMessages = [
+    { role: 'system', content: systemPrompt },
+    { role: 'user', content: String(message) },
+  ]
+
+  const errors: Array<{ provider: string; model: string; error: string }> = []
+
+  for (const route of routingChain) {
+    const result = await callProviderModel(
+      env,
+      route.provider,
+      route.model,
+      chatMessages,
+      max_tokens || 1024,
+      temperature ?? 0.7,
+    )
+
+    if (result.ok && result.reply) {
+      return json(200, {
+        patent: 'TW-115100981',
+        router: 'smart',
+        intent: intentResult,
+        provider: route.provider,
+        model: result.model || route.model,
+        reason_zh: route.reason_zh,
+        reply: result.reply,
+        usage: result.usage || null,
+        constraint: constraintResult,
+        fallback_count: errors.length,
+        fallback_errors: errors.length > 0 ? errors : undefined,
+        latency_ms: Date.now() - t0,
+      })
+    }
+
+    // 記錄失敗，繼續嘗試下一個
+    // Record failure, try next provider
+    errors.push({ provider: route.provider, model: route.model, error: result.error || 'Unknown error' })
+  }
+
+  // 所有供應商都失敗
+  // All providers failed
+  return json(502, {
+    patent: 'TW-115100981',
+    router: 'smart',
+    intent: intentResult,
+    error: '所有供應商都無法回應 / All providers failed',
+    errors,
+    constraint: constraintResult,
+    latency_ms: Date.now() - t0,
+  })
 }
 
 // ── SEOBAIKE 金流結帳 ──
