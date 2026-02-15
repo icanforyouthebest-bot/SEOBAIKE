@@ -53,6 +53,17 @@ export interface Env {
   // NVIDIA NIM
   NVIDIA_API_KEY: string
 
+  // AI 超級市集 — 全供應商
+  OPENROUTER_API_KEY: string      // OpenRouter 400+ 模型聚合器
+  GOOGLE_AI_KEY: string           // Google Gemini
+  GROQ_API_KEY: string            // Groq 超高速推理
+  TOGETHER_API_KEY: string        // Together AI 200+ 模型
+  FIREWORKS_API_KEY: string       // Fireworks AI
+  DEEPSEEK_API_KEY: string        // DeepSeek
+  MISTRAL_API_KEY: string         // Mistral AI
+  COHERE_API_KEY: string          // Cohere
+  ANTHROPIC_API_KEY: string       // Anthropic Claude/Opus
+
   // WeChat
   WECHAT_APP_ID: string
   WECHAT_APP_SECRET: string
@@ -76,6 +87,9 @@ export interface Env {
 
   // Resend
   RESEND_API_KEY: string
+
+  // Composio MCP
+  COMPOSIO_API_KEY: string
 
   // KV for rate limiting
   RATE_LIMIT: KVNamespace

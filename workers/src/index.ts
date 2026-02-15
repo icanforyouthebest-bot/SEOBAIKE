@@ -159,15 +159,20 @@ export default {
     }
 
     if (path === '/api' || path === '/api/') return json(200, {
-      status: 'operational', service: 'SEOBAIKE OS', version: '3.2.0', patent: 'TW-115100981',
-      architecture: 'AI OS — 要什麼有什麼，讓人賺錢的系統',
+      status: 'operational', service: 'SEOBAIKE OS', version: '5.0.0', patent: 'TW-115100981',
+      architecture: 'AI OS — 12 供應商 1000+ 模型 + 500 MCP 工具 + 三級分潤',
       marketplace: { listings: 30, commission_levels: 3, model: 'platform 20% / creator 50% / referrers 30%' },
-      capabilities: { ai_models: 185, platforms: 14, constraint_layers: 4, api_endpoints: 55, collaboration_bots: 185 },
+      capabilities: {
+        ai_providers: 12, ai_models: '1000+', mcp_tools: 500, platforms: 14, constraint_layers: 4, api_endpoints: 62,
+        providers_list: ['NVIDIA NIM', 'OpenRouter', 'Google Gemini', 'Groq', 'Together AI', 'Fireworks AI', 'DeepSeek', 'Mistral AI', 'Perplexity', 'Cohere', 'Anthropic Claude', 'Workers AI'],
+      },
       endpoints: {
+        ai_supermarket: ['/api/ai/providers', '/api/ai/models', '/api/ai/models?provider=nvidia', '/api/ai/nim'],
         bots: ['/api/bots/status', '/api/bots/telegram/setup', '/api/bots/telegram/info', '/api/bots/telegram/test'],
         marketplace: ['/api/marketplace', '/api/marketplace/featured', '/api/marketplace/categories', '/api/marketplace/listing/:id', '/api/marketplace/purchase', '/api/marketplace/create', '/api/marketplace/review'],
         commission: ['/api/commission/rules', '/api/wallet'],
-        ai: ['/api/ai/models', '/api/ai/nim', '/api/ai/chat', '/api/widget-chat', '/api/v1/inference', '/api/ai/router', '/api/ai/search', '/api/ai/content'],
+        mcp: ['/api/mcp/tools', '/api/mcp/execute'],
+        ai_routes: ['/api/ai/chat', '/api/widget-chat', '/api/v1/inference', '/api/ai/router', '/api/ai/search', '/api/ai/content'],
         data: ['/api/v1/l1', '/api/v1/l2', '/api/v1/l3', '/api/v1/l4', '/api/v1/nodes', '/api/v1/check', '/api/v1/search', '/api/v1/export'],
         system: ['/api/health', '/api/v1/analytics', '/api/v1/system', '/api/v1/status', '/api/platforms'],
         webhooks: ['/api/webhook/telegram', '/api/webhook/line', '/api/webhook/whatsapp', '/api/webhook/messenger', '/api/webhook/discord', '/api/webhook/slack', '/api/webhook/teams', '/api/webhook/email', '/api/webhook/google-chat', '/api/webhook/wechat', '/api/webhook/signal', '/api/webhook/viber', '/api/webhook/sms', '/api/webhook/web-widget'],
@@ -177,25 +182,151 @@ export default {
     if (path === '/api/health') return json(200, { status: 'ok', timestamp: new Date().toISOString(), version: '3.2.0', platforms_ready: 14 })
     if (path === '/api/platforms') return json(200, PLATFORM_REGISTRY)
 
-    // ── NVIDIA NIM 怪物軍團 API ──
+    // ── AI 超級市集 — 全供應商怪物引擎 ──
+    const AI_PROVIDERS: Record<string, { name: string; base_url: string; env_key: keyof Env; model_count: number; speed?: string; special?: string }> = {
+      nvidia:     { name: 'NVIDIA NIM',    base_url: 'https://integrate.api.nvidia.com/v1',                        env_key: 'NVIDIA_API_KEY',     model_count: 185, special: '企業級 GPU 推理' },
+      openrouter: { name: 'OpenRouter',    base_url: 'https://openrouter.ai/api/v1',                               env_key: 'OPENROUTER_API_KEY', model_count: 400, special: '全球最大模型聚合器' },
+      google:     { name: 'Google Gemini', base_url: 'https://generativelanguage.googleapis.com/v1beta/openai',     env_key: 'GOOGLE_AI_KEY',      model_count: 15,  special: '多模態 + 思維鏈' },
+      groq:       { name: 'Groq',          base_url: 'https://api.groq.com/openai/v1',                             env_key: 'GROQ_API_KEY',       model_count: 20,  speed: '500+ tok/s', special: 'LPU 超高速推理' },
+      together:   { name: 'Together AI',   base_url: 'https://api.together.xyz/v1',                                env_key: 'TOGETHER_API_KEY',   model_count: 200, special: '開源模型大集合' },
+      fireworks:  { name: 'Fireworks AI',  base_url: 'https://api.fireworks.ai/inference/v1',                       env_key: 'FIREWORKS_API_KEY',  model_count: 100, special: '高速推理 + 函數呼叫' },
+      deepseek:   { name: 'DeepSeek',      base_url: 'https://api.deepseek.com',                                   env_key: 'DEEPSEEK_API_KEY',   model_count: 5,   special: '推理之王 R1' },
+      mistral:    { name: 'Mistral AI',    base_url: 'https://api.mistral.ai/v1',                                  env_key: 'MISTRAL_API_KEY',    model_count: 12,  special: '歐洲 AI 之光' },
+      perplexity: { name: 'Perplexity',    base_url: 'https://api.perplexity.ai',                                  env_key: 'PERPLEXITY_API_KEY', model_count: 8,   special: 'AI 搜尋引擎' },
+      cohere:     { name: 'Cohere',        base_url: 'https://api.cohere.ai/compatibility/v1',                     env_key: 'COHERE_API_KEY',     model_count: 6,   special: 'RAG + 企業搜尋' },
+      anthropic:  { name: 'Anthropic',     base_url: 'https://api.anthropic.com/v1',                               env_key: 'ANTHROPIC_API_KEY',  model_count: 6,   special: 'Claude Opus 4.6 — 最強推理' },
+      cloudflare: { name: 'Workers AI',    base_url: 'workers-ai-built-in',                                        env_key: 'AI' as any,          model_count: 50,  special: '邊緣免費 AI' },
+    }
+
+    // ── /api/ai/providers — 全供應商狀態 ──
+    if (path === '/api/ai/providers') {
+      const providers = Object.entries(AI_PROVIDERS).map(([id, p]) => ({
+        id, name: p.name, model_count: p.model_count,
+        status: env[p.env_key] ? 'online' : 'ready',
+        speed: p.speed || null, special: p.special,
+      }))
+      const online = providers.filter(p => p.status === 'online').length
+      const totalModels = providers.reduce((sum, p) => sum + p.model_count, 0)
+      return json(200, {
+        patent: 'TW-115100981', os: 'SEOBAIKE AI OS',
+        total_providers: providers.length, online_providers: online,
+        total_models: totalModels,
+        providers,
+      })
+    }
+
+    // ── /api/ai/models — 全供應商模型列表 ──
     if (path === '/api/ai/models') {
-      const NIM_KEY = env.NVIDIA_API_KEY
-      if (!NIM_KEY) return json(503, { error: 'NVIDIA API not configured' })
+      const provider = url.searchParams.get('provider')
+      const allModels: any[] = []
+      const errors: any[] = []
+
+      // 收集所有有 API Key 的供應商模型
+      const fetchProviderModels = async (pid: string, p: typeof AI_PROVIDERS[string]) => {
+        const key = env[p.env_key] as string
+        if (!key || pid === 'cloudflare' || pid === 'anthropic') return
+        try {
+          const res = await fetch(`${p.base_url}/models`, { headers: { 'Authorization': `Bearer ${key}` } })
+          if (!res.ok) return
+          const data = await res.json() as any
+          const models = (data.data || []).map((m: any) => ({ id: m.id, provider: pid, provider_name: p.name, owned_by: m.owned_by || m.id.split('/')[0], created: m.created }))
+          allModels.push(...models)
+        } catch (e: any) { errors.push({ provider: pid, error: e.message }) }
+      }
+
+      if (provider && AI_PROVIDERS[provider]) {
+        await fetchProviderModels(provider, AI_PROVIDERS[provider])
+      } else {
+        // 同時查詢所有供應商
+        await Promise.all(Object.entries(AI_PROVIDERS).map(([pid, p]) => fetchProviderModels(pid, p)))
+      }
+
+      // 加入 Anthropic 模型（格式不同，手動加入）
+      if (!provider || provider === 'anthropic') {
+        if (env.ANTHROPIC_API_KEY) {
+          allModels.push(
+            { id: 'claude-opus-4-6', provider: 'anthropic', provider_name: 'Anthropic', owned_by: 'anthropic' },
+            { id: 'claude-sonnet-4-5-20250929', provider: 'anthropic', provider_name: 'Anthropic', owned_by: 'anthropic' },
+            { id: 'claude-haiku-4-5-20251001', provider: 'anthropic', provider_name: 'Anthropic', owned_by: 'anthropic' },
+          )
+        }
+      }
+
+      // 加入 Cloudflare Workers AI 模型
+      if (!provider || provider === 'cloudflare') {
+        allModels.push(
+          { id: '@cf/meta/llama-3.1-8b-instruct', provider: 'cloudflare', provider_name: 'Workers AI', owned_by: 'meta' },
+          { id: '@cf/mistral/mistral-7b-instruct-v0.2', provider: 'cloudflare', provider_name: 'Workers AI', owned_by: 'mistral' },
+          { id: '@cf/qwen/qwen1.5-14b-chat-awq', provider: 'cloudflare', provider_name: 'Workers AI', owned_by: 'qwen' },
+          { id: '@cf/google/gemma-7b-it', provider: 'cloudflare', provider_name: 'Workers AI', owned_by: 'google' },
+        )
+      }
+
+      // 統計
+      const byProvider: Record<string, number> = {}
+      allModels.forEach(m => { byProvider[m.provider] = (byProvider[m.provider] || 0) + 1 })
+
+      return json(200, {
+        total: allModels.length, source: 'SEOBAIKE AI OS', patent: 'TW-115100981',
+        providers: Object.entries(byProvider).sort((a, b) => b[1] - a[1]).map(([name, count]) => ({ name, count })),
+        models: allModels,
+        errors: errors.length > 0 ? errors : undefined,
+      })
+    }
+
+    // ── /api/ai/nim — NVIDIA NIM 專用入口 ──
+    if (path === '/api/ai/nim' && request.method === 'GET') {
+      return json(200, { info: 'SEOBAIKE AI OS — 全供應商怪物引擎', method: 'POST', endpoint: '/api/ai/nim', providers: Object.keys(AI_PROVIDERS), body: { provider: 'nvidia', model: 'meta/llama-3.1-405b-instruct', message: 'your question' } })
+    }
+
+    // ── Composio MCP — 500+ 應用直連 ──
+    if (path === '/api/mcp/tools') {
+      const COMP_KEY = env.COMPOSIO_API_KEY
+      if (!COMP_KEY) return json(200, {
+        status: 'os_ready', source: 'composio-mcp', total_available: 500,
+        message: 'SEOBAIKE OS 已就緒，Composio MCP 500+ 工具等待連入',
+        categories: ['communication', 'productivity', 'development', 'marketing', 'finance', 'social', 'analytics', 'storage', 'crm', 'project_management'],
+        featured: [
+          { name: 'Slack', category: 'communication', description: '團隊溝通 + 頻道管理' },
+          { name: 'GitHub', category: 'development', description: '程式碼倉庫 + PR + Issues' },
+          { name: 'Notion', category: 'productivity', description: '筆記 + 知識庫 + 任務管理' },
+          { name: 'Google Workspace', category: 'productivity', description: 'Gmail + Sheets + Drive + Calendar' },
+          { name: 'Salesforce', category: 'crm', description: '客戶關係管理 + 銷售漏斗' },
+          { name: 'HubSpot', category: 'marketing', description: '行銷自動化 + CRM' },
+          { name: 'Stripe', category: 'finance', description: '支付處理 + 訂閱管理' },
+          { name: 'Shopify', category: 'commerce', description: '電商平台 + 訂單管理' },
+          { name: 'Jira', category: 'project_management', description: '專案管理 + 敏捷開發' },
+          { name: 'Figma', category: 'design', description: '設計協作 + 原型製作' },
+          { name: 'Meta (WhatsApp/Instagram)', category: 'social', description: '社群媒體 + 訊息' },
+          { name: 'TikTok', category: 'social', description: '短影片 + 行銷' },
+          { name: 'X (Twitter)', category: 'social', description: '社群媒體 + 即時消息' },
+          { name: 'LinkedIn', category: 'social', description: '專業社群 + 招募' },
+          { name: 'AWS', category: 'cloud', description: '雲端服務 + 基礎設施' },
+        ],
+        setup: 'composio.dev → 取得 API Key → wrangler secret put COMPOSIO_API_KEY',
+      })
       try {
-        const res = await fetch('https://integrate.api.nvidia.com/v1/models', { headers: { 'Authorization': `Bearer ${NIM_KEY}` } })
-        const data = await res.json() as any
-        const models = (data.data || []).map((m: any) => ({ id: m.id, owned_by: m.owned_by || m.id.split('/')[0], created: m.created }))
-        const owners: Record<string, number> = {}
-        models.forEach((m: any) => { owners[m.owned_by] = (owners[m.owned_by] || 0) + 1 })
-        return json(200, {
-          total: models.length, source: 'NVIDIA NIM', patent: 'TW-115100981',
-          providers: Object.entries(owners).sort((a, b) => b[1] - a[1]).map(([name, count]) => ({ name, count })),
-          models,
+        const res = await fetch('https://backend.composio.dev/api/v3/mcp/servers', {
+          headers: { 'x-api-key': COMP_KEY, 'Content-Type': 'application/json' },
         })
+        const data = await res.json()
+        return json(200, { source: 'composio-mcp', data })
       } catch (e: any) { return json(500, { error: e.message }) }
     }
-    if (path === '/api/ai/nim' && request.method === 'GET') {
-      return json(200, { info: 'SEOBAIKE AI OS — 185 個 NVIDIA NIM 怪物模型', method: 'POST', endpoint: '/api/ai/nim', body: { model: 'meta/llama-3.1-405b-instruct', message: 'your question' }, available_models: '/api/ai/models' })
+    if (path === '/api/mcp/execute' && request.method === 'POST') {
+      const COMP_KEY = env.COMPOSIO_API_KEY
+      if (!COMP_KEY) return json(503, { error: 'COMPOSIO_API_KEY not configured', setup: 'composio.dev → API Key → wrangler secret put COMPOSIO_API_KEY' })
+      const body = await request.json() as any
+      if (!body.action) return json(400, { error: 'action is required', example: { action: 'GITHUB_CREATE_ISSUE', params: { repo: 'owner/repo', title: 'Bug fix' } } })
+      try {
+        const res = await fetch('https://backend.composio.dev/api/v3/actions/execute', {
+          method: 'POST',
+          headers: { 'x-api-key': COMP_KEY, 'Content-Type': 'application/json' },
+          body: JSON.stringify({ action: body.action, params: body.params || {} }),
+        })
+        const data = await res.json()
+        return json(200, { source: 'composio-mcp', action: body.action, result: data })
+      } catch (e: any) { return json(500, { error: e.message }) }
     }
 
     // ── 協作機器人狀態 API ──
@@ -1170,38 +1301,105 @@ async function handleAiChat(request: Request, env: Env): Promise<Response> {
   return json(200, result)
 }
 
-// ── NVIDIA NIM — 185 個怪物模型直連 ──
-async function handleNimChat(request: Request, env: Env): Promise<Response> {
-  const NIM_KEY = env.NVIDIA_API_KEY
-  if (!NIM_KEY) return json(503, { error: 'NVIDIA API not configured' })
+// ── AI 超級市集 — 全供應商統一聊天引擎 ──
+const PROVIDER_CONFIG: Record<string, { base_url: string; env_key: string }> = {
+  nvidia:     { base_url: 'https://integrate.api.nvidia.com/v1',                    env_key: 'NVIDIA_API_KEY' },
+  openrouter: { base_url: 'https://openrouter.ai/api/v1',                           env_key: 'OPENROUTER_API_KEY' },
+  google:     { base_url: 'https://generativelanguage.googleapis.com/v1beta/openai', env_key: 'GOOGLE_AI_KEY' },
+  groq:       { base_url: 'https://api.groq.com/openai/v1',                         env_key: 'GROQ_API_KEY' },
+  together:   { base_url: 'https://api.together.xyz/v1',                             env_key: 'TOGETHER_API_KEY' },
+  fireworks:  { base_url: 'https://api.fireworks.ai/inference/v1',                   env_key: 'FIREWORKS_API_KEY' },
+  deepseek:   { base_url: 'https://api.deepseek.com',                               env_key: 'DEEPSEEK_API_KEY' },
+  mistral:    { base_url: 'https://api.mistral.ai/v1',                              env_key: 'MISTRAL_API_KEY' },
+  perplexity: { base_url: 'https://api.perplexity.ai',                              env_key: 'PERPLEXITY_API_KEY' },
+  cohere:     { base_url: 'https://api.cohere.ai/compatibility/v1',                 env_key: 'COHERE_API_KEY' },
+}
 
+// 自動偵測模型所屬供應商
+function detectProvider(model: string): string {
+  if (model.startsWith('@cf/')) return 'cloudflare'
+  if (model.startsWith('claude-')) return 'anthropic'
+  if (model.startsWith('gemini-')) return 'google'
+  if (model.startsWith('gpt-') || model.startsWith('o1') || model.startsWith('o3') || model.startsWith('o4')) return 'openrouter'
+  if (model.startsWith('deepseek-')) return 'deepseek'
+  if (model.startsWith('mistral-') || model.startsWith('codestral') || model.startsWith('magistral')) return 'mistral'
+  if (model.startsWith('sonar')) return 'perplexity'
+  if (model.startsWith('command-')) return 'cohere'
+  if (model.includes('/')) return 'nvidia' // namespace/model 格式 = NIM
+  return 'openrouter' // 預設走 OpenRouter 大聚合
+}
+
+async function handleNimChat(request: Request, env: Env): Promise<Response> {
   const body = await request.json() as any
   const model = body.model || 'meta/llama-3.1-70b-instruct'
   const message = body.message || body.messages
-  if (!message) return json(400, { error: 'message is required', example: { model: 'meta/llama-3.1-405b-instruct', message: 'Hello' } })
+  const providerHint = body.provider
+  if (!message) return json(400, {
+    error: 'message is required',
+    example: { provider: 'nvidia', model: 'meta/llama-3.1-405b-instruct', message: 'Hello' },
+    providers: Object.keys(PROVIDER_CONFIG),
+  })
 
   const messages = Array.isArray(message) ? message : [
-    { role: 'system', content: 'You are SEOBAIKE AI, a helpful assistant. Answer in the same language the user writes in. Be concise and helpful.' },
+    { role: 'system', content: 'You are SEOBAIKE AI, a helpful assistant powered by the SEOBAIKE OS platform. Answer in the same language the user writes in.' },
     { role: 'user', content: String(message) },
   ]
 
+  // 決定供應商
+  const pid = providerHint || detectProvider(model)
+
+  // ── Cloudflare Workers AI（免費內建）──
+  if (pid === 'cloudflare') {
+    try {
+      const cfModel = model.startsWith('@cf/') ? model : '@cf/meta/llama-3.1-8b-instruct'
+      const result = await env.AI.run(cfModel, { messages })
+      return json(200, { reply: result.response, model: cfModel, provider: 'cloudflare', source: 'workers-ai', patent: 'TW-115100981' })
+    } catch (e: any) { return json(500, { error: e.message, provider: 'cloudflare' }) }
+  }
+
+  // ── Anthropic Claude（格式不同）──
+  if (pid === 'anthropic') {
+    const ANTH_KEY = env.ANTHROPIC_API_KEY
+    if (!ANTH_KEY) return json(503, { error: 'Anthropic API key not configured', setup: 'wrangler secret put ANTHROPIC_API_KEY' })
+    try {
+      const sysMsg = messages.find((m: any) => m.role === 'system')?.content || ''
+      const userMsgs = messages.filter((m: any) => m.role !== 'system')
+      const anthRes = await fetch('https://api.anthropic.com/v1/messages', {
+        method: 'POST',
+        headers: { 'x-api-key': ANTH_KEY, 'anthropic-version': '2023-06-01', 'Content-Type': 'application/json' },
+        body: JSON.stringify({ model: model || 'claude-sonnet-4-5-20250929', max_tokens: body.max_tokens || 1024, system: sysMsg, messages: userMsgs }),
+      })
+      const anthData = await anthRes.json() as any
+      const reply = anthData.content?.[0]?.text
+      if (reply) return json(200, { reply, model: anthData.model, provider: 'anthropic', source: 'anthropic-api', patent: 'TW-115100981', usage: anthData.usage })
+      return json(anthRes.status, { error: anthData.error || anthData, provider: 'anthropic', model })
+    } catch (e: any) { return json(500, { error: e.message, provider: 'anthropic' }) }
+  }
+
+  // ── OpenAI 兼容供應商（9 個）──
+  const config = PROVIDER_CONFIG[pid]
+  if (!config) return json(400, { error: `Unknown provider: ${pid}`, available: Object.keys(PROVIDER_CONFIG) })
+
+  const apiKey = (env as any)[config.env_key] as string
+  if (!apiKey) return json(503, { error: `${pid} API key not configured`, setup: `wrangler secret put ${config.env_key}` })
+
   try {
-    const nimRes = await fetch('https://integrate.api.nvidia.com/v1/chat/completions', {
+    const proxyRes = await fetch(`${config.base_url}/chat/completions`, {
       method: 'POST',
-      headers: { 'Authorization': `Bearer ${NIM_KEY}`, 'Content-Type': 'application/json' },
-      body: JSON.stringify({ model, messages, max_tokens: body.max_tokens || 1024, temperature: body.temperature ?? 0.7 }),
+      headers: { 'Authorization': `Bearer ${apiKey}`, 'Content-Type': 'application/json' },
+      body: JSON.stringify({ model, messages, max_tokens: body.max_tokens || 1024, temperature: body.temperature ?? 0.7, stream: false }),
     })
-    const nimData = await nimRes.json() as any
-    if (nimData.choices?.[0]?.message?.content) {
+    const data = await proxyRes.json() as any
+    if (data.choices?.[0]?.message?.content) {
       return json(200, {
-        reply: nimData.choices[0].message.content,
-        model, source: 'nvidia-nim', patent: 'TW-115100981',
-        usage: nimData.usage,
+        reply: data.choices[0].message.content,
+        model: data.model || model, provider: pid, source: `${pid}-api`, patent: 'TW-115100981',
+        usage: data.usage,
       })
     }
-    return json(nimRes.status, { error: nimData.error || nimData, model })
+    return json(proxyRes.status, { error: data.error || data, provider: pid, model })
   } catch (e: any) {
-    return json(500, { error: e.message, model })
+    return json(500, { error: e.message, provider: pid, model })
   }
 }
 

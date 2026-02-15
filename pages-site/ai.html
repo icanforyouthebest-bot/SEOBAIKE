@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SEOBAIKE — AI 怪物軍團 | 185 個世界級 AI 模型</title>
-<meta name="description" content="SEOBAIKE AI OS 整合 185 個 NVIDIA NIM 世界級 AI 模型，一個平台全部搞定">
+<title>SEOBAIKE — AI 超級市集 | 12 供應商 1000+ 模型</title>
+<meta name="description" content="SEOBAIKE AI OS 整合 12 大供應商 1000+ AI 模型：NVIDIA、Google、Anthropic、DeepSeek、Groq、Mistral 等，一個平台全部搞定">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
@@ -91,10 +91,11 @@ a{color:#e8850c;text-decoration:none}a:hover{text-decoration:underline}
 </nav>
 
 <div class="hero">
-  <h1>AI 怪物軍團</h1>
+  <h1>AI 超級市集</h1>
   <div class="count" id="totalCount">--</div>
-  <p>個世界級 AI 模型，全部在 SEOBAIKE OS 裡。點一下就能對話。要什麼有什麼。</p>
+  <p>個世界級 AI 模型 × 12 大供應商。NVIDIA、Google、Anthropic、DeepSeek、Groq、Mistral⋯全部在 SEOBAIKE OS 裡。點一下就能對話。</p>
 </div>
+<div id="providerBar" style="display:flex;gap:10px;padding:12px 30px;overflow-x:auto;border-bottom:1px solid #1a1a2e;flex-wrap:wrap"></div>
 
 <div class="stats-row" id="statsRow">
   <div class="stat-box"><div class="n" id="s-providers">--</div><div class="l">AI 供應商</div></div>
@@ -109,12 +110,16 @@ a{color:#e8850c;text-decoration:none}a:hover{text-decoration:underline}
   <input type="text" class="search-box" id="searchBox" placeholder="搜尋模型... (例: llama, deepseek, qwen, gemma)">
   <button class="filter-btn active" data-filter="all">全部</button>
   <button class="filter-btn" data-filter="nvidia">NVIDIA</button>
-  <button class="filter-btn" data-filter="meta">Meta</button>
+  <button class="filter-btn" data-filter="anthropic">Anthropic</button>
   <button class="filter-btn" data-filter="google">Google</button>
-  <button class="filter-btn" data-filter="mistralai">Mistral</button>
+  <button class="filter-btn" data-filter="meta">Meta</button>
+  <button class="filter-btn" data-filter="openai">OpenAI</button>
   <button class="filter-btn" data-filter="deepseek">DeepSeek</button>
-  <button class="filter-btn" data-filter="microsoft">Microsoft</button>
+  <button class="filter-btn" data-filter="mistral">Mistral</button>
+  <button class="filter-btn" data-filter="groq">Groq</button>
+  <button class="filter-btn" data-filter="cohere">Cohere</button>
   <button class="filter-btn" data-filter="qwen">Qwen</button>
+  <button class="filter-btn" data-filter="microsoft">Microsoft</button>
 </div>
 
 <div class="model-grid" id="modelGrid">
@@ -134,41 +139,66 @@ a{color:#e8850c;text-decoration:none}a:hover{text-decoration:underline}
 </div>
 
 <footer class="footer">
-  SEOBAIKE AI OS — 專利 TW-115100981 — 小路光有限公司 — 185 個世界級 AI 模型
+  SEOBAIKE AI OS — 專利 TW-115100981 — 小路光有限公司 — 12 供應商 1000+ AI 模型
 </footer>
 
 <script src="/seobaike-config.js"></script>
 <script>
 let allModels = []
 let currentModel = null
+let currentProvider = null
 let chatHistory = []
+let providerData = []
 
 function classify(id) {
   const tags = []
   const lower = id.toLowerCase()
-  if (lower.includes('code') || lower.includes('starcoder') || lower.includes('devstral') || lower.includes('granite') && lower.includes('code')) tags.push('code')
-  if (lower.includes('vision') || lower.includes('fuyu') || lower.includes('kosmos') || lower.includes('deplot') || lower.includes('llava')) tags.push('vision')
-  if (lower.includes('embed') || lower.includes('bge')) tags.push('embed')
-  if (lower.includes('r1') || lower.includes('reason') || lower.includes('thinking') || lower.includes('mathstral')) tags.push('reason')
-  if (lower.includes('405b') || lower.includes('235b') || lower.includes('120b') || lower.includes('355b') || lower.includes('100b') || lower.includes('70b')) tags.push('large')
+  if (lower.includes('code') || lower.includes('starcoder') || lower.includes('devstral') || lower.includes('coder') || (lower.includes('granite') && lower.includes('code'))) tags.push('code')
+  if (lower.includes('vision') || lower.includes('fuyu') || lower.includes('kosmos') || lower.includes('deplot') || lower.includes('llava') || lower.includes('gemini')) tags.push('vision')
+  if (lower.includes('embed') || lower.includes('bge') || lower.includes('embedding')) tags.push('embed')
+  if (lower.includes('r1') || lower.includes('reason') || lower.includes('thinking') || lower.includes('mathstral') || lower.includes('opus') || lower.includes('o1') || lower.includes('o3') || lower.includes('o4')) tags.push('reason')
+  if (lower.includes('405b') || lower.includes('235b') || lower.includes('120b') || lower.includes('355b') || lower.includes('100b') || lower.includes('70b') || lower.includes('opus') || lower.includes('4o') || lower.includes('pro')) tags.push('large')
+  if (lower.includes('sonar') || lower.includes('search') || lower.includes('perplexity')) tags.push('search')
   if (!tags.length) tags.push('chat')
   return tags
 }
 
 function tagHtml(tag) {
-  const cls = { code:'tag-code', chat:'tag-chat', vision:'tag-vision', embed:'tag-embed', reason:'tag-reason', large:'tag-large' }
-  const names = { code:'程式碼', chat:'對話', vision:'視覺', embed:'嵌入', reason:'推理', large:'大型' }
+  const cls = { code:'tag-code', chat:'tag-chat', vision:'tag-vision', embed:'tag-embed', reason:'tag-reason', large:'tag-large', search:'tag-reason' }
+  const names = { code:'程式碼', chat:'對話', vision:'視覺', embed:'嵌入', reason:'推理', large:'大型', search:'搜尋' }
   return '<span class="tag ' + (cls[tag]||'tag-chat') + '">' + (names[tag]||tag) + '</span>'
+}
+
+async function loadProviders() {
+  try {
+    const res = await fetch('/api/ai/providers')
+    const data = await res.json()
+    providerData = data.providers || []
+    const bar = document.getElementById('providerBar')
+    bar.innerHTML = providerData.map(p => {
+      const color = p.status === 'online' ? '#76b900' : '#555'
+      const dot = p.status === 'online' ? '&#x25CF;' : '&#x25CB;'
+      return '<div style="background:#16213e;border:1px solid #222;border-radius:10px;padding:8px 14px;min-width:140px;font-size:12px;display:flex;align-items:center;gap:6px">' +
+        '<span style="color:' + color + '">' + dot + '</span>' +
+        '<strong style="color:#eee">' + p.name + '</strong>' +
+        '<span style="color:#888;margin-left:auto">' + p.model_count + '</span>' +
+      '</div>'
+    }).join('')
+  } catch(e) {}
 }
 
 async function loadModels() {
   try {
     const res = await fetch('/api/ai/models')
     const data = await res.json()
-    allModels = data.models.map(m => ({ ...m, tags: classify(m.id), owner: m.owned_by || m.id.split('/')[0] }))
+    allModels = (data.models || []).map(m => ({
+      ...m, tags: classify(m.id),
+      owner: m.owned_by || m.provider || m.id.split('/')[0],
+      providerName: m.provider_name || m.provider || 'unknown',
+    }))
 
     document.getElementById('totalCount').textContent = allModels.length
-    document.getElementById('s-providers').textContent = data.providers.length
+    document.getElementById('s-providers').textContent = (data.providers || []).length
     document.getElementById('s-chat').textContent = allModels.filter(m => m.tags.includes('chat')).length
     document.getElementById('s-code').textContent = allModels.filter(m => m.tags.includes('code')).length
     document.getElementById('s-vision').textContent = allModels.filter(m => m.tags.includes('vision')).length
@@ -187,8 +217,10 @@ function renderModels(models) {
   grid.innerHTML = models.map(m => {
     const name = m.id.split('/').pop()
     const tagsHtml = m.tags.map(t => tagHtml(t)).join('')
-    return '<div class="model-card" onclick="openChat(\'' + m.id + '\')" data-id="' + m.id + '" data-owner="' + m.owner + '">' +
-      '<div class="model-owner">' + m.owner + '</div>' +
+    const prov = m.provider || ''
+    const provLabel = m.providerName || m.provider || ''
+    return '<div class="model-card" onclick="openChat(\'' + m.id.replace(/'/g,"\\'") + '\',\'' + prov + '\')" data-id="' + m.id + '" data-owner="' + m.owner + '" data-provider="' + prov + '">' +
+      '<div class="model-owner">' + m.owner + (provLabel ? ' <span style="color:#555;font-size:10px">via ' + provLabel + '</span>' : '') + '</div>' +
       '<div class="model-name">' + name + '</div>' +
       '<div class="model-id">' + m.id + '</div>' +
       '<div class="model-tags">' + tagsHtml + '</div>' +
@@ -210,19 +242,22 @@ document.querySelectorAll('.filter-btn').forEach(btn => {
     this.classList.add('active')
     const f = this.dataset.filter
     if (f === 'all') { renderModels(allModels); return }
-    renderModels(allModels.filter(m => m.owner.toLowerCase().includes(f.toLowerCase())))
+    renderModels(allModels.filter(m => {
+      const lf = f.toLowerCase()
+      return m.owner.toLowerCase().includes(lf) || (m.provider || '').toLowerCase().includes(lf) || (m.providerName || '').toLowerCase().includes(lf)
+    }))
   })
 })
 
 // Chat
-function openChat(modelId) {
+function openChat(modelId, provider) {
   currentModel = modelId
+  currentProvider = provider || null
   chatHistory = []
   document.getElementById('chatPanel').classList.add('open')
-  document.getElementById('chatModelName').textContent = modelId.split('/').pop()
-  document.getElementById('chatMessages').innerHTML = '<div class="chat-msg bot"><div class="model-label">' + modelId + '</div>我是 SEOBAIKE AI 怪物。有什麼可以幫你的？</div>'
+  document.getElementById('chatModelName').textContent = modelId.split('/').pop() + (provider ? ' (' + provider + ')' : '')
+  document.getElementById('chatMessages').innerHTML = '<div class="chat-msg bot"><div class="model-label">' + modelId + '</div>我是 SEOBAIKE AI 超級市集的怪物。有什麼可以幫你的？</div>'
   document.getElementById('chatInput').focus()
-  // Highlight card
   document.querySelectorAll('.model-card').forEach(c => c.classList.remove('active'))
   const card = document.querySelector('[data-id="' + modelId + '"]')
   if (card) { card.classList.add('active'); card.scrollIntoView({ behavior: 'smooth', block: 'center' }) }
@@ -252,10 +287,12 @@ async function sendChat() {
   chatHistory.push({ role: 'user', content: msg })
 
   try {
+    const payload = { model: currentModel, messages: [{ role: 'system', content: 'You are a helpful AI assistant on SEOBAIKE platform. Answer in the same language the user writes in.' }, ...chatHistory], max_tokens: 1024 }
+    if (currentProvider) payload.provider = currentProvider
     const res = await fetch('/api/ai/nim', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ model: currentModel, messages: [{ role: 'system', content: 'You are a helpful AI assistant on SEOBAIKE platform. Answer in the same language the user writes in.' }, ...chatHistory], max_tokens: 1024 }),
+      body: JSON.stringify(payload),
     })
     const data = await res.json()
     const reply = data.reply || data.error || 'No response'
@@ -263,7 +300,8 @@ async function sendChat() {
 
     const typing = document.getElementById('typing')
     if (typing) typing.remove()
-    msgs.innerHTML += '<div class="chat-msg bot"><div class="model-label">' + currentModel + (data.usage ? ' | ' + data.usage.total_tokens + ' tokens' : '') + '</div>' + reply.replace(/</g,'&lt;').replace(/\n/g,'<br>') + '</div>'
+    const provInfo = data.provider ? ' | ' + data.provider : ''
+    msgs.innerHTML += '<div class="chat-msg bot"><div class="model-label">' + (data.model || currentModel) + provInfo + (data.usage ? ' | ' + (data.usage.total_tokens || 0) + ' tokens' : '') + '</div>' + reply.replace(/</g,'&lt;').replace(/\n/g,'<br>') + '</div>'
   } catch(e) {
     const typing = document.getElementById('typing')
     if (typing) typing.remove()
@@ -284,6 +322,7 @@ if (window.__SEOBAIKE__) {
   }).catch(() => {})
 }
 
+loadProviders()
 loadModels()
 </script>
 </body>
