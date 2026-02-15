@@ -227,12 +227,13 @@ export default {
       // 收集所有有 API Key 的供應商模型
       const fetchProviderModels = async (pid: string, p: typeof AI_PROVIDERS[string]) => {
         const key = env[p.env_key] as string
-        if (!key || pid === 'cloudflare' || pid === 'anthropic') return
+        if (!key || pid === 'cloudflare' || pid === 'anthropic' || pid === 'replicate' || pid === 'huggingface' || pid === 'ai21') return
         try {
           const res = await fetch(`${p.base_url}/models`, { headers: { 'Authorization': `Bearer ${key}` } })
           if (!res.ok) return
           const data = await res.json() as any
-          const models = (data.data || []).map((m: any) => ({ id: m.id, provider: pid, provider_name: p.name, owned_by: m.owned_by || m.id.split('/')[0], created: m.created }))
+          const rawModels = Array.isArray(data) ? data : (data.data || [])
+          const models = rawModels.map((m: any) => ({ id: m.id, provider: pid, provider_name: p.name, owned_by: m.owned_by || m.organization || m.id.split('/')[0], created: m.created }))
           allModels.push(...models)
         } catch (e: any) { errors.push({ provider: pid, error: e.message }) }
       }
@@ -258,8 +259,8 @@ export default {
         }
       }
 
-      // 靜態模型列表 — API 回不了的供應商用靜態補齊
-      if (!provider || provider === 'together') {
+      // 靜態模型列表 — API 回不了的供應商用靜態補齊（只在 live 沒拿到時才補）
+      if ((!provider || provider === 'together') && !allModels.some(m => m.provider === 'together')) {
         if (env.TOGETHER_API_KEY) {
           const togetherModels = [
             'meta-llama/Meta-Llama-3.1-405B-Instruct-Turbo', 'meta-llama/Meta-Llama-3.1-70B-Instruct-Turbo', 'meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo',
