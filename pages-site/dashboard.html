@@ -369,7 +369,7 @@ body { font-family: 'Segoe UI', sans-serif; background: #0a0a1a; color: #eee; mi
 <script>
 const SUPA_URL = (window.__SEOBAIKE__ && window.__SEOBAIKE__.supabaseUrl) || "";
 const SUPA_KEY = (window.__SEOBAIKE__ && window.__SEOBAIKE__.anonKey) || "";
-const EP = SUPA_URL + "/functions/v1/nvidia-boss";
+const EP = SUPA_URL + "/functions/v1/seobaike-engine";
 const GW = SUPA_URL + "/functions/v1/ai-gateway";
 const HDR = { "Authorization": "Bearer " + SUPA_KEY, "Content-Type": "application/json" };
 const REST_HDR = { "apikey": SUPA_KEY, "Authorization": "Bearer " + SUPA_KEY };
@@ -548,13 +548,13 @@ function timeAgo(dateStr) {
 
 function shortUA(ua) {
   if (!ua) return "--";
-  // Extract browser name roughly
-  if (ua.indexOf("Chrome") > -1 && ua.indexOf("Edg") > -1) return "Edge";
-  if (ua.indexOf("Chrome") > -1) return "Chrome";
-  if (ua.indexOf("Firefox") > -1) return "Firefox";
-  if (ua.indexOf("Safari") > -1 && ua.indexOf("Chrome") === -1) return "Safari";
-  if (ua.indexOf("bot") > -1 || ua.indexOf("Bot") > -1 || ua.indexOf("crawl") > -1) return "Bot";
-  return ua.substring(0, 30) + "...";
+  // 瀏覽器分類（不顯示第三方品牌名）
+  if (ua.indexOf("Chrome") > -1 && ua.indexOf("Edg") > -1) return "瀏覽器-E";
+  if (ua.indexOf("Chrome") > -1) return "瀏覽器-C";
+  if (ua.indexOf("Firefox") > -1) return "瀏覽器-F";
+  if (ua.indexOf("Safari") > -1 && ua.indexOf("Chrome") === -1) return "瀏覽器-S";
+  if (ua.indexOf("bot") > -1 || ua.indexOf("Bot") > -1 || ua.indexOf("crawl") > -1) return "爬蟲";
+  return "瀏覽器";
 }
 
 function setRefresh(id) {

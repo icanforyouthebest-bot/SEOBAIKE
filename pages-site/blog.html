@@ -58,6 +58,14 @@ a:hover{color:var(--copper)}
 .blog-read-more .arrow{transition:transform .2s}
 .blog-read-more:hover .arrow{transform:translateX(4px)}
 
+/* Full article (toggle) */
+.blog-full-content{display:none;margin-top:20px;padding-top:20px;border-top:1px solid var(--border);font-size:15px;color:var(--text);line-height:2}
+.blog-full-content.open{display:block}
+.blog-full-content p{margin-bottom:16px;color:var(--dim)}
+.blog-full-content p:last-child{margin-bottom:0}
+.blog-full-content strong{color:var(--white);font-weight:700}
+.blog-full-content .signature{margin-top:24px;padding-top:16px;border-top:1px solid var(--border);font-size:14px;color:var(--dim);font-style:italic}
+
 /* Featured card (first one) */
 .blog-card.featured{border-color:rgba(232,133,12,.3);background:linear-gradient(135deg,var(--card) 0%,rgba(232,133,12,.04) 100%)}
 .blog-card.featured .blog-tag{background:rgba(118,185,0,.12);color:var(--green);border-color:rgba(118,185,0,.25)}
@@ -130,18 +138,53 @@ a:hover{color:var(--copper)}
   <!-- Blog Posts -->
   <div class="blog-list">
 
-    <!-- Post 1: Featured -->
-    <article class="blog-card featured">
+    <!-- Post 0: 上線公告 (Featured) -->
+    <article class="blog-card featured" id="post-launch-announcement">
+      <div class="blog-card-inner">
+        <div class="blog-meta">
+          <span class="blog-date">2026 年 2 月 16 日</span>
+          <span class="blog-tag" style="background:rgba(118,185,0,.12);color:var(--green);border-color:rgba(118,185,0,.25)">上線公告</span>
+        </div>
+        <h2 class="blog-title">SEOBAIKE 正式上線！AI 就該這麼簡單</h2>
+        <p class="blog-excerpt">
+          大家好，我是竣翔。今天，SEOBAIKE 正式上線了。過去一年我一直在想：為什麼用 AI 這麼複雜？所以我們做了 SEOBAIKE — 你說，它做。不用挑選、不用懂技術、不用花大錢，從 NT$0 開始。
+        </p>
+        <a href="javascript:void(0)" class="blog-read-more" onclick="toggleArticle('launch-full')">
+          閱讀更多 <span class="arrow">&rarr;</span>
+        </a>
+        <div class="blog-full-content" id="launch-full">
+          <p>大家好，我是竣翔。</p>
+          <p>今天，SEOBAIKE 正式上線了。</p>
+          <p>過去一年，我一直在想一個問題：為什麼用 AI 這麼複雜？</p>
+          <p>你要做一堆選擇、學提示詞工程⋯⋯光是搞懂這些名詞，就要花好幾天。</p>
+          <p>但我覺得，科技應該讓生活更簡單，不是更複雜。</p>
+          <p>所以我們做了 SEOBAIKE。</p>
+          <p><strong>它只有一個規則：你說，它做。</strong></p>
+          <p>不用挑選 — 我們有 1,000 多個 AI 引擎，系統自動幫你選最適合的。</p>
+          <p>不用懂技術 — 像跟朋友聊天一樣，用中文就好。</p>
+          <p>不用花大錢 — 從 NT$0 開始，想升級再升級。</p>
+          <p>而且，我們有台灣專利（TW-115100981）保護你的每一次對話。</p>
+          <p>這不是另一個 AI 聊天機器人。這是一個讓 AI 真正服務你的平台。</p>
+          <p>歡迎來體驗。</p>
+          <div class="signature">
+            竣翔<br>小路光有限公司 創辦人
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- Post 1 -->
+    <article class="blog-card">
       <div class="blog-card-inner">
         <div class="blog-meta">
           <span class="blog-date">2026 年 2 月 15 日</span>
-          <span class="blog-tag" style="background:rgba(118,185,0,.12);color:var(--green);border-color:rgba(118,185,0,.25)">平台公告</span>
+          <span class="blog-tag">平台公告</span>
         </div>
         <h2 class="blog-title">
-          <a href="/blog/seobaike-launch">SEOBAIKE 平台正式上線</a>
+          <a href="/blog/seobaike-launch">SEOBAIKE 平台正式開放公測</a>
         </h2>
         <p class="blog-excerpt">
-          SEOBAIKE 約束推理平台今日正式開放公測！作為全球首個基於「世界定義約束法」（專利 TW-115100981）的 AI 推理平台，SEOBAIKE 透過 L1-L4 四層產業約束結構，確保每一次 AI 推理都在合法且可驗證的路徑上執行。平台目前已整合 14 個 AI 夥伴與 26 個協作平台，涵蓋 766 個產業節點。開發者可立即註冊取得 API 金鑰，開始體驗約束推理的全新範式。
+          SEOBAIKE 約束推理平台今日正式開放公測！透過 L1-L4 四層產業約束結構，確保每一次 AI 推理都在合法且可驗證的路徑上執行。平台目前已整合超過 1,000 個 AI 引擎，涵蓋 766 個產業節點。立即註冊，開始體驗約束推理的全新範式。
         </p>
         <a href="/blog/seobaike-launch" class="blog-read-more">
           閱讀更多 <span class="arrow">&rarr;</span>
@@ -240,6 +283,20 @@ a:hover{color:var(--copper)}
 </footer>
 
 <script src="/seobaike-config.js"></script>
+<script>
+function toggleArticle(id) {
+  var el = document.getElementById(id);
+  if (!el) return;
+  var isOpen = el.classList.contains('open');
+  el.classList.toggle('open');
+  var btn = el.previousElementSibling;
+  if (btn && btn.classList.contains('blog-read-more')) {
+    btn.innerHTML = isOpen
+      ? '閱讀更多 <span class="arrow">&rarr;</span>'
+      : '收合文章 <span class="arrow">&darr;</span>';
+  }
+}
+</script>
 <script>
 async function subscribeNewsletter() {
   const email = document.getElementById('newsletter-email').value.trim();

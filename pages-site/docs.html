@@ -266,6 +266,8 @@ code{font-family:var(--mono);font-size:13px;background:var(--code-bg);padding:2p
       <button class="sidebar-link" onclick="scrollToSection('ep-l3')"><span class="method-dot get"></span>L3 製程</button>
       <button class="sidebar-link" onclick="scrollToSection('ep-l4')"><span class="method-dot get"></span>L4 節點</button>
       <button class="sidebar-link" onclick="scrollToSection('ep-inference')"><span class="method-dot post"></span>約束推理</button>
+      <button class="sidebar-link" onclick="scrollToSection('ep-smart')"><span class="method-dot post"></span>智慧路由</button>
+      <button class="sidebar-link" onclick="scrollToSection('ep-nim')"><span class="method-dot post"></span>AI 引擎</button>
     </div>
   </aside>
 
@@ -382,6 +384,8 @@ code{font-family:var(--mono);font-size:13px;background:var(--code-bg);padding:2p
           <tr><td>L1-L4 查詢</td><td class="limit-val">300 次</td><td>每分鐘</td><td>公開端點</td></tr>
           <tr><td>路徑驗證 (check)</td><td class="limit-val">200 次</td><td>每分鐘</td><td>專利核心</td></tr>
           <tr><td>約束推理 (inference)</td><td class="limit-val">60 次</td><td>每分鐘</td><td>含 AI 推理</td></tr>
+          <tr><td>智慧路由 (smart)</td><td class="limit-val">60 次</td><td>每分鐘</td><td>含意圖分析 + AI 推理</td></tr>
+          <tr><td>AI 引擎 (nim)</td><td class="limit-val">60 次</td><td>每分鐘</td><td>多引擎 AI 推理</td></tr>
           <tr><td>全域合計</td><td class="limit-val">1,000 次</td><td>每小時</td><td>所有端點合計</td></tr>
         </tbody>
       </table>
@@ -897,7 +901,7 @@ code{font-family:var(--mono);font-size:13px;background:var(--code-bg);padding:2p
         <span class="ep-tag">核心引擎</span>
       </div>
       <div class="ep-card-body">
-        <div class="ep-desc">執行約束 AI 推理。使用者的查詢會經過 L1-L4 約束引擎驗證後，由 AI 模型產生符合專利規範的推理結果。支援多輪對話與上下文記憶。需要身份驗證。</div>
+        <div class="ep-desc">執行約束 AI 推理。使用者的查詢會經過 L1-L4 約束引擎驗證後，由 AI 引擎產生符合專利規範的推理結果。支援多輪對話與上下文記憶。需要身份驗證。</div>
 
         <div class="params-section">
           <div class="params-label">Request Body (JSON)</div>
@@ -943,9 +947,9 @@ code{font-family:var(--mono);font-size:13px;background:var(--code-bg);padding:2p
     <span class="p">"validation"</span>: <span class="s">"allowed"</span>
   },
   <span class="p">"usage"</span>: {
-    <span class="p">"prompt_tokens"</span>: 156,
-    <span class="p">"completion_tokens"</span>: 892,
-    <span class="p">"total_tokens"</span>: 1048
+    <span class="p">"input_units"</span>: 156,
+    <span class="p">"output_units"</span>: 892,
+    <span class="p">"total_units"</span>: 1048
   },
   <span class="p">"patent"</span>: <span class="s">"TW-115100981"</span>
 }</pre>
@@ -965,6 +969,193 @@ code{font-family:var(--mono);font-size:13px;background:var(--code-bg);padding:2p
             </div>
           </div>
           <button class="try-btn run" onclick="tryApi(this, 'POST', '/api/v1/inference', document.getElementById('try-inference-body').value, document.getElementById('try-inference-token').value)">
+            <span class="play-icon">&#9654;</span>
+            <span class="spinner"></span>
+            Try it
+          </button>
+          <div class="live-response"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 9. POST /api/ai/smart ===== -->
+    <section class="ep-card" id="ep-smart">
+      <div class="ep-card-head">
+        <div class="ep-title-row">
+          <span class="method-badge post">POST</span>
+          <span class="ep-url">/api/ai/smart</span>
+        </div>
+        <span class="ep-tag">智慧路由</span>
+      </div>
+      <div class="ep-card-body">
+        <div class="ep-desc">SEOBAIKE 智慧路由引擎。自動分析使用者意圖，結合 L1-L4 約束驗證，將請求路由至最佳推理引擎。支援強制指定引擎與模型。需要身份驗證。</div>
+
+        <div class="params-section">
+          <div class="params-label">Request Body (JSON)</div>
+          <table class="params-table">
+            <thead><tr><th>參數</th><th>型別</th><th>說明</th></tr></thead>
+            <tbody>
+              <tr><td>message</td><td><span class="type">string</span> <span class="required">required</span></td><td>使用者的查詢文字</td></tr>
+              <tr><td>l1</td><td><span class="type">string</span> <span class="optional">optional</span></td><td>L1 層代碼提示，例如 <code>"L1-01"</code></td></tr>
+              <tr><td>l2</td><td><span class="type">string</span> <span class="optional">optional</span></td><td>L2 層代碼提示，例如 <code>"L2-0101"</code></td></tr>
+              <tr><td>l3</td><td><span class="type">string</span> <span class="optional">optional</span></td><td>L3 層代碼提示，例如 <code>"L3-010101"</code></td></tr>
+              <tr><td>l4</td><td><span class="type">string</span> <span class="optional">optional</span></td><td>L4 層代碼提示，例如 <code>"L4-01010101"</code></td></tr>
+              <tr><td>max_tokens</td><td><span class="type">integer</span> <span class="optional">optional</span></td><td>最大回應 token 數，預設 1024</td></tr>
+              <tr><td>temperature</td><td><span class="type">number</span> <span class="optional">optional</span></td><td>溫度參數 0-2，預設 0.7</td></tr>
+              <tr><td>force_provider</td><td><span class="type">string</span> <span class="optional">optional</span></td><td>強制指定推理引擎（搭配 force_model 使用）</td></tr>
+              <tr><td>force_model</td><td><span class="type">string</span> <span class="optional">optional</span></td><td>強制指定模型（搭配 force_provider 使用）</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="example-tabs">
+          <button class="example-tab active" onclick="switchTab(this,'req')">範例請求</button>
+          <button class="example-tab" onclick="switchTab(this,'res')">範例回應</button>
+        </div>
+        <div class="example-panel active" data-panel="req">
+          <div class="code-block" style="margin-top:0;border-top-left-radius:0">
+            <div class="code-header"><span>bash</span><button class="code-copy" onclick="copyCode(this)">複製</button></div>
+            <div class="code-body">
+<pre><span class="k">curl</span> -X POST https://aiforseo.vip/api/ai/smart \
+  -H <span class="s">"Authorization: Bearer YOUR_ACCESS_TOKEN"</span> \
+  -H <span class="s">"Content-Type: application/json"</span> \
+  -d <span class="s">'{
+    "message": "分析半導體產業的供應鏈風險",
+    "l1": "L1-03",
+    "max_tokens": 2048,
+    "temperature": 0.7
+  }'</span></pre>
+            </div>
+          </div>
+        </div>
+        <div class="example-panel" data-panel="res">
+          <div class="code-block" style="margin-top:0;border-top-left-radius:0">
+            <div class="code-header"><span>json</span></div>
+            <div class="code-body">
+<pre>{
+  <span class="p">"patent"</span>: <span class="s">"TW-115100981"</span>,
+  <span class="p">"router"</span>: <span class="s">"smart"</span>,
+  <span class="p">"intent"</span>: {
+    <span class="p">"intent"</span>: <span class="s">"analysis"</span>,
+    <span class="p">"confidence"</span>: 0.92,
+    <span class="p">"keywords"</span>: [<span class="s">"分析"</span>, <span class="s">"供應鏈"</span>, <span class="s">"風險"</span>]
+  },
+  <span class="p">"constraint"</span>: {
+    <span class="p">"verdict"</span>: <span class="s">"allowed"</span>,
+    <span class="p">"l1"</span>: <span class="s">"L1-03"</span>
+  },
+  <span class="p">"provider"</span>: <span class="s">"auto"</span>,
+  <span class="p">"model"</span>: <span class="s">"auto"</span>,
+  <span class="p">"reply"</span>: <span class="s">"半導體產業供應鏈風險分析結果..."</span>,
+  <span class="p">"usage"</span>: {
+    <span class="p">"input_units"</span>: 210,
+    <span class="p">"output_units"</span>: 1580,
+    <span class="p">"total_units"</span>: 1790
+  },
+  <span class="p">"latency_ms"</span>: 1250
+}</pre>
+            </div>
+          </div>
+        </div>
+
+        <div class="try-it-section">
+          <div class="try-fields">
+            <div class="try-field">
+              <label>Authorization Token</label>
+              <input type="text" id="try-smart-token" placeholder="Bearer YOUR_ACCESS_TOKEN">
+            </div>
+            <div class="try-field">
+              <label>Request Body (JSON)</label>
+              <textarea id="try-smart-body">{"message": "分析半導體產業的供應鏈風險", "l1": "L1-03"}</textarea>
+            </div>
+          </div>
+          <button class="try-btn run" onclick="tryApi(this, 'POST', '/api/ai/smart', document.getElementById('try-smart-body').value, document.getElementById('try-smart-token').value)">
+            <span class="play-icon">&#9654;</span>
+            <span class="spinner"></span>
+            Try it
+          </button>
+          <div class="live-response"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 10. POST /api/ai/nim ===== -->
+    <section class="ep-card" id="ep-nim">
+      <div class="ep-card-head">
+        <div class="ep-title-row">
+          <span class="method-badge post">POST</span>
+          <span class="ep-url">/api/ai/nim</span>
+        </div>
+        <span class="ep-tag">AI 引擎</span>
+      </div>
+      <div class="ep-card-body">
+        <div class="ep-desc">SEOBAIKE 多引擎 AI 推理端點。支援多種推理引擎與模型，透過統一介面存取。引擎會根據 model 參數自動路由至對應的推理後端。設定 model 為 <code>"auto"</code> 可讓系統自動選擇最佳引擎。需要身份驗證。</div>
+
+        <div class="params-section">
+          <div class="params-label">Request Body (JSON)</div>
+          <table class="params-table">
+            <thead><tr><th>參數</th><th>型別</th><th>說明</th></tr></thead>
+            <tbody>
+              <tr><td>message</td><td><span class="type">string</span> <span class="required">required</span></td><td>使用者的查詢文字，或使用 messages 陣列格式</td></tr>
+              <tr><td>messages</td><td><span class="type">array</span> <span class="optional">optional</span></td><td>標準格式的 messages 陣列（替代 message 參數）</td></tr>
+              <tr><td>model</td><td><span class="type">string</span> <span class="optional">optional</span></td><td>模型識別碼，預設 <code>"auto"</code>（自動選擇）</td></tr>
+              <tr><td>provider</td><td><span class="type">string</span> <span class="optional">optional</span></td><td>指定推理引擎，留空則自動偵測</td></tr>
+              <tr><td>max_tokens</td><td><span class="type">integer</span> <span class="optional">optional</span></td><td>最大回應 token 數，預設 1024</td></tr>
+              <tr><td>temperature</td><td><span class="type">number</span> <span class="optional">optional</span></td><td>溫度參數 0-2，預設 0.7</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="example-tabs">
+          <button class="example-tab active" onclick="switchTab(this,'req')">範例請求</button>
+          <button class="example-tab" onclick="switchTab(this,'res')">範例回應</button>
+        </div>
+        <div class="example-panel active" data-panel="req">
+          <div class="code-block" style="margin-top:0;border-top-left-radius:0">
+            <div class="code-header"><span>bash</span><button class="code-copy" onclick="copyCode(this)">複製</button></div>
+            <div class="code-body">
+<pre><span class="k">curl</span> -X POST https://aiforseo.vip/api/ai/nim \
+  -H <span class="s">"Authorization: Bearer YOUR_ACCESS_TOKEN"</span> \
+  -H <span class="s">"Content-Type: application/json"</span> \
+  -d <span class="s">'{
+    "model": "auto",
+    "message": "用 Python 寫一個快速排序演算法"
+  }'</span></pre>
+            </div>
+          </div>
+        </div>
+        <div class="example-panel" data-panel="res">
+          <div class="code-block" style="margin-top:0;border-top-left-radius:0">
+            <div class="code-header"><span>json</span></div>
+            <div class="code-body">
+<pre>{
+  <span class="p">"ok"</span>: true,
+  <span class="p">"reply"</span>: <span class="s">"以下是 Python 快速排序的實作..."</span>,
+  <span class="p">"model"</span>: <span class="s">"auto"</span>,
+  <span class="p">"provider"</span>: <span class="s">"auto"</span>,
+  <span class="p">"usage"</span>: {
+    <span class="p">"prompt_tokens"</span>: 85,
+    <span class="p">"completion_tokens"</span>: 620,
+    <span class="p">"total_tokens"</span>: 705
+  },
+  <span class="p">"patent"</span>: <span class="s">"TW-115100981"</span>
+}</pre>
+            </div>
+          </div>
+        </div>
+
+        <div class="try-it-section">
+          <div class="try-fields">
+            <div class="try-field">
+              <label>Authorization Token</label>
+              <input type="text" id="try-nim-token" placeholder="Bearer YOUR_ACCESS_TOKEN">
+            </div>
+            <div class="try-field">
+              <label>Request Body (JSON)</label>
+              <textarea id="try-nim-body">{"model": "auto", "message": "用 Python 寫一個快速排序演算法"}</textarea>
+            </div>
+          </div>
+          <button class="try-btn run" onclick="tryApi(this, 'POST', '/api/ai/nim', document.getElementById('try-nim-body').value, document.getElementById('try-nim-token').value)">
             <span class="play-icon">&#9654;</span>
             <span class="spinner"></span>
             Try it

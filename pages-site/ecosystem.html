@@ -24,7 +24,7 @@ body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSy
 .card:hover{border-color:var(--accent);transform:translateY(-2px)}
 .card .badge{position:absolute;top:12px;right:12px;padding:4px 10px;border-radius:12px;font-size:11px;font-weight:600}
 .badge.active{background:rgba(34,197,94,.15);color:var(--green)}
-.badge.nvidia{background:rgba(139,92,246,.15);color:var(--accent2)}
+.badge.gpu{background:rgba(139,92,246,.15);color:var(--accent2)}
 .badge.setup{background:rgba(239,68,68,.15);color:var(--red)}
 .card h3{font-size:16px;margin-bottom:4px}
 .card .provider{font-size:12px;color:var(--dim);margin-bottom:12px}
@@ -184,10 +184,10 @@ let activeCount = 0;
 
 function renderCard(item, type) {
   const status = allStatuses[item.slug];
-  const isActive = status && (status.status === 'active' || status.status === 'live' || status.api_key_configured || status.nvidia_fallback);
-  const isNvidia = status && (status.status === 'active_via_nvidia' || status.nvidia_fallback) && !status.api_key_configured && !status.key_configured;
-  const badgeClass = isActive ? (isNvidia ? 'nvidia' : 'active') : 'setup';
-  const badgeText = isActive ? (isNvidia ? 'SEOBAIKE GPU' : '運作中') : '待設定';
+  const isActive = status && (status.status === 'active' || status.status === 'live' || status.api_key_configured || status.gpu_fallback);
+  const isGpu = status && (status.status === 'active_via_gpu' || status.gpu_fallback) && !status.api_key_configured && !status.key_configured;
+  const badgeClass = isActive ? (isGpu ? 'gpu' : 'active') : 'setup';
+  const badgeText = isActive ? (isGpu ? 'SEOBAIKE GPU' : '運作中') : '待設定';
 
   return `<div class="card" data-type="${type}" data-active="${isActive}">
     <span class="badge ${badgeClass}">${badgeText}</span>
@@ -216,7 +216,7 @@ async function loadAll() {
     if (r.status === 'fulfilled' && r.value) allStatuses[all[i]] = r.value;
   });
 
-  activeCount = Object.values(allStatuses).filter(s => s.status === 'active' || s.status === 'live' || s.status === 'active_via_nvidia' || s.api_key_configured || s.nvidia_fallback).length;
+  activeCount = Object.values(allStatuses).filter(s => s.status === 'active' || s.status === 'live' || s.status === 'active_via_gpu' || s.api_key_configured || s.gpu_fallback).length;
 
   document.getElementById('ai-count').textContent = AI_PARTNERS.length;
   document.getElementById('platform-count').textContent = PLATFORMS.length;
