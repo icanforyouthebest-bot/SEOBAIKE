@@ -1269,7 +1269,7 @@ body { font-family: 'Segoe UI', sans-serif; background: #0a0a1a; color: #eee; mi
 <div class="section-title"><span class="st-icon">&#128176;</span> 分潤規則 <span class="st-sub">(Commission Rules)</span></div>
 <div class="commission-table">
   <table>
-    <thead><tr><th>類型</th><th>分潤比例</th><th>最低門檻</th><th>結算週期</th><th>說明</th></tr></thead>
+    <thead><tr><th>類型</th><th>費率</th><th>最低門檻</th><th>結算週期</th><th>說明</th></tr></thead>
     <tbody id="commission-tbody"><tr><td colspan="5" style="text-align:center;color:#555;padding:20px;">載入中...</td></tr></tbody>
   </table>
 </div>
@@ -1795,7 +1795,7 @@ async function loadMarketplaceFallback() {
     updateMP("mp-listings", "0");
     updateMP("mp-purchases", "0");
     updateMP("mp-creators", "0");
-    updateMP("mp-commission", "過路費+分潤");
+    updateMP("mp-commission", "依合約約定");
   }
 }
 
@@ -1918,13 +1918,13 @@ function renderCommissionRules(rules) {
 
 function renderCommissionFallback() {
   var defaultRules = [
-    { type: "工具銷售", rate: "30%", minimum: "NT$ 100", cycle: "月結", description: "平台抽成 30%，創作者獲得 70%" },
-    { type: "API 過路費", rate: "每次 NT$ 0.5", minimum: "NT$ 50", cycle: "月結", description: "每次 API 呼叫收取過路費" },
-    { type: "訂閱分潤", rate: "20%", minimum: "NT$ 200", cycle: "月結", description: "訂閱制服務平台分潤 20%" },
-    { type: "推薦獎勵", rate: "10%", minimum: "NT$ 50", cycle: "季結", description: "推薦新用戶首次消費的 10%" },
+    { type: "工具銷售", rate: "依合約", minimum: "NT$ 100", cycle: "月結", description: "依賣家合約約定" },
+    { type: "API 過路費", rate: "依合約", minimum: "NT$ 50", cycle: "月結", description: "每次 API 呼叫收取過路費" },
+    { type: "訂閱服務", rate: "依合約", minimum: "NT$ 200", cycle: "月結", description: "依賣家合約約定" },
+    { type: "推薦獎勵", rate: "依合約", minimum: "NT$ 50", cycle: "季結", description: "依賣家合約約定" },
   ];
   renderCommissionRules(defaultRules);
-  updateMP("mp-commission", "過路費+分潤");
+  updateMP("mp-commission", "依合約約定");
   addLog("分潤規則：顯示預設規則（API 尚未上線）", "ok");
 }
 

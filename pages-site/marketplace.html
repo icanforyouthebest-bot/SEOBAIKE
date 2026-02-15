@@ -401,7 +401,7 @@ a:hover{text-decoration:underline}
     <div class="hero-stat"><div class="num" id="stat-listings">--</div><div class="lbl">商品數量</div></div>
     <div class="hero-stat"><div class="num" id="stat-users">--</div><div class="lbl">使用者</div></div>
     <div class="hero-stat"><div class="num" id="stat-categories">--</div><div class="lbl">商品類別</div></div>
-    <div class="hero-stat"><div class="num" id="stat-commission">70%</div><div class="lbl">賣家分潤</div></div>
+    <div class="hero-stat"><div class="num" id="stat-commission">30+</div><div class="lbl">服務國家</div></div>
   </div>
   <div class="global-trade-badge" style="margin-top:24px">
     <div class="badge-title">&#x1F30D; 全球通用 — 一個點數，<span>全球買賣</span></div>
@@ -424,13 +424,8 @@ a:hover{text-decoration:underline}
 </section>
 
 <div class="commission-bar">
-  <h3>賣家分潤制度</h3>
-  <div class="split">
-    <div class="split-item"><div class="pct">70%</div><div class="role">賣家（商品銷售收入）</div></div>
-    <div class="split-item you"><div class="pct">15%</div><div class="role">推薦分潤（第一年）</div></div>
-    <div class="split-item you"><div class="pct">10%</div><div class="role">推薦分潤（持續）</div></div>
-    <div class="split-item"><div class="pct">30%</div><div class="role">平台（含金流、客服）</div></div>
-  </div>
+  <h3>交易安全保障</h3>
+  <div style="text-align:center;color:#ccc;font-size:15px;padding:16px 0;">分潤依賣家合約約定，所有交易透明可查</div>
   <div style="text-align:center;color:#888;font-size:12px;margin-top:8px">金流由第三方支付處理・安全有保障・依國際業界標準</div>
 </div>
 
@@ -446,15 +441,15 @@ a:hover{text-decoration:underline}
 
 <section class="create-section" id="earn">
   <h2>你有好東西？<span>賣到全世界</span></h2>
-  <p>上架你的商品，AI 自動翻譯、行銷、客服 — 賣家拿 70%，金流安全處理，透明公開。<br><span style="font-size:14px;color:#bbb">당신의 상품을 전 세계에 판매하세요 — AI가 모든 것을 도와드립니다</span></p>
+  <p>上架你的商品，AI 自動翻譯、行銷、客服 — 具競爭力的賣家分潤，金流安全處理，透明公開。<br><span style="font-size:14px;color:#bbb">당신의 상품을 전 세계에 판매하세요 — AI가 모든 것을 도와드립니다</span></p>
   <button class="create-btn" onclick="switchMode('sell')">我要上架商品</button>
 </section>
 
 <section class="how">
-  <div class="how-card"><div class="step">1</div><h4>上架商品</h4><p>填寫商品資訊，5 分鐘內完成上架</p></div>
+  <div class="how-card"><div class="step">1</div><h4>上架商品</h4><p>填寫商品資訊，輕鬆完成上架</p></div>
   <div class="how-card"><div class="step">2</div><h4>AI 自動翻譯</h4><p>AI 幫你把商品翻成韓文、日文、英文</p></div>
   <div class="how-card"><div class="step">3</div><h4>全球買家看到</h4><p>台灣、韓國、日本、東南亞的買家都能找到你</p></div>
-  <div class="how-card"><div class="step">4</div><h4>收款入帳</h4><p>成交後自動撥款，賣家拿 70% 分潤</p></div>
+  <div class="how-card"><div class="step">4</div><h4>收款入帳</h4><p>成交後依合約撥款，金流安全透明</p></div>
 </section>
 
 <section class="why-section">
@@ -469,14 +464,14 @@ a:hover{text-decoration:underline}
     </div>
     <div class="why-card">
       <div class="why-icon">⚡</div>
-      <h4>5 分鐘上架</h4>
+      <h4>輕鬆上架</h4>
       <p>填個表格就上架了，不需要任何技術背景。AI 幫你寫文案、做行銷，你專心做好產品</p>
       <div class="why-highlight">超簡單</div>
     </div>
     <div class="why-card">
       <div class="why-icon">💰</div>
-      <h4>賣家拿 70%</h4>
-      <p>透明的分潤制度，賣家拿 70%。金流安全處理，銷售數據即時追蹤。</p>
+      <h4>具競爭力的賣家分潤</h4>
+      <p>透明的分潤制度，依合約約定。金流安全處理，銷售數據即時追蹤。</p>
       <div class="why-highlight">即時追蹤儀表板</div>
     </div>
   </div>
@@ -739,7 +734,7 @@ function showDetail(id) {
   const priceText = sp === 0 ? '免費' : sp.toLocaleString() + ' SP';
   const equiv = sp === 0 ? '' : '\n' + spToMultiCurrency(sp);
   const shareUrl = window.location.origin + '/marketplace?tool=' + id;
-  alert(l.icon + ' ' + l.title + '\n\n' + (l.description || '') + '\n\n價格：' + priceText + equiv + '\n用戶：' + (l.total_users || 0).toLocaleString() + ' 人\n評分：' + (l.avg_rating || 'N/A') + '\n\n分享連結（推薦賺 15%）：\n' + shareUrl);
+  alert(l.icon + ' ' + l.title + '\n\n' + (l.description || '') + '\n\n價格：' + priceText + equiv + '\n用戶：' + (l.total_users || 0).toLocaleString() + ' 人\n評分：' + (l.avg_rating || 'N/A') + '\n\n分享連結：\n' + shareUrl);
 }
 
 function esc(s) { return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
