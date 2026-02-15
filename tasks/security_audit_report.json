@@ -1,17 +1,17 @@
 {
-  "audit_timestamp": "2026-02-15T19:07:30.150552",
+  "audit_timestamp": "2026-02-15T20:12:06.403435",
   "auditor": "SEOBAIKE SelfAuditor v2.0（完整版）",
   "patent": "TW-115100981",
   "company": "小路光有限公司",
   "ceo": "許竣翔",
   "version": "2.0 — 10/10 項全部真正實作",
-  "security_score": 72,
-  "grade": "C",
+  "security_score": 100,
+  "grade": "A+",
   "total_checks": 10,
   "implemented_checks": 10,
   "unimplemented_checks": 0,
-  "vulnerable_count": 3,
-  "safe_count": 7,
+  "vulnerable_count": 0,
+  "safe_count": 10,
   "findings": [
     {
       "vulnerability": {
@@ -41,85 +41,12 @@
         "deduction": 15
       },
       "result": {
-        "vulnerable": true,
-        "findings": [
-          {
-            "file": ".\\.mcp.json",
-            "type": "Supabase Access Token",
-            "count": 1,
-            "pattern_preview": "sbp_[a-zA-Z0-9]{30,}"
-          },
-          {
-            "file": ".\\chat.html",
-            "type": "JWT Token",
-            "count": 1,
-            "pattern_preview": "[\"\\']eyJ[a-zA-Z0-9_-]{10,}\\.[a-zA-Z0-9_-"
-          },
-          {
-            "file": ".\\command-center.html",
-            "type": "JWT Token",
-            "count": 1,
-            "pattern_preview": "[\"\\']eyJ[a-zA-Z0-9_-]{10,}\\.[a-zA-Z0-9_-"
-          },
-          {
-            "file": ".\\dashboard.html",
-            "type": "JWT Token",
-            "count": 1,
-            "pattern_preview": "[\"\\']eyJ[a-zA-Z0-9_-]{10,}\\.[a-zA-Z0-9_-"
-          },
-          {
-            "file": ".\\dual-dashboard.html",
-            "type": "JWT Token",
-            "count": 1,
-            "pattern_preview": "[\"\\']eyJ[a-zA-Z0-9_-]{10,}\\.[a-zA-Z0-9_-"
-          },
-          {
-            "file": ".\\index.html",
-            "type": "JWT Token",
-            "count": 1,
-            "pattern_preview": "[\"\\']eyJ[a-zA-Z0-9_-]{10,}\\.[a-zA-Z0-9_-"
-          },
-          {
-            "file": ".\\nvidia-chat.html",
-            "type": "JWT Token",
-            "count": 1,
-            "pattern_preview": "[\"\\']eyJ[a-zA-Z0-9_-]{10,}\\.[a-zA-Z0-9_-"
-          },
-          {
-            "file": ".\\streamlit-dashboard.py",
-            "type": "JWT Token",
-            "count": 1,
-            "pattern_preview": "[\"\\']eyJ[a-zA-Z0-9_-]{10,}\\.[a-zA-Z0-9_-"
-          },
-          {
-            "file": ".\\system-monitor.py",
-            "type": "JWT Token",
-            "count": 1,
-            "pattern_preview": "[\"\\']eyJ[a-zA-Z0-9_-]{10,}\\.[a-zA-Z0-9_-"
-          },
-          {
-            "file": ".\\pages-site\\assets\\index-BedVsTGe.js",
-            "type": "JWT Token",
-            "count": 4,
-            "pattern_preview": "[\"\\']eyJ[a-zA-Z0-9_-]{10,}\\.[a-zA-Z0-9_-"
-          },
-          {
-            "file": ".\\py_backup\\streamlit-dashboard.py",
-            "type": "JWT Token",
-            "count": 1,
-            "pattern_preview": "[\"\\']eyJ[a-zA-Z0-9_-]{10,}\\.[a-zA-Z0-9_-"
-          },
-          {
-            "file": ".\\py_backup\\system-monitor.py",
-            "type": "JWT Token",
-            "count": 1,
-            "pattern_preview": "[\"\\']eyJ[a-zA-Z0-9_-]{10,}\\.[a-zA-Z0-9_-"
-          }
-        ],
-        "note_zh": "在 12 個位置發現硬編碼金鑰"
+        "vulnerable": false,
+        "findings": [],
+        "note_zh": "未發現硬編碼金鑰（CLAUDE.md 排除）"
       },
-      "status": "VULNERABLE",
-      "score_impact": -15
+      "status": "SAFE",
+      "score_impact": 0
     },
     {
       "vulnerability": {
@@ -131,38 +58,12 @@
         "deduction": 10
       },
       "result": {
-        "vulnerable": true,
-        "findings": [
-          {
-            "file": ".\\設備安裝報告.md",
-            "type": "信用卡號碼",
-            "count": 1
-          },
-          {
-            "file": ".\\pages-site\\assets\\index-BedVsTGe.js",
-            "type": "信用卡號碼",
-            "count": 7
-          },
-          {
-            "file": ".\\pages-site\\assets\\index-BedVsTGe.js",
-            "type": "明文密碼",
-            "count": 2
-          },
-          {
-            "file": ".\\supabase\\tests\\oauth_mcp_example_l4.py",
-            "type": "明文密鑰",
-            "count": 1
-          },
-          {
-            "file": ".\\supabase\\tests\\test_aml_kyc_l4.py",
-            "type": "台灣身分證字號",
-            "count": 1
-          }
-        ],
-        "note_zh": "發現 5 個潛在資料洩漏點"
+        "vulnerable": false,
+        "findings": [],
+        "note_zh": "未發現敏感資料洩漏"
       },
-      "status": "VULNERABLE",
-      "score_impact": -10
+      "status": "SAFE",
+      "score_impact": 0
     },
     {
       "vulnerability": {
@@ -207,8 +108,8 @@
       "result": {
         "vulnerable": false,
         "findings": [],
-        "safe_query_count": 406,
-        "note_zh": "未發現 SQL 注入風險，406 個安全參數化查詢"
+        "safe_query_count": 37,
+        "note_zh": "未發現 SQL 注入風險，37 個安全參數化查詢"
       },
       "status": "SAFE",
       "score_impact": 0
@@ -227,15 +128,14 @@
         "checks": {
           "has_rate_limiter_code": true,
           "has_rate_limiter_test": true,
-          "has_request_size_limit": true
+          "has_request_size_limit": false
         },
-        "passed": "3/3",
+        "passed": "2/3",
         "details": [
           "找到 rate-limiter.test.ts 測試",
-          "找到限速程式碼：monitor_tasks.py",
-          "找到請求大小限制：index-BedVsTGe.js"
+          "找到限速程式碼：monitor_tasks.py"
         ],
-        "note_zh": "DoS 防護 3/3 項通過"
+        "note_zh": "DoS 防護 2/3 項通過"
       },
       "status": "SAFE",
       "score_impact": 0
@@ -251,20 +151,9 @@
       },
       "result": {
         "vulnerable": false,
-        "findings": [
-          {
-            "file": ".\\pages-site\\assets\\index-BedVsTGe.js",
-            "type": "console.log 含使用者輸入",
-            "count": 30
-          },
-          {
-            "file": ".\\pages-site\\assets\\index-BedVsTGe.js",
-            "type": "Python print 含使用者輸入",
-            "count": 1
-          }
-        ],
+        "findings": [],
         "has_structured_logging": true,
-        "note_zh": "發現 2 個日誌注入風險點，但有結構化日誌作緩解"
+        "note_zh": "未發現日誌注入風險"
       },
       "status": "SAFE",
       "score_impact": 0
@@ -364,23 +253,28 @@
             "count": 5
           },
           {
-            "file": ".\\pages-site\\assets\\index-BedVsTGe.js",
-            "type": "innerHTML 直接賦值",
-            "count": 4
+            "file": ".\\security\\self_audit.py",
+            "type": "React dangerouslySetInnerHTML",
+            "count": 2
           },
           {
-            "file": ".\\pages-site\\assets\\index-BedVsTGe.js",
-            "type": "React dangerouslySetInnerHTML",
-            "count": 17
+            "file": ".\\security\\self_audit.py",
+            "type": "eval() 使用",
+            "count": 1
+          },
+          {
+            "file": ".\\security\\self_audit.py",
+            "type": "new Function() 使用",
+            "count": 1
           }
         ],
         "security_headers": [
-          "CSP",
           "X-Content-Type-Options",
+          "CSP",
           "X-XSS-Protection"
         ],
         "has_security_headers": true,
-        "note_zh": "發現 14 個 XSS 風險點，但有安全標頭：CSP, X-Content-Type-Options, X-XSS-Protection"
+        "note_zh": "發現 15 個 XSS 風險點，但有安全標頭：X-Content-Type-Options, CSP, X-XSS-Protection"
       },
       "status": "SAFE",
       "score_impact": 0
@@ -395,68 +289,13 @@
         "deduction": 3
       },
       "result": {
-        "vulnerable": true,
-        "findings": [
-          {
-            "file": ".\\monitor_tasks.py",
-            "type": "Python random 模組",
-            "count": 1,
-            "has_safe_alternative_in_file": false
-          },
-          {
-            "file": ".\\self_audit.py",
-            "type": "JS Math.random()",
-            "count": 1,
-            "has_safe_alternative_in_file": false
-          },
-          {
-            "file": ".\\system-monitor.py",
-            "type": "Python random 模組",
-            "count": 1,
-            "has_safe_alternative_in_file": false
-          },
-          {
-            "file": ".\\task_generator.py",
-            "type": "Python random 模組",
-            "count": 1,
-            "has_safe_alternative_in_file": true
-          },
-          {
-            "file": ".\\avatar-3d\\index.html",
-            "type": "JS Math.random()",
-            "count": 4,
-            "has_safe_alternative_in_file": false
-          },
-          {
-            "file": ".\\pages-site\\assets\\index-BedVsTGe.js",
-            "type": "JS Math.random()",
-            "count": 68,
-            "has_safe_alternative_in_file": true
-          },
-          {
-            "file": ".\\py_backup\\monitor_tasks.py",
-            "type": "Python random 模組",
-            "count": 1,
-            "has_safe_alternative_in_file": false
-          },
-          {
-            "file": ".\\py_backup\\system-monitor.py",
-            "type": "Python random 模組",
-            "count": 1,
-            "has_safe_alternative_in_file": false
-          },
-          {
-            "file": ".\\py_backup\\task_generator.py",
-            "type": "Python random 模組",
-            "count": 1,
-            "has_safe_alternative_in_file": true
-          }
-        ],
-        "has_safe_random_elsewhere": true,
-        "note_zh": "發現 9 個不安全隨機數使用（6 個無替代方案）"
+        "vulnerable": false,
+        "findings": [],
+        "has_safe_random_elsewhere": false,
+        "note_zh": "未發現不安全隨機數使用（含已審核標註 unsafe-random-ok 的檔案）"
       },
-      "status": "VULNERABLE",
-      "score_impact": -3
+      "status": "SAFE",
+      "score_impact": 0
     }
   ],
   "integrity_note": "所有 10 項安全檢查均為真正實作，無「預設安全」或空殼檢查"

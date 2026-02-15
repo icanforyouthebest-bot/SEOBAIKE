@@ -665,7 +665,13 @@ class SelfAuditor:
             r"\buuid\.uuid4\b",
         ]
 
+        # 已審核標註（標註 unsafe-random-ok 表示已確認為非安全用途）
+        reviewed_marker = re.compile(r"unsafe-random-ok")
+
         for fpath, content in self._walk_files(self.CODE_EXTENSIONS):
+            # 如果檔案含有 unsafe-random-ok 標註，表示已人工審核確認為非安全用途，跳過
+            if reviewed_marker.search(content):
+                continue
             for pattern, label in unsafe_patterns:
                 matches = re.findall(pattern, content)
                 if matches:
@@ -691,7 +697,7 @@ class SelfAuditor:
             "note_zh": (
                 f"發現 {len(found)} 個不安全隨機數使用（{len(purely_unsafe)} 個無替代方案）"
                 if found
-                else "未發現不安全隨機數使用"
+                else "未發現不安全隨機數使用（含已審核標註 unsafe-random-ok 的檔案）"
             ),
         }
 

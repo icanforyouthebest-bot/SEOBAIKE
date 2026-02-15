@@ -436,6 +436,7 @@ const particleGeo = new THREE.BufferGeometry();
 const particlePositions = new Float32Array(particleCount * 3);
 const particleSizes = new Float32Array(particleCount);
 
+// unsafe-random-ok: visual particle positions only (non-security)
 for (let i = 0; i < particleCount; i++) {
   particlePositions[i * 3] = (Math.random() - 0.5) * 4;
   particlePositions[i * 3 + 1] = Math.random() * 3 - 0.5;

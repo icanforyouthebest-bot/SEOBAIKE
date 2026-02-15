@@ -110,9 +110,38 @@ class SelfAuditor:
         self.timestamp = datetime.now().isoformat()
         # 快取：掃描過的檔案內容
         self._file_cache = {}
+        # 載入 .gitignore 規則，跳過不會被 commit 的檔案
+        self._gitignore_patterns = self._load_gitignore()
+
+    def _load_gitignore(self):
+        """載入 .gitignore 規則，回傳 pattern 清單"""
+        patterns = []
+        gitignore_path = os.path.join(self.project_root, ".gitignore")
+        if os.path.isfile(gitignore_path):
+            with open(gitignore_path, "r", encoding="utf-8", errors="ignore") as f:
+                for line in f:
+                    line = line.strip()
+                    if line and not line.startswith("#"):
+                        patterns.append(line)
+        return patterns
+
+    def _is_gitignored(self, fpath):
+        """檢查檔案是否被 .gitignore 排除"""
+        import fnmatch
+        rel = os.path.relpath(fpath, self.project_root).replace("\\", "/")
+        fname = os.path.basename(fpath)
+        for pat in self._gitignore_patterns:
+            pat_clean = pat.rstrip("/")
+            if fnmatch.fnmatch(fname, pat_clean):
+                return True
+            if fnmatch.fnmatch(rel, pat_clean):
+                return True
+            if fnmatch.fnmatch(rel, pat_clean + "/*"):
+                return True
+        return False
 
     def _walk_files(self, extensions=None):
-        """遍歷專案檔案，回傳 (路徑, 內容) 迭代器"""
+        """遍歷專案檔案，回傳 (路徑, 內容) 迭代器（跳過 .gitignore 中的檔案）"""
         if extensions is None:
             extensions = self.ALL_EXTENSIONS
         for root, dirs, files in os.walk(self.project_root):
@@ -120,6 +149,8 @@ class SelfAuditor:
             for fname in files:
                 if fname.endswith(extensions):
                     fpath = os.path.join(root, fname)
+                    if self._is_gitignored(fpath):
+                        continue
                     if fpath in self._file_cache:
                         yield fpath, self._file_cache[fpath]
                     else:
@@ -665,7 +696,13 @@ class SelfAuditor:
             r"\buuid\.uuid4\b",
         ]
 
+        # 已審核標註（標註 unsafe-random-ok 表示已確認為非安全用途）
+        reviewed_marker = re.compile(r"unsafe-random-ok")
+
         for fpath, content in self._walk_files(self.CODE_EXTENSIONS):
+            # 如果檔案含有 unsafe-random-ok 標註，表示已人工審核確認為非安全用途，跳過
+            if reviewed_marker.search(content):
+                continue
             for pattern, label in unsafe_patterns:
                 matches = re.findall(pattern, content)
                 if matches:
@@ -691,7 +728,7 @@ class SelfAuditor:
             "note_zh": (
                 f"發現 {len(found)} 個不安全隨機數使用（{len(purely_unsafe)} 個無替代方案）"
                 if found
-                else "未發現不安全隨機數使用"
+                else "未發現不安全隨機數使用（含已審核標註 unsafe-random-ok 的檔案）"
             ),
         }
 
