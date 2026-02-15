@@ -206,16 +206,26 @@ export default {
         case '/api/ai/chat': return await handleAiChat(request, env)
         case '/api/v1/check': {
           const body = await request.json() as any
-          if (!body.l1 || !body.l4) return json(400, { error: 'l1 and l4 codes are required' })
+          if (!body.l1_id && !body.l1_code) return json(400, { error: 'l1_id (uuid) or l1_code (e.g. L1-01) is required', example: { l1_code: 'L1-01', l4_code: 'L4-01010101' } })
+          let l1Id = body.l1_id, l2Id = body.l2_id, l3Id = body.l3_id, l4Id = body.l4_id
+          // 如果用 code 而不是 uuid，先查 ID
+          if (body.l1_code && !l1Id) {
+            const lookupRes = await fetch(`${SUPA_URL}/rest/v1/rpc/check_inference_path`, {
+              method: 'POST', headers: { ...supaHeaders, 'Content-Type': 'application/json' },
+              body: JSON.stringify({ p_session_id: body.session_id || 'api-' + Date.now(), p_l1_id: null, p_l2_id: null, p_l3_id: null, p_l4_id: null, p_context: { l1_code: body.l1_code, l4_code: body.l4_code || null, source: 'api_v1_check' } })
+            })
+            if (lookupRes.ok) {
+              const result = await lookupRes.json()
+              return json(200, { patent: 'TW-115100981', method: 'check_inference_path()', path: { l1: body.l1_code, l2: body.l2_code, l3: body.l3_code, l4: body.l4_code }, result })
+            }
+          }
+          // 直接用 UUID 呼叫
           const checkRes = await fetch(`${SUPA_URL}/rest/v1/rpc/check_inference_path`, {
             method: 'POST', headers: { ...supaHeaders, 'Content-Type': 'application/json' },
-            body: JSON.stringify({ p_l1_code: body.l1, p_l2_code: body.l2 || null, p_l3_code: body.l3 || null, p_l4_code: body.l4 })
+            body: JSON.stringify({ p_session_id: body.session_id || 'api-' + Date.now(), p_l1_id: l1Id || null, p_l2_id: l2Id || null, p_l3_id: l3Id || null, p_l4_id: l4Id || null, p_context: body.context || {} })
           })
-          if (checkRes.ok) {
-            const result = await checkRes.json()
-            return json(200, { status: 'checked', path: { l1: body.l1, l2: body.l2, l3: body.l3, l4: body.l4 }, result })
-          }
-          return json(200, { status: 'checked', path: { l1: body.l1, l4: body.l4 }, result: 'path_validation_completed', note: 'Full RPC validation requires matching L1-L4 codes in database' })
+          const result = checkRes.ok ? await checkRes.json() : { error: 'RPC call failed', status: checkRes.status }
+          return json(200, { patent: 'TW-115100981', method: 'check_inference_path()', input: { l1_id: l1Id, l2_id: l2Id, l3_id: l3Id, l4_id: l4Id }, result })
         }
         case '/api/v1/inference': {
           const body = await request.json() as any
