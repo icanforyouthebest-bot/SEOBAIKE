@@ -9,7 +9,14 @@
   <meta property="og:description" content="讓 AI 在約束下運行。Constraint-as-a-Service 架構，產業級 AI 推理驗證。">
   <meta property="og:image" content="/og-image.png">
   <meta property="og:type" content="website">
+  <meta name="theme-color" content="#0a0a1a">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="SEOBAIKE">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/og-image.png">
+  <link rel="manifest" href="/manifest.json">
+  <link rel="preconnect" href="https://vmyrivxxibqydccurxug.supabase.co">
   <style>
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -661,6 +668,16 @@
     @media (max-width: 480px) {
       .hero h1 { font-size: 1.8rem; }
       .btn { padding: 12px 24px; font-size: 0.9rem; }
+    }
+
+    /* ─── Touch & Mobile Perf ─── */
+    * { -webkit-tap-highlight-color: transparent; }
+    select, button, a { touch-action: manipulation; }
+    @media (hover: none) and (pointer: coarse) {
+      .btn { min-height: 48px; }
+      select { min-height: 48px; font-size: 16px !important; }
+      .feature-card { padding: 28px 20px; }
+      .nav-links .btn-nav { min-height: 44px; display: flex; align-items: center; }
     }
   </style>
 </head>
