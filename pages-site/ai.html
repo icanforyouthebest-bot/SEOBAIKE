@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SEOBAIKE AI 超級引擎 | 8 大能力 1000+ 模型</title>
-<meta name="description" content="SEOBAIKE AI 超級引擎 — 對話、程式碼、視覺、推理、搜尋、嵌入、圖像生成、語音，8 大能力 1000+ AI 模型，一個平台全部搞定">
+<title>SEOBAIKE AI 超級引擎 | 8 大能力 1000+ 引擎</title>
+<meta name="description" content="SEOBAIKE AI 超級引擎 — 對話、程式碼、視覺、推理、搜尋、嵌入、圖像生成、語音，8 大能力 1000+ AI 引擎，一個平台全部搞定">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
@@ -86,7 +86,62 @@ a{color:#e8850c;text-decoration:none}a:hover{text-decoration:underline}
 
 .footer{text-align:center;padding:24px;color:#444;font-size:11px;border-top:1px solid #111;margin-top:20px}
 .loading{text-align:center;padding:40px;color:#555}
-@media(max-width:768px){.model-grid{grid-template-columns:1fr}.chat-panel{width:100%;right:0;left:0}.stats-row{gap:16px}.capability-bar{gap:6px}}
+
+/* 快速體驗區塊 */
+.quick-try{background:linear-gradient(135deg,#1a1008 0%,#2a1a0e 50%,#1a1008 100%);border-bottom:1px solid #2a1a0e;padding:40px 30px;text-align:center}
+.quick-try h2{font-size:28px;color:#e8850c;margin-bottom:6px}
+.quick-try .qt-sub{color:#888;font-size:14px;margin-bottom:24px}
+.qt-box{max-width:640px;margin:0 auto;position:relative}
+.qt-input-wrap{display:flex;gap:10px;background:#16213e;border:2px solid #333;border-radius:14px;padding:6px 6px 6px 18px;transition:border-color .3s}
+.qt-input-wrap:focus-within{border-color:#e8850c}
+.qt-input{flex:1;background:transparent;border:none;color:#eee;font-size:15px;outline:none;padding:10px 0}
+.qt-input::placeholder{color:#666}
+.qt-send{background:#e8850c;color:#000;border:none;border-radius:10px;padding:12px 24px;font-weight:700;font-size:14px;cursor:pointer;transition:background .2s;white-space:nowrap}
+.qt-send:hover{background:#ff9f30}
+.qt-send:disabled{opacity:.4;cursor:not-allowed}
+.qt-result{margin-top:18px;text-align:left;max-width:640px;margin-left:auto;margin-right:auto;display:none}
+.qt-reply{background:#16213e;border:1px solid #222;border-radius:14px;padding:18px 22px;color:#ddd;font-size:14px;line-height:1.8;white-space:pre-wrap;word-break:break-word}
+.qt-reply .qt-label{font-size:11px;color:#e8850c;font-weight:700;margin-bottom:8px;display:block}
+.qt-limit{color:#888;font-size:12px;margin-top:10px;text-align:center}
+.qt-error{color:#ff6b6b;background:#2a0a0a;border:1px solid #4a1a1a;border-radius:14px;padding:16px 22px;font-size:14px;display:none;margin-top:18px;max-width:640px;margin-left:auto;margin-right:auto;text-align:center}
+/* loading 三個跳動的點 */
+.qt-dots{display:inline-flex;gap:5px;align-items:center;padding:8px 0}
+.qt-dots span{width:8px;height:8px;border-radius:50%;background:#e8850c;animation:qtBounce .6s infinite alternate}
+.qt-dots span:nth-child(2){animation-delay:.2s}
+.qt-dots span:nth-child(3){animation-delay:.4s}
+@keyframes qtBounce{0%{transform:translateY(0);opacity:.4}100%{transform:translateY(-10px);opacity:1}}
+
+/* BYOK 金鑰管理 */
+.byok-prompt{margin:0;border-top:1px solid rgba(232,133,12,0.15)}
+.byok-header{padding:12px 16px;background:rgba(232,133,12,0.08);cursor:pointer;display:flex;justify-content:space-between;align-items:center;font-size:14px;color:#f5a623;user-select:none;transition:background .2s}
+.byok-header:hover{background:rgba(232,133,12,0.14)}
+.byok-content{padding:16px;background:rgba(0,0,0,0.2)}
+.byok-content>p{font-size:13px;color:#aaa;margin-bottom:8px}
+.byok-list{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:12px 0}
+.byok-item{display:flex;justify-content:space-between;align-items:center;padding:8px 12px;background:rgba(255,255,255,0.03);border-radius:8px;font-size:13px;border-left:3px solid transparent;transition:border-color .2s}
+.byok-item a{color:#e8850c;text-decoration:none;font-size:12px;white-space:nowrap}
+.byok-item a:hover{text-decoration:underline}
+.byok-item.byok-connected{border-left:3px solid #4ade80}
+.byok-item.byok-connected::after{content:'已連接';font-size:10px;color:#4ade80;margin-left:6px}
+.byok-input-area{display:flex;gap:8px;margin:12px 0;flex-wrap:wrap}
+.byok-key-input{flex:1;min-width:140px;padding:8px 12px;border:1px solid rgba(255,255,255,0.1);border-radius:8px;background:rgba(0,0,0,0.3);color:white;font-size:13px;outline:none}
+.byok-key-input:focus{border-color:#e8850c}
+.byok-key-input::placeholder{color:#555}
+.byok-provider-select{padding:8px;border:1px solid rgba(255,255,255,0.1);border-radius:8px;background:rgba(0,0,0,0.3);color:white;font-size:13px;outline:none}
+.byok-provider-select:focus{border-color:#e8850c}
+.byok-save-btn{padding:8px 16px;background:#e8850c;border:none;border-radius:8px;color:white;cursor:pointer;font-size:13px;font-weight:600;transition:background .2s}
+.byok-save-btn:hover{background:#ff9f30}
+.byok-note{font-size:12px;color:rgba(255,255,255,0.4);margin-top:8px}
+.byok-status-bar{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.byok-status-tag{font-size:10px;padding:2px 8px;border-radius:10px;background:rgba(74,222,128,0.1);color:#4ade80;border:1px solid rgba(74,222,128,0.3)}
+.byok-remove-btn{background:none;border:none;color:#ff6b6b;cursor:pointer;font-size:11px;margin-left:4px;padding:0 4px}
+.byok-remove-btn:hover{text-decoration:underline}
+
+/* BYOK 簡化提示（快速體驗區下方） */
+.byok-banner{max-width:640px;margin:16px auto 0;padding:12px 18px;background:rgba(232,133,12,0.06);border:1px solid rgba(232,133,12,0.15);border-radius:10px;display:flex;align-items:center;gap:10px;font-size:13px;color:#ccc}
+.byok-banner a{color:#e8850c;font-weight:600;white-space:nowrap}
+
+@media(max-width:768px){.model-grid{grid-template-columns:1fr}.chat-panel{width:100%;right:0;left:0}.stats-row{gap:16px}.capability-bar{gap:6px}.quick-try{padding:28px 16px}.qt-input-wrap{flex-direction:column;padding:12px}.qt-send{width:100%}.byok-list{grid-template-columns:1fr}.byok-input-area{flex-direction:column}.byok-banner{flex-direction:column;text-align:center}}
 </style>
 </head>
 <body>
@@ -107,22 +162,46 @@ a{color:#e8850c;text-decoration:none}a:hover{text-decoration:underline}
 <div class="hero">
   <h1>SEOBAIKE AI 超級引擎</h1>
   <div class="count" id="totalCount">--</div>
-  <p>個 AI 模型 — 8 大能力類別。對話、程式碼、視覺、推理、搜尋、嵌入、圖像生成、語音，一個平台全部搞定。點一下就能對話。</p>
+  <p>個 AI 引擎 — 8 大能力類別。根據你的需求，自動為你服務。對話、程式碼、視覺、推理、搜尋、嵌入、圖像生成、語音，SEOBAIKE 幫你搞定。</p>
 </div>
+
+<!-- 快速體驗區塊 -->
+<section class="quick-try" id="quickTry">
+  <h2>讓 SEOBAIKE 幫你試試看</h2>
+  <p class="qt-sub">不用登入，直接輸入你的問題，我們幫你找到最好的方案</p>
+  <div class="qt-box">
+    <div class="qt-input-wrap">
+      <input type="text" class="qt-input" id="qtInput" placeholder="試試看：幫我寫一封感謝 email" maxlength="500">
+      <button class="qt-send" id="qtSend" onclick="quickTrySend()">發送</button>
+    </div>
+    <div class="qt-limit" id="qtLimit"></div>
+    <div class="qt-error" id="qtError"></div>
+    <div class="qt-result" id="qtResult">
+      <div class="qt-reply" id="qtReply">
+        <span class="qt-label">SEOBAIKE AI 回覆</span>
+        <span id="qtReplyText"></span>
+      </div>
+    </div>
+    <div class="byok-banner">
+      <span>&#128273; 用自己的金鑰，解鎖無限制 AI 對話</span>
+      <a href="#" onclick="event.preventDefault();document.querySelector('.model-card')?.click();setTimeout(function(){var p=document.getElementById('chatPanel');if(p)p.classList.add('open');toggleByok()},300)">設定金鑰 &#8594;</a>
+    </div>
+  </div>
+</section>
 
 <div class="capability-bar" id="capabilityBar"></div>
 
 <div class="stats-row" id="statsRow">
-  <div class="stat-box"><div class="n" id="s-total">--</div><div class="l">模型總數</div></div>
-  <div class="stat-box"><div class="n" id="s-chat">--</div><div class="l">對話模型</div></div>
-  <div class="stat-box"><div class="n" id="s-code">--</div><div class="l">程式碼模型</div></div>
-  <div class="stat-box"><div class="n" id="s-vision">--</div><div class="l">視覺模型</div></div>
-  <div class="stat-box"><div class="n" id="s-reason">--</div><div class="l">推理模型</div></div>
-  <div class="stat-box"><div class="n" id="s-embed">--</div><div class="l">嵌入模型</div></div>
+  <div class="stat-box"><div class="n" id="s-total">--</div><div class="l">引擎總數</div></div>
+  <div class="stat-box"><div class="n" id="s-chat">--</div><div class="l">對話引擎</div></div>
+  <div class="stat-box"><div class="n" id="s-code">--</div><div class="l">程式碼引擎</div></div>
+  <div class="stat-box"><div class="n" id="s-vision">--</div><div class="l">視覺引擎</div></div>
+  <div class="stat-box"><div class="n" id="s-reason">--</div><div class="l">推理引擎</div></div>
+  <div class="stat-box"><div class="n" id="s-embed">--</div><div class="l">嵌入引擎</div></div>
 </div>
 
 <div class="controls">
-  <input type="text" class="search-box" id="searchBox" placeholder="搜尋模型功能... (例: 對話, 程式碼, 視覺, 推理)">
+  <input type="text" class="search-box" id="searchBox" placeholder="搜尋引擎功能... (例: 對話, 程式碼, 視覺, 推理)">
   <button class="filter-btn active" data-filter="all">全部</button>
   <button class="filter-btn" data-filter="chat">對話</button>
   <button class="filter-btn" data-filter="code">程式碼</button>
@@ -139,15 +218,84 @@ a{color:#e8850c;text-decoration:none}a:hover{text-decoration:underline}
 </div>
 
 <div class="model-grid" id="modelGrid">
-  <div class="loading">載入 SEOBAIKE AI 引擎中...</div>
+  <div class="loading">載入 SEOBAIKE AI 引擎列表中...</div>
 </div>
 
 <div class="chat-panel" id="chatPanel">
   <div class="chat-header">
-    <h3 id="chatModelName">選擇模型</h3>
+    <h3 id="chatModelName">選擇引擎</h3>
     <button class="chat-close" onclick="closeChat()">&times;</button>
   </div>
   <div class="chat-messages" id="chatMessages"></div>
+  <div class="byok-prompt">
+    <div class="byok-header" onclick="toggleByok()">
+      &#128273; 用自己的金鑰，解鎖完整功能 <span class="byok-arrow">&#9660;</span>
+    </div>
+    <div class="byok-content" id="byokContent" style="display:none">
+      <p>加入你自己的 AI 引擎金鑰，享受無限制使用：</p>
+      <div class="byok-list">
+        <div class="byok-item" data-provider="groq">
+          <span>&#128640; 高速對話引擎</span>
+          <a href="https://console.groq.com/keys" target="_blank" rel="noopener">取得金鑰 &#8594;</a>
+        </div>
+        <div class="byok-item" data-provider="deepseek">
+          <span>&#129504; 深度推理引擎</span>
+          <a href="https://platform.deepseek.com/api_keys" target="_blank" rel="noopener">取得金鑰 &#8594;</a>
+        </div>
+        <div class="byok-item" data-provider="perplexity">
+          <span>&#128269; 即時搜尋引擎</span>
+          <a href="https://docs.perplexity.ai/home" target="_blank" rel="noopener">取得金鑰 &#8594;</a>
+        </div>
+        <div class="byok-item" data-provider="google">
+          <span>&#127760; 多語言引擎</span>
+          <a href="https://aistudio.google.com/apikey" target="_blank" rel="noopener">取得金鑰 &#8594;</a>
+        </div>
+        <div class="byok-item" data-provider="openrouter">
+          <span>&#128172; 全能對話引擎</span>
+          <a href="https://openrouter.ai/keys" target="_blank" rel="noopener">取得金鑰 &#8594;</a>
+        </div>
+        <div class="byok-item" data-provider="anthropic">
+          <span>&#127912; 創意引擎</span>
+          <a href="https://console.anthropic.com/settings/keys" target="_blank" rel="noopener">取得金鑰 &#8594;</a>
+        </div>
+        <div class="byok-item" data-provider="fireworks">
+          <span>&#9889; 極速引擎</span>
+          <a href="https://fireworks.ai/account/api-keys" target="_blank" rel="noopener">取得金鑰 &#8594;</a>
+        </div>
+        <div class="byok-item" data-provider="cohere">
+          <span>&#128221; 文字專精引擎</span>
+          <a href="https://dashboard.cohere.com/api-keys" target="_blank" rel="noopener">取得金鑰 &#8594;</a>
+        </div>
+        <div class="byok-item" data-provider="mistral">
+          <span>&#128300; 研究引擎</span>
+          <a href="https://console.mistral.ai/api-keys" target="_blank" rel="noopener">取得金鑰 &#8594;</a>
+        </div>
+        <div class="byok-item" data-provider="nvidia">
+          <span>&#128421; GPU 運算引擎</span>
+          <a href="https://build.nvidia.com/explore/discover" target="_blank" rel="noopener">取得金鑰 &#8594;</a>
+        </div>
+      </div>
+      <div class="byok-input-area">
+        <input type="text" class="byok-key-input" placeholder="貼上你的金鑰..." id="byokKeyInput">
+        <select class="byok-provider-select" id="byokProviderSelect">
+          <option value="">選擇引擎類型</option>
+          <option value="groq">高速對話</option>
+          <option value="deepseek">深度推理</option>
+          <option value="perplexity">即時搜尋</option>
+          <option value="google">多語言</option>
+          <option value="openrouter">全能對話</option>
+          <option value="anthropic">創意</option>
+          <option value="fireworks">極速</option>
+          <option value="cohere">文字專精</option>
+          <option value="mistral">研究</option>
+          <option value="nvidia">GPU 運算</option>
+        </select>
+        <button class="byok-save-btn" onclick="saveByokKey()">儲存金鑰</button>
+      </div>
+      <div class="byok-status-bar" id="byokStatusBar"></div>
+      <p class="byok-note">&#128274; 金鑰只存在你的瀏覽器中，不會上傳到伺服器。</p>
+    </div>
+  </div>
   <div class="chat-input-row">
     <input type="text" class="chat-input" id="chatInput" placeholder="輸入訊息..." onkeydown="if(event.key==='Enter')sendChat()">
     <button class="chat-send" id="chatSend" onclick="sendChat()">發送</button>
@@ -155,7 +303,7 @@ a{color:#e8850c;text-decoration:none}a:hover{text-decoration:underline}
 </div>
 
 <footer class="footer">
-  SEOBAIKE AI 超級引擎 — 專利 TW-115100981 — 小路光有限公司
+  SEOBAIKE AI 超級引擎 — 小路光有限公司
 </footer>
 
 <script src="/seobaike-config.js"></script>
@@ -178,13 +326,13 @@ const CAPABILITIES = {
   large:  { icon: '⚡', name: '大型',     cls: 'tag-large' }
 }
 
-// Map to SEOBAIKE display names - strips brand, keeps model identifier
+// Map to SEOBAIKE display names - strips brand, keeps engine identifier
 function toBrandedName(id) {
   const parts = id.split('/')
   const raw = parts[parts.length - 1]
   // Clean up common patterns, return a readable name
   return raw
-    .replace(/^(nvidia|google|anthropic|meta|openai|deepseek|mistral|groq|cohere|qwen|microsoft|perplexity)[\/\-_]/i, '')
+    .replace(/^[a-zA-Z]+[\/\-_]/i, '')
     .replace(/[-_]/g, ' ')
     .replace(/\b\w/g, c => c.toUpperCase())
 }
@@ -323,7 +471,7 @@ async function loadModels() {
 
 function renderModels(models) {
   const grid = document.getElementById('modelGrid')
-  if (!models.length) { grid.innerHTML = '<div class="loading">沒有符合的模型</div>'; return }
+  if (!models.length) { grid.innerHTML = '<div class="loading">沒有符合的引擎</div>'; return }
   grid.innerHTML = models.map(m => {
     const tagsHtml = m.tags.map(t => tagHtml(t)).join('')
     const speedPct = (m.speedRating / 5) * 100
@@ -378,6 +526,103 @@ document.querySelectorAll('.filter-btn').forEach(btn => {
   })
 })
 
+// === BYOK 金鑰管理 ===
+function toggleByok() {
+  var content = document.getElementById('byokContent');
+  var arrow = document.querySelector('.byok-arrow');
+  if (content.style.display === 'none') {
+    content.style.display = 'block';
+    arrow.innerHTML = '&#9650;';
+    updateByokStatus();
+  } else {
+    content.style.display = 'none';
+    arrow.innerHTML = '&#9660;';
+  }
+}
+
+function saveByokKey() {
+  var key = document.getElementById('byokKeyInput').value.trim();
+  var provider = document.getElementById('byokProviderSelect').value;
+  if (!key || !provider) {
+    alert('請選擇引擎類型並輸入金鑰');
+    return;
+  }
+  var keys = JSON.parse(localStorage.getItem('seobaike_byok') || '{}');
+  keys[provider] = key;
+  localStorage.setItem('seobaike_byok', JSON.stringify(keys));
+  document.getElementById('byokKeyInput').value = '';
+  document.getElementById('byokProviderSelect').value = '';
+  alert('金鑰已儲存！下次對話將使用你的金鑰。');
+  updateByokStatus();
+}
+
+function removeByokKey(provider) {
+  var keys = JSON.parse(localStorage.getItem('seobaike_byok') || '{}');
+  delete keys[provider];
+  localStorage.setItem('seobaike_byok', JSON.stringify(keys));
+  updateByokStatus();
+}
+
+var BYOK_PROVIDER_NAMES = {
+  groq: '高速對話', deepseek: '深度推理', perplexity: '即時搜尋',
+  google: '多語言', openrouter: '全能對話', anthropic: '創意',
+  fireworks: '極速', cohere: '文字專精', mistral: '研究', nvidia: 'GPU 運算'
+};
+
+function updateByokStatus() {
+  var keys = JSON.parse(localStorage.getItem('seobaike_byok') || '{}');
+  // 更新列表中的已連接標記
+  document.querySelectorAll('.byok-item').forEach(function(item) {
+    var prov = item.getAttribute('data-provider');
+    if (prov && keys[prov]) {
+      item.classList.add('byok-connected');
+    } else {
+      item.classList.remove('byok-connected');
+    }
+  });
+  // 更新狀態列
+  var statusBar = document.getElementById('byokStatusBar');
+  if (statusBar) {
+    var html = '';
+    for (var p in keys) {
+      if (keys.hasOwnProperty(p) && keys[p]) {
+        var name = BYOK_PROVIDER_NAMES[p] || p;
+        html += '<span class="byok-status-tag">' + name + '<button class="byok-remove-btn" onclick="removeByokKey(\'' + p + '\')" title="移除">&#10005;</button></span>';
+      }
+    }
+    statusBar.innerHTML = html;
+  }
+}
+
+// 根據目前模型 ID 偵測對應的 BYOK provider
+function detectByokProvider(modelId) {
+  if (!modelId) return '';
+  var lower = modelId.toLowerCase();
+  if (lower.includes('groq') || lower.includes('llama') && lower.includes('groq')) return 'groq';
+  if (lower.includes('deepseek') || lower.includes('r1')) return 'deepseek';
+  if (lower.includes('sonar') || lower.includes('perplexity')) return 'perplexity';
+  if (lower.includes('gemini') || lower.includes('google') || lower.includes('gemma')) return 'google';
+  if (lower.includes('claude') || lower.includes('anthropic') || lower.includes('opus') || lower.includes('sonnet') || lower.includes('haiku')) return 'anthropic';
+  if (lower.includes('mistral') || lower.includes('mixtral')) return 'mistral';
+  if (lower.includes('command') || lower.includes('cohere')) return 'cohere';
+  if (lower.includes('fireworks')) return 'fireworks';
+  if (lower.includes('nvidia') || lower.includes('nim')) return 'nvidia';
+  // 通用：如果有 openrouter key 就用
+  return 'openrouter';
+}
+
+// 取得 BYOK 標頭（如果用戶有自帶金鑰）
+function getByokHeaders(modelId) {
+  var byokKeys = JSON.parse(localStorage.getItem('seobaike_byok') || '{}');
+  var provider = detectByokProvider(modelId);
+  var headers = {};
+  if (provider && byokKeys[provider]) {
+    headers['X-BYOK-Key'] = byokKeys[provider];
+    headers['X-BYOK-Provider'] = provider;
+  }
+  return headers;
+}
+
 // Chat - still sends real model id and provider to API internally
 function openChat(modelId, provider) {
   currentModel = modelId
@@ -421,9 +666,12 @@ async function sendChat() {
   try {
     const payload = { model: currentModel, messages: [{ role: 'system', content: 'You are a helpful AI assistant on SEOBAIKE platform. Answer in the same language the user writes in.' }, ...chatHistory], max_tokens: 1024 }
     if (currentProvider) payload.provider = currentProvider
+    // BYOK：如果用戶有自帶金鑰，在 header 中附上
+    const byokH = getByokHeaders(currentModel)
+    const fetchHeaders = Object.assign({ 'Content-Type': 'application/json' }, byokH)
     const res = await fetch('/api/ai/nim', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: fetchHeaders,
       body: JSON.stringify(payload),
     })
     const data = await res.json()
@@ -453,6 +701,123 @@ if (window.__SEOBAIKE__) {
     body: JSON.stringify({ page: '/ai', referrer: document.referrer || null, user_agent: navigator.userAgent })
   }).catch(() => {})
 }
+
+// === 快速體驗功能 ===
+const QT_DAILY_LIMIT = 3
+const QT_STORAGE_KEY = 'seobaike_qt'
+const QT_API_URL = 'https://seobaike-remote-control.icanforyouthebest.workers.dev/api/ai/smart'
+
+function getQtUsage() {
+  try {
+    const raw = localStorage.getItem(QT_STORAGE_KEY)
+    if (!raw) return { date: '', count: 0 }
+    const data = JSON.parse(raw)
+    return data
+  } catch { return { date: '', count: 0 } }
+}
+
+function setQtUsage(count) {
+  const today = new Date().toISOString().slice(0, 10)
+  localStorage.setItem(QT_STORAGE_KEY, JSON.stringify({ date: today, count }))
+}
+
+function getQtRemaining() {
+  const usage = getQtUsage()
+  const today = new Date().toISOString().slice(0, 10)
+  if (usage.date !== today) return QT_DAILY_LIMIT
+  return Math.max(0, QT_DAILY_LIMIT - usage.count)
+}
+
+function updateQtLimit() {
+  const remaining = getQtRemaining()
+  const el = document.getElementById('qtLimit')
+  if (remaining <= 0) {
+    el.textContent = '今日免費體驗次數已用完，登入後可無限使用'
+    el.style.color = '#ff6b6b'
+    document.getElementById('qtSend').disabled = true
+    document.getElementById('qtInput').disabled = true
+    document.getElementById('qtInput').placeholder = '今日次數已用完'
+  } else {
+    el.textContent = '免費體驗：今日剩餘 ' + remaining + ' 次'
+    el.style.color = '#888'
+  }
+}
+
+// Enter 鍵發送
+document.getElementById('qtInput').addEventListener('keydown', function(e) {
+  if (e.key === 'Enter') quickTrySend()
+})
+
+async function quickTrySend() {
+  const input = document.getElementById('qtInput')
+  const msg = input.value.trim()
+  if (!msg) return
+
+  const remaining = getQtRemaining()
+  if (remaining <= 0) {
+    document.getElementById('qtError').style.display = 'block'
+    document.getElementById('qtError').textContent = '今日免費體驗次數已用完，請登入後繼續使用'
+    return
+  }
+
+  const sendBtn = document.getElementById('qtSend')
+  const resultEl = document.getElementById('qtResult')
+  const replyText = document.getElementById('qtReplyText')
+  const errorEl = document.getElementById('qtError')
+
+  // 隱藏之前的結果和錯誤
+  errorEl.style.display = 'none'
+
+  // 顯示 loading
+  sendBtn.disabled = true
+  sendBtn.textContent = '處理中...'
+  input.disabled = true
+  resultEl.style.display = 'block'
+  replyText.innerHTML = '<div class="qt-dots"><span></span><span></span><span></span></div>'
+
+  try {
+    const res = await fetch(QT_API_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ message: msg })
+    })
+
+    if (!res.ok) {
+      throw new Error('伺服器回應異常（' + res.status + '），請稍後再試')
+    }
+
+    const data = await res.json()
+    const reply = data.reply
+
+    if (!reply) {
+      throw new Error('未收到有效回覆，請稍後再試')
+    }
+
+    // 成功 — 顯示結果並扣次數
+    replyText.textContent = reply
+    const usage = getQtUsage()
+    const today = new Date().toISOString().slice(0, 10)
+    const newCount = (usage.date === today ? usage.count : 0) + 1
+    setQtUsage(newCount)
+    updateQtLimit()
+
+  } catch (e) {
+    resultEl.style.display = 'none'
+    errorEl.style.display = 'block'
+    errorEl.textContent = e.message || '發生未知錯誤，請稍後再試'
+  }
+
+  sendBtn.disabled = false
+  sendBtn.textContent = '發送'
+  input.disabled = false
+  input.focus()
+}
+
+// 初始化快速體驗次數顯示
+updateQtLimit()
+
+// 初始化 BYOK 狀態
+updateByokStatus()
 
 loadModels()
 </script>

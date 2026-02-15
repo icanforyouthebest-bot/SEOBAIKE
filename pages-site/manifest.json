@@ -1,25 +1,32 @@
 {
-  "name": "小百 AI 秘書",
-  "short_name": "小百",
-  "description": "AI 秘書助手 - 語音控制、任務管理、遠端操控",
-  "start_url": "/assistant",
+  "name": "SEOBAIKE — AI 就該這麼簡單",
+  "short_name": "SEOBAIKE",
+  "description": "1,000+ AI 引擎智慧路由平台",
+  "start_url": "/index.html",
   "display": "standalone",
-  "background_color": "#0a0a0b",
-  "theme_color": "#667eea",
-  "orientation": "portrait",
+  "background_color": "#1a1a2e",
+  "theme_color": "#e8850c",
+  "orientation": "portrait-primary",
+  "lang": "zh-TW",
   "icons": [
     {
       "src": "/favicon.svg",
       "sizes": "any",
       "type": "image/svg+xml",
       "purpose": "any maskable"
-    },
-    {
-      "src": "/favicon.ico",
-      "sizes": "48x48",
-      "type": "image/x-icon"
     }
   ],
-  "categories": ["productivity", "utilities"],
-  "lang": "zh-TW"
+  "categories": ["productivity", "business", "utilities"],
+  "shortcuts": [
+    {
+      "name": "AI 對話",
+      "url": "/ai.html",
+      "description": "開始 AI 對話"
+    },
+    {
+      "name": "功能市集",
+      "url": "/marketplace.html",
+      "description": "探索 AI 工具市集"
+    }
+  ]
 }

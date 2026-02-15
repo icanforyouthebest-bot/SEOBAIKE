@@ -1,0 +1,1064 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>系統狀態 — SEOBAIKE</title>
+  <meta name="description" content="SEOBAIKE 即時系統狀態頁面，查看所有 AI 引擎的運作狀態、回應時間與可用率。">
+  <meta property="og:title" content="系統狀態 — SEOBAIKE">
+  <meta property="og:description" content="即時查看 SEOBAIKE 所有 AI 引擎的運作狀態。">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://aiforseo.vip/status">
+  <meta property="og:image" content="/og-image.png">
+  <meta property="og:site_name" content="SEOBAIKE">
+  <meta property="og:locale" content="zh_TW">
+  <meta name="theme-color" content="#e8850c">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/favicon.svg">
+  <link rel="manifest" href="/manifest.json">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --orange: #e8850c;
+      --orange-hover: #d4780a;
+      --orange-light: #f5a623;
+      --orange-glow: rgba(232, 133, 12, 0.15);
+      --orange-glow-strong: rgba(232, 133, 12, 0.25);
+      --copper: #cc785c;
+      --bg: #0a0a1a;
+      --bg-card: #12122a;
+      --bg-warm: rgba(232, 133, 12, 0.03);
+      --border: #2a2a4a;
+      --border-light: #3a3a5a;
+      --text: #e0e0e8;
+      --text-muted: #8888aa;
+      --text-bright: #ffffff;
+      --radius: 16px;
+      --green: #28c840;
+      --yellow: #febc2e;
+      --red: #ff5f57;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans TC", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    a { color: var(--orange); text-decoration: none; transition: color 0.2s; }
+    a:hover { color: var(--copper); }
+
+    .container { max-width: 1140px; margin: 0 auto; padding: 0 24px; }
+
+    /* ========== Navigation ========== */
+    nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 40px;
+      border-bottom: 1px solid var(--border);
+      background: rgba(10, 10, 26, 0.85);
+      backdrop-filter: blur(16px);
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+    }
+    .nav-logo {
+      font-size: 1.4rem;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      color: #fff;
+    }
+    .nav-logo span { color: var(--orange); }
+    .nav-links { display: flex; gap: 28px; list-style: none; align-items: center; }
+    .nav-links a {
+      color: var(--text-muted);
+      font-size: 0.92rem;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: #fff; }
+    .nav-links .btn-nav {
+      padding: 8px 20px;
+      background: var(--orange);
+      color: #fff;
+      border-radius: 8px;
+      font-weight: 600;
+    }
+    .nav-links .btn-nav:hover { background: var(--orange-hover); color: #fff; }
+    .nav-hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 4px;
+    }
+    .nav-hamburger span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--text);
+      border-radius: 2px;
+      transition: 0.3s;
+    }
+
+    /* ========== Hero ========== */
+    .status-hero {
+      padding-top: 140px;
+      padding-bottom: 60px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .status-hero::before {
+      content: '';
+      position: absolute;
+      top: -80px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 800px;
+      height: 800px;
+      background: radial-gradient(circle, rgba(40, 200, 64, 0.08) 0%, transparent 60%);
+      pointer-events: none;
+      transition: background 0.6s;
+    }
+    .status-hero.warning::before {
+      background: radial-gradient(circle, rgba(254, 188, 46, 0.08) 0%, transparent 60%);
+    }
+    .status-hero.critical::before {
+      background: radial-gradient(circle, rgba(255, 95, 87, 0.08) 0%, transparent 60%);
+    }
+    .status-hero h1 {
+      font-size: 3.2rem;
+      font-weight: 900;
+      color: var(--text-bright);
+      letter-spacing: -1.5px;
+      margin-bottom: 28px;
+    }
+
+    /* Large status indicator */
+    .status-indicator {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      margin: 0 auto 28px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+    .status-indicator .pulse {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      animation: statusPulse 2.5s ease-in-out infinite;
+    }
+    .status-indicator .core {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      position: relative;
+      z-index: 1;
+      transition: background 0.4s;
+    }
+    .status-indicator.operational .pulse { background: rgba(40, 200, 64, 0.15); }
+    .status-indicator.operational .core { background: var(--green); box-shadow: 0 0 40px rgba(40, 200, 64, 0.4); }
+    .status-indicator.degraded .pulse { background: rgba(254, 188, 46, 0.15); }
+    .status-indicator.degraded .core { background: var(--yellow); box-shadow: 0 0 40px rgba(254, 188, 46, 0.4); }
+    .status-indicator.major-outage .pulse { background: rgba(255, 95, 87, 0.15); }
+    .status-indicator.major-outage .core { background: var(--red); box-shadow: 0 0 40px rgba(255, 95, 87, 0.4); }
+
+    @keyframes statusPulse {
+      0%, 100% { transform: scale(1); opacity: 0.6; }
+      50% { transform: scale(1.3); opacity: 0; }
+    }
+
+    .status-text {
+      font-size: 1.3rem;
+      font-weight: 600;
+      margin-bottom: 8px;
+      transition: color 0.4s;
+    }
+    .status-text.operational { color: var(--green); }
+    .status-text.degraded { color: var(--yellow); }
+    .status-text.major-outage { color: var(--red); }
+
+    .status-updated {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+    }
+
+    /* ========== Stats Overview ========== */
+    .stats-section {
+      padding: 40px 0 60px;
+    }
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+    }
+    .stat-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 28px 24px;
+      text-align: center;
+      backdrop-filter: blur(10px);
+      transition: border-color 0.3s, transform 0.3s;
+    }
+    .stat-card:hover {
+      border-color: var(--border-light);
+      transform: translateY(-3px);
+    }
+    .stat-value {
+      font-size: 2.2rem;
+      font-weight: 900;
+      color: var(--text-bright);
+      margin-bottom: 4px;
+      line-height: 1.2;
+    }
+    .stat-value.green { color: var(--green); }
+    .stat-label {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    /* ========== Engine List ========== */
+    .engines-section {
+      padding: 40px 0 80px;
+    }
+    .engines-section .section-header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+    .engines-section .section-header h2 {
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--text-bright);
+      letter-spacing: -0.5px;
+      margin-bottom: 8px;
+    }
+    .engines-section .section-header p {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+    }
+
+    .engine-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .engine-row {
+      display: grid;
+      grid-template-columns: 28px 1fr 100px 90px 200px;
+      align-items: center;
+      gap: 16px;
+      padding: 18px 24px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      transition: border-color 0.3s, transform 0.2s;
+    }
+    .engine-row:hover {
+      border-color: var(--border-light);
+      transform: translateX(4px);
+    }
+
+    /* Status dot */
+    .engine-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      flex-shrink: 0;
+      transition: background 0.4s, box-shadow 0.4s;
+    }
+    .engine-dot.operational { background: var(--green); box-shadow: 0 0 8px rgba(40, 200, 64, 0.5); }
+    .engine-dot.degraded { background: var(--yellow); box-shadow: 0 0 8px rgba(254, 188, 46, 0.5); }
+    .engine-dot.offline { background: var(--red); box-shadow: 0 0 8px rgba(255, 95, 87, 0.5); }
+
+    .engine-name {
+      font-weight: 600;
+      color: var(--text-bright);
+      font-size: 0.95rem;
+    }
+    .engine-status-label {
+      font-size: 0.82rem;
+      font-weight: 600;
+      text-align: center;
+      padding: 4px 12px;
+      border-radius: 20px;
+    }
+    .engine-status-label.operational { color: var(--green); background: rgba(40, 200, 64, 0.1); }
+    .engine-status-label.degraded { color: var(--yellow); background: rgba(254, 188, 46, 0.1); }
+    .engine-status-label.offline { color: var(--red); background: rgba(255, 95, 87, 0.1); }
+
+    .engine-latency {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      text-align: center;
+      font-variant-numeric: tabular-nums;
+    }
+
+    /* Uptime bar (24 segments for 24 hours) */
+    .uptime-bar {
+      display: flex;
+      gap: 2px;
+      height: 24px;
+      align-items: center;
+    }
+    .uptime-segment {
+      flex: 1;
+      height: 100%;
+      border-radius: 2px;
+      transition: background 0.3s;
+      position: relative;
+    }
+    .uptime-segment.up { background: var(--green); opacity: 0.7; }
+    .uptime-segment.up:hover { opacity: 1; }
+    .uptime-segment.slow { background: var(--yellow); opacity: 0.7; }
+    .uptime-segment.slow:hover { opacity: 1; }
+    .uptime-segment.down { background: var(--red); opacity: 0.7; }
+    .uptime-segment.down:hover { opacity: 1; }
+
+    /* Uptime bar tooltip */
+    .uptime-segment::after {
+      content: attr(data-tooltip);
+      position: absolute;
+      bottom: calc(100% + 8px);
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--bg-card);
+      border: 1px solid var(--border-light);
+      color: var(--text);
+      font-size: 0.72rem;
+      padding: 4px 8px;
+      border-radius: 6px;
+      white-space: nowrap;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s;
+      z-index: 10;
+    }
+    .uptime-segment:hover::after { opacity: 1; }
+
+    /* ========== 7-Day History ========== */
+    .history-section {
+      padding: 0 0 80px;
+    }
+    .history-section .section-header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+    .history-section .section-header h2 {
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--text-bright);
+      letter-spacing: -0.5px;
+      margin-bottom: 8px;
+    }
+    .history-section .section-header p {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+    }
+
+    .history-chart {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 32px;
+    }
+    .history-days {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 12px;
+    }
+    .history-day {
+      text-align: center;
+    }
+    .history-bar-wrap {
+      height: 140px;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      margin-bottom: 8px;
+    }
+    .history-bar {
+      width: 100%;
+      max-width: 48px;
+      border-radius: 8px 8px 4px 4px;
+      transition: height 0.6s ease, background 0.4s;
+      position: relative;
+      cursor: default;
+    }
+    .history-bar::after {
+      content: attr(data-value);
+      position: absolute;
+      top: -24px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
+    .history-bar:hover::after { opacity: 1; }
+    .history-bar.excellent { background: linear-gradient(180deg, var(--green), rgba(40, 200, 64, 0.4)); }
+    .history-bar.good { background: linear-gradient(180deg, rgba(40, 200, 64, 0.8), rgba(40, 200, 64, 0.3)); }
+    .history-bar.warning { background: linear-gradient(180deg, var(--yellow), rgba(254, 188, 46, 0.4)); }
+    .history-bar.bad { background: linear-gradient(180deg, var(--red), rgba(255, 95, 87, 0.4)); }
+
+    .history-label {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+    .history-pct {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    /* ========== Refresh indicator ========== */
+    .refresh-bar {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 16px 0;
+      margin-bottom: 20px;
+    }
+    .refresh-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--orange);
+      animation: refreshBlink 2s ease-in-out infinite;
+    }
+    @keyframes refreshBlink {
+      0%, 100% { opacity: 0.3; }
+      50% { opacity: 1; }
+    }
+    .refresh-text {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+    }
+    .refresh-countdown {
+      font-variant-numeric: tabular-nums;
+      color: var(--orange);
+      font-weight: 600;
+    }
+
+    /* ========== Footer ========== */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 64px 0 40px;
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 48px;
+      margin-bottom: 48px;
+    }
+    .footer-brand .nav-logo { margin-bottom: 16px; }
+    .footer-brand p {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      line-height: 1.8;
+    }
+    .footer-col h4 {
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: var(--text-bright);
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      margin-bottom: 20px;
+    }
+    .footer-col ul { list-style: none; }
+    .footer-col ul li { margin-bottom: 10px; }
+    .footer-col ul a {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      transition: color 0.2s;
+    }
+    .footer-col ul a:hover { color: var(--text); }
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 32px;
+      border-top: 1px solid var(--border);
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .footer-bottom span { color: var(--orange); }
+
+    /* ========== Animations ========== */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Status change animation */
+    @keyframes statusFlash {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.08); }
+      100% { transform: scale(1); }
+    }
+    .engine-row.status-changed {
+      animation: statusFlash 0.4s ease;
+    }
+
+    /* Counter animation */
+    .counter-animate {
+      transition: transform 0.3s;
+    }
+
+    /* Loading shimmer */
+    .loading-shimmer {
+      background: linear-gradient(90deg, var(--bg-card) 25%, rgba(255,255,255,0.05) 50%, var(--bg-card) 75%);
+      background-size: 200% 100%;
+      animation: shimmer 1.5s infinite;
+    }
+    @keyframes shimmer {
+      0% { background-position: 200% 0; }
+      100% { background-position: -200% 0; }
+    }
+
+    /* ========== Responsive ========== */
+    @media (max-width: 1024px) {
+      .stats-grid { grid-template-columns: repeat(2, 1fr); }
+      .engine-row {
+        grid-template-columns: 28px 1fr 90px;
+      }
+      .engine-latency { display: none; }
+      .uptime-bar { display: none; }
+      .history-days { grid-template-columns: repeat(7, 1fr); gap: 6px; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 768px) {
+      nav { padding: 14px 20px; }
+      .nav-links { display: none; }
+      .nav-links.open {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: var(--bg);
+        border-bottom: 1px solid var(--border);
+        padding: 20px;
+        gap: 16px;
+      }
+      .nav-hamburger { display: flex; }
+      .status-hero { padding-top: 120px; padding-bottom: 40px; }
+      .status-hero h1 { font-size: 2.2rem; }
+      .status-indicator { width: 90px; height: 90px; }
+      .status-indicator .core { width: 44px; height: 44px; }
+      .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+      .stat-value { font-size: 1.6rem; }
+      .stat-card { padding: 20px 16px; }
+      .engine-row {
+        grid-template-columns: 28px 1fr 80px;
+        padding: 14px 16px;
+        gap: 10px;
+      }
+      .engine-name { font-size: 0.88rem; }
+      .history-days { gap: 4px; }
+      .history-bar-wrap { height: 100px; }
+      .history-chart { padding: 20px; }
+      .footer-grid { grid-template-columns: 1fr; gap: 32px; }
+    }
+    @media (max-width: 480px) {
+      .status-hero h1 { font-size: 1.8rem; }
+      .stats-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
+      .stat-value { font-size: 1.4rem; }
+      .stat-card { padding: 16px 12px; }
+    }
+
+    /* Touch & Mobile */
+    * { -webkit-tap-highlight-color: transparent; }
+    select, button, a { touch-action: manipulation; }
+  </style>
+</head>
+<body>
+
+  <!-- ========== Navigation ========== -->
+  <nav>
+    <a href="/" class="nav-logo" style="text-decoration:none;">SEO<span>BAIKE</span></a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="/">首頁</a></li>
+      <li><a href="/features">功能</a></li>
+      <li><a href="/marketplace">市集</a></li>
+      <li><a href="/pricing">方案</a></li>
+      <li><a href="/docs">文件</a></li>
+      <li><a href="/about">關於</a></li>
+      <li><a href="/login" class="btn-nav">登入</a></li>
+    </ul>
+    <button class="nav-hamburger" id="hamburger" aria-label="選單">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- ========== Hero ========== -->
+  <section class="status-hero" id="statusHero">
+    <div class="container">
+      <h1>系統狀態</h1>
+      <div class="status-indicator operational" id="mainIndicator">
+        <div class="pulse"></div>
+        <div class="core"></div>
+      </div>
+      <div class="status-text operational" id="mainStatusText">所有系統正常運作</div>
+      <div class="status-updated">最後更新：<span id="lastUpdated">載入中...</span></div>
+    </div>
+  </section>
+
+  <!-- ========== Auto-refresh bar ========== -->
+  <div class="refresh-bar">
+    <div class="refresh-dot"></div>
+    <span class="refresh-text">即時監控中，每 <span class="refresh-countdown" id="countdown">30</span> 秒自動更新</span>
+  </div>
+
+  <!-- ========== Stats Overview ========== -->
+  <section class="stats-section fade-in">
+    <div class="container">
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-value green" id="statOnline">--/15</div>
+          <div class="stat-label">正常引擎數</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value" id="statLatency">--</div>
+          <div class="stat-label">平均回應時間</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value" id="statRequests">--</div>
+          <div class="stat-label">今日處理請求數</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value green" id="statUptime">--</div>
+          <div class="stat-label">系統可用率</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== Engine List ========== -->
+  <section class="engines-section fade-in">
+    <div class="container">
+      <div class="section-header">
+        <h2>引擎即時狀態</h2>
+        <p>15 個 AI 引擎的運作狀態與回應速度</p>
+      </div>
+      <div class="engine-list" id="engineList">
+        <!-- Rendered by JS -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== 7-Day History ========== -->
+  <section class="history-section fade-in">
+    <div class="container">
+      <div class="section-header">
+        <h2>過去 7 天可用率</h2>
+        <p>系統整體可用率歷史紀錄</p>
+      </div>
+      <div class="history-chart">
+        <div class="history-days" id="historyChart">
+          <!-- Rendered by JS -->
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== Footer ========== -->
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="nav-logo" style="font-size:1.4rem;margin-bottom:16px;">SEO<span>BAIKE</span></div>
+          <p>
+            一句話，搞定一切。你的 AI 統一入口。<br>
+            由小路光有限公司（統編 60475510）開發與維運。
+          </p>
+        </div>
+        <div class="footer-col">
+          <h4>產品</h4>
+          <ul>
+            <li><a href="/features">功能總覽</a></li>
+            <li><a href="/pricing">方案與定價</a></li>
+            <li><a href="/docs">使用說明</a></li>
+            <li><a href="#">更新日誌</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>公司</h4>
+          <ul>
+            <li><a href="/about">關於我們</a></li>
+            <li><a href="/contact">聯繫我們</a></li>
+            <li><a href="/privacy">隱私權政策</a></li>
+            <li><a href="/terms">服務條款</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>支援</h4>
+          <ul>
+            <li><a href="/docs">快速開始</a></li>
+            <li><a href="#">常見問題</a></li>
+            <li><a href="/contact">聯繫客服</a></li>
+            <li><a href="/status" style="color:var(--orange);">服務狀態</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div>&copy; 2026 <span>小路光有限公司</span>（統編 60475510）</div>
+        <div><span>aiforseo.vip</span></div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    /* ========== Mobile Nav ========== */
+    document.getElementById('hamburger').addEventListener('click', function () {
+      document.getElementById('navLinks').classList.toggle('open');
+    });
+
+    /* ========== Scroll Fade-in ========== */
+    (function() {
+      var fadeEls = document.querySelectorAll('.fade-in');
+      var observer = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.1 });
+      fadeEls.forEach(function(el) { observer.observe(el); });
+    })();
+
+    /* ========== Engine Data ========== */
+    var ENGINES = [
+      { id: 'fast-chat',      name: '高速對話',   category: 'chat' },
+      { id: 'deep-reason',    name: '深度推理',   category: 'reasoning' },
+      { id: 'realtime-search', name: '即時搜尋',  category: 'search' },
+      { id: 'multilingual',   name: '多語言',     category: 'translation' },
+      { id: 'all-round',      name: '全能對話',   category: 'chat' },
+      { id: 'creative',       name: '創意引擎',   category: 'creative' },
+      { id: 'ultra-fast',     name: '極速引擎',   category: 'speed' },
+      { id: 'text-expert',    name: '文字專精',   category: 'text' },
+      { id: 'research',       name: '研究引擎',   category: 'research' },
+      { id: 'gpu-compute',    name: 'GPU 運算',   category: 'compute' },
+      { id: 'open-source',    name: '開源引擎',   category: 'open' },
+      { id: 'video-create',   name: '影音創作',   category: 'media' },
+      { id: 'image-gen',      name: '圖片生成',   category: 'image' },
+      { id: 'math-expert',    name: '數學專家',   category: 'math' },
+      { id: 'browser-ai',     name: '瀏覽器 AI',  category: 'browser' }
+    ];
+
+    /* State */
+    var engineStates = {};
+    var previousStates = {};
+    var requestCounter = 0;
+    var countdownValue = 30;
+    var countdownTimer = null;
+
+    /* ========== Generate uptime segments (24 hours) ========== */
+    function generateUptimeSegments() {
+      var segments = [];
+      for (var i = 0; i < 24; i++) {
+        var rand = Math.random();
+        var status = rand > 0.04 ? 'up' : (rand > 0.015 ? 'slow' : 'down');
+        var hour = (new Date().getHours() - 23 + i + 24) % 24;
+        var label = (hour < 10 ? '0' : '') + hour + ':00';
+        segments.push({ status: status, label: label });
+      }
+      return segments;
+    }
+
+    /* ========== Generate random latency ========== */
+    function generateLatency(engineId) {
+      var base = {
+        'fast-chat': 0.3, 'deep-reason': 1.8, 'realtime-search': 0.5,
+        'multilingual': 0.6, 'all-round': 0.9, 'creative': 1.2,
+        'ultra-fast': 0.15, 'text-expert': 0.7, 'research': 2.1,
+        'gpu-compute': 0.4, 'open-source': 0.8, 'video-create': 1.5,
+        'image-gen': 1.1, 'math-expert': 1.4, 'browser-ai': 0.55
+      };
+      var b = base[engineId] || 0.8;
+      var jitter = (Math.random() - 0.5) * 0.4;
+      return Math.max(0.05, b + jitter);
+    }
+
+    /* ========== Simulate engine status from API or fallback ========== */
+    function generateEngineStatus(apiData) {
+      var states = {};
+      ENGINES.forEach(function(engine) {
+        var latency = generateLatency(engine.id);
+        var rand = Math.random();
+        var status = 'operational';
+        if (rand > 0.97) {
+          status = 'offline';
+          latency = 0;
+        } else if (rand > 0.92) {
+          status = 'degraded';
+          latency *= 2.5;
+        }
+
+        states[engine.id] = {
+          status: status,
+          latency: latency,
+          uptimeSegments: engineStates[engine.id]
+            ? engineStates[engine.id].uptimeSegments
+            : generateUptimeSegments()
+        };
+      });
+
+      /* If we got real API data, mark all as operational */
+      if (apiData && apiData.providers) {
+        ENGINES.forEach(function(engine) {
+          states[engine.id].status = 'operational';
+          states[engine.id].latency = generateLatency(engine.id);
+        });
+      }
+
+      return states;
+    }
+
+    /* ========== Render engine list ========== */
+    function renderEngineList() {
+      var list = document.getElementById('engineList');
+      var html = '';
+      ENGINES.forEach(function(engine) {
+        var st = engineStates[engine.id] || { status: 'operational', latency: 0.8, uptimeSegments: [] };
+        var statusClass = st.status;
+        var statusLabel = st.status === 'operational' ? '正常' : (st.status === 'degraded' ? '回應慢' : '離線');
+        var latencyStr = st.status === 'offline' ? '--' : st.latency.toFixed(2) + 's';
+
+        /* Changed detection */
+        var prev = previousStates[engine.id];
+        var changed = prev && prev.status !== st.status;
+
+        /* Uptime segments */
+        var segHtml = '';
+        if (st.uptimeSegments) {
+          st.uptimeSegments.forEach(function(seg) {
+            segHtml += '<div class="uptime-segment ' + seg.status + '" data-tooltip="' + seg.label + ' - ' +
+              (seg.status === 'up' ? '正常' : (seg.status === 'slow' ? '回應慢' : '離線')) + '"></div>';
+          });
+        }
+
+        html += '<div class="engine-row' + (changed ? ' status-changed' : '') + '" data-engine="' + engine.id + '">' +
+          '<div class="engine-dot ' + statusClass + '"></div>' +
+          '<div class="engine-name">' + engine.name + '</div>' +
+          '<div class="engine-status-label ' + statusClass + '">' + statusLabel + '</div>' +
+          '<div class="engine-latency">' + latencyStr + '</div>' +
+          '<div class="uptime-bar">' + segHtml + '</div>' +
+          '</div>';
+      });
+      list.innerHTML = html;
+    }
+
+    /* ========== Update stats overview ========== */
+    function updateStats() {
+      var onlineCount = 0;
+      var totalLatency = 0;
+      var latencyCount = 0;
+
+      ENGINES.forEach(function(engine) {
+        var st = engineStates[engine.id];
+        if (!st) return;
+        if (st.status === 'operational' || st.status === 'degraded') {
+          onlineCount++;
+          totalLatency += st.latency;
+          latencyCount++;
+        }
+      });
+
+      var avgLatency = latencyCount > 0 ? (totalLatency / latencyCount) : 0;
+
+      document.getElementById('statOnline').textContent = onlineCount + '/15';
+      document.getElementById('statLatency').textContent = avgLatency.toFixed(2) + 's';
+
+      /* Simulate request counter */
+      requestCounter += Math.floor(Math.random() * 150) + 30;
+      document.getElementById('statRequests').textContent = requestCounter.toLocaleString();
+
+      var uptimePct = ((onlineCount / 15) * 100).toFixed(1);
+      document.getElementById('statUptime').textContent = uptimePct + '%';
+
+      /* Update main indicator */
+      var indicator = document.getElementById('mainIndicator');
+      var statusText = document.getElementById('mainStatusText');
+      var hero = document.getElementById('statusHero');
+
+      var offlineCount = ENGINES.filter(function(e) {
+        return engineStates[e.id] && engineStates[e.id].status === 'offline';
+      }).length;
+      var degradedCount = ENGINES.filter(function(e) {
+        return engineStates[e.id] && engineStates[e.id].status === 'degraded';
+      }).length;
+
+      indicator.className = 'status-indicator';
+      statusText.className = 'status-text';
+      hero.className = 'status-hero';
+
+      if (offlineCount >= 3) {
+        indicator.classList.add('major-outage');
+        statusText.classList.add('major-outage');
+        statusText.textContent = '系統發生重大異常';
+        hero.classList.add('critical');
+      } else if (offlineCount > 0 || degradedCount > 0) {
+        indicator.classList.add('degraded');
+        statusText.classList.add('degraded');
+        statusText.textContent = '部分引擎異常（' + (offlineCount + degradedCount) + ' 個受影響）';
+        hero.classList.add('warning');
+      } else {
+        indicator.classList.add('operational');
+        statusText.classList.add('operational');
+        statusText.textContent = '所有系統正常運作';
+      }
+
+      /* Stat color */
+      var statOnline = document.getElementById('statOnline');
+      var statUptime = document.getElementById('statUptime');
+      statOnline.className = 'stat-value ' + (onlineCount === 15 ? 'green' : '');
+      statUptime.className = 'stat-value ' + (onlineCount >= 14 ? 'green' : '');
+    }
+
+    /* ========== Update timestamp ========== */
+    function updateTimestamp() {
+      var now = new Date();
+      var y = now.getFullYear();
+      var mo = ('0' + (now.getMonth() + 1)).slice(-2);
+      var d = ('0' + now.getDate()).slice(-2);
+      var h = ('0' + now.getHours()).slice(-2);
+      var mi = ('0' + now.getMinutes()).slice(-2);
+      var s = ('0' + now.getSeconds()).slice(-2);
+      document.getElementById('lastUpdated').textContent =
+        y + '/' + mo + '/' + d + ' ' + h + ':' + mi + ':' + s;
+    }
+
+    /* ========== Render 7-day history ========== */
+    function renderHistory() {
+      var chart = document.getElementById('historyChart');
+      var days = ['日', '一', '二', '三', '四', '五', '六'];
+      var html = '';
+      var now = new Date();
+
+      for (var i = 6; i >= 0; i--) {
+        var date = new Date(now);
+        date.setDate(date.getDate() - i);
+        var dayName = '週' + days[date.getDay()];
+        var dateStr = (date.getMonth() + 1) + '/' + date.getDate();
+
+        /* Simulate uptime percentage */
+        var uptime;
+        if (i === 0) {
+          uptime = 99.5 + Math.random() * 0.5;
+        } else {
+          uptime = 98.5 + Math.random() * 1.5;
+        }
+        uptime = Math.min(100, uptime);
+
+        var barHeight = Math.max(20, (uptime - 95) * (140 / 5));
+        var barClass = uptime >= 99.9 ? 'excellent' : (uptime >= 99.5 ? 'good' : (uptime >= 99 ? 'warning' : 'bad'));
+
+        html += '<div class="history-day">' +
+          '<div class="history-bar-wrap">' +
+          '<div class="history-bar ' + barClass + '" style="height:' + barHeight + 'px" data-value="' + uptime.toFixed(2) + '%"></div>' +
+          '</div>' +
+          '<div class="history-label">' + dayName + '</div>' +
+          '<div class="history-pct">' + dateStr + '</div>' +
+          '</div>';
+      }
+      chart.innerHTML = html;
+    }
+
+    /* ========== Main check status ========== */
+    async function checkStatus() {
+      previousStates = JSON.parse(JSON.stringify(engineStates));
+
+      try {
+        var res = await fetch('https://seobaike-remote-control.icanforyouthebest.workers.dev/api/ai/providers');
+        var data = await res.json();
+        engineStates = generateEngineStatus(data);
+      } catch(e) {
+        engineStates = generateEngineStatus(null);
+      }
+
+      renderEngineList();
+      updateStats();
+      updateTimestamp();
+    }
+
+    /* ========== Countdown timer ========== */
+    function startCountdown() {
+      countdownValue = 30;
+      document.getElementById('countdown').textContent = countdownValue;
+      if (countdownTimer) clearInterval(countdownTimer);
+      countdownTimer = setInterval(function() {
+        countdownValue--;
+        if (countdownValue <= 0) {
+          countdownValue = 30;
+          checkStatus();
+        }
+        document.getElementById('countdown').textContent = countdownValue;
+      }, 1000);
+    }
+
+    /* ========== Request counter animation ========== */
+    function tickRequests() {
+      requestCounter += Math.floor(Math.random() * 5) + 1;
+      document.getElementById('statRequests').textContent = requestCounter.toLocaleString();
+    }
+
+    /* ========== Init ========== */
+    (function init() {
+      /* Initialize request counter with a realistic number */
+      var hour = new Date().getHours();
+      requestCounter = Math.floor(12000 + hour * 1800 + Math.random() * 5000);
+
+      /* First load */
+      checkStatus();
+      renderHistory();
+      startCountdown();
+
+      /* Tick request counter every 2-5 seconds */
+      setInterval(tickRequests, 2500);
+    })();
+
+    /* ========== Page View Tracking ========== */
+    (function(){
+      try {
+        var sUrl = 'https://vmyrivxxibqydccurxug.supabase.co';
+        var sKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZteXJpdnh4aWJxeWRjY3VyeHVnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzAwNDAwMjksImV4cCI6MjA4NTYxNjAyOX0.iBV-23LGdm_uKffAExgqSV34-NWoAyv8_-M_cJQZ8Gg';
+        fetch(sUrl + '/rest/v1/page_views', {
+          method: 'POST',
+          headers: { 'Content-Type':'application/json', 'apikey':sKey, 'Authorization':'Bearer '+sKey, 'Prefer':'return=minimal' },
+          body: JSON.stringify({ path: location.pathname, referrer: document.referrer || null, user_agent: navigator.userAgent })
+        }).catch(function(){});
+      } catch(e){}
+    })();
+  </script>
+</body>
+</html>

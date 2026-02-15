@@ -1,7 +1,7 @@
 /**
  * SEOBAIKE 產品展示動畫元件
  * 純 CSS/JS 模擬影片效果，60 秒看懂 SEOBAIKE
- * 小路光有限公司 — 台灣專利 TW-115100981
+ * 小路光有限公司 — aiforseo.vip
  *
  * 使用方式：
  *   <div id="demo-video"></div>
@@ -236,7 +236,7 @@
   opacity: 1;
 }
 
-/* ===== Scene 3: 智慧路由 ===== */
+/* ===== Scene 3: 自動匹配 ===== */
 .sbk-s3-wrap {
   position: relative;
   width: 100%;
@@ -613,7 +613,7 @@
     }
     s3.innerHTML =
       '<div class="sbk-s3-wrap">' +
-        '<div class="sbk-s3-center">' + escHtml('SEOBAIKE') + '<br>' + escHtml('智慧路由') + '</div>' +
+        '<div class="sbk-s3-center">' + escHtml('SEOBAIKE') + '<br>' + escHtml('自動匹配') + '</div>' +
         '<div class="sbk-s3-scan"></div>' +
         nodesHtml +
         '<svg class="sbk-s3-lines" style="position:absolute;inset:0;pointer-events:none;z-index:1;width:100%;height:100%;"></svg>' +
@@ -632,7 +632,7 @@
       '</div>' +
       '<div class="sbk-s4-stats">' +
         '<span class="sbk-s4-stat">' + escHtml('\u26A1 0.8 秒完成') + '</span>' +
-        '<span class="sbk-s4-stat">' + escHtml('\uD83D\uDD12 專利保護') + '</span>' +
+        '<span class="sbk-s4-stat">' + escHtml('\uD83D\uDD12 安全保護') + '</span>' +
         '<span class="sbk-s4-stat">' + escHtml('\uD83D\uDCB0 NT$0 起') + '</span>' +
       '</div>';
     stage.appendChild(s4);
@@ -649,7 +649,7 @@
         '<div class="sbk-s5-point">' + escHtml('不用花大錢') + '</div>' +
       '</div>' +
       '<a class="sbk-s5-cta" href="/login.html">' + escHtml('免費體驗') + '</a>' +
-      '<div class="sbk-s5-footer">' + escHtml('台灣專利 TW-115100981 \u2014 小路光有限公司') + '</div>';
+      '<div class="sbk-s5-footer">' + escHtml('小路光有限公司 \u2014 aiforseo.vip') + '</div>';
     stage.appendChild(s5);
 
     // 大播放覆蓋
@@ -844,7 +844,7 @@
     if (t > 8000) s.querySelector('.sbk-s2-hint').classList.add('sbk-show');
   };
 
-  /* ---- Scene 3 動畫（智慧路由） ---- */
+  /* ---- Scene 3 動畫（自動匹配） ---- */
   DemoPlayer.prototype._scene3 = function (t) {
     var self = this;
     var s = this.scenes.scene3;

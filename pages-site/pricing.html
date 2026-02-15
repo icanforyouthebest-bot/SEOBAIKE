@@ -3,16 +3,41 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>方案與定價 — SEOBAIKE | AI 就該這麼簡單</title>
-  <meta name="description" content="SEOBAIKE 定價方案：體驗版免費、個人版 NT$299、專業版 NT$899、企業版 NT$2,999。不用選模型、不用懂技術，告訴我們你要什麼，剩下的交給 SEOBAIKE。">
-  <meta property="og:title" content="SEOBAIKE — AI 就該這麼簡單">
-  <meta property="og:description" content="不用選模型、不用懂技術。四種方案，一分鐘看完我們賣什麼。">
-  <meta property="og:image" content="/og-image.png">
+  <title>方案與定價 — SEOBAIKE | AI 平台價格方案</title>
+  <meta name="description" content="SEOBAIKE 定價方案：體驗版免費、個人版 NT$299、專業版 NT$899、企業版 NT$2,999。不用選模型、不用懂技術，告訴我們你要什麼，剩下的交給 SEOBAIKE。年付享 8 折優惠。">
+  <meta name="keywords" content="SEOBAIKE,AI 平台定價,AI 工具價格,AI 方案,AI 訂閱,台灣 AI 服務,AI 引擎費用,人工智慧方案,AI 助理價格,免費 AI 工具,企業 AI 方案,AI 月費">
+  <link rel="canonical" href="https://aiforseo.vip/pricing.html">
+  <meta property="og:title" content="方案與定價 — SEOBAIKE | AI 平台">
+  <meta property="og:description" content="四種方案，從免費到企業級。不用選模型、不用懂技術，一分鐘看完。年付享 8 折優惠。">
   <meta property="og:type" content="website">
+  <meta property="og:url" content="https://aiforseo.vip/pricing.html">
+  <meta property="og:image" content="/og-image.png">
+  <meta property="og:site_name" content="SEOBAIKE">
+  <meta property="og:locale" content="zh_TW">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="方案與定價 — SEOBAIKE | AI 平台">
+  <meta name="twitter:description" content="四種方案，從免費到企業級。不用選模型、不用懂技術，一分鐘看完。年付享 8 折。">
   <meta name="theme-color" content="#0a0a1a">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="/og-image.png">
   <link rel="manifest" href="/manifest.json">
+  <script type="application/ld+json">
+  [
+    {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": "SEOBAIKE AI 平台",
+      "description": "台灣首創 AI 平台，整合 1,000+ AI 引擎",
+      "brand": { "@type": "Brand", "name": "SEOBAIKE" },
+      "offers": [
+        { "@type": "Offer", "name": "體驗版", "price": "0", "priceCurrency": "TWD", "description": "每天 10 次 AI 對話、基礎 AI 服務、社群支援", "availability": "https://schema.org/InStock" },
+        { "@type": "Offer", "name": "個人版", "price": "299", "priceCurrency": "TWD", "description": "無限 AI 對話、自動選擇最佳方案、8 大能力全開、Email 支援", "availability": "https://schema.org/InStock", "priceValidUntil": "2026-12-31" },
+        { "@type": "Offer", "name": "專業版", "price": "899", "priceCurrency": "TWD", "description": "API 存取、市集工具免費、優先處理、專屬客服", "availability": "https://schema.org/InStock", "priceValidUntil": "2026-12-31" },
+        { "@type": "Offer", "name": "企業版", "price": "2999", "priceCurrency": "TWD", "description": "白標方案、技術授權、24/7 技術支援、SLA 99.9%", "availability": "https://schema.org/InStock", "priceValidUntil": "2026-12-31" }
+      ]
+    }
+  ]
+  </script>
   <style>
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -218,179 +243,8 @@
     /* ========== VIDEO DEMO ========== */
     .video-section {
       padding: 0 2rem 4rem;
-      max-width: 800px;
+      max-width: 960px;
       margin: 0 auto;
-    }
-
-    .video-player {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      overflow: hidden;
-      position: relative;
-    }
-
-    .video-screen {
-      width: 100%;
-      height: 360px;
-      background: var(--bg-code);
-      position: relative;
-      overflow: hidden;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .video-frame {
-      position: absolute;
-      inset: 0;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 2rem;
-      opacity: 0;
-      transition: opacity 0.6s ease;
-      pointer-events: none;
-    }
-
-    .video-frame.active { opacity: 1; }
-
-    .video-frame .frame-title {
-      font-size: clamp(1.4rem, 3vw, 2rem);
-      font-weight: 800;
-      color: var(--text-bright);
-      text-align: center;
-      margin-bottom: 1rem;
-    }
-
-    .video-frame .frame-sub {
-      font-size: 1rem;
-      color: var(--text-muted);
-      text-align: center;
-      max-width: 400px;
-    }
-
-    /* Typing cursor effect */
-    .typing-cursor::after {
-      content: '|';
-      animation: blink 0.7s infinite;
-      color: var(--orange);
-      font-weight: 300;
-    }
-
-    @keyframes blink {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0; }
-    }
-
-    /* Routing animation */
-    .routing-circle {
-      width: 120px; height: 120px;
-      border: 4px solid var(--orange);
-      border-top-color: transparent;
-      border-radius: 50%;
-      animation: none;
-    }
-
-    .routing-circle.spinning {
-      animation: spin 1s linear infinite;
-    }
-
-    @keyframes spin {
-      to { transform: rotate(360deg); }
-    }
-
-    /* Filter animation */
-    .filter-bars {
-      display: flex;
-      gap: 8px;
-      align-items: flex-end;
-      height: 80px;
-      margin-bottom: 1rem;
-    }
-
-    .filter-bar {
-      width: 24px;
-      background: var(--border);
-      border-radius: 4px 4px 0 0;
-      transition: height 0.5s ease, background 0.5s ease;
-    }
-
-    .filter-bar.highlight {
-      background: var(--orange);
-    }
-
-    /* Completion checkmark */
-    .check-circle {
-      width: 80px; height: 80px;
-      border-radius: 50%;
-      background: rgba(118,185,0,0.15);
-      border: 3px solid var(--green);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 2.5rem;
-      color: var(--green);
-      transform: scale(0);
-      transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-    }
-
-    .check-circle.show { transform: scale(1); }
-
-    /* Video controls */
-    .video-controls {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      padding: 1rem 1.5rem;
-      background: rgba(18,18,42,0.8);
-      border-top: 1px solid var(--border);
-    }
-
-    .play-btn {
-      width: 36px; height: 36px;
-      background: var(--orange);
-      border: none;
-      border-radius: 50%;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-      transition: transform 0.2s;
-    }
-
-    .play-btn:hover { transform: scale(1.1); }
-
-    .play-btn svg { fill: #fff; width: 14px; height: 14px; margin-left: 2px; }
-
-    .play-btn.playing svg { margin-left: 0; }
-
-    .progress-bar {
-      flex: 1;
-      height: 6px;
-      background: var(--border);
-      border-radius: 3px;
-      position: relative;
-      cursor: pointer;
-    }
-
-    .progress-fill {
-      height: 100%;
-      background: var(--orange);
-      border-radius: 3px;
-      width: 0%;
-      transition: width 0.1s linear;
-    }
-
-    .video-time {
-      font-size: 0.82rem;
-      color: var(--text-muted);
-      font-family: monospace;
-      white-space: nowrap;
-      min-width: 72px;
-      text-align: right;
     }
 
     /* ========== PRICING CARDS ========== */
@@ -898,8 +752,6 @@
         transform: translateY(-6px);
       }
 
-      .video-screen { height: 280px; }
-
       .comp-table { min-width: 600px; }
 
       .footer-grid { grid-template-columns: 1fr 1fr; }
@@ -912,8 +764,360 @@
       .hero h1 { font-size: 2rem; }
       .pricing-grid { max-width: 100%; }
       .footer-grid { grid-template-columns: 1fr; }
-      .video-screen { height: 240px; }
-      .video-frame .frame-title { font-size: 1.2rem; }
+    }
+
+    /* ========== REFERRAL PROGRAM ========== */
+    .referral-section {
+      padding: 5rem 2rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .referral-section::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(232,133,12,0.06) 0%, rgba(204,120,92,0.04) 40%, rgba(118,185,0,0.03) 100%);
+      pointer-events: none;
+    }
+
+    .referral-header {
+      text-align: center;
+      margin-bottom: 3rem;
+      position: relative;
+    }
+
+    .referral-badge-top {
+      display: inline-block;
+      background: linear-gradient(135deg, var(--orange), #d0770a);
+      color: #fff;
+      padding: 0.4rem 1.6rem;
+      border-radius: 999px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      margin-bottom: 1.2rem;
+      box-shadow: 0 4px 20px rgba(232,133,12,0.3);
+      letter-spacing: 1px;
+    }
+
+    .referral-header h2 {
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 900;
+      color: var(--text-bright);
+      margin-bottom: 0.8rem;
+      letter-spacing: -1px;
+    }
+
+    .referral-sub {
+      font-size: 1.1rem;
+      color: var(--text-muted);
+      max-width: 650px;
+      margin: 0 auto;
+      line-height: 1.8;
+    }
+
+    .referral-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      margin-bottom: 3rem;
+      position: relative;
+    }
+
+    .referral-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 2.5rem 1.8rem;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      transition: transform 0.3s, box-shadow 0.3s;
+      overflow: hidden;
+    }
+
+    .referral-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 4px;
+      border-radius: 20px 20px 0 0;
+    }
+
+    .referral-card-fire::before {
+      background: linear-gradient(90deg, #e8850c, #ff6b35);
+    }
+
+    .referral-card-diamond::before {
+      background: linear-gradient(90deg, #76b900, #a3d73e);
+    }
+
+    .referral-card-trophy::before {
+      background: linear-gradient(90deg, #cc785c, #e8850c);
+    }
+
+    .referral-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 60px rgba(232,133,12,0.15);
+    }
+
+    .referral-card-icon {
+      font-size: 3rem;
+      margin-bottom: 0.8rem;
+    }
+
+    .referral-card h3 {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: var(--text-bright);
+      margin-bottom: 0.5rem;
+    }
+
+    .referral-card-tag {
+      display: inline-block;
+      background: rgba(232,133,12,0.1);
+      color: var(--orange);
+      padding: 0.25rem 0.9rem;
+      border-radius: 999px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      margin-bottom: 1.2rem;
+      border: 1px solid rgba(232,133,12,0.2);
+      align-self: flex-start;
+    }
+
+    .referral-features {
+      list-style: none;
+      margin-bottom: 1.5rem;
+      flex: 1;
+    }
+
+    .referral-features li {
+      padding: 0.4rem 0;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+      position: relative;
+      padding-left: 1.4rem;
+    }
+
+    .referral-features li::before {
+      content: '\2713';
+      position: absolute;
+      left: 0;
+      color: var(--green);
+      font-weight: 700;
+    }
+
+    .big-pct {
+      color: var(--orange);
+      font-size: 1.3rem;
+      font-weight: 900;
+    }
+
+    .referral-example {
+      background: rgba(232,133,12,0.06);
+      border: 1px solid rgba(232,133,12,0.15);
+      border-radius: 12px;
+      padding: 1rem 1.2rem;
+      margin-bottom: 1.5rem;
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      line-height: 1.7;
+      text-align: center;
+    }
+
+    .example-amount {
+      color: var(--orange);
+      font-size: 1.4rem;
+      font-weight: 900;
+      display: inline-block;
+      margin-top: 0.3rem;
+    }
+
+    .btn-referral {
+      display: block;
+      text-align: center;
+      padding: 0.85rem 1.5rem;
+      border-radius: 12px;
+      font-size: 0.95rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, var(--orange), #d0770a);
+      color: #fff;
+      border: none;
+      cursor: pointer;
+      transition: all 0.25s;
+      box-shadow: 0 4px 16px rgba(232,133,12,0.2);
+    }
+
+    .btn-referral:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 28px rgba(232,133,12,0.35);
+      color: #fff;
+    }
+
+    /* Revenue Calculator */
+    .revenue-calculator {
+      background: var(--bg-card);
+      border: 2px solid var(--orange);
+      border-radius: 24px;
+      padding: 2.5rem;
+      max-width: 600px;
+      margin: 0 auto;
+      position: relative;
+      box-shadow: 0 0 60px rgba(232,133,12,0.1);
+    }
+
+    .revenue-calculator h3 {
+      text-align: center;
+      font-size: 1.6rem;
+      font-weight: 800;
+      color: var(--text-bright);
+      margin-bottom: 2rem;
+    }
+
+    .calc-body {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .calc-row {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .calc-row label {
+      font-size: 0.92rem;
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+
+    .calc-input-group {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .calc-input-group input[type="range"] {
+      flex: 1;
+      -webkit-appearance: none;
+      appearance: none;
+      height: 8px;
+      background: var(--border);
+      border-radius: 999px;
+      outline: none;
+      cursor: pointer;
+    }
+
+    .calc-input-group input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: var(--orange);
+      cursor: pointer;
+      box-shadow: 0 2px 8px rgba(232,133,12,0.4);
+    }
+
+    .calc-input-group input[type="range"]::-moz-range-thumb {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: var(--orange);
+      cursor: pointer;
+      border: none;
+      box-shadow: 0 2px 8px rgba(232,133,12,0.4);
+    }
+
+    .calc-badge {
+      background: rgba(232,133,12,0.15);
+      color: var(--orange);
+      padding: 0.3rem 1rem;
+      border-radius: 999px;
+      font-size: 0.9rem;
+      font-weight: 700;
+      min-width: 60px;
+      text-align: center;
+      white-space: nowrap;
+    }
+
+    .calc-row select {
+      background: var(--bg-code);
+      color: var(--text);
+      border: 1px solid var(--border);
+      padding: 0.7rem 1rem;
+      border-radius: 10px;
+      font-size: 0.95rem;
+      font-family: inherit;
+      outline: none;
+      cursor: pointer;
+    }
+
+    .calc-row select:focus {
+      border-color: var(--orange);
+    }
+
+    .calc-result {
+      background: linear-gradient(135deg, rgba(232,133,12,0.08), rgba(204,120,92,0.05));
+      border: 1px solid rgba(232,133,12,0.2);
+      border-radius: 16px;
+      padding: 2rem;
+      text-align: center;
+      margin-top: 0.5rem;
+    }
+
+    .calc-label {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+    }
+
+    .calc-big-number {
+      font-size: 3.2rem;
+      font-weight: 900;
+      color: var(--orange);
+      letter-spacing: -2px;
+      line-height: 1.2;
+      text-shadow: 0 0 40px rgba(232,133,12,0.3);
+    }
+
+    .calc-yearly {
+      font-size: 1.1rem;
+      color: var(--green);
+      font-weight: 700;
+      margin-top: 0.5rem;
+    }
+
+    .calc-note {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      margin-top: 0.5rem;
+    }
+
+    /* Referral responsive */
+    @media (max-width: 1024px) {
+      .referral-grid {
+        grid-template-columns: 1fr;
+        max-width: 500px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .referral-section { padding: 3rem 1rem; }
+      .revenue-calculator { padding: 1.5rem; }
+      .calc-big-number { font-size: 2.4rem; }
+      .referral-header h2 { font-size: 1.8rem; }
+    }
+
+    @media (max-width: 480px) {
+      .referral-card { padding: 1.8rem 1.2rem; }
+      .calc-big-number { font-size: 2rem; }
     }
 
     /* Touch & Mobile */
@@ -947,8 +1151,8 @@
   <!-- HERO -->
   <section class="hero">
     <div class="container">
-      <h1>AI 就該這麼簡單</h1>
-      <p class="hero-sub">不用選模型、不用懂技術。告訴我們你要什麼，剩下的交給 SEOBAIKE。</p>
+      <h1>找到適合你的方式</h1>
+      <p class="hero-sub">不管你在哪個階段，SEOBAIKE 都能幫你。告訴我們你需要什麼，我們幫你選最適合的。</p>
 
       <!-- Billing Toggle -->
       <div class="billing-toggle">
@@ -960,58 +1164,9 @@
     </div>
   </section>
 
-  <!-- VIDEO DEMO -->
+  <!-- VIDEO DEMO (60秒產品展示) -->
   <section class="video-section">
-    <div class="video-player">
-      <div class="video-screen" id="videoScreen">
-
-        <!-- Frame 1: 0-10s -->
-        <div class="video-frame active" id="frame1">
-          <div class="frame-title"><span id="typingText"></span><span class="typing-cursor"></span></div>
-          <div class="frame-sub">使用者只要輸入問題，其他都不用管</div>
-        </div>
-
-        <!-- Frame 2: 10-20s -->
-        <div class="video-frame" id="frame2">
-          <div class="routing-circle" id="routingCircle"></div>
-          <div class="frame-title" style="margin-top:1.5rem;">SEOBAIKE 智慧路由啟動</div>
-          <div class="frame-sub">自動分析你的需求，找到最佳引擎</div>
-        </div>
-
-        <!-- Frame 3: 20-35s -->
-        <div class="video-frame" id="frame3">
-          <div class="filter-bars" id="filterBars"></div>
-          <div class="frame-title">從 1,000+ 引擎中選出最佳方案</div>
-          <div class="frame-sub">效能、成本、品質 — 三方最佳平衡</div>
-        </div>
-
-        <!-- Frame 4: 35-50s -->
-        <div class="video-frame" id="frame4">
-          <div class="frame-title"><span id="answerText"></span><span class="typing-cursor"></span></div>
-          <div class="frame-sub">答案即時產生，品質有專利保證</div>
-        </div>
-
-        <!-- Frame 5: 50-60s -->
-        <div class="video-frame" id="frame5">
-          <div class="check-circle" id="checkCircle">&#10003;</div>
-          <div class="frame-title" style="margin-top:1.5rem; color: var(--green);">完成！就這麼簡單。</div>
-          <div class="frame-sub">從提問到回答，全自動、零技術門檻</div>
-        </div>
-
-      </div>
-
-      <!-- Controls -->
-      <div class="video-controls">
-        <button class="play-btn" id="playBtn" onclick="togglePlay()">
-          <svg id="playIcon" viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg>
-          <svg id="pauseIcon" viewBox="0 0 24 24" style="display:none;margin-left:0;"><rect x="5" y="3" width="4" height="18"/><rect x="15" y="3" width="4" height="18"/></svg>
-        </button>
-        <div class="progress-bar" id="progressBar" onclick="seekVideo(event)">
-          <div class="progress-fill" id="progressFill"></div>
-        </div>
-        <div class="video-time" id="videoTime">0:00 / 1:00</div>
-      </div>
-    </div>
+    <div id="demo-video-pricing"></div>
   </section>
 
   <!-- PRICING CARDS -->
@@ -1022,7 +1177,7 @@
       <div class="pricing-card">
         <div class="pricing-icon">&#127381;</div>
         <div class="pricing-name">體驗版</div>
-        <div class="pricing-target">適合：想試試看的人</div>
+        <div class="pricing-target">先試試看，讓我們了解你</div>
         <div class="pricing-price">
           <span class="currency">NT$</span><span class="amount">0</span>
           <span class="period">/月</span>
@@ -1030,17 +1185,17 @@
         </div>
         <ul class="pricing-features">
           <li><span class="ck">&#10003;</span>每天 10 次 AI 對話</li>
-          <li><span class="ck">&#10003;</span>基礎智慧路由</li>
+          <li><span class="ck">&#10003;</span>基礎 AI 服務</li>
           <li><span class="ck">&#10003;</span>社群支援</li>
         </ul>
-        <a href="/login" class="btn-plan outline">免費開始</a>
+        <a href="/login" class="btn-plan outline">先試試看</a>
       </div>
 
       <!-- 個人版 -->
       <div class="pricing-card">
         <div class="pricing-icon">&#128100;</div>
         <div class="pricing-name">個人版</div>
-        <div class="pricing-target">適合：個人創作者、自由工作者</div>
+        <div class="pricing-target">適合個人創作者、自由工作者</div>
         <div class="pricing-price">
           <span class="currency">NT$</span><span class="amount price-monthly" data-monthly="299" data-annual="239">299</span>
           <span class="period">/月</span>
@@ -1048,7 +1203,7 @@
         </div>
         <ul class="pricing-features">
           <li><span class="ck">&#10003;</span>無限 AI 對話</li>
-          <li><span class="ck">&#10003;</span>智慧路由（自動選最佳引擎）</li>
+          <li><span class="ck">&#10003;</span>自動選擇最佳方案</li>
           <li><span class="ck">&#10003;</span>8 大能力全開</li>
           <li><span class="ck">&#10003;</span>對話、程式碼、視覺、推理</li>
           <li><span class="ck">&#10003;</span>搜尋、嵌入、圖像、語音</li>
@@ -1062,7 +1217,7 @@
         <div class="recommend-badge">推薦方案</div>
         <div class="pricing-icon">&#128188;</div>
         <div class="pricing-name">專業版</div>
-        <div class="pricing-target">適合：新創團隊、中小企業</div>
+        <div class="pricing-target">適合已經知道自己需要什麼的你</div>
         <div class="pricing-price">
           <span class="currency">NT$</span><span class="amount price-monthly" data-monthly="899" data-annual="719">899</span>
           <span class="period">/月</span>
@@ -1072,7 +1227,7 @@
           <li><span class="ck">&#10003;</span>個人版所有功能</li>
           <li><span class="ck">&#10003;</span>API 存取（整合到你的產品）</li>
           <li><span class="ck">&#10003;</span>市集工具免費用</li>
-          <li><span class="ck">&#10003;</span>優先路由（更快回應）</li>
+          <li><span class="ck">&#10003;</span>優先處理（更快回應）</li>
           <li><span class="ck">&#10003;</span>專屬客服</li>
         </ul>
         <a href="/login" class="btn-plan primary">選擇專業版</a>
@@ -1082,7 +1237,7 @@
       <div class="pricing-card">
         <div class="pricing-icon">&#127970;</div>
         <div class="pricing-name">企業版</div>
-        <div class="pricing-target">適合：大型企業、政府機關</div>
+        <div class="pricing-target">我們為你量身打造</div>
         <div class="pricing-price">
           <span class="currency">NT$</span><span class="amount price-monthly" data-monthly="2,999" data-annual="2,399">2,999</span>
           <span class="period">/月</span>
@@ -1091,9 +1246,9 @@
         <ul class="pricing-features">
           <li><span class="ck">&#10003;</span>專業版所有功能</li>
           <li><span class="ck">&#10003;</span>白標方案（放你的品牌）</li>
-          <li><span class="ck">&#10003;</span>專利授權（L1-L4 約束引擎）</li>
+          <li><span class="ck">&#10003;</span>技術授權（L1-L4 約束引擎）</li>
           <li><span class="ck">&#10003;</span>24/7 專屬技術支援</li>
-          <li><span class="ck">&#10003;</span>客製化路由規則</li>
+          <li><span class="ck">&#10003;</span>客製化設定</li>
           <li><span class="ck">&#10003;</span>SLA 99.9% 保證</li>
         </ul>
         <a href="/contact" class="btn-plan green-outline">聯繫銷售</a>
@@ -1105,7 +1260,7 @@
   <!-- COMPARISON TABLE -->
   <section class="comparison-section">
     <h2>方案功能比較</h2>
-    <p class="comp-sub">一目了然，看看哪個方案最適合你</p>
+    <p class="comp-sub">一目了然，我們幫你找到最適合的</p>
 
     <div class="comp-table-wrapper">
       <table class="comp-table">
@@ -1127,7 +1282,7 @@
             <td><span class="t-yes">&#10003;</span> <span class="t-text">無限</span></td>
           </tr>
           <tr>
-            <td>智慧路由</td>
+            <td>AI 引擎匹配</td>
             <td><span class="t-text">基礎</span></td>
             <td><span class="t-yes">&#10003;</span> <span class="t-text">標準</span></td>
             <td class="featured-col"><span class="t-yes">&#10003;</span> <span class="t-text">優先</span></td>
@@ -1162,7 +1317,7 @@
             <td><span class="t-yes">&#10003;</span></td>
           </tr>
           <tr>
-            <td>專利授權</td>
+            <td>技術授權</td>
             <td><span class="t-no">&#10005;</span></td>
             <td><span class="t-no">&#10005;</span></td>
             <td class="featured-col"><span class="t-no">&#10005;</span></td>
@@ -1194,6 +1349,104 @@
     </div>
   </section>
 
+  <!-- REFERRAL / REVENUE SHARE PROGRAM -->
+  <section class="referral-section" id="referral">
+    <div class="container">
+      <div class="referral-header">
+        <div class="referral-badge-top">SEOBAIKE 分享計畫</div>
+        <h2>把好東西分享給朋友</h2>
+        <p class="referral-sub">覺得 SEOBAIKE 幫到你了嗎？分享給朋友，一起走對的路。依照台灣業界標準流程，透明公開。</p>
+      </div>
+
+      <div class="referral-grid">
+        <!-- 推薦分潤 -->
+        <div class="referral-card referral-card-fire">
+          <div class="referral-card-icon">&#128293;</div>
+          <h3>推薦分潤</h3>
+          <div class="referral-card-tag">任何人都能參加</div>
+          <ul class="referral-features">
+            <li>推薦朋友加入 SEOBAIKE</li>
+            <li>朋友付費的<strong>第一年</strong>，你拿 <span class="big-pct">15%</span></li>
+            <li>朋友續約的<strong>第二年起</strong>，你拿 <span class="big-pct">10%</span>（持續）</li>
+            <li>無上限，幫助越多人越好</li>
+          </ul>
+          <div class="referral-example">
+            範例：分享給 10 位朋友使用專業版<br>
+            = 每月 <span class="example-amount">NT$1,349</span> 分享回饋
+          </div>
+          <a href="/login" class="btn-referral">開始分享給朋友</a>
+        </div>
+
+        <!-- 開發者分潤 -->
+        <div class="referral-card referral-card-diamond">
+          <div class="referral-card-icon">&#128142;</div>
+          <h3>開發者分潤</h3>
+          <div class="referral-card-tag">工具上架市集</div>
+          <ul class="referral-features">
+            <li>在 SEOBAIKE 市集上架你的 AI 工具</li>
+            <li>每筆銷售你拿 <span class="big-pct">70%</span></li>
+            <li>平台服務費 <span class="big-pct">30%</span>（含金流、客服、流量）</li>
+            <li>依台灣業界標準，比照 App Store 規範</li>
+            <li>SEOBAIKE 負責流量、金流、客服</li>
+          </ul>
+          <div class="referral-example">
+            你做工具，我們幫你找到需要的人<br>
+            <span class="example-amount">金流由綠界/藍新第三方處理</span>
+          </div>
+          <a href="/marketplace" class="btn-referral">前往市集上架</a>
+        </div>
+
+        <!-- 代理商分潤 -->
+        <div class="referral-card referral-card-trophy">
+          <div class="referral-card-icon">&#127942;</div>
+          <h3>代理商分潤</h3>
+          <div class="referral-card-tag">大量推廣</div>
+          <ul class="referral-features">
+            <li>成為 SEOBAIKE 區域代理商</li>
+            <li>你的客戶營收依台灣業界標準分潤</li>
+            <li>代理商專屬即時儀表板</li>
+            <li>成果即時追蹤，透明公開</li>
+            <li>金流由第三方支付平台處理</li>
+          </ul>
+          <div class="referral-example">
+            幫助 50 個企業找到對的工具<br>
+            = 每月 <span class="example-amount">NT$29,990</span> 分享回饋
+          </div>
+          <a href="/contact" class="btn-referral">申請成為代理商</a>
+        </div>
+      </div>
+
+      <!-- 分潤計算器 -->
+      <div class="revenue-calculator">
+        <h3>&#128176; 看看分享的回饋</h3>
+        <div class="calc-body">
+          <div class="calc-row">
+            <label>預計推薦人數</label>
+            <div class="calc-input-group">
+              <input type="range" min="1" max="100" value="10" id="calcReferrals" oninput="updateCalc()">
+              <span class="calc-badge" id="calcRefCount">10 人</span>
+            </div>
+          </div>
+          <div class="calc-row">
+            <label>平均方案</label>
+            <select id="calcPlan" onchange="updateCalc()">
+              <option value="299">個人版 NT$299/月</option>
+              <option value="899" selected>專業版 NT$899/月</option>
+              <option value="2999">企業版 NT$2,999/月</option>
+            </select>
+          </div>
+          <div class="calc-result">
+            <div class="calc-label">每月分享回饋</div>
+            <div class="calc-big-number" id="calcMonthly">NT$2,697</div>
+            <div class="calc-yearly" id="calcYearly">年回饋：NT$32,364</div>
+            <div class="calc-note">持續分享，持續獲得回饋</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
   <!-- FAQ -->
   <section class="faq-section">
     <h2>常見問題</h2>
@@ -1201,11 +1454,11 @@
 
     <div class="faq-item">
       <button class="faq-question" onclick="toggleFaq(this)">
-        <span>什麼是智慧路由？</span>
+        <span>SEOBAIKE 怎麼運作？</span>
         <span class="arrow">&#9660;</span>
       </button>
       <div class="faq-answer">
-        <p>智慧路由是 SEOBAIKE 的核心技術。當你提出問題時，系統會自動分析你的需求，然後從上千個 AI 引擎中選出最適合的來回答。你不需要知道背後用了哪個引擎，就像你打開水龍頭不需要知道水從哪個水庫來一樣。整個過程由台灣專利 TW-115100981 的約束引擎保護。</p>
+        <p>你只要說話，系統自動幫你找到最好的方案。當你提出問題時，系統會自動分析你的需求，然後從上千個 AI 引擎中選出最適合的來回答。你不需要知道背後用了哪個引擎，就像你打開水龍頭不需要知道水從哪個水庫來一樣。</p>
       </div>
     </div>
 
@@ -1235,7 +1488,7 @@
         <span class="arrow">&#9660;</span>
       </button>
       <div class="faq-answer">
-        <p>可以。企業版提供完整的客製化能力，包括：白標方案（使用你自己的品牌）、客製化路由規則（定義你自己的 AI 策略）、專利 L1-L4 約束引擎授權、以及專屬技術支援團隊。請聯繫我們的銷售團隊了解詳情。</p>
+        <p>可以。企業版提供完整的客製化能力，包括：白標方案（使用你自己的品牌）、客製化設定（定義你自己的 AI 策略）、L1-L4 約束引擎技術授權、以及專屬技術支援團隊。請聯繫我們的銷售團隊了解詳情。</p>
       </div>
     </div>
 
@@ -1245,7 +1498,7 @@
         <span class="arrow">&#9660;</span>
       </button>
       <div class="faq-answer">
-        <p>絕對安全。SEOBAIKE 受台灣專利 TW-115100981 保護，所有推理路徑都經過四層約束驗證。你的資料儲存在台灣主權範圍內，全程加密傳輸。我們不會將你的資料分享給任何第三方，也不會用你的資料來訓練任何引擎。</p>
+        <p>絕對安全。SEOBAIKE 所有推理路徑都經過四層約束驗證。你的資料儲存在台灣主權範圍內，全程加密傳輸。我們不會將你的資料分享給任何第三方，也不會用你的資料來訓練任何引擎。</p>
       </div>
     </div>
   </section>
@@ -1253,9 +1506,9 @@
   <!-- BOTTOM CTA -->
   <section class="cta-section">
     <div class="cta-box">
-      <h2>現在開始，免費體驗</h2>
-      <p>零技術門檻、零風險。註冊就能立即體驗 SEOBAIKE 的智慧路由能力。</p>
-      <a href="/login" class="btn-cta">免費註冊，立即體驗</a>
+      <h2>讓我們幫你找到適合的方式</h2>
+      <p>零技術門檻、零壓力。SEOBAIKE 會根據你的需求，幫你走對的路。</p>
+      <a href="/login" class="btn-cta">開始你的旅程</a>
     </div>
   </section>
 
@@ -1264,7 +1517,7 @@
     <div class="footer-grid">
       <div class="footer-brand">
         <h3>SEO<span>BAIKE</span></h3>
-        <p>小路光有限公司（統編 60475510）<br>AI 智慧路由平台 — AI 界的 App Store<br>台灣專利 TW-115100981</p>
+        <p>小路光有限公司（統編 60475510）<br>AI 平台 — AI 界的 App Store</p>
       </div>
       <div class="footer-col">
         <h4>產品</h4>
@@ -1290,7 +1543,7 @@
     </div>
     <div class="footer-bottom">
       <p>&copy; 2025-2026 <span>小路光有限公司</span>（統編 60475510）</p>
-      <p>專利 <span>TW-115100981</span>「世界定義約束法用於AI推理」</p>
+      <p><span>aiforseo.vip</span></p>
     </div>
   </footer>
 
@@ -1363,189 +1616,20 @@
       }
     }
 
-    // ==================== Video Animation ====================
-    var videoPlaying = false;
-    var videoTime = 0;
-    var videoDuration = 60;
-    var videoInterval = null;
-    var currentFrame = 1;
-
-    // Typing animation state
-    var typingInterval1 = null;
-    var typingInterval2 = null;
-
-    function showFrame(n) {
-      for (var i = 1; i <= 5; i++) {
-        var f = document.getElementById('frame' + i);
-        if (f) f.classList.remove('active');
-      }
-      var target = document.getElementById('frame' + n);
-      if (target) target.classList.add('active');
-      currentFrame = n;
-
-      // Trigger frame-specific animations
-      if (n === 1) startTyping1();
-      if (n === 2) startRouting();
-      if (n === 3) startFilter();
-      if (n === 4) startTyping2();
-      if (n === 5) startCompletion();
+    // ==================== Revenue Calculator ====================
+    function updateCalc() {
+      var refs = parseInt(document.getElementById('calcReferrals').value);
+      var plan = parseInt(document.getElementById('calcPlan').value);
+      document.getElementById('calcRefCount').textContent = refs + ' 人';
+      var monthly = Math.round(refs * plan * 0.15);
+      var yearly = monthly * 12;
+      document.getElementById('calcMonthly').textContent = 'NT$' + monthly.toLocaleString();
+      document.getElementById('calcYearly').textContent = '年回饋：NT$' + yearly.toLocaleString();
     }
-
-    function startTyping1() {
-      var el = document.getElementById('typingText');
-      var text = '我想要一份 SEO 分析報告...';
-      var i = 0;
-      el.textContent = '';
-      clearInterval(typingInterval1);
-      typingInterval1 = setInterval(function () {
-        if (i < text.length) {
-          el.textContent += text[i];
-          i++;
-        } else {
-          clearInterval(typingInterval1);
-        }
-      }, 80);
-    }
-
-    function startRouting() {
-      var circle = document.getElementById('routingCircle');
-      circle.classList.add('spinning');
-    }
-
-    function startFilter() {
-      var container = document.getElementById('filterBars');
-      container.innerHTML = '';
-      var heights = [60, 35, 80, 25, 55, 70, 40, 50, 30, 65, 45, 75, 20, 58, 42];
-      heights.forEach(function (h, idx) {
-        var bar = document.createElement('div');
-        bar.className = 'filter-bar';
-        bar.style.height = '0px';
-        container.appendChild(bar);
-        setTimeout(function () {
-          bar.style.height = h + 'px';
-        }, idx * 80);
-        // Highlight best ones
-        setTimeout(function () {
-          if (h > 60) {
-            bar.classList.add('highlight');
-          } else {
-            bar.style.opacity = '0.3';
-          }
-        }, 1500 + idx * 60);
-      });
-    }
-
-    function startTyping2() {
-      var el = document.getElementById('answerText');
-      var text = '答案生成中...';
-      var i = 0;
-      el.textContent = '';
-      clearInterval(typingInterval2);
-      typingInterval2 = setInterval(function () {
-        if (i < text.length) {
-          el.textContent += text[i];
-          i++;
-        } else {
-          clearInterval(typingInterval2);
-        }
-      }, 120);
-    }
-
-    function startCompletion() {
-      var circle = document.getElementById('checkCircle');
-      circle.classList.remove('show');
-      setTimeout(function () {
-        circle.classList.add('show');
-      }, 200);
-    }
-
-    function getFrameForTime(t) {
-      if (t < 10) return 1;
-      if (t < 20) return 2;
-      if (t < 35) return 3;
-      if (t < 50) return 4;
-      return 5;
-    }
-
-    function updateVideo() {
-      videoTime += 0.1;
-      if (videoTime >= videoDuration) {
-        videoTime = videoDuration;
-        pauseVideo();
-      }
-
-      // Update progress
-      var pct = (videoTime / videoDuration) * 100;
-      document.getElementById('progressFill').style.width = pct + '%';
-
-      // Update time display
-      var min = Math.floor(videoTime / 60);
-      var sec = Math.floor(videoTime % 60);
-      document.getElementById('videoTime').textContent =
-        min + ':' + (sec < 10 ? '0' : '') + sec + ' / 1:00';
-
-      // Switch frames
-      var newFrame = getFrameForTime(videoTime);
-      if (newFrame !== currentFrame) {
-        showFrame(newFrame);
-      }
-    }
-
-    function playVideo() {
-      videoPlaying = true;
-      document.getElementById('playIcon').style.display = 'none';
-      document.getElementById('pauseIcon').style.display = 'block';
-      document.getElementById('playBtn').classList.add('playing');
-
-      if (videoTime >= videoDuration) {
-        videoTime = 0;
-        showFrame(1);
-      }
-
-      videoInterval = setInterval(updateVideo, 100);
-    }
-
-    function pauseVideo() {
-      videoPlaying = false;
-      document.getElementById('playIcon').style.display = 'block';
-      document.getElementById('pauseIcon').style.display = 'none';
-      document.getElementById('playBtn').classList.remove('playing');
-      clearInterval(videoInterval);
-    }
-
-    function togglePlay() {
-      if (videoPlaying) {
-        pauseVideo();
-      } else {
-        playVideo();
-      }
-    }
-
-    function seekVideo(e) {
-      var bar = document.getElementById('progressBar');
-      var rect = bar.getBoundingClientRect();
-      var pct = (e.clientX - rect.left) / rect.width;
-      pct = Math.max(0, Math.min(1, pct));
-      videoTime = pct * videoDuration;
-
-      var newFrame = getFrameForTime(videoTime);
-      showFrame(newFrame);
-
-      // Update display immediately
-      var p = (videoTime / videoDuration) * 100;
-      document.getElementById('progressFill').style.width = p + '%';
-      var min = Math.floor(videoTime / 60);
-      var sec = Math.floor(videoTime % 60);
-      document.getElementById('videoTime').textContent =
-        min + ':' + (sec < 10 ? '0' : '') + sec + ' / 1:00';
-    }
-
-    // Initialize first frame
-    showFrame(1);
 
     // ==================== Scroll fade-in ====================
     (function () {
-      var sections = document.querySelectorAll('.pricing-section, .comparison-section, .faq-section, .cta-section, .video-section');
+      var sections = document.querySelectorAll('.pricing-section, .comparison-section, .referral-section, .faq-section, .cta-section, .video-section');
       sections.forEach(function (sec) {
         sec.style.opacity = '0';
         sec.style.transform = 'translateY(30px)';
@@ -1580,6 +1664,8 @@
   })();
   </script>
 
+  <script src="/assets/demo-video.js"></script>
+  <script>window.SEOBAIKEDemo && window.SEOBAIKEDemo.init('demo-video-pricing');</script>
   <script src="/seobaike-widget.js"></script>
 </body>
 </html>

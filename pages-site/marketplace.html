@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SEOBAIKE 市集 — AI 工具交易平台 | 用 AI 賺錢</title>
-<meta name="description" content="SEOBAIKE 市集：20+ AI 工具一鍵使用，三級分潤讓你分享就賺錢。台灣專利 AI OS 平台。">
+<title>SEOBAIKE 市集 — AI 工具平台 | 幫你找到對的工具</title>
+<meta name="description" content="SEOBAIKE 市集：20+ AI 工具一鍵使用，幫你找到對的工具，分享好東西給朋友。台灣 AI OS 平台。">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
@@ -83,6 +83,22 @@ a:hover{text-decoration:underline}
 .how-card h4{font-size:15px;margin-bottom:6px}
 .how-card p{font-size:13px;color:#888;line-height:1.5}
 
+/* Why Section */
+.why-section{margin:20px 30px;background:linear-gradient(135deg,#16213e,#1a1a2e);border:1px solid #333;border-radius:16px;padding:40px}
+.why-section h2{font-size:28px;margin-bottom:8px;text-align:center}
+.why-section h2 span{color:#e8850c}
+.why-section>p{color:#999;margin-bottom:28px;font-size:15px;text-align:center;max-width:600px;margin-left:auto;margin-right:auto}
+.why-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px;margin-bottom:28px}
+.why-card{background:#0a0a1a;border:1px solid #333;border-radius:14px;padding:24px;text-align:center;transition:all 0.3s}
+.why-card:hover{border-color:#e8850c;transform:translateY(-2px)}
+.why-card .why-icon{font-size:40px;margin-bottom:12px}
+.why-card h4{font-size:16px;margin-bottom:6px;color:#eee}
+.why-card p{font-size:13px;color:#888;line-height:1.6}
+.why-card .why-highlight{color:#e8850c;font-weight:700;font-size:20px;margin-top:8px}
+.why-cta{text-align:center}
+.why-cta-btn{display:inline-block;padding:14px 36px;border-radius:24px;background:linear-gradient(135deg,#e8850c,#cc785c);color:#fff;font-weight:700;font-size:16px;border:none;cursor:pointer;transition:all 0.3s}
+.why-cta-btn:hover{transform:scale(1.05);box-shadow:0 8px 30px rgba(232,133,12,0.3)}
+
 /* Footer */
 .footer{text-align:center;padding:30px;color:#555;font-size:12px;border-top:1px solid #222;margin-top:20px}
 .footer a{color:#e8850c}
@@ -117,29 +133,29 @@ a:hover{text-decoration:underline}
   <a href="/ecosystem">生態系</a>
   <a href="/pricing">方案</a>
   <a href="/docs">API</a>
-  <a class="earn" href="#earn" onclick="document.getElementById('createModal').classList.add('show')">一鍵上架賺錢</a>
+  <a class="earn" href="#earn" onclick="document.getElementById('createModal').classList.add('show')">一鍵上架分享</a>
 </nav>
 
 <section class="hero">
   <h1>SEOBAIKE <span>市集</span></h1>
-  <p>要什麼有什麼的 AI OS — 喜歡股票就給股票系統，喜歡棒球就給棒球系統。用全世界 AI，還能分享賺錢。</p>
+  <p>要什麼有什麼的 AI OS — 喜歡股票就給股票系統，喜歡棒球就給棒球系統。幫你找到對的工具，分享好東西給朋友。</p>
   <div class="hero-stats">
     <div class="hero-stat"><div class="num" id="stat-listings">--</div><div class="lbl">AI 工具</div></div>
     <div class="hero-stat"><div class="num" id="stat-users">--</div><div class="lbl">使用者</div></div>
     <div class="hero-stat"><div class="num" id="stat-categories">--</div><div class="lbl">產業類別</div></div>
-    <div class="hero-stat"><div class="num" id="stat-commission">30%</div><div class="lbl">最高分潤</div></div>
+    <div class="hero-stat"><div class="num" id="stat-commission">70%</div><div class="lbl">開發者分潤</div></div>
   </div>
 </section>
 
 <div class="commission-bar">
-  <h3>三級分潤制度</h3>
+  <h3>分享回饋制度</h3>
   <div class="split">
-    <div class="split-item"><div class="pct">50%</div><div class="role">創作者</div></div>
-    <div class="split-item you"><div class="pct">15%</div><div class="role">你推薦（直推）</div></div>
-    <div class="split-item you"><div class="pct">10%</div><div class="role">你的下線推薦</div></div>
-    <div class="split-item you"><div class="pct">5%</div><div class="role">三級下線</div></div>
-    <div class="split-item"><div class="pct">20%</div><div class="role">平台</div></div>
+    <div class="split-item"><div class="pct">70%</div><div class="role">開發者（工具銷售）</div></div>
+    <div class="split-item you"><div class="pct">15%</div><div class="role">推薦分潤（第一年）</div></div>
+    <div class="split-item you"><div class="pct">10%</div><div class="role">推薦分潤（持續）</div></div>
+    <div class="split-item"><div class="pct">30%</div><div class="role">平台（含金流、客服）</div></div>
   </div>
+  <div style="text-align:center;color:#888;font-size:12px;margin-top:8px">金流由第三方支付處理（綠界/藍新）・依台灣業界標準</div>
 </div>
 
 <section class="search-section">
@@ -154,20 +170,48 @@ a:hover{text-decoration:underline}
 </div>
 
 <section class="create-section" id="earn">
-  <h2>你有 AI 工具？<span>一鍵上架開賣</span></h2>
-  <p>創作者上架 → 用戶付費 → 你拿 50%。推薦朋友來用 → 你再賺 15%～30%。</p>
+  <h2>你有 AI 工具？<span>分享給更多人</span></h2>
+  <p>你做工具，我們幫你找到需要的人 — 開發者拿 70%，金流由第三方處理，透明公開。</p>
   <button class="create-btn" onclick="document.getElementById('createModal').classList.add('show')">立即上架我的 AI 工具</button>
 </section>
 
 <section class="how">
   <div class="how-card"><div class="step">1</div><h4>選工具</h4><p>瀏覽市集，找到適合你產業的 AI 工具</p></div>
   <div class="how-card"><div class="step">2</div><h4>開始用</h4><p>一鍵啟用，AI 立刻為你工作</p></div>
-  <div class="how-card"><div class="step">3</div><h4>分享賺</h4><p>推薦給朋友，他用你就賺 15%</p></div>
-  <div class="how-card"><div class="step">4</div><h4>躺著收</h4><p>三級分潤，下線的下線也幫你賺錢</p></div>
+  <div class="how-card"><div class="step">3</div><h4>分享好東西</h4><p>推薦給朋友，分享好工具給需要的人</p></div>
+  <div class="how-card"><div class="step">4</div><h4>一起成長</h4><p>幫助更多人找到對的工具，一起走對的路</p></div>
+</section>
+
+<section class="why-section">
+  <h2>為什麼在 SEOBAIKE <span>市集分享？</span></h2>
+  <p>不管你是個人開發者還是公司，把你的好工具分享給需要的人，幫助更多人走對的路</p>
+  <div class="why-grid">
+    <div class="why-card">
+      <div class="why-icon">🌍</div>
+      <h4>觸及全平台用戶</h4>
+      <p>你的工具上架後，SEOBAIKE 全平台用戶都看得到。不用自己打廣告，平台幫你曝光</p>
+      <div class="why-highlight">免費曝光</div>
+    </div>
+    <div class="why-card">
+      <div class="why-icon">⚡</div>
+      <h4>簡單上架，15 分鐘搞定</h4>
+      <p>填個表格就上架了，不用寫程式、不用架伺服器。有 API 端點的話接上就好，沒有也沒關係</p>
+      <div class="why-highlight">15 分鐘</div>
+    </div>
+    <div class="why-card">
+      <div class="why-icon">💰</div>
+      <h4>透明公開，即時追蹤</h4>
+      <p>開發者拿 70%，金流由第三方支付處理。分享成果即時顯示，幫了多少人一目了然。</p>
+      <div class="why-highlight">即時追蹤儀表板</div>
+    </div>
+  </div>
+  <div class="why-cta">
+    <button class="why-cta-btn" onclick="document.getElementById('createModal').classList.add('show')">分享你的好工具</button>
+  </div>
 </section>
 
 <div class="footer">
-  SEOBAIKE OS — 專利 TW-115100981 — <a href="/">小路光有限公司</a> — 讓人賺錢的 AI 系統
+  SEOBAIKE — <a href="/">小路光有限公司</a> — 幫你找到對的工具
 </div>
 
 <!-- Create Modal -->
@@ -175,7 +219,7 @@ a:hover{text-decoration:underline}
   <div class="modal">
     <button class="close" onclick="this.closest('.modal-overlay').classList.remove('show')">&times;</button>
     <h2>一鍵上架 AI 工具</h2>
-    <p style="color:#888;font-size:13px;margin-bottom:16px">填完送出，你的工具馬上出現在市集上。用戶付費你拿 50%。</p>
+    <p style="color:#888;font-size:13px;margin-bottom:16px">填完送出，讓更多人找到你的好工具。開發者拿 70%，金流由第三方處理。</p>
     <div class="modal-field"><label>工具名稱 *</label><input type="text" id="cr-title" placeholder="例：AI 股票分析師"></div>
     <div class="modal-field"><label>一句話介紹</label><input type="text" id="cr-subtitle" placeholder="例：即時股價預測 + 技術分析"></div>
     <div class="modal-field"><label>詳細說明</label><textarea id="cr-desc" placeholder="這個工具能做什麼？幫用戶解決什麼問題？"></textarea></div>

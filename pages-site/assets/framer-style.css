@@ -1,0 +1,2061 @@
+/* ==========================================================================
+   SEOBAIKE Framer 風格共用 CSS 框架
+   版本：1.0.0
+   作者：小路光有限公司（統編 60475510）
+   說明：所有頁面共用的設計系統，基於 Framer 設計語言，暖色系主題
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   0. 字型引入
+   -------------------------------------------------------------------------- */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=DM+Sans:wght@400;500;600;700;800&family=Noto+Sans+TC:wght@300;400;500;600;700;900&display=swap');
+
+/* --------------------------------------------------------------------------
+   1. CSS 自訂屬性（Design Tokens）
+   -------------------------------------------------------------------------- */
+:root {
+  /* === 主色系（暖橘色） === */
+  --primary: #e8850c;
+  --primary-light: #f5a623;
+  --primary-dark: #c46d00;
+  --primary-rgb: 232, 133, 12;
+
+  /* === 語義色 === */
+  --success: #34d399;
+  --warning: #fbbf24;
+  --error: #f87171;
+  --info: #60a5fa;
+
+  /* === 背景色 === */
+  --bg-dark: #0a0a0b;
+  --bg-darker: #050506;
+  --bg-card: rgba(255, 255, 255, 0.03);
+  --bg-card-hover: rgba(255, 255, 255, 0.06);
+  --bg-glass: rgba(255, 255, 255, 0.05);
+  --bg-glass-strong: rgba(255, 255, 255, 0.08);
+  --bg-input: rgba(255, 255, 255, 0.04);
+
+  /* === 文字色 === */
+  --text-primary: #ffffff;
+  --text-secondary: rgba(255, 255, 255, 0.6);
+  --text-tertiary: rgba(255, 255, 255, 0.4);
+  --text-disabled: rgba(255, 255, 255, 0.25);
+  --text-link: var(--primary-light);
+
+  /* === 邊框 === */
+  --border: rgba(255, 255, 255, 0.08);
+  --border-hover: rgba(255, 255, 255, 0.15);
+  --border-focus: rgba(232, 133, 12, 0.5);
+  --border-active: var(--primary);
+
+  /* === 漸層 === */
+  --gradient-primary: linear-gradient(135deg, #e8850c 0%, #f5a623 100%);
+  --gradient-primary-reverse: linear-gradient(135deg, #f5a623 0%, #e8850c 100%);
+  --gradient-bg: radial-gradient(ellipse at top, rgba(232, 133, 12, 0.15) 0%, transparent 60%);
+  --gradient-glass: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.02) 100%);
+  --gradient-text: linear-gradient(135deg, #ffffff 0%, #f5a623 50%, #e8850c 100%);
+  --gradient-glow: radial-gradient(circle, rgba(232, 133, 12, 0.3) 0%, transparent 70%);
+  --gradient-mesh: radial-gradient(at 40% 20%, rgba(232, 133, 12, 0.12) 0px, transparent 50%),
+                   radial-gradient(at 80% 0%, rgba(245, 166, 35, 0.08) 0px, transparent 50%),
+                   radial-gradient(at 0% 50%, rgba(196, 109, 0, 0.06) 0px, transparent 50%);
+
+  /* === 陰影 === */
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.2);
+  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.25);
+  --shadow-lg: 0 20px 40px rgba(0, 0, 0, 0.3);
+  --shadow-xl: 0 32px 64px rgba(0, 0, 0, 0.4);
+  --shadow-glow: 0 0 30px rgba(232, 133, 12, 0.3);
+  --shadow-glow-sm: 0 0 15px rgba(232, 133, 12, 0.2);
+
+  /* === 圓角 === */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+  --radius-pill: 9999px;
+
+  /* === 排版 === */
+  --font-sans: 'Inter', 'Noto Sans TC', 'PingFang TC', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-display: 'DM Sans', 'Noto Sans TC', 'PingFang TC', sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', 'SF Mono', monospace;
+
+  --text-xs: 0.75rem;    /* 12px */
+  --text-sm: 0.875rem;   /* 14px */
+  --text-base: 1rem;     /* 16px */
+  --text-lg: 1.125rem;   /* 18px */
+  --text-xl: 1.25rem;    /* 20px */
+  --text-2xl: 1.5rem;    /* 24px */
+  --text-3xl: 1.875rem;  /* 30px */
+  --text-4xl: 2.25rem;   /* 36px */
+  --text-5xl: 3rem;      /* 48px */
+  --text-6xl: 3.75rem;   /* 60px */
+  --text-7xl: 4.5rem;    /* 72px */
+
+  --leading-tight: 1.1;
+  --leading-snug: 1.3;
+  --leading-normal: 1.5;
+  --leading-relaxed: 1.7;
+
+  --tracking-tight: -0.03em;
+  --tracking-normal: 0;
+  --tracking-wide: 0.02em;
+
+  /* === 間距 === */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --space-16: 64px;
+  --space-20: 80px;
+  --space-24: 96px;
+  --space-30: 120px;
+
+  /* === 動畫 === */
+  --ease-framer: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-spring: cubic-bezier(0.22, 1, 0.36, 1);
+
+  --duration-fast: 0.2s;
+  --duration-normal: 0.4s;
+  --duration-slow: 0.6s;
+  --duration-slower: 0.8s;
+
+  /* === 層級 === */
+  --z-dropdown: 100;
+  --z-sticky: 200;
+  --z-navbar: 500;
+  --z-overlay: 900;
+  --z-modal: 1000;
+  --z-toast: 1100;
+
+  /* === 佈局 === */
+  --max-width: 1200px;
+  --max-width-narrow: 800px;
+  --max-width-wide: 1400px;
+  --grid-gap: 24px;
+  --navbar-height: 72px;
+  --section-padding: 120px;
+  --section-padding-tablet: 80px;
+  --section-padding-mobile: 60px;
+}
+
+/* --------------------------------------------------------------------------
+   2. CSS Reset / 基礎重設
+   -------------------------------------------------------------------------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  -webkit-text-size-adjust: 100%;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-sans);
+  font-size: var(--text-base);
+  line-height: var(--leading-relaxed);
+  color: var(--text-primary);
+  background-color: var(--bg-dark);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* 噪點紋理覆蓋層 */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+  opacity: 0.025;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 256px 256px;
+}
+
+/* 背景漸層網格 */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background: var(--gradient-mesh);
+}
+
+/* 頁面載入淡入動畫 */
+body {
+  animation: pageLoad var(--duration-slow) var(--ease-framer) both;
+}
+
+img, video, svg {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+a {
+  color: var(--text-link);
+  text-decoration: none;
+  transition: color var(--duration-fast) var(--ease-smooth);
+}
+
+a:hover {
+  color: var(--primary);
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  background: none;
+  color: inherit;
+}
+
+input, textarea, select {
+  font-family: inherit;
+  font-size: inherit;
+  color: inherit;
+}
+
+ul, ol {
+  list-style: none;
+}
+
+/* --------------------------------------------------------------------------
+   3. 排版系統
+   -------------------------------------------------------------------------- */
+
+/* === 超大標題（Hero 用） === */
+.framer-hero-title {
+  font-family: var(--font-display);
+  font-size: var(--text-7xl);
+  font-weight: 800;
+  line-height: var(--leading-tight);
+  letter-spacing: var(--tracking-tight);
+  color: var(--text-primary);
+}
+
+/* === 標題層級 === */
+h1, .framer-h1 {
+  font-family: var(--font-display);
+  font-size: var(--text-5xl);
+  font-weight: 700;
+  line-height: var(--leading-tight);
+  letter-spacing: var(--tracking-tight);
+}
+
+h2, .framer-h2 {
+  font-family: var(--font-display);
+  font-size: var(--text-4xl);
+  font-weight: 700;
+  line-height: var(--leading-snug);
+  letter-spacing: var(--tracking-tight);
+}
+
+h3, .framer-h3 {
+  font-family: var(--font-display);
+  font-size: var(--text-3xl);
+  font-weight: 600;
+  line-height: var(--leading-snug);
+}
+
+h4, .framer-h4 {
+  font-family: var(--font-display);
+  font-size: var(--text-2xl);
+  font-weight: 600;
+  line-height: var(--leading-snug);
+}
+
+h5, .framer-h5 {
+  font-family: var(--font-sans);
+  font-size: var(--text-xl);
+  font-weight: 600;
+  line-height: var(--leading-normal);
+}
+
+h6, .framer-h6 {
+  font-family: var(--font-sans);
+  font-size: var(--text-lg);
+  font-weight: 600;
+  line-height: var(--leading-normal);
+}
+
+/* === 副標題 === */
+.framer-subtitle {
+  font-size: var(--text-xl);
+  font-weight: 400;
+  color: var(--text-secondary);
+  line-height: var(--leading-relaxed);
+  max-width: 640px;
+}
+
+.framer-subtitle-lg {
+  font-size: var(--text-2xl);
+  font-weight: 400;
+  color: var(--text-secondary);
+  line-height: var(--leading-relaxed);
+  max-width: 720px;
+}
+
+/* === 正文 === */
+.framer-body {
+  font-size: var(--text-base);
+  line-height: var(--leading-relaxed);
+  color: var(--text-secondary);
+}
+
+.framer-body-lg {
+  font-size: var(--text-lg);
+  line-height: var(--leading-relaxed);
+  color: var(--text-secondary);
+}
+
+/* === 小字 === */
+.framer-caption {
+  font-size: var(--text-sm);
+  color: var(--text-tertiary);
+  line-height: var(--leading-normal);
+}
+
+.framer-overline {
+  font-size: var(--text-xs);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wide);
+  color: var(--primary-light);
+}
+
+/* === 文字漸層效果 === */
+.framer-text-gradient {
+  background: var(--gradient-text);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.framer-text-gradient-primary {
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* === 等寬字 === */
+.framer-mono {
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+}
+
+/* --------------------------------------------------------------------------
+   4. 佈局系統
+   -------------------------------------------------------------------------- */
+
+/* === 容器 === */
+.framer-container {
+  width: 100%;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 var(--space-6);
+}
+
+.framer-container-narrow {
+  max-width: var(--max-width-narrow);
+}
+
+.framer-container-wide {
+  max-width: var(--max-width-wide);
+}
+
+/* === 區塊 === */
+.framer-section {
+  padding: var(--section-padding) 0;
+  position: relative;
+}
+
+/* === Grid 系統 === */
+.framer-grid {
+  display: grid;
+  gap: var(--grid-gap);
+}
+
+.framer-grid-2 {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.framer-grid-3 {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.framer-grid-4 {
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.framer-grid-auto {
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+}
+
+/* === Flex 工具 === */
+.framer-flex {
+  display: flex;
+}
+
+.framer-flex-col {
+  display: flex;
+  flex-direction: column;
+}
+
+.framer-flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.framer-flex-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.framer-flex-wrap {
+  flex-wrap: wrap;
+}
+
+.framer-gap-1 { gap: var(--space-1); }
+.framer-gap-2 { gap: var(--space-2); }
+.framer-gap-3 { gap: var(--space-3); }
+.framer-gap-4 { gap: var(--space-4); }
+.framer-gap-6 { gap: var(--space-6); }
+.framer-gap-8 { gap: var(--space-8); }
+
+/* === 對齊 === */
+.framer-text-center { text-align: center; }
+.framer-text-left { text-align: left; }
+.framer-text-right { text-align: right; }
+.framer-mx-auto { margin-left: auto; margin-right: auto; }
+
+/* --------------------------------------------------------------------------
+   5. 導航列（Navbar）
+   -------------------------------------------------------------------------- */
+.framer-navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: var(--z-navbar);
+  height: var(--navbar-height);
+  display: flex;
+  align-items: center;
+  background: rgba(10, 10, 11, 0.8);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+  transition: background var(--duration-normal) var(--ease-smooth),
+              border-color var(--duration-normal) var(--ease-smooth);
+}
+
+/* 捲動後加深背景 */
+.framer-navbar.scrolled {
+  background: rgba(10, 10, 11, 0.95);
+  border-bottom-color: var(--border-hover);
+}
+
+.framer-navbar-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  max-width: var(--max-width-wide);
+  margin: 0 auto;
+  padding: 0 var(--space-6);
+}
+
+/* Logo */
+.framer-navbar-logo {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  font-family: var(--font-display);
+  font-size: var(--text-xl);
+  font-weight: 700;
+  color: var(--text-primary);
+  text-decoration: none;
+  flex-shrink: 0;
+}
+
+.framer-navbar-logo img,
+.framer-navbar-logo svg {
+  height: 32px;
+  width: auto;
+}
+
+/* 導航連結 */
+.framer-navbar-links {
+  display: flex;
+  align-items: center;
+  gap: var(--space-8);
+}
+
+.framer-navbar-link {
+  font-size: var(--text-sm);
+  font-weight: 500;
+  color: var(--text-secondary);
+  text-decoration: none;
+  transition: color var(--duration-fast) var(--ease-smooth);
+  position: relative;
+  padding: var(--space-2) 0;
+}
+
+.framer-navbar-link:hover,
+.framer-navbar-link.active {
+  color: var(--text-primary);
+}
+
+.framer-navbar-link.active::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--gradient-primary);
+  border-radius: 1px;
+}
+
+/* 導航列 CTA */
+.framer-navbar-cta {
+  flex-shrink: 0;
+}
+
+/* === 漢堡選單 === */
+.framer-hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 44px;
+  height: 44px;
+  cursor: pointer;
+  z-index: calc(var(--z-overlay) + 1);
+  position: relative;
+}
+
+.framer-hamburger span {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: var(--text-primary);
+  border-radius: 1px;
+  transition: all var(--duration-normal) var(--ease-framer);
+  position: absolute;
+}
+
+.framer-hamburger span:nth-child(1) {
+  transform: translateY(-7px);
+}
+
+.framer-hamburger span:nth-child(3) {
+  transform: translateY(7px);
+}
+
+/* 開啟時三線變 X */
+.framer-hamburger.open span:nth-child(1) {
+  transform: rotate(45deg);
+}
+
+.framer-hamburger.open span:nth-child(2) {
+  opacity: 0;
+  transform: scaleX(0);
+}
+
+.framer-hamburger.open span:nth-child(3) {
+  transform: rotate(-45deg);
+}
+
+/* 全螢幕行動版選單 */
+.framer-mobile-menu {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-overlay);
+  background: rgba(10, 10, 11, 0.98);
+  backdrop-filter: blur(30px);
+  -webkit-backdrop-filter: blur(30px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-8);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity var(--duration-normal) var(--ease-framer),
+              visibility var(--duration-normal) var(--ease-framer);
+}
+
+.framer-mobile-menu.open {
+  opacity: 1;
+  visibility: visible;
+}
+
+.framer-mobile-menu a {
+  font-family: var(--font-display);
+  font-size: var(--text-3xl);
+  font-weight: 600;
+  color: var(--text-primary);
+  text-decoration: none;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity var(--duration-normal) var(--ease-framer),
+              transform var(--duration-normal) var(--ease-framer);
+}
+
+.framer-mobile-menu.open a {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* 手機選單連結交錯動畫 */
+.framer-mobile-menu.open a:nth-child(1) { transition-delay: 0.1s; }
+.framer-mobile-menu.open a:nth-child(2) { transition-delay: 0.15s; }
+.framer-mobile-menu.open a:nth-child(3) { transition-delay: 0.2s; }
+.framer-mobile-menu.open a:nth-child(4) { transition-delay: 0.25s; }
+.framer-mobile-menu.open a:nth-child(5) { transition-delay: 0.3s; }
+.framer-mobile-menu.open a:nth-child(6) { transition-delay: 0.35s; }
+
+/* --------------------------------------------------------------------------
+   6. Hero 區塊
+   -------------------------------------------------------------------------- */
+.framer-hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  overflow: hidden;
+  padding-top: var(--navbar-height);
+}
+
+.framer-hero-90vh {
+  min-height: 90vh;
+}
+
+/* Hero 頂部光暈 */
+.framer-hero::before {
+  content: '';
+  position: absolute;
+  top: -200px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 800px;
+  height: 600px;
+  background: radial-gradient(ellipse, rgba(232, 133, 12, 0.15) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.framer-hero-content {
+  position: relative;
+  z-index: 1;
+  max-width: 900px;
+  padding: 0 var(--space-6);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-6);
+}
+
+/* 網格背景 */
+.framer-grid-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  background-size: 60px 60px;
+  mask-image: radial-gradient(ellipse at center, black 30%, transparent 70%);
+  -webkit-mask-image: radial-gradient(ellipse at center, black 30%, transparent 70%);
+}
+
+/* 浮動光球 */
+.framer-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.framer-orb-1 {
+  width: 400px;
+  height: 400px;
+  background: rgba(232, 133, 12, 0.12);
+  top: 10%;
+  left: 15%;
+  animation: orbFloat1 8s var(--ease-smooth) infinite alternate;
+}
+
+.framer-orb-2 {
+  width: 300px;
+  height: 300px;
+  background: rgba(245, 166, 35, 0.08);
+  bottom: 20%;
+  right: 10%;
+  animation: orbFloat2 10s var(--ease-smooth) infinite alternate;
+}
+
+.framer-orb-3 {
+  width: 200px;
+  height: 200px;
+  background: rgba(196, 109, 0, 0.1);
+  top: 50%;
+  right: 30%;
+  animation: orbFloat3 12s var(--ease-smooth) infinite alternate;
+}
+
+/* --------------------------------------------------------------------------
+   7. 卡片系統（Glassmorphism）
+   -------------------------------------------------------------------------- */
+.framer-card {
+  background: var(--gradient-glass);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-8);
+  transition: all var(--duration-normal) var(--ease-framer);
+  position: relative;
+  overflow: hidden;
+}
+
+.framer-card:hover {
+  border-color: var(--border-hover);
+  background: var(--bg-card-hover);
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+}
+
+/* 卡片頂部裝飾線 */
+.framer-card-accent {
+  position: relative;
+}
+
+.framer-card-accent::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: var(--space-8);
+  right: var(--space-8);
+  height: 1px;
+  background: var(--gradient-primary);
+  opacity: 0;
+  transition: opacity var(--duration-normal) var(--ease-framer);
+}
+
+.framer-card-accent:hover::before {
+  opacity: 1;
+}
+
+/* 緊湊卡片 */
+.framer-card-sm {
+  padding: var(--space-5);
+  border-radius: var(--radius-md);
+}
+
+/* 大卡片 */
+.framer-card-lg {
+  padding: var(--space-12);
+  border-radius: var(--radius-xl);
+}
+
+/* 互動卡片（帶有 glow） */
+.framer-card-interactive {
+  cursor: pointer;
+}
+
+.framer-card-interactive:hover {
+  box-shadow: var(--shadow-lg), var(--shadow-glow-sm);
+}
+
+/* 特色卡片（重點強調） */
+.framer-card-featured {
+  border-color: rgba(232, 133, 12, 0.2);
+  background: linear-gradient(135deg, rgba(232, 133, 12, 0.08) 0%, rgba(255, 255, 255, 0.02) 100%);
+}
+
+.framer-card-featured:hover {
+  border-color: rgba(232, 133, 12, 0.4);
+  box-shadow: var(--shadow-lg), var(--shadow-glow);
+}
+
+/* 卡片圖示區 */
+.framer-card-icon {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-md);
+  background: rgba(232, 133, 12, 0.1);
+  color: var(--primary-light);
+  font-size: var(--text-2xl);
+  margin-bottom: var(--space-4);
+}
+
+/* --------------------------------------------------------------------------
+   8. 按鈕系統
+   -------------------------------------------------------------------------- */
+
+/* === 基礎按鈕 === */
+.framer-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  min-height: 48px;
+  padding: var(--space-3) var(--space-6);
+  font-family: var(--font-sans);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  line-height: 1;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: all var(--duration-normal) var(--ease-framer);
+  text-decoration: none;
+  white-space: nowrap;
+  user-select: none;
+  position: relative;
+  overflow: hidden;
+}
+
+.framer-btn:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+/* === 主按鈕 === */
+.framer-btn-primary {
+  background: var(--gradient-primary);
+  color: #ffffff;
+  border: none;
+  box-shadow: var(--shadow-sm);
+}
+
+.framer-btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md), var(--shadow-glow);
+  color: #ffffff;
+}
+
+.framer-btn-primary:active {
+  transform: translateY(0);
+  box-shadow: var(--shadow-sm);
+}
+
+/* === 次按鈕 === */
+.framer-btn-secondary {
+  background: transparent;
+  color: var(--text-primary);
+  border: 1px solid var(--border-hover);
+}
+
+.framer-btn-secondary:hover {
+  background: var(--bg-glass-strong);
+  border-color: var(--text-tertiary);
+  color: var(--text-primary);
+  transform: translateY(-2px);
+}
+
+/* === Ghost 按鈕（文字+箭頭） === */
+.framer-btn-ghost {
+  background: transparent;
+  color: var(--text-secondary);
+  padding: var(--space-2) 0;
+  min-height: auto;
+  border-radius: 0;
+}
+
+.framer-btn-ghost:hover {
+  color: var(--text-primary);
+}
+
+.framer-btn-ghost::after {
+  content: '\2192'; /* 右箭頭 → */
+  display: inline-block;
+  margin-left: var(--space-2);
+  transition: transform var(--duration-normal) var(--ease-framer);
+}
+
+.framer-btn-ghost:hover::after {
+  transform: translateX(4px);
+}
+
+/* === 按鈕尺寸 === */
+.framer-btn-sm {
+  min-height: 36px;
+  padding: var(--space-2) var(--space-4);
+  font-size: var(--text-xs);
+  border-radius: var(--radius-sm);
+}
+
+.framer-btn-lg {
+  min-height: 56px;
+  padding: var(--space-4) var(--space-8);
+  font-size: var(--text-base);
+  border-radius: var(--radius-lg);
+}
+
+/* === 按鈕狀態 === */
+.framer-btn:disabled,
+.framer-btn[disabled] {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+/* === 圖示按鈕 === */
+.framer-btn-icon {
+  width: 48px;
+  height: 48px;
+  min-height: auto;
+  padding: 0;
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* --------------------------------------------------------------------------
+   9. 標籤 / Badge
+   -------------------------------------------------------------------------- */
+.framer-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  padding: var(--space-1) var(--space-3);
+  font-size: var(--text-xs);
+  font-weight: 600;
+  line-height: 1.4;
+  border-radius: var(--radius-pill);
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--text-secondary);
+  border: 1px solid var(--border);
+  white-space: nowrap;
+}
+
+.framer-badge-primary {
+  background: rgba(232, 133, 12, 0.12);
+  color: var(--primary-light);
+  border-color: rgba(232, 133, 12, 0.2);
+}
+
+.framer-badge-success {
+  background: rgba(52, 211, 153, 0.12);
+  color: var(--success);
+  border-color: rgba(52, 211, 153, 0.2);
+}
+
+.framer-badge-warning {
+  background: rgba(251, 191, 36, 0.12);
+  color: var(--warning);
+  border-color: rgba(251, 191, 36, 0.2);
+}
+
+.framer-badge-error {
+  background: rgba(248, 113, 113, 0.12);
+  color: var(--error);
+  border-color: rgba(248, 113, 113, 0.2);
+}
+
+/* 帶有小圓點的 badge */
+.framer-badge-dot::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+  flex-shrink: 0;
+}
+
+/* --------------------------------------------------------------------------
+   10. 表單元件
+   -------------------------------------------------------------------------- */
+.framer-input {
+  width: 100%;
+  min-height: 48px;
+  padding: var(--space-3) var(--space-4);
+  font-family: var(--font-sans);
+  font-size: var(--text-sm);
+  color: var(--text-primary);
+  background: var(--bg-input);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  transition: all var(--duration-fast) var(--ease-smooth);
+  outline: none;
+}
+
+.framer-input::placeholder {
+  color: var(--text-tertiary);
+}
+
+.framer-input:hover {
+  border-color: var(--border-hover);
+}
+
+.framer-input:focus {
+  border-color: var(--border-focus);
+  box-shadow: 0 0 0 3px rgba(232, 133, 12, 0.1);
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.framer-textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+.framer-label {
+  display: block;
+  font-size: var(--text-sm);
+  font-weight: 500;
+  color: var(--text-secondary);
+  margin-bottom: var(--space-2);
+}
+
+/* --------------------------------------------------------------------------
+   11. 分隔線
+   -------------------------------------------------------------------------- */
+.framer-divider {
+  width: 100%;
+  height: 1px;
+  background: var(--border);
+  border: none;
+  margin: var(--space-8) 0;
+}
+
+.framer-divider-gradient {
+  background: linear-gradient(90deg, transparent 0%, var(--border-hover) 50%, transparent 100%);
+}
+
+/* --------------------------------------------------------------------------
+   12. Footer
+   -------------------------------------------------------------------------- */
+.framer-footer {
+  position: relative;
+  background: var(--bg-darker);
+  padding: var(--space-16) 0 var(--space-8);
+  border-top: 1px solid var(--border);
+}
+
+.framer-footer-grid {
+  display: grid;
+  grid-template-columns: 2fr repeat(3, 1fr);
+  gap: var(--space-12);
+  margin-bottom: var(--space-12);
+}
+
+.framer-footer-brand {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.framer-footer-brand-logo {
+  font-family: var(--font-display);
+  font-size: var(--text-xl);
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.framer-footer-brand-desc {
+  font-size: var(--text-sm);
+  color: var(--text-tertiary);
+  line-height: var(--leading-relaxed);
+  max-width: 300px;
+}
+
+.framer-footer-col-title {
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: var(--space-4);
+}
+
+.framer-footer-links {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.framer-footer-link {
+  font-size: var(--text-sm);
+  color: var(--text-tertiary);
+  text-decoration: none;
+  transition: color var(--duration-fast) var(--ease-smooth);
+}
+
+.framer-footer-link:hover {
+  color: var(--text-primary);
+}
+
+/* Footer 底部列 */
+.framer-footer-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: var(--space-8);
+  border-top: 1px solid var(--border);
+}
+
+.framer-footer-copyright {
+  font-size: var(--text-xs);
+  color: var(--text-tertiary);
+}
+
+.framer-footer-social {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+}
+
+.framer-footer-social a {
+  color: var(--text-tertiary);
+  transition: color var(--duration-fast) var(--ease-smooth);
+  font-size: var(--text-lg);
+}
+
+.framer-footer-social a:hover {
+  color: var(--text-primary);
+}
+
+/* --------------------------------------------------------------------------
+   13. 動畫關鍵影格
+   -------------------------------------------------------------------------- */
+
+/* 頁面載入 */
+@keyframes pageLoad {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* 淡入上滑（Scroll Reveal 用） */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 淡入（無位移） */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* 淡入左滑 */
+@keyframes fadeInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* 淡入右滑 */
+@keyframes fadeInRight {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* 放大出現 */
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* 浮動光球動畫 */
+@keyframes orbFloat1 {
+  from {
+    transform: translate(0, 0);
+  }
+  to {
+    transform: translate(60px, -40px);
+  }
+}
+
+@keyframes orbFloat2 {
+  from {
+    transform: translate(0, 0);
+  }
+  to {
+    transform: translate(-50px, 30px);
+  }
+}
+
+@keyframes orbFloat3 {
+  from {
+    transform: translate(0, 0);
+  }
+  to {
+    transform: translate(30px, 50px);
+  }
+}
+
+/* 脈衝（狀態指示器） */
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+/* 旋轉（loading） */
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* 微妙浮動 */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+/* 閃爍 */
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   14. Scroll Reveal 動畫類別
+   （配合 IntersectionObserver 使用）
+   -------------------------------------------------------------------------- */
+
+/* 初始狀態（未進入視窗） */
+.framer-reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity var(--duration-slow) var(--ease-framer),
+              transform var(--duration-slow) var(--ease-framer);
+}
+
+.framer-reveal-left {
+  opacity: 0;
+  transform: translateX(-30px);
+  transition: opacity var(--duration-slow) var(--ease-framer),
+              transform var(--duration-slow) var(--ease-framer);
+}
+
+.framer-reveal-right {
+  opacity: 0;
+  transform: translateX(30px);
+  transition: opacity var(--duration-slow) var(--ease-framer),
+              transform var(--duration-slow) var(--ease-framer);
+}
+
+.framer-reveal-scale {
+  opacity: 0;
+  transform: scale(0.9);
+  transition: opacity var(--duration-slow) var(--ease-framer),
+              transform var(--duration-slow) var(--ease-framer);
+}
+
+/* 進入視窗後的狀態 */
+.framer-reveal.visible,
+.framer-reveal-left.visible,
+.framer-reveal-right.visible,
+.framer-reveal-scale.visible {
+  opacity: 1;
+  transform: translateY(0) translateX(0) scale(1);
+}
+
+/* 交錯動畫延遲 */
+.framer-stagger > *:nth-child(1) { transition-delay: 0s; }
+.framer-stagger > *:nth-child(2) { transition-delay: 0.1s; }
+.framer-stagger > *:nth-child(3) { transition-delay: 0.2s; }
+.framer-stagger > *:nth-child(4) { transition-delay: 0.3s; }
+.framer-stagger > *:nth-child(5) { transition-delay: 0.4s; }
+.framer-stagger > *:nth-child(6) { transition-delay: 0.5s; }
+.framer-stagger > *:nth-child(7) { transition-delay: 0.6s; }
+.framer-stagger > *:nth-child(8) { transition-delay: 0.7s; }
+.framer-stagger > *:nth-child(9) { transition-delay: 0.8s; }
+.framer-stagger > *:nth-child(10) { transition-delay: 0.9s; }
+.framer-stagger > *:nth-child(11) { transition-delay: 1.0s; }
+.framer-stagger > *:nth-child(12) { transition-delay: 1.1s; }
+
+/* --------------------------------------------------------------------------
+   15. 工具類別（Utilities）
+   -------------------------------------------------------------------------- */
+
+/* === 間距 === */
+.framer-mt-0 { margin-top: 0; }
+.framer-mt-2 { margin-top: var(--space-2); }
+.framer-mt-4 { margin-top: var(--space-4); }
+.framer-mt-6 { margin-top: var(--space-6); }
+.framer-mt-8 { margin-top: var(--space-8); }
+.framer-mt-12 { margin-top: var(--space-12); }
+.framer-mt-16 { margin-top: var(--space-16); }
+
+.framer-mb-0 { margin-bottom: 0; }
+.framer-mb-2 { margin-bottom: var(--space-2); }
+.framer-mb-4 { margin-bottom: var(--space-4); }
+.framer-mb-6 { margin-bottom: var(--space-6); }
+.framer-mb-8 { margin-bottom: var(--space-8); }
+.framer-mb-12 { margin-bottom: var(--space-12); }
+.framer-mb-16 { margin-bottom: var(--space-16); }
+
+.framer-p-4 { padding: var(--space-4); }
+.framer-p-6 { padding: var(--space-6); }
+.framer-p-8 { padding: var(--space-8); }
+
+/* === 寬度 === */
+.framer-w-full { width: 100%; }
+.framer-max-w-sm { max-width: 480px; }
+.framer-max-w-md { max-width: 640px; }
+.framer-max-w-lg { max-width: 800px; }
+.framer-max-w-xl { max-width: 1024px; }
+
+/* === 顯示 === */
+.framer-hidden { display: none !important; }
+.framer-block { display: block; }
+.framer-inline-block { display: inline-block; }
+
+/* === 位置 === */
+.framer-relative { position: relative; }
+.framer-absolute { position: absolute; }
+.framer-sticky { position: sticky; top: 0; }
+
+/* === 溢出 === */
+.framer-overflow-hidden { overflow: hidden; }
+
+/* === 透明度 === */
+.framer-opacity-0 { opacity: 0; }
+.framer-opacity-50 { opacity: 0.5; }
+.framer-opacity-70 { opacity: 0.7; }
+.framer-opacity-100 { opacity: 1; }
+
+/* === 動畫工具 === */
+.framer-animate-pulse { animation: pulse 2s ease-in-out infinite; }
+.framer-animate-spin { animation: spin 1s linear infinite; }
+.framer-animate-float { animation: float 3s var(--ease-smooth) infinite; }
+
+/* === 骨架屏 / Loading === */
+.framer-skeleton {
+  background: linear-gradient(90deg,
+    rgba(255, 255, 255, 0.04) 25%,
+    rgba(255, 255, 255, 0.08) 50%,
+    rgba(255, 255, 255, 0.04) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: var(--radius-sm);
+}
+
+/* === 滾動條美化 === */
+.framer-scrollbar::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+.framer-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.framer-scrollbar::-webkit-scrollbar-thumb {
+  background: var(--border-hover);
+  border-radius: 3px;
+}
+
+.framer-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: var(--text-tertiary);
+}
+
+/* === 游標跟隨光暈容器（需要搭配 JS） === */
+.framer-cursor-glow {
+  position: relative;
+}
+
+.framer-cursor-glow::after {
+  content: '';
+  position: absolute;
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(232, 133, 12, 0.08) 0%, transparent 70%);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity var(--duration-normal) var(--ease-smooth);
+  transform: translate(-50%, -50%);
+  /* left 和 top 由 JS 設定 */
+}
+
+.framer-cursor-glow:hover::after {
+  opacity: 1;
+}
+
+/* === Tooltip === */
+.framer-tooltip {
+  position: relative;
+}
+
+.framer-tooltip::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%) translateY(4px);
+  padding: var(--space-2) var(--space-3);
+  font-size: var(--text-xs);
+  font-weight: 500;
+  color: var(--text-primary);
+  background: rgba(30, 30, 30, 0.95);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity var(--duration-fast) var(--ease-smooth),
+              transform var(--duration-fast) var(--ease-smooth);
+  z-index: var(--z-tooltip, 1000);
+}
+
+.framer-tooltip:hover::after {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* === 頭像 === */
+.framer-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--border);
+}
+
+.framer-avatar-lg {
+  width: 64px;
+  height: 64px;
+}
+
+.framer-avatar-sm {
+  width: 28px;
+  height: 28px;
+}
+
+/* === 數字指標（Stats） === */
+.framer-stat {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.framer-stat-value {
+  font-family: var(--font-display);
+  font-size: var(--text-4xl);
+  font-weight: 700;
+  letter-spacing: var(--tracking-tight);
+  color: var(--text-primary);
+}
+
+.framer-stat-label {
+  font-size: var(--text-sm);
+  color: var(--text-tertiary);
+}
+
+/* === 對話框 / Modal 背景 === */
+.framer-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-overlay);
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity var(--duration-normal) var(--ease-smooth),
+              visibility var(--duration-normal) var(--ease-smooth);
+}
+
+.framer-overlay.open {
+  opacity: 1;
+  visibility: visible;
+}
+
+.framer-modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.95);
+  z-index: var(--z-modal);
+  max-width: 560px;
+  width: calc(100% - var(--space-8));
+  max-height: 85vh;
+  overflow-y: auto;
+  background: rgba(20, 20, 22, 0.98);
+  backdrop-filter: blur(30px);
+  -webkit-backdrop-filter: blur(30px);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  padding: var(--space-8);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity var(--duration-normal) var(--ease-framer),
+              visibility var(--duration-normal) var(--ease-framer),
+              transform var(--duration-normal) var(--ease-framer);
+}
+
+.framer-modal.open {
+  opacity: 1;
+  visibility: visible;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+/* === Toast 通知 === */
+.framer-toast {
+  position: fixed;
+  bottom: var(--space-6);
+  right: var(--space-6);
+  z-index: var(--z-toast);
+  min-width: 300px;
+  max-width: 480px;
+  padding: var(--space-4) var(--space-5);
+  background: rgba(25, 25, 27, 0.95);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-lg);
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  font-size: var(--text-sm);
+  color: var(--text-primary);
+  transform: translateY(20px);
+  opacity: 0;
+  transition: all var(--duration-normal) var(--ease-framer);
+}
+
+.framer-toast.show {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+/* --------------------------------------------------------------------------
+   16. 特殊效果
+   -------------------------------------------------------------------------- */
+
+/* 漸層網格背景（用於 section 或整頁） */
+.framer-gradient-mesh {
+  position: relative;
+}
+
+.framer-gradient-mesh::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: var(--gradient-mesh);
+}
+
+/* 頂部光暈效果 */
+.framer-glow-top {
+  position: relative;
+}
+
+.framer-glow-top::before {
+  content: '';
+  position: absolute;
+  top: -100px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 600px;
+  height: 400px;
+  background: var(--gradient-glow);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* 滿版分隔漸層線 */
+.framer-section-divider {
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(90deg,
+    transparent 0%,
+    rgba(232, 133, 12, 0.3) 20%,
+    rgba(245, 166, 35, 0.5) 50%,
+    rgba(232, 133, 12, 0.3) 80%,
+    transparent 100%
+  );
+}
+
+/* 程式碼區塊 */
+.framer-code {
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: var(--space-1) var(--space-2);
+  color: var(--primary-light);
+}
+
+.framer-code-block {
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: var(--space-5);
+  overflow-x: auto;
+  line-height: 1.6;
+  color: var(--text-secondary);
+}
+
+/* Tab 切換列 */
+.framer-tabs {
+  display: flex;
+  gap: var(--space-1);
+  background: rgba(255, 255, 255, 0.03);
+  padding: var(--space-1);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border);
+}
+
+.framer-tab {
+  padding: var(--space-2) var(--space-4);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  color: var(--text-tertiary);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: all var(--duration-fast) var(--ease-smooth);
+  border: none;
+  background: none;
+}
+
+.framer-tab:hover {
+  color: var(--text-secondary);
+}
+
+.framer-tab.active {
+  color: var(--text-primary);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+/* 進度條 */
+.framer-progress {
+  width: 100%;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.framer-progress-bar {
+  height: 100%;
+  background: var(--gradient-primary);
+  border-radius: 2px;
+  transition: width var(--duration-slow) var(--ease-framer);
+}
+
+/* 分頁器 */
+.framer-pagination {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.framer-pagination-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--border-hover);
+  cursor: pointer;
+  transition: all var(--duration-fast) var(--ease-smooth);
+}
+
+.framer-pagination-dot.active {
+  width: 24px;
+  border-radius: 4px;
+  background: var(--primary);
+}
+
+/* --------------------------------------------------------------------------
+   17. 響應式設計（RWD）
+   -------------------------------------------------------------------------- */
+
+/* === 平板 (768px - 1024px) === */
+@media (max-width: 1024px) {
+  :root {
+    --section-padding: var(--section-padding-tablet);
+  }
+
+  .framer-hero-title {
+    font-size: var(--text-5xl);
+  }
+
+  h1, .framer-h1 {
+    font-size: var(--text-4xl);
+  }
+
+  h2, .framer-h2 {
+    font-size: var(--text-3xl);
+  }
+
+  .framer-grid-4 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .framer-footer-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-8);
+  }
+}
+
+/* === 手機 (< 768px) === */
+@media (max-width: 768px) {
+  :root {
+    --section-padding: var(--section-padding-mobile);
+    --grid-gap: 16px;
+    --navbar-height: 64px;
+  }
+
+  .framer-hero-title {
+    font-size: var(--text-4xl);
+  }
+
+  h1, .framer-h1 {
+    font-size: var(--text-3xl);
+  }
+
+  h2, .framer-h2 {
+    font-size: var(--text-2xl);
+  }
+
+  h3, .framer-h3 {
+    font-size: var(--text-xl);
+  }
+
+  .framer-subtitle {
+    font-size: var(--text-lg);
+  }
+
+  .framer-subtitle-lg {
+    font-size: var(--text-xl);
+  }
+
+  .framer-grid-2,
+  .framer-grid-3,
+  .framer-grid-4 {
+    grid-template-columns: 1fr;
+  }
+
+  .framer-card {
+    padding: var(--space-6);
+  }
+
+  .framer-card-lg {
+    padding: var(--space-8);
+  }
+
+  /* 導航列手機版 */
+  .framer-navbar-links {
+    display: none;
+  }
+
+  .framer-navbar-cta {
+    display: none;
+  }
+
+  .framer-hamburger {
+    display: flex;
+  }
+
+  /* Footer 手機版 */
+  .framer-footer-grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-8);
+  }
+
+  .framer-footer-bottom {
+    flex-direction: column;
+    gap: var(--space-4);
+    text-align: center;
+  }
+
+  /* Hero 光球縮小 */
+  .framer-orb-1 {
+    width: 200px;
+    height: 200px;
+  }
+
+  .framer-orb-2 {
+    width: 150px;
+    height: 150px;
+  }
+
+  .framer-orb-3 {
+    display: none;
+  }
+
+  /* Toast 全寬 */
+  .framer-toast {
+    left: var(--space-4);
+    right: var(--space-4);
+    min-width: auto;
+    max-width: none;
+  }
+
+  /* Modal 全寬 */
+  .framer-modal {
+    width: calc(100% - var(--space-6));
+    max-height: 90vh;
+    padding: var(--space-6);
+  }
+}
+
+/* === 小手機 (< 480px) === */
+@media (max-width: 480px) {
+  .framer-hero-title {
+    font-size: var(--text-3xl);
+  }
+
+  h1, .framer-h1 {
+    font-size: var(--text-2xl);
+  }
+
+  .framer-btn-lg {
+    min-height: 48px;
+    padding: var(--space-3) var(--space-6);
+    font-size: var(--text-sm);
+  }
+
+  .framer-stat-value {
+    font-size: var(--text-3xl);
+  }
+}
+
+/* === 桌面以上才顯示 === */
+@media (max-width: 1024px) {
+  .framer-desktop-only {
+    display: none !important;
+  }
+}
+
+/* === 手機才顯示 === */
+@media (min-width: 769px) {
+  .framer-mobile-only {
+    display: none !important;
+  }
+}
+
+/* === 偏好減少動態效果 === */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .framer-reveal,
+  .framer-reveal-left,
+  .framer-reveal-right,
+  .framer-reveal-scale {
+    opacity: 1;
+    transform: none;
+  }
+
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   18. 列印樣式
+   -------------------------------------------------------------------------- */
+@media print {
+  body {
+    background: white;
+    color: black;
+  }
+
+  body::before,
+  body::after {
+    display: none;
+  }
+
+  .framer-navbar,
+  .framer-hamburger,
+  .framer-mobile-menu,
+  .framer-orb,
+  .framer-toast,
+  .framer-overlay,
+  .framer-modal {
+    display: none !important;
+  }
+
+  .framer-card {
+    border: 1px solid #ddd;
+    box-shadow: none;
+    backdrop-filter: none;
+  }
+}
+
+/* ==========================================================================
+   結束：SEOBAIKE Framer 風格 CSS 框架
+
+   引入方式：
+   <link rel="stylesheet" href="/assets/framer-style.css">
+
+   JavaScript 初始化程式碼（請在 HTML 最底部或另存 JS 檔案引入）：
+
+   -----------------------------------------------------------------------
+
+   // === Scroll Reveal 動畫（IntersectionObserver） ===
+   // 為帶有 .framer-reveal / .framer-reveal-left / .framer-reveal-right /
+   // .framer-reveal-scale 的元素，在進入視窗時加上 .visible 類別
+
+   document.addEventListener('DOMContentLoaded', function() {
+
+     // 1. Scroll Reveal
+     var revealElements = document.querySelectorAll(
+       '.framer-reveal, .framer-reveal-left, .framer-reveal-right, .framer-reveal-scale'
+     );
+
+     if (revealElements.length > 0 && 'IntersectionObserver' in window) {
+       var revealObserver = new IntersectionObserver(function(entries) {
+         entries.forEach(function(entry) {
+           if (entry.isIntersecting) {
+             entry.target.classList.add('visible');
+             revealObserver.unobserve(entry.target);
+           }
+         });
+       }, {
+         threshold: 0.1,
+         rootMargin: '0px 0px -50px 0px'
+       });
+
+       revealElements.forEach(function(el) {
+         revealObserver.observe(el);
+       });
+     } else {
+       // 若瀏覽器不支援 IntersectionObserver，直接顯示
+       revealElements.forEach(function(el) {
+         el.classList.add('visible');
+       });
+     }
+
+     // 2. 導航列捲動偵測（加上 .scrolled 類別）
+     var navbar = document.querySelector('.framer-navbar');
+     if (navbar) {
+       window.addEventListener('scroll', function() {
+         if (window.scrollY > 20) {
+           navbar.classList.add('scrolled');
+         } else {
+           navbar.classList.remove('scrolled');
+         }
+       }, { passive: true });
+     }
+
+     // 3. 漢堡選單開關
+     var hamburger = document.querySelector('.framer-hamburger');
+     var mobileMenu = document.querySelector('.framer-mobile-menu');
+     if (hamburger && mobileMenu) {
+       hamburger.addEventListener('click', function() {
+         hamburger.classList.toggle('open');
+         mobileMenu.classList.toggle('open');
+         document.body.style.overflow =
+           mobileMenu.classList.contains('open') ? 'hidden' : '';
+       });
+
+       // 點選選單連結後自動關閉
+       mobileMenu.querySelectorAll('a').forEach(function(link) {
+         link.addEventListener('click', function() {
+           hamburger.classList.remove('open');
+           mobileMenu.classList.remove('open');
+           document.body.style.overflow = '';
+         });
+       });
+     }
+
+     // 4. 游標跟隨光暈（可選功能）
+     var glowContainers = document.querySelectorAll('.framer-cursor-glow');
+     glowContainers.forEach(function(container) {
+       container.addEventListener('mousemove', function(e) {
+         var rect = container.getBoundingClientRect();
+         var x = e.clientX - rect.left;
+         var y = e.clientY - rect.top;
+         container.style.setProperty('--glow-x', x + 'px');
+         container.style.setProperty('--glow-y', y + 'px');
+         if (container.querySelector(':scope::after') || true) {
+           container.style.cssText +=
+             '--glow-x:' + x + 'px;--glow-y:' + y + 'px;';
+         }
+       });
+     });
+
+   });
+
+   ========================================================================== */

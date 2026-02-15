@@ -3,12 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SEOBAIKE 生態圈 — AI 夥伴 & 協作平台</title>
-<meta name="description" content="SEOBAIKE 生態圈：14個AI夥伴 + 18個協作平台，全部即時運作">
+<title>SEOBAIKE 生態圈 — AI 工具 + 協作平台，全部幫你做事</title>
+<meta name="description" content="SEOBAIKE 生態圈：14 種 AI 能力 + 26 個協作平台，寫文案、做圖片、分析數據、管專案，全部一站搞定">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-:root{--bg:#0a0a0f;--card:#12121a;--border:#1e1e2e;--accent:#f97316;--accent2:#8b5cf6;--text:#e2e8f0;--dim:#64748b;--green:#22c55e;--red:#ef4444;--blue:#3b82f6}
+:root{--bg:#0a0a0f;--card:#12121a;--border:#1e1e2e;--accent:#e8850c;--accent2:#cc785c;--text:#e2e8f0;--dim:#64748b;--green:#22c55e;--red:#ef4444;--blue:#3b82f6}
 body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;min-height:100vh}
 .header{background:linear-gradient(135deg,#1a1a2e 0%,#16213e 100%);border-bottom:1px solid var(--border);padding:20px 24px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px}
 .header h1{font-size:24px;background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
@@ -48,11 +48,25 @@ body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSy
 .chat-input{display:flex;padding:12px;border-top:1px solid var(--border);gap:8px}
 .chat-input input{flex:1;padding:10px;border-radius:8px;border:1px solid var(--border);background:var(--bg);color:var(--text);font-size:13px}
 .chat-input input:focus{outline:none;border-color:var(--accent)}
+/* BYOK 簡化提示 */
+.byok-hint{padding:10px 16px;background:rgba(232,133,12,0.06);border-top:1px solid rgba(232,133,12,0.12);display:flex;align-items:center;gap:8px;font-size:12px;color:#aaa}
+.byok-hint a{color:var(--accent);font-weight:600;text-decoration:none;white-space:nowrap}
+.byok-hint a:hover{text-decoration:underline}
 .chat-toggle{position:fixed;bottom:20px;right:20px;width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--accent2));border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:24px;color:#fff;z-index:101;box-shadow:0 4px 12px rgba(249,115,22,.4)}
 .loading{display:inline-block;width:12px;height:12px;border:2px solid var(--dim);border-top-color:var(--accent);border-radius:50%;animation:spin .6s linear infinite}
 @keyframes spin{to{transform:rotate(360deg)}}
 .section-title{padding:24px 24px 8px;font-size:18px;font-weight:700;display:flex;align-items:center;gap:8px}
 .section-title .count{font-size:13px;color:var(--dim);font-weight:400}
+/* Ecosystem CTA */
+.eco-cta{margin:24px;background:linear-gradient(135deg,#1a1a2e,#16213e);border:1px solid var(--border);border-radius:16px;padding:40px;text-align:center}
+.eco-cta h2{font-size:26px;margin-bottom:8px}
+.eco-cta h2 span{color:var(--accent)}
+.eco-cta p{color:var(--dim);margin-bottom:24px;font-size:15px;max-width:600px;margin-left:auto;margin-right:auto}
+.eco-cta-btn{display:inline-block;padding:14px 36px;border-radius:24px;background:linear-gradient(135deg,var(--accent),#cc785c);color:#fff;font-weight:700;font-size:16px;border:none;cursor:pointer;transition:all 0.3s;text-decoration:none}
+.eco-cta-btn:hover{transform:scale(1.05);box-shadow:0 8px 30px rgba(249,115,22,0.3)}
+/* Ecosystem Intro */
+.eco-intro{padding:24px 24px 0;text-align:center}
+.eco-intro p{color:var(--dim);font-size:15px;max-width:700px;margin:0 auto;line-height:1.7}
 @media(max-width:600px){.grid{grid-template-columns:1fr;padding:12px}.header{padding:12px}.chat-panel{width:100%}}
 </style>
 </head>
@@ -76,53 +90,62 @@ body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSy
 <div class="header">
   <div>
     <h1>SEOBAIKE 生態圈</h1>
-    <div style="font-size:12px;color:var(--dim);margin-top:4px">AI 界的 App Store — 小路光有限公司</div>
+    <div style="font-size:12px;color:var(--dim);margin-top:4px">你的 AI 工具箱 — 小路光有限公司 打造</div>
   </div>
   <div class="stats">
-    <div class="stat"><div class="num" id="ai-count">0</div><div class="label">AI 夥伴</div></div>
-    <div class="stat"><div class="num" id="platform-count">0</div><div class="label">協作平台</div></div>
-    <div class="stat"><div class="num" id="active-count">0</div><div class="label">即時運作</div></div>
+    <div class="stat"><div class="num" id="ai-count">0</div><div class="label">種 AI 能力</div></div>
+    <div class="stat"><div class="num" id="platform-count">0</div><div class="label">個協作工具</div></div>
+    <div class="stat"><div class="num" id="active-count">0</div><div class="label">個已上線</div></div>
   </div>
+</div>
+
+<div class="eco-intro">
+  <p>SEOBAIKE 生態圈把各種 AI 能力和工作平台串在一起，讓你在一個地方就能完成所有事情 — 寫文案、做圖片、分析報表、管理專案、自動化流程，不用到處開帳號。</p>
 </div>
 
 <div class="tabs">
   <div class="tab active" onclick="showTab('all')">全部</div>
-  <div class="tab" onclick="showTab('ai')">AI 夥伴</div>
-  <div class="tab" onclick="showTab('collab')">協作平台</div>
-  <div class="tab" onclick="showTab('active')">已啟用</div>
+  <div class="tab" onclick="showTab('ai')">AI 能力</div>
+  <div class="tab" onclick="showTab('collab')">協作工具</div>
+  <div class="tab" onclick="showTab('active')">已上線</div>
 </div>
 
-<div class="section-title" id="ai-section">AI 夥伴 <span class="count" id="ai-section-count"></span></div>
+<div class="section-title" id="ai-section">SEOBAIKE AI 能力 <span class="count" id="ai-section-count"></span></div>
 <div class="grid" id="ai-grid"></div>
 
-<div class="section-title" id="collab-section">協作平台 <span class="count" id="collab-section-count"></span></div>
+<div class="section-title" id="collab-section">SEOBAIKE 協作工具 <span class="count" id="collab-section-count"></span></div>
 <div class="grid" id="collab-grid"></div>
 
 <!-- Chat Panel -->
 <button class="chat-toggle" onclick="toggleChat()" title="AI 對話">💬</button>
 <div class="chat-panel" id="chatPanel">
   <div class="chat-header">
-    <h3>🤖 AI 夥伴對話</h3>
+    <h3>SEOBAIKE AI 對話</h3>
     <div style="display:flex;align-items:center;gap:8px">
       <select id="chatPartner" style="padding:4px 8px;border-radius:6px;border:1px solid var(--border);background:var(--bg);color:var(--text);font-size:12px">
-        <option value="partner-openai">SEOBAIKE AI 引擎 A</option>
-        <option value="partner-anthropic">SEOBAIKE AI 引擎 B</option>
-        <option value="partner-deepseek">SEOBAIKE AI 引擎 C</option>
-        <option value="partner-grok">SEOBAIKE AI 引擎 D</option>
-        <option value="partner-groq">SEOBAIKE AI 引擎 E（快速）</option>
-        <option value="partner-mistral">SEOBAIKE AI 引擎 F</option>
-        <option value="partner-google">SEOBAIKE AI 引擎 G</option>
-        <option value="partner-cohere">SEOBAIKE AI 引擎 H</option>
-        <option value="partner-together">SEOBAIKE AI 引擎 I</option>
-        <option value="partner-huggingface">SEOBAIKE AI Hub</option>
-        <option value="partner-perplexity">SEOBAIKE 搜尋 AI</option>
-        <option value="partner-qwen">SEOBAIKE AI 引擎 J</option>
+        <option value="partner-openai">全能助手</option>
+        <option value="partner-anthropic">深度分析</option>
+        <option value="partner-deepseek">邏輯推理</option>
+        <option value="partner-grok">即時問答</option>
+        <option value="partner-groq">閃電回覆</option>
+        <option value="partner-mistral">多語翻譯</option>
+        <option value="partner-google">多模態助手</option>
+        <option value="partner-cohere">語意搜尋</option>
+        <option value="partner-together">創意工坊</option>
+        <option value="partner-huggingface">模型市集</option>
+        <option value="partner-perplexity">搜尋問答</option>
+        <option value="partner-qwen">數學專家</option>
       </select>
       <button onclick="toggleChat()" style="background:none;border:none;color:var(--dim);cursor:pointer;font-size:18px">✕</button>
     </div>
   </div>
   <div class="chat-messages" id="chatMessages">
-    <div class="msg bot">你好！選擇任何 AI 夥伴開始對話。所有夥伴都已上線。</div>
+    <div class="msg bot">你好！上面選一個 AI 能力就能開始對話。想寫文案選「全能助手」，想查資料選「搜尋問答」，想算數學選「數學專家」。</div>
+  </div>
+  <div class="byok-hint">
+    <span>&#128273;</span>
+    <span>用自己的金鑰解鎖無限 AI 對話</span>
+    <a href="/ai#byok">前往設定 &#8594;</a>
   </div>
   <div class="chat-input">
     <input type="text" id="chatInput" placeholder="輸入訊息..." onkeydown="if(event.key==='Enter')sendChat()">
@@ -130,53 +153,63 @@ body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSy
   </div>
 </div>
 
+<section class="eco-cta">
+  <h2>全部串在一起，<span>一個平台搞定</span></h2>
+  <p>不用到處開帳號、不用自己接 API。SEOBAIKE 幫你把 AI 能力和工作工具串好，你只要專心做事就好。</p>
+  <a href="/marketplace" class="eco-cta-btn">去市集逛逛</a>
+</section>
+
+<div style="text-align:center;padding:30px;color:#555;font-size:12px;border-top:1px solid var(--border);margin-top:20px">
+  SEOBAIKE OS — <a href="/" style="color:var(--accent)">小路光有限公司</a> — 你的 AI 工具箱
+</div>
+
 <script>
 const BASE = 'https://vmyrivxxibqydccurxug.supabase.co/functions/v1';
 
 const AI_PARTNERS = [
-  { slug: 'partner-openai', name: 'SEOBAIKE AI 引擎 A', provider: 'SEOBAIKE AI', caps: ['chat','embeddings','images','tts','vision'] },
-  { slug: 'partner-anthropic', name: 'SEOBAIKE AI 引擎 B', provider: 'SEOBAIKE AI', caps: ['chat','vision','code','analysis'] },
-  { slug: 'partner-deepseek', name: 'SEOBAIKE AI 引擎 C', provider: 'SEOBAIKE AI', caps: ['chat','code','reasoning'] },
-  { slug: 'partner-grok', name: 'SEOBAIKE AI 引擎 D', provider: 'SEOBAIKE AI', caps: ['chat','code','reasoning','vision'] },
-  { slug: 'partner-groq', name: 'SEOBAIKE AI 引擎 E', provider: 'SEOBAIKE AI', caps: ['chat','fast-inference'] },
-  { slug: 'partner-mistral', name: 'SEOBAIKE AI 引擎 F', provider: 'SEOBAIKE AI', caps: ['chat','code','embeddings'] },
-  { slug: 'partner-google', name: 'SEOBAIKE AI 引擎 G', provider: 'SEOBAIKE AI', caps: ['chat','vision','code'] },
-  { slug: 'partner-perplexity', name: 'SEOBAIKE 搜尋 AI', provider: 'SEOBAIKE AI', caps: ['search','chat','research'] },
-  { slug: 'partner-cohere', name: 'SEOBAIKE AI 引擎 H', provider: 'SEOBAIKE AI', caps: ['chat','embed','rerank'] },
-  { slug: 'partner-together', name: 'SEOBAIKE AI 引擎 I', provider: 'SEOBAIKE AI', caps: ['chat','image','code'] },
-  { slug: 'partner-huggingface', name: 'SEOBAIKE AI Hub', provider: 'SEOBAIKE AI', caps: ['chat','inference','models'] },
-  { slug: 'partner-qwen', name: 'SEOBAIKE AI 引擎 J', provider: 'SEOBAIKE AI', caps: ['chat','code','vision','math'] },
-  { slug: 'partner-replicate', name: 'SEOBAIKE AI 引擎 K', provider: 'SEOBAIKE AI', caps: ['image','video','audio','text'] },
-  { slug: 'partner-stability', name: 'SEOBAIKE AI 引擎 L', provider: 'SEOBAIKE AI', caps: ['image-generation','upscale'] },
+  { slug: 'partner-openai', name: 'SEOBAIKE 全能助手', provider: 'SEOBAIKE AI', caps: ['對話','文字嵌入','生圖','語音','看圖理解'] },
+  { slug: 'partner-anthropic', name: 'SEOBAIKE 深度分析', provider: 'SEOBAIKE AI', caps: ['對話','看圖理解','寫程式','資料分析'] },
+  { slug: 'partner-deepseek', name: 'SEOBAIKE 邏輯推理', provider: 'SEOBAIKE AI', caps: ['對話','寫程式','推理思考'] },
+  { slug: 'partner-grok', name: 'SEOBAIKE 即時問答', provider: 'SEOBAIKE AI', caps: ['對話','寫程式','推理思考','看圖理解'] },
+  { slug: 'partner-groq', name: 'SEOBAIKE 閃電回覆', provider: 'SEOBAIKE AI', caps: ['對話','極速回應'] },
+  { slug: 'partner-mistral', name: 'SEOBAIKE 多語翻譯', provider: 'SEOBAIKE AI', caps: ['對話','寫程式','文字嵌入'] },
+  { slug: 'partner-google', name: 'SEOBAIKE 多模態助手', provider: 'SEOBAIKE AI', caps: ['對話','看圖理解','寫程式'] },
+  { slug: 'partner-perplexity', name: 'SEOBAIKE 搜尋問答', provider: 'SEOBAIKE AI', caps: ['網路搜尋','對話','深度研究'] },
+  { slug: 'partner-cohere', name: 'SEOBAIKE 語意搜尋', provider: 'SEOBAIKE AI', caps: ['對話','語意嵌入','結果排序'] },
+  { slug: 'partner-together', name: 'SEOBAIKE 創意工坊', provider: 'SEOBAIKE AI', caps: ['對話','生圖','寫程式'] },
+  { slug: 'partner-huggingface', name: 'SEOBAIKE 模型市集', provider: 'SEOBAIKE AI', caps: ['對話','模型推論','模型庫'] },
+  { slug: 'partner-qwen', name: 'SEOBAIKE 數學專家', provider: 'SEOBAIKE AI', caps: ['對話','寫程式','看圖理解','數學運算'] },
+  { slug: 'partner-replicate', name: 'SEOBAIKE 影音創作', provider: 'SEOBAIKE AI', caps: ['生圖','影片','音訊','文字'] },
+  { slug: 'partner-stability', name: 'SEOBAIKE 圖片生成', provider: 'SEOBAIKE AI', caps: ['AI 繪圖','圖片放大'] },
 ];
 
 const PLATFORMS = [
-  { slug: 'connect-slack', name: 'SEOBAIKE 通訊 A', type: '團隊通訊' },
-  { slug: 'connect-github', name: 'SEOBAIKE 開發協作', type: '程式碼協作' },
-  { slug: 'connect-notion', name: 'SEOBAIKE 知識庫', type: '知識管理' },
-  { slug: 'connect-figma', name: 'SEOBAIKE 設計協作', type: '設計協作' },
-  { slug: 'connect-clickup', name: 'SEOBAIKE 專案 A', type: '專案管理' },
-  { slug: 'connect-monday', name: 'SEOBAIKE 專案 B', type: '工作管理' },
-  { slug: 'connect-asana', name: 'SEOBAIKE 任務管理', type: '任務管理' },
-  { slug: 'connect-jira', name: 'SEOBAIKE 開發管理', type: '軟體開發' },
-  { slug: 'connect-miro', name: 'SEOBAIKE 視覺協作', type: '視覺協作' },
-  { slug: 'connect-airtable', name: 'SEOBAIKE 資料平台', type: '資料庫平台' },
-  { slug: 'connect-trello', name: 'SEOBAIKE 看板', type: '看板管理' },
-  { slug: 'connect-hubspot', name: 'SEOBAIKE 行銷 CRM', type: 'CRM 行銷' },
-  { slug: 'connect-teams', name: 'SEOBAIKE 通訊 B', type: '企業通訊' },
-  { slug: 'connect-google-workspace', name: 'SEOBAIKE 雲端協作', type: '雲端協作' },
-  { slug: 'connect-confluence', name: 'SEOBAIKE 文件 Wiki', type: 'Wiki 文件' },
-  { slug: 'connect-canva', name: 'SEOBAIKE AI 設計', type: 'AI 視覺設計' },
-  { slug: 'connect-streamline', name: 'SEOBAIKE 供應鏈', type: '供應鏈 AI' },
-  { slug: 'connect-motiff', name: 'SEOBAIKE UI 設計', type: 'AI UI 設計' },
-  { slug: 'connect-mokahr', name: 'SEOBAIKE 招募', type: 'AI 招募' },
-  { slug: 'connect-linear', name: 'SEOBAIKE 議題追蹤', type: '議題追蹤' },
-  { slug: 'connect-basecamp', name: 'SEOBAIKE 專案 C', type: '專案管理' },
-  { slug: 'connect-coda', name: 'SEOBAIKE 文件自動化', type: '文件自動化' },
-  { slug: 'connect-zapier', name: 'SEOBAIKE 市集 A', type: '工作流自動化' },
-  { slug: 'connect-n8n', name: 'SEOBAIKE 市集 B', type: '開源自動化' },
-  { slug: 'connect-pipedream', name: 'SEOBAIKE 市集 C', type: '開發者自動化' },
-  { slug: 'connect-svix', name: 'SEOBAIKE Webhook', type: 'Webhook 管理' },
+  { slug: 'connect-slack', name: 'SEOBAIKE 團隊聊天室', type: '即時訊息，團隊溝通' },
+  { slug: 'connect-github', name: 'SEOBAIKE 程式碼倉庫', type: '版本控制，協作開發' },
+  { slug: 'connect-notion', name: 'SEOBAIKE 筆記知識庫', type: '文件整理，知識管理' },
+  { slug: 'connect-figma', name: 'SEOBAIKE 介面設計', type: '畫面設計，團隊協作' },
+  { slug: 'connect-clickup', name: 'SEOBAIKE 專案總管', type: '任務追蹤，時間管理' },
+  { slug: 'connect-monday', name: 'SEOBAIKE 工作看板', type: '進度追蹤，團隊管理' },
+  { slug: 'connect-asana', name: 'SEOBAIKE 任務分派', type: '待辦事項，團隊協作' },
+  { slug: 'connect-jira', name: 'SEOBAIKE 開發追蹤', type: '軟體開發，問題追蹤' },
+  { slug: 'connect-miro', name: 'SEOBAIKE 線上白板', type: '腦力激盪，視覺協作' },
+  { slug: 'connect-airtable', name: 'SEOBAIKE 智慧表格', type: '資料管理，自動化' },
+  { slug: 'connect-trello', name: 'SEOBAIKE 拖拉看板', type: '卡片管理，簡單好用' },
+  { slug: 'connect-hubspot', name: 'SEOBAIKE 客戶管理', type: '客戶關係，行銷追蹤' },
+  { slug: 'connect-teams', name: 'SEOBAIKE 企業通訊', type: '視訊會議，企業溝通' },
+  { slug: 'connect-google-workspace', name: 'SEOBAIKE 雲端辦公', type: '文件試算，雲端協作' },
+  { slug: 'connect-confluence', name: 'SEOBAIKE 團隊文件', type: '知識庫，文件共編' },
+  { slug: 'connect-canva', name: 'SEOBAIKE 快速設計', type: '海報簡報，一鍵生成' },
+  { slug: 'connect-streamline', name: 'SEOBAIKE 供應鏈管理', type: '進銷存，物流追蹤' },
+  { slug: 'connect-motiff', name: 'SEOBAIKE 介面原型', type: '畫面原型，互動設計' },
+  { slug: 'connect-mokahr', name: 'SEOBAIKE 人才招募', type: '履歷篩選，面試排程' },
+  { slug: 'connect-linear', name: 'SEOBAIKE 問題追蹤', type: '待修清單，開發排程' },
+  { slug: 'connect-basecamp', name: 'SEOBAIKE 專案營地', type: '專案溝通，進度回報' },
+  { slug: 'connect-coda', name: 'SEOBAIKE 文件自動化', type: '智慧文件，自動流程' },
+  { slug: 'connect-zapier', name: 'SEOBAIKE 自動串接', type: '不寫程式，自動連結工具' },
+  { slug: 'connect-n8n', name: 'SEOBAIKE 開源自動化', type: '自己架，自己控制流程' },
+  { slug: 'connect-pipedream', name: 'SEOBAIKE 開發者自動化', type: '寫腳本，串 API' },
+  { slug: 'connect-svix', name: 'SEOBAIKE 事件通知', type: '自動推送，即時通知' },
 ];
 
 let allStatuses = {};
@@ -274,9 +307,26 @@ async function sendChat() {
   msgsDiv.scrollTop = msgsDiv.scrollHeight;
 
   try {
+    // BYOK：如果用戶有自帶金鑰，在 header 中附上
+    const byokKeys = JSON.parse(localStorage.getItem('seobaike_byok') || '{}');
+    const byokProviderMap = {
+      'partner-openai': 'openrouter', 'partner-anthropic': 'anthropic',
+      'partner-deepseek': 'deepseek', 'partner-grok': 'openrouter',
+      'partner-groq': 'groq', 'partner-mistral': 'mistral',
+      'partner-google': 'google', 'partner-cohere': 'cohere',
+      'partner-together': 'openrouter', 'partner-huggingface': 'openrouter',
+      'partner-perplexity': 'perplexity', 'partner-qwen': 'openrouter',
+      'partner-replicate': 'openrouter', 'partner-stability': 'openrouter'
+    };
+    const byokProv = byokProviderMap[partner] || '';
+    const chatFetchHeaders = { 'Content-Type': 'application/json' };
+    if (byokProv && byokKeys[byokProv]) {
+      chatFetchHeaders['X-BYOK-Key'] = byokKeys[byokProv];
+      chatFetchHeaders['X-BYOK-Provider'] = byokProv;
+    }
     const res = await fetch(`${BASE}/${partner}/chat`, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: chatFetchHeaders,
       body: JSON.stringify(partner === 'partner-perplexity'
         ? { messages: [{ role: 'user', content: msg }] }
         : { prompt: msg, max_tokens: 1024 }),
