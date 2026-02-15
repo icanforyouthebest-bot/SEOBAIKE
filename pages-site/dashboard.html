@@ -49,6 +49,66 @@ body { font-family: 'Segoe UI', sans-serif; background: #0a0a1a; color: #eee; mi
 .route .path { color: #888; }
 .footer { text-align: center; padding: 16px; color: #333; font-size: 11px; }
 
+/* === Navigation Bar === */
+.nav-bar { display: flex; gap: 0; padding: 0 30px; background: #0d1117; border-bottom: 1px solid #222; }
+.nav-bar a { color: #888; text-decoration: none; padding: 10px 18px; font-size: 13px; font-weight: 600; border-bottom: 2px solid transparent; transition: all 0.2s; }
+.nav-bar a:hover { color: #e8850c; border-bottom-color: #e8850c; }
+.nav-bar a.active { color: #e8850c; border-bottom-color: #e8850c; }
+
+/* === Marketplace Overview Section === */
+.section-title { padding: 20px 30px 10px; font-size: 16px; color: #e8850c; font-weight: 700; display: flex; align-items: center; gap: 8px; }
+.section-title .st-icon { font-size: 20px; }
+.section-title .st-sub { font-size: 11px; color: #555; font-weight: normal; margin-left: 8px; }
+
+.marketplace-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; padding: 0 30px 16px; }
+.mp-card { background: linear-gradient(135deg, #16213e, #1a1a2e); border: 1px solid #333; border-radius: 16px; padding: 20px; text-align: center; transition: all 0.3s; }
+.mp-card:hover { border-color: #e8850c; transform: translateY(-2px); }
+.mp-card .mp-num { font-size: 36px; font-weight: bold; color: #e8850c; transition: all 0.5s; }
+.mp-card .mp-num.changed { animation: slideIn 0.5s; color: #fff; }
+.mp-card .mp-lbl { font-size: 13px; color: #888; margin-top: 6px; }
+.mp-card .mp-sub { font-size: 10px; color: #555; margin-top: 4px; }
+
+/* === Featured Tools Section === */
+.featured-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 14px; padding: 0 30px 20px; }
+.featured-card { background: linear-gradient(135deg, #1a1530, #16213e); border: 1px solid #333; border-radius: 14px; padding: 18px; transition: all 0.3s; position: relative; overflow: hidden; }
+.featured-card:hover { border-color: #76b900; transform: translateY(-3px); box-shadow: 0 6px 20px rgba(118,185,0,0.1); }
+.featured-card .fc-badge { position: absolute; top: 10px; right: 10px; background: #e8850c; color: #000; font-size: 10px; font-weight: bold; padding: 2px 8px; border-radius: 8px; }
+.featured-card .fc-name { font-size: 15px; font-weight: 700; color: #fff; margin-bottom: 4px; }
+.featured-card .fc-desc { font-size: 11px; color: #888; line-height: 1.5; margin-bottom: 10px; max-height: 36px; overflow: hidden; }
+.featured-card .fc-meta { display: flex; gap: 14px; font-size: 11px; }
+.featured-card .fc-meta span { color: #76b900; font-weight: 600; }
+.featured-card .fc-meta .fc-label { color: #555; font-weight: normal; }
+.featured-card .fc-price { margin-top: 8px; font-size: 14px; font-weight: bold; color: #cc785c; }
+.featured-card .fc-creator { font-size: 10px; color: #555; margin-top: 6px; }
+
+/* === Bot Status Row === */
+.bot-status-row { display: flex; align-items: center; gap: 16px; padding: 0 30px 20px; flex-wrap: wrap; }
+.bot-summary-card { background: linear-gradient(135deg, #16213e, #1a1a2e); border: 1px solid #333; border-radius: 14px; padding: 16px 24px; display: flex; align-items: center; gap: 14px; flex: 1; min-width: 220px; transition: all 0.3s; }
+.bot-summary-card:hover { border-color: #76b900; }
+.bot-summary-card .bot-icon { font-size: 28px; }
+.bot-summary-card .bot-info { flex: 1; }
+.bot-summary-card .bot-title { font-size: 14px; font-weight: 700; color: #fff; }
+.bot-summary-card .bot-stat { font-size: 12px; color: #888; margin-top: 2px; }
+.bot-summary-card .bot-stat .online { color: #76b900; font-weight: bold; }
+.bot-summary-card .bot-stat .total { color: #cc785c; font-weight: bold; }
+.bot-summary-card .bot-dots { display: flex; gap: 4px; flex-wrap: wrap; }
+.bot-summary-card .bot-dot { width: 10px; height: 10px; border-radius: 50%; border: 1px solid #333; }
+.bot-summary-card .bot-dot.on { background: #76b900; border-color: #76b900; box-shadow: 0 0 6px rgba(118,185,0,0.5); }
+.bot-summary-card .bot-dot.off { background: #333; }
+.bot-detail-card { background: linear-gradient(135deg, #16213e, #1a1a2e); border: 1px solid #333; border-radius: 14px; padding: 14px 20px; min-width: 160px; text-align: center; transition: all 0.3s; }
+.bot-detail-card:hover { border-color: #e8850c; }
+.bot-detail-card .bd-num { font-size: 28px; font-weight: bold; color: #76b900; }
+.bot-detail-card .bd-lbl { font-size: 11px; color: #888; margin-top: 2px; }
+
+/* === Commission Model Display === */
+.commission-table { padding: 0 30px 20px; }
+.commission-table table { width: 100%; background: #0d1117; border: 1px solid #222; border-radius: 12px; overflow: hidden; border-collapse: collapse; font-size: 12px; }
+.commission-table th { background: #16213e; color: #cc785c; text-align: left; padding: 8px 14px; font-size: 11px; font-weight: 600; letter-spacing: 0.5px; }
+.commission-table td { padding: 7px 14px; border-top: 1px solid #1a1a2e; color: #ccc; }
+.commission-table tr:hover td { background: rgba(232,133,12,0.05); }
+.commission-table .cm-type { color: #e8850c; font-weight: 600; }
+.commission-table .cm-rate { color: #76b900; font-weight: 700; font-size: 14px; }
+
 /* === Real-Time Data Panels === */
 .data-panels { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; padding: 0 30px 16px; }
 .data-panel { background: linear-gradient(135deg, #16213e, #1a1a2e); border: 1px solid #333; border-radius: 16px; padding: 20px; position: relative; overflow: hidden; }
@@ -90,12 +150,19 @@ body { font-family: 'Segoe UI', sans-serif; background: #0a0a1a; color: #eee; mi
 /* Responsive: stack panels on smaller screens */
 @media (max-width: 1200px) {
   .data-panels { grid-template-columns: repeat(2, 1fr); }
+  .marketplace-grid { grid-template-columns: repeat(2, 1fr); }
+  .featured-grid { grid-template-columns: repeat(2, 1fr); }
 }
 @media (max-width: 768px) {
   .grid { grid-template-columns: repeat(2, 1fr); }
   .data-panels { grid-template-columns: 1fr; }
   .engines { grid-template-columns: 1fr; }
   .header { flex-wrap: wrap; }
+  .marketplace-grid { grid-template-columns: 1fr; }
+  .featured-grid { grid-template-columns: 1fr; }
+  .bot-status-row { flex-direction: column; }
+  .nav-bar { flex-wrap: wrap; }
+  .nav-bar a { padding: 8px 12px; font-size: 12px; }
 }
 </style>
 </head>
@@ -107,6 +174,14 @@ body { font-family: 'Segoe UI', sans-serif; background: #0a0a1a; color: #eee; mi
   <span class="badge" style="background:#cc785c;color:#fff;">專利 115100981</span>
   <span class="badge" style="background:#111;color:#0f0;border:1px solid #333;"><span class="live-dot"></span><span id="status">連線中...</span></span>
   <span style="margin-left:auto;font-size:12px;color:#888;" id="clock"></span>
+</div>
+
+<div class="nav-bar">
+  <a href="/">首頁</a>
+  <a href="/dashboard.html" class="active">儀錶板</a>
+  <a href="/marketplace">市集</a>
+  <a href="/bots">機器人</a>
+  <a href="/docs">文件</a>
 </div>
 
 <div class="grid" id="mainGrid">
@@ -200,6 +275,71 @@ body { font-family: 'Segoe UI', sans-serif; background: #0a0a1a; color: #eee; mi
     </div>
     <div class="bar-container"><div class="bar orange" id="gw-bar" style="width:0%"></div></div>
   </div>
+</div>
+
+<!-- ============ 市集概覽 Section ============ -->
+<div class="section-title"><span class="st-icon">&#128722;</span> 市集概覽 <span class="st-sub">(Marketplace Overview)</span></div>
+<div class="marketplace-grid">
+  <div class="mp-card">
+    <div class="mp-num" id="mp-listings">--</div>
+    <div class="mp-lbl">上架工具</div>
+    <div class="mp-sub">Total Listings</div>
+  </div>
+  <div class="mp-card">
+    <div class="mp-num" id="mp-purchases">--</div>
+    <div class="mp-lbl">累計購買</div>
+    <div class="mp-sub">Total Purchases</div>
+  </div>
+  <div class="mp-card">
+    <div class="mp-num" id="mp-creators">--</div>
+    <div class="mp-lbl">創作者</div>
+    <div class="mp-sub">Total Creators</div>
+  </div>
+  <div class="mp-card">
+    <div class="mp-num" id="mp-commission" style="color:#cc785c;">--</div>
+    <div class="mp-lbl">分潤模式</div>
+    <div class="mp-sub">Commission Model</div>
+  </div>
+</div>
+
+<!-- ============ 熱門工具 Section ============ -->
+<div class="section-title"><span class="st-icon">&#11088;</span> 熱門工具 <span class="st-sub">(Featured Tools)</span></div>
+<div class="featured-grid" id="featured-grid">
+  <div class="featured-card" style="text-align:center;padding:30px;color:#555;">載入中...</div>
+</div>
+
+<!-- ============ 協作機器人 Section ============ -->
+<div class="section-title"><span class="st-icon">&#129302;</span> 協作機器人 <span class="st-sub">(Bot Fleet Status)</span></div>
+<div class="bot-status-row" id="bot-status-row">
+  <div class="bot-summary-card">
+    <div class="bot-icon">&#129302;</div>
+    <div class="bot-info">
+      <div class="bot-title">SEOBAIKE Bot Fleet</div>
+      <div class="bot-stat"><span class="online" id="bot-online">--</span> 在線 / <span class="total" id="bot-total">14</span> 總計</div>
+    </div>
+    <div class="bot-dots" id="bot-dots"></div>
+  </div>
+  <div class="bot-detail-card">
+    <div class="bd-num" id="bot-tasks">--</div>
+    <div class="bd-lbl">執行中任務</div>
+  </div>
+  <div class="bot-detail-card">
+    <div class="bd-num" style="color:#e8850c;" id="bot-errors">--</div>
+    <div class="bd-lbl">近24h 錯誤</div>
+  </div>
+  <div class="bot-detail-card">
+    <div class="bd-num" style="color:#cc785c;" id="bot-uptime">--</div>
+    <div class="bd-lbl">正常運行率</div>
+  </div>
+</div>
+
+<!-- ============ 分潤規則 Section ============ -->
+<div class="section-title"><span class="st-icon">&#128176;</span> 分潤規則 <span class="st-sub">(Commission Rules)</span></div>
+<div class="commission-table">
+  <table>
+    <thead><tr><th>類型</th><th>分潤比例</th><th>最低門檻</th><th>結算週期</th><th>說明</th></tr></thead>
+    <tbody id="commission-tbody"><tr><td colspan="5" style="text-align:center;color:#555;padding:20px;">載入中...</td></tr></tbody>
+  </table>
 </div>
 
 <div class="routes">
@@ -640,6 +780,280 @@ async function loadActivityFeed() {
   }
 }
 
+// ============================================================
+// Marketplace / Commission / Bot Panels
+// ============================================================
+
+const API_BASE = "https://aiforseo.vip";
+
+function updateMP(id, val) {
+  var el = document.getElementById(id);
+  if (el && el.textContent !== String(val)) {
+    el.textContent = val;
+    el.classList.add("changed");
+    setTimeout(function() { el.classList.remove("changed"); }, 600);
+  }
+}
+
+// Marketplace + Analytics overview
+async function loadMarketplaceStats() {
+  try {
+    var res = await fetch(API_BASE + "/api/v1/analytics", {
+      headers: { "Accept": "application/json" },
+      signal: AbortSignal.timeout(10000)
+    });
+    if (res.ok) {
+      var data = await res.json();
+      if (data.marketplace) {
+        updateMP("mp-listings", (data.marketplace.total_listings || 0).toLocaleString());
+        updateMP("mp-purchases", (data.marketplace.total_purchases || 0).toLocaleString());
+        updateMP("mp-creators", (data.marketplace.total_creators || 0).toLocaleString());
+        if (data.marketplace.commission_model) {
+          updateMP("mp-commission", data.marketplace.commission_model);
+        }
+      }
+      // Also update constraint node counts if available
+      if (data.constraints) {
+        if (data.constraints.l1_count) updateNum("d-l1", data.constraints.l1_count);
+        if (data.constraints.l2_count) updateNum("d-l2", data.constraints.l2_count);
+        if (data.constraints.l3_count) updateNum("d-l3", data.constraints.l3_count);
+        if (data.constraints.l4_count) updateNum("d-l4", data.constraints.l4_count);
+      }
+      addLog("市集概覽已載入 (via /api/v1/analytics)", "ok");
+    } else {
+      addLog("市集概覽 API 回應: HTTP " + res.status + " — 使用備援資料", "err");
+      loadMarketplaceFallback();
+    }
+  } catch (e) {
+    addLog("市集概覽 API 無法連線: " + e.message + " — 使用備援資料", "err");
+    loadMarketplaceFallback();
+  }
+}
+
+// Fallback: load marketplace stats from Supabase directly
+async function loadMarketplaceFallback() {
+  try {
+    // Try marketplace_listings table
+    var listRes = await fetch(SUPA_URL + "/rest/v1/marketplace_listings?select=id,creator_id,status&status=eq.active", {
+      headers: REST_HDR
+    });
+    if (listRes.ok) {
+      var listings = await listRes.json();
+      updateMP("mp-listings", listings.length.toLocaleString());
+      // Count unique creators
+      var creators = {};
+      listings.forEach(function(l) { if (l.creator_id) creators[l.creator_id] = true; });
+      updateMP("mp-creators", Object.keys(creators).length.toLocaleString());
+    }
+  } catch (e) {
+    // If tables don't exist, show placeholder data
+    updateMP("mp-listings", "0");
+    updateMP("mp-purchases", "0");
+    updateMP("mp-creators", "0");
+    updateMP("mp-commission", "過路費+分潤");
+  }
+}
+
+// Featured marketplace listings
+async function loadFeaturedTools() {
+  try {
+    var res = await fetch(API_BASE + "/api/marketplace/featured", {
+      headers: { "Accept": "application/json" },
+      signal: AbortSignal.timeout(10000)
+    });
+    if (res.ok) {
+      var data = await res.json();
+      var items = data.items || data.featured || data || [];
+      if (Array.isArray(items) && items.length > 0) {
+        renderFeaturedTools(items.slice(0, 5));
+        addLog("熱門工具已載入 — " + items.length + " 項", "ok");
+        return;
+      }
+    }
+    addLog("熱門工具 API 回應異常 — 使用備援資料", "err");
+    loadFeaturedFallback();
+  } catch (e) {
+    addLog("熱門工具 API 無法連線: " + e.message + " — 使用備援資料", "err");
+    loadFeaturedFallback();
+  }
+}
+
+function loadFeaturedFallback() {
+  // Try loading from Supabase marketplace_listings table
+  fetch(SUPA_URL + "/rest/v1/marketplace_listings?select=*&status=eq.active&is_featured=eq.true&order=created_at.desc&limit=5", {
+    headers: REST_HDR
+  }).then(function(res) {
+    if (res.ok) return res.json();
+    throw new Error("HTTP " + res.status);
+  }).then(function(items) {
+    if (items.length > 0) {
+      renderFeaturedTools(items);
+    } else {
+      renderFeaturedPlaceholder();
+    }
+  }).catch(function() {
+    renderFeaturedPlaceholder();
+  });
+}
+
+function renderFeaturedTools(items) {
+  var container = document.getElementById("featured-grid");
+  var html = "";
+  items.forEach(function(item) {
+    var name = item.name || item.title || "未命名工具";
+    var desc = item.description || item.desc || "AI 工具";
+    var price = item.price != null ? ("NT$ " + Number(item.price).toLocaleString()) : "免費";
+    var downloads = item.downloads || item.purchases || 0;
+    var rating = item.rating || "--";
+    var creator = item.creator_name || item.creator || "SEOBAIKE";
+    var badge = item.badge || (item.is_featured ? "精選" : "");
+
+    html += '<div class="featured-card">';
+    if (badge) html += '<span class="fc-badge">' + badge + '</span>';
+    html += '<div class="fc-name">' + name + '</div>';
+    html += '<div class="fc-desc">' + desc + '</div>';
+    html += '<div class="fc-meta">';
+    html += '<span>' + downloads + ' <span class="fc-label">下載</span></span>';
+    html += '<span>' + rating + ' <span class="fc-label">評分</span></span>';
+    html += '</div>';
+    html += '<div class="fc-price">' + price + '</div>';
+    html += '<div class="fc-creator">by ' + creator + '</div>';
+    html += '</div>';
+  });
+  container.innerHTML = html;
+}
+
+function renderFeaturedPlaceholder() {
+  var placeholders = [
+    { name: "SEO 關鍵字分析器", desc: "AI 驅動的關鍵字研究與競爭分析", price: "免費", downloads: "--", rating: "--", creator: "SEOBAIKE", badge: "即將上線" },
+    { name: "內容優化助手", desc: "自動分析內容結構並提供 SEO 建議", price: "免費", downloads: "--", rating: "--", creator: "SEOBAIKE", badge: "即將上線" },
+    { name: "反向連結監控", desc: "即時追蹤反向連結變化與品質評估", price: "免費", downloads: "--", rating: "--", creator: "SEOBAIKE", badge: "即將上線" },
+  ];
+  renderFeaturedTools(placeholders);
+  addLog("熱門工具：顯示預設工具列表（市集尚未上線）", "ok");
+}
+
+// Commission rules
+async function loadCommissionRules() {
+  try {
+    var res = await fetch(API_BASE + "/api/commission/rules", {
+      headers: { "Accept": "application/json" },
+      signal: AbortSignal.timeout(10000)
+    });
+    if (res.ok) {
+      var data = await res.json();
+      var rules = data.rules || data || [];
+      if (Array.isArray(rules) && rules.length > 0) {
+        renderCommissionRules(rules);
+        addLog("分潤規則已載入 — " + rules.length + " 條", "ok");
+        return;
+      }
+    }
+    renderCommissionFallback();
+  } catch (e) {
+    addLog("分潤規則 API 無法連線: " + e.message + " — 使用預設規則", "err");
+    renderCommissionFallback();
+  }
+}
+
+function renderCommissionRules(rules) {
+  var tbody = document.getElementById("commission-tbody");
+  var html = "";
+  rules.forEach(function(r) {
+    html += '<tr>';
+    html += '<td class="cm-type">' + (r.type || r.name || "--") + '</td>';
+    html += '<td class="cm-rate">' + (r.rate || r.percentage || "--") + '</td>';
+    html += '<td>' + (r.minimum || r.threshold || "--") + '</td>';
+    html += '<td>' + (r.cycle || r.settlement || "--") + '</td>';
+    html += '<td>' + (r.description || r.note || "--") + '</td>';
+    html += '</tr>';
+  });
+  tbody.innerHTML = html;
+}
+
+function renderCommissionFallback() {
+  var defaultRules = [
+    { type: "工具銷售", rate: "30%", minimum: "NT$ 100", cycle: "月結", description: "平台抽成 30%，創作者獲得 70%" },
+    { type: "API 過路費", rate: "每次 NT$ 0.5", minimum: "NT$ 50", cycle: "月結", description: "每次 API 呼叫收取過路費" },
+    { type: "訂閱分潤", rate: "20%", minimum: "NT$ 200", cycle: "月結", description: "訂閱制服務平台分潤 20%" },
+    { type: "推薦獎勵", rate: "10%", minimum: "NT$ 50", cycle: "季結", description: "推薦新用戶首次消費的 10%" },
+  ];
+  renderCommissionRules(defaultRules);
+  updateMP("mp-commission", "過路費+分潤");
+  addLog("分潤規則：顯示預設規則（API 尚未上線）", "ok");
+}
+
+// Bot status
+async function loadBotStatus() {
+  try {
+    var res = await fetch(API_BASE + "/api/bots/status", {
+      headers: { "Accept": "application/json" },
+      signal: AbortSignal.timeout(10000)
+    });
+    if (res.ok) {
+      var data = await res.json();
+      var bots = data.bots || data || [];
+      var totalCount = data.total || (Array.isArray(bots) ? bots.length : 14);
+      var onlineCount = data.online || (Array.isArray(bots) ? bots.filter(function(b) { return b.status === "online"; }).length : 0);
+      var tasks = data.active_tasks || 0;
+      var errors = data.errors_24h || 0;
+      var uptime = data.uptime || "--";
+
+      document.getElementById("bot-online").textContent = onlineCount;
+      document.getElementById("bot-total").textContent = totalCount;
+      document.getElementById("bot-tasks").textContent = tasks;
+      document.getElementById("bot-errors").textContent = errors;
+      document.getElementById("bot-uptime").textContent = typeof uptime === "number" ? uptime + "%" : uptime;
+
+      renderBotDots(onlineCount, totalCount);
+      addLog("機器人狀態已載入 — " + onlineCount + "/" + totalCount + " 在線", "ok");
+    } else {
+      addLog("機器人 API 回應: HTTP " + res.status + " — 使用備援資料", "err");
+      loadBotFallback();
+    }
+  } catch (e) {
+    addLog("機器人 API 無法連線: " + e.message + " — 使用備援資料", "err");
+    loadBotFallback();
+  }
+}
+
+function loadBotFallback() {
+  // Try Supabase bots table
+  fetch(SUPA_URL + "/rest/v1/bots?select=id,name,status", { headers: REST_HDR })
+    .then(function(res) {
+      if (res.ok) return res.json();
+      throw new Error("HTTP " + res.status);
+    })
+    .then(function(bots) {
+      var total = bots.length || 14;
+      var online = bots.filter(function(b) { return b.status === "online" || b.status === "active"; }).length;
+      document.getElementById("bot-online").textContent = online;
+      document.getElementById("bot-total").textContent = total;
+      document.getElementById("bot-tasks").textContent = "--";
+      document.getElementById("bot-errors").textContent = "--";
+      document.getElementById("bot-uptime").textContent = "--";
+      renderBotDots(online, total);
+    })
+    .catch(function() {
+      // Show placeholder
+      document.getElementById("bot-online").textContent = "0";
+      document.getElementById("bot-total").textContent = "14";
+      document.getElementById("bot-tasks").textContent = "0";
+      document.getElementById("bot-errors").textContent = "0";
+      document.getElementById("bot-uptime").textContent = "N/A";
+      renderBotDots(0, 14);
+    });
+}
+
+function renderBotDots(online, total) {
+  var dotsEl = document.getElementById("bot-dots");
+  var html = "";
+  for (var i = 0; i < total; i++) {
+    html += '<div class="bot-dot ' + (i < online ? "on" : "off") + '" title="Bot #' + (i + 1) + '"></div>';
+  }
+  dotsEl.innerHTML = html;
+}
+
 // Master refresh function
 async function refreshAllPanels() {
   addLog("--- 面板自動刷新 ---", "ok");
@@ -647,7 +1061,11 @@ async function refreshAllPanels() {
     loadPageViews(),
     loadAPIStatus(),
     loadUserStats(),
-    loadActivityFeed()
+    loadActivityFeed(),
+    loadMarketplaceStats(),
+    loadFeaturedTools(),
+    loadCommissionRules(),
+    loadBotStatus()
   ]);
 }
 
