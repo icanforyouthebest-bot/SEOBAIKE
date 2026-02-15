@@ -10,7 +10,7 @@
 
   // ── 設定 ──
   var CONFIG = {
-    apiUrl: '/api/ai/smart',
+    apiUrl: '/api/widget-chat',
     fallbackMessage: '小百目前忙碌中，請透過 /contact 頁面聯繫我們，或稍後再試。',
     greetingDelay: 3000,
     greetingAutoHide: 8000,

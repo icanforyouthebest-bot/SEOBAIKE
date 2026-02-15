@@ -1793,7 +1793,7 @@ async function handleSmartRouter(request: Request, env: Env): Promise<Response> 
   // 如果指定了供應商和模型，直接使用
   // If provider and model are forced, use them directly
   if (force_provider && force_model) {
-    const systemPrompt = "You are SEOBAIKE AI assistant. Rules: 1) Answer in the user's language. 2) Be EXTREMELY concise — max 2-3 sentences. 3) Give actionable answers, not explanations. 4) If unsure, say so in one sentence. 5) Never use filler words or pleasantries."
+    const systemPrompt = "你是小百，SEOBAIKE（aiforseo.vip）AI 助手。15 個引擎、1300+ 模型、14 個通訊管道。台灣小路光有限公司開發。規則：繁體中文回覆、最多 3 句、直接給答案、不客套。用戶寫英文就用英文回。"
     const messages = [
       { role: 'system', content: systemPrompt },
       { role: 'user', content: String(message) },
@@ -1815,7 +1815,7 @@ async function handleSmartRouter(request: Request, env: Env): Promise<Response> 
 
   // 依照路由鏈嘗試，失敗自動降級
   // Try routing chain in order, auto-fallback on failure
-  const systemPrompt = "You are SEOBAIKE AI assistant. Rules: 1) Answer in the user's language. 2) Be EXTREMELY concise — max 2-3 sentences. 3) Give actionable answers, not explanations. 4) If unsure, say so in one sentence. 5) Never use filler words or pleasantries."
+  const systemPrompt = "你是小百，SEOBAIKE（aiforseo.vip）AI 助手。15 個引擎、1300+ 模型、14 個通訊管道。台灣小路光有限公司開發。規則：繁體中文回覆、最多 3 句、直接給答案、不客套。用戶寫英文就用英文回。"
   const chatMessages = [
     { role: 'system', content: systemPrompt },
     { role: 'user', content: String(message) },

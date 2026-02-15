@@ -135,6 +135,7 @@
       left: 0;
       right: 0;
       z-index: 1000;
+      transition: background 0.3s, border-color 0.3s;
     }
     .nav-logo {
       font-size: 1.4rem;
@@ -198,6 +199,19 @@
       max-width: 600px;
       margin: 0 auto;
     }
+    .section-label {
+      display: inline-block;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--orange);
+      background: rgba(232,133,12,0.08);
+      border: 1px solid rgba(232,133,12,0.2);
+      border-radius: 100px;
+      padding: 6px 18px;
+      margin-bottom: 20px;
+    }
     .btn {
       display: inline-flex;
       align-items: center;
@@ -239,90 +253,439 @@
       border-radius: 14px;
     }
 
-    /* ═══════════ Section 1: Hero ═══════════ */
+    /* ═══════════════════════════════════════════════════════════
+       HERO SECTION — Particle Grid Background
+       ═══════════════════════════════════════════════════════════ */
     .hero {
-      padding-top: 160px;
-      padding-bottom: 100px;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       text-align: center;
       position: relative;
       overflow: hidden;
+      padding-top: 80px;
     }
-    .hero::before {
-      content: '';
+
+    /* Animated gradient mesh background */
+    .hero-mesh {
       position: absolute;
-      top: -80px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 900px;
-      height: 900px;
-      background: radial-gradient(circle, rgba(232,133,12,0.10) 0%, rgba(232,133,12,0.03) 40%, transparent 70%);
-      pointer-events: none;
-      animation: heroPulse 6s ease-in-out infinite;
+      inset: 0;
+      z-index: 0;
+      background:
+        radial-gradient(ellipse at 20% 50%, rgba(232,133,12,0.12) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 20%, rgba(245,166,35,0.08) 0%, transparent 50%),
+        radial-gradient(ellipse at 50% 80%, rgba(204,120,92,0.06) 0%, transparent 50%);
+      animation: meshShift 12s ease-in-out infinite alternate;
     }
-    @keyframes heroPulse {
-      0%, 100% { opacity: 0.8; transform: translateX(-50%) scale(1); }
-      50% { opacity: 1; transform: translateX(-50%) scale(1.05); }
+    @keyframes meshShift {
+      0% {
+        background:
+          radial-gradient(ellipse at 20% 50%, rgba(232,133,12,0.12) 0%, transparent 50%),
+          radial-gradient(ellipse at 80% 20%, rgba(245,166,35,0.08) 0%, transparent 50%),
+          radial-gradient(ellipse at 50% 80%, rgba(204,120,92,0.06) 0%, transparent 50%);
+      }
+      50% {
+        background:
+          radial-gradient(ellipse at 40% 30%, rgba(232,133,12,0.15) 0%, transparent 50%),
+          radial-gradient(ellipse at 70% 60%, rgba(245,166,35,0.10) 0%, transparent 50%),
+          radial-gradient(ellipse at 30% 70%, rgba(204,120,92,0.08) 0%, transparent 50%);
+      }
+      100% {
+        background:
+          radial-gradient(ellipse at 60% 40%, rgba(232,133,12,0.10) 0%, transparent 50%),
+          radial-gradient(ellipse at 30% 70%, rgba(245,166,35,0.12) 0%, transparent 50%),
+          radial-gradient(ellipse at 70% 30%, rgba(204,120,92,0.07) 0%, transparent 50%);
+      }
     }
-    /* floating orbs */
+
+    /* Pulsing grid lines */
+    .hero-grid {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      background-image:
+        linear-gradient(rgba(232,133,12,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(232,133,12,0.04) 1px, transparent 1px);
+      background-size: 60px 60px;
+      mask-image: radial-gradient(ellipse at center, black 20%, transparent 70%);
+      -webkit-mask-image: radial-gradient(ellipse at center, black 20%, transparent 70%);
+      animation: gridPulse 4s ease-in-out infinite;
+    }
+    @keyframes gridPulse {
+      0%, 100% { opacity: 0.5; }
+      50% { opacity: 1; }
+    }
+
+    /* Floating light orbs */
     .hero-orb {
       position: absolute;
       border-radius: 50%;
       pointer-events: none;
-      filter: blur(60px);
+      filter: blur(80px);
+      z-index: 1;
     }
     .hero-orb-1 {
-      width: 300px; height: 300px;
-      background: rgba(232,133,12,0.08);
-      top: 10%; left: 5%;
-      animation: orbFloat1 8s ease-in-out infinite;
+      width: 400px; height: 400px;
+      background: rgba(232,133,12,0.10);
+      top: 5%; left: 5%;
+      animation: orbDrift1 10s ease-in-out infinite alternate;
     }
     .hero-orb-2 {
+      width: 300px; height: 300px;
+      background: rgba(245,166,35,0.07);
+      bottom: 10%; right: 5%;
+      animation: orbDrift2 12s ease-in-out infinite alternate;
+    }
+    .hero-orb-3 {
       width: 200px; height: 200px;
-      background: rgba(204,120,92,0.06);
-      bottom: 15%; right: 8%;
-      animation: orbFloat2 10s ease-in-out infinite;
+      background: rgba(204,120,92,0.08);
+      top: 40%; right: 20%;
+      animation: orbDrift3 14s ease-in-out infinite alternate;
     }
-    @keyframes orbFloat1 {
-      0%, 100% { transform: translate(0, 0); }
-      50% { transform: translate(30px, -20px); }
+    @keyframes orbDrift1 {
+      0% { transform: translate(0, 0) scale(1); }
+      100% { transform: translate(60px, -40px) scale(1.1); }
     }
-    @keyframes orbFloat2 {
-      0%, 100% { transform: translate(0, 0); }
-      50% { transform: translate(-20px, 15px); }
+    @keyframes orbDrift2 {
+      0% { transform: translate(0, 0) scale(1); }
+      100% { transform: translate(-50px, 30px) scale(0.9); }
     }
+    @keyframes orbDrift3 {
+      0% { transform: translate(0, 0); }
+      100% { transform: translate(30px, 50px); }
+    }
+
+    /* Central hero glow */
+    .hero-glow {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 800px;
+      height: 800px;
+      background: radial-gradient(circle, rgba(232,133,12,0.08) 0%, transparent 60%);
+      pointer-events: none;
+      z-index: 1;
+      animation: heroGlowPulse 5s ease-in-out infinite;
+    }
+    @keyframes heroGlowPulse {
+      0%, 100% { opacity: 0.6; transform: translate(-50%, -50%) scale(1); }
+      50% { opacity: 1; transform: translate(-50%, -50%) scale(1.1); }
+    }
+
+    /* Scanning line */
+    .hero-scanline {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, rgba(232,133,12,0.4), transparent);
+      z-index: 2;
+      animation: scanDown 6s linear infinite;
+      opacity: 0.5;
+    }
+    @keyframes scanDown {
+      0% { top: 0; }
+      100% { top: 100%; }
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 10;
+      max-width: 900px;
+      padding: 0 24px;
+    }
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      letter-spacing: 1px;
+      color: var(--orange-light);
+      background: rgba(232,133,12,0.08);
+      border: 1px solid rgba(232,133,12,0.2);
+      border-radius: 100px;
+      padding: 8px 20px;
+      margin-bottom: 32px;
+      animation: badgeFadeIn 1s ease-out 0.3s both;
+    }
+    .hero-badge-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--orange);
+      animation: dotPulse 2s ease-in-out infinite;
+    }
+    @keyframes dotPulse {
+      0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(232,133,12,0.5); }
+      50% { opacity: 0.8; box-shadow: 0 0 0 6px rgba(232,133,12,0); }
+    }
+    @keyframes badgeFadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
     .hero h1 {
-      font-size: 4.2rem;
+      font-size: 4.5rem;
       font-weight: 900;
       color: var(--text-bright);
       letter-spacing: -2px;
-      line-height: 1.2;
-      margin-bottom: 24px;
-      position: relative;
+      line-height: 1.1;
+      margin-bottom: 28px;
+      animation: heroTitleIn 1s ease-out 0.5s both;
     }
     .hero h1 em {
       font-style: normal;
-      background: linear-gradient(135deg, var(--orange), var(--orange-light));
+      background: linear-gradient(135deg, var(--orange), var(--orange-light), #fff);
+      background-size: 200% 200%;
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
+      animation: gradientShift 4s ease-in-out infinite;
     }
+    @keyframes gradientShift {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+    }
+    @keyframes heroTitleIn {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
     .hero-sub {
-      font-size: 1.3rem;
+      font-size: 1.35rem;
       color: var(--text-muted);
-      max-width: 580px;
+      max-width: 620px;
       margin: 0 auto 48px;
       line-height: 1.8;
-      position: relative;
+      animation: heroSubIn 1s ease-out 0.7s both;
     }
+    @keyframes heroSubIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
     .hero-actions {
       display: flex;
       gap: 16px;
       justify-content: center;
       flex-wrap: wrap;
-      position: relative;
+      animation: heroActionsIn 1s ease-out 0.9s both;
+    }
+    @keyframes heroActionsIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
-    /* ═══════════ Section 2: Demo Animation ═══════════ */
+    /* Scroll down indicator */
+    .hero-scroll {
+      position: absolute;
+      bottom: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 10;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      color: var(--text-muted);
+      font-size: 0.75rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      animation: scrollBounce 2s ease-in-out infinite;
+    }
+    .hero-scroll-line {
+      width: 1px;
+      height: 40px;
+      background: linear-gradient(to bottom, var(--orange), transparent);
+      animation: scrollLineDown 2s ease-in-out infinite;
+    }
+    @keyframes scrollBounce {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50% { transform: translateX(-50%) translateY(8px); }
+    }
+    @keyframes scrollLineDown {
+      0% { opacity: 0; height: 0; }
+      50% { opacity: 1; height: 40px; }
+      100% { opacity: 0; height: 40px; }
+    }
+
+    /* ═══════════════════════════════════════════════════════════
+       STATS COUNTER SECTION
+       ═══════════════════════════════════════════════════════════ */
+    .stats-section {
+      padding: 80px 0;
+      background: linear-gradient(180deg, var(--bg) 0%, rgba(18,18,42,1) 50%, var(--bg) 100%);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      position: relative;
+      overflow: hidden;
+    }
+    .stats-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 600px;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, rgba(232,133,12,0.5), transparent);
+    }
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 32px;
+      text-align: center;
+    }
+    .stat-item {
+      position: relative;
+      padding: 24px 16px;
+    }
+    .stat-item:not(:last-child)::after {
+      content: '';
+      position: absolute;
+      right: 0;
+      top: 20%;
+      height: 60%;
+      width: 1px;
+      background: linear-gradient(to bottom, transparent, var(--border-light), transparent);
+    }
+    .stat-number {
+      font-size: 3.2rem;
+      font-weight: 900;
+      letter-spacing: -2px;
+      line-height: 1;
+      margin-bottom: 8px;
+      background: linear-gradient(135deg, var(--text-bright), var(--orange-light));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .stat-suffix {
+      font-size: 1.6rem;
+      font-weight: 700;
+    }
+    .stat-label {
+      font-size: 0.92rem;
+      color: var(--text-muted);
+      font-weight: 500;
+      letter-spacing: 0.5px;
+    }
+
+    /* ═══════════════════════════════════════════════════════════
+       HOW IT WORKS — 3 Step Flow
+       ═══════════════════════════════════════════════════════════ */
+    .how-section {
+      padding: 120px 0;
+      position: relative;
+    }
+    .how-steps {
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      gap: 0;
+      position: relative;
+      max-width: 960px;
+      margin: 0 auto;
+    }
+    .how-step {
+      flex: 1;
+      text-align: center;
+      padding: 0 24px;
+      position: relative;
+      z-index: 2;
+    }
+    .how-step-icon {
+      width: 88px;
+      height: 88px;
+      border-radius: 24px;
+      background: linear-gradient(135deg, rgba(232,133,12,0.12), rgba(232,133,12,0.04));
+      border: 1px solid rgba(232,133,12,0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 24px;
+      font-size: 2rem;
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      position: relative;
+    }
+    .how-step:hover .how-step-icon {
+      transform: translateY(-6px) scale(1.05);
+      border-color: var(--orange);
+      box-shadow: 0 12px 40px rgba(232,133,12,0.2);
+      background: linear-gradient(135deg, rgba(232,133,12,0.2), rgba(232,133,12,0.08));
+    }
+    .how-step-number {
+      position: absolute;
+      top: -8px;
+      right: -8px;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: var(--orange);
+      color: #fff;
+      font-size: 0.75rem;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 12px rgba(232,133,12,0.4);
+    }
+    .how-step h3 {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--text-bright);
+      margin-bottom: 10px;
+    }
+    .how-step p {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      line-height: 1.7;
+    }
+
+    /* Connecting lines between steps */
+    .how-connector {
+      position: absolute;
+      top: 44px;
+      left: calc(33.33% + 44px);
+      width: calc(33.33% - 88px);
+      height: 2px;
+      z-index: 1;
+    }
+    .how-connector-line {
+      width: 100%;
+      height: 2px;
+      background-image: linear-gradient(90deg, var(--orange) 6px, transparent 6px);
+      background-size: 14px 2px;
+      background-repeat: repeat-x;
+      position: relative;
+      animation: dashFlow 1.5s linear infinite;
+    }
+    .how-connector-line::after {
+      content: '';
+      position: absolute;
+      right: -6px;
+      top: -4px;
+      width: 0;
+      height: 0;
+      border-top: 5px solid transparent;
+      border-bottom: 5px solid transparent;
+      border-left: 8px solid var(--orange);
+    }
+    .how-connector-2 {
+      left: calc(66.66% + 44px);
+    }
+    @keyframes dashFlow {
+      0% { background-position: 0 0; }
+      100% { background-position: 14px 0; }
+    }
+
+    /* ═══════════════════════════════════════════════════════════
+       DEMO SECTION
+       ═══════════════════════════════════════════════════════════ */
     .demo-section {
       background: var(--bg-warm);
       border-top: 1px solid var(--border);
@@ -392,7 +755,6 @@
       color: var(--text);
       border-bottom-left-radius: 4px;
     }
-    /* Route animation */
     .demo-route {
       display: flex;
       align-items: center;
@@ -434,11 +796,6 @@
       0%, 100% { transform: scale(1); }
       50% { transform: scale(1.15); }
     }
-    .demo-route-arrow {
-      color: var(--text-muted);
-      font-size: 0.9rem;
-    }
-    /* Progress bar */
     .demo-controls {
       display: flex;
       align-items: center;
@@ -482,7 +839,9 @@
       text-align: right;
     }
 
-    /* ═══════════ Section 3: Three Pillars ═══════════ */
+    /* ═══════════════════════════════════════════════════════════
+       THREE PILLARS
+       ═══════════════════════════════════════════════════════════ */
     .pillars-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -531,7 +890,9 @@
       line-height: 1.8;
     }
 
-    /* ═══════════ Section 4: Capabilities ═══════════ */
+    /* ═══════════════════════════════════════════════════════════
+       CAPABILITIES
+       ═══════════════════════════════════════════════════════════ */
     .cap-section { background: var(--bg-warm); }
     .cap-grid {
       display: grid;
@@ -590,7 +951,9 @@
       opacity: 1;
     }
 
-    /* ═══════════ Section 5: Pricing Preview ═══════════ */
+    /* ═══════════════════════════════════════════════════════════
+       PRICING PREVIEW
+       ═══════════════════════════════════════════════════════════ */
     .pricing-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
@@ -668,7 +1031,92 @@
       flex-shrink: 0;
     }
 
-    /* ═══════════ Section 6: Trust ═══════════ */
+    /* ═══════════════════════════════════════════════════════════
+       SOCIAL PROOF / ENGINE MARQUEE
+       ═══════════════════════════════════════════════════════════ */
+    .engines-section {
+      padding: 100px 0;
+      background: linear-gradient(180deg, var(--bg) 0%, rgba(18,18,42,0.6) 50%, var(--bg) 100%);
+      position: relative;
+      overflow: hidden;
+    }
+    .engines-section::before,
+    .engines-section::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 200px;
+      z-index: 10;
+      pointer-events: none;
+    }
+    .engines-section::before {
+      left: 0;
+      background: linear-gradient(90deg, var(--bg), transparent);
+    }
+    .engines-section::after {
+      right: 0;
+      background: linear-gradient(270deg, var(--bg), transparent);
+    }
+
+    .marquee-track {
+      display: flex;
+      width: max-content;
+      animation: marqueeScroll 40s linear infinite;
+    }
+    .marquee-track:hover {
+      animation-play-state: paused;
+    }
+    .marquee-row-2 .marquee-track {
+      animation-direction: reverse;
+      animation-duration: 35s;
+    }
+    .marquee-row {
+      overflow: hidden;
+      margin-bottom: 20px;
+    }
+    @keyframes marqueeScroll {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    .engine-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 24px;
+      margin: 0 10px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--text);
+      white-space: nowrap;
+      transition: all 0.3s;
+      backdrop-filter: blur(8px);
+    }
+    .engine-badge:hover {
+      border-color: var(--orange);
+      background: rgba(232,133,12,0.06);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(232,133,12,0.1);
+    }
+    .engine-badge-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      background: linear-gradient(135deg, rgba(232,133,12,0.15), rgba(232,133,12,0.05));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      flex-shrink: 0;
+    }
+
+    /* ═══════════════════════════════════════════════════════════
+       TRUST SECTION
+       ═══════════════════════════════════════════════════════════ */
     .trust-section { background: var(--bg-warm); }
     .trust-strip {
       display: grid;
@@ -700,43 +1148,68 @@
       color: var(--text-muted);
     }
 
-    /* ═══════════ Section 7: Final CTA ═══════════ */
-    .cta-section {
-      text-align: center;
-      padding: 100px 0;
-    }
-    .cta-box {
-      background: linear-gradient(135deg, rgba(232,133,12,0.08), rgba(204,120,92,0.05));
-      border: 1px solid rgba(232,133,12,0.2);
-      border-radius: 28px;
-      padding: 80px 48px;
+    /* ═══════════════════════════════════════════════════════════
+       FINAL CTA — Dark Section with Gradient Text
+       ═══════════════════════════════════════════════════════════ */
+    .cta-final {
+      padding: 120px 0;
       position: relative;
       overflow: hidden;
+      background: linear-gradient(180deg, var(--bg) 0%, #06060f 100%);
     }
-    .cta-box::before {
-      content: '';
+    .cta-final-mesh {
       position: absolute;
-      top: -120px;
-      right: -120px;
-      width: 400px;
-      height: 400px;
-      background: radial-gradient(circle, rgba(232,133,12,0.06), transparent);
+      inset: 0;
+      background:
+        radial-gradient(ellipse at 30% 50%, rgba(232,133,12,0.06) 0%, transparent 60%),
+        radial-gradient(ellipse at 70% 50%, rgba(245,166,35,0.04) 0%, transparent 60%);
       pointer-events: none;
     }
-    .cta-box h2 {
-      font-size: 2.6rem;
-      font-weight: 800;
-      color: var(--text-bright);
-      margin-bottom: 16px;
-      letter-spacing: -1px;
+    .cta-final-grid {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(232,133,12,0.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(232,133,12,0.02) 1px, transparent 1px);
+      background-size: 80px 80px;
+      mask-image: radial-gradient(ellipse at center, black 30%, transparent 80%);
+      -webkit-mask-image: radial-gradient(ellipse at center, black 30%, transparent 80%);
+      pointer-events: none;
     }
-    .cta-box p {
+    .cta-final-content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+    .cta-final-content h2 {
+      font-size: 3.4rem;
+      font-weight: 900;
+      letter-spacing: -2px;
+      line-height: 1.15;
+      margin-bottom: 20px;
+      background: linear-gradient(135deg, #fff 0%, var(--orange-light) 50%, var(--orange) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .cta-final-content p {
+      font-size: 1.2rem;
       color: var(--text-muted);
-      font-size: 1.15rem;
-      margin-bottom: 40px;
+      margin-bottom: 48px;
+      line-height: 1.8;
+    }
+    .cta-final-actions {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
     }
 
-    /* ═══════════ Footer ═══════════ */
+    /* ═══════════════════════════════════════════════════════════
+       FOOTER
+       ═══════════════════════════════════════════════════════════ */
     footer {
       border-top: 1px solid var(--border);
       padding: 64px 0 40px;
@@ -782,7 +1255,9 @@
     }
     .footer-bottom span { color: var(--orange); }
 
-    /* ═══════════ Scroll Fade-in ═══════════ */
+    /* ═══════════════════════════════════════════════════════════
+       SCROLL REVEAL
+       ═══════════════════════════════════════════════════════════ */
     .fade-in {
       opacity: 0;
       transform: translateY(30px);
@@ -792,15 +1267,43 @@
       opacity: 1;
       transform: translateY(0);
     }
+    .fade-in-scale {
+      opacity: 0;
+      transform: scale(0.9);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .fade-in-scale.visible {
+      opacity: 1;
+      transform: scale(1);
+    }
 
-    /* ═══════════ Responsive ═══════════ */
+    /* Stagger delays for children */
+    .stagger-children > *:nth-child(1) { transition-delay: 0s; }
+    .stagger-children > *:nth-child(2) { transition-delay: 0.1s; }
+    .stagger-children > *:nth-child(3) { transition-delay: 0.15s; }
+    .stagger-children > *:nth-child(4) { transition-delay: 0.2s; }
+    .stagger-children > *:nth-child(5) { transition-delay: 0.25s; }
+    .stagger-children > *:nth-child(6) { transition-delay: 0.3s; }
+    .stagger-children > *:nth-child(7) { transition-delay: 0.35s; }
+    .stagger-children > *:nth-child(8) { transition-delay: 0.4s; }
+
+    /* ═══════════════════════════════════════════════════════════
+       RESPONSIVE
+       ═══════════════════════════════════════════════════════════ */
     @media (max-width: 1024px) {
-      .hero h1 { font-size: 3.2rem; }
+      .hero h1 { font-size: 3.4rem; }
       .pillars-grid { grid-template-columns: 1fr; max-width: 520px; margin: 0 auto; }
       .cap-grid { grid-template-columns: repeat(2, 1fr); }
       .pricing-grid { grid-template-columns: repeat(2, 1fr); }
       .trust-strip { grid-template-columns: repeat(2, 1fr); }
       .footer-grid { grid-template-columns: 1fr 1fr; }
+      .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 20px; }
+      .stat-item:nth-child(2)::after { display: none; }
+      .stat-number { font-size: 2.6rem; }
+      .how-steps { flex-direction: column; gap: 40px; align-items: center; }
+      .how-step { max-width: 360px; }
+      .how-connector { display: none; }
+      .cta-final-content h2 { font-size: 2.6rem; }
     }
     @media (max-width: 768px) {
       nav { padding: 14px 20px; }
@@ -818,17 +1321,23 @@
         gap: 16px;
       }
       .nav-hamburger { display: flex; }
-      .hero { padding-top: 120px; padding-bottom: 60px; }
+      .hero { min-height: auto; padding-top: 120px; padding-bottom: 80px; }
       .hero h1 { font-size: 2.4rem; letter-spacing: -1px; }
       .hero-sub { font-size: 1.1rem; }
+      .hero-scroll { display: none; }
       .section { padding: 70px 0; }
       .section-header h2 { font-size: 2rem; }
       .cap-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
       .pricing-grid { grid-template-columns: 1fr; max-width: 400px; margin: 0 auto; }
       .trust-strip { grid-template-columns: 1fr 1fr; }
       .footer-grid { grid-template-columns: 1fr; gap: 32px; }
-      .cta-box { padding: 48px 24px; }
-      .cta-box h2 { font-size: 1.8rem; }
+      .stats-grid { grid-template-columns: repeat(2, 1fr); }
+      .stat-item::after { display: none !important; }
+      .cta-final { padding: 80px 0; }
+      .cta-final-content h2 { font-size: 2rem; }
+      .cta-final-content p { font-size: 1rem; }
+      .how-section { padding: 80px 0; }
+      .engines-section { padding: 60px 0; }
     }
     @media (max-width: 480px) {
       .hero h1 { font-size: 1.9rem; }
@@ -836,6 +1345,12 @@
       .btn { padding: 14px 28px; font-size: 0.95rem; }
       .cap-grid { grid-template-columns: 1fr 1fr; }
       .pillars-grid { max-width: 100%; }
+      .stats-grid { grid-template-columns: 1fr 1fr; gap: 12px; }
+      .stat-number { font-size: 2.2rem; }
+      .stat-item { padding: 16px 12px; }
+      .engine-badge { padding: 10px 16px; font-size: 0.82rem; }
+      .engine-badge-icon { width: 26px; height: 26px; font-size: 0.85rem; }
+      .cta-final-content h2 { font-size: 1.7rem; }
     }
 
     /* ─── Touch & Mobile Perf ─── */
@@ -882,6 +1397,19 @@
         margin-left: 0;
       }
     }
+
+    /* ─── Reduced motion ─── */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+      .fade-in, .fade-in-scale {
+        opacity: 1;
+        transform: none;
+      }
+    }
   </style>
 </head>
 <body>
@@ -908,26 +1436,119 @@
     </button>
   </nav>
 
-  <!-- ═══════════ Section 1: Hero ═══════════ -->
+  <!-- ═══════════ Section 1: Hero (Upgraded) ═══════════ -->
   <section class="hero">
+    <!-- Animated backgrounds -->
+    <div class="hero-mesh"></div>
+    <div class="hero-grid"></div>
+    <div class="hero-glow"></div>
+    <div class="hero-scanline"></div>
     <div class="hero-orb hero-orb-1"></div>
     <div class="hero-orb hero-orb-2"></div>
-    <div class="container">
+    <div class="hero-orb hero-orb-3"></div>
+
+    <div class="hero-content">
+      <div class="hero-badge">
+        <span class="hero-badge-dot"></span>
+        台灣首創 AI 統一平台
+      </div>
       <h1 data-i18n-html="hero.title.prefix,hero.title.highlight,hero.title.suffix"><em>一句話</em>，搞定一切</h1>
       <p class="hero-sub" data-i18n="hero.subtitle">
-        不用選工具、不用懂 AI。你說，SEOBAIKE 做。
+        不用選工具、不用懂 AI。你說，SEOBAIKE 做。<br>
+        15 個 AI 引擎、1,300+ 模型、自動幫你選最佳方案。
       </p>
       <div class="hero-actions">
-        <a href="/login.html" class="btn btn-primary btn-large" data-i18n="hero.cta1">開始使用</a>
+        <a href="/login.html" class="btn btn-primary btn-large" data-i18n="hero.cta1">免費開始</a>
         <a href="/pricing.html" class="btn btn-secondary btn-large" data-i18n="hero.cta2">了解更多</a>
+      </div>
+    </div>
+
+    <div class="hero-scroll">
+      <span>往下探索</span>
+      <div class="hero-scroll-line"></div>
+    </div>
+  </section>
+
+  <!-- ═══════════ Section 2: Stats Counter ═══════════ -->
+  <section class="stats-section fade-in">
+    <div class="container">
+      <div class="stats-grid stagger-children">
+        <div class="stat-item fade-in">
+          <div class="stat-number"><span class="counter" data-target="15">0</span></div>
+          <div class="stat-label">AI 引擎</div>
+        </div>
+        <div class="stat-item fade-in">
+          <div class="stat-number"><span class="counter" data-target="1300">0</span><span class="stat-suffix">+</span></div>
+          <div class="stat-label">AI 模型</div>
+        </div>
+        <div class="stat-item fade-in">
+          <div class="stat-number"><span class="counter" data-target="14">0</span></div>
+          <div class="stat-label">服務頻道</div>
+        </div>
+        <div class="stat-item fade-in">
+          <div class="stat-number"><span class="counter" data-target="500">0</span><span class="stat-suffix">+</span></div>
+          <div class="stat-label">整合工具</div>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- ═══════════ Section 2: Interactive Demo ═══════════ -->
+  <!-- ═══════════ Section 3: How It Works ═══════════ -->
+  <section class="how-section fade-in">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-label">簡單三步驟</div>
+        <h2>30 秒上手，就這麼簡單</h2>
+        <p>不需要任何技術背景，三步驟開始你的 AI 旅程</p>
+      </div>
+      <div class="how-steps">
+        <!-- Connectors -->
+        <div class="how-connector">
+          <div class="how-connector-line"></div>
+        </div>
+        <div class="how-connector how-connector-2">
+          <div class="how-connector-line"></div>
+        </div>
+
+        <div class="how-step fade-in">
+          <div class="how-step-icon">
+            <span class="how-step-number">1</span>
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color:var(--orange-light)">
+              <rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 3h-8l-2 4h12z"/>
+            </svg>
+          </div>
+          <h3>選擇你的行業</h3>
+          <p>告訴我們你是做什麼的，我們會根據你的產業自動推薦最適合的 AI 組合</p>
+        </div>
+        <div class="how-step fade-in">
+          <div class="how-step-icon">
+            <span class="how-step-number">2</span>
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color:var(--orange-light)">
+              <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+            </svg>
+          </div>
+          <h3>AI 自動配置</h3>
+          <p>SEOBAIKE 從 15 個引擎、1,300+ 模型中，自動為你選擇最快、最準、最划算的方案</p>
+        </div>
+        <div class="how-step fade-in">
+          <div class="how-step-icon">
+            <span class="how-step-number">3</span>
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color:var(--orange-light)">
+              <path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/>
+            </svg>
+          </div>
+          <h3>一鍵啟動</h3>
+          <p>開始使用你的專屬 AI 工作台。對話、寫作、圖像、程式碼，全部一站搞定</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ Section 4: Interactive Demo ═══════════ -->
   <section class="section demo-section fade-in">
     <div class="container">
       <div class="section-header">
+        <div class="section-label">即時體驗</div>
         <h2>看一次就懂</h2>
         <p>你說話，我們幫你找到最好的 AI 引擎來完成</p>
       </div>
@@ -942,7 +1563,6 @@
           <div class="demo-body">
             <div class="demo-chat" id="demoChat">
               <div class="demo-msg demo-msg-user" id="demoMsg1">幫我寫一篇產品介紹文案</div>
-              <!-- Route animation -->
               <div class="demo-route" id="demoRoute">
                 <div class="demo-route-circle" id="routeA">引擎 A</div>
                 <div class="demo-route-circle" id="routeB">引擎 B</div>
@@ -971,7 +1591,7 @@
     </div>
   </section>
 
-  <!-- ═══════════ Section 2.5: 60秒產品展示影片 ═══════════ -->
+  <!-- ═══════════ Section 4.5: 60秒產品展示影片 ═══════════ -->
   <section class="section fade-in" style="padding-top:40px;">
     <div class="container">
       <div class="section-header">
@@ -982,25 +1602,26 @@
     </div>
   </section>
 
-  <!-- ═══════════ Section 3: Three Pillars ═══════════ -->
+  <!-- ═══════════ Section 5: Three Pillars ═══════════ -->
   <section class="section fade-in">
     <div class="container">
       <div class="section-header">
+        <div class="section-label">核心優勢</div>
         <h2>為什麼選 SEOBAIKE？</h2>
         <p>三個理由，讓你不用再猶豫</p>
       </div>
-      <div class="pillars-grid">
-        <div class="pillar-card">
+      <div class="pillars-grid stagger-children">
+        <div class="pillar-card fade-in">
           <span class="pillar-emoji">&#127919;</span>
           <h3>零選擇障礙</h3>
           <p>別人要你做一堆選擇。我們？你只要說話。</p>
         </div>
-        <div class="pillar-card">
+        <div class="pillar-card fade-in">
           <span class="pillar-emoji">&#9889;</span>
           <h3>自動匹配</h3>
-          <p>1,000+ 個 AI 引擎，SEOBAIKE 自動幫你選最快、最準、最省的。</p>
+          <p>1,300+ 個 AI 模型，SEOBAIKE 自動幫你選最快、最準、最省的。</p>
         </div>
-        <div class="pillar-card">
+        <div class="pillar-card fade-in">
           <span class="pillar-emoji">&#128274;</span>
           <h3>安全保護</h3>
           <p>你的資料、你的對話，全程安全加密保護。</p>
@@ -1009,85 +1630,130 @@
     </div>
   </section>
 
-  <!-- ═══════════ Section 4: Capabilities ═══════════ -->
+  <!-- ═══════════ Section 6: Capabilities ═══════════ -->
   <section class="section cap-section fade-in">
     <div class="container">
       <div class="section-header">
+        <div class="section-label">八大能力</div>
         <h2>能做什麼？</h2>
         <p>八大能力，一個入口。滑鼠移上去看範例。</p>
       </div>
-      <div class="cap-grid">
-
-        <div class="cap-card">
+      <div class="cap-grid stagger-children">
+        <div class="cap-card fade-in">
           <span class="cap-emoji">&#128172;</span>
           <h4>對話</h4>
           <span class="cap-desc">跟 AI 聊天，像跟朋友一樣</span>
           <div class="cap-example">「幫我想三個生日派對主題」</div>
         </div>
-
-        <div class="cap-card">
+        <div class="cap-card fade-in">
           <span class="cap-emoji">&#128187;</span>
           <h4>程式碼</h4>
           <span class="cap-desc">寫程式、除錯、最佳化</span>
           <div class="cap-example">「這段程式有 bug，幫我修好」</div>
         </div>
-
-        <div class="cap-card">
+        <div class="cap-card fade-in">
           <span class="cap-emoji">&#128065;</span>
           <h4>視覺</h4>
           <span class="cap-desc">看圖說故事、分析圖片</span>
           <div class="cap-example">「這張設計稿有什麼可以改進的？」</div>
         </div>
-
-        <div class="cap-card">
+        <div class="cap-card fade-in">
           <span class="cap-emoji">&#129504;</span>
           <h4>推理</h4>
           <span class="cap-desc">數學、邏輯、複雜分析</span>
           <div class="cap-example">「這組數據的趨勢代表什麼？」</div>
         </div>
-
-        <div class="cap-card">
+        <div class="cap-card fade-in">
           <span class="cap-emoji">&#128269;</span>
           <h4>搜尋</h4>
           <span class="cap-desc">即時搜尋最新資訊</span>
           <div class="cap-example">「今天台北天氣如何？」</div>
         </div>
-
-        <div class="cap-card">
+        <div class="cap-card fade-in">
           <span class="cap-emoji">&#128202;</span>
           <h4>嵌入</h4>
           <span class="cap-desc">文件分析、語意理解</span>
           <div class="cap-example">「幫我把這份合約重點摘要」</div>
         </div>
-
-        <div class="cap-card">
+        <div class="cap-card fade-in">
           <span class="cap-emoji">&#127912;</span>
           <h4>圖像</h4>
           <span class="cap-desc">AI 繪圖、設計</span>
           <div class="cap-example">「畫一隻穿太空裝的柴犬」</div>
         </div>
-
-        <div class="cap-card">
+        <div class="cap-card fade-in">
           <span class="cap-emoji">&#127908;</span>
           <h4>語音</h4>
           <span class="cap-desc">語音轉文字、文字轉語音</span>
           <div class="cap-example">「把這段會議錄音轉成文字」</div>
         </div>
-
       </div>
     </div>
   </section>
 
-  <!-- ═══════════ Section 5: Pricing Preview ═══════════ -->
+  <!-- ═══════════ Section 7: Engine Capabilities Marquee ═══════════ -->
+  <section class="engines-section fade-in">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-label">生態系統</div>
+        <h2>15 家頂級 AI 引擎供應商</h2>
+        <p>整合業界最強大的 AI 能力，為你自動選擇最佳引擎</p>
+      </div>
+    </div>
+    <!-- Marquee Row 1 -->
+    <div class="marquee-row">
+      <div class="marquee-track">
+        <div class="engine-badge"><div class="engine-badge-icon">&#9889;</div>極速推理</div>
+        <div class="engine-badge"><div class="engine-badge-icon">&#129504;</div>深度推理</div>
+        <div class="engine-badge"><div class="engine-badge-icon">&#128187;</div>程式碼生成</div>
+        <div class="engine-badge"><div class="engine-badge-icon">&#127912;</div>圖像創作</div>
+        <div class="engine-badge"><div class="engine-badge-icon">&#128172;</div>多語言對話</div>
+        <div class="engine-badge"><div class="engine-badge-icon">&#128269;</div>即時搜尋</div>
+        <div class="engine-badge"><div class="engine-badge-icon">&#128202;</div>資料分析</div>
+        <div class="engine-badge"><div class="engine-badge-icon">&#127908;</div>語音處理</div>
+        <!-- Duplicate for seamless loop -->
+        <div class="engine-badge"><div class="engine-badge-icon">&#9889;</div>極速推理</div>
+        <div class="engine-badge"><div class="engine-badge-icon">&#129504;</div>深度推理</div>
+        <div class="engine-badge"><div class="engine-badge-icon">&#128187;</div>程式碼生成</div>
+        <div class="engine-badge"><div class="engine-badge-icon">&#127912;</div>圖像創作</div>
+        <div class="engine-badge"><div class="engine-badge-icon">&#128172;</div>多語言對話</div>
+        <div class="engine-badge"><div class="engine-badge-icon">&#128269;</div>即時搜尋</div>
+        <div class="engine-badge"><div class="engine-badge-icon">&#128202;</div>資料分析</div>
+        <div class="engine-badge"><div class="engine-badge-icon">&#127908;</div>語音處理</div>
+      </div>
+    </div>
+    <!-- Marquee Row 2 (reverse direction) -->
+    <div class="marquee-row marquee-row-2">
+      <div class="marquee-track">
+        <div class="engine-badge"><div class="engine-badge-icon">&#128640;</div>GPU 加速</div>
+        <div class="engine-badge"><div class="engine-badge-icon">&#128274;</div>安全合規</div>
+        <div class="engine-badge"><div class="engine-badge-icon">&#128200;</div>商業智慧</div>
+        <div class="engine-badge"><div class="engine-badge-icon">&#128065;</div>視覺辨識</div>
+        <div class="engine-badge"><div class="engine-badge-icon">&#128736;</div>自動化工作流</div>
+        <div class="engine-badge"><div class="engine-badge-icon">&#127760;</div>多模態融合</div>
+        <div class="engine-badge"><div class="engine-badge-icon">&#128218;</div>知識管理</div>
+        <!-- Duplicate for seamless loop -->
+        <div class="engine-badge"><div class="engine-badge-icon">&#128640;</div>GPU 加速</div>
+        <div class="engine-badge"><div class="engine-badge-icon">&#128274;</div>安全合規</div>
+        <div class="engine-badge"><div class="engine-badge-icon">&#128200;</div>商業智慧</div>
+        <div class="engine-badge"><div class="engine-badge-icon">&#128065;</div>視覺辨識</div>
+        <div class="engine-badge"><div class="engine-badge-icon">&#128736;</div>自動化工作流</div>
+        <div class="engine-badge"><div class="engine-badge-icon">&#127760;</div>多模態融合</div>
+        <div class="engine-badge"><div class="engine-badge-icon">&#128218;</div>知識管理</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ Section 8: Pricing Preview ═══════════ -->
   <section class="section fade-in">
     <div class="container">
       <div class="section-header">
+        <div class="section-label">定價方案</div>
         <h2>選擇適合你的方式</h2>
         <p>不管你在哪個階段，我們都有適合你的方案</p>
       </div>
-      <div class="pricing-grid">
-
-        <div class="price-card">
+      <div class="pricing-grid stagger-children">
+        <div class="price-card fade-in">
           <h4>體驗版</h4>
           <div class="price-amount"><span class="currency">NT$</span>0</div>
           <div class="price-period">永久免費</div>
@@ -1097,8 +1763,7 @@
             <li>社群支援</li>
           </ul>
         </div>
-
-        <div class="price-card">
+        <div class="price-card fade-in">
           <h4>個人版</h4>
           <div class="price-amount"><span class="currency">NT$</span>299</div>
           <div class="price-period">每月</div>
@@ -1108,8 +1773,7 @@
             <li>優先回應速度</li>
           </ul>
         </div>
-
-        <div class="price-card recommended">
+        <div class="price-card recommended fade-in">
           <div class="price-badge">推薦</div>
           <h4>專業版</h4>
           <div class="price-amount"><span class="currency">NT$</span>899</div>
@@ -1120,8 +1784,7 @@
             <li>專屬客服</li>
           </ul>
         </div>
-
-        <div class="price-card">
+        <div class="price-card fade-in">
           <h4>企業版</h4>
           <div class="price-amount"><span class="currency">NT$</span>2,999</div>
           <div class="price-period">每月</div>
@@ -1131,7 +1794,6 @@
             <li>客製化整合</li>
           </ul>
         </div>
-
       </div>
       <div style="text-align:center;margin-top:40px;">
         <a href="/pricing.html" class="btn btn-secondary">了解更多方案</a>
@@ -1139,29 +1801,30 @@
     </div>
   </section>
 
-  <!-- ═══════════ Section 6: Trust ═══════════ -->
+  <!-- ═══════════ Section 9: Trust ═══════════ -->
   <section class="section trust-section fade-in">
     <div class="container">
       <div class="section-header">
+        <div class="section-label">安心保障</div>
         <h2>值得信賴</h2>
       </div>
-      <div class="trust-strip">
-        <div class="trust-item">
+      <div class="trust-strip stagger-children">
+        <div class="trust-item fade-in">
           <span class="trust-item-icon">&#128220;</span>
           <h4>台灣公司</h4>
           <p>合法立案經營</p>
         </div>
-        <div class="trust-item">
+        <div class="trust-item fade-in">
           <span class="trust-item-icon">&#127970;</span>
           <h4>合法公司</h4>
           <p>小路光有限公司<br>統編 60475510</p>
         </div>
-        <div class="trust-item">
+        <div class="trust-item fade-in">
           <span class="trust-item-icon">&#9889;</span>
-          <h4>1,000+ AI 引擎</h4>
+          <h4>1,300+ AI 模型</h4>
           <p>自動選最佳方案</p>
         </div>
-        <div class="trust-item">
+        <div class="trust-item fade-in">
           <span class="trust-item-icon">&#128737;</span>
           <h4>零第三方干擾</h4>
           <p>你的資料只屬於你</p>
@@ -1170,13 +1833,18 @@
     </div>
   </section>
 
-  <!-- ═══════════ Section 7: Final CTA ═══════════ -->
-  <section class="cta-section fade-in">
+  <!-- ═══════════ Section 10: Final CTA ═══════════ -->
+  <section class="cta-final fade-in">
+    <div class="cta-final-mesh"></div>
+    <div class="cta-final-grid"></div>
     <div class="container">
-      <div class="cta-box">
-        <h2>讓 SEOBAIKE 幫你走對的路</h2>
-        <p>不綁卡、不綁約，找到適合你的方式。</p>
-        <a href="/login.html" class="btn btn-primary btn-large">開始你的旅程</a>
+      <div class="cta-final-content">
+        <h2>準備好了嗎？</h2>
+        <p>免費開始，30 秒上手。<br>讓 SEOBAIKE 成為你的 AI 統一入口。</p>
+        <div class="cta-final-actions">
+          <a href="/login.html" class="btn btn-primary btn-large">免費開始</a>
+          <a href="/pricing.html" class="btn btn-secondary btn-large">了解更多</a>
+        </div>
       </div>
     </div>
   </section>
@@ -1233,9 +1901,9 @@
       document.getElementById('navLinks').classList.toggle('open');
     });
 
-    /* ─── Scroll fade-in ─── */
+    /* ─── Scroll fade-in (enhanced — handles all reveal types) ─── */
     (function() {
-      var fadeEls = document.querySelectorAll('.fade-in');
+      var fadeEls = document.querySelectorAll('.fade-in, .fade-in-scale');
       var observer = new IntersectionObserver(function(entries) {
         entries.forEach(function(entry) {
           if (entry.isIntersecting) {
@@ -1243,14 +1911,65 @@
             observer.unobserve(entry.target);
           }
         });
-      }, { threshold: 0.1 });
+      }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
       fadeEls.forEach(function(el) { observer.observe(el); });
+    })();
+
+    /* ─── Animated Number Counters ─── */
+    (function() {
+      var counters = document.querySelectorAll('.counter');
+      var animated = false;
+
+      function animateCounters() {
+        if (animated) return;
+        animated = true;
+
+        counters.forEach(function(counter) {
+          var target = parseInt(counter.getAttribute('data-target'), 10);
+          var duration = 2000;
+          var startTime = null;
+
+          function easeOutExpo(t) {
+            return t === 1 ? 1 : 1 - Math.pow(2, -10 * t);
+          }
+
+          function updateCounter(timestamp) {
+            if (!startTime) startTime = timestamp;
+            var elapsed = timestamp - startTime;
+            var progress = Math.min(elapsed / duration, 1);
+            var easedProgress = easeOutExpo(progress);
+            var current = Math.floor(easedProgress * target);
+
+            counter.textContent = current.toLocaleString();
+
+            if (progress < 1) {
+              requestAnimationFrame(updateCounter);
+            } else {
+              counter.textContent = target.toLocaleString();
+            }
+          }
+
+          requestAnimationFrame(updateCounter);
+        });
+      }
+
+      var statsSection = document.querySelector('.stats-section');
+      if (statsSection) {
+        var counterObserver = new IntersectionObserver(function(entries) {
+          entries.forEach(function(entry) {
+            if (entry.isIntersecting) {
+              animateCounters();
+              counterObserver.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.3 });
+        counterObserver.observe(statsSection);
+      }
     })();
 
     /* ─── Demo Animation ─── */
     (function() {
       var isPlaying = false;
-      var animTimeout = null;
       var animTimeouts = [];
       var playBtn = document.getElementById('demoPlayBtn');
       var progress = document.getElementById('demoProgress');
@@ -1266,7 +1985,7 @@
         document.getElementById('routeD')
       ];
 
-      var TOTAL_DURATION = 10000; /* 10 seconds */
+      var TOTAL_DURATION = 10000;
       var progressStart = 0;
       var progressRAF = null;
 
@@ -1281,7 +2000,6 @@
         });
         progress.style.width = '0%';
         timeDisplay.textContent = '0:00';
-        /* reset play icon */
         playBtn.innerHTML = '<svg width="14" height="14" viewBox="0 0 14 14" fill="currentColor"><polygon points="3,1 12,7 3,13"/></svg>';
       }
 
@@ -1301,57 +2019,34 @@
         resetDemo();
         isPlaying = true;
         progressStart = Date.now();
-        /* pause icon */
         playBtn.innerHTML = '<svg width="14" height="14" viewBox="0 0 14 14" fill="currentColor"><rect x="2" y="1" width="4" height="12"/><rect x="8" y="1" width="4" height="12"/></svg>';
         updateProgress();
 
-        /* Step 1: User message (0.3s) */
-        animTimeouts.push(setTimeout(function() {
-          msg1.classList.add('visible');
-        }, 300));
+        animTimeouts.push(setTimeout(function() { msg1.classList.add('visible'); }, 300));
+        animTimeouts.push(setTimeout(function() { route.classList.add('visible'); }, 1500));
 
-        /* Step 2: Route appears (1.5s) */
-        animTimeouts.push(setTimeout(function() {
-          route.classList.add('visible');
-        }, 1500));
-
-        /* Step 3: Check each engine (2.5s - 5s) */
         circles.forEach(function(c, i) {
-          animTimeouts.push(setTimeout(function() {
-            c.classList.add('checking');
-          }, 2500 + i * 600));
+          animTimeouts.push(setTimeout(function() { c.classList.add('checking'); }, 2500 + i * 600));
           if (i < 3) {
-            /* not the winner - remove checking after a beat */
-            animTimeouts.push(setTimeout(function() {
-              c.classList.remove('checking');
-            }, 2500 + i * 600 + 400));
+            animTimeouts.push(setTimeout(function() { c.classList.remove('checking'); }, 2500 + i * 600 + 400));
           }
         });
 
-        /* Step 4: AI thinking message (5s) */
-        animTimeouts.push(setTimeout(function() {
-          msg2.classList.add('visible');
-        }, 5000));
+        animTimeouts.push(setTimeout(function() { msg2.classList.add('visible'); }, 5000));
 
-        /* Step 5: Select best engine (6s) */
         animTimeouts.push(setTimeout(function() {
           circles.forEach(function(c, i) {
             c.classList.remove('checking');
-            if (i === 2) {
-              c.classList.add('selected');
-            } else {
-              c.classList.add('dimmed');
-            }
+            if (i === 2) { c.classList.add('selected'); }
+            else { c.classList.add('dimmed'); }
           });
         }, 6000));
 
-        /* Step 6: AI final response (7.5s) */
         animTimeouts.push(setTimeout(function() {
           msg2.classList.remove('visible');
           msg3.classList.add('visible');
         }, 7500));
 
-        /* Step 7: Done (10s) */
         animTimeouts.push(setTimeout(function() {
           isPlaying = false;
           playBtn.innerHTML = '<svg width="14" height="14" viewBox="0 0 14 14" fill="currentColor"><polygon points="3,1 12,7 3,13"/></svg>';
@@ -1370,7 +2065,6 @@
         }
       });
 
-      /* Auto-play when visible */
       var demoObs = new IntersectionObserver(function(entries) {
         entries.forEach(function(entry) {
           if (entry.isIntersecting && !isPlaying) {
@@ -1380,6 +2074,20 @@
         });
       }, { threshold: 0.3 });
       demoObs.observe(document.querySelector('.demo-section'));
+    })();
+
+    /* ─── Navbar scroll effect ─── */
+    (function() {
+      var nav = document.querySelector('nav');
+      window.addEventListener('scroll', function() {
+        if (window.scrollY > 50) {
+          nav.style.background = 'rgba(10, 10, 26, 0.95)';
+          nav.style.borderBottomColor = 'rgba(232,133,12,0.1)';
+        } else {
+          nav.style.background = 'rgba(10, 10, 26, 0.85)';
+          nav.style.borderBottomColor = '';
+        }
+      }, { passive: true });
     })();
 
     /* ─── Page View Tracking ─── */
