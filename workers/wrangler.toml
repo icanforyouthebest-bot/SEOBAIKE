@@ -3,7 +3,7 @@ main = "src/index.ts"
 compatibility_date = "2024-01-01"
 workers_dev = true
 
-# API 路徑走 Worker，主站走 Cloudflare Pages（含安全標頭）
+# API 路徑走 Worker（含 Pages 代理），其他走 Lovable/Framer
 routes = [
   { pattern = "aiforseo.vip/api/*", zone_name = "aiforseo.vip" }
 ]

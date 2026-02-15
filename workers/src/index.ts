@@ -39,15 +39,9 @@ export default {
     const url = new URL(request.url)
     const path = url.pathname
 
-    // ── 非 /api/ 路徑 → proxy 到 origin 並注入全站安全標頭 ──
+    // ── 非 /api/ 路徑 → 直接跳過（Lovable/Framer 處理） ──
     if (!path.startsWith('/api/') && path !== '/api') {
-      const originResponse = await fetch(request)
-      const response = new Response(originResponse.body, originResponse)
-      // 注入缺失的安全標頭（CSP, X-Frame-Options, Permissions-Policy）
-      for (const [key, value] of Object.entries(SITE_SECURITY_HEADERS)) {
-        response.headers.set(key, value)
-      }
-      return response
+      return fetch(request)
     }
 
     // CORS preflight — API 路徑統一處理
@@ -66,6 +60,20 @@ export default {
     if (path === '/api' || path === '/api/') return json(200, { status: 'ok', service: 'SEOBAIKE OS', version: '3.0.0', ai: 'cloudflare-workers-ai', platforms: 14, architecture: 'CaaS — 人類決策為主，AI 為輔助執行' })
     if (path === '/api/health') return json(200, { status: 'ok', timestamp: new Date().toISOString(), version: '3.0.0', platforms_ready: 14 })
     if (path === '/api/platforms') return json(200, PLATFORM_REGISTRY)
+
+    // ── Pages 代理：生態系統儀表板 + Widget（從 GitHub Raw 取內容） ──
+    const PAGES_MAP: Record<string, { file: string; type: string }> = {
+      '/api/ecosystem': { file: 'pages-site/ecosystem.html', type: 'text/html; charset=utf-8' },
+      '/api/widget.js': { file: 'pages-site/seobaike-widget.js', type: 'application/javascript; charset=utf-8' },
+    }
+    if (PAGES_MAP[path]) {
+      const { file, type } = PAGES_MAP[path]
+      const rawRes = await fetch(`https://raw.githubusercontent.com/icanforyouthebest-bot/SEOBAIKE/master/${file}`)
+      return new Response(rawRes.body, {
+        status: rawRes.status,
+        headers: { ...SECURITY_HEADERS, 'Content-Type': type, 'Cache-Control': 'public, max-age=600' },
+      })
+    }
 
     if (request.method === 'GET') {
       if (path === '/api/chat') return serveChatWidget()

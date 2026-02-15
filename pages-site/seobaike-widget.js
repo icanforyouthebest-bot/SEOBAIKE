@@ -311,8 +311,8 @@
       </div>
       <div class="sw-nav">
         <a href="/" class="active">首頁</a>
-        <a href="/ecosystem.html">生態系統</a>
-        <a href="/dashboard.html">儀表板</a>
+        <a href="/api/ecosystem">生態系統</a>
+        <a href="/api/health" target="_blank">系統狀態</a>
       </div>
       <div class="sw-partner-select" id="sw-partner-list"></div>
       <div class="sw-messages" id="sw-messages">
@@ -467,7 +467,7 @@
       chatHistory = [];
     },
     openEcosystem: function() {
-      window.open('/ecosystem.html', '_blank');
+      window.open('/api/ecosystem', '_blank');
     },
     selectPartner: function(id) {
       const p = PARTNERS.find(x => x.id === id);
