@@ -248,7 +248,7 @@ export default {
     if (request.method !== 'POST') return json(405, { error: 'Method not allowed' })
 
     // ── Rate Limiting — 公開 API 每 IP 每端點 5 秒冷卻 ──
-    const rateLimitPaths = ['/api/ai/chat', '/api/widget-chat', '/api/v1/check', '/api/v1/inference', '/api/checkout']
+    const rateLimitPaths = ['/api/ai/chat', '/api/widget-chat', '/api/v1/check', '/api/v1/inference', '/api/checkout', '/api/ai/router', '/api/ai/search', '/api/ai/content', '/api/bot/command', '/api/team/dispatch']
     if (rateLimitPaths.includes(path)) {
       const clientIp = request.headers.get('CF-Connecting-IP') || 'unknown'
       const { allowed, retryAfter } = await checkRateLimit(env.RATE_LIMIT, `${clientIp}:${path}`, 5)
@@ -274,6 +274,12 @@ export default {
         case '/api/gateway': return await handleGateway(request, env)
         case '/api/ai/chat': return await handleAiChat(request, env)
         case '/api/widget-chat': return await handleWidgetChat(request, env)
+        // ── SEOBAIKE 世界級 API 路由 ──
+        case '/api/ai/router': return await proxyEdge(request, env, 'ai-universal-router')
+        case '/api/ai/search': return await proxyEdge(request, env, 'ai-search-engine')
+        case '/api/ai/content': return await proxyEdge(request, env, 'ai-content-factory')
+        case '/api/bot/command': return await proxyEdge(request, env, 'bot-commander')
+        case '/api/team/dispatch': return await proxyEdge(request, env, 'team-orchestrator')
         case '/api/checkout': return await handleStripeCheckout(request, env)
         case '/api/webhook/stripe': return await handleStripeWebhook(request, env)
         case '/api/send-email': return await handleSendEmail(request, env)
@@ -795,6 +801,21 @@ function quickButtons(cmd: string): { text: string, callback_data: string }[][] 
   if (cmd === '/revenue') return [[s, e], [h]]
   if (cmd === '/seo' || cmd === '/keywords') return [[s, r], [h]]
   return [[s, r], [h]]
+}
+
+// ============================================================
+// Edge Function Proxy — 世界級 API 統一代理
+// ============================================================
+async function proxyEdge(request: Request, env: Env, functionName: string): Promise<Response> {
+  const SUPA_URL = env.SUPABASE_URL || 'https://vmyrivxxibqydccurxug.supabase.co'
+  const body = await request.text()
+  const res = await fetch(`${SUPA_URL}/functions/v1/${functionName}`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${env.SUPABASE_SERVICE_ROLE_KEY}` },
+    body,
+  })
+  const data = await res.text()
+  return new Response(data, { status: res.status, headers: { ...SECURITY_HEADERS, 'Content-Type': 'application/json' } })
 }
 
 // ============================================================
