@@ -75,11 +75,14 @@ export default {
       }
       const rawRes = await fetch(`https://raw.githubusercontent.com/icanforyouthebest-bot/SEOBAIKE/master/pages-site/${pageFile}`)
       const body = await rawRes.text()
-      const resp = new Response(body, {
+      // ── 國家偵測：注入 data-cf-country 屬性供 i18n 自動切換語言 ──
+      const country = (request as any).cf?.country || 'US'
+      const injectedBody = body.replace('<html ', `<html data-cf-country="${country}" `)
+      const resp = new Response(injectedBody, {
         status: rawRes.status,
         headers: { ...SITE_SECURITY_HEADERS, 'Content-Type': 'text/html; charset=utf-8', 'Cache-Control': 'public, max-age=300, s-maxage=600', 'X-Cache': 'MISS' },
       })
-      if (rawRes.ok) { const toCache = new Response(body, { status: 200, headers: { ...SITE_SECURITY_HEADERS, 'Content-Type': 'text/html; charset=utf-8', 'Cache-Control': 'public, max-age=300, s-maxage=600', 'X-Cache': 'HIT' } }); cache.put(cacheKey, toCache) }
+      if (rawRes.ok) { const toCache = new Response(injectedBody, { status: 200, headers: { ...SITE_SECURITY_HEADERS, 'Content-Type': 'text/html; charset=utf-8', 'Cache-Control': 'public, max-age=300, s-maxage=600', 'X-Cache': 'HIT' } }); cache.put(cacheKey, toCache) }
       return resp
     }
 

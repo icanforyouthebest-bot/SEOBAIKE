@@ -1,10 +1,16 @@
 /**
- * SEOBAIKE i18n - 國際化語言切換模組
+ * SEOBAIKE i18n - 國際化語言切換模組（v2 - 自動偵測版）
  * 支援：繁體中文（預設）、English、日本語、한국어
+ * 語言偵測優先順序：
+ *   1. localStorage 手動選擇 (seobaike_lang_manual)
+ *   2. Cloudflare 國家碼 (html[data-cf-country])
+ *   3. navigator.language / navigator.languages
+ *   4. 預設 zh-TW
  * 小路光有限公司 (c) 2026
  */
 window.SEOBAIKE_I18N = {
   current: 'zh-TW',
+  supportedLangs: ['zh-TW', 'en', 'ja', 'ko'],
 
   translations: {
     'zh-TW': {
@@ -85,7 +91,18 @@ window.SEOBAIKE_I18N = {
       'footer.support.start': '快速開始',
       'footer.support.faq': '常見問題',
       'footer.support.contact': '聯繫客服',
-      'footer.support.status': '服務狀態'
+      'footer.support.status': '服務狀態',
+      // 市集翻譯鍵
+      'marketplace_hero': '你的東西，賣到全世界',
+      'marketplace_sell': '我要賣',
+      'marketplace_buy': '我要買',
+      'marketplace_list': '上架商品',
+      'marketplace_countries': '賣到哪裡？',
+      'global_reach': '全球零距離',
+      'auto_translate': 'AI 自動翻譯',
+      'seller_dashboard': '賣家後台',
+      'buyer_browse': '逛市集',
+      'list_success': '上架成功！'
     },
     'en': {
       'nav.home': 'Home',
@@ -165,7 +182,18 @@ window.SEOBAIKE_I18N = {
       'footer.support.start': 'Quick Start',
       'footer.support.faq': 'FAQ',
       'footer.support.contact': 'Contact Support',
-      'footer.support.status': 'Service Status'
+      'footer.support.status': 'Service Status',
+      // Marketplace translation keys
+      'marketplace_hero': 'Your products, sold worldwide',
+      'marketplace_sell': 'Sell',
+      'marketplace_buy': 'Buy',
+      'marketplace_list': 'List Product',
+      'marketplace_countries': 'Sell where?',
+      'global_reach': 'Global Zero Distance',
+      'auto_translate': 'AI Auto-Translate',
+      'seller_dashboard': 'Seller Dashboard',
+      'buyer_browse': 'Browse',
+      'list_success': 'Listed!'
     },
     'ja': {
       'nav.home': 'ホーム',
@@ -245,7 +273,18 @@ window.SEOBAIKE_I18N = {
       'footer.support.start': 'クイックスタート',
       'footer.support.faq': 'よくある質問',
       'footer.support.contact': 'サポート連絡',
-      'footer.support.status': 'サービス状態'
+      'footer.support.status': 'サービス状態',
+      // マーケットプレイス翻訳キー
+      'marketplace_hero': 'あなたの商品を世界へ',
+      'marketplace_sell': '販売する',
+      'marketplace_buy': '購入する',
+      'marketplace_list': '出品する',
+      'marketplace_countries': 'どこに売る？',
+      'global_reach': '世界とゼロ距離',
+      'auto_translate': 'AI自動翻訳',
+      'seller_dashboard': 'セラーダッシュボード',
+      'buyer_browse': 'マーケットを見る',
+      'list_success': '出品完了！'
     },
     'ko': {
       'nav.home': '홈',
@@ -325,8 +364,110 @@ window.SEOBAIKE_I18N = {
       'footer.support.start': '빠른 시작',
       'footer.support.faq': '자주 묻는 질문',
       'footer.support.contact': '고객 지원 문의',
-      'footer.support.status': '서비스 상태'
+      'footer.support.status': '서비스 상태',
+      // 마켓플레이스 번역 키
+      'marketplace_hero': '당신의 상품을 전 세계로',
+      'marketplace_sell': '판매하기',
+      'marketplace_buy': '구매하기',
+      'marketplace_list': '상품 등록',
+      'marketplace_countries': '어디에 팔까요?',
+      'global_reach': '글로벌 제로 디스턴스',
+      'auto_translate': 'AI 자동 번역',
+      'seller_dashboard': '판매자 대시보드',
+      'buyer_browse': '마켓 둘러보기',
+      'list_success': '등록 완료!'
     }
+  },
+
+  /**
+   * 國家碼 → 語言對應表（Cloudflare Workers 設定 data-cf-country）
+   */
+  countryToLang: {
+    'TW': 'zh-TW', 'HK': 'zh-TW', 'MO': 'zh-TW',
+    'KR': 'ko',
+    'JP': 'ja',
+    'US': 'en', 'GB': 'en', 'AU': 'en', 'CA': 'en', 'NZ': 'en',
+    'IE': 'en', 'SG': 'en', 'PH': 'en', 'IN': 'en'
+  },
+
+  /**
+   * 從 navigator.language 偵測對應的支援語言
+   * @returns {string} 偵測到的語言代碼
+   */
+  _detectFromNavigator: function() {
+    var langs = [];
+    try {
+      if (navigator.languages && navigator.languages.length) {
+        langs = Array.prototype.slice.call(navigator.languages);
+      } else if (navigator.language) {
+        langs = [navigator.language];
+      }
+    } catch(e) {}
+
+    for (var i = 0; i < langs.length; i++) {
+      var tag = langs[i].toLowerCase();
+      // 繁體中文系列
+      if (tag === 'zh-tw' || tag === 'zh-hant' || tag === 'zh-hant-tw' || tag === 'zh-hant-hk') {
+        return 'zh-TW';
+      }
+      // 簡體中文也歸到 zh-TW（SEOBAIKE 不另設簡體，繁體可讀）
+      if (tag === 'zh' || tag === 'zh-cn' || tag === 'zh-hans' || tag === 'zh-sg') {
+        return 'zh-TW';
+      }
+      // 韓文
+      if (tag === 'ko' || tag.indexOf('ko-') === 0) {
+        return 'ko';
+      }
+      // 日文
+      if (tag === 'ja' || tag.indexOf('ja-') === 0) {
+        return 'ja';
+      }
+      // 英文
+      if (tag === 'en' || tag.indexOf('en-') === 0) {
+        return 'en';
+      }
+    }
+    // 預設
+    return 'en';
+  },
+
+  /**
+   * 從 Cloudflare 國家碼偵測語言
+   * Workers 會在 <html data-cf-country="TW"> 設定此屬性
+   * @returns {string|null} 偵測到的語言代碼，或 null
+   */
+  _detectFromCloudflare: function() {
+    try {
+      var country = document.documentElement.getAttribute('data-cf-country');
+      if (country && this.countryToLang[country.toUpperCase()]) {
+        return this.countryToLang[country.toUpperCase()];
+      }
+    } catch(e) {}
+    return null;
+  },
+
+  /**
+   * 完整的語言偵測邏輯（依優先順序）
+   * 1. 手動選擇 (seobaike_lang_manual)
+   * 2. Cloudflare 國家碼
+   * 3. navigator.language
+   * 4. 預設 zh-TW
+   * @returns {string} 最終決定的語言代碼
+   */
+  detectLanguage: function() {
+    // 1. 手動選擇最優先
+    var manual = null;
+    try { manual = localStorage.getItem('seobaike_lang_manual'); } catch(e) {}
+    if (manual && this.translations[manual]) {
+      return manual;
+    }
+
+    // 2. Cloudflare 國家碼
+    var cfLang = this._detectFromCloudflare();
+    if (cfLang) return cfLang;
+
+    // 3. navigator.language
+    return this._detectFromNavigator();
   },
 
   /**
@@ -341,55 +482,98 @@ window.SEOBAIKE_I18N = {
   },
 
   /**
-   * 切換語言
-   * @param {string} lang - 目標語言代碼 ('zh-TW' | 'en' | 'ja' | 'ko')
+   * 注入淡入淡出動畫所需的 CSS（只注入一次）
    */
-  switchLang: function(lang) {
-    if (!this.translations[lang]) return;
-    this.current = lang;
-    try { localStorage.setItem('seobaike_lang', lang); } catch(e) {}
-
-    // 設定 html lang 屬性
-    var langMap = { 'zh-TW': 'zh-TW', 'en': 'en', 'ja': 'ja', 'ko': 'ko' };
-    document.documentElement.lang = langMap[lang] || 'zh-TW';
-
-    // 更新所有有 data-i18n 屬性的元素
-    var self = this;
-    document.querySelectorAll('[data-i18n]').forEach(function(el) {
-      el.textContent = self.t(el.dataset.i18n);
-    });
-
-    // 更新所有有 data-i18n-html 屬性的元素（支援 innerHTML）
-    document.querySelectorAll('[data-i18n-html]').forEach(function(el) {
-      var keys = el.dataset.i18nHtml.split(',');
-      if (keys.length === 3) {
-        el.innerHTML = self.t(keys[0]) + '<em>' + self.t(keys[1]) + '</em>' + self.t(keys[2]);
-      }
-    });
-
-    // 更新語言切換按鈕的 active 狀態
-    document.querySelectorAll('.lang-btn').forEach(function(b) {
-      if (b.dataset.lang === lang) {
-        b.classList.add('active');
-      } else {
-        b.classList.remove('active');
-      }
-    });
-
-    // 觸發自訂事件，方便其他元件監聽
-    try {
-      document.dispatchEvent(new CustomEvent('seobaike:langchange', { detail: { lang: lang } }));
-    } catch(e) {}
+  _injectTransitionCSS: function() {
+    if (document.getElementById('seobaike-i18n-transition-css')) return;
+    var style = document.createElement('style');
+    style.id = 'seobaike-i18n-transition-css';
+    style.textContent =
+      '.seobaike-lang-fade { transition: opacity 0.25s ease; }' +
+      '.seobaike-lang-fade-out { opacity: 0 !important; }';
+    document.head.appendChild(style);
   },
 
   /**
-   * 初始化 — 從 localStorage 讀取上次選擇的語言
+   * 切換語言（含淡入淡出動畫）
+   * @param {string} lang - 目標語言代碼 ('zh-TW' | 'en' | 'ja' | 'ko')
+   * @param {object} [options] - 選項
+   * @param {boolean} [options.manual] - 是否為使用者手動切換
+   * @param {boolean} [options.skipAnimation] - 是否跳過動畫（初始化時用）
+   */
+  switchLang: function(lang, options) {
+    if (!this.translations[lang]) return;
+    var opts = options || {};
+    var self = this;
+
+    // 儲存語言選擇
+    this.current = lang;
+    try { localStorage.setItem('seobaike_lang', lang); } catch(e) {}
+
+    // 如果是手動切換，額外存一個 manual 標記，之後優先使用
+    if (opts.manual) {
+      try { localStorage.setItem('seobaike_lang_manual', lang); } catch(e) {}
+    }
+
+    var applyTranslations = function() {
+      // 設定 html lang 屬性
+      document.documentElement.lang = lang;
+
+      // 更新所有有 data-i18n 屬性的元素
+      document.querySelectorAll('[data-i18n]').forEach(function(el) {
+        el.textContent = self.t(el.dataset.i18n);
+      });
+
+      // 更新所有有 data-i18n-html 屬性的元素（支援 innerHTML）
+      document.querySelectorAll('[data-i18n-html]').forEach(function(el) {
+        var keys = el.dataset.i18nHtml.split(',');
+        if (keys.length === 3) {
+          el.innerHTML = self.t(keys[0]) + '<em>' + self.t(keys[1]) + '</em>' + self.t(keys[2]);
+        }
+      });
+
+      // 更新語言切換按鈕的 active 狀態
+      document.querySelectorAll('.lang-btn').forEach(function(b) {
+        if (b.dataset.lang === lang) {
+          b.classList.add('active');
+        } else {
+          b.classList.remove('active');
+        }
+      });
+
+      // 觸發自訂事件，方便其他元件監聽
+      try {
+        document.dispatchEvent(new CustomEvent('seobaike:langchange', { detail: { lang: lang } }));
+      } catch(e) {}
+    };
+
+    // 動畫邏輯
+    if (opts.skipAnimation || !document.body) {
+      applyTranslations();
+      return;
+    }
+
+    this._injectTransitionCSS();
+    document.body.classList.add('seobaike-lang-fade');
+    document.body.classList.add('seobaike-lang-fade-out');
+
+    setTimeout(function() {
+      applyTranslations();
+      document.body.classList.remove('seobaike-lang-fade-out');
+      // 動畫結束後移除 transition class，避免影響其他動畫
+      setTimeout(function() {
+        document.body.classList.remove('seobaike-lang-fade');
+      }, 300);
+    }, 250);
+  },
+
+  /**
+   * 初始化 — 自動偵測語言 + 載入上次選擇
+   * 偵測優先順序：手動選擇 > Cloudflare 國家碼 > navigator.language > 預設
    */
   init: function() {
-    var saved = null;
-    try { saved = localStorage.getItem('seobaike_lang'); } catch(e) {}
-    if (saved && this.translations[saved]) {
-      this.switchLang(saved);
-    }
+    var detectedLang = this.detectLanguage();
+    // 首次載入跳過動畫，直接套用
+    this.switchLang(detectedLang, { skipAnimation: true });
   }
 };
