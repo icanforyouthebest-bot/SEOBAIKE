@@ -1,7 +1,8 @@
 // ============================================================
-// SEOBAIKE AI 客服聊天小工具 — "小百"
-// 自包含嵌入式腳本，無外部依賴
-// 連接 Supabase Edge Function: ai-gateway
+// SEOBAIKE 主動式 AI 聊天 Widget — "小百 2.0"
+// 自包含嵌入式腳本，純 vanilla JS，零依賴
+// 主動出擊：AI 不等人來問，而是先開口
+// 連接 Workers API: /api/ai/smart
 // ============================================================
 
 (function () {
@@ -9,336 +10,503 @@
 
   // ── 設定 ──
   var CONFIG = {
-    edgeUrl: '/api/widget-chat',
-    apiKey: '',
-    platform: 'web-widget',
-    fallbackMessage: '\u5c0f\u767e\u76ee\u524d\u5fd9\u7921\u4e2d\uff0c\u8acb\u900f\u904e /contact \u9801\u9762\u806f\u7e6b\u6211\u5011\uff0c\u6216\u7a0d\u5f8c\u518d\u8a66\u3002',
-    welcomeMessage: '\u4f60\u597d\uff01\u6211\u662f\u5c0f\u767e\uff0cSEOBAIKE \u7684 AI \u52a9\u624b\u3002\u6709\u4ec0\u9ebc\u6211\u53ef\u4ee5\u5e6b\u4f60\u7684\u55ce\uff1f'
+    apiUrl: '/api/ai/smart',
+    fallbackMessage: '小百目前忙碌中，請透過 /contact 頁面聯繫我們，或稍後再試。',
+    greetingDelay: 3000,
+    greetingAutoHide: 8000,
+    inactivityDelay: 30000,
+    maxHistory: 10,
+    storageKeys: {
+      profile: 'seobaike_profile',
+      chatHistory: 'seobaike_chat_history',
+      widgetClosed: 'seobaike_widget_closed',
+      lastPage: 'seobaike_last_page',
+      visitCount: 'seobaike_visit_count',
+      sessionMessages: 'seobaike_session_proactive'
+    }
   };
 
-  // 訪客 ID（每個 session 固定）
-  var visitorId = 'visitor-' + Math.random().toString(36).substring(2, 10) + Date.now().toString(36);
+  // ── 頁面上下文建議 ──
+  var PAGE_SUGGESTIONS = {
+    '/': {
+      greeting: '想了解我們能幫你什麼嗎？',
+      pills: [
+        { icon: '\uD83D\uDE80', text: '快速了解' },
+        { icon: '\uD83D\uDCBC', text: '適合我的行業' },
+        { icon: '\uD83C\uDF81', text: '免費體驗' }
+      ]
+    },
+    '/pricing': {
+      greeting: '需要幫你比較哪個方案最適合嗎？',
+      pills: [
+        { icon: '\uD83D\uDD0D', text: '比較方案' },
+        { icon: '\uD83C\uDF81', text: '免費體驗' },
+        { icon: '\uD83D\uDCDE', text: '聯繫我們' }
+      ]
+    },
+    '/features': {
+      greeting: '想看看哪個功能最適合你的行業嗎？',
+      pills: [
+        { icon: '\u2B50', text: '熱門功能' },
+        { icon: '\uD83C\uDFAF', text: '依行業推薦' },
+        { icon: '\uD83D\uDCCA', text: '效果展示' }
+      ]
+    },
+    '/dashboard': {
+      greeting: '需要幫你分析今天的數據嗎？',
+      pills: [
+        { icon: '\uD83D\uDCCA', text: '看今日報表' },
+        { icon: '\uD83D\uDCE2', text: '發推文' },
+        { icon: '\uD83D\uDCAC', text: '回客戶' }
+      ]
+    },
+    '/marketplace': {
+      greeting: '在找特定的工具嗎？告訴我你的需求！',
+      pills: [
+        { icon: '\uD83D\uDD0D', text: '搜尋工具' },
+        { icon: '\uD83C\uDF1F', text: '熱門推薦' },
+        { icon: '\uD83C\uDFF7\uFE0F', text: '依類別瀏覽' }
+      ]
+    },
+    '/ai': {
+      greeting: '直接試試！問我任何問題。',
+      pills: [
+        { icon: '\uD83E\uDD16', text: '寫一篇文章' },
+        { icon: '\uD83D\uDCDD', text: '翻譯內容' },
+        { icon: '\uD83D\uDCA1', text: '給我建議' }
+      ]
+    }
+  };
 
-  var isOpen = false;
-  var isSending = false;
+  // ── 狀態 ──
+  var state = {
+    isOpen: false,
+    isSending: false,
+    greetingVisible: false,
+    greetingTimeout: null,
+    inactivityTimer: null,
+    shownProactiveMessages: {},
+    visitorId: 'visitor-' + Math.random().toString(36).substring(2, 10) + Date.now().toString(36)
+  };
 
   // ── SVG 圖示 ──
-  var CHAT_ICON_SVG = '<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>';
+  var ICONS = {
+    chat: '<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>',
+    close: '<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>',
+    send: '<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>'
+  };
 
-  var CLOSE_ICON_SVG = '<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>';
+  // ── DOM 參照 ──
+  var els = {};
 
-  var SEND_ICON_SVG = '<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>';
-
-  // ── 樣式注入 ──
+  // ══════════════════════════════════════════
+  // CSS 樣式注入
+  // ══════════════════════════════════════════
   function injectStyles() {
+    if (document.getElementById('seobaike-widget-styles')) return;
     var style = document.createElement('style');
     style.id = 'seobaike-widget-styles';
-    style.textContent = [
-      /* ── 浮動按鈕 ── */
-      '#seobaike-chat-btn {',
-      '  position: fixed;',
-      '  bottom: 24px;',
-      '  right: 24px;',
-      '  width: 60px;',
-      '  height: 60px;',
-      '  border-radius: 50%;',
-      '  background: #e8850c;',
-      '  border: none;',
-      '  cursor: pointer;',
-      '  box-shadow: 0 4px 16px rgba(232, 133, 12, 0.45);',
-      '  z-index: 9999;',
-      '  display: flex;',
-      '  align-items: center;',
-      '  justify-content: center;',
-      '  transition: transform 0.25s ease, box-shadow 0.25s ease, opacity 0.3s ease;',
-      '  padding: 0;',
-      '  outline: none;',
-      '}',
-      '#seobaike-chat-btn:hover {',
-      '  transform: scale(1.08);',
-      '  box-shadow: 0 6px 24px rgba(232, 133, 12, 0.6);',
-      '}',
-      '#seobaike-chat-btn.sb-hidden {',
-      '  transform: scale(0);',
-      '  opacity: 0;',
-      '  pointer-events: none;',
-      '}',
+    style.textContent = '\n' +
 
-      /* ── 聊天面板 ── */
-      '#seobaike-chat-panel {',
-      '  position: fixed;',
-      '  bottom: 24px;',
-      '  right: 24px;',
-      '  width: 380px;',
-      '  height: 520px;',
-      '  background: #0a0a1a;',
-      '  border-radius: 16px;',
-      '  box-shadow: 0 8px 48px rgba(0, 0, 0, 0.55), 0 0 0 1px rgba(232, 133, 12, 0.2);',
-      '  z-index: 10000;',
-      '  display: flex;',
-      '  flex-direction: column;',
-      '  overflow: hidden;',
-      '  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;',
-      '  transform: scale(0) translateY(20px);',
-      '  transform-origin: bottom right;',
-      '  opacity: 0;',
-      '  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.2s ease;',
-      '  pointer-events: none;',
-      '}',
-      '#seobaike-chat-panel.sb-open {',
-      '  transform: scale(1) translateY(0);',
-      '  opacity: 1;',
-      '  pointer-events: auto;',
-      '}',
+    /* ── 浮動按鈕 ── */
+    '#seobaike-chat-btn {\n' +
+    '  position: fixed;\n' +
+    '  bottom: 24px;\n' +
+    '  right: 24px;\n' +
+    '  width: 60px;\n' +
+    '  height: 60px;\n' +
+    '  border-radius: 50%;\n' +
+    '  background: #e8850c;\n' +
+    '  border: none;\n' +
+    '  cursor: pointer;\n' +
+    '  box-shadow: 0 4px 20px rgba(232,133,12,0.5);\n' +
+    '  z-index: 10000;\n' +
+    '  display: flex;\n' +
+    '  align-items: center;\n' +
+    '  justify-content: center;\n' +
+    '  transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.3s ease, opacity 0.3s ease;\n' +
+    '  padding: 0;\n' +
+    '  outline: none;\n' +
+    '}\n' +
+    '#seobaike-chat-btn:hover {\n' +
+    '  transform: scale(1.1);\n' +
+    '  box-shadow: 0 6px 28px rgba(232,133,12,0.65);\n' +
+    '}\n' +
+    '#seobaike-chat-btn.sb-hidden {\n' +
+    '  transform: scale(0);\n' +
+    '  opacity: 0;\n' +
+    '  pointer-events: none;\n' +
+    '}\n' +
 
-      /* ── 標題列 ── */
-      '.sb-header {',
-      '  background: linear-gradient(135deg, #e8850c 0%, #d4700a 100%);',
-      '  padding: 14px 16px;',
-      '  display: flex;',
-      '  align-items: center;',
-      '  justify-content: space-between;',
-      '  flex-shrink: 0;',
-      '}',
-      '.sb-header-info {',
-      '  display: flex;',
-      '  align-items: center;',
-      '  gap: 10px;',
-      '}',
-      '.sb-header-avatar {',
-      '  width: 36px;',
-      '  height: 36px;',
-      '  border-radius: 50%;',
-      '  background: rgba(255,255,255,0.2);',
-      '  display: flex;',
-      '  align-items: center;',
-      '  justify-content: center;',
-      '  font-size: 18px;',
-      '  color: white;',
-      '  font-weight: 700;',
-      '  flex-shrink: 0;',
-      '}',
-      '.sb-header-text h3 {',
-      '  margin: 0;',
-      '  font-size: 15px;',
-      '  font-weight: 700;',
-      '  color: white;',
-      '  line-height: 1.2;',
-      '}',
-      '.sb-header-text span {',
-      '  font-size: 11px;',
-      '  color: rgba(255,255,255,0.8);',
-      '  display: flex;',
-      '  align-items: center;',
-      '  gap: 4px;',
-      '}',
-      '.sb-online-dot {',
-      '  width: 6px;',
-      '  height: 6px;',
-      '  border-radius: 50%;',
-      '  background: #4ade80;',
-      '  display: inline-block;',
-      '}',
-      '.sb-close-btn {',
-      '  background: rgba(255,255,255,0.15);',
-      '  border: none;',
-      '  width: 32px;',
-      '  height: 32px;',
-      '  border-radius: 8px;',
-      '  cursor: pointer;',
-      '  display: flex;',
-      '  align-items: center;',
-      '  justify-content: center;',
-      '  transition: background 0.2s;',
-      '  padding: 0;',
-      '  outline: none;',
-      '}',
-      '.sb-close-btn:hover {',
-      '  background: rgba(255,255,255,0.3);',
-      '}',
+    /* ── 主動招呼氣泡 ── */
+    '#seobaike-greeting {\n' +
+    '  position: fixed;\n' +
+    '  bottom: 96px;\n' +
+    '  right: 24px;\n' +
+    '  max-width: 280px;\n' +
+    '  background: #1a1a2e;\n' +
+    '  color: #f0f0ff;\n' +
+    '  padding: 14px 18px;\n' +
+    '  border-radius: 16px 16px 4px 16px;\n' +
+    '  font-size: 14px;\n' +
+    '  line-height: 1.5;\n' +
+    '  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;\n' +
+    '  box-shadow: 0 8px 32px rgba(0,0,0,0.4), 0 0 0 1px rgba(232,133,12,0.25);\n' +
+    '  z-index: 10001;\n' +
+    '  cursor: pointer;\n' +
+    '  transform: translateY(10px) scale(0.9);\n' +
+    '  opacity: 0;\n' +
+    '  transition: transform 0.4s cubic-bezier(0.34,1.56,0.64,1), opacity 0.3s ease;\n' +
+    '  pointer-events: none;\n' +
+    '}\n' +
+    '#seobaike-greeting.sb-visible {\n' +
+    '  transform: translateY(0) scale(1);\n' +
+    '  opacity: 1;\n' +
+    '  pointer-events: auto;\n' +
+    '}\n' +
+    '#seobaike-greeting::after {\n' +
+    '  content: "";\n' +
+    '  position: absolute;\n' +
+    '  bottom: -8px;\n' +
+    '  right: 20px;\n' +
+    '  width: 0;\n' +
+    '  height: 0;\n' +
+    '  border-left: 8px solid transparent;\n' +
+    '  border-right: 8px solid transparent;\n' +
+    '  border-top: 8px solid #1a1a2e;\n' +
+    '}\n' +
+    '#seobaike-greeting:hover {\n' +
+    '  background: #252540;\n' +
+    '}\n' +
 
-      /* ── 訊息區 ── */
-      '.sb-messages {',
-      '  flex: 1;',
-      '  overflow-y: auto;',
-      '  padding: 16px;',
-      '  background: #12122a;',
-      '  display: flex;',
-      '  flex-direction: column;',
-      '  gap: 12px;',
-      '}',
-      '.sb-messages::-webkit-scrollbar {',
-      '  width: 5px;',
-      '}',
-      '.sb-messages::-webkit-scrollbar-track {',
-      '  background: transparent;',
-      '}',
-      '.sb-messages::-webkit-scrollbar-thumb {',
-      '  background: rgba(255,255,255,0.15);',
-      '  border-radius: 4px;',
-      '}',
-      '.sb-messages::-webkit-scrollbar-thumb:hover {',
-      '  background: rgba(255,255,255,0.25);',
-      '}',
+    /* ── 聊天面板 ── */
+    '#seobaike-chat-panel {\n' +
+    '  position: fixed;\n' +
+    '  bottom: 24px;\n' +
+    '  right: 24px;\n' +
+    '  width: 380px;\n' +
+    '  height: 500px;\n' +
+    '  background: rgba(10,10,26,0.95);\n' +
+    '  backdrop-filter: blur(20px);\n' +
+    '  -webkit-backdrop-filter: blur(20px);\n' +
+    '  border-radius: 16px;\n' +
+    '  box-shadow: 0 8px 48px rgba(0,0,0,0.55), 0 0 0 1px rgba(232,133,12,0.2);\n' +
+    '  z-index: 10000;\n' +
+    '  display: flex;\n' +
+    '  flex-direction: column;\n' +
+    '  overflow: hidden;\n' +
+    '  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;\n' +
+    '  transform: scale(0) translateY(20px);\n' +
+    '  transform-origin: bottom right;\n' +
+    '  opacity: 0;\n' +
+    '  transition: transform 0.35s cubic-bezier(0.34,1.56,0.64,1), opacity 0.25s ease;\n' +
+    '  pointer-events: none;\n' +
+    '}\n' +
+    '#seobaike-chat-panel.sb-open {\n' +
+    '  transform: scale(1) translateY(0);\n' +
+    '  opacity: 1;\n' +
+    '  pointer-events: auto;\n' +
+    '}\n' +
 
-      /* ── 訊息氣泡 ── */
-      '.sb-msg {',
-      '  display: flex;',
-      '  flex-direction: column;',
-      '  max-width: 82%;',
-      '  animation: sb-fade-in 0.3s ease;',
-      '}',
-      '@keyframes sb-fade-in {',
-      '  from { opacity: 0; transform: translateY(8px); }',
-      '  to { opacity: 1; transform: translateY(0); }',
-      '}',
-      '.sb-msg-user {',
-      '  align-self: flex-end;',
-      '}',
-      '.sb-msg-bot {',
-      '  align-self: flex-start;',
-      '}',
-      '.sb-msg-bubble {',
-      '  padding: 10px 14px;',
-      '  border-radius: 14px;',
-      '  font-size: 13.5px;',
-      '  line-height: 1.55;',
-      '  word-break: break-word;',
-      '  white-space: pre-wrap;',
-      '}',
-      '.sb-msg-user .sb-msg-bubble {',
-      '  background: #e8850c;',
-      '  color: white;',
-      '  border-bottom-right-radius: 4px;',
-      '}',
-      '.sb-msg-bot .sb-msg-bubble {',
-      '  background: #1a1a3a;',
-      '  color: #e0e0ef;',
-      '  border-bottom-left-radius: 4px;',
-      '}',
-      '.sb-msg-time {',
-      '  font-size: 10px;',
-      '  color: rgba(255,255,255,0.3);',
-      '  margin-top: 4px;',
-      '  padding: 0 4px;',
-      '}',
-      '.sb-msg-user .sb-msg-time {',
-      '  text-align: right;',
-      '}',
+    /* ── 標題列 ── */
+    '.sb-header {\n' +
+    '  background: linear-gradient(135deg, #e8850c 0%, #d4700a 100%);\n' +
+    '  padding: 14px 16px;\n' +
+    '  display: flex;\n' +
+    '  align-items: center;\n' +
+    '  justify-content: space-between;\n' +
+    '  flex-shrink: 0;\n' +
+    '}\n' +
+    '.sb-header-info {\n' +
+    '  display: flex;\n' +
+    '  align-items: center;\n' +
+    '  gap: 10px;\n' +
+    '}\n' +
+    '.sb-header-avatar {\n' +
+    '  width: 36px;\n' +
+    '  height: 36px;\n' +
+    '  border-radius: 50%;\n' +
+    '  background: rgba(255,255,255,0.2);\n' +
+    '  display: flex;\n' +
+    '  align-items: center;\n' +
+    '  justify-content: center;\n' +
+    '  font-size: 18px;\n' +
+    '  color: white;\n' +
+    '  font-weight: 700;\n' +
+    '  flex-shrink: 0;\n' +
+    '}\n' +
+    '.sb-header-text h3 {\n' +
+    '  margin: 0;\n' +
+    '  font-size: 15px;\n' +
+    '  font-weight: 700;\n' +
+    '  color: white;\n' +
+    '  line-height: 1.2;\n' +
+    '}\n' +
+    '.sb-header-text span {\n' +
+    '  font-size: 11px;\n' +
+    '  color: rgba(255,255,255,0.8);\n' +
+    '  display: flex;\n' +
+    '  align-items: center;\n' +
+    '  gap: 4px;\n' +
+    '}\n' +
+    '.sb-online-dot {\n' +
+    '  width: 6px;\n' +
+    '  height: 6px;\n' +
+    '  border-radius: 50%;\n' +
+    '  background: #4ade80;\n' +
+    '  display: inline-block;\n' +
+    '}\n' +
+    '.sb-close-btn {\n' +
+    '  background: rgba(255,255,255,0.15);\n' +
+    '  border: none;\n' +
+    '  width: 32px;\n' +
+    '  height: 32px;\n' +
+    '  border-radius: 8px;\n' +
+    '  cursor: pointer;\n' +
+    '  display: flex;\n' +
+    '  align-items: center;\n' +
+    '  justify-content: center;\n' +
+    '  transition: background 0.2s;\n' +
+    '  padding: 0;\n' +
+    '  outline: none;\n' +
+    '}\n' +
+    '.sb-close-btn:hover {\n' +
+    '  background: rgba(255,255,255,0.3);\n' +
+    '}\n' +
 
-      /* ── 打字動畫 ── */
-      '.sb-typing-indicator {',
-      '  display: flex;',
-      '  align-items: center;',
-      '  gap: 5px;',
-      '  padding: 12px 16px;',
-      '  background: #1a1a3a;',
-      '  border-radius: 14px;',
-      '  border-bottom-left-radius: 4px;',
-      '  align-self: flex-start;',
-      '  animation: sb-fade-in 0.3s ease;',
-      '}',
-      '.sb-typing-dot {',
-      '  width: 7px;',
-      '  height: 7px;',
-      '  border-radius: 50%;',
-      '  background: #e8850c;',
-      '  animation: sb-typing-bounce 1.4s infinite ease-in-out;',
-      '}',
-      '.sb-typing-dot:nth-child(2) { animation-delay: 0.16s; }',
-      '.sb-typing-dot:nth-child(3) { animation-delay: 0.32s; }',
-      '@keyframes sb-typing-bounce {',
-      '  0%, 80%, 100% { transform: scale(0.4); opacity: 0.4; }',
-      '  40% { transform: scale(1); opacity: 1; }',
-      '}',
+    /* ── 訊息區 ── */
+    '.sb-messages {\n' +
+    '  flex: 1;\n' +
+    '  overflow-y: auto;\n' +
+    '  padding: 16px;\n' +
+    '  background: rgba(18,18,42,0.8);\n' +
+    '  display: flex;\n' +
+    '  flex-direction: column;\n' +
+    '  gap: 12px;\n' +
+    '}\n' +
+    '.sb-messages::-webkit-scrollbar {\n' +
+    '  width: 5px;\n' +
+    '}\n' +
+    '.sb-messages::-webkit-scrollbar-track {\n' +
+    '  background: transparent;\n' +
+    '}\n' +
+    '.sb-messages::-webkit-scrollbar-thumb {\n' +
+    '  background: rgba(255,255,255,0.15);\n' +
+    '  border-radius: 4px;\n' +
+    '}\n' +
+    '.sb-messages::-webkit-scrollbar-thumb:hover {\n' +
+    '  background: rgba(255,255,255,0.25);\n' +
+    '}\n' +
 
-      /* ── 輸入區 ── */
-      '.sb-input-area {',
-      '  display: flex;',
-      '  align-items: center;',
-      '  gap: 8px;',
-      '  padding: 12px 14px;',
-      '  background: #0a0a1a;',
-      '  border-top: 1px solid rgba(255,255,255,0.06);',
-      '  flex-shrink: 0;',
-      '}',
-      '.sb-input-field {',
-      '  flex: 1;',
-      '  padding: 10px 14px;',
-      '  border-radius: 12px;',
-      '  border: 1px solid rgba(255,255,255,0.1);',
-      '  background: #12122a;',
-      '  color: #f0f0ff;',
-      '  font-size: 13.5px;',
-      '  outline: none;',
-      '  transition: border-color 0.2s;',
-      '  font-family: inherit;',
-      '}',
-      '.sb-input-field:focus {',
-      '  border-color: #e8850c;',
-      '}',
-      '.sb-input-field::placeholder {',
-      '  color: rgba(255,255,255,0.3);',
-      '}',
-      '.sb-send-btn {',
-      '  width: 40px;',
-      '  height: 40px;',
-      '  border-radius: 12px;',
-      '  border: none;',
-      '  background: #e8850c;',
-      '  cursor: pointer;',
-      '  display: flex;',
-      '  align-items: center;',
-      '  justify-content: center;',
-      '  transition: background 0.2s, transform 0.15s;',
-      '  flex-shrink: 0;',
-      '  padding: 0;',
-      '  outline: none;',
-      '}',
-      '.sb-send-btn:hover {',
-      '  background: #d4700a;',
-      '  transform: scale(1.05);',
-      '}',
-      '.sb-send-btn:active {',
-      '  transform: scale(0.95);',
-      '}',
-      '.sb-send-btn:disabled {',
-      '  background: #5a3a10;',
-      '  cursor: not-allowed;',
-      '  transform: none;',
-      '}',
+    /* ── 訊息氣泡 ── */
+    '.sb-msg {\n' +
+    '  display: flex;\n' +
+    '  flex-direction: column;\n' +
+    '  max-width: 82%;\n' +
+    '  animation: sb-fade-in 0.3s ease;\n' +
+    '}\n' +
+    '@keyframes sb-fade-in {\n' +
+    '  from { opacity: 0; transform: translateY(8px); }\n' +
+    '  to { opacity: 1; transform: translateY(0); }\n' +
+    '}\n' +
+    '.sb-msg-user {\n' +
+    '  align-self: flex-end;\n' +
+    '}\n' +
+    '.sb-msg-bot {\n' +
+    '  align-self: flex-start;\n' +
+    '}\n' +
+    '.sb-msg-bubble {\n' +
+    '  padding: 10px 14px;\n' +
+    '  border-radius: 14px;\n' +
+    '  font-size: 13.5px;\n' +
+    '  line-height: 1.55;\n' +
+    '  word-break: break-word;\n' +
+    '  white-space: pre-wrap;\n' +
+    '}\n' +
+    '.sb-msg-user .sb-msg-bubble {\n' +
+    '  background: #e8850c;\n' +
+    '  color: white;\n' +
+    '  border-bottom-right-radius: 4px;\n' +
+    '}\n' +
+    '.sb-msg-bot .sb-msg-bubble {\n' +
+    '  background: #1a1a3a;\n' +
+    '  color: #e0e0ef;\n' +
+    '  border-bottom-left-radius: 4px;\n' +
+    '}\n' +
+    '.sb-msg-time {\n' +
+    '  font-size: 10px;\n' +
+    '  color: rgba(255,255,255,0.3);\n' +
+    '  margin-top: 4px;\n' +
+    '  padding: 0 4px;\n' +
+    '}\n' +
+    '.sb-msg-user .sb-msg-time {\n' +
+    '  text-align: right;\n' +
+    '}\n' +
 
-      /* ── 底部標語 ── */
-      '.sb-footer {',
-      '  text-align: center;',
-      '  padding: 6px;',
-      '  font-size: 10px;',
-      '  color: rgba(255,255,255,0.2);',
-      '  background: #0a0a1a;',
-      '  flex-shrink: 0;',
-      '  letter-spacing: 0.3px;',
-      '}',
+    /* ── 快速操作按鈕 ── */
+    '.sb-quick-actions {\n' +
+    '  display: flex;\n' +
+    '  flex-wrap: wrap;\n' +
+    '  gap: 8px;\n' +
+    '  padding: 4px 0 8px 0;\n' +
+    '  animation: sb-fade-in 0.4s ease;\n' +
+    '}\n' +
+    '.sb-quick-pill {\n' +
+    '  display: inline-flex;\n' +
+    '  align-items: center;\n' +
+    '  gap: 6px;\n' +
+    '  padding: 8px 14px;\n' +
+    '  background: rgba(232,133,12,0.12);\n' +
+    '  border: 1px solid rgba(232,133,12,0.3);\n' +
+    '  border-radius: 20px;\n' +
+    '  color: #e8a050;\n' +
+    '  font-size: 13px;\n' +
+    '  cursor: pointer;\n' +
+    '  transition: all 0.2s ease;\n' +
+    '  font-family: inherit;\n' +
+    '  outline: none;\n' +
+    '}\n' +
+    '.sb-quick-pill:hover {\n' +
+    '  background: rgba(232,133,12,0.25);\n' +
+    '  border-color: rgba(232,133,12,0.5);\n' +
+    '  color: #f0b060;\n' +
+    '  transform: translateY(-1px);\n' +
+    '}\n' +
+    '.sb-quick-pill:active {\n' +
+    '  transform: translateY(0);\n' +
+    '}\n' +
 
-      /* ── 手機響應式 ── */
-      '@media (max-width: 480px) {',
-      '  #seobaike-chat-panel {',
-      '    width: 100%;',
-      '    height: 100%;',
-      '    bottom: 0;',
-      '    right: 0;',
-      '    border-radius: 0;',
-      '    transform-origin: bottom center;',
-      '  }',
-      '  #seobaike-chat-btn {',
-      '    bottom: 16px;',
-      '    right: 16px;',
-      '  }',
-      '}'
-    ].join('\n');
+    /* ── 打字動畫 ── */
+    '.sb-typing-indicator {\n' +
+    '  display: flex;\n' +
+    '  align-items: center;\n' +
+    '  gap: 5px;\n' +
+    '  padding: 12px 16px;\n' +
+    '  background: #1a1a3a;\n' +
+    '  border-radius: 14px;\n' +
+    '  border-bottom-left-radius: 4px;\n' +
+    '  align-self: flex-start;\n' +
+    '  animation: sb-fade-in 0.3s ease;\n' +
+    '}\n' +
+    '.sb-typing-dot {\n' +
+    '  width: 7px;\n' +
+    '  height: 7px;\n' +
+    '  border-radius: 50%;\n' +
+    '  background: #e8850c;\n' +
+    '  animation: sb-typing-bounce 1.4s infinite ease-in-out;\n' +
+    '}\n' +
+    '.sb-typing-dot:nth-child(2) { animation-delay: 0.16s; }\n' +
+    '.sb-typing-dot:nth-child(3) { animation-delay: 0.32s; }\n' +
+    '@keyframes sb-typing-bounce {\n' +
+    '  0%, 80%, 100% { transform: scale(0.4); opacity: 0.4; }\n' +
+    '  40% { transform: scale(1); opacity: 1; }\n' +
+    '}\n' +
+
+    /* ── 輸入區 ── */
+    '.sb-input-area {\n' +
+    '  display: flex;\n' +
+    '  align-items: center;\n' +
+    '  gap: 8px;\n' +
+    '  padding: 12px 14px;\n' +
+    '  background: rgba(10,10,26,0.95);\n' +
+    '  border-top: 1px solid rgba(255,255,255,0.06);\n' +
+    '  flex-shrink: 0;\n' +
+    '}\n' +
+    '.sb-input-field {\n' +
+    '  flex: 1;\n' +
+    '  padding: 10px 14px;\n' +
+    '  border-radius: 12px;\n' +
+    '  border: 1px solid rgba(255,255,255,0.1);\n' +
+    '  background: #12122a;\n' +
+    '  color: #f0f0ff;\n' +
+    '  font-size: 13.5px;\n' +
+    '  outline: none;\n' +
+    '  transition: border-color 0.2s;\n' +
+    '  font-family: inherit;\n' +
+    '}\n' +
+    '.sb-input-field:focus {\n' +
+    '  border-color: #e8850c;\n' +
+    '}\n' +
+    '.sb-input-field::placeholder {\n' +
+    '  color: rgba(255,255,255,0.3);\n' +
+    '}\n' +
+    '.sb-send-btn {\n' +
+    '  width: 40px;\n' +
+    '  height: 40px;\n' +
+    '  border-radius: 12px;\n' +
+    '  border: none;\n' +
+    '  background: #e8850c;\n' +
+    '  cursor: pointer;\n' +
+    '  display: flex;\n' +
+    '  align-items: center;\n' +
+    '  justify-content: center;\n' +
+    '  transition: background 0.2s, transform 0.15s;\n' +
+    '  flex-shrink: 0;\n' +
+    '  padding: 0;\n' +
+    '  outline: none;\n' +
+    '}\n' +
+    '.sb-send-btn:hover {\n' +
+    '  background: #d4700a;\n' +
+    '  transform: scale(1.05);\n' +
+    '}\n' +
+    '.sb-send-btn:active {\n' +
+    '  transform: scale(0.95);\n' +
+    '}\n' +
+    '.sb-send-btn:disabled {\n' +
+    '  background: #5a3a10;\n' +
+    '  cursor: not-allowed;\n' +
+    '  transform: none;\n' +
+    '}\n' +
+
+    /* ── 底部品牌 ── */
+    '.sb-footer {\n' +
+    '  text-align: center;\n' +
+    '  padding: 6px;\n' +
+    '  font-size: 10px;\n' +
+    '  color: rgba(255,255,255,0.2);\n' +
+    '  background: rgba(10,10,26,0.95);\n' +
+    '  flex-shrink: 0;\n' +
+    '  letter-spacing: 0.3px;\n' +
+    '}\n' +
+
+    /* ── 按鈕脈衝動畫（主動出擊時） ── */
+    '@keyframes sb-pulse {\n' +
+    '  0% { box-shadow: 0 4px 20px rgba(232,133,12,0.5); }\n' +
+    '  50% { box-shadow: 0 4px 20px rgba(232,133,12,0.5), 0 0 0 12px rgba(232,133,12,0); }\n' +
+    '  100% { box-shadow: 0 4px 20px rgba(232,133,12,0.5); }\n' +
+    '}\n' +
+    '#seobaike-chat-btn.sb-pulse {\n' +
+    '  animation: sb-pulse 2s ease-in-out infinite;\n' +
+    '}\n' +
+
+    /* ── 手機響應式 ── */
+    '@media (max-width: 480px) {\n' +
+    '  #seobaike-chat-panel {\n' +
+    '    width: 100%;\n' +
+    '    height: 100%;\n' +
+    '    bottom: 0;\n' +
+    '    right: 0;\n' +
+    '    border-radius: 0;\n' +
+    '    transform-origin: bottom center;\n' +
+    '  }\n' +
+    '  #seobaike-chat-btn {\n' +
+    '    bottom: 16px;\n' +
+    '    right: 16px;\n' +
+    '  }\n' +
+    '  #seobaike-greeting {\n' +
+    '    bottom: 88px;\n' +
+    '    right: 16px;\n' +
+    '    max-width: calc(100vw - 80px);\n' +
+    '  }\n' +
+    '}\n';
+
     document.head.appendChild(style);
   }
 
-  // ── 工具函式 ──
+  // ══════════════════════════════════════════
+  // 工具函式
+  // ══════════════════════════════════════════
+
   function escapeHtml(text) {
     var div = document.createElement('div');
     div.textContent = text;
@@ -347,114 +515,282 @@
 
   function getTimeString() {
     var now = new Date();
-    var h = now.getHours().toString();
-    var m = now.getMinutes().toString();
-    if (h.length < 2) h = '0' + h;
-    if (m.length < 2) m = '0' + m;
+    var h = ('0' + now.getHours()).slice(-2);
+    var m = ('0' + now.getMinutes()).slice(-2);
     return h + ':' + m;
   }
 
-  // ── DOM 參照 ──
-  var chatPanel, chatBtn, messagesContainer, inputField, sendBtn, typingEl;
+  function getCurrentPath() {
+    var path = window.location.pathname.replace(/\.html$/, '');
+    if (path === '' || path === '/index') path = '/';
+    // 去掉尾端斜線（但保留根路徑 /）
+    if (path.length > 1 && path.charAt(path.length - 1) === '/') {
+      path = path.slice(0, -1);
+    }
+    return path;
+  }
 
-  // ── 建立 Widget DOM ──
+  function getPageContext() {
+    var path = getCurrentPath();
+    // 精確匹配
+    if (PAGE_SUGGESTIONS[path]) return PAGE_SUGGESTIONS[path];
+    // 前綴匹配（例如 /dashboard/xxx）
+    var keys = Object.keys(PAGE_SUGGESTIONS);
+    for (var i = 0; i < keys.length; i++) {
+      if (keys[i] !== '/' && path.indexOf(keys[i]) === 0) {
+        return PAGE_SUGGESTIONS[keys[i]];
+      }
+    }
+    // 預設
+    return {
+      greeting: '有什麼我能幫你的嗎？',
+      pills: [
+        { icon: '\uD83D\uDE80', text: '了解 SEOBAIKE' },
+        { icon: '\uD83D\uDCAC', text: '跟小百聊聊' },
+        { icon: '\uD83C\uDF1F', text: '熱門功能' }
+      ]
+    };
+  }
+
+  function getProfile() {
+    try {
+      var raw = localStorage.getItem(CONFIG.storageKeys.profile);
+      if (raw) return JSON.parse(raw);
+    } catch (e) { /* 靜默 */ }
+    return null;
+  }
+
+  function getChatHistory() {
+    try {
+      var raw = localStorage.getItem(CONFIG.storageKeys.chatHistory);
+      if (raw) return JSON.parse(raw);
+    } catch (e) { /* 靜默 */ }
+    return [];
+  }
+
+  function saveChatHistory(messages) {
+    try {
+      // 只保留最後 N 條
+      var trimmed = messages.slice(-CONFIG.maxHistory);
+      localStorage.setItem(CONFIG.storageKeys.chatHistory, JSON.stringify(trimmed));
+    } catch (e) { /* 靜默 */ }
+  }
+
+  function addToHistory(role, text) {
+    var history = getChatHistory();
+    history.push({ role: role, text: text, time: Date.now() });
+    saveChatHistory(history);
+  }
+
+  function getVisitCount() {
+    try {
+      var count = parseInt(localStorage.getItem(CONFIG.storageKeys.visitCount) || '0', 10);
+      return count;
+    } catch (e) { return 0; }
+  }
+
+  function incrementVisitCount() {
+    try {
+      var count = getVisitCount() + 1;
+      localStorage.setItem(CONFIG.storageKeys.visitCount, String(count));
+      return count;
+    } catch (e) { return 1; }
+  }
+
+  function getLastPage() {
+    try {
+      return localStorage.getItem(CONFIG.storageKeys.lastPage) || '';
+    } catch (e) { return ''; }
+  }
+
+  function saveLastPage() {
+    try {
+      localStorage.setItem(CONFIG.storageKeys.lastPage, getCurrentPath());
+    } catch (e) { /* 靜默 */ }
+  }
+
+  function wasExplicitlyClosed() {
+    try {
+      return localStorage.getItem(CONFIG.storageKeys.widgetClosed) === 'true';
+    } catch (e) { return false; }
+  }
+
+  function setExplicitlyClosed(val) {
+    try {
+      if (val) {
+        localStorage.setItem(CONFIG.storageKeys.widgetClosed, 'true');
+      } else {
+        localStorage.removeItem(CONFIG.storageKeys.widgetClosed);
+      }
+    } catch (e) { /* 靜默 */ }
+  }
+
+  /** 判斷某條主動訊息在本 session 是否已顯示過 */
+  function hasShownProactive(key) {
+    return !!state.shownProactiveMessages[key];
+  }
+
+  function markProactiveShown(key) {
+    state.shownProactiveMessages[key] = true;
+  }
+
+  // ══════════════════════════════════════════
+  // DOM 建構
+  // ══════════════════════════════════════════
+
   function createWidget() {
     // --- 浮動按鈕 ---
-    chatBtn = document.createElement('button');
-    chatBtn.id = 'seobaike-chat-btn';
-    chatBtn.setAttribute('aria-label', 'SEOBAIKE AI \u5ba2\u670d');
-    chatBtn.innerHTML = CHAT_ICON_SVG;
-    chatBtn.addEventListener('click', toggleChat);
-    document.body.appendChild(chatBtn);
+    els.chatBtn = document.createElement('button');
+    els.chatBtn.id = 'seobaike-chat-btn';
+    els.chatBtn.setAttribute('aria-label', 'SEOBAIKE AI 助手');
+    els.chatBtn.innerHTML = ICONS.chat;
+    els.chatBtn.addEventListener('click', function () {
+      hideGreeting();
+      openChat();
+    });
+    document.body.appendChild(els.chatBtn);
+
+    // --- 主動招呼氣泡 ---
+    els.greeting = document.createElement('div');
+    els.greeting.id = 'seobaike-greeting';
+    els.greeting.addEventListener('click', function () {
+      hideGreeting();
+      openChat();
+    });
+    document.body.appendChild(els.greeting);
 
     // --- 聊天面板 ---
-    chatPanel = document.createElement('div');
-    chatPanel.id = 'seobaike-chat-panel';
-    chatPanel.setAttribute('role', 'dialog');
-    chatPanel.setAttribute('aria-label', 'SEOBAIKE AI \u5ba2\u670d\u5c0d\u8a71');
+    els.chatPanel = document.createElement('div');
+    els.chatPanel.id = 'seobaike-chat-panel';
+    els.chatPanel.setAttribute('role', 'dialog');
+    els.chatPanel.setAttribute('aria-label', 'SEOBAIKE AI 助手對話');
 
     // 標題列
     var header = document.createElement('div');
     header.className = 'sb-header';
-    header.innerHTML = [
-      '<div class="sb-header-info">',
-      '  <div class="sb-header-avatar">\u5c0f</div>',
-      '  <div class="sb-header-text">',
-      '    <h3>SEOBAIKE \u5c0f\u767e</h3>',
-      '    <span><span class="sb-online-dot"></span> AI \u5ba2\u670d\u52a9\u624b</span>',
-      '  </div>',
-      '</div>'
-    ].join('');
+    header.innerHTML =
+      '<div class="sb-header-info">' +
+      '  <div class="sb-header-avatar">\u5C0F</div>' +
+      '  <div class="sb-header-text">' +
+      '    <h3>SEOBAIKE \u5C0F\u767E</h3>' +
+      '    <span><span class="sb-online-dot"></span> AI \u52A9\u624B \u00b7 \u96A8\u6642\u70BA\u4F60\u670D\u52D9</span>' +
+      '  </div>' +
+      '</div>';
 
     var closeBtn = document.createElement('button');
     closeBtn.className = 'sb-close-btn';
-    closeBtn.setAttribute('aria-label', '\u95dc\u9589\u5c0d\u8a71');
-    closeBtn.innerHTML = CLOSE_ICON_SVG;
-    closeBtn.addEventListener('click', toggleChat);
+    closeBtn.setAttribute('aria-label', '\u95DC\u9589\u5C0D\u8A71');
+    closeBtn.innerHTML = ICONS.close;
+    closeBtn.addEventListener('click', function () {
+      closeChat(true);
+    });
     header.appendChild(closeBtn);
 
     // 訊息容器
-    messagesContainer = document.createElement('div');
-    messagesContainer.className = 'sb-messages';
+    els.messagesContainer = document.createElement('div');
+    els.messagesContainer.className = 'sb-messages';
 
     // 輸入區
     var inputArea = document.createElement('div');
     inputArea.className = 'sb-input-area';
 
-    inputField = document.createElement('input');
-    inputField.type = 'text';
-    inputField.className = 'sb-input-field';
-    inputField.placeholder = '\u8f38\u5165\u8a0a\u606f...';
-    inputField.setAttribute('aria-label', '\u8f38\u5165\u8a0a\u606f');
-    inputField.addEventListener('keydown', function (e) {
+    els.inputField = document.createElement('input');
+    els.inputField.type = 'text';
+    els.inputField.className = 'sb-input-field';
+    els.inputField.placeholder = '\u8F38\u5165\u8A0A\u606F...';
+    els.inputField.setAttribute('aria-label', '\u8F38\u5165\u8A0A\u606F');
+    els.inputField.addEventListener('keydown', function (e) {
       if (e.key === 'Enter' && !e.shiftKey) {
         e.preventDefault();
         handleSend();
       }
     });
 
-    sendBtn = document.createElement('button');
-    sendBtn.className = 'sb-send-btn';
-    sendBtn.setAttribute('aria-label', '\u50b3\u9001');
-    sendBtn.innerHTML = SEND_ICON_SVG;
-    sendBtn.addEventListener('click', handleSend);
+    // 輸入時重設閒置計時器
+    els.inputField.addEventListener('input', resetInactivityTimer);
 
-    inputArea.appendChild(inputField);
-    inputArea.appendChild(sendBtn);
+    els.sendBtn = document.createElement('button');
+    els.sendBtn.className = 'sb-send-btn';
+    els.sendBtn.setAttribute('aria-label', '\u50B3\u9001');
+    els.sendBtn.innerHTML = ICONS.send;
+    els.sendBtn.addEventListener('click', handleSend);
 
-    // 底部標語
+    inputArea.appendChild(els.inputField);
+    inputArea.appendChild(els.sendBtn);
+
+    // 底部品牌
     var footer = document.createElement('div');
     footer.className = 'sb-footer';
     footer.textContent = 'Powered by SEOBAIKE CaaS';
 
-    // 組裝面板
-    chatPanel.appendChild(header);
-    chatPanel.appendChild(messagesContainer);
-    chatPanel.appendChild(inputArea);
-    chatPanel.appendChild(footer);
-    document.body.appendChild(chatPanel);
-
-    // 插入歡迎訊息
-    appendBotMessage(CONFIG.welcomeMessage);
+    // 組裝
+    els.chatPanel.appendChild(header);
+    els.chatPanel.appendChild(els.messagesContainer);
+    els.chatPanel.appendChild(inputArea);
+    els.chatPanel.appendChild(footer);
+    document.body.appendChild(els.chatPanel);
   }
 
-  // ── 開關面板 ──
-  function toggleChat() {
-    isOpen = !isOpen;
-    if (isOpen) {
-      chatPanel.classList.add('sb-open');
-      chatBtn.classList.add('sb-hidden');
-      // 延遲一點才 focus，讓動畫順暢
-      setTimeout(function () {
-        inputField.focus();
-      }, 320);
-    } else {
-      chatPanel.classList.remove('sb-open');
-      chatBtn.classList.remove('sb-hidden');
+  // ══════════════════════════════════════════
+  // 招呼氣泡（出現在按鈕上方）
+  // ══════════════════════════════════════════
+
+  function showGreeting(text) {
+    if (state.isOpen) return;
+    if (state.greetingVisible) return;
+
+    els.greeting.textContent = text;
+    state.greetingVisible = true;
+    els.greeting.classList.add('sb-visible');
+    els.chatBtn.classList.add('sb-pulse');
+
+    // 自動隱藏
+    clearTimeout(state.greetingTimeout);
+    state.greetingTimeout = setTimeout(function () {
+      hideGreeting();
+    }, CONFIG.greetingAutoHide);
+  }
+
+  function hideGreeting() {
+    if (!state.greetingVisible) return;
+    state.greetingVisible = false;
+    els.greeting.classList.remove('sb-visible');
+    els.chatBtn.classList.remove('sb-pulse');
+    clearTimeout(state.greetingTimeout);
+  }
+
+  // ══════════════════════════════════════════
+  // 開關面板
+  // ══════════════════════════════════════════
+
+  function openChat() {
+    if (state.isOpen) return;
+    state.isOpen = true;
+    hideGreeting();
+    setExplicitlyClosed(false);
+    els.chatPanel.classList.add('sb-open');
+    els.chatBtn.classList.add('sb-hidden');
+    setTimeout(function () {
+      els.inputField.focus();
+    }, 350);
+    resetInactivityTimer();
+  }
+
+  function closeChat(explicit) {
+    if (!state.isOpen) return;
+    state.isOpen = false;
+    els.chatPanel.classList.remove('sb-open');
+    els.chatBtn.classList.remove('sb-hidden');
+    if (explicit) {
+      setExplicitlyClosed(true);
     }
+    clearInactivityTimer();
   }
 
-  // ── 新增使用者訊息 ──
+  // ══════════════════════════════════════════
+  // 訊息渲染
+  // ══════════════════════════════════════════
+
   function appendUserMessage(text) {
     var wrapper = document.createElement('div');
     wrapper.className = 'sb-msg sb-msg-user';
@@ -469,102 +805,139 @@
 
     wrapper.appendChild(bubble);
     wrapper.appendChild(time);
-    messagesContainer.appendChild(wrapper);
+    els.messagesContainer.appendChild(wrapper);
     scrollToBottom();
   }
 
-  // ── 新增機器人訊息 ──
   function appendBotMessage(text) {
     var wrapper = document.createElement('div');
     wrapper.className = 'sb-msg sb-msg-bot';
 
     var bubble = document.createElement('div');
     bubble.className = 'sb-msg-bubble';
-    // 保留換行但做 HTML escape
     bubble.innerHTML = escapeHtml(text);
 
     var time = document.createElement('div');
     time.className = 'sb-msg-time';
-    time.textContent = '\u5c0f\u767e \u00b7 ' + getTimeString();
+    time.textContent = '\u5C0F\u767E \u00b7 ' + getTimeString();
 
     wrapper.appendChild(bubble);
     wrapper.appendChild(time);
-    messagesContainer.appendChild(wrapper);
+    els.messagesContainer.appendChild(wrapper);
     scrollToBottom();
   }
 
-  // ── 打字指示器 ──
+  function appendQuickActions(pills) {
+    var wrapper = document.createElement('div');
+    wrapper.className = 'sb-quick-actions';
+
+    for (var i = 0; i < pills.length; i++) {
+      (function (pill) {
+        var btn = document.createElement('button');
+        btn.className = 'sb-quick-pill';
+        btn.textContent = pill.icon + ' ' + pill.text;
+        btn.addEventListener('click', function () {
+          // 移除快速操作區
+          if (wrapper.parentNode) {
+            wrapper.parentNode.removeChild(wrapper);
+          }
+          // 當作使用者輸入送出
+          sendMessage(pill.text);
+        });
+        wrapper.appendChild(btn);
+      })(pills[i]);
+    }
+
+    els.messagesContainer.appendChild(wrapper);
+    scrollToBottom();
+  }
+
   function showTyping() {
-    typingEl = document.createElement('div');
-    typingEl.className = 'sb-typing-indicator';
-    typingEl.innerHTML = '<span class="sb-typing-dot"></span><span class="sb-typing-dot"></span><span class="sb-typing-dot"></span>';
-    messagesContainer.appendChild(typingEl);
+    var el = document.createElement('div');
+    el.className = 'sb-typing-indicator';
+    el.id = 'sb-typing';
+    el.innerHTML = '<span class="sb-typing-dot"></span><span class="sb-typing-dot"></span><span class="sb-typing-dot"></span>';
+    els.messagesContainer.appendChild(el);
     scrollToBottom();
   }
 
   function hideTyping() {
-    if (typingEl && typingEl.parentNode) {
-      typingEl.parentNode.removeChild(typingEl);
-      typingEl = null;
+    var el = document.getElementById('sb-typing');
+    if (el && el.parentNode) {
+      el.parentNode.removeChild(el);
     }
   }
 
-  // ── 捲動到底部 ──
   function scrollToBottom() {
     requestAnimationFrame(function () {
-      messagesContainer.scrollTop = messagesContainer.scrollHeight;
+      els.messagesContainer.scrollTop = els.messagesContainer.scrollHeight;
     });
   }
 
-  // ── 發送訊息 ──
-  function handleSend() {
-    if (isSending) return;
+  // ══════════════════════════════════════════
+  // 發送與 AI 通訊
+  // ══════════════════════════════════════════
 
-    var text = inputField.value.trim();
-    if (!text) return;
+  function sendMessage(text) {
+    if (state.isSending) return;
+    if (!text || !text.trim()) return;
 
-    inputField.value = '';
+    text = text.trim();
     appendUserMessage(text);
+    addToHistory('user', text);
 
-    isSending = true;
-    sendBtn.disabled = true;
+    state.isSending = true;
+    els.sendBtn.disabled = true;
     showTyping();
+    resetInactivityTimer();
 
-    callAIGateway(text)
+    callAI(text)
       .then(function (reply) {
         hideTyping();
         appendBotMessage(reply);
+        addToHistory('bot', reply);
       })
       .catch(function () {
         hideTyping();
         appendBotMessage(CONFIG.fallbackMessage);
       })
       .finally(function () {
-        isSending = false;
-        sendBtn.disabled = false;
-        inputField.focus();
+        state.isSending = false;
+        els.sendBtn.disabled = false;
+        els.inputField.focus();
       });
   }
 
-  // ── 呼叫 AI Gateway ──
-  function callAIGateway(message) {
-    return fetch(CONFIG.edgeUrl, {
+  function handleSend() {
+    var text = els.inputField.value;
+    els.inputField.value = '';
+    sendMessage(text);
+  }
+
+  function callAI(message) {
+    var body = {
+      message: message,
+      page: getCurrentPath(),
+      visitor_id: state.visitorId,
+      platform: 'web-widget'
+    };
+
+    var profile = getProfile();
+    if (profile) {
+      body.industry = profile.industry || '';
+      body.user_name = profile.name || '';
+    }
+
+    return fetch(CONFIG.apiUrl, {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        message: message
-      })
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(body)
     })
       .then(function (res) {
-        if (!res.ok) {
-          throw new Error('HTTP ' + res.status);
-        }
+        if (!res.ok) throw new Error('HTTP ' + res.status);
         return res.json();
       })
       .then(function (data) {
-        // 嘗試多種回應格式
         var reply = data.reply
           || data.message
           || data.response
@@ -579,24 +952,211 @@
       });
   }
 
-  // ── 初始化 ──
+  // ══════════════════════════════════════════
+  // 主動行為引擎（核心差異化功能）
+  // ══════════════════════════════════════════
+
+  /** 建構個人化招呼語 */
+  function buildPersonalGreeting() {
+    var profile = getProfile();
+    if (profile && profile.industry) {
+      return '\u55E8 ' + profile.industry + '\u8001\u95C6\uFF01\u6709\u4EC0\u9EBC\u6211\u80FD\u5E6B\u5FD9\u7684\uFF1F';
+    }
+    return '\u55E8\uFF01\u6211\u662F\u4F60\u7684 AI \u52A9\u624B\uFF0C\u6709\u4EC0\u9EBC\u80FD\u5E6B\u4F60\u7684\u55CE\uFF1F';
+  }
+
+  /** 建構初次/回訪招呼語 */
+  function buildVisitGreeting() {
+    var history = getChatHistory();
+    var lastPage = getLastPage();
+    var visitCount = getVisitCount();
+
+    // 完全新訪客（無聊天記錄 + 無造訪記錄）
+    if (visitCount <= 1 && history.length === 0) {
+      return '\u7B2C\u4E00\u6B21\u4F86\uFF1F\u8B93\u6211\u5E36\u4F60\u770B\u770B\uFF01';
+    }
+
+    // 回訪用戶
+    if (lastPage && lastPage !== getCurrentPath()) {
+      var pageNames = {
+        '/': '\u9996\u9801',
+        '/pricing': '\u65B9\u6848\u9801',
+        '/features': '\u529F\u80FD\u9801',
+        '/dashboard': '\u5100\u8868\u677F',
+        '/marketplace': '\u5DE5\u5177\u5E02\u96C6',
+        '/ai': 'AI \u52A9\u624B'
+      };
+      var pageName = pageNames[lastPage] || lastPage;
+      return '\u6B61\u8FCE\u56DE\u4F86\uFF01\u4E0A\u6B21\u4F60\u5728\u770B' + pageName + '\uFF0C\u8981\u7E7C\u7E8C\u55CE\uFF1F';
+    }
+
+    return null;
+  }
+
+  /** 3 秒後自動彈出招呼 */
+  function scheduleAutoGreeting() {
+    if (wasExplicitlyClosed()) return;
+
+    setTimeout(function () {
+      if (state.isOpen) return;
+      if (hasShownProactive('auto-greeting')) return;
+
+      // 優先使用訪客狀態招呼語
+      var visitGreeting = buildVisitGreeting();
+      var text = visitGreeting || buildPersonalGreeting();
+
+      markProactiveShown('auto-greeting');
+      showGreeting(text);
+    }, CONFIG.greetingDelay);
+  }
+
+  /** 閒置 30 秒後主動出擊 */
+  function resetInactivityTimer() {
+    clearInactivityTimer();
+    state.inactivityTimer = setTimeout(function () {
+      if (state.isOpen) {
+        // 面板已打開 — 在聊天內提示
+        if (!hasShownProactive('inactivity-chat')) {
+          markProactiveShown('inactivity-chat');
+          var ctx = getPageContext();
+          appendBotMessage('\u9700\u8981\u5E6B\u5FD9\u55CE\uFF1F' + ctx.greeting);
+        }
+      } else {
+        // 面板關閉 — 顯示氣泡
+        if (!hasShownProactive('inactivity-bubble')) {
+          markProactiveShown('inactivity-bubble');
+          showGreeting('\u9700\u8981\u5E6B\u5FD9\u55CE\uFF1F\u6211\u53EF\u4EE5\u5E6B\u4F60...');
+        }
+      }
+    }, CONFIG.inactivityDelay);
+  }
+
+  function clearInactivityTimer() {
+    if (state.inactivityTimer) {
+      clearTimeout(state.inactivityTimer);
+      state.inactivityTimer = null;
+    }
+  }
+
+  /** 監聽捲動 — 在 pricing 區塊附近主動出擊 */
+  function setupScrollWatcher() {
+    var lastScrollY = 0;
+    var scrollHandler = function () {
+      resetInactivityTimer();
+
+      var currentScrollY = window.scrollY || window.pageYOffset;
+      // 只在向下捲動時觸發
+      if (currentScrollY <= lastScrollY) {
+        lastScrollY = currentScrollY;
+        return;
+      }
+      lastScrollY = currentScrollY;
+
+      // 已經顯示過，不重複
+      if (hasShownProactive('scroll-pricing')) return;
+      if (state.isOpen) return;
+
+      // 偵測 pricing 相關元素
+      var pricingEl = document.querySelector('[id*="pricing"], [class*="pricing"], [data-section="pricing"]');
+      if (pricingEl) {
+        var rect = pricingEl.getBoundingClientRect();
+        var windowH = window.innerHeight;
+        // 元素進入視窗
+        if (rect.top < windowH && rect.bottom > 0) {
+          markProactiveShown('scroll-pricing');
+          showGreeting('\u60F3\u4E86\u89E3\u66F4\u591A\u55CE\uFF1F\u554F\u6211\u5C31\u597D\uFF01');
+        }
+      }
+    };
+
+    window.addEventListener('scroll', scrollHandler, { passive: true });
+  }
+
+  /** 建立歡迎訊息 + 快速按鈕（在面板打開時） */
+  function populateWelcome() {
+    var profile = getProfile();
+    var ctx = getPageContext();
+
+    // 歡迎語
+    var welcomeText;
+    if (profile && profile.industry) {
+      welcomeText = '\u55E8 ' + profile.industry + '\u8001\u95C6\uFF01' + ctx.greeting;
+    } else {
+      welcomeText = '\u4F60\u597D\uFF01\u6211\u662F\u5C0F\u767E\uFF0CSEOBAIKE \u7684 AI \u52A9\u624B\u3002\n' + ctx.greeting;
+    }
+
+    appendBotMessage(welcomeText);
+
+    // 載入歷史訊息（最多最後 6 條，讓畫面不要太擠）
+    var history = getChatHistory();
+    var recentHistory = history.slice(-6);
+    for (var i = 0; i < recentHistory.length; i++) {
+      var msg = recentHistory[i];
+      if (msg.role === 'user') {
+        appendUserMessage(msg.text);
+      } else {
+        appendBotMessage(msg.text);
+      }
+    }
+
+    // 快速操作按鈕（只在沒有歷史記錄時顯示，保持乾淨）
+    if (history.length === 0) {
+      appendQuickActions(ctx.pills);
+    }
+  }
+
+  // ══════════════════════════════════════════
+  // 全域事件監聽（活動追蹤）
+  // ══════════════════════════════════════════
+
+  function setupActivityListeners() {
+    var events = ['mousemove', 'keydown', 'touchstart', 'click'];
+    for (var i = 0; i < events.length; i++) {
+      document.addEventListener(events[i], resetInactivityTimer, { passive: true });
+    }
+  }
+
+  // ══════════════════════════════════════════
+  // 公開 API
+  // ══════════════════════════════════════════
+
+  window.seobaikeWidget = {
+    open: function () { openChat(); },
+    close: function () { closeChat(false); },
+    toggle: function () {
+      if (state.isOpen) { closeChat(false); } else { openChat(); }
+    },
+    showGreeting: function (text) { showGreeting(text); },
+    hideGreeting: function () { hideGreeting(); }
+  };
+
+  // ══════════════════════════════════════════
+  // 初始化
+  // ══════════════════════════════════════════
+
   function init() {
     // 防止重複初始化
     if (document.getElementById('seobaike-chat-btn')) return;
+
+    // 追蹤造訪次數
+    incrementVisitCount();
+
+    // 注入樣式 + 建構 DOM
     injectStyles();
     createWidget();
-  }
 
-  // ── 公開 API ──
-  window.seobaikeWidget = {
-    open: function () {
-      if (!isOpen) toggleChat();
-    },
-    close: function () {
-      if (isOpen) toggleChat();
-    },
-    toggle: toggleChat
-  };
+    // 填充歡迎訊息 + 快速按鈕
+    populateWelcome();
+
+    // 啟動主動行為
+    scheduleAutoGreeting();
+    setupScrollWatcher();
+    setupActivityListeners();
+    resetInactivityTimer();
+
+    // 記錄當前頁面（供下次回訪使用）
+    saveLastPage();
+  }
 
   // ── 自動啟動 ──
   if (document.readyState === 'loading') {

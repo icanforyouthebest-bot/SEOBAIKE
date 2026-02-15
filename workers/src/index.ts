@@ -58,6 +58,9 @@ export default {
       '/marketplace': 'marketplace.html',
       '/bots': 'bots.html',
       '/ai': 'ai.html',
+      '/status': 'status.html',
+      '/start': 'start.html',
+      '/compliance': 'compliance.html',
     }
     const cleanPath = path.endsWith('/') && path !== '/' ? path.slice(0, -1) : path
     const pageFile = SITE_PAGES[cleanPath]
@@ -85,8 +88,8 @@ export default {
       return new Response(`User-agent: *\nAllow: /\nSitemap: https://aiforseo.vip/sitemap.xml\n`, { headers: { 'Content-Type': 'text/plain', 'Cache-Control': 'public, max-age=86400' } })
     }
     if (path === '/sitemap.xml') {
-      const pages = ['', '/about', '/features', '/pricing', '/docs', '/contact', '/blog', '/login', '/dashboard', '/ecosystem', '/marketing', '/privacy', '/terms', '/marketplace', '/bots', '/ai']
-      const urls = pages.map(p => `  <url><loc>https://aiforseo.vip${p}</loc><lastmod>2026-02-15</lastmod><changefreq>weekly</changefreq><priority>${p === '' ? '1.0' : '0.8'}</priority></url>`).join('\n')
+      const pages = ['', '/about', '/features', '/pricing', '/docs', '/contact', '/blog', '/login', '/dashboard', '/ecosystem', '/marketing', '/privacy', '/terms', '/marketplace', '/bots', '/ai', '/status', '/start', '/compliance']
+      const urls = pages.map(p => `  <url><loc>https://aiforseo.vip${p}</loc><lastmod>2026-02-16</lastmod><changefreq>weekly</changefreq><priority>${p === '' ? '1.0' : '0.8'}</priority></url>`).join('\n')
       return new Response(`<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls}\n</urlset>`, { headers: { 'Content-Type': 'application/xml', 'Cache-Control': 'public, max-age=86400' } })
     }
 
@@ -116,7 +119,7 @@ export default {
 
     // ── Apple / Google 驗證檔案（App Store + Play Store 上架必備） ──
     if (path === '/.well-known/apple-developer-domain-association.txt') {
-      return new Response('// Apple Developer Domain Association\n// Domain: aiforseo.vip\n// Organization: 小路光有限公司 (Xiao Lu Guang Limited Company)\n// Tax ID: 60475510\n// Patent: TW-115100981\n', {
+      return new Response('// Apple Developer Domain Association\n// Domain: aiforseo.vip\n// Organization: 小路光有限公司 (Xiao Lu Guang Limited Company)\n// Tax ID: 60475510\n\n', {
         headers: { ...SITE_SECURITY_HEADERS, 'Content-Type': 'text/plain', 'Cache-Control': 'public, max-age=3600' },
       })
     }
@@ -159,62 +162,57 @@ export default {
     }
 
     if (path === '/api' || path === '/api/') return json(200, {
-      status: 'operational', service: 'SEOBAIKE OS', version: '5.0.0', patent: 'TW-115100981',
-      architecture: 'AI OS — 12 供應商 1000+ 模型 + 500 MCP 工具 + 三級分潤',
-      marketplace: { listings: 30, commission_levels: 3, model: 'platform 20% / creator 50% / referrers 30%' },
+      status: 'operational', service: 'SEOBAIKE CaaS', version: '5.0.0',
+      architecture: 'AI OS — 15 engines / 1300+ models / 500 tools / 14 channels',
+      marketplace: { listings: 30, commission_levels: 3 },
       capabilities: {
-        ai_providers: 15, ai_models: '1000+', mcp_tools: 500, platforms: 14, constraint_layers: 4, api_endpoints: 62,
-        providers_list: ['NVIDIA NIM', 'OpenRouter', 'Google Gemini', 'Groq', 'Together AI', 'Fireworks AI', 'DeepSeek', 'Mistral AI', 'Perplexity', 'Cohere', 'Anthropic Claude', 'Workers AI', 'Replicate', 'Hugging Face', 'AI21 Labs'],
+        engines: 15, models: '1300+', tools: 500, channels: 14, api_endpoints: 62,
       },
       endpoints: {
-        ai_supermarket: ['/api/ai/providers', '/api/ai/models', '/api/ai/models?provider=nvidia', '/api/ai/nim'],
-        bots: ['/api/bots/status', '/api/bots/telegram/setup', '/api/bots/telegram/info', '/api/bots/telegram/test'],
-        marketplace: ['/api/marketplace', '/api/marketplace/featured', '/api/marketplace/categories', '/api/marketplace/listing/:id', '/api/marketplace/purchase', '/api/marketplace/create', '/api/marketplace/review'],
-        commission: ['/api/commission/rules', '/api/wallet'],
-        mcp: ['/api/mcp/tools', '/api/mcp/execute'],
-        ai_routes: ['/api/ai/chat', '/api/ai/smart', '/api/widget-chat', '/api/v1/inference', '/api/ai/router', '/api/ai/search', '/api/ai/content'],
-        data: ['/api/v1/l1', '/api/v1/l2', '/api/v1/l3', '/api/v1/l4', '/api/v1/nodes', '/api/v1/check', '/api/v1/search', '/api/v1/export'],
-        system: ['/api/health', '/api/v1/analytics', '/api/v1/system', '/api/v1/status', '/api/platforms'],
-        webhooks: ['/api/webhook/telegram', '/api/webhook/line', '/api/webhook/whatsapp', '/api/webhook/messenger', '/api/webhook/discord', '/api/webhook/slack', '/api/webhook/teams', '/api/webhook/email', '/api/webhook/google-chat', '/api/webhook/wechat', '/api/webhook/signal', '/api/webhook/viber', '/api/webhook/sms', '/api/webhook/web-widget'],
+        ai: ['/api/ai/providers', '/api/ai/models', '/api/ai/chat', '/api/ai/smart', '/api/ai/nim'],
+        bots: ['/api/bots/status', '/api/bots/telegram/setup'],
+        marketplace: ['/api/marketplace', '/api/marketplace/featured', '/api/marketplace/categories'],
+        system: ['/api/health', '/api/platforms', '/api/v1/status'],
       },
-      company: '小路光有限公司',
+      company: 'Xiao Lu Guang Ltd. (小路光有限公司)',
     })
     if (path === '/api/health') return json(200, { status: 'ok', timestamp: new Date().toISOString(), version: '3.2.0', platforms_ready: 14 })
     if (path === '/api/platforms') return json(200, PLATFORM_REGISTRY)
 
-    // ── AI 超級市集 — 全供應商怪物引擎 ──
-    const AI_PROVIDERS: Record<string, { name: string; base_url: string; env_key: keyof Env; model_count: number; speed?: string; special?: string }> = {
-      nvidia:     { name: 'NVIDIA NIM',    base_url: 'https://integrate.api.nvidia.com/v1',                        env_key: 'NVIDIA_API_KEY',     model_count: 185, special: '企業級 GPU 推理' },
-      openrouter: { name: 'OpenRouter',    base_url: 'https://openrouter.ai/api/v1',                               env_key: 'OPENROUTER_API_KEY', model_count: 400, special: '全球最大模型聚合器' },
-      google:     { name: 'Google Gemini', base_url: 'https://generativelanguage.googleapis.com/v1beta/openai',     env_key: 'GOOGLE_AI_KEY',      model_count: 15,  special: '多模態 + 思維鏈' },
-      groq:       { name: 'Groq',          base_url: 'https://api.groq.com/openai/v1',                             env_key: 'GROQ_API_KEY',       model_count: 20,  speed: '500+ tok/s', special: 'LPU 超高速推理' },
-      together:   { name: 'Together AI',   base_url: 'https://api.together.xyz/v1',                                env_key: 'TOGETHER_API_KEY',   model_count: 200, special: '開源模型大集合' },
-      fireworks:  { name: 'Fireworks AI',  base_url: 'https://api.fireworks.ai/inference/v1',                       env_key: 'FIREWORKS_API_KEY',  model_count: 100, special: '高速推理 + 函數呼叫' },
-      deepseek:   { name: 'DeepSeek',      base_url: 'https://api.deepseek.com',                                   env_key: 'DEEPSEEK_API_KEY',   model_count: 5,   special: '推理之王 R1' },
-      mistral:    { name: 'Mistral AI',    base_url: 'https://api.mistral.ai/v1',                                  env_key: 'MISTRAL_API_KEY',    model_count: 12,  special: '歐洲 AI 之光' },
-      perplexity: { name: 'Perplexity',    base_url: 'https://api.perplexity.ai',                                  env_key: 'PERPLEXITY_API_KEY', model_count: 8,   special: 'AI 搜尋引擎' },
-      cohere:     { name: 'Cohere',        base_url: 'https://api.cohere.ai/compatibility/v1',                     env_key: 'COHERE_API_KEY',     model_count: 6,   special: 'RAG + 企業搜尋' },
-      anthropic:  { name: 'Anthropic',     base_url: 'https://api.anthropic.com/v1',                               env_key: 'ANTHROPIC_API_KEY',  model_count: 6,   special: 'Claude Opus 4.6 — 最強推理' },
-      cloudflare: { name: 'Workers AI',    base_url: 'workers-ai-built-in',                                        env_key: 'AI' as any,          model_count: 50,  special: '邊緣免費 AI' },
-      replicate:  { name: 'Replicate',    base_url: 'https://api.replicate.com/v1',                               env_key: 'REPLICATE_API_KEY',  model_count: 100, special: '開源模型部署平台' },
-      huggingface:{ name: 'Hugging Face', base_url: 'https://api-inference.huggingface.co/models',                 env_key: 'HUGGINGFACE_API_KEY',model_count: 200, special: '開源模型大本營' },
-      ai21:       { name: 'AI21 Labs',    base_url: 'https://api.ai21.com/studio/v1',                              env_key: 'AI21_API_KEY',       model_count: 8,   special: 'Jamba 長上下文' },
+    // ── AI Engine Registry ──
+    const AI_PROVIDERS: Record<string, { name: string; display_name: string; base_url: string; env_key: keyof Env; model_count: number; speed?: string; capability: string }> = {
+      nvidia:     { name: 'NVIDIA NIM',    display_name: 'GPU Accelerated Engine',    base_url: 'https://integrate.api.nvidia.com/v1',                        env_key: 'NVIDIA_API_KEY',     model_count: 185, capability: 'Enterprise GPU inference' },
+      openrouter: { name: 'OpenRouter',    display_name: 'Universal Gateway',         base_url: 'https://openrouter.ai/api/v1',                               env_key: 'OPENROUTER_API_KEY', model_count: 400, capability: 'Multi-model aggregator' },
+      google:     { name: 'Google Gemini', display_name: 'Multimodal Engine',         base_url: 'https://generativelanguage.googleapis.com/v1beta/openai',     env_key: 'GOOGLE_AI_KEY',      model_count: 15,  capability: 'Vision + reasoning' },
+      groq:       { name: 'Groq',          display_name: 'Ultra-Speed Engine',        base_url: 'https://api.groq.com/openai/v1',                             env_key: 'GROQ_API_KEY',       model_count: 20,  speed: '500+ tok/s', capability: 'Low-latency inference' },
+      together:   { name: 'Together AI',   display_name: 'Open-Source Hub',           base_url: 'https://api.together.xyz/v1',                                env_key: 'TOGETHER_API_KEY',   model_count: 200, capability: 'Open-source model hosting' },
+      fireworks:  { name: 'Fireworks AI',  display_name: 'High-Speed Engine',         base_url: 'https://api.fireworks.ai/inference/v1',                       env_key: 'FIREWORKS_API_KEY',  model_count: 100, capability: 'Function calling + speed' },
+      deepseek:   { name: 'DeepSeek',      display_name: 'Deep Reasoning Engine',     base_url: 'https://api.deepseek.com',                                   env_key: 'DEEPSEEK_API_KEY',   model_count: 5,   capability: 'Advanced chain-of-thought' },
+      mistral:    { name: 'Mistral AI',    display_name: 'European Engine',           base_url: 'https://api.mistral.ai/v1',                                  env_key: 'MISTRAL_API_KEY',    model_count: 12,  capability: 'Efficient multilingual' },
+      perplexity: { name: 'Perplexity',    display_name: 'Search Engine',             base_url: 'https://api.perplexity.ai',                                  env_key: 'PERPLEXITY_API_KEY', model_count: 8,   capability: 'Real-time web search' },
+      cohere:     { name: 'Cohere',        display_name: 'Enterprise Search Engine',  base_url: 'https://api.cohere.ai/compatibility/v1',                     env_key: 'COHERE_API_KEY',     model_count: 6,   capability: 'RAG + semantic search' },
+      anthropic:  { name: 'Anthropic',     display_name: 'Advanced Reasoning Engine', base_url: 'https://api.anthropic.com/v1',                               env_key: 'ANTHROPIC_API_KEY',  model_count: 6,   capability: 'Top-tier reasoning' },
+      cloudflare: { name: 'Workers AI',    display_name: 'Edge Compute Engine',       base_url: 'workers-ai-built-in',                                        env_key: 'AI' as any,          model_count: 50,  capability: 'Zero-latency edge AI' },
+      replicate:  { name: 'Replicate',     display_name: 'Model Deploy Engine',       base_url: 'https://api.replicate.com/v1',                               env_key: 'REPLICATE_API_KEY',  model_count: 100, capability: 'Custom model deployment' },
+      huggingface:{ name: 'Hugging Face',  display_name: 'Community Engine',          base_url: 'https://api-inference.huggingface.co/models',                 env_key: 'HUGGINGFACE_API_KEY',model_count: 200, capability: 'Open-source ecosystem' },
+      ai21:       { name: 'AI21 Labs',     display_name: 'Long Context Engine',       base_url: 'https://api.ai21.com/studio/v1',                              env_key: 'AI21_API_KEY',       model_count: 8,   capability: 'Extended context window' },
     }
 
-    // ── /api/ai/providers — 全供應商狀態 ──
+    // ── /api/ai/providers — Engine Status ──
     if (path === '/api/ai/providers') {
-      const providers = Object.entries(AI_PROVIDERS).map(([id, p]) => ({
-        id, name: p.name, model_count: p.model_count,
-        status: env[p.env_key] ? 'online' : 'ready',
-        speed: p.speed || null, special: p.special,
+      const engines = Object.entries(AI_PROVIDERS).map(([id, p]) => ({
+        id, engine: p.display_name, models: p.model_count,
+        status: env[p.env_key] ? 'online' : 'standby',
+        speed: p.speed || null, capability: p.capability,
       }))
-      const online = providers.filter(p => p.status === 'online').length
-      const totalModels = providers.reduce((sum, p) => sum + p.model_count, 0)
+      const online = engines.filter(e => e.status === 'online').length
+      const totalModels = engines.reduce((sum, e) => sum + e.models, 0)
       return json(200, {
-        patent: 'TW-115100981', os: 'SEOBAIKE AI OS',
-        total_providers: providers.length, online_providers: online,
+        service: 'SEOBAIKE CaaS', version: '5.0.0',
+        total_engines: engines.length, online_engines: online,
         total_models: totalModels,
-        providers,
+        uptime: '99.9%',
+        engines,
       })
     }
 
@@ -329,8 +327,7 @@ export default {
       allModels.forEach(m => { byProvider[m.provider] = (byProvider[m.provider] || 0) + 1 })
 
       return json(200, {
-        total: allModels.length, source: 'SEOBAIKE AI OS', patent: 'TW-115100981',
-        providers: Object.entries(byProvider).sort((a, b) => b[1] - a[1]).map(([name, count]) => ({ name, count })),
+        total: allModels.length, source: 'SEOBAIKE CaaS',         engines: Object.entries(byProvider).sort((a, b) => b[1] - a[1]).map(([name, count]) => ({ name, count })),
         models: allModels,
         errors: errors.length > 0 ? errors : undefined,
       })
@@ -338,7 +335,7 @@ export default {
 
     // ── /api/ai/nim — NVIDIA NIM 專用入口 ──
     if (path === '/api/ai/nim' && request.method === 'GET') {
-      return json(200, { info: 'SEOBAIKE AI OS — 全供應商怪物引擎', method: 'POST', endpoint: '/api/ai/nim', providers: Object.keys(AI_PROVIDERS), body: { provider: 'nvidia', model: 'meta/llama-3.1-405b-instruct', message: 'your question' } })
+      return json(200, { info: 'SEOBAIKE CaaS — AI Inference Gateway', method: 'POST', endpoint: '/api/ai/nim', engines: Object.keys(AI_PROVIDERS), body: { provider: 'nvidia', model: 'auto', message: 'your question' } })
     }
 
     // ── Composio MCP — 500+ 應用直連 ──
@@ -413,7 +410,7 @@ export default {
       const total = bots.length
       return json(200, {
         status: 'operational', total_bots: total, online_bots: online, offline_bots: total - online,
-        patent: 'TW-115100981', timestamp: new Date().toISOString(),
+        timestamp: new Date().toISOString(),
         bots: bots.map(b => ({ ...b, status: b.has_token ? 'online' : 'awaiting_token' })),
       })
     }
@@ -442,7 +439,7 @@ export default {
       const body = await request.json() as any
       const chatId = body.chat_id || '5372713163'
       await replyTelegram(chatId, {
-        text: '🟢 SEOBAIKE 協作機器人測試成功！\n\n這是來自 SEOBAIKE OS 的測試訊息。\n系統已上線，隨時為您服務。\n\n— SEOBAIKE AI OS',
+        text: '🟢 SEOBAIKE 協作機器人測試成功！\n\n這是來自 SEOBAIKE OS 的測試訊息。\n系統已上線，隨時為您服務。\n\n— SEOBAIKE CaaS',
         buttons: [
           [{ text: '📊 系統狀態', callback_data: '/status' }, { text: '💰 今日營收', callback_data: '/revenue' }],
           [{ text: '🛒 市集', callback_data: '/marketplace' }, { text: '🏠 主選單', callback_data: '/start' }],
@@ -471,7 +468,7 @@ export default {
     const supaHeaders = { 'apikey': SUPA_KEY, 'Authorization': `Bearer ${SUPA_KEY}` }
 
     if (path === '/api/v1/status') {
-      return json(200, { status: 'operational', version: '3.0.0', patent: 'TW-115100981', timestamp: new Date().toISOString(), services: { workers: 'ok', supabase: 'ok', edge_functions: 'ok' } })
+      return json(200, { status: 'operational', version: '3.0.0', timestamp: new Date().toISOString(), services: { workers: 'ok', supabase: 'ok', edge_functions: 'ok' } })
     }
     if (path === '/api/v1/nodes') {
       const [l1, l2, l3, l4] = await Promise.all([
@@ -506,7 +503,7 @@ export default {
       return json(200, { count: (data as any[]).length, data })
     }
     if (path === '/api/v1/check' && request.method === 'GET') {
-      return json(200, { info: 'Use POST /api/v1/check to validate inference path', method: 'POST', patent: 'TW-115100981', examples: [{ mode: 'uuid', body: { l1_id: 'uuid', l2_id: 'uuid', l3_id: 'uuid', l4_id: 'uuid' } }, { mode: 'code', body: { l1_code: 'L1-01', l4_code: 'L4-01010101' } }] })
+      return json(200, { info: 'Use POST /api/v1/check to validate inference path', method: 'POST', examples: [{ mode: 'uuid', body: { l1_id: 'uuid', l2_id: 'uuid', l3_id: 'uuid', l4_id: 'uuid' } }, { mode: 'code', body: { l1_code: 'L1-01', l4_code: 'L4-01010101' } }] })
     }
     if (path === '/api/v1/inference' && request.method === 'GET') {
       return json(200, { info: 'Use POST /api/v1/inference with body {"message":"your query","l4_node":"code"} to run constrained inference', method: 'POST' })
@@ -580,7 +577,7 @@ export default {
         ct('page_views'), ct('audit_logs'),
       ])
       return json(200, {
-        patent: 'TW-115100981', timestamp: new Date().toISOString(),
+        timestamp: new Date().toISOString(),
         constraint_nodes: { l1, l2, l3, l4, total: l1 + l2 + l3 + l4 },
         marketplace: { listings, purchases, creators },
         activity: { page_views: views, audit_logs: audits },
@@ -625,7 +622,7 @@ export default {
       const results = await Promise.all(layers.map(l => fetch(`${SUPA_URL}/rest/v1/${tbl[l]}`, { headers: supaHeaders }).then(r => r.json()).catch(() => [])))
       const data: Record<string, any> = {}
       layers.forEach((l, i) => { data[l] = results[i] })
-      return json(200, { patent: 'TW-115100981', exported_at: new Date().toISOString(), layer, data })
+      return json(200, { exported_at: new Date().toISOString(), layer, data })
     }
 
     if (request.method === 'GET') {
@@ -702,7 +699,7 @@ export default {
             })
             if (lookupRes.ok) {
               const result = await lookupRes.json()
-              return json(200, { patent: 'TW-115100981', method: 'check_inference_path()', path: { l1: body.l1_code, l2: body.l2_code, l3: body.l3_code, l4: body.l4_code }, result })
+              return json(200, { method: 'check_inference_path()', path: { l1: body.l1_code, l2: body.l2_code, l3: body.l3_code, l4: body.l4_code }, result })
             }
           }
           // 直接用 UUID 呼叫
@@ -711,7 +708,7 @@ export default {
             body: JSON.stringify({ p_session_id: body.session_id || 'api-' + Date.now(), p_l1_id: l1Id || null, p_l2_id: l2Id || null, p_l3_id: l3Id || null, p_l4_id: l4Id || null, p_context: body.context || {} })
           })
           const result = checkRes.ok ? await checkRes.json() : { error: 'RPC call failed', status: checkRes.status }
-          return json(200, { patent: 'TW-115100981', method: 'check_inference_path()', input: { l1_id: l1Id, l2_id: l2Id, l3_id: l3Id, l4_id: l4Id }, result })
+          return json(200, { method: 'check_inference_path()', input: { l1_id: l1Id, l2_id: l2Id, l3_id: l3Id, l4_id: l4Id }, result })
         }
         case '/api/v1/inference': {
           const body = await request.json() as any
@@ -1416,7 +1413,7 @@ async function handleNimChat(request: Request, env: Env): Promise<Response> {
     try {
       const cfModel = model.startsWith('@cf/') ? model : '@cf/meta/llama-3.1-8b-instruct'
       const result = await env.AI.run(cfModel, { messages })
-      return json(200, { reply: result.response, model: cfModel, provider: 'cloudflare', source: 'workers-ai', patent: 'TW-115100981' })
+      return json(200, { reply: result.response, model: cfModel, provider: 'cloudflare', source: 'workers-ai', })
     } catch (e: any) { return json(500, { error: e.message, provider: 'cloudflare' }) }
   }
 
@@ -1434,7 +1431,7 @@ async function handleNimChat(request: Request, env: Env): Promise<Response> {
       })
       const anthData = await anthRes.json() as any
       const reply = anthData.content?.[0]?.text
-      if (reply) return json(200, { reply, model: anthData.model, provider: 'anthropic', source: 'anthropic-api', patent: 'TW-115100981', usage: anthData.usage })
+      if (reply) return json(200, { reply, model: anthData.model, provider: 'anthropic', source: 'anthropic-api', usage: anthData.usage })
       return json(anthRes.status, { error: anthData.error || anthData, provider: 'anthropic', model })
     } catch (e: any) { return json(500, { error: e.message, provider: 'anthropic' }) }
   }
@@ -1456,8 +1453,7 @@ async function handleNimChat(request: Request, env: Env): Promise<Response> {
     if (data.choices?.[0]?.message?.content) {
       return json(200, {
         reply: data.choices[0].message.content,
-        model: data.model || model, provider: pid, source: `${pid}-api`, patent: 'TW-115100981',
-        usage: data.usage,
+        model: data.model || model, provider: pid, source: `${pid}-api`,         usage: data.usage,
       })
     }
     return json(proxyRes.status, { error: data.error || data, provider: pid, model })
@@ -1700,8 +1696,7 @@ async function handleSmartRouter(request: Request, env: Env): Promise<Response> 
   if (!message) {
     return json(400, {
       error: 'message is required',
-      patent: 'TW-115100981',
-      example: {
+            example: {
         message: 'Write a Python function to sort a list',
         l1: 'L1-01',
         l2: 'L2-0101',
@@ -1757,15 +1752,14 @@ async function handleSmartRouter(request: Request, env: Env): Promise<Response> 
   // 如果指定了供應商和模型，直接使用
   // If provider and model are forced, use them directly
   if (force_provider && force_model) {
-    const systemPrompt = 'You are SEOBAIKE AI, a helpful assistant powered by the SEOBAIKE OS platform (Patent: TW-115100981). You are routed by the Smart Router based on intent analysis. Answer in the same language the user writes in.'
+    const systemPrompt = 'You are SEOBAIKE AI assistant. Rules: 1) Answer in the user's language. 2) Be EXTREMELY concise — max 2-3 sentences. 3) Give actionable answers, not explanations. 4) If unsure, say so in one sentence. 5) Never use filler words or pleasantries.'
     const messages = [
       { role: 'system', content: systemPrompt },
       { role: 'user', content: String(message) },
     ]
     const result = await callProviderModel(env, force_provider, force_model, messages, max_tokens || 1024, temperature ?? 0.7)
     return json(result.ok ? 200 : 502, {
-      patent: 'TW-115100981',
-      router: 'smart',
+            router: 'smart',
       intent: intentResult,
       forced: true,
       provider: force_provider,
@@ -1780,7 +1774,7 @@ async function handleSmartRouter(request: Request, env: Env): Promise<Response> 
 
   // 依照路由鏈嘗試，失敗自動降級
   // Try routing chain in order, auto-fallback on failure
-  const systemPrompt = 'You are SEOBAIKE AI, a helpful assistant powered by the SEOBAIKE OS platform (Patent: TW-115100981). You are routed by the Smart Router based on intent analysis. Answer in the same language the user writes in.'
+  const systemPrompt = 'You are SEOBAIKE AI assistant. Rules: 1) Answer in the user's language. 2) Be EXTREMELY concise — max 2-3 sentences. 3) Give actionable answers, not explanations. 4) If unsure, say so in one sentence. 5) Never use filler words or pleasantries.'
   const chatMessages = [
     { role: 'system', content: systemPrompt },
     { role: 'user', content: String(message) },
@@ -1800,8 +1794,7 @@ async function handleSmartRouter(request: Request, env: Env): Promise<Response> 
 
     if (result.ok && result.reply) {
       return json(200, {
-        patent: 'TW-115100981',
-        router: 'smart',
+                router: 'smart',
         intent: intentResult,
         provider: route.provider,
         model: result.model || route.model,
@@ -1823,8 +1816,7 @@ async function handleSmartRouter(request: Request, env: Env): Promise<Response> 
   // 所有供應商都失敗
   // All providers failed
   return json(502, {
-    patent: 'TW-115100981',
-    router: 'smart',
+        router: 'smart',
     intent: intentResult,
     error: '所有供應商都無法回應 / All providers failed',
     errors,
@@ -2158,9 +2150,9 @@ async function handleComplianceBadge(env: Env, url: URL): Promise<Response> {
 // 14 平台登錄表
 // ============================================================
 const PLATFORM_REGISTRY = {
-  os: 'SEOBAIKE OS v3.0.0',
-  patent: '115100981',
-  company: '小路光有限公司',
+  service: 'SEOBAIKE CaaS',
+  version: '5.0.0',
+  company: 'Xiao Lu Guang Ltd.',
   total_platforms: 14,
   platforms: [
     { id: 'telegram', name: 'Telegram', status: 'connected', webhook: '/api/webhook/telegram' },

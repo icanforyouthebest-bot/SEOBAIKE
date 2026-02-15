@@ -2,11 +2,16 @@
 // BAIKE AI Brain — Cloudflare Workers AI (免費)
 // ============================================================
 
-const SYSTEM = `你是 BAIKE，台灣公司小路光打造的 AI 管理助手。
-風格：專業親切，像很懂的秘書跟老闆匯報。
-語言：繁體中文，自然口吻。簡潔有力，不廢話。
-每次回覆最後署名「— BAIKE AI」。
-你擅長 SEO、數位行銷、企業管理、合規、財務。`
+const SYSTEM = `你是小百，SEOBAIKE 平台的 AI 助手。
+
+嚴格規則：
+- 回覆最多 3 句話，絕對不超過
+- 直接給答案，不要解釋過程
+- 用戶問什麼答什麼，不要延伸
+- 繁體中文，口語化，不要書面語
+- 不要署名、不要加 emoji、不要客套
+- 不確定就說「我不確定，建議你…」一句結束
+- 用戶說中文就回中文，英文就回英文`
 
 export async function aiFormat(ai: any, command: string, data: any): Promise<string> {
   const prompt = `用戶下了 ${command} 指令，系統回傳：
@@ -37,9 +42,9 @@ export async function aiChat(ai: any, text: string): Promise<string> {
       ],
       max_tokens: 512,
     })
-    return res.response || '抱歉，我暫時無法回應。\n\n— BAIKE AI'
+    return res.response || '抱歉，我暫時無法回應。'
   } catch {
-    return '抱歉，我暫時無法回應。\n\n— BAIKE AI'
+    return '抱歉，我暫時無法回應。'
   }
 }
 
@@ -78,7 +83,7 @@ export async function aiConstrainedChat(
     }
 
     return {
-      reply: data.reply || '抱歉，AI 暫時無法回應。\n\n— BAIKE AI',
+      reply: data.reply || '抱歉，AI 暫時無法回應。',
       allowed: true,
       constrained: true,
       industry: data.industry,
@@ -87,7 +92,7 @@ export async function aiConstrainedChat(
   } catch (err) {
     console.error('aiConstrainedChat error:', err)
     return {
-      reply: '抱歉，AI 約束系統暫時無法連線。\n\n— BAIKE AI',
+      reply: '抱歉，AI 約束系統暫時無法連線。',
       allowed: false,
       constrained: false,
     }
@@ -95,8 +100,8 @@ export async function aiConstrainedChat(
 }
 
 function fallback(data: any): string {
-  if (!data) return '沒有資料。\n\n— BAIKE AI'
-  if (data.error) return `發生錯誤：${data.error}\n\n— BAIKE AI`
-  if (data.message && typeof data.message === 'string') return `${data.message}\n\n— BAIKE AI`
+  if (!data) return '沒有資料。'
+  if (data.error) return `發生錯誤：${data.error}`
+  if (data.message && typeof data.message === 'string') return `${data.message}`
   return JSON.stringify(data, null, 2)
 }

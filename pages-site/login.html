@@ -236,6 +236,217 @@
     }
     footer span { color: var(--orange); }
 
+    /* ── Onboarding Overlay ── */
+    .onboard-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(5, 5, 20, 0.82);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.4s ease;
+    }
+    .onboard-overlay.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .onboard-overlay.fade-out {
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.5s ease;
+    }
+
+    .onboard-container {
+      width: 94%;
+      max-width: 680px;
+      max-height: 92vh;
+      overflow-y: auto;
+      background: linear-gradient(135deg, #13132e 0%, #1a1a3a 100%);
+      border: 1px solid rgba(232, 133, 12, 0.25);
+      border-radius: 20px;
+      padding: 40px 36px 32px;
+      box-shadow: 0 24px 80px rgba(0,0,0,0.6), 0 0 40px rgba(232,133,12,0.08);
+      transform: translateY(30px) scale(0.96);
+      transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.4s ease;
+      opacity: 0;
+    }
+    .onboard-overlay.active .onboard-container {
+      transform: translateY(0) scale(1);
+      opacity: 1;
+    }
+
+    .onboard-step { display: none; }
+    .onboard-step.active { display: block; }
+
+    .onboard-title {
+      text-align: center;
+      font-size: 1.6rem;
+      font-weight: 800;
+      margin-bottom: 6px;
+      color: #fff;
+    }
+    .onboard-subtitle {
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.92rem;
+      margin-bottom: 28px;
+    }
+
+    /* Step 1: Industry Grid */
+    .industry-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+    }
+    .industry-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      padding: 16px 6px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      user-select: none;
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    .industry-item.slide-in {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .industry-item .icon {
+      font-size: 1.7rem;
+      line-height: 1;
+    }
+    .industry-item .label {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      text-align: center;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+    .industry-item.slide-in:hover {
+      border-color: rgba(232, 133, 12, 0.5);
+      background: rgba(232, 133, 12, 0.06);
+      transform: translateY(-2px);
+    }
+    .industry-item.slide-in:hover .label { color: #fff; }
+    .industry-item.selected {
+      border-color: var(--orange);
+      background: rgba(232, 133, 12, 0.12);
+      box-shadow: 0 0 20px rgba(232, 133, 12, 0.25), inset 0 0 12px rgba(232, 133, 12, 0.06);
+    }
+    .industry-item.selected .label { color: #fff; font-weight: 700; }
+
+    /* Step 2: Need Cards */
+    .need-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+    }
+    .need-card {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      padding: 20px 18px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      user-select: none;
+      opacity: 0;
+      transform: translateY(24px);
+    }
+    .need-card.slide-in {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .need-card .card-icon {
+      font-size: 1.6rem;
+      line-height: 1;
+    }
+    .need-card .card-title {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: #fff;
+      transition: color 0.2s;
+    }
+    .need-card .card-desc {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      line-height: 1.4;
+    }
+    .need-card.slide-in:hover {
+      border-color: rgba(232, 133, 12, 0.5);
+      background: rgba(232, 133, 12, 0.06);
+      transform: translateY(-2px);
+    }
+    .need-card.selected {
+      border-color: var(--orange);
+      background: rgba(232, 133, 12, 0.12);
+      box-shadow: 0 0 24px rgba(232, 133, 12, 0.25), inset 0 0 12px rgba(232, 133, 12, 0.06);
+    }
+
+    /* Step indicator dots */
+    .onboard-dots {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      margin-bottom: 24px;
+    }
+    .onboard-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--border);
+      transition: all 0.3s ease;
+    }
+    .onboard-dot.active {
+      background: var(--orange);
+      width: 24px;
+      border-radius: 4px;
+    }
+
+    /* Skip button */
+    .onboard-skip {
+      display: block;
+      margin: 24px auto 0;
+      padding: 10px 28px;
+      background: transparent;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      color: var(--text-muted);
+      font-size: 0.88rem;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .onboard-skip:hover {
+      border-color: var(--text-muted);
+      color: #fff;
+    }
+
+    /* Smooth redirect transition */
+    .page-exit {
+      animation: pageExit 0.5s ease forwards;
+    }
+    @keyframes pageExit {
+      to {
+        opacity: 0;
+        transform: scale(1.02);
+        filter: blur(4px);
+      }
+    }
+
     /* ── Responsive ── */
     @media (max-width: 768px) {
       nav { padding: 14px 20px; }
@@ -255,6 +466,22 @@
       .nav-hamburger { display: flex; }
       .login-card { padding: 36px 24px; }
       .login-header .logo-text { font-size: 1.6rem; }
+
+      .onboard-container { padding: 28px 20px 24px; }
+      .onboard-title { font-size: 1.3rem; }
+      .industry-grid { grid-template-columns: repeat(4, 1fr); gap: 8px; }
+      .industry-item { padding: 12px 4px; }
+      .industry-item .icon { font-size: 1.4rem; }
+      .industry-item .label { font-size: 0.7rem; }
+      .need-grid { grid-template-columns: 1fr; gap: 10px; }
+      .need-card { padding: 16px 14px; }
+    }
+
+    @media (max-width: 420px) {
+      .industry-grid { grid-template-columns: repeat(4, 1fr); gap: 6px; }
+      .industry-item { padding: 10px 2px; }
+      .industry-item .icon { font-size: 1.2rem; }
+      .industry-item .label { font-size: 0.65rem; }
     }
   </style>
 </head>
@@ -324,13 +551,45 @@
     &copy; 2026 <span>小路光有限公司</span>（統編 60475510）— aiforseo.vip
   </footer>
 
+  <!-- Onboarding Overlay -->
+  <div class="onboard-overlay" id="onboardOverlay">
+    <div class="onboard-container">
+      <!-- Step 1: Industry -->
+      <div class="onboard-step active" id="onboardStep1">
+        <div class="onboard-dots">
+          <div class="onboard-dot active"></div>
+          <div class="onboard-dot"></div>
+        </div>
+        <div class="onboard-title">&#x4F60;&#x662F;&#x505A;&#x4EC0;&#x9EBC;&#x7684;&#xFF1F;</div>
+        <div class="onboard-subtitle">&#x9078;&#x4E00;&#x500B;&#x6700;&#x63A5;&#x8FD1;&#x4F60;&#x7684;&#x7522;&#x696D;</div>
+        <div class="industry-grid" id="industryGrid"></div>
+        <button class="onboard-skip" id="onboardSkip1">&#x5148;&#x901B;&#x901B;</button>
+      </div>
+
+      <!-- Step 2: Need -->
+      <div class="onboard-step" id="onboardStep2">
+        <div class="onboard-dots">
+          <div class="onboard-dot" style="background:var(--orange);"></div>
+          <div class="onboard-dot active"></div>
+        </div>
+        <div class="onboard-title">&#x6700;&#x60F3;&#x641E;&#x5B9A;&#x4EC0;&#x9EBC;&#xFF1F;</div>
+        <div class="onboard-subtitle">&#x9078;&#x4E00;&#x500B;&#xFF0C;&#x6211;&#x5011;&#x7ACB;&#x523B;&#x5E6B;&#x4F60;&#x5B89;&#x6392;</div>
+        <div class="need-grid" id="needGrid"></div>
+        <button class="onboard-skip" id="onboardSkip2">&#x5148;&#x901B;&#x901B;</button>
+      </div>
+    </div>
+  </div>
+
   <script src="/seobaike-config.js"></script>
   <script>
     document.getElementById('hamburger').addEventListener('click', function () {
       document.getElementById('navLinks').classList.toggle('open');
     });
 
-    // SEOBAIKE Auth
+    // ══════════════════════════════════════
+    // SEOBAIKE Auth + Smart Onboarding
+    // ══════════════════════════════════════
+
     const SUPA_URL = (window.__SEOBAIKE__ && window.__SEOBAIKE__.supabaseUrl) || '';
     const SUPA_KEY = (window.__SEOBAIKE__ && window.__SEOBAIKE__.anonKey) || '';
 
@@ -338,9 +597,143 @@
     const btnPrimary = document.querySelector('.btn-primary');
     const btnSSO = document.querySelector('.btn-outline');
 
-    // 顯示訊息
+    // ── Onboarding Data ──
+    var _obIndustries = [
+      { key: 'food',        icon: '\uD83C\uDF7D\uFE0F', label: '\u9910\u98F2\u7F8E\u98DF' },
+      { key: 'retail',      icon: '\uD83C\uDFEA',       label: '\u96F6\u552E\u96FB\u5546' },
+      { key: 'health',      icon: '\uD83C\uDFE5',       label: '\u91AB\u7642\u5065\u5EB7' },
+      { key: 'education',   icon: '\uD83D\uDCDA',       label: '\u6559\u80B2\u57F9\u8A13' },
+      { key: 'finance',     icon: '\uD83D\uDCB0',       label: '\u91D1\u878D\u7406\u8CA1' },
+      { key: 'construction',icon: '\uD83C\uDFD7\uFE0F', label: '\u5EFA\u7BC9\u5DE5\u7A0B' },
+      { key: 'design',      icon: '\uD83C\uDFA8',       label: '\u8A2D\u8A08\u5275\u610F' },
+      { key: 'tech',        icon: '\uD83D\uDCBB',       label: '\u79D1\u6280\u8EDF\u9AD4' },
+      { key: 'manufacturing',icon: '\uD83C\uDFED',      label: '\u88FD\u9020\u696D' },
+      { key: 'auto',        icon: '\uD83D\uDE97',       label: '\u6C7D\u8ECA\u4EA4\u901A' },
+      { key: 'realestate',  icon: '\uD83C\uDFE0',       label: '\u623F\u5730\u7522' },
+      { key: 'legal',       icon: '\u2696\uFE0F',       label: '\u6CD5\u5F8B\u9867\u554F' },
+      { key: 'agriculture', icon: '\uD83C\uDF3E',       label: '\u8FB2\u696D\u98DF\u54C1' },
+      { key: 'media',       icon: '\uD83C\uDFAC',       label: '\u5A92\u9AD4\u5A1B\u6A02' },
+      { key: 'business',    icon: '\uD83D\uDCBC',       label: '\u4F01\u696D\u7BA1\u7406' },
+      { key: 'other',       icon: '\uD83C\uDF0D',       label: '\u5176\u4ED6' }
+    ];
+
+    var _obNeeds = [
+      { key: 'marketing',   icon: '\uD83D\uDCE2', title: '\u884C\u92B7\u63A8\u5EE3', desc: '\u8B93\u66F4\u591A\u4EBA\u77E5\u9053\u6211' },
+      { key: 'analytics',   icon: '\uD83D\uDCCA', title: '\u6578\u64DA\u5206\u6790', desc: '\u770B\u61C2\u6211\u7684\u751F\u610F' },
+      { key: 'automation',  icon: '\uD83E\uDD16', title: '\u81EA\u52D5\u5316',       desc: '\u91CD\u8907\u7684\u4E8B\u4EA4\u7D66 AI' },
+      { key: 'content',     icon: '\uD83D\uDCDD', title: '\u5167\u5BB9\u751F\u6210', desc: '\u6587\u6848\u3001\u5716\u7247\u3001\u5F71\u7247' },
+      { key: 'support',     icon: '\uD83D\uDCAC', title: '\u5BA2\u670D\u6E9D\u901A', desc: '24 \u5C0F\u6642\u4E0D\u6253\u70CA' },
+      { key: 'operations',  icon: '\uD83D\uDCCB', title: '\u71DF\u904B\u7BA1\u7406', desc: '\u5E33\u52D9\u3001\u6392\u7A0B\u3001\u5EAB\u5B58' }
+    ];
+
+    var _obSelected = { industry: null, need: null };
+
+    // ── Build Onboarding DOM ──
+    (function buildOnboarding() {
+      var igrid = document.getElementById('industryGrid');
+      _obIndustries.forEach(function(item, i) {
+        var el = document.createElement('div');
+        el.className = 'industry-item';
+        el.dataset.key = item.key;
+        el.innerHTML = '<div class="icon">' + item.icon + '</div><div class="label">' + item.label + '</div>';
+        el.addEventListener('click', function() { selectIndustry(item.key, el); });
+        igrid.appendChild(el);
+      });
+
+      var ngrid = document.getElementById('needGrid');
+      _obNeeds.forEach(function(item, i) {
+        var el = document.createElement('div');
+        el.className = 'need-card';
+        el.dataset.key = item.key;
+        el.innerHTML = '<div class="card-icon">' + item.icon + '</div><div class="card-title">' + item.title + '</div><div class="card-desc">' + item.desc + '</div>';
+        el.addEventListener('click', function() { selectNeed(item.key, el); });
+        ngrid.appendChild(el);
+      });
+    })();
+
+    function selectIndustry(key, el) {
+      _obSelected.industry = key;
+      document.querySelectorAll('.industry-item').forEach(function(x) { x.classList.remove('selected'); });
+      el.classList.add('selected');
+      // Auto-advance to step 2 after brief glow
+      setTimeout(function() { goToStep2(); }, 350);
+    }
+
+    function selectNeed(key, el) {
+      _obSelected.need = key;
+      document.querySelectorAll('.need-card').forEach(function(x) { x.classList.remove('selected'); });
+      el.classList.add('selected');
+      // Save and redirect after brief glow
+      setTimeout(function() { finishOnboarding(); }, 400);
+    }
+
+    function goToStep2() {
+      document.getElementById('onboardStep1').classList.remove('active');
+      document.getElementById('onboardStep2').classList.add('active');
+      // Animate need cards sliding in
+      var cards = document.querySelectorAll('#onboardStep2 .need-card');
+      cards.forEach(function(card, i) {
+        setTimeout(function() { card.classList.add('slide-in'); }, 60 * i);
+      });
+    }
+
+    function finishOnboarding() {
+      var profile = {
+        industry: _obSelected.industry || 'general',
+        need: _obSelected.need || 'explore',
+        setupAt: new Date().toISOString()
+      };
+      localStorage.setItem('seobaike_profile', JSON.stringify(profile));
+      smoothRedirect();
+    }
+
+    function skipOnboarding() {
+      var profile = {
+        industry: 'general',
+        need: 'explore',
+        setupAt: new Date().toISOString()
+      };
+      localStorage.setItem('seobaike_profile', JSON.stringify(profile));
+      smoothRedirect();
+    }
+
+    function smoothRedirect() {
+      var overlay = document.getElementById('onboardOverlay');
+      overlay.classList.add('fade-out');
+      document.body.classList.add('page-exit');
+      setTimeout(function() { window.location.href = '/dashboard'; }, 500);
+    }
+
+    function showOnboarding() {
+      var overlay = document.getElementById('onboardOverlay');
+      overlay.classList.add('active');
+      // Stagger industry items slide-in
+      var items = document.querySelectorAll('#onboardStep1 .industry-item');
+      items.forEach(function(item, i) {
+        setTimeout(function() { item.classList.add('slide-in'); }, 40 * i);
+      });
+    }
+
+    // Skip buttons
+    document.getElementById('onboardSkip1').addEventListener('click', skipOnboarding);
+    document.getElementById('onboardSkip2').addEventListener('click', skipOnboarding);
+
+    // ── Post-login trigger ──
+    // If user already has a profile, skip onboarding and go straight to dashboard
+    function handleLoginSuccess() {
+      var existingProfile = localStorage.getItem('seobaike_profile');
+      if (existingProfile) {
+        // Returning user - skip onboarding
+        setTimeout(function() { window.location.href = '/dashboard'; }, 600);
+      } else {
+        // New user - show onboarding after brief success message
+        setTimeout(function() { showOnboarding(); }, 700);
+      }
+    }
+
+    // ── 顯示訊息 ──
     function showMsg(text, isError) {
-      let msgEl = document.getElementById('login-msg');
+      var msgEl = document.getElementById('login-msg');
       if (!msgEl) {
         msgEl = document.createElement('div');
         msgEl.id = 'login-msg';
@@ -354,78 +747,107 @@
       msgEl.textContent = text;
     }
 
-    // Email + Password 登入
+    // ── Email + Password 登入 ──
     loginForm.addEventListener('submit', async function(e) {
       e.preventDefault();
-      const email = document.getElementById('email').value.trim();
-      const password = document.getElementById('password').value;
+      var email = document.getElementById('email').value.trim();
+      var password = document.getElementById('password').value;
 
       if (!email || !password) {
-        showMsg('請輸入電子郵件和密碼', true);
+        showMsg('\u8ACB\u8F38\u5165\u96FB\u5B50\u90F5\u4EF6\u548C\u5BC6\u78BC', true);
         return;
       }
 
       btnPrimary.disabled = true;
-      btnPrimary.textContent = '登入中...';
+      btnPrimary.textContent = '\u767B\u5165\u4E2D...';
 
       try {
-        const res = await fetch(SUPA_URL + '/auth/v1/token?grant_type=password', {
+        var res = await fetch(SUPA_URL + '/auth/v1/token?grant_type=password', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
             'apikey': SUPA_KEY
           },
-          body: JSON.stringify({ email, password })
+          body: JSON.stringify({ email: email, password: password })
         });
-        const data = await res.json();
+        var data = await res.json();
 
         if (res.ok && data.access_token) {
           localStorage.setItem('sb-access-token', data.access_token);
           localStorage.setItem('sb-refresh-token', data.refresh_token);
           localStorage.setItem('sb-user', JSON.stringify(data.user));
-          showMsg('登入成功！正在跳轉...', false);
-          setTimeout(function() { window.location.href = '/dashboard'; }, 800);
+          showMsg('\u767B\u5165\u6210\u529F\uFF01', false);
+          handleLoginSuccess();
         } else {
-          const msg = data.error_description || data.msg || data.error || '登入失敗';
+          var msg = data.error_description || data.msg || data.error || '\u767B\u5165\u5931\u6557';
           if (msg.includes('Invalid login')) {
-            showMsg('電子郵件或密碼錯誤', true);
+            showMsg('\u96FB\u5B50\u90F5\u4EF6\u6216\u5BC6\u78BC\u932F\u8AA4', true);
           } else if (msg.includes('Email not confirmed')) {
-            showMsg('請先至信箱確認帳號', true);
+            showMsg('\u8ACB\u5148\u81F3\u4FE1\u7BB1\u78BA\u8A8D\u5E33\u865F', true);
           } else {
             showMsg(msg, true);
           }
         }
       } catch (err) {
-        showMsg('網路錯誤，請稍後再試', true);
+        showMsg('\u7DB2\u8DEF\u932F\u8AA4\uFF0C\u8ACB\u7A0D\u5F8C\u518D\u8A66', true);
       }
 
       btnPrimary.disabled = false;
-      btnPrimary.textContent = '登入';
+      btnPrimary.textContent = '\u767B\u5165';
     });
 
-    // OAuth SSO 帳號登入
+    // ── OAuth SSO 帳號登入 ──
+    // SSO redirect goes to a callback page; onboarding triggers on the callback/dashboard
     btnSSO.addEventListener('click', function() {
-      const redirectTo = window.location.origin + '/dashboard';
-      const ssoUrl = SUPA_URL + '/auth/v1/authorize?provider=google&redirect_to=' + encodeURIComponent(redirectTo);
+      // Redirect to login callback that will show onboarding
+      var redirectTo = window.location.origin + '/login?sso=callback';
+      var ssoUrl = SUPA_URL + '/auth/v1/authorize?provider=google&redirect_to=' + encodeURIComponent(redirectTo);
       window.location.href = ssoUrl;
     });
 
-    // 註冊連結
+    // ── Handle SSO callback ──
+    (function handleSSOCallback() {
+      var params = new URLSearchParams(window.location.search);
+      var hash = window.location.hash;
+      // Check if we're coming back from SSO with tokens in the hash
+      if (hash && hash.includes('access_token')) {
+        var hashParams = new URLSearchParams(hash.substring(1));
+        var accessToken = hashParams.get('access_token');
+        var refreshToken = hashParams.get('refresh_token');
+        if (accessToken) {
+          localStorage.setItem('sb-access-token', accessToken);
+          if (refreshToken) localStorage.setItem('sb-refresh-token', refreshToken);
+          showMsg('\u767B\u5165\u6210\u529F\uFF01', false);
+          // Clear the hash
+          history.replaceState(null, '', window.location.pathname);
+          handleLoginSuccess();
+          return;
+        }
+      }
+      // Also check query param callback
+      if (params.get('sso') === 'callback' && localStorage.getItem('sb-access-token')) {
+        showMsg('\u767B\u5165\u6210\u529F\uFF01', false);
+        handleLoginSuccess();
+        return;
+      }
+    })();
+
+    // ── 註冊連結 ──
     document.querySelector('.login-footer a').addEventListener('click', function(e) {
       e.preventDefault();
-      const card = document.querySelector('.login-card');
-      const header = card.querySelector('.login-header p');
-      const isLogin = header.textContent.includes('登入');
+      var card = document.querySelector('.login-card');
+      var header = card.querySelector('.login-header p');
+      var isLogin = header.textContent.includes('\u767B\u5165');
 
       if (isLogin) {
-        header.textContent = '建立您的 SEOBAIKE 帳號';
-        btnPrimary.textContent = '註冊';
-        document.querySelector('.login-footer').innerHTML = '已有帳號？ <a href="#">返回登入</a>';
+        header.textContent = '\u5EFA\u7ACB\u60A8\u7684 SEOBAIKE \u5E33\u865F';
+        btnPrimary.textContent = '\u8A3B\u518A';
+        document.querySelector('.login-footer').innerHTML = '\u5DF2\u6709\u5E33\u865F\uFF1F <a href="#">\u8FD4\u56DE\u767B\u5165</a>';
         loginForm.dataset.mode = 'signup';
       } else {
-        header.textContent = '登入您的 AI 約束推理平台帳號';
-        btnPrimary.textContent = '登入';
-        document.querySelector('.login-footer').innerHTML = '還沒有帳號？ <a href="#">立即註冊</a>';
+        header.textContent = '\u767B\u5165\u60A8\u7684 AI \u7D04\u675F\u63A8\u7406\u5E73\u53F0\u5E33\u865F';
+        btnPrimary.textContent = '\u767B\u5165';
+        document.querySelector('.login-footer').innerHTML = '\u9084\u6C92\u6709\u5E33\u865F\uFF1F <a href="#">\u7ACB\u5373\u8A3B\u518A</a>';
         loginForm.dataset.mode = 'login';
       }
 
@@ -433,95 +855,102 @@
       document.querySelector('.login-footer a').addEventListener('click', arguments.callee);
     });
 
-    // 攔截 form submit，如果是 signup mode
-    const origSubmit = loginForm.onsubmit;
+    // ── 攔截 form submit，如果是 signup mode ──
     loginForm.addEventListener('submit', async function(e) {
       if (loginForm.dataset.mode !== 'signup') return;
       e.preventDefault();
       e.stopImmediatePropagation();
 
-      const email = document.getElementById('email').value.trim();
-      const password = document.getElementById('password').value;
+      var email = document.getElementById('email').value.trim();
+      var password = document.getElementById('password').value;
 
       if (!email || !password) {
-        showMsg('請輸入電子郵件和密碼', true);
+        showMsg('\u8ACB\u8F38\u5165\u96FB\u5B50\u90F5\u4EF6\u548C\u5BC6\u78BC', true);
         return;
       }
       if (password.length < 6) {
-        showMsg('密碼至少需要 6 個字元', true);
+        showMsg('\u5BC6\u78BC\u81F3\u5C11\u9700\u8981 6 \u500B\u5B57\u5143', true);
         return;
       }
 
       btnPrimary.disabled = true;
-      btnPrimary.textContent = '註冊中...';
+      btnPrimary.textContent = '\u8A3B\u518A\u4E2D...';
 
       try {
-        const res = await fetch(SUPA_URL + '/auth/v1/signup', {
+        var res = await fetch(SUPA_URL + '/auth/v1/signup', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
             'apikey': SUPA_KEY
           },
-          body: JSON.stringify({ email, password })
+          body: JSON.stringify({ email: email, password: password })
         });
-        const data = await res.json();
+        var data = await res.json();
 
         if (res.ok) {
           if (data.access_token) {
             localStorage.setItem('sb-access-token', data.access_token);
-            showMsg('註冊成功！正在跳轉...', false);
-            setTimeout(function() { window.location.href = '/dashboard'; }, 800);
+            localStorage.setItem('sb-user', JSON.stringify(data.user));
+            showMsg('\u8A3B\u518A\u6210\u529F\uFF01', false);
+            handleLoginSuccess();
           } else {
-            showMsg('註冊成功！請至信箱確認帳號後再登入。', false);
+            showMsg('\u8A3B\u518A\u6210\u529F\uFF01\u8ACB\u81F3\u4FE1\u7BB1\u78BA\u8A8D\u5E33\u865F\u5F8C\u518D\u767B\u5165\u3002', false);
           }
         } else {
-          const msg = data.error_description || data.msg || data.error || '註冊失敗';
+          var msg = data.error_description || data.msg || data.error || '\u8A3B\u518A\u5931\u6557';
           if (msg.includes('already registered')) {
-            showMsg('此電子郵件已註冊，請直接登入', true);
+            showMsg('\u6B64\u96FB\u5B50\u90F5\u4EF6\u5DF2\u8A3B\u518A\uFF0C\u8ACB\u76F4\u63A5\u767B\u5165', true);
           } else {
             showMsg(msg, true);
           }
         }
       } catch (err) {
-        showMsg('網路錯誤，請稍後再試', true);
+        showMsg('\u7DB2\u8DEF\u932F\u8AA4\uFF0C\u8ACB\u7A0D\u5F8C\u518D\u8A66', true);
       }
 
       btnPrimary.disabled = false;
-      btnPrimary.textContent = '註冊';
+      btnPrimary.textContent = '\u8A3B\u518A';
     }, true);
 
-    // 忘記密碼
+    // ── 忘記密碼 ──
     document.querySelector('.form-meta a').addEventListener('click', async function(e) {
       e.preventDefault();
-      const email = document.getElementById('email').value.trim();
+      var email = document.getElementById('email').value.trim();
       if (!email) {
-        showMsg('請先輸入電子郵件，再點擊忘記密碼', true);
+        showMsg('\u8ACB\u5148\u8F38\u5165\u96FB\u5B50\u90F5\u4EF6\uFF0C\u518D\u9EDE\u64CA\u5FD8\u8A18\u5BC6\u78BC', true);
         return;
       }
       try {
-        const res = await fetch(SUPA_URL + '/auth/v1/recover', {
+        var res = await fetch(SUPA_URL + '/auth/v1/recover', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
             'apikey': SUPA_KEY
           },
-          body: JSON.stringify({ email })
+          body: JSON.stringify({ email: email })
         });
         if (res.ok) {
-          showMsg('密碼重設信已寄出，請查收信箱', false);
+          showMsg('\u5BC6\u78BC\u91CD\u8A2D\u4FE1\u5DF2\u5BC4\u51FA\uFF0C\u8ACB\u67E5\u6536\u4FE1\u7BB1', false);
         } else {
-          showMsg('無法寄出重設信，請確認電子郵件', true);
+          showMsg('\u7121\u6CD5\u5BC4\u51FA\u91CD\u8A2D\u4FE1\uFF0C\u8ACB\u78BA\u8A8D\u96FB\u5B50\u90F5\u4EF6', true);
         }
       } catch (err) {
-        showMsg('網路錯誤，請稍後再試', true);
+        showMsg('\u7DB2\u8DEF\u932F\u8AA4\uFF0C\u8ACB\u7A0D\u5F8C\u518D\u8A66', true);
       }
     });
 
-    // 如果已登入，自動跳轉
-    if (localStorage.getItem('sb-access-token')) {
-      showMsg('您已登入，正在跳轉到儀表板...', false);
-      setTimeout(function() { window.location.href = '/dashboard'; }, 500);
-    }
+    // ── 如果已登入，自動跳轉 ──
+    (function checkAlreadyLoggedIn() {
+      // Don't auto-redirect if we're handling SSO callback
+      var params = new URLSearchParams(window.location.search);
+      if (params.get('sso') === 'callback') return;
+      if (window.location.hash && window.location.hash.includes('access_token')) return;
+
+      if (localStorage.getItem('sb-access-token')) {
+        showMsg('\u60A8\u5DF2\u767B\u5165\uFF0C\u6B63\u5728\u8DF3\u8F49\u5230\u5100\u8868\u677F...', false);
+        setTimeout(function() { window.location.href = '/dashboard'; }, 500);
+      }
+    })();
   </script>
 <script>
 (function(){
