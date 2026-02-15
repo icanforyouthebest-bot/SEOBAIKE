@@ -1,0 +1,291 @@
+/* ═══════════════════════════════════════════════════
+   SEOBAIKE Premium Effects — Beyond Framer
+   Micro-interactions, parallax, cursor fx, 3D cards
+   ═══════════════════════════════════════════════════ */
+
+/* ── Film Grain Overlay (luxury texture) ── */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 9998;
+  pointer-events: none;
+  opacity: 0.015;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 256px 256px;
+}
+
+/* ── Smooth Page Load ── */
+@keyframes pageIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+body { animation: pageIn 0.6s ease-out; }
+
+/* ── Staggered Fade-Up Children ── */
+.stagger > *:nth-child(1) { transition-delay: 0s; }
+.stagger > *:nth-child(2) { transition-delay: 0.08s; }
+.stagger > *:nth-child(3) { transition-delay: 0.16s; }
+.stagger > *:nth-child(4) { transition-delay: 0.24s; }
+.stagger > *:nth-child(5) { transition-delay: 0.32s; }
+.stagger > *:nth-child(6) { transition-delay: 0.4s; }
+.stagger > *:nth-child(7) { transition-delay: 0.48s; }
+.stagger > *:nth-child(8) { transition-delay: 0.56s; }
+
+/* ── Magnetic Button Effect ── */
+.btn-magnetic {
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.btn-magnetic:hover {
+  transform: scale(1.03);
+}
+.btn-magnetic:active {
+  transform: scale(0.97);
+  transition-duration: 0.1s;
+}
+
+/* ── 3D Card Tilt ── */
+.card-3d {
+  transform-style: preserve-3d;
+  perspective: 1000px;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease;
+}
+.card-3d:hover {
+  box-shadow:
+    0 20px 60px rgba(0,0,0,0.4),
+    0 0 40px rgba(232,133,12,0.08);
+}
+
+/* ── Glow Border on Hover ── */
+.glow-border {
+  position: relative;
+}
+.glow-border::after {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  background: linear-gradient(135deg, rgba(232,133,12,0.3), transparent 50%, rgba(245,166,35,0.2));
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  filter: blur(4px);
+}
+.glow-border:hover::after {
+  opacity: 1;
+}
+
+/* ── Text Shimmer (for headings) ── */
+.text-shimmer {
+  background: linear-gradient(
+    90deg,
+    var(--gold-300, #e8850c) 0%,
+    var(--gold-100, #ffd700) 25%,
+    var(--gold-200, #f5a623) 50%,
+    var(--gold-100, #ffd700) 75%,
+    var(--gold-300, #e8850c) 100%
+  );
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: textShimmer 4s linear infinite;
+}
+@keyframes textShimmer {
+  0% { background-position: 0% center; }
+  100% { background-position: 200% center; }
+}
+
+/* ── Smooth Underline Link ── */
+.link-smooth {
+  position: relative;
+  display: inline-block;
+}
+.link-smooth::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 1.5px;
+  background: var(--gold-gradient, linear-gradient(90deg, #e8850c, #ffd700));
+  transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.link-smooth:hover::after {
+  width: 100%;
+}
+
+/* ── Scroll Progress Bar ── */
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 2px;
+  background: var(--gold-gradient, linear-gradient(90deg, #e8850c, #f5a623, #ffd700));
+  z-index: 10001;
+  width: 0%;
+  transition: width 0.1s linear;
+}
+
+/* ── Floating Particles Background ── */
+.particles {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  overflow: hidden;
+}
+.particle {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  background: rgba(232,133,12,0.15);
+  border-radius: 50%;
+  animation: particleFloat var(--dur, 20s) linear infinite;
+}
+@keyframes particleFloat {
+  0% { transform: translateY(100vh) translateX(0); opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { transform: translateY(-10vh) translateX(var(--dx, 50px)); opacity: 0; }
+}
+
+/* ── Custom Cursor Dot (desktop only) ── */
+@media (hover: hover) and (pointer: fine) {
+  .cursor-dot {
+    width: 6px;
+    height: 6px;
+    background: var(--gold-200, #f5a623);
+    border-radius: 50%;
+    position: fixed;
+    pointer-events: none;
+    z-index: 99999;
+    transition: transform 0.15s ease, opacity 0.15s;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 0 10px rgba(232,133,12,0.4);
+    mix-blend-mode: screen;
+  }
+  .cursor-ring {
+    width: 32px;
+    height: 32px;
+    border: 1.5px solid rgba(232,133,12,0.25);
+    border-radius: 50%;
+    position: fixed;
+    pointer-events: none;
+    z-index: 99998;
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), width 0.3s, height 0.3s, border-color 0.3s;
+    transform: translate(-50%, -50%);
+  }
+  .cursor-ring.hover {
+    width: 48px;
+    height: 48px;
+    border-color: rgba(232,133,12,0.5);
+  }
+}
+
+/* ── Smooth Section Divider Glow ── */
+.section-glow {
+  position: relative;
+}
+.section-glow::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 50%;
+  max-width: 400px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(232,133,12,0.4), transparent);
+}
+
+/* ── Number Counter Glow ── */
+.counter-glow {
+  text-shadow: 0 0 20px rgba(232,133,12,0.3);
+  transition: text-shadow 0.3s;
+}
+.counter-glow:hover {
+  text-shadow: 0 0 40px rgba(232,133,12,0.5), 0 0 80px rgba(232,133,12,0.2);
+}
+
+/* ── Hover Lift (universal) ── */
+.hover-lift {
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease;
+}
+.hover-lift:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(0,0,0,0.3), 0 0 20px rgba(232,133,12,0.06);
+}
+
+/* ── Typing Animation ── */
+.typing-cursor::after {
+  content: '|';
+  animation: blink 0.8s step-end infinite;
+  color: var(--gold-200, #f5a623);
+  font-weight: 300;
+}
+@keyframes blink {
+  50% { opacity: 0; }
+}
+
+/* ── Reveal Line (slide in from left) ── */
+.reveal-line {
+  overflow: hidden;
+}
+.reveal-line > * {
+  transform: translateY(100%);
+  transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.reveal-line.visible > * {
+  transform: translateY(0);
+}
+
+/* ── Glass Effect (enhanced) ── */
+.glass {
+  background: rgba(255,255,255,0.02);
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  border: 1px solid rgba(255,255,255,0.05);
+}
+
+/* ── Pulse Ring (for live indicators) ── */
+.pulse-ring {
+  position: relative;
+}
+.pulse-ring::before,
+.pulse-ring::after {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  border-radius: inherit;
+  border: 1px solid currentColor;
+  opacity: 0;
+  animation: pulseRingOut 2s ease-out infinite;
+}
+.pulse-ring::after {
+  animation-delay: 1s;
+}
+@keyframes pulseRingOut {
+  0% { transform: scale(1); opacity: 0.4; }
+  100% { transform: scale(1.5); opacity: 0; }
+}
+
+/* ── Responsive: disable heavy FX on mobile ── */
+@media (max-width: 768px) {
+  body::after { display: none; } /* no grain on mobile */
+  .cursor-dot, .cursor-ring { display: none; }
+  .card-3d:hover { transform: none; }
+  .particles { display: none; }
+}
+
+/* ── Reduced Motion ── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+  body::after { display: none; }
+  .particles { display: none; }
+  .cursor-dot, .cursor-ring { display: none; }
+}
