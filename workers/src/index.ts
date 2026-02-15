@@ -39,6 +39,15 @@ export default {
     const url = new URL(request.url)
     const path = url.pathname
 
+    // ── 總部儀表板 → 從 GitHub 取 pages-site/dashboard.html ──
+    if (path === '/dashboard' || path === '/dashboard/') {
+      const rawRes = await fetch('https://raw.githubusercontent.com/icanforyouthebest-bot/SEOBAIKE/master/pages-site/dashboard.html')
+      return new Response(rawRes.body, {
+        status: rawRes.status,
+        headers: { ...SITE_SECURITY_HEADERS, 'Content-Type': 'text/html; charset=utf-8', 'Cache-Control': 'public, max-age=60' },
+      })
+    }
+
     // ── 非 /api/ 路徑 → 代理到 Cloudflare Pages（Framer SPA） ──
     if (!path.startsWith('/api/') && path !== '/api') {
       const pagesUrl = new URL(request.url)

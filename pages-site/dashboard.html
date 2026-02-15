@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SEOBAIKE — 即時儀錶板</title>
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Segoe UI', sans-serif; background: #0a0a1a; color: #eee; min-height: 100vh; }
+.header { background: linear-gradient(135deg, #76b900 0%, #cc785c 50%, #1a1a2e 100%); padding: 16px 30px; display: flex; align-items: center; gap: 14px; }
+.header h1 { font-size: 24px; color: #fff; }
+.badge { padding: 5px 12px; border-radius: 14px; font-size: 12px; font-weight: bold; }
+.live-dot { display: inline-block; width: 10px; height: 10px; border-radius: 50%; background: #0f0; animation: pulse 1s infinite; margin-right: 6px; }
+@keyframes pulse { 0%,100% { opacity:1; } 50% { opacity:0.2; } }
+@keyframes slideIn { from { opacity:0; transform:translateY(-10px); } to { opacity:1; transform:translateY(0); } }
+.grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; padding: 20px 30px; }
+.card { background: linear-gradient(135deg, #16213e, #1a1a2e); border: 1px solid #333; border-radius: 16px; padding: 20px; text-align: center; transition: all 0.3s; }
+.card:hover { border-color: #76b900; transform: translateY(-2px); }
+.card .num { font-size: 42px; font-weight: bold; color: #76b900; transition: all 0.5s; }
+.card .num.changed { animation: slideIn 0.5s; color: #fff; }
+.card .lbl { font-size: 13px; color: #888; margin-top: 6px; }
+.engines { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; padding: 0 30px 16px; }
+.engine { background: #16213e; border: 1px solid #333; border-radius: 16px; padding: 20px; }
+.engine h3 { font-size: 16px; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
+.engine .status { display: inline-block; width: 12px; height: 12px; border-radius: 50%; }
+.engine .ok { background: #76b900; }
+.engine .fail { background: #ff4444; }
+.engine .stats { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
+.engine .stat { text-align: center; }
+.engine .stat .val { font-size: 28px; font-weight: bold; }
+.engine .stat .key { font-size: 11px; color: #888; }
+.bar-container { margin-top: 10px; background: #0a0a1a; border-radius: 8px; height: 8px; overflow: hidden; }
+.bar { height: 100%; border-radius: 8px; transition: width 0.5s; }
+.bar.green { background: linear-gradient(90deg, #76b900, #8ed100); }
+.bar.orange { background: linear-gradient(90deg, #e8850c, #ffa040); }
+.log-section { padding: 0 30px 20px; }
+.log-section h3 { font-size: 14px; color: #76b900; margin-bottom: 8px; }
+.log { background: #0d1117; border: 1px solid #222; border-radius: 12px; padding: 12px 16px; max-height: 200px; overflow-y: auto; font-family: 'Consolas', monospace; font-size: 12px; line-height: 1.8; }
+.log .entry { animation: slideIn 0.3s; }
+.log .ok { color: #76b900; }
+.log .err { color: #ff6b6b; }
+.log .ts { color: #555; }
+.routes { padding: 0 30px 20px; }
+.routes h3 { font-size: 14px; color: #cc785c; margin-bottom: 8px; }
+.route-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 8px; }
+.route { background: #16213e; border: 1px solid #222; border-radius: 10px; padding: 10px 14px; font-size: 12px; display: flex; justify-content: space-between; align-items: center; }
+.route .name { color: #e8850c; font-weight: bold; }
+.route .path { color: #888; }
+.footer { text-align: center; padding: 16px; color: #333; font-size: 11px; }
+</style>
+</head>
+<body>
+
+<div class="header" style="background:linear-gradient(135deg,#1a0f00 0%,#2a1500 50%,#0a0a1a 100%);">
+  <h1 style="background:linear-gradient(90deg,#e8850c,#cc785c,#76b900);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">SEOBAIKE</h1>
+  <span class="badge" style="background:#e8850c;color:#000;">AI FOR SEO</span>
+  <span class="badge" style="background:#cc785c;color:#fff;">專利 115100981</span>
+  <span class="badge" style="background:#111;color:#0f0;border:1px solid #333;"><span class="live-dot"></span><span id="status">連線中...</span></span>
+  <span style="margin-left:auto;font-size:12px;color:#888;" id="clock"></span>
+</div>
+
+<div class="grid" id="mainGrid">
+  <div class="card"><div class="num" id="d-l1">--</div><div class="lbl">L1 產業類別</div></div>
+  <div class="card"><div class="num" id="d-l2">--</div><div class="lbl">L2 次產業</div></div>
+  <div class="card"><div class="num" id="d-l3">--</div><div class="lbl">L3 製程</div></div>
+  <div class="card"><div class="num" id="d-l4">--</div><div class="lbl">L4 原子節點</div></div>
+  <div class="card"><div class="num" id="d-checks" style="color:#e8850c;">--</div><div class="lbl">路徑檢查總次數</div></div>
+  <div class="card"><div class="num" id="d-audit" style="color:#e8850c;">--</div><div class="lbl">稽核記錄</div></div>
+  <div class="card"><div class="num" id="d-allow" style="color:#76b900;">--</div><div class="lbl">Allow 規則</div></div>
+  <div class="card"><div class="num" id="d-deny" style="color:#ff6b6b;">--</div><div class="lbl">Deny 規則</div></div>
+</div>
+
+<div class="engines">
+  <div class="engine">
+    <h3><span class="status" id="nv-status"></span> SEOBAIKE 主引擎</h3>
+    <div class="stats">
+      <div class="stat"><div class="val" style="color:#76b900;" id="nv-ok">0</div><div class="key">成功</div></div>
+      <div class="stat"><div class="val" style="color:#ff6b6b;" id="nv-fail">0</div><div class="key">失敗</div></div>
+      <div class="stat"><div class="val" style="color:#e8850c;" id="nv-ms">--</div><div class="key">延遲 ms</div></div>
+    </div>
+    <div class="bar-container"><div class="bar green" id="nv-bar" style="width:0%"></div></div>
+  </div>
+  <div class="engine">
+    <h3><span class="status" id="gw-status"></span> SEOBAIKE 約束引擎</h3>
+    <div class="stats">
+      <div class="stat"><div class="val" style="color:#76b900;" id="gw-ok">0</div><div class="key">成功</div></div>
+      <div class="stat"><div class="val" style="color:#ff6b6b;" id="gw-fail">0</div><div class="key">失敗</div></div>
+      <div class="stat"><div class="val" style="color:#e8850c;" id="gw-ms">--</div><div class="key">延遲 ms</div></div>
+    </div>
+    <div class="bar-container"><div class="bar orange" id="gw-bar" style="width:0%"></div></div>
+  </div>
+</div>
+
+<div class="routes">
+  <h3>SEOBAIKE 路由配置</h3>
+  <div class="route-grid" id="routeGrid"></div>
+</div>
+
+<div class="log-section">
+  <h3>即時測試記錄 <span style="color:#555;font-weight:normal;">(每 5 秒自動測試)</span></h3>
+  <div class="log" id="log"></div>
+</div>
+
+<div class="footer">SEOBAIKE — 專利 115100981 — 小路光有限公司 — AI FOR SEO</div>
+
+<script src="seobaike-config.js"></script>
+<script>
+const EP = (window.__SEOBAIKE__ && window.__SEOBAIKE__.supabaseUrl || "") + "/functions/v1/nvidia-boss";
+const GW = (window.__SEOBAIKE__ && window.__SEOBAIKE__.supabaseUrl || "") + "/functions/v1/ai-gateway";
+const KEY = (window.__SEOBAIKE__ && window.__SEOBAIKE__.anonKey) || "";
+const HDR = { "Authorization": "Bearer " + KEY, "Content-Type": "application/json" };
+
+let nvOk=0, nvFail=0, gwOk=0, gwFail=0, round=0;
+const msgs = ["system status","patent check","L1 L2 L3 L4 count","constraint rules","audit report","binding list","allow industries","path check stats","performance","health"];
+const log = document.getElementById("log");
+const routes = [
+  {name:"flagship_dual", path:"主引擎 → 備援引擎"},
+  {name:"boss_direct", path:"備援引擎 → 主引擎"},
+  {name:"code_generation", path:"主引擎 → 推理引擎"},
+  {name:"reasoning_dual", path:"推理引擎 → 主引擎"},
+  {name:"fast_dual", path:"快速引擎 → 備援引擎"},
+];
+document.getElementById("routeGrid").innerHTML = routes.map(r =>
+  '<div class="route"><span class="name">' + r.name + '</span><span class="path">' + r.path + '</span></div>'
+).join("");
+
+function updateNum(id, val) {
+  const el = document.getElementById(id);
+  if (el.textContent !== String(val)) {
+    el.textContent = val;
+    el.classList.add("changed");
+    setTimeout(() => el.classList.remove("changed"), 600);
+  }
+}
+
+function addLog(text, cls) {
+  const ts = new Date().toLocaleTimeString("zh-TW");
+  const div = document.createElement("div");
+  div.className = "entry";
+  div.innerHTML = '<span class="ts">[' + ts + ']</span> <span class="' + cls + '">' + text + '</span>';
+  log.prepend(div);
+  if (log.children.length > 100) log.lastChild.remove();
+}
+
+setInterval(() => {
+  document.getElementById("clock").textContent = new Date().toLocaleString("zh-TW");
+}, 1000);
+
+async function tick() {
+  round++;
+  const msg = msgs[round % msgs.length];
+  document.getElementById("status").textContent = "同步測試中 #" + round;
+
+  const nvJob = (async () => {
+    const t0 = performance.now();
+    const res = await fetch(EP, { method:"POST", headers:HDR, body:JSON.stringify({message:msg}) });
+    const ms = Math.round(performance.now() - t0);
+    const data = await res.json();
+    if (res.ok && data.reply) {
+      nvOk++;
+      document.getElementById("nv-status").className = "status ok";
+      document.getElementById("nv-ms").textContent = ms;
+      addLog("主引擎 #" + round + " OK (" + ms + "ms) — " + data.reply.substring(0,40) + "...", "ok");
+      if (data.real_data) {
+        updateNum("d-l1", data.real_data.l1_count);
+        updateNum("d-l2", data.real_data.l2_count);
+        updateNum("d-l3", data.real_data.l3_count);
+        updateNum("d-l4", data.real_data.l4_count);
+        updateNum("d-checks", data.real_data.total_path_checks);
+        updateNum("d-audit", data.real_data.total_audit_entries);
+        updateNum("d-allow", data.real_data.allow_paths);
+        updateNum("d-deny", data.real_data.deny_paths);
+      }
+    } else { nvFail++; document.getElementById("nv-status").className = "status fail"; addLog("主引擎 #" + round + " FAIL: " + JSON.stringify(data).substring(0,60), "err"); }
+  })().catch(e => { nvFail++; addLog("主引擎 #" + round + " ERROR: " + e.message, "err"); });
+
+  const gwJob = (async () => {
+    const t0 = performance.now();
+    const res = await fetch(GW, { method:"POST", headers:HDR, body:JSON.stringify({message:msg, platform:"telegram", platform_user_id:"5372713163"}) });
+    const ms = Math.round(performance.now() - t0);
+    const data = await res.json();
+    if (res.ok && data.allowed) {
+      gwOk++;
+      document.getElementById("gw-status").className = "status ok";
+      document.getElementById("gw-ms").textContent = ms;
+      addLog("約束引擎 #" + round + " OK (" + ms + "ms) allowed=" + data.allowed + " industry=" + data.industry, "ok");
+    } else if (res.ok) {
+      gwOk++;
+      document.getElementById("gw-status").className = "status ok";
+      document.getElementById("gw-ms").textContent = ms;
+      addLog("約束引擎 #" + round + " CONSTRAINED (" + ms + "ms) " + (data.reason||"").substring(0,40), "ok");
+    } else { gwFail++; document.getElementById("gw-status").className = "status fail"; addLog("約束引擎 #" + round + " FAIL: " + JSON.stringify(data).substring(0,60), "err"); }
+  })().catch(e => { gwFail++; addLog("約束引擎 #" + round + " ERROR: " + e.message, "err"); });
+
+  await Promise.all([nvJob, gwJob]);
+
+  document.getElementById("nv-ok").textContent = nvOk;
+  document.getElementById("nv-fail").textContent = nvFail;
+  document.getElementById("nv-bar").style.width = (nvOk / (nvOk + nvFail) * 100) + "%";
+  document.getElementById("gw-ok").textContent = gwOk;
+  document.getElementById("gw-fail").textContent = gwFail;
+  document.getElementById("gw-bar").style.width = (gwOk / (gwOk + gwFail) * 100) + "%";
+
+  document.getElementById("status").textContent = "同步運行中 | 第 " + round + " 輪";
+}
+
+tick();
+setInterval(tick, 5000);
+</script>
+</body>
+</html>
