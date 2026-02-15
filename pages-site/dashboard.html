@@ -147,23 +147,80 @@ body { font-family: 'Segoe UI', sans-serif; background: #0a0a1a; color: #eee; mi
 .feed-table .fua { color: #555; font-size: 10px; max-width: 300px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .feed-table .fc { color: #cc785c; font-size: 11px; }
 
+/* === Dashboard Hamburger Menu === */
+.dash-hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:4px;margin-left:auto}
+.dash-hamburger span{display:block;width:24px;height:2px;background:#eee;border-radius:2px;transition:0.3s}
+
+.mobile-menu-overlay{display:none;position:fixed;inset:0;z-index:9999;background:rgba(10,10,26,0.97);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);flex-direction:column;align-items:center;justify-content:center;gap:0;opacity:0;transition:opacity 0.35s ease}
+.mobile-menu-overlay.open{display:flex;opacity:1}
+.mobile-menu-overlay .mobile-close{position:absolute;top:16px;right:20px;background:none;border:none;color:#fff;font-size:2rem;cursor:pointer;width:48px;height:48px;display:flex;align-items:center;justify-content:center;border-radius:50%;transition:background 0.2s}
+.mobile-menu-overlay .mobile-close:hover{background:rgba(232,133,12,0.15)}
+.mobile-menu-overlay a{display:block;color:#fff;font-size:1.3rem;font-weight:600;padding:16px 40px;text-align:center;transition:color 0.2s,background 0.2s;width:100%;text-decoration:none;min-height:48px;line-height:1.5}
+.mobile-menu-overlay a:hover{color:#e8850c;background:rgba(232,133,12,0.06)}
+
 /* Responsive: stack panels on smaller screens */
 @media (max-width: 1200px) {
   .data-panels { grid-template-columns: repeat(2, 1fr); }
   .marketplace-grid { grid-template-columns: repeat(2, 1fr); }
   .featured-grid { grid-template-columns: repeat(2, 1fr); }
 }
-@media (max-width: 768px) {
+
+/* === 平板 (1024px) === */
+@media (max-width: 1024px) {
   .grid { grid-template-columns: repeat(2, 1fr); }
-  .data-panels { grid-template-columns: 1fr; }
-  .engines { grid-template-columns: 1fr; }
-  .header { flex-wrap: wrap; }
-  .marketplace-grid { grid-template-columns: 1fr; }
-  .featured-grid { grid-template-columns: 1fr; }
-  .bot-status-row { flex-direction: column; }
-  .nav-bar { flex-wrap: wrap; }
-  .nav-bar a { padding: 8px 12px; font-size: 12px; }
-  .byok-dash-banner { flex-direction: column; text-align: center; }
+  .header h1 { font-size: 20px; }
+}
+
+/* === 手機 (768px) === */
+@media (max-width: 768px) {
+  .grid { grid-template-columns: 1fr; padding: 16px; gap: 12px; }
+  .data-panels { grid-template-columns: 1fr; padding: 0 16px 16px; gap: 12px; }
+  .engines { grid-template-columns: 1fr; padding: 0 16px 16px; }
+  .header { flex-wrap: wrap; padding: 12px 16px; gap: 8px; }
+  .header h1 { font-size: 18px; width: 100%; }
+  .marketplace-grid { grid-template-columns: 1fr; padding: 0 16px 16px; }
+  .featured-grid { grid-template-columns: 1fr; padding: 0 16px 16px; }
+  .bot-status-row { flex-direction: column; padding: 0 16px 16px; }
+  .bot-summary-card { min-width: 100%; }
+
+  /* Nav bar 改 hamburger */
+  .nav-bar a:not(.active) { display: none; }
+  .dash-hamburger { display: flex; }
+  .nav-bar { padding: 10px 16px; gap: 8px; align-items: center; }
+  .nav-bar a { padding: 8px 12px; font-size: 12px; min-height: 44px; display: flex; align-items: center; }
+
+  .byok-dash-banner { flex-direction: column; text-align: center; padding: 10px 16px; font-size: 12px; }
+  .log-section { padding: 0 16px 16px; }
+  .routes { padding: 0 16px 16px; }
+  .route-grid { grid-template-columns: 1fr; }
+  .section-title { padding: 16px 16px 8px; font-size: 14px; }
+  .commission-table { padding: 0 16px 16px; }
+
+  /* 表格橫向滾動 */
+  .commission-table table, .feed-table table, table { display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+
+  .card .num { font-size: 32px; }
+  .engine .stat .val { font-size: 22px; }
+  .data-panel .big-num { font-size: 28px; }
+  .mp-card .mp-num { font-size: 28px; }
+
+  /* 按鈕觸控友善 */
+  button, a { min-height: 44px; }
+  body { font-size: 14px; }
+}
+
+/* === 小手機 (480px) === */
+@media (max-width: 480px) {
+  .header h1 { font-size: 16px; }
+  .badge { font-size: 10px; padding: 4px 8px; }
+  .card { padding: 16px; border-radius: 12px; }
+  .card .num { font-size: 28px; }
+  .engine { padding: 16px; }
+  .engine .stat .val { font-size: 20px; }
+  .data-panel { padding: 16px; border-radius: 12px; }
+  .data-panel .big-num { font-size: 24px; }
+  .data-panel h3 { font-size: 13px; }
+  .revenue-panel { margin: 16px; padding: 20px; }
 }
 /* BYOK 簡化提示橫幅 */
 .byok-dash-banner { display: flex; align-items: center; gap: 10px; padding: 10px 30px; background: rgba(232,133,12,0.05); border-bottom: 1px solid rgba(232,133,12,0.1); font-size: 13px; color: #aaa; }
@@ -812,6 +869,20 @@ body { font-family: 'Segoe UI', sans-serif; background: #0a0a1a; color: #eee; mi
   <a href="/marketplace">市集</a>
   <a href="/bots">機器人</a>
   <a href="/docs">常見問題</a>
+  <button class="dash-hamburger" id="dashHamburger" aria-label="選單">
+    <span></span><span></span><span></span>
+  </button>
+</div>
+
+<!-- 手機版全螢幕選單 -->
+<div class="mobile-menu-overlay" id="mobileMenu">
+  <button class="mobile-close" id="mobileMenuClose" aria-label="關閉選單">&times;</button>
+  <a href="/" onclick="closeMobileMenu()">首頁</a>
+  <a href="/dashboard.html" onclick="closeMobileMenu()">儀錶板</a>
+  <a href="/marketplace" onclick="closeMobileMenu()">市集</a>
+  <a href="/bots" onclick="closeMobileMenu()">機器人</a>
+  <a href="/docs" onclick="closeMobileMenu()">常見問題</a>
+  <a href="/pricing" onclick="closeMobileMenu()">方案</a>
 </div>
 
 <div class="byok-dash-banner">
@@ -1225,6 +1296,19 @@ body { font-family: 'Segoe UI', sans-serif; background: #0a0a1a; color: #eee; mi
 
 <script src="/seobaike-config.js"></script>
 <script>
+// === 手機版 Hamburger Menu ===
+document.getElementById('dashHamburger').addEventListener('click', function(){
+  document.getElementById('mobileMenu').classList.add('open');
+  document.body.style.overflow='hidden';
+});
+document.getElementById('mobileMenuClose').addEventListener('click', function(){
+  closeMobileMenu();
+});
+function closeMobileMenu(){
+  document.getElementById('mobileMenu').classList.remove('open');
+  document.body.style.overflow='';
+}
+
 const SUPA_URL = (window.__SEOBAIKE__ && window.__SEOBAIKE__.supabaseUrl) || "";
 const SUPA_KEY = (window.__SEOBAIKE__ && window.__SEOBAIKE__.anonKey) || "";
 const EP = SUPA_URL + "/functions/v1/seobaike-engine";

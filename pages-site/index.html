@@ -1304,53 +1304,150 @@
       .how-step { max-width: 360px; }
       .how-connector { display: none; }
       .cta-final-content h2 { font-size: 2.6rem; }
+      .section-header h2 { font-size: 2rem; }
+      .section { padding: 80px 0; }
+      .container { padding: 0 16px; }
     }
     @media (max-width: 768px) {
       nav { padding: 14px 20px; }
       .nav-links { display: none; }
-      .nav-links.open {
-        display: flex;
-        flex-direction: column;
-        position: absolute;
-        top: 100%;
-        left: 0;
-        right: 0;
-        background: var(--bg);
-        border-bottom: 1px solid var(--border);
-        padding: 20px;
-        gap: 16px;
-      }
       .nav-hamburger { display: flex; }
-      .hero { min-height: auto; padding-top: 120px; padding-bottom: 80px; }
-      .hero h1 { font-size: 2.4rem; letter-spacing: -1px; }
-      .hero-sub { font-size: 1.1rem; }
+
+      /* === Hamburger 全螢幕 Overlay Menu === */
+      .mobile-menu-overlay {
+        display: none;
+        position: fixed;
+        inset: 0;
+        z-index: 9999;
+        background: rgba(10, 10, 26, 0.97);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 0;
+        opacity: 0;
+        transition: opacity 0.35s ease;
+      }
+      .mobile-menu-overlay.open {
+        display: flex;
+        opacity: 1;
+      }
+      .mobile-menu-overlay .mobile-close {
+        position: absolute;
+        top: 16px;
+        right: 20px;
+        background: none;
+        border: none;
+        color: #fff;
+        font-size: 2rem;
+        cursor: pointer;
+        width: 48px;
+        height: 48px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        transition: background 0.2s;
+      }
+      .mobile-menu-overlay .mobile-close:hover {
+        background: rgba(232,133,12,0.15);
+      }
+      .mobile-menu-overlay a {
+        display: block;
+        color: #fff;
+        font-size: 1.3rem;
+        font-weight: 600;
+        padding: 16px 40px;
+        text-align: center;
+        transition: color 0.2s, background 0.2s;
+        width: 100%;
+        text-decoration: none;
+        min-height: 48px;
+        line-height: 1.5;
+      }
+      .mobile-menu-overlay a:hover {
+        color: var(--orange);
+        background: rgba(232,133,12,0.06);
+      }
+      .mobile-menu-overlay .btn-nav {
+        background: var(--orange);
+        color: #fff !important;
+        border-radius: 12px;
+        margin: 16px 40px 0;
+        width: auto;
+        text-align: center;
+        padding: 14px 40px;
+      }
+
+      .hero { min-height: auto; padding-top: 100px; padding-bottom: 60px; }
+      .hero h1 { font-size: 2rem; letter-spacing: -1px; }
+      .hero-sub { font-size: 1rem; margin-bottom: 32px; }
       .hero-scroll { display: none; }
-      .section { padding: 70px 0; }
-      .section-header h2 { font-size: 2rem; }
-      .cap-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
-      .pricing-grid { grid-template-columns: 1fr; max-width: 400px; margin: 0 auto; }
-      .trust-strip { grid-template-columns: 1fr 1fr; }
-      .footer-grid { grid-template-columns: 1fr; gap: 32px; }
+      .hero-actions { flex-direction: column; gap: 12px; align-items: center; }
+      .hero-actions .btn { width: 100%; min-height: 48px; font-size: 1rem; }
+      .hero-content { padding: 0 16px; }
+
+      /* 隱藏裝飾性粒子動畫（省電） */
+      .hero-mesh, .hero-grid, .hero-glow, .hero-scanline,
+      .hero-orb, .hero-orb-1, .hero-orb-2, .hero-orb-3 {
+        display: none !important;
+      }
+
+      .section { padding: 50px 0; }
+      .section-header { margin-bottom: 36px; }
+      .section-header h2 { font-size: 1.6rem; }
+      .section-header p { font-size: 0.95rem; }
+      .container { padding: 0 16px; }
+
+      .cap-grid { grid-template-columns: 1fr; gap: 12px; }
+      .cap-card { padding: 24px 20px; }
+      .pillar-card { padding: 28px 20px; }
+      .pricing-grid { grid-template-columns: 1fr; max-width: 100%; }
+      .trust-strip { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr; gap: 24px; }
+      .footer-bottom { flex-direction: column; text-align: center; }
       .stats-grid { grid-template-columns: repeat(2, 1fr); }
       .stat-item::after { display: none !important; }
-      .cta-final { padding: 80px 0; }
-      .cta-final-content h2 { font-size: 2rem; }
-      .cta-final-content p { font-size: 1rem; }
-      .how-section { padding: 80px 0; }
-      .engines-section { padding: 60px 0; }
+      .stat-number { font-size: 2.4rem; }
+      .cta-final { padding: 60px 0; }
+      .cta-final-content h2 { font-size: 1.8rem; }
+      .cta-final-content p { font-size: 0.95rem; }
+      .how-section { padding: 60px 0; }
+      .engines-section { padding: 40px 0; }
+
+      /* 按鈕觸控友善 */
+      .btn, button, a.btn-nav, .btn-primary, .btn-secondary {
+        min-height: 48px;
+        font-size: 0.95rem;
+      }
+
+      /* 表格橫向滾動 */
+      table { display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+
+      /* 字體不小於 14px */
+      body { font-size: 14px; }
     }
     @media (max-width: 480px) {
-      .hero h1 { font-size: 1.9rem; }
-      .hero-sub { font-size: 1rem; }
-      .btn { padding: 14px 28px; font-size: 0.95rem; }
-      .cap-grid { grid-template-columns: 1fr 1fr; }
+      .hero h1 { font-size: 1.5rem; letter-spacing: -0.5px; }
+      .hero-sub { font-size: 0.92rem; }
+      .btn { padding: 14px 24px; font-size: 0.92rem; }
+      .cap-grid { grid-template-columns: 1fr; }
+      .cap-card { padding: 20px 16px; }
       .pillars-grid { max-width: 100%; }
-      .stats-grid { grid-template-columns: 1fr 1fr; gap: 12px; }
-      .stat-number { font-size: 2.2rem; }
-      .stat-item { padding: 16px 12px; }
-      .engine-badge { padding: 10px 16px; font-size: 0.82rem; }
-      .engine-badge-icon { width: 26px; height: 26px; font-size: 0.85rem; }
-      .cta-final-content h2 { font-size: 1.7rem; }
+      .pillar-card { padding: 24px 16px; border-radius: 14px; }
+      .stats-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
+      .stat-number { font-size: 2rem; }
+      .stat-item { padding: 12px 8px; }
+      .engine-badge { padding: 10px 14px; font-size: 0.8rem; }
+      .engine-badge-icon { width: 24px; height: 24px; font-size: 0.8rem; }
+      .cta-final-content h2 { font-size: 1.4rem; }
+      .price-card { padding: 24px 16px; border-radius: 14px; }
+      .section { padding: 40px 0; }
+      .section-header { margin-bottom: 24px; }
+      .section-header h2 { font-size: 1.4rem; }
+      .hero-badge { font-size: 0.72rem; padding: 6px 14px; }
+      .hero-content { padding: 0 12px; }
     }
 
     /* ─── Touch & Mobile Perf ─── */
@@ -1396,6 +1493,7 @@
         right: 56px;
         margin-left: 0;
       }
+      .lang-btn { padding: 3px 6px; font-size: 11px; }
     }
 
     /* ─── Reduced motion ─── */
@@ -1436,6 +1534,18 @@
       <span></span><span></span><span></span>
     </button>
   </nav>
+
+  <!-- === 手機版全螢幕選單 Overlay === -->
+  <div class="mobile-menu-overlay" id="mobileMenu">
+    <button class="mobile-close" id="mobileMenuClose" aria-label="關閉選單">&times;</button>
+    <a href="/" onclick="closeMobileMenu()">首頁</a>
+    <a href="/features" onclick="closeMobileMenu()">功能</a>
+    <a href="/marketplace" onclick="closeMobileMenu()">市集</a>
+    <a href="/pricing" onclick="closeMobileMenu()">方案</a>
+    <a href="/about" onclick="closeMobileMenu()">關於</a>
+    <a href="/docs" onclick="closeMobileMenu()">常見問題</a>
+    <a href="/login" class="btn-nav" onclick="closeMobileMenu()">登入</a>
+  </div>
 
   <!-- ═══════════ Section 1: Hero (Upgraded) ═══════════ -->
   <section class="hero">
@@ -1899,9 +2009,18 @@
 
   <script>
     /* ─── Mobile nav toggle ─── */
+    // === 手機版 Hamburger Menu ===
     document.getElementById('hamburger').addEventListener('click', function () {
-      document.getElementById('navLinks').classList.toggle('open');
+      document.getElementById('mobileMenu').classList.add('open');
+      document.body.style.overflow = 'hidden';
     });
+    document.getElementById('mobileMenuClose').addEventListener('click', function () {
+      closeMobileMenu();
+    });
+    function closeMobileMenu() {
+      document.getElementById('mobileMenu').classList.remove('open');
+      document.body.style.overflow = '';
+    }
 
     /* ─── Scroll fade-in (enhanced — handles all reveal types) ─── */
     (function() {

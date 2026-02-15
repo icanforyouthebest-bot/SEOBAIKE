@@ -55,7 +55,7 @@
     a { color: var(--orange); text-decoration: none; transition: color 0.2s; }
     a:hover { color: var(--copper); }
 
-    /* ========== Access Gate ========== */
+    /* ========== Access Gate (Biometric + Password) ========== */
     .access-gate {
       position: fixed;
       top: 0; left: 0; right: 0; bottom: 0;
@@ -65,7 +65,7 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      gap: 20px;
+      gap: 16px;
       padding: 24px;
     }
     .access-gate.hidden { display: none; }
@@ -74,7 +74,7 @@
       font-weight: 900;
       letter-spacing: -1px;
       color: #fff;
-      margin-bottom: 8px;
+      margin-bottom: 4px;
     }
     .access-gate-logo span { color: var(--orange); }
     .access-gate h2 {
@@ -85,7 +85,7 @@
     .access-gate p {
       color: var(--text-muted);
       font-size: 0.95rem;
-      margin-bottom: 8px;
+      margin-bottom: 4px;
     }
     .access-gate input {
       padding: 14px 24px;
@@ -101,7 +101,7 @@
       transition: border-color 0.3s;
     }
     .access-gate input:focus { border-color: var(--orange); }
-    .access-gate button {
+    .access-gate .gate-btn {
       padding: 14px 40px;
       font-size: 1rem;
       font-weight: 700;
@@ -111,25 +111,188 @@
       color: #fff;
       cursor: pointer;
       transition: background 0.2s, transform 0.2s;
+      min-width: 200px;
+      min-height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
     }
-    .access-gate button:hover { background: var(--orange-hover); transform: translateY(-2px); }
+    .access-gate .gate-btn:hover { background: var(--orange-hover); transform: translateY(-2px); }
+    .access-gate .gate-btn:active { transform: translateY(0); }
+    .access-gate .gate-btn.bio-btn {
+      background: transparent;
+      border: 2px solid var(--orange);
+      color: var(--orange);
+      margin-top: 4px;
+    }
+    .access-gate .gate-btn.bio-btn:hover {
+      background: rgba(232, 133, 12, 0.1);
+    }
     .access-gate .error-msg {
       color: var(--red);
       font-size: 0.88rem;
       min-height: 1.4em;
     }
-    .lock-icon {
-      width: 64px;
-      height: 64px;
+    .access-gate .success-msg {
+      color: var(--green);
+      font-size: 0.88rem;
+      min-height: 1.4em;
+    }
+    .gate-divider {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      width: 320px;
+      max-width: 100%;
+      color: var(--text-muted);
+      font-size: 0.82rem;
+      margin: 4px 0;
+    }
+    .gate-divider::before, .gate-divider::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    /* Biometric scan animation */
+    .bio-scan-ring {
+      width: 100px;
+      height: 100px;
       border-radius: 50%;
-      background: rgba(232, 133, 12, 0.1);
-      border: 2px solid rgba(232, 133, 12, 0.3);
+      position: relative;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 1.8rem;
       margin-bottom: 8px;
     }
+    .bio-scan-ring .ring-outer {
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      border-radius: 50%;
+      border: 3px solid rgba(232, 133, 12, 0.2);
+    }
+    .bio-scan-ring .ring-sweep {
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      border-radius: 50%;
+      border: 3px solid transparent;
+      border-top-color: var(--orange);
+      animation: bioSweep 1.5s linear infinite;
+    }
+    .bio-scan-ring.scanning .ring-sweep {
+      animation: bioSweep 0.8s linear infinite;
+      border-top-color: var(--orange);
+      border-right-color: rgba(232, 133, 12, 0.5);
+    }
+    .bio-scan-ring.success .ring-sweep {
+      animation: none;
+      border: 3px solid var(--green);
+    }
+    .bio-scan-ring.success .ring-outer {
+      border-color: rgba(40, 200, 64, 0.3);
+      box-shadow: 0 0 30px rgba(40, 200, 64, 0.2);
+    }
+    @keyframes bioSweep {
+      to { transform: rotate(360deg); }
+    }
+    .bio-icon-inner {
+      font-size: 2.4rem;
+      z-index: 2;
+      transition: all 0.4s;
+    }
+    .bio-scan-ring.scanning .bio-icon-inner {
+      animation: bioPulse 0.8s ease-in-out infinite;
+    }
+    @keyframes bioPulse {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.1); opacity: 0.7; }
+    }
+    .bio-scan-ring.success .bio-icon-inner {
+      color: var(--green);
+    }
+
+    /* Scan line effect */
+    .bio-scan-ring .scan-line {
+      position: absolute;
+      width: 60%;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--orange), transparent);
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    .bio-scan-ring.scanning .scan-line {
+      opacity: 1;
+      animation: scanLineMove 1.2s ease-in-out infinite;
+    }
+    @keyframes scanLineMove {
+      0% { top: 20%; }
+      50% { top: 80%; }
+      100% { top: 20%; }
+    }
+
+    /* Password section toggle */
+    .password-section { transition: all 0.3s; }
+    .password-section.collapsed {
+      max-height: 0;
+      overflow: hidden;
+      opacity: 0;
+      margin: 0;
+    }
+    .toggle-password-link {
+      color: var(--text-muted);
+      font-size: 0.82rem;
+      cursor: pointer;
+      transition: color 0.2s;
+      margin-top: 8px;
+    }
+    .toggle-password-link:hover { color: var(--orange); }
+
+    /* Registration prompt modal */
+    .bio-register-prompt {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0,0,0,0.7);
+      z-index: 10000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+    .bio-register-prompt.hidden { display: none; }
+    .bio-register-card {
+      background: var(--bg-card-solid);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 40px;
+      max-width: 400px;
+      width: 100%;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+    }
+    .bio-register-card h3 {
+      color: var(--text-bright);
+      font-size: 1.3rem;
+      font-weight: 800;
+    }
+    .bio-register-card p {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+    .bio-register-card .gate-btn {
+      width: 100%;
+    }
+    .bio-register-card .skip-link {
+      color: var(--text-muted);
+      font-size: 0.82rem;
+      cursor: pointer;
+      transition: color 0.2s;
+    }
+    .bio-register-card .skip-link:hover { color: var(--text); }
 
     /* ========== Main Dashboard ========== */
     #mainContent { display: none; }
@@ -140,7 +303,7 @@
       align-items: center;
       justify-content: space-between;
       border-bottom: 1px solid var(--border);
-      background: rgba(10, 10, 26, 0.9);
+      background: rgba(10, 10, 26, 0.95);
       backdrop-filter: blur(20px);
       position: sticky;
       top: 0;
@@ -215,8 +378,79 @@
       color: var(--text-muted);
       cursor: pointer;
       transition: all 0.2s;
+      min-height: 44px;
+      min-width: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
     .btn-logout:hover {
+      border-color: var(--red);
+      color: var(--red);
+    }
+
+    /* Hamburger menu (mobile) */
+    .hamburger-btn {
+      display: none;
+      width: 44px;
+      height: 44px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: transparent;
+      cursor: pointer;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+      padding: 0;
+    }
+    .hamburger-btn span {
+      display: block;
+      width: 20px;
+      height: 2px;
+      background: var(--text);
+      border-radius: 1px;
+      transition: all 0.3s;
+    }
+    .hamburger-btn.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+    .hamburger-btn.active span:nth-child(2) { opacity: 0; }
+    .hamburger-btn.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      top: 70px;
+      left: 0; right: 0;
+      background: rgba(10, 10, 26, 0.98);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+      padding: 16px 24px;
+      z-index: 99;
+      flex-direction: column;
+      gap: 12px;
+      align-items: stretch;
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu .mobile-menu-item {
+      padding: 12px 16px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: transparent;
+      color: var(--text);
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      text-align: center;
+      transition: all 0.2s;
+      min-height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .mobile-menu .mobile-menu-item:hover {
+      border-color: var(--orange);
+      color: var(--orange);
+    }
+    .mobile-menu .mobile-menu-item.danger:hover {
       border-color: var(--red);
       color: var(--red);
     }
@@ -305,6 +539,7 @@
       stroke-width: 10;
       stroke-linecap: round;
       transition: stroke-dashoffset 1.5s ease, stroke 0.5s;
+      filter: drop-shadow(0 0 6px currentColor);
     }
     .gauge-center {
       position: absolute;
@@ -342,6 +577,12 @@
       flex-wrap: wrap;
       padding: 8px 0;
     }
+    .engine-dot-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+    }
     .engine-dot {
       width: 18px;
       height: 18px;
@@ -367,10 +608,16 @@
       0%, 100% { box-shadow: 0 0 10px rgba(255, 95, 87, 0.5); }
       50% { box-shadow: 0 0 20px rgba(255, 95, 87, 0.8); }
     }
+    .engine-dot-label {
+      font-size: 0.62rem;
+      color: var(--text-muted);
+      font-weight: 600;
+      font-variant-numeric: tabular-nums;
+    }
     .engine-dot::after {
       content: attr(data-tip);
       position: absolute;
-      bottom: calc(100% + 8px);
+      bottom: calc(100% + 22px);
       left: 50%;
       transform: translateX(-50%);
       background: var(--bg-card-solid);
@@ -452,49 +699,15 @@
     }
     .revenue-sub .up { color: var(--green); font-weight: 700; }
 
-    /* 7 day bar chart */
-    .bar-chart {
-      display: flex;
-      align-items: flex-end;
-      gap: 8px;
-      height: 120px;
-      padding: 8px 0;
-    }
-    .bar-col {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 6px;
-      height: 100%;
-      justify-content: flex-end;
-    }
-    .bar-fill {
-      width: 100%;
-      max-width: 40px;
-      border-radius: 6px 6px 2px 2px;
-      background: linear-gradient(180deg, var(--orange), rgba(232, 133, 12, 0.4));
-      transition: height 1s ease;
+    /* Canvas chart container */
+    .chart-canvas-wrap {
       position: relative;
+      width: 100%;
+      height: 200px;
     }
-    .bar-fill:hover { opacity: 0.85; }
-    .bar-fill::after {
-      content: attr(data-val);
-      position: absolute;
-      top: -20px;
-      left: 50%;
-      transform: translateX(-50%);
-      font-size: 0.65rem;
-      color: var(--text-muted);
-      font-weight: 600;
-      white-space: nowrap;
-      opacity: 0;
-      transition: opacity 0.2s;
-    }
-    .bar-fill:hover::after { opacity: 1; }
-    .bar-label {
-      font-size: 0.7rem;
-      color: var(--text-muted);
+    .chart-canvas-wrap canvas {
+      width: 100%;
+      height: 100%;
     }
 
     /* Top sellers table */
@@ -697,6 +910,8 @@
       cursor: pointer;
       transition: all 0.2s;
       white-space: nowrap;
+      min-height: 44px;
+      min-width: 44px;
     }
     .btn-handle:hover {
       border-color: var(--orange);
@@ -745,7 +960,9 @@
       border-radius: 50%;
       flex-shrink: 0;
       position: relative;
+      transition: transform 0.6s;
     }
+    .pie-chart:hover { transform: scale(1.05); }
     .pie-chart::after {
       content: '';
       position: absolute;
@@ -857,8 +1074,12 @@
       .market-detail-grid { grid-template-columns: 1fr; }
     }
     @media (max-width: 768px) {
-      .dashboard-header { padding: 14px 16px; flex-wrap: wrap; gap: 10px; }
+      .dashboard-header { padding: 14px 16px; }
       .header-title { display: none; }
+      .header-right .live-badge,
+      .header-right .refresh-badge,
+      .header-right .btn-logout { display: none; }
+      .hamburger-btn { display: flex; }
       .dashboard-body { padding: 16px; }
       .health-top { grid-template-columns: 1fr; }
       .users-stats-row { grid-template-columns: 1fr; }
@@ -870,12 +1091,14 @@
       .alert-card { grid-template-columns: 4px 1fr; }
       .alert-actions { display: none; }
       .pie-wrap { flex-direction: column; }
-      .header-right { flex-wrap: wrap; }
+      .chart-canvas-wrap { height: 180px; }
     }
     @media (max-width: 480px) {
       .engine-dot { width: 14px; height: 14px; }
       .engine-dots-row { gap: 7px; }
       .access-gate input { width: 280px; }
+      .gate-divider { width: 280px; }
+      .bio-register-card { padding: 24px 20px; }
     }
 
     /* Touch & Mobile */
@@ -885,15 +1108,53 @@
 </head>
 <body>
 
-  <!-- ========== Access Gate ========== -->
+  <!-- ========== Access Gate (Biometric + Password) ========== -->
   <div class="access-gate" id="accessGate">
-    <div class="lock-icon">&#128274;</div>
+    <div class="bio-scan-ring" id="bioScanRing">
+      <div class="ring-outer"></div>
+      <div class="ring-sweep"></div>
+      <div class="scan-line"></div>
+      <div class="bio-icon-inner" id="bioIconInner">&#128274;</div>
+    </div>
     <div class="access-gate-logo">SEO<span>BAIKE</span></div>
     <h2>指揮中心</h2>
     <p>僅限創辦人存取</p>
-    <input type="password" id="accessCode" placeholder="請輸入存取碼" autocomplete="off">
-    <button onclick="checkAccess()">進入指揮中心</button>
+
+    <!-- Biometric Login Button -->
+    <div id="bioSection" style="display:none; text-align:center; width:320px; max-width:100%;">
+      <button class="gate-btn" id="bioLoginBtn" onclick="doBiometricLogin()">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 11c0-1.1.9-2 2-2s2 .9 2 2c0 1.5-1 2.5-2 3.5"/><path d="M8 15c-1.5-1.5-2-3.5-2-5.5C6 5.9 8.7 3 12 3s6 2.9 6 6.5c0 1-.2 2-.6 3"/><path d="M12 11v4"/><path d="M2 12c0-4.5 3.1-8.3 7.2-9.5"/><path d="M22 12c0-4.5-3.1-8.3-7.2-9.5"/><path d="M7 20.7c1.5.8 3.2 1.3 5 1.3s3.5-.5 5-1.3"/></svg>
+        生物辨識登入
+      </button>
+      <div class="success-msg" id="bioStatus"></div>
+    </div>
+
+    <div class="gate-divider" id="gateDivider" style="display:none;">或</div>
+
+    <!-- Password Fallback -->
+    <div class="password-section" id="passwordSection">
+      <div style="display:flex; flex-direction:column; align-items:center; gap:12px;">
+        <input type="password" id="accessCode" placeholder="請輸入存取碼" autocomplete="off">
+        <button class="gate-btn" onclick="checkAccess()">密碼登入</button>
+      </div>
+    </div>
+
     <div class="error-msg" id="accessError"></div>
+  </div>
+
+  <!-- ========== Biometric Registration Prompt ========== -->
+  <div class="bio-register-prompt hidden" id="bioRegisterPrompt">
+    <div class="bio-register-card">
+      <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="var(--orange)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 11c0-1.1.9-2 2-2s2 .9 2 2c0 1.5-1 2.5-2 3.5"/><path d="M8 15c-1.5-1.5-2-3.5-2-5.5C6 5.9 8.7 3 12 3s6 2.9 6 6.5c0 1-.2 2-.6 3"/><path d="M12 11v4"/><path d="M2 12c0-4.5 3.1-8.3 7.2-9.5"/><path d="M22 12c0-4.5-3.1-8.3-7.2-9.5"/><path d="M7 20.7c1.5.8 3.2 1.3 5 1.3s3.5-.5 5-1.3"/></svg>
+      <h3>啟用生物辨識登入</h3>
+      <p>下次可使用指紋或臉部辨識一鍵進入指揮中心，無需密碼。</p>
+      <button class="gate-btn" onclick="registerBiometric()">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 11c0-1.1.9-2 2-2s2 .9 2 2c0 1.5-1 2.5-2 3.5"/><path d="M8 15c-1.5-1.5-2-3.5-2-5.5C6 5.9 8.7 3 12 3s6 2.9 6 6.5c0 1-.2 2-.6 3"/><path d="M12 11v4"/></svg>
+        註冊生物辨識
+      </button>
+      <div class="skip-link" onclick="skipBioRegister()">稍後再說</div>
+      <div class="success-msg" id="bioRegisterStatus"></div>
+    </div>
   </div>
 
   <!-- ========== Main Dashboard ========== -->
@@ -909,7 +1170,19 @@
         <div class="live-badge"><div class="live-dot"></div> 即時監控中</div>
         <div class="refresh-badge">每 <span class="countdown" id="countdown">30</span> 秒自動更新</div>
         <button class="btn-logout" onclick="doLogout()">登出</button>
+        <button class="hamburger-btn" id="hamburgerBtn" onclick="toggleMobileMenu()">
+          <span></span><span></span><span></span>
+        </button>
       </div>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+      <div class="mobile-menu-item" style="color:var(--green); border-color:rgba(40,200,64,0.3);">
+        即時監控中 &mdash; 每 <span id="countdownMobile">30</span> 秒更新
+      </div>
+      <div class="mobile-menu-item" onclick="refreshDashboard(); toggleMobileMenu();">手動更新數據</div>
+      <div class="mobile-menu-item danger" onclick="doLogout()">登出指揮中心</div>
     </div>
 
     <div class="dashboard-body">
@@ -1008,8 +1281,8 @@
 
           <div class="glass-card">
             <div style="font-size:0.85rem; color:var(--text-muted); font-weight:600; margin-bottom:8px;">7 日營收趨勢</div>
-            <div class="bar-chart" id="revenueChart">
-              <!-- JS rendered -->
+            <div class="chart-canvas-wrap">
+              <canvas id="revenueLineChart"></canvas>
             </div>
           </div>
         </div>
@@ -1142,16 +1415,225 @@
 
   <script>
     /* ======================================================= */
-    /* ACCESS GATE                                              */
+    /* CONSTANTS & KEYS                                         */
     /* ======================================================= */
-    var ACCESS_KEY = 'seobaike_command_center_verified';
+    var AUTH_KEY = 'seobaike_boss_auth';
+    var WEBAUTHN_CRED_KEY = 'seobaike_webauthn_cred';
     var ACCESS_CODE = 'seobaike2026';
 
+    /* ======================================================= */
+    /* WEBAUTHN / BIOMETRIC AUTH                                */
+    /* ======================================================= */
+
+    function isWebAuthnAvailable() {
+      return window.PublicKeyCredential !== undefined &&
+             typeof window.PublicKeyCredential === 'function';
+    }
+
+    function hasSavedCredential() {
+      return !!localStorage.getItem(WEBAUTHN_CRED_KEY);
+    }
+
+    /* Generate random bytes for challenge */
+    function getRandomBytes(len) {
+      var arr = new Uint8Array(len);
+      window.crypto.getRandomValues(arr);
+      return arr;
+    }
+
+    /* ArrayBuffer to Base64 */
+    function bufferToBase64(buffer) {
+      var bytes = new Uint8Array(buffer);
+      var str = '';
+      for (var i = 0; i < bytes.length; i++) {
+        str += String.fromCharCode(bytes[i]);
+      }
+      return btoa(str);
+    }
+
+    /* Base64 to ArrayBuffer */
+    function base64ToBuffer(b64) {
+      var str = atob(b64);
+      var arr = new Uint8Array(str.length);
+      for (var i = 0; i < str.length; i++) {
+        arr[i] = str.charCodeAt(i);
+      }
+      return arr.buffer;
+    }
+
+    /* Register a new WebAuthn credential */
+    async function registerBiometric() {
+      var statusEl = document.getElementById('bioRegisterStatus');
+      statusEl.textContent = '正在註冊...';
+
+      try {
+        var userId = getRandomBytes(16);
+        var challenge = getRandomBytes(32);
+
+        var publicKeyOptions = {
+          challenge: challenge,
+          rp: {
+            name: 'SEOBAIKE 指揮中心',
+            id: location.hostname
+          },
+          user: {
+            id: userId,
+            name: 'boss@seobaike.com',
+            displayName: '創辦人'
+          },
+          pubKeyCredParams: [
+            { type: 'public-key', alg: -7 },   /* ES256 */
+            { type: 'public-key', alg: -257 }  /* RS256 */
+          ],
+          authenticatorSelection: {
+            authenticatorAttachment: 'platform',
+            userVerification: 'required',
+            residentKey: 'preferred'
+          },
+          timeout: 60000,
+          attestation: 'none'
+        };
+
+        var credential = await navigator.credentials.create({
+          publicKey: publicKeyOptions
+        });
+
+        /* Store credential ID for future login */
+        var credData = {
+          id: credential.id,
+          rawId: bufferToBase64(credential.rawId),
+          type: credential.type,
+          registered: new Date().toISOString()
+        };
+        localStorage.setItem(WEBAUTHN_CRED_KEY, JSON.stringify(credData));
+
+        statusEl.textContent = '生物辨識註冊成功！';
+        statusEl.style.color = 'var(--green)';
+
+        setTimeout(function() {
+          document.getElementById('bioRegisterPrompt').classList.add('hidden');
+          showMainContent();
+        }, 1000);
+
+      } catch (err) {
+        console.error('WebAuthn registration error:', err);
+        if (err.name === 'NotAllowedError') {
+          statusEl.textContent = '操作已取消';
+        } else {
+          statusEl.textContent = '註冊失敗：' + (err.message || '未知錯誤');
+        }
+        statusEl.style.color = 'var(--red)';
+      }
+    }
+
+    /* Authenticate with existing WebAuthn credential */
+    async function doBiometricLogin() {
+      var ring = document.getElementById('bioScanRing');
+      var statusEl = document.getElementById('bioStatus');
+      var iconEl = document.getElementById('bioIconInner');
+
+      ring.classList.add('scanning');
+      statusEl.textContent = '請驗證您的身份...';
+      statusEl.style.color = 'var(--orange)';
+
+      try {
+        var credData = JSON.parse(localStorage.getItem(WEBAUTHN_CRED_KEY));
+        var challenge = getRandomBytes(32);
+
+        var assertionOptions = {
+          challenge: challenge,
+          rpId: location.hostname,
+          allowCredentials: [{
+            type: 'public-key',
+            id: base64ToBuffer(credData.rawId),
+            transports: ['internal']
+          }],
+          userVerification: 'required',
+          timeout: 60000
+        };
+
+        var assertion = await navigator.credentials.get({
+          publicKey: assertionOptions
+        });
+
+        /* Success */
+        ring.classList.remove('scanning');
+        ring.classList.add('success');
+        iconEl.innerHTML = '&#10003;';
+        statusEl.textContent = '驗證成功！';
+        statusEl.style.color = 'var(--green)';
+
+        localStorage.setItem(AUTH_KEY, JSON.stringify({
+          verified: true,
+          method: 'biometric',
+          timestamp: new Date().toISOString()
+        }));
+
+        setTimeout(function() {
+          showMainContent();
+        }, 800);
+
+      } catch (err) {
+        ring.classList.remove('scanning');
+        console.error('WebAuthn auth error:', err);
+        if (err.name === 'NotAllowedError') {
+          statusEl.textContent = '驗證已取消';
+        } else {
+          statusEl.textContent = '驗證失敗，請使用密碼登入';
+        }
+        statusEl.style.color = 'var(--red)';
+      }
+    }
+
+    function skipBioRegister() {
+      document.getElementById('bioRegisterPrompt').classList.add('hidden');
+      showMainContent();
+    }
+
+    /* Setup login UI based on device capability */
+    function setupLoginUI() {
+      var bioSection = document.getElementById('bioSection');
+      var divider = document.getElementById('gateDivider');
+      var passwordSection = document.getElementById('passwordSection');
+      var ring = document.getElementById('bioScanRing');
+      var iconEl = document.getElementById('bioIconInner');
+
+      if (isWebAuthnAvailable() && hasSavedCredential()) {
+        /* Has credential: show biometric as primary */
+        bioSection.style.display = 'block';
+        divider.style.display = 'flex';
+        iconEl.innerHTML = '&#128275;'; /* fingerprint-like icon */
+        /* Attempt auto-trigger is too aggressive; let user click */
+      } else if (isWebAuthnAvailable()) {
+        /* No credential yet: just show password, biometric offered after first login */
+        bioSection.style.display = 'none';
+        divider.style.display = 'none';
+      } else {
+        /* No WebAuthn support: password only */
+        bioSection.style.display = 'none';
+        divider.style.display = 'none';
+      }
+    }
+
+    /* ======================================================= */
+    /* PASSWORD ACCESS GATE                                     */
+    /* ======================================================= */
     function checkAccess() {
       var code = document.getElementById('accessCode').value;
       if (code === ACCESS_CODE) {
-        localStorage.setItem(ACCESS_KEY, 'true');
-        showMainContent();
+        localStorage.setItem(AUTH_KEY, JSON.stringify({
+          verified: true,
+          method: 'password',
+          timestamp: new Date().toISOString()
+        }));
+
+        /* If WebAuthn available but no credential yet, prompt registration */
+        if (isWebAuthnAvailable() && !hasSavedCredential()) {
+          document.getElementById('accessGate').classList.add('hidden');
+          document.getElementById('bioRegisterPrompt').classList.remove('hidden');
+        } else {
+          showMainContent();
+        }
       } else {
         document.getElementById('accessError').textContent = '存取碼錯誤，請重試';
         document.getElementById('accessCode').value = '';
@@ -1164,12 +1646,31 @@
     });
 
     function doLogout() {
-      localStorage.removeItem(ACCESS_KEY);
+      localStorage.removeItem(AUTH_KEY);
+      /* Keep webauthn credential for next login */
       location.reload();
+    }
+
+    function isAuthenticated() {
+      try {
+        var auth = JSON.parse(localStorage.getItem(AUTH_KEY));
+        if (!auth || !auth.verified) return false;
+        /* Session expires after 24 hours */
+        var ts = new Date(auth.timestamp).getTime();
+        var now = Date.now();
+        if (now - ts > 24 * 60 * 60 * 1000) {
+          localStorage.removeItem(AUTH_KEY);
+          return false;
+        }
+        return true;
+      } catch (e) {
+        return false;
+      }
     }
 
     function showMainContent() {
       document.getElementById('accessGate').classList.add('hidden');
+      document.getElementById('bioRegisterPrompt').classList.add('hidden');
       document.getElementById('mainContent').style.display = 'block';
       initDashboard();
       setTimeout(function() {
@@ -1188,8 +1689,32 @@
       });
     }, { threshold: 0.05 });
 
-    if (localStorage.getItem(ACCESS_KEY) === 'true') {
+    /* Auto-login if session exists */
+    if (isAuthenticated()) {
       showMainContent();
+    } else {
+      /* Also migrate old key format */
+      if (localStorage.getItem('seobaike_command_center_verified') === 'true') {
+        localStorage.setItem(AUTH_KEY, JSON.stringify({
+          verified: true,
+          method: 'password',
+          timestamp: new Date().toISOString()
+        }));
+        localStorage.removeItem('seobaike_command_center_verified');
+        showMainContent();
+      } else {
+        setupLoginUI();
+      }
+    }
+
+    /* ======================================================= */
+    /* HAMBURGER MENU                                           */
+    /* ======================================================= */
+    function toggleMobileMenu() {
+      var btn = document.getElementById('hamburgerBtn');
+      var menu = document.getElementById('mobileMenu');
+      btn.classList.toggle('active');
+      menu.classList.toggle('open');
     }
 
     /* ======================================================= */
@@ -1225,7 +1750,7 @@
       function step(ts) {
         if (!startTime) startTime = ts;
         var progress = Math.min((ts - startTime) / duration, 1);
-        var eased = 1 - Math.pow(1 - progress, 3); // ease out cubic
+        var eased = 1 - Math.pow(1 - progress, 3);
         var current = Math.round(eased * target);
         el.textContent = prefix + current.toLocaleString() + suffix;
         if (progress < 1) requestAnimationFrame(step);
@@ -1234,17 +1759,14 @@
     }
 
     function animateGauge(circleEl, valueEl, targetPct, color) {
-      var circumference = 2 * Math.PI * 58; // 364.42
+      var circumference = 2 * Math.PI * 58;
       var offset = circumference - (targetPct / 100) * circumference;
       circleEl.style.strokeDashoffset = offset;
 
-      // Change color based on value
       if (color) {
         circleEl.setAttribute('stroke', color);
       }
 
-      // Animate number
-      var current = { v: 0 };
       var start = performance.now();
       var dur = 1500;
       function step(ts) {
@@ -1262,7 +1784,6 @@
     function generateData() {
       var hour = new Date().getHours();
 
-      // Engine statuses
       engineStatuses = ENGINE_IDS.map(function() {
         var r = Math.random();
         if (r > 0.97) return 'offline';
@@ -1270,19 +1791,16 @@
         return 'online';
       });
 
-      // System health
       var cpuBase = 25 + Math.sin(hour / 3) * 15;
       dashData.cpu = Math.round(Math.max(8, Math.min(85, cpuBase + (Math.random() - 0.5) * 20)));
       dashData.mem = Math.round(40 + Math.random() * 25);
       dashData.uptime = +(99.5 + Math.random() * 0.49).toFixed(2);
 
-      // Revenue
       dashData.revenueToday = Math.round(15000 + Math.random() * 35000 + hour * 1200);
       dashData.revenueTodayGrowth = +(5 + Math.random() * 18).toFixed(1);
       dashData.revenueMonth = Math.round(dashData.revenueToday * 16 + Math.random() * 100000);
       dashData.revenueMonthPct = Math.round(45 + Math.random() * 35);
 
-      // 7-day revenue
       dashData.revenueDays = [];
       var days = ['日', '一', '二', '三', '四', '五', '六'];
       var now = new Date();
@@ -1294,7 +1812,6 @@
         dashData.revenueDays.push({ label: dayName, value: val });
       }
 
-      // Top 5 sellers
       var sellerNames = ['AI 圖片生成器', '多語言翻譯包', '即時搜尋 API', 'SEO 分析套件', '智能客服模組'];
       dashData.sellers = sellerNames.map(function(name, i) {
         return {
@@ -1305,12 +1822,10 @@
         };
       }).sort(function(a, b) { return b.revenue - a.revenue; });
 
-      // Users
       dashData.totalUsers = Math.round(4200 + Math.random() * 800);
       dashData.newToday = Math.round(15 + Math.random() * 35);
       dashData.activeNow = Math.round(80 + Math.random() * 120 + (hour > 8 && hour < 22 ? 50 : 0));
 
-      // Recent signups
       var surnames = ['王', '李', '陳', '林', '張', '黃', '吳', '劉', '蔡', '楊', '許', '鄭', '謝', '郭', '洪'];
       var names = ['小明', '美玲', '志豪', '淑芬', '建宏', '雅婷', '家豪', '怡君', '俊傑', '佳蓉'];
       dashData.signups = [];
@@ -1325,7 +1840,6 @@
         });
       }
 
-      // Country traffic
       dashData.countries = [
         { flag: '\uD83C\uDDF9\uD83C\uDDFC', name: '台灣', pct: 42 + Math.round(Math.random() * 8), color: 'var(--orange)' },
         { flag: '\uD83C\uDDF0\uD83C\uDDF7', name: '韓國', pct: 18 + Math.round(Math.random() * 5), color: '#5882ff' },
@@ -1336,7 +1850,6 @@
       var usedPct = dashData.countries.slice(0, 4).reduce(function(a, c) { return a + c.pct; }, 0);
       dashData.countries[4].pct = Math.max(0, 100 - usedPct);
 
-      // Alerts (demo)
       dashData.alerts = [
         {
           severity: 'critical',
@@ -1364,12 +1877,10 @@
         }
       ];
 
-      // Marketplace
       dashData.totalListings = Math.round(280 + Math.random() * 50);
       dashData.pendingReview = Math.round(8 + Math.random() * 12);
       dashData.salesToday = Math.round(25 + Math.random() * 30);
 
-      // Marketplace categories
       dashData.categories = [
         { name: 'SEO 工具', pct: 32, color: 'var(--orange)' },
         { name: 'AI 對話', pct: 24, color: '#5882ff' },
@@ -1379,7 +1890,6 @@
         { name: '其他', pct: 4, color: '#8888aa' }
       ];
 
-      // Recent transactions
       var products = ['SEO 自動分析器', '即時翻譯 API', 'AI 圖片包月', '關鍵字探勘工具', '智能摘要引擎', '多語言 SEO 包'];
       dashData.transactions = [];
       for (var t = 0; t < 8; t++) {
@@ -1427,7 +1937,10 @@
       for (var i = 0; i < 15; i++) {
         var status = engineStatuses[i] || 'online';
         var label = ENGINE_LABELS[i] + ' ' + (status === 'online' ? '正常' : status === 'degraded' ? '緩慢' : '離線');
-        html += '<div class="engine-dot ' + status + '" data-tip="' + label + '"></div>';
+        html += '<div class="engine-dot-wrap">' +
+          '<div class="engine-dot ' + status + '" data-tip="' + label + '"></div>' +
+          '<div class="engine-dot-label">' + ENGINE_LABELS[i] + '</div>' +
+          '</div>';
       }
       container.innerHTML = html;
     }
@@ -1449,19 +1962,132 @@
       animateCounter(document.getElementById('revenueMonth'), dashData.revenueMonth, 2000);
       document.getElementById('revenueMonthPct').textContent = dashData.revenueMonthPct + '%';
 
-      // 7-day bar chart
-      var maxVal = Math.max.apply(null, dashData.revenueDays.map(function(d) { return d.value; }));
-      var chart = document.getElementById('revenueChart');
-      var html = '';
-      dashData.revenueDays.forEach(function(day) {
-        var heightPct = Math.max(8, (day.value / maxVal) * 100);
-        var displayVal = 'NT$' + Math.round(day.value / 1000) + 'K';
-        html += '<div class="bar-col">' +
-          '<div class="bar-fill" style="height:' + heightPct + '%" data-val="' + displayVal + '"></div>' +
-          '<div class="bar-label">' + day.label + '</div>' +
-          '</div>';
+      /* 7-day line chart on canvas */
+      renderLineChart();
+    }
+
+    /* Canvas Line Chart */
+    function renderLineChart() {
+      var canvas = document.getElementById('revenueLineChart');
+      if (!canvas) return;
+      var wrap = canvas.parentElement;
+      var dpr = window.devicePixelRatio || 1;
+      var w = wrap.clientWidth;
+      var h = wrap.clientHeight;
+      canvas.width = w * dpr;
+      canvas.height = h * dpr;
+      canvas.style.width = w + 'px';
+      canvas.style.height = h + 'px';
+
+      var ctx = canvas.getContext('2d');
+      ctx.scale(dpr, dpr);
+      ctx.clearRect(0, 0, w, h);
+
+      var data = dashData.revenueDays;
+      if (!data || data.length === 0) return;
+
+      var padLeft = 55;
+      var padRight = 20;
+      var padTop = 20;
+      var padBottom = 35;
+      var chartW = w - padLeft - padRight;
+      var chartH = h - padTop - padBottom;
+
+      var vals = data.map(function(d) { return d.value; });
+      var maxVal = Math.max.apply(null, vals);
+      var minVal = Math.min.apply(null, vals);
+      var range = maxVal - minVal || 1;
+      /* Add 10% buffer */
+      var visMin = minVal - range * 0.1;
+      var visMax = maxVal + range * 0.1;
+      var visRange = visMax - visMin;
+
+      var points = data.map(function(d, i) {
+        var x = padLeft + (i / (data.length - 1)) * chartW;
+        var y = padTop + chartH - ((d.value - visMin) / visRange) * chartH;
+        return { x: x, y: y };
       });
-      chart.innerHTML = html;
+
+      /* Grid lines */
+      ctx.strokeStyle = 'rgba(255,255,255,0.05)';
+      ctx.lineWidth = 1;
+      for (var g = 0; g <= 4; g++) {
+        var gy = padTop + (g / 4) * chartH;
+        ctx.beginPath();
+        ctx.moveTo(padLeft, gy);
+        ctx.lineTo(w - padRight, gy);
+        ctx.stroke();
+
+        /* Y-axis labels */
+        var gVal = visMax - (g / 4) * visRange;
+        ctx.fillStyle = '#8888aa';
+        ctx.font = '11px -apple-system, "Noto Sans TC", sans-serif';
+        ctx.textAlign = 'right';
+        ctx.fillText(Math.round(gVal / 1000) + 'K', padLeft - 8, gy + 4);
+      }
+
+      /* Gradient fill under curve */
+      var gradient = ctx.createLinearGradient(0, padTop, 0, padTop + chartH);
+      gradient.addColorStop(0, 'rgba(232, 133, 12, 0.3)');
+      gradient.addColorStop(1, 'rgba(232, 133, 12, 0.02)');
+
+      ctx.beginPath();
+      ctx.moveTo(points[0].x, padTop + chartH);
+      /* Smooth curve using bezier */
+      for (var i = 0; i < points.length; i++) {
+        if (i === 0) {
+          ctx.lineTo(points[i].x, points[i].y);
+        } else {
+          var cpx = (points[i - 1].x + points[i].x) / 2;
+          ctx.bezierCurveTo(cpx, points[i - 1].y, cpx, points[i].y, points[i].x, points[i].y);
+        }
+      }
+      ctx.lineTo(points[points.length - 1].x, padTop + chartH);
+      ctx.closePath();
+      ctx.fillStyle = gradient;
+      ctx.fill();
+
+      /* Line */
+      ctx.beginPath();
+      for (var i = 0; i < points.length; i++) {
+        if (i === 0) {
+          ctx.moveTo(points[i].x, points[i].y);
+        } else {
+          var cpx = (points[i - 1].x + points[i].x) / 2;
+          ctx.bezierCurveTo(cpx, points[i - 1].y, cpx, points[i].y, points[i].x, points[i].y);
+        }
+      }
+      ctx.strokeStyle = '#e8850c';
+      ctx.lineWidth = 2.5;
+      ctx.shadowColor = 'rgba(232, 133, 12, 0.5)';
+      ctx.shadowBlur = 8;
+      ctx.stroke();
+      ctx.shadowBlur = 0;
+
+      /* Dots */
+      for (var i = 0; i < points.length; i++) {
+        ctx.beginPath();
+        ctx.arc(points[i].x, points[i].y, 4, 0, Math.PI * 2);
+        ctx.fillStyle = '#0a0a1a';
+        ctx.fill();
+        ctx.strokeStyle = '#e8850c';
+        ctx.lineWidth = 2;
+        ctx.stroke();
+
+        /* Value label on top of dot */
+        ctx.fillStyle = '#e0e0e8';
+        ctx.font = '10px -apple-system, "Noto Sans TC", sans-serif';
+        ctx.textAlign = 'center';
+        ctx.fillText('NT$' + Math.round(data[i].value / 1000) + 'K', points[i].x, points[i].y - 12);
+      }
+
+      /* X-axis labels */
+      ctx.fillStyle = '#8888aa';
+      ctx.font = '11px -apple-system, "Noto Sans TC", sans-serif';
+      ctx.textAlign = 'center';
+      for (var i = 0; i < data.length; i++) {
+        ctx.fillText(data[i].label, points[i].x, h - 8);
+      }
     }
 
     function renderSellers() {
@@ -1484,7 +2110,6 @@
       animateCounter(document.getElementById('newToday'), dashData.newToday, 800);
       animateCounter(document.getElementById('activeNow'), dashData.activeNow, 1000);
 
-      // Signups
       var list = document.getElementById('signupList');
       var html = '';
       dashData.signups.forEach(function(u) {
@@ -1500,7 +2125,6 @@
       });
       list.innerHTML = html;
 
-      // Countries
       var clist = document.getElementById('countryList');
       html = '';
       dashData.countries.forEach(function(c) {
@@ -1547,7 +2171,6 @@
       animateCounter(document.getElementById('pendingReview'), dashData.pendingReview, 600);
       animateCounter(document.getElementById('salesToday'), dashData.salesToday, 800);
 
-      // Pie chart via conic-gradient
       var pie = document.getElementById('pieChart');
       var legend = document.getElementById('pieLegend');
       var angle = 0;
@@ -1556,7 +2179,7 @@
 
       dashData.categories.forEach(function(cat) {
         var startAngle = angle;
-        angle += cat.pct * 3.6; // 360 / 100
+        angle += cat.pct * 3.6;
         gradientParts.push(cat.color + ' ' + startAngle + 'deg ' + angle + 'deg');
         legendHtml += '<li>' +
           '<div class="pie-legend-dot" style="background:' + cat.color + ';"></div>' +
@@ -1568,7 +2191,6 @@
       pie.style.background = 'conic-gradient(' + gradientParts.join(', ') + ')';
       legend.innerHTML = legendHtml;
 
-      // Recent transactions
       var txList = document.getElementById('txList');
       var html = '';
       dashData.transactions.forEach(function(tx) {
@@ -1603,7 +2225,10 @@
 
     function startCountdown() {
       countdownValue = 30;
-      document.getElementById('countdown').textContent = countdownValue;
+      var mainEl = document.getElementById('countdown');
+      var mobileEl = document.getElementById('countdownMobile');
+      if (mainEl) mainEl.textContent = countdownValue;
+      if (mobileEl) mobileEl.textContent = countdownValue;
       if (countdownTimer) clearInterval(countdownTimer);
       countdownTimer = setInterval(function() {
         countdownValue--;
@@ -1611,11 +2236,11 @@
           countdownValue = 30;
           refreshDashboard();
         }
-        document.getElementById('countdown').textContent = countdownValue;
+        if (mainEl) mainEl.textContent = countdownValue;
+        if (mobileEl) mobileEl.textContent = countdownValue;
       }, 1000);
     }
 
-    /* Periodically jitter activeNow */
     function jitterActiveNow() {
       var el = document.getElementById('activeNow');
       if (!el) return;
@@ -1635,6 +2260,13 @@
       refreshDashboard();
       startCountdown();
       setInterval(jitterActiveNow, 3000);
+
+      /* Re-render chart on resize */
+      window.addEventListener('resize', function() {
+        if (dashData.revenueDays) {
+          renderLineChart();
+        }
+      });
     }
 
     /* ======================================================= */

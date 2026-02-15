@@ -235,29 +235,106 @@ a:hover{text-decoration:underline}
 .seller-view.active{display:block}
 .buyer-view.hidden{display:none}
 
+/* === Hamburger Menu (marketplace) === */
+.nav-hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:4px;margin-left:auto}
+.nav-hamburger span{display:block;width:24px;height:2px;background:#eee;border-radius:2px;transition:0.3s}
+
+.mobile-menu-overlay{display:none;position:fixed;inset:0;z-index:9999;background:rgba(10,10,26,0.97);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);flex-direction:column;align-items:center;justify-content:center;gap:0;opacity:0;transition:opacity 0.35s ease}
+.mobile-menu-overlay.open{display:flex;opacity:1}
+.mobile-menu-overlay .mobile-close{position:absolute;top:16px;right:20px;background:none;border:none;color:#fff;font-size:2rem;cursor:pointer;width:48px;height:48px;display:flex;align-items:center;justify-content:center;border-radius:50%;transition:background 0.2s}
+.mobile-menu-overlay .mobile-close:hover{background:rgba(232,133,12,0.15)}
+.mobile-menu-overlay a{display:block;color:#fff;font-size:1.3rem;font-weight:600;padding:16px 40px;text-align:center;transition:color 0.2s,background 0.2s;width:100%;text-decoration:none;min-height:48px;line-height:1.5}
+.mobile-menu-overlay a:hover{color:#e8850c;background:rgba(232,133,12,0.06)}
+.mobile-menu-overlay .earn{background:linear-gradient(135deg,#e8850c,#cc785c);color:#fff !important;border-radius:12px;margin:16px 40px 0;width:auto;padding:14px 40px}
+
+/* === 平板 (1024px) === */
+@media(max-width:1024px){
+  .grid{grid-template-columns:repeat(2,1fr)}
+  .hero h1{font-size:32px}
+  .how{grid-template-columns:repeat(2,1fr)}
+  .why-grid{grid-template-columns:repeat(2,1fr)}
+}
+
+/* === 手機 (768px) === */
 @media(max-width:768px){
-  .hero h1{font-size:28px}
-  .hero-stats{gap:20px}
-  .commission-bar{flex-direction:column;text-align:center}
-  .nav{flex-wrap:wrap;gap:8px}
+  /* Nav */
+  .nav a:not(.logo):not(.earn){display:none}
+  .nav-hamburger{display:flex}
+  .nav{padding:12px 16px;gap:8px}
+
+  /* Hero */
+  .hero{padding:40px 16px 30px}
+  .hero h1{font-size:24px}
+  .hero p{font-size:14px}
+  .hero-stats{flex-wrap:wrap;gap:16px;justify-content:center}
+  .hero-stat .num{font-size:24px}
+
+  /* 內容 */
+  .grid{grid-template-columns:1fr;padding:0 16px 16px}
+  .commission-bar{flex-direction:column;text-align:center;margin:16px;padding:16px}
+  .search-section{padding:16px;flex-direction:column}
+  .search-box{min-width:100%;width:100%}
+  .filter-btn{min-height:44px}
+  .how{grid-template-columns:1fr;padding:16px}
+  .why-grid{grid-template-columns:1fr}
+  .why-section{margin:16px;padding:24px 16px}
+  .create-section{margin:16px;padding:24px 16px}
+  .create-section h2{font-size:22px}
+  .create-btn,.why-cta-btn{width:100%;min-height:48px}
+  .use-btn{min-height:44px;padding:10px 20px}
+
+  /* Points Bar */
   .points-bar{flex-wrap:wrap;gap:8px;padding:8px 16px;top:auto;position:relative}
   .points-bar .my-points{font-size:13px}
   .ticker-wrap{order:3;width:100%;max-width:100%}
-  .global-trade-badge{margin:0 16px 16px;padding:16px 20px}
-  .global-trade-badge .badge-title{font-size:17px}
+  .topup-btn{min-height:44px}
+  .global-trade-badge{margin:0 16px 16px;padding:16px;border-radius:12px}
+  .global-trade-badge .badge-title{font-size:16px}
+  .global-trade-badge .badge-sub{font-size:12px}
+
+  /* Modal */
   .cat-grid{grid-template-columns:repeat(2,1fr);gap:10px}
   .cat-card{padding:18px 12px}
   .cat-card .cat-emoji{font-size:32px}
   .cat-card .cat-name{font-size:13px}
-  .country-btn{min-width:120px;padding:10px 14px}
+  .country-btn{min-width:100px;padding:10px 14px}
   .country-btn .country-flag{font-size:22px}
   .step-content h2{font-size:22px}
-  .step-content{padding:20px 18px 24px}
+  .step-content{padding:20px 16px 24px}
   .modal{width:96%;max-height:95vh;border-radius:18px}
-  .step-indicator{padding:20px 18px 0}
+  .step-indicator{padding:20px 16px 0}
   .mode-toggle-btn{padding:10px 20px;font-size:14px}
   .pf-price-row{flex-direction:column}
   .pf-price-row select{width:100%}
+  .submit-big{min-height:48px;font-size:18px}
+
+  /* 按鈕觸控友善 */
+  button,a{min-height:44px}
+  body{font-size:14px}
+
+  /* 表格橫向滾動 */
+  table{display:block;overflow-x:auto;-webkit-overflow-scrolling:touch}
+}
+
+/* === 小手機 (480px) === */
+@media(max-width:480px){
+  .hero h1{font-size:20px}
+  .hero p{font-size:13px}
+  .hero-stat .num{font-size:20px}
+  .card{border-radius:12px}
+  .card-head{padding:12px 14px 0}
+  .card-body{padding:8px 14px}
+  .card-tags{padding:6px 14px}
+  .card-foot{padding:8px 14px 12px}
+  .cat-grid{grid-template-columns:1fr 1fr;gap:8px}
+  .cat-card{padding:14px 10px}
+  .cat-card .cat-emoji{font-size:28px}
+  .commission-bar{padding:12px}
+  .split-item{min-width:80px;padding:6px 10px}
+  .split-item .pct{font-size:16px}
+  .how-card{padding:18px}
+  .why-card{padding:18px}
+  .mode-toggle-btn{padding:8px 16px;font-size:13px}
 }
 </style>
 <link rel="stylesheet" href="/assets/framer-style.css">
@@ -273,7 +350,22 @@ a:hover{text-decoration:underline}
   <a href="/about">關於</a>
   <a href="/docs">常見問題</a>
   <a class="earn" href="#" onclick="event.preventDefault();switchMode('sell')">我要上架</a>
+  <button class="nav-hamburger" id="hamburger" aria-label="選單">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
+
+<!-- 手機版全螢幕選單 -->
+<div class="mobile-menu-overlay" id="mobileMenu">
+  <button class="mobile-close" id="mobileMenuClose" aria-label="關閉選單">&times;</button>
+  <a href="/" onclick="closeMobileMenu()">首頁</a>
+  <a href="/features" onclick="closeMobileMenu()">功能</a>
+  <a href="/marketplace" onclick="closeMobileMenu()">市集</a>
+  <a href="/pricing" onclick="closeMobileMenu()">方案</a>
+  <a href="/about" onclick="closeMobileMenu()">關於</a>
+  <a href="/docs" onclick="closeMobileMenu()">常見問題</a>
+  <a class="earn" href="#" onclick="event.preventDefault();closeMobileMenu();switchMode('sell')">我要上架</a>
+</div>
 
 <!-- Points Balance Bar -->
 <div class="points-bar">
@@ -561,6 +653,19 @@ a:hover{text-decoration:underline}
 
 <script src="/seobaike-config.js"></script>
 <script>
+// === 手機版 Hamburger Menu ===
+document.getElementById('hamburger').addEventListener('click', function(){
+  document.getElementById('mobileMenu').classList.add('open');
+  document.body.style.overflow='hidden';
+});
+document.getElementById('mobileMenuClose').addEventListener('click', function(){
+  closeMobileMenu();
+});
+function closeMobileMenu(){
+  document.getElementById('mobileMenu').classList.remove('open');
+  document.body.style.overflow='';
+}
+
 const API = window.location.origin;
 let allListings = [];
 let currentFilter = 'all';

@@ -447,41 +447,108 @@
       }
     }
 
+    /* ── 手機版全螢幕 Overlay Menu ── */
+    .mobile-menu-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      background: rgba(10, 10, 26, 0.97);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0;
+      opacity: 0;
+      transition: opacity 0.35s ease;
+    }
+    .mobile-menu-overlay.open {
+      display: flex;
+      opacity: 1;
+    }
+    .mobile-menu-overlay .mobile-close {
+      position: absolute;
+      top: 16px;
+      right: 20px;
+      background: none;
+      border: none;
+      color: #fff;
+      font-size: 2rem;
+      cursor: pointer;
+      width: 48px;
+      height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      transition: background 0.2s;
+    }
+    .mobile-menu-overlay .mobile-close:hover {
+      background: rgba(232,133,12,0.15);
+    }
+    .mobile-menu-overlay a {
+      display: block;
+      color: #fff;
+      font-size: 1.3rem;
+      font-weight: 600;
+      padding: 16px 40px;
+      text-align: center;
+      transition: color 0.2s, background 0.2s;
+      width: 100%;
+      text-decoration: none;
+      min-height: 48px;
+      line-height: 1.5;
+    }
+    .mobile-menu-overlay a:hover {
+      color: var(--orange);
+      background: rgba(232,133,12,0.06);
+    }
+
     /* ── Responsive ── */
     @media (max-width: 768px) {
-      nav { padding: 14px 20px; }
+      nav { padding: 14px 16px; }
       .nav-links { display: none; }
-      .nav-links.open {
-        display: flex;
-        flex-direction: column;
-        position: absolute;
-        top: 100%;
-        left: 0;
-        right: 0;
-        background: var(--bg);
-        border-bottom: 1px solid var(--border);
-        padding: 20px;
-        gap: 16px;
-      }
       .nav-hamburger { display: flex; }
-      .login-card { padding: 36px 24px; }
-      .login-header .logo-text { font-size: 1.6rem; }
 
-      .onboard-container { padding: 28px 20px 24px; }
-      .onboard-title { font-size: 1.3rem; }
+      main { padding: 40px 16px; }
+      .login-card { padding: 32px 20px; border-radius: 14px; }
+      .login-header .logo-text { font-size: 1.5rem; }
+      .login-header p { font-size: 0.88rem; }
+
+      .form-group label { font-size: 0.85rem; }
+      .form-group input { padding: 14px 16px; font-size: 1rem; min-height: 48px; }
+      .btn-primary { min-height: 52px; font-size: 1.05rem; }
+      .btn-outline { min-height: 48px; }
+      .form-meta { flex-wrap: wrap; gap: 8px; }
+      .form-meta label, .form-meta a { font-size: 0.82rem; }
+
+      .onboard-container { padding: 28px 16px 24px; border-radius: 16px; }
+      .onboard-title { font-size: 1.2rem; }
+      .onboard-subtitle { font-size: 0.85rem; }
       .industry-grid { grid-template-columns: repeat(4, 1fr); gap: 8px; }
       .industry-item { padding: 12px 4px; }
       .industry-item .icon { font-size: 1.4rem; }
       .industry-item .label { font-size: 0.7rem; }
       .need-grid { grid-template-columns: 1fr; gap: 10px; }
       .need-card { padding: 16px 14px; }
+      .need-card .card-title { font-size: 0.92rem; }
+
+      footer { padding: 20px 16px; font-size: 0.78rem; }
+
+      /* 按鈕觸控友善 */
+      button, a { min-height: 44px; }
+      body { font-size: 14px; }
     }
 
-    @media (max-width: 420px) {
+    @media (max-width: 480px) {
+      .login-card { padding: 28px 16px; }
+      .login-header .logo-text { font-size: 1.3rem; }
       .industry-grid { grid-template-columns: repeat(4, 1fr); gap: 6px; }
       .industry-item { padding: 10px 2px; }
       .industry-item .icon { font-size: 1.2rem; }
       .industry-item .label { font-size: 0.65rem; }
+      .login-footer { font-size: 0.82rem; }
     }
   </style>
   <link rel="stylesheet" href="/assets/framer-style.css">
@@ -504,6 +571,17 @@
       <span></span><span></span><span></span>
     </button>
   </nav>
+
+  <!-- 手機版全螢幕選單 Overlay -->
+  <div class="mobile-menu-overlay" id="mobileMenu">
+    <button class="mobile-close" id="mobileMenuClose" aria-label="關閉選單">&times;</button>
+    <a href="/" onclick="closeMobileMenu()">首頁</a>
+    <a href="/features" onclick="closeMobileMenu()">功能</a>
+    <a href="/marketplace" onclick="closeMobileMenu()">市集</a>
+    <a href="/pricing" onclick="closeMobileMenu()">方案</a>
+    <a href="/about" onclick="closeMobileMenu()">關於</a>
+    <a href="/docs" onclick="closeMobileMenu()">常見問題</a>
+  </div>
 
   <!-- Main -->
   <main>
@@ -583,9 +661,18 @@
 
   <script src="/seobaike-config.js"></script>
   <script>
+    // === 手機版 Hamburger 全螢幕 Overlay Menu ===
     document.getElementById('hamburger').addEventListener('click', function () {
-      document.getElementById('navLinks').classList.toggle('open');
+      document.getElementById('mobileMenu').classList.add('open');
+      document.body.style.overflow = 'hidden';
     });
+    document.getElementById('mobileMenuClose').addEventListener('click', function () {
+      closeMobileMenu();
+    });
+    function closeMobileMenu() {
+      document.getElementById('mobileMenu').classList.remove('open');
+      document.body.style.overflow = '';
+    }
 
     // ══════════════════════════════════════
     // SEOBAIKE Auth + Smart Onboarding

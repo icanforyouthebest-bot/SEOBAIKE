@@ -715,6 +715,125 @@
 
     .footer-bottom span { color: var(--orange); }
 
+    /* ========== 手機版全螢幕 Overlay Menu ========== */
+    .mobile-menu-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      background: rgba(10, 10, 26, 0.97);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0;
+      opacity: 0;
+      transition: opacity 0.35s ease;
+    }
+    .mobile-menu-overlay.open {
+      display: flex;
+      opacity: 1;
+    }
+    .mobile-menu-overlay .mobile-close {
+      position: absolute;
+      top: 16px;
+      right: 20px;
+      background: none;
+      border: none;
+      color: #fff;
+      font-size: 2rem;
+      cursor: pointer;
+      width: 48px;
+      height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      transition: background 0.2s;
+    }
+    .mobile-menu-overlay .mobile-close:hover {
+      background: rgba(232,133,12,0.15);
+    }
+    .mobile-menu-overlay a {
+      display: block;
+      color: #fff;
+      font-size: 1.3rem;
+      font-weight: 600;
+      padding: 16px 40px;
+      text-align: center;
+      transition: color 0.2s, background 0.2s;
+      width: 100%;
+      text-decoration: none;
+      min-height: 48px;
+      line-height: 1.5;
+    }
+    .mobile-menu-overlay a:hover {
+      color: var(--orange);
+      background: rgba(232,133,12,0.06);
+    }
+    .mobile-menu-overlay .btn-login {
+      background: var(--orange);
+      color: #fff !important;
+      border-radius: 12px;
+      margin: 16px 40px 0;
+      width: auto;
+      text-align: center;
+      padding: 14px 40px;
+    }
+
+    /* ========== SEO Points Sticky Bar (手機版) ========== */
+    .mobile-points-sticky {
+      display: none;
+      position: sticky;
+      top: 64px;
+      z-index: 99;
+      background: linear-gradient(90deg, rgba(10,10,26,0.95), rgba(18,18,42,0.95));
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+      padding: 10px 16px;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      font-size: 0.88rem;
+    }
+    .mobile-points-sticky .points-label {
+      color: var(--orange);
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .mobile-points-sticky .points-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--orange), var(--copper));
+      color: #fff;
+      font-size: 11px;
+      font-weight: 800;
+    }
+    .mobile-points-sticky .topup-link {
+      color: var(--orange);
+      font-weight: 600;
+      font-size: 0.82rem;
+      border: 1px solid var(--orange);
+      padding: 6px 14px;
+      border-radius: 20px;
+      transition: all 0.2s;
+      min-height: 36px;
+      display: flex;
+      align-items: center;
+    }
+    .mobile-points-sticky .topup-link:hover {
+      background: var(--orange);
+      color: #fff;
+    }
+
     /* ========== RESPONSIVE ========== */
     @media (max-width: 1024px) {
       .pricing-grid {
@@ -722,48 +841,97 @@
         max-width: 700px;
         margin: 0 auto;
       }
+      .referral-grid {
+        grid-template-columns: 1fr;
+        max-width: 500px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      .container { padding: 0 16px; }
     }
 
     @media (max-width: 768px) {
       .navbar-links { display: none; }
-      .navbar-links.open {
-        display: flex;
-        flex-direction: column;
-        position: absolute;
-        top: 64px;
-        left: 0; right: 0;
-        background: rgba(10,10,26,0.98);
-        padding: 1.5rem 2rem;
-        gap: 1rem;
-        border-bottom: 1px solid var(--border);
-      }
       .hamburger { display: flex; }
 
+      .mobile-points-sticky { display: flex; }
+
+      .hero { padding: 100px 16px 40px; }
+      .hero h1 { font-size: 1.8rem; }
+      .hero .hero-sub { font-size: 0.95rem; margin-bottom: 1.5rem; }
+
+      .billing-toggle { gap: 0.6rem; }
+      .billing-toggle span { font-size: 0.85rem; }
+      .billing-badge { font-size: 0.72rem; }
+
+      .pricing-section { padding: 1.5rem 1rem 3rem; }
       .pricing-grid {
         grid-template-columns: 1fr;
-        max-width: 420px;
+        max-width: 100%;
+        gap: 1.5rem;
       }
 
+      .pricing-card {
+        padding: 2rem 1.4rem;
+      }
       .pricing-card.featured {
         transform: none;
       }
-
       .pricing-card.featured:hover {
-        transform: translateY(-6px);
+        transform: translateY(-4px);
       }
 
-      .comp-table { min-width: 600px; }
+      /* 每個方案只有 1 個大按鈕 */
+      .btn-plan {
+        min-height: 52px;
+        font-size: 1.1rem;
+        border-radius: 12px;
+        width: 100%;
+      }
 
-      .footer-grid { grid-template-columns: 1fr 1fr; }
+      .comparison-section { padding: 2rem 1rem; }
+      .comparison-section h2 { font-size: 1.5rem; }
+      .comp-table-wrapper { border-radius: 10px; }
+      .comp-table { min-width: 550px; }
 
-      .cta-box { padding: 3rem 1.5rem; }
-      .cta-box h2 { font-size: 1.6rem; }
+      .faq-section { padding: 2.5rem 1rem; }
+      .faq-section h2 { font-size: 1.5rem; }
+      .faq-question { padding: 1rem 1.2rem; font-size: 0.92rem; }
+
+      .cta-section { padding: 2.5rem 1rem; }
+      .cta-box { padding: 2.5rem 1.2rem; border-radius: 16px; }
+      .cta-box h2 { font-size: 1.4rem; }
+      .cta-box p { font-size: 0.92rem; }
+      .btn-cta { width: 100%; min-height: 48px; font-size: 1rem; }
+
+      .footer { padding: 2rem 1rem 1.5rem; }
+      .footer-grid { grid-template-columns: 1fr; gap: 1.5rem; }
+      .footer-bottom { flex-direction: column; text-align: center; }
+
+      /* 按鈕觸控友善 */
+      button, a, .btn-plan, .btn-cta {
+        min-height: 48px;
+      }
+
+      /* 表格橫向滾動 */
+      table { display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+
+      body { font-size: 14px; }
     }
 
     @media (max-width: 480px) {
-      .hero h1 { font-size: 2rem; }
+      .hero h1 { font-size: 1.5rem; }
+      .hero .hero-sub { font-size: 0.88rem; }
+      .pricing-card { padding: 1.6rem 1.2rem; border-radius: 12px; }
+      .pricing-price .amount { font-size: 2.2rem; }
+      .pricing-name { font-size: 1.15rem; }
+      .pricing-features li { font-size: 0.82rem; }
       .pricing-grid { max-width: 100%; }
       .footer-grid { grid-template-columns: 1fr; }
+      .referral-card { padding: 1.5rem 1rem; }
+      .cta-box h2 { font-size: 1.2rem; }
+      .comparison-section h2 { font-size: 1.3rem; }
+      .faq-section h2 { font-size: 1.3rem; }
     }
 
     /* ========== REFERRAL PROGRAM ========== */
@@ -1149,6 +1317,27 @@
     </button>
   </nav>
 
+  <!-- 手機版全螢幕選單 Overlay -->
+  <div class="mobile-menu-overlay" id="mobileMenu">
+    <button class="mobile-close" id="mobileMenuClose" aria-label="關閉選單">&times;</button>
+    <a href="/" onclick="closeMobileMenu()">首頁</a>
+    <a href="/features" onclick="closeMobileMenu()">功能</a>
+    <a href="/marketplace" onclick="closeMobileMenu()">市集</a>
+    <a href="/pricing" onclick="closeMobileMenu()">方案</a>
+    <a href="/about" onclick="closeMobileMenu()">關於</a>
+    <a href="/docs" onclick="closeMobileMenu()">常見問題</a>
+    <a href="/login" class="btn-login" onclick="closeMobileMenu()">登入</a>
+  </div>
+
+  <!-- SEO Points 手機版 Sticky Bar -->
+  <div class="mobile-points-sticky">
+    <div class="points-label">
+      <span class="points-icon">S</span>
+      <span>我的點數: <span id="mobilePointsBalance">0</span> SP</span>
+    </div>
+    <a href="#" class="topup-link" onclick="event.preventDefault();window.open('https://lin.ee/seobaike','_blank')">儲值</a>
+  </div>
+
   <!-- HERO -->
   <section class="hero">
     <div class="container">
@@ -1190,7 +1379,7 @@
           <li><span class="ck">&#10003;</span>基礎 AI 服務</li>
           <li><span class="ck">&#10003;</span>社群支援</li>
         </ul>
-        <a href="/login" class="btn-plan outline">先試試看</a>
+        <a href="/login" class="btn-plan outline btn-start">立即開始</a>
       </div>
 
       <!-- 個人版 -->
@@ -1211,7 +1400,7 @@
           <li><span class="ck">&#10003;</span>搜尋、嵌入、圖像、語音</li>
           <li><span class="ck">&#10003;</span>Email 支援</li>
         </ul>
-        <a href="/login" class="btn-plan outline">選擇個人版</a>
+        <a href="https://lin.ee/seobaike" target="_blank" rel="noopener" class="btn-plan outline btn-start" onclick="trackPlanClick('personal')">立即開始</a>
       </div>
 
       <!-- 專業版 -->
@@ -1232,7 +1421,7 @@
           <li><span class="ck">&#10003;</span>優先處理（更快回應）</li>
           <li><span class="ck">&#10003;</span>專屬客服</li>
         </ul>
-        <a href="/login" class="btn-plan primary">選擇專業版</a>
+        <a href="https://lin.ee/seobaike" target="_blank" rel="noopener" class="btn-plan primary btn-start" onclick="trackPlanClick('pro')">立即開始</a>
       </div>
 
       <!-- 企業版 -->
@@ -1253,7 +1442,7 @@
           <li><span class="ck">&#10003;</span>客製化設定</li>
           <li><span class="ck">&#10003;</span>SLA 99.9% 保證</li>
         </ul>
-        <a href="/contact" class="btn-plan green-outline">聯繫銷售</a>
+        <a href="https://lin.ee/seobaike" target="_blank" rel="noopener" class="btn-plan green-outline btn-start" onclick="trackPlanClick('enterprise')">立即開始</a>
       </div>
 
     </div>
@@ -1565,9 +1754,28 @@
 
   <script>
     // ==================== Mobile Nav ====================
+    // === 手機版 Hamburger 全螢幕 Overlay Menu ===
     document.getElementById('hamburger').addEventListener('click', function () {
-      document.getElementById('navLinks').classList.toggle('open');
+      document.getElementById('mobileMenu').classList.add('open');
+      document.body.style.overflow = 'hidden';
     });
+    document.getElementById('mobileMenuClose').addEventListener('click', function () {
+      closeMobileMenu();
+    });
+    function closeMobileMenu() {
+      document.getElementById('mobileMenu').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    // === 付費流程追蹤 ===
+    function trackPlanClick(plan) {
+      try {
+        if (window.localStorage) {
+          localStorage.setItem('seobaike_selected_plan', plan);
+          localStorage.setItem('seobaike_plan_time', new Date().toISOString());
+        }
+      } catch(e) {}
+    }
 
     // ==================== Billing Toggle ====================
     var isAnnual = false;
