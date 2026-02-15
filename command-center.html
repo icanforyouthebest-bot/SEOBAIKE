@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<title>SEOBAIKE — 全系統指揮中心</title>
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+html, body { width:100%; height:100%; overflow:hidden; background:#050510; font-family:'Segoe UI',sans-serif; color:#eee; }
+
+.topbar {
+  height:50px; background:linear-gradient(90deg,#0a0a1a 0%,#1a0f00 30%,#2a1500 50%,#1a0f00 70%,#0a0a1a 100%);
+  display:flex; align-items:center; justify-content:space-between; padding:0 20px;
+  border-bottom:2px solid #e8850c33;
+}
+.topbar .logo { display:flex; align-items:center; gap:10px; }
+.topbar .logo-circle { width:32px; height:32px; border-radius:50%; background:linear-gradient(135deg,#ff6b35,#ffa940); display:flex; align-items:center; justify-content:center; font-weight:900; color:#0a0a1a; font-size:16px; }
+.topbar h1 { font-size:18px; background:linear-gradient(90deg,#e8850c,#cc785c,#76b900); -webkit-background-clip:text; -webkit-text-fill-color:transparent; letter-spacing:2px; }
+.badges { display:flex; gap:6px; }
+.badge { padding:3px 10px; border-radius:12px; font-size:10px; font-weight:bold; }
+.live-dot { width:8px; height:8px; border-radius:50%; background:#0f0; display:inline-block; animation:pulse 1s infinite; }
+@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.15} }
+@keyframes slideUp { from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:translateY(0)} }
+@keyframes glow { 0%,100%{box-shadow:0 0 5px rgba(232,133,12,0.3)} 50%{box-shadow:0 0 20px rgba(232,133,12,0.6)} }
+@keyframes countUp { from{opacity:0.5;transform:scale(1.15)} to{opacity:1;transform:scale(1)} }
+@keyframes barPulse { 0%{opacity:0.8} 50%{opacity:1} 100%{opacity:0.8} }
+@keyframes spin { to{transform:rotate(360deg)} }
+.clock { font-family:'Consolas',monospace; font-size:13px; color:#e8850c; }
+
+.main {
+  display:grid;
+  grid-template-columns:260px 1fr 1fr 260px;
+  grid-template-rows:1fr 1fr;
+  height:calc(100vh - 50px - 24px);
+  gap:2px;
+}
+
+.sidebar-left { grid-row:1/3; background:#0a0a1a; padding:10px; overflow-y:auto; border-right:1px solid #1a1200; }
+.stat-card { background:#111827; border:1px solid #1f1400; border-radius:10px; padding:10px; margin-bottom:6px; text-align:center; transition:all 0.3s; }
+.stat-card:hover { border-color:#e8850c; animation:glow 2s infinite; }
+.stat-card .num { font-size:28px; font-weight:bold; color:#e8850c; animation:countUp 0.5s; }
+.stat-card .lbl { font-size:9px; color:#666; margin-top:2px; text-transform:uppercase; }
+
+.panel { background:#0d1117; border:1px solid #1a1200; overflow:hidden; }
+.panel-header { height:28px; background:#111827; display:flex; align-items:center; padding:0 10px; font-size:11px; gap:6px; border-bottom:1px solid #1a1200; color:#e8850c; }
+.panel-header .spinner { width:10px; height:10px; border:2px solid #333; border-top:2px solid #e8850c; border-radius:50%; animation:spin 1s linear infinite; display:inline-block; }
+.panel-body { height:calc(100% - 28px); overflow:hidden; }
+.panel-body iframe { width:100%; height:100%; border:none; }
+
+.sidebar-right { grid-row:1/3; background:#0a0a1a; padding:10px; overflow-y:auto; border-left:1px solid #1a1200; }
+.log-title { font-size:11px; color:#e8850c; margin-bottom:6px; display:flex; align-items:center; gap:6px; }
+.log-entry { font-family:'Consolas',monospace; font-size:10px; line-height:1.6; padding:2px 0; border-bottom:1px solid #111; animation:slideUp 0.3s; }
+.log-entry.ok { color:#76b900; }
+.log-entry.err { color:#ff6b6b; }
+.log-entry .ts { color:#444; }
+
+.engine-bar { height:6px; border-radius:3px; margin:4px 0; overflow:hidden; background:#1a1200; }
+.engine-bar .fill { height:100%; border-radius:3px; transition:width 0.8s ease; animation:barPulse 2s infinite; }
+.fill.primary { background:linear-gradient(90deg,#e8850c,#ffa940); }
+.fill.secondary { background:linear-gradient(90deg,#cc785c,#e8a07a); }
+.fill.tertiary { background:linear-gradient(90deg,#76b900,#8ed100); }
+
+.bottombar {
+  position:fixed; bottom:0; left:0; right:0; height:24px;
+  background:#0a0a1a; border-top:1px solid #1a1200;
+  display:flex; align-items:center; justify-content:space-between;
+  padding:0 16px; font-size:9px; color:#555;
+}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="logo">
+    <div class="logo-circle">S</div>
+    <h1>SEOBAIKE 全系統指揮中心</h1>
+  </div>
+  <div class="badges">
+    <span class="badge" style="background:#e8850c;color:#000;">AI FOR SEO</span>
+    <span class="badge" style="background:#cc785c;color:#fff;">專利 115100981</span>
+    <span class="badge" style="background:#1a0f00;color:#e8850c;border:1px solid #e8850c33;"><span class="live-dot"></span> 全系統運行中</span>
+  </div>
+  <span class="clock" id="clock"></span>
+</div>
+
+<div class="main">
+  <div class="sidebar-left">
+    <div style="font-size:10px;color:#e8850c;margin-bottom:8px;text-align:center;">即時數據面板</div>
+    <div class="stat-card"><div class="num" id="d-round">0</div><div class="lbl">測試輪次</div></div>
+    <div class="stat-card"><div class="num" id="d-l1">--</div><div class="lbl">L1 產業類別</div></div>
+    <div class="stat-card"><div class="num" id="d-l2">--</div><div class="lbl">L2 次產業</div></div>
+    <div class="stat-card"><div class="num" id="d-l3" style="color:#cc785c;">--</div><div class="lbl">L3 製程</div></div>
+    <div class="stat-card"><div class="num" id="d-l4" style="color:#cc785c;">--</div><div class="lbl">L4 節點</div></div>
+    <div class="stat-card"><div class="num" id="d-checks" style="color:#76b900;">--</div><div class="lbl">路徑檢查</div></div>
+    <div class="stat-card"><div class="num" id="d-audit" style="color:#76b900;">--</div><div class="lbl">稽核記錄</div></div>
+    <div class="stat-card"><div class="num" id="d-allow" style="color:#e8850c;">--</div><div class="lbl">Allow</div></div>
+    <div class="stat-card"><div class="num" id="d-deny" style="color:#ff6b6b;">--</div><div class="lbl">Deny</div></div>
+
+    <div style="margin-top:10px;font-size:10px;color:#cc785c;text-align:center;">引擎成功率</div>
+    <div style="font-size:9px;color:#888;margin:4px 0;">主引擎 <span id="e1-pct" style="float:right;color:#e8850c;">0%</span></div>
+    <div class="engine-bar"><div class="fill primary" id="e1-bar" style="width:0%"></div></div>
+    <div style="font-size:9px;color:#888;margin:4px 0;">約束引擎 <span id="e2-pct" style="float:right;color:#cc785c;">0%</span></div>
+    <div class="engine-bar"><div class="fill secondary" id="e2-bar" style="width:0%"></div></div>
+    <div style="font-size:9px;color:#888;margin:4px 0;">路由引擎 <span id="e3-pct" style="float:right;color:#76b900;">100%</span></div>
+    <div class="engine-bar"><div class="fill tertiary" id="e3-bar" style="width:100%"></div></div>
+
+    <div class="stat-card" style="margin-top:10px;"><div class="num" id="d-e1-ok" style="font-size:20px;">0</div><div class="lbl">主引擎成功</div></div>
+    <div class="stat-card"><div class="num" id="d-e2-ok" style="font-size:20px;">0</div><div class="lbl">約束引擎成功</div></div>
+    <div class="stat-card"><div class="num" id="d-latency" style="font-size:20px;color:#76b900;">--</div><div class="lbl">平均延遲 ms</div></div>
+  </div>
+
+  <div class="panel">
+    <div class="panel-header"><span class="spinner"></span> SEOBAIKE 引擎即時測試 <span style="margin-left:auto;">AUTO 5s</span></div>
+    <div class="panel-body"><iframe src="dashboard.html"></iframe></div>
+  </div>
+  <div class="panel">
+    <div class="panel-header"><span class="spinner"></span> SEOBAIKE 系統監控 <span style="margin-left:auto;">AUTO 6s</span></div>
+    <div class="panel-body"><iframe src="http://localhost:7870"></iframe></div>
+  </div>
+  <div class="panel">
+    <div class="panel-header"><span class="spinner"></span> SEOBAIKE 即時儀表板 <span style="margin-left:auto;">AUTO 3s</span></div>
+    <div class="panel-body"><iframe src="http://localhost:8501"></iframe></div>
+  </div>
+  <div class="panel">
+    <div class="panel-header"><span class="spinner"></span> SEOBAIKE AI 對話 <span style="margin-left:auto;">互動式</span></div>
+    <div class="panel-body"><iframe src="chat.html"></iframe></div>
+  </div>
+
+  <div class="sidebar-right">
+    <div class="log-title"><span class="spinner" style="width:8px;height:8px;border-width:1.5px;"></span> 即時測試記錄</div>
+    <div id="log"></div>
+  </div>
+</div>
+
+<div class="bottombar">
+  <span>SEOBAIKE | 專利 115100981 | 小路光有限公司 | 統編 60475510</span>
+  <span id="bottomStatus">初始化中...</span>
+  <span>Python 452+ | Docker | Edge Functions 67 | 4 即時面板</span>
+</div>
+
+<script>
+const EP="https://vmyrivxxibqydccurxug.supabase.co/functions/v1/nvidia-boss";
+const GW="https://vmyrivxxibqydccurxug.supabase.co/functions/v1/ai-gateway";
+const KEY="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZteXJpdnh4aWJxeWRjY3VyeHVnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzAwNDAwMjksImV4cCI6MjA4NTYxNjAyOX0.iBV-23LGdm_uKffAExgqSV34-NWoAyv8_-M_cJQZ8Gg";
+const HDR={"Authorization":"Bearer "+KEY,"Content-Type":"application/json"};
+const msgs=["system status","patent check","L1 L2 L3 L4 count","constraint rules","audit report","binding list","allow industries","path check stats","performance report","health check"];
+let round=0,e1Ok=0,e1Fail=0,e2Ok=0,e2Fail=0,totalMs=0;
+const log=document.getElementById("log");
+
+setInterval(()=>{document.getElementById("clock").textContent=new Date().toLocaleString("zh-TW");},1000);
+
+function addLog(t,c){const ts=new Date().toLocaleTimeString("zh-TW");const d=document.createElement("div");d.className="log-entry "+c;d.innerHTML='<span class="ts">['+ts+']</span> '+t;log.prepend(d);if(log.children.length>80)log.lastChild.remove();}
+function updateNum(id,v){const el=document.getElementById(id);if(el&&el.textContent!==String(v)){el.textContent=v;el.style.animation="none";el.offsetHeight;el.style.animation="countUp 0.5s";}}
+
+async function tick(){
+  round++;const msg=msgs[round%msgs.length];
+  document.getElementById("bottomStatus").textContent="同步測試 #"+round+" — "+msg;
+  const[r1,r2]=await Promise.all([
+    (async()=>{try{const t0=performance.now();const r=await fetch(EP,{method:"POST",headers:HDR,body:JSON.stringify({message:msg})});const ms=Math.round(performance.now()-t0);const d=await r.json();if(r.ok&&d.reply){e1Ok++;totalMs+=ms;if(d.real_data){updateNum("d-l1",d.real_data.l1_count);updateNum("d-l2",d.real_data.l2_count);updateNum("d-l3",d.real_data.l3_count);updateNum("d-l4",d.real_data.l4_count);updateNum("d-checks",d.real_data.total_path_checks);updateNum("d-audit",d.real_data.total_audit_entries);updateNum("d-allow",d.real_data.allow_paths);updateNum("d-deny",d.real_data.deny_paths);}addLog("主引擎 #"+round+" OK ("+ms+"ms)","ok");return ms;}else{e1Fail++;addLog("主引擎 #"+round+" FAIL","err");return 0;}}catch(e){e1Fail++;addLog("主引擎 #"+round+" ERR: "+e.message,"err");return 0;}})(),
+    (async()=>{try{const t0=performance.now();const r=await fetch(GW,{method:"POST",headers:HDR,body:JSON.stringify({message:msg,platform:"telegram",platform_user_id:"5372713163"})});const ms=Math.round(performance.now()-t0);const d=await r.json();if(r.ok){e2Ok++;totalMs+=ms;addLog("約束引擎 #"+round+" OK ("+ms+"ms)","ok");return ms;}else{e2Fail++;addLog("約束引擎 #"+round+" FAIL","err");return 0;}}catch(e){e2Fail++;addLog("約束引擎 #"+round+" ERR","err");return 0;}})()
+  ]);
+  updateNum("d-round",round);updateNum("d-e1-ok",e1Ok);updateNum("d-e2-ok",e2Ok);
+  const avg=round>0?Math.round(totalMs/(round*2)):0;updateNum("d-latency",avg);
+  const p1=(e1Ok+e1Fail)>0?(e1Ok/(e1Ok+e1Fail)*100).toFixed(1):0;
+  const p2=(e2Ok+e2Fail)>0?(e2Ok/(e2Ok+e2Fail)*100).toFixed(1):0;
+  document.getElementById("e1-bar").style.width=p1+"%";document.getElementById("e2-bar").style.width=p2+"%";
+  document.getElementById("e1-pct").textContent=p1+"%";document.getElementById("e2-pct").textContent=p2+"%";
+  document.getElementById("bottomStatus").textContent="運行中 | #"+round+" | 主:"+e1Ok+" 約束:"+e2Ok+" | "+avg+"ms";
+}
+tick();setInterval(tick,5000);
+</script>
+</body>
+</html>

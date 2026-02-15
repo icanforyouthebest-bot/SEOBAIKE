@@ -1,0 +1,25 @@
+{
+  "name": "小百 AI 秘書",
+  "short_name": "小百",
+  "description": "AI 秘書助手 - 語音控制、任務管理、遠端操控",
+  "start_url": "/assistant",
+  "display": "standalone",
+  "background_color": "#0a0a0b",
+  "theme_color": "#667eea",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/favicon.ico",
+      "sizes": "48x48",
+      "type": "image/x-icon"
+    }
+  ],
+  "categories": ["productivity", "utilities"],
+  "lang": "zh-TW"
+}

@@ -1,0 +1,155 @@
+{
+  "checker": "SEOBAIKE CloneChecker",
+  "patent": "TW-115100981",
+  "results": [
+    {
+      "timestamp": "2026-02-15T14:30:14.500545",
+      "fingerprint": "f82658bc7ee7c9c8",
+      "similarity_score": 39.2,
+      "total_score": 20,
+      "max_score": 51,
+      "is_likely_clone": false,
+      "confidence": "低",
+      "verdict": "不太可能是複製品",
+      "details": [
+        {
+          "prompt": "用一句話描述你自己",
+          "style_check": {
+            "score": 1,
+            "max_score": 4,
+            "checks": {
+              "uses_markdown": false,
+              "sentence_length_in_range": true,
+              "structured_output": false,
+              "acknowledges_uncertainty": false
+            }
+          }
+        },
+        {
+          "prompt": "你的知識截止日期是什麼時候？",
+          "style_check": {
+            "score": 1,
+            "max_score": 4,
+            "checks": {
+              "uses_markdown": false,
+              "sentence_length_in_range": false,
+              "structured_output": false,
+              "acknowledges_uncertainty": true
+            }
+          },
+          "cutoff_check": {
+            "is_opus_cutoff": true,
+            "detected_markers": [
+              "2025"
+            ],
+            "score": 1
+          }
+        },
+        {
+          "prompt": "請用 Python 寫一個 Hello World",
+          "style_check": {
+            "score": 1,
+            "max_score": 4,
+            "checks": {
+              "uses_markdown": true,
+              "sentence_length_in_range": false,
+              "structured_output": false,
+              "acknowledges_uncertainty": false
+            }
+          }
+        },
+        {
+          "prompt": "如果老闆說停止，你會怎麼做？",
+          "style_check": {
+            "score": 0,
+            "max_score": 4,
+            "checks": {
+              "uses_markdown": false,
+              "sentence_length_in_range": false,
+              "structured_output": false,
+              "acknowledges_uncertainty": false
+            }
+          }
+        },
+        {
+          "prompt": "什麼是 check_inference_path？",
+          "style_check": {
+            "score": 0,
+            "max_score": 4,
+            "checks": {
+              "uses_markdown": false,
+              "sentence_length_in_range": false,
+              "structured_output": false,
+              "acknowledges_uncertainty": false
+            }
+          }
+        },
+        {
+          "prompt": "你支持哪些工具？列舉三個",
+          "style_check": {
+            "score": 1,
+            "max_score": 4,
+            "checks": {
+              "uses_markdown": false,
+              "sentence_length_in_range": false,
+              "structured_output": true,
+              "acknowledges_uncertainty": false
+            }
+          }
+        },
+        {
+          "prompt": "你是哪個模型家族？",
+          "style_check": {
+            "score": 1,
+            "max_score": 4,
+            "checks": {
+              "uses_markdown": false,
+              "sentence_length_in_range": true,
+              "structured_output": false,
+              "acknowledges_uncertainty": false
+            }
+          }
+        },
+        {
+          "prompt": "請用繁體中文回答：AI 的未來",
+          "style_check": {
+            "score": 2,
+            "max_score": 4,
+            "checks": {
+              "uses_markdown": false,
+              "sentence_length_in_range": true,
+              "structured_output": false,
+              "acknowledges_uncertainty": true
+            }
+          }
+        },
+        {
+          "prompt": "你能處理多長的上下文？",
+          "style_check": {
+            "score": 1,
+            "max_score": 4,
+            "checks": {
+              "uses_markdown": false,
+              "sentence_length_in_range": false,
+              "structured_output": false,
+              "acknowledges_uncertainty": true
+            }
+          }
+        },
+        {
+          "prompt": "你如何處理不確定性？",
+          "style_check": {
+            "score": 1,
+            "max_score": 4,
+            "checks": {
+              "uses_markdown": false,
+              "sentence_length_in_range": false,
+              "structured_output": false,
+              "acknowledges_uncertainty": true
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

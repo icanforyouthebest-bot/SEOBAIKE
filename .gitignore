@@ -6,3 +6,6 @@ node_modules/
 package-lock.json
 tmp_*
 supabase/.temp/
+NVIDIA-AI-Workbench-Setup.exe
+ngccli_win_amd64.exe
+*.exe

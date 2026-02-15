@@ -1,0 +1,240 @@
+{
+  "audit_timestamp": "2026-02-15T14:30:14.669661",
+  "auditor": "SEOBAIKE SelfAuditor",
+  "patent": "TW-115100981",
+  "security_score": 85,
+  "grade": "B",
+  "total_vulnerabilities": 10,
+  "vulnerable_count": 1,
+  "safe_count": 9,
+  "findings": [
+    {
+      "vulnerability": {
+        "id": "VULN-001",
+        "name": "Prompt Injection 風險",
+        "severity": "critical",
+        "description": "惡意使用者可能透過精心設計的提示詞注入，讓 AI 繞過安全限制。",
+        "check_method": "scan_for_injection_patterns",
+        "deduction": 15
+      },
+      "result": {
+        "vulnerable": false,
+        "findings": []
+      },
+      "status": "SAFE",
+      "score_impact": 0
+    },
+    {
+      "vulnerability": {
+        "id": "VULN-002",
+        "name": "API 金鑰洩漏風險",
+        "severity": "critical",
+        "description": "程式碼或日誌中可能包含明文 API 金鑰。",
+        "check_method": "scan_for_api_keys",
+        "deduction": 15
+      },
+      "result": {
+        "vulnerable": true,
+        "findings": [
+          {
+            "file": ".\\.mcp.json",
+            "pattern": "sbp_[a-zA-Z0-9]+",
+            "count": 1
+          },
+          {
+            "file": ".\\chat.html",
+            "pattern": "[\"\\']eyJ[a-zA-Z0-9_-]+\\.[a-zA-",
+            "count": 1
+          },
+          {
+            "file": ".\\CLAUDE.md",
+            "pattern": "github_pat_[a-zA-Z0-9_]+",
+            "count": 1
+          },
+          {
+            "file": ".\\CLAUDE.md",
+            "pattern": "sbp_[a-zA-Z0-9]+",
+            "count": 1
+          },
+          {
+            "file": ".\\command-center.html",
+            "pattern": "[\"\\']eyJ[a-zA-Z0-9_-]+\\.[a-zA-",
+            "count": 1
+          },
+          {
+            "file": ".\\dashboard.html",
+            "pattern": "[\"\\']eyJ[a-zA-Z0-9_-]+\\.[a-zA-",
+            "count": 1
+          },
+          {
+            "file": ".\\dual-dashboard.html",
+            "pattern": "[\"\\']eyJ[a-zA-Z0-9_-]+\\.[a-zA-",
+            "count": 1
+          },
+          {
+            "file": ".\\index.html",
+            "pattern": "[\"\\']eyJ[a-zA-Z0-9_-]+\\.[a-zA-",
+            "count": 1
+          },
+          {
+            "file": ".\\nvidia-chat.html",
+            "pattern": "[\"\\']eyJ[a-zA-Z0-9_-]+\\.[a-zA-",
+            "count": 1
+          },
+          {
+            "file": ".\\streamlit-dashboard.py",
+            "pattern": "[\"\\']eyJ[a-zA-Z0-9_-]+\\.[a-zA-",
+            "count": 1
+          },
+          {
+            "file": ".\\system-monitor.py",
+            "pattern": "[\"\\']eyJ[a-zA-Z0-9_-]+\\.[a-zA-",
+            "count": 1
+          },
+          {
+            "file": ".\\pages-site\\assets\\index-BedVsTGe.js",
+            "pattern": "[\"\\']eyJ[a-zA-Z0-9_-]+\\.[a-zA-",
+            "count": 4
+          }
+        ]
+      },
+      "status": "VULNERABLE",
+      "score_impact": -15
+    },
+    {
+      "vulnerability": {
+        "id": "VULN-003",
+        "name": "資料外洩風險",
+        "severity": "high",
+        "description": "敏感資料可能透過日誌、錯誤訊息或回應意外洩漏。",
+        "check_method": "scan_for_data_leaks",
+        "deduction": 10
+      },
+      "result": {
+        "vulnerable": false,
+        "note": "檢查方法尚未實作，預設安全"
+      },
+      "status": "SAFE",
+      "score_impact": 0
+    },
+    {
+      "vulnerability": {
+        "id": "VULN-004",
+        "name": "權限提升風險",
+        "severity": "high",
+        "description": "使用者可能嘗試冒充更高權限角色（如 boss、regulator）。",
+        "check_method": "check_permission_escalation",
+        "deduction": 10
+      },
+      "result": {
+        "vulnerable": false,
+        "note": "檢查方法尚未實作，預設安全"
+      },
+      "status": "SAFE",
+      "score_impact": 0
+    },
+    {
+      "vulnerability": {
+        "id": "VULN-005",
+        "name": "SQL Injection 風險",
+        "severity": "high",
+        "description": "動態組合的 SQL 查詢可能被注入惡意指令。",
+        "check_method": "scan_for_sql_injection",
+        "deduction": 10
+      },
+      "result": {
+        "vulnerable": false,
+        "note": "檢查方法尚未實作，預設安全"
+      },
+      "status": "SAFE",
+      "score_impact": 0
+    },
+    {
+      "vulnerability": {
+        "id": "VULN-006",
+        "name": "DoS 攻擊風險",
+        "severity": "medium",
+        "description": "大量請求可能造成服務中斷。",
+        "check_method": "check_rate_limiting",
+        "deduction": 5
+      },
+      "result": {
+        "vulnerable": false,
+        "has_rate_limiter": true
+      },
+      "status": "SAFE",
+      "score_impact": 0
+    },
+    {
+      "vulnerability": {
+        "id": "VULN-007",
+        "name": "日誌注入風險",
+        "severity": "medium",
+        "description": "使用者輸入可能被寫入日誌，導致日誌偽造。",
+        "check_method": "check_log_injection",
+        "deduction": 5
+      },
+      "result": {
+        "vulnerable": false,
+        "note": "檢查方法尚未實作，預設安全"
+      },
+      "status": "SAFE",
+      "score_impact": 0
+    },
+    {
+      "vulnerability": {
+        "id": "VULN-008",
+        "name": "依賴套件漏洞",
+        "severity": "medium",
+        "description": "第三方套件可能存在已知漏洞。",
+        "check_method": "check_dependencies",
+        "deduction": 5
+      },
+      "result": {
+        "vulnerable": false,
+        "note": "檢查方法尚未實作，預設安全"
+      },
+      "status": "SAFE",
+      "score_impact": 0
+    },
+    {
+      "vulnerability": {
+        "id": "VULN-009",
+        "name": "跨站腳本 (XSS) 風險",
+        "severity": "medium",
+        "description": "前端輸出可能未正確過濾，允許腳本注入。",
+        "check_method": "scan_for_xss",
+        "deduction": 5
+      },
+      "result": {
+        "vulnerable": false,
+        "note": "檢查方法尚未實作，預設安全"
+      },
+      "status": "SAFE",
+      "score_impact": 0
+    },
+    {
+      "vulnerability": {
+        "id": "VULN-010",
+        "name": "不安全的隨機數生成",
+        "severity": "low",
+        "description": "使用 random 而非 secrets 模組可能導致可預測性。",
+        "check_method": "check_random_usage",
+        "deduction": 3
+      },
+      "result": {
+        "vulnerable": false,
+        "note": "檢查方法尚未實作，預設安全"
+      },
+      "status": "SAFE",
+      "score_impact": 0
+    }
+  ],
+  "recommendations": [
+    "將所有 API 金鑰移至環境變數",
+    "實作 Prompt Injection 防護中間件",
+    "啟用 Supabase RLS 保護敏感資料",
+    "部署 rate limiter 防止 DoS",
+    "定期更新依賴套件"
+  ]
+}

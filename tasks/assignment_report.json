@@ -1,0 +1,913 @@
+{
+  "metadata": {
+    "generated_at": "2026-02-15T14:25:12.253987",
+    "total_tasks": 100,
+    "total_legions": 15,
+    "assigner": "SEOBAIKE assign_tasks.py",
+    "patent": "TW-115100981"
+  },
+  "legion_summary": {
+    "NVIDIA": {
+      "total_assigned": 17,
+      "strength": "高效能推論與安全防護",
+      "specialties": [
+        "推論",
+        "安全檢查",
+        "影像分析",
+        "語音",
+        "GPU加速"
+      ],
+      "high_priority": 6,
+      "api_tasks": 16
+    },
+    "OpenAI": {
+      "total_assigned": 12,
+      "strength": "通用型語言理解與生成",
+      "specialties": [
+        "文本生成",
+        "摘要",
+        "對話",
+        "程式碼"
+      ],
+      "high_priority": 4,
+      "api_tasks": 9
+    },
+    "Perplexity": {
+      "total_assigned": 5,
+      "strength": "即時網路搜尋與資訊整合",
+      "specialties": [
+        "搜尋",
+        "即時資訊",
+        "研究"
+      ],
+      "high_priority": 3,
+      "api_tasks": 2
+    },
+    "Google": {
+      "total_assigned": 16,
+      "strength": "多模態理解與全球化翻譯",
+      "specialties": [
+        "翻譯",
+        "多模態",
+        "搜尋",
+        "分析"
+      ],
+      "high_priority": 6,
+      "api_tasks": 9
+    },
+    "DeepSeek": {
+      "total_assigned": 4,
+      "strength": "深度推理與程式碼生成",
+      "specialties": [
+        "程式碼",
+        "數學",
+        "推理"
+      ],
+      "high_priority": 2,
+      "api_tasks": 4
+    },
+    "Mistral": {
+      "total_assigned": 3,
+      "strength": "高效輕量模型與歐洲合規",
+      "specialties": [
+        "程式碼生成",
+        "歐洲語言",
+        "效率"
+      ],
+      "high_priority": 0,
+      "api_tasks": 1
+    },
+    "Groq": {
+      "total_assigned": 4,
+      "strength": "超低延遲推論加速",
+      "specialties": [
+        "高速推論",
+        "即時回應",
+        "低延遲"
+      ],
+      "high_priority": 1,
+      "api_tasks": 3
+    },
+    "Cohere": {
+      "total_assigned": 4,
+      "strength": "企業級搜尋與知識檢索",
+      "specialties": [
+        "企業搜尋",
+        "RAG",
+        "嵌入"
+      ],
+      "high_priority": 3,
+      "api_tasks": 4
+    },
+    "Together": {
+      "total_assigned": 5,
+      "strength": "開源模型託管與微調",
+      "specialties": [
+        "開源模型",
+        "微調",
+        "推論"
+      ],
+      "high_priority": 1,
+      "api_tasks": 5
+    },
+    "HuggingFace": {
+      "total_assigned": 6,
+      "strength": "全球最大模型生態系統",
+      "specialties": [
+        "模型庫",
+        "微調",
+        "推論",
+        "數據集"
+      ],
+      "high_priority": 2,
+      "api_tasks": 6
+    },
+    "Anthropic": {
+      "total_assigned": 4,
+      "strength": "安全對齊與長文本理解（已撤職備援）",
+      "specialties": [
+        "安全AI",
+        "長文本",
+        "分析"
+      ],
+      "high_priority": 0,
+      "api_tasks": 4
+    },
+    "Replicate": {
+      "total_assigned": 6,
+      "strength": "一鍵模型部署與影像生成",
+      "specialties": [
+        "影像生成",
+        "模型部署",
+        "API化"
+      ],
+      "high_priority": 1,
+      "api_tasks": 6
+    },
+    "Stability": {
+      "total_assigned": 9,
+      "strength": "Stable Diffusion 影像生成",
+      "specialties": [
+        "影像生成",
+        "設計",
+        "創意"
+      ],
+      "high_priority": 2,
+      "api_tasks": 9
+    },
+    "Claude": {
+      "total_assigned": 2,
+      "strength": "已撤職 — 僅備援角色",
+      "specialties": [
+        "文本生成",
+        "分析",
+        "程式碼"
+      ],
+      "high_priority": 0,
+      "api_tasks": 0
+    },
+    "Meta": {
+      "total_assigned": 3,
+      "strength": "Llama 開源多語言模型",
+      "specialties": [
+        "多語言",
+        "開源",
+        "翻譯"
+      ],
+      "high_priority": 2,
+      "api_tasks": 3
+    }
+  },
+  "assignments": {
+    "NVIDIA": [
+      {
+        "task_id": "8204eaea-d0c1-4be0-925b-76334a58c2d3",
+        "task_number": 3,
+        "description": "呼叫 NVIDIA Guardrails 安全檢查",
+        "priority": "high",
+        "assignment_reason": "專長匹配: NVIDIA (分數=2)"
+      },
+      {
+        "task_id": "1cc3a551-42a3-4daf-8e26-5e4c01e1b433",
+        "task_number": 9,
+        "description": "分析 旅遊觀光 供應鏈風險評估",
+        "priority": "medium",
+        "assignment_reason": "API 直接匹配: nvidia-guardrails → NVIDIA"
+      },
+      {
+        "task_id": "6e306d1d-9417-4a81-88fd-f43a4d860d02",
+        "task_number": 21,
+        "description": "執行 fintech-app.tw 技術 SEO 稽核",
+        "priority": "high",
+        "assignment_reason": "API 直接匹配: nvidia-nim → NVIDIA"
+      },
+      {
+        "task_id": "b53ba42b-913b-4c1a-946a-9f59620b082e",
+        "task_number": 29,
+        "description": "呼叫 Google Gemini 翻譯 自駕車技術",
+        "priority": "low",
+        "assignment_reason": "API 直接匹配: nvidia-riva → NVIDIA"
+      },
+      {
+        "task_id": "aa5b4c03-29ca-482d-b9fe-1530a3018fb7",
+        "task_number": 35,
+        "description": "生成 建築營建 社群媒體策略",
+        "priority": "medium",
+        "assignment_reason": "API 直接匹配: nvidia-riva → NVIDIA"
+      },
+      {
+        "task_id": "cbc53344-5625-4586-b9fd-13a60e424f21",
+        "task_number": 37,
+        "description": "呼叫 HuggingFace 模型推論",
+        "priority": "medium",
+        "assignment_reason": "API 直接匹配: nvidia-nim → NVIDIA"
+      },
+      {
+        "task_id": "c2d7f0aa-bfbf-4956-8eec-71de2bcf74b0",
+        "task_number": 45,
+        "description": "呼叫 Perplexity 搜尋 智慧城市規劃 最新資訊",
+        "priority": "high",
+        "assignment_reason": "API 直接匹配: nvidia-nim → NVIDIA"
+      },
+      {
+        "task_id": "aa664034-c5f4-4421-b86d-193d2e838a73",
+        "task_number": 46,
+        "description": "分析 fintech-app.tw 網站 SEO 健檢",
+        "priority": "high",
+        "assignment_reason": "API 直接匹配: nvidia-nim → NVIDIA"
+      },
+      {
+        "task_id": "edba4449-1758-40b2-b76f-c4f267192b1a",
+        "task_number": 47,
+        "description": "生成 遊戲娛樂 白皮書草稿",
+        "priority": "medium",
+        "assignment_reason": "API 直接匹配: nvidia-nim → NVIDIA"
+      },
+      {
+        "task_id": "e51df4cb-8347-4bb6-8393-0005678fa115",
+        "task_number": 52,
+        "description": "分析 aiforseo.vip 網站效能與速度",
+        "priority": "high",
+        "assignment_reason": "API 直接匹配: nvidia-guardrails → NVIDIA"
+      },
+      {
+        "task_id": "c2cb4c09-262e-490e-97d5-a7740c9f5050",
+        "task_number": 60,
+        "description": "生成 客戶行為預測 影片腳本",
+        "priority": "medium",
+        "assignment_reason": "API 直接匹配: nvidia-guardrails → NVIDIA"
+      },
+      {
+        "task_id": "775359aa-588d-460b-a79a-99264b29aff1",
+        "task_number": 68,
+        "description": "分析 不動產 市場趨勢預測",
+        "priority": "medium",
+        "assignment_reason": "API 直接匹配: nvidia-guardrails → NVIDIA"
+      },
+      {
+        "task_id": "66c06e1e-ded2-4852-b289-98d1db00ebe6",
+        "task_number": 76,
+        "description": "呼叫 HuggingFace 模型推論",
+        "priority": "low",
+        "assignment_reason": "API 直接匹配: nvidia-riva → NVIDIA"
+      },
+      {
+        "task_id": "93a44e1e-58dd-4c40-8c3c-bfe1fc4a9106",
+        "task_number": 88,
+        "description": "呼叫 Google Gemini 翻譯 品牌聲譽管理",
+        "priority": "high",
+        "assignment_reason": "API 直接匹配: nvidia-nim → NVIDIA"
+      },
+      {
+        "task_id": "c0a6aea9-07c5-4090-b922-0fe977ee8d1b",
+        "task_number": 93,
+        "description": "生成 媒體傳播 內容行事曆",
+        "priority": "low",
+        "assignment_reason": "API 直接匹配: nvidia-riva → NVIDIA"
+      },
+      {
+        "task_id": "d193b0f3-7301-4d67-ab3e-ac027e27a677",
+        "task_number": 95,
+        "description": "執行 example-client-a.com 行動端適配檢查",
+        "priority": "medium",
+        "assignment_reason": "API 直接匹配: nvidia-nim → NVIDIA"
+      },
+      {
+        "task_id": "e93cd921-ca8d-40ee-8e35-e6309e31f44e",
+        "task_number": 99,
+        "description": "呼叫 Perplexity 搜尋 智慧城市規劃 最新資訊",
+        "priority": "low",
+        "assignment_reason": "API 直接匹配: nvidia-guardrails → NVIDIA"
+      }
+    ],
+    "OpenAI": [
+      {
+        "task_id": "8ce6c5e4-1933-4474-8afe-994d29219a8c",
+        "task_number": 4,
+        "description": "呼叫 OpenAI GPT-4o 摘要 客戶行為預測",
+        "priority": "low",
+        "assignment_reason": "專長匹配: OpenAI (分數=2)"
+      },
+      {
+        "task_id": "eb38a390-b54c-45bd-8f5d-5ff248b0cf01",
+        "task_number": 5,
+        "description": "生成 區塊鏈 社群媒體策略",
+        "priority": "high",
+        "assignment_reason": "API 直接匹配: openai-gpt4o → OpenAI"
+      },
+      {
+        "task_id": "993fccdf-f808-4113-8769-7578cfd19b64",
+        "task_number": 14,
+        "description": "執行 fintech-app.tw 行動端適配檢查",
+        "priority": "medium",
+        "assignment_reason": "API 直接匹配: openai-gpt4o → OpenAI"
+      },
+      {
+        "task_id": "01019281-c278-4afb-ab13-8f9bcade46f6",
+        "task_number": 17,
+        "description": "分析 網路安全 供應鏈風險評估",
+        "priority": "low",
+        "assignment_reason": "API 直接匹配: openai-gpt4o → OpenAI"
+      },
+      {
+        "task_id": "44ffc8c4-6ee9-4ad5-b2bf-dc2284c5bbba",
+        "task_number": 19,
+        "description": "生成 醫療健康 電子報模板",
+        "priority": "medium",
+        "assignment_reason": "API 直接匹配: openai-gpt4o → OpenAI"
+      },
+      {
+        "task_id": "3dd5c05d-a30a-494b-b806-1729e60f8b91",
+        "task_number": 32,
+        "description": "生成 網路安全 產業分析報告",
+        "priority": "high",
+        "assignment_reason": "API 直接匹配: openai-gpt4o → OpenAI"
+      },
+      {
+        "task_id": "efd95224-d8b7-46b5-a023-9d557f24ac7a",
+        "task_number": 39,
+        "description": "呼叫 OpenAI GPT-4o 摘要 品牌聲譽管理",
+        "priority": "medium",
+        "assignment_reason": "專長匹配: OpenAI (分數=2)"
+      },
+      {
+        "task_id": "81788185-c4f4-4418-96c2-1d79e1801088",
+        "task_number": 40,
+        "description": "生成 SEO排名策略 影片腳本",
+        "priority": "low",
+        "assignment_reason": "API 直接匹配: openai-gpt4o → OpenAI"
+      },
+      {
+        "task_id": "a46e113c-6e20-42cc-961d-0a94cd0efa3b",
+        "task_number": 51,
+        "description": "呼叫 OpenAI GPT-4o 摘要 量子計算應用",
+        "priority": "high",
+        "assignment_reason": "專長匹配: OpenAI (分數=2)"
+      },
+      {
+        "task_id": "36b39ab7-1c1f-4ef3-87d6-60b9567e89ab",
+        "task_number": 55,
+        "description": "生成 餐飲服務 電子報模板",
+        "priority": "high",
+        "assignment_reason": "API 直接匹配: openai-gpt4o → OpenAI"
+      },
+      {
+        "task_id": "c5d76040-f18f-4c03-9b4d-8c9546f75178",
+        "task_number": 58,
+        "description": "分析 不動產 產業競爭對手",
+        "priority": "low",
+        "assignment_reason": "API 直接匹配: openai-gpt4o → OpenAI"
+      },
+      {
+        "task_id": "881675b6-ea91-4e5d-8a6c-1f2252a4878a",
+        "task_number": 73,
+        "description": "生成 區塊鏈 社群媒體策略",
+        "priority": "low",
+        "assignment_reason": "API 直接匹配: openai-gpt4o → OpenAI"
+      }
+    ],
+    "Perplexity": [
+      {
+        "task_id": "29d6b200-d4b2-4974-91b9-da066f7e94bf",
+        "task_number": 16,
+        "description": "執行 fintech-app.tw 行動端適配檢查",
+        "priority": "high",
+        "assignment_reason": "負載均衡分配: Perplexity (當前任務數=0)"
+      },
+      {
+        "task_id": "5097a613-d826-4a89-accb-ae5fef7d378b",
+        "task_number": 20,
+        "description": "生成 遊戲娛樂 關鍵字研究報告",
+        "priority": "high",
+        "assignment_reason": "專長匹配: Perplexity (分數=2)"
+      },
+      {
+        "task_id": "08c8c153-4a41-4619-a06e-de9d23544449",
+        "task_number": 30,
+        "description": "呼叫 Perplexity 搜尋 產業約束分析 最新資訊",
+        "priority": "high",
+        "assignment_reason": "API 直接匹配: perplexity → Perplexity"
+      },
+      {
+        "task_id": "7ef08508-764d-413b-ad9e-317dc5fb87dd",
+        "task_number": 50,
+        "description": "生成 內容生成優化 行銷文案",
+        "priority": "medium",
+        "assignment_reason": "API 直接匹配: perplexity → Perplexity"
+      },
+      {
+        "task_id": "8a09ffd2-a0ee-4f91-b0cf-1fbcf89650f3",
+        "task_number": 59,
+        "description": "生成 製造業 關鍵字研究報告",
+        "priority": "low",
+        "assignment_reason": "專長匹配: Perplexity (分數=2)"
+      }
+    ],
+    "Google": [
+      {
+        "task_id": "2dc22f5f-3a7e-4f5c-a238-4638d914a016",
+        "task_number": 2,
+        "description": "生成 半導體 產業分析報告",
+        "priority": "medium",
+        "assignment_reason": "專長匹配: Google (分數=2)"
+      },
+      {
+        "task_id": "f7df562a-d43f-4de5-afaa-5237b44a46c0",
+        "task_number": 10,
+        "description": "執行 medical-center.com 行動端適配檢查",
+        "priority": "high",
+        "assignment_reason": "API 直接匹配: google-gemini → Google"
+      },
+      {
+        "task_id": "b3125324-3df0-40b1-ae64-0896a82d3f33",
+        "task_number": 22,
+        "description": "分析 logistics-hub.tw 使用者行為數據",
+        "priority": "medium",
+        "assignment_reason": "專長匹配: Google (分數=2)"
+      },
+      {
+        "task_id": "59f16d77-e466-49e8-9a73-e06f2f2204d6",
+        "task_number": 26,
+        "description": "呼叫 HuggingFace 模型推論",
+        "priority": "low",
+        "assignment_reason": "API 直接匹配: google-gemini → Google"
+      },
+      {
+        "task_id": "0d9f4312-790a-4f3b-be4a-f50031b7d6dc",
+        "task_number": 34,
+        "description": "分析 fintech-app.tw 網站 SEO 健檢",
+        "priority": "high",
+        "assignment_reason": "API 直接匹配: google-gemini → Google"
+      },
+      {
+        "task_id": "e5171020-a424-476d-be98-cf80a85f1fb4",
+        "task_number": 36,
+        "description": "分析 網路安全 供應鏈風險評估",
+        "priority": "low",
+        "assignment_reason": "API 直接匹配: google-gemini → Google"
+      },
+      {
+        "task_id": "f6eb1e07-d1f4-4bd7-b806-8c95d8bed450",
+        "task_number": 38,
+        "description": "分析 ecommerce-shop.tw 使用者行為數據",
+        "priority": "medium",
+        "assignment_reason": "專長匹配: Google (分數=2)"
+      },
+      {
+        "task_id": "c8df42d0-93e7-441a-badf-584f8f99b405",
+        "task_number": 42,
+        "description": "生成 醫療健康 產業分析報告",
+        "priority": "high",
+        "assignment_reason": "API 直接匹配: google-gemini → Google"
+      },
+      {
+        "task_id": "5cb19874-0fbd-44db-880e-e6f1e3e712ea",
+        "task_number": 48,
+        "description": "分析 aiforseo.vip 網站 SEO 健檢",
+        "priority": "high",
+        "assignment_reason": "專長匹配: Google (分數=2)"
+      },
+      {
+        "task_id": "ae7dc7b9-94c8-470a-8de7-ea6fe79e0627",
+        "task_number": 49,
+        "description": "生成 電子商務 品牌定位分析",
+        "priority": "low",
+        "assignment_reason": "專長匹配: Google (分數=2)"
+      },
+      {
+        "task_id": "9691dca8-9c20-49f7-bdf6-e04ca933356e",
+        "task_number": 57,
+        "description": "呼叫 DeepSeek 程式碼審查",
+        "priority": "high",
+        "assignment_reason": "API 直接匹配: google-gemini → Google"
+      },
+      {
+        "task_id": "a115fbce-a067-43b1-9a45-1023e52545bd",
+        "task_number": 62,
+        "description": "生成 遊戲娛樂 電子報模板",
+        "priority": "low",
+        "assignment_reason": "API 直接匹配: google-gemini → Google"
+      },
+      {
+        "task_id": "928ba1ac-a1c3-4a13-a720-6a43733febfd",
+        "task_number": 64,
+        "description": "分析 遊戲娛樂 市場趨勢預測",
+        "priority": "medium",
+        "assignment_reason": "專長匹配: Google (分數=2)"
+      },
+      {
+        "task_id": "bb749224-7d9f-4c91-8f74-287723ec0cf9",
+        "task_number": 66,
+        "description": "執行 L1→L4 約束路徑檢查",
+        "priority": "medium",
+        "assignment_reason": "API 直接匹配: google-gemini → Google"
+      },
+      {
+        "task_id": "18c7af53-f6ec-4f9a-9999-8afdc3748244",
+        "task_number": 74,
+        "description": "生成 自駕車技術 行銷文案",
+        "priority": "medium",
+        "assignment_reason": "API 直接匹配: google-gemini → Google"
+      },
+      {
+        "task_id": "6e09126d-05e2-4930-92df-4195e2c7839f",
+        "task_number": 82,
+        "description": "執行 製造業 客戶情感分析",
+        "priority": "high",
+        "assignment_reason": "專長匹配: Google (分數=2)"
+      }
+    ],
+    "DeepSeek": [
+      {
+        "task_id": "2234b886-ce82-4c06-bd22-f5536aa24b17",
+        "task_number": 27,
+        "description": "執行 enterprise-corp.com 反向連結分析",
+        "priority": "low",
+        "assignment_reason": "API 直接匹配: deepseek → DeepSeek"
+      },
+      {
+        "task_id": "3d236e45-62d8-4354-a3ca-6eefecb2bc8a",
+        "task_number": 54,
+        "description": "生成 遊戲娛樂 社群媒體策略",
+        "priority": "high",
+        "assignment_reason": "API 直接匹配: deepseek → DeepSeek"
+      },
+      {
+        "task_id": "ecc7f6f1-ee68-4c75-8509-3b7ffb1aa28d",
+        "task_number": 85,
+        "description": "生成 金融科技 白皮書草稿",
+        "priority": "high",
+        "assignment_reason": "API 直接匹配: deepseek → DeepSeek"
+      },
+      {
+        "task_id": "f811a867-8bc1-42f5-b0a9-023b3559f06a",
+        "task_number": 90,
+        "description": "生成 不動產 白皮書草稿",
+        "priority": "low",
+        "assignment_reason": "API 直接匹配: deepseek → DeepSeek"
+      }
+    ],
+    "Mistral": [
+      {
+        "task_id": "a094c029-eaa2-46b7-a0cf-585b99f41316",
+        "task_number": 15,
+        "description": "呼叫 Meta Llama 多語言翻譯",
+        "priority": "medium",
+        "assignment_reason": "API 直接匹配: mistral → Mistral"
+      },
+      {
+        "task_id": "95eb7cdf-85b9-42e5-a783-814cc2d7845f",
+        "task_number": 84,
+        "description": "生成 教育科技 內容行事曆",
+        "priority": "medium",
+        "assignment_reason": "負載均衡分配: Mistral (當前任務數=1)"
+      },
+      {
+        "task_id": "da49b6ac-c3e5-4b79-9435-3a11c22ff9db",
+        "task_number": 94,
+        "description": "生成 example-client-b.com 結構化資料標記",
+        "priority": "medium",
+        "assignment_reason": "負載均衡分配: Mistral (當前任務數=2)"
+      }
+    ],
+    "Groq": [
+      {
+        "task_id": "ab791a1c-520b-496c-bccb-92ce95d5ca73",
+        "task_number": 33,
+        "description": "生成 農業科技 內容行事曆",
+        "priority": "high",
+        "assignment_reason": "負載均衡分配: Groq (當前任務數=0)"
+      },
+      {
+        "task_id": "09e0f706-1cbf-4ef9-81f1-62afdf8639c4",
+        "task_number": 65,
+        "description": "生成 法律科技 內容行事曆",
+        "priority": "medium",
+        "assignment_reason": "API 直接匹配: groq → Groq"
+      },
+      {
+        "task_id": "6ed4177d-c5a9-4a57-9fc0-99572c671e3b",
+        "task_number": 78,
+        "description": "分析 example-client-a.com 使用者行為數據",
+        "priority": "medium",
+        "assignment_reason": "API 直接匹配: groq → Groq"
+      },
+      {
+        "task_id": "2b2cf7b1-317f-4ff6-a4cd-6548b1e12c4e",
+        "task_number": 91,
+        "description": "生成 教育科技 品牌定位分析",
+        "priority": "medium",
+        "assignment_reason": "API 直接匹配: groq → Groq"
+      }
+    ],
+    "Cohere": [
+      {
+        "task_id": "17628e7b-c9d5-4327-8d4a-2ceecf5d3054",
+        "task_number": 13,
+        "description": "執行 教育科技 客戶情感分析",
+        "priority": "high",
+        "assignment_reason": "API 直接匹配: cohere → Cohere"
+      },
+      {
+        "task_id": "ff61e87f-4b69-46f1-879a-a070db35b9ef",
+        "task_number": 43,
+        "description": "呼叫 NVIDIA Guardrails 安全檢查",
+        "priority": "high",
+        "assignment_reason": "API 直接匹配: cohere → Cohere"
+      },
+      {
+        "task_id": "15d5c15b-0765-42ca-b71e-7299dc5efd95",
+        "task_number": 67,
+        "description": "生成 醫療健康 品牌定位分析",
+        "priority": "medium",
+        "assignment_reason": "API 直接匹配: cohere → Cohere"
+      },
+      {
+        "task_id": "c18e405b-fc07-4524-b4d4-be277547a971",
+        "task_number": 100,
+        "description": "生成 碳排放追蹤 影片腳本",
+        "priority": "high",
+        "assignment_reason": "API 直接匹配: cohere → Cohere"
+      }
+    ],
+    "Together": [
+      {
+        "task_id": "6bf8d561-95a6-416a-b940-4776cb3df132",
+        "task_number": 1,
+        "description": "執行 edu-platform.com 技術 SEO 稽核",
+        "priority": "low",
+        "assignment_reason": "API 直接匹配: together-ai → Together"
+      },
+      {
+        "task_id": "460b2393-313b-45fe-8d4a-a35e186d353b",
+        "task_number": 18,
+        "description": "呼叫 NVIDIA NIM API 推論 產業約束分析",
+        "priority": "low",
+        "assignment_reason": "API 直接匹配: together-ai → Together"
+      },
+      {
+        "task_id": "dd51e07a-ed32-4c1d-bc43-cb3efa3f68f8",
+        "task_number": 70,
+        "description": "執行 aiforseo.vip 行動端適配檢查",
+        "priority": "medium",
+        "assignment_reason": "API 直接匹配: together-ai → Together"
+      },
+      {
+        "task_id": "2316ae60-6245-48ac-bce4-ebbd1d9ee1c9",
+        "task_number": 75,
+        "description": "生成 醫療健康 白皮書草稿",
+        "priority": "medium",
+        "assignment_reason": "API 直接匹配: together-ai → Together"
+      },
+      {
+        "task_id": "64763b47-28d0-4ace-953f-fcf2860cce79",
+        "task_number": 98,
+        "description": "執行 startup-demo.tw 技術 SEO 稽核",
+        "priority": "high",
+        "assignment_reason": "API 直接匹配: together-ai → Together"
+      }
+    ],
+    "HuggingFace": [
+      {
+        "task_id": "b24f6a5f-e216-4b88-bf5b-87193b28e270",
+        "task_number": 6,
+        "description": "生成 電子商務 品牌定位分析",
+        "priority": "high",
+        "assignment_reason": "API 直接匹配: huggingface → HuggingFace"
+      },
+      {
+        "task_id": "ec8d8654-bfb1-43ac-991f-6101cddb9b21",
+        "task_number": 23,
+        "description": "呼叫 NVIDIA NIM API 推論 智慧城市規劃",
+        "priority": "medium",
+        "assignment_reason": "API 直接匹配: huggingface → HuggingFace"
+      },
+      {
+        "task_id": "27afa68b-986d-4822-95e0-deaac710c3ed",
+        "task_number": 28,
+        "description": "生成 物流運輸 內容行事曆",
+        "priority": "medium",
+        "assignment_reason": "API 直接匹配: huggingface → HuggingFace"
+      },
+      {
+        "task_id": "2e69c8be-bcfc-4ac4-8006-6ab6f64756be",
+        "task_number": 72,
+        "description": "分析 半導體 產業競爭對手",
+        "priority": "medium",
+        "assignment_reason": "API 直接匹配: huggingface → HuggingFace"
+      },
+      {
+        "task_id": "132f8b0e-5a65-4ced-87e9-802062cdb611",
+        "task_number": 80,
+        "description": "呼叫 NVIDIA Guardrails 安全檢查",
+        "priority": "high",
+        "assignment_reason": "API 直接匹配: huggingface → HuggingFace"
+      },
+      {
+        "task_id": "1b00b11b-214e-4bd8-8148-ac863560cc0e",
+        "task_number": 92,
+        "description": "呼叫 Perplexity 搜尋 量子計算應用 最新資訊",
+        "priority": "medium",
+        "assignment_reason": "API 直接匹配: huggingface → HuggingFace"
+      }
+    ],
+    "Anthropic": [
+      {
+        "task_id": "a5e1530b-eda9-48d2-b7b2-8099a9b9d03c",
+        "task_number": 31,
+        "description": "生成 多語言本地化 行銷文案",
+        "priority": "medium",
+        "assignment_reason": "API 直接匹配: anthropic-claude → Anthropic"
+      },
+      {
+        "task_id": "5524efc5-ec1b-475c-9838-972e2d02bee4",
+        "task_number": 63,
+        "description": "執行 餐飲服務 客戶情感分析",
+        "priority": "medium",
+        "assignment_reason": "API 直接匹配: anthropic-claude → Anthropic"
+      },
+      {
+        "task_id": "8feef50b-c0f9-403c-ba6c-2650211fe8c0",
+        "task_number": 86,
+        "description": "生成 農業科技 電子報模板",
+        "priority": "low",
+        "assignment_reason": "API 直接匹配: anthropic-claude → Anthropic"
+      },
+      {
+        "task_id": "45166496-0926-4907-9f30-97da45501931",
+        "task_number": 96,
+        "description": "執行 enterprise-corp.com 反向連結分析",
+        "priority": "low",
+        "assignment_reason": "API 直接匹配: anthropic-claude → Anthropic"
+      }
+    ],
+    "Replicate": [
+      {
+        "task_id": "6f565438-6928-4f12-95ba-5d97337f2818",
+        "task_number": 7,
+        "description": "生成 SEO排名策略 行銷文案",
+        "priority": "low",
+        "assignment_reason": "API 直接匹配: replicate → Replicate"
+      },
+      {
+        "task_id": "8988b35a-eb85-491a-a92a-4af27c1dca7f",
+        "task_number": 25,
+        "description": "生成 保險科技 電子報模板",
+        "priority": "medium",
+        "assignment_reason": "API 直接匹配: replicate → Replicate"
+      },
+      {
+        "task_id": "ec792ddd-2f25-4d5b-b06a-69e1e3ece7b6",
+        "task_number": 41,
+        "description": "分析 半導體 供應鏈風險評估",
+        "priority": "low",
+        "assignment_reason": "API 直接匹配: replicate → Replicate"
+      },
+      {
+        "task_id": "47bcde41-4da9-407c-bea3-9d85ef78a60a",
+        "task_number": 83,
+        "description": "執行 medical-center.com 反向連結分析",
+        "priority": "low",
+        "assignment_reason": "API 直接匹配: replicate → Replicate"
+      },
+      {
+        "task_id": "475756c7-25a8-479f-b2cf-697f83fa72ea",
+        "task_number": 89,
+        "description": "生成 零售業 電子報模板",
+        "priority": "high",
+        "assignment_reason": "API 直接匹配: replicate → Replicate"
+      },
+      {
+        "task_id": "36b12be3-4bc5-4b45-b18b-926e9d765b4a",
+        "task_number": 97,
+        "description": "呼叫 Perplexity 搜尋 精準醫療 最新資訊",
+        "priority": "low",
+        "assignment_reason": "API 直接匹配: replicate → Replicate"
+      }
+    ],
+    "Stability": [
+      {
+        "task_id": "a5905489-9c6a-406a-941a-17f0060fc532",
+        "task_number": 8,
+        "description": "生成 區塊鏈 白皮書草稿",
+        "priority": "medium",
+        "assignment_reason": "API 直接匹配: stability-ai → Stability"
+      },
+      {
+        "task_id": "2f3ffe7b-8d54-416f-beb4-c20998685139",
+        "task_number": 11,
+        "description": "執行 區塊鏈 客戶情感分析",
+        "priority": "high",
+        "assignment_reason": "API 直接匹配: stability-ai → Stability"
+      },
+      {
+        "task_id": "332cf87c-6c63-402a-a155-a557b7b5a1cc",
+        "task_number": 12,
+        "description": "生成 媒體傳播 電子報模板",
+        "priority": "low",
+        "assignment_reason": "API 直接匹配: stability-ai → Stability"
+      },
+      {
+        "task_id": "a9897ec0-a620-43d8-bec2-da8e616f9743",
+        "task_number": 24,
+        "description": "呼叫 OpenAI GPT-4o 摘要 碳排放追蹤",
+        "priority": "medium",
+        "assignment_reason": "API 直接匹配: stability-ai → Stability"
+      },
+      {
+        "task_id": "8400b788-be10-486f-9b0b-7c6eaadc4a6e",
+        "task_number": 53,
+        "description": "分析 教育科技 市場趨勢預測",
+        "priority": "medium",
+        "assignment_reason": "API 直接匹配: stability-ai → Stability"
+      },
+      {
+        "task_id": "2898dec0-b26a-4419-a4fe-9f102259a1eb",
+        "task_number": 56,
+        "description": "呼叫 OpenAI GPT-4o 摘要 元宇宙策略",
+        "priority": "medium",
+        "assignment_reason": "API 直接匹配: stability-ai → Stability"
+      },
+      {
+        "task_id": "29609249-a1c6-454e-8649-fd73382978ee",
+        "task_number": 61,
+        "description": "生成 品牌聲譽管理 行銷文案",
+        "priority": "high",
+        "assignment_reason": "API 直接匹配: stability-ai → Stability"
+      },
+      {
+        "task_id": "85abcc3e-e323-4a90-8c55-f4fb11b7f4ed",
+        "task_number": 69,
+        "description": "呼叫 Meta Llama 多語言翻譯",
+        "priority": "low",
+        "assignment_reason": "API 直接匹配: stability-ai → Stability"
+      },
+      {
+        "task_id": "f75f35e9-ec9b-43f8-af0b-15b29a68e68e",
+        "task_number": 71,
+        "description": "生成 客戶行為預測 行銷文案",
+        "priority": "medium",
+        "assignment_reason": "API 直接匹配: stability-ai → Stability"
+      }
+    ],
+    "Claude": [
+      {
+        "task_id": "02010a00-19a6-4199-83b5-6f0b8423f87b",
+        "task_number": 81,
+        "description": "生成 供應鏈數位化 影片腳本",
+        "priority": "medium",
+        "assignment_reason": "負載均衡分配: Claude (當前任務數=0)"
+      },
+      {
+        "task_id": "eed93bed-c539-4371-9a80-340a4db1a403",
+        "task_number": 87,
+        "description": "生成 教育科技 內容行事曆",
+        "priority": "medium",
+        "assignment_reason": "負載均衡分配: Claude (當前任務數=1)"
+      }
+    ],
+    "Meta": [
+      {
+        "task_id": "574c6667-4bf9-4893-85eb-aeff9ca9ccb7",
+        "task_number": 44,
+        "description": "呼叫 OpenAI GPT-4o 摘要 智慧城市規劃",
+        "priority": "high",
+        "assignment_reason": "API 直接匹配: meta-llama → Meta"
+      },
+      {
+        "task_id": "f693c31e-8193-427b-a122-2fe0ab70eb18",
+        "task_number": 77,
+        "description": "生成 教育科技 社群媒體策略",
+        "priority": "low",
+        "assignment_reason": "API 直接匹配: meta-llama → Meta"
+      },
+      {
+        "task_id": "cdf7b071-7746-45c8-a53e-86cfe726edf7",
+        "task_number": 79,
+        "description": "生成 遊戲娛樂 品牌定位分析",
+        "priority": "high",
+        "assignment_reason": "API 直接匹配: meta-llama → Meta"
+      }
+    ]
+  }
+}

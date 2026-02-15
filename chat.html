@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SEOBAIKE — AI 對話 | 創辦人專線</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Segoe UI', sans-serif; background: #1a1a2e; color: #eee; height: 100vh; display: flex; flex-direction: column; }
+.header { background: linear-gradient(135deg, #76b900, #1a1a2e); padding: 14px 24px; display: flex; align-items: center; gap: 12px; flex-shrink: 0; }
+.header h1 { font-size: 20px; color: #fff; }
+.header .badge { background: #76b900; color: #000; padding: 4px 10px; border-radius: 12px; font-size: 12px; font-weight: bold; }
+.main { flex: 1; display: flex; overflow: hidden; }
+.dashboard { width: 320px; background: #16213e; border-right: 1px solid #333; overflow-y: auto; padding: 16px; flex-shrink: 0; }
+.dashboard h2 { font-size: 14px; color: #76b900; margin-bottom: 12px; }
+.stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 16px; }
+.stat-card { background: #1a1a2e; border: 1px solid #333; border-radius: 10px; padding: 10px; text-align: center; }
+.stat-card .num { font-size: 22px; font-weight: bold; color: #76b900; }
+.stat-card .lbl { font-size: 11px; color: #999; margin-top: 2px; }
+.stat-wide { background: #1a1a2e; border: 1px solid #333; border-radius: 10px; padding: 10px; margin-bottom: 8px; }
+.stat-wide .row { display: flex; justify-content: space-between; font-size: 13px; padding: 3px 0; }
+.stat-wide .row .k { color: #999; }
+.stat-wide .row .v { color: #eee; font-weight: bold; }
+.stat-wide h3 { font-size: 12px; color: #e8850c; margin-bottom: 6px; }
+.chat-area { flex: 1; display: flex; flex-direction: column; }
+.chat { flex: 1; overflow-y: auto; padding: 20px; display: flex; flex-direction: column; gap: 12px; }
+.msg { max-width: 85%; padding: 12px 16px; border-radius: 16px; line-height: 1.6; font-size: 15px; white-space: pre-wrap; }
+.msg.user { align-self: flex-end; background: #e8850c; color: #fff; border-bottom-right-radius: 4px; }
+.msg.ai { align-self: flex-start; background: #2a2a4a; color: #eee; border-bottom-left-radius: 4px; }
+.msg.ai .label { color: #76b900; font-weight: bold; font-size: 12px; margin-bottom: 4px; }
+.msg.error { background: #4a1a1a; color: #ff6b6b; }
+.input-area { padding: 14px 20px; background: #16213e; display: flex; gap: 10px; flex-shrink: 0; }
+.input-area input { flex: 1; padding: 12px 18px; border-radius: 24px; border: 1px solid #333; background: #1a1a2e; color: #eee; font-size: 15px; outline: none; }
+.input-area input:focus { border-color: #76b900; }
+.input-area button { padding: 12px 24px; border-radius: 24px; border: none; background: #76b900; color: #000; font-weight: bold; font-size: 15px; cursor: pointer; }
+.input-area button:hover { background: #8ed100; }
+.input-area button:disabled { background: #444; color: #888; cursor: not-allowed; }
+.typing { color: #76b900; font-style: italic; padding: 8px 16px; }
+.live-dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: #76b900; animation: pulse 1.5s infinite; margin-right: 6px; }
+@keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.3; } }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>SEOBAIKE</h1>
+  <span class="badge">SEOBAIKE AI</span>
+  <span class="badge" style="background:#cc785c;">專利引擎</span>
+  <span class="badge" style="background:#e8850c;">創辦人專線</span>
+  <span class="badge" style="background:#333;color:#76b900;"><span class="live-dot"></span>全系統運行中</span>
+</div>
+
+<div class="main">
+  <div class="dashboard" id="dashboard">
+    <h2>即時儀錶板</h2>
+    <div class="stat-grid" id="statGrid">
+      <div class="stat-card"><div class="num" id="s-l1">--</div><div class="lbl">L1 產業</div></div>
+      <div class="stat-card"><div class="num" id="s-l2">--</div><div class="lbl">L2 次產業</div></div>
+      <div class="stat-card"><div class="num" id="s-l3">--</div><div class="lbl">L3 製程</div></div>
+      <div class="stat-card"><div class="num" id="s-l4">--</div><div class="lbl">L4 節點</div></div>
+      <div class="stat-card"><div class="num" id="s-checks">--</div><div class="lbl">路徑檢查</div></div>
+      <div class="stat-card"><div class="num" id="s-audit">--</div><div class="lbl">稽核記錄</div></div>
+    </div>
+    <div class="stat-wide">
+      <h3>約束規則</h3>
+      <div class="row"><span class="k">總規則</span><span class="v" id="s-paths">--</span></div>
+      <div class="row"><span class="k">Allow</span><span class="v" style="color:#76b900" id="s-allow">--</span></div>
+      <div class="row"><span class="k">Deny</span><span class="v" style="color:#ff6b6b" id="s-deny">--</span></div>
+    </div>
+    <div class="stat-wide">
+      <h3>客戶綁定</h3>
+      <div id="bindingList"><span class="k">載入中...</span></div>
+    </div>
+    <div class="stat-wide">
+      <h3>Allow 行業</h3>
+      <div id="allowList"><span class="k">載入中...</span></div>
+    </div>
+    <div style="text-align:center;margin-top:12px;"><span style="font-size:11px;color:#555;">每次對話自動更新</span></div>
+  </div>
+
+  <div class="chat-area">
+    <div class="chat" id="chat">
+      <div class="msg ai">
+        <div class="label">SEOBAIKE 雙霸主引擎</div>
+        老闆好！SEOBAIKE AI 引擎已上線，搭配專利約束系統 L1→L4 真實數據。請說話。
+      </div>
+    </div>
+    <div class="input-area">
+      <input type="text" id="input" placeholder="直接跟輝達說話..." autofocus />
+      <button id="send" onclick="sendMsg()">送出</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const ENDPOINT = "https://vmyrivxxibqydccurxug.supabase.co/functions/v1/nvidia-boss";
+const ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZteXJpdnh4aWJxeWRjY3VyeHVnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzAwNDAwMjksImV4cCI6MjA4NTYxNjAyOX0.iBV-23LGdm_uKffAExgqSV34-NWoAyv8_-M_cJQZ8Gg";
+
+const chat = document.getElementById("chat");
+const input = document.getElementById("input");
+const sendBtn = document.getElementById("send");
+
+input.addEventListener("keydown", e => { if (e.key === "Enter" && !sendBtn.disabled) sendMsg(); });
+
+function updateDashboard(rd) {
+  if (!rd) return;
+  document.getElementById("s-l1").textContent = rd.l1_count || 0;
+  document.getElementById("s-l2").textContent = rd.l2_count || 0;
+  document.getElementById("s-l3").textContent = rd.l3_count || 0;
+  document.getElementById("s-l4").textContent = rd.l4_count || 0;
+  document.getElementById("s-checks").textContent = rd.total_path_checks || 0;
+  document.getElementById("s-audit").textContent = rd.total_audit_entries || 0;
+  document.getElementById("s-paths").textContent = rd.total_paths || 0;
+  document.getElementById("s-allow").textContent = rd.allow_paths || 0;
+  document.getElementById("s-deny").textContent = rd.deny_paths || 0;
+
+  const bl = document.getElementById("bindingList");
+  if (rd.bindings_detail && rd.bindings_detail.length > 0) {
+    bl.innerHTML = rd.bindings_detail.map(b =>
+      '<div class="row"><span class="k">' + (b.platform||"") + ":" + (b.user||"") + '</span><span class="v">' + (b.industry||"") + '</span></div>'
+    ).join("");
+  } else {
+    bl.innerHTML = '<span class="k">無綁定</span>';
+  }
+
+  const al = document.getElementById("allowList");
+  if (rd.allow_industries && rd.allow_industries.length > 0) {
+    al.innerHTML = rd.allow_industries.map(a =>
+      '<div style="font-size:12px;color:#76b900;padding:2px 0;">' + a + '</div>'
+    ).join("");
+  }
+}
+
+async function sendMsg() {
+  const text = input.value.trim();
+  if (!text) return;
+
+  const userDiv = document.createElement("div");
+  userDiv.className = "msg user";
+  userDiv.textContent = text;
+  chat.appendChild(userDiv);
+  input.value = "";
+  sendBtn.disabled = true;
+
+  const typing = document.createElement("div");
+  typing.className = "typing";
+  typing.textContent = "SEOBAIKE AI 思考中...";
+  chat.appendChild(typing);
+  chat.scrollTop = chat.scrollHeight;
+
+  try {
+    const res = await fetch(ENDPOINT, {
+      method: "POST",
+      headers: {
+        "Authorization": "Bearer " + ANON_KEY,
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ message: text })
+    });
+    const data = await res.json();
+    typing.remove();
+
+    if (data.real_data) updateDashboard(data.real_data);
+
+    const aiDiv = document.createElement("div");
+    if (data.reply) {
+      aiDiv.className = "msg ai";
+      aiDiv.innerHTML = '<div class="label">SEOBAIKE AI</div>' + escapeHtml(data.reply);
+    } else {
+      aiDiv.className = "msg error";
+      aiDiv.textContent = JSON.stringify(data);
+    }
+    chat.appendChild(aiDiv);
+  } catch (err) {
+    typing.remove();
+    const errDiv = document.createElement("div");
+    errDiv.className = "msg error";
+    errDiv.textContent = "連線錯誤: " + err.message;
+    chat.appendChild(errDiv);
+  }
+
+  sendBtn.disabled = false;
+  input.focus();
+  chat.scrollTop = chat.scrollHeight;
+}
+
+function escapeHtml(str) {
+  return str.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/\n/g,"<br>");
+}
+
+// Auto-load dashboard on page load
+(async function() {
+  try {
+    const res = await fetch(ENDPOINT, {
+      method: "POST",
+      headers: { "Authorization": "Bearer " + ANON_KEY, "Content-Type": "application/json" },
+      body: JSON.stringify({ message: "初始化" })
+    });
+    const data = await res.json();
+    if (data.real_data) updateDashboard(data.real_data);
+  } catch(e) {}
+})();
+</script>
+</body>
+</html>

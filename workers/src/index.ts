@@ -39,9 +39,21 @@ export default {
     const url = new URL(request.url)
     const path = url.pathname
 
-    // ── 非 /api/ 路徑 → 直接跳過（Lovable/Framer 處理） ──
+    // ── 非 /api/ 路徑 → 代理到 Cloudflare Pages（Framer SPA） ──
     if (!path.startsWith('/api/') && path !== '/api') {
-      return fetch(request)
+      const pagesUrl = new URL(request.url)
+      pagesUrl.hostname = 'seobaike-site.pages.dev'
+      const pagesRes = await fetch(pagesUrl.toString(), {
+        method: request.method,
+        headers: request.headers,
+        redirect: 'follow',
+      })
+      const res = new Response(pagesRes.body, pagesRes)
+      // 注入安全標頭
+      for (const [k, v] of Object.entries(SITE_SECURITY_HEADERS)) {
+        res.headers.set(k, v)
+      }
+      return res
     }
 
     // CORS preflight — API 路徑統一處理

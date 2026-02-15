@@ -3,10 +3,9 @@ main = "src/index.ts"
 compatibility_date = "2024-01-01"
 workers_dev = true
 
-# API 路徑走 Worker（含 Pages 代理），其他走 Lovable/Framer
-routes = [
-  { pattern = "aiforseo.vip/api/*", zone_name = "aiforseo.vip" }
-]
+# Worker Custom Domain: aiforseo.vip + www.aiforseo.vip + api.aiforseo.vip
+# 所有流量由 Worker 處理：API 路徑 → Worker 邏輯，其他 → 代理到 Pages
+# routes 已由 Custom Domain 取代，無需手動設定
 
 # KV for rate limiting (MVP: disabled, rate-limiter gracefully handles undefined KV)
 # [[kv_namespaces]]
