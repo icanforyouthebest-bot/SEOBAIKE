@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>合規中心 — SEOBAIKE</title>
-  <meta name="description" content="SEOBAIKE 合規中心：所有政府機關需要的資料，一次備齊。公司登記、稅務、個資保護、智財等合規文件一鍵匯出。">
+  <title>合規中心 — SEOBAIKE | 小路光有限公司</title>
+  <meta name="description" content="SEOBAIKE 合規中心：法律先行，安全至上。個資保護、金融合規、消費者保護、反洗錢、跨國法規全面覆蓋。">
   <meta property="og:title" content="合規中心 — SEOBAIKE">
-  <meta property="og:description" content="所有政府機關需要的資料，一次備齊。">
+  <meta property="og:description" content="法律先行，安全至上。SEOBAIKE 合規中心。">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://aiforseo.vip/compliance">
   <meta property="og:image" content="/og-image.png">
@@ -16,1526 +16,521 @@
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="/favicon.svg">
   <link rel="manifest" href="/manifest.json">
+  <link rel="stylesheet" href="/assets/design-system.css">
   <style>
-    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-
-    :root {
-      --orange: #e8850c;
-      --orange-hover: #d4780a;
-      --orange-light: #f5a623;
-      --orange-glow: rgba(232, 133, 12, 0.15);
-      --orange-glow-strong: rgba(232, 133, 12, 0.25);
-      --copper: #cc785c;
-      --bg: #0a0a1a;
-      --bg-card: #12122a;
-      --bg-warm: rgba(232, 133, 12, 0.03);
-      --border: #2a2a4a;
-      --border-light: #3a3a5a;
-      --text: #e0e0e8;
-      --text-muted: #8888aa;
-      --text-bright: #ffffff;
-      --radius: 16px;
-      --green: #28c840;
-      --yellow: #febc2e;
-      --red: #ff5f57;
-    }
-
-    html { scroll-behavior: smooth; }
-
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans TC", sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      line-height: 1.7;
-      overflow-x: hidden;
-    }
-
-    a { color: var(--orange); text-decoration: none; transition: color 0.2s; }
-    a:hover { color: var(--copper); }
-
-    .container { max-width: 1140px; margin: 0 auto; padding: 0 24px; }
-
-    /* ========== Navigation ========== */
-    nav {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 16px 40px;
-      border-bottom: 1px solid var(--border);
-      background: rgba(10, 10, 26, 0.85);
-      backdrop-filter: blur(16px);
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      z-index: 1000;
-    }
-    .nav-logo {
-      font-size: 1.4rem;
-      font-weight: 800;
-      letter-spacing: -0.5px;
-      color: #fff;
-    }
-    .nav-logo span { color: var(--orange); }
-    .nav-links { display: flex; gap: 28px; list-style: none; align-items: center; }
-    .nav-links a {
-      color: var(--text-muted);
-      font-size: 0.92rem;
-      font-weight: 500;
-      transition: color 0.2s;
-    }
-    .nav-links a:hover { color: #fff; }
-    .nav-links .btn-nav {
-      padding: 8px 20px;
-      background: var(--orange);
-      color: #fff;
-      border-radius: 8px;
-      font-weight: 600;
-    }
-    .nav-links .btn-nav:hover { background: var(--orange-hover); color: #fff; }
-    .nav-hamburger {
-      display: none;
-      flex-direction: column;
-      gap: 5px;
-      cursor: pointer;
-      background: none;
-      border: none;
-      padding: 4px;
-    }
-    .nav-hamburger span {
-      display: block;
-      width: 24px;
-      height: 2px;
-      background: var(--text);
-      border-radius: 2px;
-      transition: 0.3s;
-    }
-
-    /* ========== Access Gate ========== */
-    .access-gate {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: var(--bg);
-      z-index: 9999;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 20px;
-      padding: 24px;
-    }
-    .access-gate.hidden { display: none; }
-    .access-gate h2 {
-      font-size: 2rem;
-      font-weight: 900;
-      color: var(--text-bright);
-    }
-    .access-gate p {
-      color: var(--text-muted);
-      font-size: 1rem;
-      margin-bottom: 8px;
-    }
-    .access-gate input {
-      padding: 14px 24px;
-      font-size: 1rem;
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      background: var(--bg-card);
-      color: var(--text-bright);
-      width: 320px;
-      max-width: 100%;
-      text-align: center;
-      outline: none;
-      transition: border-color 0.3s;
-    }
-    .access-gate input:focus { border-color: var(--orange); }
-    .access-gate button {
-      padding: 14px 40px;
-      font-size: 1rem;
-      font-weight: 700;
-      border: none;
-      border-radius: 12px;
-      background: var(--orange);
-      color: #fff;
-      cursor: pointer;
-      transition: background 0.2s, transform 0.2s;
-    }
-    .access-gate button:hover { background: var(--orange-hover); transform: translateY(-2px); }
-    .access-gate .error-msg {
-      color: var(--red);
-      font-size: 0.88rem;
-      min-height: 1.4em;
-    }
-
-    /* ========== Hero ========== */
+    /* ── Compliance Page ── */
     .compliance-hero {
-      padding-top: 140px;
-      padding-bottom: 60px;
+      padding: 140px 0 80px;
       text-align: center;
       position: relative;
       overflow: hidden;
+      background: linear-gradient(180deg, var(--bg-secondary) 0%, var(--bg-primary) 100%);
     }
     .compliance-hero::before {
       content: '';
       position: absolute;
-      top: -80px;
+      top: 20px;
       left: 50%;
       transform: translateX(-50%);
       width: 800px;
       height: 800px;
-      background: radial-gradient(circle, var(--orange-glow) 0%, transparent 60%);
+      background: radial-gradient(circle, rgba(232,133,12,0.06) 0%, transparent 60%);
       pointer-events: none;
     }
-    .compliance-hero h1 {
-      font-size: 3.2rem;
-      font-weight: 900;
-      color: var(--text-bright);
-      letter-spacing: -1.5px;
-      margin-bottom: 12px;
-    }
+    .compliance-hero h1 { margin-bottom: var(--sp-3); }
     .compliance-hero .subtitle {
-      font-size: 1.2rem;
+      font-size: 1.15rem;
       color: var(--text-muted);
-      margin-bottom: 40px;
+      max-width: 520px;
+      margin: 0 auto var(--sp-6);
     }
-
-    /* Company Info Card */
-    .company-card {
+    .company-info {
       display: inline-grid;
       grid-template-columns: 1fr 1fr;
-      gap: 16px 40px;
+      gap: 12px 40px;
       background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 32px 48px;
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      padding: var(--sp-8) var(--sp-10);
       text-align: left;
     }
-    .company-card .item {
-      display: flex;
-      flex-direction: column;
-    }
-    .company-card .label {
-      font-size: 0.78rem;
+    .company-info .ci-label {
+      font-size: 0.72rem;
       color: var(--text-muted);
       text-transform: uppercase;
-      letter-spacing: 1px;
-      font-weight: 600;
-      margin-bottom: 4px;
-    }
-    .company-card .value {
-      font-size: 1.1rem;
+      letter-spacing: 1.5px;
       font-weight: 700;
-      color: var(--text-bright);
+      margin-bottom: 2px;
     }
-    .company-card .value.orange { color: var(--orange); }
-
-    /* ========== Score Section ========== */
-    .score-section {
-      padding: 40px 0 60px;
-    }
-    .score-grid {
-      display: grid;
-      grid-template-columns: 260px 1fr;
-      gap: 40px;
-      align-items: center;
-    }
-    .score-circle-wrap {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 12px;
-    }
-    .score-circle {
-      position: relative;
-      width: 200px;
-      height: 200px;
-    }
-    .score-circle svg {
-      transform: rotate(-90deg);
-      width: 200px;
-      height: 200px;
-    }
-    .score-circle .bg { fill: none; stroke: var(--border); stroke-width: 12; }
-    .score-circle .progress {
-      fill: none;
-      stroke: var(--orange);
-      stroke-width: 12;
-      stroke-linecap: round;
-      stroke-dasharray: 565.48;
-      stroke-dashoffset: 28.27;
-      transition: stroke-dashoffset 1.5s ease;
-    }
-    .score-number {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      font-size: 3rem;
-      font-weight: 900;
-      color: var(--text-bright);
-    }
-    .score-number small {
-      font-size: 1.2rem;
-      color: var(--text-muted);
-      font-weight: 500;
-    }
-    .score-label {
-      font-size: 0.92rem;
-      color: var(--text-muted);
-      font-weight: 600;
-    }
-    .score-stats {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 16px;
-    }
-    .score-stat-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 24px;
-      transition: border-color 0.3s, transform 0.3s;
-    }
-    .score-stat-card:hover {
-      border-color: var(--border-light);
-      transform: translateY(-3px);
-    }
-    .score-stat-card .ss-val {
-      font-size: 2rem;
-      font-weight: 900;
-      color: var(--text-bright);
-      margin-bottom: 4px;
-    }
-    .score-stat-card .ss-val.green { color: var(--green); }
-    .score-stat-card .ss-val.yellow { color: var(--yellow); }
-    .score-stat-card .ss-val.orange { color: var(--orange); }
-    .score-stat-card .ss-lbl {
-      font-size: 0.85rem;
-      color: var(--text-muted);
-      font-weight: 500;
-    }
-
-    /* ========== Agency Sections ========== */
-    .agencies-section {
-      padding: 40px 0 60px;
-    }
-    .agencies-section .section-header {
-      text-align: center;
-      margin-bottom: 48px;
-    }
-    .agencies-section .section-header h2 {
-      font-size: 2rem;
+    .company-info .ci-value {
+      font-size: 1.05rem;
       font-weight: 800;
-      color: var(--text-bright);
-      letter-spacing: -0.5px;
-      margin-bottom: 8px;
+      color: var(--text-primary);
     }
-    .agencies-section .section-header p {
-      color: var(--text-muted);
-      font-size: 0.95rem;
-    }
+    .company-info .ci-value.gold { color: var(--gold-200); }
 
-    .agency-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 32px;
-      margin-bottom: 20px;
-      transition: border-color 0.3s, transform 0.3s;
+    /* Compliance Cards */
+    .compliance-card {
+      position: relative;
+      overflow: hidden;
     }
-    .agency-card:hover {
-      border-color: var(--border-light);
-      transform: translateY(-2px);
-    }
-    .agency-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 20px;
-      flex-wrap: wrap;
-      gap: 12px;
-    }
-    .agency-title {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-    .agency-icon {
-      width: 48px;
-      height: 48px;
-      border-radius: 12px;
+    .compliance-card .card-icon {
+      width: 52px;
+      height: 52px;
+      border-radius: var(--radius-md);
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 1.4rem;
-      background: var(--orange-glow);
+      font-size: 1.5rem;
+      background: rgba(232,133,12,0.08);
+      border: 1px solid rgba(232,133,12,0.12);
+      margin-bottom: var(--sp-4);
       flex-shrink: 0;
     }
-    .agency-title h3 {
-      font-size: 1.2rem;
-      font-weight: 700;
-      color: var(--text-bright);
+    .compliance-card h3 { margin-bottom: var(--sp-2); font-size: 1.15rem; }
+    .compliance-card p { font-size: 0.9rem; line-height: 1.75; }
+    .compliance-card .card-list {
+      list-style: none;
+      margin-top: var(--sp-4);
+      padding: 0;
     }
-    .agency-title .agency-sub {
-      font-size: 0.82rem;
-      color: var(--text-muted);
-      font-weight: 400;
-    }
-    .agency-status {
+    .compliance-card .card-list li {
+      padding: 6px 0;
+      font-size: 0.88rem;
+      color: var(--text-secondary);
       display: flex;
       align-items: center;
       gap: 8px;
-      padding: 6px 16px;
-      border-radius: 20px;
-      font-size: 0.85rem;
-      font-weight: 600;
     }
-    .agency-status.compliant {
-      color: var(--green);
-      background: rgba(40, 200, 64, 0.1);
-    }
-    .agency-status.pending {
-      color: var(--yellow);
-      background: rgba(254, 188, 46, 0.1);
-    }
-    .agency-status .status-dot {
-      width: 8px;
-      height: 8px;
+    .compliance-card .card-list li::before {
+      content: '';
+      width: 6px;
+      height: 6px;
       border-radius: 50%;
-    }
-    .agency-status.compliant .status-dot {
-      background: var(--green);
-      box-shadow: 0 0 8px rgba(40, 200, 64, 0.5);
-    }
-    .agency-status.pending .status-dot {
-      background: var(--yellow);
-      box-shadow: 0 0 8px rgba(254, 188, 46, 0.5);
+      background: var(--gold-300);
+      flex-shrink: 0;
     }
 
-    .doc-list {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-      gap: 10px;
-      margin-bottom: 20px;
-    }
-    .doc-item {
+    /* Standards Section */
+    .standard-item {
       display: flex;
-      align-items: center;
-      gap: 10px;
-      padding: 12px 16px;
-      background: rgba(255, 255, 255, 0.02);
-      border: 1px solid rgba(255, 255, 255, 0.04);
-      border-radius: 10px;
-      font-size: 0.92rem;
-      color: var(--text);
-      transition: background 0.2s, border-color 0.2s;
+      align-items: flex-start;
+      gap: var(--sp-5);
+      padding: var(--sp-6);
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      transition: all var(--duration-normal) var(--ease-out);
     }
-    .doc-item:hover {
-      background: var(--orange-glow);
-      border-color: rgba(232, 133, 12, 0.2);
+    .standard-item:hover {
+      border-color: var(--border-hover);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-gold);
     }
-    .doc-check {
-      width: 20px;
-      height: 20px;
-      border-radius: 6px;
+    .standard-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: var(--radius-sm);
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 0.7rem;
-      flex-shrink: 0;
-      font-weight: 700;
-    }
-    .doc-check.ok {
-      background: rgba(40, 200, 64, 0.15);
-      color: var(--green);
-    }
-    .doc-check.warn {
-      background: rgba(254, 188, 46, 0.15);
-      color: var(--yellow);
-    }
-    .agency-actions {
-      display: flex;
-      gap: 12px;
-      flex-wrap: wrap;
-    }
-    .btn-export {
-      padding: 10px 24px;
-      font-size: 0.88rem;
-      font-weight: 600;
-      border: none;
-      border-radius: 10px;
-      cursor: pointer;
-      transition: all 0.2s;
-    }
-    .btn-export.primary {
-      background: var(--orange);
-      color: #fff;
-    }
-    .btn-export.primary:hover {
-      background: var(--orange-hover);
-      transform: translateY(-1px);
-    }
-    .btn-export.secondary {
-      background: rgba(232, 133, 12, 0.1);
-      color: var(--orange);
-      border: 1px solid rgba(232, 133, 12, 0.2);
-    }
-    .btn-export.secondary:hover {
-      background: rgba(232, 133, 12, 0.2);
-      transform: translateY(-1px);
-    }
-
-    /* ========== Export All Section ========== */
-    .export-section {
-      padding: 60px 0 80px;
-      text-align: center;
-    }
-    .export-big-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 14px;
-      padding: 20px 56px;
       font-size: 1.2rem;
-      font-weight: 800;
-      border: none;
-      border-radius: 16px;
-      background: linear-gradient(135deg, var(--orange), var(--copper));
-      color: #fff;
-      cursor: pointer;
-      transition: all 0.3s;
-      box-shadow: 0 8px 32px rgba(232, 133, 12, 0.3);
+      flex-shrink: 0;
     }
-    .export-big-btn:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 12px 40px rgba(232, 133, 12, 0.4);
-    }
-    .export-big-btn:active {
-      transform: translateY(0);
-    }
-    .export-big-btn .btn-icon {
-      font-size: 1.5rem;
-    }
-    .export-note {
-      margin-top: 16px;
-      font-size: 0.85rem;
-      color: var(--text-muted);
-    }
+    .standard-icon.green { background: rgba(52,208,88,0.1); color: var(--success); }
+    .standard-icon.gold { background: rgba(232,133,12,0.1); color: var(--gold-200); }
+    .standard-icon.blue { background: rgba(88,166,255,0.1); color: var(--info); }
+    .standard-info h4 { font-size: 1rem; margin-bottom: 4px; }
+    .standard-info p { font-size: 0.88rem; line-height: 1.7; }
 
-    /* ========== Live Stats ========== */
-    .live-stats-section {
-      padding: 40px 0 60px;
-    }
-    .live-stats-section .section-header {
-      text-align: center;
-      margin-bottom: 40px;
-    }
-    .live-stats-section .section-header h2 {
-      font-size: 2rem;
-      font-weight: 800;
-      color: var(--text-bright);
-      letter-spacing: -0.5px;
-      margin-bottom: 8px;
-    }
-    .live-stats-section .section-header p {
-      color: var(--text-muted);
-      font-size: 0.95rem;
-    }
-    .live-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 20px;
-    }
-    .live-card {
+    /* Report Section */
+    .report-section {
       background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 24px;
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-xl);
+      padding: var(--sp-12) var(--sp-10);
       text-align: center;
-      transition: border-color 0.3s, transform 0.3s;
     }
-    .live-card:hover {
-      border-color: var(--border-light);
-      transform: translateY(-3px);
-    }
-    .live-val {
-      font-size: 2rem;
-      font-weight: 900;
-      color: var(--orange);
-      margin-bottom: 4px;
-    }
-    .live-lbl {
-      font-size: 0.85rem;
-      color: var(--text-muted);
-      font-weight: 500;
-    }
-
-    /* ========== Toast ========== */
-    .toast {
-      position: fixed;
-      bottom: 40px;
-      left: 50%;
-      transform: translateX(-50%) translateY(100px);
-      background: var(--bg-card);
-      border: 1px solid var(--green);
-      color: var(--text-bright);
-      padding: 16px 32px;
-      border-radius: 12px;
+    .report-section h3 { margin-bottom: var(--sp-2); }
+    .report-section .report-desc {
       font-size: 0.95rem;
-      font-weight: 600;
-      z-index: 10000;
-      opacity: 0;
-      transition: transform 0.4s, opacity 0.4s;
-      box-shadow: 0 8px 32px rgba(0,0,0,0.4);
-    }
-    .toast.show {
-      transform: translateX(-50%) translateY(0);
-      opacity: 1;
-    }
-
-    /* ========== Footer ========== */
-    footer {
-      border-top: 1px solid var(--border);
-      padding: 64px 0 40px;
-    }
-    .footer-grid {
-      display: grid;
-      grid-template-columns: 2fr 1fr 1fr 1fr;
-      gap: 48px;
-      margin-bottom: 48px;
-    }
-    .footer-brand .nav-logo { margin-bottom: 16px; }
-    .footer-brand p {
       color: var(--text-muted);
-      font-size: 0.9rem;
-      line-height: 1.8;
-    }
-    .footer-col h4 {
-      font-size: 0.88rem;
-      font-weight: 700;
-      color: var(--text-bright);
-      text-transform: uppercase;
-      letter-spacing: 1.5px;
-      margin-bottom: 20px;
-    }
-    .footer-col ul { list-style: none; }
-    .footer-col ul li { margin-bottom: 10px; }
-    .footer-col ul a {
-      color: var(--text-muted);
-      font-size: 0.9rem;
-      transition: color 0.2s;
-    }
-    .footer-col ul a:hover { color: var(--text); }
-    .footer-bottom {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding-top: 32px;
-      border-top: 1px solid var(--border);
-      font-size: 0.82rem;
-      color: var(--text-muted);
-      flex-wrap: wrap;
-      gap: 12px;
-    }
-    .footer-bottom span { color: var(--orange); }
-
-    /* ========== Animations ========== */
-    .fade-in {
-      opacity: 0;
-      transform: translateY(30px);
-      transition: opacity 0.7s ease, transform 0.7s ease;
-    }
-    .fade-in.visible {
-      opacity: 1;
-      transform: translateY(0);
+      margin-bottom: var(--sp-6);
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
     }
 
-    /* ========== Print Styles ========== */
-    @media print {
-      nav,
-      .access-gate,
-      .btn-export,
-      .export-section,
-      .agency-actions,
-      .nav-hamburger,
-      footer,
-      .toast { display: none !important; }
-
-      body {
-        background: #fff;
-        color: #111;
-        font-size: 11pt;
-        line-height: 1.5;
-      }
-
-      .compliance-hero {
-        padding-top: 20px;
-        padding-bottom: 20px;
-      }
-      .compliance-hero h1 {
-        color: #111;
-        font-size: 2rem;
-      }
-      .compliance-hero .subtitle {
-        color: #444;
-      }
-
-      .company-card {
-        background: #f9f9f9;
-        border: 1px solid #ccc;
-      }
-      .company-card .label { color: #666; }
-      .company-card .value { color: #111; }
-      .company-card .value.orange { color: #e8850c; }
-
-      .score-section { padding: 20px 0; }
-      .score-grid { grid-template-columns: 1fr; }
-      .score-stat-card {
-        background: #f9f9f9;
-        border: 1px solid #ccc;
-      }
-      .score-stat-card .ss-val { color: #111; }
-      .score-stat-card .ss-lbl { color: #666; }
-
-      .agency-card {
-        background: #f9f9f9;
-        border: 1px solid #ccc;
-        break-inside: avoid;
-      }
-      .agency-title h3 { color: #111; }
-      .agency-title .agency-sub { color: #666; }
-      .agency-icon { background: #eee; }
-      .doc-item {
-        background: #fff;
-        border: 1px solid #ddd;
-        color: #111;
-      }
-      .doc-check.ok { background: #e6f4ea; color: #137333; }
-      .doc-check.warn { background: #fef7e0; color: #b06000; }
-
-      .live-card {
-        background: #f9f9f9;
-        border: 1px solid #ccc;
-      }
-      .live-val { color: #e8850c; }
-      .live-lbl { color: #666; }
-
-      .container { max-width: 100%; }
-    }
-
-    /* ========== Responsive ========== */
-    @media (max-width: 1024px) {
-      .score-grid { grid-template-columns: 1fr; }
-      .score-circle-wrap { margin-bottom: 20px; }
-      .live-grid { grid-template-columns: repeat(2, 1fr); }
-      .footer-grid { grid-template-columns: 1fr 1fr; }
-      .company-card { grid-template-columns: 1fr; }
-    }
     @media (max-width: 768px) {
-      nav { padding: 14px 20px; }
-      .nav-links { display: none; }
-      .nav-links.open {
-        display: flex;
-        flex-direction: column;
-        position: absolute;
-        top: 100%;
-        left: 0;
-        right: 0;
-        background: var(--bg);
-        border-bottom: 1px solid var(--border);
-        padding: 20px;
-        gap: 16px;
+      .compliance-hero { padding: 110px 0 50px; }
+      .company-info {
+        grid-template-columns: 1fr;
+        padding: var(--sp-6);
+        gap: var(--sp-3);
       }
-      .nav-hamburger { display: flex; }
-      .compliance-hero { padding-top: 120px; padding-bottom: 40px; }
-      .compliance-hero h1 { font-size: 2.2rem; }
-      .doc-list { grid-template-columns: 1fr; }
-      .score-stats { grid-template-columns: 1fr; }
-      .live-grid { grid-template-columns: 1fr 1fr; gap: 12px; }
-      .footer-grid { grid-template-columns: 1fr; gap: 32px; }
-      .export-big-btn { padding: 16px 32px; font-size: 1rem; }
-      .agency-card { padding: 24px 20px; }
+      .standard-item { flex-direction: column; gap: var(--sp-3); }
+      .report-section { padding: var(--sp-8) var(--sp-5); }
     }
     @media (max-width: 480px) {
-      .compliance-hero h1 { font-size: 1.8rem; }
-      .live-grid { grid-template-columns: 1fr; }
-      .score-circle { width: 160px; height: 160px; }
-      .score-circle svg { width: 160px; height: 160px; }
-      .score-number { font-size: 2.4rem; }
-      .access-gate input { width: 280px; }
+      .company-info { padding: var(--sp-5); }
     }
-
-    /* Touch & Mobile */
-    * { -webkit-tap-highlight-color: transparent; }
-    select, button, a { touch-action: manipulation; }
   </style>
-  <link rel="stylesheet" href="/assets/framer-style.css">
 </head>
-<body>
+<body class="page-top">
 
-  <!-- ========== Access Gate ========== -->
-  <div class="access-gate" id="accessGate">
-    <h2>合規中心</h2>
-    <p>此頁面僅限公司管理層存取</p>
-    <input type="password" id="accessCode" placeholder="請輸入存取碼" autocomplete="off">
-    <button onclick="checkAccess()">進入</button>
-    <div class="error-msg" id="accessError"></div>
-  </div>
-
-  <!-- ========== Navigation ========== -->
-  <nav>
-    <a href="/" class="nav-logo" style="text-decoration:none;">SEO<span>BAIKE</span></a>
-    <ul class="nav-links" id="navLinks">
+  <!-- Nav -->
+  <nav class="nav">
+    <a href="/" class="nav-brand">
+      <img src="/favicon.svg" alt="SEOBAIKE" width="34" height="34">
+      <span><span class="seo">SEO</span><span class="baike">BAIKE</span></span>
+    </a>
+    <ul class="nav-links">
       <li><a href="/">首頁</a></li>
       <li><a href="/features">功能</a></li>
       <li><a href="/marketplace">市集</a></li>
       <li><a href="/pricing">方案</a></li>
       <li><a href="/about">關於</a></li>
       <li><a href="/docs">常見問題</a></li>
-      <li><a href="/login" class="btn-nav">登入</a></li>
+      <li><a href="/login" class="nav-cta">登入</a></li>
     </ul>
-    <button class="nav-hamburger" id="hamburger" aria-label="選單">
+    <button class="nav-hamburger" onclick="toggleMenu()" aria-label="選單">
       <span></span><span></span><span></span>
     </button>
   </nav>
 
-  <!-- ========== Main Content ========== -->
-  <main id="mainContent" style="display:none;">
+  <!-- Mobile Overlay -->
+  <div class="mobile-overlay">
+    <button class="mobile-close" onclick="toggleMenu()">&times;</button>
+    <a href="/" onclick="toggleMenu()">首頁</a>
+    <a href="/features" onclick="toggleMenu()">功能</a>
+    <a href="/marketplace" onclick="toggleMenu()">市集</a>
+    <a href="/pricing" onclick="toggleMenu()">方案</a>
+    <a href="/about" onclick="toggleMenu()">關於</a>
+    <a href="/docs" onclick="toggleMenu()">常見問題</a>
+    <a href="/login" onclick="toggleMenu()">登入</a>
+  </div>
 
-    <!-- ========== Hero ========== -->
-    <section class="compliance-hero">
-      <div class="container">
-        <h1>合規中心</h1>
-        <p class="subtitle">所有政府機關需要的資料，一次備齊</p>
-        <div class="company-card">
-          <div class="item">
-            <div class="label">公司名稱</div>
-            <div class="value">小路光有限公司</div>
+  <!-- Hero -->
+  <section class="compliance-hero">
+    <div class="container">
+      <div class="section-badge fade-up">COMPLIANCE CENTER</div>
+      <h1 class="text-gold fade-up">合規中心</h1>
+      <p class="subtitle fade-up">法律先行，安全至上</p>
+      <div class="company-info fade-up">
+        <div>
+          <div class="ci-label">公司名稱</div>
+          <div class="ci-value">小路光有限公司</div>
+        </div>
+        <div>
+          <div class="ci-label">統一編號</div>
+          <div class="ci-value gold">60475510</div>
+        </div>
+        <div>
+          <div class="ci-label">平台品牌</div>
+          <div class="ci-value">SEOBAIKE</div>
+        </div>
+        <div>
+          <div class="ci-label">營運網址</div>
+          <div class="ci-value gold">aiforseo.vip</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Compliance Areas -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header fade-up">
+        <div class="section-badge">COMPLIANCE AREAS</div>
+        <h2>合規覆蓋範圍</h2>
+        <p>SEOBAIKE 全面遵循以下五大合規領域，保障平台使用者與合作夥伴之權益。</p>
+      </div>
+
+      <div class="grid-3">
+        <!-- 1. 個資保護 -->
+        <div class="card compliance-card fade-up">
+          <div class="card-icon">&#x1F512;</div>
+          <h3>個資保護</h3>
+          <p>全面遵循台灣個人資料保護法及國際隱私法規，保護每一位使用者的數位權利。</p>
+          <ul class="card-list">
+            <li>台灣個人資料保護法 (PDPA)</li>
+            <li>歐盟一般資料保護規則 (GDPR)</li>
+            <li>美國加州消費者隱私法 (CCPA)</li>
+            <li>資料最小化收集原則</li>
+            <li>個資外洩通報機制</li>
+            <li>跨境傳輸安全保障</li>
+          </ul>
+        </div>
+
+        <!-- 2. 金融合規 -->
+        <div class="card compliance-card fade-up">
+          <div class="card-icon">&#x1F4B3;</div>
+          <h3>金融合規</h3>
+          <p>SEO Points 點數系統嚴格遵循金融法規，所有金流透過合規之第三方金流服務商處理。</p>
+          <ul class="card-list">
+            <li>SEO Points 非貨幣聲明</li>
+            <li>第三方金流服務商合作</li>
+            <li>交易紀錄完整保存</li>
+            <li>退費政策透明公開</li>
+            <li>跨境支付合規處理</li>
+          </ul>
+        </div>
+
+        <!-- 3. 消費者保護 -->
+        <div class="card compliance-card fade-up">
+          <div class="card-icon">&#x2696;&#xFE0F;</div>
+          <h3>消費者保護</h3>
+          <p>市集平台遵循公平交易法規，確保交易透明、退款有據、爭議有管道。</p>
+          <ul class="card-list">
+            <li>公平交易委員會合規</li>
+            <li>定價透明度</li>
+            <li>退款政策與爭議處理</li>
+            <li>賣家資格審核</li>
+            <li>消費者權益保護措施</li>
+          </ul>
+        </div>
+
+        <!-- 4. 反洗錢 -->
+        <div class="card compliance-card fade-up">
+          <div class="card-icon">&#x1F6E1;&#xFE0F;</div>
+          <h3>反洗錢 (AML)</h3>
+          <p>嚴格防範洗錢及恐怖主義融資行為，配合金融監督管理委員會之法規要求。</p>
+          <ul class="card-list">
+            <li>認識客戶 (KYC) 流程</li>
+            <li>可疑交易監控與通報</li>
+            <li>禁止行為明確規範</li>
+            <li>帳號凍結與法律追訴權</li>
+            <li>洗錢防制內部控制</li>
+          </ul>
+        </div>
+
+        <!-- 5. 跨國法規 -->
+        <div class="card compliance-card fade-up">
+          <div class="card-icon">&#x1F30F;</div>
+          <h3>跨國法規</h3>
+          <p>平台服務全球使用者，遵循多國法規框架，以最高標準保護所有地區使用者。</p>
+          <ul class="card-list">
+            <li>台灣法律為準據法</li>
+            <li>台北地方法院管轄</li>
+            <li>GDPR 跨境資料傳輸 SCCs</li>
+            <li>多國產業分類碼對齊</li>
+            <li>國際仲裁機制</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- Certifications & Standards -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header fade-up">
+        <div class="section-badge">STANDARDS</div>
+        <h2>遵循之標準與措施</h2>
+        <p>SEOBAIKE 採用業界最佳實踐，確保平台安全性與合規性。</p>
+      </div>
+
+      <div class="grid-2" style="gap: var(--sp-5);">
+        <div class="standard-item fade-up">
+          <div class="standard-icon green">&#x1F510;</div>
+          <div class="standard-info">
+            <h4>TLS/SSL 全站加密</h4>
+            <p>所有網路通訊均透過 TLS 加密傳輸，確保資料在傳輸過程中的安全性。</p>
           </div>
-          <div class="item">
-            <div class="label">統一編號</div>
-            <div class="value orange">60475510</div>
+        </div>
+        <div class="standard-item fade-up">
+          <div class="standard-icon gold">&#x1F5C4;&#xFE0F;</div>
+          <div class="standard-info">
+            <h4>Row Level Security (RLS)</h4>
+            <p>資料庫層級之列級安全策略，確保使用者僅能存取自己的資料。</p>
           </div>
-          <div class="item">
-            <div class="label">負責人</div>
-            <div class="value">許竣翔</div>
+        </div>
+        <div class="standard-item fade-up">
+          <div class="standard-icon blue">&#x1F511;</div>
+          <div class="standard-info">
+            <h4>bcrypt 密碼雜湊</h4>
+            <p>使用者密碼經 bcrypt 雜湊處理後儲存，本公司無法還原明文密碼。</p>
           </div>
-          <div class="item">
-            <div class="label">設立日期</div>
-            <div class="value">2025 年</div>
+        </div>
+        <div class="standard-item fade-up">
+          <div class="standard-icon green">&#x1F4CB;</div>
+          <div class="standard-info">
+            <h4>定期安全稽核</h4>
+            <p>定期進行安全稽核與弱點掃描，持續強化平台之安全防護能力。</p>
           </div>
-          <div class="item" style="grid-column: 1 / -1;">
-            <div class="label">營業項目</div>
-            <div class="value">AI 平台服務</div>
+        </div>
+        <div class="standard-item fade-up">
+          <div class="standard-icon gold">&#x1F6A8;</div>
+          <div class="standard-info">
+            <h4>資料外洩應變計畫</h4>
+            <p>備有完整之資料外洩事件應變流程，確保於法定時限內通知受影響使用者。</p>
+          </div>
+        </div>
+        <div class="standard-item fade-up">
+          <div class="standard-icon blue">&#x1F310;</div>
+          <div class="standard-info">
+            <h4>CDN 安全防護</h4>
+            <p>透過全球 CDN 網路提供 DDoS 防護及效能優化，個人資料不於邊緣節點快取。</p>
+          </div>
+        </div>
+        <div class="standard-item fade-up">
+          <div class="standard-icon green">&#x1F4DC;</div>
+          <div class="standard-info">
+            <h4>隱私權政策透明公開</h4>
+            <p>完整之隱私權政策、服務條款公開於網站，使用者可隨時查閱。</p>
+          </div>
+        </div>
+        <div class="standard-item fade-up">
+          <div class="standard-icon gold">&#x1F46E;</div>
+          <div class="standard-info">
+            <h4>人員存取管控</h4>
+            <p>僅經授權之人員得於業務必要時存取個人資料，並受保密協議約束。</p>
           </div>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- ========== Compliance Score ========== -->
-    <section class="score-section fade-in">
-      <div class="container">
-        <div class="score-grid">
-          <div class="score-circle-wrap">
-            <div class="score-circle">
-              <svg viewBox="0 0 200 200">
-                <circle class="bg" cx="100" cy="100" r="90" />
-                <circle class="progress" cx="100" cy="100" r="90" />
-              </svg>
-              <div class="score-number">95<small>/100</small></div>
-            </div>
-            <div class="score-label">即時合規分數</div>
+  <hr class="divider divider-gold">
+
+  <!-- Report Section -->
+  <section class="section">
+    <div class="container">
+      <div class="container-narrow">
+        <div class="report-section fade-up">
+          <div class="section-badge" style="margin-bottom: var(--sp-4);">REPORT</div>
+          <h3>通報問題</h3>
+          <p class="report-desc">
+            若您發現本平台有任何違規行為、安全漏洞或合規問題，請透過以下管道向我們通報。我們承諾認真對待每一份通報。
+          </p>
+
+          <div style="display: flex; flex-direction: column; gap: var(--sp-4); max-width: 400px; margin: 0 auto var(--sp-6);">
+            <a href="mailto:legal@aiforseo.vip" class="btn btn-primary btn-lg" style="width: 100%;">
+              法務通報信箱 legal@aiforseo.vip
+            </a>
+            <a href="mailto:contact@aiforseo.vip" class="btn btn-secondary" style="width: 100%;">
+              一般問題 contact@aiforseo.vip
+            </a>
           </div>
-          <div class="score-stats">
-            <div class="score-stat-card">
-              <div class="ss-val green">7</div>
-              <div class="ss-lbl">機關合規通過</div>
-            </div>
-            <div class="score-stat-card">
-              <div class="ss-val yellow">1</div>
-              <div class="ss-lbl">審查中</div>
-            </div>
-            <div class="score-stat-card">
-              <div class="ss-val">無紀錄</div>
-              <div class="ss-lbl">上次稽查</div>
-            </div>
-            <div class="score-stat-card">
-              <div class="ss-val orange">2026/03/16</div>
-              <div class="ss-lbl">下次建議複查</div>
-            </div>
+
+          <div style="text-align: left; max-width: 460px; margin: 0 auto;">
+            <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: var(--sp-3);">通報類型包括但不限於：</p>
+            <ul style="list-style: none; padding: 0; margin: 0;">
+              <li style="padding: 8px 0; font-size: 0.88rem; color: var(--text-secondary); display: flex; align-items: center; gap: 10px;">
+                <span style="color: var(--gold-200);">&#9679;</span> 個人資料外洩或隱私侵害
+              </li>
+              <li style="padding: 8px 0; font-size: 0.88rem; color: var(--text-secondary); display: flex; align-items: center; gap: 10px;">
+                <span style="color: var(--gold-200);">&#9679;</span> 平台安全漏洞
+              </li>
+              <li style="padding: 8px 0; font-size: 0.88rem; color: var(--text-secondary); display: flex; align-items: center; gap: 10px;">
+                <span style="color: var(--gold-200);">&#9679;</span> 市集詐欺或不實商品
+              </li>
+              <li style="padding: 8px 0; font-size: 0.88rem; color: var(--text-secondary); display: flex; align-items: center; gap: 10px;">
+                <span style="color: var(--gold-200);">&#9679;</span> 智慧財產權侵害
+              </li>
+              <li style="padding: 8px 0; font-size: 0.88rem; color: var(--text-secondary); display: flex; align-items: center; gap: 10px;">
+                <span style="color: var(--gold-200);">&#9679;</span> 疑似洗錢或不當交易
+              </li>
+              <li style="padding: 8px 0; font-size: 0.88rem; color: var(--text-secondary); display: flex; align-items: center; gap: 10px;">
+                <span style="color: var(--gold-200);">&#9679;</span> 其他違規行為
+              </li>
+            </ul>
+          </div>
+
+          <div style="margin-top: var(--sp-8); padding-top: var(--sp-6); border-top: 1px solid var(--border-subtle);">
+            <p style="font-size: 0.82rem; color: var(--text-muted);">
+              <strong>小路光有限公司</strong>（統一編號：60475510）<br>
+              本公司將於收到通報後 <strong>5 個工作日內</strong>回覆確認，並於 <strong>30 日內</strong>提供處理結果。
+            </p>
           </div>
         </div>
       </div>
-    </section>
 
-    <!-- ========== Agency Sections ========== -->
-    <section class="agencies-section">
-      <div class="container">
-        <div class="section-header">
-          <h2>各機關合規狀態</h2>
-          <p>依據中華民國法規，分機關列出所需備齊文件</p>
-        </div>
-
-        <!-- 1. 經濟部 / 商業司 -->
-        <div class="agency-card fade-in" id="agency-moea">
-          <div class="agency-header">
-            <div class="agency-title">
-              <div class="agency-icon">&#x1F4CB;</div>
-              <div>
-                <h3>經濟部 / 商業司</h3>
-                <div class="agency-sub">公司登記與商業登記</div>
-              </div>
-            </div>
-            <div class="agency-status compliant">
-              <div class="status-dot"></div>
-              已備齊
-            </div>
-          </div>
-          <div class="doc-list">
-            <div class="doc-item"><div class="doc-check ok">&#10003;</div>公司登記證明</div>
-            <div class="doc-item"><div class="doc-check ok">&#10003;</div>營業項目變更紀錄</div>
-            <div class="doc-item"><div class="doc-check ok">&#10003;</div>股東名冊</div>
-            <div class="doc-item"><div class="doc-check ok">&#10003;</div>董監事名冊</div>
-            <div class="doc-item"><div class="doc-check ok">&#10003;</div>章程</div>
-          </div>
-          <div class="agency-actions">
-            <button class="btn-export primary" onclick="exportSection('moea')">匯出全部</button>
-          </div>
-        </div>
-
-        <!-- 2. 財政部 / 國稅局 -->
-        <div class="agency-card fade-in" id="agency-tax">
-          <div class="agency-header">
-            <div class="agency-title">
-              <div class="agency-icon">&#x1F4B0;</div>
-              <div>
-                <h3>財政部 / 國稅局</h3>
-                <div class="agency-sub">稅務申報與扣繳</div>
-              </div>
-            </div>
-            <div class="agency-status compliant">
-              <div class="status-dot"></div>
-              已備齊
-            </div>
-          </div>
-          <div class="doc-list">
-            <div class="doc-item"><div class="doc-check ok">&#10003;</div>營業稅申報紀錄</div>
-            <div class="doc-item"><div class="doc-check ok">&#10003;</div>發票開立紀錄</div>
-            <div class="doc-item"><div class="doc-check ok">&#10003;</div>營利事業所得稅</div>
-            <div class="doc-item"><div class="doc-check ok">&#10003;</div>各類所得扣繳</div>
-          </div>
-          <div class="agency-actions">
-            <button class="btn-export primary" onclick="exportSection('tax')">匯出稅務資料</button>
-          </div>
-        </div>
-
-        <!-- 3. 個資保護 -->
-        <div class="agency-card fade-in" id="agency-pdpa">
-          <div class="agency-header">
-            <div class="agency-title">
-              <div class="agency-icon">&#x1F512;</div>
-              <div>
-                <h3>個人資料保護法</h3>
-                <div class="agency-sub">個資蒐集、處理、利用與保護</div>
-              </div>
-            </div>
-            <div class="agency-status compliant">
-              <div class="status-dot"></div>
-              已備齊
-            </div>
-          </div>
-          <div class="doc-list">
-            <div class="doc-item"><div class="doc-check ok">&#10003;</div>個資蒐集告知書</div>
-            <div class="doc-item"><div class="doc-check ok">&#10003;</div>個資處理紀錄</div>
-            <div class="doc-item"><div class="doc-check ok">&#10003;</div>資料存取日誌</div>
-            <div class="doc-item"><div class="doc-check ok">&#10003;</div>加密措施說明</div>
-            <div class="doc-item"><div class="doc-check ok">&#10003;</div>資料外洩應變計畫</div>
-            <div class="doc-item"><div class="doc-check ok">&#10003;</div>跨境傳輸評估</div>
-          </div>
-          <div class="agency-actions">
-            <button class="btn-export primary" onclick="exportSection('pdpa')">匯出個資合規報告</button>
-          </div>
-        </div>
-
-        <!-- 4. 公平交易委員會 -->
-        <div class="agency-card fade-in" id="agency-ftc">
-          <div class="agency-header">
-            <div class="agency-title">
-              <div class="agency-icon">&#x2696;</div>
-              <div>
-                <h3>公平交易委員會</h3>
-                <div class="agency-sub">競爭法與消費者保護</div>
-              </div>
-            </div>
-            <div class="agency-status compliant">
-              <div class="status-dot"></div>
-              已備齊
-            </div>
-          </div>
-          <div class="doc-list">
-            <div class="doc-item"><div class="doc-check ok">&#10003;</div>定價透明度報告</div>
-            <div class="doc-item"><div class="doc-check ok">&#10003;</div>競爭合規聲明</div>
-            <div class="doc-item"><div class="doc-check ok">&#10003;</div>消費者權益保護措施</div>
-            <div class="doc-item"><div class="doc-check ok">&#10003;</div>退款政策</div>
-          </div>
-          <div class="agency-actions">
-            <button class="btn-export primary" onclick="exportSection('ftc')">匯出全部</button>
-          </div>
-        </div>
-
-        <!-- 5. NCC -->
-        <div class="agency-card fade-in" id="agency-ncc">
-          <div class="agency-header">
-            <div class="agency-title">
-              <div class="agency-icon">&#x1F4E1;</div>
-              <div>
-                <h3>國家通訊傳播委員會（NCC）</h3>
-                <div class="agency-sub">網路服務與內容管理</div>
-              </div>
-            </div>
-            <div class="agency-status compliant">
-              <div class="status-dot"></div>
-              已備齊
-            </div>
-          </div>
-          <div class="doc-list">
-            <div class="doc-item"><div class="doc-check ok">&#10003;</div>網路服務提供者資訊</div>
-            <div class="doc-item"><div class="doc-check ok">&#10003;</div>內容審查機制</div>
-            <div class="doc-item"><div class="doc-check ok">&#10003;</div>使用者檢舉處理流程</div>
-            <div class="doc-item"><div class="doc-check ok">&#10003;</div>兒少保護措施</div>
-          </div>
-          <div class="agency-actions">
-            <button class="btn-export primary" onclick="exportSection('ncc')">匯出全部</button>
-          </div>
-        </div>
-
-        <!-- 6. 金管會 -->
-        <div class="agency-card fade-in" id="agency-fsc">
-          <div class="agency-header">
-            <div class="agency-title">
-              <div class="agency-icon">&#x1F4B3;</div>
-              <div>
-                <h3>金融監督管理委員會</h3>
-                <div class="agency-sub">第三方支付與洗錢防制</div>
-              </div>
-            </div>
-            <div class="agency-status compliant">
-              <div class="status-dot"></div>
-              已備齊
-            </div>
-          </div>
-          <div class="doc-list">
-            <div class="doc-item"><div class="doc-check ok">&#10003;</div>第三方支付合作證明</div>
-            <div class="doc-item"><div class="doc-check ok">&#10003;</div>洗錢防制措施</div>
-            <div class="doc-item"><div class="doc-check ok">&#10003;</div>認識客戶（KYC）流程說明</div>
-          </div>
-          <div class="agency-actions">
-            <button class="btn-export primary" onclick="exportSection('fsc')">匯出全部</button>
-          </div>
-        </div>
-
-        <!-- 7. 勞動部 -->
-        <div class="agency-card fade-in" id="agency-mol">
-          <div class="agency-header">
-            <div class="agency-title">
-              <div class="agency-icon">&#x1F477;</div>
-              <div>
-                <h3>勞動部</h3>
-                <div class="agency-sub">勞工權益、保險與安全衛生</div>
-              </div>
-            </div>
-            <div class="agency-status compliant">
-              <div class="status-dot"></div>
-              已備齊
-            </div>
-          </div>
-          <div class="doc-list">
-            <div class="doc-item"><div class="doc-check ok">&#10003;</div>勞工保險紀錄</div>
-            <div class="doc-item"><div class="doc-check ok">&#10003;</div>就業保險</div>
-            <div class="doc-item"><div class="doc-check ok">&#10003;</div>勞退提繳</div>
-            <div class="doc-item"><div class="doc-check ok">&#10003;</div>工時紀錄</div>
-            <div class="doc-item"><div class="doc-check ok">&#10003;</div>職業安全衛生</div>
-          </div>
-          <div class="agency-actions">
-            <button class="btn-export primary" onclick="exportSection('mol')">匯出全部</button>
-          </div>
-        </div>
-
-        <!-- 8. 智慧財產局 -->
-        <div class="agency-card fade-in" id="agency-tipo">
-          <div class="agency-header">
-            <div class="agency-title">
-              <div class="agency-icon">&#x1F9E0;</div>
-              <div>
-                <h3>經濟部智慧財產局（TIPO）</h3>
-                <div class="agency-sub">專利、商標、著作權與營業秘密</div>
-              </div>
-            </div>
-            <div class="agency-status pending">
-              <div class="status-dot"></div>
-              專利審查中
-            </div>
-          </div>
-          <div class="doc-list">
-            <div class="doc-item"><div class="doc-check warn">&#x25CF;</div>專利申請狀態（申請中）</div>
-            <div class="doc-item"><div class="doc-check ok">&#10003;</div>商標註冊</div>
-            <div class="doc-item"><div class="doc-check ok">&#10003;</div>著作權聲明</div>
-            <div class="doc-item"><div class="doc-check ok">&#10003;</div>營業秘密保護措施</div>
-          </div>
-          <div class="agency-actions">
-            <button class="btn-export primary" onclick="exportSection('tipo')">匯出全部</button>
-          </div>
-        </div>
-
+      <div class="text-center mt-8 fade-up">
+        <a href="/privacy" class="btn btn-secondary btn-sm">隱私權政策</a>
+        <a href="/terms" class="btn btn-secondary btn-sm" style="margin-left: 8px;">服務條款</a>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- ========== Live Stats ========== -->
-    <section class="live-stats-section fade-in">
-      <div class="container">
-        <div class="section-header">
-          <h2>即時營運統計</h2>
-          <p>系統即時數據，供稽查人員參考</p>
-        </div>
-        <div class="live-grid">
-          <div class="live-card">
-            <div class="live-val" id="liveEngines">15</div>
-            <div class="live-lbl">AI 引擎數</div>
-          </div>
-          <div class="live-card">
-            <div class="live-val" id="liveModels">1,315</div>
-            <div class="live-lbl">AI 模型數</div>
-          </div>
-          <div class="live-card">
-            <div class="live-val" id="liveEncryption">AES-256</div>
-            <div class="live-lbl">加密標準</div>
-          </div>
-          <div class="live-card">
-            <div class="live-val" id="liveLocation">台灣</div>
-            <div class="live-lbl">資料儲存地點</div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ========== Export All ========== -->
-    <section class="export-section fade-in">
-      <div class="container">
-        <button class="export-big-btn" onclick="exportAllCompliance()">
-          <span class="btn-icon">&#x1F4E6;</span>
-          一鍵匯出全部合規資料
-        </button>
-        <div class="export-note">
-          匯出完整 JSON 報告，包含所有機關合規狀態、文件清單與營運數據
-        </div>
-      </div>
-    </section>
-
-  </main>
-
-  <!-- ========== Footer ========== -->
-  <footer id="siteFooter" style="display:none;">
+  <!-- Footer -->
+  <footer class="footer">
     <div class="container">
       <div class="footer-grid">
         <div class="footer-brand">
-          <div class="nav-logo" style="font-size:1.4rem;margin-bottom:16px;">SEO<span>BAIKE</span></div>
+          <a href="/" class="nav-brand" style="font-size: 1.3rem;">
+            <span class="seo">SEO</span><span class="baike">BAIKE</span>
+          </a>
           <p>
-            一句話，搞定一切。你的 AI 統一入口。<br>
-            由小路光有限公司（統編 60475510）開發與維運。
+            小路光有限公司（統編 60475510）<br>
+            AI 全球市集平台<br>
+            讓全球 AI 服務自由流通。
           </p>
         </div>
         <div class="footer-col">
           <h4>產品</h4>
-          <ul>
-            <li><a href="/features">功能總覽</a></li>
-            <li><a href="/pricing">方案與定價</a></li>
-            <li><a href="/docs">使用說明</a></li>
-            <li><a href="#">更新日誌</a></li>
-          </ul>
+          <a href="/features">功能總覽</a>
+          <a href="/pricing">方案與定價</a>
+          <a href="/marketplace">市集</a>
+          <a href="/docs">技術文件</a>
         </div>
         <div class="footer-col">
           <h4>公司</h4>
-          <ul>
-            <li><a href="/about">關於我們</a></li>
-            <li><a href="/contact">聯繫我們</a></li>
-            <li><a href="/privacy">隱私權政策</a></li>
-            <li><a href="/terms">服務條款</a></li>
-          </ul>
+          <a href="/about">關於我們</a>
+          <a href="/contact">聯繫我們</a>
+          <a href="/privacy">隱私權政策</a>
+          <a href="/terms">服務條款</a>
         </div>
         <div class="footer-col">
           <h4>支援</h4>
-          <ul>
-            <li><a href="/docs">快速開始</a></li>
-            <li><a href="#">常見問題</a></li>
-            <li><a href="/contact">聯繫客服</a></li>
-            <li><a href="/status" style="color:var(--orange);">服務狀態</a></li>
-          </ul>
+          <a href="/docs">快速開始</a>
+          <a href="/compliance">合規中心</a>
+          <a href="/contact">聯繫客服</a>
+          <a href="/status">服務狀態</a>
         </div>
       </div>
       <div class="footer-bottom">
-        <div>&copy; 2026 <span>小路光有限公司</span>（統編 60475510）</div>
-        <div><span>aiforseo.vip</span></div>
+        <span>&copy; 2024-2026 小路光有限公司. All rights reserved.</span>
+        <span>aiforseo.vip</span>
       </div>
     </div>
   </footer>
 
-  <!-- ========== Toast ========== -->
-  <div class="toast" id="toast"></div>
-
+  <!-- Page Views Tracking -->
   <script>
-    /* ========== Access Gate ========== */
-    var ACCESS_KEY = 'seobaike_compliance_verified';
-    var ACCESS_CODE = 'seobaike2026';
-
-    function checkAccess() {
-      var code = document.getElementById('accessCode').value;
-      if (code === ACCESS_CODE) {
-        localStorage.setItem(ACCESS_KEY, 'true');
-        showMainContent();
-      } else {
-        document.getElementById('accessError').textContent = '存取碼錯誤，請重試';
-        document.getElementById('accessCode').value = '';
-        document.getElementById('accessCode').focus();
-      }
-    }
-
-    // Enter key to submit
-    document.getElementById('accessCode').addEventListener('keydown', function(e) {
-      if (e.key === 'Enter') checkAccess();
-    });
-
-    function showMainContent() {
-      document.getElementById('accessGate').classList.add('hidden');
-      document.getElementById('mainContent').style.display = 'block';
-      document.getElementById('siteFooter').style.display = 'block';
-      // Trigger fade-in animations
-      setTimeout(function() {
-        document.querySelectorAll('.fade-in').forEach(function(el) {
-          observer.observe(el);
-        });
-      }, 100);
-    }
-
-    // Check if already verified
-    if (localStorage.getItem(ACCESS_KEY) === 'true') {
-      showMainContent();
-    }
-
-    /* ========== Mobile Nav ========== */
-    document.getElementById('hamburger').addEventListener('click', function () {
-      document.getElementById('navLinks').classList.toggle('open');
-    });
-
-    /* ========== Scroll Fade-in ========== */
-    var observer = new IntersectionObserver(function(entries) {
-      entries.forEach(function(entry) {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-        }
-      });
-    }, { threshold: 0.1 });
-
-    document.querySelectorAll('.fade-in').forEach(function(el) {
-      observer.observe(el);
-    });
-
-    /* ========== Toast ========== */
-    function showToast(message) {
-      var toast = document.getElementById('toast');
-      toast.textContent = message;
-      toast.classList.add('show');
-      setTimeout(function() {
-        toast.classList.remove('show');
-      }, 3000);
-    }
-
-    /* ========== Section Export ========== */
-    var sectionData = {
-      moea: {
-        agency: '經濟部 / 商業司',
-        status: 'compliant',
-        documents: [
-          '公司登記證明',
-          '營業項目變更紀錄',
-          '股東名冊',
-          '董監事名冊',
-          '章程'
-        ]
-      },
-      tax: {
-        agency: '財政部 / 國稅局',
-        status: 'compliant',
-        documents: [
-          '營業稅申報紀錄',
-          '發票開立紀錄',
-          '營利事業所得稅',
-          '各類所得扣繳'
-        ]
-      },
-      pdpa: {
-        agency: '個人資料保護法',
-        status: 'compliant',
-        documents: [
-          '個資蒐集告知書',
-          '個資處理紀錄',
-          '資料存取日誌',
-          '加密措施說明',
-          '資料外洩應變計畫',
-          '跨境傳輸評估'
-        ]
-      },
-      ftc: {
-        agency: '公平交易委員會',
-        status: 'compliant',
-        documents: [
-          '定價透明度報告',
-          '競爭合規聲明',
-          '消費者權益保護措施',
-          '退款政策'
-        ]
-      },
-      ncc: {
-        agency: '國家通訊傳播委員會',
-        status: 'compliant',
-        documents: [
-          '網路服務提供者資訊',
-          '內容審查機制',
-          '使用者檢舉處理流程',
-          '兒少保護措施'
-        ]
-      },
-      fsc: {
-        agency: '金融監督管理委員會',
-        status: 'compliant',
-        documents: [
-          '第三方支付合作證明',
-          '洗錢防制措施',
-          '認識客戶（KYC）流程說明'
-        ]
-      },
-      mol: {
-        agency: '勞動部',
-        status: 'compliant',
-        documents: [
-          '勞工保險紀錄',
-          '就業保險',
-          '勞退提繳',
-          '工時紀錄',
-          '職業安全衛生'
-        ]
-      },
-      tipo: {
-        agency: '經濟部智慧財產局',
-        status: 'pending',
-        note: '專利審查中（台灣專利 115100981）',
-        documents: [
-          '專利申請狀態（申請中）',
-          '商標註冊',
-          '著作權聲明',
-          '營業秘密保護措施'
-        ]
-      }
-    };
-
-    function exportSection(key) {
-      var data = sectionData[key];
-      if (!data) return;
-
-      var report = {
-        company: {
-          name: '小路光有限公司',
-          tax_id: '60475510',
-          ceo: '許竣翔'
-        },
-        export_date: new Date().toISOString(),
-        section: data,
-        generated_by: 'SEOBAIKE 合規中心 v1.0'
-      };
-
-      var blob = new Blob([JSON.stringify(report, null, 2)], { type: 'application/json' });
-      var url = URL.createObjectURL(blob);
-      var a = document.createElement('a');
-      a.href = url;
-      a.download = 'seobaike_' + key + '_' + new Date().toISOString().slice(0, 10) + '.json';
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
-      URL.revokeObjectURL(url);
-
-      showToast('已匯出：' + data.agency);
-    }
-
-    /* ========== Export All ========== */
-    function exportAllCompliance() {
-      var report = {
-        company: {
-          name: '小路光有限公司',
-          tax_id: '60475510',
-          ceo: '許竣翔',
-          established: '2025',
-          business: 'AI 平台服務'
-        },
-        export_date: new Date().toISOString(),
-        compliance_score: 95,
-        sections: [
-          { agency: '經濟部 / 商業司', status: 'compliant', documents: 5 },
-          { agency: '財政部 / 國稅局', status: 'compliant', documents: 4 },
-          { agency: '個人資料保護法', status: 'compliant', documents: 6 },
-          { agency: '公平交易委員會', status: 'compliant', documents: 4 },
-          { agency: '國家通訊傳播委員會', status: 'compliant', documents: 4 },
-          { agency: '金融監督管理委員會', status: 'compliant', documents: 3 },
-          { agency: '勞動部', status: 'compliant', documents: 5 },
-          { agency: '經濟部智慧財產局', status: 'pending', documents: 4, note: '專利審查中（台灣專利 115100981）' }
-        ],
-        ai_operations: {
-          total_engines: 15,
-          total_models: 1315,
-          data_location: '台灣',
-          encryption: 'AES-256 + TLS 1.3',
-          data_retention: '依法保留',
-          payment_gateway: '已合規整合'
-        },
-        detailed_documents: sectionData,
-        generated_by: 'SEOBAIKE 合規中心 v1.0'
-      };
-
-      // Download JSON
-      var blob = new Blob([JSON.stringify(report, null, 2)], { type: 'application/json' });
-      var url = URL.createObjectURL(blob);
-      var a = document.createElement('a');
-      a.href = url;
-      a.download = 'seobaike_compliance_full_' + new Date().toISOString().slice(0, 10) + '.json';
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
-      URL.revokeObjectURL(url);
-
-      // Generate printable HTML report
-      generatePrintableReport(report);
-
-      showToast('合規報告已匯出（JSON + HTML）');
-    }
-
-    function generatePrintableReport(report) {
-      var html = '<!DOCTYPE html><html lang="zh-Hant"><head><meta charset="UTF-8">';
-      html += '<title>合規報告 - 小路光有限公司</title>';
-      html += '<style>';
-      html += 'body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans TC",sans-serif;max-width:800px;margin:0 auto;padding:40px 24px;color:#222;line-height:1.8;}';
-      html += 'h1{font-size:1.8rem;border-bottom:3px solid #e8850c;padding-bottom:12px;margin-bottom:24px;}';
-      html += 'h2{font-size:1.3rem;color:#e8850c;margin-top:32px;margin-bottom:12px;border-bottom:1px solid #ddd;padding-bottom:8px;}';
-      html += '.info-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px 24px;margin-bottom:24px;background:#f9f9f9;padding:20px;border-radius:8px;}';
-      html += '.info-item .label{font-size:0.8rem;color:#888;text-transform:uppercase;letter-spacing:1px;}';
-      html += '.info-item .val{font-size:1rem;font-weight:700;}';
-      html += '.score{font-size:3rem;font-weight:900;color:#e8850c;text-align:center;margin:20px 0;}';
-      html += '.section{margin-bottom:20px;padding:16px;border:1px solid #ddd;border-radius:8px;}';
-      html += '.section h3{font-size:1.1rem;margin-bottom:8px;display:flex;align-items:center;gap:8px;}';
-      html += '.status-badge{display:inline-block;padding:2px 10px;border-radius:12px;font-size:0.8rem;font-weight:600;}';
-      html += '.status-badge.compliant{background:#e6f4ea;color:#137333;}';
-      html += '.status-badge.pending{background:#fef7e0;color:#b06000;}';
-      html += 'ul{padding-left:20px;}li{margin-bottom:4px;}';
-      html += '.footer{margin-top:40px;padding-top:20px;border-top:2px solid #e8850c;font-size:0.85rem;color:#888;text-align:center;}';
-      html += '@media print{body{padding:20px;}}';
-      html += '</style></head><body>';
-      html += '<h1>合規報告 — 小路光有限公司</h1>';
-      html += '<div class="info-grid">';
-      html += '<div class="info-item"><div class="label">公司名稱</div><div class="val">' + report.company.name + '</div></div>';
-      html += '<div class="info-item"><div class="label">統一編號</div><div class="val">' + report.company.tax_id + '</div></div>';
-      html += '<div class="info-item"><div class="label">負責人</div><div class="val">' + report.company.ceo + '</div></div>';
-      html += '<div class="info-item"><div class="label">設立日期</div><div class="val">' + report.company.established + ' 年</div></div>';
-      html += '<div class="info-item"><div class="label">營業項目</div><div class="val">' + report.company.business + '</div></div>';
-      html += '<div class="info-item"><div class="label">匯出日期</div><div class="val">' + new Date().toLocaleDateString('zh-TW') + '</div></div>';
-      html += '</div>';
-      html += '<div class="score">' + report.compliance_score + ' / 100</div>';
-      html += '<p style="text-align:center;color:#888;margin-bottom:32px;">合規分數：8 個機關，7 個通過，1 個審查中</p>';
-
-      html += '<h2>各機關合規詳情</h2>';
-      report.sections.forEach(function(sec) {
-        html += '<div class="section">';
-        html += '<h3>' + sec.agency + ' <span class="status-badge ' + sec.status + '">' + (sec.status === 'compliant' ? '已備齊' : '審查中') + '</span></h3>';
-        if (sec.note) html += '<p style="color:#b06000;font-size:0.9rem;">' + sec.note + '</p>';
-        html += '<p>文件數：' + sec.documents + ' 份</p>';
-        // List documents from detailed data
-        var key = Object.keys(sectionData).find(function(k) {
-          return sectionData[k].agency.indexOf(sec.agency.split(' /')[0].split('（')[0]) !== -1;
-        });
-        if (key && sectionData[key].documents) {
-          html += '<ul>';
-          sectionData[key].documents.forEach(function(doc) {
-            html += '<li>' + doc + '</li>';
-          });
-          html += '</ul>';
-        }
-        html += '</div>';
-      });
-
-      html += '<h2>AI 營運數據</h2>';
-      html += '<div class="info-grid">';
-      html += '<div class="info-item"><div class="label">AI 引擎數</div><div class="val">' + report.ai_operations.total_engines + '</div></div>';
-      html += '<div class="info-item"><div class="label">AI 模型數</div><div class="val">' + report.ai_operations.total_models + '</div></div>';
-      html += '<div class="info-item"><div class="label">資料儲存地點</div><div class="val">' + report.ai_operations.data_location + '</div></div>';
-      html += '<div class="info-item"><div class="label">加密標準</div><div class="val">' + report.ai_operations.encryption + '</div></div>';
-      html += '<div class="info-item"><div class="label">資料保留</div><div class="val">' + report.ai_operations.data_retention + '</div></div>';
-      html += '<div class="info-item"><div class="label">金流整合</div><div class="val">' + report.ai_operations.payment_gateway + '</div></div>';
-      html += '</div>';
-
-      html += '<div class="footer">';
-      html += '<p>本報告由 SEOBAIKE 合規中心自動產生</p>';
-      html += '<p>&copy; 2026 小路光有限公司（統編 60475510）| aiforseo.vip</p>';
-      html += '</div></body></html>';
-
-      var blob = new Blob([html], { type: 'text/html;charset=utf-8' });
-      var url = URL.createObjectURL(blob);
-      var a = document.createElement('a');
-      a.href = url;
-      a.download = 'seobaike_compliance_report_' + new Date().toISOString().slice(0, 10) + '.html';
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
-      URL.revokeObjectURL(url);
-    }
-
-    /* ========== Live Stats from API ========== */
-    async function loadLiveStats() {
-      try {
-        var res = await fetch('https://seobaike-remote-control.icanforyouthebest.workers.dev/api');
-        var data = await res.json();
-        if (data && data.engines) {
-          document.getElementById('liveEngines').textContent = data.engines.length || 15;
-        }
-        if (data && data.total_models) {
-          document.getElementById('liveModels').textContent = Number(data.total_models).toLocaleString();
-        }
-      } catch (e) {
-        // Use default values - already set in HTML
-      }
-    }
-    loadLiveStats();
-
-    /* ========== Analytics Tracking ========== */
-    (function() {
-      // Track page view
-      var pageView = {
-        page: '/compliance',
-        title: '合規中心',
-        timestamp: new Date().toISOString(),
-        referrer: document.referrer || 'direct'
-      };
-      // Send to analytics endpoint if available
-      try {
-        if (navigator.sendBeacon) {
-          navigator.sendBeacon(
-            'https://seobaike-remote-control.icanforyouthebest.workers.dev/api/analytics',
-            JSON.stringify(pageView)
-          );
-        }
-      } catch (e) {
-        // Analytics tracking is non-critical
-      }
-    })();
+  (function(){
+    try {
+      var cfg = window.__SEOBAIKE__ || {};
+      var sUrl = cfg.supabaseUrl || 'https://vmyrivxxibqydccurxug.supabase.co';
+      var sKey = cfg.anonKey || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZteXJpdnh4aWJxeWRjY3VyeHVnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzAwNDAwMjksImV4cCI6MjA4NTYxNjAyOX0.iBV-23LGdm_uKffAExgqSV34-NWoAyv8_-M_cJQZ8Gg';
+      fetch(sUrl + '/rest/v1/page_views', {
+        method: 'POST',
+        headers: { 'Content-Type':'application/json', 'apikey':sKey, 'Authorization':'Bearer '+sKey, 'Prefer':'return=minimal' },
+        body: JSON.stringify({ path: location.pathname, referrer: document.referrer || null, user_agent: navigator.userAgent })
+      }).catch(function(){});
+    } catch(e){}
+  })();
   </script>
-  <script src="/assets/smart-align.js"></script>
+  <script src="/seobaike-widget.js"></script>
 
+  <!-- Design System Scripts -->
+  <script>
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
+
+  window.addEventListener('scroll', () => {
+    const nav = document.querySelector('.nav');
+    if (nav) nav.classList.toggle('scrolled', window.scrollY > 20);
+  });
+
+  function toggleMenu() {
+    document.querySelector('.nav-hamburger')?.classList.toggle('active');
+    document.querySelector('.mobile-overlay')?.classList.toggle('open');
+  }
+  </script>
 </body>
 </html>
