@@ -676,7 +676,7 @@ export default {
         case '/api/gateway': return await handleGateway(request, env)
         case '/api/ai/chat': return await handleAiChat(request, env)
         case '/api/ai/nim': return await handleNimChat(request, env)
-        case '/api/widget-chat': return await handleWidgetChat(request, env)
+        case '/api/widget-chat': return await handleWidgetChatSmart(request, env)
         case '/api/ai/smart': return await handleSmartRouter(request, env)
         // ── SEOBAIKE 世界級 API 路由 ──
         case '/api/ai/router': return await proxyEdge(request, env, 'ai-universal-router')
@@ -1462,17 +1462,58 @@ async function handleNimChat(request: Request, env: Env): Promise<Response> {
   }
 }
 
-// ── Widget Chat — 直接用 Workers AI（真的 AI，不經 ai-gateway）──
-async function handleWidgetChat(request: Request, env: Env): Promise<Response> {
+// ── Widget Chat — 走 Smart Router 拿真正好的回覆 ──
+async function handleWidgetChatSmart(request: Request, env: Env): Promise<Response> {
   const body = await request.json() as any
   const { message } = body
   if (!message) return json(400, { error: 'message is required' })
 
+  // 直接用中文最強模型鏈
+  const systemPrompt = `你是小百，SEOBAIKE（aiforseo.vip）平台的 AI 助手。
+
+關於 SEOBAIKE：
+- AI 界的 App Store，讓企業一站式使用 AI 工具
+- 15 個 AI 引擎、1300+ 模型、500 個自動化工具
+- 支援 14 個通訊管道（LINE, Telegram, WhatsApp 等）
+- 台灣公司「小路光有限公司」開發
+- 方案：免費版 NT$0 / 個人版 NT$299 / 專業版 NT$899 / 企業版 NT$2,999
+
+嚴格規則：
+- 只用繁體中文回覆
+- 最多 3 句話
+- 直接給答案，不解釋過程
+- 不要客套、不要署名`
+  const providers = [
+    { id: 'deepseek', key: env.DEEPSEEK_API_KEY, url: 'https://api.deepseek.com/chat/completions', model: 'deepseek-chat' },
+    { id: 'groq', key: env.GROQ_API_KEY, url: 'https://api.groq.com/openai/v1/chat/completions', model: 'llama-3.3-70b-versatile' },
+    { id: 'together', key: env.TOGETHER_API_KEY, url: 'https://api.together.xyz/v1/chat/completions', model: 'meta-llama/Llama-3.3-70B-Instruct-Turbo' },
+  ]
+
+  for (const p of providers) {
+    if (!p.key) continue
+    try {
+      const res = await fetch(p.url, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${p.key}` },
+        body: JSON.stringify({
+          model: p.model,
+          messages: [{ role: 'system', content: systemPrompt }, { role: 'user', content: message }],
+          max_tokens: 300, temperature: 0.7,
+        }),
+      })
+      if (!res.ok) continue
+      const data = await res.json() as any
+      const reply = data.choices?.[0]?.message?.content
+      if (reply) return json(200, { reply, source: 'seobaike-ai', engine: p.id })
+    } catch { continue }
+  }
+
+  // 全部失敗才用 Workers AI
   try {
     const reply = await aiChat(env.AI, message)
-    return json(200, { reply, source: 'seobaike-ai', model: 'seobaike-chat-v1' })
+    return json(200, { reply, source: 'seobaike-ai', engine: 'edge' })
   } catch (err) {
-    return json(500, { reply: '抱歉，AI 暫時無法回應。\n\n— 小百', error: String(err) })
+    return json(500, { reply: '暫時無法回應，請稍後再試。', error: String(err) })
   }
 }
 
@@ -1752,7 +1793,7 @@ async function handleSmartRouter(request: Request, env: Env): Promise<Response> 
   // 如果指定了供應商和模型，直接使用
   // If provider and model are forced, use them directly
   if (force_provider && force_model) {
-    const systemPrompt = 'You are SEOBAIKE AI assistant. Rules: 1) Answer in the user's language. 2) Be EXTREMELY concise — max 2-3 sentences. 3) Give actionable answers, not explanations. 4) If unsure, say so in one sentence. 5) Never use filler words or pleasantries.'
+    const systemPrompt = "You are SEOBAIKE AI assistant. Rules: 1) Answer in the user's language. 2) Be EXTREMELY concise — max 2-3 sentences. 3) Give actionable answers, not explanations. 4) If unsure, say so in one sentence. 5) Never use filler words or pleasantries."
     const messages = [
       { role: 'system', content: systemPrompt },
       { role: 'user', content: String(message) },
@@ -1774,7 +1815,7 @@ async function handleSmartRouter(request: Request, env: Env): Promise<Response> 
 
   // 依照路由鏈嘗試，失敗自動降級
   // Try routing chain in order, auto-fallback on failure
-  const systemPrompt = 'You are SEOBAIKE AI assistant. Rules: 1) Answer in the user's language. 2) Be EXTREMELY concise — max 2-3 sentences. 3) Give actionable answers, not explanations. 4) If unsure, say so in one sentence. 5) Never use filler words or pleasantries.'
+  const systemPrompt = "You are SEOBAIKE AI assistant. Rules: 1) Answer in the user's language. 2) Be EXTREMELY concise — max 2-3 sentences. 3) Give actionable answers, not explanations. 4) If unsure, say so in one sentence. 5) Never use filler words or pleasantries."
   const chatMessages = [
     { role: 'system', content: systemPrompt },
     { role: 'user', content: String(message) },
