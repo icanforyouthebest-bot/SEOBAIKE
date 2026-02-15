@@ -2784,12 +2784,117 @@
       startCountdown();
       setInterval(jitterActiveNow, 3000);
 
+      /* Fetch real Supabase data */
+      fetchRealData();
+
       /* Re-render chart on resize */
       window.addEventListener('resize', function() {
         if (dashData.revenueDays) {
           renderLineChart();
         }
       });
+    }
+
+    /* ======================================================= */
+    /* REAL DATA FROM SUPABASE                                  */
+    /* ======================================================= */
+    var SUPA_URL = 'https://vmyrivxxibqydccurxug.supabase.co';
+    var SUPA_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZteXJpdnh4aWJxeWRjY3VyeHVnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzAwNDAwMjksImV4cCI6MjA4NTYxNjAyOX0.iBV-23LGdm_uKffAExgqSV34-NWoAyv8_-M_cJQZ8Gg';
+
+    function fetchRealData() {
+      var headers = { 'apikey': SUPA_KEY, 'Authorization': 'Bearer ' + SUPA_KEY };
+
+      /* 1. Page Views — real traffic data */
+      fetch(SUPA_URL + '/rest/v1/page_views?select=path,created_at&order=created_at.desc&limit=200', { headers: headers })
+      .then(function(r) { return r.json(); })
+      .then(function(views) {
+        /* Total views */
+        var totalEl = document.getElementById('totalUsers');
+        if (totalEl) totalEl.textContent = views.length;
+
+        /* Today's views */
+        var today = new Date().toISOString().split('T')[0];
+        var todayViews = views.filter(function(v) { return v.created_at && v.created_at.startsWith(today); });
+        var newTodayEl = document.getElementById('newToday');
+        if (newTodayEl) newTodayEl.textContent = todayViews.length;
+
+        /* Page breakdown — inject into signup list */
+        var pageCounts = {};
+        views.forEach(function(v) {
+          var p = v.path || '/unknown';
+          pageCounts[p] = (pageCounts[p] || 0) + 1;
+        });
+        var sorted = Object.keys(pageCounts).sort(function(a, b) { return pageCounts[b] - pageCounts[a]; });
+        var list = document.getElementById('signupList');
+        if (list) {
+          var html = '';
+          sorted.forEach(function(path) {
+            var label = path === '/' ? '首頁' : path.replace('/', '');
+            html += '<li>' +
+              '<div class="signup-avatar" style="background:var(--orange);font-size:0.7rem;">' + pageCounts[path] + '</div>' +
+              '<div class="signup-info">' +
+                '<div class="signup-name">' + label + '</div>' +
+                '<div class="signup-time">' + pageCounts[path] + ' 次瀏覽</div>' +
+              '</div>' +
+              '</li>';
+          });
+          list.innerHTML = html;
+        }
+
+        /* Real data badge */
+        var badge = document.createElement('div');
+        badge.style.cssText = 'position:fixed;bottom:20px;left:20px;padding:8px 16px;border-radius:20px;background:rgba(40,200,64,0.15);border:1px solid rgba(40,200,64,0.3);color:var(--green);font-size:0.78rem;font-weight:700;z-index:1000;';
+        badge.innerHTML = '<span style="display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--green);margin-right:6px;animation:liveBlink 1.5s infinite;"></span>真實數據 — ' + views.length + ' 筆記錄';
+        document.body.appendChild(badge);
+      }).catch(function(e) { console.log('page_views fetch error:', e); });
+
+      /* 2. Announcements */
+      fetch(SUPA_URL + '/rest/v1/announcements?select=*&order=created_at.desc&limit=10', { headers: headers })
+      .then(function(r) { return r.json(); })
+      .then(function(anns) {
+        var log = document.getElementById('bossActionLog');
+        if (log && anns.length > 0) {
+          var html = '';
+          anns.forEach(function(a) {
+            var time = new Date(a.created_at).toLocaleString('zh-TW');
+            html += '<li class="tx-item"><div class="tx-left"><div class="tx-icon">&#128227;</div><div><div class="tx-name">公告：' + a.title + '</div><div class="tx-time">' + time + '</div></div></div></li>';
+          });
+          log.innerHTML = html;
+        }
+      }).catch(function(){});
+
+      /* 3. SEO Points Transactions */
+      fetch(SUPA_URL + '/rest/v1/seo_points_transactions?select=*&order=created_at.desc&limit=10', { headers: headers })
+      .then(function(r) { return r.json(); })
+      .then(function(txs) {
+        if (txs.length > 0) {
+          var txList = document.getElementById('txList');
+          if (txList) {
+            var html = '';
+            txs.forEach(function(tx) {
+              var time = new Date(tx.created_at).toLocaleString('zh-TW');
+              html += '<li class="tx-item"><div class="tx-left"><div class="tx-icon">&#128176;</div><div><div class="tx-name">' + (tx.description || tx.type) + '</div><div class="tx-time">' + time + '</div></div></div><div class="tx-amount">+' + tx.amount + ' SP</div></li>';
+            });
+            txList.innerHTML = html;
+          }
+        }
+      }).catch(function(){});
+
+      /* 4. Frozen Accounts */
+      fetch(SUPA_URL + '/rest/v1/frozen_accounts?select=*&is_active=eq.true&order=frozen_at.desc&limit=10', { headers: headers })
+      .then(function(r) { return r.json(); })
+      .then(function(frozen) {
+        if (frozen.length > 0) {
+          var alertGrid = document.getElementById('alertGrid');
+          if (alertGrid) {
+            var html = '';
+            frozen.forEach(function(f) {
+              html += '<div class="alert-card"><div class="alert-severity critical"></div><div class="alert-body"><div class="alert-title">已凍結：' + f.user_id + '</div><div class="alert-desc">原因：' + f.reason + '</div><div class="alert-time">' + new Date(f.frozen_at).toLocaleString('zh-TW') + '</div></div></div>';
+            });
+            alertGrid.innerHTML = html + alertGrid.innerHTML;
+          }
+        }
+      }).catch(function(){});
     }
 
     /* ======================================================= */
