@@ -1048,6 +1048,209 @@
       font-variant-numeric: tabular-nums;
     }
 
+    /* ========== Boss Quick Actions ========== */
+    .boss-actions-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+    }
+    .boss-action-card {
+      text-align: center;
+      padding: 24px 16px 20px;
+      position: relative;
+    }
+    .boss-action-card h4 {
+      color: var(--text-bright);
+      font-size: 1rem;
+      margin: 10px 0 4px;
+    }
+    .boss-action-card > p {
+      color: var(--text-muted);
+      font-size: 0.78rem;
+      margin-bottom: 14px;
+    }
+    .boss-action-icon {
+      width: 52px;
+      height: 52px;
+      border-radius: 14px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.6rem;
+    }
+    .boss-form {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 12px;
+      text-align: left;
+    }
+    .boss-input {
+      width: 100%;
+      padding: 10px 14px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      color: var(--text);
+      font-size: 0.88rem;
+      font-family: inherit;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .boss-input:focus {
+      border-color: var(--orange);
+    }
+    .boss-input::placeholder {
+      color: var(--text-muted);
+    }
+    .boss-amount-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .boss-unit {
+      color: var(--orange);
+      font-weight: 700;
+      font-size: 0.85rem;
+      white-space: nowrap;
+    }
+    .boss-btn {
+      padding: 10px 20px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.04);
+      color: var(--text);
+      font-size: 0.88rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+      font-family: inherit;
+    }
+    .boss-btn:hover {
+      background: rgba(255,255,255,0.08);
+      border-color: var(--orange);
+      color: var(--text-bright);
+    }
+    .boss-btn.green {
+      background: rgba(40,200,64,0.12);
+      border-color: rgba(40,200,64,0.4);
+      color: var(--green);
+    }
+    .boss-btn.green:hover {
+      background: rgba(40,200,64,0.2);
+    }
+    .boss-btn.orange {
+      background: rgba(232,133,12,0.12);
+      border-color: rgba(232,133,12,0.4);
+      color: var(--orange);
+    }
+    .boss-btn.orange:hover {
+      background: rgba(232,133,12,0.2);
+    }
+    .boss-btn.red {
+      background: rgba(255,95,87,0.12);
+      border-color: rgba(255,95,87,0.4);
+      color: var(--red);
+    }
+    .boss-btn.red:hover {
+      background: rgba(255,95,87,0.2);
+    }
+    .boss-nav-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      justify-content: center;
+    }
+    .boss-nav-link {
+      display: inline-block;
+      padding: 8px 16px;
+      border-radius: 10px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--border);
+      color: var(--text) !important;
+      font-size: 0.82rem;
+      font-weight: 500;
+      transition: all 0.2s;
+    }
+    .boss-nav-link:hover {
+      background: rgba(232,133,12,0.1);
+      border-color: var(--orange);
+      color: var(--orange) !important;
+    }
+    .boss-action-toast {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      padding: 14px 24px;
+      border-radius: 12px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      z-index: 10000;
+      opacity: 0;
+      transform: translateY(-10px);
+      transition: all 0.3s;
+      pointer-events: none;
+    }
+    .boss-action-toast.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .boss-action-toast.success {
+      background: rgba(40,200,64,0.15);
+      border: 1px solid rgba(40,200,64,0.4);
+      color: var(--green);
+    }
+    .boss-action-toast.error {
+      background: rgba(255,95,87,0.15);
+      border: 1px solid rgba(255,95,87,0.4);
+      color: var(--red);
+    }
+
+    /* ========== Login Social Buttons ========== */
+    .social-login-group {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      width: 320px;
+    }
+    .social-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 13px 20px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.04);
+      color: var(--text);
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+      font-family: inherit;
+      width: 100%;
+    }
+    .social-btn:hover {
+      background: rgba(255,255,255,0.08);
+      border-color: var(--orange);
+    }
+    .social-btn svg {
+      width: 20px;
+      height: 20px;
+    }
+    .login-attempts-warn {
+      color: var(--red);
+      font-size: 0.82rem;
+      margin-top: 4px;
+    }
+    .email-verify-section {
+      width: 320px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      align-items: center;
+    }
+
     /* ========== Footer ========== */
     .dashboard-footer {
       text-align: center;
@@ -1110,6 +1313,8 @@
       .alert-actions { display: none; }
       .pie-wrap { flex-direction: column; }
       .chart-canvas-wrap { height: 180px; }
+      .boss-actions-grid { grid-template-columns: 1fr 1fr; }
+      .social-login-group, .email-verify-section { width: 280px; }
     }
     @media (max-width: 480px) {
       .engine-dot { width: 14px; height: 14px; }
@@ -1117,6 +1322,8 @@
       .access-gate input { width: 280px; }
       .gate-divider { width: 280px; }
       .bio-register-card { padding: 24px 20px; }
+      .boss-actions-grid { grid-template-columns: 1fr; }
+      .social-login-group, .email-verify-section { width: 100%; padding: 0 16px; }
     }
 
     /* Touch & Mobile */
@@ -1126,7 +1333,7 @@
 </head>
 <body>
 
-  <!-- ========== Access Gate (Biometric + Password) ========== -->
+  <!-- ========== Access Gate (Multi-Method Auth) ========== -->
   <div class="access-gate" id="accessGate">
     <div class="bio-scan-ring" id="bioScanRing">
       <div class="ring-outer"></div>
@@ -1136,20 +1343,20 @@
     </div>
     <div class="access-gate-logo"><img src="/favicon.svg" alt="S" width="44" height="44" style="border-radius:10px;"><span class="seo">SEO</span><span class="baike">BAIKE</span></div>
     <h2>指揮中心</h2>
-    <p>僅限創辦人存取</p>
+    <p>僅限創辦人存取 &mdash; 三重驗證保護</p>
 
-    <!-- Biometric Login Button -->
+    <!-- Method 1: Biometric (fastest for founder) -->
     <div id="bioSection" style="display:none; text-align:center; width:320px; max-width:100%;">
       <button class="gate-btn" id="bioLoginBtn" onclick="doBiometricLogin()">
         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 11c0-1.1.9-2 2-2s2 .9 2 2c0 1.5-1 2.5-2 3.5"/><path d="M8 15c-1.5-1.5-2-3.5-2-5.5C6 5.9 8.7 3 12 3s6 2.9 6 6.5c0 1-.2 2-.6 3"/><path d="M12 11v4"/><path d="M2 12c0-4.5 3.1-8.3 7.2-9.5"/><path d="M22 12c0-4.5-3.1-8.3-7.2-9.5"/><path d="M7 20.7c1.5.8 3.2 1.3 5 1.3s3.5-.5 5-1.3"/></svg>
-        生物辨識登入
+        指紋 / 臉部辨識 一鍵進入
       </button>
       <div class="success-msg" id="bioStatus"></div>
     </div>
 
-    <div class="gate-divider" id="gateDivider" style="display:none;">或</div>
+    <div class="gate-divider" id="gateDivider" style="display:none;">或選擇其他方式</div>
 
-    <!-- Password Fallback -->
+    <!-- Method 2: Password -->
     <div class="password-section" id="passwordSection">
       <div style="display:flex; flex-direction:column; align-items:center; gap:12px;">
         <input type="password" id="accessCode" placeholder="請輸入存取碼" autocomplete="off">
@@ -1158,6 +1365,38 @@
     </div>
 
     <div class="error-msg" id="accessError"></div>
+    <div class="login-attempts-warn" id="attemptsWarn" style="display:none;"></div>
+
+    <!-- Lockout Screen (hidden until 3 failures) -->
+    <div id="lockoutScreen" style="display:none; text-align:center;">
+      <p style="color:var(--red); font-size:1rem; font-weight:700;">&#128683; 帳號已鎖定</p>
+      <p style="color:var(--text-muted); font-size:0.85rem;">連續 3 次輸入錯誤，請等待 <span id="lockoutTimer">60</span> 秒後重試</p>
+      <p style="color:var(--text-muted); font-size:0.78rem; margin-top:8px;">或使用其他方式登入</p>
+    </div>
+
+    <!-- Method 3 & 4: Social Login -->
+    <div class="social-login-group" id="socialLoginGroup">
+      <button class="social-btn" onclick="loginWithApple()">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.05 20.28c-.98.95-2.05.88-3.08.4-1.09-.5-2.08-.48-3.24 0-1.44.62-2.2.44-3.06-.4C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.38 5.98.48 7.13-.57 1.5-1.31 2.99-2.54 4.09zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z"/></svg>
+        Apple 帳號登入
+      </button>
+      <button class="social-btn" onclick="loginWithGoogle()">
+        <svg viewBox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 01-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+        Google 帳號登入
+      </button>
+    </div>
+
+    <!-- Method 5: Email Verification -->
+    <div class="email-verify-section" id="emailVerifySection" style="display:none;">
+      <input type="email" id="verifyEmail" placeholder="創辦人 Email" class="boss-input" style="width:100%;">
+      <button class="gate-btn" onclick="sendEmailCode()" id="sendEmailBtn">發送驗證碼</button>
+      <input type="text" id="emailCode" placeholder="輸入 6 位驗證碼" class="boss-input" style="width:100%; display:none;">
+      <button class="gate-btn" onclick="verifyEmailCode()" id="verifyEmailBtn" style="display:none;">驗證登入</button>
+      <div class="success-msg" id="emailVerifyStatus"></div>
+    </div>
+    <button style="background:none;border:none;color:var(--text-muted);font-size:0.82rem;cursor:pointer;margin-top:4px;" onclick="toggleEmailVerify()">
+      &#128231; 改用 Email 驗證
+    </button>
   </div>
 
   <!-- ========== Biometric Registration Prompt ========== -->
@@ -1422,6 +1661,95 @@
         </div>
       </div>
 
+      <!-- ============================== -->
+      <!-- BOSS QUICK ACTIONS -->
+      <!-- ============================== -->
+      <div class="section-block fade-in">
+        <div class="section-title">
+          <div class="icon" style="background:rgba(255,215,0,0.15);">&#9889;</div>
+          創辦人快捷指令
+        </div>
+
+        <div class="boss-actions-grid">
+          <!-- 發獎金 -->
+          <div class="glass-card boss-action-card" id="bonusCard">
+            <div class="boss-action-icon" style="background:rgba(40,200,64,0.1);color:var(--green);">&#128176;</div>
+            <h4>發獎金</h4>
+            <p>一鍵發放 SEO Points 給指定用戶</p>
+            <div class="boss-form" id="bonusForm" style="display:none;">
+              <input type="text" id="bonusUser" placeholder="用戶 Email 或 ID" class="boss-input">
+              <div class="boss-amount-row">
+                <input type="number" id="bonusAmount" placeholder="點數" class="boss-input" min="1" style="flex:1;">
+                <span class="boss-unit">SP</span>
+              </div>
+              <select id="bonusReason" class="boss-input">
+                <option value="performance">表現優異</option>
+                <option value="referral">推薦獎勵</option>
+                <option value="compensation">補償</option>
+                <option value="event">活動獎品</option>
+                <option value="other">其他</option>
+              </select>
+              <button class="boss-btn green" onclick="sendBonus()">確認發放</button>
+            </div>
+            <button class="boss-btn" onclick="toggleBonusForm()">發獎金</button>
+          </div>
+
+          <!-- 全站公告 -->
+          <div class="glass-card boss-action-card">
+            <div class="boss-action-icon" style="background:rgba(232,133,12,0.1);color:var(--orange);">&#128227;</div>
+            <h4>全站公告</h4>
+            <p>一鍵推送訊息給所有用戶</p>
+            <div class="boss-form" id="announceForm" style="display:none;">
+              <input type="text" id="announceTitle" placeholder="公告標題" class="boss-input">
+              <textarea id="announceBody" placeholder="公告內容" class="boss-input" rows="3" style="resize:vertical;"></textarea>
+              <button class="boss-btn orange" onclick="sendAnnounce()">發布公告</button>
+            </div>
+            <button class="boss-btn" onclick="toggleForm('announceForm',this)">發公告</button>
+          </div>
+
+          <!-- 凍結帳號 -->
+          <div class="glass-card boss-action-card">
+            <div class="boss-action-icon" style="background:rgba(255,95,87,0.1);color:var(--red);">&#128683;</div>
+            <h4>凍結帳號</h4>
+            <p>立即停權可疑或違規帳號</p>
+            <div class="boss-form" id="freezeForm" style="display:none;">
+              <input type="text" id="freezeUser" placeholder="用戶 Email 或 ID" class="boss-input">
+              <select id="freezeReason" class="boss-input">
+                <option value="abuse">濫用 API</option>
+                <option value="fraud">詐騙行為</option>
+                <option value="unpaid">逾期未付款</option>
+                <option value="bot">機器人帳號</option>
+                <option value="other">其他</option>
+              </select>
+              <button class="boss-btn red" onclick="sendFreeze()">確認凍結</button>
+            </div>
+            <button class="boss-btn" onclick="toggleForm('freezeForm',this)">凍結</button>
+          </div>
+
+          <!-- 快速導航 -->
+          <div class="glass-card boss-action-card">
+            <div class="boss-action-icon" style="background:rgba(88,130,255,0.1);color:#5882ff;">&#128640;</div>
+            <h4>快速前往</h4>
+            <p>不用跑來跑去，一鍵到位</p>
+            <div class="boss-nav-links">
+              <a href="/dashboard" class="boss-nav-link">用戶儀表板</a>
+              <a href="/marketplace" class="boss-nav-link">市集</a>
+              <a href="/pricing" class="boss-nav-link">定價</a>
+              <a href="/compliance" class="boss-nav-link">合規中心</a>
+              <a href="/" class="boss-nav-link">首頁</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- 最近操作記錄 -->
+        <div class="glass-card" style="margin-top:16px;">
+          <div style="font-size:0.85rem;color:var(--text-muted);font-weight:600;margin-bottom:12px;">最近操作記錄</div>
+          <ul class="tx-list" id="bossActionLog">
+            <li style="color:var(--text-muted);font-size:0.85rem;padding:12px 0;">尚無操作記錄</li>
+          </ul>
+        </div>
+      </div>
+
     </div><!-- /dashboard-body -->
 
     <!-- Footer -->
@@ -1438,6 +1766,11 @@
     var AUTH_KEY = 'seobaike_boss_auth';
     var WEBAUTHN_CRED_KEY = 'seobaike_webauthn_cred';
     var ACCESS_CODE = 'seobaike2026';
+    var BOSS_EMAIL = 'boss@seobaike.com';
+    var MAX_ATTEMPTS = 3;
+    var LOCKOUT_SECONDS = 60;
+    var loginAttempts = 0;
+    var isLockedOut = false;
 
     /* ======================================================= */
     /* WEBAUTHN / BIOMETRIC AUTH                                */
@@ -1637,8 +1970,11 @@
     /* PASSWORD ACCESS GATE                                     */
     /* ======================================================= */
     function checkAccess() {
+      if (isLockedOut) return;
+
       var code = document.getElementById('accessCode').value;
       if (code === ACCESS_CODE) {
+        loginAttempts = 0;
         localStorage.setItem(AUTH_KEY, JSON.stringify({
           verified: true,
           method: 'password',
@@ -1653,10 +1989,177 @@
           showMainContent();
         }
       } else {
-        document.getElementById('accessError').textContent = '存取碼錯誤，請重試';
+        loginAttempts++;
+        var remaining = MAX_ATTEMPTS - loginAttempts;
+
+        if (remaining <= 0) {
+          /* LOCKOUT */
+          triggerLockout();
+        } else {
+          document.getElementById('accessError').textContent = '存取碼錯誤';
+          var warn = document.getElementById('attemptsWarn');
+          warn.style.display = 'block';
+          warn.textContent = '剩餘 ' + remaining + ' 次機會，' + MAX_ATTEMPTS + ' 次失敗將鎖定帳號';
+        }
         document.getElementById('accessCode').value = '';
         document.getElementById('accessCode').focus();
       }
+    }
+
+    function triggerLockout() {
+      isLockedOut = true;
+      document.getElementById('passwordSection').style.display = 'none';
+      document.getElementById('attemptsWarn').style.display = 'none';
+      document.getElementById('accessError').textContent = '';
+      document.getElementById('lockoutScreen').style.display = 'block';
+
+      var seconds = LOCKOUT_SECONDS;
+      var timerEl = document.getElementById('lockoutTimer');
+      var lockInterval = setInterval(function() {
+        seconds--;
+        timerEl.textContent = seconds;
+        if (seconds <= 0) {
+          clearInterval(lockInterval);
+          isLockedOut = false;
+          loginAttempts = 0;
+          document.getElementById('lockoutScreen').style.display = 'none';
+          document.getElementById('passwordSection').style.display = 'block';
+          document.getElementById('attemptsWarn').style.display = 'none';
+        }
+      }, 1000);
+
+      /* Log lockout event */
+      logSecurityEvent('lockout', '連續 ' + MAX_ATTEMPTS + ' 次密碼錯誤，帳號鎖定 ' + LOCKOUT_SECONDS + ' 秒');
+    }
+
+    function logSecurityEvent(type, detail) {
+      try {
+        var sUrl = 'https://vmyrivxxibqydccurxug.supabase.co';
+        var sKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZteXJpdnh4aWJxeWRjY3VyeHVnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzAwNDAwMjksImV4cCI6MjA4NTYxNjAyOX0.iBV-23LGdm_uKffAExgqSV34-NWoAyv8_-M_cJQZ8Gg';
+        fetch(sUrl + '/rest/v1/page_views', {
+          method: 'POST',
+          headers: { 'Content-Type':'application/json', 'apikey':sKey, 'Authorization':'Bearer '+sKey, 'Prefer':'return=minimal' },
+          body: JSON.stringify({ path: '/status/security/' + type, referrer: detail, user_agent: navigator.userAgent })
+        }).catch(function(){});
+      } catch(e){}
+    }
+
+    /* Social Login: Apple */
+    function loginWithApple() {
+      var sUrl = 'https://vmyrivxxibqydccurxug.supabase.co';
+      var sKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZteXJpdnh4aWJxeWRjY3VyeHVnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzAwNDAwMjksImV4cCI6MjA4NTYxNjAyOX0.iBV-23LGdm_uKffAExgqSV34-NWoAyv8_-M_cJQZ8Gg';
+      window.location.href = sUrl + '/auth/v1/authorize?provider=apple&redirect_to=' + encodeURIComponent(location.origin + '/status');
+    }
+
+    /* Social Login: Google */
+    function loginWithGoogle() {
+      var sUrl = 'https://vmyrivxxibqydccurxug.supabase.co';
+      var sKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZteXJpdnh4aWJxeWRjY3VyeHVnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzAwNDAwMjksImV4cCI6MjA4NTYxNjAyOX0.iBV-23LGdm_uKffAExgqSV34-NWoAyv8_-M_cJQZ8Gg';
+      window.location.href = sUrl + '/auth/v1/authorize?provider=google&redirect_to=' + encodeURIComponent(location.origin + '/status');
+    }
+
+    /* Email Verification Toggle */
+    function toggleEmailVerify() {
+      var section = document.getElementById('emailVerifySection');
+      section.style.display = section.style.display === 'none' ? 'flex' : 'none';
+    }
+
+    /* Email Verification: Send Code */
+    function sendEmailCode() {
+      var email = document.getElementById('verifyEmail').value.trim();
+      var statusEl = document.getElementById('emailVerifyStatus');
+      if (!email) {
+        statusEl.textContent = '請輸入 Email';
+        statusEl.style.color = 'var(--red)';
+        return;
+      }
+      var sUrl = 'https://vmyrivxxibqydccurxug.supabase.co';
+      var sKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZteXJpdnh4aWJxeWRjY3VyeHVnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzAwNDAwMjksImV4cCI6MjA4NTYxNjAyOX0.iBV-23LGdm_uKffAExgqSV34-NWoAyv8_-M_cJQZ8Gg';
+      statusEl.textContent = '發送中...';
+      statusEl.style.color = 'var(--orange)';
+      fetch(sUrl + '/auth/v1/otp', {
+        method: 'POST',
+        headers: { 'Content-Type':'application/json', 'apikey':sKey },
+        body: JSON.stringify({ email: email })
+      }).then(function(r) {
+        if (r.ok) {
+          statusEl.textContent = '驗證碼已發送，請查看信箱';
+          statusEl.style.color = 'var(--green)';
+          document.getElementById('emailCode').style.display = 'block';
+          document.getElementById('verifyEmailBtn').style.display = 'block';
+          document.getElementById('sendEmailBtn').textContent = '重新發送';
+        } else {
+          statusEl.textContent = '發送失敗，請確認 Email 是否正確';
+          statusEl.style.color = 'var(--red)';
+        }
+      }).catch(function() {
+        statusEl.textContent = '網路錯誤，請稍後重試';
+        statusEl.style.color = 'var(--red)';
+      });
+    }
+
+    /* Email Verification: Verify Code */
+    function verifyEmailCode() {
+      var email = document.getElementById('verifyEmail').value.trim();
+      var code = document.getElementById('emailCode').value.trim();
+      var statusEl = document.getElementById('emailVerifyStatus');
+      if (!code) {
+        statusEl.textContent = '請輸入驗證碼';
+        statusEl.style.color = 'var(--red)';
+        return;
+      }
+      var sUrl = 'https://vmyrivxxibqydccurxug.supabase.co';
+      var sKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZteXJpdnh4aWJxeWRjY3VyeHVnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzAwNDAwMjksImV4cCI6MjA4NTYxNjAyOX0.iBV-23LGdm_uKffAExgqSV34-NWoAyv8_-M_cJQZ8Gg';
+      statusEl.textContent = '驗證中...';
+      statusEl.style.color = 'var(--orange)';
+      fetch(sUrl + '/auth/v1/verify', {
+        method: 'POST',
+        headers: { 'Content-Type':'application/json', 'apikey':sKey },
+        body: JSON.stringify({ type: 'email', token: code, email: email })
+      }).then(function(r) { return r.json(); })
+      .then(function(data) {
+        if (data.access_token) {
+          statusEl.textContent = '驗證成功！';
+          statusEl.style.color = 'var(--green)';
+          localStorage.setItem(AUTH_KEY, JSON.stringify({
+            verified: true,
+            method: 'email',
+            email: email,
+            token: data.access_token,
+            timestamp: new Date().toISOString()
+          }));
+          setTimeout(function() { showMainContent(); }, 600);
+        } else {
+          statusEl.textContent = '驗證碼錯誤或已過期';
+          statusEl.style.color = 'var(--red)';
+        }
+      }).catch(function() {
+        statusEl.textContent = '驗證失敗，請重試';
+        statusEl.style.color = 'var(--red)';
+      });
+    }
+
+    /* Check for OAuth callback in URL hash */
+    function checkOAuthCallback() {
+      var hash = window.location.hash;
+      if (hash && hash.includes('access_token=')) {
+        var params = {};
+        hash.substring(1).split('&').forEach(function(pair) {
+          var kv = pair.split('=');
+          params[kv[0]] = decodeURIComponent(kv[1] || '');
+        });
+        if (params.access_token) {
+          localStorage.setItem(AUTH_KEY, JSON.stringify({
+            verified: true,
+            method: 'oauth',
+            token: params.access_token,
+            timestamp: new Date().toISOString()
+          }));
+          window.location.hash = '';
+          return true;
+        }
+      }
+      return false;
     }
 
     document.getElementById('accessCode').addEventListener('keydown', function(e) {
@@ -1708,7 +2211,9 @@
     }, { threshold: 0.05 });
 
     /* Auto-login if session exists */
-    if (isAuthenticated()) {
+    if (checkOAuthCallback()) {
+      showMainContent();
+    } else if (isAuthenticated()) {
       showMainContent();
     } else {
       /* Also migrate old key format */
@@ -2284,6 +2789,168 @@
         if (dashData.revenueDays) {
           renderLineChart();
         }
+      });
+    }
+
+    /* ======================================================= */
+    /* BOSS QUICK ACTIONS                                       */
+    /* ======================================================= */
+
+    function showToast(msg, type) {
+      var existing = document.querySelector('.boss-action-toast');
+      if (existing) existing.remove();
+      var toast = document.createElement('div');
+      toast.className = 'boss-action-toast ' + (type || 'success');
+      toast.textContent = msg;
+      document.body.appendChild(toast);
+      setTimeout(function() { toast.classList.add('show'); }, 10);
+      setTimeout(function() {
+        toast.classList.remove('show');
+        setTimeout(function() { toast.remove(); }, 300);
+      }, 3000);
+    }
+
+    function addActionLog(action) {
+      var log = document.getElementById('bossActionLog');
+      if (!log) return;
+      var placeholder = log.querySelector('li[style]');
+      if (placeholder && placeholder.textContent.includes('尚無')) {
+        placeholder.remove();
+      }
+      var now = new Date();
+      var timeStr = now.getHours().toString().padStart(2,'0') + ':' + now.getMinutes().toString().padStart(2,'0');
+      var li = document.createElement('li');
+      li.className = 'tx-item';
+      li.innerHTML = '<div class="tx-left"><div class="tx-icon">&#128221;</div><div><div class="tx-name">' + action + '</div><div class="tx-time">' + timeStr + '</div></div></div>';
+      log.insertBefore(li, log.firstChild);
+    }
+
+    function toggleBonusForm() {
+      var form = document.getElementById('bonusForm');
+      var card = document.getElementById('bonusCard');
+      var btn = card.querySelector('.boss-btn:last-child');
+      if (form.style.display === 'none') {
+        form.style.display = 'flex';
+        btn.style.display = 'none';
+      } else {
+        form.style.display = 'none';
+        btn.style.display = 'block';
+      }
+    }
+
+    function toggleForm(formId, btn) {
+      var form = document.getElementById(formId);
+      if (form.style.display === 'none') {
+        form.style.display = 'flex';
+        btn.style.display = 'none';
+      } else {
+        form.style.display = 'none';
+        btn.style.display = 'block';
+      }
+    }
+
+    function sendBonus() {
+      var user = document.getElementById('bonusUser').value.trim();
+      var amount = document.getElementById('bonusAmount').value;
+      var reason = document.getElementById('bonusReason').value;
+      if (!user || !amount) {
+        showToast('請填寫用戶和點數', 'error');
+        return;
+      }
+      var reasonMap = { performance:'表現優異', referral:'推薦獎勵', compensation:'補償', event:'活動獎品', other:'其他' };
+      var sUrl = 'https://vmyrivxxibqydccurxug.supabase.co';
+      var sKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZteXJpdnh4aWJxeWRjY3VyeHVnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzAwNDAwMjksImV4cCI6MjA4NTYxNjAyOX0.iBV-23LGdm_uKffAExgqSV34-NWoAyv8_-M_cJQZ8Gg';
+
+      fetch(sUrl + '/rest/v1/seo_points_transactions', {
+        method: 'POST',
+        headers: { 'Content-Type':'application/json', 'apikey':sKey, 'Authorization':'Bearer '+sKey, 'Prefer':'return=minimal' },
+        body: JSON.stringify({
+          user_id: user,
+          amount: parseInt(amount),
+          type: 'bonus',
+          description: '創辦人發放獎金 — ' + (reasonMap[reason] || reason),
+          created_by: 'boss'
+        })
+      }).then(function(r) {
+        if (r.ok) {
+          showToast('已發放 ' + amount + ' SP 給 ' + user, 'success');
+          addActionLog('發放 ' + amount + ' SP 獎金給 ' + user);
+          document.getElementById('bonusUser').value = '';
+          document.getElementById('bonusAmount').value = '';
+        } else {
+          showToast('發放失敗，請稍後重試', 'error');
+        }
+      }).catch(function() {
+        showToast('網路錯誤', 'error');
+      });
+    }
+
+    function sendAnnounce() {
+      var title = document.getElementById('announceTitle').value.trim();
+      var body = document.getElementById('announceBody').value.trim();
+      if (!title) {
+        showToast('請填寫公告標題', 'error');
+        return;
+      }
+      var sUrl = 'https://vmyrivxxibqydccurxug.supabase.co';
+      var sKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZteXJpdnh4aWJxeWRjY3VyeHVnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzAwNDAwMjksImV4cCI6MjA4NTYxNjAyOX0.iBV-23LGdm_uKffAExgqSV34-NWoAyv8_-M_cJQZ8Gg';
+
+      fetch(sUrl + '/rest/v1/announcements', {
+        method: 'POST',
+        headers: { 'Content-Type':'application/json', 'apikey':sKey, 'Authorization':'Bearer '+sKey, 'Prefer':'return=minimal' },
+        body: JSON.stringify({
+          title: title,
+          body: body || '',
+          created_by: 'boss',
+          is_active: true
+        })
+      }).then(function(r) {
+        if (r.ok) {
+          showToast('公告「' + title + '」已發布', 'success');
+          addActionLog('發布公告：' + title);
+          document.getElementById('announceTitle').value = '';
+          document.getElementById('announceBody').value = '';
+        } else {
+          showToast('發布失敗', 'error');
+        }
+      }).catch(function() {
+        showToast('網路錯誤', 'error');
+      });
+    }
+
+    function sendFreeze() {
+      var user = document.getElementById('freezeUser').value.trim();
+      var reason = document.getElementById('freezeReason').value;
+      if (!user) {
+        showToast('請填寫要凍結的用戶', 'error');
+        return;
+      }
+      var reasonMap = { abuse:'濫用 API', fraud:'詐騙行為', unpaid:'逾期未付款', bot:'機器人帳號', other:'其他' };
+
+      if (!confirm('確定要凍結帳號「' + user + '」嗎？\n原因：' + (reasonMap[reason] || reason))) return;
+
+      var sUrl = 'https://vmyrivxxibqydccurxug.supabase.co';
+      var sKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZteXJpdnh4aWJxeWRjY3VyeHVnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzAwNDAwMjksImV4cCI6MjA4NTYxNjAyOX0.iBV-23LGdm_uKffAExgqSV34-NWoAyv8_-M_cJQZ8Gg';
+
+      fetch(sUrl + '/rest/v1/frozen_accounts', {
+        method: 'POST',
+        headers: { 'Content-Type':'application/json', 'apikey':sKey, 'Authorization':'Bearer '+sKey, 'Prefer':'return=minimal' },
+        body: JSON.stringify({
+          user_id: user,
+          reason: reasonMap[reason] || reason,
+          frozen_by: 'boss',
+          is_active: true
+        })
+      }).then(function(r) {
+        if (r.ok) {
+          showToast('帳號「' + user + '」已凍結', 'success');
+          addActionLog('凍結帳號：' + user + '（' + (reasonMap[reason] || reason) + '）');
+          document.getElementById('freezeUser').value = '';
+        } else {
+          showToast('凍結失敗', 'error');
+        }
+      }).catch(function() {
+        showToast('網路錯誤', 'error');
       });
     }
 
