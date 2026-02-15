@@ -7,10 +7,10 @@ workers_dev = true
 # 所有流量由 Worker 處理：API 路徑 → Worker 邏輯，其他 → 代理到 Pages
 # routes 已由 Custom Domain 取代，無需手動設定
 
-# KV for rate limiting (MVP: disabled, rate-limiter gracefully handles undefined KV)
-# [[kv_namespaces]]
-# binding = "RATE_LIMIT"
-# id = "" # Fill after `wrangler kv:namespace create RATE_LIMIT`
+# KV for rate limiting
+[[kv_namespaces]]
+binding = "RATE_LIMIT"
+id = "0b4c47814188436e8039fd5ed8a2252f"
 
 # Cloudflare Workers AI (免費、內建)
 [ai]

@@ -104,10 +104,11 @@ body { font-family: 'Segoe UI', sans-serif; background: #0a0a1a; color: #eee; mi
 
 <div class="footer">SEOBAIKE — 專利 115100981 — 小路光有限公司 — AI FOR SEO</div>
 
+<script src="seobaike-config.js"></script>
 <script>
-const EP = "https://vmyrivxxibqydccurxug.supabase.co/functions/v1/nvidia-boss";
-const GW = "https://vmyrivxxibqydccurxug.supabase.co/functions/v1/ai-gateway";
-const KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZteXJpdnh4aWJxeWRjY3VyeHVnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzAwNDAwMjksImV4cCI6MjA4NTYxNjAyOX0.iBV-23LGdm_uKffAExgqSV34-NWoAyv8_-M_cJQZ8Gg";
+const EP = (window.__SEOBAIKE__ && window.__SEOBAIKE__.supabaseUrl || "") + "/functions/v1/nvidia-boss";
+const GW = (window.__SEOBAIKE__ && window.__SEOBAIKE__.supabaseUrl || "") + "/functions/v1/ai-gateway";
+const KEY = (window.__SEOBAIKE__ && window.__SEOBAIKE__.anonKey) || "";
 const HDR = { "Authorization": "Bearer " + KEY, "Content-Type": "application/json" };
 
 let nvOk=0, nvFail=0, gwOk=0, gwFail=0, round=0;

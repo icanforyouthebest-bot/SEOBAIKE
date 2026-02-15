@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>BAIKE AI — Physical AI Avatar</title>
+<title>SEOBAIKE AI — 3D AI 助手</title>
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
   body {
@@ -659,7 +659,7 @@ function setBadge(industry) {
 }
 
 // Initial greeting
-addMessage('嗨！我是 BAIKE，你的 AI 管理助手。\n請輸入問題或指令開始互動。\n\n— BAIKE AI', 'bot');
+addMessage('嗨！我是 SEOBAIKE，你的 AI 管理助手。\n請輸入問題或指令開始互動。\n\n— SEOBAIKE AI', 'bot');
 
 async function sendMessage() {
   const text = inputEl.value.trim();
@@ -706,7 +706,7 @@ async function sendMessage() {
   } catch (err) {
     removeTyping();
     playAnimation('idle');
-    addMessage('無法連線到 BAIKE 伺服器，請稍後再試。', 'denied');
+    addMessage('無法連線到 SEOBAIKE 伺服器，請稍後再試。', 'denied');
   }
 
   isSending = false;

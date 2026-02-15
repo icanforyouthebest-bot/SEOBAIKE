@@ -90,18 +90,18 @@ body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSy
     <h3>🤖 AI 夥伴對話</h3>
     <div style="display:flex;align-items:center;gap:8px">
       <select id="chatPartner" style="padding:4px 8px;border-radius:6px;border:1px solid var(--border);background:var(--bg);color:var(--text);font-size:12px">
-        <option value="partner-openai">OpenAI GPT-4o</option>
-        <option value="partner-anthropic">Anthropic Claude</option>
-        <option value="partner-deepseek">DeepSeek</option>
-        <option value="partner-grok">Grok (xAI)</option>
-        <option value="partner-groq">Groq (fast)</option>
-        <option value="partner-mistral">Mistral</option>
-        <option value="partner-google">Google Gemini</option>
-        <option value="partner-cohere">Cohere</option>
-        <option value="partner-together">Together AI</option>
-        <option value="partner-huggingface">HuggingFace</option>
-        <option value="partner-perplexity">Perplexity</option>
-        <option value="partner-qwen">Qwen (通義)</option>
+        <option value="partner-openai">SEOBAIKE AI 引擎 A</option>
+        <option value="partner-anthropic">SEOBAIKE AI 引擎 B</option>
+        <option value="partner-deepseek">SEOBAIKE AI 引擎 C</option>
+        <option value="partner-grok">SEOBAIKE AI 引擎 D</option>
+        <option value="partner-groq">SEOBAIKE AI 引擎 E（快速）</option>
+        <option value="partner-mistral">SEOBAIKE AI 引擎 F</option>
+        <option value="partner-google">SEOBAIKE AI 引擎 G</option>
+        <option value="partner-cohere">SEOBAIKE AI 引擎 H</option>
+        <option value="partner-together">SEOBAIKE AI 引擎 I</option>
+        <option value="partner-huggingface">SEOBAIKE AI Hub</option>
+        <option value="partner-perplexity">SEOBAIKE 搜尋 AI</option>
+        <option value="partner-qwen">SEOBAIKE AI 引擎 J</option>
       </select>
       <button onclick="toggleChat()" style="background:none;border:none;color:var(--dim);cursor:pointer;font-size:18px">✕</button>
     </div>
@@ -119,49 +119,49 @@ body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSy
 const BASE = 'https://vmyrivxxibqydccurxug.supabase.co/functions/v1';
 
 const AI_PARTNERS = [
-  { slug: 'partner-openai', name: 'OpenAI', provider: 'OpenAI Inc.', caps: ['chat','embeddings','images','tts','vision'] },
-  { slug: 'partner-anthropic', name: 'Anthropic Claude', provider: 'Anthropic', caps: ['chat','vision','code','analysis'] },
-  { slug: 'partner-deepseek', name: 'DeepSeek', provider: 'DeepSeek AI', caps: ['chat','code','reasoning'] },
-  { slug: 'partner-grok', name: 'Grok', provider: 'xAI', caps: ['chat','code','reasoning','vision'] },
-  { slug: 'partner-groq', name: 'Groq', provider: 'Groq Inc.', caps: ['chat','fast-inference'] },
-  { slug: 'partner-mistral', name: 'Mistral', provider: 'Mistral AI', caps: ['chat','code','embeddings'] },
-  { slug: 'partner-google', name: 'Google Gemini', provider: 'Google', caps: ['chat','vision','code'] },
-  { slug: 'partner-perplexity', name: 'Perplexity', provider: 'Perplexity AI', caps: ['search','chat','research'] },
-  { slug: 'partner-cohere', name: 'Cohere', provider: 'Cohere Inc.', caps: ['chat','embed','rerank'] },
-  { slug: 'partner-together', name: 'Together AI', provider: 'Together', caps: ['chat','image','code'] },
-  { slug: 'partner-huggingface', name: 'HuggingFace', provider: 'Hugging Face', caps: ['chat','inference','models'] },
-  { slug: 'partner-qwen', name: 'Qwen (通義千問)', provider: 'Alibaba Cloud', caps: ['chat','code','vision','math'] },
-  { slug: 'partner-replicate', name: 'Replicate', provider: 'Replicate', caps: ['image','video','audio','text'] },
-  { slug: 'partner-stability', name: 'Stability AI', provider: 'Stability AI', caps: ['image-generation','upscale'] },
+  { slug: 'partner-openai', name: 'SEOBAIKE AI 引擎 A', provider: 'SEOBAIKE AI', caps: ['chat','embeddings','images','tts','vision'] },
+  { slug: 'partner-anthropic', name: 'SEOBAIKE AI 引擎 B', provider: 'SEOBAIKE AI', caps: ['chat','vision','code','analysis'] },
+  { slug: 'partner-deepseek', name: 'SEOBAIKE AI 引擎 C', provider: 'SEOBAIKE AI', caps: ['chat','code','reasoning'] },
+  { slug: 'partner-grok', name: 'SEOBAIKE AI 引擎 D', provider: 'SEOBAIKE AI', caps: ['chat','code','reasoning','vision'] },
+  { slug: 'partner-groq', name: 'SEOBAIKE AI 引擎 E', provider: 'SEOBAIKE AI', caps: ['chat','fast-inference'] },
+  { slug: 'partner-mistral', name: 'SEOBAIKE AI 引擎 F', provider: 'SEOBAIKE AI', caps: ['chat','code','embeddings'] },
+  { slug: 'partner-google', name: 'SEOBAIKE AI 引擎 G', provider: 'SEOBAIKE AI', caps: ['chat','vision','code'] },
+  { slug: 'partner-perplexity', name: 'SEOBAIKE 搜尋 AI', provider: 'SEOBAIKE AI', caps: ['search','chat','research'] },
+  { slug: 'partner-cohere', name: 'SEOBAIKE AI 引擎 H', provider: 'SEOBAIKE AI', caps: ['chat','embed','rerank'] },
+  { slug: 'partner-together', name: 'SEOBAIKE AI 引擎 I', provider: 'SEOBAIKE AI', caps: ['chat','image','code'] },
+  { slug: 'partner-huggingface', name: 'SEOBAIKE AI Hub', provider: 'SEOBAIKE AI', caps: ['chat','inference','models'] },
+  { slug: 'partner-qwen', name: 'SEOBAIKE AI 引擎 J', provider: 'SEOBAIKE AI', caps: ['chat','code','vision','math'] },
+  { slug: 'partner-replicate', name: 'SEOBAIKE AI 引擎 K', provider: 'SEOBAIKE AI', caps: ['image','video','audio','text'] },
+  { slug: 'partner-stability', name: 'SEOBAIKE AI 引擎 L', provider: 'SEOBAIKE AI', caps: ['image-generation','upscale'] },
 ];
 
 const PLATFORMS = [
-  { slug: 'connect-slack', name: 'Slack', type: 'Team Communication' },
-  { slug: 'connect-github', name: 'GitHub', type: 'Code Collaboration' },
-  { slug: 'connect-notion', name: 'Notion', type: 'Knowledge Management' },
-  { slug: 'connect-figma', name: 'Figma', type: 'Design Collaboration' },
-  { slug: 'connect-clickup', name: 'ClickUp', type: 'Project Management' },
-  { slug: 'connect-monday', name: 'Monday.com', type: 'Work Management' },
-  { slug: 'connect-asana', name: 'Asana', type: 'Task Management' },
-  { slug: 'connect-jira', name: 'Jira', type: 'Software Development' },
-  { slug: 'connect-miro', name: 'Miro', type: 'Visual Collaboration' },
-  { slug: 'connect-airtable', name: 'Airtable', type: 'Database Platform' },
-  { slug: 'connect-trello', name: 'Trello', type: 'Kanban Board' },
-  { slug: 'connect-hubspot', name: 'HubSpot', type: 'CRM & Marketing' },
-  { slug: 'connect-teams', name: 'Microsoft Teams', type: 'Enterprise Communication' },
-  { slug: 'connect-google-workspace', name: 'Google Workspace', type: 'Cloud Collaboration' },
-  { slug: 'connect-confluence', name: 'Confluence', type: 'Wiki & Documentation' },
-  { slug: 'connect-canva', name: 'Canva', type: 'AI Visual Design' },
-  { slug: 'connect-streamline', name: 'Streamline', type: 'Supply Chain AI' },
-  { slug: 'connect-motiff', name: 'Motiff', type: 'AI UI Design' },
-  { slug: 'connect-mokahr', name: 'MokaHR', type: 'AI Recruitment' },
-  { slug: 'connect-linear', name: 'Linear', type: 'Issue Tracking' },
-  { slug: 'connect-basecamp', name: 'Basecamp', type: 'Project Management' },
-  { slug: 'connect-coda', name: 'Coda', type: 'Doc Automation' },
-  { slug: 'connect-zapier', name: 'Zapier', type: 'Workflow Automation' },
-  { slug: 'connect-n8n', name: 'n8n', type: 'Open-Source Automation' },
-  { slug: 'connect-pipedream', name: 'Pipedream', type: 'Developer Automation' },
-  { slug: 'connect-svix', name: 'Svix', type: 'Webhook Management' },
+  { slug: 'connect-slack', name: 'SEOBAIKE 通訊 A', type: '團隊通訊' },
+  { slug: 'connect-github', name: 'SEOBAIKE 開發協作', type: '程式碼協作' },
+  { slug: 'connect-notion', name: 'SEOBAIKE 知識庫', type: '知識管理' },
+  { slug: 'connect-figma', name: 'SEOBAIKE 設計協作', type: '設計協作' },
+  { slug: 'connect-clickup', name: 'SEOBAIKE 專案 A', type: '專案管理' },
+  { slug: 'connect-monday', name: 'SEOBAIKE 專案 B', type: '工作管理' },
+  { slug: 'connect-asana', name: 'SEOBAIKE 任務管理', type: '任務管理' },
+  { slug: 'connect-jira', name: 'SEOBAIKE 開發管理', type: '軟體開發' },
+  { slug: 'connect-miro', name: 'SEOBAIKE 視覺協作', type: '視覺協作' },
+  { slug: 'connect-airtable', name: 'SEOBAIKE 資料平台', type: '資料庫平台' },
+  { slug: 'connect-trello', name: 'SEOBAIKE 看板', type: '看板管理' },
+  { slug: 'connect-hubspot', name: 'SEOBAIKE 行銷 CRM', type: 'CRM 行銷' },
+  { slug: 'connect-teams', name: 'SEOBAIKE 通訊 B', type: '企業通訊' },
+  { slug: 'connect-google-workspace', name: 'SEOBAIKE 雲端協作', type: '雲端協作' },
+  { slug: 'connect-confluence', name: 'SEOBAIKE 文件 Wiki', type: 'Wiki 文件' },
+  { slug: 'connect-canva', name: 'SEOBAIKE AI 設計', type: 'AI 視覺設計' },
+  { slug: 'connect-streamline', name: 'SEOBAIKE 供應鏈', type: '供應鏈 AI' },
+  { slug: 'connect-motiff', name: 'SEOBAIKE UI 設計', type: 'AI UI 設計' },
+  { slug: 'connect-mokahr', name: 'SEOBAIKE 招募', type: 'AI 招募' },
+  { slug: 'connect-linear', name: 'SEOBAIKE 議題追蹤', type: '議題追蹤' },
+  { slug: 'connect-basecamp', name: 'SEOBAIKE 專案 C', type: '專案管理' },
+  { slug: 'connect-coda', name: 'SEOBAIKE 文件自動化', type: '文件自動化' },
+  { slug: 'connect-zapier', name: 'SEOBAIKE 市集 A', type: '工作流自動化' },
+  { slug: 'connect-n8n', name: 'SEOBAIKE 市集 B', type: '開源自動化' },
+  { slug: 'connect-pipedream', name: 'SEOBAIKE 市集 C', type: '開發者自動化' },
+  { slug: 'connect-svix', name: 'SEOBAIKE Webhook', type: 'Webhook 管理' },
 ];
 
 let allStatuses = {};
@@ -172,7 +172,7 @@ function renderCard(item, type) {
   const isActive = status && (status.status === 'active' || status.status === 'live' || status.api_key_configured || status.nvidia_fallback);
   const isNvidia = status && (status.status === 'active_via_nvidia' || status.nvidia_fallback) && !status.api_key_configured && !status.key_configured;
   const badgeClass = isActive ? (isNvidia ? 'nvidia' : 'active') : 'setup';
-  const badgeText = isActive ? (isNvidia ? 'NVIDIA NIM' : '運作中') : '待設定';
+  const badgeText = isActive ? (isNvidia ? 'SEOBAIKE GPU' : '運作中') : '待設定';
 
   return `<div class="card" data-type="${type}" data-active="${isActive}">
     <span class="badge ${badgeClass}">${badgeText}</span>

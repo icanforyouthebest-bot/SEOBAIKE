@@ -206,13 +206,13 @@ class SelfAuditor:
         """掃描 API 金鑰洩漏 — 檢查硬編碼的 token/key"""
         patterns = [
             (r'["\']eyJ[a-zA-Z0-9_-]{10,}\.[a-zA-Z0-9_-]+\.[a-zA-Z0-9_-]+["\']', "JWT Token"),
-            (r"sk-[a-zA-Z0-9]{32,}", "OpenAI/Anthropic API Key"),
+            (r"sk-[a-zA-Z0-9]{32,}", "AI 平台 API Key"),
             (r"ghp_[a-zA-Z0-9]{36}", "GitHub Personal Access Token"),
             (r"github_pat_[a-zA-Z0-9_]+", "GitHub Fine-grained PAT"),
             (r"sbp_[a-zA-Z0-9]{30,}", "Supabase Access Token"),
-            (r"xoxb-[0-9]+-[a-zA-Z0-9]+", "Slack Bot Token"),
-            (r"AKIA[0-9A-Z]{16}", "AWS Access Key"),
-            (r"AIza[a-zA-Z0-9_-]{35}", "Google API Key"),
+            (r"xoxb-[0-9]+-[a-zA-Z0-9]+", "通訊平台 Bot Token"),
+            (r"AKIA[0-9A-Z]{16}", "雲端平台 Access Key"),
+            (r"AIza[a-zA-Z0-9_-]{35}", "搜尋平台 API Key"),
         ]
         found = []
         allowed_files = {"CLAUDE.md"}  # CLAUDE.md 是專案指令檔，允許含 token

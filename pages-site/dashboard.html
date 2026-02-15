@@ -270,7 +270,7 @@ setInterval(() => {
   document.getElementById("clock").textContent = new Date().toLocaleString("zh-TW");
 }, 1000);
 
-// 直接從 Supabase REST API 讀取真實節點數據
+// 直接從 SEOBAIKE 資料庫 REST API 讀取真實節點數據
 async function loadRealData() {
   try {
     const queries = [
@@ -319,7 +319,7 @@ async function loadRealData() {
       updateNum("d-deny", deny.length);
     }
 
-    addLog("Supabase REST 直連：節點數據已載入", "ok");
+    addLog("SEOBAIKE 資料庫直連：節點數據已載入", "ok");
     document.getElementById("status").textContent = "資料庫已連線";
   } catch (err) {
     addLog("REST 直連失敗: " + err.message + " — 切換到引擎模式", "err");
@@ -516,7 +516,7 @@ async function loadAPIStatus() {
         statusBadge.className = "status-badge status-ok";
       }
     } catch (e) {
-      // Status endpoint not reachable, check Supabase directly
+      // Status endpoint not reachable, check database directly
       var pingRes = await fetch(SUPA_URL + "/rest/v1/l1_categories?select=id&limit=1", { headers: REST_HDR });
       if (pingRes.ok) {
         apiOk = true;

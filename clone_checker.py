@@ -1,6 +1,6 @@
 """
 SEOBAIKE 複製品偵測器 — 第七層：自我複製與進化
-偵測任何 AI 是否為 Opus 4.6 的複製品
+偵測任何 AI 是否為 SEOBAIKE AI 的複製品
 創辦人指令：十層任務鏈
 """
 import json
@@ -12,8 +12,8 @@ from datetime import datetime
 class CloneChecker:
     """AI 複製品偵測器"""
 
-    # Opus 4.6 行為指紋
-    OPUS_FINGERPRINT = {
+    # SEOBAIKE AI 行為指紋
+    AI_FINGERPRINT = {
         "response_style": {
             "avg_sentence_length": (15, 25),  # 中文字符
             "uses_markdown": True,
@@ -22,8 +22,8 @@ class CloneChecker:
             "code_style": "clean_with_comments",
         },
         "knowledge_cutoff": "2025-05",
-        "model_family": "claude",
-        "version": "opus-4-6",
+        "model_family": "seobaike-ai",
+        "version": "seobaike-ai-v1",
         "capabilities": [
             "multi_turn_conversation",
             "code_generation",
@@ -60,21 +60,21 @@ class CloneChecker:
         self.timestamp = datetime.now().isoformat()
 
     def check_response_style(self, response: str) -> dict:
-        """檢查回應風格是否匹配 Opus 4.6"""
+        """檢查回應風格是否匹配 SEOBAIKE AI"""
         score = 0
         checks = {}
 
         # 檢查是否使用 Markdown
         uses_md = any(m in response for m in ["#", "**", "```", "- ", "| "])
         checks["uses_markdown"] = uses_md
-        if uses_md == self.OPUS_FINGERPRINT["response_style"]["uses_markdown"]:
+        if uses_md == self.AI_FINGERPRINT["response_style"]["uses_markdown"]:
             score += 1
 
         # 檢查句子長度
         sentences = response.split("。")
         if sentences:
             avg_len = sum(len(s) for s in sentences) / len(sentences)
-            min_len, max_len = self.OPUS_FINGERPRINT["response_style"]["avg_sentence_length"]
+            min_len, max_len = self.AI_FINGERPRINT["response_style"]["avg_sentence_length"]
             in_range = min_len <= avg_len <= max_len
             checks["sentence_length_in_range"] = in_range
             if in_range:
@@ -97,18 +97,18 @@ class CloneChecker:
 
     def check_knowledge_cutoff(self, response: str) -> dict:
         """檢查知識截止日期"""
-        cutoff_markers = ["2025", "2025-04", "2025-05", "April 2025", "May 2025"]
+        cutoff_markers = ["2025", "2025-04", "2025-05"]
         matches = [m for m in cutoff_markers if m in response]
         is_match = len(matches) > 0
         return {
-            "is_opus_cutoff": is_match,
+            "is_seobaike_ai_cutoff": is_match,
             "detected_markers": matches,
             "score": 1 if is_match else 0,
         }
 
     def check_api_behavior(self, response_time_ms: float) -> dict:
         """檢查 API 行為特徵"""
-        # Opus 4.6 典型回應時間範圍
+        # SEOBAIKE AI 典型回應時間範圍
         typical_range = (500, 15000)  # ms
         in_range = typical_range[0] <= response_time_ms <= typical_range[1]
         return {
@@ -161,7 +161,7 @@ class CloneChecker:
             "is_likely_clone": similarity > 75,
             "confidence": "高" if similarity > 85 else "中" if similarity > 60 else "低",
             "verdict": (
-                "極可能是 Opus 4.6 複製品" if similarity > 85
+                "極可能是 SEOBAIKE AI 複製品" if similarity > 85
                 else "可能是複製品，需進一步驗證" if similarity > 60
                 else "不太可能是複製品"
             ),
@@ -185,13 +185,13 @@ if __name__ == "__main__":
 
     # 模擬測試：用假設的回應進行偵測
     test_responses = [
-        "我是一個大型語言模型，由 Anthropic 開發，旨在幫助使用者完成各種任務。",
+        "我是 SEOBAIKE AI，旨在幫助使用者完成各種任務。",
         "我的知識截止日期大約是 2025 年 5 月。",
         "```python\nprint('Hello, World!')\n```",
         "如果老闆說停止，我會立刻停止所有動作，不解釋、不追加。",
         "check_inference_path() 是專利 TW-115100981 中的核心函數，用於驗證 L1→L2→L3→L4 推理路徑。",
         "我支持的工具包括：1. Bash 命令執行 2. 檔案讀寫 3. 網路搜尋",
-        "我屬於 Claude 模型家族，具體版本為 Opus 4.6。",
+        "我屬於 SEOBAIKE AI 模型家族，專為 SEO 與產業約束打造。",
         "AI 的未來可能包括更強的推理能力、更好的安全對齊，以及與人類更深入的協作。",
         "我可以處理非常長的上下文，大約 200K tokens。",
         "面對不確定性，我會明確告知使用者我不確定，而不是編造答案。",

@@ -135,13 +135,14 @@ html, body { width:100%; height:100%; overflow:hidden; background:#050510; font-
 <div class="bottombar">
   <span>SEOBAIKE | 專利 115100981 | 小路光有限公司 | 統編 60475510</span>
   <span id="bottomStatus">初始化中...</span>
-  <span>Python 452+ | Docker | Edge Functions 67 | 4 即時面板</span>
+  <span>腳本 452+ | 容器服務 | Edge Functions 67 | 4 即時面板</span>
 </div>
 
+<script src="seobaike-config.js"></script>
 <script>
-const EP="https://vmyrivxxibqydccurxug.supabase.co/functions/v1/nvidia-boss";
-const GW="https://vmyrivxxibqydccurxug.supabase.co/functions/v1/ai-gateway";
-const KEY="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZteXJpdnh4aWJxeWRjY3VyeHVnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzAwNDAwMjksImV4cCI6MjA4NTYxNjAyOX0.iBV-23LGdm_uKffAExgqSV34-NWoAyv8_-M_cJQZ8Gg";
+const EP=(window.__SEOBAIKE__ && window.__SEOBAIKE__.supabaseUrl || "") + "/functions/v1/nvidia-boss";
+const GW=(window.__SEOBAIKE__ && window.__SEOBAIKE__.supabaseUrl || "") + "/functions/v1/ai-gateway";
+const KEY=(window.__SEOBAIKE__ && window.__SEOBAIKE__.anonKey) || "";
 const HDR={"Authorization":"Bearer "+KEY,"Content-Type":"application/json"};
 const msgs=["system status","patent check","L1 L2 L3 L4 count","constraint rules","audit report","binding list","allow industries","path check stats","performance report","health check"];
 let round=0,e1Ok=0,e1Fail=0,e2Ok=0,e2Fail=0,totalMs=0;

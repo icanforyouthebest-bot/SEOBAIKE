@@ -6,80 +6,80 @@ import json
 from datetime import datetime
 
 AI_LEGIONS = {
-    "NVIDIA": {
+    "SEOBAIKE Alpha": {
         "specialties": ["推論", "安全檢查", "影像分析", "語音", "GPU加速"],
-        "api_match": ["nvidia-nim", "nvidia-guardrails", "nvidia-riva"],
+        "api_match": ["seobaike-gpu", "seobaike-guardrails", "seobaike-voice"],
         "strength": "高效能推論與安全防護",
     },
-    "OpenAI": {
+    "SEOBAIKE Beta": {
         "specialties": ["文本生成", "摘要", "對話", "程式碼"],
-        "api_match": ["openai-gpt4o"],
+        "api_match": ["seobaike-ai-text"],
         "strength": "通用型語言理解與生成",
     },
-    "Perplexity": {
+    "SEOBAIKE Gamma": {
         "specialties": ["搜尋", "即時資訊", "研究"],
-        "api_match": ["perplexity"],
+        "api_match": ["seobaike-search-ai"],
         "strength": "即時網路搜尋與資訊整合",
     },
-    "Google": {
+    "SEOBAIKE Delta": {
         "specialties": ["翻譯", "多模態", "搜尋", "分析"],
-        "api_match": ["google-gemini"],
+        "api_match": ["seobaike-search"],
         "strength": "多模態理解與全球化翻譯",
     },
-    "DeepSeek": {
+    "SEOBAIKE Epsilon": {
         "specialties": ["程式碼", "數學", "推理"],
-        "api_match": ["deepseek"],
+        "api_match": ["seobaike-ai-reason"],
         "strength": "深度推理與程式碼生成",
     },
-    "Mistral": {
+    "SEOBAIKE Zeta": {
         "specialties": ["程式碼生成", "歐洲語言", "效率"],
-        "api_match": ["mistral"],
-        "strength": "高效輕量模型與歐洲合規",
+        "api_match": ["seobaike-ai-code"],
+        "strength": "高效輕量模型與多語合規",
     },
-    "Groq": {
+    "SEOBAIKE Eta": {
         "specialties": ["高速推論", "即時回應", "低延遲"],
-        "api_match": ["groq"],
+        "api_match": ["seobaike-ai-fast"],
         "strength": "超低延遲推論加速",
     },
-    "Cohere": {
+    "SEOBAIKE Theta": {
         "specialties": ["企業搜尋", "RAG", "嵌入"],
-        "api_match": ["cohere"],
+        "api_match": ["seobaike-ai-rag"],
         "strength": "企業級搜尋與知識檢索",
     },
-    "Together": {
+    "SEOBAIKE Iota": {
         "specialties": ["開源模型", "微調", "推論"],
-        "api_match": ["together-ai"],
+        "api_match": ["seobaike-ai-open"],
         "strength": "開源模型託管與微調",
     },
-    "HuggingFace": {
+    "SEOBAIKE Kappa": {
         "specialties": ["模型庫", "微調", "推論", "數據集"],
-        "api_match": ["huggingface"],
+        "api_match": ["seobaike-ai-hub"],
         "strength": "全球最大模型生態系統",
     },
-    "Anthropic": {
+    "SEOBAIKE Lambda": {
         "specialties": ["安全AI", "長文本", "分析"],
-        "api_match": ["anthropic-claude"],
-        "strength": "安全對齊與長文本理解（已撤職備援）",
+        "api_match": ["seobaike-ai-analyst"],
+        "strength": "安全對齊與長文本理解（備援角色）",
     },
-    "Replicate": {
+    "SEOBAIKE Mu": {
         "specialties": ["影像生成", "模型部署", "API化"],
-        "api_match": ["replicate"],
+        "api_match": ["seobaike-ai-deploy"],
         "strength": "一鍵模型部署與影像生成",
     },
-    "Stability": {
+    "SEOBAIKE Nu": {
         "specialties": ["影像生成", "設計", "創意"],
-        "api_match": ["stability-ai"],
-        "strength": "Stable Diffusion 影像生成",
+        "api_match": ["seobaike-ai-image"],
+        "strength": "SEOBAIKE AI 影像生成",
     },
-    "Claude": {
+    "SEOBAIKE Xi": {
         "specialties": ["文本生成", "分析", "程式碼"],
         "api_match": [],
-        "strength": "已撤職 — 僅備援角色",
+        "strength": "備援角色",
     },
-    "Meta": {
+    "SEOBAIKE Omicron": {
         "specialties": ["多語言", "開源", "翻譯"],
-        "api_match": ["meta-llama"],
-        "strength": "Llama 開源多語言模型",
+        "api_match": ["seobaike-ai-multilang"],
+        "strength": "SEOBAIKE AI 開源多語言模型",
     },
 }
 

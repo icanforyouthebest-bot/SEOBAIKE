@@ -20,15 +20,15 @@ def simulate_execution(task):
     elif priority == "low":
         base_success_rate = 0.80
 
-    if api in ["nvidia-nim", "nvidia-guardrails"]:
-        base_success_rate = 0.95  # NVIDIA 指揮官級最穩定
-    elif api in ["openai-gpt4o"]:
+    if api in ["seobaike-gpu", "seobaike-guardrails"]:
+        base_success_rate = 0.95  # SEOBAIKE GPU 指揮官級最穩定
+    elif api in ["seobaike-ai-text"]:
         base_success_rate = 0.90
 
     # 模擬延遲
     latency_ms = random.randint(200, 8000)
-    if api and "nvidia" in api:
-        latency_ms = random.randint(100, 3000)  # NVIDIA 最快
+    if api and "seobaike-gpu" in api:
+        latency_ms = random.randint(100, 3000)  # SEOBAIKE GPU 最快
 
     # 模擬 token 消耗
     tokens_used = random.randint(

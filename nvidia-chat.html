@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SEOBAIKE 指揮中心 | 輝達全線驅動</title>
+<title>SEOBAIKE 指揮中心 | AI 全線驅動</title>
 <style>
 * { margin: 0; padding: 0; box-sizing: border-box; }
 body { font-family: 'Segoe UI', sans-serif; background: #1a1a2e; color: #eee; height: 100vh; display: flex; flex-direction: column; }
@@ -44,10 +44,10 @@ body { font-family: 'Segoe UI', sans-serif; background: #1a1a2e; color: #eee; he
 
 <div class="header">
   <h1>SEOBAIKE 指揮中心</h1>
-  <span class="badge">輝達 指揮官</span>
+  <span class="badge">SEOBAIKE 指揮官</span>
   <span class="badge" style="background:#76b900;">6 部門 18 模型</span>
-  <span class="badge" style="background:#666;color:#ccc;">Opus 4.6 秘書</span>
-  <span class="badge" style="background:#333;color:#76b900;"><span class="live-dot"></span>輝達全線驅動</span>
+  <span class="badge" style="background:#666;color:#ccc;">AI 秘書</span>
+  <span class="badge" style="background:#333;color:#76b900;"><span class="live-dot"></span>AI 全線驅動</span>
 </div>
 
 <div class="main">
@@ -81,20 +81,21 @@ body { font-family: 'Segoe UI', sans-serif; background: #1a1a2e; color: #eee; he
   <div class="chat-area">
     <div class="chat" id="chat">
       <div class="msg ai">
-        <div class="label">SEOBAIKE 指揮中心（輝達驅動）</div>
-        老闆好！輝達 6 大部門已全數就位，擔任指揮官與架構師。Opus 4.6 已降為秘書備援。請下達指令。
+        <div class="label">SEOBAIKE 指揮中心</div>
+        老闆好！SEOBAIKE AI 6 大部門已全數就位，擔任指揮官與架構師。AI 秘書已備援就位。請下達指令。
       </div>
     </div>
     <div class="input-area">
-      <input type="text" id="input" placeholder="直接跟輝達說話..." autofocus />
+      <input type="text" id="input" placeholder="直接跟 SEOBAIKE AI 說話..." autofocus />
       <button id="send" onclick="sendMsg()">送出</button>
     </div>
   </div>
 </div>
 
+<script src="seobaike-config.js"></script>
 <script>
-const ENDPOINT = "https://vmyrivxxibqydccurxug.supabase.co/functions/v1/nvidia-boss";
-const ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZteXJpdnh4aWJxeWRjY3VyeHVnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzAwNDAwMjksImV4cCI6MjA4NTYxNjAyOX0.iBV-23LGdm_uKffAExgqSV34-NWoAyv8_-M_cJQZ8Gg";
+const ENDPOINT = window.__SEOBAIKE__.supabaseUrl + "/functions/v1/nvidia-boss";
+const ANON_KEY = window.__SEOBAIKE__.anonKey;
 
 const chat = document.getElementById("chat");
 const input = document.getElementById("input");
@@ -144,7 +145,7 @@ async function sendMsg() {
 
   const typing = document.createElement("div");
   typing.className = "typing";
-  typing.textContent = "指揮中心處理中（輝達驅動）...";
+  typing.textContent = "SEOBAIKE 指揮中心處理中...";
   chat.appendChild(typing);
   chat.scrollTop = chat.scrollHeight;
 
@@ -165,7 +166,7 @@ async function sendMsg() {
     const aiDiv = document.createElement("div");
     if (data.reply) {
       aiDiv.className = "msg ai";
-      aiDiv.innerHTML = '<div class="label">SEOBAIKE 指揮中心（輝達驅動）</div>' + escapeHtml(data.reply);
+      aiDiv.innerHTML = '<div class="label">SEOBAIKE 指揮中心</div>' + escapeHtml(data.reply);
     } else {
       aiDiv.className = "msg error";
       aiDiv.textContent = JSON.stringify(data);

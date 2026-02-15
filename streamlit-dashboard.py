@@ -3,20 +3,21 @@ import streamlit as st
 import httpx
 import time
 import json
+import os
 from datetime import datetime
 
 st.set_page_config(page_title="SEOBAIKE 即時監控", page_icon="🔥", layout="wide")
 
-SUPABASE_URL = "https://vmyrivxxibqydccurxug.supabase.co"
-ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZteXJpdnh4aWJxeWRjY3VyeHVnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzAwNDAwMjksImV4cCI6MjA4NTYxNjAyOX0.iBV-23LGdm_uKffAExgqSV34-NWoAyv8_-M_cJQZ8Gg"
-NVIDIA_EP = f"{SUPABASE_URL}/functions/v1/nvidia-boss"
+SUPABASE_URL = os.environ.get("SUPABASE_URL", "https://vmyrivxxibqydccurxug.supabase.co")
+ANON_KEY = os.environ.get("SUPABASE_ANON_KEY", "")
+MAIN_ENGINE_EP = f"{SUPABASE_URL}/functions/v1/nvidia-boss"  # 端點名稱保留（技術路由）
 GATEWAY_EP = f"{SUPABASE_URL}/functions/v1/ai-gateway"
 HEADERS = {"Authorization": f"Bearer {ANON_KEY}", "Content-Type": "application/json"}
 
 if "round" not in st.session_state:
     st.session_state.round = 0
-    st.session_state.nv_ok = 0
-    st.session_state.nv_fail = 0
+    st.session_state.main_ok = 0
+    st.session_state.main_fail = 0
     st.session_state.gw_ok = 0
     st.session_state.gw_fail = 0
     st.session_state.history = []
@@ -41,35 +42,35 @@ col1, col2 = st.columns(2)
 try:
     t0 = time.time()
     with httpx.Client(timeout=30) as c:
-        r = c.post(NVIDIA_EP, headers=HEADERS, json={"message": msg})
-    nv_ms = round((time.time()-t0)*1000)
+        r = c.post(MAIN_ENGINE_EP, headers=HEADERS, json={"message": msg})
+    main_ms = round((time.time()-t0)*1000)
     d = r.json()
     if r.status_code == 200 and d.get("reply"):
-        st.session_state.nv_ok += 1
-        nv_status = "OK"
-        nv_reply = d["reply"][:80]
+        st.session_state.main_ok += 1
+        main_status = "OK"
+        main_reply = d["reply"][:80]
         real_data = d.get("real_data", {})
     else:
-        st.session_state.nv_fail += 1
-        nv_status = "FAIL"
-        nv_reply = str(d)[:80]
+        st.session_state.main_fail += 1
+        main_status = "FAIL"
+        main_reply = str(d)[:80]
         real_data = {}
 except Exception as e:
-    st.session_state.nv_fail += 1
-    nv_status = "ERROR"
-    nv_reply = str(e)[:80]
-    nv_ms = 0
+    st.session_state.main_fail += 1
+    main_status = "ERROR"
+    main_reply = str(e)[:80]
+    main_ms = 0
     real_data = {}
 
 with col1:
     st.markdown(f"### SEOBAIKE 主引擎")
     c1, c2, c3 = st.columns(3)
-    c1.metric("成功", st.session_state.nv_ok)
-    c2.metric("失敗", st.session_state.nv_fail)
-    c3.metric("延遲", f"{nv_ms}ms")
-    nv_rate = round(st.session_state.nv_ok/(st.session_state.nv_ok+st.session_state.nv_fail)*100, 1) if (st.session_state.nv_ok+st.session_state.nv_fail) > 0 else 0
-    st.progress(nv_rate/100, text=f"成功率 {nv_rate}%")
-    st.code(f"[{nv_status}] {nv_reply}")
+    c1.metric("成功", st.session_state.main_ok)
+    c2.metric("失敗", st.session_state.main_fail)
+    c3.metric("延遲", f"{main_ms}ms")
+    main_rate = round(st.session_state.main_ok/(st.session_state.main_ok+st.session_state.main_fail)*100, 1) if (st.session_state.main_ok+st.session_state.main_fail) > 0 else 0
+    st.progress(main_rate/100, text=f"成功率 {main_rate}%")
+    st.code(f"[{main_status}] {main_reply}")
 
 # Gateway test
 try:
@@ -118,7 +119,7 @@ p7.metric("Allow 規則", real_data.get("allow_paths", "?"))
 p8.metric("Deny 規則", real_data.get("deny_paths", "?"))
 
 # Log
-st.session_state.history.insert(0, f"[{now}] #{st.session_state.round} NV:{nv_ms}ms({nv_status}) GW:{gw_ms}ms({gw_status}) msg={msg}")
+st.session_state.history.insert(0, f"[{now}] #{st.session_state.round} MAIN:{main_ms}ms({main_status}) GW:{gw_ms}ms({gw_status}) msg={msg}")
 st.session_state.history = st.session_state.history[:30]
 
 st.markdown("---")

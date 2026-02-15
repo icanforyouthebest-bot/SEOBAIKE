@@ -199,7 +199,7 @@ def generate_optimization_report():
 
 動態任務分配演算法透過即時效率評估與加權分配，預估可將整體完成時間縮短 **{comp['time_improvement']}**，Token 消耗減少 **{comp['tokens_saved']:,}** 個。
 
-建議部署此演算法至生產環境，搭配 NVIDIA 指揮部的即時監控系統。
+建議部署此演算法至生產環境，搭配 SEOBAIKE 指揮部的即時監控系統。
 
 ---
 

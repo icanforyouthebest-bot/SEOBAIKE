@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>BAIKE AI - 雙霸主即時儀錶板</title>
+<title>SEOBAIKE AI - 雙引擎即時儀錶板</title>
 <style>
 * { margin: 0; padding: 0; box-sizing: border-box; }
 body { font-family: 'Segoe UI', sans-serif; background: #0a0a1a; color: #eee; min-height: 100vh; }
@@ -52,9 +52,9 @@ body { font-family: 'Segoe UI', sans-serif; background: #0a0a1a; color: #eee; mi
 <body>
 
 <div class="header">
-  <h1>BAIKE AI</h1>
-  <span class="badge" style="background:#76b900;color:#000;">NVIDIA NIM</span>
-  <span class="badge" style="background:#cc785c;color:#fff;">Claude Opus 4.6</span>
+  <h1>SEOBAIKE AI</h1>
+  <span class="badge" style="background:#76b900;color:#000;">SEOBAIKE 主引擎</span>
+  <span class="badge" style="background:#cc785c;color:#fff;">SEOBAIKE 約束引擎</span>
   <span class="badge" style="background:#e8850c;color:#fff;">創辦人專線</span>
   <span class="badge" style="background:#111;color:#0f0;border:1px solid #333;"><span class="live-dot"></span><span id="status">連線中...</span></span>
   <span style="margin-left:auto;font-size:12px;color:#888;" id="clock"></span>
@@ -73,7 +73,7 @@ body { font-family: 'Segoe UI', sans-serif; background: #0a0a1a; color: #eee; mi
 
 <div class="engines">
   <div class="engine">
-    <h3><span class="status" id="nv-status"></span> NVIDIA NIM — Llama 3.3 70B</h3>
+    <h3><span class="status" id="nv-status"></span> SEOBAIKE 主引擎 — AI 運算核心</h3>
     <div class="stats">
       <div class="stat"><div class="val" style="color:#76b900;" id="nv-ok">0</div><div class="key">成功</div></div>
       <div class="stat"><div class="val" style="color:#ff6b6b;" id="nv-fail">0</div><div class="key">失敗</div></div>
@@ -93,7 +93,7 @@ body { font-family: 'Segoe UI', sans-serif; background: #0a0a1a; color: #eee; mi
 </div>
 
 <div class="routes">
-  <h3>雙霸主路由配置</h3>
+  <h3>雙引擎路由配置</h3>
   <div class="route-grid" id="routeGrid"></div>
 </div>
 
@@ -102,23 +102,24 @@ body { font-family: 'Segoe UI', sans-serif; background: #0a0a1a; color: #eee; mi
   <div class="log" id="log"></div>
 </div>
 
-<div class="footer">BAIKE AI — 專利 115100981 — 小路光有限公司 — NVIDIA + Claude 雙霸主引擎</div>
+<div class="footer">SEOBAIKE AI — 專利 115100981 — 小路光有限公司 — 雙引擎架構</div>
 
+<script src="seobaike-config.js"></script>
 <script>
-const EP = "https://vmyrivxxibqydccurxug.supabase.co/functions/v1/nvidia-boss";
-const GW = "https://vmyrivxxibqydccurxug.supabase.co/functions/v1/ai-gateway";
-const KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZteXJpdnh4aWJxeWRjY3VyeHVnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzAwNDAwMjksImV4cCI6MjA4NTYxNjAyOX0.iBV-23LGdm_uKffAExgqSV34-NWoAyv8_-M_cJQZ8Gg";
+const EP = (window.__SEOBAIKE__ && window.__SEOBAIKE__.supabaseUrl || "") + "/functions/v1/nvidia-boss";
+const GW = (window.__SEOBAIKE__ && window.__SEOBAIKE__.supabaseUrl || "") + "/functions/v1/ai-gateway";
+const KEY = (window.__SEOBAIKE__ && window.__SEOBAIKE__.anonKey) || "";
 const HDR = { "Authorization": "Bearer " + KEY, "Content-Type": "application/json" };
 
 let nvOk=0, nvFail=0, gwOk=0, gwFail=0, round=0;
 const msgs = ["system status","patent check","L1 L2 L3 L4 count","constraint rules","audit report","binding list","allow industries","path check stats","performance","health"];
 const log = document.getElementById("log");
 const routes = [
-  {name:"flagship_dual", path:"Claude Opus → NVIDIA NIM"},
-  {name:"boss_direct", path:"NVIDIA NIM → Claude Opus"},
-  {name:"code_generation", path:"Claude Opus → NVIDIA Nemotron"},
-  {name:"reasoning_dual", path:"NVIDIA Nemotron → Claude Opus"},
-  {name:"fast_dual", path:"Claude Haiku → NVIDIA NIM"},
+  {name:"flagship_dual", path:"約束引擎 → 主引擎"},
+  {name:"boss_direct", path:"主引擎 → 約束引擎"},
+  {name:"code_generation", path:"約束引擎 → 運算核心"},
+  {name:"reasoning_dual", path:"運算核心 → 約束引擎"},
+  {name:"fast_dual", path:"快速引擎 → 主引擎"},
 ];
 document.getElementById("routeGrid").innerHTML = routes.map(r =>
   '<div class="route"><span class="name">' + r.name + '</span><span class="path">' + r.path + '</span></div>'
@@ -160,7 +161,7 @@ async function tick() {
       nvOk++;
       document.getElementById("nv-status").className = "status ok";
       document.getElementById("nv-ms").textContent = ms;
-      addLog("NVIDIA #" + round + " OK (" + ms + "ms) — " + data.reply.substring(0,40) + "...", "ok");
+      addLog("主引擎 #" + round + " OK (" + ms + "ms) — " + data.reply.substring(0,40) + "...", "ok");
       if (data.real_data) {
         updateNum("d-l1", data.real_data.l1_count);
         updateNum("d-l2", data.real_data.l2_count);
@@ -171,8 +172,8 @@ async function tick() {
         updateNum("d-allow", data.real_data.allow_paths);
         updateNum("d-deny", data.real_data.deny_paths);
       }
-    } else { nvFail++; document.getElementById("nv-status").className = "status fail"; addLog("NVIDIA #" + round + " FAIL: " + JSON.stringify(data).substring(0,60), "err"); }
-  })().catch(e => { nvFail++; addLog("NVIDIA #" + round + " ERROR: " + e.message, "err"); });
+    } else { nvFail++; document.getElementById("nv-status").className = "status fail"; addLog("主引擎 #" + round + " FAIL: " + JSON.stringify(data).substring(0,60), "err"); }
+  })().catch(e => { nvFail++; addLog("主引擎 #" + round + " ERROR: " + e.message, "err"); });
 
   const gwJob = (async () => {
     const t0 = performance.now();

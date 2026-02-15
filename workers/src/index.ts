@@ -1,6 +1,6 @@
 // ============================================================
 // SEOBAIKE 遙控器 — AI Remote Control
-// Cloudflare Workers AI (免費) + Telegram Inline Keyboard
+// 多平台 AI 中控 + Inline Keyboard
 // ============================================================
 
 import type { Env, NormalizedMessage, ReplyContext } from './types'
@@ -33,6 +33,7 @@ import { replySms } from './reply/sms-reply'
 import { replyWebWidget } from './reply/web-widget-reply'
 import { aiFormat, aiChat, aiConstrainedChat } from './ai/brain'
 import { lookupAuth } from './middleware/auth'
+import { checkRateLimit } from './middleware/rate-limiter'
 
 export default {
   async fetch(request: Request, env: Env): Promise<Response> {
@@ -58,7 +59,7 @@ export default {
     const cleanPath = path.endsWith('/') && path !== '/' ? path.slice(0, -1) : path
     const pageFile = SITE_PAGES[cleanPath]
     if (pageFile) {
-      // ── Cloudflare 邊緣快取：毫秒級響應 ──
+      // ── SEOBAIKE 邊緣快取：毫秒級響應 ──
       const cache = caches.default
       const cacheKey = new Request(url.toString(), request)
       const purge = url.searchParams.get('purge')
@@ -101,6 +102,13 @@ export default {
       })
       if (rawRes.ok) cache.put(cacheKey, resp.clone())
       return resp
+    }
+
+    // ── Google Search Console 驗證 ──
+    if (path === '/google1d30b7964cf86d2c.html') {
+      return new Response('google-site-verification: google1d30b7964cf86d2c.html', {
+        headers: { 'Content-Type': 'text/html', 'Cache-Control': 'public, max-age=86400' },
+      })
     }
 
     // ── Apple / Google 驗證檔案（App Store + Play Store 上架必備） ──
@@ -167,7 +175,7 @@ export default {
 
     // ── /api/v1/* 公開資料路由 → 從 Supabase REST 代理 ──
     const SUPA_URL = env.SUPABASE_URL || 'https://vmyrivxxibqydccurxug.supabase.co'
-    const SUPA_KEY = env.SUPABASE_ANON_KEY || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZteXJpdnh4aWJxeWRjY3VyeHVnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzAwNDAwMjksImV4cCI6MjA4NTYxNjAyOX0.iBV-23LGdm_uKffAExgqSV34-NWoAyv8_-M_cJQZ8Gg'
+    const SUPA_KEY = env.SUPABASE_ANON_KEY
     const supaHeaders = { 'apikey': SUPA_KEY, 'Authorization': `Bearer ${SUPA_KEY}` }
 
     if (path === '/api/v1/status') {
@@ -238,6 +246,14 @@ export default {
     }
 
     if (request.method !== 'POST') return json(405, { error: 'Method not allowed' })
+
+    // ── Rate Limiting — 公開 API 每 IP 每端點 5 秒冷卻 ──
+    const rateLimitPaths = ['/api/ai/chat', '/api/widget-chat', '/api/v1/check', '/api/v1/inference', '/api/checkout']
+    if (rateLimitPaths.includes(path)) {
+      const clientIp = request.headers.get('CF-Connecting-IP') || 'unknown'
+      const { allowed, retryAfter } = await checkRateLimit(env.RATE_LIMIT, `${clientIp}:${path}`, 5)
+      if (!allowed) return json(429, { error: '請求過於頻繁，請稍後再試', retry_after: retryAfter })
+    }
 
     try {
       switch (path) {
@@ -723,13 +739,13 @@ async function handleSmsWebhook(request: Request, env: Env): Promise<Response> {
   const parsed = parseCommand(msg.text)
   if (!parsed.command.startsWith('/')) {
     const result = await aiConstrainedChat(env.SUPABASE_URL, env.SUPABASE_SERVICE_ROLE_KEY, msg.text, 'sms', msg.source_user_id)
-    if (msg.from_number) await replySms(msg.from_number, result.reply, env.TWILIO_ACCOUNT_SID, env.TWILIO_AUTH_TOKEN, env.TWILIO_PHONE_NUMBER)
+    if (msg.from_number) await replySms(msg.from_number, result.reply, env.TWILIO_PHONE_NUMBER, env.TWILIO_ACCOUNT_SID, env.TWILIO_AUTH_TOKEN)
     return json(200, { status: 'ok' })
   }
 
   const result = await callEdge(env, parsed.command, msg.source_user_id, 'sms', parsed.sub_command, parsed.args)
   const replyText = await aiFormat(env.AI, parsed.command, result)
-  if (msg.from_number) await replySms(msg.from_number, replyText, env.TWILIO_ACCOUNT_SID, env.TWILIO_AUTH_TOKEN, env.TWILIO_PHONE_NUMBER)
+  if (msg.from_number) await replySms(msg.from_number, replyText, env.TWILIO_PHONE_NUMBER, env.TWILIO_ACCOUNT_SID, env.TWILIO_AUTH_TOKEN)
   return json(200, { status: 'ok', result })
 }
 
@@ -851,7 +867,7 @@ async function handleGateway(request: Request, env: Env): Promise<Response> {
 }
 
 // ============================================================
-// AI 約束聊天（L1-L4 行業約束 + NVIDIA NIM）
+// SEOBAIKE AI 約束聊天（L1-L4 行業約束）
 // ============================================================
 async function handleAiChat(request: Request, env: Env): Promise<Response> {
   const body = await request.json() as any
@@ -879,15 +895,15 @@ async function handleWidgetChat(request: Request, env: Env): Promise<Response> {
 
   try {
     const reply = await aiChat(env.AI, message)
-    return json(200, { reply, source: 'cloudflare-workers-ai', model: '@cf/meta/llama-3.1-8b-instruct' })
+    return json(200, { reply, source: 'seobaike-ai', model: 'seobaike-chat-v1' })
   } catch (err) {
     return json(500, { reply: '抱歉，AI 暫時無法回應。\n\n— 小百', error: String(err) })
   }
 }
 
-// ── Stripe Checkout — 真的收款 ──
+// ── SEOBAIKE 金流結帳 ──
 async function handleStripeCheckout(request: Request, env: Env): Promise<Response> {
-  if (!env.STRIPE_SECRET_KEY) return json(503, { error: 'Stripe 尚未設定，請提供 API Key' })
+  if (!env.STRIPE_SECRET_KEY) return json(503, { error: '金流系統尚未設定' })
 
   const body = await request.json() as any
   const plan = body.plan || 'professional'
@@ -925,7 +941,7 @@ async function handleStripeCheckout(request: Request, env: Env): Promise<Respons
   return json(200, { checkout_url: session.url, session_id: session.id })
 }
 
-// ── Stripe Webhook — 接收付款通知 ──
+// ── SEOBAIKE 金流 Webhook — 接收付款通知 ──
 async function handleStripeWebhook(request: Request, env: Env): Promise<Response> {
   const body = await request.text()
   try {
@@ -954,9 +970,9 @@ async function handleStripeWebhook(request: Request, env: Env): Promise<Response
   }
 }
 
-// ── Resend Email — 真的寄信 ──
+// ── SEOBAIKE 信件發送 ──
 async function handleSendEmail(request: Request, env: Env): Promise<Response> {
-  if (!env.RESEND_API_KEY) return json(503, { error: 'Resend 尚未設定，請提供 API Key' })
+  if (!env.RESEND_API_KEY) return json(503, { error: '信件系統尚未設定' })
 
   const body = await request.json() as any
   const { to, subject, html, text } = body
@@ -1009,7 +1025,7 @@ async function sendReply(env: Env, ctx: ReplyContext, text: string): Promise<voi
     case 'wechat': { if (ctx.open_id && env.WECHAT_APP_ID) await replyWechat(ctx.open_id, text, env.WECHAT_APP_ID, env.WECHAT_APP_SECRET); break }
     case 'signal': { if (env.SIGNAL_REST_API_URL) await replySignal(ctx.sender_id || '', text, env.SIGNAL_BOT_NUMBER, env.SIGNAL_REST_API_URL); break }
     case 'viber': { if (ctx.viber_user_id && env.VIBER_AUTH_TOKEN) await replyViber(ctx.viber_user_id, text, env.VIBER_AUTH_TOKEN); break }
-    case 'sms': { if (ctx.from_number && env.TWILIO_AUTH_TOKEN) await replySms(ctx.from_number, text, env.TWILIO_ACCOUNT_SID, env.TWILIO_AUTH_TOKEN, env.TWILIO_PHONE_NUMBER); break }
+    case 'sms': { if (ctx.from_number && env.TWILIO_AUTH_TOKEN) await replySms(ctx.from_number, text, env.TWILIO_PHONE_NUMBER, env.TWILIO_ACCOUNT_SID, env.TWILIO_AUTH_TOKEN); break }
     case 'web_widget': { if (ctx.callback_url) await replyWebWidget(ctx.callback_url, text, ctx.session_token); break }
   }
 }

@@ -2,7 +2,7 @@
 <html lang="zh-TW">
 <head>
 <meta charset="UTF-8">
-<title>BAIKE AI — 總控制台</title>
+<title>SEOBAIKE AI — 總控制台</title>
 <style>
 * { margin:0; padding:0; box-sizing:border-box; }
 body { font-family:'Segoe UI',sans-serif; background:#0a0a1a; color:#eee; min-height:100vh; }
@@ -30,8 +30,8 @@ body { font-family:'Segoe UI',sans-serif; background:#0a0a1a; color:#eee; min-he
 <body>
 
 <div class="header">
-  <h1><span class="live"></span> BAIKE AI — 雙霸主總控制台</h1>
-  <p>NVIDIA NIM + Claude Opus 4.6 | 專利 115100981 | 小路光有限公司 | <span class="clock" id="clock"></span></p>
+  <h1><span class="live"></span> SEOBAIKE AI — 雙引擎總控制台</h1>
+  <p>SEOBAIKE 主引擎 + 約束引擎 | 專利 115100981 | 小路光有限公司 | <span class="clock" id="clock"></span></p>
 </div>
 
 <div class="stats" id="liveStats">
@@ -43,27 +43,27 @@ body { font-family:'Segoe UI',sans-serif; background:#0a0a1a; color:#eee; min-he
 
 <div class="grid">
   <div class="panel">
-    <h3><span class="spinner"></span> 雙霸主引擎即時測試 <span class="badge" style="background:#76b900;color:#000;">自動 5s</span></h3>
+    <h3><span class="spinner"></span> 雙引擎即時測試 <span class="badge" style="background:#76b900;color:#000;">自動 5s</span></h3>
     <iframe src="dual-dashboard.html"></iframe>
   </div>
   <div class="panel">
-    <h3><span class="spinner"></span> Gradio 全系統監控 <span class="badge" style="background:#cc785c;color:#fff;">自動 6s</span></h3>
+    <h3><span class="spinner"></span> SEOBAIKE 全系統監控 <span class="badge" style="background:#cc785c;color:#fff;">自動 6s</span></h3>
     <iframe src="http://localhost:7870"></iframe>
   </div>
   <div class="panel">
-    <h3><span class="spinner"></span> Streamlit 即時儀表板 <span class="badge" style="background:#e8850c;color:#fff;">自動 3s</span></h3>
+    <h3><span class="spinner"></span> SEOBAIKE 即時儀表板 <span class="badge" style="background:#e8850c;color:#fff;">自動 3s</span></h3>
     <iframe src="http://localhost:8501"></iframe>
   </div>
   <div class="panel">
-    <h3><span class="spinner"></span> 雙霸主聊天介面 <span class="badge" style="background:#76b900;color:#000;">互動式</span></h3>
+    <h3><span class="spinner"></span> 雙引擎聊天介面 <span class="badge" style="background:#76b900;color:#000;">互動式</span></h3>
     <iframe src="nvidia-chat.html"></iframe>
   </div>
   <div class="panel">
-    <h3><span class="spinner"></span> JupyterLab 開發環境 <span class="badge" style="background:#f37726;color:#fff;">互動式</span></h3>
+    <h3><span class="spinner"></span> SEOBAIKE 開發環境 <span class="badge" style="background:#f37726;color:#fff;">互動式</span></h3>
     <iframe src="http://localhost:8888"></iframe>
   </div>
   <div class="panel">
-    <h3><span class="spinner"></span> Docker 容器監控 <span class="badge" style="background:#2496ed;color:#fff;">常駐</span></h3>
+    <h3><span class="spinner"></span> SEOBAIKE 容器監控 <span class="badge" style="background:#2496ed;color:#fff;">常駐</span></h3>
     <div style="padding:16px;font-family:monospace;font-size:12px;line-height:1.8;height:400px;overflow-y:auto;" id="dockerLog">
       載入中...
     </div>
@@ -71,7 +71,7 @@ body { font-family:'Segoe UI',sans-serif; background:#0a0a1a; color:#eee; min-he
 </div>
 
 <div class="footer">
-  BAIKE AI — 專利 115100981 — 小路光有限公司 — 全系統運行中 — <span id="ft"></span>
+  SEOBAIKE AI — 專利 115100981 — 小路光有限公司 — 全系統運行中 — <span id="ft"></span>
 </div>
 
 <script>
@@ -87,9 +87,9 @@ setInterval(() => {
 setInterval(() => {
   let count = 0;
   const checks = [
-    {url:"http://localhost:7870", name:"Gradio"},
-    {url:"http://localhost:8501", name:"Streamlit"},
-    {url:"http://localhost:8888", name:"JupyterLab"},
+    {url:"http://localhost:7870", name:"全系統監控"},
+    {url:"http://localhost:8501", name:"即時儀表板"},
+    {url:"http://localhost:8888", name:"開發環境"},
   ];
   let done = 0;
   checks.forEach(c => {
@@ -97,10 +97,12 @@ setInterval(() => {
   });
 }, 10000);
 document.getElementById("s-services").textContent = "7+";
-
+</script>
+<script src="seobaike-config.js"></script>
+<script>
 // Test round counter
-const EP = "https://vmyrivxxibqydccurxug.supabase.co/functions/v1/nvidia-boss";
-const KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZteXJpdnh4aWJxeWRjY3VyeHVnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzAwNDAwMjksImV4cCI6MjA4NTYxNjAyOX0.iBV-23LGdm_uKffAExgqSV34-NWoAyv8_-M_cJQZ8Gg";
+const EP = (window.__SEOBAIKE__ && window.__SEOBAIKE__.supabaseUrl || "https://vmyrivxxibqydccurxug.supabase.co") + "/functions/v1/nvidia-boss";
+const KEY = (window.__SEOBAIKE__ && window.__SEOBAIKE__.anonKey) || "";
 
 async function pingDocker() {
   const dl = document.getElementById("dockerLog");
@@ -110,9 +112,9 @@ async function pingDocker() {
     const d = await r.json();
     testRound++;
     document.getElementById("s-round").textContent = testRound;
-    dl.innerHTML = '<div style="color:#76b900;">['+ts+'] #'+testRound+' Docker ping OK — '+((d.reply||"").substring(0,60))+'</div>' + dl.innerHTML;
+    dl.innerHTML = '<div style="color:#76b900;">['+ts+'] #'+testRound+' 容器 ping OK — '+((d.reply||"").substring(0,60))+'</div>' + dl.innerHTML;
   } catch(e) {
-    dl.innerHTML = '<div style="color:#ff6b6b;">['+ts+'] Docker ping FAIL — '+e.message+'</div>' + dl.innerHTML;
+    dl.innerHTML = '<div style="color:#ff6b6b;">['+ts+'] 容器 ping FAIL — '+e.message+'</div>' + dl.innerHTML;
   }
   if(dl.children.length > 50) dl.lastChild.remove();
 }

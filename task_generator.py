@@ -11,33 +11,33 @@ from datetime import datetime
 TASK_DESCRIPTIONS = [
     "分析 {site} 網站 SEO 健檢",
     "生成 {industry} 產業分析報告",
-    "呼叫 NVIDIA NIM API 推論 {topic}",
+    "呼叫 SEOBAIKE GPU 推論 {topic}",
     "生成 {topic} 行銷文案",
     "執行 L1→L4 約束路徑檢查",
     "分析 {industry} 產業競爭對手",
     "生成 {industry} 關鍵字研究報告",
-    "呼叫 OpenAI GPT-4o 摘要 {topic}",
+    "呼叫 SEOBAIKE AI 摘要 {topic}",
     "執行 {site} 反向連結分析",
     "生成 {industry} 社群媒體策略",
-    "呼叫 Google Gemini 翻譯 {topic}",
+    "呼叫 SEOBAIKE 搜尋翻譯 {topic}",
     "分析 {site} 網站效能與速度",
     "生成 {industry} 內容行事曆",
-    "呼叫 Perplexity 搜尋 {topic} 最新資訊",
+    "呼叫 SEOBAIKE 搜尋 AI 搜尋 {topic} 最新資訊",
     "執行 {site} 技術 SEO 稽核",
     "生成 {industry} 電子報模板",
-    "呼叫 DeepSeek 程式碼審查",
+    "呼叫 SEOBAIKE AI 程式碼審查",
     "分析 {industry} 市場趨勢預測",
     "生成 {site} 結構化資料標記",
-    "呼叫 NVIDIA Guardrails 安全檢查",
+    "呼叫 SEOBAIKE 安全防護檢查",
     "執行 {industry} 客戶情感分析",
     "生成 {topic} 影片腳本",
-    "呼叫 Meta Llama 多語言翻譯",
+    "呼叫 SEOBAIKE AI 多語言翻譯",
     "分析 {site} 使用者行為數據",
     "生成 {industry} 白皮書草稿",
-    "呼叫 Mistral 程式碼生成",
+    "呼叫 SEOBAIKE AI 程式碼生成",
     "執行 {site} 行動端適配檢查",
     "生成 {industry} 品牌定位分析",
-    "呼叫 HuggingFace 模型推論",
+    "呼叫 SEOBAIKE AI Hub 模型推論",
     "分析 {industry} 供應鏈風險評估",
 ]
 
@@ -64,10 +64,10 @@ TOPICS = [
 
 EXTERNAL_APIS = [
     None, None, None,  # 30% 不需外部 API
-    "nvidia-nim", "openai-gpt4o", "google-gemini", "perplexity",
-    "deepseek", "mistral", "meta-llama", "huggingface",
-    "nvidia-guardrails", "nvidia-riva", "anthropic-claude",
-    "groq", "cohere", "together-ai", "replicate", "stability-ai",
+    "seobaike-gpu", "seobaike-ai-text", "seobaike-search", "seobaike-search-ai",
+    "seobaike-ai-reason", "seobaike-ai-code", "seobaike-ai-multilang", "seobaike-ai-hub",
+    "seobaike-guardrails", "seobaike-voice", "seobaike-ai-analyst",
+    "seobaike-ai-fast", "seobaike-ai-rag", "seobaike-ai-open", "seobaike-ai-deploy", "seobaike-ai-image",
 ]
 
 LOCAL_FILES = [

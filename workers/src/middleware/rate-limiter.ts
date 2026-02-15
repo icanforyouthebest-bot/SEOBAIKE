@@ -19,6 +19,6 @@ export async function checkRateLimit(
     }
   }
 
-  await kv.put(cacheKey, String(Date.now()), { expirationTtl: cooldownSeconds })
+  await kv.put(cacheKey, String(Date.now()), { expirationTtl: Math.max(60, cooldownSeconds) })
   return { allowed: true }
 }

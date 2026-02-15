@@ -1,18 +1,32 @@
 import { createClient } from 'jsr:@supabase/supabase-js@2'
 
-const corsHeaders = {
-  'Access-Control-Allow-Origin': '*',
-  'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
+const ALLOWED_ORIGINS = [
+  'https://aiforseo.vip',
+  'https://www.aiforseo.vip',
+  'https://api.aiforseo.vip',
+  'https://seobaike-remote-control.icanforyouthebest.workers.dev',
+]
+
+function getCorsHeaders(req: Request) {
+  const origin = req.headers.get('Origin') || ''
+  const allowed = ALLOWED_ORIGINS.includes(origin) ? origin : ALLOWED_ORIGINS[0]
+  return {
+    'Access-Control-Allow-Origin': allowed,
+    'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
+    'Access-Control-Allow-Methods': 'POST, OPTIONS',
+  }
 }
 
 Deno.serve(async (req) => {
-  // 1. 處理 CORS (允許跨域請求)
+  const corsHeaders = getCorsHeaders(req)
+
+  // 1. CORS preflight
   if (req.method === 'OPTIONS') {
     return new Response('ok', { headers: corsHeaders })
   }
 
   // 只允許 POST
-  if (req.method !== 'POST' && req.method !== 'OPTIONS') {
+  if (req.method !== 'POST') {
     return new Response(JSON.stringify({ error: 'Method not allowed' }), {
       headers: { ...corsHeaders, 'Content-Type': 'application/json' },
       status: 405,
@@ -44,7 +58,6 @@ Deno.serve(async (req) => {
     )
 
     // 4. 呼叫 SQL RPC (execute_remote_command)
-    // user_id 傳 NULL，由 SQL function 從 metadata 中解析 platform binding
     const { data, error } = await supabaseClient.rpc('execute_remote_command', {
       command_type: command,
       request_metadata: { ...metadata, user_id: userId }
@@ -55,7 +68,7 @@ Deno.serve(async (req) => {
       throw error
     }
 
-    // 5. 回傳結果 (保持純淨 JSON，不加任何廢話)
+    // 5. 回傳結果
     return new Response(JSON.stringify(data), {
       headers: { ...corsHeaders, 'Content-Type': 'application/json' },
       status: 200,

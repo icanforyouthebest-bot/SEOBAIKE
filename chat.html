@@ -81,20 +81,21 @@ body { font-family: 'Segoe UI', sans-serif; background: #1a1a2e; color: #eee; he
   <div class="chat-area">
     <div class="chat" id="chat">
       <div class="msg ai">
-        <div class="label">SEOBAIKE 雙霸主引擎</div>
+        <div class="label">SEOBAIKE 雙引擎</div>
         老闆好！SEOBAIKE AI 引擎已上線，搭配專利約束系統 L1→L4 真實數據。請說話。
       </div>
     </div>
     <div class="input-area">
-      <input type="text" id="input" placeholder="直接跟輝達說話..." autofocus />
+      <input type="text" id="input" placeholder="直接跟 SEOBAIKE AI 說話..." autofocus />
       <button id="send" onclick="sendMsg()">送出</button>
     </div>
   </div>
 </div>
 
+<script src="seobaike-config.js"></script>
 <script>
-const ENDPOINT = "https://vmyrivxxibqydccurxug.supabase.co/functions/v1/nvidia-boss";
-const ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZteXJpdnh4aWJxeWRjY3VyeHVnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzAwNDAwMjksImV4cCI6MjA4NTYxNjAyOX0.iBV-23LGdm_uKffAExgqSV34-NWoAyv8_-M_cJQZ8Gg";
+const ENDPOINT = window.__SEOBAIKE__.supabaseUrl + "/functions/v1/nvidia-boss";
+const ANON_KEY = window.__SEOBAIKE__.anonKey;
 
 const chat = document.getElementById("chat");
 const input = document.getElementById("input");
