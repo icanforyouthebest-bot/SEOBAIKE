@@ -25,6 +25,8 @@
   <link rel="apple-touch-icon" href="/favicon.svg">
   <link rel="manifest" href="/manifest.json">
   <link rel="preconnect" href="https://vmyrivxxibqydccurxug.supabase.co">
+
+  <!-- Structured Data -->
   <script type="application/ld+json">
   [
     {
@@ -85,644 +87,286 @@
     }
   ]
   </script>
+
+  <!-- Design System -->
+  <link rel="stylesheet" href="/assets/design-system.css">
+
+  <!-- Page-Specific Styles -->
   <style>
-    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-
-    :root {
-      --orange: #e8850c;
-      --orange-hover: #d4780a;
-      --orange-light: #f5a623;
-      --orange-glow: rgba(232, 133, 12, 0.15);
-      --orange-glow-strong: rgba(232, 133, 12, 0.25);
-      --copper: #cc785c;
-      --bg: #0a0a1a;
-      --bg-card: #12122a;
-      --bg-warm: rgba(232, 133, 12, 0.03);
-      --border: #2a2a4a;
-      --border-light: #3a3a5a;
-      --text: #e0e0e8;
-      --text-muted: #8888aa;
-      --text-bright: #ffffff;
-      --radius: 16px;
-    }
-
-    html { scroll-behavior: smooth; }
-
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans TC", sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      line-height: 1.7;
-      overflow-x: hidden;
-    }
-
-    a { color: var(--orange); text-decoration: none; transition: color 0.2s; }
-    a:hover { color: var(--copper); }
-
-    .container { max-width: 1140px; margin: 0 auto; padding: 0 24px; }
-
-    /* ─────────── Navigation ─────────── */
-    nav {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 16px 40px;
-      border-bottom: 1px solid var(--border);
-      background: rgba(10, 10, 26, 0.85);
-      backdrop-filter: blur(16px);
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      z-index: 1000;
-      transition: background 0.3s, border-color 0.3s;
-    }
-    .nav-logo {
-      font-size: 1.65rem;
-      font-weight: 900;
-      letter-spacing: -1px;
-      color: #fff;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      text-transform: uppercase;
-    }
-    .nav-logo .seo {
-      background: linear-gradient(135deg, #e8850c, #f5a623, #ffd700);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      text-shadow: 0 0 20px rgba(232,133,12,0.3);
-    }
-    .nav-logo .baike {
-      color: #ffffff;
-      font-weight: 800;
-      letter-spacing: 1px;
-      opacity: 0.95;
-    }
-    .nav-links { display: flex; gap: 28px; list-style: none; align-items: center; }
-    .nav-links a {
-      color: var(--text-muted);
-      font-size: 0.92rem;
-      font-weight: 500;
-      transition: color 0.2s;
-    }
-    .nav-links a:hover { color: #fff; }
-    .nav-links .btn-nav {
-      padding: 8px 20px;
-      background: var(--orange);
-      color: #fff;
-      border-radius: 8px;
-      font-weight: 600;
-    }
-    .nav-links .btn-nav:hover { background: var(--orange-hover); color: #fff; }
-    .nav-hamburger {
-      display: none;
-      flex-direction: column;
-      gap: 5px;
-      cursor: pointer;
-      background: none;
-      border: none;
-      padding: 4px;
-    }
-    .nav-hamburger span {
-      display: block;
-      width: 24px;
-      height: 2px;
-      background: var(--text);
-      border-radius: 2px;
-      transition: 0.3s;
-    }
-
-    /* ─────────── Common ─────────── */
-    .section {
-      padding: 100px 0;
-    }
-    .section-header {
-      text-align: center;
-      margin-bottom: 60px;
-    }
-    .section-header h2 {
-      font-size: 2.6rem;
-      font-weight: 800;
-      color: var(--text-bright);
-      letter-spacing: -1px;
-      margin-bottom: 16px;
-    }
-    .section-header p {
-      color: var(--text-muted);
-      font-size: 1.1rem;
-      max-width: 600px;
-      margin: 0 auto;
-    }
-    .section-label {
-      display: inline-block;
-      font-size: 0.78rem;
-      font-weight: 700;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      color: var(--orange);
-      background: rgba(232,133,12,0.08);
-      border: 1px solid rgba(232,133,12,0.2);
-      border-radius: 100px;
-      padding: 6px 18px;
-      margin-bottom: 20px;
-    }
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      padding: 16px 36px;
-      border-radius: 12px;
-      font-size: 1.05rem;
-      font-weight: 700;
-      cursor: pointer;
-      border: none;
-      transition: all 0.25s;
-      text-decoration: none;
-    }
-    .btn-primary {
-      background: var(--orange);
-      color: #fff;
-      box-shadow: 0 4px 24px rgba(232,133,12,0.3);
-    }
-    .btn-primary:hover {
-      background: var(--orange-hover);
-      color: #fff;
-      transform: translateY(-2px);
-      box-shadow: 0 8px 36px rgba(232,133,12,0.4);
-    }
-    .btn-secondary {
-      background: transparent;
-      color: var(--text);
-      border: 1px solid var(--border-light);
-    }
-    .btn-secondary:hover {
-      border-color: var(--orange);
-      color: #fff;
-      background: rgba(232,133,12,0.05);
-    }
-    .btn-large {
-      padding: 18px 48px;
-      font-size: 1.15rem;
-      border-radius: 14px;
-    }
-
-    /* ═══════════════════════════════════════════════════════════
-       HERO SECTION — Particle Grid Background
-       ═══════════════════════════════════════════════════════════ */
+    /* ── Hero ── */
     .hero {
+      position: relative;
       min-height: 100vh;
       display: flex;
       align-items: center;
       justify-content: center;
-      text-align: center;
-      position: relative;
       overflow: hidden;
-      padding-top: 80px;
+      padding-top: 64px;
     }
-
-    /* Animated gradient mesh background */
-    .hero-mesh {
+    .hero-bg {
       position: absolute;
       inset: 0;
       z-index: 0;
-      background:
-        radial-gradient(ellipse at 20% 50%, rgba(232,133,12,0.12) 0%, transparent 50%),
-        radial-gradient(ellipse at 80% 20%, rgba(245,166,35,0.08) 0%, transparent 50%),
-        radial-gradient(ellipse at 50% 80%, rgba(204,120,92,0.06) 0%, transparent 50%);
-      animation: meshShift 12s ease-in-out infinite alternate;
+      overflow: hidden;
     }
-    @keyframes meshShift {
-      0% {
-        background:
-          radial-gradient(ellipse at 20% 50%, rgba(232,133,12,0.12) 0%, transparent 50%),
-          radial-gradient(ellipse at 80% 20%, rgba(245,166,35,0.08) 0%, transparent 50%),
-          radial-gradient(ellipse at 50% 80%, rgba(204,120,92,0.06) 0%, transparent 50%);
-      }
-      50% {
-        background:
-          radial-gradient(ellipse at 40% 30%, rgba(232,133,12,0.15) 0%, transparent 50%),
-          radial-gradient(ellipse at 70% 60%, rgba(245,166,35,0.10) 0%, transparent 50%),
-          radial-gradient(ellipse at 30% 70%, rgba(204,120,92,0.08) 0%, transparent 50%);
-      }
-      100% {
-        background:
-          radial-gradient(ellipse at 60% 40%, rgba(232,133,12,0.10) 0%, transparent 50%),
-          radial-gradient(ellipse at 30% 70%, rgba(245,166,35,0.12) 0%, transparent 50%),
-          radial-gradient(ellipse at 70% 30%, rgba(204,120,92,0.07) 0%, transparent 50%);
-      }
-    }
-
-    /* Pulsing grid lines */
-    .hero-grid {
-      position: absolute;
-      inset: 0;
-      z-index: 1;
-      background-image:
-        linear-gradient(rgba(232,133,12,0.04) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(232,133,12,0.04) 1px, transparent 1px);
-      background-size: 60px 60px;
-      mask-image: radial-gradient(ellipse at center, black 20%, transparent 70%);
-      -webkit-mask-image: radial-gradient(ellipse at center, black 20%, transparent 70%);
-      animation: gridPulse 4s ease-in-out infinite;
-    }
-    @keyframes gridPulse {
-      0%, 100% { opacity: 0.5; }
-      50% { opacity: 1; }
-    }
-
-    /* Floating light orbs */
     .hero-orb {
       position: absolute;
       border-radius: 50%;
-      pointer-events: none;
-      filter: blur(80px);
-      z-index: 1;
+      filter: blur(100px);
+      opacity: 0.35;
+      animation: orbFloat 12s ease-in-out infinite;
     }
     .hero-orb-1 {
-      width: 400px; height: 400px;
-      background: rgba(232,133,12,0.10);
-      top: 5%; left: 5%;
-      animation: orbDrift1 10s ease-in-out infinite alternate;
+      width: 600px; height: 600px;
+      background: radial-gradient(circle, rgba(232,133,12,0.4), transparent 70%);
+      top: -15%; left: -10%;
+      animation-delay: 0s;
     }
     .hero-orb-2 {
-      width: 300px; height: 300px;
-      background: rgba(245,166,35,0.07);
-      bottom: 10%; right: 5%;
-      animation: orbDrift2 12s ease-in-out infinite alternate;
+      width: 500px; height: 500px;
+      background: radial-gradient(circle, rgba(245,166,35,0.3), transparent 70%);
+      bottom: -20%; right: -10%;
+      animation-delay: -4s;
     }
     .hero-orb-3 {
-      width: 200px; height: 200px;
-      background: rgba(204,120,92,0.08);
-      top: 40%; right: 20%;
-      animation: orbDrift3 14s ease-in-out infinite alternate;
+      width: 350px; height: 350px;
+      background: radial-gradient(circle, rgba(255,215,0,0.2), transparent 70%);
+      top: 40%; left: 50%;
+      transform: translateX(-50%);
+      animation-delay: -8s;
     }
-    @keyframes orbDrift1 {
-      0% { transform: translate(0, 0) scale(1); }
-      100% { transform: translate(60px, -40px) scale(1.1); }
+    @keyframes orbFloat {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      33% { transform: translate(30px, -20px) scale(1.05); }
+      66% { transform: translate(-20px, 15px) scale(0.95); }
     }
-    @keyframes orbDrift2 {
-      0% { transform: translate(0, 0) scale(1); }
-      100% { transform: translate(-50px, 30px) scale(0.9); }
-    }
-    @keyframes orbDrift3 {
-      0% { transform: translate(0, 0); }
-      100% { transform: translate(30px, 50px); }
-    }
-
-    /* Central hero glow */
-    .hero-glow {
+    .hero-grid-overlay {
       position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 800px;
-      height: 800px;
-      background: radial-gradient(circle, rgba(232,133,12,0.08) 0%, transparent 60%);
-      pointer-events: none;
-      z-index: 1;
-      animation: heroGlowPulse 5s ease-in-out infinite;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(232,133,12,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(232,133,12,0.03) 1px, transparent 1px);
+      background-size: 60px 60px;
+      mask-image: radial-gradient(ellipse 60% 50% at 50% 50%, black, transparent);
+      -webkit-mask-image: radial-gradient(ellipse 60% 50% at 50% 50%, black, transparent);
     }
-    @keyframes heroGlowPulse {
-      0%, 100% { opacity: 0.6; transform: translate(-50%, -50%) scale(1); }
-      50% { opacity: 1; transform: translate(-50%, -50%) scale(1.1); }
-    }
-
-    /* Scanning line */
-    .hero-scanline {
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 2px;
-      background: linear-gradient(90deg, transparent, rgba(232,133,12,0.4), transparent);
-      z-index: 2;
-      animation: scanDown 6s linear infinite;
-      opacity: 0.5;
-    }
-    @keyframes scanDown {
-      0% { top: 0; }
-      100% { top: 100%; }
-    }
-
     .hero-content {
       position: relative;
-      z-index: 10;
+      z-index: 2;
+      text-align: center;
       max-width: 900px;
-      padding: 0 24px;
+      padding: 0 var(--sp-6);
     }
-    .hero-badge {
+    .hero-eyebrow {
       display: inline-flex;
       align-items: center;
       gap: 8px;
+      padding: 8px 20px;
+      border-radius: var(--radius-full);
+      background: rgba(232,133,12,0.06);
+      border: 1px solid rgba(232,133,12,0.12);
       font-size: 0.82rem;
       font-weight: 600;
+      color: var(--gold-200);
       letter-spacing: 1px;
-      color: var(--orange-light);
-      background: rgba(232,133,12,0.08);
-      border: 1px solid rgba(232,133,12,0.2);
-      border-radius: 100px;
-      padding: 8px 20px;
-      margin-bottom: 32px;
-      animation: badgeFadeIn 1s ease-out 0.3s both;
+      margin-bottom: var(--sp-8);
     }
-    .hero-badge-dot {
-      width: 8px;
-      height: 8px;
+    .hero-eyebrow .dot {
+      width: 6px; height: 6px;
+      background: var(--success);
       border-radius: 50%;
-      background: var(--orange);
-      animation: dotPulse 2s ease-in-out infinite;
+      animation: pulse 2s ease-in-out infinite;
     }
-    @keyframes dotPulse {
-      0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(232,133,12,0.5); }
-      50% { opacity: 0.8; box-shadow: 0 0 0 6px rgba(232,133,12,0); }
-    }
-    @keyframes badgeFadeIn {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
     .hero h1 {
-      font-size: 4.5rem;
+      font-size: clamp(2.8rem, 7vw, 5rem);
       font-weight: 900;
-      color: var(--text-bright);
-      letter-spacing: -2px;
       line-height: 1.1;
-      margin-bottom: 28px;
-      animation: heroTitleIn 1s ease-out 0.5s both;
+      letter-spacing: -0.03em;
+      margin-bottom: var(--sp-6);
     }
-    .hero h1 em {
-      font-style: normal;
-      background: linear-gradient(135deg, var(--orange), var(--orange-light), #fff);
-      background-size: 200% 200%;
+    .hero h1 .gradient {
+      background: var(--gold-gradient);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
-      animation: gradientShift 4s ease-in-out infinite;
     }
-    @keyframes gradientShift {
-      0%, 100% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-    }
-    @keyframes heroTitleIn {
-      from { opacity: 0; transform: translateY(30px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    .hero-sub {
-      font-size: 1.35rem;
+    .hero-subtitle {
+      font-size: clamp(1.05rem, 2vw, 1.3rem);
       color: var(--text-muted);
-      max-width: 620px;
-      margin: 0 auto 48px;
-      line-height: 1.8;
-      animation: heroSubIn 1s ease-out 0.7s both;
+      max-width: 600px;
+      margin: 0 auto var(--sp-10);
+      line-height: 1.7;
     }
-    @keyframes heroSubIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    .hero-actions {
+    .hero-ctas {
       display: flex;
-      gap: 16px;
+      gap: var(--sp-4);
       justify-content: center;
       flex-wrap: wrap;
-      animation: heroActionsIn 1s ease-out 0.9s both;
     }
-    @keyframes heroActionsIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    /* Scroll down indicator */
-    .hero-scroll {
+    .hero-scroll-hint {
       position: absolute;
       bottom: 40px;
       left: 50%;
       transform: translateX(-50%);
-      z-index: 10;
+      z-index: 2;
       display: flex;
       flex-direction: column;
       align-items: center;
       gap: 8px;
       color: var(--text-muted);
       font-size: 0.75rem;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      animation: scrollBounce 2s ease-in-out infinite;
+      letter-spacing: 1px;
+      animation: float 3s ease-in-out infinite;
     }
-    .hero-scroll-line {
+    .scroll-line {
       width: 1px;
       height: 40px;
-      background: linear-gradient(to bottom, var(--orange), transparent);
-      animation: scrollLineDown 2s ease-in-out infinite;
-    }
-    @keyframes scrollBounce {
-      0%, 100% { transform: translateX(-50%) translateY(0); }
-      50% { transform: translateX(-50%) translateY(8px); }
-    }
-    @keyframes scrollLineDown {
-      0% { opacity: 0; height: 0; }
-      50% { opacity: 1; height: 40px; }
-      100% { opacity: 0; height: 40px; }
+      background: linear-gradient(to bottom, var(--gold-300), transparent);
     }
 
-    /* ═══════════════════════════════════════════════════════════
-       STATS COUNTER SECTION
-       ═══════════════════════════════════════════════════════════ */
+    /* ── Stats Section ── */
     .stats-section {
-      padding: 80px 0;
-      background: linear-gradient(180deg, var(--bg) 0%, rgba(18,18,42,1) 50%, var(--bg) 100%);
-      border-top: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
       position: relative;
-      overflow: hidden;
-    }
-    .stats-section::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 600px;
-      height: 2px;
-      background: linear-gradient(90deg, transparent, rgba(232,133,12,0.5), transparent);
+      padding: var(--sp-20) 0;
+      background: var(--bg-secondary);
+      border-top: 1px solid var(--border-subtle);
+      border-bottom: 1px solid var(--border-subtle);
     }
     .stats-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      gap: 32px;
+      gap: var(--sp-6);
+    }
+    .stat-card {
       text-align: center;
-    }
-    .stat-item {
-      position: relative;
-      padding: 24px 16px;
-    }
-    .stat-item:not(:last-child)::after {
-      content: '';
-      position: absolute;
-      right: 0;
-      top: 20%;
-      height: 60%;
-      width: 1px;
-      background: linear-gradient(to bottom, transparent, var(--border-light), transparent);
+      padding: var(--sp-8) var(--sp-4);
     }
     .stat-number {
-      font-size: 3.2rem;
+      font-size: clamp(2rem, 4vw, 3rem);
       font-weight: 900;
-      letter-spacing: -2px;
-      line-height: 1;
-      margin-bottom: 8px;
-      background: linear-gradient(135deg, var(--text-bright), var(--orange-light));
+      background: var(--gold-gradient);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
-    }
-    .stat-suffix {
-      font-size: 1.6rem;
-      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: var(--sp-2);
     }
     .stat-label {
-      font-size: 0.92rem;
+      font-size: 0.9rem;
       color: var(--text-muted);
       font-weight: 500;
-      letter-spacing: 0.5px;
     }
 
-    /* ═══════════ GLOBAL REACH — Sci-Fi Tech Section ═══════════ */
+    /* ── Global Reach (Sci-Fi) ── */
     .global-section {
-      padding: 80px 0;
       position: relative;
       overflow: hidden;
-      background: radial-gradient(ellipse at 50% 50%, rgba(232,133,12,0.04) 0%, transparent 70%);
+      padding: 120px 0;
     }
-    .global-section::before {
-      content: '';
+    .global-bg {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+    }
+    .radar-ring {
       position: absolute;
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      width: 600px;
-      height: 600px;
       border-radius: 50%;
       border: 1px solid rgba(232,133,12,0.06);
-      animation: globalPulseRing 4s ease-in-out infinite;
+      animation: radarExpand 4s ease-out infinite;
     }
-    .global-section::after {
-      content: '';
+    .radar-ring:nth-child(1) { width: 300px; height: 300px; animation-delay: 0s; }
+    .radar-ring:nth-child(2) { width: 500px; height: 500px; animation-delay: 1s; }
+    .radar-ring:nth-child(3) { width: 700px; height: 700px; animation-delay: 2s; }
+    .radar-ring:nth-child(4) { width: 900px; height: 900px; animation-delay: 3s; }
+    @keyframes radarExpand {
+      0% { opacity: 0.5; transform: translate(-50%, -50%) scale(0.8); }
+      100% { opacity: 0; transform: translate(-50%, -50%) scale(1.2); }
+    }
+    .scan-line {
       position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 400px;
-      height: 400px;
-      border-radius: 50%;
-      border: 1px solid rgba(232,133,12,0.08);
-      animation: globalPulseRing 4s ease-in-out infinite 1s;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(232,133,12,0.4), transparent);
+      animation: scanSweep 5s linear infinite;
     }
-    @keyframes globalPulseRing {
-      0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.3; }
-      50% { transform: translate(-50%, -50%) scale(1.15); opacity: 0.8; }
+    @keyframes scanSweep {
+      0% { left: -100%; top: 20%; }
+      100% { left: 100%; top: 80%; }
     }
-
-    .global-header {
-      text-align: center;
-      margin-bottom: 48px;
-      position: relative;
-      z-index: 2;
-    }
-    .global-header .live-pulse {
+    .global-live-badge {
       display: inline-flex;
       align-items: center;
       gap: 8px;
       padding: 6px 16px;
-      border-radius: 20px;
-      background: rgba(232,133,12,0.08);
-      border: 1px solid rgba(232,133,12,0.2);
-      font-size: 0.78rem;
+      border-radius: var(--radius-full);
+      background: rgba(52,208,88,0.08);
+      border: 1px solid rgba(52,208,88,0.2);
+      font-size: 0.75rem;
       font-weight: 700;
-      color: var(--orange);
-      letter-spacing: 2px;
+      color: var(--success);
+      letter-spacing: 1.5px;
       text-transform: uppercase;
-      margin-bottom: 16px;
+      margin-bottom: var(--sp-4);
     }
-    .global-header .live-dot {
-      width: 8px;
-      height: 8px;
+    .global-live-badge .live-dot {
+      width: 6px; height: 6px;
       border-radius: 50%;
-      background: var(--orange);
-      animation: liveBlink 1.5s ease-in-out infinite;
+      background: var(--success);
+      animation: pulse 1.5s ease-in-out infinite;
     }
-    @keyframes liveBlink {
-      0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(232,133,12,0.5); }
-      50% { opacity: 0.6; box-shadow: 0 0 12px 4px rgba(232,133,12,0.3); }
-    }
-    .global-header h2 {
-      font-size: 2.4rem;
-      font-weight: 900;
-      color: var(--text-bright);
-      margin-bottom: 8px;
-    }
-    .global-header p {
-      color: var(--text-muted);
-      font-size: 1rem;
-    }
-
-    /* Country Grid — Sci-Fi Tiles */
     .country-grid {
       display: grid;
       grid-template-columns: repeat(5, 1fr);
-      gap: 16px;
-      max-width: 900px;
-      margin: 0 auto;
-      position: relative;
-      z-index: 2;
+      gap: var(--sp-4);
+      margin-top: var(--sp-12);
     }
     .country-tile {
       position: relative;
-      padding: 28px 16px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: var(--sp-5) var(--sp-4);
       text-align: center;
-      border-radius: 16px;
-      border: 1px solid rgba(232,133,12,0.12);
-      background: rgba(18, 18, 42, 0.6);
-      backdrop-filter: blur(8px);
-      transition: all 0.3s ease;
+      transition: all var(--duration-normal) var(--ease-out);
       overflow: hidden;
-      cursor: default;
     }
-    .country-tile::before {
+    .country-tile::after {
       content: '';
       position: absolute;
-      top: -1px;
-      left: 20%;
-      right: 20%;
-      height: 2px;
-      background: linear-gradient(90deg, transparent, var(--orange), transparent);
-      opacity: 0;
-      transition: opacity 0.3s;
+      top: 0;
+      left: -100%;
+      width: 50%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(232,133,12,0.05), transparent);
+      animation: tileSweep 6s linear infinite;
     }
-    .country-tile:hover::before {
-      opacity: 1;
+    @keyframes tileSweep {
+      0% { left: -100%; }
+      100% { left: 200%; }
     }
     .country-tile:hover {
-      border-color: rgba(232,133,12,0.3);
-      background: rgba(232,133,12,0.05);
-      transform: translateY(-4px);
-      box-shadow: 0 8px 32px rgba(232,133,12,0.1);
+      border-color: var(--border-hover);
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-gold);
+    }
+    .country-tile.active {
+      border-color: rgba(52,208,88,0.2);
     }
     .country-flag {
-      font-size: 2.4rem;
-      line-height: 1;
-      margin-bottom: 10px;
-      filter: drop-shadow(0 2px 8px rgba(0,0,0,0.3));
+      font-size: 2rem;
+      margin-bottom: var(--sp-2);
+      display: block;
     }
     .country-name {
-      font-size: 0.88rem;
+      font-size: 0.92rem;
       font-weight: 700;
-      color: var(--text-bright);
-      margin-bottom: 4px;
+      color: var(--text-primary);
+      margin-bottom: var(--sp-1);
     }
     .country-status {
       display: inline-flex;
@@ -730,1829 +374,921 @@
       gap: 5px;
       font-size: 0.72rem;
       font-weight: 600;
-      padding: 3px 10px;
-      border-radius: 10px;
+      letter-spacing: 0.5px;
     }
-    .country-status.live {
-      color: var(--green);
-      background: rgba(40,200,64,0.1);
-    }
-    .country-status.coming {
-      color: var(--orange);
-      background: rgba(232,133,12,0.1);
-    }
-    .country-status-dot {
-      width: 6px;
-      height: 6px;
+    .country-status .status-dot {
+      width: 5px; height: 5px;
       border-radius: 50%;
-      animation: countryDotPulse 2s ease-in-out infinite;
     }
-    .country-status.live .country-status-dot {
-      background: var(--green);
-      box-shadow: 0 0 6px var(--green);
+    .country-status.live .status-dot {
+      background: var(--success);
+      animation: pulse 1.5s ease-in-out infinite;
     }
-    .country-status.coming .country-status-dot {
-      background: var(--orange);
-      box-shadow: 0 0 6px var(--orange);
-      animation: countryDotPulse 1.2s ease-in-out infinite;
-    }
-    @keyframes countryDotPulse {
-      0%, 100% { transform: scale(1); opacity: 1; }
-      50% { transform: scale(1.8); opacity: 0.5; }
-    }
-
-    /* Scan line effect across country tiles */
-    .country-tile .scan-sweep {
-      position: absolute;
-      top: 0;
-      left: -100%;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(232,133,12,0.04), transparent);
-      animation: countryScan 6s linear infinite;
-      pointer-events: none;
-    }
-    @keyframes countryScan {
-      0% { left: -100%; }
-      100% { left: 200%; }
-    }
-    .country-tile:nth-child(2) .scan-sweep { animation-delay: 0.8s; }
-    .country-tile:nth-child(3) .scan-sweep { animation-delay: 1.6s; }
-    .country-tile:nth-child(4) .scan-sweep { animation-delay: 2.4s; }
-    .country-tile:nth-child(5) .scan-sweep { animation-delay: 3.2s; }
-
-    /* Bottom stats ticker */
+    .country-status.live { color: var(--success); }
+    .country-status.soon .status-dot { background: var(--warning); }
+    .country-status.soon { color: var(--warning); }
     .global-ticker {
+      margin-top: var(--sp-12);
       display: flex;
       justify-content: center;
-      gap: 48px;
-      margin-top: 40px;
-      position: relative;
-      z-index: 2;
+      gap: var(--sp-10);
+      flex-wrap: wrap;
     }
     .ticker-item {
-      text-align: center;
+      display: flex;
+      align-items: center;
+      gap: var(--sp-2);
+      font-size: 0.85rem;
+      color: var(--text-muted);
     }
     .ticker-value {
-      font-size: 2rem;
-      font-weight: 900;
-      color: var(--orange);
-      line-height: 1;
-      margin-bottom: 4px;
-      text-shadow: 0 0 20px rgba(232,133,12,0.3);
-      animation: tickerGlow 3s ease-in-out infinite;
-    }
-    @keyframes tickerGlow {
-      0%, 100% { text-shadow: 0 0 20px rgba(232,133,12,0.3); }
-      50% { text-shadow: 0 0 40px rgba(232,133,12,0.6), 0 0 80px rgba(232,133,12,0.2); }
-    }
-    .ticker-label {
-      font-size: 0.78rem;
-      color: var(--text-muted);
-      font-weight: 500;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-    }
-
-    /* ═══════════════════════════════════════════════════════════
-       HOW IT WORKS — Flow
-       ═══════════════════════════════════════════════════════════ */
-    .how-section {
-      padding: 120px 0;
-      position: relative;
-    }
-    .how-steps {
-      display: flex;
-      align-items: flex-start;
-      justify-content: center;
-      gap: 0;
-      position: relative;
-      max-width: 960px;
-      margin: 0 auto;
-    }
-    .how-step {
-      flex: 1;
-      text-align: center;
-      padding: 0 24px;
-      position: relative;
-      z-index: 2;
-    }
-    .how-step-icon {
-      width: 88px;
-      height: 88px;
-      border-radius: 24px;
-      background: linear-gradient(135deg, rgba(232,133,12,0.12), rgba(232,133,12,0.04));
-      border: 1px solid rgba(232,133,12,0.2);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin: 0 auto 24px;
-      font-size: 2rem;
-      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-      position: relative;
-    }
-    .how-step:hover .how-step-icon {
-      transform: translateY(-6px) scale(1.05);
-      border-color: var(--orange);
-      box-shadow: 0 12px 40px rgba(232,133,12,0.2);
-      background: linear-gradient(135deg, rgba(232,133,12,0.2), rgba(232,133,12,0.08));
-    }
-    .how-step-number {
-      position: absolute;
-      top: -8px;
-      right: -8px;
-      width: 28px;
-      height: 28px;
-      border-radius: 50%;
-      background: var(--orange);
-      color: #fff;
-      font-size: 0.75rem;
       font-weight: 800;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 0 4px 12px rgba(232,133,12,0.4);
-    }
-    .how-step h3 {
-      font-size: 1.3rem;
-      font-weight: 700;
-      color: var(--text-bright);
-      margin-bottom: 10px;
-    }
-    .how-step p {
-      font-size: 0.95rem;
-      color: var(--text-muted);
-      line-height: 1.7;
+      color: var(--gold-200);
+      text-shadow: 0 0 12px rgba(232,133,12,0.3);
     }
 
-    /* Connecting lines between steps */
-    .how-connector {
-      position: absolute;
-      top: 44px;
-      left: calc(33.33% + 44px);
-      width: calc(33.33% - 88px);
-      height: 2px;
-      z-index: 1;
-    }
-    .how-connector-line {
-      width: 100%;
-      height: 2px;
-      background-image: linear-gradient(90deg, var(--orange) 6px, transparent 6px);
-      background-size: 14px 2px;
-      background-repeat: repeat-x;
+    /* ── How It Works ── */
+    .steps-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--sp-8);
       position: relative;
-      animation: dashFlow 1.5s linear infinite;
     }
-    .how-connector-line::after {
+    .steps-grid::before {
       content: '';
       position: absolute;
-      right: -6px;
-      top: -4px;
-      width: 0;
-      height: 0;
-      border-top: 5px solid transparent;
-      border-bottom: 5px solid transparent;
-      border-left: 8px solid var(--orange);
+      top: 60px;
+      left: 16.67%;
+      right: 16.67%;
+      height: 2px;
+      background: linear-gradient(90deg, rgba(232,133,12,0.1), rgba(232,133,12,0.3), rgba(232,133,12,0.1));
+      z-index: 0;
     }
-    .how-connector-2 {
-      left: calc(66.66% + 44px);
+    .step-card {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      padding: var(--sp-8);
     }
-    @keyframes dashFlow {
-      0% { background-position: 0 0; }
-      100% { background-position: 14px 0; }
+    .step-number {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: var(--bg-card);
+      border: 2px solid rgba(232,133,12,0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.3rem;
+      font-weight: 900;
+      color: var(--gold-200);
+      margin: 0 auto var(--sp-6);
+      position: relative;
+    }
+    .step-number::after {
+      content: '';
+      position: absolute;
+      inset: -4px;
+      border-radius: 50%;
+      border: 1px solid rgba(232,133,12,0.1);
+    }
+    .step-icon {
+      font-size: 2.5rem;
+      margin-bottom: var(--sp-4);
+      display: block;
+    }
+    .step-card h3 {
+      margin-bottom: var(--sp-3);
+    }
+    .step-card p {
+      font-size: 0.9rem;
+      color: var(--text-muted);
     }
 
-    /* ═══════════════════════════════════════════════════════════
-       DEMO SECTION
-       ═══════════════════════════════════════════════════════════ */
+    /* ── Demo Section ── */
     .demo-section {
-      background: var(--bg-warm);
-      border-top: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
+      position: relative;
+      padding: 120px 0;
+      background: var(--bg-secondary);
     }
     .demo-container {
-      max-width: 720px;
+      max-width: 900px;
       margin: 0 auto;
+      padding: 0 var(--sp-6);
     }
-    .demo-window {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: 20px;
+    .demo-terminal {
+      background: rgba(6,6,15,0.95);
+      border: 1px solid var(--border-default);
+      border-radius: var(--radius-lg);
       overflow: hidden;
-      box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+      box-shadow: var(--shadow-lg);
     }
-    .demo-titlebar {
+    .demo-terminal-bar {
       display: flex;
       align-items: center;
       gap: 8px;
-      padding: 16px 20px;
-      background: rgba(255,255,255,0.02);
-      border-bottom: 1px solid var(--border);
+      padding: 12px 18px;
+      background: rgba(255,255,255,0.03);
+      border-bottom: 1px solid var(--border-subtle);
     }
-    .demo-dot { width: 12px; height: 12px; border-radius: 50%; }
-    .demo-dot-r { background: #ff5f57; }
-    .demo-dot-y { background: #febc2e; }
-    .demo-dot-g { background: #28c840; }
-    .demo-titlebar-text {
-      margin-left: auto;
-      font-size: 0.8rem;
-      color: var(--text-muted);
-    }
-    .demo-body {
-      padding: 32px 28px;
-      min-height: 320px;
-      position: relative;
-    }
-    .demo-chat {
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-    }
-    .demo-msg {
-      max-width: 85%;
-      padding: 14px 20px;
-      border-radius: 16px;
-      font-size: 0.95rem;
-      line-height: 1.6;
-      opacity: 0;
-      transform: translateY(10px);
-      transition: opacity 0.5s, transform 0.5s;
-    }
-    .demo-msg.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-    .demo-msg-user {
-      align-self: flex-end;
-      background: var(--orange);
-      color: #fff;
-      border-bottom-right-radius: 4px;
-    }
-    .demo-msg-ai {
-      align-self: flex-start;
-      background: rgba(255,255,255,0.06);
-      color: var(--text);
-      border-bottom-left-radius: 4px;
-    }
-    .demo-route {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 12px;
-      margin: 20px 0;
-      opacity: 0;
-      transition: opacity 0.6s;
-    }
-    .demo-route.visible { opacity: 1; }
-    .demo-route-circle {
-      width: 48px;
-      height: 48px;
+    .demo-dot {
+      width: 10px; height: 10px;
       border-radius: 50%;
-      border: 2px solid var(--border);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 0.7rem;
-      color: var(--text-muted);
-      transition: all 0.4s;
-      position: relative;
     }
-    .demo-route-circle.checking {
-      border-color: var(--orange);
-      color: var(--orange);
-      animation: routePulse 0.6s ease-in-out;
-    }
-    .demo-route-circle.selected {
-      border-color: var(--orange);
-      background: var(--orange);
-      color: #fff;
-      box-shadow: 0 0 20px rgba(232,133,12,0.4);
-    }
-    .demo-route-circle.dimmed {
-      opacity: 0.3;
-    }
-    @keyframes routePulse {
-      0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.15); }
-    }
-    .demo-controls {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      padding: 16px 28px;
-      border-top: 1px solid var(--border);
-    }
-    .demo-play-btn {
-      width: 36px;
-      height: 36px;
-      border-radius: 50%;
-      background: var(--orange);
-      border: none;
-      color: #fff;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-      transition: background 0.2s;
-    }
-    .demo-play-btn:hover { background: var(--orange-hover); }
-    .demo-progress-wrap {
+    .demo-dot-red { background: #ff5f57; }
+    .demo-dot-yellow { background: #febc2e; }
+    .demo-dot-green { background: #28c840; }
+    .demo-terminal-title {
       flex: 1;
-      height: 4px;
-      background: var(--border);
-      border-radius: 4px;
-      overflow: hidden;
-    }
-    .demo-progress-bar {
-      height: 100%;
-      width: 0%;
-      background: var(--orange);
-      border-radius: 4px;
-      transition: width 0.3s linear;
-    }
-    .demo-time {
+      text-align: center;
       font-size: 0.78rem;
       color: var(--text-muted);
-      min-width: 36px;
-      text-align: right;
+      font-family: var(--font-mono);
+    }
+    .demo-body {
+      padding: var(--sp-8);
+      font-family: var(--font-mono);
+      font-size: 0.88rem;
+      line-height: 1.8;
+      min-height: 280px;
+    }
+    .demo-line {
+      margin-bottom: var(--sp-2);
+      opacity: 0;
+      transform: translateY(8px);
+      animation: demoLineIn 0.5s forwards;
+    }
+    .demo-line .prompt {
+      color: var(--gold-200);
+      margin-right: 8px;
+    }
+    .demo-line .cmd { color: var(--text-primary); }
+    .demo-line .output { color: var(--text-muted); }
+    .demo-line .success { color: var(--success); }
+    .demo-line .highlight { color: var(--gold-100); }
+    @keyframes demoLineIn {
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .demo-line:nth-child(1) { animation-delay: 0.3s; }
+    .demo-line:nth-child(2) { animation-delay: 0.8s; }
+    .demo-line:nth-child(3) { animation-delay: 1.4s; }
+    .demo-line:nth-child(4) { animation-delay: 2.0s; }
+    .demo-line:nth-child(5) { animation-delay: 2.6s; }
+    .demo-line:nth-child(6) { animation-delay: 3.2s; }
+    .demo-line:nth-child(7) { animation-delay: 3.8s; }
+    .demo-line:nth-child(8) { animation-delay: 4.4s; }
+    .demo-cursor {
+      display: inline-block;
+      width: 8px;
+      height: 16px;
+      background: var(--gold-200);
+      animation: blink 1s step-end infinite;
+      vertical-align: middle;
+      margin-left: 2px;
+    }
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
     }
 
-    /* ═══════════════════════════════════════════════════════════
-       THREE PILLARS
-       ═══════════════════════════════════════════════════════════ */
+    /* ── Pillars Section ── */
     .pillars-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 28px;
+      gap: var(--sp-8);
     }
     .pillar-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: 20px;
-      padding: 44px 32px;
-      transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s;
       position: relative;
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-xl);
+      padding: var(--sp-10) var(--sp-8);
+      text-align: center;
+      transition: all var(--duration-normal) var(--ease-out);
       overflow: hidden;
-    }
-    .pillar-card:hover {
-      border-color: var(--orange);
-      transform: translateY(-6px);
-      box-shadow: 0 16px 48px rgba(232,133,12,0.08);
     }
     .pillar-card::before {
       content: '';
       position: absolute;
       top: 0;
-      left: 0;
-      right: 0;
-      height: 3px;
-      background: var(--orange);
+      left: 20%;
+      right: 20%;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, rgba(232,133,12,0.3), transparent);
       opacity: 0;
-      transition: opacity 0.3s;
+      transition: opacity var(--duration-normal);
+    }
+    .pillar-card:hover {
+      border-color: var(--border-hover);
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-gold);
     }
     .pillar-card:hover::before { opacity: 1; }
-    .pillar-emoji {
-      font-size: 2.8rem;
-      margin-bottom: 20px;
-      display: block;
+    .pillar-icon {
+      width: 72px;
+      height: 72px;
+      border-radius: var(--radius-lg);
+      background: rgba(232,133,12,0.06);
+      border: 1px solid rgba(232,133,12,0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      margin: 0 auto var(--sp-6);
     }
     .pillar-card h3 {
-      font-size: 1.35rem;
-      font-weight: 700;
-      color: var(--text-bright);
-      margin-bottom: 14px;
+      margin-bottom: var(--sp-3);
+      font-size: 1.2rem;
     }
     .pillar-card p {
+      font-size: 0.9rem;
       color: var(--text-muted);
-      font-size: 1rem;
-      line-height: 1.8;
+      line-height: 1.7;
     }
 
-    /* ═══════════════════════════════════════════════════════════
-       CAPABILITIES
-       ═══════════════════════════════════════════════════════════ */
-    .cap-section { background: var(--bg-warm); }
-    .cap-grid {
+    /* ── Capabilities ── */
+    .capabilities-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      gap: 20px;
+      gap: var(--sp-5);
     }
     .cap-card {
       background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 32px 24px;
-      text-align: center;
-      cursor: default;
-      transition: border-color 0.3s, transform 0.3s;
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: var(--sp-6);
+      transition: all var(--duration-normal) var(--ease-out);
       position: relative;
       overflow: hidden;
     }
-    .cap-card:hover {
-      border-color: var(--orange);
-      transform: translateY(-4px);
-    }
-    .cap-emoji {
-      font-size: 2.2rem;
-      margin-bottom: 12px;
-      display: block;
-    }
-    .cap-card h4 {
-      font-size: 1.05rem;
-      font-weight: 700;
-      color: var(--text-bright);
-      margin-bottom: 8px;
-    }
-    .cap-desc {
-      color: var(--text-muted);
-      font-size: 0.88rem;
-      line-height: 1.6;
-    }
-    .cap-example {
-      position: absolute;
-      inset: 0;
-      background: rgba(232,133,12,0.95);
-      color: #fff;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 20px;
-      font-size: 0.92rem;
-      line-height: 1.6;
-      font-weight: 500;
-      text-align: center;
-      opacity: 0;
-      transition: opacity 0.3s;
-      border-radius: 16px;
-    }
-    .cap-card:hover .cap-example {
-      opacity: 1;
-    }
-
-    /* ═══════════════════════════════════════════════════════════
-       PRICING PREVIEW
-       ═══════════════════════════════════════════════════════════ */
-    .pricing-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 20px;
-    }
-    .price-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: 20px;
-      padding: 36px 24px;
-      text-align: center;
-      transition: border-color 0.3s, transform 0.3s;
-      position: relative;
-    }
-    .price-card:hover {
-      border-color: var(--border-light);
-      transform: translateY(-4px);
-    }
-    .price-card.recommended {
-      border-color: var(--orange);
-      box-shadow: 0 0 30px rgba(232,133,12,0.1);
-    }
-    .price-badge {
-      position: absolute;
-      top: -12px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: var(--orange);
-      color: #fff;
-      font-size: 0.75rem;
-      font-weight: 700;
-      padding: 4px 16px;
-      border-radius: 20px;
-    }
-    .price-card h4 {
-      font-size: 1.05rem;
-      font-weight: 700;
-      color: var(--text-bright);
-      margin-bottom: 16px;
-    }
-    .price-amount {
-      font-size: 2.4rem;
-      font-weight: 900;
-      color: var(--text-bright);
-      margin-bottom: 4px;
-    }
-    .price-amount .currency {
-      font-size: 1rem;
-      font-weight: 600;
-      color: var(--text-muted);
-    }
-    .price-period {
-      font-size: 0.85rem;
-      color: var(--text-muted);
-      margin-bottom: 20px;
-    }
-    .price-feature-list {
-      list-style: none;
-      padding: 0;
-      margin-bottom: 24px;
-      text-align: left;
-    }
-    .price-feature-list li {
-      padding: 6px 0;
-      font-size: 0.88rem;
-      color: var(--text-muted);
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-    .price-feature-list li::before {
-      content: '\2713';
-      color: var(--orange);
-      font-weight: 700;
-      flex-shrink: 0;
-    }
-
-    /* ═══════════════════════════════════════════════════════════
-       SOCIAL PROOF / ENGINE MARQUEE
-       ═══════════════════════════════════════════════════════════ */
-    .engines-section {
-      padding: 100px 0;
-      background: linear-gradient(180deg, var(--bg) 0%, rgba(18,18,42,0.6) 50%, var(--bg) 100%);
-      position: relative;
-      overflow: hidden;
-    }
-    .engines-section::before,
-    .engines-section::after {
+    .cap-card::before {
       content: '';
       position: absolute;
       top: 0;
-      bottom: 0;
-      width: 200px;
-      z-index: 10;
-      pointer-events: none;
+      left: 20%;
+      right: 20%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(232,133,12,0.25), transparent);
+      opacity: 0;
+      transition: opacity var(--duration-normal);
     }
-    .engines-section::before {
-      left: 0;
-      background: linear-gradient(90deg, var(--bg), transparent);
-    }
-    .engines-section::after {
-      right: 0;
-      background: linear-gradient(270deg, var(--bg), transparent);
-    }
-
-    .marquee-track {
-      display: flex;
-      width: max-content;
-      animation: marqueeScroll 40s linear infinite;
-    }
-    .marquee-track:hover {
-      animation-play-state: paused;
-    }
-    .marquee-row-2 .marquee-track {
-      animation-direction: reverse;
-      animation-duration: 35s;
-    }
-    .marquee-row {
-      overflow: hidden;
-      margin-bottom: 20px;
-    }
-    @keyframes marqueeScroll {
-      0% { transform: translateX(0); }
-      100% { transform: translateX(-50%); }
-    }
-
-    .engine-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      padding: 14px 24px;
-      margin: 0 10px;
-      background: rgba(255,255,255,0.03);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      font-size: 0.9rem;
-      font-weight: 600;
-      color: var(--text);
-      white-space: nowrap;
-      transition: all 0.3s;
-      backdrop-filter: blur(8px);
-    }
-    .engine-badge:hover {
-      border-color: var(--orange);
-      background: rgba(232,133,12,0.06);
+    .cap-card:hover {
+      border-color: var(--border-hover);
       transform: translateY(-2px);
-      box-shadow: 0 8px 24px rgba(232,133,12,0.1);
+      box-shadow: var(--shadow-gold);
     }
-    .engine-badge-icon {
-      width: 32px;
-      height: 32px;
-      border-radius: 8px;
-      background: linear-gradient(135deg, rgba(232,133,12,0.15), rgba(232,133,12,0.05));
+    .cap-card:hover::before { opacity: 1; }
+    .cap-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: var(--radius-sm);
+      background: rgba(232,133,12,0.06);
+      border: 1px solid rgba(232,133,12,0.08);
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 1rem;
-      flex-shrink: 0;
+      font-size: 1.3rem;
+      margin-bottom: var(--sp-4);
     }
-
-    /* ═══════════════════════════════════════════════════════════
-       TRUST SECTION
-       ═══════════════════════════════════════════════════════════ */
-    .trust-section { background: var(--bg-warm); }
-    .trust-strip {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 24px;
-      text-align: center;
+    .cap-card h4 {
+      font-size: 0.95rem;
+      margin-bottom: var(--sp-2);
+      color: var(--text-primary);
     }
-    .trust-item {
-      padding: 32px 20px;
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      transition: border-color 0.3s;
-    }
-    .trust-item:hover { border-color: var(--border-light); }
-    .trust-item-icon {
-      font-size: 2rem;
-      margin-bottom: 12px;
-      display: block;
-    }
-    .trust-item h4 {
-      font-size: 1rem;
-      font-weight: 700;
-      color: var(--text-bright);
-      margin-bottom: 4px;
-    }
-    .trust-item p {
-      font-size: 0.85rem;
+    .cap-card p {
+      font-size: 0.8rem;
       color: var(--text-muted);
+      line-height: 1.6;
     }
 
-    /* ═══════════════════════════════════════════════════════════
-       FINAL CTA — Dark Section with Gradient Text
-       ═══════════════════════════════════════════════════════════ */
-    .cta-final {
+    /* ── CTA Section ── */
+    .cta-section {
+      position: relative;
       padding: 120px 0;
-      position: relative;
-      overflow: hidden;
-      background: linear-gradient(180deg, var(--bg) 0%, #06060f 100%);
-    }
-    .cta-final-mesh {
-      position: absolute;
-      inset: 0;
-      background:
-        radial-gradient(ellipse at 30% 50%, rgba(232,133,12,0.06) 0%, transparent 60%),
-        radial-gradient(ellipse at 70% 50%, rgba(245,166,35,0.04) 0%, transparent 60%);
-      pointer-events: none;
-    }
-    .cta-final-grid {
-      position: absolute;
-      inset: 0;
-      background-image:
-        linear-gradient(rgba(232,133,12,0.02) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(232,133,12,0.02) 1px, transparent 1px);
-      background-size: 80px 80px;
-      mask-image: radial-gradient(ellipse at center, black 30%, transparent 80%);
-      -webkit-mask-image: radial-gradient(ellipse at center, black 30%, transparent 80%);
-      pointer-events: none;
-    }
-    .cta-final-content {
-      position: relative;
-      z-index: 2;
       text-align: center;
-      max-width: 700px;
-      margin: 0 auto;
+      overflow: hidden;
     }
-    .cta-final-content h2 {
-      font-size: 3.4rem;
+    .cta-glow {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(232,133,12,0.1), transparent 70%);
+      pointer-events: none;
+    }
+    .cta-content {
+      position: relative;
+      z-index: 1;
+    }
+    .cta-content h2 {
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
       font-weight: 900;
-      letter-spacing: -2px;
-      line-height: 1.15;
-      margin-bottom: 20px;
-      background: linear-gradient(135deg, #fff 0%, var(--orange-light) 50%, var(--orange) 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
+      margin-bottom: var(--sp-4);
     }
-    .cta-final-content p {
-      font-size: 1.2rem;
+    .cta-content p {
+      font-size: 1.1rem;
       color: var(--text-muted);
-      margin-bottom: 48px;
-      line-height: 1.8;
-    }
-    .cta-final-actions {
-      display: flex;
-      gap: 16px;
-      justify-content: center;
-      flex-wrap: wrap;
+      margin-bottom: var(--sp-10);
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
     }
 
-    /* ═══════════════════════════════════════════════════════════
-       FOOTER
-       ═══════════════════════════════════════════════════════════ */
-    footer {
-      border-top: 1px solid var(--border);
-      padding: 64px 0 40px;
-    }
-    .footer-grid {
-      display: grid;
-      grid-template-columns: 2fr 1fr 1fr 1fr;
-      gap: 48px;
-      margin-bottom: 48px;
-    }
-    .footer-brand .nav-logo { margin-bottom: 16px; }
-    .footer-brand p {
-      color: var(--text-muted);
-      font-size: 0.9rem;
-      line-height: 1.8;
-    }
-    .footer-col h4 {
-      font-size: 0.88rem;
-      font-weight: 700;
-      color: var(--text-bright);
-      text-transform: uppercase;
-      letter-spacing: 1.5px;
-      margin-bottom: 20px;
-    }
-    .footer-col ul { list-style: none; }
-    .footer-col ul li { margin-bottom: 10px; }
-    .footer-col ul a {
-      color: var(--text-muted);
-      font-size: 0.9rem;
-      transition: color 0.2s;
-    }
-    .footer-col ul a:hover { color: var(--text); }
-    .footer-bottom {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding-top: 32px;
-      border-top: 1px solid var(--border);
-      font-size: 0.82rem;
-      color: var(--text-muted);
-      flex-wrap: wrap;
-      gap: 12px;
-    }
-    .footer-bottom span { color: var(--orange); }
-
-    /* ═══════════════════════════════════════════════════════════
-       SCROLL REVEAL
-       ═══════════════════════════════════════════════════════════ */
-    .fade-in {
-      opacity: 0;
-      transform: translateY(30px);
-      transition: opacity 0.7s ease, transform 0.7s ease;
-    }
-    .fade-in.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-    .fade-in-scale {
-      opacity: 0;
-      transform: scale(0.9);
-      transition: opacity 0.7s ease, transform 0.7s ease;
-    }
-    .fade-in-scale.visible {
-      opacity: 1;
-      transform: scale(1);
-    }
-
-    /* Stagger delays for children */
-    .stagger-children > *:nth-child(1) { transition-delay: 0s; }
-    .stagger-children > *:nth-child(2) { transition-delay: 0.1s; }
-    .stagger-children > *:nth-child(3) { transition-delay: 0.15s; }
-    .stagger-children > *:nth-child(4) { transition-delay: 0.2s; }
-    .stagger-children > *:nth-child(5) { transition-delay: 0.25s; }
-    .stagger-children > *:nth-child(6) { transition-delay: 0.3s; }
-    .stagger-children > *:nth-child(7) { transition-delay: 0.35s; }
-    .stagger-children > *:nth-child(8) { transition-delay: 0.4s; }
-
-    /* ═══════════════════════════════════════════════════════════
-       RESPONSIVE
-       ═══════════════════════════════════════════════════════════ */
-    @media (max-width: 1024px) {
-      .hero h1 { font-size: 3.4rem; }
-      .pillars-grid { grid-template-columns: 1fr; max-width: 520px; margin: 0 auto; }
-      .cap-grid { grid-template-columns: repeat(2, 1fr); }
-      .pricing-grid { grid-template-columns: repeat(2, 1fr); }
-      .trust-strip { grid-template-columns: repeat(2, 1fr); }
-      .footer-grid { grid-template-columns: 1fr 1fr; }
-      .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 20px; }
-      .stat-item:nth-child(2)::after { display: none; }
-      .stat-number { font-size: 2.6rem; }
-      .how-steps { flex-direction: column; gap: 40px; align-items: center; }
-      .how-step { max-width: 360px; }
-      .how-connector { display: none; }
-      .cta-final-content h2 { font-size: 2.6rem; }
-      .section-header h2 { font-size: 2rem; }
-      .section { padding: 80px 0; }
-      .container { padding: 0 16px; }
-    }
-    @media (max-width: 768px) {
-      nav { padding: 14px 20px; }
-      .nav-links { display: none; }
-      .nav-hamburger { display: flex; }
-
-      /* === Hamburger 全螢幕 Overlay Menu === */
-      .mobile-menu-overlay {
-        display: none;
-        position: fixed;
-        inset: 0;
-        z-index: 9999;
-        background: rgba(10, 10, 26, 0.97);
-        backdrop-filter: blur(20px);
-        -webkit-backdrop-filter: blur(20px);
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        gap: 0;
-        opacity: 0;
-        transition: opacity 0.35s ease;
-      }
-      .mobile-menu-overlay.open {
-        display: flex;
-        opacity: 1;
-      }
-      .mobile-menu-overlay .mobile-close {
-        position: absolute;
-        top: 16px;
-        right: 20px;
-        background: none;
-        border: none;
-        color: #fff;
-        font-size: 2rem;
-        cursor: pointer;
-        width: 48px;
-        height: 48px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        border-radius: 50%;
-        transition: background 0.2s;
-      }
-      .mobile-menu-overlay .mobile-close:hover {
-        background: rgba(232,133,12,0.15);
-      }
-      .mobile-menu-overlay a {
-        display: block;
-        color: #fff;
-        font-size: 1.3rem;
-        font-weight: 600;
-        padding: 16px 40px;
-        text-align: center;
-        transition: color 0.2s, background 0.2s;
-        width: 100%;
-        text-decoration: none;
-        min-height: 48px;
-        line-height: 1.5;
-      }
-      .mobile-menu-overlay a:hover {
-        color: var(--orange);
-        background: rgba(232,133,12,0.06);
-      }
-      .mobile-menu-overlay .btn-nav {
-        background: var(--orange);
-        color: #fff !important;
-        border-radius: 12px;
-        margin: 16px 40px 0;
-        width: auto;
-        text-align: center;
-        padding: 14px 40px;
-      }
-
-      .hero { min-height: auto; padding-top: 100px; padding-bottom: 60px; }
-      .hero h1 { font-size: 2rem; letter-spacing: -1px; }
-      .hero-sub { font-size: 1rem; margin-bottom: 32px; }
-      .hero-scroll { display: none; }
-      .hero-actions { flex-direction: column; gap: 12px; align-items: center; }
-      .hero-actions .btn { width: 100%; min-height: 48px; font-size: 1rem; }
-      .hero-content { padding: 0 16px; }
-
-      /* 隱藏裝飾性粒子動畫（省電） */
-      .hero-mesh, .hero-grid, .hero-glow, .hero-scanline,
-      .hero-orb, .hero-orb-1, .hero-orb-2, .hero-orb-3 {
-        display: none !important;
-      }
-
-      .section { padding: 50px 0; }
-      .section-header { margin-bottom: 36px; }
-      .section-header h2 { font-size: 1.6rem; }
-      .section-header p { font-size: 0.95rem; }
-      .container { padding: 0 16px; }
-
-      .cap-grid { grid-template-columns: 1fr; gap: 12px; }
-      .cap-card { padding: 24px 20px; }
-      .pillar-card { padding: 28px 20px; }
-      .pricing-grid { grid-template-columns: 1fr; max-width: 100%; }
-      .trust-strip { grid-template-columns: 1fr; }
-      .footer-grid { grid-template-columns: 1fr; gap: 24px; }
-      .footer-bottom { flex-direction: column; text-align: center; }
-      .stats-grid { grid-template-columns: repeat(2, 1fr); }
-      .stat-item::after { display: none !important; }
-      .stat-number { font-size: 2.4rem; }
-      .country-grid { grid-template-columns: repeat(3, 1fr); gap: 12px; }
-      .global-ticker { gap: 24px; flex-wrap: wrap; }
-      .global-section::before, .global-section::after { display: none; }
-      .cta-final { padding: 60px 0; }
-      .cta-final-content h2 { font-size: 1.8rem; }
-      .cta-final-content p { font-size: 0.95rem; }
-      .how-section { padding: 60px 0; }
-      .engines-section { padding: 40px 0; }
-
-      /* 按鈕觸控友善 */
-      .btn, button, a.btn-nav, .btn-primary, .btn-secondary {
-        min-height: 48px;
-        font-size: 0.95rem;
-      }
-
-      /* 表格橫向滾動 */
-      table { display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; }
-
-      /* 字體不小於 14px */
-      body { font-size: 14px; }
-    }
-    @media (max-width: 480px) {
-      .hero h1 { font-size: 1.5rem; letter-spacing: -0.5px; }
-      .hero-sub { font-size: 0.92rem; }
-      .btn { padding: 14px 24px; font-size: 0.92rem; }
-      .cap-grid { grid-template-columns: 1fr; }
-      .cap-card { padding: 20px 16px; }
-      .pillars-grid { max-width: 100%; }
-      .pillar-card { padding: 24px 16px; border-radius: 14px; }
-      .stats-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
-      .stat-number { font-size: 2rem; }
-      .stat-item { padding: 12px 8px; }
-      .engine-badge { padding: 10px 14px; font-size: 0.8rem; }
-      .engine-badge-icon { width: 24px; height: 24px; font-size: 0.8rem; }
-      .country-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
-      .country-tile { padding: 20px 12px; }
-      .country-flag { font-size: 1.8rem; }
-      .global-header h2 { font-size: 1.6rem; }
-      .ticker-value { font-size: 1.4rem; }
-      .global-ticker { gap: 20px; }
-      .cta-final-content h2 { font-size: 1.4rem; }
-      .price-card { padding: 24px 16px; border-radius: 14px; }
-      .section { padding: 40px 0; }
-      .section-header { margin-bottom: 24px; }
-      .section-header h2 { font-size: 1.4rem; }
-      .hero-badge { font-size: 0.72rem; padding: 6px 14px; }
-      .hero-content { padding: 0 12px; }
-    }
-
-    /* ─── Touch & Mobile Perf ─── */
-    * { -webkit-tap-highlight-color: transparent; }
-    select, button, a { touch-action: manipulation; }
-    @media (hover: none) and (pointer: coarse) {
-      .btn { min-height: 48px; }
-      .cap-example { display: none; }
-      .cap-desc { display: block; }
-    }
-
-    /* ─── Language Switcher ─── */
+    /* ── Language Switcher ── */
     .lang-switcher {
       display: flex;
       gap: 4px;
-      margin-left: 12px;
+      align-items: center;
     }
     .lang-btn {
-      padding: 4px 8px;
-      border: 1px solid rgba(255,255,255,0.15);
-      border-radius: 6px;
+      padding: 4px 10px;
+      border: 1px solid transparent;
+      border-radius: var(--radius-full);
       background: transparent;
-      color: rgba(255,255,255,0.6);
-      font-size: 12px;
+      color: var(--text-muted);
+      font-size: 0.72rem;
+      font-weight: 600;
       cursor: pointer;
-      transition: all 0.3s;
-      font-family: inherit;
-      line-height: 1.4;
+      transition: all var(--duration-fast);
+      font-family: var(--font-sans);
     }
     .lang-btn:hover {
-      border-color: rgba(232,133,12,0.5);
-      color: rgba(255,255,255,0.85);
+      color: var(--text-secondary);
     }
     .lang-btn.active {
-      background: rgba(232,133,12,0.2);
-      border-color: #e8850c;
-      color: #f5a623;
-    }
-    @media (max-width: 768px) {
-      .lang-switcher {
-        position: absolute;
-        top: 14px;
-        right: 56px;
-        margin-left: 0;
-      }
-      .lang-btn { padding: 3px 6px; font-size: 11px; }
+      background: rgba(232,133,12,0.1);
+      border-color: rgba(232,133,12,0.2);
+      color: var(--gold-200);
     }
 
-    /* ─── Reduced motion ─── */
-    @media (prefers-reduced-motion: reduce) {
-      *, *::before, *::after {
-        animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: 0.01ms !important;
-      }
-      .fade-in, .fade-in-scale {
-        opacity: 1;
-        transform: none;
-      }
+    /* ── Responsive Overrides ── */
+    @media (max-width: 1024px) {
+      .capabilities-grid { grid-template-columns: repeat(2, 1fr); }
+      .country-grid { grid-template-columns: repeat(3, 1fr); }
+      .pillars-grid { grid-template-columns: repeat(3, 1fr); }
+      .stats-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 768px) {
+      .hero h1 { font-size: clamp(2rem, 8vw, 3rem); }
+      .hero-subtitle { font-size: 1rem; }
+      .steps-grid { grid-template-columns: 1fr; gap: var(--sp-6); }
+      .steps-grid::before { display: none; }
+      .pillars-grid { grid-template-columns: 1fr; }
+      .capabilities-grid { grid-template-columns: 1fr; }
+      .country-grid { grid-template-columns: repeat(2, 1fr); }
+      .stats-grid { grid-template-columns: repeat(2, 1fr); }
+      .global-ticker { gap: var(--sp-6); }
+      .hero-scroll-hint { display: none; }
+      .lang-switcher { gap: 2px; }
+      .demo-body { padding: var(--sp-4); font-size: 0.78rem; }
+    }
+    @media (max-width: 480px) {
+      .country-grid { grid-template-columns: repeat(2, 1fr); }
+      .stats-grid { grid-template-columns: 1fr; }
+      .hero-ctas { flex-direction: column; align-items: center; }
+      .hero-ctas .btn { width: 100%; max-width: 280px; }
     }
   </style>
 </head>
 <body>
 
   <!-- ═══════════ Navigation ═══════════ -->
-  <nav>
-    <div class="nav-logo"><img src="/favicon.svg" alt="S" width="32" height="32" style="border-radius:6px; box-shadow: 0 0 8px rgba(232,133,12,0.3); border: 1px solid rgba(232,133,12,0.2);"><span class="seo">SEO</span><span class="baike">BAIKE</span></div>
-    <ul class="nav-links" id="navLinks">
-      <li><a href="/" data-i18n="nav.home">首頁</a></li>
+  <nav class="nav" id="mainNav">
+    <a href="/" class="nav-brand">
+      <img src="/favicon.svg" alt="SEOBAIKE" width="34" height="34">
+      <span><span class="seo">SEO</span><span class="baike">BAIKE</span></span>
+    </a>
+
+    <ul class="nav-links">
+      <li><a href="/" class="active" data-i18n="nav.home">首頁</a></li>
       <li><a href="/features" data-i18n="nav.features">功能</a></li>
       <li><a href="/marketplace" data-i18n="nav.marketplace">市集</a></li>
       <li><a href="/pricing" data-i18n="nav.pricing">方案</a></li>
       <li><a href="/about" data-i18n="nav.about">關於</a></li>
-      <li><a href="/docs">常見問題</a></li>
-      <li><a href="/login" class="btn-nav" data-i18n="nav.login">登入</a></li>
     </ul>
-    <div class="lang-switcher">
+
+    <div class="flex gap-4" style="align-items:center;">
+      <div class="lang-switcher">
+        <button class="lang-btn active" data-lang="zh-TW" onclick="SEOBAIKE_I18N.switchLang('zh-TW',{manual:true})">中文</button>
+        <button class="lang-btn" data-lang="en" onclick="SEOBAIKE_I18N.switchLang('en',{manual:true})">EN</button>
+        <button class="lang-btn" data-lang="ja" onclick="SEOBAIKE_I18N.switchLang('ja',{manual:true})">日本語</button>
+        <button class="lang-btn" data-lang="ko" onclick="SEOBAIKE_I18N.switchLang('ko',{manual:true})">한국어</button>
+      </div>
+      <a href="/login" class="nav-cta" data-i18n="nav.login">登入</a>
+    </div>
+
+    <button class="nav-hamburger" onclick="toggleMenu()" aria-label="選單">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-overlay" id="mobileMenu">
+    <button class="mobile-close" onclick="toggleMenu()">&times;</button>
+    <a href="/" onclick="toggleMenu()" data-i18n="nav.home">首頁</a>
+    <a href="/features" onclick="toggleMenu()" data-i18n="nav.features">功能</a>
+    <a href="/marketplace" onclick="toggleMenu()" data-i18n="nav.marketplace">市集</a>
+    <a href="/pricing" onclick="toggleMenu()" data-i18n="nav.pricing">方案</a>
+    <a href="/about" onclick="toggleMenu()" data-i18n="nav.about">關於</a>
+    <a href="/login" onclick="toggleMenu()" data-i18n="nav.login">登入</a>
+    <div class="lang-switcher" style="margin-top:24px;">
       <button class="lang-btn active" data-lang="zh-TW" onclick="SEOBAIKE_I18N.switchLang('zh-TW',{manual:true})">中文</button>
       <button class="lang-btn" data-lang="en" onclick="SEOBAIKE_I18N.switchLang('en',{manual:true})">EN</button>
       <button class="lang-btn" data-lang="ja" onclick="SEOBAIKE_I18N.switchLang('ja',{manual:true})">日本語</button>
       <button class="lang-btn" data-lang="ko" onclick="SEOBAIKE_I18N.switchLang('ko',{manual:true})">한국어</button>
     </div>
-    <button class="nav-hamburger" id="hamburger" aria-label="選單">
-      <span></span><span></span><span></span>
-    </button>
-  </nav>
-
-  <!-- === 手機版全螢幕選單 Overlay === -->
-  <div class="mobile-menu-overlay" id="mobileMenu">
-    <button class="mobile-close" id="mobileMenuClose" aria-label="關閉選單">&times;</button>
-    <a href="/" onclick="closeMobileMenu()">首頁</a>
-    <a href="/features" onclick="closeMobileMenu()">功能</a>
-    <a href="/marketplace" onclick="closeMobileMenu()">市集</a>
-    <a href="/pricing" onclick="closeMobileMenu()">方案</a>
-    <a href="/about" onclick="closeMobileMenu()">關於</a>
-    <a href="/docs" onclick="closeMobileMenu()">常見問題</a>
-    <a href="/login" class="btn-nav" onclick="closeMobileMenu()">登入</a>
   </div>
 
-  <!-- ═══════════ Section 1: Hero (Upgraded) ═══════════ -->
-  <section class="hero">
-    <!-- Animated backgrounds -->
-    <div class="hero-mesh"></div>
-    <div class="hero-grid"></div>
-    <div class="hero-glow"></div>
-    <div class="hero-scanline"></div>
-    <div class="hero-orb hero-orb-1"></div>
-    <div class="hero-orb hero-orb-2"></div>
-    <div class="hero-orb hero-orb-3"></div>
+
+  <!-- ═══════════ 1. Hero ═══════════ -->
+  <section class="hero" id="hero">
+    <div class="hero-bg">
+      <div class="hero-orb hero-orb-1"></div>
+      <div class="hero-orb hero-orb-2"></div>
+      <div class="hero-orb hero-orb-3"></div>
+      <div class="hero-grid-overlay"></div>
+    </div>
 
     <div class="hero-content">
-      <div class="hero-badge">
-        <span class="hero-badge-dot"></span>
-        AI 驅動的全球市集
+      <div class="hero-eyebrow fade-up">
+        <span class="dot"></span>
+        <span>SEOBAIKE Global Marketplace</span>
       </div>
-      <h1 data-i18n-html="hero.title.prefix,hero.title.highlight,hero.title.suffix">你的產品，<em>全世界都能買到</em></h1>
-      <p class="hero-sub" data-i18n="hero.subtitle">
-        SEOBAIKE 是 AI 驅動的全球市集。上架你的商品，AI 自動翻譯、行銷、客服。<br>
-        <span style="color:#8892a4;font-size:0.95em">한국에서 SEOBAIKE로 전 세계에 판매하세요</span>
+
+      <h1 class="fade-up" data-i18n-html="hero.title.prefix,hero.title.highlight,hero.title.suffix">
+        <span class="gradient">AI 驅動的</span><br>全球市集
+      </h1>
+
+      <p class="hero-subtitle fade-up" data-i18n="hero.subtitle">
+        你的產品，全世界都能買到。上架商品，AI 自動翻譯、行銷、配對買家。
       </p>
-      <div class="hero-actions">
-        <a href="/marketplace" class="btn btn-primary btn-large" data-i18n="hero.cta1">逛市集</a>
-        <a href="/marketplace#earn" class="btn btn-secondary btn-large" data-i18n="hero.cta2">我要上架</a>
+
+      <div class="hero-ctas fade-up">
+        <a href="/marketplace" class="btn btn-primary btn-lg" data-i18n="hero.cta1">逛市集</a>
+        <a href="/marketplace#earn" class="btn btn-secondary btn-lg" data-i18n="hero.cta2">我要上架</a>
       </div>
     </div>
 
-    <div class="hero-scroll">
-      <span>往下探索</span>
-      <div class="hero-scroll-line"></div>
+    <div class="hero-scroll-hint">
+      <span>SCROLL</span>
+      <div class="scroll-line"></div>
     </div>
   </section>
 
-  <!-- ═══════════ Section 2: Stats Counter ═══════════ -->
-  <section class="stats-section fade-in">
+
+  <!-- ═══════════ 2. Stats ═══════════ -->
+  <section class="stats-section" id="stats">
     <div class="container">
-      <div class="stats-grid stagger-children">
-        <div class="stat-item fade-in">
-          <div class="stat-number"><span class="counter" data-target="6">0</span></div>
+      <div class="stats-grid">
+        <div class="stat-card fade-up">
+          <div class="stat-number" data-count="6">0</div>
           <div class="stat-label">商品類別</div>
         </div>
-        <div class="stat-item fade-in">
-          <div class="stat-number"><span class="counter" data-target="30">0</span><span class="stat-suffix">+</span></div>
-          <div class="stat-label">服務國家與地區</div>
+        <div class="stat-card fade-up">
+          <div class="stat-number" data-count="30" data-suffix="+">0</div>
+          <div class="stat-label">服務國家</div>
         </div>
-        <div class="stat-item fade-in">
-          <div class="stat-number"><span class="counter" data-target="24">0</span><span class="stat-suffix">hr</span></div>
-          <div class="stat-label">全天候服務</div>
+        <div class="stat-card fade-up">
+          <div class="stat-number" data-count="24" data-suffix="hr">0</div>
+          <div class="stat-label">全天候運作</div>
         </div>
-        <div class="stat-item fade-in">
-          <div class="stat-number"><span class="counter" data-target="15">0</span></div>
+        <div class="stat-card fade-up">
+          <div class="stat-number" data-count="15">0</div>
           <div class="stat-label">AI 引擎</div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ═══════════ Section 2.5: Global Reach — Sci-Fi ═══════════ -->
-  <section class="global-section fade-in">
-    <div class="container">
-      <div class="global-header">
-        <div class="live-pulse"><div class="live-dot"></div>LIVE — 全球部署中</div>
-        <h2>你的商品，正在這些國家被看見</h2>
-        <p>即時連線，AI 自動翻譯到每個市場</p>
+
+  <!-- ═══════════ 3. Global Reach (Sci-Fi) ═══════════ -->
+  <section class="global-section section-lg" id="global">
+    <div class="global-bg">
+      <div class="radar-ring"></div>
+      <div class="radar-ring"></div>
+      <div class="radar-ring"></div>
+      <div class="radar-ring"></div>
+      <div class="scan-line"></div>
+    </div>
+
+    <div class="container" style="position:relative;z-index:1;">
+      <div class="section-header fade-up">
+        <div class="global-live-badge">
+          <span class="live-dot"></span>
+          LIVE NETWORK
+        </div>
+        <h2>全球節點<span class="text-gold">即時連線</span></h2>
+        <p>從亞洲到全球，SEOBAIKE 市集正在擴展中</p>
       </div>
 
       <div class="country-grid">
-        <div class="country-tile fade-in">
-          <div class="scan-sweep"></div>
-          <div class="country-flag">&#127481;&#127484;</div>
+        <!-- Active Markets -->
+        <div class="country-tile active fade-up">
+          <span class="country-flag">🇹🇼</span>
           <div class="country-name">台灣</div>
-          <div class="country-status live"><span class="country-status-dot"></span>營運中</div>
+          <div class="country-status live"><span class="status-dot"></span> 營運中</div>
         </div>
-        <div class="country-tile fade-in">
-          <div class="scan-sweep"></div>
-          <div class="country-flag">&#127472;&#127479;</div>
+        <div class="country-tile active fade-up">
+          <span class="country-flag">🇰🇷</span>
           <div class="country-name">韓國</div>
-          <div class="country-status live"><span class="country-status-dot"></span>營運中</div>
+          <div class="country-status live"><span class="status-dot"></span> 營運中</div>
         </div>
-        <div class="country-tile fade-in">
-          <div class="scan-sweep"></div>
-          <div class="country-flag">&#127471;&#127477;</div>
+        <div class="country-tile active fade-up">
+          <span class="country-flag">🇯🇵</span>
           <div class="country-name">日本</div>
-          <div class="country-status live"><span class="country-status-dot"></span>營運中</div>
+          <div class="country-status live"><span class="status-dot"></span> 營運中</div>
         </div>
-        <div class="country-tile fade-in">
-          <div class="scan-sweep"></div>
-          <div class="country-flag">&#127480;&#127468;</div>
+        <div class="country-tile active fade-up">
+          <span class="country-flag">🇸🇬</span>
           <div class="country-name">新加坡</div>
-          <div class="country-status live"><span class="country-status-dot"></span>營運中</div>
+          <div class="country-status live"><span class="status-dot"></span> 營運中</div>
         </div>
-        <div class="country-tile fade-in">
-          <div class="scan-sweep"></div>
-          <div class="country-flag">&#127482;&#127480;</div>
+        <!-- Coming Soon -->
+        <div class="country-tile fade-up">
+          <span class="country-flag">🇺🇸</span>
           <div class="country-name">美國</div>
-          <div class="country-status coming"><span class="country-status-dot"></span>即將開放</div>
+          <div class="country-status soon"><span class="status-dot"></span> 即將開放</div>
         </div>
-        <div class="country-tile fade-in">
-          <div class="scan-sweep"></div>
-          <div class="country-flag">&#127462;&#127482;</div>
+        <div class="country-tile fade-up">
+          <span class="country-flag">🇦🇺</span>
           <div class="country-name">澳洲</div>
-          <div class="country-status coming"><span class="country-status-dot"></span>即將開放</div>
+          <div class="country-status soon"><span class="status-dot"></span> 即將開放</div>
         </div>
-        <div class="country-tile fade-in">
-          <div class="scan-sweep"></div>
-          <div class="country-flag">&#127468;&#127463;</div>
+        <div class="country-tile fade-up">
+          <span class="country-flag">🇬🇧</span>
           <div class="country-name">英國</div>
-          <div class="country-status coming"><span class="country-status-dot"></span>即將開放</div>
+          <div class="country-status soon"><span class="status-dot"></span> 即將開放</div>
         </div>
-        <div class="country-tile fade-in">
-          <div class="scan-sweep"></div>
-          <div class="country-flag">&#127481;&#127469;</div>
+        <div class="country-tile fade-up">
+          <span class="country-flag">🇹🇭</span>
           <div class="country-name">泰國</div>
-          <div class="country-status coming"><span class="country-status-dot"></span>即將開放</div>
+          <div class="country-status soon"><span class="status-dot"></span> 即將開放</div>
         </div>
-        <div class="country-tile fade-in">
-          <div class="scan-sweep"></div>
-          <div class="country-flag">&#127483;&#127475;</div>
+        <div class="country-tile fade-up">
+          <span class="country-flag">🇻🇳</span>
           <div class="country-name">越南</div>
-          <div class="country-status coming"><span class="country-status-dot"></span>即將開放</div>
+          <div class="country-status soon"><span class="status-dot"></span> 即將開放</div>
         </div>
-        <div class="country-tile fade-in">
-          <div class="scan-sweep"></div>
-          <div class="country-flag">&#127470;&#127465;</div>
+        <div class="country-tile fade-up">
+          <span class="country-flag">🇮🇩</span>
           <div class="country-name">印尼</div>
-          <div class="country-status coming"><span class="country-status-dot"></span>即將開放</div>
+          <div class="country-status soon"><span class="status-dot"></span> 即將開放</div>
         </div>
       </div>
 
-      <div class="global-ticker">
+      <!-- Ticker Stats -->
+      <div class="global-ticker fade-up">
         <div class="ticker-item">
-          <div class="ticker-value" id="tickerCountries">4</div>
-          <div class="ticker-label">營運中國家</div>
+          <span class="ticker-value">4</span> 市場營運中
         </div>
         <div class="ticker-item">
-          <div class="ticker-value" id="tickerExpanding">6</div>
-          <div class="ticker-label">擴展中</div>
+          <span class="ticker-value">6</span> 市場準備中
         </div>
         <div class="ticker-item">
-          <div class="ticker-value" id="tickerLanguages">12+</div>
-          <div class="ticker-label">支援語言</div>
-        </div>
-        <div class="ticker-item">
-          <div class="ticker-value" id="tickerTimezones">24hr</div>
-          <div class="ticker-label">跨時區覆蓋</div>
+          <span class="ticker-value">10</span> 全球節點
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ═══════════ Section 3: How It Works ═══════════ -->
-  <section class="how-section fade-in">
-    <div class="container">
-      <div class="section-header">
-        <div class="section-label">如何開始</div>
-        <h2>輕鬆上架，全世界買到</h2>
-        <p>不需要任何技術背景，把你的商品賣到全世界</p>
-      </div>
-      <div class="how-steps">
-        <!-- Connectors -->
-        <div class="how-connector">
-          <div class="how-connector-line"></div>
-        </div>
-        <div class="how-connector how-connector-2">
-          <div class="how-connector-line"></div>
-        </div>
 
-        <div class="how-step fade-in">
-          <div class="how-step-icon">
-            <span class="how-step-number">1</span>
-            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color:var(--orange-light)">
-              <rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 3h-8l-2 4h12z"/>
-            </svg>
-          </div>
-          <h3>上架你的商品</h3>
-          <p>填寫商品資訊，選擇類別和定價，簡單完成上架</p>
+  <!-- ═══════════ 4. How It Works ═══════════ -->
+  <section class="section-lg" id="how-it-works" style="background:var(--bg-secondary);">
+    <div class="container">
+      <div class="section-header fade-up">
+        <div class="section-badge">HOW IT WORKS</div>
+        <h2>如何開始</h2>
+        <p>從上架到成交，AI 全程協助</p>
+      </div>
+
+      <div class="steps-grid">
+        <div class="step-card fade-up">
+          <div class="step-number">1</div>
+          <span class="step-icon">📦</span>
+          <h3>上架商品</h3>
+          <p>填寫商品資訊，上傳圖片。支援數位商品與實體商品。</p>
         </div>
-        <div class="how-step fade-in">
-          <div class="how-step-icon">
-            <span class="how-step-number">2</span>
-            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color:var(--orange-light)">
-              <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
-            </svg>
-          </div>
-          <h3>AI 幫你翻譯行銷</h3>
-          <p>AI 自動把商品翻成韓文、日文、英文，並幫你寫文案、做行銷</p>
+        <div class="step-card fade-up">
+          <div class="step-number">2</div>
+          <span class="step-icon">🤖</span>
+          <h3>AI 翻譯行銷</h3>
+          <p>AI 自動翻譯商品描述、生成多語言行銷文案，觸及全球買家。</p>
         </div>
-        <div class="how-step fade-in">
-          <div class="how-step-icon">
-            <span class="how-step-number">3</span>
-            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color:var(--orange-light)">
-              <path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/>
-            </svg>
-          </div>
+        <div class="step-card fade-up">
+          <div class="step-number">3</div>
+          <span class="step-icon">🌍</span>
           <h3>全球買家下單</h3>
-          <p>台灣、韓國、日本、東南亞的買家都能找到你的商品，成交後自動撥款</p>
+          <p>來自各國的買家瀏覽你的商品，直接下單購買。</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ═══════════ Section 4: Interactive Demo ═══════════ -->
-  <section class="section demo-section fade-in">
-    <div class="container">
-      <div class="section-header">
-        <div class="section-label">即時體驗</div>
-        <h2>看一次就懂</h2>
-        <p>AI 幫你處理翻譯、行銷、客服，你專心做生意</p>
+
+  <!-- ═══════════ 5. Demo ═══════════ -->
+  <section class="demo-section" id="demo">
+    <div class="demo-container">
+      <div class="section-header fade-up">
+        <div class="section-badge">LIVE DEMO</div>
+        <h2>AI <span class="text-gold">即時運作</span></h2>
+        <p>看 SEOBAIKE 的 AI 引擎如何處理你的商品</p>
       </div>
-      <div class="demo-container">
-        <div class="demo-window">
-          <div class="demo-titlebar">
-            <div class="demo-dot demo-dot-r"></div>
-            <div class="demo-dot demo-dot-y"></div>
-            <div class="demo-dot demo-dot-g"></div>
-            <span class="demo-titlebar-text">SEOBAIKE</span>
+
+      <div class="demo-terminal fade-up" id="demoTerminal">
+        <div class="demo-terminal-bar">
+          <span class="demo-dot demo-dot-red"></span>
+          <span class="demo-dot demo-dot-yellow"></span>
+          <span class="demo-dot demo-dot-green"></span>
+          <span class="demo-terminal-title">seobaike-ai-engine v3.0</span>
+        </div>
+        <div class="demo-body" id="demoBody">
+          <div class="demo-line">
+            <span class="prompt">&gt;</span>
+            <span class="cmd">seobaike upload --product "台灣烏龍茶禮盒"</span>
           </div>
-          <div class="demo-body">
-            <div class="demo-chat" id="demoChat">
-              <div class="demo-msg demo-msg-user" id="demoMsg1">幫我把這個商品翻成韓文，寫個吸引人的文案</div>
-              <div class="demo-route" id="demoRoute">
-                <div class="demo-route-circle" id="routeA">翻譯</div>
-                <div class="demo-route-circle" id="routeB">文案</div>
-                <div class="demo-route-circle" id="routeC">行銷</div>
-                <div class="demo-route-circle" id="routeD">客服</div>
-              </div>
-              <div class="demo-msg demo-msg-ai" id="demoMsg2">正在分析你的商品，為你準備韓文版文案...</div>
-              <div class="demo-msg demo-msg-ai" id="demoMsg3">
-                <strong>翻譯 + 文案完成</strong><br>
-                韓文版商品文案已生成：<br><br>
-                「매일을 더 간단하게. 혁신적인 디자인과 직관적인 조작을 결합한 제품입니다. 배울 필요 없이, 기다릴 필요 없이, 바로 시작하세요.」
-              </div>
-            </div>
+          <div class="demo-line">
+            <span class="output">[SCAN] 分析商品資訊中...</span>
           </div>
-          <div class="demo-controls">
-            <button class="demo-play-btn" id="demoPlayBtn" aria-label="播放">
-              <svg width="14" height="14" viewBox="0 0 14 14" fill="currentColor"><polygon points="3,1 12,7 3,13"/></svg>
-            </button>
-            <div class="demo-progress-wrap">
-              <div class="demo-progress-bar" id="demoProgress"></div>
-            </div>
-            <span class="demo-time" id="demoTime">0:00</span>
+          <div class="demo-line">
+            <span class="success">[DONE] 商品分類：食品飲料 / 茶葉禮盒</span>
+          </div>
+          <div class="demo-line">
+            <span class="prompt">&gt;</span>
+            <span class="cmd">seobaike translate --target ja,ko,en</span>
+          </div>
+          <div class="demo-line">
+            <span class="output">[AI] 翻譯生成中... ja: 台湾烏龍茶ギフト | ko: 대만 우롱차 선물세트 | en: Taiwan Oolong Gift Set</span>
+          </div>
+          <div class="demo-line">
+            <span class="success">[DONE] 3 語言版本已生成</span>
+          </div>
+          <div class="demo-line">
+            <span class="prompt">&gt;</span>
+            <span class="cmd">seobaike publish --market global</span>
+          </div>
+          <div class="demo-line">
+            <span class="highlight">[LIVE] 商品已上架至 4 個市場 ■</span>
+            <span class="demo-cursor"></span>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ═══════════ Section 4.5: 60秒產品展示影片 ═══════════ -->
-  <section class="section fade-in" style="padding-top:40px;">
-    <div class="container">
-      <div class="section-header">
-        <h2>60 秒看懂 SEOBAIKE</h2>
-        <p>完整產品展示，從提問到回答，全流程體驗</p>
-      </div>
-      <div id="demo-video-home"></div>
-    </div>
-  </section>
 
-  <!-- ═══════════ Section 5: Three Pillars ═══════════ -->
-  <section class="section fade-in">
+  <!-- ═══════════ 6. Three Pillars ═══════════ -->
+  <section class="section-lg" id="pillars">
     <div class="container">
-      <div class="section-header">
-        <div class="section-label">核心優勢</div>
-        <h2>為什麼選 SEOBAIKE？</h2>
-        <p>三個理由，讓你不用再猶豫</p>
+      <div class="section-header fade-up">
+        <div class="section-badge">WHY SEOBAIKE</div>
+        <h2>為什麼選 <span class="text-gold">SEOBAIKE</span></h2>
+        <p>三大核心優勢，讓你的商品走向世界</p>
       </div>
-      <div class="pillars-grid stagger-children">
-        <div class="pillar-card fade-in">
-          <span class="pillar-emoji">&#127758;</span>
+
+      <div class="pillars-grid">
+        <div class="pillar-card fade-up">
+          <div class="pillar-icon">🌐</div>
           <h3>全球市集</h3>
-          <p>台灣、韓國、日本、東南亞 — 你的商品，全世界的買家都能找到。</p>
+          <p>多國市場同步上架，AI 自動適配各地語言與消費習慣。從亞洲到歐美，一站式觸及全球買家。</p>
         </div>
-        <div class="pillar-card fade-in">
-          <span class="pillar-emoji">&#9889;</span>
+        <div class="pillar-card fade-up">
+          <div class="pillar-icon">⚡</div>
           <h3>AI 全自動</h3>
-          <p>AI 幫你翻譯、寫文案、做行銷、回客服。你只要上架，其他交給 AI。</p>
+          <p>從翻譯、SEO 優化、行銷文案到客服回覆，AI 引擎全程自動化運作，賣家專注做好產品。</p>
         </div>
-        <div class="pillar-card fade-in">
-          <span class="pillar-emoji">&#128274;</span>
+        <div class="pillar-card fade-up">
+          <div class="pillar-icon">🔒</div>
           <h3>安全收款</h3>
-          <p>賣家收益依合約約定，金流安全處理。</p>
+          <p>多幣種結算，安全支付通道。資金流向透明，交易記錄完整可查。</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ═══════════ Section 6: Capabilities ═══════════ -->
-  <section class="section cap-section fade-in">
+
+  <!-- ═══════════ 7. Capabilities ═══════════ -->
+  <section class="section-lg" id="capabilities" style="background:var(--bg-secondary);">
     <div class="container">
-      <div class="section-header">
-        <div class="section-label">八大能力</div>
-        <h2>能做什麼？</h2>
-        <p>八大能力，一個入口。滑鼠移上去看範例。</p>
+      <div class="section-header fade-up">
+        <div class="section-badge">AI CAPABILITIES</div>
+        <h2>AI <span class="text-gold">能力矩陣</span></h2>
+        <p>內建多種 AI 引擎，覆蓋電商營運全流程</p>
       </div>
-      <div class="cap-grid stagger-children">
-        <div class="cap-card fade-in">
-          <span class="cap-emoji">&#128172;</span>
-          <h4>對話</h4>
-          <span class="cap-desc">跟 AI 聊天，像跟朋友一樣</span>
-          <div class="cap-example">「幫我想三個生日派對主題」</div>
+
+      <div class="capabilities-grid">
+        <div class="cap-card fade-up">
+          <div class="cap-icon">📊</div>
+          <h4>SEO 分析</h4>
+          <p>自動分析關鍵字、競品排名，產出最佳化建議。</p>
         </div>
-        <div class="cap-card fade-in">
-          <span class="cap-emoji">&#128187;</span>
-          <h4>程式碼</h4>
-          <span class="cap-desc">寫程式、除錯、最佳化</span>
-          <div class="cap-example">「這段程式有 bug，幫我修好」</div>
+        <div class="cap-card fade-up">
+          <div class="cap-icon">💬</div>
+          <h4>AI 對話</h4>
+          <p>智能客服，多語言即時回覆買家問題。</p>
         </div>
-        <div class="cap-card fade-in">
-          <span class="cap-emoji">&#128065;</span>
-          <h4>視覺</h4>
-          <span class="cap-desc">看圖說故事、分析圖片</span>
-          <div class="cap-example">「這張設計稿有什麼可以改進的？」</div>
+        <div class="cap-card fade-up">
+          <div class="cap-icon">🎨</div>
+          <h4>圖片生成</h4>
+          <p>AI 生成商品展示圖、行銷素材、社群貼文圖。</p>
         </div>
-        <div class="cap-card fade-in">
-          <span class="cap-emoji">&#129504;</span>
-          <h4>推理</h4>
-          <span class="cap-desc">數學、邏輯、複雜分析</span>
-          <div class="cap-example">「這組數據的趨勢代表什麼？」</div>
+        <div class="cap-card fade-up">
+          <div class="cap-icon">🌏</div>
+          <h4>多語翻譯</h4>
+          <p>商品描述、評論、客服對話，即時翻譯多國語言。</p>
         </div>
-        <div class="cap-card fade-in">
-          <span class="cap-emoji">&#128269;</span>
-          <h4>搜尋</h4>
-          <span class="cap-desc">即時搜尋最新資訊</span>
-          <div class="cap-example">「今天台北天氣如何？」</div>
+        <div class="cap-card fade-up">
+          <div class="cap-icon">📈</div>
+          <h4>數據分析</h4>
+          <p>銷售趨勢、買家行為、市場洞察，數據一目了然。</p>
         </div>
-        <div class="cap-card fade-in">
-          <span class="cap-emoji">&#128202;</span>
-          <h4>嵌入</h4>
-          <span class="cap-desc">文件分析、語意理解</span>
-          <div class="cap-example">「幫我把這份合約重點摘要」</div>
+        <div class="cap-card fade-up">
+          <div class="cap-icon">🎧</div>
+          <h4>智能客服</h4>
+          <p>全天候 AI 客服，處理訂單查詢、退換貨、常見問題。</p>
         </div>
-        <div class="cap-card fade-in">
-          <span class="cap-emoji">&#127912;</span>
-          <h4>圖像</h4>
-          <span class="cap-desc">AI 繪圖、設計</span>
-          <div class="cap-example">「畫一隻穿太空裝的柴犬」</div>
+        <div class="cap-card fade-up">
+          <div class="cap-icon">✍️</div>
+          <h4>內容生成</h4>
+          <p>自動生成商品文案、部落格文章、社群行銷內容。</p>
         </div>
-        <div class="cap-card fade-in">
-          <span class="cap-emoji">&#127908;</span>
-          <h4>語音</h4>
-          <span class="cap-desc">語音轉文字、文字轉語音</span>
-          <div class="cap-example">「把這段會議錄音轉成文字」</div>
+        <div class="cap-card fade-up">
+          <div class="cap-icon">🔍</div>
+          <h4>市場研究</h4>
+          <p>AI 分析各國市場趨勢、消費偏好、定價策略。</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ═══════════ Section 7: Engine Capabilities Marquee ═══════════ -->
-  <section class="engines-section fade-in">
-    <div class="container">
-      <div class="section-header">
-        <div class="section-label">AI 能力</div>
-        <h2>AI 幫你做的事</h2>
-        <p>翻譯、行銷、客服、數據分析 — AI 全部搞定</p>
-      </div>
-    </div>
-    <!-- Marquee Row 1 -->
-    <div class="marquee-row">
-      <div class="marquee-track">
-        <div class="engine-badge"><div class="engine-badge-icon">&#9889;</div>極速推理</div>
-        <div class="engine-badge"><div class="engine-badge-icon">&#129504;</div>深度推理</div>
-        <div class="engine-badge"><div class="engine-badge-icon">&#128187;</div>程式碼生成</div>
-        <div class="engine-badge"><div class="engine-badge-icon">&#127912;</div>圖像創作</div>
-        <div class="engine-badge"><div class="engine-badge-icon">&#128172;</div>多語言對話</div>
-        <div class="engine-badge"><div class="engine-badge-icon">&#128269;</div>即時搜尋</div>
-        <div class="engine-badge"><div class="engine-badge-icon">&#128202;</div>資料分析</div>
-        <div class="engine-badge"><div class="engine-badge-icon">&#127908;</div>語音處理</div>
-        <!-- Duplicate for seamless loop -->
-        <div class="engine-badge"><div class="engine-badge-icon">&#9889;</div>極速推理</div>
-        <div class="engine-badge"><div class="engine-badge-icon">&#129504;</div>深度推理</div>
-        <div class="engine-badge"><div class="engine-badge-icon">&#128187;</div>程式碼生成</div>
-        <div class="engine-badge"><div class="engine-badge-icon">&#127912;</div>圖像創作</div>
-        <div class="engine-badge"><div class="engine-badge-icon">&#128172;</div>多語言對話</div>
-        <div class="engine-badge"><div class="engine-badge-icon">&#128269;</div>即時搜尋</div>
-        <div class="engine-badge"><div class="engine-badge-icon">&#128202;</div>資料分析</div>
-        <div class="engine-badge"><div class="engine-badge-icon">&#127908;</div>語音處理</div>
-      </div>
-    </div>
-    <!-- Marquee Row 2 (reverse direction) -->
-    <div class="marquee-row marquee-row-2">
-      <div class="marquee-track">
-        <div class="engine-badge"><div class="engine-badge-icon">&#128640;</div>GPU 加速</div>
-        <div class="engine-badge"><div class="engine-badge-icon">&#128274;</div>安全合規</div>
-        <div class="engine-badge"><div class="engine-badge-icon">&#128200;</div>商業智慧</div>
-        <div class="engine-badge"><div class="engine-badge-icon">&#128065;</div>視覺辨識</div>
-        <div class="engine-badge"><div class="engine-badge-icon">&#128736;</div>自動化工作流</div>
-        <div class="engine-badge"><div class="engine-badge-icon">&#127760;</div>多模態融合</div>
-        <div class="engine-badge"><div class="engine-badge-icon">&#128218;</div>知識管理</div>
-        <!-- Duplicate for seamless loop -->
-        <div class="engine-badge"><div class="engine-badge-icon">&#128640;</div>GPU 加速</div>
-        <div class="engine-badge"><div class="engine-badge-icon">&#128274;</div>安全合規</div>
-        <div class="engine-badge"><div class="engine-badge-icon">&#128200;</div>商業智慧</div>
-        <div class="engine-badge"><div class="engine-badge-icon">&#128065;</div>視覺辨識</div>
-        <div class="engine-badge"><div class="engine-badge-icon">&#128736;</div>自動化工作流</div>
-        <div class="engine-badge"><div class="engine-badge-icon">&#127760;</div>多模態融合</div>
-        <div class="engine-badge"><div class="engine-badge-icon">&#128218;</div>知識管理</div>
-      </div>
-    </div>
-  </section>
 
-  <!-- ═══════════ Section 8: Pricing Preview ═══════════ -->
-  <section class="section fade-in">
-    <div class="container">
-      <div class="section-header">
-        <div class="section-label">定價方案</div>
-        <h2>選擇適合你的方式</h2>
-        <p>不管你在哪個階段，我們都有適合你的方案</p>
-      </div>
-      <div class="pricing-grid stagger-children">
-        <div class="price-card fade-in">
-          <h4>體驗版</h4>
-          <div class="price-amount"><span class="currency">NT$</span>0</div>
-          <div class="price-period">永久免費</div>
-          <ul class="price-feature-list">
-            <li>基本對話功能</li>
-            <li>每日有限額度</li>
-            <li>社群支援</li>
-          </ul>
-        </div>
-        <div class="price-card fade-in">
-          <h4>個人版</h4>
-          <div class="price-amount"><span class="currency">NT$</span>299</div>
-          <div class="price-period">每月</div>
-          <ul class="price-feature-list">
-            <li>所有基本功能</li>
-            <li>更多每日額度</li>
-            <li>優先回應速度</li>
-          </ul>
-        </div>
-        <div class="price-card recommended fade-in">
-          <div class="price-badge">推薦</div>
-          <h4>專業版</h4>
-          <div class="price-amount"><span class="currency">NT$</span>899</div>
-          <div class="price-period">每月</div>
-          <ul class="price-feature-list">
-            <li>全部 AI 能力</li>
-            <li>高額度使用</li>
-            <li>專屬客服</li>
-          </ul>
-        </div>
-        <div class="price-card fade-in">
-          <h4>企業版</h4>
-          <div class="price-amount"><span class="currency">NT$</span>2,999</div>
-          <div class="price-period">每月</div>
-          <ul class="price-feature-list">
-            <li>無限額度</li>
-            <li>專屬帳戶經理</li>
-            <li>客製化整合</li>
-          </ul>
-        </div>
-      </div>
-      <p style="text-align:center;color:#8888aa;font-size:0.85rem;margin-top:1.5rem;">價格以新台幣顯示，支援多幣別付款｜全球適用，在哪都能用</p>
-      <div style="text-align:center;margin-top:16px;">
-        <a href="/pricing.html" class="btn btn-secondary">了解更多方案</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- ═══════════ Section 9: Trust ═══════════ -->
-  <section class="section trust-section fade-in">
-    <div class="container">
-      <div class="section-header">
-        <div class="section-label">安心保障</div>
-        <h2>值得信賴</h2>
-      </div>
-      <div class="trust-strip stagger-children">
-        <div class="trust-item fade-in">
-          <span class="trust-item-icon">&#128220;</span>
-          <h4>台灣公司</h4>
-          <p>合法立案經營</p>
-        </div>
-        <div class="trust-item fade-in">
-          <span class="trust-item-icon">&#127970;</span>
-          <h4>合法公司</h4>
-          <p>小路光有限公司<br>統編 60475510</p>
-        </div>
-        <div class="trust-item fade-in">
-          <span class="trust-item-icon">&#9889;</span>
-          <h4>AI 全自動</h4>
-          <p>翻譯、行銷、客服</p>
-        </div>
-        <div class="trust-item fade-in">
-          <span class="trust-item-icon">&#128737;</span>
-          <h4>零第三方干擾</h4>
-          <p>你的資料只屬於你</p>
+  <!-- ═══════════ 8. CTA ═══════════ -->
+  <section class="cta-section" id="cta">
+    <div class="cta-glow"></div>
+    <div class="cta-content container-narrow">
+      <div class="fade-up">
+        <div class="section-badge" style="margin-bottom:var(--sp-6);">GET STARTED</div>
+        <h2>讓你的產品<br><span class="text-gold">被全世界看見</span></h2>
+        <p>加入 SEOBAIKE 全球市集，AI 幫你打開國際市場。</p>
+        <div class="hero-ctas">
+          <a href="/marketplace" class="btn btn-primary btn-lg">立即開始</a>
+          <a href="/about" class="btn btn-secondary btn-lg">了解更多</a>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ═══════════ Section 10: Final CTA ═══════════ -->
-  <section class="cta-final fade-in">
-    <div class="cta-final-mesh"></div>
-    <div class="cta-final-grid"></div>
-    <div class="container">
-      <div class="cta-final-content">
-        <h2>準備好了嗎？</h2>
-        <p>免費上架，輕鬆搞定。<br>讓 SEOBAIKE 幫你把商品賣到全世界。</p>
-        <div class="cta-final-actions">
-          <a href="/marketplace" class="btn btn-primary btn-large">逛市集</a>
-          <a href="/marketplace#earn" class="btn btn-secondary btn-large">我要上架</a>
-        </div>
-      </div>
-    </div>
-  </section>
 
-  <!-- ═══════════ Footer ═══════════ -->
-  <footer>
+  <!-- ═══════════ 9. Footer ═══════════ -->
+  <footer class="footer">
     <div class="container">
       <div class="footer-grid">
         <div class="footer-brand">
-          <div class="nav-logo" style="font-size:1.4rem;margin-bottom:16px;"><img src="/favicon.svg" alt="S" width="28" height="28" style="border-radius:5px; box-shadow: 0 0 8px rgba(232,133,12,0.3); border: 1px solid rgba(232,133,12,0.2);"><span class="seo">SEO</span><span class="baike">BAIKE</span></div>
-          <p>
-            AI 驅動的全球市集。你的產品，全世界都能買到。<br>
-            由小路光有限公司（統編 60475510）開發與維運。
-          </p>
+          <a href="/" class="nav-brand" style="font-size:1.3rem;">
+            <img src="/favicon.svg" alt="SEOBAIKE" width="28" height="28">
+            <span><span class="seo">SEO</span><span class="baike">BAIKE</span></span>
+          </a>
+          <p>AI 驅動的全球市集。小路光有限公司出品。</p>
+          <p style="font-size:0.75rem;color:var(--text-muted);margin-top:4px;">統編 60475510 | 台灣專利 115100981</p>
         </div>
+
         <div class="footer-col">
           <h4>產品</h4>
-          <ul>
-            <li><a href="/features">功能總覽</a></li>
-            <li><a href="/pricing">方案與定價</a></li>
-            <li><a href="/docs">常見問題</a></li>
-            <li><a href="#">更新日誌</a></li>
-          </ul>
+          <a href="/marketplace">市集</a>
+          <a href="/features">功能</a>
+          <a href="/pricing">方案</a>
+          <a href="/ecosystem">生態系統</a>
         </div>
+
+        <div class="footer-col">
+          <h4>資源</h4>
+          <a href="/docs">文件</a>
+          <a href="/blog">部落格</a>
+          <a href="/changelog">更新日誌</a>
+          <a href="/status">系統狀態</a>
+        </div>
+
         <div class="footer-col">
           <h4>公司</h4>
-          <ul>
-            <li><a href="/about">關於我們</a></li>
-            <li><a href="/contact">聯繫我們</a></li>
-            <li><a href="#">隱私權政策</a></li>
-            <li><a href="#">服務條款</a></li>
-          </ul>
-        </div>
-        <div class="footer-col">
-          <h4>支援</h4>
-          <ul>
-            <li><a href="/marketplace">逛市集</a></li>
-            <li><a href="/docs">常見問題</a></li>
-            <li><a href="#">聯繫客服</a></li>
-            <li><a href="/status">服務狀態</a></li>
-          </ul>
+          <a href="/about">關於我們</a>
+          <a href="/contact">聯絡</a>
+          <a href="/privacy">隱私政策</a>
+          <a href="/terms">服務條款</a>
         </div>
       </div>
+
+      <hr class="divider" style="margin:var(--sp-8) 0;">
+
       <div class="footer-bottom">
-        <div>&copy; 2026 <span>小路光有限公司</span>（統編 60475510）</div>
-        <div><span>aiforseo.vip</span></div>
+        <span>&copy; 2025 SEOBAIKE. 小路光有限公司 版權所有。</span>
+        <div class="flex gap-4">
+          <a href="/privacy">隱私</a>
+          <a href="/terms">條款</a>
+        </div>
       </div>
     </div>
   </footer>
 
+
+  <!-- ═══════════ Scripts ═══════════ -->
   <script>
-    /* ─── Mobile nav toggle ─── */
-    // === 手機版 Hamburger Menu ===
-    document.getElementById('hamburger').addEventListener('click', function () {
-      document.getElementById('mobileMenu').classList.add('open');
-      document.body.style.overflow = 'hidden';
-    });
-    document.getElementById('mobileMenuClose').addEventListener('click', function () {
-      closeMobileMenu();
-    });
-    function closeMobileMenu() {
-      document.getElementById('mobileMenu').classList.remove('open');
-      document.body.style.overflow = '';
-    }
-
-    /* ─── Scroll fade-in (enhanced — handles all reveal types) ─── */
+    /* ── Intersection Observer for fade-up ── */
     (function() {
-      var fadeEls = document.querySelectorAll('.fade-in, .fade-in-scale');
-      var observer = new IntersectionObserver(function(entries) {
-        entries.forEach(function(entry) {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('visible');
-            observer.unobserve(entry.target);
+      var obs = new IntersectionObserver(function(entries) {
+        entries.forEach(function(e) {
+          if (e.isIntersecting) {
+            e.target.classList.add('visible');
           }
         });
-      }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
-      fadeEls.forEach(function(el) { observer.observe(el); });
-    })();
-
-    /* ─── Animated Number Counters ─── */
-    (function() {
-      var counters = document.querySelectorAll('.counter');
-      var animated = false;
-
-      function animateCounters() {
-        if (animated) return;
-        animated = true;
-
-        counters.forEach(function(counter) {
-          var target = parseInt(counter.getAttribute('data-target'), 10);
-          var duration = 2000;
-          var startTime = null;
-
-          function easeOutExpo(t) {
-            return t === 1 ? 1 : 1 - Math.pow(2, -10 * t);
-          }
-
-          function updateCounter(timestamp) {
-            if (!startTime) startTime = timestamp;
-            var elapsed = timestamp - startTime;
-            var progress = Math.min(elapsed / duration, 1);
-            var easedProgress = easeOutExpo(progress);
-            var current = Math.floor(easedProgress * target);
-
-            counter.textContent = current.toLocaleString();
-
-            if (progress < 1) {
-              requestAnimationFrame(updateCounter);
-            } else {
-              counter.textContent = target.toLocaleString();
-            }
-          }
-
-          requestAnimationFrame(updateCounter);
-        });
-      }
-
-      var statsSection = document.querySelector('.stats-section');
-      if (statsSection) {
-        var counterObserver = new IntersectionObserver(function(entries) {
-          entries.forEach(function(entry) {
-            if (entry.isIntersecting) {
-              animateCounters();
-              counterObserver.unobserve(entry.target);
-            }
-          });
-        }, { threshold: 0.3 });
-        counterObserver.observe(statsSection);
-      }
-    })();
-
-    /* ─── Demo Animation ─── */
-    (function() {
-      var isPlaying = false;
-      var animTimeouts = [];
-      var playBtn = document.getElementById('demoPlayBtn');
-      var progress = document.getElementById('demoProgress');
-      var timeDisplay = document.getElementById('demoTime');
-      var msg1 = document.getElementById('demoMsg1');
-      var msg2 = document.getElementById('demoMsg2');
-      var msg3 = document.getElementById('demoMsg3');
-      var route = document.getElementById('demoRoute');
-      var circles = [
-        document.getElementById('routeA'),
-        document.getElementById('routeB'),
-        document.getElementById('routeC'),
-        document.getElementById('routeD')
-      ];
-
-      var TOTAL_DURATION = 10000;
-      var progressStart = 0;
-      var progressRAF = null;
-
-      function resetDemo() {
-        animTimeouts.forEach(clearTimeout);
-        animTimeouts = [];
-        if (progressRAF) cancelAnimationFrame(progressRAF);
-        [msg1, msg2, msg3].forEach(function(m) { m.classList.remove('visible'); });
-        route.classList.remove('visible');
-        circles.forEach(function(c) {
-          c.classList.remove('checking', 'selected', 'dimmed');
-        });
-        progress.style.width = '0%';
-        timeDisplay.textContent = '0:00';
-        playBtn.innerHTML = '<svg width="14" height="14" viewBox="0 0 14 14" fill="currentColor"><polygon points="3,1 12,7 3,13"/></svg>';
-      }
-
-      function updateProgress() {
-        if (!isPlaying) return;
-        var elapsed = Date.now() - progressStart;
-        var pct = Math.min(100, (elapsed / TOTAL_DURATION) * 100);
-        progress.style.width = pct + '%';
-        var sec = Math.floor(elapsed / 1000);
-        timeDisplay.textContent = '0:' + (sec < 10 ? '0' : '') + sec;
-        if (pct < 100) {
-          progressRAF = requestAnimationFrame(updateProgress);
-        }
-      }
-
-      function runAnimation() {
-        resetDemo();
-        isPlaying = true;
-        progressStart = Date.now();
-        playBtn.innerHTML = '<svg width="14" height="14" viewBox="0 0 14 14" fill="currentColor"><rect x="2" y="1" width="4" height="12"/><rect x="8" y="1" width="4" height="12"/></svg>';
-        updateProgress();
-
-        animTimeouts.push(setTimeout(function() { msg1.classList.add('visible'); }, 300));
-        animTimeouts.push(setTimeout(function() { route.classList.add('visible'); }, 1500));
-
-        circles.forEach(function(c, i) {
-          animTimeouts.push(setTimeout(function() { c.classList.add('checking'); }, 2500 + i * 600));
-          if (i < 3) {
-            animTimeouts.push(setTimeout(function() { c.classList.remove('checking'); }, 2500 + i * 600 + 400));
-          }
-        });
-
-        animTimeouts.push(setTimeout(function() { msg2.classList.add('visible'); }, 5000));
-
-        animTimeouts.push(setTimeout(function() {
-          circles.forEach(function(c, i) {
-            c.classList.remove('checking');
-            if (i === 2) { c.classList.add('selected'); }
-            else { c.classList.add('dimmed'); }
-          });
-        }, 6000));
-
-        animTimeouts.push(setTimeout(function() {
-          msg2.classList.remove('visible');
-          msg3.classList.add('visible');
-        }, 7500));
-
-        animTimeouts.push(setTimeout(function() {
-          isPlaying = false;
-          playBtn.innerHTML = '<svg width="14" height="14" viewBox="0 0 14 14" fill="currentColor"><polygon points="3,1 12,7 3,13"/></svg>';
-        }, TOTAL_DURATION));
-      }
-
-      playBtn.addEventListener('click', function() {
-        if (isPlaying) {
-          isPlaying = false;
-          animTimeouts.forEach(clearTimeout);
-          animTimeouts = [];
-          if (progressRAF) cancelAnimationFrame(progressRAF);
-          playBtn.innerHTML = '<svg width="14" height="14" viewBox="0 0 14 14" fill="currentColor"><polygon points="3,1 12,7 3,13"/></svg>';
-        } else {
-          runAnimation();
-        }
+      }, { threshold: 0.08 });
+      document.querySelectorAll('.fade-up').forEach(function(el) {
+        obs.observe(el);
       });
-
-      var demoObs = new IntersectionObserver(function(entries) {
-        entries.forEach(function(entry) {
-          if (entry.isIntersecting && !isPlaying) {
-            runAnimation();
-            demoObs.unobserve(entry.target);
-          }
-        });
-      }, { threshold: 0.3 });
-      demoObs.observe(document.querySelector('.demo-section'));
     })();
 
-    /* ─── Navbar scroll effect ─── */
+    /* ── Nav scroll effect ── */
     (function() {
-      var nav = document.querySelector('nav');
+      var nav = document.getElementById('mainNav');
       window.addEventListener('scroll', function() {
-        if (window.scrollY > 50) {
-          nav.style.background = 'rgba(10, 10, 26, 0.95)';
-          nav.style.borderBottomColor = 'rgba(232,133,12,0.1)';
-        } else {
-          nav.style.background = 'rgba(10, 10, 26, 0.85)';
-          nav.style.borderBottomColor = '';
-        }
+        nav.classList.toggle('scrolled', window.scrollY > 20);
       }, { passive: true });
     })();
 
-    /* ─── Page View Tracking ─── */
+    /* ── Hamburger toggle ── */
+    function toggleMenu() {
+      document.querySelector('.nav-hamburger').classList.toggle('active');
+      document.getElementById('mobileMenu').classList.toggle('open');
+    }
+
+    /* ── Counter animation ── */
+    (function() {
+      var counted = false;
+      var statsObs = new IntersectionObserver(function(entries) {
+        entries.forEach(function(e) {
+          if (e.isIntersecting && !counted) {
+            counted = true;
+            animateCounters();
+          }
+        });
+      }, { threshold: 0.3 });
+
+      var statsSection = document.getElementById('stats');
+      if (statsSection) statsObs.observe(statsSection);
+
+      function animateCounters() {
+        var counters = document.querySelectorAll('[data-count]');
+        counters.forEach(function(el) {
+          var target = parseInt(el.getAttribute('data-count'), 10);
+          var suffix = el.getAttribute('data-suffix') || '';
+          var current = 0;
+          var duration = 1500;
+          var step = target / (duration / 16);
+
+          function tick() {
+            current += step;
+            if (current >= target) {
+              el.textContent = target + suffix;
+              return;
+            }
+            el.textContent = Math.floor(current) + suffix;
+            requestAnimationFrame(tick);
+          }
+          tick();
+        });
+      }
+    })();
+
+    /* ── Demo terminal replay ── */
+    (function() {
+      var demoObs = new IntersectionObserver(function(entries) {
+        entries.forEach(function(e) {
+          if (e.isIntersecting) {
+            var lines = e.target.querySelectorAll('.demo-line');
+            lines.forEach(function(line) {
+              /* Reset animation by cloning */
+              var clone = line.cloneNode(true);
+              line.parentNode.replaceChild(clone, line);
+            });
+          }
+        });
+      }, { threshold: 0.3 });
+      var terminal = document.getElementById('demoTerminal');
+      if (terminal) demoObs.observe(terminal);
+    })();
+
+    /* ── Smooth scroll for anchor links ── */
+    document.querySelectorAll('a[href^="#"]').forEach(function(a) {
+      a.addEventListener('click', function(e) {
+        var target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          e.preventDefault();
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+
+    /* ── Page View Tracking ── */
     (function(){
       try {
         var cfg = window.__SEOBAIKE__ || {};
@@ -2567,8 +1303,6 @@
     })();
   </script>
 
-  <script src="/assets/demo-video.js"></script>
-  <script>window.SEOBAIKEDemo && window.SEOBAIKEDemo.init('demo-video-home');</script>
   <script src="/seobaike-widget.js"></script>
   <script src="/assets/i18n.js"></script>
   <script>SEOBAIKE_I18N.init();</script>

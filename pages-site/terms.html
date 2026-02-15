@@ -5,753 +5,537 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>服務條款 — SEOBAIKE | 小路光有限公司</title>
   <meta name="description" content="SEOBAIKE 服務條款：國際 AI 市集平台使用規範、SEO Points 點數條款、市集交易規則、免責聲明與責任限制。">
+  <meta property="og:title" content="服務條款 — SEOBAIKE">
+  <meta property="og:description" content="SEOBAIKE 國際 AI 市集平台之使用規範與條件。">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://aiforseo.vip/terms">
+  <meta property="og:image" content="/og-image.png">
+  <meta property="og:site_name" content="SEOBAIKE">
+  <meta property="og:locale" content="zh_TW">
+  <meta name="theme-color" content="#e8850c">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/favicon.svg">
+  <link rel="manifest" href="/manifest.json">
+  <link rel="stylesheet" href="/assets/design-system.css">
   <style>
-    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-
-    :root {
-      --orange: #e8850c;
-      --copper: #cc785c;
-      --green: #76b900;
-      --bg: #0a0a1a;
-      --bg-card: #12122a;
-      --bg-elevated: #1a1a3a;
-      --text: #e8e8f0;
-      --text-dim: #9999b0;
-      --border: #2a2a4a;
-    }
-
-    html { scroll-behavior: smooth; }
-
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans TC", sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      line-height: 1.7;
-      min-height: 100vh;
-    }
-
-    a { color: var(--orange); text-decoration: none; transition: color 0.2s; }
-    a:hover { color: var(--copper); }
-
-    /* ── Navigation ── */
-    nav {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
-      background: rgba(10, 10, 26, 0.92);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--border);
-    }
-    .nav-inner {
-      max-width: 1200px; margin: 0 auto;
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 0 24px; height: 64px;
-    }
-    .nav-brand {
-      font-size: 1.3rem; font-weight: 800; color: var(--orange);
-      letter-spacing: 1px;
-    }
-    .nav-brand span { color: var(--green); }
-    .nav-links { display: flex; gap: 28px; list-style: none; }
-    .nav-links a {
-      color: var(--text-dim); font-size: 0.92rem; font-weight: 500;
-      transition: color 0.2s;
-    }
-    .nav-links a:hover, .nav-links a.active { color: var(--orange); }
-    .nav-toggle { display: none; background: none; border: none; color: var(--text); font-size: 1.5rem; cursor: pointer; }
-
-    /* ── Hero ── */
-    .hero {
-      padding: 140px 24px 60px;
+    /* ── Legal Page Specific ── */
+    .legal-hero {
+      padding: 140px 0 60px;
       text-align: center;
-      background: linear-gradient(180deg, #0f0f2a 0%, var(--bg) 100%);
       position: relative;
       overflow: hidden;
+      background: linear-gradient(180deg, var(--bg-secondary) 0%, var(--bg-primary) 100%);
     }
-    .hero::before {
-      content: "";
-      position: absolute; top: 60px; left: 50%; transform: translateX(-50%);
-      width: 600px; height: 600px;
-      background: radial-gradient(circle, rgba(232,133,12,0.08) 0%, transparent 70%);
+    .legal-hero::before {
+      content: '';
+      position: absolute;
+      top: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 700px;
+      height: 700px;
+      background: radial-gradient(circle, rgba(232,133,12,0.06) 0%, transparent 65%);
       pointer-events: none;
     }
-    .hero h1 {
-      font-size: clamp(2.2rem, 5vw, 3.2rem);
-      font-weight: 800;
-      background: linear-gradient(135deg, var(--orange), var(--copper));
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-      background-clip: text;
-      margin-bottom: 16px;
+    .legal-hero h1 { margin-bottom: var(--sp-4); }
+    .legal-hero .subtitle {
+      font-size: 1.05rem;
+      color: var(--text-muted);
+      max-width: 600px;
+      margin: 0 auto var(--sp-3);
     }
-    .hero p {
-      font-size: 1.1rem; color: var(--text-dim);
-      max-width: 600px; margin: 0 auto;
-    }
-    .hero .last-updated {
-      font-size: 0.88rem; color: var(--text-dim);
-      margin-top: 12px; opacity: 0.7;
+    .legal-hero .last-updated {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      opacity: 0.7;
     }
 
-    /* ── Legal Content ── */
-    .legal-content {
-      max-width: 860px; margin: 0 auto;
-      padding: 60px 24px 80px;
+    /* Legal Content */
+    .legal-content { padding: var(--sp-16) 0 var(--sp-20); }
+    .legal-section { margin-bottom: var(--sp-12); }
+    .legal-section-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 14px;
+      border-radius: var(--radius-full);
+      background: rgba(232,133,12,0.08);
+      border: 1px solid rgba(232,133,12,0.15);
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: var(--gold-200);
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      margin-bottom: var(--sp-3);
     }
-
-    .legal-section {
-      margin-bottom: 48px;
-    }
-
-    .legal-section-number {
-      display: inline-block;
-      font-size: 0.78rem; font-weight: 700; text-transform: uppercase;
-      letter-spacing: 2px; color: var(--green);
-      margin-bottom: 8px;
-    }
-
     .legal-section h2 {
-      font-size: 1.5rem; font-weight: 700; color: #fff;
-      margin-bottom: 20px;
-      padding-bottom: 12px;
-      border-bottom: 1px solid var(--border);
+      font-size: clamp(1.3rem, 2.5vw, 1.6rem);
+      margin-bottom: var(--sp-5);
+      padding-bottom: var(--sp-3);
+      border-bottom: 1px solid var(--border-subtle);
     }
-
     .legal-section h3 {
-      font-size: 1.15rem; font-weight: 600; color: var(--orange);
-      margin: 24px 0 12px;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--text-gold);
+      margin: var(--sp-6) 0 var(--sp-3);
     }
-
     .legal-section p {
-      color: var(--text-dim); font-size: 0.98rem;
-      line-height: 1.85; margin-bottom: 14px;
+      font-size: 0.95rem;
+      line-height: 1.85;
+      margin-bottom: var(--sp-3);
     }
-
     .legal-section ul, .legal-section ol {
-      color: var(--text-dim); font-size: 0.98rem;
-      line-height: 1.85; margin: 12px 0 16px 24px;
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+      line-height: 1.85;
+      margin: var(--sp-3) 0 var(--sp-4) var(--sp-6);
     }
-
-    .legal-section li {
-      margin-bottom: 8px;
-    }
-
-    .legal-section li strong {
-      color: var(--text);
-    }
-
-    .legal-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 24px 28px;
-      margin: 20px 0;
-    }
-
-    .legal-card h4 {
-      color: var(--orange); font-size: 1rem; font-weight: 600;
-      margin-bottom: 10px;
-    }
-
-    .legal-card p, .legal-card ul {
-      color: var(--text-dim); font-size: 0.92rem; line-height: 1.8;
-    }
+    .legal-section li { margin-bottom: var(--sp-2); }
+    .legal-section li strong { color: var(--text-primary); }
 
     .legal-highlight {
-      background: rgba(232,133,12,0.08);
-      border-left: 3px solid var(--orange);
-      padding: 16px 20px;
-      border-radius: 0 8px 8px 0;
-      margin: 16px 0;
+      background: rgba(232,133,12,0.06);
+      border-left: 3px solid var(--gold-300);
+      padding: var(--sp-4) var(--sp-5);
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+      margin: var(--sp-4) 0;
     }
+    .legal-highlight p { color: var(--text-primary); margin-bottom: 0; }
 
-    .legal-highlight p {
-      color: var(--text); font-size: 0.95rem;
-      margin-bottom: 0;
+    .legal-card-box {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: var(--sp-6) var(--sp-6);
+      margin: var(--sp-5) 0;
+    }
+    .legal-card-box h4 {
+      color: var(--gold-200);
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: var(--sp-2);
+    }
+    .legal-card-box p {
+      font-size: 0.92rem;
+      line-height: 1.85;
     }
 
     .legal-table {
       width: 100%;
       border-collapse: collapse;
-      margin: 16px 0;
-      font-size: 0.92rem;
+      margin: var(--sp-4) 0;
+      font-size: 0.9rem;
     }
-
     .legal-table th {
       background: var(--bg-elevated);
-      color: var(--orange);
+      color: var(--gold-200);
       text-align: left;
       padding: 12px 16px;
-      border: 1px solid var(--border);
-      font-weight: 600;
+      border: 1px solid var(--border-subtle);
+      font-weight: 700;
+      font-size: 0.85rem;
     }
-
     .legal-table td {
       padding: 12px 16px;
-      border: 1px solid var(--border);
-      color: var(--text-dim);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-secondary);
     }
-
-    .patent-warning {
-      background: linear-gradient(135deg, rgba(118,185,0,0.08), rgba(118,185,0,0.03));
-      border: 1px solid rgba(118,185,0,0.3);
-      border-radius: 12px;
-      padding: 24px 28px;
-      margin: 20px 0;
-    }
-
-    .patent-warning h4 {
-      color: var(--green); font-size: 1rem; font-weight: 700;
-      margin-bottom: 10px;
-    }
-
-    .patent-warning p {
-      color: var(--text-dim); font-size: 0.92rem; line-height: 1.8;
-    }
+    .legal-table td strong { color: var(--text-primary); }
 
     .contact-box {
-      background: linear-gradient(135deg, #12122a 0%, #1a1030 100%);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 36px 32px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      padding: var(--sp-10) var(--sp-8);
       text-align: center;
-      margin-top: 48px;
+      margin-top: var(--sp-12);
     }
+    .contact-box h3 { margin-bottom: var(--sp-3); }
+    .contact-box p { font-size: 0.95rem; margin-bottom: var(--sp-1); }
+    .contact-box a { font-weight: 700; }
 
-    .contact-box h3 {
-      color: #fff; font-size: 1.3rem; margin-bottom: 12px;
-    }
-
-    .contact-box p {
-      color: var(--text-dim); font-size: 0.95rem; margin-bottom: 4px;
-    }
-
-    .contact-box a {
-      font-size: 1.1rem; font-weight: 600;
-    }
-
-    /* ── Footer ── */
-    footer {
-      border-top: 1px solid var(--border);
-      padding: 48px 24px 32px;
-      margin-top: 40px;
-    }
-    .footer-inner {
-      max-width: 1000px; margin: 0 auto;
-      display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 48px;
-    }
-    .footer-brand { font-size: 1.2rem; font-weight: 700; color: var(--orange); margin-bottom: 12px; }
-    .footer-desc { color: var(--text-dim); font-size: 0.9rem; line-height: 1.7; }
-    .footer-col h4 { color: #fff; font-size: 0.9rem; margin-bottom: 12px; }
-    .footer-col ul { list-style: none; }
-    .footer-col li { margin-bottom: 8px; }
-    .footer-col a { color: var(--text-dim); font-size: 0.88rem; }
-    .footer-col a:hover { color: var(--orange); }
-    .footer-bottom {
-      max-width: 1000px; margin: 32px auto 0;
-      padding-top: 24px; border-top: 1px solid var(--border);
-      display: flex; justify-content: space-between; align-items: center;
-      flex-wrap: wrap; gap: 12px;
-      color: var(--text-dim); font-size: 0.82rem;
-    }
-
-    /* ── Responsive ── */
     @media (max-width: 768px) {
-      .nav-links { display: none; }
-      .nav-links.open {
-        display: flex; flex-direction: column;
-        position: absolute; top: 64px; left: 0; right: 0;
-        background: rgba(10,10,26,0.97);
-        padding: 20px 24px; gap: 16px;
-        border-bottom: 1px solid var(--border);
-      }
-      .nav-toggle { display: block; }
-      .legal-content { padding: 40px 16px 60px; }
-      .legal-card { padding: 20px; }
-      .patent-warning { padding: 20px; }
-      .contact-box { padding: 28px 20px; }
+      .legal-hero { padding: 110px 0 40px; }
       .legal-table { font-size: 0.82rem; }
       .legal-table th, .legal-table td { padding: 8px 10px; }
-      .footer-inner { grid-template-columns: 1fr; gap: 32px; }
-      .footer-bottom { flex-direction: column; text-align: center; }
+      .contact-box { padding: var(--sp-8) var(--sp-5); }
+      .legal-card-box { padding: var(--sp-5); }
     }
   </style>
 </head>
-<body>
+<body class="page-top">
 
-  <!-- ════ Navigation ════ -->
-  <nav>
-    <div class="nav-inner">
-      <a href="/" class="nav-brand">SEO<span>BAIKE</span></a>
-      <button class="nav-toggle" onclick="document.querySelector('.nav-links').classList.toggle('open')" aria-label="選單">&#9776;</button>
-      <ul class="nav-links">
-        <li><a href="/">首頁</a></li>
-        <li><a href="/features">功能</a></li>
-        <li><a href="/marketplace">市集</a></li>
-        <li><a href="/pricing">方案</a></li>
-        <li><a href="/about">關於</a></li>
-        <li><a href="/docs">常見問題</a></li>
-        <li><a href="/login">登入</a></li>
-      </ul>
-    </div>
+  <!-- Nav -->
+  <nav class="nav">
+    <a href="/" class="nav-brand">
+      <img src="/favicon.svg" alt="SEOBAIKE" width="34" height="34">
+      <span><span class="seo">SEO</span><span class="baike">BAIKE</span></span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="/">首頁</a></li>
+      <li><a href="/features">功能</a></li>
+      <li><a href="/marketplace">市集</a></li>
+      <li><a href="/pricing">方案</a></li>
+      <li><a href="/about">關於</a></li>
+      <li><a href="/docs">常見問題</a></li>
+      <li><a href="/login" class="nav-cta">登入</a></li>
+    </ul>
+    <button class="nav-hamburger" onclick="toggleMenu()" aria-label="選單">
+      <span></span><span></span><span></span>
+    </button>
   </nav>
 
-  <!-- ════ Hero ════ -->
-  <section class="hero">
-    <h1>服務條款</h1>
-    <p>Terms of Service — SEOBAIKE 國際 AI 市集平台之使用規範與條件。</p>
-    <div class="last-updated">最後更新日期 (Last Updated)：2026 年 2 月 16 日</div>
-  </section>
-
-  <!-- ════ Legal Content ════ -->
-  <div class="legal-content">
-
-    <!-- ──────────────────────────────────────────── -->
-    <!-- Section 1: 服務說明 -->
-    <!-- ──────────────────────────────────────────── -->
-    <div class="legal-section">
-      <div class="legal-section-number">Section 1</div>
-      <h2>一、服務說明 (Service Description)</h2>
-      <p>
-        本服務條款（以下簡稱「本條款」）構成您（以下簡稱「使用者」或「您」）與<strong>小路光有限公司</strong>（統一編號：60475510，負責人：許竣翔，以下簡稱「本公司」）之間，就使用 SEOBAIKE 平台（網址：<strong>aiforseo.vip</strong>，以下簡稱「本平台」）所提供之服務所訂立之具有法律約束力之契約。
-      </p>
-
-      <div class="legal-highlight">
-        <p><strong>重要聲明：</strong>SEOBAIKE 是一個<strong>市集平台 (Marketplace Platform)</strong>。本平台提供一個線上場域 (venue)，讓賣家與買家得以進行交易。本公司本身<strong>並非</strong>商品或服務之賣方、提供者或製造商。本公司不參與買賣雙方之實際交易內容，亦不對市集中上架之商品或服務之品質、安全性、合法性負責。</p>
-      </div>
-
-      <h3>1.1 平台性質 (Platform Nature)</h3>
-      <p>
-        SEOBAIKE 是一個國際 AI 服務市集平台，同時整合 Constraint-as-a-Service (CaaS) 約束即服務技術。本平台之功能包括但不限於：
-      </p>
-      <ul>
-        <li><strong>市集服務</strong>：為賣家與買家提供線上交易場域，媒合 AI 相關服務、工具與數位產品之供需</li>
-        <li><strong>CaaS 技術服務</strong>：提供 AI 推理約束驗證之技術基礎設施</li>
-        <li><strong>SEO Points 點數系統</strong>：提供平台內部點數機制，便利跨境交易之結算</li>
-        <li><strong>API 存取服務</strong>：提供程式化介面，供開發者整合本平台功能</li>
-      </ul>
-
-      <h3>1.2 使用同意 (Acceptance of Terms)</h3>
-      <p>
-        使用本平台即表示您已閱讀、理解並同意受本條款之約束。若您不同意本條款之任何內容，請立即停止使用本平台。若您代表法人實體使用本平台，即表示您有權代表該法人實體接受本條款，且該法人實體同意就您違反本條款之行為負責。
-      </p>
-    </div>
-
-    <!-- ──────────────────────────────────────────── -->
-    <!-- Section 2: 帳號與註冊 -->
-    <!-- ──────────────────────────────────────────── -->
-    <div class="legal-section">
-      <div class="legal-section-number">Section 2</div>
-      <h2>二、帳號與註冊 (Accounts and Registration)</h2>
-
-      <div class="legal-highlight">
-        <p><strong>全球開放：</strong>本平台向全球所有國家及地區之使用者開放，不設國家或地區限制。任何年滿 18 歲（或其所在司法管轄區之法定成年年齡，以較高者為準）之自然人或依法設立之法人實體，均可註冊使用本平台。</p>
-      </div>
-
-      <h3>2.1 註冊資格 (Eligibility)</h3>
-      <ul>
-        <li><strong>年齡要求</strong>：您必須年滿 18 歲，或達到您所在司法管轄區之法定成年年齡（以較高者為準）</li>
-        <li><strong>無國家限制</strong>：本平台不因使用者之國籍、居住地或所在地而限制其註冊或使用</li>
-        <li><strong>法人實體</strong>：法人實體須依其登記地法律合法設立且存續中</li>
-        <li><strong>合規義務</strong>：使用者應自行確保其使用本平台之行為符合其所在地之法律法規</li>
-      </ul>
-
-      <h3>2.2 帳號責任 (Account Responsibilities)</h3>
-      <ul>
-        <li>使用者於註冊時應提供真實、準確且完整之資訊，並於資訊變更時即時更新</li>
-        <li>使用者應妥善保管其帳號密碼及 API 金鑰，不得分享予他人</li>
-        <li>如發現帳號遭未經授權之使用，應立即通知本公司</li>
-        <li>因使用者未善盡帳號保管責任導致之損失，本公司不負賠償責任</li>
-        <li>每位使用者僅得持有一個帳號，不得重複註冊</li>
-      </ul>
-
-      <h3>2.3 帳號終止 (Account Termination)</h3>
-      <p>
-        使用者得隨時向本公司申請終止帳號。本公司於確認後 30 日內刪除帳號資料（法律要求保留之資料除外）。帳號終止後，帳號內剩餘之 SEO Points 點數將失效且不予退還。本公司亦有權因使用者違反本條款而立即終止或暫停其帳號，無須事先通知。
-      </p>
-    </div>
-
-    <!-- ──────────────────────────────────────────── -->
-    <!-- Section 3: SEO Points 點數條款 -->
-    <!-- ──────────────────────────────────────────── -->
-    <div class="legal-section">
-      <div class="legal-section-number">Section 3</div>
-      <h2>三、SEO Points 點數條款 (SEO Points Terms)</h2>
-
-      <div class="patent-warning">
-        <h4>SEO Points 性質聲明</h4>
-        <p>
-          SEO Points（以下簡稱「點數」）是本平台內部之<strong>預付型平台信用額度 (prepaid platform credits)</strong>。點數<strong>並非</strong>貨幣、虛擬貨幣、加密貨幣、電子貨幣、有價證券、金融商品或任何形式之投資工具。點數不具有本平台以外之現金價值，不可兌換為任何國家之法定貨幣，亦不得於本平台以外之任何場所使用或交易。
-        </p>
-      </div>
-
-      <h3>3.1 點數用途 (Purpose of Points)</h3>
-      <p>SEO Points 之設計目的係為便利本平台之跨境交易結算。其用途包括：</p>
-      <ul>
-        <li><strong>市集交易結算</strong>：作為本平台市集中買賣雙方之交易結算單位</li>
-        <li><strong>API 服務用量計費</strong>：作為 CaaS 及其他 API 服務之用量計費單位</li>
-        <li><strong>跨境便利工具</strong>：消除不同幣別間之轉換障礙，簡化國際交易流程</li>
-      </ul>
-
-      <h3>3.2 點數限制 (Points Restrictions)</h3>
-      <ol>
-        <li>點數<strong>不可</strong>兌換為現金或任何法定貨幣</li>
-        <li>點數<strong>不可</strong>轉讓予其他使用者（本公司另行開放之功能除外）</li>
-        <li>點數<strong>不可</strong>於本平台以外之任何地方使用</li>
-        <li>點數<strong>不產生</strong>利息、收益或任何形式之增值回報</li>
-        <li>點數<strong>不構成</strong>本公司對使用者之債務</li>
-        <li>點數之價值由本公司單方決定，本公司保留調整點數價值之權利</li>
-      </ol>
-
-      <h3>3.3 點數購買與退費 (Purchase and Refund)</h3>
-      <p>
-        使用者購買點數後，除法律另有規定外，原則上不予退費。若發生系統錯誤導致點數異常扣款，使用者得於事件發生後 30 日內向本公司提出申訴，經查證屬實後，本公司將以點數方式補償。
-      </p>
-
-      <h3>3.4 點數失效 (Expiration)</h3>
-      <p>
-        點數自最後一次帳號活動日起算，超過 12 個月未使用者，本公司保留使其失效之權利。本公司將於點數即將失效前 30 日透過電子郵件通知使用者。
-      </p>
-    </div>
-
-    <!-- ──────────────────────────────────────────── -->
-    <!-- Section 4: 市集交易 -->
-    <!-- ──────────────────────────────────────────── -->
-    <div class="legal-section">
-      <div class="legal-section-number">Section 4</div>
-      <h2>四、市集交易 (Marketplace Transactions)</h2>
-
-      <div class="legal-highlight">
-        <p><strong>場域聲明：</strong>SEOBAIKE 僅為買賣雙方提供交易場域 (venue)。本平台本身並非交易之當事人，不參與買賣雙方間之契約關係。所有透過本平台進行之交易，其契約關係存在於買方與賣方之間。</p>
-      </div>
-
-      <h3>4.1 賣家義務 (Seller Obligations)</h3>
-      <p>於本平台上架商品或服務之賣家，應遵守以下義務：</p>
-      <ol>
-        <li><strong>合規責任</strong>：賣家應自行確保其商品或服務符合其所在地及目標市場之法律法規、出口管制規定及行業標準</li>
-        <li><strong>資訊揭露</strong>：賣家應真實、準確、完整地描述其商品或服務之內容、功能、限制及定價</li>
-        <li><strong>履約責任</strong>：賣家應依其與買家間之約定履行交付義務</li>
-        <li><strong>稅務責任</strong>：賣家應自行處理因交易產生之稅務申報及繳納義務</li>
-        <li><strong>智慧財產權</strong>：賣家保證其上架之商品或服務不侵害任何第三方之智慧財產權</li>
-      </ol>
-
-      <h3>4.2 買家義務 (Buyer Obligations)</h3>
-      <ol>
-        <li><strong>購買前審查</strong>：買家應於購買前仔細閱讀商品或服務之說明，並自行評估其適用性</li>
-        <li><strong>合規責任</strong>：買家應確保其購買及使用之行為符合其所在地之法律法規</li>
-        <li><strong>合理使用</strong>：買家應依賣家授權之範圍使用所購買之商品或服務</li>
-      </ol>
-
-      <h3>4.3 爭議處理 (Dispute Resolution Between Parties)</h3>
-      <p>
-        買賣雙方間因交易產生之爭議，應先由雙方自行協商解決。若協商未果，任一方得向本平台申請介入調解。本平台之調解意見僅供參考，不具法律約束力。本公司對買賣雙方間之爭議結果不負任何責任。
-      </p>
-
-      <h3>4.4 平台手續費 (Platform Commission)</h3>
-      <p>
-        本平台就市集交易收取一定比例之手續費（過路費）。具體費率依本平台公告為準。本公司保留隨時調整手續費率之權利，並將於調整前合理期間內通知賣家。
-      </p>
-    </div>
-
-    <!-- ──────────────────────────────────────────── -->
-    <!-- Section 5: 金流與付款 -->
-    <!-- ──────────────────────────────────────────── -->
-    <div class="legal-section">
-      <div class="legal-section-number">Section 5</div>
-      <h2>五、金流與付款 (Payment Processing)</h2>
-
-      <div class="legal-card">
-        <h4>金流聲明</h4>
-        <p>
-          SEOBAIKE <strong>不直接處理任何金融交易</strong>。所有涉及法定貨幣之付款行為（包括但不限於信用卡扣款、銀行轉帳、電子錢包付款），均由本公司合作之<strong>獨立第三方國際金流服務商</strong>負責處理。本公司不儲存您的信用卡號碼、銀行帳號或其他金融支付憑證。
-        </p>
-      </div>
-
-      <h3>5.1 第三方金流服務 (Third-Party Payment Processors)</h3>
-      <ul>
-        <li>所有付款交易均由領有合法執照之國際金流服務商處理</li>
-        <li>使用者於付款時所提交之金融資訊，直接傳輸至金流服務商，本公司無權存取亦不儲存</li>
-        <li>使用者使用金流服務時，除本條款外，另須遵守該金流服務商之服務條款及隱私權政策</li>
-        <li>因金流服務商之作業導致之任何延遲、錯誤或損失，本公司不負責任</li>
-      </ul>
-
-      <h3>5.2 付款與收款 (Payments and Payouts)</h3>
-      <p>
-        買家透過金流服務商完成付款後，款項將依本平台規定之流程，於扣除平台手續費後，撥付予賣家。具體之撥款週期及方式，依本平台公告及賣家所選擇之收款方式而定。
-      </p>
-
-      <h3>5.3 退款政策 (Refund Policy)</h3>
-      <p>
-        若買家對交易有退款需求，應先與賣家協商。若賣家同意退款，將透過原付款管道退還。涉及 SEO Points 之退款，將以點數方式退還至買家帳號。本公司保留就退款爭議作出最終裁決之權利。
-      </p>
-    </div>
-
-    <!-- ──────────────────────────────────────────── -->
-    <!-- Section 6: 智慧財產權 -->
-    <!-- ──────────────────────────────────────────── -->
-    <div class="legal-section">
-      <div class="legal-section-number">Section 6</div>
-      <h2>六、智慧財產權 (Intellectual Property)</h2>
-
-      <h3>6.1 平台智慧財產權 (Platform IP)</h3>
-      <p>
-        本平台及其所有內容（包括但不限於軟體、程式碼、設計、文字、圖像、標誌、核心技術）均為本公司或其授權者之智慧財產，受中華民國著作權法、商標法及國際智慧財產權條約之保護。「SEOBAIKE」、「小路光」及相關標誌為本公司之商標，未經本公司書面同意，不得使用。
-      </p>
-
-      <div class="patent-warning">
-        <h4>技術保護聲明</h4>
-        <p>
-          本平台之核心技術「世界定義約束法用於 AI 推理」受台灣專利保護。該技術涵蓋 L1-L4 四層約束架構、<code>check_inference_path()</code> 推理路徑驗證機制，以及基於多國產業分類碼之對齊系統。使用者不得對本平台之任何元件進行逆向工程、反編譯或反組譯，亦不得於本平台以外之系統中複製或實作上述技術。
-        </p>
-      </div>
-
-      <h3>6.2 使用者與賣家內容 (User and Seller Content)</h3>
-      <p>
-        使用者及賣家透過本平台上傳或發布之內容（包括商品描述、數位產品、服務說明等），其智慧財產權歸原作者所有。使用者及賣家保證其上傳之內容不侵害任何第三方之智慧財產權。
-      </p>
-      <p>
-        為提供平台服務之必要，使用者及賣家授予本公司非專屬、全球性、免權利金之有限授權，允許本公司於平台上展示、傳輸及處理該等內容，僅限於提供平台服務所必要之範圍。此授權於內容自平台移除或帳號終止後自動失效。
-      </p>
-
-      <h3>6.3 侵權通報 (Infringement Notice)</h3>
-      <p>
-        若您認為本平台上之任何內容侵害了您的智慧財產權，請向 <a href="mailto:legal@aiforseo.vip">legal@aiforseo.vip</a> 提交書面通知，本公司將依法處理。
-      </p>
-    </div>
-
-    <!-- ──────────────────────────────────────────── -->
-    <!-- Section 7: 免責聲明 -->
-    <!-- ──────────────────────────────────────────── -->
-    <div class="legal-section">
-      <div class="legal-section-number">Section 7</div>
-      <h2>七、免責聲明 (Disclaimers)</h2>
-
-      <h3>7.1 平台場域免責 (Venue Disclaimer)</h3>
-      <div class="legal-highlight">
-        <p><strong>SEOBAIKE 作為市集平台，不對以下事項負責：</strong></p>
-      </div>
-      <ol>
-        <li><strong>商品或服務品質</strong>：本平台不保證市集中任何商品或服務之品質、安全性、適用性、合法性或可用性</li>
-        <li><strong>賣家行為</strong>：本平台不保證賣家將履行其義務、準時交付或提供退款</li>
-        <li><strong>交易結果</strong>：本平台不對買賣雙方間之交易結果負責</li>
-        <li><strong>使用者內容</strong>：本平台不對使用者上傳之內容之真實性、準確性或合法性負責</li>
-        <li><strong>第三方連結</strong>：本平台可能包含通往第三方網站之連結，本公司不對該等網站之內容負責</li>
-      </ol>
-
-      <h3>7.2 服務現狀提供 (As-Is Basis)</h3>
-      <p>
-        本平台以「現狀」(AS IS) 及「可用狀態」(AS AVAILABLE) 提供服務。在法律允許之最大範圍內，本公司不就本平台之適用性、可靠性、可用性、時效性、安全性或準確性提供任何明示或暗示之保證，包括但不限於適銷性之默示保證、特定用途適用性之默示保證及非侵權之默示保證。
-      </p>
-
-      <h3>7.3 AI 推理結果 (AI Inference Results)</h3>
-      <p>
-        本平台提供之 CaaS 服務係對 AI 推理路徑進行約束驗證，並非對 AI 生成結果之正確性或品質提供保證。使用者應自行判斷 AI 生成結果之適用性，並承擔使用 AI 生成結果之全部風險。
-      </p>
-    </div>
-
-    <!-- ──────────────────────────────────────────── -->
-    <!-- Section 8: 責任限制 -->
-    <!-- ──────────────────────────────────────────── -->
-    <div class="legal-section">
-      <div class="legal-section-number">Section 8</div>
-      <h2>八、責任限制 (Limitation of Liability)</h2>
-
-      <div class="legal-card">
-        <h4>最大責任上限</h4>
-        <p>
-          在法律允許之最大範圍內，本公司（包括其負責人、董事、員工、代理人及關係企業）就因使用本平台或與本條款相關之任何損害，其累計賠償責任之上限，<strong>不超過使用者於主張損害之事件發生前 12 個月內實際支付予本公司之金額，或以等值之 SEO Points 點數退還</strong>。若使用者於該期間未支付任何費用，則本公司之最大賠償責任以新台幣一千元 (NTD 1,000) 為限。
-        </p>
-      </div>
-
-      <h3>8.1 間接損害免責 (No Consequential Damages)</h3>
-      <p>
-        在法律允許之最大範圍內，本公司對因使用本平台而導致之任何間接損害、附帶損害、特殊損害、懲罰性損害或衍生損害（包括但不限於營業損失、資料遺失、利潤損失、商譽損失、替代服務之採購成本）不負賠償責任，無論本公司是否已被告知發生該等損害之可能性。
-      </p>
-
-      <h3>8.2 賣家之獨立責任 (Seller's Independent Liability)</h3>
-      <p>
-        市集中之賣家為獨立之契約當事人，而非本公司之員工、代理人或合作夥伴。賣家因其商品或服務所產生之一切法律責任（包括但不限於產品責任、消費者保護法責任、侵權責任），由賣家自行承擔，與本公司無涉。
-      </p>
-
-      <h3>8.3 不可抗力 (Force Majeure)</h3>
-      <p>
-        因天災、戰爭、恐怖攻擊、流行病、政府行為、制裁、網路中斷、電力故障或其他非本公司合理控制範圍內之事件，導致本公司無法履行本條款之義務時，本公司不負違約責任。
-      </p>
-    </div>
-
-    <!-- ──────────────────────────────────────────── -->
-    <!-- Section 9: 準據法與管轄 -->
-    <!-- ──────────────────────────────────────────── -->
-    <div class="legal-section">
-      <div class="legal-section-number">Section 9</div>
-      <h2>九、準據法與管轄 (Governing Law and Jurisdiction)</h2>
-
-      <div class="legal-card">
-        <h4>準據法 (Governing Law)</h4>
-        <p>
-          本條款之訂立、解釋、適用及爭議之處理，均以<strong>中華民國（台灣）法律</strong>為準據法，不適用衝突法規則。
-        </p>
-      </div>
-
-      <div class="legal-card">
-        <h4>管轄法院 (Jurisdiction)</h4>
-        <p>
-          因本條款所生之任何爭議，雙方同意以<strong>台灣台北地方法院</strong>為第一審專屬管轄法院。
-        </p>
-      </div>
-
-      <h3>9.1 拘束力仲裁 (Binding Arbitration)</h3>
-      <p>
-        在向法院提起訴訟之前，雙方同意先就爭議提交拘束力仲裁。仲裁程序如下：
-      </p>
-      <ol>
-        <li><strong>協商 (Negotiation)</strong>：雙方先以誠信原則進行協商，期間 30 日</li>
-        <li><strong>仲裁 (Arbitration)</strong>：協商未果者，提交中華民國仲裁協會依其仲裁規則進行仲裁。仲裁地為台灣台北市。仲裁語言為中文。仲裁判斷對雙方具有拘束力且為終局判斷</li>
-        <li><strong>訴訟 (Litigation)</strong>：僅於仲裁不適用或法律不允許仲裁之情形，始向台灣台北地方法院提起訴訟</li>
-      </ol>
-
-      <h3>9.2 集體訴訟棄權 (Class Action Waiver)</h3>
-      <p>
-        在法律允許之最大範圍內，您同意僅以個人身分（而非集體訴訟之成員或代表人）就任何爭議提起仲裁或訴訟。您放棄參與任何針對本公司之集體訴訟、集體仲裁或代表人訴訟之權利。
-      </p>
-    </div>
-
-    <!-- ──────────────────────────────────────────── -->
-    <!-- Section 10: 修改條款 -->
-    <!-- ──────────────────────────────────────────── -->
-    <div class="legal-section">
-      <div class="legal-section-number">Section 10</div>
-      <h2>十、修改條款 (Modifications to Terms)</h2>
-
-      <p>
-        本公司保留隨時修改、補充或更新本條款之權利，無須事先取得使用者之個別同意。修改後之條款將於本頁面公布並標示更新日期。重大變更將透過平台公告或電子郵件通知。
-      </p>
-      <p>
-        修改後繼續使用本平台即視為同意修改後之條款。若您不同意修改後之條款，您唯一之救濟方式為停止使用本平台並依本條款申請終止帳號。
-      </p>
-
-      <div class="legal-highlight">
-        <p>建議您定期查閱本頁面以了解條款之最新內容。本條款頂端之「最後更新日期」即為最近一次修改之日期。</p>
-      </div>
-    </div>
-
-    <!-- ──────────────────────────────────────────── -->
-    <!-- Section 11: 禁止行為 -->
-    <!-- ──────────────────────────────────────────── -->
-    <div class="legal-section">
-      <div class="legal-section-number">Section 11</div>
-      <h2>十一、禁止行為 (Prohibited Activities)</h2>
-      <p>使用者不得從事以下行為：</p>
-      <ol>
-        <li><strong>違法行為</strong>：利用本平台從事任何違反中華民國法律或使用者所在地法律之行為</li>
-        <li><strong>詐欺行為</strong>：以虛假身分註冊、上架虛假商品或服務、或進行任何詐欺交易</li>
-        <li><strong>侵害智慧財產權</strong>：侵害本公司或第三方之專利、商標、著作權或其他智慧財產權</li>
-        <li><strong>濫用 API</strong>：發送惡意請求、分散式阻斷服務攻擊、注入攻擊或其他安全攻擊</li>
-        <li><strong>逆向工程</strong>：對本平台之軟體、API 或約束規則進行逆向工程、反編譯或反組譯</li>
-        <li><strong>未授權存取</strong>：試圖存取其他使用者之帳號、資料或本平台之內部系統</li>
-        <li><strong>規避限制</strong>：透過技術手段規避 API 速率限制、用量限額或其他平台限制</li>
-        <li><strong>洗錢或恐怖主義融資</strong>：利用本平台或 SEO Points 從事洗錢、恐怖主義融資或其他金融犯罪</li>
-        <li><strong>有害內容</strong>：透過本平台傳播惡意軟體、病毒或其他有害程式碼</li>
-        <li><strong>繞過約束</strong>：試圖繞過或停用 L1-L4 推理約束驗證機制</li>
-      </ol>
-      <p>違反上述規定者，本公司有權立即停止其服務、凍結帳號及帳號內之 SEO Points，並保留法律追訴之權利。</p>
-    </div>
-
-    <!-- ──────────────────────────────────────────── -->
-    <!-- Section 12: 一般條款 -->
-    <!-- ──────────────────────────────────────────── -->
-    <div class="legal-section">
-      <div class="legal-section-number">Section 12</div>
-      <h2>十二、一般條款 (General Terms)</h2>
-
-      <h3>12.1 完整協議 (Entire Agreement)</h3>
-      <p>
-        本條款（連同隱私權政策）構成使用者與本公司間就本平台服務之完整協議，取代雙方先前就同一事項所為之一切口頭或書面約定。
-      </p>
-
-      <h3>12.2 可分割性 (Severability)</h3>
-      <p>
-        若本條款之任何條款被任何司法管轄區之法院或主管機關認定為無效、違法或不可執行，該條款應在法律允許之最大範圍內進行調整以符合原意，其餘條款仍然完全有效。
-      </p>
-
-      <h3>12.3 權利不棄權 (No Waiver)</h3>
-      <p>
-        本公司未行使或延遲行使本條款之任何權利，不構成對該權利之拋棄，亦不影響本公司日後行使該權利。
-      </p>
-
-      <h3>12.4 轉讓 (Assignment)</h3>
-      <p>
-        使用者不得將本條款之權利或義務轉讓予第三方。本公司得於公司合併、收購或資產轉讓時，將本條款轉讓予繼受方，無須取得使用者之事先同意。
-      </p>
-
-      <h3>12.5 獨立契約方 (Independent Parties)</h3>
-      <p>
-        本條款不構成使用者與本公司間之合夥、僱傭、代理或合資關係。使用者為獨立之契約當事人。
-      </p>
-
-      <h3>12.6 語言 (Language)</h3>
-      <p>
-        本條款以繁體中文撰寫。若本條款之繁體中文版本與任何翻譯版本間有不一致之處，以繁體中文版本為準。
-      </p>
-    </div>
-
-    <!-- ──────────────────────────────────────────── -->
-    <!-- Section 13: 聯絡資訊 -->
-    <!-- ──────────────────────────────────────────── -->
-    <div class="legal-section">
-      <div class="legal-section-number">Section 13</div>
-      <h2>十三、聯絡資訊 (Contact Information)</h2>
-      <div class="contact-box">
-        <h3>服務條款相關問題</h3>
-        <p><strong>小路光有限公司</strong>（統一編號：60475510）</p>
-        <p>負責人：許竣翔</p>
-        <p style="margin-top: 12px;">法務信箱 (Legal)：</p>
-        <p><a href="mailto:legal@aiforseo.vip">legal@aiforseo.vip</a></p>
-        <p style="margin-top: 8px;">一般聯絡 (General)：</p>
-        <p><a href="mailto:contact@aiforseo.vip">contact@aiforseo.vip</a></p>
-        <p style="margin-top: 16px;">
-          <a href="/privacy" style="font-size: 0.92rem;">隱私權政策 (Privacy Policy)</a>
-        </p>
-      </div>
-    </div>
-
+  <!-- Mobile Overlay -->
+  <div class="mobile-overlay">
+    <button class="mobile-close" onclick="toggleMenu()">&times;</button>
+    <a href="/" onclick="toggleMenu()">首頁</a>
+    <a href="/features" onclick="toggleMenu()">功能</a>
+    <a href="/marketplace" onclick="toggleMenu()">市集</a>
+    <a href="/pricing" onclick="toggleMenu()">方案</a>
+    <a href="/about" onclick="toggleMenu()">關於</a>
+    <a href="/docs" onclick="toggleMenu()">常見問題</a>
+    <a href="/login" onclick="toggleMenu()">登入</a>
   </div>
 
-  <!-- ════ Footer ════ -->
-  <footer>
-    <div class="footer-inner">
-      <div>
-        <div class="footer-brand">SEOBAIKE</div>
-        <p class="footer-desc">
-          小路光有限公司（統編 60475510）<br>
-          國際 AI 市集平台<br>
-          讓全球 AI 服務自由流通。
+  <!-- Hero -->
+  <section class="legal-hero">
+    <div class="container-narrow">
+      <h1 class="text-gold fade-up">服務條款</h1>
+      <p class="subtitle fade-up">Terms of Service — SEOBAIKE 國際 AI 市集平台之使用規範與條件。</p>
+      <div class="last-updated fade-up">最後更新日期：2026 年 2 月 16 日</div>
+    </div>
+  </section>
+
+  <!-- Legal Content -->
+  <div class="legal-content">
+    <div class="container-narrow">
+
+      <!-- Section 1: 服務說明 -->
+      <div class="legal-section fade-up">
+        <div class="legal-section-label">Section 1</div>
+        <h2>一、服務說明</h2>
+        <p>
+          本服務條款（以下簡稱「本條款」）構成您與<strong>小路光有限公司</strong>（統一編號：60475510，以下簡稱「本公司」）之間，就使用 SEOBAIKE 平台（網址：<strong>aiforseo.vip</strong>）所提供之服務所訂立之具有法律約束力之契約。
+        </p>
+        <div class="legal-highlight">
+          <p><strong>重要聲明：</strong>SEOBAIKE 是一個<strong>市集平台 (Marketplace)</strong>。本平台提供線上場域讓賣家與買家進行交易。本公司本身<strong>並非</strong>商品或服務之賣方、提供者或製造商。</p>
+        </div>
+
+        <h3>1.1 平台性質</h3>
+        <ul>
+          <li><strong>市集服務</strong>：為賣家與買家提供線上交易場域，媒合 AI 相關服務與數位產品</li>
+          <li><strong>CaaS 技術服務</strong>：提供 AI 推理約束驗證之技術基礎設施</li>
+          <li><strong>SEO Points 點數系統</strong>：平台內部點數機制，便利跨境交易結算</li>
+          <li><strong>API 存取服務</strong>：程式化介面，供開發者整合本平台功能</li>
+        </ul>
+
+        <h3>1.2 使用同意</h3>
+        <p>
+          使用本平台即表示您已閱讀、理解並同意受本條款約束。若您不同意本條款之任何內容，請立即停止使用。若您代表法人實體使用本平台，即表示您有權代表該法人實體接受本條款。
         </p>
       </div>
-      <div class="footer-col">
-        <h4>平台</h4>
+
+      <!-- Section 2: 帳號責任 -->
+      <div class="legal-section fade-up">
+        <div class="legal-section-label">Section 2</div>
+        <h2>二、帳號責任</h2>
+        <div class="legal-highlight">
+          <p><strong>全球開放：</strong>本平台向全球所有國家及地區之使用者開放。任何年滿 18 歲之自然人或依法設立之法人實體均可註冊使用。</p>
+        </div>
+
+        <h3>2.1 註冊資格</h3>
         <ul>
-          <li><a href="/features">功能介紹</a></li>
-          <li><a href="/pricing">方案價格</a></li>
-          <li><a href="/docs">技術文件</a></li>
-          <li><a href="/login">登入平台</a></li>
+          <li><strong>年齡要求</strong>：必須年滿 18 歲，或達到所在地之法定成年年齡</li>
+          <li><strong>無國家限制</strong>：不因國籍、居住地或所在地而限制註冊或使用</li>
+          <li><strong>法人實體</strong>：須依其登記地法律合法設立且存續中</li>
+          <li><strong>合規義務</strong>：使用者應自行確保其使用行為符合所在地之法律法規</li>
         </ul>
-      </div>
-      <div class="footer-col">
-        <h4>公司</h4>
+
+        <h3>2.2 帳號保管</h3>
         <ul>
-          <li><a href="/about">關於我們</a></li>
-          <li><a href="/contact">聯絡方式</a></li>
-          <li><a href="/privacy">隱私權政策</a></li>
-          <li><a href="/terms">服務條款</a></li>
+          <li>註冊時應提供真實、準確且完整之資訊，並於變更時即時更新</li>
+          <li>妥善保管帳號密碼及 API 金鑰，不得分享予他人</li>
+          <li>發現帳號遭未經授權之使用，應立即通知本公司</li>
+          <li>因未善盡帳號保管責任導致之損失，本公司不負賠償責任</li>
+          <li>每位使用者僅得持有一個帳號</li>
         </ul>
+
+        <h3>2.3 帳號終止</h3>
+        <p>
+          使用者得隨時申請終止帳號。帳號終止後，帳號內剩餘之 SEO Points 點數將失效且不予退還。本公司亦有權因使用者違反本條款而立即終止或暫停其帳號。
+        </p>
       </div>
+
+      <!-- Section 3: SEO Points 使用規範 -->
+      <div class="legal-section fade-up">
+        <div class="legal-section-label">Section 3</div>
+        <h2>三、SEO Points 使用規範</h2>
+        <div class="legal-card-box">
+          <h4>SEO Points 性質聲明</h4>
+          <p>
+            SEO Points 是本平台內部之<strong>預付型平台信用額度</strong>。點數<strong>並非</strong>貨幣、虛擬貨幣、加密貨幣、電子貨幣、有價證券或任何投資工具。點數不具有本平台以外之現金價值，不可兌換為法定貨幣。
+          </p>
+        </div>
+
+        <h3>3.1 點數用途</h3>
+        <ul>
+          <li><strong>市集交易結算</strong>：作為買賣雙方之交易結算單位</li>
+          <li><strong>API 服務計費</strong>：作為 CaaS 及其他 API 服務之用量計費單位</li>
+          <li><strong>跨境便利</strong>：消除不同幣別間之轉換障礙，簡化國際交易流程</li>
+        </ul>
+
+        <h3>3.2 點數限制</h3>
+        <ol>
+          <li>點數<strong>不可</strong>兌換為現金或任何法定貨幣</li>
+          <li>點數<strong>不可</strong>轉讓予其他使用者（另行開放之功能除外）</li>
+          <li>點數<strong>不可</strong>於本平台以外使用</li>
+          <li>點數<strong>不產生</strong>利息、收益或任何增值回報</li>
+          <li>點數<strong>不構成</strong>本公司對使用者之債務</li>
+          <li>本公司保留調整點數價值之權利</li>
+        </ol>
+
+        <h3>3.3 退費與失效</h3>
+        <p>
+          購買點數後，除法律另有規定外，原則上不予退費。點數自最後一次帳號活動日起算，超過 12 個月未使用者，本公司保留使其失效之權利，並將於失效前 30 日通知。
+        </p>
+      </div>
+
+      <!-- Section 4: 賣家條款 -->
+      <div class="legal-section fade-up">
+        <div class="legal-section-label">Section 4</div>
+        <h2>四、賣家條款</h2>
+        <div class="legal-highlight">
+          <p><strong>場域聲明：</strong>SEOBAIKE 僅為買賣雙方提供交易場域。本平台本身並非交易當事人，不參與買賣雙方間之契約關係。</p>
+        </div>
+
+        <h3>4.1 賣家義務</h3>
+        <ol>
+          <li><strong>合規責任</strong>：確保商品或服務符合所在地及目標市場之法律法規</li>
+          <li><strong>資訊揭露</strong>：真實、準確、完整地描述商品或服務之內容、功能及定價</li>
+          <li><strong>履約責任</strong>：依與買家間之約定履行交付義務</li>
+          <li><strong>稅務責任</strong>：自行處理因交易產生之稅務申報及繳納</li>
+          <li><strong>智慧財產權</strong>：保證上架商品不侵害任何第三方之智慧財產權</li>
+        </ol>
+
+        <h3>4.2 平台手續費</h3>
+        <p>
+          本平台就市集交易收取一定比例之手續費。具體費率依本平台公告為準。本公司保留隨時調整手續費率之權利，並將於調整前合理期間內通知賣家。
+        </p>
+      </div>
+
+      <!-- Section 5: 買家條款 -->
+      <div class="legal-section fade-up">
+        <div class="legal-section-label">Section 5</div>
+        <h2>五、買家條款</h2>
+
+        <h3>5.1 買家義務</h3>
+        <ol>
+          <li><strong>購買前審查</strong>：購買前仔細閱讀商品說明，自行評估適用性</li>
+          <li><strong>合規責任</strong>：確保購買及使用行為符合所在地之法律法規</li>
+          <li><strong>合理使用</strong>：依賣家授權之範圍使用所購買之商品或服務</li>
+        </ol>
+
+        <h3>5.2 金流與付款</h3>
+        <div class="legal-card-box">
+          <h4>金流聲明</h4>
+          <p>SEOBAIKE <strong>不直接處理任何金融交易</strong>。所有涉及法定貨幣之付款行為均由獨立第三方國際金流服務商處理。本公司不儲存信用卡號碼、銀行帳號或其他金融支付憑證。</p>
+        </div>
+
+        <h3>5.3 退款政策</h3>
+        <p>
+          買家有退款需求應先與賣家協商。若賣家同意退款，將透過原付款管道退還。涉及 SEO Points 之退款以點數方式退還。本公司保留就退款爭議作出最終裁決之權利。
+        </p>
+
+        <h3>5.4 爭議處理</h3>
+        <p>
+          買賣雙方因交易產生之爭議，應先自行協商。協商未果得向本平台申請調解。本平台之調解意見僅供參考，不具法律約束力。
+        </p>
+      </div>
+
+      <!-- Section 6: 智慧財產權 -->
+      <div class="legal-section fade-up">
+        <div class="legal-section-label">Section 6</div>
+        <h2>六、智慧財產權</h2>
+
+        <h3>6.1 平台智慧財產權</h3>
+        <p>
+          本平台及其所有內容（包括軟體、程式碼、設計、文字、圖像、標誌、核心技術）均為本公司或其授權者之智慧財產，受中華民國著作權法、商標法及國際智慧財產權條約之保護。「SEOBAIKE」、「小路光」及相關標誌為本公司之商標。
+        </p>
+
+        <h3>6.2 使用者內容</h3>
+        <p>
+          使用者透過本平台上傳之內容，其智慧財產權歸原作者所有。為提供服務，使用者授予本公司非專屬、全球性、免權利金之有限授權，僅限於提供平台服務所必要之範圍。此授權於內容移除或帳號終止後自動失效。
+        </p>
+
+        <h3>6.3 侵權通報</h3>
+        <p>
+          若您認為本平台上之任何內容侵害了您的智慧財產權，請向 <a href="mailto:legal@aiforseo.vip">legal@aiforseo.vip</a> 提交書面通知。
+        </p>
+      </div>
+
+      <!-- Section 7: 免責聲明 -->
+      <div class="legal-section fade-up">
+        <div class="legal-section-label">Section 7</div>
+        <h2>七、免責聲明</h2>
+
+        <h3>7.1 平台場域免責</h3>
+        <ol>
+          <li><strong>商品品質</strong>：不保證市集中任何商品或服務之品質、安全性、適用性或合法性</li>
+          <li><strong>賣家行為</strong>：不保證賣家將履行義務、準時交付或提供退款</li>
+          <li><strong>交易結果</strong>：不對買賣雙方間之交易結果負責</li>
+          <li><strong>使用者內容</strong>：不對使用者上傳內容之真實性、準確性或合法性負責</li>
+          <li><strong>第三方連結</strong>：不對第三方網站之內容負責</li>
+        </ol>
+
+        <h3>7.2 服務現狀提供</h3>
+        <p>
+          本平台以「現狀」(AS IS) 及「可用狀態」(AS AVAILABLE) 提供服務。本公司不就本平台之適用性、可靠性、可用性、時效性、安全性或準確性提供任何明示或暗示之保證。
+        </p>
+
+        <h3>7.3 責任限制</h3>
+        <div class="legal-card-box">
+          <h4>最大責任上限</h4>
+          <p>
+            本公司就因使用本平台所生之損害，累計賠償責任上限<strong>不超過使用者於事件發生前 12 個月內實際支付之金額</strong>。若該期間未支付費用，最大賠償責任以新台幣一千元為限。
+          </p>
+        </div>
+        <p>
+          本公司對間接損害、附帶損害、特殊損害、懲罰性損害或衍生損害（含營業損失、資料遺失、利潤損失）不負賠償責任。
+        </p>
+      </div>
+
+      <!-- Section 8: 爭議處理 -->
+      <div class="legal-section fade-up">
+        <div class="legal-section-label">Section 8</div>
+        <h2>八、爭議處理（台灣法律管轄）</h2>
+
+        <div class="legal-card-box">
+          <h4>準據法</h4>
+          <p>本條款之訂立、解釋、適用及爭議之處理，均以<strong>中華民國（台灣）法律</strong>為準據法。</p>
+        </div>
+        <div class="legal-card-box">
+          <h4>管轄法院</h4>
+          <p>因本條款所生之任何爭議，雙方同意以<strong>台灣台北地方法院</strong>為第一審專屬管轄法院。</p>
+        </div>
+
+        <h3>8.1 爭議解決程序</h3>
+        <ol>
+          <li><strong>協商</strong>：雙方先以誠信原則協商，期間 30 日</li>
+          <li><strong>仲裁</strong>：協商未果者，提交中華民國仲裁協會仲裁。仲裁地為台灣台北市，語言為中文</li>
+          <li><strong>訴訟</strong>：僅於仲裁不適用之情形，始向台北地方法院提起訴訟</li>
+        </ol>
+
+        <h3>8.2 集體訴訟棄權</h3>
+        <p>
+          在法律允許之最大範圍內，您同意僅以個人身分就任何爭議提起仲裁或訴訟。您放棄參與任何針對本公司之集體訴訟之權利。
+        </p>
+
+        <h3>8.3 不可抗力</h3>
+        <p>
+          因天災、戰爭、流行病、政府行為、網路中斷、電力故障或其他非本公司合理控制範圍內之事件，導致無法履行本條款之義務時，本公司不負違約責任。
+        </p>
+      </div>
+
+      <!-- Section 9: 修改條款 -->
+      <div class="legal-section fade-up">
+        <div class="legal-section-label">Section 9</div>
+        <h2>九、修改條款與一般規定</h2>
+        <p>
+          本公司保留隨時修改本條款之權利。修改後之條款將於本頁面公布並標示更新日期。重大變更將透過平台公告或電子郵件通知。修改後繼續使用即視為同意修改後之條款。
+        </p>
+
+        <h3>9.1 禁止行為</h3>
+        <ol>
+          <li>利用本平台從事違法行為</li>
+          <li>以虛假身分註冊或進行詐欺交易</li>
+          <li>侵害本公司或第三方之智慧財產權</li>
+          <li>發送惡意請求、DDoS 攻擊或注入攻擊</li>
+          <li>對本平台進行逆向工程、反編譯或反組譯</li>
+          <li>試圖存取其他使用者之帳號或內部系統</li>
+          <li>規避 API 速率限制或其他平台限制</li>
+          <li>利用本平台從事洗錢或恐怖主義融資</li>
+          <li>傳播惡意軟體、病毒或有害程式碼</li>
+        </ol>
+
+        <h3>9.2 一般條款</h3>
+        <ul>
+          <li><strong>完整協議</strong>：本條款（連同隱私權政策）構成雙方間之完整協議</li>
+          <li><strong>可分割性</strong>：任何條款被認定無效，其餘條款仍然有效</li>
+          <li><strong>權利不棄權</strong>：未行使或延遲行使任何權利，不構成對該權利之拋棄</li>
+          <li><strong>語言</strong>：本條款以繁體中文為準，翻譯版本如有不一致以中文為準</li>
+        </ul>
+
+        <div class="legal-highlight">
+          <p>建議您定期查閱本頁面。本條款頂端之「最後更新日期」即為最近一次修改之日期。</p>
+        </div>
+      </div>
+
+      <!-- Contact -->
+      <div class="legal-section fade-up">
+        <div class="legal-section-label">Contact</div>
+        <h2>聯絡資訊</h2>
+        <div class="contact-box">
+          <h3>服務條款相關問題</h3>
+          <p><strong>小路光有限公司</strong>（統一編號：60475510）</p>
+          <p style="margin-top: var(--sp-3);">法務信箱：</p>
+          <p><a href="mailto:legal@aiforseo.vip">legal@aiforseo.vip</a></p>
+          <p style="margin-top: var(--sp-2);">一般聯絡：</p>
+          <p><a href="mailto:contact@aiforseo.vip">contact@aiforseo.vip</a></p>
+          <div style="margin-top: var(--sp-4);">
+            <a href="/privacy" class="btn btn-secondary btn-sm">隱私權政策</a>
+            <a href="/compliance" class="btn btn-secondary btn-sm" style="margin-left: 8px;">合規中心</a>
+          </div>
+        </div>
+      </div>
+
     </div>
-    <div class="footer-bottom">
-      <span>&copy; 2024-2026 小路光有限公司. All rights reserved.</span>
-      <span>aiforseo.vip</span>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="/" class="nav-brand" style="font-size: 1.3rem;">
+            <span class="seo">SEO</span><span class="baike">BAIKE</span>
+          </a>
+          <p>
+            小路光有限公司（統編 60475510）<br>
+            AI 全球市集平台<br>
+            讓全球 AI 服務自由流通。
+          </p>
+        </div>
+        <div class="footer-col">
+          <h4>產品</h4>
+          <a href="/features">功能總覽</a>
+          <a href="/pricing">方案與定價</a>
+          <a href="/marketplace">市集</a>
+          <a href="/docs">技術文件</a>
+        </div>
+        <div class="footer-col">
+          <h4>公司</h4>
+          <a href="/about">關於我們</a>
+          <a href="/contact">聯繫我們</a>
+          <a href="/privacy">隱私權政策</a>
+          <a href="/terms">服務條款</a>
+        </div>
+        <div class="footer-col">
+          <h4>支援</h4>
+          <a href="/docs">快速開始</a>
+          <a href="/compliance">合規中心</a>
+          <a href="/contact">聯繫客服</a>
+          <a href="/status">服務狀態</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>&copy; 2024-2026 小路光有限公司. All rights reserved.</span>
+        <span>aiforseo.vip</span>
+      </div>
     </div>
   </footer>
 
-  <!-- ════ Page Views Tracking ════ -->
+  <!-- Page Views Tracking -->
   <script>
   (function(){
     try {
@@ -767,5 +551,23 @@
   })();
   </script>
   <script src="/seobaike-widget.js"></script>
+
+  <!-- Design System Scripts -->
+  <script>
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
+
+  window.addEventListener('scroll', () => {
+    const nav = document.querySelector('.nav');
+    if (nav) nav.classList.toggle('scrolled', window.scrollY > 20);
+  });
+
+  function toggleMenu() {
+    document.querySelector('.nav-hamburger')?.classList.toggle('active');
+    document.querySelector('.mobile-overlay')?.classList.toggle('open');
+  }
+  </script>
 </body>
 </html>

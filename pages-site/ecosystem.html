@@ -3,378 +3,653 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SEOBAIKE 生態圈 — AI 工具 + 協作平台，全部幫你做事</title>
-<meta name="description" content="SEOBAIKE 生態圈：14 種 AI 能力 + 26 個協作平台，寫文案、做圖片、分析數據、管專案，全部一站搞定">
+<title>SEOBAIKE 生態系統 — AI 驅動的完整商業生態</title>
+<meta name="description" content="SEOBAIKE 生態系統：市集、AI 引擎、金流、開發者 API，打造完整的 AI 商業閉環">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="stylesheet" href="/assets/design-system.css">
 <style>
-*{margin:0;padding:0;box-sizing:border-box}
-:root{--bg:#0a0a0f;--card:#12121a;--border:#1e1e2e;--accent:#e8850c;--accent2:#cc785c;--text:#e2e8f0;--dim:#64748b;--green:#22c55e;--red:#ef4444;--blue:#3b82f6}
-body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;min-height:100vh}
-.header{background:linear-gradient(135deg,#1a1a2e 0%,#16213e 100%);border-bottom:1px solid var(--border);padding:20px 24px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px}
-.header h1{font-size:24px;background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-.header .stats{display:flex;gap:16px;flex-wrap:wrap}
-.stat{text-align:center;padding:8px 16px;background:var(--card);border-radius:8px;border:1px solid var(--border)}
-.stat .num{font-size:24px;font-weight:700;color:var(--accent)}
-.stat .label{font-size:11px;color:var(--dim);text-transform:uppercase}
-.tabs{display:flex;gap:8px;padding:16px 24px;border-bottom:1px solid var(--border);flex-wrap:wrap}
-.tab{padding:8px 20px;border-radius:20px;cursor:pointer;font-size:14px;border:1px solid var(--border);background:transparent;color:var(--dim);transition:.2s}
-.tab.active,.tab:hover{background:var(--accent);color:#fff;border-color:var(--accent)}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:16px;padding:24px}
-.card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:20px;transition:.2s;position:relative;overflow:hidden}
-.card:hover{border-color:var(--accent);transform:translateY(-2px)}
-.card .badge{position:absolute;top:12px;right:12px;padding:4px 10px;border-radius:12px;font-size:11px;font-weight:600}
-.badge.active{background:rgba(34,197,94,.15);color:var(--green)}
-.badge.gpu{background:rgba(139,92,246,.15);color:var(--accent2)}
-.badge.setup{background:rgba(239,68,68,.15);color:var(--red)}
-.card h3{font-size:16px;margin-bottom:4px}
-.card .provider{font-size:12px;color:var(--dim);margin-bottom:12px}
-.card .caps{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px}
-.cap{padding:3px 8px;background:rgba(249,115,22,.1);border:1px solid rgba(249,115,22,.2);border-radius:6px;font-size:11px;color:var(--accent)}
-.card .actions{display:flex;gap:8px}
-.btn{padding:8px 16px;border-radius:8px;border:none;cursor:pointer;font-size:12px;font-weight:600;transition:.2s}
-.btn-primary{background:var(--accent);color:#fff}
-.btn-primary:hover{background:#ea580c}
-.btn-secondary{background:var(--border);color:var(--text)}
-.btn-secondary:hover{background:#2a2a3e}
-.chat-panel{position:fixed;bottom:0;right:0;width:400px;max-height:600px;background:var(--card);border:1px solid var(--border);border-radius:12px 12px 0 0;display:none;flex-direction:column;z-index:100;box-shadow:0 -4px 24px rgba(0,0,0,.5)}
-.chat-panel.open{display:flex}
-.chat-header{padding:16px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
-.chat-header h3{font-size:14px}
-.chat-messages{flex:1;overflow-y:auto;padding:16px;max-height:400px}
-.msg{margin-bottom:12px;padding:10px 14px;border-radius:10px;font-size:13px;line-height:1.5;max-width:85%;word-wrap:break-word}
-.msg.user{background:var(--accent);color:#fff;margin-left:auto}
-.msg.bot{background:var(--border);color:var(--text)}
-.msg .meta{font-size:10px;color:var(--dim);margin-top:4px}
-.chat-input{display:flex;padding:12px;border-top:1px solid var(--border);gap:8px}
-.chat-input input{flex:1;padding:10px;border-radius:8px;border:1px solid var(--border);background:var(--bg);color:var(--text);font-size:13px}
-.chat-input input:focus{outline:none;border-color:var(--accent)}
-/* BYOK 簡化提示 */
-.byok-hint{padding:10px 16px;background:rgba(232,133,12,0.06);border-top:1px solid rgba(232,133,12,0.12);display:flex;align-items:center;gap:8px;font-size:12px;color:#aaa}
-.byok-hint a{color:var(--accent);font-weight:600;text-decoration:none;white-space:nowrap}
-.byok-hint a:hover{text-decoration:underline}
-.chat-toggle{position:fixed;bottom:20px;right:20px;width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--accent2));border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:24px;color:#fff;z-index:101;box-shadow:0 4px 12px rgba(249,115,22,.4)}
-.loading{display:inline-block;width:12px;height:12px;border:2px solid var(--dim);border-top-color:var(--accent);border-radius:50%;animation:spin .6s linear infinite}
-@keyframes spin{to{transform:rotate(360deg)}}
-.section-title{padding:24px 24px 8px;font-size:18px;font-weight:700;display:flex;align-items:center;gap:8px}
-.section-title .count{font-size:13px;color:var(--dim);font-weight:400}
-/* Ecosystem CTA */
-.eco-cta{margin:24px;background:linear-gradient(135deg,#1a1a2e,#16213e);border:1px solid var(--border);border-radius:16px;padding:40px;text-align:center}
-.eco-cta h2{font-size:26px;margin-bottom:8px}
-.eco-cta h2 span{color:var(--accent)}
-.eco-cta p{color:var(--dim);margin-bottom:24px;font-size:15px;max-width:600px;margin-left:auto;margin-right:auto}
-.eco-cta-btn{display:inline-block;padding:14px 36px;border-radius:24px;background:linear-gradient(135deg,var(--accent),#cc785c);color:#fff;font-weight:700;font-size:16px;border:none;cursor:pointer;transition:all 0.3s;text-decoration:none}
-.eco-cta-btn:hover{transform:scale(1.05);box-shadow:0 8px 30px rgba(249,115,22,0.3)}
-/* Ecosystem Intro */
-.eco-intro{padding:24px 24px 0;text-align:center}
-.eco-intro p{color:var(--dim);font-size:15px;max-width:700px;margin:0 auto;line-height:1.7}
-@media(max-width:600px){.grid{grid-template-columns:1fr;padding:12px}.header{padding:12px}.chat-panel{width:100%}}
-</style>
-<link rel="stylesheet" href="/assets/framer-style.css">
-</head>
-<body>
+  /* ── Hero ── */
+  .eco-hero {
+    padding: 120px 0 var(--sp-16);
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .eco-hero::before {
+    content: '';
+    position: absolute;
+    top: -200px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 800px;
+    height: 800px;
+    background: radial-gradient(circle, rgba(232,133,12,0.06) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .eco-hero h1 {
+    margin-bottom: var(--sp-4);
+  }
+  .eco-hero p {
+    max-width: 560px;
+    margin: 0 auto;
+    font-size: 1.08rem;
+    color: var(--text-muted);
+  }
 
-<nav style="position:sticky;top:0;z-index:100;background:rgba(10,10,15,.92);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);padding:0 24px">
-  <div style="max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:56px">
-    <a href="/" style="font-size:20px;font-weight:800;background:linear-gradient(135deg,var(--accent),#cc785c);-webkit-background-clip:text;-webkit-text-fill-color:transparent;text-decoration:none">SEOBAIKE</a>
-    <div style="display:flex;gap:24px;align-items:center">
-      <a href="/" style="color:var(--dim);font-size:14px;font-weight:500;text-decoration:none">首頁</a>
-      <a href="/features" style="color:var(--dim);font-size:14px;font-weight:500;text-decoration:none">功能</a>
-      <a href="/marketplace" style="color:var(--dim);font-size:14px;font-weight:500;text-decoration:none">市集</a>
-      <a href="/pricing" style="color:var(--dim);font-size:14px;font-weight:500;text-decoration:none">方案</a>
-      <a href="/about" style="color:var(--dim);font-size:14px;font-weight:500;text-decoration:none">關於</a>
-      <a href="/docs" style="color:var(--dim);font-size:14px;font-weight:500;text-decoration:none">常見問題</a>
-      <a href="/login" style="color:var(--dim);font-size:14px;font-weight:500;text-decoration:none">登入</a>
-    </div>
-  </div>
+  /* ── Ecosystem Diagram ── */
+  .eco-diagram {
+    position: relative;
+    max-width: 720px;
+    margin: var(--sp-16) auto;
+  }
+  .eco-center {
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    background: var(--gold-gradient);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    position: relative;
+    z-index: 2;
+    box-shadow: 0 0 60px rgba(232,133,12,0.2);
+  }
+  .eco-center .logo-text {
+    font-size: 1rem;
+    font-weight: 900;
+    color: #000;
+    letter-spacing: -0.5px;
+  }
+  .eco-center .logo-sub {
+    font-size: 0.6rem;
+    font-weight: 700;
+    color: rgba(0,0,0,0.6);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  .eco-ring {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: var(--sp-4);
+    margin-top: calc(-20px);
+    position: relative;
+    z-index: 1;
+  }
+  .eco-node {
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-lg);
+    padding: var(--sp-6) var(--sp-4);
+    text-align: center;
+    transition: all var(--duration-normal) var(--ease-out);
+  }
+  .eco-node:hover {
+    border-color: var(--border-hover);
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-gold);
+  }
+  .eco-node .node-icon {
+    font-size: 1.6rem;
+    margin-bottom: var(--sp-3);
+    display: block;
+  }
+  .eco-node .node-name {
+    font-size: 0.88rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: var(--sp-1);
+  }
+  .eco-node .node-desc {
+    font-size: 0.72rem;
+    color: var(--text-muted);
+    line-height: 1.4;
+  }
+  /* Connector lines (CSS only) */
+  .eco-connectors {
+    display: flex;
+    justify-content: center;
+    gap: var(--sp-10);
+    margin: var(--sp-3) 0;
+  }
+  .connector-line {
+    width: 1px;
+    height: 40px;
+    background: linear-gradient(to bottom, var(--gold-300), transparent);
+  }
+
+  /* ── Flow Section ── */
+  .flow-steps {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--sp-6);
+    counter-reset: step;
+  }
+  .flow-step {
+    position: relative;
+    padding: var(--sp-8) var(--sp-6);
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-lg);
+    text-align: center;
+    counter-increment: step;
+  }
+  .flow-step::before {
+    content: counter(step);
+    position: absolute;
+    top: -14px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: var(--gold-gradient);
+    color: #000;
+    font-size: 0.78rem;
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .flow-step h4 {
+    margin-top: var(--sp-2);
+    margin-bottom: var(--sp-2);
+    font-size: 0.95rem;
+  }
+  .flow-step p {
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    line-height: 1.5;
+  }
+
+  /* ── Dev Section ── */
+  .code-block {
+    background: rgba(0,0,0,0.4);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-md);
+    padding: var(--sp-6);
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    line-height: 1.7;
+    color: var(--text-secondary);
+    overflow-x: auto;
+  }
+  .code-block .kw { color: var(--gold-200); }
+  .code-block .str { color: var(--success); }
+  .code-block .cmt { color: var(--text-muted); }
+
+  /* ── Feature Grid ── */
+  .feature-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--sp-6);
+  }
+  .feature-item {
+    padding: var(--sp-8);
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-lg);
+    transition: all var(--duration-normal) var(--ease-out);
+  }
+  .feature-item:hover {
+    border-color: var(--border-hover);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-gold);
+  }
+  .feature-icon {
+    font-size: 1.6rem;
+    margin-bottom: var(--sp-4);
+    display: block;
+  }
+  .feature-item h4 { margin-bottom: var(--sp-2); }
+  .feature-item p { font-size: 0.85rem; color: var(--text-muted); line-height: 1.6; }
+
+  /* ── Partner Cards ── */
+  .partner-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--sp-8);
+  }
+  .partner-card {
+    padding: var(--sp-10) var(--sp-8);
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-lg);
+    transition: all var(--duration-normal) var(--ease-out);
+  }
+  .partner-card:hover {
+    border-color: var(--border-hover);
+    box-shadow: var(--shadow-gold);
+  }
+  .partner-card h3 { margin-bottom: var(--sp-3); }
+  .partner-card p { font-size: 0.88rem; color: var(--text-muted); line-height: 1.6; margin-bottom: var(--sp-6); }
+  .partner-card ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-2);
+    margin-bottom: var(--sp-6);
+  }
+  .partner-card li {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    padding-left: 20px;
+    position: relative;
+  }
+  .partner-card li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 8px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--gold-300);
+  }
+
+  /* ── CTA Section ── */
+  .cta-section {
+    text-align: center;
+    padding: var(--sp-24) 0;
+    position: relative;
+  }
+  .cta-section::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(232,133,12,0.04) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .cta-section h2 { margin-bottom: var(--sp-4); }
+  .cta-section p {
+    max-width: 500px;
+    margin: 0 auto var(--sp-8);
+    color: var(--text-muted);
+    font-size: 1.02rem;
+  }
+
+  /* ── Responsive ── */
+  @media (max-width: 1024px) {
+    .eco-ring { grid-template-columns: repeat(3, 1fr); }
+    .flow-steps { grid-template-columns: repeat(2, 1fr); }
+    .feature-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 768px) {
+    .eco-hero { padding: 100px 0 var(--sp-10); }
+    .eco-ring { grid-template-columns: repeat(2, 1fr); }
+    .flow-steps { grid-template-columns: 1fr; }
+    .feature-grid { grid-template-columns: 1fr; }
+    .partner-grid { grid-template-columns: 1fr; }
+    .eco-center { width: 110px; height: 110px; }
+  }
+  @media (max-width: 480px) {
+    .eco-ring { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body class="page-top">
+
+<!-- ═══ Navigation ═══ -->
+<nav class="nav" id="mainNav">
+  <a href="/" class="nav-brand">
+    <img src="/favicon.svg" alt="SEOBAIKE" width="34" height="34">
+    <span class="seo">SEO</span><span class="baike">BAIKE</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="/">首頁</a></li>
+    <li><a href="/marketplace.html">市集</a></li>
+    <li><a href="/dashboard.html">儀表板</a></li>
+    <li><a href="/ecosystem.html" class="active">生態系統</a></li>
+    <li><a href="/pricing.html">方案</a></li>
+    <li><a href="/status.html" class="nav-cta">系統狀態</a></li>
+  </ul>
+  <button class="nav-hamburger" onclick="toggleMenu()" aria-label="選單">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
 
-<div class="header">
-  <div>
-    <h1>SEOBAIKE 生態圈</h1>
-    <div style="font-size:12px;color:var(--dim);margin-top:4px">你的 AI 工具箱 — 小路光有限公司 打造</div>
-  </div>
-  <div class="stats">
-    <div class="stat"><div class="num" id="ai-count">0</div><div class="label">種 AI 能力</div></div>
-    <div class="stat"><div class="num" id="platform-count">0</div><div class="label">個協作工具</div></div>
-    <div class="stat"><div class="num" id="active-count">0</div><div class="label">個已上線</div></div>
-  </div>
+<!-- Mobile Overlay -->
+<div class="mobile-overlay" id="mobileMenu">
+  <button class="mobile-close" onclick="toggleMenu()">&times;</button>
+  <a href="/" onclick="toggleMenu()">首頁</a>
+  <a href="/marketplace.html" onclick="toggleMenu()">市集</a>
+  <a href="/dashboard.html" onclick="toggleMenu()">儀表板</a>
+  <a href="/ecosystem.html" onclick="toggleMenu()">生態系統</a>
+  <a href="/pricing.html" onclick="toggleMenu()">方案</a>
+  <a href="/status.html" onclick="toggleMenu()">系統狀態</a>
 </div>
 
-<div class="eco-intro">
-  <p>SEOBAIKE 生態圈把各種 AI 能力和工作平台串在一起，讓你在一個地方就能完成所有事情 — 寫文案、做圖片、分析報表、管理專案、自動化流程，不用到處開帳號。</p>
-</div>
-
-<div class="tabs">
-  <div class="tab active" onclick="showTab('all')">全部</div>
-  <div class="tab" onclick="showTab('ai')">AI 能力</div>
-  <div class="tab" onclick="showTab('collab')">協作工具</div>
-  <div class="tab" onclick="showTab('active')">已上線</div>
-</div>
-
-<div class="section-title" id="ai-section">SEOBAIKE AI 能力 <span class="count" id="ai-section-count"></span></div>
-<div class="grid" id="ai-grid"></div>
-
-<div class="section-title" id="collab-section">SEOBAIKE 協作工具 <span class="count" id="collab-section-count"></span></div>
-<div class="grid" id="collab-grid"></div>
-
-<!-- Chat Panel -->
-<button class="chat-toggle" onclick="toggleChat()" title="AI 對話">💬</button>
-<div class="chat-panel" id="chatPanel">
-  <div class="chat-header">
-    <h3>SEOBAIKE AI 對話</h3>
-    <div style="display:flex;align-items:center;gap:8px">
-      <select id="chatPartner" style="padding:4px 8px;border-radius:6px;border:1px solid var(--border);background:var(--bg);color:var(--text);font-size:12px">
-        <option value="partner-openai">全能助手</option>
-        <option value="partner-anthropic">深度分析</option>
-        <option value="partner-deepseek">邏輯推理</option>
-        <option value="partner-grok">即時問答</option>
-        <option value="partner-groq">閃電回覆</option>
-        <option value="partner-mistral">多語翻譯</option>
-        <option value="partner-google">多模態助手</option>
-        <option value="partner-cohere">語意搜尋</option>
-        <option value="partner-together">創意工坊</option>
-        <option value="partner-huggingface">模型市集</option>
-        <option value="partner-perplexity">搜尋問答</option>
-        <option value="partner-qwen">數學專家</option>
-      </select>
-      <button onclick="toggleChat()" style="background:none;border:none;color:var(--dim);cursor:pointer;font-size:18px">✕</button>
-    </div>
+<!-- ═══ Hero ═══ -->
+<section class="eco-hero">
+  <div class="container">
+    <div class="section-badge fade-up">ECOSYSTEM</div>
+    <h1 class="fade-up">SEOBAIKE <span class="text-gold">生態系統</span></h1>
+    <p class="fade-up">市集、AI 引擎、金流、開發者工具 — 一個完整串連的商業生態，讓每個角色都能創造價值。</p>
   </div>
-  <div class="chat-messages" id="chatMessages">
-    <div class="msg bot">你好！上面選一個 AI 能力就能開始對話。想寫文案選「全能助手」，想查資料選「搜尋問答」，想算數學選「數學專家」。</div>
-  </div>
-  <div class="byok-hint">
-    <span>&#128273;</span>
-    <span>用自己的金鑰解鎖無限 AI 對話</span>
-    <a href="/ai#byok">前往設定 &#8594;</a>
-  </div>
-  <div class="chat-input">
-    <input type="text" id="chatInput" placeholder="輸入訊息..." onkeydown="if(event.key==='Enter')sendChat()">
-    <button class="btn btn-primary" onclick="sendChat()">發送</button>
-  </div>
-</div>
-
-<section class="eco-cta">
-  <h2>全部串在一起，<span>一個平台搞定</span></h2>
-  <p>不用到處開帳號、不用自己接 API。SEOBAIKE 幫你把 AI 能力和工作工具串好，你只要專心做事就好。</p>
-  <a href="/marketplace" class="eco-cta-btn">去市集逛逛</a>
 </section>
 
-<div style="text-align:center;padding:30px;color:#555;font-size:12px;border-top:1px solid var(--border);margin-top:20px">
-  SEOBAIKE OS — <a href="/" style="color:var(--accent)">小路光有限公司</a> — 你的 AI 工具箱
-</div>
+<!-- ═══ Ecosystem Overview Diagram ═══ -->
+<section class="section-sm">
+  <div class="container">
+    <div class="eco-diagram fade-up">
+      <!-- Center Hub -->
+      <div class="eco-center animate-glow">
+        <div class="logo-text">SEOBAIKE</div>
+        <div class="logo-sub">AI Platform</div>
+      </div>
 
-<script>
-const BASE = 'https://vmyrivxxibqydccurxug.supabase.co/functions/v1';
+      <!-- Connectors -->
+      <div class="eco-connectors">
+        <div class="connector-line"></div>
+        <div class="connector-line"></div>
+        <div class="connector-line"></div>
+        <div class="connector-line"></div>
+        <div class="connector-line"></div>
+      </div>
 
-const AI_PARTNERS = [
-  { slug: 'partner-openai', name: 'SEOBAIKE 全能助手', provider: 'SEOBAIKE AI', caps: ['對話','文字嵌入','生圖','語音','看圖理解'] },
-  { slug: 'partner-anthropic', name: 'SEOBAIKE 深度分析', provider: 'SEOBAIKE AI', caps: ['對話','看圖理解','寫程式','資料分析'] },
-  { slug: 'partner-deepseek', name: 'SEOBAIKE 邏輯推理', provider: 'SEOBAIKE AI', caps: ['對話','寫程式','推理思考'] },
-  { slug: 'partner-grok', name: 'SEOBAIKE 即時問答', provider: 'SEOBAIKE AI', caps: ['對話','寫程式','推理思考','看圖理解'] },
-  { slug: 'partner-groq', name: 'SEOBAIKE 閃電回覆', provider: 'SEOBAIKE AI', caps: ['對話','極速回應'] },
-  { slug: 'partner-mistral', name: 'SEOBAIKE 多語翻譯', provider: 'SEOBAIKE AI', caps: ['對話','寫程式','文字嵌入'] },
-  { slug: 'partner-google', name: 'SEOBAIKE 多模態助手', provider: 'SEOBAIKE AI', caps: ['對話','看圖理解','寫程式'] },
-  { slug: 'partner-perplexity', name: 'SEOBAIKE 搜尋問答', provider: 'SEOBAIKE AI', caps: ['網路搜尋','對話','深度研究'] },
-  { slug: 'partner-cohere', name: 'SEOBAIKE 語意搜尋', provider: 'SEOBAIKE AI', caps: ['對話','語意嵌入','結果排序'] },
-  { slug: 'partner-together', name: 'SEOBAIKE 創意工坊', provider: 'SEOBAIKE AI', caps: ['對話','生圖','寫程式'] },
-  { slug: 'partner-huggingface', name: 'SEOBAIKE 模型市集', provider: 'SEOBAIKE AI', caps: ['對話','模型推論','模型庫'] },
-  { slug: 'partner-qwen', name: 'SEOBAIKE 數學專家', provider: 'SEOBAIKE AI', caps: ['對話','寫程式','看圖理解','數學運算'] },
-  { slug: 'partner-replicate', name: 'SEOBAIKE 影音創作', provider: 'SEOBAIKE AI', caps: ['生圖','影片','音訊','文字'] },
-  { slug: 'partner-stability', name: 'SEOBAIKE 圖片生成', provider: 'SEOBAIKE AI', caps: ['AI 繪圖','圖片放大'] },
-];
-
-const PLATFORMS = [
-  { slug: 'connect-slack', name: 'SEOBAIKE 團隊聊天室', type: '即時訊息，團隊溝通' },
-  { slug: 'connect-github', name: 'SEOBAIKE 程式碼倉庫', type: '版本控制，協作開發' },
-  { slug: 'connect-notion', name: 'SEOBAIKE 筆記知識庫', type: '文件整理，知識管理' },
-  { slug: 'connect-figma', name: 'SEOBAIKE 介面設計', type: '畫面設計，團隊協作' },
-  { slug: 'connect-clickup', name: 'SEOBAIKE 專案總管', type: '任務追蹤，時間管理' },
-  { slug: 'connect-monday', name: 'SEOBAIKE 工作看板', type: '進度追蹤，團隊管理' },
-  { slug: 'connect-asana', name: 'SEOBAIKE 任務分派', type: '待辦事項，團隊協作' },
-  { slug: 'connect-jira', name: 'SEOBAIKE 開發追蹤', type: '軟體開發，問題追蹤' },
-  { slug: 'connect-miro', name: 'SEOBAIKE 線上白板', type: '腦力激盪，視覺協作' },
-  { slug: 'connect-airtable', name: 'SEOBAIKE 智慧表格', type: '資料管理，自動化' },
-  { slug: 'connect-trello', name: 'SEOBAIKE 拖拉看板', type: '卡片管理，簡單好用' },
-  { slug: 'connect-hubspot', name: 'SEOBAIKE 客戶管理', type: '客戶關係，行銷追蹤' },
-  { slug: 'connect-teams', name: 'SEOBAIKE 企業通訊', type: '視訊會議，企業溝通' },
-  { slug: 'connect-google-workspace', name: 'SEOBAIKE 雲端辦公', type: '文件試算，雲端協作' },
-  { slug: 'connect-confluence', name: 'SEOBAIKE 團隊文件', type: '知識庫，文件共編' },
-  { slug: 'connect-canva', name: 'SEOBAIKE 快速設計', type: '海報簡報，一鍵生成' },
-  { slug: 'connect-streamline', name: 'SEOBAIKE 供應鏈管理', type: '進銷存，物流追蹤' },
-  { slug: 'connect-motiff', name: 'SEOBAIKE 介面原型', type: '畫面原型，互動設計' },
-  { slug: 'connect-mokahr', name: 'SEOBAIKE 人才招募', type: '履歷篩選，面試排程' },
-  { slug: 'connect-linear', name: 'SEOBAIKE 問題追蹤', type: '待修清單，開發排程' },
-  { slug: 'connect-basecamp', name: 'SEOBAIKE 專案營地', type: '專案溝通，進度回報' },
-  { slug: 'connect-coda', name: 'SEOBAIKE 文件自動化', type: '智慧文件，自動流程' },
-  { slug: 'connect-zapier', name: 'SEOBAIKE 自動串接', type: '不寫程式，自動連結工具' },
-  { slug: 'connect-n8n', name: 'SEOBAIKE 開源自動化', type: '自己架，自己控制流程' },
-  { slug: 'connect-pipedream', name: 'SEOBAIKE 開發者自動化', type: '寫腳本，串 API' },
-  { slug: 'connect-svix', name: 'SEOBAIKE 事件通知', type: '自動推送，即時通知' },
-];
-
-let allStatuses = {};
-let activeCount = 0;
-
-function renderCard(item, type) {
-  const status = allStatuses[item.slug];
-  const isActive = status && (status.status === 'active' || status.status === 'live' || status.api_key_configured || status.gpu_fallback);
-  const isGpu = status && (status.status === 'active_via_gpu' || status.gpu_fallback) && !status.api_key_configured && !status.key_configured;
-  const badgeClass = isActive ? (isGpu ? 'gpu' : 'active') : 'setup';
-  const badgeText = isActive ? (isGpu ? 'SEOBAIKE GPU' : '運作中') : '待設定';
-
-  return `<div class="card" data-type="${type}" data-active="${isActive}">
-    <span class="badge ${badgeClass}">${badgeText}</span>
-    <h3>${item.name}</h3>
-    <div class="provider">${item.provider || item.type || ''}</div>
-    <div class="caps">${(item.caps || []).map(c => `<span class="cap">${c}</span>`).join('')}</div>
-    <div class="actions">
-      ${type === 'ai' ? `<button class="btn btn-primary" onclick="openChatWith('${item.slug}')">對話</button>` : ''}
-      <button class="btn btn-secondary" onclick="checkHealth('${item.slug}')">檢查狀態</button>
+      <!-- Nodes Ring -->
+      <div class="eco-ring">
+        <div class="eco-node">
+          <span class="node-icon">&#128722;</span>
+          <div class="node-name">市集</div>
+          <div class="node-desc">AI 商品與服務交易平台</div>
+        </div>
+        <div class="eco-node">
+          <span class="node-icon">&#129302;</span>
+          <div class="node-name">AI 引擎</div>
+          <div class="node-desc">SEO 分析、內容生成、數據洞察</div>
+        </div>
+        <div class="eco-node">
+          <span class="node-icon">&#128179;</span>
+          <div class="node-name">金流</div>
+          <div class="node-desc">安全支付、分潤、SEO Points</div>
+        </div>
+        <div class="eco-node">
+          <span class="node-icon">&#127979;</span>
+          <div class="node-name">賣家</div>
+          <div class="node-desc">上架商品、管理訂單、獲取收益</div>
+        </div>
+        <div class="eco-node">
+          <span class="node-icon">&#128100;</span>
+          <div class="node-name">買家</div>
+          <div class="node-desc">發現工具、購買服務、成長事業</div>
+        </div>
+      </div>
     </div>
-  </div>`;
+
+    <!-- Data Flow -->
+    <div class="section-header fade-up" style="margin-top:var(--sp-16);">
+      <div class="section-badge">HOW IT WORKS</div>
+      <h2>運作<span class="text-gold">流程</span></h2>
+      <p>從上架到交付，每一步都在生態系統內完成</p>
+    </div>
+
+    <div class="flow-steps fade-up">
+      <div class="flow-step">
+        <h4>賣家上架</h4>
+        <p>將 AI 工具、模板、服務上架到 SEOBAIKE 市集，設定價格與說明</p>
+      </div>
+      <div class="flow-step">
+        <h4>AI 引擎優化</h4>
+        <p>平台 AI 自動優化商品曝光度，智慧匹配潛在買家需求</p>
+      </div>
+      <div class="flow-step">
+        <h4>買家購買</h4>
+        <p>買家透過市集搜尋、比較並購買所需工具，安全金流處理</p>
+      </div>
+      <div class="flow-step">
+        <h4>價值交付</h4>
+        <p>自動交付商品、分潤結算，雙方皆獲得 SEO Points 回饋</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- ═══ For Developers ═══ -->
+<section class="section" id="developers">
+  <div class="container">
+    <div class="section-header fade-up">
+      <div class="section-badge">DEVELOPERS</div>
+      <h2>開發者<span class="text-gold">專區</span></h2>
+      <p>透過 API 串接 SEOBAIKE 生態系統，將 AI 能力嵌入你的產品</p>
+    </div>
+
+    <div class="grid-2 fade-up">
+      <div>
+        <div class="feature-grid" style="grid-template-columns:1fr;">
+          <div class="feature-item">
+            <span class="feature-icon">&#128268;</span>
+            <h4>RESTful API</h4>
+            <p>完整的 REST API 文件，支援商品查詢、訂單建立、Points 管理等所有核心功能。</p>
+          </div>
+          <div class="feature-item">
+            <span class="feature-icon">&#128272;</span>
+            <h4>API 金鑰認證</h4>
+            <p>安全的 API Key 機制，每個開發者專屬金鑰，支援速率限制與權限控管。</p>
+          </div>
+          <div class="feature-item">
+            <span class="feature-icon">&#128214;</span>
+            <h4>開發者文件</h4>
+            <p>詳細的技術文件、範例程式碼、SDK 指南，協助你快速完成整合。</p>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="code-block">
+          <span class="cmt">// SEOBAIKE API 範例</span><br><br>
+          <span class="kw">const</span> response = <span class="kw">await</span> fetch(<br>
+          &nbsp;&nbsp;<span class="str">'https://aiforseo.vip/api/v1/products'</span>,<br>
+          &nbsp;&nbsp;{<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;headers: {<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="str">'Authorization'</span>: <span class="str">'Bearer YOUR_API_KEY'</span>,<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="str">'Content-Type'</span>: <span class="str">'application/json'</span><br>
+          &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+          &nbsp;&nbsp;}<br>
+          );<br><br>
+          <span class="kw">const</span> data = <span class="kw">await</span> response.json();<br><br>
+          <span class="cmt">// 回傳商品列表</span><br>
+          <span class="cmt">// {</span><br>
+          <span class="cmt">//   "products": [...],</span><br>
+          <span class="cmt">//   "total": 128,</span><br>
+          <span class="cmt">//   "page": 1</span><br>
+          <span class="cmt">// }</span>
+        </div>
+        <div style="margin-top:var(--sp-6);display:flex;gap:var(--sp-4);">
+          <a href="#" class="btn btn-primary btn-sm">取得 API 金鑰</a>
+          <a href="#" class="btn btn-secondary btn-sm">閱讀文件</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- ═══ For Partners ═══ -->
+<section class="section" id="partners">
+  <div class="container">
+    <div class="section-header fade-up">
+      <div class="section-badge">PARTNERS</div>
+      <h2>合作<span class="text-gold">夥伴</span></h2>
+      <p>加入 SEOBAIKE 生態系統，與我們共同成長</p>
+    </div>
+
+    <div class="partner-grid fade-up">
+      <div class="partner-card">
+        <h3>&#128188; 商業合作</h3>
+        <p>將您的 AI 工具或服務帶進 SEOBAIKE 市集，觸及更多潛在客戶。</p>
+        <ul>
+          <li>專屬賣家後台管理</li>
+          <li>AI 智慧曝光優化</li>
+          <li>自動化分潤結算</li>
+          <li>品牌共同行銷機會</li>
+        </ul>
+        <a href="#" class="btn btn-primary">申請成為夥伴</a>
+      </div>
+      <div class="partner-card">
+        <h3>&#128736; 技術合作</h3>
+        <p>透過 API 或外掛機制，將 SEOBAIKE 的 AI 能力整合到您的平台。</p>
+        <ul>
+          <li>API 串接支援</li>
+          <li>客製化整合方案</li>
+          <li>技術文件與 SDK</li>
+          <li>專屬技術支援窗口</li>
+        </ul>
+        <a href="#" class="btn btn-secondary">技術合作洽詢</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- ═══ Integration ═══ -->
+<section class="section" id="integration">
+  <div class="container">
+    <div class="section-header fade-up">
+      <div class="section-badge">INTEGRATION</div>
+      <h2>整合<span class="text-gold">方式</span></h2>
+      <p>多種方式將 SEOBAIKE 接入您的工作流程</p>
+    </div>
+
+    <div class="feature-grid fade-up">
+      <div class="feature-item">
+        <span class="feature-icon">&#127760;</span>
+        <h4>網站嵌入</h4>
+        <p>一行程式碼即可在您的網站嵌入 SEOBAIKE AI Widget，提供即時 SEO 建議。</p>
+      </div>
+      <div class="feature-item">
+        <span class="feature-icon">&#128640;</span>
+        <h4>API 直接呼叫</h4>
+        <p>透過 RESTful API 直接呼叫 SEOBAIKE 的分析引擎與市集功能。</p>
+      </div>
+      <div class="feature-item">
+        <span class="feature-icon">&#128257;</span>
+        <h4>Webhook 通知</h4>
+        <p>訂單成立、商品更新等事件即時推送到您的系統，保持數據同步。</p>
+      </div>
+      <div class="feature-item">
+        <span class="feature-icon">&#128230;</span>
+        <h4>批量資料匯入</h4>
+        <p>支援 CSV / JSON 格式批量匯入商品，快速完成大量上架。</p>
+      </div>
+      <div class="feature-item">
+        <span class="feature-icon">&#128274;</span>
+        <h4>OAuth 2.0 授權</h4>
+        <p>標準 OAuth 2.0 流程，讓用戶安全授權您的應用存取其 SEOBAIKE 資料。</p>
+      </div>
+      <div class="feature-item">
+        <span class="feature-icon">&#128200;</span>
+        <h4>數據分析 API</h4>
+        <p>取得銷售數據、流量分析、SEO 評分等報表資料，驅動您的決策。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ CTA ═══ -->
+<section class="cta-section">
+  <div class="container">
+    <h2 class="fade-up">加入 SEOBAIKE <span class="text-gold">生態系統</span></h2>
+    <p class="fade-up">無論您是開發者、賣家或合作夥伴，SEOBAIKE 都為您準備了最佳位置。</p>
+    <div class="fade-up" style="display:flex;gap:var(--sp-4);justify-content:center;flex-wrap:wrap;">
+      <a href="/pricing.html" class="btn btn-primary btn-lg">立即開始</a>
+      <a href="/marketplace.html" class="btn btn-secondary btn-lg">探索市集</a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ Footer ═══ -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="/" class="nav-brand" style="font-size:1.3rem;">
+          <img src="/favicon.svg" alt="SEOBAIKE" width="28" height="28">
+          <span class="seo">SEO</span><span class="baike">BAIKE</span>
+        </a>
+        <p>AI 驅動的 SEO 商業生態系統。由小路光有限公司營運。</p>
+      </div>
+      <div class="footer-col">
+        <h4>平台</h4>
+        <a href="/marketplace.html">市集</a>
+        <a href="/dashboard.html">儀表板</a>
+        <a href="/pricing.html">方案</a>
+        <a href="/status.html">系統狀態</a>
+      </div>
+      <div class="footer-col">
+        <h4>生態系統</h4>
+        <a href="#developers">開發者</a>
+        <a href="#partners">合作夥伴</a>
+        <a href="#integration">整合方式</a>
+      </div>
+      <div class="footer-col">
+        <h4>公司</h4>
+        <a href="#">關於我們</a>
+        <a href="#">服務條款</a>
+        <a href="#">隱私政策</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2025-2026 SEOBAIKE — 小路光有限公司</span>
+      <span>aiforseo.vip</span>
+    </div>
+  </div>
+</footer>
+
+<!-- ═══ Scripts ═══ -->
+<script>
+/* Scroll Observer */
+const obs = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.08 });
+document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
+
+/* Nav scroll effect */
+window.addEventListener('scroll', () => {
+  const nav = document.querySelector('.nav');
+  if (nav) nav.classList.toggle('scrolled', window.scrollY > 20);
+});
+
+/* Hamburger */
+function toggleMenu() {
+  document.querySelector('.nav-hamburger')?.classList.toggle('active');
+  document.querySelector('.mobile-overlay')?.classList.toggle('open');
 }
-
-async function fetchStatus(slug) {
-  try {
-    const res = await fetch(`${BASE}/${slug}`, { signal: AbortSignal.timeout(5000) });
-    if (res.ok) return await res.json();
-  } catch {}
-  return null;
-}
-
-async function loadAll() {
-  const all = [...AI_PARTNERS.map(p => p.slug), ...PLATFORMS.map(p => p.slug)];
-  const results = await Promise.allSettled(all.map(slug => fetchStatus(slug)));
-  results.forEach((r, i) => {
-    if (r.status === 'fulfilled' && r.value) allStatuses[all[i]] = r.value;
-  });
-
-  activeCount = Object.values(allStatuses).filter(s => s.status === 'active' || s.status === 'live' || s.status === 'active_via_gpu' || s.api_key_configured || s.gpu_fallback).length;
-
-  document.getElementById('ai-count').textContent = AI_PARTNERS.length;
-  document.getElementById('platform-count').textContent = PLATFORMS.length;
-  document.getElementById('active-count').textContent = activeCount;
-  document.getElementById('ai-section-count').textContent = `(${AI_PARTNERS.length} 個)`;
-  document.getElementById('collab-section-count').textContent = `(${PLATFORMS.length} 個)`;
-
-  document.getElementById('ai-grid').innerHTML = AI_PARTNERS.map(p => renderCard(p, 'ai')).join('');
-  document.getElementById('collab-grid').innerHTML = PLATFORMS.map(p => renderCard(p, 'collab')).join('');
-}
-
-function showTab(tab) {
-  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-  event.target.classList.add('active');
-  const aiSection = document.getElementById('ai-section');
-  const aiGrid = document.getElementById('ai-grid');
-  const collabSection = document.getElementById('collab-section');
-  const collabGrid = document.getElementById('collab-grid');
-
-  aiSection.style.display = (tab === 'collab') ? 'none' : '';
-  aiGrid.style.display = (tab === 'collab') ? 'none' : '';
-  collabSection.style.display = (tab === 'ai') ? 'none' : '';
-  collabGrid.style.display = (tab === 'ai') ? 'none' : '';
-
-  if (tab === 'active') {
-    document.querySelectorAll('.card').forEach(c => {
-      c.style.display = c.dataset.active === 'true' ? '' : 'none';
-    });
-  } else {
-    document.querySelectorAll('.card').forEach(c => c.style.display = '');
-  }
-}
-
-function toggleChat() {
-  document.getElementById('chatPanel').classList.toggle('open');
-}
-
-function openChatWith(slug) {
-  document.getElementById('chatPartner').value = slug;
-  document.getElementById('chatPanel').classList.add('open');
-  document.getElementById('chatInput').focus();
-}
-
-async function sendChat() {
-  const input = document.getElementById('chatInput');
-  const msg = input.value.trim();
-  if (!msg) return;
-  input.value = '';
-
-  const partner = document.getElementById('chatPartner').value;
-  const msgsDiv = document.getElementById('chatMessages');
-
-  msgsDiv.innerHTML += `<div class="msg user">${escHtml(msg)}</div>`;
-  msgsDiv.innerHTML += `<div class="msg bot" id="typing"><div class="loading"></div> 思考中...</div>`;
-  msgsDiv.scrollTop = msgsDiv.scrollHeight;
-
-  try {
-    // BYOK：如果用戶有自帶金鑰，在 header 中附上
-    const byokKeys = JSON.parse(localStorage.getItem('seobaike_byok') || '{}');
-    const byokProviderMap = {
-      'partner-openai': 'openrouter', 'partner-anthropic': 'anthropic',
-      'partner-deepseek': 'deepseek', 'partner-grok': 'openrouter',
-      'partner-groq': 'groq', 'partner-mistral': 'mistral',
-      'partner-google': 'google', 'partner-cohere': 'cohere',
-      'partner-together': 'openrouter', 'partner-huggingface': 'openrouter',
-      'partner-perplexity': 'perplexity', 'partner-qwen': 'openrouter',
-      'partner-replicate': 'openrouter', 'partner-stability': 'openrouter'
-    };
-    const byokProv = byokProviderMap[partner] || '';
-    const chatFetchHeaders = { 'Content-Type': 'application/json' };
-    if (byokProv && byokKeys[byokProv]) {
-      chatFetchHeaders['X-BYOK-Key'] = byokKeys[byokProv];
-      chatFetchHeaders['X-BYOK-Provider'] = byokProv;
-    }
-    const res = await fetch(`${BASE}/${partner}/chat`, {
-      method: 'POST',
-      headers: chatFetchHeaders,
-      body: JSON.stringify(partner === 'partner-perplexity'
-        ? { messages: [{ role: 'user', content: msg }] }
-        : { prompt: msg, max_tokens: 1024 }),
-    });
-    const data = await res.json();
-    const reply = data.response || data.choices?.[0]?.message?.content || data.answer || JSON.stringify(data);
-    const via = data.via ? ` (via ${data.via})` : '';
-    const model = data.model || '';
-
-    document.getElementById('typing').remove();
-    msgsDiv.innerHTML += `<div class="msg bot">${escHtml(reply)}<div class="meta">${model}${via}</div></div>`;
-  } catch (err) {
-    document.getElementById('typing').remove();
-    msgsDiv.innerHTML += `<div class="msg bot" style="color:var(--red)">Error: ${escHtml(err.message)}</div>`;
-  }
-  msgsDiv.scrollTop = msgsDiv.scrollHeight;
-}
-
-async function checkHealth(slug) {
-  try {
-    const res = await fetch(`${BASE}/${slug}`);
-    const data = await res.json();
-    alert(JSON.stringify(data, null, 2));
-  } catch (err) {
-    alert('Error: ' + err.message);
-  }
-}
-
-function escHtml(s) { const d = document.createElement('div'); d.textContent = s; return d.innerHTML; }
-
-loadAll();
 </script>
+
+<!-- Page View Tracking -->
 <script>
 (function(){
   try {
-    var cfg = window.__SEOBAIKE__ || {};
-    var sUrl = cfg.supabaseUrl || 'https://vmyrivxxibqydccurxug.supabase.co';
-    var sKey = cfg.anonKey || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZteXJpdnh4aWJxeWRjY3VyeHVnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzAwNDAwMjksImV4cCI6MjA4NTYxNjAyOX0.iBV-23LGdm_uKffAExgqSV34-NWoAyv8_-M_cJQZ8Gg';
-    fetch(sUrl + '/rest/v1/page_views', {
+    const endpoint = 'https://vmyrivxxibqydccurxug.supabase.co/rest/v1/page_views';
+    const apiKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZteXJpdnh4aWJxeWRjY3VyeHVnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDcwMTcyMDAsImV4cCI6MjA2MjU5MzIwMH0.ItEkER45F6kInS0jMD6p7UfJbJV8CEkBYPBbIl2R6FI';
+    fetch(endpoint, {
       method: 'POST',
-      headers: { 'Content-Type':'application/json', 'apikey':sKey, 'Authorization':'Bearer '+sKey, 'Prefer':'return=minimal' },
-      body: JSON.stringify({ path: location.pathname, referrer: document.referrer || null, user_agent: navigator.userAgent })
+      headers: {
+        'Content-Type': 'application/json',
+        'apikey': apiKey,
+        'Authorization': 'Bearer ' + apiKey,
+        'Prefer': 'return=minimal'
+      },
+      body: JSON.stringify({
+        page: '/ecosystem.html',
+        referrer: document.referrer || null,
+        user_agent: navigator.userAgent
+      })
     }).catch(function(){});
   } catch(e){}
 })();
 </script>
-<script src="/assets/smart-align.js"></script>
-<script src="/seobaike-widget.js"></script>
+
+<!-- SEOBAIKE Widget -->
+<script src="https://vmyrivxxibqydccurxug.supabase.co/functions/v1/seobaike-widget" defer></script>
 </body>
 </html>

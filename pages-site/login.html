@@ -3,223 +3,184 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>登入 — SEOBAIKE AI 約束推理平台</title>
-  <meta name="description" content="登入 SEOBAIKE 帳號，開始使用 AI 約束推理平台。">
+  <title>登入 — SEOBAIKE</title>
+  <meta name="description" content="登入您的 SEOBAIKE 帳號，開始使用 AI 智能平台。">
+  <meta name="theme-color" content="#e8850c">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/og-image.png">
+  <link rel="stylesheet" href="/assets/design-system.css">
   <style>
-    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-
-    :root {
-      --orange: #e8850c;
-      --orange-hover: #d4780a;
-      --copper: #cc785c;
-      --green: #76b900;
-      --bg: #0a0a1a;
-      --bg-card: #12122a;
-      --bg-input: #1a1a35;
-      --border: #2a2a4a;
-      --text: #e0e0e8;
-      --text-muted: #8888aa;
-      --radius: 12px;
-    }
-
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans TC", sans-serif;
-      background: var(--bg);
-      color: var(--text);
+    /* ── Login Page Specific ── */
+    .login-wrap {
       min-height: 100vh;
       display: flex;
       flex-direction: column;
-      line-height: 1.6;
     }
 
-    a { color: var(--orange); text-decoration: none; transition: color 0.2s; }
-    a:hover { color: var(--copper); }
-
-    /* ── Navigation ── */
-    nav {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 16px 40px;
-      border-bottom: 1px solid var(--border);
-      background: rgba(10, 10, 26, 0.85);
-      backdrop-filter: blur(12px);
-      position: sticky;
-      top: 0;
-      z-index: 100;
-    }
-    .nav-logo {
-      font-size: 1.5rem;
-      font-weight: 900;
-      letter-spacing: -1px;
-      color: #fff;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-    .nav-logo .seo {
-      background: linear-gradient(135deg, #e8850c, #f5a623, #ffd700);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-    .nav-logo .baike {
-      color: #ffffff;
-    }
-    .nav-links { display: flex; gap: 28px; list-style: none; }
-    .nav-links a {
-      color: var(--text-muted);
-      font-size: 0.92rem;
-      font-weight: 500;
-      transition: color 0.2s;
-    }
-    .nav-links a:hover, .nav-links a.active { color: #fff; }
-    .nav-hamburger {
-      display: none;
-      flex-direction: column;
-      gap: 5px;
-      cursor: pointer;
-      background: none;
-      border: none;
-      padding: 4px;
-    }
-    .nav-hamburger span {
-      display: block;
-      width: 24px;
-      height: 2px;
-      background: var(--text);
-      border-radius: 2px;
-      transition: 0.3s;
-    }
-
-    /* ── Main ── */
-    main {
+    .login-main {
       flex: 1;
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 60px 20px;
+      padding: 100px var(--sp-6) var(--sp-12);
+      position: relative;
+    }
+
+    /* Ambient background glow */
+    .login-main::before {
+      content: '';
+      position: absolute;
+      top: 10%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, rgba(232,133,12,0.06) 0%, transparent 70%);
+      pointer-events: none;
     }
 
     .login-card {
       width: 100%;
       max-width: 420px;
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 48px 40px;
-      box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+      background: var(--bg-glass);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-xl);
+      padding: var(--sp-12) var(--sp-10);
+      box-shadow: var(--shadow-lg), var(--gold-glow);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .login-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 20%;
+      right: 20%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(232,133,12,0.3), transparent);
     }
 
     .login-header {
       text-align: center;
-      margin-bottom: 36px;
+      margin-bottom: var(--sp-8);
     }
-    .login-header .logo-text {
-      font-size: 2rem;
-      font-weight: 900;
-      letter-spacing: -1px;
-      margin-bottom: 8px;
+
+    .login-logo {
       display: flex;
       align-items: center;
       justify-content: center;
       gap: 10px;
+      margin-bottom: var(--sp-3);
     }
-    .login-header .logo-text .seo {
-      background: linear-gradient(135deg, #e8850c, #f5a623, #ffd700);
+
+    .login-logo img {
+      width: 40px;
+      height: 40px;
+      border-radius: var(--radius-sm);
+      box-shadow: 0 0 12px rgba(232,133,12,0.2);
+      border: 1px solid rgba(232,133,12,0.15);
+    }
+
+    .login-logo-text {
+      font-size: 1.8rem;
+      font-weight: 900;
+      letter-spacing: -0.5px;
+    }
+
+    .login-logo-text .seo {
+      background: var(--gold-gradient);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
     }
-    .login-header .logo-text .baike {
-      color: #ffffff;
-    }
-    .login-header p {
-      color: var(--text-muted);
-      font-size: 0.95rem;
+
+    .login-logo-text .baike {
+      color: var(--text-primary);
     }
 
-    .form-group {
-      margin-bottom: 20px;
-    }
-    .form-group label {
-      display: block;
-      font-size: 0.88rem;
+    .login-title {
+      font-size: 1.1rem;
       font-weight: 600;
-      margin-bottom: 7px;
-      color: var(--text);
-    }
-    .form-group input {
-      width: 100%;
-      padding: 12px 16px;
-      background: var(--bg-input);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      color: var(--text);
-      font-size: 0.95rem;
-      outline: none;
-      transition: border-color 0.2s, box-shadow 0.2s;
-    }
-    .form-group input::placeholder { color: var(--text-muted); }
-    .form-group input:focus {
-      border-color: var(--orange);
-      box-shadow: 0 0 0 3px rgba(232, 133, 12, 0.15);
+      color: var(--text-primary);
+      margin-bottom: var(--sp-1);
     }
 
-    .form-meta {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 24px;
-      font-size: 0.85rem;
-    }
-    .form-meta label {
-      display: flex;
-      align-items: center;
-      gap: 6px;
+    .login-subtitle {
+      font-size: 0.88rem;
       color: var(--text-muted);
-      cursor: pointer;
     }
-    .form-meta input[type="checkbox"] {
-      accent-color: var(--orange);
-      width: 16px;
-      height: 16px;
-    }
-    .form-meta a { font-size: 0.85rem; }
 
-    .btn-primary {
+    /* Form */
+    .form-group {
+      margin-bottom: var(--sp-5);
+    }
+
+    .form-label {
+      display: block;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text-secondary);
+      margin-bottom: 6px;
+    }
+
+    .login-btn {
       display: block;
       width: 100%;
       padding: 14px;
-      background: var(--orange);
-      color: #fff;
-      font-size: 1rem;
+      border-radius: var(--radius-full);
+      font-size: 0.95rem;
       font-weight: 700;
-      border: none;
-      border-radius: 8px;
+      font-family: var(--font-sans);
       cursor: pointer;
-      transition: background 0.2s, transform 0.1s;
+      transition: all var(--duration-normal) var(--ease-out);
+      border: none;
+      text-align: center;
     }
-    .btn-primary:hover { background: var(--orange-hover); }
-    .btn-primary:active { transform: scale(0.98); }
 
-    .divider {
+    .login-btn-primary {
+      background: var(--gold-gradient);
+      color: #000;
+      box-shadow: 0 2px 12px rgba(232,133,12,0.2);
+    }
+
+    .login-btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 24px rgba(232,133,12,0.35);
+    }
+
+    .login-btn-primary:active {
+      transform: scale(0.98);
+    }
+
+    .login-btn-primary:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    /* Divider */
+    .login-divider {
       display: flex;
       align-items: center;
-      gap: 16px;
-      margin: 28px 0;
+      gap: var(--sp-4);
+      margin: var(--sp-6) 0;
       color: var(--text-muted);
-      font-size: 0.85rem;
+      font-size: 0.82rem;
     }
-    .divider::before, .divider::after {
+
+    .login-divider::before,
+    .login-divider::after {
       content: '';
       flex: 1;
       height: 1px;
-      background: var(--border);
+      background: var(--border-default);
     }
 
-    .btn-outline {
+    /* Social Buttons */
+    .social-btn {
       display: flex;
       align-items: center;
       justify-content: center;
@@ -227,658 +188,263 @@
       width: 100%;
       padding: 13px;
       background: transparent;
-      color: var(--text);
-      font-size: 0.95rem;
-      font-weight: 600;
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      cursor: pointer;
-      transition: border-color 0.2s, background 0.2s;
-    }
-    .btn-outline:hover {
-      border-color: var(--text-muted);
-      background: rgba(255,255,255,0.03);
-    }
-    .btn-outline svg { width: 20px; height: 20px; }
-
-    .login-footer {
-      text-align: center;
-      margin-top: 28px;
+      color: var(--text-primary);
       font-size: 0.9rem;
-      color: var(--text-muted);
-    }
-    .login-footer a { font-weight: 600; }
-
-    /* ── Footer ── */
-    footer {
-      text-align: center;
-      padding: 24px 20px;
-      border-top: 1px solid var(--border);
-      color: var(--text-muted);
-      font-size: 0.82rem;
-    }
-    footer span { color: var(--orange); }
-
-    /* ── Onboarding Overlay ── */
-    .onboard-overlay {
-      position: fixed;
-      inset: 0;
-      z-index: 9999;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: rgba(5, 5, 20, 0.82);
-      backdrop-filter: blur(18px);
-      -webkit-backdrop-filter: blur(18px);
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.4s ease;
-    }
-    .onboard-overlay.active {
-      opacity: 1;
-      pointer-events: auto;
-    }
-    .onboard-overlay.fade-out {
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.5s ease;
-    }
-
-    .onboard-container {
-      width: 94%;
-      max-width: 680px;
-      max-height: 92vh;
-      overflow-y: auto;
-      background: linear-gradient(135deg, #13132e 0%, #1a1a3a 100%);
-      border: 1px solid rgba(232, 133, 12, 0.25);
-      border-radius: 20px;
-      padding: 40px 36px 32px;
-      box-shadow: 0 24px 80px rgba(0,0,0,0.6), 0 0 40px rgba(232,133,12,0.08);
-      transform: translateY(30px) scale(0.96);
-      transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.4s ease;
-      opacity: 0;
-    }
-    .onboard-overlay.active .onboard-container {
-      transform: translateY(0) scale(1);
-      opacity: 1;
-    }
-
-    .onboard-step { display: none; }
-    .onboard-step.active { display: block; }
-
-    .onboard-title {
-      text-align: center;
-      font-size: 1.6rem;
-      font-weight: 800;
-      margin-bottom: 6px;
-      color: #fff;
-    }
-    .onboard-subtitle {
-      text-align: center;
-      color: var(--text-muted);
-      font-size: 0.92rem;
-      margin-bottom: 28px;
-    }
-
-    /* Step 1: Industry Grid */
-    .industry-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 12px;
-    }
-    .industry-item {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 6px;
-      padding: 16px 6px;
-      background: rgba(255,255,255,0.03);
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      cursor: pointer;
-      transition: all 0.25s ease;
-      user-select: none;
-      opacity: 0;
-      transform: translateY(20px);
-    }
-    .industry-item.slide-in {
-      opacity: 1;
-      transform: translateY(0);
-    }
-    .industry-item .icon {
-      font-size: 1.7rem;
-      line-height: 1;
-    }
-    .industry-item .label {
-      font-size: 0.78rem;
-      color: var(--text-muted);
-      text-align: center;
-      font-weight: 500;
-      transition: color 0.2s;
-    }
-    .industry-item.slide-in:hover {
-      border-color: rgba(232, 133, 12, 0.5);
-      background: rgba(232, 133, 12, 0.06);
-      transform: translateY(-2px);
-    }
-    .industry-item.slide-in:hover .label { color: #fff; }
-    .industry-item.selected {
-      border-color: var(--orange);
-      background: rgba(232, 133, 12, 0.12);
-      box-shadow: 0 0 20px rgba(232, 133, 12, 0.25), inset 0 0 12px rgba(232, 133, 12, 0.06);
-    }
-    .industry-item.selected .label { color: #fff; font-weight: 700; }
-
-    /* Step 2: Need Cards */
-    .need-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 14px;
-    }
-    .need-card {
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-      padding: 20px 18px;
-      background: rgba(255,255,255,0.03);
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      cursor: pointer;
-      transition: all 0.25s ease;
-      user-select: none;
-      opacity: 0;
-      transform: translateY(24px);
-    }
-    .need-card.slide-in {
-      opacity: 1;
-      transform: translateY(0);
-    }
-    .need-card .card-icon {
-      font-size: 1.6rem;
-      line-height: 1;
-    }
-    .need-card .card-title {
-      font-size: 0.95rem;
-      font-weight: 700;
-      color: #fff;
-      transition: color 0.2s;
-    }
-    .need-card .card-desc {
-      font-size: 0.8rem;
-      color: var(--text-muted);
-      line-height: 1.4;
-    }
-    .need-card.slide-in:hover {
-      border-color: rgba(232, 133, 12, 0.5);
-      background: rgba(232, 133, 12, 0.06);
-      transform: translateY(-2px);
-    }
-    .need-card.selected {
-      border-color: var(--orange);
-      background: rgba(232, 133, 12, 0.12);
-      box-shadow: 0 0 24px rgba(232, 133, 12, 0.25), inset 0 0 12px rgba(232, 133, 12, 0.06);
-    }
-
-    /* Step indicator dots */
-    .onboard-dots {
-      display: flex;
-      justify-content: center;
-      gap: 8px;
-      margin-bottom: 24px;
-    }
-    .onboard-dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: var(--border);
-      transition: all 0.3s ease;
-    }
-    .onboard-dot.active {
-      background: var(--orange);
-      width: 24px;
-      border-radius: 4px;
-    }
-
-    /* Skip button */
-    .onboard-skip {
-      display: block;
-      margin: 24px auto 0;
-      padding: 10px 28px;
-      background: transparent;
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      color: var(--text-muted);
-      font-size: 0.88rem;
-      cursor: pointer;
-      transition: all 0.2s;
-    }
-    .onboard-skip:hover {
-      border-color: var(--text-muted);
-      color: #fff;
-    }
-
-    /* Smooth redirect transition */
-    .page-exit {
-      animation: pageExit 0.5s ease forwards;
-    }
-    @keyframes pageExit {
-      to {
-        opacity: 0;
-        transform: scale(1.02);
-        filter: blur(4px);
-      }
-    }
-
-    /* ── 手機版全螢幕 Overlay Menu ── */
-    .mobile-menu-overlay {
-      display: none;
-      position: fixed;
-      inset: 0;
-      z-index: 9999;
-      background: rgba(10, 10, 26, 0.97);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 0;
-      opacity: 0;
-      transition: opacity 0.35s ease;
-    }
-    .mobile-menu-overlay.open {
-      display: flex;
-      opacity: 1;
-    }
-    .mobile-menu-overlay .mobile-close {
-      position: absolute;
-      top: 16px;
-      right: 20px;
-      background: none;
-      border: none;
-      color: #fff;
-      font-size: 2rem;
-      cursor: pointer;
-      width: 48px;
-      height: 48px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: 50%;
-      transition: background 0.2s;
-    }
-    .mobile-menu-overlay .mobile-close:hover {
-      background: rgba(232,133,12,0.15);
-    }
-    .mobile-menu-overlay a {
-      display: block;
-      color: #fff;
-      font-size: 1.3rem;
       font-weight: 600;
-      padding: 16px 40px;
-      text-align: center;
-      transition: color 0.2s, background 0.2s;
-      width: 100%;
-      text-decoration: none;
-      min-height: 48px;
-      line-height: 1.5;
+      font-family: var(--font-sans);
+      border: 1px solid var(--border-default);
+      border-radius: var(--radius-full);
+      cursor: pointer;
+      transition: all var(--duration-normal) var(--ease-out);
+      margin-bottom: var(--sp-3);
     }
-    .mobile-menu-overlay a:hover {
-      color: var(--orange);
-      background: rgba(232,133,12,0.06);
+
+    .social-btn:hover {
+      border-color: var(--border-hover);
+      background: rgba(255,255,255,0.02);
+    }
+
+    .social-btn svg {
+      width: 20px;
+      height: 20px;
+      flex-shrink: 0;
+    }
+
+    /* Links */
+    .forgot-link {
+      display: block;
+      text-align: right;
+      font-size: 0.82rem;
+      color: var(--gold-200);
+      margin-bottom: var(--sp-6);
+      transition: color var(--duration-fast);
+    }
+
+    .forgot-link:hover {
+      color: var(--gold-100);
+    }
+
+    .login-footer-text {
+      text-align: center;
+      margin-top: var(--sp-6);
+      font-size: 0.88rem;
+      color: var(--text-muted);
+    }
+
+    .login-footer-text a {
+      color: var(--gold-200);
+      font-weight: 600;
+    }
+
+    /* Message */
+    #login-msg {
+      display: none;
+      text-align: center;
+      padding: 12px;
+      border-radius: var(--radius-md);
+      margin-bottom: var(--sp-4);
+      font-size: 0.88rem;
+    }
+
+    /* Minimal footer */
+    .login-page-footer {
+      text-align: center;
+      padding: var(--sp-6) var(--sp-4);
+      border-top: 1px solid var(--border-subtle);
+      color: var(--text-muted);
+      font-size: 0.78rem;
+      background: var(--bg-secondary);
+    }
+
+    .login-page-footer span {
+      color: var(--gold-200);
     }
 
     /* ── Responsive ── */
     @media (max-width: 768px) {
-      nav { padding: 14px 16px; }
-      .nav-links { display: none; }
-      .nav-hamburger { display: flex; }
+      .login-main {
+        padding: 80px var(--sp-4) var(--sp-8);
+      }
 
-      main { padding: 40px 16px; }
-      .login-card { padding: 32px 20px; border-radius: 14px; }
-      .login-header .logo-text { font-size: 1.5rem; }
-      .login-header p { font-size: 0.88rem; }
+      .login-card {
+        padding: var(--sp-8) var(--sp-5);
+        border-radius: var(--radius-lg);
+      }
 
-      .form-group label { font-size: 0.85rem; }
-      .form-group input { padding: 14px 16px; font-size: 1rem; min-height: 48px; }
-      .btn-primary { min-height: 52px; font-size: 1.05rem; }
-      .btn-outline { min-height: 48px; }
-      .form-meta { flex-wrap: wrap; gap: 8px; }
-      .form-meta label, .form-meta a { font-size: 0.82rem; }
+      .login-logo-text {
+        font-size: 1.5rem;
+      }
 
-      .onboard-container { padding: 28px 16px 24px; border-radius: 16px; }
-      .onboard-title { font-size: 1.2rem; }
-      .onboard-subtitle { font-size: 0.85rem; }
-      .industry-grid { grid-template-columns: repeat(4, 1fr); gap: 8px; }
-      .industry-item { padding: 12px 4px; }
-      .industry-item .icon { font-size: 1.4rem; }
-      .industry-item .label { font-size: 0.7rem; }
-      .need-grid { grid-template-columns: 1fr; gap: 10px; }
-      .need-card { padding: 16px 14px; }
-      .need-card .card-title { font-size: 0.92rem; }
-
-      footer { padding: 20px 16px; font-size: 0.78rem; }
-
-      /* 按鈕觸控友善 */
-      button, a { min-height: 44px; }
-      body { font-size: 14px; }
+      .login-btn,
+      .social-btn {
+        min-height: 48px;
+      }
     }
 
     @media (max-width: 480px) {
-      .login-card { padding: 28px 16px; }
-      .login-header .logo-text { font-size: 1.3rem; }
-      .industry-grid { grid-template-columns: repeat(4, 1fr); gap: 6px; }
-      .industry-item { padding: 10px 2px; }
-      .industry-item .icon { font-size: 1.2rem; }
-      .industry-item .label { font-size: 0.65rem; }
-      .login-footer { font-size: 0.82rem; }
+      .login-card {
+        padding: var(--sp-6) var(--sp-4);
+      }
+
+      .login-logo-text {
+        font-size: 1.3rem;
+      }
     }
   </style>
-  <link rel="stylesheet" href="/assets/framer-style.css">
 </head>
 <body>
+  <div class="login-wrap">
 
-  <!-- Navigation -->
-  <nav>
-    <div class="nav-logo"><img src="/favicon.svg" alt="S" width="28" height="28" style="border-radius:6px;"><span class="seo">SEO</span><span class="baike">BAIKE</span></div>
-    <ul class="nav-links" id="navLinks">
-      <li><a href="/">首頁</a></li>
-      <li><a href="/features">功能</a></li>
-      <li><a href="/marketplace">市集</a></li>
-      <li><a href="/pricing">方案</a></li>
-      <li><a href="/about">關於</a></li>
-      <li><a href="/docs">常見問題</a></li>
-      <li><a href="/login" class="active">登入</a></li>
-    </ul>
-    <button class="nav-hamburger" id="hamburger" aria-label="選單">
-      <span></span><span></span><span></span>
-    </button>
-  </nav>
-
-  <!-- 手機版全螢幕選單 Overlay -->
-  <div class="mobile-menu-overlay" id="mobileMenu">
-    <button class="mobile-close" id="mobileMenuClose" aria-label="關閉選單">&times;</button>
-    <a href="/" onclick="closeMobileMenu()">首頁</a>
-    <a href="/features" onclick="closeMobileMenu()">功能</a>
-    <a href="/marketplace" onclick="closeMobileMenu()">市集</a>
-    <a href="/pricing" onclick="closeMobileMenu()">方案</a>
-    <a href="/about" onclick="closeMobileMenu()">關於</a>
-    <a href="/docs" onclick="closeMobileMenu()">常見問題</a>
-  </div>
-
-  <!-- Main -->
-  <main>
-    <div class="login-card">
-      <div class="login-header">
-        <div class="logo-text"><img src="/favicon.svg" alt="S" width="36" height="36" style="border-radius:8px;"><span class="seo">SEO</span><span class="baike">BAIKE</span></div>
-        <p>登入您的 AI 約束推理平台帳號</p>
-      </div>
-
-      <form action="#" method="POST" autocomplete="on">
-        <div class="form-group">
-          <label for="email">電子郵件</label>
-          <input type="email" id="email" name="email" placeholder="you@example.com" required autocomplete="email">
-        </div>
-
-        <div class="form-group">
-          <label for="password">密碼</label>
-          <input type="password" id="password" name="password" placeholder="輸入密碼" required autocomplete="current-password">
-        </div>
-
-        <div class="form-meta">
-          <label><input type="checkbox" name="remember"> 記住我</label>
-          <a href="#">忘記密碼？</a>
-        </div>
-
-        <button type="submit" class="btn-primary">登入</button>
-      </form>
-
-      <div class="divider">或</div>
-
-      <button class="btn-outline" type="button">
-        <svg viewBox="0 0 24 24" fill="none">
-          <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z" fill="#e8850c"/>
-        </svg>
-        SEOBAIKE 帳號登入
+    <!-- Navigation -->
+    <nav class="nav">
+      <a href="/" class="nav-brand">
+        <img src="/favicon.svg" alt="SEOBAIKE" width="34" height="34">
+        <span class="seo">SEO</span><span class="baike">BAIKE</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="/">首頁</a></li>
+        <li><a href="/features">功能</a></li>
+        <li><a href="/pricing">方案</a></li>
+        <li><a href="/ai">AI 技術</a></li>
+        <li><a href="/start" class="nav-cta">開始使用</a></li>
+      </ul>
+      <button class="nav-hamburger" onclick="toggleMenu()" aria-label="選單">
+        <span></span><span></span><span></span>
       </button>
+    </nav>
 
-      <div class="login-footer">
-        還沒有帳號？ <a href="#">立即註冊</a>
-      </div>
+    <!-- Mobile Overlay -->
+    <div class="mobile-overlay">
+      <button class="mobile-close" onclick="toggleMenu()" aria-label="關閉選單">&times;</button>
+      <a href="/" onclick="toggleMenu()">首頁</a>
+      <a href="/features" onclick="toggleMenu()">功能</a>
+      <a href="/pricing" onclick="toggleMenu()">方案</a>
+      <a href="/ai" onclick="toggleMenu()">AI 技術</a>
+      <a href="/start" onclick="toggleMenu()">開始使用</a>
     </div>
-  </main>
 
-  <!-- Footer -->
-  <footer>
-    &copy; 2026 <span>小路光有限公司</span>（統編 60475510）— aiforseo.vip
-  </footer>
-
-  <!-- Onboarding Overlay -->
-  <div class="onboard-overlay" id="onboardOverlay">
-    <div class="onboard-container">
-      <!-- Step 1: Industry -->
-      <div class="onboard-step active" id="onboardStep1">
-        <div class="onboard-dots">
-          <div class="onboard-dot active"></div>
-          <div class="onboard-dot"></div>
+    <!-- Login Main -->
+    <main class="login-main">
+      <div class="login-card">
+        <div class="login-header">
+          <div class="login-logo">
+            <img src="/favicon.svg" alt="SEOBAIKE" width="40" height="40">
+            <span class="login-logo-text"><span class="seo">SEO</span><span class="baike">BAIKE</span></span>
+          </div>
+          <h1 class="login-title">登入</h1>
+          <p class="login-subtitle" id="loginSubtitle">登入您的帳號以繼續</p>
         </div>
-        <div class="onboard-title">&#x4F60;&#x662F;&#x505A;&#x4EC0;&#x9EBC;&#x7684;&#xFF1F;</div>
-        <div class="onboard-subtitle">&#x9078;&#x4E00;&#x500B;&#x6700;&#x63A5;&#x8FD1;&#x4F60;&#x7684;&#x7522;&#x696D;</div>
-        <div class="industry-grid" id="industryGrid"></div>
-        <button class="onboard-skip" id="onboardSkip1">&#x5148;&#x901B;&#x901B;</button>
-      </div>
 
-      <!-- Step 2: Need -->
-      <div class="onboard-step" id="onboardStep2">
-        <div class="onboard-dots">
-          <div class="onboard-dot" style="background:var(--orange);"></div>
-          <div class="onboard-dot active"></div>
+        <div id="login-msg"></div>
+
+        <form id="loginForm" autocomplete="on">
+          <div class="form-group">
+            <label class="form-label" for="email">電子郵件</label>
+            <input class="input" type="email" id="email" name="email" placeholder="you@example.com" required autocomplete="email">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="password">密碼</label>
+            <input class="input" type="password" id="password" name="password" placeholder="輸入密碼" required autocomplete="current-password">
+          </div>
+
+          <a href="#" class="forgot-link" id="forgotLink">忘記密碼？</a>
+
+          <button type="submit" class="login-btn login-btn-primary" id="btnPrimary">登入</button>
+        </form>
+
+        <div class="login-divider">或</div>
+
+        <button class="social-btn" type="button" id="btnGoogle">
+          <svg viewBox="0 0 24 24" fill="none">
+            <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 01-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" fill="#4285F4"/>
+            <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
+            <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/>
+            <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
+          </svg>
+          使用 Google 登入
+        </button>
+
+        <button class="social-btn" type="button" id="btnApple">
+          <svg viewBox="0 0 24 24" fill="currentColor">
+            <path d="M17.05 20.28c-.98.95-2.05.88-3.08.4-1.09-.5-2.08-.48-3.24 0-1.44.62-2.2.44-3.06-.4C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.38 5.98.48 7.13-.57 1.5-1.31 2.99-2.54 4.09zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z"/>
+          </svg>
+          使用 Apple 登入
+        </button>
+
+        <div class="login-footer-text" id="loginFooterToggle">
+          還沒有帳號？ <a href="#">註冊</a>
         </div>
-        <div class="onboard-title">&#x6700;&#x60F3;&#x641E;&#x5B9A;&#x4EC0;&#x9EBC;&#xFF1F;</div>
-        <div class="onboard-subtitle">&#x9078;&#x4E00;&#x500B;&#xFF0C;&#x6211;&#x5011;&#x7ACB;&#x523B;&#x5E6B;&#x4F60;&#x5B89;&#x6392;</div>
-        <div class="need-grid" id="needGrid"></div>
-        <button class="onboard-skip" id="onboardSkip2">&#x5148;&#x901B;&#x901B;</button>
       </div>
-    </div>
+    </main>
+
+    <!-- Minimal Footer -->
+    <footer class="login-page-footer">
+      &copy; 2025-2026 <span>小路光有限公司</span>（統編 60475510）— aiforseo.vip
+    </footer>
+
   </div>
 
+  <!-- Scripts -->
   <script src="/seobaike-config.js"></script>
   <script>
-    // === 手機版 Hamburger 全螢幕 Overlay Menu ===
-    document.getElementById('hamburger').addEventListener('click', function () {
-      document.getElementById('mobileMenu').classList.add('open');
-      document.body.style.overflow = 'hidden';
+    // ── Design System JS ──
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.08 });
+    document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
+
+    window.addEventListener('scroll', () => {
+      const nav = document.querySelector('.nav');
+      if (nav) nav.classList.toggle('scrolled', window.scrollY > 20);
     });
-    document.getElementById('mobileMenuClose').addEventListener('click', function () {
-      closeMobileMenu();
-    });
-    function closeMobileMenu() {
-      document.getElementById('mobileMenu').classList.remove('open');
-      document.body.style.overflow = '';
+
+    function toggleMenu() {
+      document.querySelector('.nav-hamburger').classList.toggle('active');
+      document.querySelector('.mobile-overlay').classList.toggle('open');
     }
 
-    // ══════════════════════════════════════
-    // SEOBAIKE Auth + Smart Onboarding
-    // ══════════════════════════════════════
+    // ── Auth Config ──
+    var SUPA_URL = (window.__SEOBAIKE__ && window.__SEOBAIKE__.supabaseUrl) || '';
+    var SUPA_KEY = (window.__SEOBAIKE__ && window.__SEOBAIKE__.anonKey) || '';
 
-    const SUPA_URL = (window.__SEOBAIKE__ && window.__SEOBAIKE__.supabaseUrl) || '';
-    const SUPA_KEY = (window.__SEOBAIKE__ && window.__SEOBAIKE__.anonKey) || '';
+    var loginForm = document.getElementById('loginForm');
+    var btnPrimary = document.getElementById('btnPrimary');
 
-    const loginForm = document.querySelector('form');
-    const btnPrimary = document.querySelector('.btn-primary');
-    const btnSSO = document.querySelector('.btn-outline');
-
-    // ── Onboarding Data ──
-    var _obIndustries = [
-      { key: 'food',        icon: '\uD83C\uDF7D\uFE0F', label: '\u9910\u98F2\u7F8E\u98DF' },
-      { key: 'retail',      icon: '\uD83C\uDFEA',       label: '\u96F6\u552E\u96FB\u5546' },
-      { key: 'health',      icon: '\uD83C\uDFE5',       label: '\u91AB\u7642\u5065\u5EB7' },
-      { key: 'education',   icon: '\uD83D\uDCDA',       label: '\u6559\u80B2\u57F9\u8A13' },
-      { key: 'finance',     icon: '\uD83D\uDCB0',       label: '\u91D1\u878D\u7406\u8CA1' },
-      { key: 'construction',icon: '\uD83C\uDFD7\uFE0F', label: '\u5EFA\u7BC9\u5DE5\u7A0B' },
-      { key: 'design',      icon: '\uD83C\uDFA8',       label: '\u8A2D\u8A08\u5275\u610F' },
-      { key: 'tech',        icon: '\uD83D\uDCBB',       label: '\u79D1\u6280\u8EDF\u9AD4' },
-      { key: 'manufacturing',icon: '\uD83C\uDFED',      label: '\u88FD\u9020\u696D' },
-      { key: 'auto',        icon: '\uD83D\uDE97',       label: '\u6C7D\u8ECA\u4EA4\u901A' },
-      { key: 'realestate',  icon: '\uD83C\uDFE0',       label: '\u623F\u5730\u7522' },
-      { key: 'legal',       icon: '\u2696\uFE0F',       label: '\u6CD5\u5F8B\u9867\u554F' },
-      { key: 'agriculture', icon: '\uD83C\uDF3E',       label: '\u8FB2\u696D\u98DF\u54C1' },
-      { key: 'media',       icon: '\uD83C\uDFAC',       label: '\u5A92\u9AD4\u5A1B\u6A02' },
-      { key: 'business',    icon: '\uD83D\uDCBC',       label: '\u4F01\u696D\u7BA1\u7406' },
-      { key: 'other',       icon: '\uD83C\uDF0D',       label: '\u5176\u4ED6' }
-    ];
-
-    var _obNeeds = [
-      { key: 'marketing',   icon: '\uD83D\uDCE2', title: '\u884C\u92B7\u63A8\u5EE3', desc: '\u8B93\u66F4\u591A\u4EBA\u77E5\u9053\u6211' },
-      { key: 'analytics',   icon: '\uD83D\uDCCA', title: '\u6578\u64DA\u5206\u6790', desc: '\u770B\u61C2\u6211\u7684\u751F\u610F' },
-      { key: 'automation',  icon: '\uD83E\uDD16', title: '\u81EA\u52D5\u5316',       desc: '\u91CD\u8907\u7684\u4E8B\u4EA4\u7D66 AI' },
-      { key: 'content',     icon: '\uD83D\uDCDD', title: '\u5167\u5BB9\u751F\u6210', desc: '\u6587\u6848\u3001\u5716\u7247\u3001\u5F71\u7247' },
-      { key: 'support',     icon: '\uD83D\uDCAC', title: '\u5BA2\u670D\u6E9D\u901A', desc: '24 \u5C0F\u6642\u4E0D\u6253\u70CA' },
-      { key: 'operations',  icon: '\uD83D\uDCCB', title: '\u71DF\u904B\u7BA1\u7406', desc: '\u5E33\u52D9\u3001\u6392\u7A0B\u3001\u5EAB\u5B58' }
-    ];
-
-    var _obSelected = { industry: null, need: null };
-
-    // ── Build Onboarding DOM ──
-    (function buildOnboarding() {
-      var igrid = document.getElementById('industryGrid');
-      _obIndustries.forEach(function(item, i) {
-        var el = document.createElement('div');
-        el.className = 'industry-item';
-        el.dataset.key = item.key;
-        el.innerHTML = '<div class="icon">' + item.icon + '</div><div class="label">' + item.label + '</div>';
-        el.addEventListener('click', function() { selectIndustry(item.key, el); });
-        igrid.appendChild(el);
-      });
-
-      var ngrid = document.getElementById('needGrid');
-      _obNeeds.forEach(function(item, i) {
-        var el = document.createElement('div');
-        el.className = 'need-card';
-        el.dataset.key = item.key;
-        el.innerHTML = '<div class="card-icon">' + item.icon + '</div><div class="card-title">' + item.title + '</div><div class="card-desc">' + item.desc + '</div>';
-        el.addEventListener('click', function() { selectNeed(item.key, el); });
-        ngrid.appendChild(el);
-      });
-    })();
-
-    function selectIndustry(key, el) {
-      _obSelected.industry = key;
-      document.querySelectorAll('.industry-item').forEach(function(x) { x.classList.remove('selected'); });
-      el.classList.add('selected');
-      // Auto-advance to step 2 after brief glow
-      setTimeout(function() { goToStep2(); }, 350);
-    }
-
-    function selectNeed(key, el) {
-      _obSelected.need = key;
-      document.querySelectorAll('.need-card').forEach(function(x) { x.classList.remove('selected'); });
-      el.classList.add('selected');
-      // Save and redirect after brief glow
-      setTimeout(function() { finishOnboarding(); }, 400);
-    }
-
-    function goToStep2() {
-      document.getElementById('onboardStep1').classList.remove('active');
-      document.getElementById('onboardStep2').classList.add('active');
-      // Animate need cards sliding in
-      var cards = document.querySelectorAll('#onboardStep2 .need-card');
-      cards.forEach(function(card, i) {
-        setTimeout(function() { card.classList.add('slide-in'); }, 60 * i);
-      });
-    }
-
-    function finishOnboarding() {
-      var profile = {
-        industry: _obSelected.industry || 'general',
-        need: _obSelected.need || 'explore',
-        setupAt: new Date().toISOString()
-      };
-      localStorage.setItem('seobaike_profile', JSON.stringify(profile));
-      smoothRedirect();
-    }
-
-    function skipOnboarding() {
-      var profile = {
-        industry: 'general',
-        need: 'explore',
-        setupAt: new Date().toISOString()
-      };
-      localStorage.setItem('seobaike_profile', JSON.stringify(profile));
-      smoothRedirect();
-    }
-
-    function smoothRedirect() {
-      var overlay = document.getElementById('onboardOverlay');
-      overlay.classList.add('fade-out');
-      document.body.classList.add('page-exit');
-      setTimeout(function() { window.location.href = '/dashboard'; }, 500);
-    }
-
-    function showOnboarding() {
-      var overlay = document.getElementById('onboardOverlay');
-      overlay.classList.add('active');
-      // Stagger industry items slide-in
-      var items = document.querySelectorAll('#onboardStep1 .industry-item');
-      items.forEach(function(item, i) {
-        setTimeout(function() { item.classList.add('slide-in'); }, 40 * i);
-      });
-    }
-
-    // Skip buttons
-    document.getElementById('onboardSkip1').addEventListener('click', skipOnboarding);
-    document.getElementById('onboardSkip2').addEventListener('click', skipOnboarding);
-
-    // ── Post-login trigger ──
-    // If user already has a profile, skip onboarding and go straight to dashboard
-    function handleLoginSuccess() {
-      var existingProfile = localStorage.getItem('seobaike_profile');
-      if (existingProfile) {
-        // Returning user - skip onboarding
-        setTimeout(function() { window.location.href = '/dashboard'; }, 600);
-      } else {
-        // New user - show onboarding after brief success message
-        setTimeout(function() { showOnboarding(); }, 700);
-      }
-    }
-
-    // ── 顯示訊息 ──
+    // ── Show Message ──
     function showMsg(text, isError) {
       var msgEl = document.getElementById('login-msg');
-      if (!msgEl) {
-        msgEl = document.createElement('div');
-        msgEl.id = 'login-msg';
-        msgEl.style.cssText = 'text-align:center;padding:12px;border-radius:8px;margin-bottom:16px;font-size:0.9rem;';
-        loginForm.parentNode.insertBefore(msgEl, loginForm);
-      }
       msgEl.style.display = 'block';
-      msgEl.style.background = isError ? 'rgba(255,68,68,0.1)' : 'rgba(118,185,0,0.1)';
-      msgEl.style.border = isError ? '1px solid rgba(255,68,68,0.3)' : '1px solid rgba(118,185,0,0.3)';
-      msgEl.style.color = isError ? '#ff6b6b' : '#76b900';
+      msgEl.style.background = isError ? 'rgba(248,81,73,0.1)' : 'rgba(52,208,88,0.1)';
+      msgEl.style.border = isError ? '1px solid rgba(248,81,73,0.3)' : '1px solid rgba(52,208,88,0.3)';
+      msgEl.style.color = isError ? 'var(--danger)' : 'var(--success)';
       msgEl.textContent = text;
     }
 
-    // ── Email + Password 登入 ──
+    // ── Email + Password Login ──
     loginForm.addEventListener('submit', async function(e) {
       e.preventDefault();
       var email = document.getElementById('email').value.trim();
       var password = document.getElementById('password').value;
 
       if (!email || !password) {
-        showMsg('\u8ACB\u8F38\u5165\u96FB\u5B50\u90F5\u4EF6\u548C\u5BC6\u78BC', true);
+        showMsg('請輸入電子郵件和密碼', true);
+        return;
+      }
+
+      // Check if signup mode
+      if (loginForm.dataset.mode === 'signup') {
+        handleSignup(email, password);
         return;
       }
 
       btnPrimary.disabled = true;
-      btnPrimary.textContent = '\u767B\u5165\u4E2D...';
+      btnPrimary.textContent = '登入中...';
 
       try {
         var res = await fetch(SUPA_URL + '/auth/v1/token?grant_type=password', {
           method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'apikey': SUPA_KEY
-          },
+          headers: { 'Content-Type': 'application/json', 'apikey': SUPA_KEY },
           body: JSON.stringify({ email: email, password: password })
         });
         var data = await res.json();
@@ -887,113 +453,40 @@
           localStorage.setItem('sb-access-token', data.access_token);
           localStorage.setItem('sb-refresh-token', data.refresh_token);
           localStorage.setItem('sb-user', JSON.stringify(data.user));
-          showMsg('\u767B\u5165\u6210\u529F\uFF01', false);
-          handleLoginSuccess();
+          showMsg('登入成功！', false);
+          setTimeout(function() { window.location.href = '/dashboard'; }, 600);
         } else {
-          var msg = data.error_description || data.msg || data.error || '\u767B\u5165\u5931\u6557';
+          var msg = data.error_description || data.msg || data.error || '登入失敗';
           if (msg.includes('Invalid login')) {
-            showMsg('\u96FB\u5B50\u90F5\u4EF6\u6216\u5BC6\u78BC\u932F\u8AA4', true);
+            showMsg('電子郵件或密碼錯誤', true);
           } else if (msg.includes('Email not confirmed')) {
-            showMsg('\u8ACB\u5148\u81F3\u4FE1\u7BB1\u78BA\u8A8D\u5E33\u865F', true);
+            showMsg('請先至信箱確認帳號', true);
           } else {
             showMsg(msg, true);
           }
         }
       } catch (err) {
-        showMsg('\u7DB2\u8DEF\u932F\u8AA4\uFF0C\u8ACB\u7A0D\u5F8C\u518D\u8A66', true);
+        showMsg('網路錯誤，請稍後再試', true);
       }
 
       btnPrimary.disabled = false;
-      btnPrimary.textContent = '\u767B\u5165';
+      btnPrimary.textContent = loginForm.dataset.mode === 'signup' ? '註冊' : '登入';
     });
 
-    // ── OAuth SSO 帳號登入 ──
-    // SSO redirect goes to a callback page; onboarding triggers on the callback/dashboard
-    btnSSO.addEventListener('click', function() {
-      // Redirect to login callback that will show onboarding
-      var redirectTo = window.location.origin + '/login?sso=callback';
-      var ssoUrl = SUPA_URL + '/auth/v1/authorize?provider=google&redirect_to=' + encodeURIComponent(redirectTo);
-      window.location.href = ssoUrl;
-    });
-
-    // ── Handle SSO callback ──
-    (function handleSSOCallback() {
-      var params = new URLSearchParams(window.location.search);
-      var hash = window.location.hash;
-      // Check if we're coming back from SSO with tokens in the hash
-      if (hash && hash.includes('access_token')) {
-        var hashParams = new URLSearchParams(hash.substring(1));
-        var accessToken = hashParams.get('access_token');
-        var refreshToken = hashParams.get('refresh_token');
-        if (accessToken) {
-          localStorage.setItem('sb-access-token', accessToken);
-          if (refreshToken) localStorage.setItem('sb-refresh-token', refreshToken);
-          showMsg('\u767B\u5165\u6210\u529F\uFF01', false);
-          // Clear the hash
-          history.replaceState(null, '', window.location.pathname);
-          handleLoginSuccess();
-          return;
-        }
-      }
-      // Also check query param callback
-      if (params.get('sso') === 'callback' && localStorage.getItem('sb-access-token')) {
-        showMsg('\u767B\u5165\u6210\u529F\uFF01', false);
-        handleLoginSuccess();
-        return;
-      }
-    })();
-
-    // ── 註冊連結 ──
-    document.querySelector('.login-footer a').addEventListener('click', function(e) {
-      e.preventDefault();
-      var card = document.querySelector('.login-card');
-      var header = card.querySelector('.login-header p');
-      var isLogin = header.textContent.includes('\u767B\u5165');
-
-      if (isLogin) {
-        header.textContent = '\u5EFA\u7ACB\u60A8\u7684 SEOBAIKE \u5E33\u865F';
-        btnPrimary.textContent = '\u8A3B\u518A';
-        document.querySelector('.login-footer').innerHTML = '\u5DF2\u6709\u5E33\u865F\uFF1F <a href="#">\u8FD4\u56DE\u767B\u5165</a>';
-        loginForm.dataset.mode = 'signup';
-      } else {
-        header.textContent = '\u767B\u5165\u60A8\u7684 AI \u7D04\u675F\u63A8\u7406\u5E73\u53F0\u5E33\u865F';
-        btnPrimary.textContent = '\u767B\u5165';
-        document.querySelector('.login-footer').innerHTML = '\u9084\u6C92\u6709\u5E33\u865F\uFF1F <a href="#">\u7ACB\u5373\u8A3B\u518A</a>';
-        loginForm.dataset.mode = 'login';
-      }
-
-      // 重新綁定註冊連結
-      document.querySelector('.login-footer a').addEventListener('click', arguments.callee);
-    });
-
-    // ── 攔截 form submit，如果是 signup mode ──
-    loginForm.addEventListener('submit', async function(e) {
-      if (loginForm.dataset.mode !== 'signup') return;
-      e.preventDefault();
-      e.stopImmediatePropagation();
-
-      var email = document.getElementById('email').value.trim();
-      var password = document.getElementById('password').value;
-
-      if (!email || !password) {
-        showMsg('\u8ACB\u8F38\u5165\u96FB\u5B50\u90F5\u4EF6\u548C\u5BC6\u78BC', true);
-        return;
-      }
+    // ── Signup Handler ──
+    async function handleSignup(email, password) {
       if (password.length < 6) {
-        showMsg('\u5BC6\u78BC\u81F3\u5C11\u9700\u8981 6 \u500B\u5B57\u5143', true);
+        showMsg('密碼至少需要 6 個字元', true);
         return;
       }
 
       btnPrimary.disabled = true;
-      btnPrimary.textContent = '\u8A3B\u518A\u4E2D...';
+      btnPrimary.textContent = '註冊中...';
 
       try {
         var res = await fetch(SUPA_URL + '/auth/v1/signup', {
           method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'apikey': SUPA_KEY
-          },
+          headers: { 'Content-Type': 'application/json', 'apikey': SUPA_KEY },
           body: JSON.stringify({ email: email, password: password })
         });
         var data = await res.json();
@@ -1002,82 +495,135 @@
           if (data.access_token) {
             localStorage.setItem('sb-access-token', data.access_token);
             localStorage.setItem('sb-user', JSON.stringify(data.user));
-            showMsg('\u8A3B\u518A\u6210\u529F\uFF01', false);
-            handleLoginSuccess();
+            showMsg('註冊成功！', false);
+            setTimeout(function() { window.location.href = '/dashboard'; }, 600);
           } else {
-            showMsg('\u8A3B\u518A\u6210\u529F\uFF01\u8ACB\u81F3\u4FE1\u7BB1\u78BA\u8A8D\u5E33\u865F\u5F8C\u518D\u767B\u5165\u3002', false);
+            showMsg('註冊成功！請至信箱確認帳號後再登入。', false);
           }
         } else {
-          var msg = data.error_description || data.msg || data.error || '\u8A3B\u518A\u5931\u6557';
+          var msg = data.error_description || data.msg || data.error || '註冊失敗';
           if (msg.includes('already registered')) {
-            showMsg('\u6B64\u96FB\u5B50\u90F5\u4EF6\u5DF2\u8A3B\u518A\uFF0C\u8ACB\u76F4\u63A5\u767B\u5165', true);
+            showMsg('此電子郵件已註冊，請直接登入', true);
           } else {
             showMsg(msg, true);
           }
         }
       } catch (err) {
-        showMsg('\u7DB2\u8DEF\u932F\u8AA4\uFF0C\u8ACB\u7A0D\u5F8C\u518D\u8A66', true);
+        showMsg('網路錯誤，請稍後再試', true);
       }
 
       btnPrimary.disabled = false;
-      btnPrimary.textContent = '\u8A3B\u518A';
-    }, true);
+      btnPrimary.textContent = '註冊';
+    }
 
-    // ── 忘記密碼 ──
-    document.querySelector('.form-meta a').addEventListener('click', async function(e) {
+    // ── Google OAuth ──
+    document.getElementById('btnGoogle').addEventListener('click', function() {
+      var redirectTo = window.location.origin + '/login?sso=callback';
+      var ssoUrl = SUPA_URL + '/auth/v1/authorize?provider=google&redirect_to=' + encodeURIComponent(redirectTo);
+      window.location.href = ssoUrl;
+    });
+
+    // ── Apple OAuth ──
+    document.getElementById('btnApple').addEventListener('click', function() {
+      var redirectTo = window.location.origin + '/login?sso=callback';
+      var ssoUrl = SUPA_URL + '/auth/v1/authorize?provider=apple&redirect_to=' + encodeURIComponent(redirectTo);
+      window.location.href = ssoUrl;
+    });
+
+    // ── SSO Callback Handler ──
+    (function handleSSOCallback() {
+      var hash = window.location.hash;
+      if (hash && hash.includes('access_token')) {
+        var hashParams = new URLSearchParams(hash.substring(1));
+        var accessToken = hashParams.get('access_token');
+        var refreshToken = hashParams.get('refresh_token');
+        if (accessToken) {
+          localStorage.setItem('sb-access-token', accessToken);
+          if (refreshToken) localStorage.setItem('sb-refresh-token', refreshToken);
+          showMsg('登入成功！', false);
+          history.replaceState(null, '', window.location.pathname);
+          setTimeout(function() { window.location.href = '/dashboard'; }, 600);
+          return;
+        }
+      }
+      var params = new URLSearchParams(window.location.search);
+      if (params.get('sso') === 'callback' && localStorage.getItem('sb-access-token')) {
+        showMsg('登入成功！', false);
+        setTimeout(function() { window.location.href = '/dashboard'; }, 600);
+      }
+    })();
+
+    // ── Toggle Login / Signup ──
+    document.getElementById('loginFooterToggle').addEventListener('click', function(e) {
+      if (e.target.tagName !== 'A') return;
+      e.preventDefault();
+      var isLogin = loginForm.dataset.mode !== 'signup';
+      if (isLogin) {
+        loginForm.dataset.mode = 'signup';
+        document.getElementById('loginSubtitle').textContent = '建立您的 SEOBAIKE 帳號';
+        document.querySelector('.login-title').textContent = '註冊';
+        btnPrimary.textContent = '註冊';
+        this.innerHTML = '已有帳號？ <a href="#">登入</a>';
+      } else {
+        loginForm.dataset.mode = 'login';
+        document.getElementById('loginSubtitle').textContent = '登入您的帳號以繼續';
+        document.querySelector('.login-title').textContent = '登入';
+        btnPrimary.textContent = '登入';
+        this.innerHTML = '還沒有帳號？ <a href="#">註冊</a>';
+      }
+    });
+
+    // ── Forgot Password ──
+    document.getElementById('forgotLink').addEventListener('click', async function(e) {
       e.preventDefault();
       var email = document.getElementById('email').value.trim();
       if (!email) {
-        showMsg('\u8ACB\u5148\u8F38\u5165\u96FB\u5B50\u90F5\u4EF6\uFF0C\u518D\u9EDE\u64CA\u5FD8\u8A18\u5BC6\u78BC', true);
+        showMsg('請先輸入電子郵件，再點擊忘記密碼', true);
         return;
       }
       try {
         var res = await fetch(SUPA_URL + '/auth/v1/recover', {
           method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'apikey': SUPA_KEY
-          },
+          headers: { 'Content-Type': 'application/json', 'apikey': SUPA_KEY },
           body: JSON.stringify({ email: email })
         });
         if (res.ok) {
-          showMsg('\u5BC6\u78BC\u91CD\u8A2D\u4FE1\u5DF2\u5BC4\u51FA\uFF0C\u8ACB\u67E5\u6536\u4FE1\u7BB1', false);
+          showMsg('密碼重設信已寄出，請查收信箱', false);
         } else {
-          showMsg('\u7121\u6CD5\u5BC4\u51FA\u91CD\u8A2D\u4FE1\uFF0C\u8ACB\u78BA\u8A8D\u96FB\u5B50\u90F5\u4EF6', true);
+          showMsg('無法寄出重設信，請確認電子郵件', true);
         }
       } catch (err) {
-        showMsg('\u7DB2\u8DEF\u932F\u8AA4\uFF0C\u8ACB\u7A0D\u5F8C\u518D\u8A66', true);
+        showMsg('網路錯誤，請稍後再試', true);
       }
     });
 
-    // ── 如果已登入，自動跳轉 ──
+    // ── Auto-redirect if logged in ──
     (function checkAlreadyLoggedIn() {
-      // Don't auto-redirect if we're handling SSO callback
       var params = new URLSearchParams(window.location.search);
       if (params.get('sso') === 'callback') return;
       if (window.location.hash && window.location.hash.includes('access_token')) return;
-
       if (localStorage.getItem('sb-access-token')) {
-        showMsg('\u60A8\u5DF2\u767B\u5165\uFF0C\u6B63\u5728\u8DF3\u8F49\u5230\u5100\u8868\u677F...', false);
+        showMsg('您已登入，正在跳轉...', false);
         setTimeout(function() { window.location.href = '/dashboard'; }, 500);
       }
     })();
   </script>
-<script>
-(function(){
-  try {
-    var cfg = window.__SEOBAIKE__ || {};
-    var sUrl = cfg.supabaseUrl || 'https://vmyrivxxibqydccurxug.supabase.co';
-    var sKey = cfg.anonKey || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZteXJpdnh4aWJxeWRjY3VyeHVnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzAwNDAwMjksImV4cCI6MjA4NTYxNjAyOX0.iBV-23LGdm_uKffAExgqSV34-NWoAyv8_-M_cJQZ8Gg';
-    fetch(sUrl + '/rest/v1/page_views', {
-      method: 'POST',
-      headers: { 'Content-Type':'application/json', 'apikey':sKey, 'Authorization':'Bearer '+sKey, 'Prefer':'return=minimal' },
-      body: JSON.stringify({ path: location.pathname, referrer: document.referrer || null, user_agent: navigator.userAgent })
-    }).catch(function(){});
-  } catch(e){}
-})();
-</script>
-<script src="/assets/smart-align.js"></script>
-<script src="/seobaike-widget.js"></script>
+
+  <!-- Page Views Tracking -->
+  <script>
+  (function(){
+    try {
+      var cfg = window.__SEOBAIKE__ || {};
+      var sUrl = cfg.supabaseUrl || 'https://vmyrivxxibqydccurxug.supabase.co';
+      var sKey = cfg.anonKey || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZteXJpdnh4aWJxeWRjY3VyeHVnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzAwNDAwMjksImV4cCI6MjA4NTYxNjAyOX0.iBV-23LGdm_uKffAExgqSV34-NWoAyv8_-M_cJQZ8Gg';
+      fetch(sUrl + '/rest/v1/page_views', {
+        method: 'POST',
+        headers: { 'Content-Type':'application/json', 'apikey':sKey, 'Authorization':'Bearer '+sKey, 'Prefer':'return=minimal' },
+        body: JSON.stringify({ path: location.pathname, referrer: document.referrer || null, user_agent: navigator.userAgent })
+      }).catch(function(){});
+    } catch(e){}
+  })();
+  </script>
+  <script src="/seobaike-widget.js"></script>
 </body>
 </html>

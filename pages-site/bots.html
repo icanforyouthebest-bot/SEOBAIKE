@@ -1,288 +1,592 @@
 <!DOCTYPE html>
-<html lang="zh-TW">
+<html lang="zh-Hant">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SEOBAIKE — 協作機器人控制中心</title>
-<meta name="description" content="SEOBAIKE AI OS 14 平台協作機器人，一鍵連入全球通訊平台">
-<link rel="icon" href="/favicon.svg" type="image/svg+xml">
-<style>
-*{margin:0;padding:0;box-sizing:border-box}
-body{font-family:'Segoe UI',system-ui,sans-serif;background:#0a0a1a;color:#eee;min-height:100vh}
-a{color:#e8850c;text-decoration:none}a:hover{text-decoration:underline}
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>協作機器人 — SEOBAIKE</title>
+  <meta name="description" content="SEOBAIKE 協作機器人控制中心：客服、翻譯、內容生成、數據分析，你的 AI 團隊成員。">
+  <meta property="og:title" content="協作機器人 — SEOBAIKE">
+  <meta property="og:description" content="你的 AI 團隊成員。">
+  <meta property="og:image" content="/og-image.png">
+  <meta property="og:type" content="website">
+  <meta name="theme-color" content="#06060f">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/og-image.png">
+  <link rel="manifest" href="/manifest.json">
+  <link rel="preconnect" href="https://vmyrivxxibqydccurxug.supabase.co">
+  <link rel="stylesheet" href="/assets/design-system.css">
+  <style>
+    /* ── Hero ── */
+    .hero {
+      padding: 140px 0 80px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -200px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 700px;
+      height: 700px;
+      background: radial-gradient(circle, rgba(232,133,12,0.06) 0%, transparent 65%);
+      pointer-events: none;
+    }
+    .hero h1 { margin-bottom: var(--sp-4); }
+    .hero-sub {
+      font-size: 1.15rem;
+      color: var(--text-muted);
+      max-width: 480px;
+      margin: 0 auto var(--sp-8);
+      line-height: 1.8;
+    }
 
-/* NAV */
-.nav{background:#111;border-bottom:1px solid #222;padding:0 30px;display:flex;align-items:center;height:56px;gap:24px}
-.nav-logo{font-size:18px;font-weight:700;color:#e8850c}
-.nav-links{display:flex;gap:16px;margin-left:auto}
-.nav-links a{color:#999;font-size:13px;padding:6px 10px;border-radius:6px;transition:.2s}
-.nav-links a:hover,.nav-links a.active{color:#fff;background:#1a1a2e;text-decoration:none}
+    /* ── Bot Cards ── */
+    .bot-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--sp-6); }
+    .bot-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      padding: var(--sp-8);
+      position: relative;
+      overflow: hidden;
+      transition: all var(--duration-normal) var(--ease-out);
+    }
+    .bot-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      opacity: 0;
+      transition: opacity var(--duration-normal);
+    }
+    .bot-card:nth-child(1)::before { background: var(--gold-gradient); }
+    .bot-card:nth-child(2)::before { background: linear-gradient(90deg, #58a6ff, #34d058); }
+    .bot-card:nth-child(3)::before { background: linear-gradient(90deg, #c678dd, #f85149); }
+    .bot-card:nth-child(4)::before { background: linear-gradient(90deg, #f0b429, #e8850c); }
+    .bot-card:hover {
+      border-color: var(--border-hover);
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-gold);
+    }
+    .bot-card:hover::before { opacity: 1; }
+    .bot-icon-wrap {
+      width: 56px; height: 56px;
+      border-radius: var(--radius-md);
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: var(--sp-5);
+    }
+    .bot-card h3 { font-size: 1.2rem; margin-bottom: var(--sp-2); }
+    .bot-card > p { font-size: 0.88rem; color: var(--text-muted); margin-bottom: var(--sp-5); line-height: 1.7; }
+    .bot-features {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 var(--sp-5);
+    }
+    .bot-features li {
+      padding: 4px 0;
+      font-size: 0.84rem;
+      color: var(--text-secondary);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .bot-features li::before {
+      content: '';
+      width: 5px; height: 5px;
+      border-radius: 50%;
+      background: var(--gold-300);
+      flex-shrink: 0;
+    }
+    .bot-status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 12px;
+      border-radius: var(--radius-full);
+      font-size: 0.72rem;
+      font-weight: 700;
+      background: rgba(52,208,88,0.1);
+      color: var(--success);
+    }
+    .bot-status-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--success);
+      animation: pulse 2s infinite;
+    }
 
-/* HERO */
-.hero{background:linear-gradient(135deg,#1a1a2e 0%,#16213e 50%,#0a0a1a 100%);padding:48px 30px 32px;text-align:center;border-bottom:1px solid #222}
-.hero h1{font-size:36px;background:linear-gradient(135deg,#e8850c,#cc785c,#76b900);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:8px}
-.hero p{color:#888;font-size:15px;max-width:600px;margin:0 auto}
+    /* ── Pipeline ── */
+    .pipeline {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0;
+      flex-wrap: wrap;
+    }
+    .pipe-step {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: var(--sp-5) var(--sp-6);
+      text-align: center;
+      min-width: 140px;
+      transition: all var(--duration-normal) var(--ease-out);
+    }
+    .pipe-step:hover {
+      border-color: var(--border-hover);
+      transform: translateY(-2px);
+    }
+    .pipe-step-num {
+      font-size: 0.68rem;
+      font-weight: 700;
+      color: var(--gold-200);
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      margin-bottom: var(--sp-2);
+    }
+    .pipe-step-title {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 2px;
+    }
+    .pipe-step-desc {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+    }
+    .pipe-arrow {
+      color: var(--gold-300);
+      font-size: 1.2rem;
+      padding: 0 var(--sp-3);
+      flex-shrink: 0;
+    }
 
-/* STATS */
-.stats-bar{display:flex;justify-content:center;gap:40px;padding:24px 30px;border-bottom:1px solid #1a1a2e}
-.stat-item{text-align:center}
-.stat-num{font-size:42px;font-weight:800;color:#76b900;line-height:1}
-.stat-num.warn{color:#e8850c}
-.stat-num.off{color:#555}
-.stat-lbl{font-size:12px;color:#888;margin-top:4px}
+    /* ── Config Mock ── */
+    .config-panel {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      padding: var(--sp-8);
+      overflow: hidden;
+      position: relative;
+    }
+    .config-panel::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: var(--gold-gradient);
+    }
+    .config-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: var(--sp-6);
+    }
+    .config-group { margin-bottom: var(--sp-5); }
+    .config-group label {
+      display: block;
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: var(--sp-2);
+    }
+    .config-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--sp-4);
+    }
+    .config-toggle {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: var(--sp-3) var(--sp-4);
+      background: rgba(255,255,255,0.02);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-sm);
+      margin-bottom: var(--sp-3);
+    }
+    .config-toggle span { font-size: 0.85rem; color: var(--text-secondary); }
+    .toggle-switch {
+      width: 36px; height: 20px;
+      border-radius: 10px;
+      background: var(--success);
+      position: relative;
+      cursor: pointer;
+    }
+    .toggle-switch::after {
+      content: '';
+      position: absolute;
+      top: 2px; right: 2px;
+      width: 16px; height: 16px;
+      border-radius: 50%;
+      background: #fff;
+      transition: transform var(--duration-fast);
+    }
+    .toggle-switch.off {
+      background: var(--border-default);
+    }
+    .toggle-switch.off::after {
+      transform: translateX(-16px);
+    }
 
-/* GRID */
-.bot-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:16px;padding:24px 30px}
+    /* ── CTA ── */
+    .cta-banner {
+      text-align: center;
+      padding: var(--sp-16) var(--sp-6);
+      position: relative;
+    }
+    .cta-banner::before {
+      content: '';
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%,-50%);
+      width: 500px; height: 350px;
+      background: radial-gradient(circle, rgba(232,133,12,0.06) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .cta-banner h2 { margin-bottom: var(--sp-3); }
+    .cta-banner p { color: var(--text-muted); margin-bottom: var(--sp-8); max-width: 420px; margin-left: auto; margin-right: auto; }
 
-.bot-card{background:#16213e;border:1px solid #222;border-radius:16px;overflow:hidden;transition:all .3s}
-.bot-card:hover{border-color:#e8850c;transform:translateY(-2px);box-shadow:0 8px 30px rgba(232,133,12,.15)}
-.bot-card.online{border-left:4px solid #76b900}
-.bot-card.offline{border-left:4px solid #333}
-
-.bot-header{display:flex;align-items:center;gap:12px;padding:16px 20px;background:#1a1a2e}
-.bot-icon{font-size:32px}
-.bot-name{font-size:18px;font-weight:700}
-.bot-status{margin-left:auto;padding:4px 12px;border-radius:20px;font-size:11px;font-weight:700}
-.bot-status.on{background:#76b900;color:#000}
-.bot-status.off{background:#333;color:#888}
-.bot-status.loading{background:#e8850c;color:#000;animation:blink 1s infinite}
-@keyframes blink{0%,100%{opacity:1}50%{opacity:.5}}
-
-.bot-body{padding:16px 20px}
-.bot-webhook{background:#0d1117;border:1px solid #222;border-radius:8px;padding:8px 12px;font-family:monospace;font-size:11px;color:#76b900;word-break:break-all;margin-bottom:12px}
-.bot-features{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px}
-.bot-feat{background:#0d1117;border:1px solid #222;padding:3px 10px;border-radius:12px;font-size:11px;color:#cc785c}
-.bot-tokens{font-size:11px;color:#666;margin-bottom:12px}
-.bot-tokens code{color:#e8850c;background:#0d1117;padding:1px 4px;border-radius:3px}
-
-.bot-actions{display:flex;gap:8px}
-.btn{padding:8px 16px;border-radius:8px;border:none;font-size:12px;font-weight:600;cursor:pointer;transition:.2s}
-.btn-primary{background:#e8850c;color:#fff}.btn-primary:hover{background:#ff9f30}
-.btn-test{background:#16213e;color:#76b900;border:1px solid #333}.btn-test:hover{background:#1a1a2e}
-.btn-setup{background:#76b900;color:#000}.btn-setup:hover{background:#8ed100}
-.btn:disabled{opacity:.4;cursor:not-allowed}
-
-/* LOG */
-.log-section{padding:24px 30px}
-.log-section h3{font-size:16px;color:#e8850c;margin-bottom:12px}
-.log-box{background:#0d1117;border:1px solid #222;border-radius:12px;padding:16px;max-height:300px;overflow-y:auto;font-family:monospace;font-size:12px;line-height:1.8}
-.log-ok{color:#76b900}.log-err{color:#ff6b6b}.log-info{color:#e8850c}.log-ts{color:#555}
-
-/* SETUP */
-.setup-section{padding:24px 30px;border-top:1px solid #1a1a2e}
-.setup-section h3{font-size:16px;color:#cc785c;margin-bottom:16px}
-.setup-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(400px,1fr));gap:12px}
-.setup-step{background:#16213e;border:1px solid #222;border-radius:12px;padding:16px 20px}
-.setup-step h4{color:#e8850c;font-size:14px;margin-bottom:8px}
-.setup-step p{color:#888;font-size:12px;line-height:1.6}
-.setup-step code{color:#76b900;background:#0d1117;padding:1px 6px;border-radius:3px;font-size:11px}
-
-.footer{text-align:center;padding:24px;color:#444;font-size:11px;border-top:1px solid #111}
-@media(max-width:768px){
-  .bot-grid{grid-template-columns:1fr}
-  .stats-bar{flex-wrap:wrap;gap:20px}
-  .nav-links{gap:8px}
-  .setup-grid{grid-template-columns:1fr}
-}
-</style>
+    /* ── Responsive ── */
+    @media (max-width: 1024px) {
+      .config-row { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 768px) {
+      .hero { padding: 110px 0 60px; }
+      .bot-grid { grid-template-columns: 1fr; }
+      .pipeline { flex-direction: column; }
+      .pipe-arrow { transform: rotate(90deg); padding: var(--sp-2) 0; }
+    }
+  </style>
 </head>
-<body>
+<body class="page-top">
 
-<nav class="nav">
-  <div class="nav-logo">SEOBAIKE</div>
-  <div class="nav-links">
-    <a href="/">首頁</a>
-    <a href="/features">功能</a>
-    <a href="/marketplace">市集</a>
-    <a href="/pricing">方案</a>
-    <a href="/about">關於</a>
-    <a href="/docs">常見問題</a>
-    <a href="/login">登入</a>
+  <!-- Navigation -->
+  <nav class="nav">
+    <a href="/" class="nav-brand">
+      <img src="/favicon.svg" alt="SEOBAIKE" width="34" height="34">
+      <span><span class="seo">SEO</span><span class="baike">BAIKE</span></span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="/">首頁</a></li>
+      <li><a href="/features">功能</a></li>
+      <li><a href="/marketplace">市集</a></li>
+      <li><a href="/bots" class="active">機器人</a></li>
+      <li><a href="/pricing">方案</a></li>
+      <li><a href="/about">關於</a></li>
+      <li><a href="/login" class="nav-cta">登入</a></li>
+    </ul>
+    <button class="nav-hamburger" onclick="toggleMenu()" aria-label="選單">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- Mobile Overlay -->
+  <div class="mobile-overlay">
+    <button class="mobile-close" onclick="toggleMenu()">&times;</button>
+    <a href="/" onclick="toggleMenu()">首頁</a>
+    <a href="/features" onclick="toggleMenu()">功能</a>
+    <a href="/marketplace" onclick="toggleMenu()">市集</a>
+    <a href="/bots" onclick="toggleMenu()">機器人</a>
+    <a href="/pricing" onclick="toggleMenu()">方案</a>
+    <a href="/about" onclick="toggleMenu()">關於</a>
+    <a href="/login" onclick="toggleMenu()">登入</a>
   </div>
-</nav>
 
-<div class="hero">
-  <h1>協作機器人控制中心</h1>
-  <p>14 個平台、14 個遙控器、一套 AI OS。連入任何通訊平台，SEOBAIKE 都在你身邊。</p>
-</div>
-
-<div class="stats-bar">
-  <div class="stat-item"><div class="stat-num" id="s-total">--</div><div class="stat-lbl">平台總數</div></div>
-  <div class="stat-item"><div class="stat-num" id="s-online">--</div><div class="stat-lbl">已上線</div></div>
-  <div class="stat-item"><div class="stat-num warn" id="s-offline">--</div><div class="stat-lbl">等待連入</div></div>
-  <div class="stat-item"><div class="stat-num off" id="s-features">--</div><div class="stat-lbl">功能總數</div></div>
-</div>
-
-<div class="bot-grid" id="botGrid">
-  <div style="text-align:center;padding:40px;color:#555;">載入中...</div>
-</div>
-
-<div class="log-section">
-  <h3>即時操作記錄</h3>
-  <div class="log-box" id="logBox">
-    <div class="log-info">等待操作...</div>
-  </div>
-</div>
-
-<div class="setup-section">
-  <h3>快速上線指南</h3>
-  <div class="setup-grid">
-    <div class="setup-step">
-      <h4>Step 1：取得 Bot Token</h4>
-      <p>到各平台開發者後台建立機器人，取得 API Token / Secret。<br>例如 Telegram 到 <code>@BotFather</code> 取得 token，LINE 到 LINE Developers 建立 Messaging API channel。</p>
+  <!-- Hero -->
+  <section class="hero">
+    <div class="container">
+      <div class="section-badge">BOT CONTROL CENTER</div>
+      <h1><span class="text-gold">協作機器人</span></h1>
+      <p class="hero-sub">你的 AI 團隊成員。<br>客服、翻譯、內容生成、數據分析，隨時待命。</p>
+      <a href="#bots" class="btn btn-primary btn-lg">探索機器人</a>
     </div>
-    <div class="setup-step">
-      <h4>Step 2：設定 Workers Secret</h4>
-      <p>在命令列中執行：<br><code>wrangler secret put TELEGRAM_BOT_TOKEN</code><br>輸入 token 值即可。每個平台有對應的 secret key。</p>
+  </section>
+
+  <hr class="divider">
+
+  <!-- Bot Types -->
+  <section class="section" id="bots">
+    <div class="container">
+      <div class="section-header fade-up">
+        <div class="section-badge">BOT TYPES</div>
+        <h2>四大機器人類型</h2>
+        <p>每一種機器人專注處理特定領域的任務。</p>
+      </div>
+      <div class="bot-grid">
+
+        <!-- Customer Service Bot -->
+        <div class="bot-card fade-up">
+          <div class="bot-icon-wrap" style="background:rgba(232,133,12,0.08);">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#e8850c" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+          </div>
+          <h3>客服機器人</h3>
+          <p>全天候自動回覆客戶問題，支援多語系，整合知識庫即時解答。</p>
+          <ul class="bot-features">
+            <li>自動問答回覆</li>
+            <li>多語系即時翻譯</li>
+            <li>知識庫整合</li>
+            <li>轉接真人客服</li>
+            <li>滿意度追蹤</li>
+          </ul>
+          <div class="bot-status-badge"><div class="bot-status-dot"></div>可部署</div>
+        </div>
+
+        <!-- Translation Bot -->
+        <div class="bot-card fade-up">
+          <div class="bot-icon-wrap" style="background:rgba(88,166,255,0.08);">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#58a6ff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
+          </div>
+          <h3>翻譯機器人</h3>
+          <p>支援多國語言即時翻譯，保持語境準確度，適用於內容在地化。</p>
+          <ul class="bot-features">
+            <li>即時多語系翻譯</li>
+            <li>語境感知翻譯</li>
+            <li>專業術語庫</li>
+            <li>批量文件翻譯</li>
+            <li>翻譯品質評分</li>
+          </ul>
+          <div class="bot-status-badge"><div class="bot-status-dot"></div>可部署</div>
+        </div>
+
+        <!-- Content Bot -->
+        <div class="bot-card fade-up">
+          <div class="bot-icon-wrap" style="background:rgba(198,120,221,0.08);">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#c678dd" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+          </div>
+          <h3>內容生成機器人</h3>
+          <p>自動產出文章、社群貼文、廣告文案，符合品牌語調與 SEO 最佳實踐。</p>
+          <ul class="bot-features">
+            <li>SEO 文章撰寫</li>
+            <li>社群貼文生成</li>
+            <li>廣告文案優化</li>
+            <li>品牌語調一致</li>
+            <li>多格式輸出</li>
+          </ul>
+          <div class="bot-status-badge"><div class="bot-status-dot"></div>可部署</div>
+        </div>
+
+        <!-- Analytics Bot -->
+        <div class="bot-card fade-up">
+          <div class="bot-icon-wrap" style="background:rgba(240,180,41,0.08);">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#f0b429" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+          </div>
+          <h3>數據分析機器人</h3>
+          <p>即時監控網站數據、流量趨勢，自動生成分析報告與行動建議。</p>
+          <ul class="bot-features">
+            <li>流量即時監控</li>
+            <li>轉換率分析</li>
+            <li>自動報告生成</li>
+            <li>異常偵測警報</li>
+            <li>趨勢預測</li>
+          </ul>
+          <div class="bot-status-badge"><div class="bot-status-dot"></div>可部署</div>
+        </div>
+
+      </div>
     </div>
-    <div class="setup-step">
-      <h4>Step 3：設定 Webhook</h4>
-      <p>將平台的 Webhook URL 指向：<br><code>https://aiforseo.vip/api/webhook/{platform}</code><br>Telegram 可用「一鍵設定」按鈕自動完成。</p>
+  </section>
+
+  <!-- How Bots Work -->
+  <section class="section" style="background:rgba(12,12,29,0.5);">
+    <div class="container">
+      <div class="section-header fade-up">
+        <div class="section-badge">PIPELINE</div>
+        <h2>機器人運作流程</h2>
+        <p>從接收任務到輸出結果的完整 AI 管線。</p>
+      </div>
+      <div class="pipeline fade-up">
+        <div class="pipe-step">
+          <div class="pipe-step-num">Step 1</div>
+          <div class="pipe-step-title">接收指令</div>
+          <div class="pipe-step-desc">使用者發送任務</div>
+        </div>
+        <div class="pipe-arrow">&#8594;</div>
+        <div class="pipe-step">
+          <div class="pipe-step-num">Step 2</div>
+          <div class="pipe-step-title">AI 處理</div>
+          <div class="pipe-step-desc">模型分析與推理</div>
+        </div>
+        <div class="pipe-arrow">&#8594;</div>
+        <div class="pipe-step">
+          <div class="pipe-step-num">Step 3</div>
+          <div class="pipe-step-title">約束驗證</div>
+          <div class="pipe-step-desc">L1-L4 路徑校驗</div>
+        </div>
+        <div class="pipe-arrow">&#8594;</div>
+        <div class="pipe-step">
+          <div class="pipe-step-num">Step 4</div>
+          <div class="pipe-step-title">輸出結果</div>
+          <div class="pipe-step-desc">交付與回報</div>
+        </div>
+      </div>
     </div>
-    <div class="setup-step">
-      <h4>Step 4：測試 & 上線</h4>
-      <p>點擊「測試」按鈕發送測試訊息，確認機器人正常運作。<br>所有機器人共享同一個 AI 大腦 + L1-L4 行業約束 + 審批系統。</p>
+  </section>
+
+  <!-- Configuration -->
+  <section class="section" id="config">
+    <div class="container">
+      <div class="section-header fade-up">
+        <div class="section-badge">CONFIGURATION</div>
+        <h2>機器人設定</h2>
+        <p>自訂機器人的行為、語調和回應規則。</p>
+      </div>
+      <div class="config-panel fade-up">
+        <div class="config-header">
+          <h3 style="font-size:1rem;">機器人參數設定</h3>
+          <span class="badge badge-gold">預覽模式</span>
+        </div>
+        <div class="config-row">
+          <div>
+            <div class="config-group">
+              <label>機器人名稱</label>
+              <input class="input" type="text" value="SEOBAIKE 客服助手" readonly>
+            </div>
+            <div class="config-group">
+              <label>預設語言</label>
+              <select class="input">
+                <option>繁體中文</option>
+                <option>English</option>
+                <option>日本語</option>
+              </select>
+            </div>
+            <div class="config-group">
+              <label>回應語調</label>
+              <select class="input">
+                <option>專業友善</option>
+                <option>正式商務</option>
+                <option>輕鬆活潑</option>
+              </select>
+            </div>
+          </div>
+          <div>
+            <div class="config-toggle">
+              <span>自動回覆</span>
+              <div class="toggle-switch"></div>
+            </div>
+            <div class="config-toggle">
+              <span>知識庫搜尋</span>
+              <div class="toggle-switch"></div>
+            </div>
+            <div class="config-toggle">
+              <span>多語系翻譯</span>
+              <div class="toggle-switch"></div>
+            </div>
+            <div class="config-toggle">
+              <span>錯誤自動重試</span>
+              <div class="toggle-switch off"></div>
+            </div>
+            <div class="config-toggle">
+              <span>對話記錄</span>
+              <div class="toggle-switch"></div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-  </div>
-</div>
+  </section>
 
-<footer class="footer">
-  SEOBAIKE AI OS — 小路光有限公司 — 14 平台協作機器人架構
-</footer>
+  <!-- CTA -->
+  <section class="section">
+    <div class="container">
+      <div class="cta-banner fade-up">
+        <h2><span class="text-gold">部署你的 AI 團隊</span></h2>
+        <p>選擇適合你業務的機器人，立即開始自動化工作流程。</p>
+        <div style="display:flex;justify-content:center;gap:var(--sp-4);flex-wrap:wrap;">
+          <a href="/pricing" class="btn btn-primary btn-lg">查看方案</a>
+          <a href="/marketing" class="btn btn-secondary btn-lg">行銷指揮中心</a>
+        </div>
+      </div>
+    </div>
+  </section>
 
-<script src="/seobaike-config.js"></script>
-<script>
-const API_BASE = ''
-const LOG = document.getElementById('logBox')
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="/" class="nav-brand" style="margin-bottom:var(--sp-4);">
+            <img src="/favicon.svg" alt="SEOBAIKE" width="34" height="34">
+            <span><span class="seo">SEO</span><span class="baike">BAIKE</span></span>
+          </a>
+          <p>AI 協作機器人平台。<br>由小路光有限公司（統編 60475510）開發與維運。</p>
+        </div>
+        <div class="footer-col">
+          <h4>產品</h4>
+          <a href="/features">功能總覽</a>
+          <a href="/pricing">方案與定價</a>
+          <a href="/marketplace">AI 市集</a>
+          <a href="/marketing">行銷中心</a>
+        </div>
+        <div class="footer-col">
+          <h4>公司</h4>
+          <a href="/about">關於我們</a>
+          <a href="/contact">聯繫我們</a>
+          <a href="/privacy">隱私權政策</a>
+          <a href="/terms">服務條款</a>
+        </div>
+        <div class="footer-col">
+          <h4>支援</h4>
+          <a href="/docs">常見問題</a>
+          <a href="/bots">協作機器人</a>
+          <a href="/contact">聯絡我們</a>
+          <a href="/status">系統狀態</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div>&copy; 2026 小路光有限公司（統編 60475510）</div>
+        <div>aiforseo.vip</div>
+      </div>
+    </div>
+  </footer>
 
-function addLog(text, cls) {
-  const ts = new Date().toLocaleTimeString('zh-TW')
-  const d = document.createElement('div')
-  d.innerHTML = '<span class="log-ts">[' + ts + ']</span> <span class="' + cls + '">' + text + '</span>'
-  LOG.prepend(d)
-  if (LOG.children.length > 50) LOG.lastChild.remove()
-}
+  <script>
+    /* ═══════════ Config ═══════════ */
+    var SUPABASE_URL = 'https://vmyrivxxibqydccurxug.supabase.co';
+    var SUPABASE_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZteXJpdnh4aWJxeWRjY3VyeHVnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzAwNDAwMjksImV4cCI6MjA4NTYxNjAyOX0.iBV-23LGdm_uKffAExgqSV34-NWoAyv8_-M_cJQZ8Gg';
 
-function renderBots(data) {
-  const grid = document.getElementById('botGrid')
-  document.getElementById('s-total').textContent = data.total_bots
-  document.getElementById('s-online').textContent = data.online_bots
-  document.getElementById('s-offline').textContent = data.offline_bots
-  const allFeats = data.bots.reduce((sum, b) => sum + b.features.length, 0)
-  document.getElementById('s-features').textContent = allFeats
+    /* ═══════════ Design System Scripts ═══════════ */
+    var obs = new IntersectionObserver(function(entries) {
+      entries.forEach(function(e) { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.08 });
+    document.querySelectorAll('.fade-up').forEach(function(el) { obs.observe(el); });
 
-  grid.innerHTML = data.bots.map(bot => {
-    const isOn = bot.status === 'online'
-    const tokenList = bot.token_keys.map(k => '<code>' + k + '</code>').join(', ')
-    const featHtml = bot.features.map(f => '<span class="bot-feat">' + f + '</span>').join('')
+    window.addEventListener('scroll', function() {
+      var nav = document.querySelector('.nav');
+      if (nav) nav.classList.toggle('scrolled', window.scrollY > 20);
+    });
 
-    let actionsHtml = ''
-    if (bot.id === 'telegram' && isOn) {
-      actionsHtml = '<button class="btn btn-setup" onclick="setupTelegram()">一鍵設定 Webhook</button> <button class="btn btn-test" onclick="testTelegram()">測試</button> <button class="btn btn-primary" onclick="getTelegramInfo()">查看狀態</button>'
-    } else if (isOn) {
-      actionsHtml = '<button class="btn btn-test" onclick="testWebhook(\'' + bot.id + '\')">測試 Webhook</button>'
-    } else {
-      actionsHtml = '<a href="' + bot.setup_url + '" target="_blank" class="btn btn-primary">前往設定</a>'
+    function toggleMenu() {
+      document.querySelector('.nav-hamburger').classList.toggle('active');
+      document.querySelector('.mobile-overlay').classList.toggle('open');
     }
 
-    return '<div class="bot-card ' + (isOn ? 'online' : 'offline') + '">' +
-      '<div class="bot-header">' +
-        '<span class="bot-icon">' + bot.icon + '</span>' +
-        '<span class="bot-name">' + bot.name + '</span>' +
-        '<span class="bot-status ' + (isOn ? 'on' : 'off') + '">' + (isOn ? 'ONLINE' : 'WAITING') + '</span>' +
-      '</div>' +
-      '<div class="bot-body">' +
-        '<div class="bot-webhook">' + bot.webhook + '</div>' +
-        '<div class="bot-features">' + featHtml + '</div>' +
-        (tokenList ? '<div class="bot-tokens">需要 Secrets: ' + tokenList + '</div>' : '') +
-        '<div class="bot-actions">' + actionsHtml + '</div>' +
-      '</div>' +
-    '</div>'
-  }).join('')
-}
-
-async function loadBots() {
-  try {
-    const res = await fetch(API_BASE + '/api/bots/status')
-    const data = await res.json()
-    renderBots(data)
-    addLog('載入 ' + data.total_bots + ' 個協作機器人，' + data.online_bots + ' 個已上線', 'log-ok')
-  } catch(e) {
-    addLog('載入失敗: ' + e.message, 'log-err')
-  }
-}
-
-async function setupTelegram() {
-  addLog('正在設定 Telegram Webhook...', 'log-info')
-  try {
-    const res = await fetch(API_BASE + '/api/bots/telegram/setup', { method: 'POST' })
-    const data = await res.json()
-    if (data.success) {
-      addLog('Telegram Webhook 設定成功! URL: ' + data.webhook_url, 'log-ok')
-    } else {
-      addLog('設定失敗: ' + JSON.stringify(data), 'log-err')
-    }
-  } catch(e) {
-    addLog('設定失敗: ' + e.message, 'log-err')
-  }
-}
-
-async function testTelegram() {
-  addLog('正在發送 Telegram 測試訊息...', 'log-info')
-  try {
-    const res = await fetch(API_BASE + '/api/bots/telegram/test', {
-      method: 'POST', headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ chat_id: '5372713163' })
-    })
-    const data = await res.json()
-    if (data.success) {
-      addLog('Telegram 測試訊息已發送!', 'log-ok')
-    } else {
-      addLog('測試失敗: ' + JSON.stringify(data), 'log-err')
-    }
-  } catch(e) {
-    addLog('測試失敗: ' + e.message, 'log-err')
-  }
-}
-
-async function getTelegramInfo() {
-  addLog('正在查詢 Telegram Bot 資訊...', 'log-info')
-  try {
-    const res = await fetch(API_BASE + '/api/bots/telegram/info')
-    const data = await res.json()
-    const bot = data.bot?.result || {}
-    const wh = data.webhook?.result || {}
-    addLog('Bot: @' + (bot.username || '?') + ' | Webhook: ' + (wh.url || 'not set') + ' | Pending: ' + (wh.pending_update_count || 0), 'log-ok')
-  } catch(e) {
-    addLog('查詢失敗: ' + e.message, 'log-err')
-  }
-}
-
-async function testWebhook(platform) {
-  addLog('測試 ' + platform + ' webhook...', 'log-info')
-  try {
-    const res = await fetch(API_BASE + '/api/webhook/' + platform, {
-      method: 'POST', headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ test: true })
-    })
-    const data = await res.json()
-    addLog(platform + ' webhook 回應: ' + JSON.stringify(data).substring(0, 100), data.status === 'os_ready' ? 'log-info' : 'log-ok')
-  } catch(e) {
-    addLog(platform + ' webhook 失敗: ' + e.message, 'log-err')
-  }
-}
-
-// 頁面瀏覽追蹤
-if (window.__SEOBAIKE__) {
-  fetch((window.__SEOBAIKE__.supabaseUrl || '') + '/rest/v1/page_views', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json', 'apikey': window.__SEOBAIKE__.anonKey || '', 'Authorization': 'Bearer ' + (window.__SEOBAIKE__.anonKey || ''), 'Prefer': 'return=minimal' },
-    body: JSON.stringify({ page: '/bots', referrer: document.referrer || null, user_agent: navigator.userAgent })
-  }).catch(() => {})
-}
-
-loadBots()
-setInterval(loadBots, 30000)
-</script>
+    /* ═══════════ Page View Tracking ═══════════ */
+    (function() {
+      try {
+        fetch(SUPABASE_URL + '/rest/v1/page_views', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'apikey': SUPABASE_ANON,
+            'Authorization': 'Bearer ' + SUPABASE_ANON,
+            'Prefer': 'return=minimal'
+          },
+          body: JSON.stringify({
+            path: location.pathname,
+            referrer: document.referrer || null,
+            user_agent: navigator.userAgent
+          })
+        }).catch(function() {});
+      } catch (e) {}
+    })();
+  </script>
+  <script src="/seobaike-widget.js"></script>
 </body>
 </html>

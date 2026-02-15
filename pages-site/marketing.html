@@ -3,1324 +3,723 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>行銷指揮中心 — SEOBAIKE AI Marketing Agents</title>
-  <meta name="description" content="SEOBAIKE 行銷指揮中心：6 個 AI Agent、8 個社群平台、即時數據監控。">
+  <title>行銷指揮中心 — SEOBAIKE</title>
+  <meta name="description" content="SEOBAIKE 行銷指揮中心：AI 幫你做行銷，全自動。SEO、社群、內容、廣告、Email、數據分析。">
   <meta property="og:title" content="行銷指揮中心 — SEOBAIKE">
-  <meta property="og:description" content="6 個 AI Agent 同步作戰，掌控全通路行銷。">
+  <meta property="og:description" content="AI 幫你做行銷，全自動。">
   <meta property="og:image" content="/og-image.png">
   <meta property="og:type" content="website">
-  <meta name="theme-color" content="#0a0a1a">
+  <meta name="theme-color" content="#06060f">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="/og-image.png">
   <link rel="manifest" href="/manifest.json">
   <link rel="preconnect" href="https://vmyrivxxibqydccurxug.supabase.co">
+  <link rel="stylesheet" href="/assets/design-system.css">
   <style>
-    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-
-    :root {
-      --orange: #e8850c;
-      --orange-hover: #d4780a;
-      --orange-glow: rgba(232, 133, 12, 0.15);
-      --copper: #cc785c;
-      --green: #76b900;
-      --green-dim: rgba(118, 185, 0, 0.12);
-      --red: #ff5f57;
-      --yellow: #febc2e;
-      --blue: #8eaaff;
-      --bg: #0a0a1a;
-      --bg-card: #12122a;
-      --bg-code: #0d0d22;
-      --border: #2a2a4a;
-      --border-light: #3a3a5a;
-      --text: #e0e0e8;
-      --text-muted: #8888aa;
-      --text-bright: #ffffff;
-      --radius: 12px;
-      --section-gap: 80px;
-    }
-
-    html { scroll-behavior: smooth; }
-
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans TC", sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      line-height: 1.7;
-      overflow-x: hidden;
-    }
-
-    a { color: var(--orange); text-decoration: none; transition: color 0.2s; }
-    a:hover { color: var(--copper); }
-
-    .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
-
-    /* ─────────── Navigation ─────────── */
-    nav {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 16px 40px;
-      border-bottom: 1px solid var(--border);
-      background: rgba(10, 10, 26, 0.8);
-      backdrop-filter: blur(16px);
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      z-index: 1000;
-    }
-    .nav-logo {
-      font-size: 1.4rem;
-      font-weight: 800;
-      letter-spacing: -0.5px;
-      color: #fff;
-    }
-    .nav-logo span { color: var(--orange); }
-    .nav-links { display: flex; gap: 28px; list-style: none; align-items: center; }
-    .nav-links a {
-      color: var(--text-muted);
-      font-size: 0.92rem;
-      font-weight: 500;
-      transition: color 0.2s;
-    }
-    .nav-links a:hover { color: #fff; }
-    .nav-links .btn-nav {
-      padding: 8px 20px;
-      background: var(--orange);
-      color: #fff;
-      border-radius: 8px;
-      font-weight: 600;
-    }
-    .nav-links .btn-nav:hover { background: var(--orange-hover); color: #fff; }
-    .nav-hamburger {
-      display: none;
-      flex-direction: column;
-      gap: 5px;
-      cursor: pointer;
-      background: none;
-      border: none;
-      padding: 4px;
-    }
-    .nav-hamburger span {
-      display: block;
-      width: 24px;
-      height: 2px;
-      background: var(--text);
-      border-radius: 2px;
-      transition: 0.3s;
-    }
-
-    /* ─────────── Hero ─────────── */
+    /* ── Hero ── */
     .hero {
-      padding-top: 140px;
-      padding-bottom: 60px;
+      padding: 140px 0 80px;
       text-align: center;
       position: relative;
+      overflow: hidden;
     }
     .hero::before {
       content: '';
       position: absolute;
-      top: 0;
+      top: -200px;
       left: 50%;
       transform: translateX(-50%);
-      width: 900px;
-      height: 900px;
-      background: radial-gradient(circle, rgba(232,133,12,0.05) 0%, transparent 70%);
+      width: 800px;
+      height: 800px;
+      background: radial-gradient(circle, rgba(232,133,12,0.06) 0%, transparent 65%);
       pointer-events: none;
     }
-    .hero-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 6px 18px;
-      background: var(--orange-glow);
-      border: 1px solid rgba(232,133,12,0.3);
-      border-radius: 100px;
-      font-size: 0.82rem;
-      font-weight: 600;
-      color: var(--orange);
-      margin-bottom: 28px;
-    }
-    .hero-badge::before {
-      content: '';
-      width: 8px;
-      height: 8px;
-      background: var(--green);
-      border-radius: 50%;
-      animation: pulse 2s infinite;
-    }
-    @keyframes pulse {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.3; }
-    }
-    .hero h1 {
-      font-size: 3.6rem;
-      font-weight: 900;
-      color: var(--text-bright);
-      letter-spacing: -2px;
-      line-height: 1.15;
-      margin-bottom: 20px;
-    }
-    .hero h1 em {
-      font-style: normal;
-      background: linear-gradient(135deg, var(--orange), var(--copper));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
+    .hero h1 { margin-bottom: var(--sp-4); }
     .hero-sub {
-      font-size: 1.2rem;
+      font-size: 1.15rem;
       color: var(--text-muted);
-      max-width: 600px;
-      margin: 0 auto 20px;
+      max-width: 520px;
+      margin: 0 auto var(--sp-8);
       line-height: 1.8;
     }
-    .hero-stats {
+    .hero-actions {
       display: flex;
       justify-content: center;
-      gap: 40px;
-      margin-top: 32px;
+      gap: var(--sp-4);
       flex-wrap: wrap;
     }
-    .hero-stat {
-      text-align: center;
-    }
-    .hero-stat-value {
-      font-size: 2rem;
-      font-weight: 900;
-      background: linear-gradient(135deg, var(--orange), var(--copper));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-    .hero-stat-label {
-      font-size: 0.82rem;
-      color: var(--text-muted);
-      text-transform: uppercase;
-      letter-spacing: 1px;
-    }
 
-    /* ─────────── System Status Bar ─────────── */
-    .sys-status-bar {
-      background: rgba(18,18,42,0.6);
-      border-top: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
-      padding: 14px 0;
-      font-family: "SF Mono", "Fira Code", "Consolas", monospace;
-      font-size: 0.78rem;
-      overflow: hidden;
-    }
-    .sys-status-inner {
-      display: flex;
-      align-items: center;
-      gap: 32px;
-      justify-content: center;
-      flex-wrap: wrap;
-    }
-    .sys-status-item {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      color: var(--text-muted);
-    }
-    .sys-status-item .dot {
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: var(--green);
-      box-shadow: 0 0 6px rgba(118,185,0,0.4);
-    }
-    .sys-status-item .dot.warn { background: var(--yellow); box-shadow: 0 0 6px rgba(254,188,46,0.4); }
-    .sys-status-item .dot.err { background: var(--red); box-shadow: 0 0 6px rgba(255,95,87,0.4); }
-    .sys-status-item strong { color: var(--text); }
-
-    /* ─────────── Section Shared ─────────── */
-    .section {
-      padding: var(--section-gap) 0;
-    }
-    .section-header {
-      text-align: center;
-      margin-bottom: 48px;
-    }
-    .section-label {
-      display: inline-block;
-      font-size: 0.72rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 2.5px;
-      color: var(--orange);
-      margin-bottom: 12px;
-    }
-    .section-header h2 {
-      font-size: 2.2rem;
-      font-weight: 800;
-      color: var(--text-bright);
-      letter-spacing: -1px;
-      margin-bottom: 12px;
-    }
-    .section-header p {
-      color: var(--text-muted);
-      font-size: 1rem;
-      max-width: 560px;
-      margin: 0 auto;
-    }
-
-    /* ─────────── Agent Grid ─────────── */
-    .agent-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 24px;
-    }
+    /* ── Agent Cards ── */
+    .agent-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--sp-6); }
     .agent-card {
       background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 32px 28px;
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      padding: var(--sp-8);
       position: relative;
       overflow: hidden;
-      transition: border-color 0.3s, transform 0.3s;
-    }
-    .agent-card:hover {
-      border-color: var(--border-light);
-      transform: translateY(-4px);
+      transition: all var(--duration-normal) var(--ease-out);
     }
     .agent-card::before {
       content: '';
       position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
+      top: 0; left: 0; right: 0;
       height: 3px;
+      background: var(--gold-gradient);
+      opacity: 0;
+      transition: opacity var(--duration-normal);
     }
-    .agent-card:nth-child(1)::before { background: var(--orange); }
-    .agent-card:nth-child(2)::before { background: var(--green); }
-    .agent-card:nth-child(3)::before { background: var(--copper); }
-    .agent-card:nth-child(4)::before { background: var(--blue); }
-    .agent-card:nth-child(5)::before { background: #c678dd; }
-    .agent-card:nth-child(6)::before { background: var(--orange); }
-
-    .agent-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 16px;
+    .agent-card:hover {
+      border-color: var(--border-hover);
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-gold);
     }
-    .agent-id {
-      font-family: "SF Mono", "Fira Code", "Consolas", monospace;
-      font-size: 0.72rem;
-      color: var(--text-muted);
-      background: rgba(255,255,255,0.04);
-      padding: 3px 10px;
-      border-radius: 4px;
-      border: 1px solid var(--border);
+    .agent-card:hover::before { opacity: 1; }
+    .agent-icon-wrap {
+      width: 52px; height: 52px;
+      border-radius: var(--radius-md);
+      display: flex; align-items: center; justify-content: center;
+      background: rgba(232,133,12,0.08);
+      margin-bottom: var(--sp-4);
     }
-    .agent-status {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      font-size: 0.75rem;
-      font-weight: 600;
-    }
-    .agent-status .dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: var(--green);
-      box-shadow: 0 0 8px rgba(118,185,0,0.5);
-      animation: pulse 2s infinite;
-    }
-    .agent-status .dot.offline {
-      background: var(--text-muted);
-      box-shadow: none;
-      animation: none;
-    }
-    .agent-status .dot.error {
-      background: var(--red);
-      box-shadow: 0 0 8px rgba(255,95,87,0.5);
-    }
-    .agent-status.online { color: var(--green); }
-    .agent-status.offline { color: var(--text-muted); }
-    .agent-status.error { color: var(--red); }
-
-    .agent-icon {
-      width: 48px;
-      height: 48px;
-      border-radius: 12px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.4rem;
-      margin-bottom: 16px;
-    }
-
-    .agent-name {
-      font-size: 1.2rem;
-      font-weight: 700;
-      color: var(--text-bright);
-      margin-bottom: 4px;
-    }
-    .agent-role {
-      font-size: 0.85rem;
-      color: var(--text-muted);
-      margin-bottom: 16px;
-    }
-
+    .agent-card h3 { font-size: 1.15rem; margin-bottom: var(--sp-2); }
+    .agent-card p { font-size: 0.88rem; color: var(--text-muted); margin-bottom: var(--sp-4); }
     .agent-caps {
       list-style: none;
       padding: 0;
-      margin-bottom: 20px;
+      margin: 0;
     }
     .agent-caps li {
-      padding: 4px 0;
+      padding: 3px 0;
       font-size: 0.82rem;
-      color: var(--text);
+      color: var(--text-secondary);
       display: flex;
       align-items: center;
       gap: 8px;
     }
     .agent-caps li::before {
-      content: '>';
-      color: var(--green);
-      font-weight: 700;
-      font-family: monospace;
-      font-size: 0.75rem;
+      content: '';
+      width: 5px; height: 5px;
+      border-radius: 50%;
+      background: var(--gold-300);
+      flex-shrink: 0;
     }
 
-    .agent-btn {
-      width: 100%;
-      padding: 10px 0;
-      background: transparent;
-      border: 1px solid var(--border-light);
-      border-radius: 8px;
-      color: var(--text);
-      font-size: 0.88rem;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.2s;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-    }
-    .agent-btn:hover {
-      background: var(--orange);
-      border-color: var(--orange);
-      color: #fff;
-      box-shadow: 0 4px 16px rgba(232,133,12,0.3);
-    }
-    .agent-btn.active {
-      background: var(--green);
-      border-color: var(--green);
-      color: #fff;
-    }
-
-    /* ─────────── Live Data Panel ─────────── */
-    .data-panel {
+    /* ── Dashboard Preview ── */
+    .dash-panel {
       background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 36px 32px;
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      padding: var(--sp-8);
       position: relative;
       overflow: hidden;
     }
-    .data-panel::before {
+    .dash-panel::before {
       content: '';
       position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 3px;
-      background: linear-gradient(90deg, var(--orange), var(--green));
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: var(--gold-gradient);
     }
-    .data-panel-header {
+    .dash-header {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      margin-bottom: 28px;
+      margin-bottom: var(--sp-8);
     }
-    .data-panel-title {
-      font-size: 1.1rem;
+    .dash-title {
+      font-size: 1rem;
       font-weight: 700;
-      color: var(--text-bright);
+      color: var(--text-primary);
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 8px;
     }
-    .data-panel-title .live-dot {
-      width: 8px;
-      height: 8px;
+    .dash-live-dot {
+      width: 8px; height: 8px;
       border-radius: 50%;
-      background: var(--red);
-      animation: pulse 1s infinite;
+      background: var(--success);
+      animation: pulse 2s infinite;
     }
-    .data-panel-refresh {
+    .dash-time {
       font-size: 0.75rem;
       color: var(--text-muted);
-      font-family: monospace;
+      font-family: var(--font-mono);
     }
-
-    .data-grid {
+    .metric-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      gap: 20px;
+      gap: var(--sp-4);
     }
-    .data-metric {
+    .metric-box {
       background: rgba(255,255,255,0.02);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 24px 20px;
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: var(--sp-5);
       text-align: center;
-      transition: border-color 0.3s;
+      transition: border-color var(--duration-fast);
     }
-    .data-metric:hover {
-      border-color: var(--border-light);
-    }
-    .data-metric-icon {
-      font-size: 1.6rem;
-      margin-bottom: 10px;
-    }
-    .data-metric-value {
-      font-size: 2rem;
+    .metric-box:hover { border-color: var(--border-hover); }
+    .metric-icon { font-size: 1.5rem; margin-bottom: var(--sp-2); }
+    .metric-val {
+      font-size: 1.8rem;
       font-weight: 900;
-      color: var(--text-bright);
-      font-family: "SF Mono", "Fira Code", "Consolas", monospace;
-      margin-bottom: 4px;
+      color: var(--text-primary);
+      font-family: var(--font-mono);
+      line-height: 1.2;
+      margin-bottom: 2px;
     }
-    .data-metric-value.loading {
-      color: var(--text-muted);
-      font-size: 1rem;
-    }
-    .data-metric-label {
-      font-size: 0.78rem;
+    .metric-val.loading { color: var(--text-muted); font-size: 1rem; }
+    .metric-label {
+      font-size: 0.72rem;
       color: var(--text-muted);
       text-transform: uppercase;
       letter-spacing: 1px;
     }
+    .dash-chart-area {
+      margin-top: var(--sp-6);
+      background: rgba(255,255,255,0.015);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: var(--sp-6);
+      min-height: 160px;
+      display: flex;
+      align-items: flex-end;
+      gap: 6px;
+      justify-content: space-between;
+    }
+    .chart-bar {
+      flex: 1;
+      background: var(--gold-gradient);
+      border-radius: 4px 4px 0 0;
+      opacity: 0.7;
+      transition: opacity var(--duration-fast);
+      min-width: 8px;
+    }
+    .chart-bar:hover { opacity: 1; }
 
-    /* ─────────── Agent Commander ─────────── */
-    .commander {
+    /* ── Task Center ── */
+    .task-panel {
       background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 36px 32px;
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      padding: var(--sp-8);
       position: relative;
       overflow: hidden;
     }
-    .commander::before {
+    .task-panel::before {
       content: '';
       position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 3px;
-      background: linear-gradient(90deg, var(--copper), var(--orange));
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--gold-300), var(--gold-100));
     }
-    .commander-title {
-      font-size: 1.1rem;
-      font-weight: 700;
-      color: var(--text-bright);
-      margin-bottom: 8px;
-    }
-    .commander-desc {
-      font-size: 0.88rem;
-      color: var(--text-muted);
-      margin-bottom: 24px;
-    }
-    .commander-form {
+    .task-form {
       display: grid;
       grid-template-columns: 200px 1fr auto;
-      gap: 12px;
+      gap: var(--sp-3);
       align-items: end;
     }
-    .commander-form label {
+    .task-form label {
       display: block;
       font-size: 0.72rem;
       color: var(--text-muted);
       text-transform: uppercase;
       letter-spacing: 1px;
       margin-bottom: 6px;
+      font-weight: 600;
     }
-    .commander-form select,
-    .commander-form input {
-      width: 100%;
-      padding: 12px 16px;
-      background: var(--bg-code);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      color: var(--text);
-      font-size: 0.92rem;
-      font-family: inherit;
-      transition: border-color 0.2s;
-    }
-    .commander-form select:focus,
-    .commander-form input:focus {
-      outline: none;
-      border-color: var(--orange);
-    }
-    .commander-form select { cursor: pointer; }
-    .commander-send {
-      padding: 12px 28px;
-      background: var(--orange);
-      border: none;
-      border-radius: 8px;
-      color: #fff;
-      font-size: 0.92rem;
-      font-weight: 700;
-      cursor: pointer;
-      transition: all 0.2s;
-      white-space: nowrap;
-    }
-    .commander-send:hover {
-      background: var(--orange-hover);
-      box-shadow: 0 4px 16px rgba(232,133,12,0.3);
-    }
-    .commander-send:disabled {
-      opacity: 0.5;
-      cursor: not-allowed;
-    }
-
-    .commander-log {
-      margin-top: 20px;
-      background: var(--bg-code);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 16px 20px;
-      max-height: 240px;
+    .task-log {
+      margin-top: var(--sp-5);
+      background: rgba(0,0,0,0.2);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: var(--sp-4) var(--sp-5);
+      max-height: 200px;
       overflow-y: auto;
-      font-family: "SF Mono", "Fira Code", "Consolas", monospace;
-      font-size: 0.8rem;
-      line-height: 1.8;
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      line-height: 1.9;
       display: none;
     }
-    .commander-log.visible { display: block; }
-    .log-entry {
-      padding: 4px 0;
-      border-bottom: 1px solid rgba(42,42,74,0.5);
-    }
+    .task-log.visible { display: block; }
+    .log-entry { padding: 2px 0; border-bottom: 1px solid rgba(255,255,255,0.03); }
     .log-entry:last-child { border-bottom: none; }
     .log-time { color: var(--text-muted); }
-    .log-agent { color: var(--orange); font-weight: 600; }
-    .log-msg { color: var(--text); }
-    .log-ok { color: var(--green); }
-    .log-err { color: var(--red); }
+    .log-agent { color: var(--gold-200); font-weight: 600; }
+    .log-ok { color: var(--success); }
+    .log-err { color: var(--danger); }
+    .log-msg { color: var(--text-secondary); }
 
-    /* ─────────── Footer ─────────── */
-    footer {
-      border-top: 1px solid var(--border);
-      padding: 64px 0 40px;
+    /* ── CTA Banner ── */
+    .cta-banner {
+      text-align: center;
+      padding: var(--sp-16) var(--sp-6);
+      position: relative;
     }
-    .footer-grid {
-      display: grid;
-      grid-template-columns: 2fr 1fr 1fr 1fr;
-      gap: 48px;
-      margin-bottom: 48px;
+    .cta-banner::before {
+      content: '';
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 600px; height: 400px;
+      background: radial-gradient(circle, rgba(232,133,12,0.06) 0%, transparent 70%);
+      pointer-events: none;
     }
-    .footer-brand .nav-logo { margin-bottom: 16px; }
-    .footer-brand p {
-      color: var(--text-muted);
-      font-size: 0.9rem;
-      line-height: 1.8;
-    }
-    .footer-col h4 {
-      font-size: 0.88rem;
-      font-weight: 700;
-      color: var(--text-bright);
-      text-transform: uppercase;
-      letter-spacing: 1.5px;
-      margin-bottom: 20px;
-    }
-    .footer-col ul { list-style: none; }
-    .footer-col ul li { margin-bottom: 10px; }
-    .footer-col ul a {
-      color: var(--text-muted);
-      font-size: 0.9rem;
-      transition: color 0.2s;
-    }
-    .footer-col ul a:hover { color: var(--text); }
-    .footer-bottom {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding-top: 32px;
-      border-top: 1px solid var(--border);
-      font-size: 0.82rem;
-      color: var(--text-muted);
-      flex-wrap: wrap;
-      gap: 12px;
-    }
-    .footer-bottom span { color: var(--orange); }
+    .cta-banner h2 { margin-bottom: var(--sp-3); }
+    .cta-banner p { color: var(--text-muted); margin-bottom: var(--sp-8); max-width: 480px; margin-left: auto; margin-right: auto; }
 
-    /* ─────────── Responsive ─────────── */
+    /* ── Responsive ── */
     @media (max-width: 1024px) {
       .agent-grid { grid-template-columns: repeat(2, 1fr); }
-      .data-grid { grid-template-columns: repeat(2, 1fr); }
-      .commander-form { grid-template-columns: 1fr; }
-      .footer-grid { grid-template-columns: 1fr 1fr; }
+      .metric-grid { grid-template-columns: repeat(2, 1fr); }
+      .task-form { grid-template-columns: 1fr; }
     }
     @media (max-width: 768px) {
-      nav { padding: 14px 20px; }
-      .nav-links { display: none; }
-      .nav-links.open {
-        display: flex;
-        flex-direction: column;
-        position: absolute;
-        top: 100%;
-        left: 0;
-        right: 0;
-        background: var(--bg);
-        border-bottom: 1px solid var(--border);
-        padding: 20px;
-        gap: 16px;
-      }
-      .nav-hamburger { display: flex; }
-      .hero { padding-top: 110px; padding-bottom: 40px; }
-      .hero h1 { font-size: 2.2rem; letter-spacing: -1px; }
-      .hero-sub { font-size: 1rem; }
-      .hero-stats { gap: 24px; }
-      .hero-stat-value { font-size: 1.5rem; }
+      .hero { padding: 110px 0 60px; }
       .agent-grid { grid-template-columns: 1fr; }
-      .data-grid { grid-template-columns: repeat(2, 1fr); }
-      .section { padding: 60px 0; }
-      .section-header h2 { font-size: 1.8rem; }
-      .footer-grid { grid-template-columns: 1fr; gap: 32px; }
-      .sys-status-inner { gap: 16px; font-size: 0.7rem; }
+      .metric-grid { grid-template-columns: repeat(2, 1fr); }
     }
     @media (max-width: 480px) {
-      .hero h1 { font-size: 1.8rem; }
-      .data-grid { grid-template-columns: 1fr; }
-      .commander-form { grid-template-columns: 1fr; }
+      .metric-grid { grid-template-columns: 1fr; }
     }
-
-    /* ─── Touch & Mobile Perf ─── */
-    * { -webkit-tap-highlight-color: transparent; }
-    select, button, a { touch-action: manipulation; }
-    @media (hover: none) and (pointer: coarse) {
-      .agent-btn { min-height: 48px; }
-      .commander-send { min-height: 48px; }
-      select, input { min-height: 48px; font-size: 16px !important; }
-      .nav-links .btn-nav { min-height: 44px; display: flex; align-items: center; }
-    }
-
-    /* ─── Scrollbar ─── */
-    .commander-log::-webkit-scrollbar { width: 6px; }
-    .commander-log::-webkit-scrollbar-track { background: transparent; }
-    .commander-log::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
   </style>
-  <link rel="stylesheet" href="/assets/framer-style.css">
 </head>
-<body>
+<body class="page-top">
 
   <!-- Navigation -->
-  <nav>
-    <div class="nav-logo">SEO<span>BAIKE</span></div>
-    <ul class="nav-links" id="navLinks">
+  <nav class="nav">
+    <a href="/" class="nav-brand">
+      <img src="/favicon.svg" alt="SEOBAIKE" width="34" height="34">
+      <span><span class="seo">SEO</span><span class="baike">BAIKE</span></span>
+    </a>
+    <ul class="nav-links">
       <li><a href="/">首頁</a></li>
       <li><a href="/features">功能</a></li>
       <li><a href="/marketplace">市集</a></li>
+      <li><a href="/marketing" class="active">行銷</a></li>
       <li><a href="/pricing">方案</a></li>
       <li><a href="/about">關於</a></li>
-      <li><a href="/docs">常見問題</a></li>
-      <li><a href="/login" class="btn-nav">登入</a></li>
+      <li><a href="/login" class="nav-cta">登入</a></li>
     </ul>
-    <button class="nav-hamburger" id="hamburger" aria-label="選單">
+    <button class="nav-hamburger" onclick="toggleMenu()" aria-label="選單">
       <span></span><span></span><span></span>
     </button>
   </nav>
 
+  <!-- Mobile Overlay -->
+  <div class="mobile-overlay">
+    <button class="mobile-close" onclick="toggleMenu()">&times;</button>
+    <a href="/" onclick="toggleMenu()">首頁</a>
+    <a href="/features" onclick="toggleMenu()">功能</a>
+    <a href="/marketplace" onclick="toggleMenu()">市集</a>
+    <a href="/marketing" onclick="toggleMenu()">行銷</a>
+    <a href="/pricing" onclick="toggleMenu()">方案</a>
+    <a href="/about" onclick="toggleMenu()">關於</a>
+    <a href="/login" onclick="toggleMenu()">登入</a>
+  </div>
+
   <!-- Hero -->
   <section class="hero">
     <div class="container">
-      <div class="hero-badge">COMMAND CENTER ONLINE</div>
-      <h1><em>行銷指揮中心</em></h1>
-      <p class="hero-sub">
-        6 個 AI Agent &middot; 8 個社群平台 &middot; 即時數據<br>
-        全通路行銷作戰，由 AI 軍團自動執行。
-      </p>
-      <div class="hero-stats">
-        <div class="hero-stat">
-          <div class="hero-stat-value">6</div>
-          <div class="hero-stat-label">AI Agents</div>
-        </div>
-        <div class="hero-stat">
-          <div class="hero-stat-value">8</div>
-          <div class="hero-stat-label">社群平台</div>
-        </div>
-        <div class="hero-stat">
-          <div class="hero-stat-value" id="uptimeValue">99.9%</div>
-          <div class="hero-stat-label">Uptime</div>
-        </div>
-        <div class="hero-stat">
-          <div class="hero-stat-value" id="tasksValue">--</div>
-          <div class="hero-stat-label">今日任務</div>
-        </div>
+      <div class="section-badge">MARKETING HUB</div>
+      <h1><span class="text-gold">行銷指揮中心</span></h1>
+      <p class="hero-sub">AI 幫你做行銷，全自動。<br>SEO、社群、內容、廣告、Email、數據 — 一站搞定。</p>
+      <div class="hero-actions">
+        <a href="#agents" class="btn btn-primary btn-lg">探索 AI 行銷</a>
+        <a href="#dashboard" class="btn btn-secondary btn-lg">查看數據</a>
       </div>
     </div>
   </section>
 
-  <!-- System Status Bar -->
-  <div class="sys-status-bar">
-    <div class="container">
-      <div class="sys-status-inner">
-        <div class="sys-status-item">
-          <div class="dot" id="sysEdge"></div>
-          <span>Edge Functions: <strong>OPERATIONAL</strong></span>
-        </div>
-        <div class="sys-status-item">
-          <div class="dot" id="sysDb"></div>
-          <span>Database: <strong>OPERATIONAL</strong></span>
-        </div>
-        <div class="sys-status-item">
-          <div class="dot" id="sysCdn"></div>
-          <span>CDN: <strong>OPERATIONAL</strong></span>
-        </div>
-        <div class="sys-status-item">
-          <span>Last check: <strong id="sysLastCheck">--:--:--</strong></span>
-        </div>
-      </div>
-    </div>
-  </div>
+  <!-- Divider -->
+  <hr class="divider">
 
-  <!-- Agent Status Grid -->
-  <section class="section">
+  <!-- AI Marketing Agents -->
+  <section class="section" id="agents">
     <div class="container">
-      <div class="section-header">
-        <div class="section-label">Agent Fleet</div>
+      <div class="section-header fade-up">
+        <div class="section-badge">AI AGENTS</div>
         <h2>AI 行銷軍團</h2>
-        <p>6 個專業 AI Agent，各司其職，協同作戰。點擊啟動按鈕喚醒 Agent。</p>
+        <p>六大 AI Agent 各司其職，涵蓋完整行銷流程。</p>
       </div>
-      <div class="agent-grid" id="agentGrid">
+      <div class="agent-grid">
 
-        <!-- content-agent -->
-        <div class="agent-card" data-agent="content-agent">
-          <div class="agent-header">
-            <div class="agent-id">content-agent</div>
-            <div class="agent-status offline" id="status-content-agent">
-              <div class="dot offline"></div>
-              <span>CHECKING</span>
-            </div>
-          </div>
-          <div class="agent-icon" style="background: var(--orange-glow);">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#e8850c" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
-          </div>
-          <div class="agent-name">內容軍團</div>
-          <div class="agent-role">Content Agent &mdash; 自動生成 SEO 文章、社群貼文、電子報</div>
-          <ul class="agent-caps">
-            <li>SEO 文章自動生成</li>
-            <li>社群貼文排程</li>
-            <li>電子報撰寫</li>
-            <li>多語系內容翻譯</li>
-          </ul>
-          <button class="agent-btn" onclick="activateAgent('content-agent')">啟動</button>
-        </div>
-
-        <!-- sales-agent -->
-        <div class="agent-card" data-agent="sales-agent">
-          <div class="agent-header">
-            <div class="agent-id">sales-agent</div>
-            <div class="agent-status offline" id="status-sales-agent">
-              <div class="dot offline"></div>
-              <span>CHECKING</span>
-            </div>
-          </div>
-          <div class="agent-icon" style="background: var(--green-dim);">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#76b900" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
-          </div>
-          <div class="agent-name">銷售軍團</div>
-          <div class="agent-role">Sales Agent &mdash; 潛在客戶追蹤、報價生成、CRM 管理</div>
-          <ul class="agent-caps">
-            <li>潛在客戶自動追蹤</li>
-            <li>智慧報價生成</li>
-            <li>CRM 資料同步</li>
-            <li>成交率預測</li>
-          </ul>
-          <button class="agent-btn" onclick="activateAgent('sales-agent')">啟動</button>
-        </div>
-
-        <!-- pr-agent -->
-        <div class="agent-card" data-agent="pr-agent">
-          <div class="agent-header">
-            <div class="agent-id">pr-agent</div>
-            <div class="agent-status offline" id="status-pr-agent">
-              <div class="dot offline"></div>
-              <span>CHECKING</span>
-            </div>
-          </div>
-          <div class="agent-icon" style="background: rgba(204,120,92,0.12);">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#cc785c" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
-          </div>
-          <div class="agent-name">公關軍團</div>
-          <div class="agent-role">PR Agent &mdash; 新聞稿撰寫、媒體監控、品牌聲量分析</div>
-          <ul class="agent-caps">
-            <li>新聞稿自動撰寫</li>
-            <li>媒體提及監控</li>
-            <li>品牌聲量分析</li>
-            <li>危機預警系統</li>
-          </ul>
-          <button class="agent-btn" onclick="activateAgent('pr-agent')">啟動</button>
-        </div>
-
-        <!-- analytics-agent -->
-        <div class="agent-card" data-agent="analytics-agent">
-          <div class="agent-header">
-            <div class="agent-id">analytics-agent</div>
-            <div class="agent-status offline" id="status-analytics-agent">
-              <div class="dot offline"></div>
-              <span>CHECKING</span>
-            </div>
-          </div>
-          <div class="agent-icon" style="background: rgba(142,170,255,0.12);">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#8eaaff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
-          </div>
-          <div class="agent-name">數據軍團</div>
-          <div class="agent-role">Analytics Agent &mdash; 即時數據儀表板、流量分析、轉換追蹤</div>
-          <ul class="agent-caps">
-            <li>即時流量監控</li>
-            <li>轉換漏斗分析</li>
-            <li>A/B 測試報告</li>
-            <li>ROI 自動計算</li>
-          </ul>
-          <button class="agent-btn" onclick="activateAgent('analytics-agent')">啟動</button>
-        </div>
-
-        <!-- social-agent -->
-        <div class="agent-card" data-agent="social-agent">
-          <div class="agent-header">
-            <div class="agent-id">social-agent</div>
-            <div class="agent-status offline" id="status-social-agent">
-              <div class="dot offline"></div>
-              <span>CHECKING</span>
-            </div>
-          </div>
-          <div class="agent-icon" style="background: rgba(198,120,221,0.12);">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#c678dd" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
-          </div>
-          <div class="agent-name">社群軍團</div>
-          <div class="agent-role">Social Agent &mdash; 8 平台同步發文、互動管理、粉絲分析</div>
-          <ul class="agent-caps">
-            <li>8 平台同步發文</li>
-            <li>自動回覆互動</li>
-            <li>粉絲增長分析</li>
-            <li>最佳發文時段建議</li>
-          </ul>
-          <button class="agent-btn" onclick="activateAgent('social-agent')">啟動</button>
-        </div>
-
-        <!-- seo-agent -->
-        <div class="agent-card" data-agent="seo-agent">
-          <div class="agent-header">
-            <div class="agent-id">seo-agent</div>
-            <div class="agent-status offline" id="status-seo-agent">
-              <div class="dot offline"></div>
-              <span>CHECKING</span>
-            </div>
-          </div>
-          <div class="agent-icon" style="background: var(--orange-glow);">
+        <!-- SEO -->
+        <div class="agent-card fade-up">
+          <div class="agent-icon-wrap">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#e8850c" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
           </div>
-          <div class="agent-name">SEO 軍團</div>
-          <div class="agent-role">SEO Agent &mdash; 關鍵字研究、排名追蹤、技術 SEO 審計</div>
+          <h3>SEO 優化</h3>
+          <p>全自動搜尋引擎優化，從關鍵字研究到排名追蹤。</p>
           <ul class="agent-caps">
             <li>關鍵字機會挖掘</li>
             <li>排名即時追蹤</li>
             <li>技術 SEO 審計</li>
             <li>競爭對手分析</li>
           </ul>
-          <button class="agent-btn" onclick="activateAgent('seo-agent')">啟動</button>
+        </div>
+
+        <!-- Social -->
+        <div class="agent-card fade-up">
+          <div class="agent-icon-wrap" style="background:rgba(52,208,88,0.08);">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#34d058" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+          </div>
+          <h3>社群媒體管理</h3>
+          <p>多平台同步發文，互動管理一把抓。</p>
+          <ul class="agent-caps">
+            <li>多平台同步發文</li>
+            <li>自動回覆互動</li>
+            <li>粉絲增長分析</li>
+            <li>最佳發文時段建議</li>
+          </ul>
+        </div>
+
+        <!-- Content -->
+        <div class="agent-card fade-up">
+          <div class="agent-icon-wrap" style="background:rgba(88,166,255,0.08);">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#58a6ff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+          </div>
+          <h3>內容行銷</h3>
+          <p>AI 自動生成高品質文章、社群貼文、電子報。</p>
+          <ul class="agent-caps">
+            <li>SEO 文章自動生成</li>
+            <li>社群貼文排程</li>
+            <li>電子報撰寫</li>
+            <li>多語系內容翻譯</li>
+          </ul>
+        </div>
+
+        <!-- Ads -->
+        <div class="agent-card fade-up">
+          <div class="agent-icon-wrap" style="background:rgba(240,180,41,0.08);">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#f0b429" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16"/></svg>
+          </div>
+          <h3>廣告投放</h3>
+          <p>智慧廣告管理，自動優化投放策略與預算。</p>
+          <ul class="agent-caps">
+            <li>跨平台廣告管理</li>
+            <li>受眾精準定位</li>
+            <li>預算自動分配</li>
+            <li>素材 A/B 測試</li>
+          </ul>
+        </div>
+
+        <!-- Email -->
+        <div class="agent-card fade-up">
+          <div class="agent-icon-wrap" style="background:rgba(198,120,221,0.08);">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#c678dd" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          </div>
+          <h3>Email 行銷</h3>
+          <p>自動化郵件行銷流程，從名單到轉換。</p>
+          <ul class="agent-caps">
+            <li>電子報自動發送</li>
+            <li>名單分群管理</li>
+            <li>開信率追蹤</li>
+            <li>自動化漏斗流程</li>
+          </ul>
+        </div>
+
+        <!-- Analytics -->
+        <div class="agent-card fade-up">
+          <div class="agent-icon-wrap" style="background:rgba(248,81,73,0.08);">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#f85149" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+          </div>
+          <h3>數據分析</h3>
+          <p>即時數據儀表板，深入洞察行銷成效。</p>
+          <ul class="agent-caps">
+            <li>即時流量監控</li>
+            <li>轉換漏斗分析</li>
+            <li>A/B 測試報告</li>
+            <li>ROI 計算</li>
+          </ul>
         </div>
 
       </div>
     </div>
   </section>
 
-  <!-- Live Data Panel -->
-  <section class="section" style="background: rgba(18,18,42,0.3);">
+  <!-- Dashboard Preview -->
+  <section class="section" id="dashboard" style="background:rgba(12,12,29,0.5);">
     <div class="container">
-      <div class="section-header">
-        <div class="section-label">Live Intelligence</div>
-        <h2>即時數據面板</h2>
-        <p>數據軍團回報的即時營運指標，每 30 秒自動更新。</p>
+      <div class="section-header fade-up">
+        <div class="section-badge">LIVE DATA</div>
+        <h2>行銷數據儀表板</h2>
+        <p>即時掌握所有行銷指標，數據驅動決策。</p>
       </div>
-      <div class="data-panel">
-        <div class="data-panel-header">
-          <div class="data-panel-title">
-            <div class="live-dot"></div>
-            LIVE DATA FEED
+      <div class="dash-panel fade-up">
+        <div class="dash-header">
+          <div class="dash-title">
+            <div class="dash-live-dot"></div>
+            行銷數據總覽
           </div>
-          <div class="data-panel-refresh">auto-refresh: <span id="refreshCountdown">30</span>s</div>
+          <div class="dash-time">更新: <span id="dashTime">--:--:--</span></div>
         </div>
-        <div class="data-grid">
-          <div class="data-metric">
-            <div class="data-metric-icon">
-              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#e8850c" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+        <div class="metric-grid">
+          <div class="metric-box">
+            <div class="metric-icon">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#e8850c" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
             </div>
-            <div class="data-metric-value loading" id="metricPageViews">--</div>
-            <div class="data-metric-label">Page Views</div>
+            <div class="metric-val loading" id="metricViews">--</div>
+            <div class="metric-label">頁面瀏覽</div>
           </div>
-          <div class="data-metric">
-            <div class="data-metric-icon">
-              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#76b900" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+          <div class="metric-box">
+            <div class="metric-icon">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#34d058" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
             </div>
-            <div class="data-metric-value loading" id="metricContacts">--</div>
-            <div class="data-metric-label">Contacts</div>
+            <div class="metric-val loading" id="metricContacts">--</div>
+            <div class="metric-label">聯繫人</div>
           </div>
-          <div class="data-metric">
-            <div class="data-metric-icon">
-              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#cc785c" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          <div class="metric-box">
+            <div class="metric-icon">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#c678dd" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
             </div>
-            <div class="data-metric-value loading" id="metricNewsletters">--</div>
-            <div class="data-metric-label">Newsletters</div>
+            <div class="metric-val loading" id="metricEmails">--</div>
+            <div class="metric-label">Email 發送</div>
           </div>
-          <div class="data-metric">
-            <div class="data-metric-icon">
-              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#8eaaff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+          <div class="metric-box">
+            <div class="metric-icon">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#58a6ff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
             </div>
-            <div class="data-metric-value loading" id="metricEvents">--</div>
-            <div class="data-metric-label">Audit Events</div>
+            <div class="metric-val loading" id="metricEvents">--</div>
+            <div class="metric-label">事件追蹤</div>
           </div>
         </div>
+        <!-- Mock Chart -->
+        <div class="dash-chart-area" id="chartArea"></div>
       </div>
     </div>
   </section>
 
-  <!-- Agent Commander -->
-  <section class="section">
+  <!-- Task Center -->
+  <section class="section" id="tasks">
     <div class="container">
-      <div class="section-header">
-        <div class="section-label">Command Interface</div>
-        <h2>任務派遣中心</h2>
-        <p>選擇目標 Agent，輸入任務指令，一鍵派遣。</p>
+      <div class="section-header fade-up">
+        <div class="section-badge">TASK CENTER</div>
+        <h2>行銷任務中心</h2>
+        <p>建立行銷任務，指派給 AI Agent 自動執行。</p>
       </div>
-      <div class="commander">
-        <div class="commander-title">AGENT COMMANDER</div>
-        <div class="commander-desc">選擇 Agent 並輸入任務內容，系統會將指令派遣至對應的 Edge Function。</div>
-        <div class="commander-form" id="commanderForm">
+      <div class="task-panel fade-up">
+        <h3 style="font-size:1rem;margin-bottom:var(--sp-2);">建立新任務</h3>
+        <p style="font-size:0.85rem;color:var(--text-muted);margin-bottom:var(--sp-6);">選擇 Agent 並輸入任務描述，系統將自動派遣至對應服務。</p>
+        <div class="task-form" id="taskForm">
           <div>
-            <label for="cmdAgent">目標 Agent</label>
-            <select id="cmdAgent">
-              <option value="content-agent">內容軍團 (content-agent)</option>
-              <option value="sales-agent">銷售軍團 (sales-agent)</option>
-              <option value="pr-agent">公關軍團 (pr-agent)</option>
-              <option value="analytics-agent">數據軍團 (analytics-agent)</option>
-              <option value="social-agent">社群軍團 (social-agent)</option>
-              <option value="seo-agent">SEO 軍團 (seo-agent)</option>
+            <label for="taskAgent">目標 Agent</label>
+            <select class="input" id="taskAgent">
+              <option value="seo">SEO 優化</option>
+              <option value="social">社群媒體管理</option>
+              <option value="content">內容行銷</option>
+              <option value="ads">廣告投放</option>
+              <option value="email">Email 行銷</option>
+              <option value="analytics">數據分析</option>
             </select>
           </div>
           <div>
-            <label for="cmdTask">任務指令</label>
-            <input type="text" id="cmdTask" placeholder="例如：分析本月 SEO 排名變化並產出報告" />
+            <label for="taskInput">任務描述</label>
+            <input class="input" type="text" id="taskInput" placeholder="例：分析本月 SEO 排名變化並產出報告">
           </div>
           <div>
             <label>&nbsp;</label>
-            <button class="commander-send" id="cmdSend" onclick="dispatchTask()">派遣任務</button>
+            <button class="btn btn-primary" id="taskSend" onclick="dispatchTask()">派遣任務</button>
           </div>
         </div>
-        <div class="commander-log" id="cmdLog">
+        <div class="task-log" id="taskLog">
           <div class="log-entry">
-            <span class="log-time">[SYSTEM]</span> <span class="log-msg">Commander initialized. Awaiting orders...</span>
+            <span class="log-time">[SYSTEM]</span> <span class="log-msg">任務中心已就緒。等待指令...</span>
           </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="section">
+    <div class="container">
+      <div class="cta-banner fade-up">
+        <h2><span class="text-gold">開始 AI 行銷</span></h2>
+        <p>讓 AI 接管繁瑣的行銷工作，專注在策略與創意。</p>
+        <div style="display:flex;justify-content:center;gap:var(--sp-4);flex-wrap:wrap;">
+          <a href="/pricing" class="btn btn-primary btn-lg">查看方案</a>
+          <a href="/features" class="btn btn-secondary btn-lg">了解更多</a>
         </div>
       </div>
     </div>
   </section>
 
   <!-- Footer -->
-  <footer>
+  <footer class="footer">
     <div class="container">
       <div class="footer-grid">
         <div class="footer-brand">
-          <div class="nav-logo" style="font-size:1.4rem;margin-bottom:16px;">SEO<span>BAIKE</span></div>
-          <p>
-            AI 行銷指揮中心。6 個 AI Agent 全通路協同作戰。<br>
-            由小路光有限公司（統編 60475510）開發與維運。
-          </p>
+          <a href="/" class="nav-brand" style="margin-bottom:var(--sp-4);">
+            <img src="/favicon.svg" alt="SEOBAIKE" width="34" height="34">
+            <span><span class="seo">SEO</span><span class="baike">BAIKE</span></span>
+          </a>
+          <p>AI 行銷指揮中心。<br>由小路光有限公司（統編 60475510）開發與維運。</p>
         </div>
         <div class="footer-col">
           <h4>產品</h4>
-          <ul>
-            <li><a href="/features">功能總覽</a></li>
-            <li><a href="/pricing">方案與定價</a></li>
-            <li><a href="/docs">常見問題</a></li>
-            <li><a href="/marketing">行銷中心</a></li>
-          </ul>
+          <a href="/features">功能總覽</a>
+          <a href="/pricing">方案與定價</a>
+          <a href="/marketplace">AI 市集</a>
+          <a href="/marketing">行銷中心</a>
         </div>
         <div class="footer-col">
           <h4>公司</h4>
-          <ul>
-            <li><a href="/about">關於我們</a></li>
-            <li><a href="/contact">聯繫我們</a></li>
-            <li><a href="#">隱私權政策</a></li>
-            <li><a href="#">服務條款</a></li>
-          </ul>
+          <a href="/about">關於我們</a>
+          <a href="/contact">聯繫我們</a>
+          <a href="/privacy">隱私權政策</a>
+          <a href="/terms">服務條款</a>
         </div>
         <div class="footer-col">
           <h4>支援</h4>
-          <ul>
-            <li><a href="/docs">常見問題</a></li>
-            <li><a href="/marketplace">逛市集</a></li>
-            <li><a href="/contact">聯絡我們</a></li>
-            <li><a href="/status">系統狀態</a></li>
-          </ul>
+          <a href="/docs">常見問題</a>
+          <a href="/bots">協作機器人</a>
+          <a href="/contact">聯絡我們</a>
+          <a href="/status">系統狀態</a>
         </div>
       </div>
       <div class="footer-bottom">
-        <div>&copy; 2026 <span>小路光有限公司</span>（統編 60475510）</div>
+        <div>&copy; 2026 小路光有限公司（統編 60475510）</div>
         <div>aiforseo.vip</div>
       </div>
     </div>
   </footer>
 
   <script>
-    /* ═══════════ Configuration ═══════════ */
+    /* ═══════════ Config ═══════════ */
     var SUPABASE_URL = 'https://vmyrivxxibqydccurxug.supabase.co';
     var SUPABASE_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZteXJpdnh4aWJxeWRjY3VyeHVnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzAwNDAwMjksImV4cCI6MjA4NTYxNjAyOX0.iBV-23LGdm_uKffAExgqSV34-NWoAyv8_-M_cJQZ8Gg';
 
-    var AGENTS = [
-      { slug: 'content-agent',   name: '內容軍團' },
-      { slug: 'sales-agent',     name: '銷售軍團' },
-      { slug: 'pr-agent',        name: '公關軍團' },
-      { slug: 'analytics-agent', name: '數據軍團' },
-      { slug: 'social-agent',    name: '社群軍團' },
-      { slug: 'seo-agent',       name: 'SEO 軍團' }
-    ];
+    /* ═══════════ Design System Scripts ═══════════ */
+    var obs = new IntersectionObserver(function(entries) {
+      entries.forEach(function(e) { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.08 });
+    document.querySelectorAll('.fade-up').forEach(function(el) { obs.observe(el); });
 
-    /* ═══════════ Mobile Nav ═══════════ */
-    document.getElementById('hamburger').addEventListener('click', function () {
-      document.getElementById('navLinks').classList.toggle('open');
+    window.addEventListener('scroll', function() {
+      var nav = document.querySelector('.nav');
+      if (nav) nav.classList.toggle('scrolled', window.scrollY > 20);
     });
 
-    /* ═══════════ Agent Status Check ═══════════ */
-    function checkAgentStatus(slug) {
-      var statusEl = document.getElementById('status-' + slug);
-      if (!statusEl) return;
-      var dotEl = statusEl.querySelector('.dot');
-      var textEl = statusEl.querySelector('span');
+    function toggleMenu() {
+      document.querySelector('.nav-hamburger').classList.toggle('active');
+      document.querySelector('.mobile-overlay').classList.toggle('open');
+    }
 
-      fetch(SUPABASE_URL + '/functions/v1/' + slug, {
-        method: 'GET',
-        headers: {
-          'Authorization': 'Bearer ' + SUPABASE_ANON,
-          'apikey': SUPABASE_ANON
-        }
-      })
-      .then(function (res) {
-        if (res.ok) {
-          dotEl.className = 'dot';
-          textEl.textContent = 'ONLINE';
-          statusEl.className = 'agent-status online';
-        } else {
-          dotEl.className = 'dot offline';
-          textEl.textContent = 'OFFLINE';
-          statusEl.className = 'agent-status offline';
-        }
-      })
-      .catch(function () {
-        dotEl.className = 'dot offline';
-        textEl.textContent = 'OFFLINE';
-        statusEl.className = 'agent-status offline';
+    /* ═══════════ Mock Chart ═══════════ */
+    (function() {
+      var area = document.getElementById('chartArea');
+      var heights = [35,52,40,68,55,78,62,85,70,92,65,88,72,95,60,80,75,90,58,82,70,88,64,76,83,91,55,73,86,68];
+      heights.forEach(function(h) {
+        var bar = document.createElement('div');
+        bar.className = 'chart-bar';
+        bar.style.height = h + 'px';
+        area.appendChild(bar);
       });
-    }
+    })();
 
-    function checkAllAgents() {
-      AGENTS.forEach(function (a) { checkAgentStatus(a.slug); });
-      document.getElementById('sysLastCheck').textContent = new Date().toLocaleTimeString('zh-TW', { hour12: false });
+    /* ═══════════ Dashboard Time ═══════════ */
+    function updateDashTime() {
+      document.getElementById('dashTime').textContent = new Date().toLocaleTimeString('zh-TW', { hour12: false });
     }
+    updateDashTime();
+    setInterval(updateDashTime, 1000);
 
-    /* ═══════════ Live Data Fetch ═══════════ */
-    function fetchLiveData() {
+    /* ═══════════ Live Data ═══════════ */
+    function fetchMetrics() {
       fetch(SUPABASE_URL + '/functions/v1/analytics-agent', {
         method: 'GET',
-        headers: {
-          'Authorization': 'Bearer ' + SUPABASE_ANON,
-          'apikey': SUPABASE_ANON
-        }
+        headers: { 'Authorization': 'Bearer ' + SUPABASE_ANON, 'apikey': SUPABASE_ANON }
       })
-      .then(function (res) { return res.json(); })
-      .then(function (data) {
-        var pv = document.getElementById('metricPageViews');
-        var ct = document.getElementById('metricContacts');
-        var nl = document.getElementById('metricNewsletters');
-        var ev = document.getElementById('metricEvents');
-
+      .then(function(res) { return res.json(); })
+      .then(function(data) {
         if (data.page_views !== undefined) {
-          pv.textContent = Number(data.page_views).toLocaleString();
-          pv.classList.remove('loading');
+          var el = document.getElementById('metricViews');
+          el.textContent = Number(data.page_views).toLocaleString();
+          el.classList.remove('loading');
         }
         if (data.contacts !== undefined) {
-          ct.textContent = Number(data.contacts).toLocaleString();
-          ct.classList.remove('loading');
+          var el2 = document.getElementById('metricContacts');
+          el2.textContent = Number(data.contacts).toLocaleString();
+          el2.classList.remove('loading');
         }
         if (data.newsletters !== undefined) {
-          nl.textContent = Number(data.newsletters).toLocaleString();
-          nl.classList.remove('loading');
+          var el3 = document.getElementById('metricEmails');
+          el3.textContent = Number(data.newsletters).toLocaleString();
+          el3.classList.remove('loading');
         }
         if (data.audit_events !== undefined) {
-          ev.textContent = Number(data.audit_events).toLocaleString();
-          ev.classList.remove('loading');
-        }
-
-        /* Also update hero tasks count if available */
-        if (data.audit_events !== undefined) {
-          document.getElementById('tasksValue').textContent = data.audit_events;
+          var el4 = document.getElementById('metricEvents');
+          el4.textContent = Number(data.audit_events).toLocaleString();
+          el4.classList.remove('loading');
         }
       })
-      .catch(function () {
-        /* Silently fail - metrics remain as "--" */
-      });
+      .catch(function() {});
     }
+    fetchMetrics();
+    setInterval(fetchMetrics, 30000);
 
-    /* ═══════════ Refresh Countdown ═══════════ */
-    var countdown = 30;
-    var countdownEl = document.getElementById('refreshCountdown');
-    function tick() {
-      countdown--;
-      if (countdown <= 0) {
-        countdown = 30;
-        checkAllAgents();
-        fetchLiveData();
-      }
-      countdownEl.textContent = countdown;
-    }
-
-    /* ═══════════ Activate Agent ═══════════ */
-    function activateAgent(slug) {
-      var card = document.querySelector('[data-agent="' + slug + '"]');
-      var btn = card.querySelector('.agent-btn');
-      var origText = btn.textContent;
-      btn.disabled = true;
-      btn.textContent = '連線中...';
-
-      fetch(SUPABASE_URL + '/functions/v1/' + slug, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': 'Bearer ' + SUPABASE_ANON,
-          'apikey': SUPABASE_ANON
-        },
-        body: JSON.stringify({ action: 'activate', timestamp: new Date().toISOString() })
-      })
-      .then(function (res) {
-        if (res.ok) {
-          btn.textContent = 'ACTIVE';
-          btn.classList.add('active');
-          addLog(slug, 'Agent activated successfully', 'ok');
-          checkAgentStatus(slug);
-        } else {
-          btn.textContent = origText;
-          addLog(slug, 'Activation failed (HTTP ' + res.status + ')', 'err');
-        }
-      })
-      .catch(function (err) {
-        btn.textContent = origText;
-        addLog(slug, 'Connection error: ' + err.message, 'err');
-      })
-      .finally(function () {
-        btn.disabled = false;
-      });
-    }
-
-    /* ═══════════ Dispatch Task ═══════════ */
+    /* ═══════════ Task Dispatch ═══════════ */
     function dispatchTask() {
-      var agentSlug = document.getElementById('cmdAgent').value;
-      var taskText = document.getElementById('cmdTask').value.trim();
-      var sendBtn = document.getElementById('cmdSend');
+      var agent = document.getElementById('taskAgent').value;
+      var task = document.getElementById('taskInput').value.trim();
+      var btn = document.getElementById('taskSend');
+      if (!task) { addLog('SYSTEM', '請輸入任務描述', 'err'); return; }
 
-      if (!taskText) {
-        addLog('SYSTEM', '請輸入任務指令', 'err');
-        return;
-      }
+      btn.disabled = true;
+      btn.textContent = '派遣中...';
+      addLog(agent, '派遣任務: ' + task, 'msg');
 
-      sendBtn.disabled = true;
-      sendBtn.textContent = '派遣中...';
-      addLog(agentSlug, '派遣任務: ' + taskText, 'msg');
-
-      fetch(SUPABASE_URL + '/functions/v1/' + agentSlug, {
+      fetch(SUPABASE_URL + '/functions/v1/' + agent + '-agent', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
           'Authorization': 'Bearer ' + SUPABASE_ANON,
           'apikey': SUPABASE_ANON
         },
-        body: JSON.stringify({
-          action: 'task',
-          task: taskText,
-          timestamp: new Date().toISOString(),
-          source: 'marketing-command-center'
-        })
+        body: JSON.stringify({ action: 'task', task: task, timestamp: new Date().toISOString(), source: 'marketing-hub' })
       })
-      .then(function (res) { return res.json().then(function(d) { return { status: res.status, data: d }; }); })
-      .then(function (result) {
+      .then(function(res) { return res.json().then(function(d) { return { status: res.status, data: d }; }); })
+      .then(function(result) {
         if (result.status >= 200 && result.status < 300) {
-          addLog(agentSlug, 'Task accepted. Response: ' + JSON.stringify(result.data).substring(0, 120), 'ok');
+          addLog(agent, '任務已接受', 'ok');
         } else {
-          addLog(agentSlug, 'Task rejected (HTTP ' + result.status + '): ' + (result.data.error || JSON.stringify(result.data)), 'err');
+          addLog(agent, '任務被拒絕 (HTTP ' + result.status + ')', 'err');
         }
       })
-      .catch(function (err) {
-        addLog(agentSlug, 'Dispatch failed: ' + err.message, 'err');
-      })
-      .finally(function () {
-        sendBtn.disabled = false;
-        sendBtn.textContent = '派遣任務';
-        document.getElementById('cmdTask').value = '';
+      .catch(function(err) { addLog(agent, '派遣失敗: ' + err.message, 'err'); })
+      .finally(function() {
+        btn.disabled = false;
+        btn.textContent = '派遣任務';
+        document.getElementById('taskInput').value = '';
       });
     }
 
-    /* ═══════════ Command Log ═══════════ */
     function addLog(agent, message, type) {
-      var log = document.getElementById('cmdLog');
+      var log = document.getElementById('taskLog');
       log.classList.add('visible');
       var entry = document.createElement('div');
       entry.className = 'log-entry';
       var now = new Date().toLocaleTimeString('zh-TW', { hour12: false });
-      var typeClass = type === 'ok' ? 'log-ok' : type === 'err' ? 'log-err' : 'log-msg';
-      entry.innerHTML = '<span class="log-time">[' + now + ']</span> ' +
-                         '<span class="log-agent">[' + agent + ']</span> ' +
-                         '<span class="' + typeClass + '">' + escapeHtml(message) + '</span>';
+      var cls = type === 'ok' ? 'log-ok' : type === 'err' ? 'log-err' : 'log-msg';
+      entry.innerHTML = '<span class="log-time">[' + now + ']</span> <span class="log-agent">[' + escapeHtml(agent) + ']</span> <span class="' + cls + '">' + escapeHtml(message) + '</span>';
       log.appendChild(entry);
       log.scrollTop = log.scrollHeight;
     }
 
     function escapeHtml(str) {
-      var div = document.createElement('div');
-      div.appendChild(document.createTextNode(str));
-      return div.innerHTML;
+      var d = document.createElement('div');
+      d.appendChild(document.createTextNode(str));
+      return d.innerHTML;
     }
 
-    /* ═══════════ Enter key to dispatch ═══════════ */
-    document.getElementById('cmdTask').addEventListener('keydown', function (e) {
-      if (e.key === 'Enter') {
-        e.preventDefault();
-        dispatchTask();
-      }
+    document.getElementById('taskInput').addEventListener('keydown', function(e) {
+      if (e.key === 'Enter') { e.preventDefault(); dispatchTask(); }
     });
 
-    /* ═══════════ Fade-in on scroll ═══════════ */
-    (function () {
-      var sections = document.querySelectorAll('.section, .sys-status-bar');
-      sections.forEach(function (sec) {
-        sec.style.opacity = '0';
-        sec.style.transform = 'translateY(24px)';
-        sec.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-      });
-      var observer = new IntersectionObserver(function (entries) {
-        entries.forEach(function (entry) {
-          if (entry.isIntersecting) {
-            entry.target.style.opacity = '1';
-            entry.target.style.transform = 'translateY(0)';
-            observer.unobserve(entry.target);
-          }
-        });
-      }, { threshold: 0.08 });
-      sections.forEach(function (sec) { observer.observe(sec); });
-    })();
-
-    /* ═══════════ Init ═══════════ */
-    checkAllAgents();
-    fetchLiveData();
-    setInterval(tick, 1000);
-
     /* ═══════════ Page View Tracking ═══════════ */
-    (function () {
+    (function() {
       try {
         fetch(SUPABASE_URL + '/rest/v1/page_views', {
           method: 'POST',
@@ -1335,12 +734,10 @@
             referrer: document.referrer || null,
             user_agent: navigator.userAgent
           })
-        }).catch(function () {});
+        }).catch(function() {});
       } catch (e) {}
     })();
   </script>
-
-  <script src="/assets/smart-align.js"></script>
   <script src="/seobaike-widget.js"></script>
 </body>
 </html>

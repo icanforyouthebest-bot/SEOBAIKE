@@ -3,772 +3,789 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>功能介紹 — SEOBAIKE | AI 市集八大功能</title>
-  <meta name="description" content="SEOBAIKE 市集八大功能：一鍵上架、AI 翻譯、智慧行銷、自動客服、商品管理、數據分析、全球曝光、安全收款。AI 幫你把商品賣到全世界。">
-  <meta name="keywords" content="SEOBAIKE,市集功能,一鍵上架,AI 翻譯,AI 行銷,跨國銷售,商品管理,數據分析,全球市集">
+  <title>功能介紹 — SEOBAIKE | AI 平台八大能力</title>
+  <meta name="description" content="SEOBAIKE 八大 AI 能力：SEO 自動分析、AI 多語言翻譯、智能客服、內容自動生成、圖片生成、數據分析、市場研究、自動行銷。一個入口，所有 AI。">
+  <meta name="keywords" content="SEOBAIKE,AI平台,SEO分析,AI翻譯,智能客服,內容生成,圖片生成,數據分析,市場研究,自動行銷">
   <link rel="canonical" href="https://aiforseo.vip/features.html">
-  <meta property="og:title" content="功能介紹 — SEOBAIKE | AI 市集八大功能">
-  <meta property="og:description" content="SEOBAIKE 市集八大功能：一鍵上架、AI 翻譯、智慧行銷、自動客服。AI 幫你把商品賣到全世界。">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="功能介紹 — SEOBAIKE | AI 平台八大能力">
+  <meta property="og:description" content="SEOBAIKE 八大 AI 能力：SEO 自動分析、AI 多語言翻譯、智能客服、內容自動生成。一個入口，所有 AI。">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://aiforseo.vip/features.html">
   <meta property="og:image" content="/og-image.png">
   <meta property="og:site_name" content="SEOBAIKE">
   <meta property="og:locale" content="zh_TW">
+
+  <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="功能介紹 — SEOBAIKE | AI 市集八大功能">
-  <meta name="twitter:description" content="SEOBAIKE 市集八大功能：一鍵上架、AI 翻譯、智慧行銷、自動客服。把商品賣到全世界。">
+  <meta name="twitter:title" content="功能介紹 — SEOBAIKE | AI 平台八大能力">
+  <meta name="twitter:description" content="SEOBAIKE 八大 AI 能力：SEO 分析、AI 翻譯、智能客服、內容生成。一個入口，所有 AI。">
+
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+
+  <!-- Structured Data -->
   <script type="application/ld+json">
-  [
-    {
-      "@context": "https://schema.org",
-      "@type": "SoftwareApplication",
-      "name": "SEOBAIKE",
-      "applicationCategory": "BusinessApplication",
-      "operatingSystem": "Web",
-      "url": "https://aiforseo.vip/features.html",
-      "description": "SEOBAIKE 市集八大功能：一鍵上架、AI 翻譯、智慧行銷、自動客服、商品管理、數據分析、全球曝光、安全收款",
-      "featureList": "一鍵上架, AI 自動翻譯, 智慧行銷, AI 客服, 商品管理, 數據分析, 全球曝光, 安全收款",
-      "author": {
-        "@type": "Organization",
-        "name": "小路光有限公司"
-      },
-      "offers": {
-        "@type": "Offer",
-        "price": "0",
-        "priceCurrency": "TWD"
-      }
+  [{
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "SEOBAIKE",
+    "applicationCategory": "BusinessApplication",
+    "operatingSystem": "Web",
+    "url": "https://aiforseo.vip/features.html",
+    "description": "SEOBAIKE AI 平台八大能力：SEO 自動分析、AI 多語言翻譯、智能客服、內容自動生成、圖片生成、數據分析、市場研究、自動行銷",
+    "featureList": "SEO 自動分析, AI 多語言翻譯, 智能客服, 內容自動生成, 圖片生成, 數據分析, 市場研究, 自動行銷",
+    "author": {
+      "@type": "Organization",
+      "name": "小路光有限公司"
+    },
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "TWD"
     }
-  ]
+  }]
   </script>
+
+  <!-- Design System -->
+  <link rel="stylesheet" href="/assets/design-system.css">
+
+  <!-- Page-Specific Styles -->
   <style>
-    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-
-    :root {
-      --orange: #e8850c;
-      --orange-light: rgba(232,133,12,0.12);
-      --orange-glow: rgba(232,133,12,0.25);
-      --copper: #cc785c;
-      --green: #76b900;
-      --bg: #0a0a1a;
-      --bg-card: #12122a;
-      --bg-card-hover: #1a1a3a;
-      --text: #e0e0e0;
-      --text-muted: #9a9ab0;
-      --border: #2a2a4a;
-      --radius: 16px;
-    }
-
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans TC", sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      line-height: 1.7;
-      min-height: 100vh;
-      overflow-x: hidden;
-    }
-
-    a { color: inherit; text-decoration: none; }
-
-    /* ========== NAVBAR ========== */
-    .navbar {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      z-index: 1000;
-      background: rgba(10, 10, 26, 0.92);
-      backdrop-filter: blur(16px);
-      border-bottom: 1px solid var(--border);
-      padding: 0 2rem;
-      height: 64px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    .navbar-brand {
-      font-size: 1.4rem;
-      font-weight: 800;
-      color: var(--orange);
-      letter-spacing: 1px;
-    }
-
-    .navbar-brand span { color: var(--green); }
-
-    .navbar-links {
-      display: flex;
-      gap: 1.6rem;
-      align-items: center;
-    }
-
-    .navbar-links a {
-      font-size: 0.9rem;
-      color: var(--text-muted);
-      transition: color 0.2s;
-      white-space: nowrap;
-    }
-
-    .navbar-links a:hover,
-    .navbar-links a.active {
-      color: var(--orange);
-    }
-
-    .navbar-links .btn-login {
-      background: var(--orange);
-      color: #fff;
-      padding: 0.45rem 1.2rem;
-      border-radius: 6px;
-      font-weight: 600;
-      transition: background 0.2s;
-    }
-
-    .navbar-links .btn-login:hover {
-      background: #d0770a;
-      color: #fff;
-    }
-
-    .hamburger {
-      display: none;
-      flex-direction: column;
-      gap: 5px;
-      cursor: pointer;
-      background: none;
-      border: none;
-      padding: 4px;
-    }
-
-    .hamburger span {
-      display: block;
-      width: 24px;
-      height: 2px;
-      background: var(--text);
-      border-radius: 2px;
-      transition: transform 0.3s;
-    }
-
-    /* ========== HERO ========== */
-    .hero {
-      padding: 140px 2rem 80px;
+    /* ── Hero ── */
+    .features-hero {
+      padding: 140px 0 100px;
       text-align: center;
-      background: linear-gradient(180deg, rgba(232,133,12,0.1) 0%, transparent 60%);
-      position: relative;
-    }
-
-    .hero::after {
-      content: "";
-      position: absolute;
-      bottom: -2px;
-      left: 0;
-      right: 0;
-      height: 100px;
-      background: linear-gradient(to bottom, transparent, var(--bg));
-      pointer-events: none;
-    }
-
-    .hero h1 {
-      font-size: clamp(2.4rem, 5vw, 3.8rem);
-      font-weight: 800;
-      margin-bottom: 1rem;
-      background: linear-gradient(135deg, var(--orange), var(--copper));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-
-    .hero .subtitle {
-      font-size: clamp(1.2rem, 3vw, 1.6rem);
-      color: var(--text);
-      font-weight: 500;
-      max-width: 600px;
-      margin: 0 auto;
-      opacity: 0.9;
-    }
-
-    /* ========== FEATURES ========== */
-    .features-section {
-      padding: 2rem 2rem 6rem;
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-
-    .features-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 1.8rem;
-    }
-
-    .feature-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 2.2rem 2rem;
-      transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
-                  border-color 0.3s,
-                  box-shadow 0.35s cubic-bezier(0.22, 1, 0.36, 1);
       position: relative;
       overflow: hidden;
-      opacity: 0;
-      transform: translateY(30px);
     }
-
-    .feature-card.visible {
-      opacity: 1;
-      transform: translateY(0);
-      transition: opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1),
-                  transform 0.6s cubic-bezier(0.22, 1, 0.36, 1),
-                  border-color 0.3s,
-                  box-shadow 0.35s;
-    }
-
-    .feature-card::before {
-      content: "";
+    .features-hero::before {
+      content: '';
       position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 3px;
-      background: linear-gradient(90deg, var(--orange), var(--copper));
-      opacity: 0;
-      transition: opacity 0.3s;
-    }
-
-    .feature-card::after {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: radial-gradient(circle at 50% 0%, rgba(232,133,12,0.06), transparent 70%);
-      opacity: 0;
-      transition: opacity 0.3s;
+      top: -40%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 800px;
+      height: 800px;
+      background: radial-gradient(circle, rgba(232,133,12,0.08) 0%, transparent 65%);
       pointer-events: none;
     }
-
-    .feature-card:hover {
-      transform: translateY(-6px);
-      border-color: var(--orange-glow);
-      box-shadow: 0 16px 48px rgba(232,133,12,0.1);
+    .features-hero::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 120px;
+      background: linear-gradient(to bottom, transparent, var(--bg-primary));
+      pointer-events: none;
     }
-
-    .feature-card:hover::before { opacity: 1; }
-    .feature-card:hover::after { opacity: 1; }
-
-    .feature-card:hover .feature-icon {
-      transform: scale(1.15);
-    }
-
-    .feature-icon {
-      font-size: 2.8rem;
-      display: block;
-      margin-bottom: 1rem;
-      transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
-    }
-
-    .feature-card h3 {
-      font-size: 1.3rem;
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 20px;
+      border-radius: var(--radius-full);
+      background: rgba(232,133,12,0.06);
+      border: 1px solid rgba(232,133,12,0.12);
+      font-size: 0.8rem;
       font-weight: 700;
-      color: #fff;
-      margin-bottom: 0.5rem;
+      color: var(--gold-200);
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      margin-bottom: var(--sp-6);
+    }
+    .hero-title {
+      margin-bottom: var(--sp-5);
+      position: relative;
+      z-index: 1;
+    }
+    .hero-subtitle {
+      font-size: clamp(1.05rem, 2.2vw, 1.25rem);
+      color: var(--text-secondary);
+      max-width: 560px;
+      margin: 0 auto var(--sp-10);
+      line-height: 1.8;
+      position: relative;
+      z-index: 1;
+    }
+    .hero-actions {
+      display: flex;
+      gap: var(--sp-4);
+      justify-content: center;
+      flex-wrap: wrap;
+      position: relative;
+      z-index: 1;
     }
 
-    .feature-desc {
-      font-size: 1rem;
-      color: var(--text);
+    /* ── Feature Grid ── */
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: var(--sp-6);
+    }
+    .feature-card {
+      text-align: center;
+      padding: var(--sp-10) var(--sp-6) var(--sp-8);
+    }
+    .feature-icon-wrap {
+      width: 72px;
+      height: 72px;
+      margin: 0 auto var(--sp-6);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: var(--radius-lg);
+      background: rgba(232,133,12,0.06);
+      border: 1px solid rgba(232,133,12,0.1);
+      font-size: 2rem;
+      transition: all var(--duration-normal) var(--ease-out);
+    }
+    .card:hover .feature-icon-wrap {
+      background: rgba(232,133,12,0.1);
+      border-color: rgba(232,133,12,0.25);
+      transform: scale(1.08);
+      box-shadow: 0 0 24px rgba(232,133,12,0.12);
+    }
+    .feature-card h3 {
+      margin-bottom: var(--sp-3);
+    }
+    .feature-card p {
+      font-size: 0.9rem;
       line-height: 1.7;
-      margin-bottom: 0.8rem;
     }
-
-    .feature-scenario {
+    .feature-tag {
       display: inline-block;
-      background: var(--orange-light);
-      border: 1px solid rgba(232,133,12,0.15);
-      border-radius: 8px;
-      padding: 0.6rem 1rem;
-      font-size: 0.88rem;
-      color: var(--orange);
-      line-height: 1.6;
+      margin-top: var(--sp-4);
+      padding: 4px 14px;
+      border-radius: var(--radius-full);
+      background: rgba(232,133,12,0.06);
+      border: 1px solid rgba(232,133,12,0.1);
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--gold-200);
+      letter-spacing: 0.5px;
     }
 
-    /* ========== WHY US ========== */
-    .why-section {
-      padding: 4rem 2rem 5rem;
-      max-width: 1100px;
+    /* ── Pipeline / How AI Works ── */
+    .pipeline-wrap {
+      display: flex;
+      align-items: stretch;
+      gap: 0;
+      position: relative;
+      max-width: 1000px;
       margin: 0 auto;
     }
-
-    .why-section h2 {
+    .pipeline-step {
+      flex: 1;
       text-align: center;
-      font-size: clamp(1.6rem, 3vw, 2.2rem);
-      font-weight: 800;
-      margin-bottom: 2.5rem;
-      background: linear-gradient(135deg, var(--orange), var(--copper));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-
-    .why-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1.5rem;
-    }
-
-    .why-card {
+      padding: var(--sp-8) var(--sp-4);
+      position: relative;
       background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 2.5rem 2rem;
-      text-align: center;
-      transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
-                  border-color 0.3s,
-                  box-shadow 0.35s;
-      opacity: 0;
-      transform: translateY(30px);
+      border: 1px solid var(--border-subtle);
+      transition: all var(--duration-normal) var(--ease-out);
     }
-
-    .why-card.visible {
-      opacity: 1;
-      transform: translateY(0);
-      transition: opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1),
-                  transform 0.6s cubic-bezier(0.22, 1, 0.36, 1),
-                  border-color 0.3s,
-                  box-shadow 0.35s;
+    .pipeline-step:first-child {
+      border-radius: var(--radius-lg) 0 0 var(--radius-lg);
     }
-
-    .why-card:hover {
-      transform: translateY(-4px);
-      border-color: var(--orange-glow);
-      box-shadow: 0 12px 36px rgba(232,133,12,0.08);
+    .pipeline-step:last-child {
+      border-radius: 0 var(--radius-lg) var(--radius-lg) 0;
     }
-
-    .why-icon {
-      font-size: 2.4rem;
-      display: block;
-      margin-bottom: 1rem;
+    .pipeline-step:hover {
+      background: var(--bg-card-hover);
+      border-color: var(--border-hover);
+      z-index: 2;
     }
-
-    .why-card h3 {
-      font-size: 1.15rem;
-      font-weight: 700;
-      color: #fff;
-      margin-bottom: 0.5rem;
+    .pipeline-num {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: var(--gold-gradient);
+      color: #000;
+      font-weight: 800;
+      font-size: 0.85rem;
+      margin-bottom: var(--sp-4);
     }
-
-    .why-card p {
-      font-size: 0.95rem;
+    .pipeline-step h4 {
+      margin-bottom: var(--sp-2);
+      font-size: 1rem;
+    }
+    .pipeline-step p {
+      font-size: 0.82rem;
       color: var(--text-muted);
       line-height: 1.6;
     }
-
-    .why-highlight {
-      display: inline-block;
-      color: var(--orange);
-      font-weight: 700;
-      font-size: 1.1rem;
-      margin-top: 0.5rem;
-    }
-
-    /* ========== CTA ========== */
-    .cta-section {
-      padding: 5rem 2rem;
-      text-align: center;
-      background: linear-gradient(180deg, transparent, rgba(232,133,12,0.08));
-      position: relative;
-    }
-
-    .cta-section h2 {
-      font-size: clamp(1.8rem, 4vw, 2.4rem);
-      font-weight: 800;
-      margin-bottom: 1rem;
-      background: linear-gradient(135deg, var(--orange), var(--copper));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-
-    .cta-section p {
-      color: var(--text-muted);
-      margin-bottom: 2.5rem;
-      font-size: 1.1rem;
-    }
-
-    .cta-buttons {
+    .pipeline-arrow {
+      position: absolute;
+      right: -14px;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 3;
+      width: 28px;
+      height: 28px;
       display: flex;
-      gap: 1rem;
+      align-items: center;
+      justify-content: center;
+      background: var(--bg-primary);
+      border: 1px solid var(--border-subtle);
+      border-radius: 50%;
+      color: var(--gold-200);
+      font-size: 0.9rem;
+    }
+
+    /* ── Integration Section ── */
+    .integration-visual {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--sp-8);
+      flex-wrap: wrap;
+      margin-top: var(--sp-10);
+    }
+    .integration-hub {
+      width: 160px;
+      height: 160px;
+      border-radius: 50%;
+      background: var(--gold-gradient);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 4px;
+      position: relative;
+      box-shadow: 0 0 60px rgba(232,133,12,0.2), 0 0 120px rgba(232,133,12,0.08);
+      flex-shrink: 0;
+    }
+    .integration-hub span {
+      color: #000;
+      font-weight: 900;
+      font-size: 1.1rem;
+      letter-spacing: -0.5px;
+    }
+    .integration-hub small {
+      color: rgba(0,0,0,0.6);
+      font-size: 0.7rem;
+      font-weight: 600;
+    }
+    .integration-channels {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--sp-3);
+    }
+    .integration-chip {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 18px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      transition: all var(--duration-fast);
+      white-space: nowrap;
+    }
+    .integration-chip:hover {
+      border-color: var(--border-hover);
+      color: var(--text-primary);
+      background: var(--bg-card-hover);
+    }
+    .integration-connector {
+      width: 60px;
+      height: 2px;
+      background: linear-gradient(90deg, var(--gold-300), transparent);
+      flex-shrink: 0;
+    }
+
+    /* ── CTA Section ── */
+    .cta-section {
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .cta-section::before {
+      content: '';
+      position: absolute;
+      bottom: -200px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 700px;
+      height: 700px;
+      background: radial-gradient(circle, rgba(232,133,12,0.06) 0%, transparent 65%);
+      pointer-events: none;
+    }
+    .cta-box {
+      max-width: 640px;
+      margin: 0 auto;
+      padding: var(--sp-16) var(--sp-8);
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-xl);
+      position: relative;
+      overflow: hidden;
+    }
+    .cta-box::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 10%;
+      right: 10%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(232,133,12,0.3), transparent);
+    }
+    .cta-box h2 {
+      margin-bottom: var(--sp-4);
+    }
+    .cta-box p {
+      margin-bottom: var(--sp-8);
+      font-size: 1.05rem;
+    }
+    .cta-actions {
+      display: flex;
+      gap: var(--sp-4);
       justify-content: center;
       flex-wrap: wrap;
     }
 
-    .btn-cta {
-      display: inline-block;
-      background: linear-gradient(135deg, var(--orange), #d0770a);
-      color: #fff;
-      padding: 0.9rem 2.6rem;
-      border-radius: 10px;
-      font-size: 1.1rem;
-      font-weight: 700;
-      border: none;
-      cursor: pointer;
-      transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1),
-                  box-shadow 0.25s;
-    }
-
-    .btn-cta:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 10px 30px rgba(232,133,12,0.35);
-    }
-
-    .btn-secondary {
-      display: inline-block;
-      background: transparent;
-      color: var(--orange);
-      padding: 0.9rem 2.6rem;
-      border-radius: 10px;
-      font-size: 1.1rem;
-      font-weight: 700;
-      border: 2px solid var(--orange);
-      cursor: pointer;
-      transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1),
-                  background 0.25s,
-                  color 0.25s;
-    }
-
-    .btn-secondary:hover {
-      transform: translateY(-3px);
-      background: var(--orange);
-      color: #fff;
-    }
-
-    /* ========== FOOTER ========== */
-    .footer {
-      border-top: 1px solid var(--border);
-      padding: 3rem 2rem 2rem;
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-
-    .footer-grid {
-      display: grid;
-      grid-template-columns: 2fr 1fr 1fr 1fr;
-      gap: 2rem;
-      margin-bottom: 2rem;
-    }
-
-    .footer-brand h3 {
-      font-size: 1.2rem;
-      color: var(--orange);
-      margin-bottom: 0.5rem;
-    }
-
-    .footer-brand p {
-      font-size: 0.85rem;
-      color: var(--text-muted);
-      line-height: 1.6;
-    }
-
-    .footer-col h4 {
-      font-size: 0.85rem;
-      color: #fff;
-      margin-bottom: 0.8rem;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-    }
-
-    .footer-col a {
-      display: block;
-      font-size: 0.85rem;
-      color: var(--text-muted);
-      margin-bottom: 0.5rem;
-      transition: color 0.2s;
-    }
-
-    .footer-col a:hover { color: var(--orange); }
-
-    .footer-bottom {
-      border-top: 1px solid var(--border);
-      padding-top: 1.5rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 1rem;
-    }
-
-    .footer-bottom p {
-      font-size: 0.8rem;
-      color: var(--text-muted);
-    }
-
-    /* ========== RESPONSIVE ========== */
-    @media (max-width: 900px) {
+    /* ── Responsive Overrides ── */
+    @media (max-width: 1024px) {
       .features-grid {
-        grid-template-columns: 1fr;
+        grid-template-columns: repeat(2, 1fr);
       }
-      .why-grid {
-        grid-template-columns: 1fr;
-        max-width: 500px;
-        margin: 0 auto;
+      .pipeline-wrap {
+        flex-wrap: wrap;
+      }
+      .pipeline-step {
+        flex: 1 1 45%;
+        border-radius: var(--radius-md) !important;
+      }
+      .pipeline-arrow {
+        display: none;
+      }
+      .integration-connector {
+        display: none;
+      }
+      .integration-visual {
+        flex-direction: column;
       }
     }
 
     @media (max-width: 768px) {
-      .navbar-links { display: none; }
-      .navbar-links.open {
-        display: flex;
-        flex-direction: column;
-        position: absolute;
-        top: 64px;
-        left: 0;
-        right: 0;
-        background: rgba(10,10,26,0.98);
-        padding: 1.5rem 2rem;
-        gap: 1rem;
-        border-bottom: 1px solid var(--border);
+      .features-hero {
+        padding: 120px 0 80px;
       }
-      .hamburger { display: flex; }
-      .footer-grid {
-        grid-template-columns: 1fr 1fr;
+      .features-grid {
+        grid-template-columns: 1fr;
+      }
+      .pipeline-step {
+        flex: 1 1 100%;
+      }
+      .integration-channels {
+        grid-template-columns: 1fr;
+      }
+      .cta-box {
+        padding: var(--sp-10) var(--sp-5);
       }
     }
 
     @media (max-width: 480px) {
-      .footer-grid { grid-template-columns: 1fr; }
-      .hero { padding: 120px 1.2rem 60px; }
-      .features-section { padding: 1rem 1.2rem 4rem; }
-      .feature-card { padding: 1.8rem 1.4rem; }
-      .cta-buttons { flex-direction: column; align-items: center; }
+      .features-hero {
+        padding: 110px 0 60px;
+      }
+      .integration-hub {
+        width: 120px;
+        height: 120px;
+      }
+      .integration-hub span {
+        font-size: 0.9rem;
+      }
     }
   </style>
-  <link rel="stylesheet" href="/assets/framer-style.css">
 </head>
-<body>
+<body class="page-top">
 
-  <!-- NAVBAR -->
-  <nav class="navbar">
-    <a href="/" class="navbar-brand">SEO<span>BAIKE</span></a>
-    <div class="navbar-links" id="navLinks">
-      <a href="/">首頁</a>
-      <a href="/features" class="active">功能</a>
-      <a href="/marketplace">市集</a>
-      <a href="/pricing">方案</a>
-      <a href="/about">關於</a>
-      <a href="/docs">常見問題</a>
-      <a href="/login" class="btn-login">登入</a>
-    </div>
-    <button class="hamburger" id="hamburger" aria-label="選單">
+  <!-- ════════════ NAV ════════════ -->
+  <nav class="nav">
+    <a href="/" class="nav-brand">
+      <img src="/favicon.svg" alt="SEOBAIKE" width="34" height="34">
+      <span><span class="seo">SEO</span><span class="baike">BAIKE</span></span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="/">首頁</a></li>
+      <li><a href="/features" class="active">功能</a></li>
+      <li><a href="/marketplace">市集</a></li>
+      <li><a href="/pricing">方案</a></li>
+      <li><a href="/about">關於</a></li>
+      <li><a href="/docs">常見問題</a></li>
+      <li><a href="/login" class="nav-cta">登入</a></li>
+    </ul>
+    <button class="nav-hamburger" onclick="toggleMenu()" aria-label="選單">
       <span></span><span></span><span></span>
     </button>
   </nav>
 
-  <!-- HERO -->
-  <section class="hero">
-    <h1>SEOBAIKE 市集功能</h1>
-    <p class="subtitle">八大功能，幫你把商品賣到全世界。AI 搞定一切，你專心做生意。</p>
-  </section>
+  <!-- Mobile Menu Overlay -->
+  <div class="mobile-overlay">
+    <button class="mobile-close" onclick="toggleMenu()">&times;</button>
+    <a href="/" onclick="toggleMenu()">首頁</a>
+    <a href="/features" onclick="toggleMenu()">功能</a>
+    <a href="/marketplace" onclick="toggleMenu()">市集</a>
+    <a href="/pricing" onclick="toggleMenu()">方案</a>
+    <a href="/about" onclick="toggleMenu()">關於</a>
+    <a href="/docs" onclick="toggleMenu()">常見問題</a>
+    <a href="/login" onclick="toggleMenu()">登入</a>
+  </div>
 
-  <!-- 60秒產品展示影片 -->
-  <section style="padding: 0 2rem 3rem; max-width: 960px; margin: 0 auto;">
-    <div style="text-align:center; margin-bottom: 2rem;">
-      <h2 style="font-size: clamp(1.6rem, 3vw, 2.2rem); font-weight: 800; background: linear-gradient(135deg, var(--orange), var(--copper)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 0.5rem;">60 秒看懂 SEOBAIKE</h2>
-      <p style="color: var(--text-muted); font-size: 1rem;">看一次就知道 SEOBAIKE 能為你做什麼</p>
-    </div>
-    <div id="demo-video-features"></div>
-  </section>
-
-  <!-- FEATURES -->
-  <section class="features-section">
-    <div class="features-grid">
-
-      <!-- 1. 一鍵上架 -->
-      <div class="feature-card">
-        <span class="feature-icon">🏪</span>
-        <h3>一鍵上架</h3>
-        <p class="feature-desc">填完表格，你的商品就能出現在全球市集上。不需要技術背景。</p>
-        <div class="feature-scenario">數位商品、AI 工具、設計素材、教學課程、顧問服務、行銷方案</div>
+  <!-- ════════════ HERO ════════════ -->
+  <section class="features-hero">
+    <div class="container text-center">
+      <div class="fade-up">
+        <div class="hero-badge">AI 能力總覽</div>
+        <h1 class="hero-title"><span class="text-gold">SEOBAIKE</span> 能做什麼？</h1>
+        <p class="hero-subtitle">
+          八大 AI 能力，涵蓋 SEO 分析、內容生成、多語言翻譯、數據洞察。<br>
+          一個入口，串接所有 AI 服務。
+        </p>
+        <div class="hero-actions">
+          <a href="/pricing" class="btn btn-primary btn-lg">查看方案</a>
+          <a href="/marketplace" class="btn btn-secondary btn-lg">探索市集</a>
+        </div>
       </div>
-
-      <!-- 2. AI 自動翻譯 -->
-      <div class="feature-card">
-        <span class="feature-icon">🌍</span>
-        <h3>AI 自動翻譯</h3>
-        <p class="feature-desc">AI 自動把你的商品說明翻成韓文、日文、英文，讓全世界的買家都看得懂。</p>
-        <div class="feature-scenario">한국어 번역 · 日本語翻訳 · English Translation — 全自動</div>
-      </div>
-
-      <!-- 3. 智慧行銷 -->
-      <div class="feature-card">
-        <span class="feature-icon">📣</span>
-        <h3>智慧行銷</h3>
-        <p class="feature-desc">AI 幫你撰寫吸引人的商品文案、社群貼文、廣告素材。不用花錢請行銷公司。</p>
-        <div class="feature-scenario">AI 寫商品文案、自動生成社群貼文、廣告素材設計</div>
-      </div>
-
-      <!-- 4. 自動客服 -->
-      <div class="feature-card">
-        <span class="feature-icon">🤖</span>
-        <h3>AI 客服助手</h3>
-        <p class="feature-desc">AI 自動回答買家的常見問題，支援多語言。你專心做生意，客服交給 AI。</p>
-        <div class="feature-scenario">24 小時自動回覆、多語言客服、常見問題自動處理</div>
-      </div>
-
-      <!-- 5. 商品管理 -->
-      <div class="feature-card">
-        <span class="feature-icon">📦</span>
-        <h3>商品管理</h3>
-        <p class="feature-desc">輕鬆管理你的所有上架商品。修改價格、更新說明、調整類別，一目了然。</p>
-        <div class="feature-scenario">商品編輯、庫存管理、分類調整、批次更新</div>
-      </div>
-
-      <!-- 6. 數據分析 -->
-      <div class="feature-card">
-        <span class="feature-icon">📊</span>
-        <h3>銷售數據分析</h3>
-        <p class="feature-desc">即時查看銷售數據、買家行為、流量趨勢。AI 幫你看懂數字，做出更好的決策。</p>
-        <div class="feature-scenario">銷售趨勢、買家來源分析、熱門商品排行</div>
-      </div>
-
-      <!-- 7. 全球曝光 -->
-      <div class="feature-card">
-        <span class="feature-icon">🚀</span>
-        <h3>全球曝光</h3>
-        <p class="feature-desc">你的商品上架後，台灣、韓國、日本、東南亞的買家都能找到你。免費全球曝光。</p>
-        <div class="feature-scenario">跨國市集、搜尋排名優化、AI 推薦系統</div>
-      </div>
-
-      <!-- 8. 安全收款 -->
-      <div class="feature-card">
-        <span class="feature-icon">💰</span>
-        <h3>安全收款</h3>
-        <p class="feature-desc">第三方支付平台安全處理金流，分潤依合約約定。</p>
-        <div class="feature-scenario">安全金流、即時撥款、透明可查、台幣計價</div>
-      </div>
-
     </div>
   </section>
 
-  <!-- WHY US -->
-  <section class="why-section">
-    <h2>為什麼選 SEOBAIKE 市集？</h2>
-    <div class="why-grid">
-
-      <div class="why-card">
-        <span class="why-icon">🌏</span>
-        <h3>賣到全世界</h3>
-        <p>台灣、韓國、日本、東南亞 — AI 幫你翻譯，全球買家都能找到你的商品。</p>
+  <!-- ════════════ FEATURE GRID ════════════ -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header fade-up">
+        <div class="section-badge">Core Features</div>
+        <h2>八大 <span class="text-gold">AI 能力</span></h2>
+        <p>每一項都經過精心設計，讓你的業務流程全面升級</p>
       </div>
 
-      <div class="why-card">
-        <span class="why-icon">🛡️</span>
-        <h3>安全有保障</h3>
-        <p>金流安全處理，資料全程加密。台灣合法公司經營，安心交易。</p>
-        <span class="why-highlight">安全交易</span>
-      </div>
+      <div class="features-grid">
 
-      <div class="why-card">
-        <span class="why-icon">💰</span>
-        <h3>安全收款</h3>
-        <p>透明的分潤制度，免費上架，成交才收費。</p>
-        <span class="why-highlight">免費上架</span>
-      </div>
+        <!-- 1. SEO 自動分析 -->
+        <div class="card feature-card fade-up">
+          <div class="feature-icon-wrap">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--gold-200)">
+              <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+              <path d="M11 8v6"/><path d="M8 11h6"/>
+            </svg>
+          </div>
+          <h3>SEO 自動分析</h3>
+          <p>AI 自動掃描網站結構、關鍵字密度、反向連結品質，產出可執行的優化建議報告。</p>
+          <span class="feature-tag">搜尋優化</span>
+        </div>
 
+        <!-- 2. AI 多語言翻譯 -->
+        <div class="card feature-card fade-up">
+          <div class="feature-icon-wrap">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--gold-200)">
+              <path d="m5 8 6 6"/><path d="m4 14 6-6 2-3"/><path d="M2 5h12"/>
+              <path d="M7 2h1"/><path d="m22 22-5-10-5 10"/><path d="M14 18h6"/>
+            </svg>
+          </div>
+          <h3>AI 多語言翻譯</h3>
+          <p>支援中、英、日、韓、東南亞多語系即時翻譯，語意精準，符合在地化表達習慣。</p>
+          <span class="feature-tag">全球觸達</span>
+        </div>
+
+        <!-- 3. 智能客服 -->
+        <div class="card feature-card fade-up">
+          <div class="feature-icon-wrap">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--gold-200)">
+              <path d="M12 6V2H8"/><path d="m8 18-4 4V8a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2Z"/>
+              <path d="M10 12h.01"/><path d="M14 12h.01"/>
+            </svg>
+          </div>
+          <h3>智能客服</h3>
+          <p>AI 客服全天候自動應答，理解上下文語境，多語言同時服務，大幅降低人力負擔。</p>
+          <span class="feature-tag">自動應答</span>
+        </div>
+
+        <!-- 4. 內容自動生成 -->
+        <div class="card feature-card fade-up">
+          <div class="feature-icon-wrap">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--gold-200)">
+              <path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
+              <path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z"/>
+            </svg>
+          </div>
+          <h3>內容自動生成</h3>
+          <p>一鍵生成部落格文章、產品描述、社群貼文、電子報文案，符合 SEO 架構與品牌調性。</p>
+          <span class="feature-tag">文案引擎</span>
+        </div>
+
+        <!-- 5. 圖片生成 -->
+        <div class="card feature-card fade-up">
+          <div class="feature-icon-wrap">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--gold-200)">
+              <rect width="18" height="18" x="3" y="3" rx="2" ry="2"/>
+              <circle cx="9" cy="9" r="2"/>
+              <path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/>
+            </svg>
+          </div>
+          <h3>圖片生成</h3>
+          <p>輸入文字描述，AI 即時產出高品質圖片素材，適用於廣告、社群、產品展示等場景。</p>
+          <span class="feature-tag">視覺創作</span>
+        </div>
+
+        <!-- 6. 數據分析 -->
+        <div class="card feature-card fade-up">
+          <div class="feature-icon-wrap">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--gold-200)">
+              <path d="M3 3v16a2 2 0 0 0 2 2h16"/>
+              <path d="m7 11 4-4 4 4 6-6"/>
+            </svg>
+          </div>
+          <h3>數據分析</h3>
+          <p>AI 自動彙整流量、轉換、使用者行為等數據，以視覺化圖表呈現關鍵洞察。</p>
+          <span class="feature-tag">智能洞察</span>
+        </div>
+
+        <!-- 7. 市場研究 -->
+        <div class="card feature-card fade-up">
+          <div class="feature-icon-wrap">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--gold-200)">
+              <circle cx="12" cy="12" r="10"/>
+              <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/>
+              <path d="M2 12h20"/>
+            </svg>
+          </div>
+          <h3>市場研究</h3>
+          <p>AI 蒐集並分析市場趨勢、競爭對手動態、受眾偏好，協助制定精準商業策略。</p>
+          <span class="feature-tag">策略分析</span>
+        </div>
+
+        <!-- 8. 自動行銷 -->
+        <div class="card feature-card fade-up">
+          <div class="feature-icon-wrap">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--gold-200)">
+              <path d="m3 11 18-5v12L3 13v-2z"/>
+              <path d="M11.6 16.8a3 3 0 1 1-5.8-1.6"/>
+            </svg>
+          </div>
+          <h3>自動行銷</h3>
+          <p>AI 自動排程社群貼文、觸發電子郵件行銷、優化廣告投放策略，全流程自動化運作。</p>
+          <span class="feature-tag">行銷自動化</span>
+        </div>
+
+      </div>
     </div>
   </section>
 
-  <!-- CTA -->
-  <section class="cta-section">
-    <h2>開始賣到全世界</h2>
-    <p>免費上架，輕鬆搞定。AI 幫你翻譯、行銷、客服。</p>
-    <div class="cta-buttons">
-      <a href="/marketplace#earn" class="btn-cta">我要上架</a>
-      <a href="/marketplace" class="btn-secondary">逛市集</a>
+  <!-- ════════════ HOW AI WORKS ════════════ -->
+  <section class="section" style="background: var(--bg-secondary);">
+    <div class="container">
+      <div class="section-header fade-up">
+        <div class="section-badge">How It Works</div>
+        <h2>AI <span class="text-gold">運作流程</span></h2>
+        <p>從輸入到產出，四個步驟完成任務</p>
+      </div>
+
+      <div class="pipeline-wrap fade-up">
+        <!-- Step 1 -->
+        <div class="pipeline-step">
+          <div class="pipeline-num">1</div>
+          <h4>輸入需求</h4>
+          <p>用自然語言描述你想要的結果</p>
+          <div class="pipeline-arrow">&#8594;</div>
+        </div>
+        <!-- Step 2 -->
+        <div class="pipeline-step">
+          <div class="pipeline-num">2</div>
+          <h4>AI 解析</h4>
+          <p>平台自動匹配最適合的 AI 模型</p>
+          <div class="pipeline-arrow">&#8594;</div>
+        </div>
+        <!-- Step 3 -->
+        <div class="pipeline-step">
+          <div class="pipeline-num">3</div>
+          <h4>執行任務</h4>
+          <p>AI 在背景高效運算並產出結果</p>
+          <div class="pipeline-arrow">&#8594;</div>
+        </div>
+        <!-- Step 4 -->
+        <div class="pipeline-step">
+          <div class="pipeline-num">4</div>
+          <h4>交付成果</h4>
+          <p>即時取得可用的分析報告或內容</p>
+        </div>
+      </div>
     </div>
   </section>
 
-  <!-- FOOTER -->
+  <!-- ════════════ INTEGRATION ════════════ -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header fade-up">
+        <div class="section-badge">Integration</div>
+        <h2>一個入口，<span class="text-gold">所有 AI</span></h2>
+        <p>不用在不同工具之間切換，SEOBAIKE 統一串接，一站完成</p>
+      </div>
+
+      <div class="integration-visual fade-up">
+        <div class="integration-channels">
+          <div class="integration-chip">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color:var(--gold-200);flex-shrink:0"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+            SEO 分析引擎
+          </div>
+          <div class="integration-chip">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color:var(--gold-200);flex-shrink:0"><path d="m5 8 6 6"/><path d="m4 14 6-6 2-3"/><path d="M2 5h12"/></svg>
+            翻譯模組
+          </div>
+          <div class="integration-chip">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color:var(--gold-200);flex-shrink:0"><path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/></svg>
+            內容生成器
+          </div>
+          <div class="integration-chip">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color:var(--gold-200);flex-shrink:0"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><circle cx="9" cy="9" r="2"/></svg>
+            圖片生成引擎
+          </div>
+          <div class="integration-chip">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color:var(--gold-200);flex-shrink:0"><path d="M3 3v16a2 2 0 0 0 2 2h16"/><path d="m7 11 4-4 4 4 6-6"/></svg>
+            數據分析中心
+          </div>
+          <div class="integration-chip">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color:var(--gold-200);flex-shrink:0"><path d="m3 11 18-5v12L3 13v-2z"/></svg>
+            行銷自動化
+          </div>
+        </div>
+
+        <div class="integration-connector"></div>
+
+        <div class="integration-hub animate-glow">
+          <span>SEOBAIKE</span>
+          <small>AI 中控台</small>
+        </div>
+
+        <div class="integration-connector" style="background:linear-gradient(90deg, transparent, var(--gold-300));"></div>
+
+        <div class="integration-channels">
+          <div class="integration-chip">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color:var(--success);flex-shrink:0"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            SEO 報告
+          </div>
+          <div class="integration-chip">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color:var(--success);flex-shrink:0"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            多語言內容
+          </div>
+          <div class="integration-chip">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color:var(--success);flex-shrink:0"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            行銷素材
+          </div>
+          <div class="integration-chip">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color:var(--success);flex-shrink:0"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            客服紀錄
+          </div>
+          <div class="integration-chip">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color:var(--success);flex-shrink:0"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            數據儀表板
+          </div>
+          <div class="integration-chip">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color:var(--success);flex-shrink:0"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            視覺素材
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════ CTA ════════════ -->
+  <section class="section cta-section" style="background: var(--bg-secondary);">
+    <div class="container">
+      <div class="cta-box fade-up">
+        <div class="section-badge" style="margin-bottom:var(--sp-6)">Get Started</div>
+        <h2>準備好了嗎？</h2>
+        <p>從今天開始，讓 AI 成為你的商業夥伴</p>
+        <div class="cta-actions">
+          <a href="/pricing" class="btn btn-primary btn-lg">選擇方案</a>
+          <a href="/about" class="btn btn-secondary btn-lg">了解更多</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════ FOOTER ════════════ -->
   <footer class="footer">
-    <div class="footer-grid">
-      <div class="footer-brand">
-        <h3>SEOBAIKE</h3>
-        <p>小路光有限公司（統編 60475510）<br>AI 驅動的全球市集</p>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="/" class="nav-brand" style="margin-bottom:var(--sp-3)">
+            <img src="/favicon.svg" alt="SEOBAIKE" width="34" height="34">
+            <span><span class="seo">SEO</span><span class="baike">BAIKE</span></span>
+          </a>
+          <p>小路光有限公司（統編 60475510）<br>AI 驅動的服務平台，一個入口串接所有 AI。</p>
+        </div>
+        <div class="footer-col">
+          <h4>產品</h4>
+          <a href="/features">功能介紹</a>
+          <a href="/pricing">方案定價</a>
+          <a href="/marketplace">市集</a>
+        </div>
+        <div class="footer-col">
+          <h4>公司</h4>
+          <a href="/about">關於我們</a>
+          <a href="/contact">聯繫我們</a>
+          <a href="/about#careers">加入團隊</a>
+        </div>
+        <div class="footer-col">
+          <h4>支援</h4>
+          <a href="/docs">常見問題</a>
+          <a href="/contact">聯絡客服</a>
+          <a href="/status">系統狀態</a>
+        </div>
       </div>
-      <div class="footer-col">
-        <h4>產品</h4>
-        <a href="/features">功能介紹</a>
-        <a href="/pricing">方案定價</a>
-        <a href="/marketplace">市集</a>
+      <div class="footer-bottom">
+        <p>&copy; 2025-2026 小路光有限公司。保留所有權利。</p>
+        <p>aiforseo.vip</p>
       </div>
-      <div class="footer-col">
-        <h4>公司</h4>
-        <a href="/about">關於我們</a>
-        <a href="/contact">聯繫我們</a>
-        <a href="/about#careers">加入團隊</a>
-      </div>
-      <div class="footer-col">
-        <h4>支援</h4>
-        <a href="/docs">常見問題</a>
-        <a href="/contact">聯絡我們</a>
-        <a href="/status">系統狀態</a>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      <p>&copy; 2025-2026 小路光有限公司。保留所有權利。</p>
-      <p>aiforseo.vip</p>
     </div>
   </footer>
 
-  <!-- Hamburger Menu -->
+  <!-- ════════════ SCRIPTS ════════════ -->
+
+  <!-- Scroll Animations + Nav Scroll + Hamburger -->
   <script>
-    document.getElementById('hamburger').addEventListener('click', function () {
-      document.getElementById('navLinks').classList.toggle('open');
+    /* IntersectionObserver for .fade-up */
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.08 });
+    document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
+
+    /* Nav scroll effect */
+    window.addEventListener('scroll', () => {
+      const nav = document.querySelector('.nav');
+      if (nav) nav.classList.toggle('scrolled', window.scrollY > 20);
     });
+
+    /* Hamburger toggle */
+    function toggleMenu() {
+      document.querySelector('.nav-hamburger')?.classList.toggle('active');
+      document.querySelector('.mobile-overlay')?.classList.toggle('open');
+    }
   </script>
 
-  <!-- Scroll Reveal Animation -->
+  <!-- Analytics: page_views tracking -->
   <script>
-    (function() {
-      var cards = document.querySelectorAll('.feature-card, .why-card');
-      var observer = new IntersectionObserver(function(entries) {
-        entries.forEach(function(entry) {
-          if (entry.isIntersecting) {
-            var el = entry.target;
-            var siblings = Array.prototype.slice.call(el.parentElement.children);
-            var i = siblings.indexOf(el);
-            setTimeout(function() {
-              el.classList.add('visible');
-            }, i * 100);
-            observer.unobserve(el);
-          }
-        });
-      }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
-
-      cards.forEach(function(card) {
-        observer.observe(card);
-      });
-    })();
+  (function(){
+    try {
+      var cfg = window.__SEOBAIKE__ || {};
+      var sUrl = cfg.supabaseUrl || 'https://vmyrivxxibqydccurxug.supabase.co';
+      var sKey = cfg.anonKey || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZteXJpdnh4aWJxeWRjY3VyeHVnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzAwNDAwMjksImV4cCI6MjA4NTYxNjAyOX0.iBV-23LGdm_uKffAExgqSV34-NWoAyv8_-M_cJQZ8Gg';
+      fetch(sUrl + '/rest/v1/page_views', {
+        method: 'POST',
+        headers: { 'Content-Type':'application/json', 'apikey':sKey, 'Authorization':'Bearer '+sKey, 'Prefer':'return=minimal' },
+        body: JSON.stringify({ path: location.pathname, referrer: document.referrer || null, user_agent: navigator.userAgent })
+      }).catch(function(){});
+    } catch(e){}
+  })();
   </script>
 
-  <!-- Analytics -->
-  <script>
-(function(){
-  try {
-    var cfg = window.__SEOBAIKE__ || {};
-    var sUrl = cfg.supabaseUrl || 'https://vmyrivxxibqydccurxug.supabase.co';
-    var sKey = cfg.anonKey || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZteXJpdnh4aWJxeWRjY3VyeHVnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzAwNDAwMjksImV4cCI6MjA4NTYxNjAyOX0.iBV-23LGdm_uKffAExgqSV34-NWoAyv8_-M_cJQZ8Gg';
-    fetch(sUrl + '/rest/v1/page_views', {
-      method: 'POST',
-      headers: { 'Content-Type':'application/json', 'apikey':sKey, 'Authorization':'Bearer '+sKey, 'Prefer':'return=minimal' },
-      body: JSON.stringify({ path: location.pathname, referrer: document.referrer || null, user_agent: navigator.userAgent })
-    }).catch(function(){});
-  } catch(e){}
-})();
-</script>
-
-  <script src="/assets/demo-video.js"></script>
-  <script>window.SEOBAIKEDemo && window.SEOBAIKEDemo.init('demo-video-features');</script>
-  <script src="/assets/smart-align.js"></script>
   <script src="/seobaike-widget.js"></script>
 </body>
 </html>

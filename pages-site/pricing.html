@@ -3,1775 +3,914 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>方案與定價 — SEOBAIKE | AI 平台價格方案</title>
-  <meta name="description" content="SEOBAIKE 定價方案：體驗版免費、個人版 NT$299、專業版 NT$899、企業版 NT$2,999。不用選模型、不用懂技術，告訴我們你要什麼，剩下的交給 SEOBAIKE。年付享 8 折優惠。">
-  <meta name="keywords" content="SEOBAIKE,AI 平台定價,AI 工具價格,AI 方案,AI 訂閱,台灣 AI 服務,AI 引擎費用,人工智慧方案,AI 助理價格,免費 AI 工具,企業 AI 方案,AI 月費">
-  <link rel="canonical" href="https://aiforseo.vip/pricing.html">
-  <meta property="og:title" content="方案與定價 — SEOBAIKE | AI 平台">
-  <meta property="og:description" content="四種方案，從免費到企業級。不用選模型、不用懂技術，一分鐘看完。年付享 8 折優惠。">
+  <title>方案與定價 — SEOBAIKE | SEO Points 彈性點數制</title>
+  <meta name="description" content="SEOBAIKE 採用 SEO Points 點數制，彈性又透明。免費體驗、專業版、企業版三種方案，滿足不同階段需求。價格以新台幣顯示。">
+  <meta name="keywords" content="SEOBAIKE,定價,SEO Points,AI 平台定價,點數制,台灣 AI 服務,AI 方案,企業 AI">
+  <link rel="canonical" href="https://aiforseo.vip/pricing">
+  <meta property="og:title" content="方案與定價 — SEOBAIKE | SEO Points 點數制">
+  <meta property="og:description" content="用 SEO Points 點數交易，彈性又透明。三種方案，從免費體驗到企業級。">
   <meta property="og:type" content="website">
-  <meta property="og:url" content="https://aiforseo.vip/pricing.html">
+  <meta property="og:url" content="https://aiforseo.vip/pricing">
   <meta property="og:image" content="/og-image.png">
   <meta property="og:site_name" content="SEOBAIKE">
   <meta property="og:locale" content="zh_TW">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="方案與定價 — SEOBAIKE | AI 平台">
-  <meta name="twitter:description" content="四種方案，從免費到企業級。不用選模型、不用懂技術，一分鐘看完。年付享 8 折。">
-  <meta name="theme-color" content="#0a0a1a">
+  <meta name="twitter:title" content="方案與定價 — SEOBAIKE | SEO Points 點數制">
+  <meta name="twitter:description" content="用 SEO Points 點數交易，彈性又透明。三種方案，從免費體驗到企業級。">
+  <meta name="theme-color" content="#06060f">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="/og-image.png">
   <link rel="manifest" href="/manifest.json">
+
+  <!-- Structured Data -->
   <script type="application/ld+json">
-  [
-    {
-      "@context": "https://schema.org",
-      "@type": "Product",
-      "name": "SEOBAIKE AI 平台",
-      "description": "全球適用 AI 平台，整合 1,000+ AI 引擎",
-      "brand": { "@type": "Brand", "name": "SEOBAIKE" },
-      "offers": [
-        { "@type": "Offer", "name": "體驗版", "price": "0", "priceCurrency": "TWD", "description": "每天 10 次 AI 對話、基礎 AI 服務、社群支援", "availability": "https://schema.org/InStock" },
-        { "@type": "Offer", "name": "個人版", "price": "299", "priceCurrency": "TWD", "description": "無限 AI 對話、自動選擇最佳方案、8 大能力全開、Email 支援", "availability": "https://schema.org/InStock", "priceValidUntil": "2026-12-31" },
-        { "@type": "Offer", "name": "專業版", "price": "899", "priceCurrency": "TWD", "description": "API 存取、市集工具免費、優先處理、專屬客服", "availability": "https://schema.org/InStock", "priceValidUntil": "2026-12-31" },
-        { "@type": "Offer", "name": "企業版", "price": "2999", "priceCurrency": "TWD", "description": "白標方案、技術授權、24/7 技術支援、SLA 服務承諾", "availability": "https://schema.org/InStock", "priceValidUntil": "2026-12-31" }
-      ]
-    }
-  ]
+  {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": "SEOBAIKE AI 平台",
+    "description": "SEO Points 點數制 AI 平台，彈性透明",
+    "brand": { "@type": "Brand", "name": "SEOBAIKE" },
+    "offers": [
+      { "@type": "Offer", "name": "免費體驗", "price": "0", "priceCurrency": "TWD", "description": "每月 100 SEO Points，體驗核心功能", "availability": "https://schema.org/InStock" },
+      { "@type": "Offer", "name": "專業版", "price": "899", "priceCurrency": "TWD", "description": "每月 2,000 SEO Points，API 存取，優先處理", "availability": "https://schema.org/InStock" },
+      { "@type": "Offer", "name": "企業版", "priceCurrency": "TWD", "description": "客製化點數方案，白標授權，SLA 服務等級承諾", "availability": "https://schema.org/InStock" }
+    ]
+  }
   </script>
+
+  <!-- Design System -->
+  <link rel="stylesheet" href="/assets/design-system.css">
+
   <style>
-    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    /* ══════════════════════════════════════════
+       Pricing Page — Premium Overrides
+       ══════════════════════════════════════════ */
 
-    :root {
-      --orange: #e8850c;
-      --orange-hover: #d4780a;
-      --orange-glow: rgba(232, 133, 12, 0.15);
-      --copper: #cc785c;
-      --green: #76b900;
-      --green-dim: rgba(118, 185, 0, 0.12);
-      --bg: #0a0a1a;
-      --bg-card: #12122a;
-      --bg-code: #0d0d22;
-      --border: #2a2a4a;
-      --border-light: #3a3a5a;
-      --text: #e0e0e8;
-      --text-muted: #8888aa;
-      --text-bright: #ffffff;
-      --radius: 14px;
-    }
-
-    html { scroll-behavior: smooth; }
-
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans TC", sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      line-height: 1.7;
-      overflow-x: hidden;
-    }
-
-    a { color: inherit; text-decoration: none; transition: color 0.2s; }
-
-    .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
-
-    /* ========== NAVBAR ========== */
-    .navbar {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 1000;
-      background: rgba(10, 10, 26, 0.92);
-      backdrop-filter: blur(16px);
-      border-bottom: 1px solid var(--border);
-      padding: 0 2rem;
-      height: 64px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    .navbar-brand {
-      font-size: 1.5rem;
-      font-weight: 900;
-      color: #fff;
-      letter-spacing: -1px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .navbar-brand .seo {
-      background: linear-gradient(135deg, #e8850c, #f5a623, #ffd700);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-    .navbar-brand .baike { color: #ffffff; }
-
-    .navbar-links {
-      display: flex;
-      gap: 1.6rem;
-      align-items: center;
-      list-style: none;
-    }
-
-    .navbar-links a {
-      font-size: 0.9rem;
-      color: var(--text-muted);
-      transition: color 0.2s;
-      white-space: nowrap;
-      font-weight: 500;
-    }
-
-    .navbar-links a:hover,
-    .navbar-links a.active { color: var(--orange); }
-
-    .navbar-links .btn-login {
-      background: var(--orange);
-      color: #fff;
-      padding: 0.45rem 1.2rem;
-      border-radius: 8px;
-      font-weight: 600;
-      transition: background 0.2s;
-    }
-
-    .navbar-links .btn-login:hover {
-      background: var(--orange-hover);
-      color: #fff;
-    }
-
-    .hamburger {
-      display: none;
-      flex-direction: column;
-      gap: 5px;
-      cursor: pointer;
-      background: none;
-      border: none;
-      padding: 4px;
-    }
-
-    .hamburger span {
-      display: block;
-      width: 24px;
-      height: 2px;
-      background: var(--text);
-      border-radius: 2px;
-      transition: 0.3s;
-    }
-
-    /* ========== HERO ========== */
-    .hero {
-      padding: 140px 2rem 60px;
+    /* Hero */
+    .pricing-hero {
+      padding: 140px 0 80px;
       text-align: center;
       position: relative;
+      overflow: hidden;
     }
-
-    .hero::before {
+    .pricing-hero::before {
       content: '';
       position: absolute;
-      top: 0; left: 50%;
+      top: -200px;
+      left: 50%;
       transform: translateX(-50%);
-      width: 900px; height: 900px;
-      background: radial-gradient(circle, rgba(232,133,12,0.07) 0%, transparent 70%);
+      width: 1000px;
+      height: 1000px;
+      background: radial-gradient(ellipse, rgba(232,133,12,0.06) 0%, transparent 65%);
       pointer-events: none;
     }
-
-    .hero h1 {
-      font-size: clamp(2.4rem, 5vw, 3.8rem);
-      font-weight: 900;
-      margin-bottom: 1rem;
-      background: linear-gradient(135deg, var(--orange), var(--copper));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      letter-spacing: -2px;
+    .pricing-hero h1 {
+      margin-bottom: var(--sp-4);
     }
-
-    .hero .hero-sub {
-      font-size: 1.2rem;
+    .pricing-hero .subtitle {
+      font-size: 1.15rem;
       color: var(--text-muted);
-      max-width: 600px;
-      margin: 0 auto 2.5rem;
+      max-width: 560px;
+      margin: 0 auto;
       line-height: 1.8;
     }
 
-    /* ========== BILLING TOGGLE ========== */
-    .billing-toggle {
+    /* SEO Points Explainer */
+    .points-explainer {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--sp-6);
+      margin-top: var(--sp-10);
+    }
+    .point-card {
+      text-align: center;
+      padding: var(--sp-8) var(--sp-6);
+    }
+    .point-card-icon {
+      width: 56px;
+      height: 56px;
+      border-radius: var(--radius-lg);
+      background: rgba(232,133,12,0.08);
+      border: 1px solid rgba(232,133,12,0.15);
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 1rem;
-      margin-bottom: 1rem;
+      margin: 0 auto var(--sp-4);
+      font-size: 1.5rem;
     }
-
-    .billing-toggle span {
-      font-size: 0.95rem;
+    .point-card h4 {
+      margin-bottom: var(--sp-2);
+    }
+    .point-card p {
+      font-size: 0.88rem;
       color: var(--text-muted);
-      font-weight: 500;
-      cursor: pointer;
-      transition: color 0.2s;
+      line-height: 1.7;
     }
 
-    .billing-toggle span.active { color: var(--text-bright); font-weight: 700; }
-
-    .toggle-switch {
-      width: 52px;
-      height: 28px;
-      background: var(--border);
-      border-radius: 999px;
-      position: relative;
-      cursor: pointer;
-      transition: background 0.3s;
-    }
-
-    .toggle-switch.annual { background: var(--orange); }
-
-    .toggle-switch::after {
-      content: '';
-      position: absolute;
-      top: 3px; left: 3px;
-      width: 22px; height: 22px;
-      background: #fff;
-      border-radius: 50%;
-      transition: transform 0.3s;
-    }
-
-    .toggle-switch.annual::after {
-      transform: translateX(24px);
-    }
-
-    .billing-badge {
-      display: inline-block;
-      background: var(--green-dim);
-      color: var(--green);
-      padding: 0.2rem 0.8rem;
-      border-radius: 999px;
-      font-size: 0.78rem;
-      font-weight: 700;
-      border: 1px solid rgba(118,185,0,0.25);
-    }
-
-    /* ========== VIDEO DEMO ========== */
-    .video-section {
-      padding: 0 2rem 4rem;
-      max-width: 960px;
-      margin: 0 auto;
-    }
-
-    /* ========== PRICING CARDS ========== */
-    .pricing-section {
-      padding: 2rem 2rem 5rem;
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-
+    /* Pricing Cards */
     .pricing-grid {
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 1.2rem;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--sp-6);
       align-items: stretch;
     }
-
     .pricing-card {
       background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 2.2rem 1.6rem;
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-xl);
+      padding: var(--sp-10) var(--sp-8);
       display: flex;
       flex-direction: column;
       position: relative;
-      transition: transform 0.25s, box-shadow 0.25s;
+      transition: all var(--duration-normal) var(--ease-out);
+      overflow: hidden;
     }
-
+    .pricing-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 15%;
+      right: 15%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(232,133,12,0.15), transparent);
+      opacity: 0;
+      transition: opacity var(--duration-normal);
+    }
     .pricing-card:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 16px 48px rgba(0,0,0,0.3);
+      border-color: var(--border-hover);
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-gold);
     }
-
+    .pricing-card:hover::before {
+      opacity: 1;
+    }
     .pricing-card.featured {
-      border-color: var(--orange);
-      box-shadow: 0 0 0 1px var(--orange), 0 8px 32px rgba(232,133,12,0.15);
-      transform: scale(1.02);
+      border-color: rgba(232,133,12,0.4);
+      box-shadow: 0 0 0 1px rgba(232,133,12,0.15), var(--shadow-gold);
+      background: var(--bg-card-hover);
     }
-
-    .pricing-card.featured:hover {
-      transform: scale(1.02) translateY(-6px);
+    .pricing-card.featured::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: var(--gold-gradient);
     }
 
     .recommend-badge {
       position: absolute;
-      top: -14px; left: 50%;
-      transform: translateX(-50%);
-      background: linear-gradient(135deg, var(--orange), #d0770a);
-      color: #fff;
-      padding: 0.3rem 1.2rem;
-      border-radius: 999px;
+      top: 16px;
+      right: 16px;
+      background: var(--gold-gradient);
+      color: #000;
+      padding: 4px 14px;
+      border-radius: var(--radius-full);
+      font-size: 0.72rem;
+      font-weight: 800;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+
+    .pricing-tier-name {
       font-size: 0.78rem;
       font-weight: 700;
-      white-space: nowrap;
-      box-shadow: 0 4px 12px rgba(232,133,12,0.3);
+      color: var(--gold-200);
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      margin-bottom: var(--sp-2);
     }
-
-    .pricing-icon {
-      font-size: 2rem;
-      margin-bottom: 0.5rem;
+    .pricing-card h3 {
+      font-size: 1.5rem;
+      margin-bottom: var(--sp-2);
     }
-
-    .pricing-name {
-      font-size: 1.3rem;
-      font-weight: 700;
-      color: var(--text-bright);
-      margin-bottom: 0.3rem;
-    }
-
-    .pricing-target {
-      font-size: 0.82rem;
+    .pricing-desc {
+      font-size: 0.88rem;
       color: var(--text-muted);
-      margin-bottom: 1.2rem;
+      margin-bottom: var(--sp-6);
+      line-height: 1.6;
     }
 
     .pricing-price {
-      margin-bottom: 1.5rem;
+      margin-bottom: var(--sp-6);
+      padding-bottom: var(--sp-6);
+      border-bottom: 1px solid var(--border-subtle);
     }
-
     .pricing-price .amount {
-      font-size: 2.6rem;
+      font-size: 3rem;
       font-weight: 900;
-      color: var(--orange);
-      letter-spacing: -1px;
+      letter-spacing: -2px;
+      line-height: 1;
     }
-
     .pricing-price .currency {
       font-size: 1rem;
-      font-weight: 600;
-      color: var(--orange);
+      font-weight: 700;
+      color: var(--text-muted);
       vertical-align: super;
     }
-
     .pricing-price .period {
       font-size: 0.92rem;
       color: var(--text-muted);
+      margin-left: 2px;
     }
-
-    .pricing-price .annual-price {
+    .pricing-price .price-note {
       display: block;
       font-size: 0.82rem;
-      color: var(--green);
-      margin-top: 0.3rem;
-      min-height: 1.2em;
+      color: var(--text-muted);
+      margin-top: var(--sp-2);
+    }
+
+    .pricing-points {
+      display: flex;
+      align-items: center;
+      gap: var(--sp-2);
+      padding: var(--sp-3) var(--sp-4);
+      background: rgba(232,133,12,0.06);
+      border: 1px solid rgba(232,133,12,0.1);
+      border-radius: var(--radius-md);
+      margin-bottom: var(--sp-6);
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: var(--gold-200);
+    }
+    .pricing-points svg {
+      flex-shrink: 0;
     }
 
     .pricing-features {
       list-style: none;
-      margin-bottom: 2rem;
       flex: 1;
+      margin-bottom: var(--sp-8);
     }
-
     .pricing-features li {
-      padding: 0.45rem 0;
-      font-size: 0.88rem;
-      color: var(--text-muted);
       display: flex;
       align-items: flex-start;
-      gap: 0.6rem;
+      gap: 10px;
+      padding: 7px 0;
+      font-size: 0.88rem;
+      color: var(--text-secondary);
       line-height: 1.5;
     }
-
     .pricing-features .ck {
-      color: var(--green);
+      color: var(--success);
+      font-size: 0.82rem;
       font-weight: 700;
-      font-size: 0.95rem;
       flex-shrink: 0;
-      margin-top: 1px;
+      margin-top: 2px;
     }
 
     .btn-plan {
-      display: block;
-      text-align: center;
-      padding: 0.85rem 1.5rem;
-      border-radius: 10px;
-      font-size: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      padding: 14px 24px;
+      border-radius: var(--radius-full);
+      font-size: 0.95rem;
       font-weight: 700;
       cursor: pointer;
       border: none;
-      transition: all 0.2s;
-      width: 100%;
+      transition: all var(--duration-normal) var(--ease-out);
+      text-decoration: none;
+      font-family: var(--font-sans);
     }
-
     .btn-plan.primary {
-      background: linear-gradient(135deg, var(--orange), #d0770a);
-      color: #fff;
-      box-shadow: 0 4px 16px rgba(232,133,12,0.25);
+      background: var(--gold-gradient);
+      color: #000;
+      box-shadow: 0 2px 16px rgba(232,133,12,0.25);
     }
-
     .btn-plan.primary:hover {
       transform: translateY(-2px);
-      box-shadow: 0 8px 24px rgba(232,133,12,0.35);
+      box-shadow: 0 6px 28px rgba(232,133,12,0.4);
+      color: #000;
     }
-
     .btn-plan.outline {
       background: transparent;
-      color: var(--orange);
-      border: 2px solid var(--orange);
+      color: var(--text-primary);
+      border: 1px solid var(--border-default);
     }
-
     .btn-plan.outline:hover {
-      background: rgba(232,133,12,0.08);
-      transform: translateY(-2px);
+      border-color: var(--border-hover);
+      background: rgba(232,133,12,0.04);
+      color: var(--text-primary);
     }
 
-    .btn-plan.green-outline {
-      background: transparent;
-      color: var(--green);
-      border: 2px solid var(--green);
-    }
-
-    .btn-plan.green-outline:hover {
-      background: rgba(118,185,0,0.08);
-      transform: translateY(-2px);
-    }
-
-    /* ========== COMPARISON TABLE ========== */
-    .comparison-section {
-      padding: 4rem 2rem;
-      max-width: 1100px;
-      margin: 0 auto;
-    }
-
-    .comparison-section h2 {
-      text-align: center;
-      font-size: 2rem;
-      font-weight: 800;
-      color: var(--text-bright);
-      margin-bottom: 0.5rem;
-    }
-
-    .comparison-section .comp-sub {
-      text-align: center;
-      color: var(--text-muted);
-      margin-bottom: 2.5rem;
-      font-size: 1rem;
-    }
-
-    .comp-table-wrapper {
-      overflow-x: auto;
-      border-radius: var(--radius);
-      border: 1px solid var(--border);
-    }
-
-    .comp-table {
-      width: 100%;
-      border-collapse: collapse;
-      background: var(--bg-card);
-      min-width: 700px;
-    }
-
-    .comp-table thead th {
-      background: rgba(42,42,74,0.5);
-      color: var(--text-bright);
-      font-size: 0.88rem;
-      font-weight: 700;
-      padding: 1rem 1.2rem;
-      text-align: center;
-      border-bottom: 1px solid var(--border);
-    }
-
-    .comp-table thead th:first-child {
-      text-align: left;
-      color: var(--text-muted);
-    }
-
-    .comp-table thead th.featured-col {
-      background: rgba(232,133,12,0.1);
-      color: var(--orange);
-    }
-
-    .comp-table tbody td {
-      padding: 0.8rem 1.2rem;
-      font-size: 0.9rem;
-      color: var(--text-muted);
-      text-align: center;
-      border-bottom: 1px solid rgba(42,42,74,0.4);
-    }
-
-    .comp-table tbody td:first-child {
-      text-align: left;
-      color: var(--text);
-      font-weight: 500;
-    }
-
-    .comp-table tbody td.featured-col {
-      background: rgba(232,133,12,0.03);
-    }
-
-    .comp-table tbody tr:last-child td { border-bottom: none; }
-
-    .comp-table .t-yes {
-      color: var(--green);
-      font-size: 1.1rem;
-      font-weight: 700;
-    }
-
-    .comp-table .t-no {
-      color: #555;
-      font-size: 1.1rem;
-    }
-
-    .comp-table .t-text {
-      color: var(--text-muted);
-      font-size: 0.85rem;
-    }
-
-    /* ========== FAQ ========== */
-    .faq-section {
-      padding: 5rem 2rem;
-      max-width: 800px;
-      margin: 0 auto;
-    }
-
-    .faq-section h2 {
-      text-align: center;
-      font-size: 2rem;
-      font-weight: 800;
-      color: var(--text-bright);
-      margin-bottom: 0.5rem;
-    }
-
-    .faq-section .faq-sub {
-      text-align: center;
-      color: var(--text-muted);
-      margin-bottom: 2.5rem;
-      font-size: 1rem;
-    }
-
+    /* FAQ Accordion */
     .faq-item {
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      margin-bottom: 0.8rem;
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      margin-bottom: 10px;
       background: var(--bg-card);
       overflow: hidden;
-      transition: border-color 0.2s;
+      transition: border-color var(--duration-fast);
     }
-
-    .faq-item:hover { border-color: var(--border-light); }
-
+    .faq-item:hover {
+      border-color: var(--border-hover);
+    }
     .faq-question {
       width: 100%;
       background: none;
       border: none;
-      color: var(--text-bright);
-      padding: 1.2rem 1.5rem;
-      font-size: 1rem;
+      color: var(--text-primary);
+      padding: 18px 22px;
+      font-size: 0.95rem;
       font-weight: 600;
       text-align: left;
       cursor: pointer;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      transition: background 0.2s;
-      font-family: inherit;
+      transition: background var(--duration-fast);
+      font-family: var(--font-sans);
       line-height: 1.5;
+      gap: var(--sp-4);
     }
-
-    .faq-question:hover { background: rgba(232,133,12,0.04); }
-
-    .faq-question .arrow {
-      color: var(--orange);
-      font-size: 1.1rem;
-      transition: transform 0.3s;
+    .faq-question:hover {
+      background: rgba(232,133,12,0.03);
+    }
+    .faq-arrow {
+      color: var(--gold-300);
+      font-size: 0.85rem;
       flex-shrink: 0;
-      margin-left: 1rem;
+      transition: transform var(--duration-normal) var(--ease-out);
     }
-
-    .faq-item.open .faq-question .arrow { transform: rotate(180deg); }
-
+    .faq-item.open .faq-arrow {
+      transform: rotate(180deg);
+    }
     .faq-answer {
       max-height: 0;
       overflow: hidden;
-      transition: max-height 0.35s ease, padding 0.35s ease;
+      transition: max-height 0.4s var(--ease-out), padding 0.4s var(--ease-out);
     }
-
     .faq-item.open .faq-answer {
-      max-height: 350px;
-      padding: 0 1.5rem 1.2rem;
+      max-height: 400px;
+      padding: 0 22px 18px;
     }
-
     .faq-answer p {
-      font-size: 0.92rem;
+      font-size: 0.9rem;
       color: var(--text-muted);
       line-height: 1.8;
     }
 
-    /* ========== BOTTOM CTA ========== */
-    .cta-section {
-      padding: 5rem 2rem;
+    /* Payment Methods */
+    .payment-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: var(--sp-4);
+    }
+    .payment-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: var(--sp-2);
+      padding: var(--sp-6) var(--sp-4);
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      transition: all var(--duration-fast);
+    }
+    .payment-item:hover {
+      border-color: var(--border-hover);
+      background: var(--bg-card-hover);
+    }
+    .payment-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: var(--radius-sm);
+      background: rgba(255,255,255,0.04);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.3rem;
+    }
+    .payment-item span {
+      font-size: 0.82rem;
+      color: var(--text-secondary);
+      font-weight: 600;
       text-align: center;
     }
 
+    /* CTA Section */
     .cta-box {
-      background: linear-gradient(135deg, rgba(232,133,12,0.08), rgba(118,185,0,0.05));
-      border: 1px solid rgba(232,133,12,0.2);
-      border-radius: 24px;
-      padding: 4rem 2rem;
-      max-width: 700px;
+      background: linear-gradient(135deg, rgba(232,133,12,0.06), rgba(245,166,35,0.03));
+      border: 1px solid rgba(232,133,12,0.15);
+      border-radius: var(--radius-xl);
+      padding: var(--sp-20) var(--sp-8);
+      text-align: center;
+      max-width: 720px;
       margin: 0 auto;
       position: relative;
       overflow: hidden;
     }
-
     .cta-box::before {
       content: '';
       position: absolute;
-      top: -80px; right: -80px;
-      width: 250px; height: 250px;
-      background: radial-gradient(circle, rgba(232,133,12,0.08), transparent);
+      top: -100px;
+      right: -100px;
+      width: 300px;
+      height: 300px;
+      background: radial-gradient(circle, rgba(232,133,12,0.06), transparent);
       pointer-events: none;
     }
-
-    .cta-box h2 {
-      font-size: 2rem;
-      font-weight: 800;
-      color: var(--text-bright);
-      margin-bottom: 1rem;
+    .cta-box::after {
+      content: '';
+      position: absolute;
+      bottom: -80px;
+      left: -80px;
+      width: 250px;
+      height: 250px;
+      background: radial-gradient(circle, rgba(245,166,35,0.04), transparent);
+      pointer-events: none;
     }
-
+    .cta-box h2 {
+      margin-bottom: var(--sp-3);
+      position: relative;
+    }
     .cta-box p {
       color: var(--text-muted);
-      margin-bottom: 2rem;
+      margin-bottom: var(--sp-8);
       font-size: 1.05rem;
       max-width: 480px;
       margin-left: auto;
       margin-right: auto;
+      position: relative;
     }
 
-    .btn-cta {
-      display: inline-block;
-      background: linear-gradient(135deg, var(--orange), #d0770a);
-      color: #fff;
-      padding: 1rem 2.8rem;
-      border-radius: 10px;
-      font-size: 1.1rem;
-      font-weight: 700;
-      border: none;
-      cursor: pointer;
-      transition: transform 0.2s, box-shadow 0.2s;
-      box-shadow: 0 4px 20px rgba(232,133,12,0.3);
-    }
-
-    .btn-cta:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 8px 32px rgba(232,133,12,0.4);
-      color: #fff;
-    }
-
-    /* ========== FOOTER ========== */
-    .footer {
-      border-top: 1px solid var(--border);
-      padding: 3rem 2rem 2rem;
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-
-    .footer-grid {
-      display: grid;
-      grid-template-columns: 2fr 1fr 1fr 1fr;
-      gap: 2rem;
-      margin-bottom: 2rem;
-    }
-
-    .footer-brand h3 {
-      font-size: 1.2rem;
-      color: #fff;
-      margin-bottom: 0.5rem;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      font-weight: 900;
-      letter-spacing: -1px;
-    }
-
-    .footer-brand h3 .seo {
-      background: linear-gradient(135deg, #e8850c, #f5a623, #ffd700);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-    .footer-brand h3 .baike { color: #ffffff; }
-
-    .footer-brand p {
-      font-size: 0.85rem;
-      color: var(--text-muted);
-      line-height: 1.7;
-    }
-
-    .footer-col h4 {
-      font-size: 0.82rem;
-      color: var(--text-bright);
-      margin-bottom: 0.8rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 1.5px;
-    }
-
-    .footer-col a {
-      display: block;
-      font-size: 0.85rem;
-      color: var(--text-muted);
-      margin-bottom: 0.5rem;
-      transition: color 0.2s;
-    }
-
-    .footer-col a:hover { color: var(--orange); }
-
-    .footer-bottom {
-      border-top: 1px solid var(--border);
-      padding-top: 1.5rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 1rem;
-      font-size: 0.8rem;
-      color: var(--text-muted);
-    }
-
-    .footer-bottom span { color: var(--orange); }
-
-    /* ========== 手機版全螢幕 Overlay Menu ========== */
-    .mobile-menu-overlay {
-      display: none;
-      position: fixed;
-      inset: 0;
-      z-index: 9999;
-      background: rgba(10, 10, 26, 0.97);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 0;
-      opacity: 0;
-      transition: opacity 0.35s ease;
-    }
-    .mobile-menu-overlay.open {
-      display: flex;
-      opacity: 1;
-    }
-    .mobile-menu-overlay .mobile-close {
-      position: absolute;
-      top: 16px;
-      right: 20px;
-      background: none;
-      border: none;
-      color: #fff;
-      font-size: 2rem;
-      cursor: pointer;
-      width: 48px;
-      height: 48px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: 50%;
-      transition: background 0.2s;
-    }
-    .mobile-menu-overlay .mobile-close:hover {
-      background: rgba(232,133,12,0.15);
-    }
-    .mobile-menu-overlay a {
-      display: block;
-      color: #fff;
-      font-size: 1.3rem;
-      font-weight: 600;
-      padding: 16px 40px;
-      text-align: center;
-      transition: color 0.2s, background 0.2s;
-      width: 100%;
-      text-decoration: none;
-      min-height: 48px;
-      line-height: 1.5;
-    }
-    .mobile-menu-overlay a:hover {
-      color: var(--orange);
-      background: rgba(232,133,12,0.06);
-    }
-    .mobile-menu-overlay .btn-login {
-      background: var(--orange);
-      color: #fff !important;
-      border-radius: 12px;
-      margin: 16px 40px 0;
-      width: auto;
-      text-align: center;
-      padding: 14px 40px;
-    }
-
-    /* ========== SEO Points Sticky Bar (手機版) ========== */
-    .mobile-points-sticky {
-      display: none;
-      position: sticky;
-      top: 64px;
-      z-index: 99;
-      background: linear-gradient(90deg, rgba(10,10,26,0.95), rgba(18,18,42,0.95));
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      border-bottom: 1px solid var(--border);
-      padding: 10px 16px;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      font-size: 0.88rem;
-    }
-    .mobile-points-sticky .points-label {
-      color: var(--orange);
-      font-weight: 700;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-    .mobile-points-sticky .points-icon {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 22px;
-      height: 22px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, var(--orange), var(--copper));
-      color: #fff;
-      font-size: 11px;
-      font-weight: 800;
-    }
-    .mobile-points-sticky .topup-link {
-      color: var(--orange);
-      font-weight: 600;
-      font-size: 0.82rem;
-      border: 1px solid var(--orange);
-      padding: 6px 14px;
-      border-radius: 20px;
-      transition: all 0.2s;
-      min-height: 36px;
-      display: flex;
-      align-items: center;
-    }
-    .mobile-points-sticky .topup-link:hover {
-      background: var(--orange);
-      color: #fff;
-    }
-
-    /* ========== RESPONSIVE ========== */
+    /* ══════ Responsive ══════ */
     @media (max-width: 1024px) {
       .pricing-grid {
-        grid-template-columns: repeat(2, 1fr);
-        max-width: 700px;
-        margin: 0 auto;
-      }
-      .referral-grid {
         grid-template-columns: 1fr;
-        max-width: 500px;
+        max-width: 480px;
         margin-left: auto;
         margin-right: auto;
       }
-      .container { padding: 0 16px; }
-    }
-
-    @media (max-width: 768px) {
-      .navbar-links { display: none; }
-      .hamburger { display: flex; }
-
-      .mobile-points-sticky { display: flex; }
-
-      .hero { padding: 100px 16px 40px; }
-      .hero h1 { font-size: 1.8rem; }
-      .hero .hero-sub { font-size: 0.95rem; margin-bottom: 1.5rem; }
-
-      .billing-toggle { gap: 0.6rem; }
-      .billing-toggle span { font-size: 0.85rem; }
-      .billing-badge { font-size: 0.72rem; }
-
-      .pricing-section { padding: 1.5rem 1rem 3rem; }
-      .pricing-grid {
+      .points-explainer {
         grid-template-columns: 1fr;
-        max-width: 100%;
-        gap: 1.5rem;
+        max-width: 400px;
+        margin-left: auto;
+        margin-right: auto;
       }
-
+      .payment-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+    @media (max-width: 768px) {
+      .pricing-hero {
+        padding: 110px 0 50px;
+      }
+      .pricing-hero .subtitle {
+        font-size: 1rem;
+      }
       .pricing-card {
-        padding: 2rem 1.4rem;
+        padding: var(--sp-8) var(--sp-6);
       }
-      .pricing-card.featured {
-        transform: none;
+      .pricing-price .amount {
+        font-size: 2.4rem;
       }
-      .pricing-card.featured:hover {
-        transform: translateY(-4px);
-      }
-
-      /* 每個方案只有 1 個大按鈕 */
       .btn-plan {
         min-height: 52px;
-        font-size: 1.1rem;
-        border-radius: 12px;
-        width: 100%;
+        font-size: 1rem;
       }
-
-      .comparison-section { padding: 2rem 1rem; }
-      .comparison-section h2 { font-size: 1.5rem; }
-      .comp-table-wrapper { border-radius: 10px; }
-      .comp-table { min-width: 550px; }
-
-      .faq-section { padding: 2.5rem 1rem; }
-      .faq-section h2 { font-size: 1.5rem; }
-      .faq-question { padding: 1rem 1.2rem; font-size: 0.92rem; }
-
-      .cta-section { padding: 2.5rem 1rem; }
-      .cta-box { padding: 2.5rem 1.2rem; border-radius: 16px; }
-      .cta-box h2 { font-size: 1.4rem; }
-      .cta-box p { font-size: 0.92rem; }
-      .btn-cta { width: 100%; min-height: 48px; font-size: 1rem; }
-
-      .footer { padding: 2rem 1rem 1.5rem; }
-      .footer-grid { grid-template-columns: 1fr; gap: 1.5rem; }
-      .footer-bottom { flex-direction: column; text-align: center; }
-
-      /* 按鈕觸控友善 */
-      button, a, .btn-plan, .btn-cta {
-        min-height: 48px;
+      .faq-question {
+        padding: 14px 16px;
+        font-size: 0.9rem;
       }
-
-      /* 表格橫向滾動 */
-      table { display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; }
-
-      body { font-size: 14px; }
+      .faq-item.open .faq-answer {
+        padding: 0 16px 14px;
+      }
+      .cta-box {
+        padding: var(--sp-12) var(--sp-6);
+      }
     }
-
     @media (max-width: 480px) {
-      .hero h1 { font-size: 1.5rem; }
-      .hero .hero-sub { font-size: 0.88rem; }
-      .pricing-card { padding: 1.6rem 1.2rem; border-radius: 12px; }
-      .pricing-price .amount { font-size: 2.2rem; }
-      .pricing-name { font-size: 1.15rem; }
-      .pricing-features li { font-size: 0.82rem; }
-      .pricing-grid { max-width: 100%; }
-      .footer-grid { grid-template-columns: 1fr; }
-      .referral-card { padding: 1.5rem 1rem; }
-      .cta-box h2 { font-size: 1.2rem; }
-      .comparison-section h2 { font-size: 1.3rem; }
-      .faq-section h2 { font-size: 1.3rem; }
-    }
-
-    /* ========== REFERRAL PROGRAM ========== */
-    .referral-section {
-      padding: 5rem 2rem;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .referral-section::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(135deg, rgba(232,133,12,0.06) 0%, rgba(204,120,92,0.04) 40%, rgba(118,185,0,0.03) 100%);
-      pointer-events: none;
-    }
-
-    .referral-header {
-      text-align: center;
-      margin-bottom: 3rem;
-      position: relative;
-    }
-
-    .referral-badge-top {
-      display: inline-block;
-      background: linear-gradient(135deg, var(--orange), #d0770a);
-      color: #fff;
-      padding: 0.4rem 1.6rem;
-      border-radius: 999px;
-      font-size: 0.85rem;
-      font-weight: 700;
-      margin-bottom: 1.2rem;
-      box-shadow: 0 4px 20px rgba(232,133,12,0.3);
-      letter-spacing: 1px;
-    }
-
-    .referral-header h2 {
-      font-size: clamp(2rem, 4vw, 3rem);
-      font-weight: 900;
-      color: var(--text-bright);
-      margin-bottom: 0.8rem;
-      letter-spacing: -1px;
-    }
-
-    .referral-sub {
-      font-size: 1.1rem;
-      color: var(--text-muted);
-      max-width: 650px;
-      margin: 0 auto;
-      line-height: 1.8;
-    }
-
-    .referral-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1.5rem;
-      margin-bottom: 3rem;
-      position: relative;
-    }
-
-    .referral-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: 20px;
-      padding: 2.5rem 1.8rem;
-      display: flex;
-      flex-direction: column;
-      position: relative;
-      transition: transform 0.3s, box-shadow 0.3s;
-      overflow: hidden;
-    }
-
-    .referral-card::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 4px;
-      border-radius: 20px 20px 0 0;
-    }
-
-    .referral-card-fire::before {
-      background: linear-gradient(90deg, #e8850c, #ff6b35);
-    }
-
-    .referral-card-diamond::before {
-      background: linear-gradient(90deg, #76b900, #a3d73e);
-    }
-
-    .referral-card-trophy::before {
-      background: linear-gradient(90deg, #cc785c, #e8850c);
-    }
-
-    .referral-card:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 20px 60px rgba(232,133,12,0.15);
-    }
-
-    .referral-card-icon {
-      font-size: 3rem;
-      margin-bottom: 0.8rem;
-    }
-
-    .referral-card h3 {
-      font-size: 1.5rem;
-      font-weight: 800;
-      color: var(--text-bright);
-      margin-bottom: 0.5rem;
-    }
-
-    .referral-card-tag {
-      display: inline-block;
-      background: rgba(232,133,12,0.1);
-      color: var(--orange);
-      padding: 0.25rem 0.9rem;
-      border-radius: 999px;
-      font-size: 0.78rem;
-      font-weight: 600;
-      margin-bottom: 1.2rem;
-      border: 1px solid rgba(232,133,12,0.2);
-      align-self: flex-start;
-    }
-
-    .referral-features {
-      list-style: none;
-      margin-bottom: 1.5rem;
-      flex: 1;
-    }
-
-    .referral-features li {
-      padding: 0.4rem 0;
-      font-size: 0.9rem;
-      color: var(--text-muted);
-      line-height: 1.6;
-      position: relative;
-      padding-left: 1.4rem;
-    }
-
-    .referral-features li::before {
-      content: '\2713';
-      position: absolute;
-      left: 0;
-      color: var(--green);
-      font-weight: 700;
-    }
-
-    .big-pct {
-      color: var(--orange);
-      font-size: 1.3rem;
-      font-weight: 900;
-    }
-
-    .referral-example {
-      background: rgba(232,133,12,0.06);
-      border: 1px solid rgba(232,133,12,0.15);
-      border-radius: 12px;
-      padding: 1rem 1.2rem;
-      margin-bottom: 1.5rem;
-      font-size: 0.88rem;
-      color: var(--text-muted);
-      line-height: 1.7;
-      text-align: center;
-    }
-
-    .example-amount {
-      color: var(--orange);
-      font-size: 1.4rem;
-      font-weight: 900;
-      display: inline-block;
-      margin-top: 0.3rem;
-    }
-
-    .btn-referral {
-      display: block;
-      text-align: center;
-      padding: 0.85rem 1.5rem;
-      border-radius: 12px;
-      font-size: 0.95rem;
-      font-weight: 700;
-      background: linear-gradient(135deg, var(--orange), #d0770a);
-      color: #fff;
-      border: none;
-      cursor: pointer;
-      transition: all 0.25s;
-      box-shadow: 0 4px 16px rgba(232,133,12,0.2);
-    }
-
-    .btn-referral:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 28px rgba(232,133,12,0.35);
-      color: #fff;
-    }
-
-    /* Revenue Calculator */
-    .revenue-calculator {
-      background: var(--bg-card);
-      border: 2px solid var(--orange);
-      border-radius: 24px;
-      padding: 2.5rem;
-      max-width: 600px;
-      margin: 0 auto;
-      position: relative;
-      box-shadow: 0 0 60px rgba(232,133,12,0.1);
-    }
-
-    .revenue-calculator h3 {
-      text-align: center;
-      font-size: 1.6rem;
-      font-weight: 800;
-      color: var(--text-bright);
-      margin-bottom: 2rem;
-    }
-
-    .calc-body {
-      display: flex;
-      flex-direction: column;
-      gap: 1.5rem;
-    }
-
-    .calc-row {
-      display: flex;
-      flex-direction: column;
-      gap: 0.5rem;
-    }
-
-    .calc-row label {
-      font-size: 0.92rem;
-      color: var(--text-muted);
-      font-weight: 600;
-    }
-
-    .calc-input-group {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-    }
-
-    .calc-input-group input[type="range"] {
-      flex: 1;
-      -webkit-appearance: none;
-      appearance: none;
-      height: 8px;
-      background: var(--border);
-      border-radius: 999px;
-      outline: none;
-      cursor: pointer;
-    }
-
-    .calc-input-group input[type="range"]::-webkit-slider-thumb {
-      -webkit-appearance: none;
-      appearance: none;
-      width: 24px;
-      height: 24px;
-      border-radius: 50%;
-      background: var(--orange);
-      cursor: pointer;
-      box-shadow: 0 2px 8px rgba(232,133,12,0.4);
-    }
-
-    .calc-input-group input[type="range"]::-moz-range-thumb {
-      width: 24px;
-      height: 24px;
-      border-radius: 50%;
-      background: var(--orange);
-      cursor: pointer;
-      border: none;
-      box-shadow: 0 2px 8px rgba(232,133,12,0.4);
-    }
-
-    .calc-badge {
-      background: rgba(232,133,12,0.15);
-      color: var(--orange);
-      padding: 0.3rem 1rem;
-      border-radius: 999px;
-      font-size: 0.9rem;
-      font-weight: 700;
-      min-width: 60px;
-      text-align: center;
-      white-space: nowrap;
-    }
-
-    .calc-row select {
-      background: var(--bg-code);
-      color: var(--text);
-      border: 1px solid var(--border);
-      padding: 0.7rem 1rem;
-      border-radius: 10px;
-      font-size: 0.95rem;
-      font-family: inherit;
-      outline: none;
-      cursor: pointer;
-    }
-
-    .calc-row select:focus {
-      border-color: var(--orange);
-    }
-
-    .calc-result {
-      background: linear-gradient(135deg, rgba(232,133,12,0.08), rgba(204,120,92,0.05));
-      border: 1px solid rgba(232,133,12,0.2);
-      border-radius: 16px;
-      padding: 2rem;
-      text-align: center;
-      margin-top: 0.5rem;
-    }
-
-    .calc-label {
-      font-size: 0.9rem;
-      color: var(--text-muted);
-      margin-bottom: 0.5rem;
-      font-weight: 600;
-    }
-
-    .calc-big-number {
-      font-size: 3.2rem;
-      font-weight: 900;
-      color: var(--orange);
-      letter-spacing: -2px;
-      line-height: 1.2;
-      text-shadow: 0 0 40px rgba(232,133,12,0.3);
-    }
-
-    .calc-yearly {
-      font-size: 1.1rem;
-      color: var(--green);
-      font-weight: 700;
-      margin-top: 0.5rem;
-    }
-
-    .calc-note {
-      font-size: 0.82rem;
-      color: var(--text-muted);
-      margin-top: 0.5rem;
-    }
-
-    /* Referral responsive */
-    @media (max-width: 1024px) {
-      .referral-grid {
-        grid-template-columns: 1fr;
-        max-width: 500px;
-        margin-left: auto;
-        margin-right: auto;
+      .pricing-card {
+        padding: var(--sp-6) var(--sp-5);
+        border-radius: var(--radius-lg);
       }
-    }
-
-    @media (max-width: 768px) {
-      .referral-section { padding: 3rem 1rem; }
-      .revenue-calculator { padding: 1.5rem; }
-      .calc-big-number { font-size: 2.4rem; }
-      .referral-header h2 { font-size: 1.8rem; }
-    }
-
-    @media (max-width: 480px) {
-      .referral-card { padding: 1.8rem 1.2rem; }
-      .calc-big-number { font-size: 2rem; }
-    }
-
-    /* Touch & Mobile */
-    * { -webkit-tap-highlight-color: transparent; }
-    select, button, a { touch-action: manipulation; }
-    @media (hover: none) and (pointer: coarse) {
-      .btn-plan, .btn-cta { min-height: 48px; }
-      .navbar-links .btn-login { min-height: 44px; display: flex; align-items: center; }
+      .pricing-price .amount {
+        font-size: 2rem;
+      }
+      .payment-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: var(--sp-3);
+      }
     }
   </style>
-  <link rel="stylesheet" href="/assets/framer-style.css">
 </head>
-<body>
+<body class="page-top">
 
-  <!-- NAVBAR -->
-  <nav class="navbar">
-    <a href="/" class="navbar-brand"><img src="/favicon.svg" alt="S" width="28" height="28" style="border-radius:6px;"><span class="seo">SEO</span><span class="baike">BAIKE</span></a>
-    <div class="navbar-links" id="navLinks">
-      <a href="/">首頁</a>
-      <a href="/features">功能</a>
-      <a href="/marketplace">市集</a>
-      <a href="/pricing" class="active">方案</a>
-      <a href="/about">關於</a>
-      <a href="/docs">常見問題</a>
-      <a href="/login" class="btn-login">登入</a>
-    </div>
-    <button class="hamburger" id="hamburger" aria-label="選單">
+  <!-- ═══════ Navigation ═══════ -->
+  <nav class="nav">
+    <a href="/" class="nav-brand">
+      <img src="/favicon.svg" alt="SEOBAIKE" width="34" height="34">
+      <span class="seo">SEO</span><span class="baike">BAIKE</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="/">首頁</a></li>
+      <li><a href="/features">功能</a></li>
+      <li><a href="/marketplace">市集</a></li>
+      <li><a href="/pricing" class="active">方案</a></li>
+      <li><a href="/about">關於</a></li>
+      <li><a href="/docs">文件</a></li>
+      <li><a href="/login" class="nav-cta">登入</a></li>
+    </ul>
+    <button class="nav-hamburger" onclick="toggleMenu()" aria-label="選單">
       <span></span><span></span><span></span>
     </button>
   </nav>
 
-  <!-- 手機版全螢幕選單 Overlay -->
-  <div class="mobile-menu-overlay" id="mobileMenu">
-    <button class="mobile-close" id="mobileMenuClose" aria-label="關閉選單">&times;</button>
-    <a href="/" onclick="closeMobileMenu()">首頁</a>
-    <a href="/features" onclick="closeMobileMenu()">功能</a>
-    <a href="/marketplace" onclick="closeMobileMenu()">市集</a>
-    <a href="/pricing" onclick="closeMobileMenu()">方案</a>
-    <a href="/about" onclick="closeMobileMenu()">關於</a>
-    <a href="/docs" onclick="closeMobileMenu()">常見問題</a>
-    <a href="/login" class="btn-login" onclick="closeMobileMenu()">登入</a>
+  <!-- Mobile Overlay -->
+  <div class="mobile-overlay" id="mobileOverlay">
+    <button class="mobile-close" onclick="toggleMenu()" aria-label="關閉選單">&times;</button>
+    <a href="/" onclick="toggleMenu()">首頁</a>
+    <a href="/features" onclick="toggleMenu()">功能</a>
+    <a href="/marketplace" onclick="toggleMenu()">市集</a>
+    <a href="/pricing" onclick="toggleMenu()">方案</a>
+    <a href="/about" onclick="toggleMenu()">關於</a>
+    <a href="/docs" onclick="toggleMenu()">文件</a>
+    <a href="/login" onclick="toggleMenu()">登入</a>
   </div>
 
-  <!-- SEO Points 手機版 Sticky Bar -->
-  <div class="mobile-points-sticky">
-    <div class="points-label">
-      <span class="points-icon">S</span>
-      <span>我的點數: <span id="mobilePointsBalance">0</span> SP</span>
-    </div>
-    <a href="#" class="topup-link" onclick="event.preventDefault();window.open('https://lin.ee/seobaike','_blank')">儲值</a>
-  </div>
 
-  <!-- HERO -->
-  <section class="hero">
+  <!-- ═══════ Hero ═══════ -->
+  <section class="pricing-hero">
+    <div class="container fade-up">
+      <div class="section-badge">PRICING</div>
+      <h1>方案與<span class="text-gold">定價</span></h1>
+      <p class="subtitle">用 SEO Points 點數交易，彈性又透明。<br>不綁約、不浪費，用多少算多少。</p>
+    </div>
+  </section>
+
+
+  <!-- ═══════ SEO Points Explainer ═══════ -->
+  <section class="section-sm">
     <div class="container">
-      <h1>找到適合你的方式</h1>
-      <p class="hero-sub">不管你在哪個階段，SEOBAIKE 都能幫你。告訴我們你需要什麼，我們幫你選最適合的。</p>
-      <p style="color:var(--orange);font-weight:700;font-size:1rem;margin-top:1rem;letter-spacing:0.5px;">全球適用 — 台灣、韓國、日本、美國、歐洲、東南亞，在哪都能用</p>
+      <div class="section-header fade-up">
+        <div class="section-badge">SEO POINTS</div>
+        <h2>什麼是 <span class="text-gold">SEO Points</span>？</h2>
+        <p>SEOBAIKE 平台上的統一交易貨幣。購買點數，按需使用，簡單透明。</p>
+      </div>
 
-      <!-- Billing Toggle -->
-      <div class="billing-toggle">
-        <span id="monthlyLabel" class="active" onclick="setBilling('monthly')">月付</span>
-        <div class="toggle-switch" id="billingToggle" onclick="toggleBilling()"></div>
-        <span id="annualLabel" onclick="setBilling('annual')">年付</span>
-        <span class="billing-badge">省 20%</span>
+      <div class="points-explainer">
+        <div class="card point-card fade-up">
+          <div class="point-card-icon">
+            <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" style="color:var(--gold-200)"><circle cx="12" cy="12" r="10"/><path d="M12 6v12M8 10l4-4 4 4M8 14l4 4 4-4"/></svg>
+          </div>
+          <h4>儲值點數</h4>
+          <p>選擇適合你的方案，取得 SEO Points。點數存入帳戶，隨時可用。</p>
+        </div>
+        <div class="card point-card fade-up">
+          <div class="point-card-icon">
+            <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" style="color:var(--gold-200)"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+          </div>
+          <h4>按需扣點</h4>
+          <p>使用 AI 服務、市集工具時自動扣除對應點數。用多少扣多少，不浪費。</p>
+        </div>
+        <div class="card point-card fade-up">
+          <div class="point-card-icon">
+            <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" style="color:var(--gold-200)"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/><path d="M12 6v6l4 2"/></svg>
+          </div>
+          <h4>永不過期</h4>
+          <p>帳戶內的 SEO Points 永久有效，沒有使用期限的壓力。</p>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- VIDEO DEMO (60秒產品展示) -->
-  <section class="video-section">
-    <div id="demo-video-pricing"></div>
-  </section>
+  <hr class="divider">
 
-  <!-- PRICING CARDS -->
-  <section class="pricing-section" id="pricing">
-    <div class="pricing-grid">
-
-      <!-- 體驗版 -->
-      <div class="pricing-card">
-        <div class="pricing-icon">&#127381;</div>
-        <div class="pricing-name">體驗版</div>
-        <div class="pricing-target">先試試看，讓我們了解你</div>
-        <div class="pricing-price">
-          <span class="currency">NT$</span><span class="amount">0</span>
-          <span class="period">/月</span>
-          <span class="annual-price">&nbsp;</span>
-        </div>
-        <ul class="pricing-features">
-          <li><span class="ck">&#10003;</span>每天 10 次 AI 對話</li>
-          <li><span class="ck">&#10003;</span>基礎 AI 服務</li>
-          <li><span class="ck">&#10003;</span>社群支援</li>
-        </ul>
-        <a href="/login" class="btn-plan outline btn-start">立即開始</a>
-      </div>
-
-      <!-- 個人版 -->
-      <div class="pricing-card">
-        <div class="pricing-icon">&#128100;</div>
-        <div class="pricing-name">個人版</div>
-        <div class="pricing-target">適合個人創作者、自由工作者</div>
-        <div class="pricing-price">
-          <span class="currency">NT$</span><span class="amount price-monthly" data-monthly="299" data-annual="239">299</span>
-          <span class="period">/月</span>
-          <span class="annual-price" data-annual-text="年付 NT$2,868（每月 NT$239）"></span>
-        </div>
-        <ul class="pricing-features">
-          <li><span class="ck">&#10003;</span>無限 AI 對話</li>
-          <li><span class="ck">&#10003;</span>自動選擇最佳方案</li>
-          <li><span class="ck">&#10003;</span>8 大能力全開</li>
-          <li><span class="ck">&#10003;</span>對話、程式碼、視覺、推理</li>
-          <li><span class="ck">&#10003;</span>搜尋、嵌入、圖像、語音</li>
-          <li><span class="ck">&#10003;</span>Email 支援</li>
-        </ul>
-        <a href="https://lin.ee/seobaike" target="_blank" rel="noopener" class="btn-plan outline btn-start" onclick="trackPlanClick('personal')">立即開始</a>
-      </div>
-
-      <!-- 專業版 -->
-      <div class="pricing-card featured">
-        <div class="recommend-badge">推薦方案</div>
-        <div class="pricing-icon">&#128188;</div>
-        <div class="pricing-name">專業版</div>
-        <div class="pricing-target">適合已經知道自己需要什麼的你</div>
-        <div class="pricing-price">
-          <span class="currency">NT$</span><span class="amount price-monthly" data-monthly="899" data-annual="719">899</span>
-          <span class="period">/月</span>
-          <span class="annual-price" data-annual-text="年付 NT$8,628（每月 NT$719）"></span>
-        </div>
-        <ul class="pricing-features">
-          <li><span class="ck">&#10003;</span>個人版所有功能</li>
-          <li><span class="ck">&#10003;</span>API 存取（整合到你的產品）</li>
-          <li><span class="ck">&#10003;</span>市集工具免費用</li>
-          <li><span class="ck">&#10003;</span>優先處理（更快回應）</li>
-          <li><span class="ck">&#10003;</span>專屬客服</li>
-        </ul>
-        <a href="https://lin.ee/seobaike" target="_blank" rel="noopener" class="btn-plan primary btn-start" onclick="trackPlanClick('pro')">立即開始</a>
-      </div>
-
-      <!-- 企業版 -->
-      <div class="pricing-card">
-        <div class="pricing-icon">&#127970;</div>
-        <div class="pricing-name">企業版</div>
-        <div class="pricing-target">我們為你量身打造</div>
-        <div class="pricing-price">
-          <span class="currency">NT$</span><span class="amount price-monthly" data-monthly="2,999" data-annual="2,399">2,999</span>
-          <span class="period">/月</span>
-          <span class="annual-price" data-annual-text="年付 NT$28,788（每月 NT$2,399）"></span>
-        </div>
-        <ul class="pricing-features">
-          <li><span class="ck">&#10003;</span>專業版所有功能</li>
-          <li><span class="ck">&#10003;</span>白標方案（放你的品牌）</li>
-          <li><span class="ck">&#10003;</span>技術授權（L1-L4 約束引擎）</li>
-          <li><span class="ck">&#10003;</span>24/7 專屬技術支援</li>
-          <li><span class="ck">&#10003;</span>客製化設定</li>
-          <li><span class="ck">&#10003;</span>SLA 服務等級承諾</li>
-        </ul>
-        <a href="https://lin.ee/seobaike" target="_blank" rel="noopener" class="btn-plan green-outline btn-start" onclick="trackPlanClick('enterprise')">立即開始</a>
-      </div>
-
-    </div>
-    <p style="text-align:center;color:var(--text-muted);font-size:0.88rem;margin-top:2rem;line-height:1.8;">
-      價格以新台幣（NT$）顯示，約等於：NT$299 ≈ USD $10 ≈ KRW ₩13,500 ≈ JPY ¥1,500<br>
-      實際金額依當時匯率為準，支援多幣別付款
-    </p>
-  </section>
-
-  <!-- COMPARISON TABLE -->
-  <section class="comparison-section">
-    <h2>方案功能比較</h2>
-    <p class="comp-sub">一目了然，我們幫你找到最適合的</p>
-
-    <div class="comp-table-wrapper">
-      <table class="comp-table">
-        <thead>
-          <tr>
-            <th>功能</th>
-            <th>體驗版</th>
-            <th>個人版</th>
-            <th class="featured-col">專業版</th>
-            <th>企業版</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>AI 對話</td>
-            <td><span class="t-text">每天 10 次</span></td>
-            <td><span class="t-yes">&#10003;</span> <span class="t-text">無限</span></td>
-            <td class="featured-col"><span class="t-yes">&#10003;</span> <span class="t-text">無限</span></td>
-            <td><span class="t-yes">&#10003;</span> <span class="t-text">無限</span></td>
-          </tr>
-          <tr>
-            <td>AI 引擎匹配</td>
-            <td><span class="t-text">基礎</span></td>
-            <td><span class="t-yes">&#10003;</span> <span class="t-text">標準</span></td>
-            <td class="featured-col"><span class="t-yes">&#10003;</span> <span class="t-text">優先</span></td>
-            <td><span class="t-yes">&#10003;</span> <span class="t-text">客製化</span></td>
-          </tr>
-          <tr>
-            <td>8 大 AI 能力</td>
-            <td><span class="t-no">&#10005;</span></td>
-            <td><span class="t-yes">&#10003;</span></td>
-            <td class="featured-col"><span class="t-yes">&#10003;</span></td>
-            <td><span class="t-yes">&#10003;</span></td>
-          </tr>
-          <tr>
-            <td>API 存取</td>
-            <td><span class="t-no">&#10005;</span></td>
-            <td><span class="t-no">&#10005;</span></td>
-            <td class="featured-col"><span class="t-yes">&#10003;</span></td>
-            <td><span class="t-yes">&#10003;</span></td>
-          </tr>
-          <tr>
-            <td>市集工具</td>
-            <td><span class="t-no">&#10005;</span></td>
-            <td><span class="t-no">&#10005;</span></td>
-            <td class="featured-col"><span class="t-yes">&#10003;</span> <span class="t-text">免費</span></td>
-            <td><span class="t-yes">&#10003;</span> <span class="t-text">免費</span></td>
-          </tr>
-          <tr>
-            <td>白標方案</td>
-            <td><span class="t-no">&#10005;</span></td>
-            <td><span class="t-no">&#10005;</span></td>
-            <td class="featured-col"><span class="t-no">&#10005;</span></td>
-            <td><span class="t-yes">&#10003;</span></td>
-          </tr>
-          <tr>
-            <td>技術授權</td>
-            <td><span class="t-no">&#10005;</span></td>
-            <td><span class="t-no">&#10005;</span></td>
-            <td class="featured-col"><span class="t-no">&#10005;</span></td>
-            <td><span class="t-yes">&#10003;</span></td>
-          </tr>
-          <tr>
-            <td>客戶支援</td>
-            <td><span class="t-text">社群</span></td>
-            <td><span class="t-text">Email</span></td>
-            <td class="featured-col"><span class="t-text">專屬客服</span></td>
-            <td><span class="t-text">24/7 專屬</span></td>
-          </tr>
-          <tr>
-            <td>SLA 保證</td>
-            <td><span class="t-no">&#10005;</span></td>
-            <td><span class="t-no">&#10005;</span></td>
-            <td class="featured-col"><span class="t-no">&#10005;</span></td>
-            <td><span class="t-yes">&#10003;</span> <span class="t-text">依合約</span></td>
-          </tr>
-          <tr>
-            <td>月費</td>
-            <td><span class="t-text">免費</span></td>
-            <td><span class="t-text">NT$299</span></td>
-            <td class="featured-col" style="color:var(--orange);font-weight:700;">NT$899</td>
-            <td><span class="t-text">NT$2,999</span></td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </section>
-
-  <!-- REFERRAL / REVENUE SHARE PROGRAM -->
-  <section class="referral-section" id="referral">
+  <!-- ═══════ Pricing Tiers ═══════ -->
+  <section class="section" id="pricing">
     <div class="container">
-      <div class="referral-header">
-        <div class="referral-badge-top">SEOBAIKE 分享計畫</div>
-        <h2>把好東西分享給朋友</h2>
-        <p class="referral-sub">覺得 SEOBAIKE 幫到你了嗎？分享給朋友，一起走對的路。全球適用，透明公開。</p>
+      <div class="section-header fade-up">
+        <div class="section-badge">PLANS</div>
+        <h2>選擇適合你的<span class="text-gold">方案</span></h2>
+        <p>從免費體驗到企業級，滿足每個階段的需求</p>
       </div>
 
-      <div class="referral-grid">
-        <!-- 推薦計畫 -->
-        <div class="referral-card referral-card-fire">
-          <div class="referral-card-icon">&#128293;</div>
-          <h3>推薦計畫</h3>
-          <div class="referral-card-tag">任何人都能參加</div>
-          <ul class="referral-features">
-            <li>推薦朋友加入 SEOBAIKE</li>
-            <li>推薦回饋依合約約定</li>
-            <li>持續推薦，持續獲得回饋</li>
-            <li>無上限，幫助越多人越好</li>
-          </ul>
-          <div class="referral-example">
-            分享好東西給朋友<br>
-            <span class="example-amount">詳見推薦計畫合約</span>
+      <div class="pricing-grid">
+
+        <!-- 免費體驗 -->
+        <div class="pricing-card fade-up">
+          <div class="pricing-tier-name">FREE</div>
+          <h3>免費體驗</h3>
+          <p class="pricing-desc">先試試看，感受 SEOBAIKE 的能力</p>
+
+          <div class="pricing-price">
+            <span class="currency">NT$</span><span class="amount text-gold">0</span>
+            <span class="period">/月</span>
+            <span class="price-note">永久免費，不需信用卡</span>
           </div>
-          <a href="/login" class="btn-referral">開始分享給朋友</a>
+
+          <div class="pricing-points">
+            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l2 2"/></svg>
+            每月 100 SEO Points
+          </div>
+
+          <ul class="pricing-features">
+            <li><span class="ck">&#10003;</span>基礎 AI 對話服務</li>
+            <li><span class="ck">&#10003;</span>市集瀏覽</li>
+            <li><span class="ck">&#10003;</span>社群支援</li>
+            <li><span class="ck">&#10003;</span>基本數據報表</li>
+          </ul>
+
+          <a href="/login" class="btn-plan outline">開始免費體驗</a>
         </div>
 
-        <!-- 賣家收益 -->
-        <div class="referral-card referral-card-diamond">
-          <div class="referral-card-icon">&#128142;</div>
-          <h3>賣家收益</h3>
-          <div class="referral-card-tag">商品上架市集</div>
-          <ul class="referral-features">
-            <li>在 SEOBAIKE 市集上架你的 AI 工具</li>
-            <li>每筆銷售依合約分潤</li>
-            <li>比照國際平台規範，透明公開</li>
-            <li>SEOBAIKE 負責流量、金流、客服</li>
-            <li>詳見賣家合約</li>
-          </ul>
-          <div class="referral-example">
-            你做工具，我們幫你找到需要的人<br>
-            <span class="example-amount">金流由第三方支付平台處理</span>
+        <!-- 專業版 -->
+        <div class="pricing-card featured fade-up">
+          <div class="recommend-badge">推薦方案</div>
+          <div class="pricing-tier-name">PROFESSIONAL</div>
+          <h3>專業版</h3>
+          <p class="pricing-desc">適合個人創作者、自由工作者、中小企業</p>
+
+          <div class="pricing-price">
+            <span class="currency">NT$</span><span class="amount text-gold">899</span>
+            <span class="period">/月</span>
+            <span class="price-note">每月自動續約，可隨時取消</span>
           </div>
-          <a href="/marketplace" class="btn-referral">前往市集上架</a>
+
+          <div class="pricing-points">
+            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l2 2"/></svg>
+            每月 2,000 SEO Points
+          </div>
+
+          <ul class="pricing-features">
+            <li><span class="ck">&#10003;</span>免費體驗版所有功能</li>
+            <li><span class="ck">&#10003;</span>進階 AI 能力全開</li>
+            <li><span class="ck">&#10003;</span>API 存取權限</li>
+            <li><span class="ck">&#10003;</span>市集工具使用</li>
+            <li><span class="ck">&#10003;</span>優先處理佇列</li>
+            <li><span class="ck">&#10003;</span>進階數據分析</li>
+            <li><span class="ck">&#10003;</span>Email 專屬客服</li>
+          </ul>
+
+          <a href="https://lin.ee/seobaike" target="_blank" rel="noopener" class="btn-plan primary" onclick="trackPlanClick('professional')">選擇專業版</a>
         </div>
 
-        <!-- 代理商計畫 -->
-        <div class="referral-card referral-card-trophy">
-          <div class="referral-card-icon">&#127942;</div>
-          <h3>代理商計畫</h3>
-          <div class="referral-card-tag">大量推廣</div>
-          <ul class="referral-features">
-            <li>成為 SEOBAIKE 區域代理商</li>
-            <li>收益依代理商合約約定</li>
-            <li>代理商專屬即時儀表板</li>
-            <li>成果即時追蹤，透明公開</li>
-            <li>金流由第三方支付平台處理</li>
-          </ul>
-          <div class="referral-example">
-            幫助企業找到對的 AI 工具<br>
-            <span class="example-amount">詳見代理商合約</span>
+        <!-- 企業版 -->
+        <div class="pricing-card fade-up">
+          <div class="pricing-tier-name">ENTERPRISE</div>
+          <h3>企業版</h3>
+          <p class="pricing-desc">量身打造，滿足大型團隊與企業需求</p>
+
+          <div class="pricing-price">
+            <span class="amount text-gold" style="font-size:2rem;">洽詢報價</span>
+            <span class="price-note">依企業規模客製化方案</span>
           </div>
-          <a href="/contact" class="btn-referral">申請成為代理商</a>
+
+          <div class="pricing-points">
+            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l2 2"/></svg>
+            客製化 SEO Points 額度
+          </div>
+
+          <ul class="pricing-features">
+            <li><span class="ck">&#10003;</span>專業版所有功能</li>
+            <li><span class="ck">&#10003;</span>白標方案（使用你的品牌）</li>
+            <li><span class="ck">&#10003;</span>L1-L4 約束引擎技術授權</li>
+            <li><span class="ck">&#10003;</span>SLA 服務等級承諾</li>
+            <li><span class="ck">&#10003;</span>24/7 專屬技術支援</li>
+            <li><span class="ck">&#10003;</span>客製化整合與部署</li>
+            <li><span class="ck">&#10003;</span>賣家分潤依合約約定</li>
+          </ul>
+
+          <a href="/contact" class="btn-plan outline">聯繫銷售團隊</a>
         </div>
+
       </div>
 
-      <!-- 分享回饋說明 -->
-      <div class="revenue-calculator">
-        <h3>&#128176; 分享好東西，一起成長</h3>
-        <div class="calc-body">
-          <div class="calc-result">
-            <div class="calc-label">推薦回饋</div>
-            <div class="calc-big-number">依合約約定</div>
-            <div class="calc-note">持續分享，持續獲得回饋。詳細回饋比例請參閱您的合約。</div>
-          </div>
-        </div>
-      </div>
-
+      <p style="text-align:center;color:var(--text-muted);font-size:0.82rem;margin-top:var(--sp-8);line-height:1.8;">
+        所有價格以新台幣（TWD）顯示。額外點數可隨時加購。<br>
+        市集賣家分潤比例依合約約定，具競爭力的賣家分潤。
+      </p>
     </div>
   </section>
 
-  <!-- FAQ -->
-  <section class="faq-section">
-    <h2>常見問題</h2>
-    <p class="faq-sub">還有疑問？我們幫你解答</p>
+  <hr class="divider">
 
-    <div class="faq-item">
-      <button class="faq-question" onclick="toggleFaq(this)">
-        <span>SEOBAIKE 怎麼運作？</span>
-        <span class="arrow">&#9660;</span>
-      </button>
-      <div class="faq-answer">
-        <p>你只要說話，系統自動幫你找到最好的方案。當你提出問題時，系統會自動分析你的需求，然後從上千個 AI 引擎中選出最適合的來回答。你不需要知道背後用了哪個引擎，就像你打開水龍頭不需要知道水從哪個水庫來一樣。</p>
+  <!-- ═══════ FAQ ═══════ -->
+  <section class="section" id="faq">
+    <div class="container-narrow">
+      <div class="section-header fade-up">
+        <div class="section-badge">FAQ</div>
+        <h2>常見問題</h2>
+        <p>關於定價、SEO Points、退款的疑問</p>
       </div>
-    </div>
 
-    <div class="faq-item">
-      <button class="faq-question" onclick="toggleFaq(this)">
-        <span>我需要懂 AI 嗎？</span>
-        <span class="arrow">&#9660;</span>
-      </button>
-      <div class="faq-answer">
-        <p>完全不用。SEOBAIKE 的設計理念就是「你不需要懂 AI」。你只要用中文描述你的需求，系統會自動處理所有技術細節。不需要選模型、不需要設定參數、不需要寫程式。就像用手機一樣簡單。</p>
-      </div>
-    </div>
+      <div class="fade-up">
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <span>SEO Points 怎麼使用？</span>
+            <span class="faq-arrow">&#9660;</span>
+          </button>
+          <div class="faq-answer">
+            <p>SEO Points 是 SEOBAIKE 平台的統一交易貨幣。當你使用 AI 服務、購買市集工具、或啟用進階功能時，系統會自動從你的帳戶扣除對應點數。不同服務消耗的點數不同，你可以在使用前查看每項服務的點數消耗說明。</p>
+          </div>
+        </div>
 
-    <div class="faq-item">
-      <button class="faq-question" onclick="toggleFaq(this)">
-        <span>可以隨時取消嗎？</span>
-        <span class="arrow">&#9660;</span>
-      </button>
-      <div class="faq-answer">
-        <p>可以，所有方案都沒有綁約限制。你可以隨時在帳戶設定中升級、降級或取消。取消後在當期結束前仍可繼續使用。年付方案中途取消可依比例退款。</p>
-      </div>
-    </div>
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <span>點數用完了怎麼辦？</span>
+            <span class="faq-arrow">&#9660;</span>
+          </button>
+          <div class="faq-answer">
+            <p>你可以隨時加購 SEO Points，不需要升級方案。加購的點數會立即存入你的帳戶，和方案內含的點數合併使用。如果你經常需要更多點數，建議考慮升級到更高階的方案，會更划算。</p>
+          </div>
+        </div>
 
-    <div class="faq-item">
-      <button class="faq-question" onclick="toggleFaq(this)">
-        <span>企業版可以客製化嗎？</span>
-        <span class="arrow">&#9660;</span>
-      </button>
-      <div class="faq-answer">
-        <p>可以。企業版提供完整的客製化能力，包括：白標方案（使用你自己的品牌）、客製化設定（定義你自己的 AI 策略）、L1-L4 約束引擎技術授權、以及專屬技術支援團隊。請聯繫我們的銷售團隊了解詳情。</p>
-      </div>
-    </div>
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <span>可以隨時取消訂閱嗎？</span>
+            <span class="faq-arrow">&#9660;</span>
+          </button>
+          <div class="faq-answer">
+            <p>可以。所有方案都不綁約，你可以隨時在帳戶設定中取消。取消後，在當期計費週期結束前仍可繼續使用所有功能。帳戶內剩餘的 SEO Points 不會消失，你可以繼續使用。</p>
+          </div>
+        </div>
 
-    <div class="faq-item">
-      <button class="faq-question" onclick="toggleFaq(this)">
-        <span>SEOBAIKE 全球都能用嗎？</span>
-        <span class="arrow">&#9660;</span>
-      </button>
-      <div class="faq-answer">
-        <p>是的，SEOBAIKE 全球適用。不管你在台灣、韓國、日本、美國、歐洲、東南亞或其他任何地方，都能註冊和使用。價格以新台幣顯示，支援多幣別付款方式。我們不限制任何國家或地區。</p>
-      </div>
-    </div>
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <span>SEO Points 會過期嗎？</span>
+            <span class="faq-arrow">&#9660;</span>
+          </button>
+          <div class="faq-answer">
+            <p>不會。你帳戶中的 SEO Points 永久有效，不論是方案內含的還是額外加購的點數，都沒有使用期限。即使取消訂閱，剩餘點數仍然保留。</p>
+          </div>
+        </div>
 
-    <div class="faq-item">
-      <button class="faq-question" onclick="toggleFaq(this)">
-        <span>安全嗎？我的資料會被保護嗎？</span>
-        <span class="arrow">&#9660;</span>
-      </button>
-      <div class="faq-answer">
-        <p>絕對安全。SEOBAIKE 所有推理路徑都經過四層約束驗證。你的資料全程加密傳輸，儲存於安全的雲端資料庫。我們不會將你的資料分享給任何第三方，也不會用你的資料來訓練任何引擎。</p>
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <span>退款政策是什麼？</span>
+            <span class="faq-arrow">&#9660;</span>
+          </button>
+          <div class="faq-answer">
+            <p>如果你對服務不滿意，可以在購買後 7 天內申請退款。退款將退回原付款方式。已使用的 SEO Points 將按比例扣除。企業版方案的退款政策依合約約定。詳細退款政策請參閱服務條款。</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <span>我在市集上架工具，分潤比例是多少？</span>
+            <span class="faq-arrow">&#9660;</span>
+          </button>
+          <div class="faq-answer">
+            <p>SEOBAIKE 提供具競爭力的賣家分潤。具體分潤比例依合約約定，會在你上架前明確告知。我們致力於讓賣家獲得合理回報，同時確保平台能持續提供優質服務。</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <span>企業版有什麼特別的？</span>
+            <span class="faq-arrow">&#9660;</span>
+          </button>
+          <div class="faq-answer">
+            <p>企業版提供完整的客製化能力，包括：白標方案（使用你自己的品牌）、L1-L4 約束引擎技術授權、SLA 服務等級承諾、24/7 專屬技術支援、以及客製化整合與部署。方案內容與定價根據企業需求量身打造，請聯繫我們的銷售團隊了解詳情。</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <span>支援哪些地區？</span>
+            <span class="faq-arrow">&#9660;</span>
+          </button>
+          <div class="faq-answer">
+            <p>SEOBAIKE 全球適用，不限制任何國家或地區。台灣、日本、韓國、美國、歐洲、東南亞 — 在哪都能用。價格以新台幣顯示，支援多種付款方式。</p>
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- BOTTOM CTA -->
-  <section class="cta-section">
-    <div class="cta-box">
-      <h2>讓我們幫你找到適合的方式</h2>
-      <p>零技術門檻、零壓力。SEOBAIKE 會根據你的需求，幫你走對的路。</p>
-      <a href="/login" class="btn-cta">開始你的旅程</a>
+  <hr class="divider">
+
+  <!-- ═══════ Payment Methods ═══════ -->
+  <section class="section-sm">
+    <div class="container">
+      <div class="section-header fade-up">
+        <div class="section-badge">PAYMENT</div>
+        <h2>付款方式</h2>
+        <p>多種付款管道，方便你選擇</p>
+      </div>
+
+      <div class="payment-grid fade-up" style="max-width:640px;margin:0 auto;">
+        <div class="payment-item">
+          <div class="payment-icon">
+            <svg width="24" height="24" fill="none" stroke="var(--success)" stroke-width="2" viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+          </div>
+          <span>LINE Pay</span>
+        </div>
+        <div class="payment-item">
+          <div class="payment-icon">
+            <svg width="24" height="24" fill="none" stroke="var(--gold-200)" stroke-width="2" viewBox="0 0 24 24"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+          </div>
+          <span>信用卡</span>
+        </div>
+        <div class="payment-item">
+          <div class="payment-icon">
+            <svg width="24" height="24" fill="none" stroke="var(--info)" stroke-width="2" viewBox="0 0 24 24"><path d="M3 3h18v4H3zM3 10h18v4H3zM3 17h18v4H3z"/></svg>
+          </div>
+          <span>銀行轉帳</span>
+        </div>
+        <div class="payment-item">
+          <div class="payment-icon">
+            <svg width="24" height="24" fill="none" stroke="var(--gold-300)" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+          </div>
+          <span>超商代碼</span>
+        </div>
+      </div>
+
+      <p style="text-align:center;color:var(--text-muted);font-size:0.82rem;margin-top:var(--sp-6);">
+        所有付款均由第三方支付平台安全處理，SEOBAIKE 不儲存您的付款資訊。
+      </p>
     </div>
   </section>
 
-  <!-- FOOTER -->
+  <hr class="divider">
+
+  <!-- ═══════ CTA ═══════ -->
+  <section class="section">
+    <div class="container fade-up">
+      <div class="cta-box">
+        <h2>開始免費<span class="text-gold">體驗</span></h2>
+        <p>每月 100 SEO Points 免費用，不需信用卡。<br>感受 SEOBAIKE 的能力，再決定要不要升級。</p>
+        <a href="/login" class="btn btn-primary btn-lg" style="position:relative;">開始免費體驗</a>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════ Footer ═══════ -->
   <footer class="footer">
-    <div class="footer-grid">
-      <div class="footer-brand">
-        <h3><img src="/favicon.svg" alt="S" width="22" height="22" style="border-radius:5px;"><span class="seo">SEO</span><span class="baike">BAIKE</span></h3>
-        <p>小路光有限公司（統編 60475510）<br>AI 平台 — AI 界的 App Store</p>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="/" class="nav-brand" style="margin-bottom:var(--sp-3)">
+            <img src="/favicon.svg" alt="SEOBAIKE" width="28" height="28">
+            <span class="seo">SEO</span><span class="baike">BAIKE</span>
+          </a>
+          <p>小路光有限公司（統編 60475510）<br>AI 平台 — AI 界的 App Store</p>
+        </div>
+        <div class="footer-col">
+          <h4>產品</h4>
+          <a href="/features">平台功能</a>
+          <a href="/pricing">方案定價</a>
+          <a href="/marketplace">市集</a>
+          <a href="/docs">技術文件</a>
+        </div>
+        <div class="footer-col">
+          <h4>公司</h4>
+          <a href="/about">關於我們</a>
+          <a href="/contact">聯繫我們</a>
+          <a href="/privacy">隱私權政策</a>
+          <a href="/terms">服務條款</a>
+        </div>
+        <div class="footer-col">
+          <h4>資源</h4>
+          <a href="/docs">快速開始</a>
+          <a href="/blog">部落格</a>
+          <a href="/docs">常見問題</a>
+          <a href="/status">系統狀態</a>
+        </div>
       </div>
-      <div class="footer-col">
-        <h4>產品</h4>
-        <a href="/features">平台功能</a>
-        <a href="/pricing">方案定價</a>
-        <a href="/marketplace">市集</a>
-        <a href="/docs">技術文件</a>
+      <div class="footer-bottom">
+        <p>&copy; 2025-2026 小路光有限公司（統編 60475510）</p>
+        <p>aiforseo.vip</p>
       </div>
-      <div class="footer-col">
-        <h4>公司</h4>
-        <a href="/about">關於我們</a>
-        <a href="/contact">聯繫我們</a>
-        <a href="/privacy">隱私權政策</a>
-        <a href="/terms">服務條款</a>
-      </div>
-      <div class="footer-col">
-        <h4>資源</h4>
-        <a href="/docs">快速開始</a>
-        <a href="/blog">部落格</a>
-        <a href="/docs">常見問題</a>
-        <a href="/status">系統狀態</a>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      <p>&copy; 2025-2026 <span>小路光有限公司</span>（統編 60475510）</p>
-      <p><span>aiforseo.vip</span></p>
     </div>
   </footer>
 
+
+  <!-- ═══════ Scripts ═══════ -->
   <script>
-    // ==================== Mobile Nav ====================
-    // === 手機版 Hamburger 全螢幕 Overlay Menu ===
-    document.getElementById('hamburger').addEventListener('click', function () {
-      document.getElementById('mobileMenu').classList.add('open');
-      document.body.style.overflow = 'hidden';
+    /* Scroll fade-in observer */
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.08 });
+    document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
+
+    /* Nav scroll effect */
+    window.addEventListener('scroll', () => {
+      const nav = document.querySelector('.nav');
+      if (nav) nav.classList.toggle('scrolled', window.scrollY > 20);
     });
-    document.getElementById('mobileMenuClose').addEventListener('click', function () {
-      closeMobileMenu();
-    });
-    function closeMobileMenu() {
-      document.getElementById('mobileMenu').classList.remove('open');
-      document.body.style.overflow = '';
+
+    /* Hamburger menu */
+    function toggleMenu() {
+      document.querySelector('.nav-hamburger')?.classList.toggle('active');
+      document.querySelector('.mobile-overlay')?.classList.toggle('open');
+      document.body.style.overflow = document.querySelector('.mobile-overlay.open') ? 'hidden' : '';
     }
 
-    // === 付費流程追蹤 ===
+    /* FAQ accordion */
+    function toggleFaq(button) {
+      const item = button.parentElement;
+      const wasOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(el => el.classList.remove('open'));
+      if (!wasOpen) item.classList.add('open');
+    }
+
+    /* Plan click tracking */
     function trackPlanClick(plan) {
       try {
         if (window.localStorage) {
@@ -1780,94 +919,6 @@
         }
       } catch(e) {}
     }
-
-    // ==================== Billing Toggle ====================
-    var isAnnual = false;
-
-    function setBilling(mode) {
-      isAnnual = mode === 'annual';
-      updateBilling();
-    }
-
-    function toggleBilling() {
-      isAnnual = !isAnnual;
-      updateBilling();
-    }
-
-    function updateBilling() {
-      var toggle = document.getElementById('billingToggle');
-      var monthlyLabel = document.getElementById('monthlyLabel');
-      var annualLabel = document.getElementById('annualLabel');
-
-      if (isAnnual) {
-        toggle.classList.add('annual');
-        monthlyLabel.classList.remove('active');
-        annualLabel.classList.add('active');
-      } else {
-        toggle.classList.remove('annual');
-        monthlyLabel.classList.add('active');
-        annualLabel.classList.remove('active');
-      }
-
-      // Update prices
-      var priceEls = document.querySelectorAll('.price-monthly');
-      priceEls.forEach(function (el) {
-        if (isAnnual) {
-          el.textContent = el.getAttribute('data-annual');
-        } else {
-          el.textContent = el.getAttribute('data-monthly');
-        }
-      });
-
-      // Update annual price text
-      var annualTexts = document.querySelectorAll('.annual-price');
-      annualTexts.forEach(function (el) {
-        var txt = el.getAttribute('data-annual-text');
-        if (txt) {
-          el.textContent = isAnnual ? txt : '';
-          el.innerHTML = isAnnual ? txt : '&nbsp;';
-        }
-      });
-    }
-
-    // ==================== FAQ ====================
-    function toggleFaq(button) {
-      var item = button.parentElement;
-      var wasOpen = item.classList.contains('open');
-
-      document.querySelectorAll('.faq-item').forEach(function (el) {
-        el.classList.remove('open');
-      });
-
-      if (!wasOpen) {
-        item.classList.add('open');
-      }
-    }
-
-    // ==================== Revenue Calculator (removed - no specific percentages) ====================
-    function updateCalc() {
-      // Calculator removed per legal review - no specific percentages to display
-    }
-
-    // ==================== Scroll fade-in ====================
-    (function () {
-      var sections = document.querySelectorAll('.pricing-section, .comparison-section, .referral-section, .faq-section, .cta-section, .video-section');
-      sections.forEach(function (sec) {
-        sec.style.opacity = '0';
-        sec.style.transform = 'translateY(30px)';
-        sec.style.transition = 'opacity 0.7s ease, transform 0.7s ease';
-      });
-      var observer = new IntersectionObserver(function (entries) {
-        entries.forEach(function (entry) {
-          if (entry.isIntersecting) {
-            entry.target.style.opacity = '1';
-            entry.target.style.transform = 'translateY(0)';
-            observer.unobserve(entry.target);
-          }
-        });
-      }, { threshold: 0.1 });
-      sections.forEach(function (sec) { observer.observe(sec); });
-    })();
   </script>
 
   <!-- Page View Tracking -->
@@ -1886,9 +937,6 @@
   })();
   </script>
 
-  <script src="/assets/demo-video.js"></script>
-  <script>window.SEOBAIKEDemo && window.SEOBAIKEDemo.init('demo-video-pricing');</script>
-  <script src="/assets/smart-align.js"></script>
   <script src="/seobaike-widget.js"></script>
 </body>
 </html>
