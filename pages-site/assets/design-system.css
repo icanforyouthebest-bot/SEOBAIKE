@@ -620,6 +620,20 @@ select, button, a { touch-action: manipulation; }
   h1 { font-size: 1.5rem; }
 }
 
+/* ── Legal Disclaimer ── */
+.footer-disclaimer {
+  margin-top: var(--sp-4);
+  padding-top: var(--sp-4);
+  border-top: 1px solid var(--border-default);
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+  text-align: center;
+  max-width: 640px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 /* ── Scroll Observer Script Marker ── */
 /* Add this JS to every page:
 <script>
