@@ -548,6 +548,19 @@
       <span>aiforseo.vip</span>
     </div>
   </footer>
-
+<script>
+(function(){
+  try {
+    var cfg = window.__SEOBAIKE__ || {};
+    var sUrl = cfg.supabaseUrl || 'https://vmyrivxxibqydccurxug.supabase.co';
+    var sKey = cfg.anonKey || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZteXJpdnh4aWJxeWRjY3VyeHVnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzAwNDAwMjksImV4cCI6MjA4NTYxNjAyOX0.iBV-23LGdm_uKffAExgqSV34-NWoAyv8_-M_cJQZ8Gg';
+    fetch(sUrl + '/rest/v1/page_views', {
+      method: 'POST',
+      headers: { 'Content-Type':'application/json', 'apikey':sKey, 'Authorization':'Bearer '+sKey, 'Prefer':'return=minimal' },
+      body: JSON.stringify({ path: location.pathname, referrer: document.referrer || null, user_agent: navigator.userAgent })
+    }).catch(function(){});
+  } catch(e){}
+})();
+</script>
 </body>
 </html>

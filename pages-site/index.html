@@ -693,7 +693,7 @@
         確保推理路徑合規、可追蹤、可稽核。
       </p>
       <div class="hero-actions">
-        <a href="#" class="btn btn-primary">免費開始</a>
+        <a href="#demo-section" class="btn btn-primary">立即體驗</a>
         <a href="/docs" class="btn btn-secondary">查看文件 &rarr;</a>
       </div>
     </div>
@@ -916,6 +916,58 @@
     </div>
   </section>
 
+  <!-- ═══════════ Live Demo ═══════════ -->
+  <section class="section" id="demo-section" style="background:rgba(232,133,12,0.03);">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-label">立即體驗</div>
+        <h2>30 秒體驗約束推理</h2>
+        <p>選擇一條 L1→L4 產業路徑，真實呼叫專利約束引擎。</p>
+      </div>
+      <div style="max-width:720px;margin:0 auto;">
+        <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:16px;padding:40px 32px;position:relative;overflow:hidden;">
+          <div style="position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--orange),var(--green));"></div>
+
+          <!-- 預設路徑選擇 -->
+          <div style="margin-bottom:24px;">
+            <label style="display:block;font-size:0.82rem;color:var(--text-muted);margin-bottom:8px;text-transform:uppercase;letter-spacing:1px;">選擇產業路徑</label>
+            <select id="demo-preset" style="width:100%;padding:12px 16px;background:var(--bg-code);border:1px solid var(--border);border-radius:8px;color:var(--text);font-size:0.95rem;cursor:pointer;">
+              <option value="agri">農林漁牧業 → 農作物栽培業 → 糧食作物栽培 → 稻米栽培</option>
+              <option value="mfg">製造業 → 半導體製造 → 晶圓蝕刻製程 → 光阻塗佈</option>
+              <option value="fin">金融保險業 → 銀行業 → 存款業務 → 定期存款</option>
+              <option value="tech">資訊通信業 → 軟體開發 → 系統整合 → API 整合</option>
+              <option value="cross" style="color:#ff6b6b;">跨產業測試：農業 L1 → 半導體 L4（應被拒絕）</option>
+            </select>
+          </div>
+
+          <!-- 路徑視覺化 -->
+          <div id="demo-path" style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:24px;font-family:monospace;font-size:0.88rem;">
+            <span class="layer-tag layer-l1" id="dp-l1">L1</span>
+            <span style="color:var(--text-muted);">→</span>
+            <span class="layer-tag layer-l2" id="dp-l2">L2</span>
+            <span style="color:var(--text-muted);">→</span>
+            <span class="layer-tag layer-l3" id="dp-l3">L3</span>
+            <span style="color:var(--text-muted);">→</span>
+            <span class="layer-tag layer-l4" id="dp-l4">L4</span>
+          </div>
+
+          <!-- 執行按鈕 -->
+          <button id="demo-btn" onclick="runDemo()" class="btn btn-primary" style="width:100%;justify-content:center;font-size:1.05rem;">
+            驗證推理路徑
+          </button>
+
+          <!-- 結果區 -->
+          <div id="demo-result" style="display:none;margin-top:20px;padding:16px 20px;border-radius:10px;font-family:monospace;font-size:0.85rem;line-height:1.8;"></div>
+
+          <!-- 專利標記 -->
+          <div style="margin-top:16px;text-align:center;font-size:0.75rem;color:var(--text-muted);">
+            專利 TW-115100981「世界定義約束法用於AI推理」 — 真實 API 呼叫，非模擬
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- ═══════════ CTA ═══════════ -->
   <section class="cta-section">
     <div class="container">
@@ -923,7 +975,7 @@
         <h2>準備好讓 AI 在約束下運行了嗎？</h2>
         <p>免費開始使用 SEOBAIKE，體驗產業級約束推理平台的強大能力。</p>
         <div class="hero-actions">
-          <a href="#" class="btn btn-primary">免費註冊</a>
+          <a href="/login" class="btn btn-primary">免費註冊</a>
           <a href="/contact" class="btn btn-secondary">聯繫銷售</a>
         </div>
       </div>
@@ -1008,6 +1060,68 @@
     }
     animateCounters();
 
+    /* ─── Live Demo ─── */
+    var DEMO_PRESETS = {
+      agri:  { l1_code:'L1-01', l4_code:'L4-01010101', labels:['農林漁牧業','農作物栽培業','糧食作物栽培','稻米栽培'] },
+      mfg:   { l1_code:'L1-03', l4_code:'L4-03010101', labels:['製造業','半導體製造','晶圓蝕刻製程','光阻塗佈'] },
+      fin:   { l1_code:'L1-11', l4_code:'L4-11010101', labels:['金融保險業','銀行業','存款業務','定期存款'] },
+      tech:  { l1_code:'L1-09', l4_code:'L4-09010101', labels:['資訊通信業','軟體開發','系統整合','API 整合'] },
+      cross: { l1_code:'L1-01', l4_code:'L4-03010101', labels:['農林漁牧業','(跨產業)','(跨產業)','光阻塗佈'] }
+    };
+    var demoSelect = document.getElementById('demo-preset');
+    function updatePathDisplay() {
+      var p = DEMO_PRESETS[demoSelect.value];
+      document.getElementById('dp-l1').textContent = p.labels[0];
+      document.getElementById('dp-l2').textContent = p.labels[1];
+      document.getElementById('dp-l3').textContent = p.labels[2];
+      document.getElementById('dp-l4').textContent = p.labels[3];
+      document.getElementById('demo-result').style.display = 'none';
+    }
+    demoSelect.addEventListener('change', updatePathDisplay);
+    updatePathDisplay();
+
+    function runDemo() {
+      var btn = document.getElementById('demo-btn');
+      var result = document.getElementById('demo-result');
+      var p = DEMO_PRESETS[demoSelect.value];
+      btn.disabled = true;
+      btn.textContent = '驗證中...';
+      result.style.display = 'none';
+
+      fetch('/api/v1/check', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ l1_code: p.l1_code, l4_code: p.l4_code, session_id: 'demo-' + Date.now() })
+      })
+      .then(function(res) { return res.json(); })
+      .then(function(data) {
+        var verdict = (data.result && data.result.verdict) || 'unknown';
+        var reason = (data.result && data.result.reason) || '';
+        var isAllowed = verdict === 'allowed';
+        result.style.display = 'block';
+        result.className = '';
+        result.style.background = isAllowed ? 'rgba(118,185,0,0.1)' : 'rgba(255,80,80,0.1)';
+        result.style.border = isAllowed ? '1px solid rgba(118,185,0,0.3)' : '1px solid rgba(255,80,80,0.3)';
+        result.style.color = isAllowed ? '#76b900' : '#ff6b6b';
+        result.innerHTML =
+          '<div style="font-size:1.1rem;font-weight:700;margin-bottom:8px;">' + (isAllowed ? '\u2713 ALLOWED' : '\u2717 DENIED') + '</div>' +
+          '<div>' + reason + '</div>' +
+          (data.result && data.result.check_id ? '<div style="margin-top:8px;font-size:0.78rem;color:var(--text-muted);">check_id: ' + data.result.check_id + '</div>' : '') +
+          '<div style="margin-top:4px;font-size:0.78rem;color:var(--text-muted);">patent: ' + (data.patent || 'TW-115100981') + '</div>';
+      })
+      .catch(function(err) {
+        result.style.display = 'block';
+        result.style.background = 'rgba(255,200,0,0.1)';
+        result.style.border = '1px solid rgba(255,200,0,0.3)';
+        result.style.color = '#ffcc00';
+        result.textContent = 'Error: ' + err.message;
+      })
+      .finally(function() {
+        btn.disabled = false;
+        btn.textContent = '驗證推理路徑';
+      });
+    }
+
     /* Fade-in on scroll */
     function initFadeIn() {
       var sections = document.querySelectorAll('.section, .stats, .cta-section');
@@ -1028,6 +1142,20 @@
       sections.forEach(function (sec) { observer.observe(sec); });
     }
     initFadeIn();
+
+    /* ─── Page View Tracking ─── */
+    (function(){
+      try {
+        var cfg = window.__SEOBAIKE__ || {};
+        var sUrl = cfg.supabaseUrl || 'https://vmyrivxxibqydccurxug.supabase.co';
+        var sKey = cfg.anonKey || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZteXJpdnh4aWJxeWRjY3VyeHVnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzAwNDAwMjksImV4cCI6MjA4NTYxNjAyOX0.iBV-23LGdm_uKffAExgqSV34-NWoAyv8_-M_cJQZ8Gg';
+        fetch(sUrl + '/rest/v1/page_views', {
+          method: 'POST',
+          headers: { 'Content-Type':'application/json', 'apikey':sKey, 'Authorization':'Bearer '+sKey, 'Prefer':'return=minimal' },
+          body: JSON.stringify({ path: location.pathname, referrer: document.referrer || null, user_agent: navigator.userAgent })
+        }).catch(function(){});
+      } catch(e){}
+    })();
   </script>
 
 </body>
