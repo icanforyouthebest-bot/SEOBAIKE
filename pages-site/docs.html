@@ -3,39 +3,49 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>API 文件與技術文件 — SEOBAIKE | AI 平台開發者指南</title>
-<meta name="description" content="SEOBAIKE 完整 API 文件：約束推理引擎、AI 閘道、L1-L4 產業節點查詢、路徑驗證等互動式 API 參考。支援即時測試，快速開始整合。">
-<meta name="keywords" content="SEOBAIKE,API 文件,AI API,約束推理 API,L1-L4 節點,路徑驗證,台灣 AI 平台,開發者文件,AI 整合,REST API,AI 引擎 API">
+<title>常見問題 — SEOBAIKE | 幫助中心</title>
+<meta name="description" content="SEOBAIKE 常見問題：怎麼上架商品？怎麼收款？可以賣到哪些國家？AI 能幫我什麼？所有問題一次回答。">
+<meta name="keywords" content="SEOBAIKE,常見問題,FAQ,幫助中心,市集上架,跨國銷售,AI 市集,全球市集">
 <link rel="canonical" href="https://aiforseo.vip/docs.html">
-<meta property="og:title" content="API 文件與技術文件 — SEOBAIKE | AI 平台開發者指南">
-<meta property="og:description" content="SEOBAIKE 完整互動式 API 文件：約束推理、路徑驗證、L1-L4 節點查詢。支援即時測試。">
+<meta property="og:title" content="常見問題 — SEOBAIKE 幫助中心">
+<meta property="og:description" content="SEOBAIKE 常見問題：上架商品、收款方式、跨國銷售、AI 功能。所有問題一次回答。">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://aiforseo.vip/docs.html">
 <meta property="og:image" content="/og-image.png">
 <meta property="og:site_name" content="SEOBAIKE">
 <meta property="og:locale" content="zh_TW">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="API 文件與技術文件 — SEOBAIKE | AI 平台開發者指南">
-<meta name="twitter:description" content="SEOBAIKE 完整互動式 API 文件：約束推理、路徑驗證、L1-L4 節點查詢。">
+<meta name="twitter:title" content="常見問題 — SEOBAIKE 幫助中心">
+<meta name="twitter:description" content="SEOBAIKE 常見問題：上架商品、收款方式、跨國銷售、AI 功能。">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <script type="application/ld+json">
 [
   {
     "@context": "https://schema.org",
-    "@type": "TechArticle",
-    "headline": "SEOBAIKE API Reference — 約束推理平台完整 API 文件",
-    "description": "SEOBAIKE 約束推理平台完整互動式 API 文件，涵蓋推理引擎、路徑驗證、L1-L4 產業節點查詢與 AI 引擎匹配。",
-    "url": "https://aiforseo.vip/docs.html",
-    "author": {
-      "@type": "Organization",
-      "name": "小路光有限公司"
-    },
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "怎麼在市集上架商品？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "進入市集頁面，點選「我要上架」按鈕，填寫商品名稱、說明、價格，送出即可。整個流程不到 5 分鐘。"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "可以賣到哪些國家？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "SEOBAIKE 是全球市集，目前主要服務台灣、韓國、日本及東南亞市場，未來將持續擴展。AI 會自動幫你翻譯商品資訊。"
+        }
+      }
+    ],
     "publisher": {
       "@type": "Organization",
       "name": "SEOBAIKE"
     },
-    "datePublished": "2026-02-15",
-    "proficiencyLevel": "Beginner",
+    "url": "https://aiforseo.vip/docs.html",
     "inLanguage": "zh-TW"
   }
 ]
@@ -43,19 +53,15 @@
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 :root{
-  --bg:#0a0a1a;--bg2:#080818;--card:#111122;--card2:#161630;--card-hover:#191935;
+  --bg:#0a0a1a;--card:#111122;--card2:#161630;
   --border:#1e1e3a;--border-light:#2a2a50;
-  --orange:#e8850c;--orange-dim:rgba(232,133,12,.12);--copper:#cc785c;--green:#76b900;--green-dim:rgba(118,185,0,.12);
-  --red:#e85050;--red-dim:rgba(232,80,80,.12);--blue:#5090e8;--blue-dim:rgba(80,144,232,.12);
+  --orange:#e8850c;--orange-dim:rgba(232,133,12,.12);--copper:#cc785c;--green:#76b900;
   --text:#e2e8f0;--dim:#8892a4;--dim2:#5a6070;--white:#ffffff;
-  --code-bg:#0d0d20;--code-border:#252545;
-  --mono:'Consolas','SF Mono','Fira Code','Courier New',monospace;
-  --radius:10px;--radius-sm:6px;
+  --radius:14px;--radius-sm:8px;
 }
-body{background:var(--bg);color:var(--text);font-family:'Inter','Segoe UI',-apple-system,BlinkMacSystemFont,sans-serif;line-height:1.7;-webkit-font-smoothing:antialiased}
+body{background:var(--bg);color:var(--text);font-family:'Inter','Segoe UI',-apple-system,BlinkMacSystemFont,'Noto Sans TC',sans-serif;line-height:1.7;-webkit-font-smoothing:antialiased}
 a{color:var(--orange);text-decoration:none;transition:color .2s}
 a:hover{color:var(--copper)}
-code{font-family:var(--mono);font-size:13px;background:var(--code-bg);padding:2px 7px;border-radius:4px;color:var(--orange)}
 
 /* Navigation */
 .nav{position:sticky;top:0;z-index:100;background:rgba(10,10,26,.92);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);padding:0 24px}
@@ -67,150 +73,44 @@ code{font-family:var(--mono);font-size:13px;background:var(--code-bg);padding:2p
 .nav-toggle{display:none;background:none;border:none;color:var(--text);font-size:24px;cursor:pointer}
 
 /* Hero */
-.hero{background:linear-gradient(160deg,#0f0f2a 0%,#1a1020 50%,#0a0a1a 100%);padding:80px 24px 48px;text-align:center;border-bottom:1px solid var(--border)}
-.hero h1{font-size:48px;font-weight:800;background:linear-gradient(135deg,var(--orange),var(--copper),var(--green));-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:12px}
-.hero p{font-size:18px;color:var(--dim);max-width:640px;margin:0 auto 24px}
-.hero-meta{display:flex;justify-content:center;gap:32px;flex-wrap:wrap}
-.hero-meta-item{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--dim2)}
-.hero-meta-item .dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
-.hero-meta-item .dot.live{background:var(--green);box-shadow:0 0 8px rgba(118,185,0,.5)}
-.hero-meta-item .dot.patent{background:var(--orange);box-shadow:0 0 8px rgba(232,133,12,.4)}
-.hero-meta-item code{font-size:12px;padding:1px 6px}
+.hero{background:linear-gradient(160deg,#0f0f2a 0%,#1a1020 50%,#0a0a1a 100%);padding:100px 24px 60px;text-align:center;border-bottom:1px solid var(--border)}
+.hero h1{font-size:48px;font-weight:800;background:linear-gradient(135deg,var(--orange),var(--copper));-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:12px}
+.hero p{font-size:18px;color:var(--dim);max-width:640px;margin:0 auto 16px}
+.hero .subtitle-ko{font-size:15px;color:var(--dim2);margin-bottom:0}
 
-/* Layout: sidebar + content */
-.docs-layout{display:flex;max-width:1280px;margin:0 auto;min-height:calc(100vh - 64px)}
-.docs-sidebar{width:260px;flex-shrink:0;border-right:1px solid var(--border);padding:32px 0 64px 24px;position:sticky;top:64px;height:calc(100vh - 64px);overflow-y:auto;scrollbar-width:thin;scrollbar-color:var(--border) transparent}
-.docs-sidebar::-webkit-scrollbar{width:4px}
-.docs-sidebar::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px}
-.sidebar-section{margin-bottom:28px}
-.sidebar-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1.2px;color:var(--dim2);margin-bottom:10px;padding-left:12px}
-.sidebar-link{display:flex;align-items:center;gap:8px;padding:7px 12px;border-radius:var(--radius-sm);font-size:13px;color:var(--dim);cursor:pointer;transition:all .15s;border:none;background:none;width:100%;text-align:left;font-family:inherit}
-.sidebar-link:hover{color:var(--text);background:rgba(232,133,12,.06)}
-.sidebar-link.active{color:var(--orange);background:var(--orange-dim);font-weight:600}
-.sidebar-link .method-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0}
-.sidebar-link .method-dot.get{background:var(--green)}
-.sidebar-link .method-dot.post{background:var(--orange)}
-.docs-content{flex:1;min-width:0;padding:40px 48px 80px}
+/* Main Content */
+.faq-container{max-width:800px;margin:0 auto;padding:60px 24px 80px}
+.faq-intro{text-align:center;margin-bottom:48px}
+.faq-intro h2{font-size:28px;font-weight:700;color:var(--white);margin-bottom:12px}
+.faq-intro p{font-size:16px;color:var(--dim);max-width:500px;margin:0 auto}
 
-/* Section Headers */
-.section{margin-bottom:64px;scroll-margin-top:80px}
-.section-title{font-size:26px;font-weight:700;color:var(--white);margin-bottom:8px;display:flex;align-items:center;gap:12px}
-.section-title::before{content:'';display:inline-block;width:4px;height:26px;background:var(--orange);border-radius:2px;flex-shrink:0}
-.section-desc{color:var(--dim);font-size:15px;margin-bottom:32px;line-height:1.7}
+/* FAQ Item */
+.faq-item{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);margin-bottom:16px;overflow:hidden;transition:border-color .2s}
+.faq-item:hover{border-color:var(--border-light)}
+.faq-question{display:flex;align-items:center;justify-content:space-between;padding:20px 24px;cursor:pointer;user-select:none;gap:16px}
+.faq-question h3{font-size:16px;font-weight:600;color:var(--white);line-height:1.5;flex:1}
+.faq-icon{width:28px;height:28px;border-radius:50%;background:var(--orange-dim);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:transform .3s, background .3s}
+.faq-icon svg{width:14px;height:14px;stroke:var(--orange);transition:transform .3s}
+.faq-item.open .faq-icon{background:var(--orange);transform:rotate(180deg)}
+.faq-item.open .faq-icon svg{stroke:var(--white)}
+.faq-answer{max-height:0;overflow:hidden;transition:max-height .4s cubic-bezier(0.4,0,0.2,1),padding .3s}
+.faq-answer-inner{padding:0 24px 20px;font-size:15px;color:var(--dim);line-height:1.8}
+.faq-answer-inner strong{color:var(--text)}
+.faq-answer-inner ul{margin:8px 0 8px 20px}
+.faq-answer-inner li{margin-bottom:6px}
+.faq-item.open .faq-answer{max-height:500px}
 
-/* Quick Start */
-.quickstart-box{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:28px;margin-bottom:24px}
-.quickstart-box h3{font-size:16px;font-weight:600;color:var(--white);margin-bottom:6px}
-.quickstart-box p{font-size:14px;color:var(--dim);margin-bottom:16px}
-.base-url-bar{display:flex;align-items:center;gap:12px;background:var(--code-bg);border:1px solid var(--code-border);border-radius:var(--radius-sm);padding:12px 16px;font-family:var(--mono);font-size:14px;color:var(--green);margin-bottom:16px;overflow-x:auto}
-.base-url-bar .label{color:var(--dim2);font-size:11px;text-transform:uppercase;letter-spacing:.5px;flex-shrink:0}
+/* Category Labels */
+.faq-category{display:flex;align-items:center;gap:10px;margin:40px 0 20px;padding-bottom:8px;border-bottom:1px solid var(--border)}
+.faq-category-icon{font-size:24px}
+.faq-category h2{font-size:20px;font-weight:700;color:var(--white)}
 
-/* Code Block */
-.code-block{background:var(--code-bg);border:1px solid var(--code-border);border-radius:var(--radius);overflow:hidden;margin:16px 0}
-.code-header{background:rgba(30,30,58,.6);padding:8px 16px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--code-border)}
-.code-header span{font-size:12px;color:var(--dim);font-family:var(--mono)}
-.code-copy{background:none;border:1px solid var(--border);color:var(--dim);padding:3px 10px;border-radius:var(--radius-sm);font-size:11px;cursor:pointer;transition:all .2s;font-family:inherit}
-.code-copy:hover{color:var(--orange);border-color:var(--orange)}
-.code-body{padding:14px 18px;overflow-x:auto}
-.code-body pre{margin:0;font-family:var(--mono);font-size:13px;line-height:1.8;color:#c4c8d4;white-space:pre;tab-size:2}
-.code-body .cm{color:#5a6070}
-.code-body .s{color:var(--green)}
-.code-body .k{color:var(--orange)}
-.code-body .p{color:var(--copper)}
-.code-body .n{color:#7aa2f7}
-.code-body .d{color:var(--dim)}
-
-/* Endpoint Card */
-.ep-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);margin-bottom:32px;overflow:hidden;transition:border-color .2s;scroll-margin-top:80px}
-.ep-card:hover{border-color:var(--border-light)}
-.ep-card-head{padding:24px 28px 20px;border-bottom:1px solid var(--border);display:flex;align-items:flex-start;justify-content:space-between;gap:16px;flex-wrap:wrap}
-.ep-title-row{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
-.method-badge{padding:4px 12px;border-radius:var(--radius-sm);font-size:12px;font-weight:700;font-family:var(--mono);letter-spacing:.5px;flex-shrink:0}
-.method-badge.get{background:var(--green-dim);color:var(--green);border:1px solid rgba(118,185,0,.3)}
-.method-badge.post{background:var(--orange-dim);color:var(--orange);border:1px solid rgba(232,133,12,.3)}
-.ep-url{font-family:var(--mono);font-size:14px;color:var(--white);word-break:break-all}
-.ep-tag{padding:3px 10px;border-radius:4px;font-size:11px;background:rgba(204,120,92,.12);color:var(--copper);border:1px solid rgba(204,120,92,.25);font-weight:500}
-.ep-card-body{padding:24px 28px}
-.ep-desc{font-size:14px;color:var(--dim);line-height:1.7;margin-bottom:20px}
-
-/* Params Table */
-.params-section{margin-bottom:20px}
-.params-label{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:var(--dim2);margin-bottom:10px}
-.params-table{width:100%;border-collapse:collapse}
-.params-table th{text-align:left;padding:8px 12px;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;color:var(--dim2);background:rgba(13,13,32,.5);border-bottom:1px solid var(--code-border)}
-.params-table td{padding:8px 12px;font-size:13px;border-bottom:1px solid rgba(30,30,58,.4);color:var(--dim);vertical-align:top}
-.params-table td:first-child{font-family:var(--mono);color:var(--copper);font-weight:500;white-space:nowrap}
-.params-table .type{font-family:var(--mono);font-size:11px;color:var(--blue);background:var(--blue-dim);padding:1px 6px;border-radius:3px}
-.params-table .required{font-family:var(--mono);font-size:10px;color:var(--red);background:var(--red-dim);padding:1px 5px;border-radius:3px;margin-left:4px}
-.params-table .optional{font-family:var(--mono);font-size:10px;color:var(--dim2);background:rgba(90,96,112,.15);padding:1px 5px;border-radius:3px;margin-left:4px}
-
-/* Example Request/Response */
-.example-tabs{display:flex;gap:0;margin-bottom:0}
-.example-tab{padding:8px 18px;font-size:12px;font-weight:600;cursor:pointer;border:1px solid var(--code-border);border-bottom:none;background:transparent;color:var(--dim);font-family:inherit;transition:all .15s;border-radius:var(--radius-sm) var(--radius-sm) 0 0;margin-right:-1px;position:relative}
-.example-tab.active{background:var(--code-bg);color:var(--orange);z-index:1}
-.example-tab:hover:not(.active){color:var(--text)}
-.example-panel{display:none}
-.example-panel.active{display:block}
-
-/* Try It */
-.try-it-section{margin-top:20px;padding-top:20px;border-top:1px solid rgba(30,30,58,.6)}
-.try-btn{display:inline-flex;align-items:center;gap:8px;padding:8px 20px;border-radius:var(--radius-sm);font-size:13px;font-weight:600;cursor:pointer;transition:all .2s;border:none;font-family:inherit}
-.try-btn.run{background:linear-gradient(135deg,var(--orange),var(--copper));color:var(--white)}
-.try-btn.run:hover{opacity:.9;transform:translateY(-1px);box-shadow:0 4px 16px rgba(232,133,12,.3)}
-.try-btn.run:active{transform:translateY(0)}
-.try-btn.run:disabled{opacity:.5;cursor:not-allowed;transform:none}
-.try-btn.run .spinner{display:none;width:14px;height:14px;border:2px solid rgba(255,255,255,.3);border-top-color:#fff;border-radius:50%;animation:spin .6s linear infinite}
-.try-btn.run.loading .spinner{display:inline-block}
-.try-btn.run.loading .play-icon{display:none}
-@keyframes spin{to{transform:rotate(360deg)}}
-
-/* Live Response Panel */
-.live-response{margin-top:16px;display:none}
-.live-response.visible{display:block}
-.live-response-header{display:flex;align-items:center;gap:10px;margin-bottom:8px}
-.live-response-header .status-pill{padding:3px 10px;border-radius:20px;font-size:12px;font-weight:700;font-family:var(--mono)}
-.live-response-header .status-pill.s2xx{background:var(--green-dim);color:var(--green)}
-.live-response-header .status-pill.s4xx{background:var(--orange-dim);color:var(--orange)}
-.live-response-header .status-pill.s5xx{background:var(--red-dim);color:var(--red)}
-.live-response-header .timing{font-size:12px;color:var(--dim2);font-family:var(--mono)}
-
-/* Input fields for Try It */
-.try-fields{margin-bottom:16px}
-.try-field{margin-bottom:10px}
-.try-field label{display:block;font-size:12px;font-weight:600;color:var(--dim);margin-bottom:4px;font-family:var(--mono)}
-.try-field input,.try-field textarea{width:100%;background:var(--code-bg);border:1px solid var(--code-border);border-radius:var(--radius-sm);padding:8px 12px;font-size:13px;font-family:var(--mono);color:var(--text);outline:none;transition:border-color .2s;resize:vertical}
-.try-field input:focus,.try-field textarea:focus{border-color:var(--orange)}
-.try-field textarea{min-height:80px;line-height:1.6}
-
-/* Auth Section */
-.auth-box{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:28px;margin-top:20px}
-.auth-box h3{font-size:17px;font-weight:600;color:var(--white);margin-bottom:12px}
-.auth-box p{font-size:14px;color:var(--dim);margin-bottom:12px}
-.auth-flow{display:flex;flex-wrap:wrap;gap:12px;margin-top:16px}
-.auth-step{flex:1;min-width:180px;background:var(--card2);border:1px solid var(--border);border-radius:8px;padding:16px;text-align:center}
-.auth-step .num{font-size:24px;font-weight:700;color:var(--orange);margin-bottom:4px}
-.auth-step .label{font-size:13px;color:var(--dim)}
-
-/* Rate Limit Table */
-.rate-table{width:100%;border-collapse:collapse;margin-top:20px;border-radius:var(--radius);overflow:hidden;border:1px solid var(--border)}
-.rate-table th,.rate-table td{padding:14px 16px;text-align:left;border-bottom:1px solid var(--border);font-size:14px}
-.rate-table th{background:var(--card);color:var(--copper);font-weight:600;font-size:12px;text-transform:uppercase;letter-spacing:.5px}
-.rate-table td{color:var(--dim);background:var(--card)}
-.rate-table tr:hover td{color:var(--text);background:var(--card-hover)}
-.rate-table .limit-val{color:var(--orange);font-weight:600;font-family:var(--mono)}
-
-/* Status badges */
-.status-badge{display:inline-block;padding:3px 10px;border-radius:4px;font-size:12px;font-weight:600;font-family:var(--mono)}
-.status-badge.s200{background:var(--green-dim);color:var(--green)}
-.status-badge.s401{background:var(--orange-dim);color:var(--orange)}
-.status-badge.s429{background:rgba(204,120,92,.15);color:var(--copper)}
-
-/* Error codes table */
-.error-table{width:100%;border-collapse:collapse;margin-top:16px;border-radius:var(--radius);overflow:hidden;border:1px solid var(--border)}
-.error-table th,.error-table td{padding:10px 14px;text-align:left;border-bottom:1px solid var(--border);font-size:13px}
-.error-table th{background:var(--card);color:var(--copper);font-weight:600;font-size:11px;text-transform:uppercase;letter-spacing:.5px}
-.error-table td{color:var(--dim);background:var(--card)}
-.error-table td:first-child{font-family:var(--mono);color:var(--orange);font-weight:600}
+/* Contact CTA */
+.contact-cta{background:linear-gradient(135deg,var(--card),var(--card2));border:1px solid var(--border);border-radius:var(--radius);padding:40px;text-align:center;margin-top:60px}
+.contact-cta h2{font-size:22px;font-weight:700;color:var(--white);margin-bottom:8px}
+.contact-cta p{font-size:15px;color:var(--dim);margin-bottom:20px}
+.contact-btn{display:inline-block;padding:12px 32px;background:linear-gradient(135deg,var(--orange),var(--copper));color:var(--white);font-weight:700;font-size:15px;border-radius:var(--radius-sm);border:none;cursor:pointer;transition:transform .2s,box-shadow .2s}
+.contact-btn:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(232,133,12,.3);color:#fff}
 
 /* Footer */
 .footer{background:var(--card);border-top:1px solid var(--border);padding:40px 24px;text-align:center}
@@ -223,30 +123,15 @@ code{font-family:var(--mono);font-size:13px;background:var(--code-bg);padding:2p
 .footer-copy{font-size:12px;color:#444}
 
 /* Responsive */
-@media(max-width:900px){
-  .docs-sidebar{display:none}
-  .docs-content{padding:32px 20px 64px}
-  .ep-card-head{padding:20px}
-  .ep-card-body{padding:20px}
-}
 @media(max-width:768px){
   .nav-links{display:none;position:absolute;top:64px;left:0;right:0;background:rgba(10,10,26,.98);flex-direction:column;padding:20px 24px;gap:16px;border-bottom:1px solid var(--border)}
   .nav-links.open{display:flex}
   .nav-toggle{display:block}
   .hero h1{font-size:32px}
   .hero p{font-size:15px}
-  .hero-meta{gap:16px}
-  .auth-flow{flex-direction:column}
-  .rate-table{font-size:12px}
-  .rate-table th,.rate-table td{padding:10px 8px}
-  .params-table{font-size:12px}
+  .faq-question h3{font-size:15px}
+  .faq-answer-inner{font-size:14px}
 }
-
-/* Scroll bar global */
-::-webkit-scrollbar{width:6px;height:6px}
-::-webkit-scrollbar-track{background:transparent}
-::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px}
-::-webkit-scrollbar-thumb:hover{background:var(--border-light)}
 </style>
 <link rel="stylesheet" href="/assets/framer-style.css">
 </head>
@@ -262,8 +147,8 @@ code{font-family:var(--mono);font-size:13px;background:var(--code-bg);padding:2p
       <a href="/features">功能</a>
       <a href="/marketplace">市集</a>
       <a href="/pricing">方案</a>
-      <a href="/docs" class="active">文件</a>
       <a href="/about">關於</a>
+      <a href="/docs" class="active">常見問題</a>
       <a href="/login">登入</a>
     </div>
   </div>
@@ -271,936 +156,206 @@ code{font-family:var(--mono);font-size:13px;background:var(--code-bg);padding:2p
 
 <!-- Hero -->
 <section class="hero">
-  <h1>API Reference</h1>
-  <p>SEOBAIKE 約束推理平台完整互動式 API 文件。支援即時測試，涵蓋推理引擎、路徑驗證與 L1-L4 產業節點查詢。</p>
-  <div class="hero-meta">
-    <div class="hero-meta-item"><span class="dot live"></span> API 線上運行中</div>
-    <div class="hero-meta-item"><span class="dot patent"></span> 安全保護 <code>SEOBAIKE</code></div>
-    <div class="hero-meta-item">Base URL: <code>https://aiforseo.vip</code></div>
-  </div>
+  <h1>常見問題</h1>
+  <p>有任何疑問？這裡應該能找到答案。找不到的話，隨時聯繫我們。</p>
+  <p class="subtitle-ko">자주 묻는 질문 | Frequently Asked Questions</p>
 </section>
 
-<div class="docs-layout">
+<!-- FAQ Content -->
+<div class="faq-container">
 
-  <!-- Sidebar Navigation -->
-  <aside class="docs-sidebar">
-    <div class="sidebar-section">
-      <div class="sidebar-label">概覽</div>
-      <button class="sidebar-link active" onclick="scrollToSection('quickstart')">快速開始</button>
-      <button class="sidebar-link" onclick="scrollToSection('auth')">身份驗證</button>
-      <button class="sidebar-link" onclick="scrollToSection('errors')">錯誤處理</button>
-      <button class="sidebar-link" onclick="scrollToSection('ratelimits')">速率限制</button>
+  <!-- 上架相關 -->
+  <div class="faq-category">
+    <span class="faq-category-icon">🏪</span>
+    <h2>上架與銷售</h2>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-question" onclick="toggleFaq(this)">
+      <h3>怎麼在市集上架商品？</h3>
+      <div class="faq-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg></div>
     </div>
-    <div class="sidebar-section">
-      <div class="sidebar-label">端點</div>
-      <button class="sidebar-link" onclick="scrollToSection('ep-status')"><span class="method-dot get"></span>系統狀態</button>
-      <button class="sidebar-link" onclick="scrollToSection('ep-check')"><span class="method-dot post"></span>路徑驗證</button>
-      <button class="sidebar-link" onclick="scrollToSection('ep-nodes')"><span class="method-dot get"></span>節點統計</button>
-      <button class="sidebar-link" onclick="scrollToSection('ep-l1')"><span class="method-dot get"></span>L1 類別</button>
-      <button class="sidebar-link" onclick="scrollToSection('ep-l2')"><span class="method-dot get"></span>L2 次分類</button>
-      <button class="sidebar-link" onclick="scrollToSection('ep-l3')"><span class="method-dot get"></span>L3 製程</button>
-      <button class="sidebar-link" onclick="scrollToSection('ep-l4')"><span class="method-dot get"></span>L4 節點</button>
-      <button class="sidebar-link" onclick="scrollToSection('ep-inference')"><span class="method-dot post"></span>約束推理</button>
-      <button class="sidebar-link" onclick="scrollToSection('ep-smart')"><span class="method-dot post"></span>AI 引擎匹配</button>
-      <button class="sidebar-link" onclick="scrollToSection('ep-nim')"><span class="method-dot post"></span>AI 引擎</button>
+    <div class="faq-answer">
+      <div class="faq-answer-inner">
+        超級簡單，只要三步：
+        <ul>
+          <li>進入<a href="/marketplace">市集頁面</a>，點選<strong>「我要上架」</strong>按鈕</li>
+          <li>填寫商品名稱、說明、價格等基本資訊</li>
+          <li>送出即可，整個流程不到 5 分鐘</li>
+        </ul>
+        不需要寫程式、不需要架設伺服器，填完表格就上架了。
+      </div>
     </div>
-  </aside>
+  </div>
 
-  <!-- Main Content -->
-  <main class="docs-content">
-
-    <!-- ========== QUICK START ========== -->
-    <section class="section" id="quickstart">
-      <h2 class="section-title">快速開始</h2>
-      <p class="section-desc">Base URL 為 <code>https://aiforseo.vip</code>。所有回應均為 JSON 格式。公開端點（如 status、nodes、L1-L4 查詢）無需驗證即可存取。</p>
-
-      <div class="quickstart-box">
-        <h3>Base URL</h3>
-        <div class="base-url-bar">
-          <span class="label">BASE</span>
-          https://aiforseo.vip
-        </div>
-        <h3>第一個請求 -- 檢查系統狀態</h3>
-        <p>複製以下 curl 指令即可立即測試：</p>
-        <div class="code-block" style="margin:0">
-          <div class="code-header">
-            <span>bash</span>
-            <button class="code-copy" onclick="copyCode(this)">複製</button>
-          </div>
-          <div class="code-body">
-<pre><span class="k">curl</span> https://aiforseo.vip/api/v1/status</pre>
-          </div>
-        </div>
+  <div class="faq-item">
+    <div class="faq-question" onclick="toggleFaq(this)">
+      <h3>可以上架哪些類型的商品？</h3>
+      <div class="faq-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg></div>
+    </div>
+    <div class="faq-answer">
+      <div class="faq-answer-inner">
+        SEOBAIKE 市集支援多種商品類型：
+        <ul>
+          <li><strong>數位商品</strong> — 電子書、模板、素材包</li>
+          <li><strong>AI 工具</strong> — 你開發的 AI 應用或服務</li>
+          <li><strong>設計素材</strong> — 圖片、圖示、字型</li>
+          <li><strong>教學課程</strong> — 線上課程、教學影片</li>
+          <li><strong>顧問服務</strong> — 諮詢、企劃、策略規劃</li>
+          <li><strong>行銷方案</strong> — SEO、社群行銷、廣告投放</li>
+        </ul>
       </div>
+    </div>
+  </div>
 
-      <div class="quickstart-box">
-        <h3>驗證推理路徑（核心機制）</h3>
-        <p>使用 <code>POST /api/v1/check</code> 驗證 L1 到 L4 的推理路徑是否合法。這是 SEOBAIKE 的核心機制。</p>
-        <div class="code-block" style="margin:0">
-          <div class="code-header">
-            <span>bash</span>
-            <button class="code-copy" onclick="copyCode(this)">複製</button>
-          </div>
-          <div class="code-body">
-<pre><span class="k">curl</span> -X POST https://aiforseo.vip/api/v1/check \
-  -H <span class="s">"Content-Type: application/json"</span> \
-  -d <span class="s">'{
-    "l1_code": "L1-01",
-    "l4_code": "L4-01010101"
-  }'</span></pre>
-          </div>
-        </div>
+  <div class="faq-item">
+    <div class="faq-question" onclick="toggleFaq(this)">
+      <h3>可以賣到哪些國家？</h3>
+      <div class="faq-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg></div>
+    </div>
+    <div class="faq-answer">
+      <div class="faq-answer-inner">
+        <strong>全世界都可以！</strong>SEOBAIKE 是全球市集，目前主要服務：
+        <ul>
+          <li>台灣 🇹🇼</li>
+          <li>韓國 🇰🇷（한국에서 SEOBAIKE로 전 세계에 판매하세요）</li>
+          <li>日本 🇯🇵</li>
+          <li>東南亞（泰國、越南、馬來西亞、印尼、菲律賓）</li>
+        </ul>
+        AI 會自動幫你翻譯商品資訊，讓全世界的買家都能看懂你的商品。未來會持續擴展更多國家。
       </div>
-    </section>
+    </div>
+  </div>
 
-    <!-- ========== AUTHENTICATION ========== -->
-    <section class="section" id="auth">
-      <h2 class="section-title">身份驗證</h2>
-      <p class="section-desc">公開端點（status、nodes、L1-L4 查詢）無需驗證。受保護端點（check、inference）需要在 Header 中附帶 Bearer Token。</p>
+  <!-- 收款相關 -->
+  <div class="faq-category">
+    <span class="faq-category-icon">💰</span>
+    <h2>收款與分潤</h2>
+  </div>
 
-      <div class="auth-box">
-        <h3>驗證流程</h3>
-        <p>在 aiforseo.vip 註冊帳號後取得 API Token，然後加入 HTTP Header：</p>
-        <div class="auth-flow">
-          <div class="auth-step"><div class="num">01</div><div class="label">註冊帳號<br><small style="color:#555">至 aiforseo.vip</small></div></div>
-          <div class="auth-step"><div class="num">02</div><div class="label">取得 Token<br><small style="color:#555">控制台 &rarr; API 金鑰</small></div></div>
-          <div class="auth-step"><div class="num">03</div><div class="label">附加 Header<br><small style="color:#555">Authorization: Bearer ...</small></div></div>
-          <div class="auth-step"><div class="num">04</div><div class="label">開始呼叫<br><small style="color:#555">任何 API 端點</small></div></div>
-        </div>
+  <div class="faq-item">
+    <div class="faq-question" onclick="toggleFaq(this)">
+      <h3>怎麼收款？</h3>
+      <div class="faq-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg></div>
+    </div>
+    <div class="faq-answer">
+      <div class="faq-answer-inner">
+        金流由第三方支付平台處理，安全有保障。賣家收款流程：
+        <ul>
+          <li>買家透過市集購買你的商品</li>
+          <li>款項由第三方支付平台代收</li>
+          <li>扣除平台服務費後，自動撥款到你的帳戶</li>
+        </ul>
+        台幣計價，透明公開。依台灣業界標準處理。
       </div>
+    </div>
+  </div>
 
-      <div class="code-block" style="margin-top:20px">
-        <div class="code-header"><span>HTTP Headers</span></div>
-        <div class="code-body">
-<pre><span class="cm"># 受保護端點需要以下 Header</span>
-<span class="p">Authorization</span>: <span class="s">Bearer YOUR_ACCESS_TOKEN</span>
-<span class="p">Content-Type</span>:  <span class="s">application/json</span></pre>
-        </div>
+  <div class="faq-item">
+    <div class="faq-question" onclick="toggleFaq(this)">
+      <h3>分潤比例是多少？</h3>
+      <div class="faq-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg></div>
+    </div>
+    <div class="faq-answer">
+      <div class="faq-answer-inner">
+        <strong>賣家拿 70%，平台收 30%</strong>（含金流手續費、客服支援、系統維護）。
+        <br><br>
+        另外還有推薦分潤：
+        <ul>
+          <li>推薦新買家 — 第一年享 <strong>15%</strong> 推薦分潤</li>
+          <li>持續推薦 — 之後每年 <strong>10%</strong> 推薦分潤</li>
+        </ul>
+        所有分潤資料即時顯示在你的儀表板上。
       </div>
-    </section>
+    </div>
+  </div>
 
-    <!-- ========== ERRORS ========== -->
-    <section class="section" id="errors">
-      <h2 class="section-title">錯誤處理</h2>
-      <p class="section-desc">所有錯誤回應均包含 <code>error</code> 和 <code>message</code> 欄位。HTTP 狀態碼對應如下：</p>
+  <!-- AI 功能 -->
+  <div class="faq-category">
+    <span class="faq-category-icon">🤖</span>
+    <h2>AI 能幫我什麼？</h2>
+  </div>
 
-      <table class="error-table">
-        <thead><tr><th>狀態碼</th><th>類型</th><th>說明</th></tr></thead>
-        <tbody>
-          <tr><td>200</td><td>成功</td><td>請求成功處理</td></tr>
-          <tr><td>400</td><td>Bad Request</td><td>缺少必要參數或參數格式錯誤</td></tr>
-          <tr><td>401</td><td>Unauthorized</td><td>缺少或無效的 Bearer Token</td></tr>
-          <tr><td>403</td><td>Forbidden</td><td>推理路徑被拒絕（denied / halted）</td></tr>
-          <tr><td>429</td><td>Rate Limited</td><td>超過速率限制，請參閱 retry_after</td></tr>
-          <tr><td>500</td><td>Server Error</td><td>伺服器內部錯誤</td></tr>
-        </tbody>
-      </table>
-
-      <div class="code-block" style="margin-top:16px">
-        <div class="code-header"><span>Error Response Example</span></div>
-        <div class="code-body">
-<pre>{
-  <span class="p">"error"</span>: <span class="s">"unauthorized"</span>,
-  <span class="p">"message"</span>: <span class="s">"缺少有效的 Bearer Token，請先登入取得授權"</span>
-}</pre>
-        </div>
+  <div class="faq-item">
+    <div class="faq-question" onclick="toggleFaq(this)">
+      <h3>AI 能幫賣家做什麼？</h3>
+      <div class="faq-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg></div>
+    </div>
+    <div class="faq-answer">
+      <div class="faq-answer-inner">
+        SEOBAIKE 的 AI 是你的專屬助手，幫你處理麻煩事：
+        <ul>
+          <li><strong>自動翻譯</strong> — 商品說明自動翻成韓文、日文、英文，讓全世界看得懂</li>
+          <li><strong>智慧行銷</strong> — AI 幫你撰寫商品文案、社群貼文、廣告素材</li>
+          <li><strong>客服助手</strong> — AI 自動回答買家常見問題，你專心做生意</li>
+          <li><strong>數據分析</strong> — 銷售趨勢、買家行為，AI 幫你看數字</li>
+        </ul>
       </div>
-    </section>
+    </div>
+  </div>
 
-    <!-- ========== RATE LIMITS ========== -->
-    <section class="section" id="ratelimits">
-      <h2 class="section-title">速率限制</h2>
-      <p class="section-desc">為確保服務品質與公平使用，各端點設有不同的速率限制。超過限制時會收到 HTTP 429 回應。</p>
-
-      <table class="rate-table">
-        <thead><tr><th>端點</th><th>限制</th><th>窗口</th><th>備註</th></tr></thead>
-        <tbody>
-          <tr><td>系統狀態 / 節點查詢</td><td class="limit-val">300 次</td><td>每分鐘</td><td>公開端點</td></tr>
-          <tr><td>L1-L4 查詢</td><td class="limit-val">300 次</td><td>每分鐘</td><td>公開端點</td></tr>
-          <tr><td>路徑驗證 (check)</td><td class="limit-val">200 次</td><td>每分鐘</td><td>核心機制</td></tr>
-          <tr><td>約束推理 (inference)</td><td class="limit-val">60 次</td><td>每分鐘</td><td>含 AI 推理</td></tr>
-          <tr><td>AI 引擎匹配 (smart)</td><td class="limit-val">60 次</td><td>每分鐘</td><td>含意圖分析 + AI 推理</td></tr>
-          <tr><td>AI 引擎 (nim)</td><td class="limit-val">60 次</td><td>每分鐘</td><td>多引擎 AI 推理</td></tr>
-          <tr><td>全域合計</td><td class="limit-val">1,000 次</td><td>每小時</td><td>所有端點合計</td></tr>
-        </tbody>
-      </table>
-      <p style="margin-top:16px;font-size:13px;color:var(--dim)">需要更高配額請聯繫 <a href="mailto:seobaike@aiforseo.vip">seobaike@aiforseo.vip</a>。</p>
-    </section>
-
-    <!-- =============================================
-         ENDPOINT CARDS
-         ============================================= -->
-
-    <!-- ===== 1. GET /api/v1/status ===== -->
-    <section class="ep-card" id="ep-status">
-      <div class="ep-card-head">
-        <div class="ep-title-row">
-          <span class="method-badge get">GET</span>
-          <span class="ep-url">/api/v1/status</span>
-        </div>
-        <span class="ep-tag">系統狀態</span>
+  <div class="faq-item">
+    <div class="faq-question" onclick="toggleFaq(this)">
+      <h3>AI 能幫買家做什麼？</h3>
+      <div class="faq-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg></div>
+    </div>
+    <div class="faq-answer">
+      <div class="faq-answer-inner">
+        買家也有 AI 助力：
+        <ul>
+          <li><strong>智慧搜尋</strong> — 告訴 AI 你需要什麼，它幫你找到最適合的商品</li>
+          <li><strong>跨語言溝通</strong> — 不懂韓文？AI 即時翻譯，跟賣家溝通無障礙</li>
+          <li><strong>商品比較</strong> — AI 幫你比較不同商品的優缺點</li>
+          <li><strong>購買建議</strong> — 根據你的需求推薦最適合的商品</li>
+        </ul>
       </div>
-      <div class="ep-card-body">
-        <div class="ep-desc">取得系統運行狀態、API 版本與各服務可用性。無需任何參數或身份驗證。</div>
+    </div>
+  </div>
 
-        <div class="params-section">
-          <div class="params-label">參數</div>
-          <p style="font-size:13px;color:var(--dim2)">此端點不需要任何參數。</p>
-        </div>
+  <!-- 帳號相關 -->
+  <div class="faq-category">
+    <span class="faq-category-icon">👤</span>
+    <h2>帳號與安全</h2>
+  </div>
 
-        <!-- Example tabs -->
-        <div class="example-tabs">
-          <button class="example-tab active" onclick="switchTab(this,'req')">範例請求</button>
-          <button class="example-tab" onclick="switchTab(this,'res')">範例回應</button>
-        </div>
-        <div class="example-panel active" data-panel="req">
-          <div class="code-block" style="margin-top:0;border-top-left-radius:0">
-            <div class="code-header"><span>bash</span><button class="code-copy" onclick="copyCode(this)">複製</button></div>
-            <div class="code-body">
-<pre><span class="k">curl</span> https://aiforseo.vip/api/v1/status</pre>
-            </div>
-          </div>
-        </div>
-        <div class="example-panel" data-panel="res">
-          <div class="code-block" style="margin-top:0;border-top-left-radius:0">
-            <div class="code-header"><span>json</span></div>
-            <div class="code-body">
-<pre>{
-  <span class="p">"status"</span>: <span class="s">"operational"</span>,
-  <span class="p">"version"</span>: <span class="s">"1.0.0"</span>,
-  <span class="p">"platform"</span>: <span class="s">"SEOBAIKE"</span>,
-  <span class="p">"timestamp"</span>: <span class="s">"2026-02-15T08:00:00Z"</span>,
-  <span class="p">"services"</span>: {
-    <span class="p">"inference_engine"</span>: <span class="s">"up"</span>,
-    <span class="p">"constraint_validator"</span>: <span class="s">"up"</span>,
-    <span class="p">"database"</span>: <span class="s">"up"</span>
-  }
-}</pre>
-            </div>
-          </div>
-        </div>
-
-        <!-- Try It -->
-        <div class="try-it-section">
-          <button class="try-btn run" onclick="tryApi(this, 'GET', '/api/v1/status')">
-            <span class="play-icon">&#9654;</span>
-            <span class="spinner"></span>
-            Try it
-          </button>
-          <div class="live-response"></div>
-        </div>
+  <div class="faq-item">
+    <div class="faq-question" onclick="toggleFaq(this)">
+      <h3>註冊要錢嗎？</h3>
+      <div class="faq-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg></div>
+    </div>
+    <div class="faq-answer">
+      <div class="faq-answer-inner">
+        <strong>完全免費！</strong>註冊不用錢，瀏覽市集不用錢，上架商品也不用預先付費。只有在商品成交時，才會從成交金額中扣除平台服務費。零風險開始。
       </div>
-    </section>
+    </div>
+  </div>
 
-    <!-- ===== 2. POST /api/v1/check ===== -->
-    <section class="ep-card" id="ep-check">
-      <div class="ep-card-head">
-        <div class="ep-title-row">
-          <span class="method-badge post">POST</span>
-          <span class="ep-url">/api/v1/check</span>
-        </div>
-        <span class="ep-tag">核心機制</span>
+  <div class="faq-item">
+    <div class="faq-question" onclick="toggleFaq(this)">
+      <h3>我的資料安全嗎？</h3>
+      <div class="faq-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg></div>
+    </div>
+    <div class="faq-answer">
+      <div class="faq-answer-inner">
+        安全是我們的最高優先。SEOBAIKE 採用：
+        <ul>
+          <li>全程加密傳輸</li>
+          <li>嚴格的資料保護機制</li>
+          <li>符合台灣個資法規定</li>
+          <li>定期安全稽核</li>
+        </ul>
+        詳細資訊請參閱我們的<a href="/privacy">隱私權政策</a>。
       </div>
-      <div class="ep-card-body">
-        <div class="ep-desc">驗證 L1 &rarr; L2 &rarr; L3 &rarr; L4 推理路徑是否合法。每次 AI 動作前必須先呼叫此端點。回傳 <code>allowed</code> / <code>denied</code> / <code>halted</code> 狀態。這是 SEOBAIKE 的核心機制。</div>
+    </div>
+  </div>
 
-        <div class="params-section">
-          <div class="params-label">Request Body (JSON)</div>
-          <table class="params-table">
-            <thead><tr><th>參數</th><th>型別</th><th>說明</th></tr></thead>
-            <tbody>
-              <tr><td>l1_code</td><td><span class="type">string</span></td><td>L1 層代碼，例如 <code>"L1-01"</code>。與 l1_id 二擇一</td></tr>
-              <tr><td>l4_code</td><td><span class="type">string</span></td><td>L4 層代碼，例如 <code>"L4-01010101"</code>。與 l4_id 二擇一</td></tr>
-              <tr><td>l1_id</td><td><span class="type">uuid</span></td><td>L1 層 UUID。與 l1_code 二擇一</td></tr>
-              <tr><td>l4_id</td><td><span class="type">uuid</span></td><td>L4 層 UUID。與 l4_code 二擇一</td></tr>
-            </tbody>
-          </table>
-        </div>
+  <!-- Contact CTA -->
+  <div class="contact-cta">
+    <h2>還有其他問題？</h2>
+    <p>找不到答案也沒關係，我們的團隊隨時為你服務。</p>
+    <a href="/contact" class="contact-btn">聯繫我們</a>
+  </div>
 
-        <div class="example-tabs">
-          <button class="example-tab active" onclick="switchTab(this,'req')">範例請求</button>
-          <button class="example-tab" onclick="switchTab(this,'res')">範例回應</button>
-        </div>
-        <div class="example-panel active" data-panel="req">
-          <div class="code-block" style="margin-top:0;border-top-left-radius:0">
-            <div class="code-header"><span>bash</span><button class="code-copy" onclick="copyCode(this)">複製</button></div>
-            <div class="code-body">
-<pre><span class="k">curl</span> -X POST https://aiforseo.vip/api/v1/check \
-  -H <span class="s">"Content-Type: application/json"</span> \
-  -d <span class="s">'{
-    "l1_code": "L1-01",
-    "l4_code": "L4-01010101"
-  }'</span></pre>
-            </div>
-          </div>
-        </div>
-        <div class="example-panel" data-panel="res">
-          <div class="code-block" style="margin-top:0;border-top-left-radius:0">
-            <div class="code-header"><span>json</span></div>
-            <div class="code-body">
-<pre>{
-  <span class="p">"platform"</span>: <span class="s">"SEOBAIKE"</span>,
-  <span class="p">"method"</span>: <span class="s">"check_inference_path"</span>,
-  <span class="p">"path"</span>: {
-    <span class="p">"l1"</span>: <span class="s">"L1-01"</span>,
-    <span class="p">"l2"</span>: <span class="s">"L2-0101"</span>,
-    <span class="p">"l3"</span>: <span class="s">"L3-010101"</span>,
-    <span class="p">"l4"</span>: <span class="s">"L4-01010101"</span>
-  },
-  <span class="p">"result"</span>: {
-    <span class="p">"verdict"</span>: <span class="s">"allowed"</span>,
-    <span class="p">"reason"</span>: <span class="s">"Valid L1-L4 path confirmed"</span>,
-    <span class="p">"check_id"</span>: <span class="s">"chk_a1b2c3d4e5"</span>
-  }
-}</pre>
-            </div>
-          </div>
-        </div>
-
-        <div class="try-it-section">
-          <div class="try-fields">
-            <div class="try-field">
-              <label>Request Body (JSON)</label>
-              <textarea id="try-check-body">{"l1_code": "L1-01", "l4_code": "L4-01010101"}</textarea>
-            </div>
-          </div>
-          <button class="try-btn run" onclick="tryApi(this, 'POST', '/api/v1/check', document.getElementById('try-check-body').value)">
-            <span class="play-icon">&#9654;</span>
-            <span class="spinner"></span>
-            Try it
-          </button>
-          <div class="live-response"></div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ===== 3. GET /api/v1/nodes ===== -->
-    <section class="ep-card" id="ep-nodes">
-      <div class="ep-card-head">
-        <div class="ep-title-row">
-          <span class="method-badge get">GET</span>
-          <span class="ep-url">/api/v1/nodes</span>
-        </div>
-        <span class="ep-tag">約束結構</span>
-      </div>
-      <div class="ep-card-body">
-        <div class="ep-desc">取得 L1 到 L4 各層級節點的總數統計。可快速了解約束結構的規模。無需參數或驗證。</div>
-
-        <div class="params-section">
-          <div class="params-label">參數</div>
-          <p style="font-size:13px;color:var(--dim2)">此端點不需要任何參數。</p>
-        </div>
-
-        <div class="example-tabs">
-          <button class="example-tab active" onclick="switchTab(this,'req')">範例請求</button>
-          <button class="example-tab" onclick="switchTab(this,'res')">範例回應</button>
-        </div>
-        <div class="example-panel active" data-panel="req">
-          <div class="code-block" style="margin-top:0;border-top-left-radius:0">
-            <div class="code-header"><span>bash</span><button class="code-copy" onclick="copyCode(this)">複製</button></div>
-            <div class="code-body">
-<pre><span class="k">curl</span> https://aiforseo.vip/api/v1/nodes</pre>
-            </div>
-          </div>
-        </div>
-        <div class="example-panel" data-panel="res">
-          <div class="code-block" style="margin-top:0;border-top-left-radius:0">
-            <div class="code-header"><span>json</span></div>
-            <div class="code-body">
-<pre>{
-  <span class="p">"total"</span>: 926,
-  <span class="p">"layers"</span>: {
-    <span class="p">"l1"</span>: 21,
-    <span class="p">"l2"</span>: 89,
-    <span class="p">"l3"</span>: 150,
-    <span class="p">"l4"</span>: 666
-  }
-}</pre>
-            </div>
-          </div>
-        </div>
-
-        <div class="try-it-section">
-          <button class="try-btn run" onclick="tryApi(this, 'GET', '/api/v1/nodes')">
-            <span class="play-icon">&#9654;</span>
-            <span class="spinner"></span>
-            Try it
-          </button>
-          <div class="live-response"></div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ===== 4. GET /api/v1/l1 ===== -->
-    <section class="ep-card" id="ep-l1">
-      <div class="ep-card-head">
-        <div class="ep-title-row">
-          <span class="method-badge get">GET</span>
-          <span class="ep-url">/api/v1/l1</span>
-        </div>
-        <span class="ep-tag">約束結構</span>
-      </div>
-      <div class="ep-card-body">
-        <div class="ep-desc">查詢 L1 層級的宏觀產業分類。包含 TSIC、NAICS、NACE、JSIC 多國標準代碼對齊。支援 limit 參數控制回傳筆數。</div>
-
-        <div class="params-section">
-          <div class="params-label">Query Parameters</div>
-          <table class="params-table">
-            <thead><tr><th>參數</th><th>型別</th><th>說明</th></tr></thead>
-            <tbody>
-              <tr><td>limit</td><td><span class="type">integer</span> <span class="optional">optional</span></td><td>回傳筆數上限，預設 100</td></tr>
-            </tbody>
-          </table>
-        </div>
-
-        <div class="example-tabs">
-          <button class="example-tab active" onclick="switchTab(this,'req')">範例請求</button>
-          <button class="example-tab" onclick="switchTab(this,'res')">範例回應</button>
-        </div>
-        <div class="example-panel active" data-panel="req">
-          <div class="code-block" style="margin-top:0;border-top-left-radius:0">
-            <div class="code-header"><span>bash</span><button class="code-copy" onclick="copyCode(this)">複製</button></div>
-            <div class="code-body">
-<pre><span class="k">curl</span> <span class="s">"https://aiforseo.vip/api/v1/l1?limit=10"</span></pre>
-            </div>
-          </div>
-        </div>
-        <div class="example-panel" data-panel="res">
-          <div class="code-block" style="margin-top:0;border-top-left-radius:0">
-            <div class="code-header"><span>json</span></div>
-            <div class="code-body">
-<pre>{
-  <span class="p">"count"</span>: 21,
-  <span class="p">"data"</span>: [
-    {
-      <span class="p">"id"</span>: <span class="s">"uuid-l1-01"</span>,
-      <span class="p">"code"</span>: <span class="s">"L1-01"</span>,
-      <span class="p">"name_zh"</span>: <span class="s">"農林漁牧業"</span>,
-      <span class="p">"name_en"</span>: <span class="s">"Agriculture, Forestry and Fishing"</span>,
-      <span class="p">"tsic_code"</span>: <span class="s">"A"</span>,
-      <span class="p">"naics_code"</span>: <span class="s">"11"</span>,
-      <span class="p">"is_frozen"</span>: false
-    },
-    <span class="d">...</span>
-  ]
-}</pre>
-            </div>
-          </div>
-        </div>
-
-        <div class="try-it-section">
-          <div class="try-fields">
-            <div class="try-field">
-              <label>limit (optional)</label>
-              <input type="number" id="try-l1-limit" value="10" min="1" max="1000">
-            </div>
-          </div>
-          <button class="try-btn run" onclick="tryApi(this, 'GET', '/api/v1/l1?limit=' + document.getElementById('try-l1-limit').value)">
-            <span class="play-icon">&#9654;</span>
-            <span class="spinner"></span>
-            Try it
-          </button>
-          <div class="live-response"></div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ===== 5. GET /api/v1/l2 ===== -->
-    <section class="ep-card" id="ep-l2">
-      <div class="ep-card-head">
-        <div class="ep-title-row">
-          <span class="method-badge get">GET</span>
-          <span class="ep-url">/api/v1/l2</span>
-        </div>
-        <span class="ep-tag">約束結構</span>
-      </div>
-      <div class="ep-card-body">
-        <div class="ep-desc">查詢 L2 層級的次產業分類。透過外鍵關聯至 L1 類別，每筆資料包含所屬 L1 的參照。支援 limit 參數。</div>
-
-        <div class="params-section">
-          <div class="params-label">Query Parameters</div>
-          <table class="params-table">
-            <thead><tr><th>參數</th><th>型別</th><th>說明</th></tr></thead>
-            <tbody>
-              <tr><td>limit</td><td><span class="type">integer</span> <span class="optional">optional</span></td><td>回傳筆數上限，預設 100</td></tr>
-            </tbody>
-          </table>
-        </div>
-
-        <div class="example-tabs">
-          <button class="example-tab active" onclick="switchTab(this,'req')">範例請求</button>
-          <button class="example-tab" onclick="switchTab(this,'res')">範例回應</button>
-        </div>
-        <div class="example-panel active" data-panel="req">
-          <div class="code-block" style="margin-top:0;border-top-left-radius:0">
-            <div class="code-header"><span>bash</span><button class="code-copy" onclick="copyCode(this)">複製</button></div>
-            <div class="code-body">
-<pre><span class="k">curl</span> <span class="s">"https://aiforseo.vip/api/v1/l2?limit=10"</span></pre>
-            </div>
-          </div>
-        </div>
-        <div class="example-panel" data-panel="res">
-          <div class="code-block" style="margin-top:0;border-top-left-radius:0">
-            <div class="code-header"><span>json</span></div>
-            <div class="code-body">
-<pre>{
-  <span class="p">"count"</span>: 89,
-  <span class="p">"data"</span>: [
-    {
-      <span class="p">"id"</span>: <span class="s">"uuid-l2-0101"</span>,
-      <span class="p">"code"</span>: <span class="s">"L2-0101"</span>,
-      <span class="p">"name_zh"</span>: <span class="s">"作物栽培業"</span>,
-      <span class="p">"name_en"</span>: <span class="s">"Crop Cultivation"</span>,
-      <span class="p">"l1_id"</span>: <span class="s">"uuid-l1-01"</span>,
-      <span class="p">"is_frozen"</span>: false
-    },
-    <span class="d">...</span>
-  ]
-}</pre>
-            </div>
-          </div>
-        </div>
-
-        <div class="try-it-section">
-          <div class="try-fields">
-            <div class="try-field">
-              <label>limit (optional)</label>
-              <input type="number" id="try-l2-limit" value="10" min="1" max="1000">
-            </div>
-          </div>
-          <button class="try-btn run" onclick="tryApi(this, 'GET', '/api/v1/l2?limit=' + document.getElementById('try-l2-limit').value)">
-            <span class="play-icon">&#9654;</span>
-            <span class="spinner"></span>
-            Try it
-          </button>
-          <div class="live-response"></div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ===== 6. GET /api/v1/l3 ===== -->
-    <section class="ep-card" id="ep-l3">
-      <div class="ep-card-head">
-        <div class="ep-title-row">
-          <span class="method-badge get">GET</span>
-          <span class="ep-url">/api/v1/l3</span>
-        </div>
-        <span class="ep-tag">約束結構</span>
-      </div>
-      <div class="ep-card-body">
-        <div class="ep-desc">查詢 L3 層級的製程與作業類型。透過外鍵關聯至 L2 次產業，涵蓋各產業的標準化製程定義與工序描述。支援 limit 參數。</div>
-
-        <div class="params-section">
-          <div class="params-label">Query Parameters</div>
-          <table class="params-table">
-            <thead><tr><th>參數</th><th>型別</th><th>說明</th></tr></thead>
-            <tbody>
-              <tr><td>limit</td><td><span class="type">integer</span> <span class="optional">optional</span></td><td>回傳筆數上限，預設 100</td></tr>
-            </tbody>
-          </table>
-        </div>
-
-        <div class="example-tabs">
-          <button class="example-tab active" onclick="switchTab(this,'req')">範例請求</button>
-          <button class="example-tab" onclick="switchTab(this,'res')">範例回應</button>
-        </div>
-        <div class="example-panel active" data-panel="req">
-          <div class="code-block" style="margin-top:0;border-top-left-radius:0">
-            <div class="code-header"><span>bash</span><button class="code-copy" onclick="copyCode(this)">複製</button></div>
-            <div class="code-body">
-<pre><span class="k">curl</span> <span class="s">"https://aiforseo.vip/api/v1/l3?limit=10"</span></pre>
-            </div>
-          </div>
-        </div>
-        <div class="example-panel" data-panel="res">
-          <div class="code-block" style="margin-top:0;border-top-left-radius:0">
-            <div class="code-header"><span>json</span></div>
-            <div class="code-body">
-<pre>{
-  <span class="p">"count"</span>: 150,
-  <span class="p">"data"</span>: [
-    {
-      <span class="p">"id"</span>: <span class="s">"uuid-l3-010101"</span>,
-      <span class="p">"code"</span>: <span class="s">"L3-010101"</span>,
-      <span class="p">"name_zh"</span>: <span class="s">"稻米栽培"</span>,
-      <span class="p">"name_en"</span>: <span class="s">"Rice Cultivation"</span>,
-      <span class="p">"l2_id"</span>: <span class="s">"uuid-l2-0101"</span>,
-      <span class="p">"is_frozen"</span>: false
-    },
-    <span class="d">...</span>
-  ]
-}</pre>
-            </div>
-          </div>
-        </div>
-
-        <div class="try-it-section">
-          <div class="try-fields">
-            <div class="try-field">
-              <label>limit (optional)</label>
-              <input type="number" id="try-l3-limit" value="10" min="1" max="1000">
-            </div>
-          </div>
-          <button class="try-btn run" onclick="tryApi(this, 'GET', '/api/v1/l3?limit=' + document.getElementById('try-l3-limit').value)">
-            <span class="play-icon">&#9654;</span>
-            <span class="spinner"></span>
-            Try it
-          </button>
-          <div class="live-response"></div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ===== 7. GET /api/v1/l4 ===== -->
-    <section class="ep-card" id="ep-l4">
-      <div class="ep-card-head">
-        <div class="ep-title-row">
-          <span class="method-badge get">GET</span>
-          <span class="ep-url">/api/v1/l4</span>
-        </div>
-        <span class="ep-tag">約束結構</span>
-      </div>
-      <div class="ep-card-body">
-        <div class="ep-desc">查詢 L4 層級的原子級工業節點。每個節點為約束結構中最細粒度的單元，包含完整的產業節點定義與屬性。支援 limit 參數。</div>
-
-        <div class="params-section">
-          <div class="params-label">Query Parameters</div>
-          <table class="params-table">
-            <thead><tr><th>參數</th><th>型別</th><th>說明</th></tr></thead>
-            <tbody>
-              <tr><td>limit</td><td><span class="type">integer</span> <span class="optional">optional</span></td><td>回傳筆數上限，預設 100</td></tr>
-            </tbody>
-          </table>
-        </div>
-
-        <div class="example-tabs">
-          <button class="example-tab active" onclick="switchTab(this,'req')">範例請求</button>
-          <button class="example-tab" onclick="switchTab(this,'res')">範例回應</button>
-        </div>
-        <div class="example-panel active" data-panel="req">
-          <div class="code-block" style="margin-top:0;border-top-left-radius:0">
-            <div class="code-header"><span>bash</span><button class="code-copy" onclick="copyCode(this)">複製</button></div>
-            <div class="code-body">
-<pre><span class="k">curl</span> <span class="s">"https://aiforseo.vip/api/v1/l4?limit=5"</span></pre>
-            </div>
-          </div>
-        </div>
-        <div class="example-panel" data-panel="res">
-          <div class="code-block" style="margin-top:0;border-top-left-radius:0">
-            <div class="code-header"><span>json</span></div>
-            <div class="code-body">
-<pre>{
-  <span class="p">"count"</span>: 666,
-  <span class="p">"data"</span>: [
-    {
-      <span class="p">"id"</span>: <span class="s">"uuid-l4-01010101"</span>,
-      <span class="p">"code"</span>: <span class="s">"L4-01010101"</span>,
-      <span class="p">"name_zh"</span>: <span class="s">"有機稻米栽培"</span>,
-      <span class="p">"name_en"</span>: <span class="s">"Organic Rice Cultivation"</span>,
-      <span class="p">"l3_id"</span>: <span class="s">"uuid-l3-010101"</span>,
-      <span class="p">"tsic_code"</span>: <span class="s">"01111"</span>,
-      <span class="p">"naics_code"</span>: <span class="s">"111160"</span>,
-      <span class="p">"is_frozen"</span>: false
-    },
-    <span class="d">...</span>
-  ]
-}</pre>
-            </div>
-          </div>
-        </div>
-
-        <div class="try-it-section">
-          <div class="try-fields">
-            <div class="try-field">
-              <label>limit (optional)</label>
-              <input type="number" id="try-l4-limit" value="5" min="1" max="1000">
-            </div>
-          </div>
-          <button class="try-btn run" onclick="tryApi(this, 'GET', '/api/v1/l4?limit=' + document.getElementById('try-l4-limit').value)">
-            <span class="play-icon">&#9654;</span>
-            <span class="spinner"></span>
-            Try it
-          </button>
-          <div class="live-response"></div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ===== 8. POST /api/v1/inference ===== -->
-    <section class="ep-card" id="ep-inference">
-      <div class="ep-card-head">
-        <div class="ep-title-row">
-          <span class="method-badge post">POST</span>
-          <span class="ep-url">/api/v1/inference</span>
-        </div>
-        <span class="ep-tag">核心引擎</span>
-      </div>
-      <div class="ep-card-body">
-        <div class="ep-desc">執行約束 AI 推理。使用者的查詢會經過 L1-L4 約束引擎驗證後，由 AI 引擎產生符合約束規範的推理結果。支援多輪對話與上下文記憶。需要身份驗證。</div>
-
-        <div class="params-section">
-          <div class="params-label">Request Body (JSON)</div>
-          <table class="params-table">
-            <thead><tr><th>參數</th><th>型別</th><th>說明</th></tr></thead>
-            <tbody>
-              <tr><td>message</td><td><span class="type">string</span> <span class="required">required</span></td><td>使用者的查詢文字</td></tr>
-              <tr><td>user_id</td><td><span class="type">string</span> <span class="optional">optional</span></td><td>使用者 ID，用於多輪對話上下文</td></tr>
-            </tbody>
-          </table>
-        </div>
-
-        <div class="example-tabs">
-          <button class="example-tab active" onclick="switchTab(this,'req')">範例請求</button>
-          <button class="example-tab" onclick="switchTab(this,'res')">範例回應</button>
-        </div>
-        <div class="example-panel active" data-panel="req">
-          <div class="code-block" style="margin-top:0;border-top-left-radius:0">
-            <div class="code-header"><span>bash</span><button class="code-copy" onclick="copyCode(this)">複製</button></div>
-            <div class="code-body">
-<pre><span class="k">curl</span> -X POST https://aiforseo.vip/api/v1/inference \
-  -H <span class="s">"Authorization: Bearer YOUR_ACCESS_TOKEN"</span> \
-  -H <span class="s">"Content-Type: application/json"</span> \
-  -d <span class="s">'{
-    "message": "分析半導體產業的 L1-L4 約束路徑",
-    "user_id": "user_abc123"
-  }'</span></pre>
-            </div>
-          </div>
-        </div>
-        <div class="example-panel" data-panel="res">
-          <div class="code-block" style="margin-top:0;border-top-left-radius:0">
-            <div class="code-header"><span>json</span></div>
-            <div class="code-body">
-<pre>{
-  <span class="p">"status"</span>: <span class="s">"success"</span>,
-  <span class="p">"response"</span>: <span class="s">"半導體產業的約束路徑分析結果..."</span>,
-  <span class="p">"constraint_path"</span>: {
-    <span class="p">"l1"</span>: <span class="s">"製造業"</span>,
-    <span class="p">"l2"</span>: <span class="s">"半導體製造"</span>,
-    <span class="p">"l3"</span>: <span class="s">"晶圓製程"</span>,
-    <span class="p">"l4"</span>: <span class="s">"光罩對準"</span>,
-    <span class="p">"validation"</span>: <span class="s">"allowed"</span>
-  },
-  <span class="p">"usage"</span>: {
-    <span class="p">"input_units"</span>: 156,
-    <span class="p">"output_units"</span>: 892,
-    <span class="p">"total_units"</span>: 1048
-  },
-  <span class="p">"platform"</span>: <span class="s">"SEOBAIKE"</span>
-}</pre>
-            </div>
-          </div>
-        </div>
-
-        <div class="try-it-section">
-          <div class="try-fields">
-            <div class="try-field">
-              <label>Authorization Token</label>
-              <input type="text" id="try-inference-token" placeholder="Bearer YOUR_ACCESS_TOKEN">
-            </div>
-            <div class="try-field">
-              <label>Request Body (JSON)</label>
-              <textarea id="try-inference-body">{"message": "分析半導體產業的 L1-L4 約束路徑"}</textarea>
-            </div>
-          </div>
-          <button class="try-btn run" onclick="tryApi(this, 'POST', '/api/v1/inference', document.getElementById('try-inference-body').value, document.getElementById('try-inference-token').value)">
-            <span class="play-icon">&#9654;</span>
-            <span class="spinner"></span>
-            Try it
-          </button>
-          <div class="live-response"></div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ===== 9. POST /api/ai/smart ===== -->
-    <section class="ep-card" id="ep-smart">
-      <div class="ep-card-head">
-        <div class="ep-title-row">
-          <span class="method-badge post">POST</span>
-          <span class="ep-url">/api/ai/smart</span>
-        </div>
-        <span class="ep-tag">AI 引擎匹配</span>
-      </div>
-      <div class="ep-card-body">
-        <div class="ep-desc">SEOBAIKE AI 引擎匹配。自動分析使用者意圖，結合 L1-L4 約束驗證，將請求分配至最佳推理引擎。支援強制指定引擎與模型。需要身份驗證。</div>
-
-        <div class="params-section">
-          <div class="params-label">Request Body (JSON)</div>
-          <table class="params-table">
-            <thead><tr><th>參數</th><th>型別</th><th>說明</th></tr></thead>
-            <tbody>
-              <tr><td>message</td><td><span class="type">string</span> <span class="required">required</span></td><td>使用者的查詢文字</td></tr>
-              <tr><td>l1</td><td><span class="type">string</span> <span class="optional">optional</span></td><td>L1 層代碼提示，例如 <code>"L1-01"</code></td></tr>
-              <tr><td>l2</td><td><span class="type">string</span> <span class="optional">optional</span></td><td>L2 層代碼提示，例如 <code>"L2-0101"</code></td></tr>
-              <tr><td>l3</td><td><span class="type">string</span> <span class="optional">optional</span></td><td>L3 層代碼提示，例如 <code>"L3-010101"</code></td></tr>
-              <tr><td>l4</td><td><span class="type">string</span> <span class="optional">optional</span></td><td>L4 層代碼提示，例如 <code>"L4-01010101"</code></td></tr>
-              <tr><td>max_tokens</td><td><span class="type">integer</span> <span class="optional">optional</span></td><td>最大回應 token 數，預設 1024</td></tr>
-              <tr><td>temperature</td><td><span class="type">number</span> <span class="optional">optional</span></td><td>溫度參數 0-2，預設 0.7</td></tr>
-              <tr><td>force_provider</td><td><span class="type">string</span> <span class="optional">optional</span></td><td>強制指定推理引擎（搭配 force_model 使用）</td></tr>
-              <tr><td>force_model</td><td><span class="type">string</span> <span class="optional">optional</span></td><td>強制指定模型（搭配 force_provider 使用）</td></tr>
-            </tbody>
-          </table>
-        </div>
-
-        <div class="example-tabs">
-          <button class="example-tab active" onclick="switchTab(this,'req')">範例請求</button>
-          <button class="example-tab" onclick="switchTab(this,'res')">範例回應</button>
-        </div>
-        <div class="example-panel active" data-panel="req">
-          <div class="code-block" style="margin-top:0;border-top-left-radius:0">
-            <div class="code-header"><span>bash</span><button class="code-copy" onclick="copyCode(this)">複製</button></div>
-            <div class="code-body">
-<pre><span class="k">curl</span> -X POST https://aiforseo.vip/api/ai/smart \
-  -H <span class="s">"Authorization: Bearer YOUR_ACCESS_TOKEN"</span> \
-  -H <span class="s">"Content-Type: application/json"</span> \
-  -d <span class="s">'{
-    "message": "分析半導體產業的供應鏈風險",
-    "l1": "L1-03",
-    "max_tokens": 2048,
-    "temperature": 0.7
-  }'</span></pre>
-            </div>
-          </div>
-        </div>
-        <div class="example-panel" data-panel="res">
-          <div class="code-block" style="margin-top:0;border-top-left-radius:0">
-            <div class="code-header"><span>json</span></div>
-            <div class="code-body">
-<pre>{
-  <span class="p">"platform"</span>: <span class="s">"SEOBAIKE"</span>,
-  <span class="p">"router"</span>: <span class="s">"smart"</span>,
-  <span class="p">"intent"</span>: {
-    <span class="p">"intent"</span>: <span class="s">"analysis"</span>,
-    <span class="p">"confidence"</span>: 0.92,
-    <span class="p">"keywords"</span>: [<span class="s">"分析"</span>, <span class="s">"供應鏈"</span>, <span class="s">"風險"</span>]
-  },
-  <span class="p">"constraint"</span>: {
-    <span class="p">"verdict"</span>: <span class="s">"allowed"</span>,
-    <span class="p">"l1"</span>: <span class="s">"L1-03"</span>
-  },
-  <span class="p">"provider"</span>: <span class="s">"auto"</span>,
-  <span class="p">"model"</span>: <span class="s">"auto"</span>,
-  <span class="p">"reply"</span>: <span class="s">"半導體產業供應鏈風險分析結果..."</span>,
-  <span class="p">"usage"</span>: {
-    <span class="p">"input_units"</span>: 210,
-    <span class="p">"output_units"</span>: 1580,
-    <span class="p">"total_units"</span>: 1790
-  },
-  <span class="p">"latency_ms"</span>: 1250
-}</pre>
-            </div>
-          </div>
-        </div>
-
-        <div class="try-it-section">
-          <div class="try-fields">
-            <div class="try-field">
-              <label>Authorization Token</label>
-              <input type="text" id="try-smart-token" placeholder="Bearer YOUR_ACCESS_TOKEN">
-            </div>
-            <div class="try-field">
-              <label>Request Body (JSON)</label>
-              <textarea id="try-smart-body">{"message": "分析半導體產業的供應鏈風險", "l1": "L1-03"}</textarea>
-            </div>
-          </div>
-          <button class="try-btn run" onclick="tryApi(this, 'POST', '/api/ai/smart', document.getElementById('try-smart-body').value, document.getElementById('try-smart-token').value)">
-            <span class="play-icon">&#9654;</span>
-            <span class="spinner"></span>
-            Try it
-          </button>
-          <div class="live-response"></div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ===== 10. POST /api/ai/nim ===== -->
-    <section class="ep-card" id="ep-nim">
-      <div class="ep-card-head">
-        <div class="ep-title-row">
-          <span class="method-badge post">POST</span>
-          <span class="ep-url">/api/ai/nim</span>
-        </div>
-        <span class="ep-tag">AI 引擎</span>
-      </div>
-      <div class="ep-card-body">
-        <div class="ep-desc">SEOBAIKE 多引擎 AI 推理端點。支援多種推理引擎與模型，透過統一介面存取。引擎會根據 model 參數自動路由至對應的推理後端。設定 model 為 <code>"auto"</code> 可讓系統自動選擇最佳引擎。需要身份驗證。</div>
-
-        <div class="params-section">
-          <div class="params-label">Request Body (JSON)</div>
-          <table class="params-table">
-            <thead><tr><th>參數</th><th>型別</th><th>說明</th></tr></thead>
-            <tbody>
-              <tr><td>message</td><td><span class="type">string</span> <span class="required">required</span></td><td>使用者的查詢文字，或使用 messages 陣列格式</td></tr>
-              <tr><td>messages</td><td><span class="type">array</span> <span class="optional">optional</span></td><td>標準格式的 messages 陣列（替代 message 參數）</td></tr>
-              <tr><td>model</td><td><span class="type">string</span> <span class="optional">optional</span></td><td>模型識別碼，預設 <code>"auto"</code>（自動選擇）</td></tr>
-              <tr><td>provider</td><td><span class="type">string</span> <span class="optional">optional</span></td><td>指定推理引擎，留空則自動偵測</td></tr>
-              <tr><td>max_tokens</td><td><span class="type">integer</span> <span class="optional">optional</span></td><td>最大回應 token 數，預設 1024</td></tr>
-              <tr><td>temperature</td><td><span class="type">number</span> <span class="optional">optional</span></td><td>溫度參數 0-2，預設 0.7</td></tr>
-            </tbody>
-          </table>
-        </div>
-
-        <div class="example-tabs">
-          <button class="example-tab active" onclick="switchTab(this,'req')">範例請求</button>
-          <button class="example-tab" onclick="switchTab(this,'res')">範例回應</button>
-        </div>
-        <div class="example-panel active" data-panel="req">
-          <div class="code-block" style="margin-top:0;border-top-left-radius:0">
-            <div class="code-header"><span>bash</span><button class="code-copy" onclick="copyCode(this)">複製</button></div>
-            <div class="code-body">
-<pre><span class="k">curl</span> -X POST https://aiforseo.vip/api/ai/nim \
-  -H <span class="s">"Authorization: Bearer YOUR_ACCESS_TOKEN"</span> \
-  -H <span class="s">"Content-Type: application/json"</span> \
-  -d <span class="s">'{
-    "model": "auto",
-    "message": "用 Python 寫一個快速排序演算法"
-  }'</span></pre>
-            </div>
-          </div>
-        </div>
-        <div class="example-panel" data-panel="res">
-          <div class="code-block" style="margin-top:0;border-top-left-radius:0">
-            <div class="code-header"><span>json</span></div>
-            <div class="code-body">
-<pre>{
-  <span class="p">"ok"</span>: true,
-  <span class="p">"reply"</span>: <span class="s">"以下是 Python 快速排序的實作..."</span>,
-  <span class="p">"model"</span>: <span class="s">"auto"</span>,
-  <span class="p">"provider"</span>: <span class="s">"auto"</span>,
-  <span class="p">"usage"</span>: {
-    <span class="p">"prompt_tokens"</span>: 85,
-    <span class="p">"completion_tokens"</span>: 620,
-    <span class="p">"total_tokens"</span>: 705
-  },
-  <span class="p">"platform"</span>: <span class="s">"SEOBAIKE"</span>
-}</pre>
-            </div>
-          </div>
-        </div>
-
-        <div class="try-it-section">
-          <div class="try-fields">
-            <div class="try-field">
-              <label>Authorization Token</label>
-              <input type="text" id="try-nim-token" placeholder="Bearer YOUR_ACCESS_TOKEN">
-            </div>
-            <div class="try-field">
-              <label>Request Body (JSON)</label>
-              <textarea id="try-nim-body">{"model": "auto", "message": "用 Python 寫一個快速排序演算法"}</textarea>
-            </div>
-          </div>
-          <button class="try-btn run" onclick="tryApi(this, 'POST', '/api/ai/nim', document.getElementById('try-nim-body').value, document.getElementById('try-nim-token').value)">
-            <span class="play-icon">&#9654;</span>
-            <span class="spinner"></span>
-            Try it
-          </button>
-          <div class="live-response"></div>
-        </div>
-      </div>
-    </section>
-
-  </main>
 </div>
 
 <!-- Footer -->
@@ -1211,176 +366,32 @@ code{font-family:var(--mono);font-size:13px;background:var(--code-bg);padding:2p
     <div class="footer-links">
       <a href="/">首頁</a>
       <a href="/features">功能</a>
-      <a href="/pricing">價格</a>
-      <a href="/docs">API 文件</a>
+      <a href="/marketplace">市集</a>
+      <a href="/pricing">方案</a>
       <a href="/about">關於我們</a>
       <a href="/contact">聯絡我們</a>
-      <a href="/ecosystem">生態圈</a>
     </div>
     <div class="footer-copy">&copy; 2024-2026 SEOBAIKE. 小路光有限公司. All rights reserved.</div>
   </div>
 </footer>
 
 <script>
-/* ========== Copy Code ========== */
-function copyCode(btn) {
-  var codeBody = btn.closest('.code-block').querySelector('pre');
-  var text = codeBody.textContent;
-  navigator.clipboard.writeText(text).then(function() {
-    btn.textContent = '已複製!';
-    setTimeout(function() { btn.textContent = '複製'; }, 2000);
+function toggleFaq(questionEl) {
+  var item = questionEl.closest('.faq-item');
+  var wasOpen = item.classList.contains('open');
+
+  // Close all items
+  document.querySelectorAll('.faq-item.open').forEach(function(openItem) {
+    openItem.classList.remove('open');
   });
-}
 
-/* ========== Tab Switching ========== */
-function switchTab(tabEl, panelKey) {
-  var container = tabEl.closest('.ep-card-body') || tabEl.parentElement.parentElement;
-  var tabs = tabEl.parentElement.querySelectorAll('.example-tab');
-  var panels = container.querySelectorAll('.example-panel');
-  tabs.forEach(function(t) { t.classList.remove('active'); });
-  tabEl.classList.add('active');
-  panels.forEach(function(p) {
-    p.classList.toggle('active', p.getAttribute('data-panel') === panelKey);
-  });
-}
-
-/* ========== Sidebar Scroll ========== */
-function scrollToSection(id) {
-  var el = document.getElementById(id);
-  if (el) {
-    el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    // Update active sidebar link
-    document.querySelectorAll('.sidebar-link').forEach(function(l) { l.classList.remove('active'); });
-    var clicked = event && event.currentTarget;
-    if (clicked) clicked.classList.add('active');
+  // Toggle clicked item
+  if (!wasOpen) {
+    item.classList.add('open');
   }
 }
 
-// Intersection observer for sidebar active state
-(function() {
-  var sections = document.querySelectorAll('.section[id], .ep-card[id]');
-  var links = document.querySelectorAll('.sidebar-link');
-  var sectionIds = Array.from(sections).map(function(s) { return s.id; });
-
-  var observer = new IntersectionObserver(function(entries) {
-    entries.forEach(function(entry) {
-      if (entry.isIntersecting) {
-        var id = entry.target.id;
-        links.forEach(function(link) {
-          var onclickStr = link.getAttribute('onclick') || '';
-          var match = onclickStr.match(/scrollToSection\('([^']+)'\)/);
-          if (match) {
-            link.classList.toggle('active', match[1] === id);
-          }
-        });
-      }
-    });
-  }, { rootMargin: '-80px 0px -60% 0px', threshold: 0 });
-
-  sections.forEach(function(s) { observer.observe(s); });
-})();
-
-/* ========== Try It - Live API Calls ========== */
-var BASE_URL = 'https://aiforseo.vip';
-
-function tryApi(btn, method, path, body, token) {
-  var card = btn.closest('.try-it-section');
-  var responseEl = card.querySelector('.live-response');
-
-  // Disable button & show loading
-  btn.disabled = true;
-  btn.classList.add('loading');
-  responseEl.classList.add('visible');
-  responseEl.innerHTML = '<div style="padding:12px;color:var(--dim);font-size:13px;font-family:var(--mono)">Sending request...</div>';
-
-  var startTime = performance.now();
-
-  var opts = {
-    method: method,
-    headers: { 'Content-Type': 'application/json' }
-  };
-
-  if (token && token.trim()) {
-    var t = token.trim();
-    if (!t.startsWith('Bearer ')) t = 'Bearer ' + t;
-    opts.headers['Authorization'] = t;
-  }
-
-  if (method === 'POST' && body) {
-    try {
-      // Validate JSON
-      JSON.parse(body);
-      opts.body = body;
-    } catch (e) {
-      btn.disabled = false;
-      btn.classList.remove('loading');
-      responseEl.innerHTML = renderError('Invalid JSON: ' + e.message);
-      return;
-    }
-  }
-
-  fetch(BASE_URL + path, opts)
-    .then(function(res) {
-      var elapsed = Math.round(performance.now() - startTime);
-      return res.text().then(function(text) {
-        return { status: res.status, text: text, time: elapsed };
-      });
-    })
-    .then(function(result) {
-      btn.disabled = false;
-      btn.classList.remove('loading');
-
-      var statusClass = 's2xx';
-      if (result.status >= 400 && result.status < 500) statusClass = 's4xx';
-      if (result.status >= 500) statusClass = 's5xx';
-
-      var prettyJson;
-      try {
-        prettyJson = JSON.stringify(JSON.parse(result.text), null, 2);
-      } catch (e) {
-        prettyJson = result.text || '(empty response)';
-      }
-
-      responseEl.innerHTML =
-        '<div class="live-response-header">' +
-          '<span class="status-pill ' + statusClass + '">' + result.status + '</span>' +
-          '<span class="timing">' + result.time + 'ms</span>' +
-        '</div>' +
-        '<div class="code-block" style="margin:0">' +
-          '<div class="code-header"><span>Response</span><button class="code-copy" onclick="copyCode(this)">複製</button></div>' +
-          '<div class="code-body"><pre>' + escapeHtml(prettyJson) + '</pre></div>' +
-        '</div>';
-    })
-    .catch(function(err) {
-      btn.disabled = false;
-      btn.classList.remove('loading');
-      var elapsed = Math.round(performance.now() - startTime);
-
-      responseEl.innerHTML =
-        '<div class="live-response-header">' +
-          '<span class="status-pill s5xx">ERR</span>' +
-          '<span class="timing">' + elapsed + 'ms</span>' +
-        '</div>' +
-        '<div class="code-block" style="margin:0">' +
-          '<div class="code-header"><span>Network Error</span></div>' +
-          '<div class="code-body"><pre>' + escapeHtml(err.message || 'Failed to connect. The API may not support CORS from this origin, or the server is unreachable.\n\nTry using curl in your terminal instead.') + '</pre></div>' +
-        '</div>';
-    });
-}
-
-function renderError(msg) {
-  return '<div class="live-response-header"><span class="status-pill s4xx">ERR</span></div>' +
-    '<div class="code-block" style="margin:0"><div class="code-header"><span>Error</span></div>' +
-    '<div class="code-body"><pre>' + escapeHtml(msg) + '</pre></div></div>';
-}
-
-function escapeHtml(str) {
-  return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
-}
-</script>
-
-<!-- Page Views Tracking Beacon -->
-<script>
+// Track page view
 (function(){
   try {
     var cfg = window.__SEOBAIKE__ || {};
@@ -1389,13 +400,12 @@ function escapeHtml(str) {
     fetch(sUrl + '/rest/v1/page_views', {
       method: 'POST',
       headers: { 'Content-Type':'application/json', 'apikey':sKey, 'Authorization':'Bearer '+sKey, 'Prefer':'return=minimal' },
-      body: JSON.stringify({ path: location.pathname, referrer: document.referrer || null, user_agent: navigator.userAgent })
+      body: JSON.stringify({ path: '/docs', referrer: document.referrer || null, user_agent: navigator.userAgent })
     }).catch(function(){});
   } catch(e){}
 })();
 </script>
-
+<script src="/seobaike-config.js"></script>
 <script src="/assets/smart-align.js"></script>
-<script src="/seobaike-widget.js"></script>
 </body>
 </html>

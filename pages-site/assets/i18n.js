@@ -1,6 +1,6 @@
 /**
  * SEOBAIKE i18n - 國際化語言切換模組
- * 支援：繁體中文（預設）、English、日本語
+ * 支援：繁體中文（預設）、English、日本語、한국어
  * 小路光有限公司 (c) 2026
  */
 window.SEOBAIKE_I18N = {
@@ -246,6 +246,86 @@ window.SEOBAIKE_I18N = {
       'footer.support.faq': 'よくある質問',
       'footer.support.contact': 'サポート連絡',
       'footer.support.status': 'サービス状態'
+    },
+    'ko': {
+      'nav.home': '홈',
+      'nav.features': '기능',
+      'nav.marketplace': '마켓플레이스',
+      'nav.pricing': '요금제',
+      'nav.docs': '문서',
+      'nav.about': '소개',
+      'nav.login': '로그인',
+      'hero.title.prefix': '',
+      'hero.title.highlight': '한마디로',
+      'hero.title.suffix': ', 모든 것을 해결',
+      'hero.subtitle': '도구를 고를 필요 없고, AI를 배울 필요도 없습니다. 당신이 말하면, SEOBAIKE가 실행합니다.',
+      'hero.cta1': '시작하기',
+      'hero.cta2': '더 알아보기',
+      'demo.title': '한 번 보면 이해됩니다',
+      'demo.subtitle': '당신이 말하면, 최적의 AI 엔진이 처리합니다',
+      'video.title': '60초 만에 이해하는 SEOBAIKE',
+      'video.subtitle': '질문부터 답변까지, 전체 제품 체험을 확인하세요',
+      'pillars.title': '왜 SEOBAIKE인가요?',
+      'pillars.subtitle': '더 이상 고민할 필요 없는 세 가지 이유',
+      'pillar.1.title': '선택 장애 제로',
+      'pillar.1.desc': '다른 곳은 복잡한 선택을 강요합니다. 우리는? 그냥 말씀만 하세요.',
+      'pillar.2.title': '자동 매칭',
+      'pillar.2.desc': '1,000개 이상의 AI 엔진 중에서 가장 빠르고, 정확하고, 경제적인 것을 SEOBAIKE가 자동 선택합니다.',
+      'pillar.3.title': '보안 보호',
+      'pillar.3.desc': '당신의 데이터와 대화, 모두 암호화로 안전하게 보호됩니다.',
+      'cap.title': '무엇을 할 수 있나요?',
+      'cap.subtitle': '8가지 기능, 하나의 입구. 마우스를 올려 예시를 확인하세요.',
+      'cap.chat': '채팅',
+      'cap.chat.desc': '친구와 대화하듯 AI와 소통하세요',
+      'cap.code': '코드',
+      'cap.code.desc': '코딩, 디버깅, 최적화',
+      'cap.vision': '비전',
+      'cap.vision.desc': '이미지 분석 및 설명',
+      'cap.reasoning': '추론',
+      'cap.reasoning.desc': '수학, 논리, 복잡한 분석',
+      'cap.search': '검색',
+      'cap.search.desc': '실시간 최신 정보 검색',
+      'cap.embed': '임베딩',
+      'cap.embed.desc': '문서 분석, 의미 이해',
+      'cap.image': '이미지 생성',
+      'cap.image.desc': 'AI 그림 및 디자인',
+      'cap.voice': '음성',
+      'cap.voice.desc': '음성-텍스트 변환, 텍스트-음성 변환',
+      'pricing.title': '나에게 맞는 요금제를 선택하세요',
+      'pricing.subtitle': '어떤 단계에 있든, 최적의 요금제가 준비되어 있습니다',
+      'pricing.free': '체험판',
+      'pricing.personal': '개인판',
+      'pricing.pro': '프로판',
+      'pricing.enterprise': '기업판',
+      'pricing.recommended': '추천',
+      'pricing.more': '모든 요금제 보기',
+      'trust.title': '신뢰할 수 있는 파트너',
+      'trust.tw': '대만 기업',
+      'trust.tw.desc': '정식 등록 법인',
+      'trust.legal': '합법 법인',
+      'trust.engines': '1,000+ AI 엔진',
+      'trust.engines.desc': '최적의 엔진을 자동 선택',
+      'trust.privacy': '제3자 접근 제로',
+      'trust.privacy.desc': '당신의 데이터는 오직 당신의 것입니다',
+      'cta.title': 'SEOBAIKE와 함께 올바른 길을 걸어보세요',
+      'cta.subtitle': '신용카드 불필요. 계약 불필요. 나에게 맞는 방법을 찾아보세요.',
+      'cta.btn': '여정을 시작하세요',
+      'footer.company': '소로광유한공사 (小路光有限公司)',
+      'footer.product': '제품',
+      'footer.product.features': '기능 총람',
+      'footer.product.pricing': '요금제 및 가격',
+      'footer.product.docs': '사용 설명서',
+      'footer.product.changelog': '업데이트 기록',
+      'footer.corp': '회사',
+      'footer.corp.about': '회사 소개',
+      'footer.corp.contact': '문의하기',
+      'footer.corp.privacy': '개인정보 보호정책',
+      'footer.corp.terms': '이용약관',
+      'footer.support': '지원',
+      'footer.support.start': '빠른 시작',
+      'footer.support.faq': '자주 묻는 질문',
+      'footer.support.contact': '고객 지원 문의',
+      'footer.support.status': '서비스 상태'
     }
   },
 
@@ -262,7 +342,7 @@ window.SEOBAIKE_I18N = {
 
   /**
    * 切換語言
-   * @param {string} lang - 目標語言代碼 ('zh-TW' | 'en' | 'ja')
+   * @param {string} lang - 目標語言代碼 ('zh-TW' | 'en' | 'ja' | 'ko')
    */
   switchLang: function(lang) {
     if (!this.translations[lang]) return;
@@ -270,7 +350,7 @@ window.SEOBAIKE_I18N = {
     try { localStorage.setItem('seobaike_lang', lang); } catch(e) {}
 
     // 設定 html lang 屬性
-    var langMap = { 'zh-TW': 'zh-TW', 'en': 'en', 'ja': 'ja' };
+    var langMap = { 'zh-TW': 'zh-TW', 'en': 'en', 'ja': 'ja', 'ko': 'ko' };
     document.documentElement.lang = langMap[lang] || 'zh-TW';
 
     // 更新所有有 data-i18n 屬性的元素
