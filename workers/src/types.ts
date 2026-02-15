@@ -70,8 +70,18 @@ export interface Env {
   TWILIO_AUTH_TOKEN: string
   TWILIO_PHONE_NUMBER: string
 
+  // Stripe
+  STRIPE_SECRET_KEY: string
+  STRIPE_WEBHOOK_SECRET: string
+
+  // Resend
+  RESEND_API_KEY: string
+
   // KV for rate limiting
   RATE_LIMIT: KVNamespace
+
+  // Supabase Anon Key (for client-side auth)
+  SUPABASE_ANON_KEY: string
 }
 
 export interface NormalizedMessage {

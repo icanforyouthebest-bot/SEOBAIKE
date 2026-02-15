@@ -258,6 +258,9 @@ export default {
         case '/api/gateway': return await handleGateway(request, env)
         case '/api/ai/chat': return await handleAiChat(request, env)
         case '/api/widget-chat': return await handleWidgetChat(request, env)
+        case '/api/checkout': return await handleStripeCheckout(request, env)
+        case '/api/webhook/stripe': return await handleStripeWebhook(request, env)
+        case '/api/send-email': return await handleSendEmail(request, env)
         case '/api/v1/check': {
           const body = await request.json() as any
           if (!body.l1_id && !body.l1_code) return json(400, { error: 'l1_id (uuid) or l1_code (e.g. L1-01) is required', example: { l1_code: 'L1-01', l4_code: 'L4-01010101' } })
@@ -880,6 +883,103 @@ async function handleWidgetChat(request: Request, env: Env): Promise<Response> {
   } catch (err) {
     return json(500, { reply: '抱歉，AI 暫時無法回應。\n\n— 小百', error: String(err) })
   }
+}
+
+// ── Stripe Checkout — 真的收款 ──
+async function handleStripeCheckout(request: Request, env: Env): Promise<Response> {
+  if (!env.STRIPE_SECRET_KEY) return json(503, { error: 'Stripe 尚未設定，請提供 API Key' })
+
+  const body = await request.json() as any
+  const plan = body.plan || 'professional'
+
+  const prices: Record<string, { amount: number; name: string }> = {
+    professional: { amount: 299000, name: 'SEOBAIKE Professional（NT$2,990/月）' },
+    enterprise: { amount: 0, name: 'SEOBAIKE Enterprise（客製報價）' },
+  }
+  const selected = prices[plan]
+  if (!selected || selected.amount === 0) {
+    return json(200, { redirect: 'https://aiforseo.vip/contact', message: '企業方案請聯繫業務' })
+  }
+
+  const stripeRes = await fetch('https://api.stripe.com/v1/checkout/sessions', {
+    method: 'POST',
+    headers: {
+      'Authorization': `Basic ${btoa(env.STRIPE_SECRET_KEY + ':')}`,
+      'Content-Type': 'application/x-www-form-urlencoded',
+    },
+    body: new URLSearchParams({
+      'mode': 'subscription',
+      'payment_method_types[0]': 'card',
+      'line_items[0][price_data][currency]': 'twd',
+      'line_items[0][price_data][unit_amount]': String(selected.amount),
+      'line_items[0][price_data][recurring][interval]': 'month',
+      'line_items[0][price_data][product_data][name]': selected.name,
+      'line_items[0][quantity]': '1',
+      'success_url': 'https://aiforseo.vip/dashboard?payment=success',
+      'cancel_url': 'https://aiforseo.vip/pricing?payment=cancelled',
+    }).toString(),
+  })
+
+  const session = await stripeRes.json() as any
+  if (session.error) return json(400, { error: session.error.message })
+  return json(200, { checkout_url: session.url, session_id: session.id })
+}
+
+// ── Stripe Webhook — 接收付款通知 ──
+async function handleStripeWebhook(request: Request, env: Env): Promise<Response> {
+  const body = await request.text()
+  try {
+    const event = JSON.parse(body)
+    const SUPA_URL = env.SUPABASE_URL || 'https://vmyrivxxibqydccurxug.supabase.co'
+    const SUPA_KEY = env.SUPABASE_SERVICE_ROLE_KEY
+
+    if (event.type === 'checkout.session.completed') {
+      const session = event.data.object
+      await fetch(`${SUPA_URL}/rest/v1/payments`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'apikey': SUPA_KEY, 'Authorization': `Bearer ${SUPA_KEY}`, 'Prefer': 'return=minimal' },
+        body: JSON.stringify({
+          stripe_session_id: session.id,
+          customer_email: session.customer_email || session.customer_details?.email,
+          amount: session.amount_total,
+          currency: session.currency,
+          status: 'completed',
+          plan: 'professional',
+        }),
+      })
+    }
+    return json(200, { received: true })
+  } catch {
+    return json(400, { error: 'Invalid webhook payload' })
+  }
+}
+
+// ── Resend Email — 真的寄信 ──
+async function handleSendEmail(request: Request, env: Env): Promise<Response> {
+  if (!env.RESEND_API_KEY) return json(503, { error: 'Resend 尚未設定，請提供 API Key' })
+
+  const body = await request.json() as any
+  const { to, subject, html, text } = body
+  if (!to || !subject) return json(400, { error: 'to and subject are required' })
+
+  const resendRes = await fetch('https://api.resend.com/emails', {
+    method: 'POST',
+    headers: {
+      'Authorization': `Bearer ${env.RESEND_API_KEY}`,
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      from: 'SEOBAIKE <seobaike@aiforseo.vip>',
+      to: Array.isArray(to) ? to : [to],
+      subject,
+      html: html || undefined,
+      text: text || subject,
+    }),
+  })
+
+  const result = await resendRes.json() as any
+  if (!resendRes.ok) return json(resendRes.status, { error: result.message || 'Failed to send email', details: result })
+  return json(200, { sent: true, id: result.id, message: 'Email 已寄出' })
 }
 
 // ============================================================
