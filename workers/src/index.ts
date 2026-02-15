@@ -55,6 +55,7 @@ export default {
       '/marketing': 'marketing.html',
       '/privacy': 'privacy.html',
       '/terms': 'terms.html',
+      '/marketplace': 'marketplace.html',
     }
     const cleanPath = path.endsWith('/') && path !== '/' ? path.slice(0, -1) : path
     const pageFile = SITE_PAGES[cleanPath]
@@ -155,7 +156,21 @@ export default {
       })
     }
 
-    if (path === '/api' || path === '/api/') return json(200, { status: 'ok', service: 'SEOBAIKE OS', version: '3.0.0', ai: 'cloudflare-workers-ai', platforms: 14, architecture: 'CaaS — 人類決策為主，AI 為輔助執行' })
+    if (path === '/api' || path === '/api/') return json(200, {
+      status: 'operational', service: 'SEOBAIKE OS', version: '3.1.0', patent: 'TW-115100981',
+      architecture: 'AI OS — 要什麼有什麼，讓人賺錢的系統',
+      marketplace: { listings: 20, commission_levels: 3, model: 'platform 20% / creator 50% / referrers 30%' },
+      capabilities: { ai_models: 3, platforms: 14, constraint_layers: 4, api_endpoints: 45 },
+      endpoints: {
+        marketplace: ['/api/marketplace', '/api/marketplace/featured', '/api/marketplace/categories', '/api/marketplace/listing/:id', '/api/marketplace/purchase', '/api/marketplace/create', '/api/marketplace/review'],
+        commission: ['/api/commission/rules', '/api/wallet'],
+        ai: ['/api/ai/chat', '/api/widget-chat', '/api/v1/inference', '/api/ai/router', '/api/ai/search', '/api/ai/content'],
+        data: ['/api/v1/l1', '/api/v1/l2', '/api/v1/l3', '/api/v1/l4', '/api/v1/nodes', '/api/v1/check', '/api/v1/search', '/api/v1/export'],
+        system: ['/api/health', '/api/v1/analytics', '/api/v1/system', '/api/v1/status', '/api/platforms'],
+        webhooks: ['/api/webhook/telegram', '/api/webhook/line', '/api/webhook/whatsapp', '/api/webhook/messenger', '/api/webhook/discord', '/api/webhook/slack', '/api/webhook/teams', '/api/webhook/email', '/api/webhook/google-chat', '/api/webhook/wechat', '/api/webhook/signal', '/api/webhook/viber', '/api/webhook/sms', '/api/webhook/web-widget'],
+      },
+      company: '小路光有限公司',
+    })
     if (path === '/api/health') return json(200, { status: 'ok', timestamp: new Date().toISOString(), version: '3.0.0', platforms_ready: 14 })
     if (path === '/api/platforms') return json(200, PLATFORM_REGISTRY)
 
@@ -223,6 +238,119 @@ export default {
       return Response.redirect(`${url.origin}/docs`, 301)
     }
 
+    // ── 市集 API（GET）— 讓人賺錢的核心 ──
+    if (path === '/api/marketplace' || path === '/api/marketplace/') {
+      const category = url.searchParams.get('category')
+      const q = url.searchParams.get('q')
+      const featured = url.searchParams.get('featured')
+      let query = `${SUPA_URL}/rest/v1/marketplace_listings?status=eq.active&select=id,title,subtitle,description,price_twd,pricing_model,category,icon,tags,total_users,avg_rating,review_count,featured,api_endpoint&order=total_users.desc`
+      if (category) query += `&category=eq.${encodeURIComponent(category)}`
+      if (featured === 'true') query += `&featured=eq.true`
+      if (q) query += `&or=(title.ilike.*${encodeURIComponent(q)}*,description.ilike.*${encodeURIComponent(q)}*,category.ilike.*${encodeURIComponent(q)}*)`
+      query += '&limit=50'
+      const data = await fetch(query, { headers: supaHeaders }).then(r => r.json()).catch(() => [])
+      const categories = [...new Set((data as any[]).map((d: any) => d.category).filter(Boolean))]
+      return json(200, { total: (data as any[]).length, categories, commission_model: { platform: '20%', creator: '50%', referrer_l1: '15%', referrer_l2: '10%', referrer_l3: '5%' }, listings: data })
+    }
+    if (path === '/api/marketplace/featured') {
+      const data = await fetch(`${SUPA_URL}/rest/v1/marketplace_listings?status=eq.active&featured=eq.true&select=id,title,subtitle,price_twd,pricing_model,category,icon,total_users,avg_rating&order=total_users.desc&limit=10`, { headers: supaHeaders }).then(r => r.json()).catch(() => [])
+      return json(200, { featured: data })
+    }
+    if (path.startsWith('/api/marketplace/listing/')) {
+      const listingId = path.split('/').pop()
+      const [listing, reviews] = await Promise.all([
+        fetch(`${SUPA_URL}/rest/v1/marketplace_listings?id=eq.${listingId}&select=*`, { headers: supaHeaders }).then(r => r.json()).catch(() => []),
+        fetch(`${SUPA_URL}/rest/v1/marketplace_reviews?listing_id=eq.${listingId}&select=*&order=created_at.desc&limit=20`, { headers: supaHeaders }).then(r => r.json()).catch(() => []),
+      ])
+      if (!(listing as any[]).length) return json(404, { error: 'Listing not found' })
+      return json(200, { listing: (listing as any[])[0], reviews, review_count: (reviews as any[]).length })
+    }
+    if (path === '/api/marketplace/categories') {
+      const data = await fetch(`${SUPA_URL}/rest/v1/marketplace_listings?status=eq.active&select=category`, { headers: supaHeaders }).then(r => r.json()).catch(() => [])
+      const cats: Record<string, number> = {}
+      ;(data as any[]).forEach((d: any) => { if (d.category) cats[d.category] = (cats[d.category] || 0) + 1 })
+      return json(200, { categories: Object.entries(cats).map(([name, count]) => ({ name, count })).sort((a, b) => b.count - a.count) })
+    }
+    if (path === '/api/commission/rules') {
+      return json(200, { model: 'SEOBAIKE 三級分潤', rules: [
+        { role: 'platform', percentage: 20, description: 'SEOBAIKE 平台服務費' },
+        { role: 'creator', percentage: 50, description: '創作者收入（工具開發者）' },
+        { role: 'referrer_l1', percentage: 15, description: '直推獎金（你推薦的人買了，你賺 15%）' },
+        { role: 'referrer_l2', percentage: 10, description: '間推獎金（你的下線推薦的人買了，你賺 10%）' },
+        { role: 'referrer_l3', percentage: 5, description: '三級獎金（再下一級買了，你賺 5%）' },
+      ], total: '100%', note: '分享就賺錢，每個人都是推廣者' })
+    }
+    if (path === '/api/wallet' && request.method === 'GET') {
+      const userId = url.searchParams.get('user_id')
+      if (!userId) return json(400, { error: 'user_id is required' })
+      const wallet = await fetch(`${SUPA_URL}/rest/v1/user_wallets?user_id=eq.${userId}&select=*`, { headers: supaHeaders }).then(r => r.json()).catch(() => [])
+      const commissions = await fetch(`${SUPA_URL}/rest/v1/marketplace_commission_splits?recipient_id=eq.${userId}&select=*&order=created_at.desc&limit=20`, { headers: supaHeaders }).then(r => r.json()).catch(() => [])
+      const referrals = await fetch(`${SUPA_URL}/rest/v1/referral_tree?referrer_id=eq.${userId}&select=*`, { headers: supaHeaders }).then(r => r.json()).catch(() => [])
+      return json(200, { wallet: (wallet as any[])[0] || { balance_twd: 0, total_earned_twd: 0 }, recent_commissions: commissions, total_referrals: (referrals as any[]).length })
+    }
+
+    // ── 系統分析 API（GET）— OS 基礎建設 ──
+    if (path === '/api/v1/analytics') {
+      const ct = async (t: string): Promise<number> => {
+        try {
+          const r = await fetch(`${SUPA_URL}/rest/v1/${t}?select=id`, { headers: { ...supaHeaders, 'Prefer': 'count=exact', 'Range': '0-0' } })
+          return parseInt(r.headers.get('content-range')?.split('/')[1] || '0')
+        } catch { return 0 }
+      }
+      const [l1, l2, l3, l4, listings, purchases, creators, views, audits] = await Promise.all([
+        ct('l1_categories'), ct('l2_subcategories'), ct('l3_processes'), ct('l4_nodes'),
+        ct('marketplace_listings'), ct('marketplace_purchases'), ct('creator_profiles'),
+        ct('page_views'), ct('audit_logs'),
+      ])
+      return json(200, {
+        patent: 'TW-115100981', timestamp: new Date().toISOString(),
+        constraint_nodes: { l1, l2, l3, l4, total: l1 + l2 + l3 + l4 },
+        marketplace: { listings, purchases, creators },
+        activity: { page_views: views, audit_logs: audits },
+        ecosystem: { platforms: 14, ai_models: 3, edge_functions: 8, api_endpoints: 45 },
+      })
+    }
+    if (path === '/api/v1/search') {
+      const q = url.searchParams.get('q')
+      if (!q) return json(400, { error: 'q parameter is required', example: '/api/v1/search?q=農業' })
+      const searchIn = async (table: string, fields: string) => {
+        const u = new URL(`${SUPA_URL}/rest/v1/${table}`)
+        u.searchParams.set('or', `(name_zh.ilike.*${q}*,name_en.ilike.*${q}*,code.ilike.*${q}*)`)
+        u.searchParams.set('select', fields)
+        u.searchParams.set('limit', '20')
+        return fetch(u.toString(), { headers: supaHeaders }).then(r => r.json()).catch(() => [])
+      }
+      const [r1, r2, r3, r4, market] = await Promise.all([
+        searchIn('l1_categories', 'id,code,name_zh,name_en'),
+        searchIn('l2_subcategories', 'id,code,name_zh,name_en,l1_id'),
+        searchIn('l3_processes', 'id,code,name_zh,name_en,l2_id'),
+        searchIn('l4_nodes', 'id,code,name_zh,name_en,l3_id'),
+        fetch(`${SUPA_URL}/rest/v1/marketplace_listings?status=eq.active&or=(title.ilike.*${encodeURIComponent(q)}*,description.ilike.*${encodeURIComponent(q)}*,category.ilike.*${encodeURIComponent(q)}*)&select=id,title,category,icon,price_twd&limit=10`, { headers: supaHeaders }).then(r => r.json()).catch(() => []),
+      ])
+      const total = (r1 as any[]).length + (r2 as any[]).length + (r3 as any[]).length + (r4 as any[]).length + (market as any[]).length
+      return json(200, { query: q, total_results: total, results: { l1: r1, l2: r2, l3: r3, l4: r4, marketplace: market } })
+    }
+    if (path === '/api/v1/system') {
+      const t0 = Date.now()
+      const checks = await Promise.all([
+        Promise.resolve({ service: 'workers', status: 'operational', ms: 0 }),
+        fetch(`${SUPA_URL}/rest/v1/l1_categories?select=id&limit=1`, { headers: supaHeaders }).then(r => ({ service: 'supabase', status: r.ok ? 'operational' : 'degraded', ms: Date.now() - t0 })).catch(() => ({ service: 'supabase', status: 'down', ms: Date.now() - t0 })),
+        fetch(`${SUPA_URL}/rest/v1/marketplace_listings?select=id&limit=1`, { headers: supaHeaders }).then(r => ({ service: 'marketplace', status: r.ok ? 'operational' : 'degraded', ms: Date.now() - t0 })).catch(() => ({ service: 'marketplace', status: 'down', ms: Date.now() - t0 })),
+        env.AI ? env.AI.run('@cf/meta/llama-3.1-8b-instruct', { messages: [{ role: 'user', content: 'ping' }], max_tokens: 3 }).then(() => ({ service: 'ai-engine', status: 'operational', ms: Date.now() - t0 })).catch(() => ({ service: 'ai-engine', status: 'degraded', ms: Date.now() - t0 })) : Promise.resolve({ service: 'ai-engine', status: 'not_configured', ms: 0 }),
+      ])
+      return json(200, { status: checks.every(c => c.status === 'operational') ? 'all_operational' : 'degraded', timestamp: new Date().toISOString(), latency_ms: Date.now() - t0, services: checks, capabilities: { ai_models: 3, platforms: 14, marketplace_listings: 20, commission_levels: 3 } })
+    }
+    if (path === '/api/v1/export') {
+      const layer = url.searchParams.get('layer') || 'all'
+      const tbl: Record<string, string> = { l1: 'l1_categories?select=code,name_zh,name_en,tsic_code,naics_code,nace_code,jsic_code&order=code', l2: 'l2_subcategories?select=code,name_zh,name_en,l1_id&order=code&limit=1000', l3: 'l3_processes?select=code,name_zh,name_en,l2_id&order=code&limit=1000', l4: 'l4_nodes?select=code,name_zh,name_en,l3_id&order=code&limit=1000' }
+      if (layer !== 'all' && !tbl[layer]) return json(400, { error: 'Invalid layer. Use: l1, l2, l3, l4, or all' })
+      const layers = layer === 'all' ? ['l1', 'l2', 'l3', 'l4'] : [layer]
+      const results = await Promise.all(layers.map(l => fetch(`${SUPA_URL}/rest/v1/${tbl[l]}`, { headers: supaHeaders }).then(r => r.json()).catch(() => [])))
+      const data: Record<string, any> = {}
+      layers.forEach((l, i) => { data[l] = results[i] })
+      return json(200, { patent: 'TW-115100981', exported_at: new Date().toISOString(), layer, data })
+    }
+
     if (request.method === 'GET') {
       if (path === '/api/chat') {
         return new Response('<!DOCTYPE html><html><head><meta charset="UTF-8"><title>SEOBAIKE Chat</title></head><body style="margin:0;background:#0a0a1a;color:#eee;font-family:sans-serif;display:flex;justify-content:center;align-items:center;min-height:100vh;"><div style="text-align:center;"><h1 style="color:#e8850c;">SEOBAIKE Chat</h1><p>請使用 <a href="/dashboard" style="color:#76b900;">/dashboard</a> 或 <a href="/api/ai/chat" style="color:#76b900;">API</a> 進行對話</p></div></body></html>', { status: 200, headers: { ...SECURITY_HEADERS, 'Content-Type': 'text/html; charset=utf-8' } })
@@ -248,7 +376,7 @@ export default {
     if (request.method !== 'POST') return json(405, { error: 'Method not allowed' })
 
     // ── Rate Limiting — 公開 API 每 IP 每端點 5 秒冷卻 ──
-    const rateLimitPaths = ['/api/ai/chat', '/api/widget-chat', '/api/v1/check', '/api/v1/inference', '/api/checkout', '/api/ai/router', '/api/ai/search', '/api/ai/content', '/api/bot/command', '/api/team/dispatch']
+    const rateLimitPaths = ['/api/ai/chat', '/api/widget-chat', '/api/v1/check', '/api/v1/inference', '/api/checkout', '/api/ai/router', '/api/ai/search', '/api/ai/content', '/api/bot/command', '/api/team/dispatch', '/api/marketplace/purchase', '/api/marketplace/create', '/api/marketplace/review']
     if (rateLimitPaths.includes(path)) {
       const clientIp = request.headers.get('CF-Connecting-IP') || 'unknown'
       const { allowed, retryAfter } = await checkRateLimit(env.RATE_LIMIT, `${clientIp}:${path}`, 5)
@@ -315,6 +443,55 @@ export default {
           })
           const gwData = await gwRes.json()
           return json(gwRes.status, gwData)
+        }
+        // ── 市集購買 + 自動三級分潤 ──
+        case '/api/marketplace/purchase': {
+          const body = await request.json() as any
+          if (!body.listing_id) return json(400, { error: 'listing_id is required' })
+          if (!body.buyer_id && !body.buyer_email) return json(400, { error: 'buyer_id or buyer_email is required' })
+          const srvHeaders = { 'Content-Type': 'application/json', 'apikey': env.SUPABASE_SERVICE_ROLE_KEY, 'Authorization': `Bearer ${env.SUPABASE_SERVICE_ROLE_KEY}` }
+          const result = await fetch(`${SUPA_URL}/rest/v1/rpc/marketplace_purchase_with_split`, {
+            method: 'POST', headers: srvHeaders,
+            body: JSON.stringify({ p_listing_id: body.listing_id, p_buyer_id: body.buyer_id || null, p_buyer_email: body.buyer_email || null, p_referral_code: body.referral_code || null }),
+          }).then(r => r.json()).catch(e => ({ success: false, error: String(e) }))
+          return json(200, result)
+        }
+        // ── 市集創作者上架（一鍵上線） ──
+        case '/api/marketplace/create': {
+          const body = await request.json() as any
+          if (!body.title) return json(400, { error: 'title is required' })
+          const srvHeaders = { 'Content-Type': 'application/json', 'apikey': env.SUPABASE_SERVICE_ROLE_KEY, 'Authorization': `Bearer ${env.SUPABASE_SERVICE_ROLE_KEY}`, 'Prefer': 'return=representation' }
+          const listing = {
+            title: body.title, subtitle: body.subtitle || '', description: body.description || '',
+            price_twd: body.price_twd || 0, pricing_model: body.pricing_model || 'free',
+            category: body.category || '', icon: body.icon || '🤖', tags: body.tags || [],
+            creator_id: body.creator_id || null, api_endpoint: body.api_endpoint || '',
+            status: 'active', featured: false,
+          }
+          const result = await fetch(`${SUPA_URL}/rest/v1/marketplace_listings`, {
+            method: 'POST', headers: srvHeaders, body: JSON.stringify(listing),
+          }).then(r => r.json()).catch(e => ({ error: String(e) }))
+          return json(201, { success: true, message: '上架成功！你的工具已在市集上線', listing: Array.isArray(result) ? result[0] : result })
+        }
+        // ── 市集評價 ──
+        case '/api/marketplace/review': {
+          const body = await request.json() as any
+          if (!body.listing_id || !body.rating) return json(400, { error: 'listing_id and rating (1-5) are required' })
+          const srvHeaders = { 'Content-Type': 'application/json', 'apikey': env.SUPABASE_SERVICE_ROLE_KEY, 'Authorization': `Bearer ${env.SUPABASE_SERVICE_ROLE_KEY}`, 'Prefer': 'return=representation' }
+          await fetch(`${SUPA_URL}/rest/v1/marketplace_reviews`, {
+            method: 'POST', headers: srvHeaders,
+            body: JSON.stringify({ listing_id: body.listing_id, reviewer_id: body.reviewer_id || null, reviewer_name: body.reviewer_name || '匿名', rating: body.rating, comment: body.comment || '' }),
+          })
+          // 更新商品平均評分
+          const reviews = await fetch(`${SUPA_URL}/rest/v1/marketplace_reviews?listing_id=eq.${body.listing_id}&select=rating`, { headers: { 'apikey': env.SUPABASE_SERVICE_ROLE_KEY, 'Authorization': `Bearer ${env.SUPABASE_SERVICE_ROLE_KEY}` } }).then(r => r.json()).catch(() => []) as any[]
+          if (reviews.length > 0) {
+            const avg = (reviews.reduce((s: number, r: any) => s + r.rating, 0) / reviews.length).toFixed(2)
+            await fetch(`${SUPA_URL}/rest/v1/marketplace_listings?id=eq.${body.listing_id}`, {
+              method: 'PATCH', headers: srvHeaders,
+              body: JSON.stringify({ avg_rating: parseFloat(avg), review_count: reviews.length }),
+            })
+          }
+          return json(200, { success: true, message: '評價已送出' })
         }
         default: return json(404, { error: 'Not found' })
       }
