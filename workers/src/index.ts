@@ -163,8 +163,8 @@ export default {
       architecture: 'AI OS — 12 供應商 1000+ 模型 + 500 MCP 工具 + 三級分潤',
       marketplace: { listings: 30, commission_levels: 3, model: 'platform 20% / creator 50% / referrers 30%' },
       capabilities: {
-        ai_providers: 12, ai_models: '1000+', mcp_tools: 500, platforms: 14, constraint_layers: 4, api_endpoints: 62,
-        providers_list: ['NVIDIA NIM', 'OpenRouter', 'Google Gemini', 'Groq', 'Together AI', 'Fireworks AI', 'DeepSeek', 'Mistral AI', 'Perplexity', 'Cohere', 'Anthropic Claude', 'Workers AI'],
+        ai_providers: 15, ai_models: '1000+', mcp_tools: 500, platforms: 14, constraint_layers: 4, api_endpoints: 62,
+        providers_list: ['NVIDIA NIM', 'OpenRouter', 'Google Gemini', 'Groq', 'Together AI', 'Fireworks AI', 'DeepSeek', 'Mistral AI', 'Perplexity', 'Cohere', 'Anthropic Claude', 'Workers AI', 'Replicate', 'Hugging Face', 'AI21 Labs'],
       },
       endpoints: {
         ai_supermarket: ['/api/ai/providers', '/api/ai/models', '/api/ai/models?provider=nvidia', '/api/ai/nim'],
@@ -196,6 +196,9 @@ export default {
       cohere:     { name: 'Cohere',        base_url: 'https://api.cohere.ai/compatibility/v1',                     env_key: 'COHERE_API_KEY',     model_count: 6,   special: 'RAG + 企業搜尋' },
       anthropic:  { name: 'Anthropic',     base_url: 'https://api.anthropic.com/v1',                               env_key: 'ANTHROPIC_API_KEY',  model_count: 6,   special: 'Claude Opus 4.6 — 最強推理' },
       cloudflare: { name: 'Workers AI',    base_url: 'workers-ai-built-in',                                        env_key: 'AI' as any,          model_count: 50,  special: '邊緣免費 AI' },
+      replicate:  { name: 'Replicate',    base_url: 'https://api.replicate.com/v1',                               env_key: 'REPLICATE_API_KEY',  model_count: 100, special: '開源模型部署平台' },
+      huggingface:{ name: 'Hugging Face', base_url: 'https://api-inference.huggingface.co/models',                 env_key: 'HUGGINGFACE_API_KEY',model_count: 200, special: '開源模型大本營' },
+      ai21:       { name: 'AI21 Labs',    base_url: 'https://api.ai21.com/studio/v1',                              env_key: 'AI21_API_KEY',       model_count: 8,   special: 'Jamba 長上下文' },
     }
 
     // ── /api/ai/providers — 全供應商狀態 ──
@@ -246,20 +249,78 @@ export default {
         if (env.ANTHROPIC_API_KEY) {
           allModels.push(
             { id: 'claude-opus-4-6', provider: 'anthropic', provider_name: 'Anthropic', owned_by: 'anthropic' },
+            { id: 'claude-opus-4-5-20250819', provider: 'anthropic', provider_name: 'Anthropic', owned_by: 'anthropic' },
             { id: 'claude-sonnet-4-5-20250929', provider: 'anthropic', provider_name: 'Anthropic', owned_by: 'anthropic' },
             { id: 'claude-haiku-4-5-20251001', provider: 'anthropic', provider_name: 'Anthropic', owned_by: 'anthropic' },
+            { id: 'claude-3-5-sonnet-20241022', provider: 'anthropic', provider_name: 'Anthropic', owned_by: 'anthropic' },
+            { id: 'claude-3-5-haiku-20241022', provider: 'anthropic', provider_name: 'Anthropic', owned_by: 'anthropic' },
           )
         }
       }
 
-      // 加入 Cloudflare Workers AI 模型
+      // 靜態模型列表 — API 回不了的供應商用靜態補齊
+      if (!provider || provider === 'together') {
+        if (env.TOGETHER_API_KEY) {
+          const togetherModels = [
+            'meta-llama/Meta-Llama-3.1-405B-Instruct-Turbo', 'meta-llama/Meta-Llama-3.1-70B-Instruct-Turbo', 'meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo',
+            'meta-llama/Llama-3.3-70B-Instruct-Turbo', 'meta-llama/Meta-Llama-3-70B-Instruct-Turbo', 'meta-llama/Meta-Llama-3-8B-Instruct-Turbo',
+            'mistralai/Mixtral-8x22B-Instruct-v0.1', 'mistralai/Mixtral-8x7B-Instruct-v0.1', 'mistralai/Mistral-7B-Instruct-v0.3',
+            'Qwen/Qwen2.5-72B-Instruct-Turbo', 'Qwen/Qwen2.5-7B-Instruct-Turbo', 'Qwen/QwQ-32B',
+            'deepseek-ai/DeepSeek-R1', 'deepseek-ai/DeepSeek-R1-Distill-Llama-70B', 'deepseek-ai/DeepSeek-V3',
+            'google/gemma-2-27b-it', 'google/gemma-2-9b-it', 'databricks/dbrx-instruct',
+            'microsoft/WizardLM-2-8x22B', 'NousResearch/Nous-Hermes-2-Mixtral-8x7B-DPO',
+            'togethercomputer/StripedHyena-Nous-7B', 'allenai/OLMo-7B-Instruct',
+            'black-forest-labs/FLUX.1-schnell', 'stabilityai/stable-diffusion-xl-base-1.0',
+          ]
+          togetherModels.forEach(id => allModels.push({ id, provider: 'together', provider_name: 'Together AI', owned_by: id.split('/')[0] }))
+        }
+      }
+
+      if (!provider || provider === 'mistral') {
+        if (env.MISTRAL_API_KEY) {
+          const mistralModels = [
+            'mistral-large-latest', 'mistral-small-latest', 'mistral-medium-latest',
+            'codestral-latest', 'magistral-medium-2506', 'magistral-small-2506',
+            'mistral-embed', 'mistral-moderation-latest', 'pixtral-large-latest',
+            'pixtral-12b-2409', 'open-mistral-nemo', 'open-codestral-mamba',
+          ]
+          mistralModels.forEach(id => allModels.push({ id, provider: 'mistral', provider_name: 'Mistral AI', owned_by: 'mistralai' }))
+        }
+      }
+
+      if (!provider || provider === 'perplexity') {
+        if (env.PERPLEXITY_API_KEY) {
+          const pplxModels = [
+            'sonar', 'sonar-pro', 'sonar-reasoning', 'sonar-reasoning-pro',
+            'sonar-deep-research', 'r1-1776',
+            'sonar-chat', 'sonar-medium-chat',
+          ]
+          pplxModels.forEach(id => allModels.push({ id, provider: 'perplexity', provider_name: 'Perplexity', owned_by: 'perplexity' }))
+        }
+      }
+
+      // 加入 Cloudflare Workers AI 模型（50+ 免費）
       if (!provider || provider === 'cloudflare') {
-        allModels.push(
-          { id: '@cf/meta/llama-3.1-8b-instruct', provider: 'cloudflare', provider_name: 'Workers AI', owned_by: 'meta' },
-          { id: '@cf/mistral/mistral-7b-instruct-v0.2', provider: 'cloudflare', provider_name: 'Workers AI', owned_by: 'mistral' },
-          { id: '@cf/qwen/qwen1.5-14b-chat-awq', provider: 'cloudflare', provider_name: 'Workers AI', owned_by: 'qwen' },
-          { id: '@cf/google/gemma-7b-it', provider: 'cloudflare', provider_name: 'Workers AI', owned_by: 'google' },
-        )
+        const cfModels = [
+          '@cf/meta/llama-3.1-8b-instruct', '@cf/meta/llama-3.1-70b-instruct', '@cf/meta/llama-3-8b-instruct',
+          '@cf/meta/llama-3.2-3b-instruct', '@cf/meta/llama-3.2-1b-instruct', '@cf/meta/llama-2-7b-chat-fp16',
+          '@cf/mistral/mistral-7b-instruct-v0.2', '@cf/mistral/mistral-7b-instruct-v0.1',
+          '@cf/google/gemma-7b-it', '@cf/google/gemma-2b-it',
+          '@cf/qwen/qwen1.5-14b-chat-awq', '@cf/qwen/qwen1.5-7b-chat-awq', '@cf/qwen/qwen1.5-1.8b-chat',
+          '@cf/microsoft/phi-2', '@cf/microsoft/phi-3-mini-4k-instruct',
+          '@cf/deepseek-ai/deepseek-math-7b-instruct', '@cf/deepseek-ai/deepseek-r1-distill-qwen-32b',
+          '@cf/tiiuae/falcon-7b-instruct', '@cf/thebloke/discolm-german-7b-v1-awq',
+          '@cf/tinyllama/tinyllama-1.1b-chat-v1.0', '@cf/openchat/openchat-3.5-0106',
+          '@cf/defog/sqlcoder-7b-2', '@cf/nexusflow/starling-lm-7b-beta',
+          '@cf/baai/bge-base-en-v1.5', '@cf/baai/bge-large-en-v1.5', '@cf/baai/bge-small-en-v1.5',
+          '@cf/huggingface/distilbert-sst-2-int8', '@cf/microsoft/resnet-50',
+          '@cf/stabilityai/stable-diffusion-xl-base-1.0', '@cf/bytedance/stable-diffusion-xl-lightning',
+          '@cf/lykon/dreamshaper-8-lcm', '@cf/openai/whisper', '@cf/openai/whisper-tiny-en',
+        ]
+        cfModels.forEach(id => {
+          const owner = id.replace('@cf/', '').split('/')[0]
+          allModels.push({ id, provider: 'cloudflare', provider_name: 'Workers AI', owned_by: owner })
+        })
       }
 
       // 統計

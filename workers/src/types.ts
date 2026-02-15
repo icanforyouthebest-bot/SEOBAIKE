@@ -88,6 +88,11 @@ export interface Env {
   // Resend
   RESEND_API_KEY: string
 
+  // 額外 AI 供應商
+  REPLICATE_API_KEY: string        // Replicate
+  HUGGINGFACE_API_KEY: string      // Hugging Face
+  AI21_API_KEY: string             // AI21 Labs
+
   // Composio MCP
   COMPOSIO_API_KEY: string
 
