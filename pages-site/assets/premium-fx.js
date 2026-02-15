@@ -376,4 +376,265 @@
     })();
   }
 
+
+  /* ═══════════════════════════════════════════════════════════
+     PAGE TRANSITION FX — 頁面過場效果 JS（超越 Framer）
+     ═══════════════════════════════════════════════════════════ */
+
+  /* ── 1. Page Loader — 頁面載入動畫 ── */
+  if (!isMobile && window.innerWidth > 768 && !prefersReducedMotion) {
+    (function pageLoader() {
+      var loader = document.createElement('div');
+      loader.className = 'page-loader';
+
+      var logo = document.createElement('div');
+      logo.className = 'page-loader__logo';
+      logo.textContent = 'SEOBAIKE';
+
+      var barTrack = document.createElement('div');
+      barTrack.className = 'page-loader__bar-track';
+
+      var barFill = document.createElement('div');
+      barFill.className = 'page-loader__bar-fill';
+
+      barTrack.appendChild(barFill);
+      loader.appendChild(logo);
+      loader.appendChild(barTrack);
+
+      // 在 body 最前面插入，確保覆蓋一切
+      document.body.insertBefore(loader, document.body.firstChild);
+
+      function dismissLoader() {
+        setTimeout(function() {
+          loader.classList.add('fade-out');
+          // 動畫結束後移除 DOM
+          setTimeout(function() {
+            if (loader.parentNode) loader.parentNode.removeChild(loader);
+          }, 450);
+        }, 300);
+      }
+
+      // 頁面完全載入後觸發
+      if (document.readyState === 'complete') {
+        dismissLoader();
+      } else {
+        window.addEventListener('load', dismissLoader);
+      }
+    })();
+  }
+
+  /* ── 2. Smooth Page Transitions — 頁面間平滑過渡 ── */
+  if (!isMobile && window.innerWidth > 768 && !prefersReducedMotion) {
+    (function smoothPageTransitions() {
+      // 建立過場覆蓋層
+      var transition = document.createElement('div');
+      transition.className = 'page-transition';
+      document.body.appendChild(transition);
+
+      // 判斷是否為內部連結
+      function isInternalLink(href) {
+        if (!href) return false;
+        // 排除 # 錨點、javascript:、mailto:、tel:
+        if (href.startsWith('#') || href.startsWith('javascript:') ||
+            href.startsWith('mailto:') || href.startsWith('tel:')) return false;
+        // 排除新分頁目標
+        try {
+          var url = new URL(href, window.location.origin);
+          return url.origin === window.location.origin;
+        } catch (e) {
+          // 相對路徑算內部連結
+          return href.startsWith('/') || href.startsWith('./') || href.startsWith('../');
+        }
+      }
+
+      document.addEventListener('click', function(e) {
+        var link = e.target.closest('a');
+        if (!link) return;
+
+        var href = link.getAttribute('href');
+        if (!isInternalLink(href)) return;
+
+        // 排除帶有 target="_blank" 的連結
+        if (link.getAttribute('target') === '_blank') return;
+
+        // 排除帶有 download 屬性的連結
+        if (link.hasAttribute('download')) return;
+
+        e.preventDefault();
+
+        // 播放滑入動畫
+        transition.classList.remove('slide-out');
+        transition.classList.add('slide-in');
+
+        // 動畫完成後跳轉
+        setTimeout(function() {
+          window.location.href = href;
+        }, 450);
+      });
+
+      // 頁面回來時（瀏覽器回上頁）播放滑出動畫
+      window.addEventListener('pageshow', function(e) {
+        if (e.persisted) {
+          transition.classList.remove('slide-in');
+          transition.classList.add('slide-out');
+          setTimeout(function() {
+            transition.classList.remove('slide-out');
+          }, 450);
+        }
+      });
+    })();
+  }
+
+  /* ── 3. Parallax Scroll — 視差滾動效果 ── */
+  if (!isMobile && window.innerWidth > 768 && !prefersReducedMotion) {
+    (function parallaxScroll() {
+      var parallaxSections = document.querySelectorAll('.parallax-section');
+      if (parallaxSections.length === 0) return;
+
+      var ticking = false;
+
+      function updateParallax() {
+        var scrollY = window.scrollY;
+
+        parallaxSections.forEach(function(section) {
+          var rect = section.getBoundingClientRect();
+          var speed = parseFloat(section.dataset.parallaxSpeed) || 0.3;
+
+          // 只在視窗可見時計算
+          if (rect.bottom < 0 || rect.top > window.innerHeight) return;
+
+          var sectionTop = rect.top + scrollY;
+          var offset = (scrollY - sectionTop) * speed;
+
+          // 找到 inner 元素或直接套用到 section
+          var inner = section.querySelector('.parallax-section__inner');
+          if (inner) {
+            inner.style.transform = 'translateY(' + offset + 'px)';
+          } else {
+            section.style.backgroundPositionY = (offset * 0.5) + 'px';
+          }
+        });
+
+        ticking = false;
+      }
+
+      window.addEventListener('scroll', function() {
+        if (!ticking) {
+          requestAnimationFrame(updateParallax);
+          ticking = true;
+        }
+      }, { passive: true });
+
+      // 初始執行一次
+      updateParallax();
+    })();
+  }
+
+  /* ── 4. Text Reveal on Scroll — 文字滾動顯現 ── */
+  if (!isMobile && window.innerWidth > 768 && !prefersReducedMotion) {
+    (function textRevealOnScroll() {
+      var textRevealEls = document.querySelectorAll('.text-reveal');
+      if (textRevealEls.length === 0) return;
+
+      var revealObserver = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            // 加入 delay 讓多個元素錯開
+            var delay = parseInt(entry.target.dataset.revealDelay, 10) || 0;
+            setTimeout(function() {
+              entry.target.classList.add('revealed');
+            }, delay);
+            // 顯現後停止觀察
+            revealObserver.unobserve(entry.target);
+          }
+        });
+      }, {
+        threshold: 0.15,
+        rootMargin: '0px 0px -60px 0px'
+      });
+
+      textRevealEls.forEach(function(el) {
+        revealObserver.observe(el);
+      });
+    })();
+  }
+
+  /* ── 5. Morph Background — 流體背景 ── */
+  if (!isMobile && window.innerWidth > 768 && !prefersReducedMotion) {
+    (function morphBackground() {
+      var morphContainers = document.querySelectorAll('.morph-bg');
+      if (morphContainers.length === 0) return;
+
+      morphContainers.forEach(function(container) {
+        // 檢查是否已有 blob（避免重複建立）
+        if (container.querySelector('.morph-bg__blob')) return;
+
+        // 建立 3 個模糊圓球
+        for (var i = 1; i <= 3; i++) {
+          var blob = document.createElement('div');
+          blob.className = 'morph-bg__blob morph-bg__blob--' + i;
+          container.insertBefore(blob, container.firstChild);
+        }
+      });
+    })();
+  }
+
+  /* ── 6. Deep 3D Card with Reflection — 加強版 3D 卡片 ── */
+  if (!isMobile && window.innerWidth > 768 && !prefersReducedMotion) {
+    (function deep3DCards() {
+      var deepCards = document.querySelectorAll('.hover-3d-deep');
+      if (deepCards.length === 0) return;
+
+      deepCards.forEach(function(card) {
+        // 建立反光層（跟隨滑鼠的高光）
+        var reflection = document.createElement('div');
+        reflection.style.cssText = [
+          'position: absolute',
+          'inset: 0',
+          'border-radius: inherit',
+          'pointer-events: none',
+          'z-index: 3',
+          'opacity: 0',
+          'transition: opacity 0.3s ease',
+          'background: radial-gradient(circle at 50% 50%, rgba(255,255,255,0.12) 0%, transparent 60%)'
+        ].join(';');
+        card.appendChild(reflection);
+
+        card.addEventListener('mousemove', function(e) {
+          var rect = card.getBoundingClientRect();
+          var x = e.clientX - rect.left;
+          var y = e.clientY - rect.top;
+          var centerX = rect.width / 2;
+          var centerY = rect.height / 2;
+
+          // 旋轉角度（比 card-3d 更大：±8deg）
+          var rotateX = ((y - centerY) / centerY) * -8;
+          var rotateY = ((x - centerX) / centerX) * 8;
+
+          // 動態陰影方向
+          var shadowX = ((x - centerX) / centerX) * -15;
+          var shadowY = ((y - centerY) / centerY) * -15;
+
+          card.style.transform = 'perspective(600px) rotateX(' + rotateX + 'deg) rotateY(' + rotateY + 'deg) translateZ(10px)';
+          card.style.boxShadow =
+            shadowX + 'px ' + (shadowY + 25) + 'px 80px rgba(0,0,0,0.5), ' +
+            '0 0 50px rgba(232,133,12,0.08), ' +
+            shadowX * 0.3 + 'px ' + shadowY * 0.3 + 'px 30px rgba(232,133,12,0.05)';
+
+          // 反光高光跟隨滑鼠
+          var pctX = (x / rect.width) * 100;
+          var pctY = (y / rect.height) * 100;
+          reflection.style.background = 'radial-gradient(circle at ' + pctX + '% ' + pctY + '%, rgba(255,255,255,0.15) 0%, transparent 55%)';
+          reflection.style.opacity = '1';
+        });
+
+        card.addEventListener('mouseleave', function() {
+          card.style.transform = '';
+          card.style.boxShadow = '';
+          reflection.style.opacity = '0';
+        });
+      });
+    })();
+  }
+
 })();

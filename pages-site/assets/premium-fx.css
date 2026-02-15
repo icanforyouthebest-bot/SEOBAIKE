@@ -642,6 +642,297 @@ body { animation: pageIn 0.6s ease-out; }
   .heat-wave::after { animation: none; }
 }
 
+/* ═══════════════════════════════════════════════════════════
+   PAGE TRANSITION FX — 頁面過場效果（超越 Framer）
+   ═══════════════════════════════════════════════════════════ */
+
+/* ── 1. Page Loader — 全屏載入畫面 ── */
+@keyframes loaderFadeOut {
+  0%   { opacity: 1; }
+  100% { opacity: 0; visibility: hidden; }
+}
+@keyframes loaderLogoGlow {
+  0%, 100% {
+    text-shadow:
+      0 0 20px rgba(232,133,12,0.6),
+      0 0 40px rgba(245,166,35,0.3),
+      0 0 80px rgba(255,215,0,0.15);
+  }
+  50% {
+    text-shadow:
+      0 0 30px rgba(255,215,0,0.8),
+      0 0 60px rgba(232,133,12,0.5),
+      0 0 100px rgba(245,166,35,0.25);
+  }
+}
+@keyframes loaderProgress {
+  0%   { width: 0%; }
+  20%  { width: 15%; }
+  50%  { width: 45%; }
+  80%  { width: 80%; }
+  100% { width: 100%; }
+}
+.page-loader {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  background: #06060f;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.4s ease, visibility 0.4s ease;
+}
+.page-loader.fade-out {
+  animation: loaderFadeOut 0.4s ease forwards;
+}
+.page-loader__logo {
+  font-family: 'Inter', 'Helvetica Neue', sans-serif;
+  font-size: 2.5rem;
+  font-weight: 800;
+  letter-spacing: 0.15em;
+  color: var(--gold-100, #ffd700);
+  animation: loaderLogoGlow 2s ease-in-out infinite;
+  background: linear-gradient(
+    135deg,
+    var(--gold-100, #ffd700) 0%,
+    var(--gold-200, #f5a623) 40%,
+    var(--gold-300, #e8850c) 70%,
+    var(--gold-100, #ffd700) 100%
+  );
+  background-size: 300% 300%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 2rem;
+}
+.page-loader__bar-track {
+  width: 200px;
+  height: 3px;
+  background: rgba(255,255,255,0.08);
+  border-radius: 2px;
+  overflow: hidden;
+  position: absolute;
+  bottom: 15%;
+}
+.page-loader__bar-fill {
+  height: 100%;
+  border-radius: 2px;
+  background: linear-gradient(
+    90deg,
+    var(--gold-300, #e8850c),
+    var(--gold-200, #f5a623),
+    var(--gold-100, #ffd700)
+  );
+  animation: loaderProgress 1.2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  box-shadow: 0 0 12px rgba(232,133,12,0.5);
+}
+
+/* ── 2. Page Transition — 頁面切換過場 ── */
+@keyframes transitionSlideIn {
+  0%   { transform: translateX(100%); }
+  100% { transform: translateX(0); }
+}
+@keyframes transitionSlideOut {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-100%); }
+}
+.page-transition {
+  position: fixed;
+  inset: 0;
+  z-index: 99998;
+  background: linear-gradient(
+    135deg,
+    var(--gold-300, #e8850c) 0%,
+    #3d1500 40%,
+    #06060f 100%
+  );
+  transform: translateX(100%);
+  pointer-events: none;
+}
+.page-transition.slide-in {
+  animation: transitionSlideIn 0.4s cubic-bezier(0.65, 0, 0.35, 1) forwards;
+}
+.page-transition.slide-out {
+  animation: transitionSlideOut 0.4s cubic-bezier(0.65, 0, 0.35, 1) forwards;
+}
+/* 過場中心裝飾線 */
+.page-transition::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 10%;
+  right: 10%;
+  height: 1px;
+  transform: translateY(-50%);
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(232,133,12,0.4) 20%,
+    rgba(255,215,0,0.6) 50%,
+    rgba(232,133,12,0.4) 80%,
+    transparent 100%
+  );
+  box-shadow: 0 0 20px rgba(232,133,12,0.3);
+}
+
+/* ── 3. Parallax Section — 視差滾動 ── */
+.parallax-section {
+  position: relative;
+  overflow: hidden;
+  will-change: transform;
+}
+.parallax-section[data-parallax-bg] {
+  background-attachment: fixed;
+  background-position: center center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+.parallax-section__inner {
+  position: relative;
+  z-index: 1;
+  will-change: transform;
+  transition: transform 0.05s linear;
+}
+
+/* ── 4. Text Reveal — 文字逐字顯現 ── */
+@keyframes textRevealClip {
+  0%   { clip-path: inset(0 100% 0 0); }
+  100% { clip-path: inset(0 0% 0 0); }
+}
+.text-reveal {
+  clip-path: inset(0 100% 0 0);
+  transition: clip-path 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: clip-path;
+}
+.text-reveal.revealed {
+  clip-path: inset(0 0% 0 0);
+}
+/* 底線金色掃過效果 */
+.text-reveal::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    var(--gold-300, #e8850c),
+    var(--gold-100, #ffd700),
+    var(--gold-200, #f5a623)
+  );
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 1s cubic-bezier(0.16, 1, 0.3, 1) 0.3s;
+}
+.text-reveal.revealed::after {
+  transform: scaleX(1);
+}
+
+/* ── 5. Morph Background — 流體背景動畫 ── */
+@keyframes morphBlob1 {
+  0%   { transform: translate(0%, 0%) scale(1); border-radius: 40% 60% 70% 30% / 50% 30% 70% 50%; }
+  25%  { transform: translate(15%, -20%) scale(1.1); border-radius: 60% 40% 30% 70% / 30% 60% 40% 70%; }
+  50%  { transform: translate(-10%, 15%) scale(0.9); border-radius: 30% 70% 50% 50% / 60% 40% 60% 40%; }
+  75%  { transform: translate(20%, 10%) scale(1.05); border-radius: 50% 50% 40% 60% / 40% 70% 30% 60%; }
+  100% { transform: translate(0%, 0%) scale(1); border-radius: 40% 60% 70% 30% / 50% 30% 70% 50%; }
+}
+@keyframes morphBlob2 {
+  0%   { transform: translate(0%, 0%) scale(1); border-radius: 50% 50% 40% 60% / 40% 60% 50% 50%; }
+  25%  { transform: translate(-20%, 10%) scale(1.15); border-radius: 70% 30% 50% 50% / 50% 40% 60% 50%; }
+  50%  { transform: translate(10%, -15%) scale(0.95); border-radius: 40% 60% 60% 40% / 60% 50% 50% 40%; }
+  75%  { transform: translate(-15%, -10%) scale(1.1); border-radius: 60% 40% 40% 60% / 30% 70% 40% 60%; }
+  100% { transform: translate(0%, 0%) scale(1); border-radius: 50% 50% 40% 60% / 40% 60% 50% 50%; }
+}
+@keyframes morphBlob3 {
+  0%   { transform: translate(0%, 0%) scale(1); border-radius: 60% 40% 50% 50% / 50% 50% 40% 60%; }
+  25%  { transform: translate(10%, 20%) scale(0.9); border-radius: 30% 70% 60% 40% / 60% 30% 70% 40%; }
+  50%  { transform: translate(-15%, 5%) scale(1.1); border-radius: 50% 50% 30% 70% / 40% 60% 50% 50%; }
+  75%  { transform: translate(5%, -15%) scale(1); border-radius: 70% 30% 40% 60% / 50% 50% 60% 40%; }
+  100% { transform: translate(0%, 0%) scale(1); border-radius: 60% 40% 50% 50% / 50% 50% 40% 60%; }
+}
+.morph-bg {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+.morph-bg__blob {
+  position: absolute;
+  filter: blur(80px);
+  opacity: 0.35;
+  pointer-events: none;
+  will-change: transform, border-radius;
+}
+.morph-bg__blob--1 {
+  width: 500px;
+  height: 500px;
+  top: -15%;
+  left: -10%;
+  background: radial-gradient(circle, var(--gold-200, #f5a623) 0%, rgba(245,166,35,0) 70%);
+  animation: morphBlob1 18s ease-in-out infinite;
+}
+.morph-bg__blob--2 {
+  width: 450px;
+  height: 450px;
+  top: 30%;
+  right: -10%;
+  background: radial-gradient(circle, var(--gold-300, #e8850c) 0%, rgba(232,133,12,0) 70%);
+  animation: morphBlob2 22s ease-in-out infinite;
+}
+.morph-bg__blob--3 {
+  width: 400px;
+  height: 400px;
+  bottom: -10%;
+  left: 25%;
+  background: radial-gradient(circle, #8b0000 0%, rgba(139,0,0,0) 70%);
+  animation: morphBlob3 20s ease-in-out infinite;
+}
+
+/* ── 6. Deep 3D Card with Reflection — 深度 3D 卡片 ── */
+.hover-3d-deep {
+  transform-style: preserve-3d;
+  perspective: 600px;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s ease;
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+.hover-3d-deep::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(
+    135deg,
+    rgba(255,255,255,0.15) 0%,
+    rgba(255,255,255,0.03) 40%,
+    transparent 60%
+  );
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  pointer-events: none;
+  z-index: 2;
+}
+.hover-3d-deep:hover::before {
+  opacity: 1;
+}
+.hover-3d-deep:hover {
+  box-shadow:
+    0 25px 80px rgba(0,0,0,0.5),
+    0 0 50px rgba(232,133,12,0.1),
+    0 0 100px rgba(232,133,12,0.05);
+}
+
+/* ── Page Transition FX: Mobile disable ── */
+@media (max-width: 768px) {
+  .page-loader { display: none; }
+  .page-transition { display: none; }
+  .parallax-section[data-parallax-bg] { background-attachment: scroll; }
+  .morph-bg__blob { display: none; }
+  .hover-3d-deep:hover { transform: none; box-shadow: none; }
+}
+
 /* ── Volcanic FX: Reduced motion ── */
 @media (prefers-reduced-motion: reduce) {
   .eruption-bg::before,
@@ -654,4 +945,16 @@ body { animation: pageIn 0.6s ease-out; }
   .seismic-shake:hover { animation: none !important; }
   .heat-wave::after { animation: none !important; }
   .volcanic-ripple { display: none !important; }
+}
+
+/* ── Page Transition FX: Reduced motion ── */
+@media (prefers-reduced-motion: reduce) {
+  .page-loader { display: none !important; }
+  .page-loader__logo { animation: none !important; }
+  .page-loader__bar-fill { animation: none !important; width: 100%; }
+  .page-transition { display: none !important; }
+  .text-reveal { clip-path: none !important; }
+  .text-reveal.revealed::after { transition: none !important; }
+  .morph-bg__blob { animation: none !important; }
+  .hover-3d-deep:hover { transform: none !important; }
 }
