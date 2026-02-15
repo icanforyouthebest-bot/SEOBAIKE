@@ -50,12 +50,23 @@
       z-index: 100;
     }
     .nav-logo {
-      font-size: 1.35rem;
-      font-weight: 800;
-      letter-spacing: -0.5px;
+      font-size: 1.5rem;
+      font-weight: 900;
+      letter-spacing: -1px;
       color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 8px;
     }
-    .nav-logo span { color: var(--orange); }
+    .nav-logo .seo {
+      background: linear-gradient(135deg, #e8850c, #f5a623, #ffd700);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .nav-logo .baike {
+      color: #ffffff;
+    }
     .nav-links { display: flex; gap: 28px; list-style: none; }
     .nav-links a {
       color: var(--text-muted);
@@ -107,11 +118,23 @@
     }
     .login-header .logo-text {
       font-size: 2rem;
-      font-weight: 800;
+      font-weight: 900;
       letter-spacing: -1px;
       margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
     }
-    .login-header .logo-text span { color: var(--orange); }
+    .login-header .logo-text .seo {
+      background: linear-gradient(135deg, #e8850c, #f5a623, #ffd700);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .login-header .logo-text .baike {
+      color: #ffffff;
+    }
     .login-header p {
       color: var(--text-muted);
       font-size: 0.95rem;
@@ -557,7 +580,7 @@
 
   <!-- Navigation -->
   <nav>
-    <div class="nav-logo">SEO<span>BAIKE</span></div>
+    <div class="nav-logo"><img src="/favicon.svg" alt="S" width="28" height="28" style="border-radius:6px;"><span class="seo">SEO</span><span class="baike">BAIKE</span></div>
     <ul class="nav-links" id="navLinks">
       <li><a href="/">首頁</a></li>
       <li><a href="/features">功能</a></li>
@@ -587,7 +610,7 @@
   <main>
     <div class="login-card">
       <div class="login-header">
-        <div class="logo-text">SEO<span>BAIKE</span></div>
+        <div class="logo-text"><img src="/favicon.svg" alt="S" width="36" height="36" style="border-radius:8px;"><span class="seo">SEO</span><span class="baike">BAIKE</span></div>
         <p>登入您的 AI 約束推理平台帳號</p>
       </div>
 

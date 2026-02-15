@@ -14,7 +14,10 @@ a:hover{text-decoration:underline}
 
 /* Nav */
 .nav{background:rgba(10,10,26,0.95);backdrop-filter:blur(10px);border-bottom:1px solid #222;padding:12px 30px;display:flex;align-items:center;gap:16px;position:sticky;top:0;z-index:100}
-.nav .logo{font-size:20px;font-weight:800;color:#e8850c}
+.nav .logo{font-size:20px;font-weight:900;letter-spacing:-1px;color:#fff;display:flex;align-items:center;gap:8px}
+.nav .logo .seo{background:linear-gradient(135deg,#e8850c,#f5a623,#ffd700);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.nav .logo .baike{color:#fff}
+.nav .logo img{border-radius:6px}
 .nav a{color:#999;font-size:14px;padding:6px 12px;border-radius:8px;transition:all 0.2s}
 .nav a:hover,.nav a.active{color:#fff;background:#1a1a2e;text-decoration:none}
 .nav .earn{background:linear-gradient(135deg,#e8850c,#cc785c);color:#fff;font-weight:700;padding:8px 16px;border-radius:20px;font-size:13px}
@@ -342,7 +345,7 @@ a:hover{text-decoration:underline}
 <body>
 
 <nav class="nav">
-  <span class="logo">SEOBAIKE</span>
+  <span class="logo"><img src="/favicon.svg" alt="S" width="26" height="26"><span class="seo">SEO</span><span class="baike">BAIKE</span></span>
   <a href="/">首頁</a>
   <a href="/features">功能</a>
   <a href="/marketplace" class="active">市集</a>

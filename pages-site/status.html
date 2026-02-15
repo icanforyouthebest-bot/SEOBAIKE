@@ -75,8 +75,17 @@
       letter-spacing: -1px;
       color: #fff;
       margin-bottom: 4px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
     }
-    .access-gate-logo span { color: var(--orange); }
+    .access-gate-logo .seo {
+      background: linear-gradient(135deg, #e8850c, #f5a623, #ffd700);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .access-gate-logo .baike { color: #ffffff; }
     .access-gate h2 {
       font-size: 1.6rem;
       font-weight: 800;
@@ -315,12 +324,21 @@
       gap: 16px;
     }
     .header-logo {
-      font-size: 1.3rem;
+      font-size: 1.5rem;
       font-weight: 900;
       color: #fff;
-      letter-spacing: -0.5px;
+      letter-spacing: -1px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
     }
-    .header-logo span { color: var(--orange); }
+    .header-logo .seo {
+      background: linear-gradient(135deg, #e8850c, #f5a623, #ffd700);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .header-logo .baike { color: #ffffff; }
     .header-title {
       font-size: 1.1rem;
       font-weight: 700;
@@ -1116,7 +1134,7 @@
       <div class="scan-line"></div>
       <div class="bio-icon-inner" id="bioIconInner">&#128274;</div>
     </div>
-    <div class="access-gate-logo">SEO<span>BAIKE</span></div>
+    <div class="access-gate-logo"><img src="/favicon.svg" alt="S" width="44" height="44" style="border-radius:10px;"><span class="seo">SEO</span><span class="baike">BAIKE</span></div>
     <h2>指揮中心</h2>
     <p>僅限創辦人存取</p>
 
@@ -1163,7 +1181,7 @@
     <!-- Header -->
     <div class="dashboard-header">
       <div class="header-left">
-        <a href="/" class="header-logo" style="text-decoration:none;">SEO<span>BAIKE</span></a>
+        <a href="/" class="header-logo" style="text-decoration:none;"><img src="/favicon.svg" alt="S" width="28" height="28" style="border-radius:6px;"><span class="seo">SEO</span><span class="baike">BAIKE</span></a>
         <div class="header-title">指揮中心</div>
       </div>
       <div class="header-right">

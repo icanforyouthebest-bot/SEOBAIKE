@@ -89,13 +89,22 @@
     }
 
     .navbar-brand {
-      font-size: 1.4rem;
-      font-weight: 800;
+      font-size: 1.5rem;
+      font-weight: 900;
       color: #fff;
-      letter-spacing: -0.5px;
+      letter-spacing: -1px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
     }
 
-    .navbar-brand span { color: var(--orange); }
+    .navbar-brand .seo {
+      background: linear-gradient(135deg, #e8850c, #f5a623, #ffd700);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .navbar-brand .baike { color: #ffffff; }
 
     .navbar-links {
       display: flex;
@@ -672,9 +681,20 @@
       font-size: 1.2rem;
       color: #fff;
       margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 900;
+      letter-spacing: -1px;
     }
 
-    .footer-brand h3 span { color: var(--orange); }
+    .footer-brand h3 .seo {
+      background: linear-gradient(135deg, #e8850c, #f5a623, #ffd700);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .footer-brand h3 .baike { color: #ffffff; }
 
     .footer-brand p {
       font-size: 0.85rem;
@@ -1302,7 +1322,7 @@
 
   <!-- NAVBAR -->
   <nav class="navbar">
-    <a href="/" class="navbar-brand">SEO<span>BAIKE</span></a>
+    <a href="/" class="navbar-brand"><img src="/favicon.svg" alt="S" width="28" height="28" style="border-radius:6px;"><span class="seo">SEO</span><span class="baike">BAIKE</span></a>
     <div class="navbar-links" id="navLinks">
       <a href="/">首頁</a>
       <a href="/features">功能</a>
@@ -1721,7 +1741,7 @@
   <footer class="footer">
     <div class="footer-grid">
       <div class="footer-brand">
-        <h3>SEO<span>BAIKE</span></h3>
+        <h3><img src="/favicon.svg" alt="S" width="22" height="22" style="border-radius:5px;"><span class="seo">SEO</span><span class="baike">BAIKE</span></h3>
         <p>小路光有限公司（統編 60475510）<br>AI 平台 — AI 界的 App Store</p>
       </div>
       <div class="footer-col">

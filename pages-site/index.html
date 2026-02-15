@@ -138,12 +138,23 @@
       transition: background 0.3s, border-color 0.3s;
     }
     .nav-logo {
-      font-size: 1.4rem;
-      font-weight: 800;
-      letter-spacing: -0.5px;
+      font-size: 1.5rem;
+      font-weight: 900;
+      letter-spacing: -1px;
       color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 8px;
     }
-    .nav-logo span { color: var(--orange); }
+    .nav-logo .seo {
+      background: linear-gradient(135deg, #e8850c, #f5a623, #ffd700);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .nav-logo .baike {
+      color: #ffffff;
+    }
     .nav-links { display: flex; gap: 28px; list-style: none; align-items: center; }
     .nav-links a {
       color: var(--text-muted);
@@ -1514,7 +1525,7 @@
 
   <!-- ═══════════ Navigation ═══════════ -->
   <nav>
-    <div class="nav-logo">SEO<span>BAIKE</span></div>
+    <div class="nav-logo"><img src="/favicon.svg" alt="S" width="28" height="28" style="border-radius:6px;"><span class="seo">SEO</span><span class="baike">BAIKE</span></div>
     <ul class="nav-links" id="navLinks">
       <li><a href="/" data-i18n="nav.home">首頁</a></li>
       <li><a href="/features" data-i18n="nav.features">功能</a></li>
@@ -1966,7 +1977,7 @@
     <div class="container">
       <div class="footer-grid">
         <div class="footer-brand">
-          <div class="nav-logo" style="font-size:1.4rem;margin-bottom:16px;">SEO<span>BAIKE</span></div>
+          <div class="nav-logo" style="font-size:1.4rem;margin-bottom:16px;"><img src="/favicon.svg" alt="S" width="24" height="24" style="border-radius:5px;"><span class="seo">SEO</span><span class="baike">BAIKE</span></div>
           <p>
             AI 驅動的全球市集。你的產品，全世界都能買到。<br>
             由小路光有限公司（統編 60475510）開發與維運。
