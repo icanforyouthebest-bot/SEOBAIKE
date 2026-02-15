@@ -31,7 +31,7 @@ class TestKYC(unittest.TestCase):
     def test_identity_missing(self):
         identity = CustomerIdentity(
             name='',
-            idNumber='A123456789',
+            idNumber='A000000000',
             birthDate='1990-01-01',
             nationality='TW',
             address='台北市',

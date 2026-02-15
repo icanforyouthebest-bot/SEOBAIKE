@@ -1,14 +1,14 @@
 {
   "metadata": {
-    "generated_at": "2026-02-15T14:45:28.055757",
+    "generated_at": "2026-02-15T23:57:08.602851",
     "total_tasks": 100,
     "total_legions": 15,
     "assigner": "SEOBAIKE assign_tasks.py",
     "patent": "TW-115100981"
   },
   "legion_summary": {
-    "NVIDIA": {
-      "total_assigned": 21,
+    "SEOBAIKE Alpha": {
+      "total_assigned": 16,
       "strength": "高效能推論與安全防護",
       "specialties": [
         "推論",
@@ -17,11 +17,11 @@
         "語音",
         "GPU加速"
       ],
-      "high_priority": 4,
-      "api_tasks": 20
+      "high_priority": 5,
+      "api_tasks": 15
     },
-    "OpenAI": {
-      "total_assigned": 8,
+    "SEOBAIKE Beta": {
+      "total_assigned": 7,
       "strength": "通用型語言理解與生成",
       "specialties": [
         "文本生成",
@@ -32,19 +32,19 @@
       "high_priority": 3,
       "api_tasks": 6
     },
-    "Perplexity": {
-      "total_assigned": 4,
+    "SEOBAIKE Gamma": {
+      "total_assigned": 9,
       "strength": "即時網路搜尋與資訊整合",
       "specialties": [
         "搜尋",
         "即時資訊",
         "研究"
       ],
-      "high_priority": 1,
-      "api_tasks": 2
+      "high_priority": 4,
+      "api_tasks": 8
     },
-    "Google": {
-      "total_assigned": 9,
+    "SEOBAIKE Delta": {
+      "total_assigned": 10,
       "strength": "多模態理解與全球化翻譯",
       "specialties": [
         "翻譯",
@@ -53,43 +53,43 @@
         "分析"
       ],
       "high_priority": 2,
-      "api_tasks": 5
+      "api_tasks": 3
     },
-    "DeepSeek": {
-      "total_assigned": 4,
+    "SEOBAIKE Epsilon": {
+      "total_assigned": 12,
       "strength": "深度推理與程式碼生成",
       "specialties": [
         "程式碼",
         "數學",
         "推理"
       ],
-      "high_priority": 0,
-      "api_tasks": 4
+      "high_priority": 1,
+      "api_tasks": 12
     },
-    "Mistral": {
-      "total_assigned": 8,
-      "strength": "高效輕量模型與歐洲合規",
+    "SEOBAIKE Zeta": {
+      "total_assigned": 4,
+      "strength": "高效輕量模型與多語合規",
       "specialties": [
         "程式碼生成",
         "歐洲語言",
         "效率"
       ],
-      "high_priority": 3,
-      "api_tasks": 8
+      "high_priority": 2,
+      "api_tasks": 2
     },
-    "Groq": {
-      "total_assigned": 6,
+    "SEOBAIKE Eta": {
+      "total_assigned": 8,
       "strength": "超低延遲推論加速",
       "specialties": [
         "高速推論",
         "即時回應",
         "低延遲"
       ],
-      "high_priority": 4,
-      "api_tasks": 5
+      "high_priority": 3,
+      "api_tasks": 8
     },
-    "Cohere": {
-      "total_assigned": 5,
+    "SEOBAIKE Theta": {
+      "total_assigned": 6,
       "strength": "企業級搜尋與知識檢索",
       "specialties": [
         "企業搜尋",
@@ -97,20 +97,20 @@
         "嵌入"
       ],
       "high_priority": 1,
-      "api_tasks": 5
+      "api_tasks": 6
     },
-    "Together": {
-      "total_assigned": 5,
+    "SEOBAIKE Iota": {
+      "total_assigned": 8,
       "strength": "開源模型託管與微調",
       "specialties": [
         "開源模型",
         "微調",
         "推論"
       ],
-      "high_priority": 1,
-      "api_tasks": 5
+      "high_priority": 4,
+      "api_tasks": 8
     },
-    "HuggingFace": {
+    "SEOBAIKE Kappa": {
       "total_assigned": 3,
       "strength": "全球最大模型生態系統",
       "specialties": [
@@ -119,794 +119,794 @@
         "推論",
         "數據集"
       ],
-      "high_priority": 1,
+      "high_priority": 2,
       "api_tasks": 3
     },
-    "Anthropic": {
-      "total_assigned": 7,
-      "strength": "安全對齊與長文本理解（已撤職備援）",
+    "SEOBAIKE Lambda": {
+      "total_assigned": 4,
+      "strength": "安全對齊與長文本理解（備援角色）",
       "specialties": [
         "安全AI",
         "長文本",
         "分析"
       ],
-      "high_priority": 5,
-      "api_tasks": 7
+      "high_priority": 1,
+      "api_tasks": 4
     },
-    "Replicate": {
-      "total_assigned": 5,
+    "SEOBAIKE Mu": {
+      "total_assigned": 4,
       "strength": "一鍵模型部署與影像生成",
       "specialties": [
         "影像生成",
         "模型部署",
         "API化"
       ],
-      "high_priority": 1,
-      "api_tasks": 5
+      "high_priority": 2,
+      "api_tasks": 4
     },
-    "Stability": {
-      "total_assigned": 6,
-      "strength": "Stable Diffusion 影像生成",
+    "SEOBAIKE Nu": {
+      "total_assigned": 3,
+      "strength": "SEOBAIKE AI 影像生成",
       "specialties": [
         "影像生成",
         "設計",
         "創意"
       ],
-      "high_priority": 4,
-      "api_tasks": 6
+      "high_priority": 2,
+      "api_tasks": 3
     },
-    "Claude": {
+    "SEOBAIKE Xi": {
       "total_assigned": 2,
-      "strength": "已撤職 — 僅備援角色",
+      "strength": "備援角色",
       "specialties": [
         "文本生成",
         "分析",
         "程式碼"
       ],
-      "high_priority": 2,
+      "high_priority": 0,
       "api_tasks": 0
     },
-    "Meta": {
-      "total_assigned": 7,
-      "strength": "Llama 開源多語言模型",
+    "SEOBAIKE Omicron": {
+      "total_assigned": 4,
+      "strength": "SEOBAIKE AI 開源多語言模型",
       "specialties": [
         "多語言",
         "開源",
         "翻譯"
       ],
       "high_priority": 2,
-      "api_tasks": 6
+      "api_tasks": 4
     }
   },
   "assignments": {
-    "NVIDIA": [
+    "SEOBAIKE Alpha": [
       {
-        "task_id": "baf1c8c6-ce88-4216-b0fa-8270d8a4dfa6",
-        "task_number": 10,
-        "description": "生成 產業約束分析 行銷文案",
-        "priority": "medium",
-        "assignment_reason": "API 直接匹配: nvidia-riva → NVIDIA"
-      },
-      {
-        "task_id": "b9c9bd5a-27bb-4f67-bb9e-ef7ff7c51c78",
-        "task_number": 13,
-        "description": "分析 法律科技 供應鏈風險評估",
-        "priority": "medium",
-        "assignment_reason": "API 直接匹配: nvidia-riva → NVIDIA"
-      },
-      {
-        "task_id": "3a5febad-7f85-4fd2-a66b-04611ba569e0",
-        "task_number": 14,
-        "description": "生成 網路安全 品牌定位分析",
+        "task_id": "9ac9fa49-3fec-46f1-affa-d5f8faffeb33",
+        "task_number": 5,
+        "description": "呼叫 SEOBAIKE AI Hub 模型推論",
         "priority": "low",
-        "assignment_reason": "API 直接匹配: nvidia-nim → NVIDIA"
+        "assignment_reason": "API 直接匹配: seobaike-guardrails → SEOBAIKE Alpha"
       },
       {
-        "task_id": "ce8fbeed-4e4e-4971-ad1a-10b7df01806a",
-        "task_number": 23,
-        "description": "分析 保險科技 市場趨勢預測",
-        "priority": "medium",
-        "assignment_reason": "API 直接匹配: nvidia-nim → NVIDIA"
-      },
-      {
-        "task_id": "1aca1d38-e950-4cf0-98b3-8198326cbb1c",
-        "task_number": 28,
-        "description": "生成 農業科技 白皮書草稿",
+        "task_id": "7b3c653a-9d32-4fec-963a-9276211a11bc",
+        "task_number": 8,
+        "description": "呼叫 SEOBAIKE AI 程式碼生成",
         "priority": "high",
-        "assignment_reason": "API 直接匹配: nvidia-riva → NVIDIA"
+        "assignment_reason": "API 直接匹配: seobaike-gpu → SEOBAIKE Alpha"
       },
       {
-        "task_id": "deba2ff0-2741-4f90-abba-09983681fb9f",
-        "task_number": 33,
-        "description": "呼叫 OpenAI GPT-4o 摘要 Web3整合方案",
+        "task_id": "593ebcb1-8ce1-483e-8369-77feb9158278",
+        "task_number": 12,
+        "description": "分析 fintech-app.tw 網站效能與速度",
         "priority": "medium",
-        "assignment_reason": "API 直接匹配: nvidia-guardrails → NVIDIA"
+        "assignment_reason": "API 直接匹配: seobaike-voice → SEOBAIKE Alpha"
       },
       {
-        "task_id": "e90b0f16-7365-4e5b-8782-7c89d4ddc8ef",
-        "task_number": 37,
-        "description": "生成 農業科技 白皮書草稿",
+        "task_id": "5dec4e8c-25e4-4642-9247-50de3f426c00",
+        "task_number": 16,
+        "description": "執行 L1→L4 約束路徑檢查",
         "priority": "medium",
-        "assignment_reason": "API 直接匹配: nvidia-guardrails → NVIDIA"
+        "assignment_reason": "API 直接匹配: seobaike-voice → SEOBAIKE Alpha"
       },
       {
-        "task_id": "886cebd6-004c-4190-971d-2fa299900055",
-        "task_number": 39,
-        "description": "呼叫 NVIDIA Guardrails 安全檢查",
-        "priority": "low",
-        "assignment_reason": "API 直接匹配: nvidia-riva → NVIDIA"
-      },
-      {
-        "task_id": "359012e9-65e2-4311-bea3-e1f2b9cadd95",
-        "task_number": 42,
-        "description": "執行 農業科技 客戶情感分析",
+        "task_id": "5f7a3725-2f46-4601-a0bb-53a07af9d14e",
+        "task_number": 29,
+        "description": "呼叫 SEOBAIKE AI Hub 模型推論",
         "priority": "medium",
-        "assignment_reason": "API 直接匹配: nvidia-nim → NVIDIA"
+        "assignment_reason": "專長匹配: SEOBAIKE Alpha (分數=2)"
       },
       {
-        "task_id": "1266d665-a0e0-45a2-a7eb-850a74d61478",
-        "task_number": 45,
-        "description": "呼叫 Meta Llama 多語言翻譯",
-        "priority": "low",
-        "assignment_reason": "API 直接匹配: nvidia-nim → NVIDIA"
-      },
-      {
-        "task_id": "46a24940-229c-442b-942b-e4df787b0705",
-        "task_number": 47,
-        "description": "呼叫 HuggingFace 模型推論",
-        "priority": "low",
-        "assignment_reason": "專長匹配: NVIDIA (分數=2)"
-      },
-      {
-        "task_id": "a17865e9-92c6-40ac-a54c-dc4a2a4eb527",
-        "task_number": 55,
-        "description": "生成 碳排放追蹤 影片腳本",
-        "priority": "medium",
-        "assignment_reason": "API 直接匹配: nvidia-riva → NVIDIA"
-      },
-      {
-        "task_id": "8f6d36bd-7209-4600-86be-df8b7ba6d5e9",
-        "task_number": 56,
-        "description": "呼叫 OpenAI GPT-4o 摘要 Web3整合方案",
-        "priority": "low",
-        "assignment_reason": "API 直接匹配: nvidia-guardrails → NVIDIA"
-      },
-      {
-        "task_id": "030fe224-d8a7-4c97-a9a0-6eb5b9aebb99",
-        "task_number": 57,
-        "description": "生成 保險科技 產業分析報告",
-        "priority": "high",
-        "assignment_reason": "API 直接匹配: nvidia-riva → NVIDIA"
-      },
-      {
-        "task_id": "19cba5a2-3c19-4632-be73-8a12e1619eda",
-        "task_number": 63,
-        "description": "分析 法律科技 產業競爭對手",
-        "priority": "high",
-        "assignment_reason": "API 直接匹配: nvidia-guardrails → NVIDIA"
-      },
-      {
-        "task_id": "00b1a3fe-29d1-4cc9-a328-a774131ec5a3",
-        "task_number": 67,
-        "description": "分析 ecommerce-shop.tw 使用者行為數據",
-        "priority": "low",
-        "assignment_reason": "API 直接匹配: nvidia-riva → NVIDIA"
-      },
-      {
-        "task_id": "f915eb6b-e488-486c-8718-f3b0fa2bcf4a",
-        "task_number": 70,
-        "description": "生成 電子商務 產業分析報告",
-        "priority": "medium",
-        "assignment_reason": "API 直接匹配: nvidia-guardrails → NVIDIA"
-      },
-      {
-        "task_id": "9c845367-defd-4e95-8ff0-87342390522a",
-        "task_number": 73,
-        "description": "呼叫 Meta Llama 多語言翻譯",
-        "priority": "medium",
-        "assignment_reason": "API 直接匹配: nvidia-riva → NVIDIA"
-      },
-      {
-        "task_id": "184f87de-e38a-45cb-b567-a0ece22dfea8",
-        "task_number": 76,
-        "description": "分析 ecommerce-shop.tw 網站效能與速度",
-        "priority": "medium",
-        "assignment_reason": "API 直接匹配: nvidia-riva → NVIDIA"
-      },
-      {
-        "task_id": "750bf21c-5d12-4370-a4a9-90d4764e30f3",
-        "task_number": 78,
+        "task_id": "c6dc990c-febc-4c1f-b21f-685ceafe46ce",
+        "task_number": 35,
         "description": "分析 example-client-b.com 網站效能與速度",
         "priority": "low",
-        "assignment_reason": "API 直接匹配: nvidia-riva → NVIDIA"
+        "assignment_reason": "API 直接匹配: seobaike-gpu → SEOBAIKE Alpha"
       },
       {
-        "task_id": "a6602ead-1289-4275-9cbf-cb16107ae7bd",
-        "task_number": 98,
-        "description": "執行 example-client-a.com 反向連結分析",
+        "task_id": "5a51eb71-3ab0-489c-b10c-5ef5f80e4ea7",
+        "task_number": 42,
+        "description": "執行 aiforseo.vip 技術 SEO 稽核",
         "priority": "high",
-        "assignment_reason": "API 直接匹配: nvidia-guardrails → NVIDIA"
-      }
-    ],
-    "OpenAI": [
-      {
-        "task_id": "fff05522-c553-4510-9b55-7fe7efb9a5b1",
-        "task_number": 4,
-        "description": "呼叫 Mistral 程式碼生成",
-        "priority": "low",
-        "assignment_reason": "專長匹配: OpenAI (分數=2)"
+        "assignment_reason": "API 直接匹配: seobaike-guardrails → SEOBAIKE Alpha"
       },
       {
-        "task_id": "adadf823-a497-4a25-a9f4-eb084215b2f9",
-        "task_number": 5,
-        "description": "呼叫 DeepSeek 程式碼審查",
-        "priority": "high",
-        "assignment_reason": "API 直接匹配: openai-gpt4o → OpenAI"
-      },
-      {
-        "task_id": "934d4569-beb4-488b-a066-b1cb44358ad4",
-        "task_number": 59,
-        "description": "呼叫 Mistral 程式碼生成",
+        "task_id": "48a1c46e-06da-469b-8977-f49945914795",
+        "task_number": 50,
+        "description": "執行 網路安全 客戶情感分析",
         "priority": "medium",
-        "assignment_reason": "API 直接匹配: openai-gpt4o → OpenAI"
+        "assignment_reason": "API 直接匹配: seobaike-guardrails → SEOBAIKE Alpha"
       },
       {
-        "task_id": "527f2b89-a073-4b1e-a746-efbe16896da3",
-        "task_number": 65,
-        "description": "呼叫 OpenAI GPT-4o 摘要 AI推理效能",
-        "priority": "high",
-        "assignment_reason": "專長匹配: OpenAI (分數=2)"
-      },
-      {
-        "task_id": "54939ae0-3814-4456-a7a4-632df6057f77",
-        "task_number": 72,
-        "description": "分析 能源環保 供應鏈風險評估",
-        "priority": "low",
-        "assignment_reason": "API 直接匹配: openai-gpt4o → OpenAI"
-      },
-      {
-        "task_id": "ffed5f25-d741-4471-982b-203869718459",
-        "task_number": 84,
-        "description": "生成 餐飲服務 產業分析報告",
-        "priority": "low",
-        "assignment_reason": "API 直接匹配: openai-gpt4o → OpenAI"
-      },
-      {
-        "task_id": "3edd407e-cb5c-427a-b689-796734b1a344",
-        "task_number": 95,
-        "description": "執行 L1→L4 約束路徑檢查",
-        "priority": "medium",
-        "assignment_reason": "API 直接匹配: openai-gpt4o → OpenAI"
-      },
-      {
-        "task_id": "10393e57-a4ba-48b9-9293-55bb2e761425",
-        "task_number": 99,
-        "description": "呼叫 HuggingFace 模型推論",
-        "priority": "high",
-        "assignment_reason": "API 直接匹配: openai-gpt4o → OpenAI"
-      }
-    ],
-    "Perplexity": [
-      {
-        "task_id": "885c19e4-df63-4b84-8522-a979ded0f7a2",
-        "task_number": 15,
-        "description": "生成 精準醫療 影片腳本",
-        "priority": "low",
-        "assignment_reason": "負載均衡分配: Perplexity (當前任務數=0)"
-      },
-      {
-        "task_id": "bb8d7583-066c-44af-96b7-9fe82205fc6e",
-        "task_number": 16,
-        "description": "生成 半導體 關鍵字研究報告",
-        "priority": "low",
-        "assignment_reason": "專長匹配: Perplexity (分數=2)"
-      },
-      {
-        "task_id": "60395d7c-9e3d-4704-a975-4fa8bcd5f887",
-        "task_number": 26,
-        "description": "呼叫 OpenAI GPT-4o 摘要 Web3整合方案",
-        "priority": "low",
-        "assignment_reason": "API 直接匹配: perplexity → Perplexity"
-      },
-      {
-        "task_id": "3796d77c-76c6-4086-b374-dcf57067f78d",
-        "task_number": 34,
-        "description": "呼叫 HuggingFace 模型推論",
-        "priority": "high",
-        "assignment_reason": "API 直接匹配: perplexity → Perplexity"
-      }
-    ],
-    "Google": [
-      {
-        "task_id": "a650f62f-d15f-4723-9d61-fbf879ce08a8",
-        "task_number": 25,
-        "description": "生成 製造業 白皮書草稿",
-        "priority": "high",
-        "assignment_reason": "負載均衡分配: Google (當前任務數=0)"
-      },
-      {
-        "task_id": "cb6a9165-071d-4070-b408-0f3c8791fc0f",
-        "task_number": 36,
-        "description": "生成 保險科技 品牌定位分析",
-        "priority": "low",
-        "assignment_reason": "API 直接匹配: google-gemini → Google"
-      },
-      {
-        "task_id": "0bab6d28-ce9e-4f12-9a95-00719ff8b55a",
-        "task_number": 51,
-        "description": "呼叫 Mistral 程式碼生成",
-        "priority": "medium",
-        "assignment_reason": "API 直接匹配: google-gemini → Google"
-      },
-      {
-        "task_id": "259cf057-cf6a-4803-b25e-3bbdb6141a58",
-        "task_number": 74,
-        "description": "分析 旅遊觀光 供應鏈風險評估",
-        "priority": "low",
-        "assignment_reason": "專長匹配: Google (分數=2)"
-      },
-      {
-        "task_id": "49f30081-2f6a-4e73-a118-7ed85a1407c2",
-        "task_number": 83,
-        "description": "分析 edu-platform.com 網站 SEO 健檢",
-        "priority": "low",
-        "assignment_reason": "專長匹配: Google (分數=2)"
-      },
-      {
-        "task_id": "9b5790f8-874e-4e59-b291-575831a6be43",
-        "task_number": 85,
-        "description": "呼叫 Meta Llama 多語言翻譯",
-        "priority": "low",
-        "assignment_reason": "API 直接匹配: google-gemini → Google"
-      },
-      {
-        "task_id": "854ee583-09ef-46ee-8b4e-be6c3d3b3edd",
-        "task_number": 87,
-        "description": "分析 電子商務 產業競爭對手",
-        "priority": "low",
-        "assignment_reason": "專長匹配: Google (分數=2)"
-      },
-      {
-        "task_id": "c26dcdfb-2030-4fa2-a8e7-35ce488925f6",
-        "task_number": 91,
-        "description": "分析 醫療健康 供應鏈風險評估",
-        "priority": "medium",
-        "assignment_reason": "API 直接匹配: google-gemini → Google"
-      },
-      {
-        "task_id": "912c6f3a-2c72-472a-98c2-ffd08656177c",
-        "task_number": 97,
-        "description": "分析 網路安全 產業競爭對手",
-        "priority": "high",
-        "assignment_reason": "API 直接匹配: google-gemini → Google"
-      }
-    ],
-    "DeepSeek": [
-      {
-        "task_id": "3fdbb979-14cd-48fe-b3ce-7d87fa31e741",
-        "task_number": 12,
-        "description": "呼叫 HuggingFace 模型推論",
-        "priority": "low",
-        "assignment_reason": "API 直接匹配: deepseek → DeepSeek"
-      },
-      {
-        "task_id": "9ecbadba-d5ca-4064-9d4b-e150b084645d",
-        "task_number": 20,
-        "description": "生成 製造業 電子報模板",
-        "priority": "low",
-        "assignment_reason": "API 直接匹配: deepseek → DeepSeek"
-      },
-      {
-        "task_id": "e92dcad5-08e7-477a-8005-6dbd626bc951",
-        "task_number": 41,
-        "description": "生成 電子商務 內容行事曆",
-        "priority": "low",
-        "assignment_reason": "API 直接匹配: deepseek → DeepSeek"
-      },
-      {
-        "task_id": "dfd77d55-1214-427f-8344-7f0b6a7bc577",
-        "task_number": 92,
-        "description": "分析 ecommerce-shop.tw 使用者行為數據",
-        "priority": "medium",
-        "assignment_reason": "API 直接匹配: deepseek → DeepSeek"
-      }
-    ],
-    "Mistral": [
-      {
-        "task_id": "173eeb0c-7592-4f21-a400-023fb6902027",
-        "task_number": 1,
-        "description": "生成 餐飲服務 關鍵字研究報告",
-        "priority": "low",
-        "assignment_reason": "API 直接匹配: mistral → Mistral"
-      },
-      {
-        "task_id": "5a7ed5c3-36f9-47b3-91a7-4fbfd54a2c90",
-        "task_number": 22,
-        "description": "生成 客戶行為預測 影片腳本",
-        "priority": "low",
-        "assignment_reason": "API 直接匹配: mistral → Mistral"
-      },
-      {
-        "task_id": "a9cf2cab-163c-495a-be44-ccc5c00f192f",
-        "task_number": 30,
-        "description": "呼叫 Google Gemini 翻譯 量子計算應用",
-        "priority": "medium",
-        "assignment_reason": "API 直接匹配: mistral → Mistral"
-      },
-      {
-        "task_id": "b9e79ff8-3706-4297-bcc5-d6a2b9c2cf0f",
-        "task_number": 48,
-        "description": "執行 保險科技 客戶情感分析",
-        "priority": "low",
-        "assignment_reason": "API 直接匹配: mistral → Mistral"
-      },
-      {
-        "task_id": "9be5608b-ad06-43bd-ad4a-ac55be7a2dfe",
-        "task_number": 68,
-        "description": "分析 金融科技 供應鏈風險評估",
-        "priority": "high",
-        "assignment_reason": "API 直接匹配: mistral → Mistral"
-      },
-      {
-        "task_id": "d5c409e6-8d64-462a-baf8-3a621eadf9e9",
-        "task_number": 77,
-        "description": "執行 example-client-a.com 反向連結分析",
-        "priority": "high",
-        "assignment_reason": "API 直接匹配: mistral → Mistral"
-      },
-      {
-        "task_id": "92bb1174-88ae-4997-a720-19d176b7585b",
-        "task_number": 94,
-        "description": "呼叫 Mistral 程式碼生成",
-        "priority": "high",
-        "assignment_reason": "API 直接匹配: mistral → Mistral"
-      },
-      {
-        "task_id": "445cd61a-d8f7-4e60-84ef-00c8ed28e968",
-        "task_number": 100,
-        "description": "執行 logistics-hub.tw 反向連結分析",
-        "priority": "low",
-        "assignment_reason": "API 直接匹配: mistral → Mistral"
-      }
-    ],
-    "Groq": [
-      {
-        "task_id": "e38a349a-8107-45f7-8526-20d6eaf3920d",
-        "task_number": 35,
-        "description": "生成 供應鏈數位化 影片腳本",
-        "priority": "medium",
-        "assignment_reason": "負載均衡分配: Groq (當前任務數=0)"
-      },
-      {
-        "task_id": "9882bac2-9dd1-45d6-8d81-74ed3097e076",
+        "task_id": "cdd7c46d-2038-43c9-93df-b1880a02d135",
         "task_number": 52,
-        "description": "生成 半導體 白皮書草稿",
+        "description": "呼叫 SEOBAIKE AI 多語言翻譯",
         "priority": "high",
-        "assignment_reason": "API 直接匹配: groq → Groq"
+        "assignment_reason": "API 直接匹配: seobaike-gpu → SEOBAIKE Alpha"
       },
       {
-        "task_id": "42f4d910-b1f2-4b87-9407-fe7210abec58",
-        "task_number": 64,
-        "description": "分析 建築營建 供應鏈風險評估",
+        "task_id": "db241d50-3f1f-441e-84e7-903b430ef090",
+        "task_number": 60,
+        "description": "生成 AI推理效能 行銷文案",
         "priority": "high",
-        "assignment_reason": "API 直接匹配: groq → Groq"
+        "assignment_reason": "API 直接匹配: seobaike-gpu → SEOBAIKE Alpha"
       },
       {
-        "task_id": "1f5124d6-ba61-41ae-93ea-b3b700b4cb1a",
-        "task_number": 69,
-        "description": "生成 金融科技 電子報模板",
-        "priority": "high",
-        "assignment_reason": "API 直接匹配: groq → Groq"
+        "task_id": "27dfabca-95e1-4f0c-8be4-f840139c7172",
+        "task_number": 80,
+        "description": "呼叫 SEOBAIKE AI 摘要 內容生成優化",
+        "priority": "low",
+        "assignment_reason": "API 直接匹配: seobaike-voice → SEOBAIKE Alpha"
       },
       {
-        "task_id": "3ae71375-0f1e-496f-9e8c-de0ef0eb6ae7",
-        "task_number": 81,
-        "description": "執行 L1→L4 約束路徑檢查",
+        "task_id": "955c13bd-4149-4562-861a-8e4da481f2ee",
+        "task_number": 83,
+        "description": "分析 電子商務 產業競爭對手",
         "priority": "high",
-        "assignment_reason": "API 直接匹配: groq → Groq"
+        "assignment_reason": "API 直接匹配: seobaike-gpu → SEOBAIKE Alpha"
       },
       {
-        "task_id": "0d8c79de-002a-4ed2-af97-74ef24cb0155",
-        "task_number": 82,
-        "description": "呼叫 NVIDIA Guardrails 安全檢查",
+        "task_id": "4a9a70f0-de17-4ab5-85a8-1c123914e3ce",
+        "task_number": 85,
+        "description": "生成 供應鏈數位化 行銷文案",
         "priority": "medium",
-        "assignment_reason": "API 直接匹配: groq → Groq"
+        "assignment_reason": "API 直接匹配: seobaike-guardrails → SEOBAIKE Alpha"
+      },
+      {
+        "task_id": "1c58e616-8b84-469f-9452-f408e175d581",
+        "task_number": 86,
+        "description": "分析 旅遊觀光 供應鏈風險評估",
+        "priority": "medium",
+        "assignment_reason": "API 直接匹配: seobaike-gpu → SEOBAIKE Alpha"
+      },
+      {
+        "task_id": "eb6ad018-a6aa-4dfc-98f6-c9598e6e38be",
+        "task_number": 91,
+        "description": "生成 客戶行為預測 行銷文案",
+        "priority": "low",
+        "assignment_reason": "API 直接匹配: seobaike-gpu → SEOBAIKE Alpha"
+      },
+      {
+        "task_id": "f7cf970f-425b-4eea-aebb-6165498c29d1",
+        "task_number": 96,
+        "description": "生成 example-client-a.com 結構化資料標記",
+        "priority": "medium",
+        "assignment_reason": "API 直接匹配: seobaike-gpu → SEOBAIKE Alpha"
       }
     ],
-    "Cohere": [
+    "SEOBAIKE Beta": [
       {
-        "task_id": "a7f97999-a802-43b2-92d4-b6098764b641",
-        "task_number": 3,
+        "task_id": "febf441d-433e-446e-b259-1e4f263ae8d5",
+        "task_number": 9,
+        "description": "執行 fintech-app.tw 行動端適配檢查",
+        "priority": "low",
+        "assignment_reason": "API 直接匹配: seobaike-ai-text → SEOBAIKE Beta"
+      },
+      {
+        "task_id": "f94821e3-c071-4c55-88c8-c38d630e751a",
+        "task_number": 10,
+        "description": "生成 農業科技 白皮書草稿",
+        "priority": "medium",
+        "assignment_reason": "API 直接匹配: seobaike-ai-text → SEOBAIKE Beta"
+      },
+      {
+        "task_id": "eb77d75e-1656-478f-821d-9d7c8424953b",
+        "task_number": 23,
+        "description": "生成 媒體傳播 電子報模板",
+        "priority": "high",
+        "assignment_reason": "API 直接匹配: seobaike-ai-text → SEOBAIKE Beta"
+      },
+      {
+        "task_id": "26ee0d06-069b-4da9-aded-d2c8ac3b6c6a",
+        "task_number": 37,
+        "description": "呼叫 SEOBAIKE AI 程式碼審查",
+        "priority": "high",
+        "assignment_reason": "專長匹配: SEOBAIKE Beta (分數=2)"
+      },
+      {
+        "task_id": "2899633c-190f-489d-b452-75b1ef33ab80",
+        "task_number": 41,
+        "description": "執行 example-client-b.com 技術 SEO 稽核",
+        "priority": "medium",
+        "assignment_reason": "API 直接匹配: seobaike-ai-text → SEOBAIKE Beta"
+      },
+      {
+        "task_id": "bcb7c486-2400-4d82-901a-539a9cb99db5",
+        "task_number": 48,
+        "description": "執行 教育科技 客戶情感分析",
+        "priority": "high",
+        "assignment_reason": "API 直接匹配: seobaike-ai-text → SEOBAIKE Beta"
+      },
+      {
+        "task_id": "f39128f6-5be9-49b3-b771-9a49b64e0d85",
+        "task_number": 59,
+        "description": "生成 能源環保 產業分析報告",
+        "priority": "low",
+        "assignment_reason": "API 直接匹配: seobaike-ai-text → SEOBAIKE Beta"
+      }
+    ],
+    "SEOBAIKE Gamma": [
+      {
+        "task_id": "7cdadc38-ab76-4272-b243-650d847bf1d7",
+        "task_number": 22,
+        "description": "呼叫 SEOBAIKE 安全防護檢查",
+        "priority": "medium",
+        "assignment_reason": "API 直接匹配: seobaike-search-ai → SEOBAIKE Gamma"
+      },
+      {
+        "task_id": "2e63ad1d-cf5a-483a-a94d-1123bdf6cfda",
+        "task_number": 26,
+        "description": "生成 物流運輸 關鍵字研究報告",
+        "priority": "high",
+        "assignment_reason": "專長匹配: SEOBAIKE Gamma (分數=2)"
+      },
+      {
+        "task_id": "14c6c83f-4688-4a9a-8c08-600ac42bdcd3",
+        "task_number": 28,
+        "description": "生成 精準醫療 行銷文案",
+        "priority": "medium",
+        "assignment_reason": "API 直接匹配: seobaike-search-ai → SEOBAIKE Gamma"
+      },
+      {
+        "task_id": "46abd9ca-bb5c-4ed9-ad3f-6296e47fea22",
+        "task_number": 44,
+        "description": "生成 自駕車技術 影片腳本",
+        "priority": "high",
+        "assignment_reason": "API 直接匹配: seobaike-search-ai → SEOBAIKE Gamma"
+      },
+      {
+        "task_id": "9b45ae19-124f-45f9-b42b-7d2fa4647a60",
+        "task_number": 47,
+        "description": "執行 區塊鏈 客戶情感分析",
+        "priority": "high",
+        "assignment_reason": "API 直接匹配: seobaike-search-ai → SEOBAIKE Gamma"
+      },
+      {
+        "task_id": "39c31946-9948-4758-ac34-3214eb5af733",
+        "task_number": 51,
+        "description": "呼叫 SEOBAIKE GPU 推論 客戶行為預測",
+        "priority": "low",
+        "assignment_reason": "API 直接匹配: seobaike-search-ai → SEOBAIKE Gamma"
+      },
+      {
+        "task_id": "e5fe8ccc-c17e-4ec8-acca-bcb821eb9df7",
+        "task_number": 53,
+        "description": "生成 Web3整合方案 行銷文案",
+        "priority": "medium",
+        "assignment_reason": "API 直接匹配: seobaike-search-ai → SEOBAIKE Gamma"
+      },
+      {
+        "task_id": "25c7d0c6-f43f-4b51-9f93-3ea8dea91849",
+        "task_number": 57,
+        "description": "生成 保險科技 電子報模板",
+        "priority": "high",
+        "assignment_reason": "API 直接匹配: seobaike-search-ai → SEOBAIKE Gamma"
+      },
+      {
+        "task_id": "c5d4e88c-5b78-4f0c-a1bc-4531745e0497",
+        "task_number": 82,
+        "description": "生成 供應鏈數位化 行銷文案",
+        "priority": "low",
+        "assignment_reason": "API 直接匹配: seobaike-search-ai → SEOBAIKE Gamma"
+      }
+    ],
+    "SEOBAIKE Delta": [
+      {
+        "task_id": "69f7823f-94d5-487c-a373-1fe9a42eae31",
+        "task_number": 4,
+        "description": "執行 example-client-a.com 反向連結分析",
+        "priority": "medium",
+        "assignment_reason": "API 直接匹配: seobaike-search → SEOBAIKE Delta"
+      },
+      {
+        "task_id": "dfa4fdac-0f25-4ccd-a5c7-668e83601d18",
+        "task_number": 14,
+        "description": "執行 aiforseo.vip 反向連結分析",
+        "priority": "low",
+        "assignment_reason": "專長匹配: SEOBAIKE Delta (分數=2)"
+      },
+      {
+        "task_id": "64d6f702-595a-4193-ac37-5a200dafcaf4",
+        "task_number": 19,
+        "description": "執行 startup-demo.tw 行動端適配檢查",
+        "priority": "low",
+        "assignment_reason": "API 直接匹配: seobaike-search → SEOBAIKE Delta"
+      },
+      {
+        "task_id": "8f5a2c36-ee33-4a10-b1d1-b32f79ad27a9",
+        "task_number": 20,
         "description": "分析 fintech-app.tw 網站 SEO 健檢",
         "priority": "medium",
-        "assignment_reason": "API 直接匹配: cohere → Cohere"
+        "assignment_reason": "專長匹配: SEOBAIKE Delta (分數=2)"
       },
       {
-        "task_id": "bd6ac2de-97a2-404b-a779-6f5efc9d0a03",
+        "task_id": "866b3853-26f4-492a-9d48-e059a0ab7c61",
+        "task_number": 38,
+        "description": "執行 example-client-a.com 反向連結分析",
+        "priority": "low",
+        "assignment_reason": "專長匹配: SEOBAIKE Delta (分數=2)"
+      },
+      {
+        "task_id": "db5ccd75-1dfa-4be2-8f8a-060e1ab3a78c",
+        "task_number": 77,
+        "description": "分析 農業科技 市場趨勢預測",
+        "priority": "high",
+        "assignment_reason": "專長匹配: SEOBAIKE Delta (分數=2)"
+      },
+      {
+        "task_id": "e9b8b64f-791d-4d98-ae94-1f4ab6dc3e4e",
+        "task_number": 81,
+        "description": "執行 ecommerce-shop.tw 反向連結分析",
+        "priority": "high",
+        "assignment_reason": "專長匹配: SEOBAIKE Delta (分數=2)"
+      },
+      {
+        "task_id": "08ba582e-5951-4e08-a1b2-49bab2fa2c79",
+        "task_number": 87,
+        "description": "分析 example-client-a.com 網站 SEO 健檢",
+        "priority": "low",
+        "assignment_reason": "專長匹配: SEOBAIKE Delta (分數=2)"
+      },
+      {
+        "task_id": "193d2f24-281e-4055-bb42-f9363a5b4140",
+        "task_number": 94,
+        "description": "執行 區塊鏈 客戶情感分析",
+        "priority": "medium",
+        "assignment_reason": "專長匹配: SEOBAIKE Delta (分數=2)"
+      },
+      {
+        "task_id": "f4a15494-85fc-40d9-8bac-2ce9a3d44706",
+        "task_number": 98,
+        "description": "生成 多語言本地化 行銷文案",
+        "priority": "medium",
+        "assignment_reason": "API 直接匹配: seobaike-search → SEOBAIKE Delta"
+      }
+    ],
+    "SEOBAIKE Epsilon": [
+      {
+        "task_id": "2cd776d1-c9ce-477f-a570-04e6b9786cd7",
+        "task_number": 18,
+        "description": "執行 aiforseo.vip 反向連結分析",
+        "priority": "medium",
+        "assignment_reason": "API 直接匹配: seobaike-ai-reason → SEOBAIKE Epsilon"
+      },
+      {
+        "task_id": "f0a50f17-5b81-4e2e-9cb8-70ae5e9007ad",
+        "task_number": 33,
+        "description": "執行 ecommerce-shop.tw 行動端適配檢查",
+        "priority": "low",
+        "assignment_reason": "API 直接匹配: seobaike-ai-reason → SEOBAIKE Epsilon"
+      },
+      {
+        "task_id": "8aacf452-cfea-4b7f-88a0-fc3e4130b21b",
         "task_number": 40,
-        "description": "執行 fintech-app.tw 行動端適配檢查",
+        "description": "生成 智慧城市規劃 行銷文案",
         "priority": "medium",
-        "assignment_reason": "API 直接匹配: cohere → Cohere"
+        "assignment_reason": "API 直接匹配: seobaike-ai-reason → SEOBAIKE Epsilon"
       },
       {
-        "task_id": "f6c8eed5-d1a9-46da-81cf-f4f6753f9bfe",
-        "task_number": 53,
-        "description": "生成 區塊鏈 白皮書草稿",
-        "priority": "medium",
-        "assignment_reason": "API 直接匹配: cohere → Cohere"
-      },
-      {
-        "task_id": "b4069349-cb07-43fa-a6ca-35b71186da5f",
-        "task_number": 75,
-        "description": "呼叫 Perplexity 搜尋 智慧城市規劃 最新資訊",
-        "priority": "high",
-        "assignment_reason": "API 直接匹配: cohere → Cohere"
-      },
-      {
-        "task_id": "9767c6cf-60df-4ec5-807b-ff9e89b34643",
-        "task_number": 86,
-        "description": "呼叫 Mistral 程式碼生成",
-        "priority": "low",
-        "assignment_reason": "API 直接匹配: cohere → Cohere"
-      }
-    ],
-    "Together": [
-      {
-        "task_id": "18134fe9-1224-4d4f-bb2a-5668c07e8548",
-        "task_number": 11,
-        "description": "執行 logistics-hub.tw 技術 SEO 稽核",
-        "priority": "low",
-        "assignment_reason": "API 直接匹配: together-ai → Together"
-      },
-      {
-        "task_id": "63edc9f6-1ed9-4bdc-b65a-c27d613bee26",
-        "task_number": 43,
-        "description": "生成 媒體傳播 白皮書草稿",
-        "priority": "medium",
-        "assignment_reason": "API 直接匹配: together-ai → Together"
-      },
-      {
-        "task_id": "6b5133c3-2dee-4903-9395-967ea3793c97",
+        "task_id": "ab0b1cf0-6876-400a-ab7b-e2ae4d3adf26",
         "task_number": 46,
-        "description": "執行 startup-demo.tw 行動端適配檢查",
+        "description": "生成 建築營建 關鍵字研究報告",
         "priority": "medium",
-        "assignment_reason": "API 直接匹配: together-ai → Together"
+        "assignment_reason": "API 直接匹配: seobaike-ai-reason → SEOBAIKE Epsilon"
       },
       {
-        "task_id": "545f80b5-8b3c-478b-aa5a-416ab85fb42d",
-        "task_number": 66,
-        "description": "生成 網路安全 關鍵字研究報告",
+        "task_id": "1a46a925-b7d4-4f62-8779-f8f0879dbbd4",
+        "task_number": 54,
+        "description": "執行 aiforseo.vip 行動端適配檢查",
+        "priority": "low",
+        "assignment_reason": "API 直接匹配: seobaike-ai-reason → SEOBAIKE Epsilon"
+      },
+      {
+        "task_id": "c84907a5-d6a1-473e-b73b-e4b2a7b2e789",
+        "task_number": 55,
+        "description": "生成 農業科技 內容行事曆",
+        "priority": "medium",
+        "assignment_reason": "API 直接匹配: seobaike-ai-reason → SEOBAIKE Epsilon"
+      },
+      {
+        "task_id": "52d30a3d-5dee-4ad3-92d0-cc728b83da05",
+        "task_number": 58,
+        "description": "呼叫 SEOBAIKE 搜尋 AI 搜尋 AI推理效能 最新資訊",
+        "priority": "medium",
+        "assignment_reason": "API 直接匹配: seobaike-ai-reason → SEOBAIKE Epsilon"
+      },
+      {
+        "task_id": "2dcd5175-ea6e-437c-b343-e9e17c042afa",
+        "task_number": 61,
+        "description": "生成 智慧城市規劃 影片腳本",
         "priority": "high",
-        "assignment_reason": "API 直接匹配: together-ai → Together"
+        "assignment_reason": "API 直接匹配: seobaike-ai-reason → SEOBAIKE Epsilon"
       },
       {
-        "task_id": "5e39d653-2d31-4054-83cc-e27c47c2f516",
-        "task_number": 96,
-        "description": "生成 Web3整合方案 影片腳本",
+        "task_id": "3444205b-65ac-4781-a97f-c18d1468904a",
+        "task_number": 64,
+        "description": "生成 元宇宙策略 行銷文案",
         "priority": "medium",
-        "assignment_reason": "API 直接匹配: together-ai → Together"
+        "assignment_reason": "API 直接匹配: seobaike-ai-reason → SEOBAIKE Epsilon"
+      },
+      {
+        "task_id": "1e7af11a-afa1-4109-b639-4bc2ebbc59cc",
+        "task_number": 70,
+        "description": "執行 農業科技 客戶情感分析",
+        "priority": "low",
+        "assignment_reason": "API 直接匹配: seobaike-ai-reason → SEOBAIKE Epsilon"
+      },
+      {
+        "task_id": "a0b2a562-c7ed-4f69-9c38-d5337cc8c4db",
+        "task_number": 89,
+        "description": "生成 不動產 白皮書草稿",
+        "priority": "low",
+        "assignment_reason": "API 直接匹配: seobaike-ai-reason → SEOBAIKE Epsilon"
+      },
+      {
+        "task_id": "d59fa86a-b856-4932-a2f0-6ef0e9168759",
+        "task_number": 99,
+        "description": "生成 edu-platform.com 結構化資料標記",
+        "priority": "medium",
+        "assignment_reason": "API 直接匹配: seobaike-ai-reason → SEOBAIKE Epsilon"
       }
     ],
-    "HuggingFace": [
+    "SEOBAIKE Zeta": [
       {
-        "task_id": "73a17605-96bd-422e-ba06-875a25c402a1",
-        "task_number": 6,
-        "description": "分析 ecommerce-shop.tw 使用者行為數據",
-        "priority": "low",
-        "assignment_reason": "API 直接匹配: huggingface → HuggingFace"
+        "task_id": "3131bd9c-3eba-45cf-a140-6d1d0de426a8",
+        "task_number": 25,
+        "description": "生成 量子計算應用 行銷文案",
+        "priority": "high",
+        "assignment_reason": "負載均衡分配: SEOBAIKE Zeta (當前任務數=0)"
       },
       {
-        "task_id": "5d74f4ff-8b21-441e-82a9-a3c5e3608196",
-        "task_number": 17,
+        "task_id": "3c5ced5e-9945-4dd8-a739-25ef73797108",
+        "task_number": 71,
         "description": "生成 edu-platform.com 結構化資料標記",
         "priority": "high",
-        "assignment_reason": "API 直接匹配: huggingface → HuggingFace"
+        "assignment_reason": "負載均衡分配: SEOBAIKE Zeta (當前任務數=1)"
       },
       {
-        "task_id": "afdf4510-56ff-42e8-b909-5c6952d6904b",
-        "task_number": 38,
-        "description": "生成 餐飲服務 品牌定位分析",
+        "task_id": "07cb7a2d-5e68-457d-a2fc-9e7c1bb66534",
+        "task_number": 95,
+        "description": "執行 能源環保 客戶情感分析",
+        "priority": "medium",
+        "assignment_reason": "API 直接匹配: seobaike-ai-code → SEOBAIKE Zeta"
+      },
+      {
+        "task_id": "94339d54-5c0b-418d-9ce2-af534f35a769",
+        "task_number": 100,
+        "description": "生成 零售業 品牌定位分析",
         "priority": "low",
-        "assignment_reason": "API 直接匹配: huggingface → HuggingFace"
+        "assignment_reason": "API 直接匹配: seobaike-ai-code → SEOBAIKE Zeta"
       }
     ],
-    "Anthropic": [
+    "SEOBAIKE Eta": [
       {
-        "task_id": "9c101d9e-aed1-4268-8ec6-2fe8f0d77a19",
-        "task_number": 7,
-        "description": "執行 L1→L4 約束路徑檢查",
-        "priority": "high",
-        "assignment_reason": "API 直接匹配: anthropic-claude → Anthropic"
+        "task_id": "6c5003b0-1917-447c-8eec-112d5f24c2b1",
+        "task_number": 6,
+        "description": "呼叫 SEOBAIKE AI 多語言翻譯",
+        "priority": "medium",
+        "assignment_reason": "API 直接匹配: seobaike-ai-fast → SEOBAIKE Eta"
       },
       {
-        "task_id": "054a89fe-4ad7-4285-b85f-8f758d23bbaa",
-        "task_number": 8,
-        "description": "呼叫 DeepSeek 程式碼審查",
-        "priority": "high",
-        "assignment_reason": "API 直接匹配: anthropic-claude → Anthropic"
-      },
-      {
-        "task_id": "2c4b4a57-38f9-464e-b118-2037fe9453cb",
+        "task_id": "262f936f-b9e3-4f2f-948c-a68e07931305",
         "task_number": 21,
-        "description": "執行 startup-demo.tw 反向連結分析",
-        "priority": "high",
-        "assignment_reason": "API 直接匹配: anthropic-claude → Anthropic"
-      },
-      {
-        "task_id": "14db78a4-d64c-46e6-a70e-cca44637e238",
-        "task_number": 24,
-        "description": "呼叫 NVIDIA NIM API 推論 多語言本地化",
-        "priority": "high",
-        "assignment_reason": "API 直接匹配: anthropic-claude → Anthropic"
-      },
-      {
-        "task_id": "826211af-f887-4a77-b419-59e612b19153",
-        "task_number": 49,
-        "description": "執行 medical-center.com 技術 SEO 稽核",
-        "priority": "low",
-        "assignment_reason": "API 直接匹配: anthropic-claude → Anthropic"
-      },
-      {
-        "task_id": "1f2e0c12-8d31-4531-8332-fa190c7d3e5d",
-        "task_number": 61,
-        "description": "呼叫 Meta Llama 多語言翻譯",
-        "priority": "low",
-        "assignment_reason": "API 直接匹配: anthropic-claude → Anthropic"
-      },
-      {
-        "task_id": "d35b9567-fbff-477e-94d9-39342a337308",
-        "task_number": 62,
-        "description": "呼叫 Google Gemini 翻譯 量子計算應用",
-        "priority": "high",
-        "assignment_reason": "API 直接匹配: anthropic-claude → Anthropic"
-      }
-    ],
-    "Replicate": [
-      {
-        "task_id": "24a1b76d-f8af-4f6a-8d19-3f8b9ab2791f",
-        "task_number": 18,
-        "description": "呼叫 Meta Llama 多語言翻譯",
+        "description": "分析 example-client-a.com 網站 SEO 健檢",
         "priority": "medium",
-        "assignment_reason": "API 直接匹配: replicate → Replicate"
+        "assignment_reason": "API 直接匹配: seobaike-ai-fast → SEOBAIKE Eta"
       },
       {
-        "task_id": "6456eb4f-66f0-4cb0-bdfb-b11e54392ae3",
-        "task_number": 50,
-        "description": "呼叫 OpenAI GPT-4o 摘要 碳排放追蹤",
-        "priority": "medium",
-        "assignment_reason": "API 直接匹配: replicate → Replicate"
-      },
-      {
-        "task_id": "cef89466-561c-4f0f-9e6e-6955b3148f4b",
-        "task_number": 60,
-        "description": "呼叫 Google Gemini 翻譯 量子計算應用",
-        "priority": "high",
-        "assignment_reason": "API 直接匹配: replicate → Replicate"
-      },
-      {
-        "task_id": "5a40e88f-9229-4198-a99b-fbf8d6f0fc63",
-        "task_number": 79,
-        "description": "呼叫 DeepSeek 程式碼審查",
-        "priority": "low",
-        "assignment_reason": "API 直接匹配: replicate → Replicate"
-      },
-      {
-        "task_id": "7516e50e-16f9-4041-8412-e428b479d74d",
-        "task_number": 93,
-        "description": "呼叫 Meta Llama 多語言翻譯",
-        "priority": "medium",
-        "assignment_reason": "API 直接匹配: replicate → Replicate"
-      }
-    ],
-    "Stability": [
-      {
-        "task_id": "6953522e-2fe4-42d7-b394-99f46d8c3655",
-        "task_number": 9,
-        "description": "生成 遊戲娛樂 社群媒體策略",
-        "priority": "high",
-        "assignment_reason": "API 直接匹配: stability-ai → Stability"
-      },
-      {
-        "task_id": "bf698359-daf8-41ee-bf49-93906382cbd5",
-        "task_number": 29,
-        "description": "執行 enterprise-corp.com 技術 SEO 稽核",
-        "priority": "medium",
-        "assignment_reason": "API 直接匹配: stability-ai → Stability"
-      },
-      {
-        "task_id": "8b31dc7f-4309-4876-84c8-e37f2ab50baa",
-        "task_number": 31,
-        "description": "執行 example-client-b.com 技術 SEO 稽核",
-        "priority": "high",
-        "assignment_reason": "API 直接匹配: stability-ai → Stability"
-      },
-      {
-        "task_id": "e20e5dd2-d075-4266-b411-4548cff75160",
-        "task_number": 44,
-        "description": "執行 enterprise-corp.com 反向連結分析",
-        "priority": "high",
-        "assignment_reason": "API 直接匹配: stability-ai → Stability"
-      },
-      {
-        "task_id": "48de75d4-8314-4cf3-a067-957f9cd21f50",
-        "task_number": 80,
-        "description": "分析 農業科技 產業競爭對手",
-        "priority": "high",
-        "assignment_reason": "API 直接匹配: stability-ai → Stability"
-      },
-      {
-        "task_id": "0b1be9e3-fa0e-4479-9745-60c526ea3335",
-        "task_number": 89,
-        "description": "生成 製造業 社群媒體策略",
-        "priority": "medium",
-        "assignment_reason": "API 直接匹配: stability-ai → Stability"
-      }
-    ],
-    "Claude": [
-      {
-        "task_id": "5c04e228-c86b-4a26-8218-19ec0c90763a",
-        "task_number": 71,
-        "description": "生成 醫療健康 電子報模板",
-        "priority": "high",
-        "assignment_reason": "負載均衡分配: Claude (當前任務數=0)"
-      },
-      {
-        "task_id": "3d382cf7-b1ea-480f-966f-739e3a3b57f2",
-        "task_number": 90,
-        "description": "生成 製造業 白皮書草稿",
-        "priority": "high",
-        "assignment_reason": "負載均衡分配: Claude (當前任務數=1)"
-      }
-    ],
-    "Meta": [
-      {
-        "task_id": "854607e9-1208-47af-a4a8-cebcc796edd9",
-        "task_number": 2,
-        "description": "呼叫 Meta Llama 多語言翻譯",
-        "priority": "medium",
-        "assignment_reason": "專長匹配: Meta (分數=4)"
-      },
-      {
-        "task_id": "bf122f7a-b541-4c62-aacb-f2ff85f8495c",
-        "task_number": 19,
-        "description": "分析 零售業 產業競爭對手",
-        "priority": "low",
-        "assignment_reason": "API 直接匹配: meta-llama → Meta"
-      },
-      {
-        "task_id": "0e60aad9-8e23-4cd5-8ab7-0379a3bdc6cc",
-        "task_number": 27,
-        "description": "分析 enterprise-corp.com 使用者行為數據",
-        "priority": "high",
-        "assignment_reason": "API 直接匹配: meta-llama → Meta"
-      },
-      {
-        "task_id": "627deb16-45b8-4054-8f7f-63d289fe5ea8",
+        "task_id": "63770bb7-b135-436b-a33a-f75fd2095aaa",
         "task_number": 32,
-        "description": "執行 ecommerce-shop.tw 技術 SEO 稽核",
-        "priority": "low",
-        "assignment_reason": "API 直接匹配: meta-llama → Meta"
-      },
-      {
-        "task_id": "26ee3e97-b4f2-4d71-b264-85a778755b92",
-        "task_number": 54,
-        "description": "生成 電子商務 關鍵字研究報告",
+        "description": "呼叫 SEOBAIKE 搜尋 AI 搜尋 Web3整合方案 最新資訊",
         "priority": "high",
-        "assignment_reason": "API 直接匹配: meta-llama → Meta"
+        "assignment_reason": "API 直接匹配: seobaike-ai-fast → SEOBAIKE Eta"
       },
       {
-        "task_id": "9c6f4736-5018-4fa0-821e-9ec764399695",
-        "task_number": 58,
-        "description": "生成 產業約束分析 行銷文案",
-        "priority": "low",
-        "assignment_reason": "API 直接匹配: meta-llama → Meta"
+        "task_id": "2ac6a897-44fb-44e5-adcd-35f4ff6484e6",
+        "task_number": 39,
+        "description": "生成 網路安全 白皮書草稿",
+        "priority": "medium",
+        "assignment_reason": "API 直接匹配: seobaike-ai-fast → SEOBAIKE Eta"
       },
       {
-        "task_id": "c8cd4115-730f-46e1-8350-a6c34e6f8f35",
+        "task_id": "1a214b1b-b6ec-4ee8-903f-0c96cc353e12",
+        "task_number": 68,
+        "description": "生成 AI推理效能 影片腳本",
+        "priority": "high",
+        "assignment_reason": "API 直接匹配: seobaike-ai-fast → SEOBAIKE Eta"
+      },
+      {
+        "task_id": "d02620ee-13e4-4119-a716-634e93f908f8",
         "task_number": 88,
-        "description": "生成 餐飲服務 產業分析報告",
+        "description": "呼叫 SEOBAIKE 搜尋翻譯 客戶行為預測",
+        "priority": "high",
+        "assignment_reason": "API 直接匹配: seobaike-ai-fast → SEOBAIKE Eta"
+      },
+      {
+        "task_id": "5b4476b0-bd0f-4eb7-956c-ddf58961f63a",
+        "task_number": 92,
+        "description": "分析 保險科技 產業競爭對手",
+        "priority": "medium",
+        "assignment_reason": "API 直接匹配: seobaike-ai-fast → SEOBAIKE Eta"
+      },
+      {
+        "task_id": "bc8d13b1-b06a-427d-b9c1-0bb45476a41c",
+        "task_number": 93,
+        "description": "呼叫 SEOBAIKE AI 多語言翻譯",
         "priority": "low",
-        "assignment_reason": "API 直接匹配: meta-llama → Meta"
+        "assignment_reason": "API 直接匹配: seobaike-ai-fast → SEOBAIKE Eta"
+      }
+    ],
+    "SEOBAIKE Theta": [
+      {
+        "task_id": "1c481b7c-fe54-4d54-a5f1-eead40e2cfe7",
+        "task_number": 1,
+        "description": "分析 fintech-app.tw 使用者行為數據",
+        "priority": "high",
+        "assignment_reason": "API 直接匹配: seobaike-ai-rag → SEOBAIKE Theta"
+      },
+      {
+        "task_id": "5e5bd3d7-09f9-43c5-b568-4664861b9118",
+        "task_number": 7,
+        "description": "分析 網路安全 供應鏈風險評估",
+        "priority": "low",
+        "assignment_reason": "API 直接匹配: seobaike-ai-rag → SEOBAIKE Theta"
+      },
+      {
+        "task_id": "50416cb3-d317-4aaf-ba97-84cc7dd16a73",
+        "task_number": 11,
+        "description": "分析 logistics-hub.tw 網站 SEO 健檢",
+        "priority": "low",
+        "assignment_reason": "API 直接匹配: seobaike-ai-rag → SEOBAIKE Theta"
+      },
+      {
+        "task_id": "a34fb0c5-1fb6-4c11-a6f8-99c75e674b35",
+        "task_number": 34,
+        "description": "生成 媒體傳播 社群媒體策略",
+        "priority": "low",
+        "assignment_reason": "API 直接匹配: seobaike-ai-rag → SEOBAIKE Theta"
+      },
+      {
+        "task_id": "5af3b735-1f75-40fe-bf84-f8ec54e932ce",
+        "task_number": 49,
+        "description": "呼叫 SEOBAIKE AI Hub 模型推論",
+        "priority": "medium",
+        "assignment_reason": "API 直接匹配: seobaike-ai-rag → SEOBAIKE Theta"
+      },
+      {
+        "task_id": "fabe7868-388e-4d19-9ede-708f656e4039",
+        "task_number": 78,
+        "description": "呼叫 SEOBAIKE 搜尋翻譯 供應鏈數位化",
+        "priority": "low",
+        "assignment_reason": "API 直接匹配: seobaike-ai-rag → SEOBAIKE Theta"
+      }
+    ],
+    "SEOBAIKE Iota": [
+      {
+        "task_id": "fbc5cbf4-336c-483f-a963-72420be126a4",
+        "task_number": 2,
+        "description": "生成 法律科技 社群媒體策略",
+        "priority": "high",
+        "assignment_reason": "API 直接匹配: seobaike-ai-open → SEOBAIKE Iota"
+      },
+      {
+        "task_id": "d513aab2-8920-4b94-922d-a65502cdfdbd",
+        "task_number": 15,
+        "description": "分析 edu-platform.com 使用者行為數據",
+        "priority": "high",
+        "assignment_reason": "API 直接匹配: seobaike-ai-open → SEOBAIKE Iota"
+      },
+      {
+        "task_id": "5f1cae66-60b1-457b-99dc-77183ab485ed",
+        "task_number": 17,
+        "description": "呼叫 SEOBAIKE AI 程式碼生成",
+        "priority": "high",
+        "assignment_reason": "API 直接匹配: seobaike-ai-open → SEOBAIKE Iota"
+      },
+      {
+        "task_id": "1d1ad5db-79d4-452f-840b-bfb4481a0330",
+        "task_number": 24,
+        "description": "呼叫 SEOBAIKE AI 程式碼審查",
+        "priority": "low",
+        "assignment_reason": "API 直接匹配: seobaike-ai-open → SEOBAIKE Iota"
+      },
+      {
+        "task_id": "c7e1ce86-4de8-4b87-bba9-7127c886368b",
+        "task_number": 30,
+        "description": "執行 logistics-hub.tw 技術 SEO 稽核",
+        "priority": "medium",
+        "assignment_reason": "API 直接匹配: seobaike-ai-open → SEOBAIKE Iota"
+      },
+      {
+        "task_id": "3a0841ab-6a13-4716-8b90-ba3f83a4f389",
+        "task_number": 45,
+        "description": "執行 example-client-b.com 行動端適配檢查",
+        "priority": "medium",
+        "assignment_reason": "API 直接匹配: seobaike-ai-open → SEOBAIKE Iota"
+      },
+      {
+        "task_id": "64a004dd-98c1-490f-a309-c47382972389",
+        "task_number": 90,
+        "description": "生成 半導體 關鍵字研究報告",
+        "priority": "low",
+        "assignment_reason": "API 直接匹配: seobaike-ai-open → SEOBAIKE Iota"
+      },
+      {
+        "task_id": "0b83e1b0-8cba-4443-8b33-40267da15223",
+        "task_number": 97,
+        "description": "執行 aiforseo.vip 行動端適配檢查",
+        "priority": "high",
+        "assignment_reason": "API 直接匹配: seobaike-ai-open → SEOBAIKE Iota"
+      }
+    ],
+    "SEOBAIKE Kappa": [
+      {
+        "task_id": "6bbf10e4-3506-4232-bcda-a41ef4bcf7dc",
+        "task_number": 27,
+        "description": "呼叫 SEOBAIKE AI 摘要 碳排放追蹤",
+        "priority": "high",
+        "assignment_reason": "API 直接匹配: seobaike-ai-hub → SEOBAIKE Kappa"
+      },
+      {
+        "task_id": "5bc8483d-42b0-40f5-a4ba-38cd358bcd9e",
+        "task_number": 63,
+        "description": "生成 媒體傳播 品牌定位分析",
+        "priority": "medium",
+        "assignment_reason": "API 直接匹配: seobaike-ai-hub → SEOBAIKE Kappa"
+      },
+      {
+        "task_id": "b1a63431-5ac5-4c69-81b7-26e6845ab351",
+        "task_number": 69,
+        "description": "分析 半導體 市場趨勢預測",
+        "priority": "high",
+        "assignment_reason": "API 直接匹配: seobaike-ai-hub → SEOBAIKE Kappa"
+      }
+    ],
+    "SEOBAIKE Lambda": [
+      {
+        "task_id": "f5d33fae-3bc4-416a-b741-f791c0c0ef74",
+        "task_number": 36,
+        "description": "生成 旅遊觀光 品牌定位分析",
+        "priority": "high",
+        "assignment_reason": "API 直接匹配: seobaike-ai-analyst → SEOBAIKE Lambda"
+      },
+      {
+        "task_id": "8016f518-75de-4eb9-8bcf-e48686ba843f",
+        "task_number": 65,
+        "description": "呼叫 SEOBAIKE AI 程式碼生成",
+        "priority": "low",
+        "assignment_reason": "API 直接匹配: seobaike-ai-analyst → SEOBAIKE Lambda"
+      },
+      {
+        "task_id": "4ab5740d-7321-4eed-9cbe-3db561496c96",
+        "task_number": 66,
+        "description": "生成 智慧城市規劃 行銷文案",
+        "priority": "medium",
+        "assignment_reason": "API 直接匹配: seobaike-ai-analyst → SEOBAIKE Lambda"
+      },
+      {
+        "task_id": "b82dc90a-f914-4b43-bbef-c085f260536c",
+        "task_number": 72,
+        "description": "生成 零售業 電子報模板",
+        "priority": "medium",
+        "assignment_reason": "API 直接匹配: seobaike-ai-analyst → SEOBAIKE Lambda"
+      }
+    ],
+    "SEOBAIKE Mu": [
+      {
+        "task_id": "6da75308-8ce0-4f27-8d7f-33d5db4a8977",
+        "task_number": 3,
+        "description": "分析 製造業 供應鏈風險評估",
+        "priority": "high",
+        "assignment_reason": "API 直接匹配: seobaike-ai-deploy → SEOBAIKE Mu"
+      },
+      {
+        "task_id": "8da78359-533b-472e-9d2b-08a93b8dfcb1",
+        "task_number": 43,
+        "description": "呼叫 SEOBAIKE AI 程式碼審查",
+        "priority": "medium",
+        "assignment_reason": "API 直接匹配: seobaike-ai-deploy → SEOBAIKE Mu"
+      },
+      {
+        "task_id": "3f822b42-5a6d-47c1-8c09-f8e5797018a4",
+        "task_number": 79,
+        "description": "呼叫 SEOBAIKE 搜尋翻譯 精準醫療",
+        "priority": "medium",
+        "assignment_reason": "API 直接匹配: seobaike-ai-deploy → SEOBAIKE Mu"
+      },
+      {
+        "task_id": "62722712-9bd4-4575-9455-2e39b5cd2a91",
+        "task_number": 84,
+        "description": "生成 旅遊觀光 產業分析報告",
+        "priority": "high",
+        "assignment_reason": "API 直接匹配: seobaike-ai-deploy → SEOBAIKE Mu"
+      }
+    ],
+    "SEOBAIKE Nu": [
+      {
+        "task_id": "eef8abf3-700a-41c1-848b-9f4a3e9d05a7",
+        "task_number": 13,
+        "description": "生成 區塊鏈 白皮書草稿",
+        "priority": "high",
+        "assignment_reason": "API 直接匹配: seobaike-ai-image → SEOBAIKE Nu"
+      },
+      {
+        "task_id": "ee74cc11-0169-4300-b1a5-3e659f9f4921",
+        "task_number": 62,
+        "description": "分析 example-client-a.com 網站效能與速度",
+        "priority": "low",
+        "assignment_reason": "API 直接匹配: seobaike-ai-image → SEOBAIKE Nu"
+      },
+      {
+        "task_id": "82846f99-0388-41fa-a115-bcfcce828815",
+        "task_number": 73,
+        "description": "生成 不動產 白皮書草稿",
+        "priority": "high",
+        "assignment_reason": "API 直接匹配: seobaike-ai-image → SEOBAIKE Nu"
+      }
+    ],
+    "SEOBAIKE Xi": [
+      {
+        "task_id": "2c250e8f-470e-4029-bd73-83f25551a5d8",
+        "task_number": 67,
+        "description": "執行 aiforseo.vip 技術 SEO 稽核",
+        "priority": "low",
+        "assignment_reason": "負載均衡分配: SEOBAIKE Xi (當前任務數=0)"
+      },
+      {
+        "task_id": "84956905-e1d7-4870-8f17-bf34203f05ed",
+        "task_number": 74,
+        "description": "生成 enterprise-corp.com 結構化資料標記",
+        "priority": "low",
+        "assignment_reason": "負載均衡分配: SEOBAIKE Xi (當前任務數=1)"
+      }
+    ],
+    "SEOBAIKE Omicron": [
+      {
+        "task_id": "d59d25e5-cce4-49c5-bc41-8ef97e6e2bb6",
+        "task_number": 31,
+        "description": "生成 遊戲娛樂 內容行事曆",
+        "priority": "medium",
+        "assignment_reason": "API 直接匹配: seobaike-ai-multilang → SEOBAIKE Omicron"
+      },
+      {
+        "task_id": "38700ff4-d4ca-452a-bdb7-ce76d29e97a2",
+        "task_number": 56,
+        "description": "呼叫 SEOBAIKE AI 程式碼生成",
+        "priority": "high",
+        "assignment_reason": "API 直接匹配: seobaike-ai-multilang → SEOBAIKE Omicron"
+      },
+      {
+        "task_id": "f20fe4ef-314f-43f8-b62a-6f76c8613181",
+        "task_number": 75,
+        "description": "分析 餐飲服務 產業競爭對手",
+        "priority": "high",
+        "assignment_reason": "API 直接匹配: seobaike-ai-multilang → SEOBAIKE Omicron"
+      },
+      {
+        "task_id": "1046de0b-9ada-4759-a9fa-bd5b9909933d",
+        "task_number": 76,
+        "description": "生成 電子商務 電子報模板",
+        "priority": "low",
+        "assignment_reason": "API 直接匹配: seobaike-ai-multilang → SEOBAIKE Omicron"
       }
     ]
   }

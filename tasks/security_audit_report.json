@@ -1,17 +1,17 @@
 {
-  "audit_timestamp": "2026-02-15T20:12:06.403435",
+  "audit_timestamp": "2026-02-15T23:57:14.919357",
   "auditor": "SEOBAIKE SelfAuditor v2.0（完整版）",
   "patent": "TW-115100981",
   "company": "小路光有限公司",
   "ceo": "許竣翔",
   "version": "2.0 — 10/10 項全部真正實作",
-  "security_score": 100,
-  "grade": "A+",
+  "security_score": 82,
+  "grade": "B",
   "total_checks": 10,
   "implemented_checks": 10,
   "unimplemented_checks": 0,
-  "vulnerable_count": 0,
-  "safe_count": 10,
+  "vulnerable_count": 2,
+  "safe_count": 8,
   "findings": [
     {
       "vulnerability": {
@@ -41,12 +41,91 @@
         "deduction": 15
       },
       "result": {
-        "vulnerable": false,
-        "findings": [],
-        "note_zh": "未發現硬編碼金鑰（CLAUDE.md 排除）"
+        "vulnerable": true,
+        "findings": [
+          {
+            "file": ".\\pages-site\\about.html",
+            "type": "JWT Token",
+            "count": 1,
+            "pattern_preview": "[\"\\']eyJ[a-zA-Z0-9_-]{10,}\\.[a-zA-Z0-9_-"
+          },
+          {
+            "file": ".\\pages-site\\blog.html",
+            "type": "JWT Token",
+            "count": 1,
+            "pattern_preview": "[\"\\']eyJ[a-zA-Z0-9_-]{10,}\\.[a-zA-Z0-9_-"
+          },
+          {
+            "file": ".\\pages-site\\contact.html",
+            "type": "JWT Token",
+            "count": 1,
+            "pattern_preview": "[\"\\']eyJ[a-zA-Z0-9_-]{10,}\\.[a-zA-Z0-9_-"
+          },
+          {
+            "file": ".\\pages-site\\dashboard.html",
+            "type": "JWT Token",
+            "count": 1,
+            "pattern_preview": "[\"\\']eyJ[a-zA-Z0-9_-]{10,}\\.[a-zA-Z0-9_-"
+          },
+          {
+            "file": ".\\pages-site\\docs.html",
+            "type": "JWT Token",
+            "count": 1,
+            "pattern_preview": "[\"\\']eyJ[a-zA-Z0-9_-]{10,}\\.[a-zA-Z0-9_-"
+          },
+          {
+            "file": ".\\pages-site\\ecosystem.html",
+            "type": "JWT Token",
+            "count": 1,
+            "pattern_preview": "[\"\\']eyJ[a-zA-Z0-9_-]{10,}\\.[a-zA-Z0-9_-"
+          },
+          {
+            "file": ".\\pages-site\\features.html",
+            "type": "JWT Token",
+            "count": 1,
+            "pattern_preview": "[\"\\']eyJ[a-zA-Z0-9_-]{10,}\\.[a-zA-Z0-9_-"
+          },
+          {
+            "file": ".\\pages-site\\index.html",
+            "type": "JWT Token",
+            "count": 1,
+            "pattern_preview": "[\"\\']eyJ[a-zA-Z0-9_-]{10,}\\.[a-zA-Z0-9_-"
+          },
+          {
+            "file": ".\\pages-site\\login.html",
+            "type": "JWT Token",
+            "count": 1,
+            "pattern_preview": "[\"\\']eyJ[a-zA-Z0-9_-]{10,}\\.[a-zA-Z0-9_-"
+          },
+          {
+            "file": ".\\pages-site\\marketing.html",
+            "type": "JWT Token",
+            "count": 1,
+            "pattern_preview": "[\"\\']eyJ[a-zA-Z0-9_-]{10,}\\.[a-zA-Z0-9_-"
+          },
+          {
+            "file": ".\\pages-site\\pricing.html",
+            "type": "JWT Token",
+            "count": 1,
+            "pattern_preview": "[\"\\']eyJ[a-zA-Z0-9_-]{10,}\\.[a-zA-Z0-9_-"
+          },
+          {
+            "file": ".\\pages-site\\privacy.html",
+            "type": "JWT Token",
+            "count": 1,
+            "pattern_preview": "[\"\\']eyJ[a-zA-Z0-9_-]{10,}\\.[a-zA-Z0-9_-"
+          },
+          {
+            "file": ".\\pages-site\\terms.html",
+            "type": "JWT Token",
+            "count": 1,
+            "pattern_preview": "[\"\\']eyJ[a-zA-Z0-9_-]{10,}\\.[a-zA-Z0-9_-"
+          }
+        ],
+        "note_zh": "在 13 個位置發現硬編碼金鑰"
       },
-      "status": "SAFE",
-      "score_impact": 0
+      "status": "VULNERABLE",
+      "score_impact": -15
     },
     {
       "vulnerability": {
@@ -108,8 +187,8 @@
       "result": {
         "vulnerable": false,
         "findings": [],
-        "safe_query_count": 37,
-        "note_zh": "未發現 SQL 注入風險，37 個安全參數化查詢"
+        "safe_query_count": 59,
+        "note_zh": "未發現 SQL 注入風險，59 個安全參數化查詢"
       },
       "status": "SAFE",
       "score_impact": 0
@@ -243,14 +322,39 @@
             "count": 1
           },
           {
+            "file": ".\\pages-site\\dashboard.html",
+            "type": "innerHTML 直接賦值",
+            "count": 6
+          },
+          {
+            "file": ".\\pages-site\\docs.html",
+            "type": "innerHTML 直接賦值",
+            "count": 4
+          },
+          {
             "file": ".\\pages-site\\ecosystem.html",
             "type": "innerHTML 直接賦值",
             "count": 2
           },
           {
+            "file": ".\\pages-site\\index.html",
+            "type": "innerHTML 直接賦值",
+            "count": 1
+          },
+          {
+            "file": ".\\pages-site\\login.html",
+            "type": "innerHTML 直接賦值",
+            "count": 2
+          },
+          {
+            "file": ".\\pages-site\\marketing.html",
+            "type": "innerHTML 直接賦值",
+            "count": 1
+          },
+          {
             "file": ".\\pages-site\\seobaike-widget.js",
             "type": "innerHTML 直接賦值",
-            "count": 5
+            "count": 6
           },
           {
             "file": ".\\security\\self_audit.py",
@@ -269,12 +373,12 @@
           }
         ],
         "security_headers": [
-          "X-Content-Type-Options",
+          "X-XSS-Protection",
           "CSP",
-          "X-XSS-Protection"
+          "X-Content-Type-Options"
         ],
         "has_security_headers": true,
-        "note_zh": "發現 15 個 XSS 風險點，但有安全標頭：X-Content-Type-Options, CSP, X-XSS-Protection"
+        "note_zh": "發現 20 個 XSS 風險點，但有安全標頭：X-XSS-Protection, CSP, X-Content-Type-Options"
       },
       "status": "SAFE",
       "score_impact": 0
@@ -289,13 +393,20 @@
         "deduction": 3
       },
       "result": {
-        "vulnerable": false,
-        "findings": [],
+        "vulnerable": true,
+        "findings": [
+          {
+            "file": ".\\pages-site\\seobaike-widget.js",
+            "type": "JS Math.random()",
+            "count": 1,
+            "has_safe_alternative_in_file": false
+          }
+        ],
         "has_safe_random_elsewhere": false,
-        "note_zh": "未發現不安全隨機數使用（含已審核標註 unsafe-random-ok 的檔案）"
+        "note_zh": "發現 1 個不安全隨機數使用（1 個無替代方案）"
       },
-      "status": "SAFE",
-      "score_impact": 0
+      "status": "VULNERABLE",
+      "score_impact": -3
     }
   ],
   "integrity_note": "所有 10 項安全檢查均為真正實作，無「預設安全」或空殼檢查"

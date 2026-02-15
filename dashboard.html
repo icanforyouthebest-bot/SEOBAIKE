@@ -48,6 +48,235 @@ body { font-family: 'Segoe UI', sans-serif; background: #0a0a1a; color: #eee; mi
 .route .name { color: #e8850c; font-weight: bold; }
 .route .path { color: #888; }
 .footer { text-align: center; padding: 16px; color: #333; font-size: 11px; }
+
+/* === AI 主動歡迎面板 === */
+.ai-welcome {
+  margin: 20px 30px;
+  background: linear-gradient(135deg, rgba(232,133,12,0.15) 0%, rgba(204,120,92,0.10) 40%, rgba(26,26,46,0.95) 100%);
+  border: 1px solid rgba(232,133,12,0.3);
+  border-radius: 20px;
+  padding: 32px;
+  position: relative;
+  overflow: hidden;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+.ai-welcome::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle at 30% 40%, rgba(232,133,12,0.08) 0%, transparent 60%);
+  pointer-events: none;
+}
+.ai-welcome-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 8px;
+  position: relative;
+  z-index: 1;
+}
+.ai-ready-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #e8850c;
+  animation: aiPulse 1.5s ease-in-out infinite;
+  flex-shrink: 0;
+}
+@keyframes aiPulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(232,133,12,0.6); }
+  50% { box-shadow: 0 0 0 8px rgba(232,133,12,0); }
+}
+.ai-welcome-header .ai-label {
+  font-size: 11px;
+  color: #e8850c;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-weight: 600;
+}
+.ai-greeting {
+  font-size: 26px;
+  font-weight: bold;
+  background: linear-gradient(90deg, #e8850c, #ffa040);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 4px;
+  position: relative;
+  z-index: 1;
+}
+.ai-subtitle {
+  font-size: 14px;
+  color: #aaa;
+  margin-bottom: 24px;
+  position: relative;
+  z-index: 1;
+}
+
+/* 推薦行動卡片 */
+.ai-cards {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+  margin-bottom: 24px;
+  position: relative;
+  z-index: 1;
+}
+.ai-action-card {
+  background: rgba(22,33,62,0.8);
+  border: 1px solid rgba(232,133,12,0.2);
+  border-radius: 14px;
+  padding: 20px 16px;
+  text-align: center;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+  backdrop-filter: blur(8px);
+}
+.ai-action-card:hover {
+  transform: translateY(-6px);
+  border-color: #e8850c;
+  box-shadow: 0 12px 32px rgba(232,133,12,0.2);
+  background: rgba(232,133,12,0.1);
+}
+.ai-action-card .card-icon {
+  font-size: 32px;
+  margin-bottom: 10px;
+  display: block;
+}
+.ai-action-card .card-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: #eee;
+  margin-bottom: 12px;
+  line-height: 1.4;
+}
+.ai-action-card .card-btn {
+  display: inline-block;
+  padding: 6px 16px;
+  background: linear-gradient(135deg, #e8850c, #cc785c);
+  color: #fff;
+  border: none;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.ai-action-card .card-btn:hover {
+  background: linear-gradient(135deg, #ffa040, #e8850c);
+  box-shadow: 0 4px 16px rgba(232,133,12,0.4);
+}
+
+/* 今日快速行動 */
+.ai-quick-actions {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 20px;
+  position: relative;
+  z-index: 1;
+  flex-wrap: wrap;
+}
+.ai-quick-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  background: rgba(232,133,12,0.12);
+  border: 1px solid rgba(232,133,12,0.3);
+  border-radius: 30px;
+  color: #e8850c;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.25s;
+  text-decoration: none;
+}
+.ai-quick-btn:hover {
+  background: rgba(232,133,12,0.25);
+  border-color: #e8850c;
+  transform: scale(1.04);
+  box-shadow: 0 4px 20px rgba(232,133,12,0.15);
+}
+
+/* AI 洞察跑馬燈 */
+.ai-ticker {
+  position: relative;
+  z-index: 1;
+  background: rgba(10,10,26,0.6);
+  border-radius: 10px;
+  padding: 10px 16px;
+  overflow: hidden;
+  height: 38px;
+}
+.ai-ticker-track {
+  display: flex;
+  flex-direction: column;
+  animation: tickerScroll 12s ease-in-out infinite;
+}
+.ai-ticker-item {
+  font-size: 13px;
+  color: #ccc;
+  white-space: nowrap;
+  line-height: 18px;
+  height: 18px;
+}
+.ai-ticker-item span.highlight {
+  color: #e8850c;
+  font-weight: 600;
+}
+@keyframes tickerScroll {
+  0%, 18%   { transform: translateY(0); }
+  22%, 40%  { transform: translateY(-18px); }
+  44%, 62%  { transform: translateY(-36px); }
+  66%, 84%  { transform: translateY(-54px); }
+  88%, 100% { transform: translateY(0); }
+}
+
+/* 無資料面板 */
+.ai-welcome-empty {
+  margin: 20px 30px;
+  background: linear-gradient(135deg, rgba(232,133,12,0.12) 0%, rgba(26,26,46,0.95) 100%);
+  border: 1px solid rgba(232,133,12,0.25);
+  border-radius: 20px;
+  padding: 32px;
+  text-align: center;
+  backdrop-filter: blur(16px);
+}
+.ai-welcome-empty .empty-text {
+  font-size: 18px;
+  color: #eee;
+  margin-bottom: 16px;
+}
+.ai-welcome-empty .empty-cta {
+  display: inline-block;
+  padding: 12px 28px;
+  background: linear-gradient(135deg, #e8850c, #cc785c);
+  color: #fff;
+  border-radius: 30px;
+  font-size: 15px;
+  font-weight: 700;
+  text-decoration: none;
+  transition: all 0.3s;
+}
+.ai-welcome-empty .empty-cta:hover {
+  transform: scale(1.06);
+  box-shadow: 0 8px 28px rgba(232,133,12,0.35);
+}
+
+/* 響應式 */
+@media (max-width: 900px) {
+  .ai-cards { grid-template-columns: repeat(2, 1fr); }
+  .ai-welcome { margin: 12px 14px; padding: 22px; }
+  .ai-greeting { font-size: 20px; }
+  .ai-quick-actions { flex-direction: column; }
+}
+@media (max-width: 520px) {
+  .ai-cards { grid-template-columns: 1fr; }
+  .ai-greeting { font-size: 18px; }
+}
 </style>
 </head>
 <body>
@@ -59,6 +288,9 @@ body { font-family: 'Segoe UI', sans-serif; background: #0a0a1a; color: #eee; mi
   <span class="badge" style="background:#111;color:#0f0;border:1px solid #333;"><span class="live-dot"></span><span id="status">連線中...</span></span>
   <span style="margin-left:auto;font-size:12px;color:#888;" id="clock"></span>
 </div>
+
+<!-- === AI 主動歡迎面板 === -->
+<div id="aiWelcomePanel"></div>
 
 <div class="grid" id="mainGrid">
   <div class="card"><div class="num" id="d-l1">--</div><div class="lbl">L1 產業類別</div></div>
@@ -207,6 +439,179 @@ async function tick() {
 
 tick();
 setInterval(tick, 5000);
+
+/* ===== AI 主動歡迎面板邏輯 ===== */
+(function() {
+  var panelRoot = document.getElementById("aiWelcomePanel");
+  var profile = null;
+  try { profile = JSON.parse(localStorage.getItem("seobaike_profile")); } catch(e) {}
+
+  /* ---------- 無資料狀態 ---------- */
+  if (!profile || !profile.industry || !profile.need) {
+    panelRoot.innerHTML =
+      '<div class="ai-welcome-empty">' +
+        '<div style="font-size:36px;margin-bottom:12px;">&#x1F916;</div>' +
+        '<div class="empty-text">&#x55E8;&#xFF01;&#x544A;&#x8A34;&#x6211;&#x4F60;&#x505A;&#x4EC0;&#x9EBC;&#x7684;&#xFF0C;&#x6211;&#x5E6B;&#x4F60;&#x6E96;&#x5099;&#x597D;&#x4E00;&#x5207; &#x2192;</div>' +
+        '<a class="empty-cta" href="/start">&#x958B;&#x59CB;&#x8A2D;&#x5B9A;&#x6211;&#x7684; AI &#x52A9;&#x7406;</a>' +
+      '</div>';
+    return;
+  }
+
+  /* ---------- 時段問候 ---------- */
+  var h = new Date().getHours();
+  var greetWord = h < 12 ? "早安" : h < 18 ? "午安" : "晚安";
+
+  /* ---------- 行業 + 需求 → 推薦卡片 ---------- */
+  var cardMap = {
+    "餐飲|行銷": [
+      { icon:"&#x1F37D;&#xFE0F;", title:"發布今日特餐推文" },
+      { icon:"&#x1F4F8;", title:"生成菜單美圖" },
+      { icon:"&#x1F4AC;", title:"回覆顧客評論" },
+      { icon:"&#x1F4C8;", title:"分析來客數據" }
+    ],
+    "餐飲|自動化": [
+      { icon:"&#x1F916;", title:"自動回覆訂位訊息" },
+      { icon:"&#x1F4CB;", title:"生成每日備料清單" },
+      { icon:"&#x1F514;", title:"設定庫存提醒" },
+      { icon:"&#x1F4CA;", title:"分析營收趨勢" }
+    ],
+    "科技|行銷": [
+      { icon:"&#x1F4DD;", title:"撰寫產品發佈文案" },
+      { icon:"&#x1F310;", title:"優化網站 SEO" },
+      { icon:"&#x1F4E7;", title:"發送電子報" },
+      { icon:"&#x1F4CA;", title:"追蹤轉換成效" }
+    ],
+    "科技|自動化": [
+      { icon:"&#x1F916;", title:"自動回覆客戶" },
+      { icon:"&#x1F4C4;", title:"生成技術文件" },
+      { icon:"&#x1F50D;", title:"監控 API 狀態" },
+      { icon:"&#x23F0;", title:"排程部署任務" }
+    ],
+    "零售|行銷": [
+      { icon:"&#x1F6CD;&#xFE0F;", title:"上架新品推廣文" },
+      { icon:"&#x1F3AF;", title:"建立促銷活動" },
+      { icon:"&#x2B50;", title:"回覆商品評價" },
+      { icon:"&#x1F4CA;", title:"分析熱銷品項" }
+    ],
+    "零售|自動化": [
+      { icon:"&#x1F4E6;", title:"自動更新庫存" },
+      { icon:"&#x1F4B0;", title:"生成對帳報表" },
+      { icon:"&#x1F514;", title:"低庫存預警設定" },
+      { icon:"&#x1F69A;", title:"追蹤物流狀態" }
+    ],
+    "醫療|行銷": [
+      { icon:"&#x1FA7A;", title:"發布健康衛教文" },
+      { icon:"&#x1F4C5;", title:"推廣預約看診" },
+      { icon:"&#x1F4AC;", title:"回覆病患評論" },
+      { icon:"&#x1F4CA;", title:"分析掛號趨勢" }
+    ],
+    "醫療|自動化": [
+      { icon:"&#x1F916;", title:"自動提醒回診" },
+      { icon:"&#x1F4CB;", title:"生成診療報告" },
+      { icon:"&#x23F0;", title:"排程門診提醒" },
+      { icon:"&#x1F4CA;", title:"追蹤病患滿意度" }
+    ],
+    "教育|行銷": [
+      { icon:"&#x1F393;", title:"發布開課資訊" },
+      { icon:"&#x1F4F1;", title:"生成招生素材" },
+      { icon:"&#x1F4AC;", title:"回覆學員問題" },
+      { icon:"&#x1F4CA;", title:"分析報名趨勢" }
+    ],
+    "教育|自動化": [
+      { icon:"&#x1F916;", title:"自動回覆諮詢" },
+      { icon:"&#x1F4DD;", title:"生成教學講義" },
+      { icon:"&#x1F514;", title:"上課提醒通知" },
+      { icon:"&#x1F4CA;", title:"追蹤學習成效" }
+    ]
+  };
+
+  /* 預設萬用卡片 */
+  var defaultCards = [
+    { icon:"&#x1F680;", title:"快速建立行銷內容" },
+    { icon:"&#x1F4CA;", title:"查看業績數據分析" },
+    { icon:"&#x1F916;", title:"啟動自動化流程" },
+    { icon:"&#x1F4AC;", title:"AI 客服即時協助" }
+  ];
+
+  var key = profile.industry + "|" + profile.need;
+  var cards = cardMap[key] || defaultCards;
+
+  /* ---------- 行業 → 洞察跑馬燈 ---------- */
+  var insightMap = {
+    "餐飲": [
+      "你的行業 <span class=\"highlight\">餐飲</span> 本週熱門關鍵字：週末套餐、外送優惠、季節限定",
+      "同行平均每週發 4 篇社群貼文，你可以超越他們",
+      "本月消費者搜尋「附近美食」較上月增加 12%",
+      "AI 建議：週三推出限定優惠可提高 20% 來客率"
+    ],
+    "科技": [
+      "你的行業 <span class=\"highlight\">科技</span> 本週熱門關鍵字：AI 自動化、API 整合、雲端部署",
+      "同行 85% 已導入自動化客服，效率提升 40%",
+      "本月「技術文件」相關搜尋量增加 18%",
+      "AI 建議：自動化測試流程可節省 30% 開發時間"
+    ],
+    "零售": [
+      "你的行業 <span class=\"highlight\">零售</span> 本週熱門關鍵字：限時特賣、新品上市、會員優惠",
+      "同行平均每週上架 8 件新品，搭配社群推廣",
+      "本月「優惠折扣」搜尋量較上月增加 25%",
+      "AI 建議：週五晚間推送優惠通知轉換率最高"
+    ],
+    "醫療": [
+      "你的行業 <span class=\"highlight\">醫療</span> 本週熱門關鍵字：預約看診、健康檢查、遠距醫療",
+      "同行 60% 已啟用線上預約系統，減少 35% 空號率",
+      "本月「健康諮詢」搜尋量增加 15%",
+      "AI 建議：定期發送衛教內容可提高病患回診率 22%"
+    ],
+    "教育": [
+      "你的行業 <span class=\"highlight\">教育</span> 本週熱門關鍵字：線上課程、證照考試、技能進修",
+      "同行線上課程招生轉換率平均 8%，可透過 AI 優化",
+      "本月「學習進修」搜尋量增加 20%",
+      "AI 建議：提供免費試聽可提升 35% 報名率"
+    ]
+  };
+
+  var defaultInsights = [
+    "AI 已為你分析行業趨勢，隨時可以查看最新報告",
+    "每天花 10 分鐘使用 AI 工具，效率提升看得見",
+    "你的 AI 助理全天候待命，有問題隨時問",
+    "AI 建議：定期更新內容可提升搜尋排名 30%"
+  ];
+
+  var insights = insightMap[profile.industry] || defaultInsights;
+
+  /* ---------- 組裝 HTML ---------- */
+  var cardsHtml = cards.map(function(c) {
+    return '<div class="ai-action-card">' +
+      '<span class="card-icon">' + c.icon + '</span>' +
+      '<div class="card-title">' + c.title + '</div>' +
+      '<button class="card-btn" onclick="alert(\'&#x529F;&#x80FD;&#x5373;&#x5C07;&#x4E0A;&#x7DDA;&#xFF0C;&#x656C;&#x8ACB;&#x671F;&#x5F85;&#xFF01;\')">&#x4E00;&#x9375;&#x958B;&#x59CB;</button>' +
+    '</div>';
+  }).join("");
+
+  var tickerHtml = insights.map(function(t) {
+    return '<div class="ai-ticker-item">&#x1F4A1; ' + t + '</div>';
+  }).join("");
+
+  panelRoot.innerHTML =
+    '<div class="ai-welcome">' +
+      '<div class="ai-welcome-header">' +
+        '<span class="ai-ready-dot"></span>' +
+        '<span class="ai-label">AI &#x5DF2;&#x5C31;&#x4F4D;</span>' +
+      '</div>' +
+      '<div class="ai-greeting">' + greetWord + '&#xFF0C;' + profile.industry + '&#x8001;&#x95C6;&#xFF01;</div>' +
+      '<div class="ai-subtitle">&#x6839;&#x64DA;&#x4F60;&#x7684;&#x9700;&#x6C42;&#xFF0C;&#x6211;&#x5E6B;&#x4F60;&#x6E96;&#x5099;&#x597D;&#x4E86;&#x9019;&#x4E9B;&#xFF1A;</div>' +
+      '<div class="ai-cards">' + cardsHtml + '</div>' +
+      '<div style="font-size:13px;color:#888;margin-bottom:10px;position:relative;z-index:1;">&#x4ECA;&#x65E5;&#x5FEB;&#x901F;&#x884C;&#x52D5;</div>' +
+      '<div class="ai-quick-actions">' +
+        '<a class="ai-quick-btn" href="#" onclick="document.querySelector(\'.log-section\')&&alert(\'&#x958B;&#x555F; AI &#x5C0D;&#x8A71;...\');return false;">&#x1F3A4; &#x8DDF; AI &#x804A;&#x804A;</a>' +
+        '<a class="ai-quick-btn" href="#mainGrid" onclick="document.getElementById(\'mainGrid\').scrollIntoView({behavior:\'smooth\'});return false;">&#x1F4CA; &#x770B;&#x4ECA;&#x65E5;&#x6578;&#x64DA;</a>' +
+        '<a class="ai-quick-btn" href="#" onclick="if(navigator.share){navigator.share({title:\'SEOBAIKE\',url:location.href})}else{navigator.clipboard.writeText(location.href);alert(\'&#x5DF2;&#x8907;&#x88FD;&#x9023;&#x7D50;&#xFF01;\')};return false;">&#x1F517; &#x5206;&#x4EAB;&#x7D66;&#x670B;&#x53CB;</a>' +
+      '</div>' +
+      '<div class="ai-ticker">' +
+        '<div class="ai-ticker-track">' + tickerHtml + '</div>' +
+      '</div>' +
+    '</div>';
+})();
 </script>
 </body>
 </html>

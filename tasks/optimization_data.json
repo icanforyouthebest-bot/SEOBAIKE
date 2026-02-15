@@ -1,286 +1,288 @@
 {
   "bottlenecks": {
     "legion_stats": {
-      "NVIDIA": {
-        "total": 21,
-        "success": 20,
+      "SEOBAIKE Alpha": {
+        "total": 16,
+        "success": 15,
         "failed": 1,
-        "total_tokens": 21913,
-        "total_latency": 83116,
-        "max_latency": 7017,
-        "avg_latency": 3958,
-        "success_rate": 95.2
+        "total_tokens": 16865,
+        "total_latency": 60995,
+        "max_latency": 7836,
+        "avg_latency": 3812,
+        "success_rate": 93.8
       },
-      "OpenAI": {
-        "total": 8,
-        "success": 8,
+      "SEOBAIKE Beta": {
+        "total": 7,
+        "success": 7,
         "failed": 0,
-        "total_tokens": 7312,
-        "total_latency": 44368,
-        "max_latency": 7858,
-        "avg_latency": 5546,
+        "total_tokens": 8225,
+        "total_latency": 23749,
+        "max_latency": 7428,
+        "avg_latency": 3393,
         "success_rate": 100.0
       },
-      "Perplexity": {
-        "total": 4,
-        "success": 4,
-        "failed": 0,
-        "total_tokens": 3667,
-        "total_latency": 15673,
-        "max_latency": 5554,
-        "avg_latency": 3918,
-        "success_rate": 100.0
-      },
-      "Google": {
+      "SEOBAIKE Gamma": {
         "total": 9,
-        "success": 8,
-        "failed": 1,
-        "total_tokens": 9161,
-        "total_latency": 39737,
-        "max_latency": 7180,
-        "avg_latency": 4415,
-        "success_rate": 88.9
+        "success": 9,
+        "failed": 0,
+        "total_tokens": 7361,
+        "total_latency": 42436,
+        "max_latency": 7793,
+        "avg_latency": 4715,
+        "success_rate": 100.0
       },
-      "DeepSeek": {
+      "SEOBAIKE Delta": {
+        "total": 10,
+        "success": 10,
+        "failed": 0,
+        "total_tokens": 9614,
+        "total_latency": 42113,
+        "max_latency": 7539,
+        "avg_latency": 4211,
+        "success_rate": 100.0
+      },
+      "SEOBAIKE Epsilon": {
+        "total": 12,
+        "success": 12,
+        "failed": 0,
+        "total_tokens": 9964,
+        "total_latency": 50393,
+        "max_latency": 7997,
+        "avg_latency": 4199,
+        "success_rate": 100.0
+      },
+      "SEOBAIKE Zeta": {
         "total": 4,
         "success": 4,
         "failed": 0,
-        "total_tokens": 3160,
-        "total_latency": 22071,
-        "max_latency": 7269,
-        "avg_latency": 5518,
+        "total_tokens": 4454,
+        "total_latency": 20119,
+        "max_latency": 6013,
+        "avg_latency": 5030,
         "success_rate": 100.0
       },
-      "Mistral": {
+      "SEOBAIKE Eta": {
         "total": 8,
         "success": 8,
         "failed": 0,
-        "total_tokens": 8498,
-        "total_latency": 38291,
-        "max_latency": 7985,
-        "avg_latency": 4786,
+        "total_tokens": 9467,
+        "total_latency": 25380,
+        "max_latency": 7637,
+        "avg_latency": 3172,
         "success_rate": 100.0
       },
-      "Groq": {
+      "SEOBAIKE Theta": {
         "total": 6,
         "success": 5,
         "failed": 1,
-        "total_tokens": 5268,
-        "total_latency": 25597,
-        "max_latency": 7419,
-        "avg_latency": 4266,
+        "total_tokens": 7095,
+        "total_latency": 30408,
+        "max_latency": 7705,
+        "avg_latency": 5068,
         "success_rate": 83.3
       },
-      "Cohere": {
-        "total": 5,
-        "success": 5,
-        "failed": 0,
-        "total_tokens": 4854,
-        "total_latency": 17983,
-        "max_latency": 6357,
-        "avg_latency": 3597,
-        "success_rate": 100.0
+      "SEOBAIKE Iota": {
+        "total": 8,
+        "success": 7,
+        "failed": 1,
+        "total_tokens": 7481,
+        "total_latency": 28814,
+        "max_latency": 6055,
+        "avg_latency": 3602,
+        "success_rate": 87.5
       },
-      "Together": {
-        "total": 5,
-        "success": 5,
-        "failed": 0,
-        "total_tokens": 3807,
-        "total_latency": 23763,
-        "max_latency": 6270,
-        "avg_latency": 4753,
-        "success_rate": 100.0
-      },
-      "HuggingFace": {
+      "SEOBAIKE Kappa": {
         "total": 3,
         "success": 3,
         "failed": 0,
-        "total_tokens": 4049,
-        "total_latency": 14914,
-        "max_latency": 7991,
-        "avg_latency": 4971,
+        "total_tokens": 2344,
+        "total_latency": 9635,
+        "max_latency": 4898,
+        "avg_latency": 3212,
         "success_rate": 100.0
       },
-      "Anthropic": {
-        "total": 7,
-        "success": 7,
+      "SEOBAIKE Lambda": {
+        "total": 4,
+        "success": 4,
         "failed": 0,
-        "total_tokens": 5453,
-        "total_latency": 30144,
-        "max_latency": 7953,
-        "avg_latency": 4306,
+        "total_tokens": 3561,
+        "total_latency": 18831,
+        "max_latency": 7995,
+        "avg_latency": 4708,
         "success_rate": 100.0
       },
-      "Replicate": {
-        "total": 5,
+      "SEOBAIKE Mu": {
+        "total": 4,
+        "success": 4,
+        "failed": 0,
+        "total_tokens": 4371,
+        "total_latency": 8461,
+        "max_latency": 4757,
+        "avg_latency": 2115,
+        "success_rate": 100.0
+      },
+      "SEOBAIKE Nu": {
+        "total": 3,
         "success": 3,
-        "failed": 2,
-        "total_tokens": 4628,
-        "total_latency": 18344,
-        "max_latency": 5631,
-        "avg_latency": 3669,
-        "success_rate": 60.0
-      },
-      "Stability": {
-        "total": 6,
-        "success": 6,
         "failed": 0,
-        "total_tokens": 5281,
-        "total_latency": 29372,
-        "max_latency": 7651,
-        "avg_latency": 4895,
+        "total_tokens": 3241,
+        "total_latency": 14599,
+        "max_latency": 7605,
+        "avg_latency": 4866,
         "success_rate": 100.0
       },
-      "Claude": {
+      "SEOBAIKE Xi": {
         "total": 2,
         "success": 2,
         "failed": 0,
-        "total_tokens": 1564,
-        "total_latency": 7889,
-        "max_latency": 5785,
-        "avg_latency": 3944,
+        "total_tokens": 1622,
+        "total_latency": 8786,
+        "max_latency": 5233,
+        "avg_latency": 4393,
         "success_rate": 100.0
       },
-      "Meta": {
-        "total": 7,
-        "success": 7,
+      "SEOBAIKE Omicron": {
+        "total": 4,
+        "success": 4,
         "failed": 0,
-        "total_tokens": 6604,
-        "total_latency": 36007,
-        "max_latency": 7962,
-        "avg_latency": 5144,
+        "total_tokens": 4598,
+        "total_latency": 14612,
+        "max_latency": 6711,
+        "avg_latency": 3653,
         "success_rate": 100.0
       }
     },
     "overloaded_legions": [
-      "NVIDIA"
+      "SEOBAIKE Alpha",
+      "SEOBAIKE Epsilon"
     ],
     "underloaded_legions": [
-      "HuggingFace",
-      "Claude"
+      "SEOBAIKE Kappa",
+      "SEOBAIKE Nu",
+      "SEOBAIKE Xi"
     ],
     "top_10_slowest": [
       {
-        "task_number": 17,
-        "description": "生成 edu-platform.com 結構化資料標記",
-        "assigned_to": "HuggingFace",
-        "latency_ms": 7991
-      },
-      {
-        "task_number": 48,
-        "description": "執行 保險科技 客戶情感分析",
-        "assigned_to": "Mistral",
-        "latency_ms": 7985
-      },
-      {
-        "task_number": 54,
-        "description": "生成 電子商務 關鍵字研究報告",
-        "assigned_to": "Meta",
-        "latency_ms": 7962
-      },
-      {
-        "task_number": 8,
-        "description": "呼叫 DeepSeek 程式碼審查",
-        "assigned_to": "Anthropic",
-        "latency_ms": 7953
-      },
-      {
-        "task_number": 95,
-        "description": "執行 L1→L4 約束路徑檢查",
-        "assigned_to": "OpenAI",
-        "latency_ms": 7858
+        "task_number": 55,
+        "description": "生成 農業科技 內容行事曆",
+        "assigned_to": "SEOBAIKE Epsilon",
+        "latency_ms": 7997
       },
       {
         "task_number": 65,
-        "description": "呼叫 OpenAI GPT-4o 摘要 AI推理效能",
-        "assigned_to": "OpenAI",
-        "latency_ms": 7835
+        "description": "呼叫 SEOBAIKE AI 程式碼生成",
+        "assigned_to": "SEOBAIKE Lambda",
+        "latency_ms": 7995
+      },
+      {
+        "task_number": 85,
+        "description": "生成 供應鏈數位化 行銷文案",
+        "assigned_to": "SEOBAIKE Alpha",
+        "latency_ms": 7836
+      },
+      {
+        "task_number": 22,
+        "description": "呼叫 SEOBAIKE 安全防護檢查",
+        "assigned_to": "SEOBAIKE Gamma",
+        "latency_ms": 7793
+      },
+      {
+        "task_number": 11,
+        "description": "分析 logistics-hub.tw 網站 SEO 健檢",
+        "assigned_to": "SEOBAIKE Theta",
+        "latency_ms": 7705
+      },
+      {
+        "task_number": 93,
+        "description": "呼叫 SEOBAIKE AI 多語言翻譯",
+        "assigned_to": "SEOBAIKE Eta",
+        "latency_ms": 7637
+      },
+      {
+        "task_number": 73,
+        "description": "生成 不動產 白皮書草稿",
+        "assigned_to": "SEOBAIKE Nu",
+        "latency_ms": 7605
+      },
+      {
+        "task_number": 81,
+        "description": "執行 ecommerce-shop.tw 反向連結分析",
+        "assigned_to": "SEOBAIKE Delta",
+        "latency_ms": 7539
+      },
+      {
+        "task_number": 18,
+        "description": "執行 aiforseo.vip 反向連結分析",
+        "assigned_to": "SEOBAIKE Epsilon",
+        "latency_ms": 7517
       },
       {
         "task_number": 9,
-        "description": "生成 遊戲娛樂 社群媒體策略",
-        "assigned_to": "Stability",
-        "latency_ms": 7651
-      },
-      {
-        "task_number": 1,
-        "description": "生成 餐飲服務 關鍵字研究報告",
-        "assigned_to": "Mistral",
-        "latency_ms": 7501
-      },
-      {
-        "task_number": 52,
-        "description": "生成 半導體 白皮書草稿",
-        "assigned_to": "Groq",
-        "latency_ms": 7419
-      },
-      {
-        "task_number": 92,
-        "description": "分析 ecommerce-shop.tw 使用者行為數據",
-        "assigned_to": "DeepSeek",
-        "latency_ms": 7269
+        "description": "執行 fintech-app.tw 行動端適配檢查",
+        "assigned_to": "SEOBAIKE Beta",
+        "latency_ms": 7428
       }
     ],
     "avg_load_per_legion": 6.7
   },
   "efficiency_scores": {
-    "NVIDIA": 24.05,
-    "OpenAI": 18.03,
-    "Perplexity": 25.52,
-    "Google": 20.14,
-    "DeepSeek": 18.12,
-    "Mistral": 20.89,
-    "Groq": 19.53,
-    "Cohere": 27.8,
-    "Together": 21.04,
-    "HuggingFace": 20.12,
-    "Anthropic": 23.22,
-    "Replicate": 16.35,
-    "Stability": 20.43,
-    "Claude": 25.35,
-    "Meta": 19.44
+    "SEOBAIKE Alpha": 24.61,
+    "SEOBAIKE Beta": 29.47,
+    "SEOBAIKE Gamma": 21.21,
+    "SEOBAIKE Delta": 23.75,
+    "SEOBAIKE Epsilon": 23.82,
+    "SEOBAIKE Zeta": 19.88,
+    "SEOBAIKE Eta": 31.53,
+    "SEOBAIKE Theta": 16.44,
+    "SEOBAIKE Iota": 24.29,
+    "SEOBAIKE Kappa": 31.13,
+    "SEOBAIKE Lambda": 21.24,
+    "SEOBAIKE Mu": 47.28,
+    "SEOBAIKE Nu": 20.55,
+    "SEOBAIKE Xi": 22.76,
+    "SEOBAIKE Omicron": 27.37
   },
   "original_allocation": {
-    "NVIDIA": 21,
-    "OpenAI": 8,
-    "Perplexity": 4,
-    "Google": 9,
-    "DeepSeek": 4,
-    "Mistral": 8,
-    "Groq": 6,
-    "Cohere": 5,
-    "Together": 5,
-    "HuggingFace": 3,
-    "Anthropic": 7,
-    "Replicate": 5,
-    "Stability": 6,
-    "Claude": 2,
-    "Meta": 7
+    "SEOBAIKE Alpha": 16,
+    "SEOBAIKE Beta": 7,
+    "SEOBAIKE Gamma": 9,
+    "SEOBAIKE Delta": 10,
+    "SEOBAIKE Epsilon": 12,
+    "SEOBAIKE Zeta": 4,
+    "SEOBAIKE Eta": 8,
+    "SEOBAIKE Theta": 6,
+    "SEOBAIKE Iota": 8,
+    "SEOBAIKE Kappa": 3,
+    "SEOBAIKE Lambda": 4,
+    "SEOBAIKE Mu": 4,
+    "SEOBAIKE Nu": 3,
+    "SEOBAIKE Xi": 2,
+    "SEOBAIKE Omicron": 4
   },
   "optimized_allocation": {
-    "Cohere": 9,
-    "Perplexity": 8,
-    "Claude": 8,
-    "NVIDIA": 8,
-    "Anthropic": 7,
-    "Together": 7,
-    "Mistral": 7,
-    "Stability": 6,
-    "Google": 6,
-    "HuggingFace": 6,
-    "Groq": 6,
-    "Meta": 6,
-    "DeepSeek": 6,
-    "OpenAI": 6,
-    "Replicate": 5
+    "SEOBAIKE Mu": 12,
+    "SEOBAIKE Eta": 8,
+    "SEOBAIKE Kappa": 8,
+    "SEOBAIKE Beta": 8,
+    "SEOBAIKE Omicron": 7,
+    "SEOBAIKE Alpha": 6,
+    "SEOBAIKE Iota": 6,
+    "SEOBAIKE Epsilon": 6,
+    "SEOBAIKE Delta": 6,
+    "SEOBAIKE Xi": 6,
+    "SEOBAIKE Lambda": 6,
+    "SEOBAIKE Gamma": 6,
+    "SEOBAIKE Nu": 5,
+    "SEOBAIKE Zeta": 5,
+    "SEOBAIKE Theta": 4
   },
   "comparison": {
-    "original_time_ms": 512883,
-    "optimized_time_ms": 435951,
-    "time_saved_ms": 76932,
+    "original_time_ms": 437988,
+    "optimized_time_ms": 372290,
+    "time_saved_ms": 65698,
     "time_improvement": "15.0%",
-    "original_tokens": 109050,
-    "optimized_tokens": 100326,
-    "tokens_saved": 8724
+    "original_tokens": 110652,
+    "optimized_tokens": 101800,
+    "tokens_saved": 8852
   }
 }

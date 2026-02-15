@@ -1,6 +1,11 @@
 .mcp.json
+.mcp.json.bak
+*.py.bak
+CLAUDE.md.bak
 .env
 .env.*
+seobaike-config.js
+pages-site/assets/*.js
 nul
 node_modules/
 package-lock.json

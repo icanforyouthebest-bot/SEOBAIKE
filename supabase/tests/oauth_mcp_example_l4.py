@@ -4,6 +4,7 @@ OAuth 認證整合範例（L4）
 實際 SEOBAIKE 認證走 Supabase Auth。
 """
 
+import os
 from fastapi import Request, Response
 from fastmcp import FastMCP, AuthSettings, ClientRegistrationOptions
 from oauth_provider import GoogleOAuthProvider, ServerSettings
@@ -13,8 +14,8 @@ settings = ServerSettings(
     port=3000,
     server_url='http://localhost:3000',
     callback_path='http://localhost:3000/callback',
-    client_id='YOUR_CLIENT_ID',
-    client_secret='YOUR_CLIENT_SECRET'
+    client_id=os.environ.get('OAUTH_CLIENT_ID', ''),
+    client_secret=os.environ.get('OAUTH_CLIENT_SECRET', '')
 )
 
 oauth_provider = GoogleOAuthProvider(settings)
