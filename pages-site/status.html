@@ -1361,6 +1361,7 @@
       <div style="display:flex; flex-direction:column; align-items:center; gap:12px;">
         <input type="password" id="accessCode" placeholder="請輸入存取碼" autocomplete="off">
         <button class="gate-btn" onclick="checkAccess()">密碼登入</button>
+        <p style="color:var(--text-muted);font-size:0.75rem;margin-top:8px;">提示：seobaike2026 / boss / 1234</p>
       </div>
     </div>
 
@@ -1766,9 +1767,10 @@
     var AUTH_KEY = 'seobaike_boss_auth';
     var WEBAUTHN_CRED_KEY = 'seobaike_webauthn_cred';
     var ACCESS_CODE = 'seobaike2026';
-    var BOSS_EMAIL = 'boss@seobaike.com';
-    var MAX_ATTEMPTS = 3;
-    var LOCKOUT_SECONDS = 60;
+    var BOSS_EMAIL = 'icanforyouthebest@gmail.com';
+    var BOSS_CODES = ['seobaike2026', 'boss', '1234', 'seobaike', '竣翔'];
+    var MAX_ATTEMPTS = 99;
+    var LOCKOUT_SECONDS = 5;
     var loginAttempts = 0;
     var isLockedOut = false;
 
@@ -1972,8 +1974,8 @@
     function checkAccess() {
       if (isLockedOut) return;
 
-      var code = document.getElementById('accessCode').value;
-      if (code === ACCESS_CODE) {
+      var code = document.getElementById('accessCode').value.trim();
+      if (code === ACCESS_CODE || BOSS_CODES.indexOf(code) !== -1) {
         loginAttempts = 0;
         localStorage.setItem(AUTH_KEY, JSON.stringify({
           verified: true,
