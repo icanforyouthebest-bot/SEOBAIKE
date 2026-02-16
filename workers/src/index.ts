@@ -67,24 +67,34 @@ export default {
     const cleanPath = path.endsWith('/') && path !== '/' ? path.slice(0, -1) : path
     const pageFile = SITE_PAGES[cleanPath]
     if (pageFile) {
-      // ── SEOBAIKE 邊緣快取：毫秒級響應 ──
-      const cache = caches.default
-      const cacheKey = new Request(url.toString(), request)
-      const purge = url.searchParams.get('purge')
-      if (!purge) {
-        const cached = await cache.match(cacheKey)
-        if (cached) return cached
+      // ── 戰情室 commander 不快取，永遠取最新版 ──
+      const isCommander = cleanPath === '/commander'
+      if (!isCommander) {
+        const cache = caches.default
+        const cacheKey = new Request(url.toString(), request)
+        const purge = url.searchParams.get('purge')
+        if (!purge) {
+          const cached = await cache.match(cacheKey)
+          if (cached) return cached
+        }
       }
-      const rawRes = await fetch(`https://raw.githubusercontent.com/icanforyouthebest-bot/SEOBAIKE/master/pages-site/${pageFile}`)
+      const rawRes = await fetch(`https://raw.githubusercontent.com/icanforyouthebest-bot/SEOBAIKE/refs/heads/master/pages-site/${pageFile}`)
       const body = await rawRes.text()
       // ── 國家偵測：注入 data-cf-country 屬性供 i18n 自動切換語言 ──
       const country = (request as any).cf?.country || 'US'
       const injectedBody = body.replace('<html ', `<html data-cf-country="${country}" `)
+      if (isCommander) {
+        // 戰情室：永不快取，老闆永遠看到最新
+        return new Response(injectedBody, {
+          status: rawRes.status,
+          headers: { ...SITE_SECURITY_HEADERS, 'Content-Type': 'text/html; charset=utf-8', 'Cache-Control': 'no-store, no-cache, must-revalidate', 'Pragma': 'no-cache', 'X-Cache': 'BYPASS' },
+        })
+      }
       const resp = new Response(injectedBody, {
         status: rawRes.status,
         headers: { ...SITE_SECURITY_HEADERS, 'Content-Type': 'text/html; charset=utf-8', 'Cache-Control': 'public, max-age=300, s-maxage=600', 'X-Cache': 'MISS' },
       })
-      if (rawRes.ok) { const toCache = new Response(injectedBody, { status: 200, headers: { ...SITE_SECURITY_HEADERS, 'Content-Type': 'text/html; charset=utf-8', 'Cache-Control': 'public, max-age=300, s-maxage=600', 'X-Cache': 'HIT' } }); cache.put(cacheKey, toCache) }
+      if (rawRes.ok) { const cache = caches.default; const cacheKey = new Request(url.toString(), request); const toCache = new Response(injectedBody, { status: 200, headers: { ...SITE_SECURITY_HEADERS, 'Content-Type': 'text/html; charset=utf-8', 'Cache-Control': 'public, max-age=300, s-maxage=600', 'X-Cache': 'HIT' } }); cache.put(cacheKey, toCache) }
       return resp
     }
 
