@@ -299,6 +299,7 @@ body{background:var(--bg);color:#e0e0e0;font-family:'Inter',system-ui,sans-serif
   <button class="tab" onclick="switchView('physics',this)">PHYSICAL AI</button>
   <button class="tab" onclick="switchView('models',this)">AI SOLDIERS</button>
   <button class="tab" onclick="switchView('azure',this)">AZURE</button>
+  <button class="tab" onclick="switchView('audit',this)">AUDIT LOG</button>
   <button class="tab" onclick="switchView('meeting',this)">MEETING</button>
   <button class="tab" onclick="switchView('endpoints',this)">ENDPOINTS</button>
 </div>
@@ -490,6 +491,7 @@ function render(d){
   else if(currentView==='physics')renderPhysics(d);
   else if(currentView==='models')renderModels(d);
   else if(currentView==='azure')renderAzure(d);
+  else if(currentView==='audit')renderAudit(d);
   else if(currentView==='meeting')renderMeeting(d);
   else if(currentView==='endpoints')renderEndpoints(d);
 }
@@ -644,6 +646,31 @@ function renderAzure(d){
     const t=hb.last_heartbeat?new Date(hb.last_heartbeat).toLocaleString('zh-TW',{timeZone:'Asia/Taipei',hour12:false}):'--';
     const ok=hb.status==='healthy';
     h+=`<div class="hb-item"><div class="hb-dot" style="background:${ok?'var(--green)':'var(--red)'}"></div><span class="hb-name">${hb.component}</span><span style="color:${ok?'var(--green)':'var(--red)'};font-size:11px">${hb.status}</span><span class="hb-time">${t}</span></div>`;
+  });
+  h+=`</div></div>`;
+  document.getElementById('content').innerHTML=h;
+}
+
+function renderAudit(d){
+  const logs=d.audit_trail||[];
+  let h='<div class="main"><div class="card c-12"><div class="card-head"><span class="card-title">Audit Trail - Traceable Records</span><span class="badge b">'+logs.length+'</span></div>';
+  if(!logs.length){h+='<div style="color:rgba(255,255,255,0.3);padding:20px;text-align:center">No audit records yet. Next patrol in 5 min.</div>'}
+  logs.forEach((l,i)=>{
+    const t=l.created_at?new Date(l.created_at).toLocaleString('zh-TW',{timeZone:'Asia/Taipei',hour12:false}):'--';
+    const typeColor=l.log_type==='auto_heal'?'var(--green)':l.log_type==='patrol'?'var(--blue)':l.log_type==='commander_access'?'var(--gold)':'var(--purple)';
+    let details='';
+    try{const d2=JSON.parse(l.details);details=typeof d2==='object'?Object.entries(d2).map(([k,v])=>`${k}: ${JSON.stringify(v)}`).join(' | '):''+d2}catch(e){details=l.details||''}
+    h+=`<div style="padding:12px;background:rgba(255,255,255,0.02);border-radius:8px;margin-bottom:6px;border-left:3px solid ${typeColor};animation:cardIn 0.3s ease-out both;animation-delay:${i*0.03}s">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
+        <div style="display:flex;align-items:center;gap:8px">
+          <span style="font-family:'JetBrains Mono',monospace;font-size:10px;padding:2px 8px;border-radius:4px;background:rgba(255,255,255,0.05);color:${typeColor};font-weight:700;letter-spacing:1px">${l.log_type}</span>
+          <span style="font-size:12px;font-weight:600;color:#fff">${l.action}</span>
+        </div>
+        <span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(255,255,255,0.25)">${t}</span>
+      </div>
+      <div style="font-size:11px;color:rgba(255,255,255,0.35);font-family:'JetBrains Mono',monospace;word-break:break-all">${l.agent||'--'} | ${details.substring(0,200)}${details.length>200?'...':''}</div>
+      <div style="margin-top:4px;font-size:10px;color:${l.success?'var(--green)':'var(--red)'}">${l.success?'SUCCESS':'FAILED'}</div>
+    </div>`;
   });
   h+=`</div></div>`;
   document.getElementById('content').innerHTML=h;
