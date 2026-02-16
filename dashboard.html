@@ -330,7 +330,7 @@ body { font-family: 'Segoe UI', sans-serif; background: #0a0a1a; color: #eee; mi
 </div>
 
 <div class="log-section">
-  <h3>即時測試記錄 <span style="color:#555;font-weight:normal;">(每 5 秒自動測試)</span></h3>
+  <h3>即時測試記錄 <span style="color:#555;font-weight:normal;">(手動測試)</span> <button onclick="tick()" style="margin-left:12px;padding:4px 14px;background:#e8850c;color:#fff;border:none;border-radius:8px;cursor:pointer;font-size:12px;">手動測試</button></h3>
   <div class="log" id="log"></div>
 </div>
 
@@ -437,8 +437,9 @@ async function tick() {
   document.getElementById("status").textContent = "同步運行中 | 第 " + round + " 輪";
 }
 
-tick();
-setInterval(tick, 5000);
+/* AUTO-POLL REMOVED: tick() and setInterval(tick, 5000) disabled to stop API credit burn */
+/* tick(); */
+/* setInterval(tick, 5000); */
 
 /* ===== AI 主動歡迎面板邏輯 ===== */
 (function() {

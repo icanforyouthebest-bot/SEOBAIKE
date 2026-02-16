@@ -65,8 +65,9 @@ body { font-family:'Segoe UI',sans-serif; background:#0a0a1a; color:#eee; min-he
   <div class="panel">
     <h3><span class="spinner"></span> SEOBAIKE 容器監控 <span class="badge" style="background:#2496ed;color:#fff;">常駐</span></h3>
     <div style="padding:16px;font-family:monospace;font-size:12px;line-height:1.8;height:400px;overflow-y:auto;" id="dockerLog">
-      載入中...
+      待命中（點擊手動測試）
     </div>
+    <div style="padding:8px 16px;"><button onclick="pingDocker()" style="padding:4px 14px;background:#e8850c;color:#fff;border:none;border-radius:8px;cursor:pointer;font-size:12px;">手動測試</button></div>
   </div>
 </div>
 
@@ -118,8 +119,9 @@ async function pingDocker() {
   }
   if(dl.children.length > 50) dl.lastChild.remove();
 }
-pingDocker();
-setInterval(pingDocker, 8000);
+/* AUTO-POLL REMOVED: pingDocker() and setInterval(pingDocker, 8000) disabled to stop API credit burn */
+/* pingDocker(); */
+/* setInterval(pingDocker, 8000); */
 
 document.getElementById("ft").textContent = new Date().toLocaleString("zh-TW");
 </script>
