@@ -144,9 +144,13 @@ export default {
       })
     }
 
-    // ── 其他非 /api/ 路徑 → 404 真實回應（不再 fallback 到 Framer 空殼） ──
+    // ── 其他非 /api/ 路徑 → 從 GitHub 取 404.html ──
     if (!path.startsWith('/api/') && path !== '/api') {
-      return new Response('<!DOCTYPE html><html lang="zh-TW"><head><meta charset="UTF-8"><title>404 — SEOBAIKE</title><style>body{font-family:sans-serif;background:#0a0a1a;color:#eee;display:flex;justify-content:center;align-items:center;min-height:100vh;text-align:center;}h1{font-size:72px;color:#e8850c;margin-bottom:8px;}p{color:#888;}a{color:#76b900;}</style></head><body><div><h1>404</h1><p>頁面不存在</p><a href="/">回到首頁</a></div></body></html>', {
+      const raw404 = await fetch(`https://raw.githubusercontent.com/icanforyouthebest-bot/SEOBAIKE/master/pages-site/404.html`)
+      const body404 = await raw404.text()
+      const country = (request as any).cf?.country || 'US'
+      const injected404 = body404.replace('<html ', `<html data-cf-country="${country}" `)
+      return new Response(injected404, {
         status: 404,
         headers: { ...SITE_SECURITY_HEADERS, 'Content-Type': 'text/html; charset=utf-8' },
       })
