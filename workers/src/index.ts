@@ -62,6 +62,7 @@ export default {
       '/start': 'start.html',
       '/compliance': 'compliance.html',
       '/billing': 'billing.html',
+      '/commander': 'commander.html',
     }
     const cleanPath = path.endsWith('/') && path !== '/' ? path.slice(0, -1) : path
     const pageFile = SITE_PAGES[cleanPath]
