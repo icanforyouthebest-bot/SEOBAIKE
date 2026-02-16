@@ -443,14 +443,26 @@ function buildTicker(d){
 buildTicker(null);
 
 // === DATA ===
+let retryCount=0;
 async function load(){
   try{
-    const r=await fetch(API);
+    const controller=new AbortController();
+    const timeout=setTimeout(()=>controller.abort(),12000);
+    const r=await fetch(API,{signal:controller.signal});
+    clearTimeout(timeout);
     cachedData=await r.json();
     render(cachedData);
     buildTicker(cachedData);
+    retryCount=0;
   }catch(e){
-    document.getElementById('content').innerHTML='<div class="loading"><div class="loading-text" style="color:var(--red)">CONNECTION LOST - RETRYING...</div></div>';
+    retryCount++;
+    if(retryCount<=3){
+      // 自動重試，不顯示錯誤
+      setTimeout(load,2000);
+    } else {
+      document.getElementById('content').innerHTML='<div class="loading"><div class="loading-ring"></div><div class="loading-text">RECONNECTING...</div></div>';
+      setTimeout(load,5000);
+    }
   }
 }
 
