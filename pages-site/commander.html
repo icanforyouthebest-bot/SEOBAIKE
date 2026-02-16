@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SEOBAIKE 指揮官戰情室 | Patent 115100981</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#080810;color:#ccc;font-family:'Courier New',monospace;min-height:100vh;overflow-x:hidden}
+::-webkit-scrollbar{width:6px}::-webkit-scrollbar-track{background:#111}::-webkit-scrollbar-thumb{background:#ff4444;border-radius:3px}
+
+.top-bar{background:#0a0a0a;border-bottom:2px solid #ff4444;padding:12px 20px;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:100}
+.top-bar .logo{color:#ff4444;font-size:16px;font-weight:bold;letter-spacing:2px}
+.top-bar .live{display:flex;align-items:center;gap:8px}
+.top-bar .dot{width:8px;height:8px;border-radius:50%;background:#44ff44;animation:blink 1s infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0.3}}
+.top-bar .time{color:#888;font-size:12px}
+
+.commander-banner{background:linear-gradient(135deg,#1a0505,#0a0a1a);padding:20px;text-align:center;border-bottom:1px solid #222}
+.commander-banner h1{color:#ffcc00;font-size:20px;margin-bottom:5px}
+.commander-banner .info{color:#888;font-size:11px}
+.commander-banner .patent{color:#ff8800;font-size:13px;margin-top:5px}
+
+.progress-section{background:#0d0d15;padding:15px 20px}
+.progress-section .label{display:flex;justify-content:space-between;margin-bottom:6px;font-size:13px}
+.bar-outer{background:#1a1a2e;border-radius:8px;height:24px;overflow:hidden;position:relative}
+.bar-inner{height:100%;transition:width 0.8s ease;border-radius:8px}
+.bar-pct{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-weight:bold;font-size:14px;color:#fff;text-shadow:0 0 8px #000}
+
+.grok-bar{background:#111;border-bottom:1px solid #333;padding:12px 20px;display:flex;gap:10px;align-items:center;justify-content:center}
+.grok-btn{background:linear-gradient(135deg,#ff4444,#cc0000);color:#fff;border:none;padding:10px 24px;border-radius:6px;font-size:14px;cursor:pointer;font-family:'Courier New',monospace;font-weight:bold;text-decoration:none;display:inline-block}
+.grok-btn:hover{background:linear-gradient(135deg,#ff6666,#ee2222)}
+.grok-btn.tg{background:linear-gradient(135deg,#0088cc,#006699)}
+.grok-btn.tg:hover{background:linear-gradient(135deg,#00aaee,#0088cc)}
+.grok-btn.sb{background:linear-gradient(135deg,#3ecf8e,#2b9a66)}
+.grok-btn.sb:hover{background:linear-gradient(135deg,#50e0a0,#3ecf8e)}
+
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:10px;padding:12px}
+
+.card{background:#0c0c14;border:1px solid #1a1a2e;border-radius:8px;padding:14px;transition:border-color 0.3s}
+.card:hover{border-color:#444}
+.card.full{grid-column:1/-1}
+.card.danger{border-color:#ff4444;background:#0f0808}
+.card.ok{border-color:#1a3a1a}
+.card h2{color:#ff8800;font-size:13px;margin-bottom:10px;padding-bottom:6px;border-bottom:1px solid #1a1a2e;display:flex;justify-content:space-between;align-items:center}
+.card h2 .badge{font-size:11px;padding:2px 8px;border-radius:4px}
+.badge.green{background:#0a2a0a;color:#44ff44}
+.badge.red{background:#2a0a0a;color:#ff4444}
+.badge.yellow{background:#2a2a0a;color:#ffcc00}
+
+.row{display:flex;justify-content:space-between;padding:5px 0;font-size:12px;border-bottom:1px solid #0f0f18}
+.row:last-child{border:none}
+.row .label{color:#888}
+.g{color:#44ff44}.r{color:#ff4444}.y{color:#ffcc00}.w{color:#fff}
+
+.soldier-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:8px;margin-top:8px}
+.soldier{background:#08081a;border:1px solid #1a1a2e;border-radius:6px;padding:10px;display:grid;grid-template-columns:1fr auto;gap:8px;align-items:center;transition:all 0.3s}
+.soldier:hover{border-color:#444;background:#0c0c20}
+.soldier.dead{border-color:#ff4444;background:#120808}
+.soldier .name{font-weight:bold;font-size:13px;color:#ddd}
+.soldier .detail{font-size:11px;color:#666;margin-top:2px}
+.soldier .right{text-align:right}
+.tag{display:inline-block;padding:2px 8px;border-radius:4px;font-size:10px;font-weight:bold;letter-spacing:1px}
+.tag.on{background:#0a2a0a;color:#44ff44;border:1px solid #1a4a1a}
+.tag.off{background:#2a0a0a;color:#ff4444;border:1px solid #4a1a1a;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{box-shadow:none}50%{box-shadow:0 0 10px rgba(255,68,68,0.4)}}
+.cost-tag{font-size:10px;margin-top:4px}
+.cost-tag.low{color:#44ff44}.cost-tag.medium{color:#ffcc00}.cost-tag.high{color:#ff8800}.cost-tag.very_high{color:#ff4444}
+.ms-bar{background:#1a1a2e;height:4px;border-radius:2px;margin-top:4px;overflow:hidden}
+.ms-bar .fill{height:100%;border-radius:2px;transition:width 0.5s}
+
+.app-row{display:grid;grid-template-columns:1fr 80px 80px 100px;gap:8px;padding:8px;background:#08081a;border-radius:4px;margin-bottom:4px;font-size:12px;align-items:center}
+.app-row:hover{background:#0c0c20}
+
+.hb-row{display:grid;grid-template-columns:1fr 80px 1fr;gap:8px;padding:4px 0;font-size:11px;border-bottom:1px solid #0f0f18}
+
+.dept{background:#08081a;border:1px solid #1a1a2e;border-radius:6px;padding:10px;margin-bottom:6px}
+.dept h3{color:#ffcc00;font-size:12px;margin-bottom:6px}
+.dept .item{font-size:11px;padding:2px 0;color:#aaa}
+
+.footer{text-align:center;padding:15px;color:#333;font-size:10px;border-top:1px solid #111}
+
+.loading{text-align:center;padding:80px 20px;font-size:16px;color:#ff8800}
+.loading .spin{display:inline-block;animation:spin 1s linear infinite}
+@keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+
+.alert-banner{background:#2a0a0a;border:1px solid #ff4444;border-radius:6px;padding:10px;margin:10px 12px;text-align:center;color:#ff4444;font-size:13px;display:none}
+.alert-banner.show{display:block;animation:pulse 2s infinite}
+</style>
+</head>
+<body>
+
+<div class="top-bar">
+<div class="logo">SEOBAIKE WAR ROOM</div>
+<div class="live"><div class="dot"></div><span class="g" style="font-size:12px">LIVE</span><span class="time" id="clock"></span></div>
+</div>
+
+<div class="commander-banner">
+<h1>指揮官：許竣翔</h1>
+<div class="info">CEO 小路光有限公司 | 統編 60475510</div>
+<div class="patent">Patent 115100981 | 世界定義約束法用於AI推理 | CaaS</div>
+</div>
+
+<div class="progress-section">
+<div class="label"><span>OVERALL PROGRESS</span><span id="pct-text" class="w">--</span></div>
+<div class="bar-outer"><div class="bar-inner" id="pbar" style="width:0%"></div><div class="bar-pct" id="pbar-text">--</div></div>
+</div>
+
+<div class="switch-bar" style="background:#0a0a0a;border-bottom:1px solid #333;padding:8px 20px;display:flex;gap:6px;align-items:center;justify-content:center;flex-wrap:wrap">
+<button class="sw active" onclick="switchView('war')">WAR ROOM</button>
+<button class="sw" onclick="switchView('models')">AI SOLDIERS</button>
+<button class="sw" onclick="switchView('azure')">AZURE</button>
+<button class="sw" onclick="switchView('meeting')">MEETING</button>
+<button class="sw" onclick="switchView('endpoints')">ENDPOINTS</button>
+</div>
+<style>
+.sw{background:#1a1a2e;color:#888;border:1px solid #333;padding:8px 16px;border-radius:6px;font-size:12px;cursor:pointer;font-family:'Courier New',monospace;transition:all 0.2s}
+.sw:hover{border-color:#ff8800;color:#ff8800}
+.sw.active{background:#ff4444;color:#fff;border-color:#ff4444}
+.view{display:none}.view.show{display:block}
+</style>
+
+<div class="grok-bar">
+<a href="https://grok.com" target="_blank" class="grok-btn">GROK AI</a>
+<a href="https://supabase.com/dashboard/project/vmyrivxxibqydccurxug" target="_blank" class="grok-btn sb">SUPABASE</a>
+<a href="https://t.me/seobaike_bot" target="_blank" class="grok-btn tg">TELEGRAM</a>
+<a href="https://portal.azure.com" target="_blank" class="grok-btn" style="background:linear-gradient(135deg,#0078d4,#004e8c)">AZURE</a>
+</div>
+
+<div class="alert-banner" id="alertBanner"></div>
+
+<div id="content"><div class="loading"><span class="spin">/</span> 載入戰情資料中...</div></div>
+
+<div class="footer">SEOBAIKE AI Platform | Patent 115100981 | aiforseo.vip | Auto refresh 30s</div>
+
+<script>
+const API='https://grok-takeover-app.azurewebsites.net/api/commander';
+
+function updateClock(){
+  const now=new Date();
+  const tw=now.toLocaleString('zh-TW',{timeZone:'Asia/Taipei',hour12:false});
+  document.getElementById('clock').textContent='TW '+tw;
+}
+setInterval(updateClock,1000);updateClock();
+
+async function load(){
+  try{
+    const r=await fetch(API);
+    const d=await r.json();
+    render(d);
+  }catch(e){
+    document.getElementById('content').innerHTML='<div class="loading" style="color:#ff4444">CONNECTION FAILED - RETRYING...</div>';
+  }
+}
+
+function msColor(ms){
+  if(ms<500)return '#44ff44';
+  if(ms<1500)return '#ffcc00';
+  if(ms<3000)return '#ff8800';
+  return '#ff4444';
+}
+function msWidth(ms){return Math.min(ms/5000*100,100)}
+
+function render(d){
+  const pct=parseInt(d.overall_progress);
+  const pbar=document.getElementById('pbar');
+  pbar.style.width=pct+'%';
+  if(pct>=90)pbar.style.background='linear-gradient(90deg,#44ff44,#00cc00)';
+  else if(pct>=70)pbar.style.background='linear-gradient(90deg,#ffcc00,#ff8800)';
+  else pbar.style.background='linear-gradient(90deg,#ff4444,#cc0000)';
+  document.getElementById('pbar-text').textContent=d.overall_progress;
+  document.getElementById('pct-text').textContent=d.overall_progress;
+
+  const slackers=Array.isArray(d.slackers)?d.slackers:[];
+  const waste=Array.isArray(d.waste_alert)?d.waste_alert:[];
+
+  const ab=document.getElementById('alertBanner');
+  if(slackers.length||waste.length){
+    ab.className='alert-banner show';
+    ab.textContent='WARNING: '+(slackers.length?slackers.length+' SLACKERS ':'')+(waste.length?waste.length+' WASTE ITEMS':'');
+  }else{ab.className='alert-banner'}
+
+  if(currentView==='meeting'){document.getElementById('content').innerHTML=renderMeeting();return}
+  if(currentView==='endpoints'){document.getElementById('content').innerHTML=renderEndpoints();return}
+
+  let h='<div class="grid">';
+
+  // Overview
+  h+=`<div class="card ${pct>=90?'ok':'danger'}">
+    <h2>SYSTEM OVERVIEW <span class="badge ${pct>=90?'green':'red'}">${pct}%</span></h2>
+    <div class="row"><span class="label">AI Models</span><span class="${d.progress_detail.models==='10/10'?'g':'r'}">${d.progress_detail.models}</span></div>
+    <div class="row"><span class="label">Azure Functions</span><span class="${d.progress_detail.azure_apps==='3/3'?'g':'r'}">${d.progress_detail.azure_apps}</span></div>
+    <div class="row"><span class="label">Supabase</span><span class="${d.progress_detail.supabase==='connected'?'g':'r'}">${d.progress_detail.supabase}</span></div>
+    <div class="row"><span class="label">Cloudflare</span><span class="${d.progress_detail.cloudflare==='ONLINE'?'g':'y'}">${d.progress_detail.cloudflare}</span></div>
+    <div class="row"><span class="label">Telegram</span><span class="${d.telegram==='ONLINE'?'g':'r'}">${d.telegram}</span></div>
+    <div class="row"><span class="label">Heartbeat Timer</span><span class="g">${d.progress_detail.heartbeat_timer}</span></div>
+    <div class="row"><span class="label">Sovereignty</span><span class="g">${d.progress_detail.sovereignty}</span></div>
+  </div>`;
+
+  // Alerts & Orders
+  h+=`<div class="card ${slackers.length||waste.length?'danger':'ok'}">
+    <h2>COMMANDER ORDERS <span class="badge ${slackers.length?'red':'green'}">${slackers.length?'ACTION':'CLEAR'}</span></h2>
+    <div class="row"><span class="label">Dead Models</span><span class="${slackers.length?'r':'g'}">${d.orders.dead_models}</span></div>
+    <div class="row"><span class="label">Slow Response</span><span class="${d.orders.slow_response!=='All fast'?'y':'g'}">${d.orders.slow_response}</span></div>
+    <div class="row"><span class="label">Cost Waste</span><span class="${d.orders.cost_waste!=='No waste'?'r':'g'}">${d.orders.cost_waste}</span></div>
+    <div class="row"><span class="label">Slackers</span><span class="${slackers.length?'r':'g'}">${slackers.length?slackers.join(', '):'NONE'}</span></div>
+    <div class="row"><span class="label">Waste Items</span><span class="${waste.length?'r':'g'}">${waste.length||'NONE'}</span></div>`;
+  if(waste.length)waste.forEach(w=>{h+=`<div class="row"><span class="r">${w.item}</span><span class="y">${w.action}</span></div>`});
+  h+=`</div>`;
+
+  // Soldiers
+  h+=`<div class="card full"><h2>AI SOLDIERS <span class="badge green">${d.soldiers.filter(s=>s.status==='ONLINE').length}/10</span></h2><div class="soldier-grid">`;
+  d.soldiers.forEach(s=>{
+    const dead=s.status==='DEAD';
+    const mc=msColor(s.response_ms);
+    h+=`<div class="soldier ${dead?'dead':''}">
+      <div>
+        <div class="name">${s.slot}</div>
+        <div class="detail">${s.model.split('/').pop()} | ${s.size}</div>
+        <div class="ms-bar"><div class="fill" style="width:${msWidth(s.response_ms)}%;background:${mc}"></div></div>
+      </div>
+      <div class="right">
+        <span class="tag ${dead?'off':'on'}">${s.status}</span>
+        <div class="cost-tag ${s.cost}">${s.cost} | ${s.response_ms>0?s.response_ms+'ms':'--'}</div>
+      </div>
+    </div>`;
+  });
+  h+=`</div></div>`;
+
+  // Azure Apps
+  h+=`<div class="card"><h2>AZURE FUNCTIONS <span class="badge green">${d.azure_apps.filter(a=>a.status==='RUNNING').length}/3</span></h2>`;
+  d.azure_apps.forEach(a=>{
+    h+=`<div class="app-row">
+      <span class="w">${a.name}</span>
+      <span class="${a.status==='RUNNING'?'g':'r'}">${a.status}</span>
+      <span style="color:${msColor(a.response_ms)}">${a.response_ms}ms</span>
+      <span class="y">${a.cost}</span>
+    </div>`;
+  });
+  h+=`</div>`;
+
+  // Heartbeats
+  h+=`<div class="card"><h2>HEARTBEATS <span class="badge green">LIVE</span></h2>`;
+  (d.supabase_heartbeats||[]).slice(0,8).forEach(hb=>{
+    const t=new Date(hb.last_heartbeat).toLocaleString('zh-TW',{timeZone:'Asia/Taipei',hour12:false});
+    h+=`<div class="hb-row"><span class="${hb.status==='healthy'?'g':'r'}">${hb.component}</span><span class="${hb.status==='healthy'?'g':'r'}">${hb.status}</span><span style="color:#555">${t}</span></div>`;
+  });
+  h+=`</div>`;
+
+  // Departments
+  h+=`<div class="card full"><h2>ALL DEPARTMENTS</h2><div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:8px">`;
+
+  const depts=[
+    {name:'NVIDIA NIM',items:['10 model slots','integrate.api.nvidia.com','USB plug/unplug architecture','Real-time inference']},
+    {name:'Azure Cloud',items:['3 Function Apps (East Asia)','Key Vault (seobaike-vault)','Storage (groktakeoverstorage)','Consumption Plan ($0)']},
+    {name:'Supabase DB',items:['Project: vmyrivxxibqydccurxug','Region: Tokyo','48 migrations','Tables: system_health, ai_logs, nim_models, platform_tokens']},
+    {name:'Cloudflare',items:['Domain: aiforseo.vip','Workers: API + Webhook','Pages: commander.html','14 platform connectors']},
+    {name:'Telegram',items:['Bot: 8449292496','Chat: 5372713163','Heartbeat: 5min auto','Commander notifications']},
+    {name:'Security',items:['Key Vault secrets','Storage keys rotated','Master key renewed','Sovereignty declared']},
+    {name:'Patent 115100981',items:['世界定義約束法用於AI推理','L1-L4 constraint layers','CaaS architecture','Boss approval required']},
+    {name:'Endpoints',items:['GET /api/commander','GET /api/dashboard','GET /api/alive_check','GET /api/takeover_func']}
+  ];
+  depts.forEach(dp=>{
+    h+=`<div class="dept"><h3>${dp.name}</h3>`;
+    dp.items.forEach(i=>{h+=`<div class="item">. ${i}</div>`});
+    h+=`</div>`;
+  });
+  h+=`</div></div>`;
+
+  h+=`</div>`;
+  document.getElementById('content').innerHTML=h;
+}
+
+let currentView='war';
+function switchView(v){
+  currentView=v;
+  document.querySelectorAll('.sw').forEach(b=>{b.classList.remove('active')});
+  event.target.classList.add('active');
+  load();
+}
+
+function renderMeeting(){
+  return `<div class="grid"><div class="card full">
+    <h2>MEETING - FORCE OUTPUT</h2>
+    <div style="padding:10px">
+      <button onclick="forceMeeting()" style="background:#ff4444;color:#fff;border:none;padding:12px 24px;border-radius:6px;cursor:pointer;font-family:'Courier New',monospace;font-size:14px">FORCE ALL DEPARTMENTS MEETING NOW</button>
+      <div id="meetingResult" style="margin-top:15px;font-size:12px;white-space:pre-wrap"></div>
+    </div>
+  </div></div>`;
+}
+
+function renderEndpoints(){
+  const eps=[
+    {name:'Commander War Room',url:'https://grok-takeover-app.azurewebsites.net/api/commander'},
+    {name:'Dashboard',url:'https://grok-takeover-app.azurewebsites.net/api/dashboard'},
+    {name:'Alive Check',url:'https://grok-takeover-app.azurewebsites.net/api/alive_check'},
+    {name:'Takeover',url:'https://grok-takeover-app.azurewebsites.net/api/takeover_func'},
+    {name:'AI Router Health',url:'https://seobaike-ai-router.azurewebsites.net/api/health'},
+    {name:'AI Router Slots',url:'https://seobaike-ai-router.azurewebsites.net/api/slots'},
+    {name:'AI Router Inference',url:'https://seobaike-ai-router.azurewebsites.net/api/route'},
+    {name:'L1L4 Pipeline',url:'https://seobaike-l1l4-pipeline.azurewebsites.net/api/health'},
+    {name:'Cloudflare API',url:'https://api.aiforseo.vip/api/health'},
+    {name:'Bot Status',url:'https://api.aiforseo.vip/api/bots/status'},
+    {name:'Supabase',url:'https://supabase.com/dashboard/project/vmyrivxxibqydccurxug'}
+  ];
+  let h='<div class="grid"><div class="card full"><h2>ALL ENDPOINTS</h2>';
+  eps.forEach(e=>{
+    h+=`<div class="row" style="padding:8px 0"><span class="w">${e.name}</span><a href="${e.url}" target="_blank" style="color:#ff8800;text-decoration:none;font-size:11px;word-break:break-all">${e.url}</a></div>`;
+  });
+  h+='</div></div>';
+  return h;
+}
+
+async function forceMeeting(){
+  document.getElementById('meetingResult').textContent='Calling all departments...';
+  try{
+    const r=await fetch('https://seobaike-ai-router.azurewebsites.net/api/route',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({messages:[{role:'user',content:'全部門報到，各報告一句話狀態'}],provider:'gemma',max_tokens:200})});
+    const d=await r.json();
+    document.getElementById('meetingResult').textContent=d.result?.content||JSON.stringify(d);
+  }catch(e){document.getElementById('meetingResult').textContent='Error: '+e.message}
+}
+
+load();
+setInterval(load,30000);
+</script>
+</body>
+</html>
