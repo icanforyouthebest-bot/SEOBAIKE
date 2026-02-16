@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>404 — 找不到頁面 | SEOBAIKE</title>
+  <meta name="description" content="您要找的頁面不存在或已被移除。SEOBAIKE — AI 驅動的全球市集。">
+  <meta name="robots" content="noindex, nofollow">
+  <meta property="og:title" content="404 — 找不到頁面 | SEOBAIKE">
+  <meta property="og:description" content="您要找的頁面不存在或已被移除。">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="/og-image.png">
+  <meta property="og:site_name" content="SEOBAIKE">
+  <meta property="og:locale" content="zh_TW">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/assets/design-system.css">
+  <link rel="stylesheet" href="/assets/premium-fx.css">
+  <style>
+    /* ── 404 Hero ── */
+    .error-hero {
+      padding: 160px 0 80px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(180deg, #0c0c20 0%, var(--bg-primary) 100%);
+      min-height: 60vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .error-hero::before {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 800px;
+      height: 800px;
+      background: radial-gradient(circle, rgba(232,133,12,0.09) 0%, rgba(232,133,12,0.02) 40%, transparent 65%);
+      pointer-events: none;
+    }
+
+    /* ── Large 404 Number ── */
+    .error-code {
+      font-size: clamp(8rem, 20vw, 16rem);
+      font-weight: 900;
+      line-height: 1;
+      margin-bottom: var(--sp-4);
+      letter-spacing: -0.04em;
+      position: relative;
+      display: inline-block;
+    }
+
+    /* ── Message ── */
+    .error-title {
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 800;
+      color: var(--text-primary);
+      margin-bottom: var(--sp-3);
+    }
+    .error-subtitle {
+      font-size: 1.15rem;
+      color: var(--text-muted);
+      max-width: 480px;
+      margin: 0 auto var(--sp-8);
+      line-height: 1.7;
+    }
+
+    /* ── Helpful Links ── */
+    .error-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--sp-4);
+      justify-content: center;
+      margin-bottom: var(--sp-10);
+    }
+    .error-links a {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 28px;
+      border-radius: var(--radius-md);
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: all 0.3s ease;
+      text-decoration: none;
+    }
+    .error-links .btn-primary {
+      background: var(--gold-gradient);
+      color: #000;
+      border: none;
+    }
+    .error-links .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(232,133,12,0.3);
+    }
+    .error-links .btn-outline {
+      background: transparent;
+      color: var(--text-secondary);
+      border: 1px solid var(--border-subtle);
+    }
+    .error-links .btn-outline:hover {
+      border-color: var(--gold-300);
+      color: var(--gold-200);
+      transform: translateY(-2px);
+    }
+
+    /* ── Countdown ── */
+    .countdown-wrap {
+      margin-top: var(--sp-6);
+      padding: 16px 28px;
+      border-radius: var(--radius-md);
+      background: rgba(232,133,12,0.05);
+      border: 1px solid rgba(232,133,12,0.12);
+      display: inline-block;
+    }
+    .countdown-text {
+      font-size: 0.92rem;
+      color: var(--text-muted);
+    }
+    .countdown-number {
+      font-weight: 800;
+      font-size: 1.1rem;
+      color: var(--gold-200);
+      font-variant-numeric: tabular-nums;
+    }
+    .countdown-cancel {
+      display: inline-block;
+      margin-left: 12px;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      cursor: pointer;
+      text-decoration: underline;
+      border: none;
+      background: none;
+      transition: color 0.2s;
+    }
+    .countdown-cancel:hover {
+      color: var(--gold-200);
+    }
+
+    /* ── Decorative Particles ── */
+    .particle-field {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden;
+    }
+    .particle {
+      position: absolute;
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: var(--gold-300);
+      opacity: 0;
+      animation: floatParticle 6s ease-in-out infinite;
+    }
+    @keyframes floatParticle {
+      0% { opacity: 0; transform: translateY(0) scale(0.5); }
+      20% { opacity: 0.6; }
+      80% { opacity: 0.3; }
+      100% { opacity: 0; transform: translateY(-120px) scale(0); }
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 768px) {
+      .error-hero {
+        padding: 120px 20px 60px;
+        min-height: 50vh;
+      }
+      .error-links {
+        flex-direction: column;
+        align-items: center;
+      }
+      .error-links a {
+        width: 100%;
+        max-width: 280px;
+        justify-content: center;
+      }
+    }
+    @media (max-width: 480px) {
+      .error-hero {
+        padding: 100px 16px 40px;
+      }
+    }
+  </style>
+</head>
+<body class="page-top">
+
+  <!-- ════ Navigation ════ -->
+  <nav class="nav">
+    <a href="/" class="nav-brand">
+      <img src="/favicon.svg" alt="SEOBAIKE" width="34" height="34">
+      <span><span class="seo">SEO</span><span class="baike">BAIKE</span></span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="/">首頁</a></li>
+      <li><a href="/features">功能</a></li>
+      <li><a href="/marketplace">市集</a></li>
+      <li><a href="/pricing">方案</a></li>
+      <li><a href="/about">關於</a></li>
+      <li><a href="/blog">動態</a></li>
+      <li><a href="/billing" class="nav-link">帳單</a></li>
+      <li><a href="/contact" class="nav-cta">聯繫我們</a></li>
+    </ul>
+    <button class="nav-hamburger" onclick="toggleMenu()" aria-label="選單">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- Mobile Overlay -->
+  <div class="mobile-overlay">
+    <button class="mobile-close" onclick="toggleMenu()">&times;</button>
+    <a href="/" onclick="toggleMenu()">首頁</a>
+    <a href="/features" onclick="toggleMenu()">功能</a>
+    <a href="/marketplace" onclick="toggleMenu()">市集</a>
+    <a href="/pricing" onclick="toggleMenu()">方案</a>
+    <a href="/about" onclick="toggleMenu()">關於</a>
+    <a href="/blog" onclick="toggleMenu()">動態</a>
+    <a href="/billing" onclick="toggleMenu()">帳單</a>
+    <a href="/contact" onclick="toggleMenu()">聯繫我們</a>
+  </div>
+
+  <!-- ════ 404 Hero ════ -->
+  <section class="error-hero">
+    <div class="particle-field" id="particleField"></div>
+    <div class="container">
+      <div class="error-code volcanic-title fade-up">404</div>
+      <h1 class="error-title fade-up">找不到頁面</h1>
+      <p class="error-subtitle fade-up">您要找的頁面不存在或已被移除。<br>請確認網址是否正確，或從以下連結繼續瀏覽。</p>
+      <div class="error-links fade-up">
+        <a href="/" class="btn-primary">&#x1F3E0; 返回首頁</a>
+        <a href="/features" class="btn-outline">&#x2699;&#xFE0F; 查看功能</a>
+        <a href="/marketplace" class="btn-outline">&#x1F6D2; 瀏覽市集</a>
+        <a href="/contact" class="btn-outline">&#x1F4E9; 聯繫我們</a>
+      </div>
+      <div class="countdown-wrap fade-up">
+        <span class="countdown-text">將在 <span class="countdown-number" id="countdown">10</span> 秒後自動返回首頁</span>
+        <button class="countdown-cancel" id="cancelBtn" onclick="cancelRedirect()">取消</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════ Footer ════ -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="/" class="nav-brand" style="font-size:1.3rem;">
+            <span class="seo">SEO</span><span class="baike">BAIKE</span>
+          </a>
+          <p>小路光有限公司（統編 60475510）<br>AI 驅動的全球市集<br>讓每個人都能用 AI 把產品賣到全世界。</p>
+        </div>
+        <div class="footer-col">
+          <h4>平台</h4>
+          <a href="/features">功能介紹</a>
+          <a href="/marketplace">全球市集</a>
+          <a href="/pricing">方案價格</a>
+          <a href="/billing">帳單管理</a>
+        </div>
+        <div class="footer-col">
+          <h4>資源</h4>
+          <a href="/blog">最新動態</a>
+          <a href="/docs">常見問題</a>
+        </div>
+        <div class="footer-col">
+          <h4>公司</h4>
+          <a href="/about">關於我們</a>
+          <a href="/contact">聯繫我們</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>&copy; 2024-2026 小路光有限公司. All rights reserved.</span>
+        <span>aiforseo.vip</span>
+      </div>
+      <div class="footer-disclaimer">
+        本平台由小路光有限公司（統編 60475510）營運。AI 服務結果僅供參考，不構成任何形式之保證或承諾。使用本服務即表示同意<a href="/terms">服務條款</a>及<a href="/privacy">隱私權政策</a>。台灣專利申請案號 115100981。
+      </div>
+    </div>
+  </footer>
+
+  <!-- ════ Scripts ════ -->
+  <script>
+  (function(){
+    try {
+      var cfg = window.__SEOBAIKE__ || {};
+      var sUrl = cfg.supabaseUrl || 'https://vmyrivxxibqydccurxug.supabase.co';
+      var sKey = cfg.anonKey || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZteXJpdnh4aWJxeWRjY3VyeHVnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzAwNDAwMjksImV4cCI6MjA4NTYxNjAyOX0.iBV-23LGdm_uKffAExgqSV34-NWoAyv8_-M_cJQZ8Gg';
+      fetch(sUrl + '/rest/v1/page_views', {
+        method: 'POST',
+        headers: { 'Content-Type':'application/json', 'apikey':sKey, 'Authorization':'Bearer '+sKey, 'Prefer':'return=minimal' },
+        body: JSON.stringify({ path: location.pathname, referrer: document.referrer || null, user_agent: navigator.userAgent })
+      }).catch(function(){});
+    } catch(e){}
+  })();
+  </script>
+  <script>
+  // ── Intersection Observer for fade-up animations ──
+  var obs = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.fade-up').forEach(function(el) { obs.observe(el); });
+
+  // ── Nav scroll effect ──
+  window.addEventListener('scroll', function() {
+    var nav = document.querySelector('.nav');
+    if (nav) nav.classList.toggle('scrolled', window.scrollY > 20);
+  });
+
+  // ── Hamburger menu ──
+  function toggleMenu() {
+    var hamburger = document.querySelector('.nav-hamburger');
+    var overlay = document.querySelector('.mobile-overlay');
+    if (hamburger) hamburger.classList.toggle('active');
+    if (overlay) overlay.classList.toggle('open');
+  }
+
+  // ── Countdown & Auto-redirect ──
+  var remaining = 10;
+  var countdownEl = document.getElementById('countdown');
+  var cancelled = false;
+  var redirectTimer = setInterval(function() {
+    if (cancelled) return;
+    remaining--;
+    if (countdownEl) countdownEl.textContent = remaining;
+    if (remaining <= 0) {
+      clearInterval(redirectTimer);
+      window.location.href = '/';
+    }
+  }, 1000);
+
+  function cancelRedirect() {
+    cancelled = true;
+    clearInterval(redirectTimer);
+    var wrap = document.querySelector('.countdown-wrap');
+    if (wrap) wrap.innerHTML = '<span class="countdown-text">已取消自動跳轉</span>';
+  }
+
+  // ── Decorative Floating Particles ──
+  (function() {
+    var field = document.getElementById('particleField');
+    if (!field) return;
+    var count = 15;
+    for (var i = 0; i < count; i++) {
+      var p = document.createElement('div');
+      p.className = 'particle';
+      p.style.left = (Math.random() * 100) + '%';
+      p.style.top = (40 + Math.random() * 50) + '%';
+      p.style.animationDelay = (Math.random() * 6) + 's';
+      p.style.animationDuration = (4 + Math.random() * 4) + 's';
+      p.style.width = (2 + Math.random() * 4) + 'px';
+      p.style.height = p.style.width;
+      field.appendChild(p);
+    }
+  })();
+  </script>
+  <script src="/assets/analytics.js" defer></script>
+  <script src="/assets/premium-fx.js"></script>
+  <script src="/assets/i18n.js"></script>
+  <script src="/assets/cookie-consent.js"></script>
+</body>
+</html>

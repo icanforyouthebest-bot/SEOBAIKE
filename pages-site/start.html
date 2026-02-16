@@ -4,11 +4,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>開始使用 — SEOBAIKE</title>
-  <meta name="description" content="了解如何開始使用 SEOBAIKE 平台，從建立帳號到開始銷售的完整指南。">
+  <meta name="description" content="SEOBAIKE 新手引導精靈：選擇你的 AI 需求、設定 API Key，一步步帶你開始使用 AI 智能平台。">
   <meta name="theme-color" content="#e8850c">
   <link rel="canonical" href="https://aiforseo.vip/start">
   <meta property="og:title" content="開始使用 — SEOBAIKE">
-  <meta property="og:description" content="了解如何開始使用 SEOBAIKE 平台，從建立帳號到開始銷售的完整指南。">
+  <meta property="og:description" content="SEOBAIKE 新手引導精靈：選擇你的 AI 需求、設定 API Key，一步步帶你開始使用 AI 智能平台。">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://aiforseo.vip/start">
   <meta property="og:image" content="/og-image.png">
@@ -20,271 +20,629 @@
   <link rel="stylesheet" href="/assets/design-system.css">
   <link rel="stylesheet" href="/assets/premium-fx.css">
   <style>
-    /* ── Start Page Specific ── */
+    /* ── Onboarding Wizard ── */
 
-    /* Hero */
-    .start-hero {
+    .wizard-section {
       padding: 140px 0 80px;
-      text-align: center;
+      min-height: 80vh;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+    }
+
+    .wizard-container {
+      max-width: 680px;
+      width: 100%;
+      margin: 0 auto;
+    }
+
+    /* ── Progress Bar ── */
+    .wizard-progress {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0;
+      margin-bottom: var(--sp-10, 2.5rem);
+      padding: 0 var(--sp-4, 1rem);
+    }
+
+    .progress-step {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+      z-index: 1;
+      flex-shrink: 0;
+    }
+
+    .progress-dot {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      border: 2px solid var(--border-default, #333);
+      background: var(--bg-secondary, #1a1a1a);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.9rem;
+      font-weight: 800;
+      color: var(--text-muted, #888);
+      transition: all 0.4s ease;
+    }
+
+    .progress-step.active .progress-dot {
+      border-color: var(--gold-300, #e8850c);
+      color: var(--gold-200, #f5a623);
+      box-shadow: 0 0 20px rgba(232, 133, 12, 0.3);
+      background: var(--bg-secondary, #1a1a1a);
+    }
+
+    .progress-step.completed .progress-dot {
+      border-color: var(--gold-300, #e8850c);
+      background: var(--gold-300, #e8850c);
+      color: #fff;
+    }
+
+    .progress-label {
+      font-size: 0.72rem;
+      color: var(--text-muted, #888);
+      margin-top: var(--sp-2, 0.5rem);
+      white-space: nowrap;
+      transition: color 0.4s ease;
+    }
+
+    .progress-step.active .progress-label {
+      color: var(--gold-200, #f5a623);
+      font-weight: 700;
+    }
+
+    .progress-step.completed .progress-label {
+      color: var(--text-secondary, #aaa);
+    }
+
+    .progress-line {
+      flex: 1;
+      height: 2px;
+      background: var(--border-default, #333);
+      margin: 0 -2px;
+      margin-bottom: 22px;
+      transition: background 0.4s ease;
+      min-width: 40px;
+    }
+
+    .progress-line.filled {
+      background: linear-gradient(90deg, var(--gold-300, #e8850c), var(--gold-200, #f5a623));
+    }
+
+    /* ── Wizard Card ── */
+    .wizard-card {
+      background: var(--bg-card, #1e1e1e);
+      border: 1px solid var(--border-subtle, #2a2a2a);
+      border-radius: var(--radius-lg, 12px);
+      padding: var(--sp-10, 2.5rem) var(--sp-8, 2rem);
       position: relative;
       overflow: hidden;
     }
 
-    .start-hero::before {
+    .wizard-card::before {
       content: '';
       position: absolute;
       top: 0;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 800px;
-      height: 600px;
-      background: radial-gradient(ellipse, rgba(232,133,12,0.06) 0%, transparent 70%);
-      pointer-events: none;
-    }
-
-    .start-hero h1 {
-      margin-bottom: var(--sp-4);
-      position: relative;
-    }
-
-    .start-hero p {
-      font-size: 1.1rem;
-      color: var(--text-muted);
-      max-width: 560px;
-      margin: 0 auto;
-      position: relative;
-    }
-
-    /* Timeline Section */
-    .timeline-section {
-      padding: var(--sp-24) 0;
-    }
-
-    .timeline {
-      position: relative;
-      max-width: 700px;
-      margin: 0 auto;
-      padding-left: 60px;
-    }
-
-    /* Vertical line */
-    .timeline::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 27px;
-      bottom: 0;
-      width: 2px;
-      background: linear-gradient(180deg, var(--gold-300), var(--border-default));
-    }
-
-    .timeline-item {
-      position: relative;
-      margin-bottom: var(--sp-12);
-      padding-bottom: var(--sp-4);
-    }
-
-    .timeline-item:last-child {
-      margin-bottom: 0;
-    }
-
-    /* Timeline dot */
-    .timeline-dot {
-      position: absolute;
-      left: -33px;
-      top: 4px;
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      background: var(--bg-secondary);
-      border: 2px solid var(--gold-300);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.1rem;
-      font-weight: 800;
-      color: var(--gold-200);
-      box-shadow: 0 0 16px rgba(232,133,12,0.15);
-      z-index: 1;
-    }
-
-    .timeline-content {
-      background: var(--bg-card);
-      border: 1px solid var(--border-subtle);
-      border-radius: var(--radius-lg);
-      padding: var(--sp-6) var(--sp-8);
-      transition: all var(--duration-normal) var(--ease-out);
-    }
-
-    .timeline-content:hover {
-      border-color: var(--border-hover);
-      background: var(--bg-card-hover);
-      transform: translateX(4px);
-      box-shadow: var(--shadow-gold);
-    }
-
-    .timeline-content h3 {
-      font-size: 1.15rem;
-      margin-bottom: var(--sp-2);
-      color: var(--text-primary);
-    }
-
-    .timeline-content p {
-      font-size: 0.92rem;
-      color: var(--text-secondary);
-      line-height: 1.7;
-    }
-
-    .timeline-tag {
-      display: inline-block;
-      margin-top: var(--sp-3);
-      padding: 4px 12px;
-      border-radius: var(--radius-full);
-      background: rgba(232,133,12,0.08);
-      border: 1px solid rgba(232,133,12,0.15);
-      font-size: 0.75rem;
-      font-weight: 700;
-      color: var(--gold-200);
-      letter-spacing: 0.5px;
-    }
-
-    /* Tips Section */
-    .tips-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: var(--sp-6);
-    }
-
-    .tip-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border-subtle);
-      border-radius: var(--radius-lg);
-      padding: var(--sp-6);
-      transition: all var(--duration-normal) var(--ease-out);
-    }
-
-    .tip-card:hover {
-      border-color: var(--border-hover);
-      background: var(--bg-card-hover);
-      transform: translateY(-2px);
-      box-shadow: var(--shadow-gold);
-    }
-
-    .tip-icon {
-      width: 48px;
-      height: 48px;
-      border-radius: var(--radius-md);
-      background: rgba(232,133,12,0.08);
-      border: 1px solid rgba(232,133,12,0.15);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.4rem;
-      margin-bottom: var(--sp-4);
-    }
-
-    .tip-card h4 {
-      font-size: 1rem;
-      margin-bottom: var(--sp-2);
-      color: var(--text-primary);
-    }
-
-    .tip-card p {
-      font-size: 0.88rem;
-      color: var(--text-muted);
-      line-height: 1.6;
-    }
-
-    /* CTA Section */
-    .cta-section {
-      text-align: center;
-      padding: var(--sp-24) 0;
-      position: relative;
-    }
-
-    .cta-section::before {
-      content: '';
-      position: absolute;
-      bottom: 0;
       left: 50%;
       transform: translateX(-50%);
       width: 600px;
       height: 400px;
-      background: radial-gradient(ellipse, rgba(232,133,12,0.04) 0%, transparent 70%);
+      background: radial-gradient(ellipse, rgba(232, 133, 12, 0.04) 0%, transparent 70%);
       pointer-events: none;
     }
 
-    .cta-section h2 {
-      margin-bottom: var(--sp-4);
+    /* ── Step Panels ── */
+    .wizard-step {
+      display: none;
+      animation: wizardFadeIn 0.45s ease;
       position: relative;
     }
 
-    .cta-section p {
-      font-size: 1.05rem;
-      color: var(--text-muted);
-      max-width: 480px;
-      margin: 0 auto var(--sp-8);
-      position: relative;
+    .wizard-step.active {
+      display: block;
     }
 
-    .cta-buttons {
+    @keyframes wizardFadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(16px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .step-icon {
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      background: rgba(232, 133, 12, 0.08);
+      border: 2px solid rgba(232, 133, 12, 0.2);
       display: flex;
-      gap: var(--sp-4);
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      margin: 0 auto var(--sp-6, 1.5rem);
+    }
+
+    .step-title {
+      text-align: center;
+      font-size: 1.6rem;
+      font-weight: 800;
+      margin-bottom: var(--sp-2, 0.5rem);
+      color: var(--text-primary, #fff);
+    }
+
+    .step-subtitle {
+      text-align: center;
+      font-size: 1rem;
+      color: var(--text-muted, #888);
+      margin-bottom: var(--sp-8, 2rem);
+      line-height: 1.7;
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* ── Step 1: Welcome Features ── */
+    .welcome-features {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--sp-4, 1rem);
+      margin-top: var(--sp-6, 1.5rem);
+    }
+
+    .welcome-feature {
+      background: var(--bg-secondary, #1a1a1a);
+      border: 1px solid var(--border-subtle, #2a2a2a);
+      border-radius: var(--radius-md, 8px);
+      padding: var(--sp-4, 1rem) var(--sp-5, 1.25rem);
+      display: flex;
+      align-items: flex-start;
+      gap: var(--sp-3, 0.75rem);
+      transition: all 0.3s ease;
+    }
+
+    .welcome-feature:hover {
+      border-color: var(--border-hover, #444);
+      background: var(--bg-card-hover, #252525);
+    }
+
+    .welcome-feature-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: var(--radius-sm, 6px);
+      background: rgba(232, 133, 12, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .welcome-feature h4 {
+      font-size: 0.9rem;
+      color: var(--text-primary, #fff);
+      margin-bottom: 2px;
+    }
+
+    .welcome-feature p {
+      font-size: 0.8rem;
+      color: var(--text-muted, #888);
+      line-height: 1.5;
+    }
+
+    /* ── Step 2: Need Checkboxes ── */
+    .needs-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--sp-3, 0.75rem);
+    }
+
+    .need-option {
+      position: relative;
+    }
+
+    .need-option input[type="checkbox"] {
+      position: absolute;
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    .need-option label {
+      display: flex;
+      align-items: center;
+      gap: var(--sp-3, 0.75rem);
+      padding: var(--sp-4, 1rem) var(--sp-5, 1.25rem);
+      background: var(--bg-secondary, #1a1a1a);
+      border: 2px solid var(--border-subtle, #2a2a2a);
+      border-radius: var(--radius-md, 8px);
+      cursor: pointer;
+      transition: all 0.3s ease;
+      user-select: none;
+    }
+
+    .need-option label:hover {
+      border-color: var(--border-hover, #444);
+      background: var(--bg-card-hover, #252525);
+    }
+
+    .need-option input:checked + label {
+      border-color: var(--gold-300, #e8850c);
+      background: rgba(232, 133, 12, 0.06);
+      box-shadow: 0 0 16px rgba(232, 133, 12, 0.1);
+    }
+
+    .need-check {
+      width: 22px;
+      height: 22px;
+      border-radius: 4px;
+      border: 2px solid var(--border-default, #333);
+      background: transparent;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: all 0.25s ease;
+      font-size: 0.75rem;
+      color: transparent;
+    }
+
+    .need-option input:checked + label .need-check {
+      border-color: var(--gold-300, #e8850c);
+      background: var(--gold-300, #e8850c);
+      color: #fff;
+    }
+
+    .need-icon {
+      font-size: 1.3rem;
+      flex-shrink: 0;
+    }
+
+    .need-text {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--text-primary, #fff);
+    }
+
+    /* ── Step 3: API Key Input ── */
+    .byok-explain {
+      background: var(--bg-secondary, #1a1a1a);
+      border: 1px solid var(--border-subtle, #2a2a2a);
+      border-radius: var(--radius-md, 8px);
+      padding: var(--sp-5, 1.25rem) var(--sp-6, 1.5rem);
+      margin-bottom: var(--sp-6, 1.5rem);
+    }
+
+    .byok-explain h4 {
+      font-size: 0.95rem;
+      color: var(--gold-200, #f5a623);
+      margin-bottom: var(--sp-2, 0.5rem);
+    }
+
+    .byok-explain p {
+      font-size: 0.88rem;
+      color: var(--text-muted, #888);
+      line-height: 1.7;
+    }
+
+    .byok-explain ul {
+      list-style: none;
+      padding: 0;
+      margin: var(--sp-3, 0.75rem) 0 0;
+    }
+
+    .byok-explain ul li {
+      font-size: 0.85rem;
+      color: var(--text-secondary, #aaa);
+      padding: var(--sp-1, 0.25rem) 0;
+      padding-left: var(--sp-4, 1rem);
+      position: relative;
+    }
+
+    .byok-explain ul li::before {
+      content: '\2713';
+      position: absolute;
+      left: 0;
+      color: var(--gold-300, #e8850c);
+      font-weight: 700;
+    }
+
+    .api-input-group {
+      margin-bottom: var(--sp-4, 1rem);
+    }
+
+    .api-input-group label {
+      display: block;
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: var(--text-secondary, #aaa);
+      margin-bottom: var(--sp-2, 0.5rem);
+    }
+
+    .api-input-wrapper {
+      position: relative;
+    }
+
+    .api-input-wrapper input {
+      width: 100%;
+      padding: var(--sp-3, 0.75rem) var(--sp-4, 1rem);
+      padding-right: 48px;
+      background: var(--bg-secondary, #1a1a1a);
+      border: 2px solid var(--border-default, #333);
+      border-radius: var(--radius-md, 8px);
+      color: var(--text-primary, #fff);
+      font-size: 0.95rem;
+      font-family: monospace;
+      transition: border-color 0.3s ease;
+      box-sizing: border-box;
+    }
+
+    .api-input-wrapper input:focus {
+      outline: none;
+      border-color: var(--gold-300, #e8850c);
+      box-shadow: 0 0 12px rgba(232, 133, 12, 0.15);
+    }
+
+    .api-input-wrapper input::placeholder {
+      color: var(--text-muted, #888);
+      font-family: inherit;
+    }
+
+    .toggle-visibility {
+      position: absolute;
+      right: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      color: var(--text-muted, #888);
+      cursor: pointer;
+      font-size: 1.1rem;
+      padding: 4px;
+      transition: color 0.2s ease;
+    }
+
+    .toggle-visibility:hover {
+      color: var(--gold-200, #f5a623);
+    }
+
+    .api-hint {
+      font-size: 0.78rem;
+      color: var(--text-muted, #888);
+      margin-top: var(--sp-2, 0.5rem);
+      line-height: 1.5;
+    }
+
+    .skip-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: var(--sp-4, 1rem);
+      font-size: 0.88rem;
+      color: var(--text-muted, #888);
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 0;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      transition: color 0.2s ease;
+    }
+
+    .skip-link:hover {
+      color: var(--gold-200, #f5a623);
+    }
+
+    /* ── Step 4: Success ── */
+    .success-icon {
+      width: 88px;
+      height: 88px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, rgba(232, 133, 12, 0.15), rgba(245, 166, 35, 0.1));
+      border: 2px solid var(--gold-300, #e8850c);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.5rem;
+      margin: 0 auto var(--sp-6, 1.5rem);
+      box-shadow: 0 0 30px rgba(232, 133, 12, 0.2);
+      animation: successPulse 2s ease-in-out infinite;
+    }
+
+    @keyframes successPulse {
+      0%, 100% {
+        box-shadow: 0 0 20px rgba(232, 133, 12, 0.2);
+      }
+      50% {
+        box-shadow: 0 0 40px rgba(232, 133, 12, 0.35);
+      }
+    }
+
+    .success-summary {
+      background: var(--bg-secondary, #1a1a1a);
+      border: 1px solid var(--border-subtle, #2a2a2a);
+      border-radius: var(--radius-md, 8px);
+      padding: var(--sp-5, 1.25rem) var(--sp-6, 1.5rem);
+      margin: var(--sp-6, 1.5rem) 0;
+      text-align: left;
+    }
+
+    .success-summary h4 {
+      font-size: 0.9rem;
+      color: var(--gold-200, #f5a623);
+      margin-bottom: var(--sp-3, 0.75rem);
+    }
+
+    .summary-item {
+      display: flex;
+      align-items: center;
+      gap: var(--sp-3, 0.75rem);
+      padding: var(--sp-2, 0.5rem) 0;
+      font-size: 0.88rem;
+      color: var(--text-secondary, #aaa);
+    }
+
+    .summary-item .check {
+      color: var(--gold-300, #e8850c);
+      font-weight: 700;
+    }
+
+    .success-cta {
+      display: flex;
+      gap: var(--sp-4, 1rem);
       justify-content: center;
       flex-wrap: wrap;
+      margin-top: var(--sp-6, 1.5rem);
+    }
+
+    /* ── Nav Buttons ── */
+    .wizard-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: var(--sp-8, 2rem);
+      padding-top: var(--sp-6, 1.5rem);
+      border-top: 1px solid var(--border-subtle, #2a2a2a);
       position: relative;
+    }
+
+    .wizard-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: var(--sp-3, 0.75rem) var(--sp-6, 1.5rem);
+      border-radius: var(--radius-md, 8px);
+      font-size: 0.95rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      border: none;
+      text-decoration: none;
+    }
+
+    .wizard-btn-back {
+      background: transparent;
+      border: 1px solid var(--border-default, #333);
+      color: var(--text-secondary, #aaa);
+    }
+
+    .wizard-btn-back:hover {
+      border-color: var(--border-hover, #444);
+      color: var(--text-primary, #fff);
+      background: var(--bg-secondary, #1a1a1a);
+    }
+
+    .wizard-btn-next {
+      background: linear-gradient(135deg, var(--gold-300, #e8850c), #d4760a);
+      color: #fff;
+      box-shadow: 0 4px 16px rgba(232, 133, 12, 0.3);
+    }
+
+    .wizard-btn-next:hover {
+      box-shadow: 0 6px 24px rgba(232, 133, 12, 0.45);
+      transform: translateY(-1px);
+    }
+
+    .wizard-btn-next:active {
+      transform: translateY(0);
+    }
+
+    .wizard-btn:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+      transform: none !important;
+    }
+
+    .wizard-btn-hidden {
+      visibility: hidden;
+      pointer-events: none;
     }
 
     /* ── Responsive ── */
-    @media (max-width: 1024px) {
-      .tips-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-    }
-
     @media (max-width: 768px) {
-      .start-hero {
+      .wizard-section {
         padding: 100px 0 60px;
       }
 
-      .timeline {
-        padding-left: 48px;
+      .wizard-card {
+        padding: var(--sp-6, 1.5rem) var(--sp-5, 1.25rem);
+        margin: 0 var(--sp-4, 1rem);
       }
 
-      .timeline::before {
-        left: 19px;
+      .wizard-container {
+        padding: 0;
       }
 
-      .timeline-dot {
-        left: -29px;
-        width: 34px;
-        height: 34px;
-        font-size: 0.95rem;
+      .wizard-progress {
+        margin-bottom: var(--sp-6, 1.5rem);
+        padding: 0 var(--sp-2, 0.5rem);
       }
 
-      .timeline-content {
-        padding: var(--sp-5) var(--sp-5);
+      .progress-dot {
+        width: 32px;
+        height: 32px;
+        font-size: 0.78rem;
       }
 
-      .tips-grid {
+      .progress-label {
+        font-size: 0.65rem;
+      }
+
+      .progress-line {
+        min-width: 20px;
+      }
+
+      .step-title {
+        font-size: 1.3rem;
+      }
+
+      .step-subtitle {
+        font-size: 0.9rem;
+      }
+
+      .welcome-features {
         grid-template-columns: 1fr;
+      }
+
+      .needs-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .step-icon {
+        width: 60px;
+        height: 60px;
+        font-size: 1.6rem;
+      }
+
+      .success-icon {
+        width: 72px;
+        height: 72px;
+        font-size: 2rem;
       }
     }
 
-    @media (max-width: 480px) {
-      .timeline {
-        padding-left: 40px;
+    @media (max-width: 380px) {
+      .wizard-nav {
+        flex-direction: column;
+        gap: var(--sp-3, 0.75rem);
       }
 
-      .timeline::before {
-        left: 15px;
+      .wizard-btn {
+        width: 100%;
+        justify-content: center;
       }
 
-      .timeline-dot {
-        left: -25px;
-        width: 28px;
-        height: 28px;
-        font-size: 0.82rem;
+      .wizard-btn-hidden {
+        display: none;
       }
     }
   </style>
@@ -323,144 +681,223 @@
     <a href="/login" onclick="toggleMenu()">登入</a>
   </div>
 
-  <!-- Hero -->
-  <section class="start-hero">
-    <div class="container">
-      <div class="fade-up">
-        <span class="section-badge">新手指南</span>
-        <h1>開始使用 <span class="text-gold">SEOBAIKE</span></h1>
-        <p>從建立帳號到成功銷售，我們為您準備了完整的入門指南，一步一步帶您上手。</p>
+  <!-- Onboarding Wizard -->
+  <section class="wizard-section">
+    <div class="container wizard-container">
+
+      <!-- Progress Bar -->
+      <div class="wizard-progress" role="progressbar" aria-valuenow="1" aria-valuemin="1" aria-valuemax="4">
+        <div class="progress-step active" data-step="1">
+          <div class="progress-dot">1</div>
+          <span class="progress-label">歡迎</span>
+        </div>
+        <div class="progress-line" data-line="1"></div>
+        <div class="progress-step" data-step="2">
+          <div class="progress-dot">2</div>
+          <span class="progress-label">AI 需求</span>
+        </div>
+        <div class="progress-line" data-line="2"></div>
+        <div class="progress-step" data-step="3">
+          <div class="progress-dot">3</div>
+          <span class="progress-label">API Key</span>
+        </div>
+        <div class="progress-line" data-line="3"></div>
+        <div class="progress-step" data-step="4">
+          <div class="progress-dot">4</div>
+          <span class="progress-label">完成</span>
+        </div>
       </div>
-    </div>
-  </section>
 
-  <hr class="divider">
+      <!-- Wizard Card -->
+      <div class="wizard-card magma-border lava-glow">
 
-  <!-- Timeline Steps -->
-  <section class="timeline-section">
-    <div class="container">
-      <div class="section-header fade-up">
-        <h2>入門流程</h2>
-        <p>依照以下步驟，逐步完成您的商店設定</p>
-      </div>
+        <!-- Step 1: Welcome -->
+        <div class="wizard-step active" data-step="1">
+          <div class="step-icon">&#127755;</div>
+          <h2 class="step-title">歡迎來到 <span class="text-gold">SEOBAIKE</span></h2>
+          <p class="step-subtitle">
+            SEOBAIKE 是 AI 智能服務平台 — 您的一站式 AI 工具中心。<br>
+            用最簡單的方式，取用最強大的 AI 能力。
+          </p>
 
-      <div class="timeline">
-        <!-- Step 1 -->
-        <div class="timeline-item fade-up">
-          <div class="timeline-dot">1</div>
-          <div class="timeline-content">
-            <h3>建立帳號</h3>
-            <p>使用電子郵件或社群帳號快速註冊 SEOBAIKE 帳號。註冊後您將獲得專屬的管理後台，可以開始設定您的商店。</p>
-            <span class="timeline-tag">免費註冊</span>
+          <div class="welcome-features">
+            <div class="welcome-feature">
+              <div class="welcome-feature-icon">&#128270;</div>
+              <div>
+                <h4>SEO 智能分析</h4>
+                <p>AI 驅動的關鍵字研究與排名優化</p>
+              </div>
+            </div>
+            <div class="welcome-feature">
+              <div class="welcome-feature-icon">&#9997;&#65039;</div>
+              <div>
+                <h4>AI 內容生成</h4>
+                <p>多語言文案、部落格、產品描述</p>
+              </div>
+            </div>
+            <div class="welcome-feature">
+              <div class="welcome-feature-icon">&#128202;</div>
+              <div>
+                <h4>數據儀表板</h4>
+                <p>即時流量分析與轉換追蹤</p>
+              </div>
+            </div>
+            <div class="welcome-feature">
+              <div class="welcome-feature-icon">&#128274;</div>
+              <div>
+                <h4>BYOK 架構</h4>
+                <p>自帶金鑰，資料完全掌控</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="wizard-nav">
+            <button class="wizard-btn wizard-btn-back wizard-btn-hidden" disabled>&#8592; 上一步</button>
+            <button class="wizard-btn wizard-btn-next" onclick="wizardNext()">開始設定 &#8594;</button>
           </div>
         </div>
 
-        <!-- Step 2 -->
-        <div class="timeline-item fade-up">
-          <div class="timeline-dot">2</div>
-          <div class="timeline-content">
-            <h3>設定商店資料</h3>
-            <p>填寫您的商店名稱、聯絡方式、營業類型等基本資料。完善的商店資訊能幫助顧客更信任您的品牌，提升成交率。</p>
-            <span class="timeline-tag">基本設定</span>
+        <!-- Step 2: Choose AI Needs -->
+        <div class="wizard-step" data-step="2">
+          <div class="step-icon">&#127919;</div>
+          <h2 class="step-title">選擇你的 <span class="text-gold">AI 需求</span></h2>
+          <p class="step-subtitle">
+            告訴我們您最需要哪些 AI 功能，我們會為您推薦最適合的工具組合。<br>
+            （可複選，之後也能隨時調整）
+          </p>
+
+          <div class="needs-grid">
+            <div class="need-option">
+              <input type="checkbox" id="need-seo" name="needs" value="seo">
+              <label for="need-seo">
+                <span class="need-check">&#10003;</span>
+                <span class="need-icon">&#128270;</span>
+                <span class="need-text">SEO 分析</span>
+              </label>
+            </div>
+            <div class="need-option">
+              <input type="checkbox" id="need-writing" name="needs" value="writing">
+              <label for="need-writing">
+                <span class="need-check">&#10003;</span>
+                <span class="need-icon">&#9997;&#65039;</span>
+                <span class="need-text">AI 寫作</span>
+              </label>
+            </div>
+            <div class="need-option">
+              <input type="checkbox" id="need-image" name="needs" value="image">
+              <label for="need-image">
+                <span class="need-check">&#10003;</span>
+                <span class="need-icon">&#127912;</span>
+                <span class="need-text">圖片生成</span>
+              </label>
+            </div>
+            <div class="need-option">
+              <input type="checkbox" id="need-chatbot" name="needs" value="chatbot">
+              <label for="need-chatbot">
+                <span class="need-check">&#10003;</span>
+                <span class="need-icon">&#129302;</span>
+                <span class="need-text">聊天機器人</span>
+              </label>
+            </div>
+            <div class="need-option">
+              <input type="checkbox" id="need-data" name="needs" value="data">
+              <label for="need-data">
+                <span class="need-check">&#10003;</span>
+                <span class="need-icon">&#128202;</span>
+                <span class="need-text">數據分析</span>
+              </label>
+            </div>
+            <div class="need-option">
+              <input type="checkbox" id="need-other" name="needs" value="other">
+              <label for="need-other">
+                <span class="need-check">&#10003;</span>
+                <span class="need-icon">&#128161;</span>
+                <span class="need-text">其他</span>
+              </label>
+            </div>
+          </div>
+
+          <div class="wizard-nav">
+            <button class="wizard-btn wizard-btn-back" onclick="wizardBack()">&#8592; 上一步</button>
+            <button class="wizard-btn wizard-btn-next" onclick="wizardNext()">下一步 &#8594;</button>
           </div>
         </div>
 
-        <!-- Step 3 -->
-        <div class="timeline-item fade-up">
-          <div class="timeline-dot">3</div>
-          <div class="timeline-content">
-            <h3>上架第一個商品</h3>
-            <p>新增您的商品資訊，包含名稱、描述、價格和圖片。系統提供直覺化的編輯介面，讓您輕鬆管理商品目錄。</p>
-            <span class="timeline-tag">商品管理</span>
+        <!-- Step 3: API Key (BYOK) -->
+        <div class="wizard-step" data-step="3">
+          <div class="step-icon">&#128273;</div>
+          <h2 class="step-title">設定 <span class="text-gold">API Key</span></h2>
+          <p class="step-subtitle">
+            SEOBAIKE 採用 BYOK（自帶金鑰）架構，您的 API Key 只存放在您的裝置上，我們不會儲存。
+          </p>
+
+          <div class="byok-explain">
+            <h4>什麼是 BYOK？</h4>
+            <p>BYOK（Bring Your Own Key）讓您使用自己的 AI 服務金鑰，享有以下優勢：</p>
+            <ul>
+              <li>完全掌控 — 金鑰僅存於您的裝置</li>
+              <li>直接計費 — 費用由 AI 服務商直接向您收取</li>
+              <li>無中間加價 — 以原始價格使用 AI 服務</li>
+              <li>隨時更換 — 可隨時更新或移除金鑰</li>
+            </ul>
+          </div>
+
+          <div class="api-input-group">
+            <label for="api-key-input">您的 API Key</label>
+            <div class="api-input-wrapper">
+              <input
+                type="password"
+                id="api-key-input"
+                placeholder="sk-xxxxxxxxxxxxxxxxxxxxxxxx"
+                autocomplete="off"
+                spellcheck="false"
+              >
+              <button class="toggle-visibility" onclick="toggleApiVisibility()" aria-label="切換顯示/隱藏" type="button">&#128065;</button>
+            </div>
+            <p class="api-hint">您的金鑰將安全地存放在本地瀏覽器中，不會上傳到伺服器。</p>
+          </div>
+
+          <button class="skip-link" onclick="wizardNext()">&#8594; 之後再設定，先跳過</button>
+
+          <div class="wizard-nav">
+            <button class="wizard-btn wizard-btn-back" onclick="wizardBack()">&#8592; 上一步</button>
+            <button class="wizard-btn wizard-btn-next" onclick="saveApiKeyAndNext()">下一步 &#8594;</button>
           </div>
         </div>
 
-        <!-- Step 4 -->
-        <div class="timeline-item fade-up">
-          <div class="timeline-dot">4</div>
-          <div class="timeline-content">
-            <h3>AI 自動翻譯與優化</h3>
-            <p>SEOBAIKE 的多引擎 AI 會自動為您的商品進行多語言翻譯、SEO 關鍵字優化和文案改善，讓您的商品觸及更廣的客群。</p>
-            <span class="timeline-tag">AI 加持</span>
+        <!-- Step 4: Complete -->
+        <div class="wizard-step" data-step="4">
+          <div class="success-icon">&#10004;&#65039;</div>
+          <h2 class="step-title">設定<span class="text-gold">完成！</span></h2>
+          <p class="step-subtitle">
+            您已準備好開始使用 SEOBAIKE 的 AI 智能服務。<br>
+            以下是您的設定摘要：
+          </p>
+
+          <div class="success-summary">
+            <h4>設定摘要</h4>
+            <div class="summary-item">
+              <span class="check">&#10003;</span>
+              <span>帳號：已準備就緒</span>
+            </div>
+            <div class="summary-item" id="summary-needs">
+              <span class="check">&#10003;</span>
+              <span>AI 需求：載入中...</span>
+            </div>
+            <div class="summary-item" id="summary-apikey">
+              <span class="check">&#10003;</span>
+              <span>API Key：載入中...</span>
+            </div>
+          </div>
+
+          <div class="success-cta">
+            <a href="/dashboard" class="wizard-btn wizard-btn-next">前往控制台 &#8594;</a>
+            <a href="/marketplace" class="wizard-btn wizard-btn-back" style="visibility:visible">瀏覽功能市集</a>
           </div>
         </div>
 
-        <!-- Step 5 -->
-        <div class="timeline-item fade-up">
-          <div class="timeline-dot">5</div>
-          <div class="timeline-content">
-            <h3>開始銷售</h3>
-            <p>一切就緒後，您的商品將正式上線。您可以透過後台即時追蹤訂單、分析銷售數據，並持續優化您的經營策略。</p>
-            <span class="timeline-tag">正式上線</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <hr class="divider">
-
-  <!-- Tips Section -->
-  <section class="section">
-    <div class="container">
-      <div class="section-header fade-up">
-        <span class="section-badge">實用建議</span>
-        <h2>新手賣家小撇步</h2>
-        <p>掌握這些技巧，讓您的店鋪從一開始就走在正確的方向</p>
-      </div>
-
-      <div class="tips-grid">
-        <div class="tip-card fade-up">
-          <div class="tip-icon">&#128248;</div>
-          <h4>拍好商品照片</h4>
-          <p>清晰、明亮的商品照片是吸引顧客的第一步。建議使用自然光拍攝，展示商品的多個角度。</p>
-        </div>
-
-        <div class="tip-card fade-up">
-          <div class="tip-icon">&#9999;&#65039;</div>
-          <h4>寫出吸引人的描述</h4>
-          <p>善用 AI 文案工具，為商品撰寫詳細且有吸引力的描述。強調產品特色和使用場景。</p>
-        </div>
-
-        <div class="tip-card fade-up">
-          <div class="tip-icon">&#127760;</div>
-          <h4>善用多語言功能</h4>
-          <p>啟用 AI 自動翻譯功能，讓您的商品能觸及不同語言的客群，拓展國際市場。</p>
-        </div>
-
-        <div class="tip-card fade-up">
-          <div class="tip-icon">&#128200;</div>
-          <h4>定期查看數據</h4>
-          <p>透過後台分析工具了解哪些商品最受歡迎、流量來源分布，據此調整您的經營方向。</p>
-        </div>
-
-        <div class="tip-card fade-up">
-          <div class="tip-icon">&#128172;</div>
-          <h4>回覆顧客訊息</h4>
-          <p>即時回覆顧客的問題能提升信任度和成交率。善用 AI 客服功能，提供全天候的回應。</p>
-        </div>
-
-        <div class="tip-card fade-up">
-          <div class="tip-icon">&#128640;</div>
-          <h4>持續優化更新</h4>
-          <p>定期更新商品資訊、增加新品項，保持商店的活躍度。活躍的店鋪更容易被顧客發現。</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <hr class="divider">
-
-  <!-- CTA Section -->
-  <section class="cta-section">
-    <div class="container fade-up">
-      <h2>準備好了嗎？</h2>
-      <p>現在就加入 SEOBAIKE，開始打造您的線上事業。</p>
-      <div class="cta-buttons">
-        <a href="/login" class="btn btn-primary btn-lg">免費註冊</a>
-        <a href="/pricing" class="btn btn-secondary btn-lg">查看方案</a>
-      </div>
-    </div>
+      </div><!-- /wizard-card -->
+    </div><!-- /wizard-container -->
   </section>
 
   <!-- Footer -->
@@ -523,6 +960,129 @@
       document.querySelector('.nav-hamburger').classList.toggle('active');
       document.querySelector('.mobile-overlay').classList.toggle('open');
     }
+  </script>
+
+  <!-- Onboarding Wizard Logic -->
+  <script>
+    (function () {
+      var currentStep = 1;
+      var totalSteps = 4;
+
+      function getSteps() { return document.querySelectorAll('.wizard-step'); }
+      function getProgressSteps() { return document.querySelectorAll('.progress-step'); }
+      function getProgressLines() { return document.querySelectorAll('.progress-line'); }
+
+      function updateUI() {
+        // Update step panels
+        getSteps().forEach(function (el) {
+          var s = parseInt(el.getAttribute('data-step'));
+          el.classList.toggle('active', s === currentStep);
+        });
+
+        // Update progress bar
+        getProgressSteps().forEach(function (el) {
+          var s = parseInt(el.getAttribute('data-step'));
+          el.classList.remove('active', 'completed');
+          if (s === currentStep) el.classList.add('active');
+          else if (s < currentStep) el.classList.add('completed');
+        });
+
+        getProgressLines().forEach(function (el) {
+          var l = parseInt(el.getAttribute('data-line'));
+          el.classList.toggle('filled', l < currentStep);
+        });
+
+        // Update aria
+        var bar = document.querySelector('.wizard-progress');
+        if (bar) bar.setAttribute('aria-valuenow', currentStep);
+
+        // Scroll to top of wizard on step change
+        var section = document.querySelector('.wizard-section');
+        if (section) section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+
+      window.wizardNext = function () {
+        if (currentStep < totalSteps) {
+          // Before leaving step 2, no validation required (optional checkboxes)
+          currentStep++;
+          updateUI();
+
+          // On reaching step 4, populate summary
+          if (currentStep === 4) {
+            populateSummary();
+          }
+        }
+      };
+
+      window.wizardBack = function () {
+        if (currentStep > 1) {
+          currentStep--;
+          updateUI();
+        }
+      };
+
+      window.toggleApiVisibility = function () {
+        var input = document.getElementById('api-key-input');
+        if (!input) return;
+        if (input.type === 'password') {
+          input.type = 'text';
+        } else {
+          input.type = 'password';
+        }
+      };
+
+      window.saveApiKeyAndNext = function () {
+        var input = document.getElementById('api-key-input');
+        if (input && input.value.trim()) {
+          try {
+            localStorage.setItem('seobaike_api_key', input.value.trim());
+          } catch (e) {
+            // localStorage not available
+          }
+        }
+        wizardNext();
+      };
+
+      function populateSummary() {
+        // Gather selected needs
+        var checked = document.querySelectorAll('input[name="needs"]:checked');
+        var needLabels = {
+          seo: 'SEO 分析',
+          writing: 'AI 寫作',
+          image: '圖片生成',
+          chatbot: '聊天機器人',
+          data: '數據分析',
+          other: '其他'
+        };
+        var names = [];
+        checked.forEach(function (cb) {
+          var label = needLabels[cb.value] || cb.value;
+          names.push(label);
+        });
+
+        var needsEl = document.getElementById('summary-needs');
+        if (needsEl) {
+          var needsText = names.length > 0 ? names.join('、') : '尚未選擇（可稍後設定）';
+          needsEl.innerHTML = '<span class="check">&#10003;</span><span>AI 需求：' + needsText + '</span>';
+        }
+
+        // API Key status
+        var apiInput = document.getElementById('api-key-input');
+        var hasKey = false;
+        try {
+          hasKey = (apiInput && apiInput.value.trim()) || localStorage.getItem('seobaike_api_key');
+        } catch (e) {}
+
+        var apiEl = document.getElementById('summary-apikey');
+        if (apiEl) {
+          var apiText = hasKey ? '已設定' : '尚未設定（可稍後於設定頁新增）';
+          apiEl.innerHTML = '<span class="check">&#10003;</span><span>API Key：' + apiText + '</span>';
+        }
+      }
+
+      // Initialize
+      updateUI();
+    })();
   </script>
 
   <!-- Page Views Tracking -->

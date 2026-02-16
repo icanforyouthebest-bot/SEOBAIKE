@@ -25,43 +25,32 @@
       justify-content: center;
       padding: 100px var(--sp-6) var(--sp-12);
       position: relative;
-    }
-
-    /* Ambient background glow */
-    .login-main::before {
-      content: '';
-      position: absolute;
-      top: 10%;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 500px;
-      height: 500px;
-      background: radial-gradient(circle, rgba(232,133,12,0.06) 0%, transparent 70%);
-      pointer-events: none;
+      z-index: 1;
     }
 
     .login-card {
       width: 100%;
-      max-width: 420px;
-      background: var(--bg-glass);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
+      max-width: 440px;
+      background: rgba(10, 10, 24, 0.85);
+      backdrop-filter: blur(24px) saturate(180%);
+      -webkit-backdrop-filter: blur(24px) saturate(180%);
       border: 1px solid var(--border-subtle);
       border-radius: var(--radius-xl);
       padding: var(--sp-12) var(--sp-10);
-      box-shadow: var(--shadow-lg), var(--gold-glow);
       position: relative;
       overflow: hidden;
+      z-index: 2;
     }
 
-    .login-card::before {
+    /* Top accent line on card */
+    .login-card::after {
       content: '';
       position: absolute;
       top: 0;
-      left: 20%;
-      right: 20%;
+      left: 15%;
+      right: 15%;
       height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(232,133,12,0.3), transparent);
+      background: linear-gradient(90deg, transparent, rgba(232,133,12,0.4), transparent);
     }
 
     .login-header {
@@ -74,19 +63,19 @@
       align-items: center;
       justify-content: center;
       gap: 10px;
-      margin-bottom: var(--sp-3);
+      margin-bottom: var(--sp-4);
     }
 
     .login-logo img {
-      width: 40px;
-      height: 40px;
+      width: 44px;
+      height: 44px;
       border-radius: var(--radius-sm);
-      box-shadow: 0 0 12px rgba(232,133,12,0.2);
-      border: 1px solid rgba(232,133,12,0.15);
+      box-shadow: 0 0 16px rgba(232,133,12,0.25);
+      border: 1px solid rgba(232,133,12,0.2);
     }
 
     .login-logo-text {
-      font-size: 1.8rem;
+      font-size: 1.9rem;
       font-weight: 900;
       letter-spacing: -0.5px;
     }
@@ -103,15 +92,16 @@
     }
 
     .login-title {
-      font-size: 1.1rem;
-      font-weight: 600;
+      font-size: 1.25rem;
+      font-weight: 700;
       color: var(--text-primary);
-      margin-bottom: var(--sp-1);
+      margin-bottom: 4px;
     }
 
     .login-subtitle {
       font-size: 0.88rem;
       color: var(--text-muted);
+      line-height: 1.5;
     }
 
     /* Form */
@@ -127,6 +117,56 @@
       margin-bottom: 6px;
     }
 
+    .form-input-wrap {
+      position: relative;
+    }
+
+    .form-input-wrap .input {
+      padding-left: 44px;
+    }
+
+    .form-input-icon {
+      position: absolute;
+      left: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 18px;
+      height: 18px;
+      color: var(--text-muted);
+      pointer-events: none;
+      transition: color var(--duration-fast);
+    }
+
+    .form-input-wrap .input:focus ~ .form-input-icon,
+    .form-input-wrap:focus-within .form-input-icon {
+      color: var(--gold-300);
+    }
+
+    .password-toggle {
+      position: absolute;
+      right: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      cursor: pointer;
+      padding: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: color var(--duration-fast);
+    }
+
+    .password-toggle:hover {
+      color: var(--text-secondary);
+    }
+
+    .password-toggle svg {
+      width: 18px;
+      height: 18px;
+    }
+
     .login-btn {
       display: block;
       width: 100%;
@@ -139,17 +179,19 @@
       transition: all var(--duration-normal) var(--ease-out);
       border: none;
       text-align: center;
+      position: relative;
+      overflow: hidden;
     }
 
     .login-btn-primary {
       background: var(--gold-gradient);
       color: #000;
-      box-shadow: 0 2px 12px rgba(232,133,12,0.2);
+      box-shadow: 0 2px 16px rgba(232,133,12,0.25);
     }
 
     .login-btn-primary:hover {
       transform: translateY(-2px);
-      box-shadow: 0 4px 24px rgba(232,133,12,0.35);
+      box-shadow: 0 6px 28px rgba(232,133,12,0.4);
     }
 
     .login-btn-primary:active {
@@ -160,6 +202,22 @@
       opacity: 0.5;
       cursor: not-allowed;
       transform: none;
+      box-shadow: none;
+    }
+
+    /* Button loading shimmer */
+    .login-btn-primary.loading::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        90deg,
+        transparent 0%,
+        rgba(255,255,255,0.2) 50%,
+        transparent 100%
+      );
+      background-size: 200% 100%;
+      animation: shimmer 1.5s linear infinite;
     }
 
     /* Divider */
@@ -181,28 +239,38 @@
     }
 
     /* Social Buttons */
+    .social-btns {
+      display: flex;
+      gap: var(--sp-3);
+    }
+
     .social-btn {
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 10px;
-      width: 100%;
-      padding: 13px;
-      background: transparent;
+      gap: 8px;
+      flex: 1;
+      padding: 12px 16px;
+      background: rgba(255,255,255,0.03);
       color: var(--text-primary);
-      font-size: 0.9rem;
+      font-size: 0.85rem;
       font-weight: 600;
       font-family: var(--font-sans);
       border: 1px solid var(--border-default);
-      border-radius: var(--radius-full);
+      border-radius: var(--radius-md);
       cursor: pointer;
       transition: all var(--duration-normal) var(--ease-out);
-      margin-bottom: var(--sp-3);
     }
 
     .social-btn:hover {
       border-color: var(--border-hover);
-      background: rgba(255,255,255,0.02);
+      background: rgba(255,255,255,0.05);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 16px rgba(0,0,0,0.3);
+    }
+
+    .social-btn:active {
+      transform: scale(0.98);
     }
 
     .social-btn svg {
@@ -211,40 +279,148 @@
       flex-shrink: 0;
     }
 
-    /* Links */
+    /* Links Row */
+    .login-links-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: var(--sp-5);
+    }
+
+    .remember-label {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .remember-label input[type="checkbox"] {
+      appearance: none;
+      -webkit-appearance: none;
+      width: 16px;
+      height: 16px;
+      border: 1px solid var(--border-default);
+      border-radius: 4px;
+      background: rgba(255,255,255,0.03);
+      cursor: pointer;
+      position: relative;
+      transition: all var(--duration-fast);
+    }
+
+    .remember-label input[type="checkbox"]:checked {
+      background: var(--gold-300);
+      border-color: var(--gold-300);
+    }
+
+    .remember-label input[type="checkbox"]:checked::after {
+      content: '';
+      position: absolute;
+      left: 4.5px;
+      top: 1.5px;
+      width: 5px;
+      height: 9px;
+      border: solid #000;
+      border-width: 0 2px 2px 0;
+      transform: rotate(45deg);
+    }
+
     .forgot-link {
-      display: block;
-      text-align: right;
       font-size: 0.82rem;
       color: var(--gold-200);
-      margin-bottom: var(--sp-6);
       transition: color var(--duration-fast);
+      text-decoration: none;
     }
 
     .forgot-link:hover {
       color: var(--gold-100);
     }
 
-    .login-footer-text {
-      text-align: center;
+    /* Footer toggle and guest link */
+    .login-footer-section {
       margin-top: var(--sp-6);
+      text-align: center;
+    }
+
+    .login-footer-text {
       font-size: 0.88rem;
       color: var(--text-muted);
+      margin-bottom: var(--sp-3);
     }
 
     .login-footer-text a {
       color: var(--gold-200);
       font-weight: 600;
+      transition: color var(--duration-fast);
+    }
+
+    .login-footer-text a:hover {
+      color: var(--gold-100);
+    }
+
+    .guest-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      padding: 8px 16px;
+      border-radius: var(--radius-full);
+      border: 1px solid var(--border-subtle);
+      transition: all var(--duration-normal) var(--ease-out);
+      text-decoration: none;
+    }
+
+    .guest-link:hover {
+      color: var(--text-secondary);
+      border-color: var(--border-default);
+      background: rgba(255,255,255,0.02);
+    }
+
+    .guest-link svg {
+      width: 14px;
+      height: 14px;
     }
 
     /* Message */
     #login-msg {
       display: none;
       text-align: center;
-      padding: 12px;
+      padding: 12px 16px;
       border-radius: var(--radius-md);
       margin-bottom: var(--sp-4);
       font-size: 0.88rem;
+      line-height: 1.5;
+    }
+
+    /* Toast notification */
+    .toast {
+      position: fixed;
+      bottom: 32px;
+      left: 50%;
+      transform: translateX(-50%) translateY(100px);
+      background: rgba(14,14,32,0.95);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid var(--border-hover);
+      color: var(--text-primary);
+      padding: 14px 28px;
+      border-radius: var(--radius-full);
+      font-size: 0.88rem;
+      font-weight: 600;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.4), 0 0 20px rgba(232,133,12,0.15);
+      z-index: 10000;
+      transition: transform 0.4s var(--ease-spring), opacity 0.4s ease;
+      opacity: 0;
+      pointer-events: none;
+      white-space: nowrap;
+    }
+
+    .toast.show {
+      transform: translateX(-50%) translateY(0);
+      opacity: 1;
     }
 
     /* Minimal footer */
@@ -254,11 +430,29 @@
       border-top: 1px solid var(--border-subtle);
       color: var(--text-muted);
       font-size: 0.78rem;
-      background: var(--bg-secondary);
+      background: rgba(6,6,15,0.8);
+      position: relative;
+      z-index: 2;
     }
 
     .login-page-footer span {
       color: var(--gold-200);
+    }
+
+    /* Secure badge */
+    .secure-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      margin-top: var(--sp-4);
+      opacity: 0.7;
+    }
+
+    .secure-badge svg {
+      width: 12px;
+      height: 12px;
     }
 
     /* ── Responsive ── */
@@ -276,25 +470,62 @@
         font-size: 1.5rem;
       }
 
+      .login-logo img {
+        width: 36px;
+        height: 36px;
+      }
+
       .login-btn,
       .social-btn {
         min-height: 48px;
+      }
+
+      .social-btns {
+        flex-direction: column;
+      }
+
+      .login-links-row {
+        flex-direction: column;
+        gap: 8px;
+        align-items: flex-start;
+      }
+
+      .forgot-link {
+        align-self: flex-end;
       }
     }
 
     @media (max-width: 480px) {
       .login-card {
         padding: var(--sp-6) var(--sp-4);
+        max-width: 100%;
+        border-radius: var(--radius-md);
       }
 
       .login-logo-text {
         font-size: 1.3rem;
       }
+
+      .login-title {
+        font-size: 1.1rem;
+      }
     }
   </style>
 </head>
 <body>
-  <div class="login-wrap">
+  <div class="login-wrap eruption-bg">
+
+    <!-- Ember particles (volcanic effect) -->
+    <div class="ember-float" aria-hidden="true">
+      <div class="ember" style="left:8%;width:3px;height:3px;--ember-dur:7s;--ember-delay:0s;--ember-color:#e8850c;--ember-rot:280deg;"></div>
+      <div class="ember" style="left:22%;width:2px;height:2px;--ember-dur:9s;--ember-delay:1.5s;--ember-color:#f5a623;--ember-rot:200deg;"></div>
+      <div class="ember" style="left:45%;width:4px;height:4px;--ember-dur:6s;--ember-delay:0.8s;--ember-color:#ffd700;--ember-rot:320deg;"></div>
+      <div class="ember" style="left:65%;width:2px;height:2px;--ember-dur:10s;--ember-delay:2.5s;--ember-color:#e8850c;--ember-rot:190deg;"></div>
+      <div class="ember" style="left:78%;width:3px;height:3px;--ember-dur:8s;--ember-delay:3s;--ember-color:#ff6b35;--ember-rot:260deg;"></div>
+      <div class="ember" style="left:90%;width:2px;height:2px;--ember-dur:11s;--ember-delay:0.3s;--ember-color:#f5a623;--ember-rot:340deg;"></div>
+      <div class="ember" style="left:35%;width:2px;height:2px;--ember-dur:7.5s;--ember-delay:4s;--ember-color:#ffd700;--ember-rot:150deg;"></div>
+      <div class="ember" style="left:55%;width:3px;height:3px;--ember-dur:9.5s;--ember-delay:1s;--ember-color:#e8850c;--ember-rot:220deg;"></div>
+    </div>
 
     <!-- Navigation -->
     <nav class="nav">
@@ -331,10 +562,10 @@
       <div class="login-card magma-border lava-glow">
         <div class="login-header">
           <div class="login-logo">
-            <img src="/favicon.svg" alt="SEOBAIKE" width="40" height="40">
+            <img src="/favicon.svg" alt="SEOBAIKE" width="44" height="44">
             <span class="login-logo-text"><span class="seo">SEO</span><span class="baike">BAIKE</span></span>
           </div>
-          <h1 class="login-title">登入</h1>
+          <h1 class="login-title">歡迎回來</h1>
           <p class="login-subtitle" id="loginSubtitle">登入您的帳號以繼續</p>
         </div>
 
@@ -343,43 +574,89 @@
         <form id="loginForm" autocomplete="on">
           <div class="form-group">
             <label class="form-label" for="email">電子郵件</label>
-            <input class="input" type="email" id="email" name="email" placeholder="you@example.com" required autocomplete="email">
+            <div class="form-input-wrap">
+              <input class="input" type="email" id="email" name="email" placeholder="you@example.com" required autocomplete="email">
+              <svg class="form-input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2" y="4" width="20" height="16" rx="2"></rect>
+                <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
+              </svg>
+            </div>
           </div>
 
           <div class="form-group">
             <label class="form-label" for="password">密碼</label>
-            <input class="input" type="password" id="password" name="password" placeholder="輸入密碼" required autocomplete="current-password">
+            <div class="form-input-wrap">
+              <input class="input" type="password" id="password" name="password" placeholder="輸入密碼" required autocomplete="current-password" style="padding-right:44px;">
+              <svg class="form-input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+              </svg>
+              <button type="button" class="password-toggle" id="passwordToggle" aria-label="顯示密碼">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" id="eyeIcon">
+                  <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                  <circle cx="12" cy="12" r="3"></circle>
+                </svg>
+              </button>
+            </div>
           </div>
 
-          <a href="#" class="forgot-link" id="forgotLink">忘記密碼？</a>
+          <div class="login-links-row">
+            <label class="remember-label">
+              <input type="checkbox" id="rememberMe">
+              <span>記住我</span>
+            </label>
+            <a href="#" class="forgot-link" id="forgotLink">忘記密碼？</a>
+          </div>
 
-          <button type="submit" class="login-btn login-btn-primary" id="btnPrimary">登入</button>
+          <button type="submit" class="login-btn login-btn-primary btn-magnetic" id="btnPrimary">登入</button>
         </form>
 
-        <div class="login-divider">或</div>
+        <div class="login-divider">或使用其他方式</div>
 
-        <button class="social-btn" type="button" id="btnGoogle">
-          <svg viewBox="0 0 24 24" fill="none">
-            <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 01-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" fill="#4285F4"/>
-            <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
-            <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/>
-            <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
-          </svg>
-          使用 Google 登入
-        </button>
+        <div class="social-btns">
+          <button class="social-btn" type="button" id="btnGoogle">
+            <svg viewBox="0 0 24 24" fill="none">
+              <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 01-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" fill="#4285F4"/>
+              <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
+              <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/>
+              <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
+            </svg>
+            Google
+          </button>
 
-        <button class="social-btn" type="button" id="btnApple">
-          <svg viewBox="0 0 24 24" fill="currentColor">
-            <path d="M17.05 20.28c-.98.95-2.05.88-3.08.4-1.09-.5-2.08-.48-3.24 0-1.44.62-2.2.44-3.06-.4C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.38 5.98.48 7.13-.57 1.5-1.31 2.99-2.54 4.09zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z"/>
-          </svg>
-          使用 Apple 登入
-        </button>
+          <button class="social-btn" type="button" id="btnApple">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+              <path d="M17.05 20.28c-.98.95-2.05.88-3.08.4-1.09-.5-2.08-.48-3.24 0-1.44.62-2.2.44-3.06-.4C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.38 5.98.48 7.13-.57 1.5-1.31 2.99-2.54 4.09zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z"/>
+            </svg>
+            Apple
+          </button>
+        </div>
 
-        <div class="login-footer-text" id="loginFooterToggle">
-          還沒有帳號？ <a href="#">註冊</a>
+        <div class="login-footer-section">
+          <div class="login-footer-text" id="loginFooterToggle">
+            還沒有帳號？ <a href="#">建立帳號</a>
+          </div>
+          <a href="/start" class="guest-link">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"></path>
+              <polyline points="10 17 15 12 10 7"></polyline>
+              <line x1="15" y1="12" x2="3" y2="12"></line>
+            </svg>
+            或使用訪客模式體驗
+          </a>
+          <div class="secure-badge">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+              <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+            </svg>
+            安全加密連線
+          </div>
         </div>
       </div>
     </main>
+
+    <!-- Toast notification -->
+    <div class="toast" id="toast" aria-live="polite"></div>
 
     <!-- Minimal Footer -->
     <footer class="login-page-footer">
@@ -395,13 +672,13 @@
   <script src="/seobaike-config.js"></script>
   <script>
     // ── Design System JS ──
-    const obs = new IntersectionObserver((entries) => {
-      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    var obs = new IntersectionObserver(function(entries) {
+      entries.forEach(function(e) { if (e.isIntersecting) e.target.classList.add('visible'); });
     }, { threshold: 0.08 });
-    document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
+    document.querySelectorAll('.fade-up').forEach(function(el) { obs.observe(el); });
 
-    window.addEventListener('scroll', () => {
-      const nav = document.querySelector('.nav');
+    window.addEventListener('scroll', function() {
+      var nav = document.querySelector('.nav');
       if (nav) nav.classList.toggle('scrolled', window.scrollY > 20);
     });
 
@@ -409,6 +686,27 @@
       document.querySelector('.nav-hamburger').classList.toggle('active');
       document.querySelector('.mobile-overlay').classList.toggle('open');
     }
+
+    // ── Toast Helper ──
+    function showToast(text) {
+      var toast = document.getElementById('toast');
+      toast.textContent = text;
+      toast.classList.add('show');
+      setTimeout(function() { toast.classList.remove('show'); }, 2500);
+    }
+
+    // ── Password Visibility Toggle ──
+    document.getElementById('passwordToggle').addEventListener('click', function() {
+      var pwInput = document.getElementById('password');
+      var icon = document.getElementById('eyeIcon');
+      if (pwInput.type === 'password') {
+        pwInput.type = 'text';
+        icon.innerHTML = '<path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94"></path><path d="M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19"></path><line x1="1" y1="1" x2="23" y2="23"></line>';
+      } else {
+        pwInput.type = 'password';
+        icon.innerHTML = '<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle>';
+      }
+    });
 
     // ── Auth Config ──
     var SUPA_URL = (window.__SEOBAIKE__ && window.__SEOBAIKE__.supabaseUrl) || '';
@@ -446,6 +744,7 @@
 
       btnPrimary.disabled = true;
       btnPrimary.textContent = '登入中...';
+      btnPrimary.classList.add('loading');
 
       try {
         var res = await fetch(SUPA_URL + '/auth/v1/token?grant_type=password', {
@@ -476,7 +775,8 @@
       }
 
       btnPrimary.disabled = false;
-      btnPrimary.textContent = loginForm.dataset.mode === 'signup' ? '註冊' : '登入';
+      btnPrimary.classList.remove('loading');
+      btnPrimary.textContent = loginForm.dataset.mode === 'signup' ? '建立帳號' : '登入';
     });
 
     // ── Signup Handler ──
@@ -487,7 +787,8 @@
       }
 
       btnPrimary.disabled = true;
-      btnPrimary.textContent = '註冊中...';
+      btnPrimary.textContent = '建立帳號中...';
+      btnPrimary.classList.add('loading');
 
       try {
         var res = await fetch(SUPA_URL + '/auth/v1/signup', {
@@ -501,13 +802,13 @@
           if (data.access_token) {
             localStorage.setItem('sb-access-token', data.access_token);
             localStorage.setItem('sb-user', JSON.stringify(data.user));
-            showMsg('註冊成功！', false);
+            showMsg('帳號建立成功！', false);
             setTimeout(function() { window.location.href = '/dashboard'; }, 600);
           } else {
-            showMsg('註冊成功！請至信箱確認帳號後再登入。', false);
+            showMsg('帳號建立成功！請至信箱確認帳號後再登入。', false);
           }
         } else {
-          var msg = data.error_description || data.msg || data.error || '註冊失敗';
+          var msg = data.error_description || data.msg || data.error || '建立帳號失敗';
           if (msg.includes('already registered')) {
             showMsg('此電子郵件已註冊，請直接登入', true);
           } else {
@@ -519,7 +820,8 @@
       }
 
       btnPrimary.disabled = false;
-      btnPrimary.textContent = '註冊';
+      btnPrimary.classList.remove('loading');
+      btnPrimary.textContent = '建立帳號';
     }
 
     // ── Google OAuth ──
@@ -567,16 +869,23 @@
       if (isLogin) {
         loginForm.dataset.mode = 'signup';
         document.getElementById('loginSubtitle').textContent = '建立您的 SEOBAIKE 帳號';
-        document.querySelector('.login-title').textContent = '註冊';
-        btnPrimary.textContent = '註冊';
+        document.querySelector('.login-title').textContent = '建立帳號';
+        btnPrimary.textContent = '建立帳號';
         this.innerHTML = '已有帳號？ <a href="#">登入</a>';
+        document.getElementById('password').autocomplete = 'new-password';
+        document.getElementById('password').placeholder = '設定密碼（至少 6 字元）';
       } else {
         loginForm.dataset.mode = 'login';
         document.getElementById('loginSubtitle').textContent = '登入您的帳號以繼續';
-        document.querySelector('.login-title').textContent = '登入';
+        document.querySelector('.login-title').textContent = '歡迎回來';
         btnPrimary.textContent = '登入';
-        this.innerHTML = '還沒有帳號？ <a href="#">註冊</a>';
+        this.innerHTML = '還沒有帳號？ <a href="#">建立帳號</a>';
+        document.getElementById('password').autocomplete = 'current-password';
+        document.getElementById('password').placeholder = '輸入密碼';
       }
+      // Clear message on toggle
+      var msgEl = document.getElementById('login-msg');
+      msgEl.style.display = 'none';
     });
 
     // ── Forgot Password ──

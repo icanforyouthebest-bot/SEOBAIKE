@@ -3,14 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>功能介紹 — SEOBAIKE | AI 平台八大能力</title>
-  <meta name="description" content="SEOBAIKE 八大 AI 能力：SEO 自動分析、AI 多語言翻譯、智能客服、內容自動生成、圖片生成、數據分析、市場研究、自動行銷。一個入口，所有 AI。">
-  <meta name="keywords" content="SEOBAIKE,AI平台,SEO分析,AI翻譯,智能客服,內容生成,圖片生成,數據分析,市場研究,自動行銷">
+  <title>功能介紹 — SEOBAIKE | BYOK 插拔式 AI 平台</title>
+  <meta name="description" content="SEOBAIKE 平台核心功能：BYOK 自帶金鑰、AI 市集、多語言支援、後付制點數、即時監控儀表板、安全合規、插拔式架構、全球佈局。一個入口，所有 AI 服務。">
+  <meta name="keywords" content="SEOBAIKE,AI平台,BYOK,AI市集,多語言,後付制,即時監控,安全合規,插拔式架構,全球AI">
   <link rel="canonical" href="https://aiforseo.vip/features.html">
 
   <!-- Open Graph -->
-  <meta property="og:title" content="功能介紹 — SEOBAIKE | AI 平台八大能力">
-  <meta property="og:description" content="SEOBAIKE 八大 AI 能力：SEO 自動分析、AI 多語言翻譯、智能客服、內容自動生成。一個入口，所有 AI。">
+  <meta property="og:title" content="功能介紹 — SEOBAIKE | BYOK 插拔式 AI 平台">
+  <meta property="og:description" content="SEOBAIKE 平台核心功能：BYOK 自帶金鑰、AI 市集、多語言支援、後付制點數、即時監控、安全合規。一個入口，所有 AI。">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://aiforseo.vip/features.html">
   <meta property="og:image" content="/og-image.png">
@@ -19,8 +19,8 @@
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="功能介紹 — SEOBAIKE | AI 平台八大能力">
-  <meta name="twitter:description" content="SEOBAIKE 八大 AI 能力：SEO 分析、AI 翻譯、智能客服、內容生成。一個入口，所有 AI。">
+  <meta name="twitter:title" content="功能介紹 — SEOBAIKE | BYOK 插拔式 AI 平台">
+  <meta name="twitter:description" content="SEOBAIKE 平台核心功能：BYOK 自帶金鑰、AI 市集、多語言支援、後付制點數、即時監控、安全合規。一個入口，所有 AI。">
 
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 
@@ -33,16 +33,11 @@
     "applicationCategory": "BusinessApplication",
     "operatingSystem": "Web",
     "url": "https://aiforseo.vip/features.html",
-    "description": "SEOBAIKE AI 平台八大能力：SEO 自動分析、AI 多語言翻譯、智能客服、內容自動生成、圖片生成、數據分析、市場研究、自動行銷",
-    "featureList": "SEO 自動分析, AI 多語言翻譯, 智能客服, 內容自動生成, 圖片生成, 數據分析, 市場研究, 自動行銷",
+    "description": "SEOBAIKE BYOK 插拔式 AI 平台：自帶金鑰、AI 市集、多語言支援、後付制點數、即時監控、安全合規、全球佈局",
+    "featureList": "BYOK 自帶金鑰, AI 市集, 多語言支援, 後付制點數, 即時監控儀表板, 安全合規, 插拔式架構, 全球佈局",
     "author": {
       "@type": "Organization",
       "name": "小路光有限公司"
-    },
-    "offers": {
-      "@type": "Offer",
-      "price": "0",
-      "priceCurrency": "TWD"
     }
   }]
   </script>
@@ -104,7 +99,7 @@
     .hero-subtitle {
       font-size: clamp(1.05rem, 2.2vw, 1.25rem);
       color: var(--text-secondary);
-      max-width: 560px;
+      max-width: 620px;
       margin: 0 auto var(--sp-10);
       line-height: 1.8;
       position: relative;
@@ -119,56 +114,111 @@
       z-index: 1;
     }
 
+    /* ── Category Label ── */
+    .category-label {
+      display: flex;
+      align-items: center;
+      gap: var(--sp-3);
+      margin-bottom: var(--sp-8);
+    }
+    .category-label span {
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--gold-200);
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+    .category-label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, rgba(232,133,12,0.25), transparent);
+    }
+
     /* ── Feature Grid ── */
     .features-grid {
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
+      grid-template-columns: repeat(2, 1fr);
       gap: var(--sp-6);
     }
     .feature-card {
-      text-align: center;
-      padding: var(--sp-10) var(--sp-6) var(--sp-8);
+      padding: var(--sp-8) var(--sp-8) var(--sp-8);
+      display: flex;
+      gap: var(--sp-6);
+      align-items: flex-start;
     }
     .feature-icon-wrap {
-      width: 72px;
-      height: 72px;
-      margin: 0 auto var(--sp-6);
+      width: 64px;
+      height: 64px;
+      min-width: 64px;
       display: flex;
       align-items: center;
       justify-content: center;
       border-radius: var(--radius-lg);
       background: rgba(232,133,12,0.06);
       border: 1px solid rgba(232,133,12,0.1);
-      font-size: 2rem;
+      font-size: 1.8rem;
+      color: var(--gold-200);
       transition: all var(--duration-normal) var(--ease-out);
     }
     .card:hover .feature-icon-wrap {
-      background: rgba(232,133,12,0.1);
-      border-color: rgba(232,133,12,0.25);
+      background: rgba(232,133,12,0.12);
+      border-color: rgba(232,133,12,0.3);
       transform: scale(1.08);
-      box-shadow: 0 0 24px rgba(232,133,12,0.12);
+      box-shadow: 0 0 24px rgba(232,133,12,0.15);
+    }
+    .feature-body {
+      flex: 1;
+      min-width: 0;
     }
     .feature-card h3 {
-      margin-bottom: var(--sp-3);
+      margin-bottom: var(--sp-2);
+      font-size: 1.15rem;
     }
     .feature-card p {
       font-size: 0.9rem;
       line-height: 1.7;
+      color: var(--text-secondary);
     }
     .feature-tag {
       display: inline-block;
-      margin-top: var(--sp-4);
+      margin-top: var(--sp-3);
       padding: 4px 14px;
       border-radius: var(--radius-full);
       background: rgba(232,133,12,0.06);
       border: 1px solid rgba(232,133,12,0.1);
-      font-size: 0.75rem;
+      font-size: 0.72rem;
       font-weight: 600;
       color: var(--gold-200);
       letter-spacing: 0.5px;
     }
 
-    /* ── Pipeline / How AI Works ── */
+    /* ── Highlight Card (full-width) ── */
+    .feature-highlight {
+      grid-column: 1 / -1;
+      display: flex;
+      gap: var(--sp-10);
+      padding: var(--sp-12) var(--sp-10);
+      align-items: center;
+      background: linear-gradient(135deg, rgba(232,133,12,0.04) 0%, var(--bg-card) 100%);
+    }
+    .feature-highlight .feature-icon-wrap {
+      width: 88px;
+      height: 88px;
+      min-width: 88px;
+      font-size: 2.2rem;
+      border-radius: var(--radius-xl);
+    }
+    .feature-highlight h3 {
+      font-size: 1.35rem;
+    }
+    .feature-highlight p {
+      font-size: 1rem;
+      max-width: 520px;
+    }
+
+    /* ── How It Works Pipeline ── */
     .pipeline-wrap {
       display: flex;
       align-items: stretch;
@@ -237,68 +287,47 @@
       font-size: 0.9rem;
     }
 
-    /* ── Integration Section ── */
-    .integration-visual {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: var(--sp-8);
-      flex-wrap: wrap;
-      margin-top: var(--sp-10);
-    }
-    .integration-hub {
-      width: 160px;
-      height: 160px;
-      border-radius: 50%;
-      background: var(--gold-gradient);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-direction: column;
-      gap: 4px;
-      position: relative;
-      box-shadow: 0 0 60px rgba(232,133,12,0.2), 0 0 120px rgba(232,133,12,0.08);
-      flex-shrink: 0;
-    }
-    .integration-hub span {
-      color: #000;
-      font-weight: 900;
-      font-size: 1.1rem;
-      letter-spacing: -0.5px;
-    }
-    .integration-hub small {
-      color: rgba(0,0,0,0.6);
-      font-size: 0.7rem;
-      font-weight: 600;
-    }
-    .integration-channels {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: var(--sp-3);
-    }
-    .integration-chip {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      padding: 10px 18px;
-      background: var(--bg-card);
+    /* ── Comparison Table ── */
+    .compare-table-wrap {
+      overflow-x: auto;
+      border-radius: var(--radius-lg);
       border: 1px solid var(--border-subtle);
-      border-radius: var(--radius-md);
-      font-size: 0.85rem;
+    }
+    .compare-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.9rem;
+    }
+    .compare-table th {
+      padding: var(--sp-4) var(--sp-6);
+      text-align: left;
+      font-weight: 700;
+      font-size: 0.78rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--gold-200);
+      background: rgba(232,133,12,0.04);
+      border-bottom: 1px solid var(--border-subtle);
+    }
+    .compare-table td {
+      padding: var(--sp-4) var(--sp-6);
+      border-bottom: 1px solid var(--border-subtle);
       color: var(--text-secondary);
-      transition: all var(--duration-fast);
-      white-space: nowrap;
     }
-    .integration-chip:hover {
-      border-color: var(--border-hover);
+    .compare-table tr:last-child td {
+      border-bottom: none;
+    }
+    .compare-table tr:hover td {
+      background: rgba(232,133,12,0.02);
+    }
+    .compare-table .check-mark {
+      color: var(--success);
+      font-weight: 700;
+    }
+    .compare-table .seobaike-col {
       color: var(--text-primary);
-      background: var(--bg-card-hover);
-    }
-    .integration-connector {
-      width: 60px;
-      height: 2px;
-      background: linear-gradient(90deg, var(--gold-300), transparent);
-      flex-shrink: 0;
+      font-weight: 600;
+      background: rgba(232,133,12,0.03);
     }
 
     /* ── CTA Section ── */
@@ -319,7 +348,7 @@
       pointer-events: none;
     }
     .cta-box {
-      max-width: 640px;
+      max-width: 720px;
       margin: 0 auto;
       padding: var(--sp-16) var(--sp-8);
       background: var(--bg-card);
@@ -350,11 +379,19 @@
       justify-content: center;
       flex-wrap: wrap;
     }
+    .cta-subtext {
+      margin-top: var(--sp-5);
+      font-size: 0.82rem;
+      color: var(--text-muted);
+    }
 
     /* ── Responsive Overrides ── */
     @media (max-width: 1024px) {
       .features-grid {
         grid-template-columns: repeat(2, 1fr);
+      }
+      .feature-highlight {
+        grid-column: 1 / -1;
       }
       .pipeline-wrap {
         flex-wrap: wrap;
@@ -366,12 +403,6 @@
       .pipeline-arrow {
         display: none;
       }
-      .integration-connector {
-        display: none;
-      }
-      .integration-visual {
-        flex-direction: column;
-      }
     }
 
     @media (max-width: 768px) {
@@ -381,27 +412,33 @@
       .features-grid {
         grid-template-columns: 1fr;
       }
+      .feature-card {
+        flex-direction: column;
+        text-align: center;
+        align-items: center;
+      }
+      .feature-highlight {
+        flex-direction: column;
+        text-align: center;
+        align-items: center;
+        padding: var(--sp-8) var(--sp-6);
+      }
       .pipeline-step {
         flex: 1 1 100%;
       }
-      .integration-channels {
-        grid-template-columns: 1fr;
-      }
       .cta-box {
         padding: var(--sp-10) var(--sp-5);
+      }
+      .compare-table th,
+      .compare-table td {
+        padding: var(--sp-3) var(--sp-4);
+        font-size: 0.82rem;
       }
     }
 
     @media (max-width: 480px) {
       .features-hero {
         padding: 110px 0 60px;
-      }
-      .integration-hub {
-        width: 120px;
-        height: 120px;
-      }
-      .integration-hub span {
-        font-size: 0.9rem;
       }
     }
   </style>
@@ -446,254 +483,253 @@
   <section class="features-hero eruption-bg">
     <div class="container text-center">
       <div class="fade-up">
-        <div class="hero-badge">AI 能力總覽</div>
-        <h1 class="hero-title volcanic-title"><span class="text-gold">SEOBAIKE</span> 能做什麼？</h1>
+        <div class="hero-badge">&#9670; 平台能力總覽</div>
+        <h1 class="hero-title volcanic-title">為什麼選擇 <span class="text-gold">SEOBAIKE</span>？</h1>
         <p class="hero-subtitle">
-          八大 AI 能力，涵蓋 SEO 分析、內容生成、多語言翻譯、數據洞察。<br>
-          一個入口，串接所有 AI 服務。
+          自帶金鑰、後付制點數、插拔式 AI 市集。<br>
+          台灣公司營運，合規透明，一個入口串接所有 AI 服務。
         </p>
         <div class="hero-actions">
-          <a href="/pricing" class="btn btn-primary btn-lg seismic-shake">查看方案</a>
-          <a href="/marketplace" class="btn btn-secondary btn-lg seismic-shake">探索市集</a>
+          <a href="/start" class="btn btn-primary btn-lg seismic-shake">立即開始</a>
+          <a href="/pricing" class="btn btn-secondary btn-lg seismic-shake">查看方案</a>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ════════════ FEATURE GRID ════════════ -->
+  <!-- ════════════ CORE ADVANTAGE: BYOK HIGHLIGHT ════════════ -->
   <section class="section">
     <div class="container">
       <div class="section-header fade-up">
-        <div class="section-badge">Core Features</div>
-        <h2>八大 <span class="text-gold">AI 能力</span></h2>
-        <p>每一項都經過精心設計，讓你的業務流程全面升級</p>
+        <div class="section-badge">&#9733; Core Advantage</div>
+        <h2>平台<span class="text-gold">核心優勢</span></h2>
+        <p>不只是工具，而是讓 AI 為你工作的完整生態系</p>
       </div>
 
-      <div class="features-grid">
+      <div class="features-grid stagger">
 
-        <!-- 1. SEO 自動分析 -->
-        <div class="card feature-card fade-up magma-border">
-          <div class="feature-icon-wrap">
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--gold-200)">
-              <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
-              <path d="M11 8v6"/><path d="M8 11h6"/>
-            </svg>
+        <!-- ★ BYOK Highlight -->
+        <div class="card feature-card feature-highlight fade-up magma-border lava-glow">
+          <div class="feature-icon-wrap">&#128273;</div>
+          <div class="feature-body">
+            <h3>BYOK &#8212; 自帶金鑰</h3>
+            <p>帶入你自己的 API 金鑰，直接透過 SEOBAIKE 平台使用各種 AI 服務。費用透明，金鑰存放於你的帳號內，平台不代儲、不加價。你掌握成本，我們提供通路。</p>
+            <span class="feature-tag">&#9670; 核心架構</span>
           </div>
-          <h3>SEO 自動分析</h3>
-          <p>AI 自動掃描網站結構、關鍵字密度、反向連結品質，產出可執行的優化建議報告。</p>
-          <span class="feature-tag">搜尋優化</span>
         </div>
 
-        <!-- 2. AI 多語言翻譯 -->
-        <div class="card feature-card fade-up magma-border">
-          <div class="feature-icon-wrap">
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--gold-200)">
-              <path d="m5 8 6 6"/><path d="m4 14 6-6 2-3"/><path d="M2 5h12"/>
-              <path d="M7 2h1"/><path d="m22 22-5-10-5 10"/><path d="M14 18h6"/>
-            </svg>
+        <!-- AI 市集 -->
+        <div class="card feature-card fade-up magma-border hover-lift">
+          <div class="feature-icon-wrap">&#9749;</div>
+          <div class="feature-body">
+            <h3>AI 市集</h3>
+            <p>像逛商店一樣瀏覽、試用各種 AI 服務。從文案生成到圖片製作，從數據分析到客服機器人，一站挑選、即裝即用。</p>
+            <span class="feature-tag">服務商城</span>
           </div>
-          <h3>AI 多語言翻譯</h3>
-          <p>支援中、英、日、韓、東南亞多語系即時翻譯，語意精準，符合在地化表達習慣。</p>
-          <span class="feature-tag">全球觸達</span>
         </div>
 
-        <!-- 3. 智能客服 -->
-        <div class="card feature-card fade-up">
-          <div class="feature-icon-wrap">
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--gold-200)">
-              <path d="M12 6V2H8"/><path d="m8 18-4 4V8a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2Z"/>
-              <path d="M10 12h.01"/><path d="M14 12h.01"/>
-            </svg>
+        <!-- 插拔式架構 -->
+        <div class="card feature-card fade-up magma-border hover-lift">
+          <div class="feature-icon-wrap">&#9881;</div>
+          <div class="feature-body">
+            <h3>插拔式架構</h3>
+            <p>所有 AI 服務採用模組化設計，需要時掛載、不用時卸除。不被單一供應商綁定，隨時切換最適合的方案。</p>
+            <span class="feature-tag">靈活擴充</span>
           </div>
-          <h3>智能客服</h3>
-          <p>AI 客服全天候自動應答，理解上下文語境，多語言同時服務，大幅降低人力負擔。</p>
-          <span class="feature-tag">自動應答</span>
-        </div>
-
-        <!-- 4. 內容自動生成 -->
-        <div class="card feature-card fade-up">
-          <div class="feature-icon-wrap">
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--gold-200)">
-              <path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
-              <path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z"/>
-            </svg>
-          </div>
-          <h3>內容自動生成</h3>
-          <p>一鍵生成部落格文章、產品描述、社群貼文、電子報文案，符合 SEO 架構與品牌調性。</p>
-          <span class="feature-tag">文案引擎</span>
-        </div>
-
-        <!-- 5. 圖片生成 -->
-        <div class="card feature-card fade-up">
-          <div class="feature-icon-wrap">
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--gold-200)">
-              <rect width="18" height="18" x="3" y="3" rx="2" ry="2"/>
-              <circle cx="9" cy="9" r="2"/>
-              <path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/>
-            </svg>
-          </div>
-          <h3>圖片生成</h3>
-          <p>輸入文字描述，AI 即時產出高品質圖片素材，適用於廣告、社群、產品展示等場景。</p>
-          <span class="feature-tag">視覺創作</span>
-        </div>
-
-        <!-- 6. 數據分析 -->
-        <div class="card feature-card fade-up">
-          <div class="feature-icon-wrap">
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--gold-200)">
-              <path d="M3 3v16a2 2 0 0 0 2 2h16"/>
-              <path d="m7 11 4-4 4 4 6-6"/>
-            </svg>
-          </div>
-          <h3>數據分析</h3>
-          <p>AI 自動彙整流量、轉換、使用者行為等數據，以視覺化圖表呈現關鍵洞察。</p>
-          <span class="feature-tag">智能洞察</span>
-        </div>
-
-        <!-- 7. 市場研究 -->
-        <div class="card feature-card fade-up">
-          <div class="feature-icon-wrap">
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--gold-200)">
-              <circle cx="12" cy="12" r="10"/>
-              <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/>
-              <path d="M2 12h20"/>
-            </svg>
-          </div>
-          <h3>市場研究</h3>
-          <p>AI 蒐集並分析市場趨勢、競爭對手動態、受眾偏好，協助制定精準商業策略。</p>
-          <span class="feature-tag">策略分析</span>
-        </div>
-
-        <!-- 8. 自動行銷 -->
-        <div class="card feature-card fade-up">
-          <div class="feature-icon-wrap">
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--gold-200)">
-              <path d="m3 11 18-5v12L3 13v-2z"/>
-              <path d="M11.6 16.8a3 3 0 1 1-5.8-1.6"/>
-            </svg>
-          </div>
-          <h3>自動行銷</h3>
-          <p>AI 自動排程社群貼文、觸發電子郵件行銷、優化廣告投放策略，全流程自動化運作。</p>
-          <span class="feature-tag">行銷自動化</span>
         </div>
 
       </div>
     </div>
   </section>
 
-  <!-- ════════════ HOW AI WORKS ════════════ -->
-  <section class="section" style="background: var(--bg-secondary);">
+  <!-- ════════════ USER EXPERIENCE FEATURES ════════════ -->
+  <section class="section section-glow" style="background: var(--bg-secondary);">
     <div class="container">
       <div class="section-header fade-up">
-        <div class="section-badge">How It Works</div>
-        <h2>AI <span class="text-gold">運作流程</span></h2>
-        <p>從輸入到產出，四個步驟完成任務</p>
+        <div class="section-badge">&#9672; User Experience</div>
+        <h2>為使用者<span class="text-gold">設計的體驗</span></h2>
+        <p>從註冊到上手，每個環節都經過打磨</p>
+      </div>
+
+      <div class="features-grid stagger">
+
+        <!-- 後付制 -->
+        <div class="card feature-card fade-up hover-lift">
+          <div class="feature-icon-wrap">&#9733;</div>
+          <div class="feature-body">
+            <h3>後付制 &#8212; SEO Points</h3>
+            <p>先使用、後付款。以 SEO Points 點數計費，用多少扣多少，無需預繳大筆費用，降低嘗試門檻。</p>
+            <span class="feature-tag">彈性計費</span>
+          </div>
+        </div>
+
+        <!-- 即時監控 -->
+        <div class="card feature-card fade-up hover-lift">
+          <div class="feature-icon-wrap">&#9632;</div>
+          <div class="feature-body">
+            <h3>即時監控儀表板</h3>
+            <p>登入後台即可查看所有 AI 服務的使用量、點數消耗、API 呼叫紀錄。一目了然，完全掌握。</p>
+            <span class="feature-tag">數據透明</span>
+          </div>
+        </div>
+
+        <!-- 多語言支援 -->
+        <div class="card feature-card fade-up hover-lift">
+          <div class="feature-icon-wrap">&#9398;</div>
+          <div class="feature-body">
+            <h3>多語言支援</h3>
+            <p>平台介面支援繁體中文、English、日本語、&#54620;&#44397;&#50612;。不論你在哪裡，都能以熟悉的語言操作。</p>
+            <span class="feature-tag">zh-TW / en / ja / ko</span>
+          </div>
+        </div>
+
+        <!-- 安全合規 -->
+        <div class="card feature-card fade-up hover-lift">
+          <div class="feature-icon-wrap">&#9888;</div>
+          <div class="feature-body">
+            <h3>安全合規</h3>
+            <p>台灣公司合法營運（統編 60475510），遵循個資保護法規。資料傳輸全程加密，金鑰獨立儲存，不共用、不外洩。</p>
+            <span class="feature-tag">PDPA &#183; 台灣法遵</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════ GLOBAL + ARCHITECTURE ════════════ -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header fade-up">
+        <div class="section-badge">&#9670; Infrastructure</div>
+        <h2>全球佈局，<span class="text-gold">在地服務</span></h2>
+        <p>台灣總部營運，服務覆蓋全球市場</p>
+      </div>
+
+      <div class="features-grid stagger">
+
+        <!-- 全球佈局 (highlight) -->
+        <div class="card feature-card feature-highlight fade-up magma-border">
+          <div class="feature-icon-wrap">&#9672;</div>
+          <div class="feature-body">
+            <h3>全球佈局 &#8212; 台灣出發</h3>
+            <p>總部設於台灣，透過全球 CDN 節點提供低延遲的 AI 服務。亞太區優先，逐步覆蓋全球。每一筆 API 呼叫都經過最近節點路由，確保回應速度與穩定性。</p>
+            <span class="feature-tag">&#9670; 亞太優先</span>
+          </div>
+        </div>
+
+        <!-- 一個入口 -->
+        <div class="card feature-card fade-up hover-lift">
+          <div class="feature-icon-wrap">&#8853;</div>
+          <div class="feature-body">
+            <h3>統一入口</h3>
+            <p>不用在多個平台之間切換帳號和介面。SEOBAIKE 統一整合，一組帳號、一個儀表板、所有 AI 服務觸手可及。</p>
+            <span class="feature-tag">一站式</span>
+          </div>
+        </div>
+
+        <!-- 開發者友善 -->
+        <div class="card feature-card fade-up hover-lift">
+          <div class="feature-icon-wrap">&#9002;</div>
+          <div class="feature-body">
+            <h3>開發者友善</h3>
+            <p>提供 RESTful API 與文件，讓開發者可以將 SEOBAIKE 的 AI 能力整合到自己的應用程式與工作流程中。</p>
+            <span class="feature-tag">API 整合</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════ HOW IT WORKS ════════════ -->
+  <section class="section section-glow" style="background: var(--bg-secondary);">
+    <div class="container">
+      <div class="section-header fade-up">
+        <div class="section-badge">&#9654; How It Works</div>
+        <h2>四步驟<span class="text-gold">快速上手</span></h2>
+        <p>從註冊到完成第一個 AI 任務，只需要幾分鐘</p>
       </div>
 
       <div class="pipeline-wrap fade-up">
-        <!-- Step 1 -->
         <div class="pipeline-step">
           <div class="pipeline-num">1</div>
-          <h4>輸入需求</h4>
-          <p>用自然語言描述你想要的結果</p>
+          <h4>註冊帳號</h4>
+          <p>填入信箱，建立你的 SEOBAIKE 帳號</p>
           <div class="pipeline-arrow">&#8594;</div>
         </div>
-        <!-- Step 2 -->
         <div class="pipeline-step">
           <div class="pipeline-num">2</div>
-          <h4>AI 解析</h4>
-          <p>平台自動匹配最適合的 AI 模型</p>
+          <h4>設定金鑰</h4>
+          <p>輸入你的 API 金鑰，或購買 SEO Points</p>
           <div class="pipeline-arrow">&#8594;</div>
         </div>
-        <!-- Step 3 -->
         <div class="pipeline-step">
           <div class="pipeline-num">3</div>
-          <h4>執行任務</h4>
-          <p>AI 在背景高效運算並產出結果</p>
+          <h4>挑選服務</h4>
+          <p>在 AI 市集選擇你需要的功能模組</p>
           <div class="pipeline-arrow">&#8594;</div>
         </div>
-        <!-- Step 4 -->
         <div class="pipeline-step">
           <div class="pipeline-num">4</div>
-          <h4>交付成果</h4>
-          <p>即時取得可用的分析報告或內容</p>
+          <h4>開始使用</h4>
+          <p>即時取得 AI 產出，在儀表板追蹤用量</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ════════════ INTEGRATION ════════════ -->
+  <!-- ════════════ COMPARISON TABLE ════════════ -->
   <section class="section">
     <div class="container">
       <div class="section-header fade-up">
-        <div class="section-badge">Integration</div>
-        <h2>一個入口，<span class="text-gold">所有 AI</span></h2>
-        <p>不用在不同工具之間切換，SEOBAIKE 統一串接，一站完成</p>
+        <div class="section-badge">&#9733; Comparison</div>
+        <h2>為什麼選 <span class="text-gold">SEOBAIKE</span>？</h2>
+        <p>與傳統做法相比，平台的核心差異一目了然</p>
       </div>
 
-      <div class="integration-visual fade-up">
-        <div class="integration-channels">
-          <div class="integration-chip">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color:var(--gold-200);flex-shrink:0"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-            SEO 分析引擎
-          </div>
-          <div class="integration-chip">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color:var(--gold-200);flex-shrink:0"><path d="m5 8 6 6"/><path d="m4 14 6-6 2-3"/><path d="M2 5h12"/></svg>
-            翻譯模組
-          </div>
-          <div class="integration-chip">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color:var(--gold-200);flex-shrink:0"><path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/></svg>
-            內容生成器
-          </div>
-          <div class="integration-chip">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color:var(--gold-200);flex-shrink:0"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><circle cx="9" cy="9" r="2"/></svg>
-            圖片生成引擎
-          </div>
-          <div class="integration-chip">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color:var(--gold-200);flex-shrink:0"><path d="M3 3v16a2 2 0 0 0 2 2h16"/><path d="m7 11 4-4 4 4 6-6"/></svg>
-            數據分析中心
-          </div>
-          <div class="integration-chip">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color:var(--gold-200);flex-shrink:0"><path d="m3 11 18-5v12L3 13v-2z"/></svg>
-            行銷自動化
-          </div>
-        </div>
-
-        <div class="integration-connector"></div>
-
-        <div class="integration-hub animate-glow">
-          <span>SEOBAIKE</span>
-          <small>AI 中控台</small>
-        </div>
-
-        <div class="integration-connector" style="background:linear-gradient(90deg, transparent, var(--gold-300));"></div>
-
-        <div class="integration-channels">
-          <div class="integration-chip">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color:var(--success);flex-shrink:0"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-            SEO 報告
-          </div>
-          <div class="integration-chip">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color:var(--success);flex-shrink:0"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-            多語言內容
-          </div>
-          <div class="integration-chip">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color:var(--success);flex-shrink:0"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-            行銷素材
-          </div>
-          <div class="integration-chip">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color:var(--success);flex-shrink:0"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-            客服紀錄
-          </div>
-          <div class="integration-chip">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color:var(--success);flex-shrink:0"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-            數據儀表板
-          </div>
-          <div class="integration-chip">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color:var(--success);flex-shrink:0"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-            視覺素材
-          </div>
-        </div>
+      <div class="compare-table-wrap fade-up">
+        <table class="compare-table">
+          <thead>
+            <tr>
+              <th>功能</th>
+              <th class="seobaike-col">SEOBAIKE</th>
+              <th>傳統做法</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>金鑰管理</td>
+              <td class="seobaike-col"><span class="check-mark">&#10003;</span> BYOK 自帶金鑰</td>
+              <td>平台代管，加價轉售</td>
+            </tr>
+            <tr>
+              <td>計費方式</td>
+              <td class="seobaike-col"><span class="check-mark">&#10003;</span> 後付制，用多少付多少</td>
+              <td>預繳月費或年費</td>
+            </tr>
+            <tr>
+              <td>AI 服務數量</td>
+              <td class="seobaike-col"><span class="check-mark">&#10003;</span> 市集持續擴充中</td>
+              <td>單一供應商功能</td>
+            </tr>
+            <tr>
+              <td>架構彈性</td>
+              <td class="seobaike-col"><span class="check-mark">&#10003;</span> 插拔式，隨時增減</td>
+              <td>固定方案，無法客製</td>
+            </tr>
+            <tr>
+              <td>多語言</td>
+              <td class="seobaike-col"><span class="check-mark">&#10003;</span> 中 / 英 / 日 / 韓</td>
+              <td>多數僅支援英文</td>
+            </tr>
+            <tr>
+              <td>法規合規</td>
+              <td class="seobaike-col"><span class="check-mark">&#10003;</span> 台灣公司，在地法遵</td>
+              <td>海外公司，法規模糊</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
   </section>
@@ -701,14 +737,15 @@
   <!-- ════════════ CTA ════════════ -->
   <section class="section cta-section" style="background: var(--bg-secondary);">
     <div class="container">
-      <div class="cta-box fade-up">
-        <div class="section-badge" style="margin-bottom:var(--sp-6)">Get Started</div>
-        <h2>準備好了嗎？</h2>
-        <p>從今天開始，讓 AI 成為你的商業夥伴</p>
+      <div class="cta-box fade-up magma-border">
+        <div class="section-badge" style="margin-bottom:var(--sp-6)">&#9733; Get Started</div>
+        <h2 class="volcanic-title">準備好了嗎？</h2>
+        <p>帶上你的 API 金鑰，或用 SEO Points 開始體驗。<br>一個帳號，所有 AI 服務。</p>
         <div class="cta-actions">
-          <a href="/pricing" class="btn btn-primary btn-lg seismic-shake">選擇方案</a>
-          <a href="/about" class="btn btn-secondary btn-lg seismic-shake">了解更多</a>
+          <a href="/start" class="btn btn-primary btn-lg seismic-shake">立即開始</a>
+          <a href="/pricing" class="btn btn-secondary btn-lg seismic-shake">查看方案定價</a>
         </div>
+        <p class="cta-subtext">台灣公司營運 &#183; 統編 60475510 &#183; 小路光有限公司</p>
       </div>
     </div>
   </section>

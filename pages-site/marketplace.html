@@ -38,7 +38,7 @@
     /* Hero */
     .mp-hero {
       position: relative;
-      padding: 140px 0 100px;
+      padding: 140px 0 80px;
       text-align: center;
       overflow: hidden;
     }
@@ -62,120 +62,210 @@
       line-height: 1.7;
     }
 
-    /* Category Browser */
-    .cat-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: var(--sp-6);
+    /* Search bar */
+    .mp-search {
+      max-width: 680px;
+      margin: 0 auto;
+      position: relative;
     }
-    .cat-card {
-      text-align: center;
-      cursor: pointer;
-      padding: var(--sp-8) var(--sp-4);
-    }
-    .cat-card .cat-icon {
-      font-size: 2.8rem;
-      display: block;
-      margin-bottom: var(--sp-3);
-      transition: transform var(--duration-normal) var(--ease-spring);
-    }
-    .cat-card:hover .cat-icon { transform: scale(1.15) translateY(-4px); }
-    .cat-card h4 { margin-bottom: var(--sp-1); }
-    .cat-card p { font-size: 0.82rem; color: var(--text-muted); }
-
-    /* Search UI */
-    .search-wrap {
-      display: flex;
-      gap: var(--sp-3);
-      max-width: 640px;
-      margin: 0 auto var(--sp-10);
-    }
-    .search-wrap .input { border-radius: var(--radius-full); padding-left: var(--sp-6); }
-    .search-wrap .btn { flex-shrink: 0; }
-
-    /* Product grid */
-    .product-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: var(--sp-6);
-    }
-    .product-card { cursor: pointer; }
-    .product-card .p-icon { font-size: 2rem; margin-bottom: var(--sp-3); display: block; }
-    .product-card .p-meta {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-top: var(--sp-4);
-      padding-top: var(--sp-4);
-      border-top: 1px solid var(--border-subtle);
-    }
-    .product-card .p-price { font-weight: 800; color: var(--gold-200); font-size: 1rem; }
-    .product-card .p-price.free { color: var(--success); }
-    .product-card .p-stats { font-size: 0.78rem; color: var(--text-muted); }
-    .product-card .p-tags { display: flex; gap: var(--sp-2); margin-top: var(--sp-3); flex-wrap: wrap; }
-    .product-card .p-tag {
-      font-size: 0.7rem;
-      padding: 2px 8px;
-      border-radius: var(--radius-full);
-      background: rgba(255,255,255,0.04);
+    .mp-search .search-icon {
+      position: absolute;
+      left: 22px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 1.15rem;
       color: var(--text-muted);
-      border: 1px solid var(--border-subtle);
+      pointer-events: none;
+    }
+    .mp-search .input {
+      width: 100%;
+      padding: 16px 24px 16px 52px;
+      border-radius: var(--radius-full);
+      font-size: 1rem;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--border-default);
+    }
+    .mp-search .input:focus {
+      border-color: var(--gold-300);
+      box-shadow: 0 0 0 3px rgba(232,133,12,0.1), 0 4px 24px rgba(0,0,0,0.3);
+    }
+    .mp-search-stats {
+      margin-top: var(--sp-3);
+      font-size: 0.82rem;
+      color: var(--text-muted);
     }
 
-    /* Seller flow */
-    .flow-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: var(--sp-6);
-      counter-reset: flow;
+    /* Category tabs */
+    .cat-tabs {
+      display: flex;
+      gap: var(--sp-2);
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: var(--sp-12);
     }
-    .flow-step { text-align: center; position: relative; }
-    .flow-step::before {
-      counter-increment: flow;
-      content: counter(flow);
+    .cat-tab {
+      padding: 8px 20px;
+      border-radius: var(--radius-full);
+      font-size: 0.85rem;
+      font-weight: 600;
+      font-family: var(--font-sans);
+      cursor: pointer;
+      transition: all var(--duration-normal) var(--ease-out);
+      background: transparent;
+      color: var(--text-secondary);
+      border: 1px solid var(--border-subtle);
+      white-space: nowrap;
+    }
+    .cat-tab:hover {
+      border-color: var(--border-hover);
+      color: var(--text-primary);
+      background: rgba(232,133,12,0.05);
+    }
+    .cat-tab.active {
+      background: var(--gold-gradient);
+      color: #000;
+      border-color: transparent;
+      font-weight: 700;
+      box-shadow: 0 2px 12px rgba(232,133,12,0.2);
+    }
+
+    /* Service grid */
+    .svc-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--sp-6);
+    }
+    .svc-card {
+      display: flex;
+      flex-direction: column;
+      cursor: default;
+      position: relative;
+    }
+    .svc-card .svc-header {
+      display: flex;
+      align-items: flex-start;
+      gap: var(--sp-4);
+      margin-bottom: var(--sp-4);
+    }
+    .svc-card .svc-icon {
+      flex-shrink: 0;
+      width: 52px;
+      height: 52px;
       display: flex;
       align-items: center;
       justify-content: center;
-      width: 48px;
-      height: 48px;
-      border-radius: 50%;
-      background: rgba(232,133,12,0.1);
-      border: 1px solid rgba(232,133,12,0.25);
-      color: var(--gold-200);
+      font-size: 1.7rem;
+      border-radius: var(--radius-md);
+      background: rgba(232,133,12,0.08);
+      border: 1px solid rgba(232,133,12,0.12);
+    }
+    .svc-card .svc-title-wrap { flex: 1; min-width: 0; }
+    .svc-card .svc-name {
+      font-size: 1.05rem;
       font-weight: 800;
-      font-size: 1.1rem;
-      margin: 0 auto var(--sp-4);
+      color: var(--text-primary);
+      margin-bottom: 4px;
+      line-height: 1.3;
     }
-    .flow-step h4 { margin-bottom: var(--sp-2); }
-    .flow-step p { font-size: 0.85rem; color: var(--text-muted); }
-
-    /* Stats */
-    .stats-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: var(--sp-6);
+    .svc-card .svc-cat-tag {
+      display: inline-flex;
+      align-items: center;
+      padding: 2px 10px;
+      border-radius: var(--radius-full);
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.3px;
+      background: rgba(232,133,12,0.06);
+      color: var(--gold-200);
+      border: 1px solid rgba(232,133,12,0.12);
     }
-    .stat-card {
-      text-align: center;
-      padding: var(--sp-12) var(--sp-8);
-    }
-    .stat-card .stat-num {
-      font-size: clamp(2.2rem, 4vw, 3.2rem);
-      font-weight: 900;
-      background: var(--gold-gradient);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      line-height: 1.1;
-      margin-bottom: var(--sp-2);
-    }
-    .stat-card .stat-label {
-      font-size: 0.92rem;
+    .svc-card .svc-desc {
+      font-size: 0.88rem;
       color: var(--text-muted);
-      font-weight: 500;
+      line-height: 1.6;
+      margin-bottom: var(--sp-4);
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      flex: 1;
+    }
+    .svc-card .svc-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: var(--sp-4);
+      border-top: 1px solid var(--border-subtle);
+      gap: var(--sp-3);
+    }
+    .svc-card .svc-badges {
+      display: flex;
+      align-items: center;
+      gap: var(--sp-2);
+    }
+    .svc-card .byok-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 3px 10px;
+      border-radius: var(--radius-full);
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      background: rgba(88,166,255,0.08);
+      color: var(--info);
+      border: 1px solid rgba(88,166,255,0.15);
+      text-transform: uppercase;
+    }
+    .svc-card .svc-price {
+      font-weight: 800;
+      font-size: 0.95rem;
+      color: var(--gold-200);
+      white-space: nowrap;
+    }
+    .svc-card .svc-price.free {
+      color: var(--success);
+    }
+    .svc-card .svc-action {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 8px 20px;
+      border-radius: var(--radius-full);
+      font-size: 0.82rem;
+      font-weight: 700;
+      font-family: var(--font-sans);
+      cursor: pointer;
+      transition: all var(--duration-normal) var(--ease-out);
+      background: var(--gold-gradient);
+      color: #000;
+      border: none;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .svc-card .svc-action:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 16px rgba(232,133,12,0.3);
     }
 
-    /* Dual CTA */
+    /* No results */
+    .svc-empty {
+      grid-column: 1 / -1;
+      text-align: center;
+      padding: var(--sp-16) var(--sp-8);
+    }
+    .svc-empty .empty-icon {
+      font-size: 3rem;
+      display: block;
+      margin-bottom: var(--sp-4);
+      opacity: 0.5;
+    }
+    .svc-empty p {
+      color: var(--text-muted);
+      font-size: 1rem;
+    }
+
+    /* CTA section */
     .cta-section {
       position: relative;
       text-align: center;
@@ -192,15 +282,9 @@
       background: radial-gradient(circle, rgba(232,133,12,0.06) 0%, transparent 70%);
       pointer-events: none;
     }
-    .cta-buttons {
-      display: flex;
-      gap: var(--sp-4);
-      justify-content: center;
-      flex-wrap: wrap;
-    }
 
-    /* Commission note */
-    .commission-note {
+    /* Count badge in hero */
+    .mp-count {
       display: inline-flex;
       align-items: center;
       gap: 6px;
@@ -208,36 +292,25 @@
       border-radius: var(--radius-full);
       background: rgba(52,208,88,0.06);
       border: 1px solid rgba(52,208,88,0.15);
-      font-size: 0.8rem;
+      font-size: 0.82rem;
       color: var(--success);
       font-weight: 600;
-      margin-top: var(--sp-4);
     }
 
     /* ── Responsive overrides ── */
     @media (max-width: 1024px) {
-      .cat-grid { grid-template-columns: repeat(3, 1fr); }
-      .product-grid { grid-template-columns: repeat(2, 1fr); }
-      .flow-grid { grid-template-columns: repeat(2, 1fr); }
-      .stats-grid { grid-template-columns: repeat(3, 1fr); }
+      .svc-grid { grid-template-columns: repeat(2, 1fr); }
     }
     @media (max-width: 768px) {
       .mp-hero { padding: 110px 0 60px; }
-      .cat-grid { grid-template-columns: repeat(2, 1fr); }
-      .product-grid { grid-template-columns: 1fr; }
-      .flow-grid { grid-template-columns: 1fr 1fr; gap: var(--sp-8); }
-      .stats-grid { grid-template-columns: 1fr; gap: var(--sp-4); }
-      .stat-card { padding: var(--sp-8) var(--sp-6); }
-      .search-wrap { flex-direction: column; }
-      .search-wrap .btn { width: 100%; }
-      .cta-buttons { flex-direction: column; align-items: center; }
-      .cta-buttons .btn { width: 100%; max-width: 320px; }
+      .svc-grid { grid-template-columns: 1fr; }
+      .cat-tabs { gap: var(--sp-1); }
+      .cat-tab { padding: 6px 14px; font-size: 0.8rem; }
+      .mp-search .input { padding: 14px 20px 14px 46px; font-size: 0.92rem; }
     }
     @media (max-width: 480px) {
-      .cat-grid { grid-template-columns: repeat(2, 1fr); gap: var(--sp-3); }
-      .cat-card { padding: var(--sp-5) var(--sp-3); }
-      .cat-card .cat-icon { font-size: 2rem; }
-      .flow-grid { grid-template-columns: 1fr; }
+      .cat-tabs { justify-content: flex-start; overflow-x: auto; flex-wrap: nowrap; padding-bottom: var(--sp-2); -webkit-overflow-scrolling: touch; }
+      .cat-tab { flex-shrink: 0; }
     }
   </style>
 </head>
@@ -277,175 +350,64 @@
     <a href="/marketplace#sellers" class="nav-cta" style="margin-top:16px;display:inline-flex;" onclick="toggleMenu()">我要上架</a>
   </div>
 
-  <!-- ═══════ 1. Hero ═══════ -->
+  <!-- ═══════ 1. Hero + Search ═══════ -->
   <section class="mp-hero section-lg eruption-bg">
     <div class="container fade-up">
-      <div class="section-badge">MARKETPLACE</div>
-      <h1 class="volcanic-title">AI <span class="text-gold">全球市集</span></h1>
+      <div class="section-badge">AI SERVICE MARKETPLACE</div>
+      <h1 class="volcanic-title">AI <span class="text-gold">服務市集</span></h1>
       <p class="hero-sub">
-        買家找工具，賣家賣全球。<br>
-        一個平台，連結全世界的 AI 供需。
+        一站式探索多元 AI 服務，用 SEO Points 即刻啟用。<br>
+        從 SEO 分析到內容生成，所有工具觸手可及。
       </p>
-      <div class="cta-buttons">
-        <a href="#buyers" class="btn btn-primary btn-lg">探索 AI 工具</a>
-        <a href="#sellers" class="btn btn-secondary btn-lg">成為賣家</a>
+      <div class="mp-search">
+        <span class="search-icon">&#x1F50D;</span>
+        <input type="text" class="input" id="mpSearchBox" placeholder="搜尋 AI 服務... 例如：SEO 分析、翻譯、圖片生成" oninput="mpFilter()">
+      </div>
+      <div class="mp-search-stats mt-4">
+        <span class="mp-count" id="mpResultCount">12 項 AI 服務可用</span>
       </div>
     </div>
   </section>
 
   <hr class="divider">
 
-  <!-- ═══════ 2. Category Browser ═══════ -->
-  <section class="section" id="categories">
+  <!-- ═══════ 2. Category Tabs + Service Grid ═══════ -->
+  <section class="section" id="services">
     <div class="container">
       <div class="section-header fade-up">
-        <div class="section-badge">CATEGORIES</div>
-        <h2>探索 AI 工具類別</h2>
-        <p>從 SEO 到內容生成，找到你需要的一切</p>
+        <div class="section-badge">SERVICES</div>
+        <h2>探索 <span class="text-gold">AI 服務</span></h2>
+        <p>選擇類別快速篩選，或直接搜尋你需要的工具</p>
       </div>
-      <div class="cat-grid fade-up">
-        <div class="card cat-card" onclick="filterByCategory('SEO工具')">
-          <span class="cat-icon">&#x1F50D;</span>
-          <h4>SEO 工具</h4>
-          <p>關鍵字分析、排名追蹤、網站優化</p>
-        </div>
-        <div class="card cat-card" onclick="filterByCategory('AI對話')">
-          <span class="cat-icon">&#x1F4AC;</span>
-          <h4>AI 對話</h4>
-          <p>聊天機器人、客服自動化、對話引擎</p>
-        </div>
-        <div class="card cat-card" onclick="filterByCategory('圖片生成')">
-          <span class="cat-icon">&#x1F3A8;</span>
-          <h4>圖片生成</h4>
-          <p>AI 繪圖、設計素材、影像處理</p>
-        </div>
-        <div class="card cat-card" onclick="filterByCategory('翻譯服務')">
-          <span class="cat-icon">&#x1F310;</span>
-          <h4>翻譯服務</h4>
-          <p>多語翻譯、在地化、字幕生成</p>
-        </div>
-        <div class="card cat-card" onclick="filterByCategory('數據分析')">
-          <span class="cat-icon">&#x1F4CA;</span>
-          <h4>數據分析</h4>
-          <p>報表生成、趨勢預測、商業智能</p>
-        </div>
-        <div class="card cat-card" onclick="filterByCategory('內容生成')">
-          <span class="cat-icon">&#x270D;&#xFE0F;</span>
-          <h4>內容生成</h4>
-          <p>文案撰寫、部落格、社群貼文</p>
-        </div>
+
+      <!-- Category filter tabs -->
+      <div class="cat-tabs fade-up" id="mpCatTabs">
+        <button class="cat-tab active" data-cat="全部" onclick="mpSetCat('全部', this)">全部</button>
+        <button class="cat-tab" data-cat="SEO工具" onclick="mpSetCat('SEO工具', this)">SEO工具</button>
+        <button class="cat-tab" data-cat="AI寫作" onclick="mpSetCat('AI寫作', this)">AI寫作</button>
+        <button class="cat-tab" data-cat="圖片生成" onclick="mpSetCat('圖片生成', this)">圖片生成</button>
+        <button class="cat-tab" data-cat="聊天機器人" onclick="mpSetCat('聊天機器人', this)">聊天機器人</button>
+        <button class="cat-tab" data-cat="數據分析" onclick="mpSetCat('數據分析', this)">數據分析</button>
+        <button class="cat-tab" data-cat="翻譯" onclick="mpSetCat('翻譯', this)">翻譯</button>
+      </div>
+
+      <!-- Service cards grid -->
+      <div class="svc-grid fade-up" id="mpServiceGrid">
+        <!-- Cards rendered by JS -->
       </div>
     </div>
   </section>
 
   <hr class="divider">
 
-  <!-- ═══════ 3. For Buyers ═══════ -->
-  <section class="section" id="buyers">
-    <div class="container">
-      <div class="section-header fade-up">
-        <div class="section-badge">FOR BUYERS</div>
-        <h2>找到你需要的 <span class="text-gold">AI 工具</span></h2>
-        <p>搜尋、比較、一鍵使用 — 全球多元的 AI 工具都在這裡</p>
-      </div>
-
-      <!-- Search UI -->
-      <div class="search-wrap fade-up">
-        <input type="text" class="input" id="searchBox" placeholder="搜尋 AI 工具... SEO、翻譯、圖片生成..." oninput="filterListings()">
-        <button class="btn btn-primary" onclick="filterListings()">搜尋</button>
-      </div>
-
-      <!-- Filter tags -->
-      <div class="flex-center gap-4 fade-up mb-8" style="flex-wrap:wrap;">
-        <button class="btn btn-sm btn-secondary" style="border-color:var(--border-active);color:var(--text-primary);" onclick="setFilter('all', this)">全部</button>
-        <button class="btn btn-sm btn-ghost" onclick="setFilter('featured', this)">精選</button>
-        <div id="categoryBtns" style="display:inline-flex;gap:8px;flex-wrap:wrap;"></div>
-      </div>
-
-      <!-- Product grid (dynamically populated) -->
-      <div class="product-grid fade-up" id="listingsGrid">
-        <div class="card" style="grid-column:1/-1;text-align:center;padding:var(--sp-12);">
-          <p class="text-muted">正在載入市集商品...</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <hr class="divider">
-
-  <!-- ═══════ 4. For Sellers ═══════ -->
-  <section class="section" id="sellers">
-    <div class="container">
-      <div class="section-header fade-up">
-        <div class="section-badge">FOR SELLERS</div>
-        <h2>把你的產品 <span class="text-gold">賣到全世界</span></h2>
-        <p>上架你的 AI 工具或數位商品，讓全球買家看到你</p>
-      </div>
-
-      <div class="flow-grid fade-up">
-        <div class="flow-step">
-          <h4>註冊賣家帳號</h4>
-          <p>填寫基本資料，完成賣家認證</p>
-        </div>
-        <div class="flow-step">
-          <h4>建立商品頁面</h4>
-          <p>上傳商品資訊，AI 自動優化描述</p>
-        </div>
-        <div class="flow-step">
-          <h4>AI 多語翻譯</h4>
-          <p>系統自動翻譯成韓文、日文、英文等語言</p>
-        </div>
-        <div class="flow-step">
-          <h4>全球收款</h4>
-          <p>買家下單，依合約撥款。安全透明</p>
-        </div>
-      </div>
-
-      <div class="text-center mt-8 fade-up">
-        <div class="commission-note">分潤依合約約定，所有交易透明可查</div>
-      </div>
-
-      <div class="text-center mt-8 fade-up">
-        <a href="/login" class="btn btn-primary btn-lg">開始上架</a>
-      </div>
-    </div>
-  </section>
-
-  <hr class="divider">
-
-  <!-- ═══════ 5. Stats ═══════ -->
-  <section class="section-sm">
-    <div class="container">
-      <div class="stats-grid fade-up">
-        <div class="card stat-card">
-          <div class="stat-num" id="stat-listings">--</div>
-          <div class="stat-label">市集商品數</div>
-        </div>
-        <div class="card stat-card">
-          <div class="stat-num" id="stat-sellers">--</div>
-          <div class="stat-label">活躍賣家數</div>
-        </div>
-        <div class="card stat-card">
-          <div class="stat-num">30+</div>
-          <div class="stat-label">服務國家數</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <hr class="divider">
-
-  <!-- ═══════ 6. CTA ═══════ -->
+  <!-- ═══════ 3. CTA ═══════ -->
   <section class="section-lg cta-section">
     <div class="container fade-up">
       <div class="section-header">
-        <h2>準備好了嗎？</h2>
-        <p>不管你是要找工具還是賣產品，SEOBAIKE 市集都歡迎你</p>
+        <h2>找不到你要的？</h2>
+        <p>告訴我們你的需求，我們為你量身打造 AI 解決方案</p>
       </div>
-      <div class="cta-buttons">
-        <a href="#buyers" class="btn btn-primary btn-lg">逛市集</a>
-        <a href="#sellers" class="btn btn-secondary btn-lg">成為賣家</a>
-      </div>
+      <a href="/contact" class="btn btn-primary btn-lg">聯繫我們</a>
     </div>
   </section>
 
@@ -520,141 +482,199 @@
     }
 
     /* ═══════ Marketplace Logic ═══════ */
-    var API = window.location.origin;
-    var allListings = [];
-    var currentFilter = 'all';
+
+    /* ── Service data (12 services) ── */
+    var mpServices = [
+      {
+        id: 'seo-analysis',
+        name: 'SEO 智能分析引擎',
+        icon: '&#x1F50D;',
+        category: 'SEO工具',
+        desc: '全面分析網站 SEO 健康度，提供排名優化建議、技術問題診斷與改善方案。',
+        byok: false,
+        price: 50,
+        unit: '/次'
+      },
+      {
+        id: 'ai-writer',
+        name: 'AI 文章生成器',
+        icon: '&#x270D;&#xFE0F;',
+        category: 'AI寫作',
+        desc: '根據關鍵字與主題自動撰寫高品質長文章，支援 SEO 結構化輸出。',
+        byok: true,
+        price: 30,
+        unit: '/篇'
+      },
+      {
+        id: 'image-gen',
+        name: '智能圖片生成',
+        icon: '&#x1F3A8;',
+        category: '圖片生成',
+        desc: '輸入描述即可生成高品質圖片，適用於社群貼文、廣告素材、產品展示。',
+        byok: true,
+        price: 20,
+        unit: '/張'
+      },
+      {
+        id: 'translation',
+        name: '多語言翻譯引擎',
+        icon: '&#x1F310;',
+        category: '翻譯',
+        desc: '支援超過 30 種語言的即時互譯，保留語境語氣，適合商業文件與網站在地化。',
+        byok: false,
+        price: 10,
+        unit: '/千字'
+      },
+      {
+        id: 'chatbot',
+        name: 'AI 聊天助手',
+        icon: '&#x1F4AC;',
+        category: '聊天機器人',
+        desc: '智能客服聊天機器人，可嵌入網站或應用程式，7x24 自動回覆客戶問題。',
+        byok: true,
+        price: 100,
+        unit: '/月'
+      },
+      {
+        id: 'data-insight',
+        name: '數據洞察分析',
+        icon: '&#x1F4CA;',
+        category: '數據分析',
+        desc: '上傳數據即可自動生成視覺化報表，發現隱藏趨勢，輔助商業決策。',
+        byok: false,
+        price: 80,
+        unit: '/次'
+      },
+      {
+        id: 'keyword-research',
+        name: '關鍵字研究工具',
+        icon: '&#x1F511;',
+        category: 'SEO工具',
+        desc: '深度挖掘高價值關鍵字，分析搜尋量、競爭度與趨勢，規劃最佳 SEO 策略。',
+        byok: false,
+        price: 40,
+        unit: '/次'
+      },
+      {
+        id: 'competitor-analysis',
+        name: '競爭對手分析',
+        icon: '&#x1F3AF;',
+        category: '數據分析',
+        desc: '全面分析競爭對手的流量來源、關鍵字排名與內容策略，找出超越機會。',
+        byok: false,
+        price: 60,
+        unit: '/份'
+      },
+      {
+        id: 'social-content',
+        name: '社群貼文生成',
+        icon: '&#x1F4F1;',
+        category: 'AI寫作',
+        desc: '一鍵產出適合各大社群平台的貼文、標題與 Hashtag，提升互動率與觸及率。',
+        byok: true,
+        price: 15,
+        unit: '/篇'
+      },
+      {
+        id: 'email-marketing',
+        name: '電子郵件行銷助手',
+        icon: '&#x1F4E7;',
+        category: 'AI寫作',
+        desc: '自動撰寫行銷信件、電子報內容，並針對不同受眾進行個人化調整與 A/B 測試建議。',
+        byok: false,
+        price: 25,
+        unit: '/封'
+      },
+      {
+        id: 'product-desc',
+        name: '產品描述生成器',
+        icon: '&#x1F6CD;&#xFE0F;',
+        category: 'AI寫作',
+        desc: '為電商產品自動生成吸引人的描述文案，支援多語輸出與 SEO 結構優化。',
+        byok: true,
+        price: 20,
+        unit: '/篇'
+      },
+      {
+        id: 'speech-to-text',
+        name: '語音轉文字引擎',
+        icon: '&#x1F399;&#xFE0F;',
+        category: '翻譯',
+        desc: '將音訊或影片中的語音精準轉換為文字，支援多國語言辨識與字幕生成。',
+        byok: false,
+        price: 35,
+        unit: '/分鐘'
+      }
+    ];
+
+    var mpCurrentCat = '全部';
 
     function esc(s) {
       return String(s || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
     }
 
-    /* Load marketplace data from API */
-    async function loadMarketplace() {
-      try {
-        var res = await fetch(API + '/api/marketplace');
-        var data = await res.json();
-        allListings = data.listings || [];
-
-        /* Update stats */
-        var el1 = document.getElementById('stat-listings');
-        var el2 = document.getElementById('stat-sellers');
-        if (el1) el1.textContent = allListings.length;
-
-        /* Estimate sellers from unique subtitles or show user count */
-        var sellers = new Set(allListings.map(function(l) { return l.subtitle || l.category || ''; }));
-        if (el2) el2.textContent = sellers.size || '--';
-
-        /* Build dynamic category filter buttons */
-        var cats = data.categories || [];
-        var catBtns = document.getElementById('categoryBtns');
-        if (catBtns) {
-          catBtns.innerHTML = cats.slice(0, 8).map(function(c) {
-            return '<button class="btn btn-sm btn-ghost" onclick="setFilter(\'' + c + '\', this)">' + c + '</button>';
-          }).join('');
-        }
-
-        renderListings(allListings);
-      } catch (e) {
-        var grid = document.getElementById('listingsGrid');
-        if (grid) grid.innerHTML = '<div class="card" style="grid-column:1/-1;text-align:center;padding:var(--sp-12);"><p style="color:var(--danger);">載入失敗：' + esc(e.message) + '</p></div>';
-      }
-    }
-
-    /* Render product cards */
-    function renderListings(items) {
-      var grid = document.getElementById('listingsGrid');
+    /* Render service cards */
+    function mpRender(items) {
+      var grid = document.getElementById('mpServiceGrid');
       if (!grid) return;
 
       if (!items.length) {
-        grid.innerHTML = '<div class="card" style="grid-column:1/-1;text-align:center;padding:var(--sp-12);"><p class="text-muted">沒有符合的工具</p></div>';
+        grid.innerHTML = '<div class="svc-empty"><span class="empty-icon">&#x1F50E;</span><p>找不到符合的服務，請嘗試其他關鍵字或類別</p></div>';
         return;
       }
 
-      grid.innerHTML = items.map(function(l) {
-        var sp = l.price_twd || 0;
-        var suffix = l.pricing_model === 'monthly' ? '/月' : l.pricing_model === 'per_use' ? '/次' : '';
-        var priceText = sp === 0 ? '免費' : sp.toLocaleString() + ' SP' + suffix;
-        var stars = l.avg_rating ? '&#9733; ' + Number(l.avg_rating).toFixed(1) : '';
-        var tags = (l.tags || []).slice(0, 3);
-        var isFree = sp === 0;
+      grid.innerHTML = items.map(function(s) {
+        var priceText = s.price === 0 ? '免費' : s.price + ' SP' + (s.unit || '');
+        var isFree = s.price === 0;
 
-        return '<div class="card product-card" onclick="showDetail(\'' + l.id + '\')">' +
-          (l.featured ? '<span class="badge badge-gold" style="position:absolute;top:12px;right:12px;">精選</span>' : '') +
-          '<span class="p-icon">' + (l.icon || '&#x1F916;') + '</span>' +
-          '<h4>' + esc(l.title) + '</h4>' +
-          '<p style="font-size:0.85rem;margin-top:4px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;">' + esc(l.description || '') + '</p>' +
-          (tags.length ? '<div class="p-tags">' + tags.map(function(t) { return '<span class="p-tag">' + esc(t) + '</span>'; }).join('') + '</div>' : '') +
-          '<div class="p-meta">' +
-            '<span class="p-price' + (isFree ? ' free' : '') + '">' + priceText + '</span>' +
-            '<span class="p-stats">' + (stars ? stars + ' &middot; ' : '') + (l.total_users || 0).toLocaleString() + ' 人使用</span>' +
+        return '<div class="card svc-card">' +
+          '<div class="svc-header">' +
+            '<div class="svc-icon">' + s.icon + '</div>' +
+            '<div class="svc-title-wrap">' +
+              '<div class="svc-name">' + esc(s.name) + '</div>' +
+              '<span class="svc-cat-tag">' + esc(s.category) + '</span>' +
+            '</div>' +
+          '</div>' +
+          '<p class="svc-desc">' + esc(s.desc) + '</p>' +
+          '<div class="svc-footer">' +
+            '<div class="svc-badges">' +
+              '<span class="svc-price' + (isFree ? ' free' : '') + '">' + priceText + '</span>' +
+              (s.byok ? '<span class="byok-badge">&#x1F511; BYOK</span>' : '') +
+            '</div>' +
+            '<button class="svc-action" onclick="alert(\'&#x2705; ' + esc(s.name) + '\\n\\n價格：' + priceText + '\\n\\n請登入後使用此服務。\')">使用</button>' +
           '</div>' +
         '</div>';
       }).join('');
+
+      /* Update result count */
+      var countEl = document.getElementById('mpResultCount');
+      if (countEl) countEl.textContent = items.length + ' 項 AI 服務' + (mpCurrentCat !== '全部' ? '（' + mpCurrentCat + '）' : '可用');
     }
 
-    /* Filter and search */
-    function filterListings() {
-      var q = (document.getElementById('searchBox').value || '').toLowerCase();
-      var filtered = allListings;
+    /* Filter by search + category */
+    function mpFilter() {
+      var q = (document.getElementById('mpSearchBox').value || '').toLowerCase();
+      var items = mpServices;
 
-      if (currentFilter === 'featured') {
-        filtered = filtered.filter(function(l) { return l.featured; });
-      } else if (currentFilter !== 'all') {
-        filtered = filtered.filter(function(l) { return l.category === currentFilter; });
+      if (mpCurrentCat !== '全部') {
+        items = items.filter(function(s) { return s.category === mpCurrentCat; });
       }
 
       if (q) {
-        filtered = filtered.filter(function(l) {
-          return (l.title + l.description + l.category + (l.tags || []).join(' ')).toLowerCase().indexOf(q) !== -1;
+        items = items.filter(function(s) {
+          return (s.name + s.desc + s.category).toLowerCase().indexOf(q) !== -1;
         });
       }
 
-      renderListings(filtered);
+      mpRender(items);
     }
 
-    function setFilter(f, btn) {
-      currentFilter = f;
-      /* Reset all filter button styles */
-      document.querySelectorAll('#buyers .btn-sm').forEach(function(b) {
-        b.classList.remove('btn-secondary');
-        b.classList.add('btn-ghost');
-        b.style.borderColor = '';
-        b.style.color = '';
-      });
-      if (btn) {
-        btn.classList.remove('btn-ghost');
-        btn.classList.add('btn-secondary');
-        btn.style.borderColor = 'var(--border-active)';
-        btn.style.color = 'var(--text-primary)';
-      }
-      filterListings();
-    }
-
-    /* Filter from category card click */
-    function filterByCategory(cat) {
-      currentFilter = cat;
-      document.getElementById('searchBox').value = '';
-      filterListings();
-      /* Scroll to buyer section */
-      var target = document.getElementById('buyers');
-      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
-
-    /* Product detail (simple alert for now) */
-    function showDetail(id) {
-      var l = allListings.find(function(x) { return x.id === id; });
-      if (!l) return;
-      var sp = l.price_twd || 0;
-      var priceText = sp === 0 ? '免費' : sp.toLocaleString() + ' SP';
-      var shareUrl = window.location.origin + '/marketplace?tool=' + id;
-      alert(
-        (l.icon || '') + ' ' + l.title + '\n\n' +
-        (l.description || '') + '\n\n' +
-        '價格：' + priceText + '\n' +
-        '用戶：' + (l.total_users || 0).toLocaleString() + ' 人\n' +
-        '評分：' + (l.avg_rating || 'N/A') + '\n\n' +
-        '分享連結：\n' + shareUrl
-      );
+    /* Set active category tab */
+    function mpSetCat(cat, btn) {
+      mpCurrentCat = cat;
+      document.querySelectorAll('.cat-tab').forEach(function(t) { t.classList.remove('active'); });
+      if (btn) btn.classList.add('active');
+      mpFilter();
     }
 
     /* ─── Page View Tracking ─── */
@@ -672,7 +692,7 @@
     })();
 
     /* ─── Init ─── */
-    loadMarketplace();
+    mpRender(mpServices);
   </script>
   <script src="/assets/analytics.js" defer></script>
   <script src="/seobaike-widget.js"></script>
