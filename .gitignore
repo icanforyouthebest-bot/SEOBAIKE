@@ -5,7 +5,7 @@ CLAUDE.md.bak
 .env
 .env.*
 seobaike-config.js
-pages-site/assets/*.js
+seobaike-config.local.js
 nul
 node_modules/
 package-lock.json

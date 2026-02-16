@@ -3,20 +3,20 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SEOBAIKE — AI 全球市集 | 你的產品，賣到全世界</title>
-  <meta name="description" content="SEOBAIKE 是 AI 驅動的全球市集。上架你的商品，AI 自動翻譯、行銷、客服。台灣、韓國、日本、東南亞 — 讓全世界買到你的東西。">
-  <meta name="keywords" content="SEOBAIKE,AI 市集,全球市集,跨國銷售,AI 翻譯,AI 行銷,數位商品,線上市集,台灣市集,韓國市集">
+  <title>SEOBAIKE — AI 界的 App Store | 一個平台，接通所有 AI 服務</title>
+  <meta name="description" content="SEOBAIKE 是 AI 界的 App Store。一個平台接通所有 AI 服務，用你自己的 API Key（BYOK），台灣在地團隊打造，全球佈局。">
+  <meta name="keywords" content="SEOBAIKE,AI平台,AI服務,BYOK,API Key,AI App Store,AI工具,小路光,台灣AI,aiforseo">
   <link rel="canonical" href="https://aiforseo.vip/">
-  <meta property="og:title" content="SEOBAIKE — AI 全球市集 | 你的產品，賣到全世界">
-  <meta property="og:description" content="SEOBAIKE 是 AI 驅動的全球市集。上架你的商品，AI 自動翻譯、行銷、客服。">
+  <meta property="og:title" content="SEOBAIKE — AI 界的 App Store | 一個平台，接通所有 AI 服務">
+  <meta property="og:description" content="SEOBAIKE 是 AI 界的 App Store。一個平台接通所有 AI 服務，BYOK 架構，台灣在地團隊打造。">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://aiforseo.vip/">
   <meta property="og:image" content="/og-image.png">
   <meta property="og:site_name" content="SEOBAIKE">
   <meta property="og:locale" content="zh_TW">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="SEOBAIKE — AI 全球市集 | 你的產品，賣到全世界">
-  <meta name="twitter:description" content="SEOBAIKE 是 AI 驅動的全球市集。上架你的商品，AI 自動翻譯、行銷、客服。">
+  <meta name="twitter:title" content="SEOBAIKE — AI 界的 App Store | 一個平台，接通所有 AI 服務">
+  <meta name="twitter:description" content="SEOBAIKE 是 AI 界的 App Store。一個平台接通所有 AI 服務，BYOK 架構，台灣在地團隊打造。">
   <meta name="theme-color" content="#e8850c">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -35,7 +35,7 @@
       "name": "SEOBAIKE",
       "legalName": "小路光有限公司",
       "url": "https://aiforseo.vip",
-      "description": "AI 驅動的全球市集 — 你的產品，賣到全世界",
+      "description": "AI 界的 App Store — 一個平台，接通所有 AI 服務",
       "foundingDate": "2025",
       "founder": {
         "@type": "Person",
@@ -53,7 +53,7 @@
       "@type": "WebSite",
       "name": "SEOBAIKE",
       "url": "https://aiforseo.vip",
-      "description": "全球適用 AI 平台",
+      "description": "AI 界的 App Store — 一個平台接通所有 AI 服務",
       "publisher": {
         "@type": "Organization",
         "name": "小路光有限公司"
@@ -70,7 +70,7 @@
       "name": "SEOBAIKE",
       "applicationCategory": "BusinessApplication",
       "operatingSystem": "Web",
-      "description": "AI 驅動的全球市集。上架你的商品，AI 幫你翻譯、行銷、客服。",
+      "description": "AI 界的 App Store。一個平台接通所有 AI 服務，BYOK 架構，台灣在地團隊打造。",
       "url": "https://aiforseo.vip",
       "author": {
         "@type": "Organization",
@@ -95,661 +95,106 @@
   <!-- Page-Specific Styles -->
   <style>
     /* ── Hero ── */
-    .hero {
-      position: relative;
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
-      padding-top: 64px;
-    }
-    .hero-bg {
-      position: absolute;
-      inset: 0;
-      z-index: 0;
-      overflow: hidden;
-    }
-    .hero-orb {
-      position: absolute;
-      border-radius: 50%;
-      filter: blur(100px);
-      opacity: 0.35;
-      animation: orbFloat 12s ease-in-out infinite;
-    }
-    .hero-orb-1 {
-      width: 600px; height: 600px;
-      background: radial-gradient(circle, rgba(232,133,12,0.4), transparent 70%);
-      top: -15%; left: -10%;
-      animation-delay: 0s;
-    }
-    .hero-orb-2 {
-      width: 500px; height: 500px;
-      background: radial-gradient(circle, rgba(245,166,35,0.3), transparent 70%);
-      bottom: -20%; right: -10%;
-      animation-delay: -4s;
-    }
-    .hero-orb-3 {
-      width: 350px; height: 350px;
-      background: radial-gradient(circle, rgba(255,215,0,0.2), transparent 70%);
-      top: 40%; left: 50%;
-      transform: translateX(-50%);
-      animation-delay: -8s;
-    }
-    @keyframes orbFloat {
-      0%, 100% { transform: translate(0, 0) scale(1); }
-      33% { transform: translate(30px, -20px) scale(1.05); }
-      66% { transform: translate(-20px, 15px) scale(0.95); }
-    }
-    .hero-grid-overlay {
-      position: absolute;
-      inset: 0;
-      background-image:
-        linear-gradient(rgba(232,133,12,0.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(232,133,12,0.03) 1px, transparent 1px);
-      background-size: 60px 60px;
-      mask-image: radial-gradient(ellipse 60% 50% at 50% 50%, black, transparent);
-      -webkit-mask-image: radial-gradient(ellipse 60% 50% at 50% 50%, black, transparent);
-    }
-    .hero-content {
-      position: relative;
-      z-index: 2;
-      text-align: center;
-      max-width: 900px;
-      padding: 0 var(--sp-6);
-    }
-    .hero-eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 8px 20px;
-      border-radius: var(--radius-full);
-      background: rgba(232,133,12,0.06);
-      border: 1px solid rgba(232,133,12,0.12);
-      font-size: 0.82rem;
-      font-weight: 600;
-      color: var(--gold-200);
-      letter-spacing: 1px;
-      margin-bottom: var(--sp-8);
-    }
-    .hero-eyebrow .dot {
-      width: 6px; height: 6px;
-      background: var(--success);
-      border-radius: 50%;
-      animation: pulse 2s ease-in-out infinite;
-    }
-    .hero h1 {
-      font-size: clamp(2.8rem, 7vw, 5rem);
-      font-weight: 900;
-      line-height: 1.1;
-      letter-spacing: -0.03em;
-      margin-bottom: var(--sp-6);
-    }
-    .hero h1 .gradient {
-      background: var(--gold-gradient);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-    .hero-subtitle {
-      font-size: clamp(1.05rem, 2vw, 1.3rem);
-      color: var(--text-muted);
-      max-width: 600px;
-      margin: 0 auto var(--sp-10);
-      line-height: 1.7;
-    }
-    .hero-ctas {
-      display: flex;
-      gap: var(--sp-4);
-      justify-content: center;
-      flex-wrap: wrap;
-    }
-    .hero-scroll-hint {
-      position: absolute;
-      bottom: 40px;
-      left: 50%;
-      transform: translateX(-50%);
-      z-index: 2;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 8px;
-      color: var(--text-muted);
-      font-size: 0.75rem;
-      letter-spacing: 1px;
-      animation: float 3s ease-in-out infinite;
-    }
-    .scroll-line {
-      width: 1px;
-      height: 40px;
-      background: linear-gradient(to bottom, var(--gold-300), transparent);
-    }
+    .hero { position:relative; min-height:100vh; display:flex; align-items:center; justify-content:center; overflow:hidden; padding-top:64px; }
+    .hero-bg { position:absolute; inset:0; z-index:0; overflow:hidden; }
+    .hero-orb { position:absolute; border-radius:50%; filter:blur(100px); opacity:0.35; animation:orbFloat 12s ease-in-out infinite; }
+    .hero-orb-1 { width:600px; height:600px; background:radial-gradient(circle,rgba(232,133,12,0.4),transparent 70%); top:-15%; left:-10%; }
+    .hero-orb-2 { width:500px; height:500px; background:radial-gradient(circle,rgba(245,166,35,0.3),transparent 70%); bottom:-20%; right:-10%; animation-delay:-4s; }
+    .hero-orb-3 { width:350px; height:350px; background:radial-gradient(circle,rgba(255,215,0,0.2),transparent 70%); top:40%; left:50%; transform:translateX(-50%); animation-delay:-8s; }
+    @keyframes orbFloat { 0%,100%{transform:translate(0,0)scale(1);} 33%{transform:translate(30px,-20px)scale(1.05);} 66%{transform:translate(-20px,15px)scale(0.95);} }
+    .hero-grid-overlay { position:absolute; inset:0; background-image:linear-gradient(rgba(232,133,12,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(232,133,12,0.03) 1px,transparent 1px); background-size:60px 60px; mask-image:radial-gradient(ellipse 60% 50% at 50% 50%,black,transparent); -webkit-mask-image:radial-gradient(ellipse 60% 50% at 50% 50%,black,transparent); }
+    .hero-content { position:relative; z-index:2; text-align:center; max-width:960px; padding:0 var(--sp-6); }
+    .hero-eyebrow { display:inline-flex; align-items:center; gap:8px; padding:8px 20px; border-radius:var(--radius-full); background:rgba(232,133,12,0.06); border:1px solid rgba(232,133,12,0.12); font-size:0.82rem; font-weight:600; color:var(--gold-200); letter-spacing:1px; margin-bottom:var(--sp-8); }
+    .hero-eyebrow .dot { width:6px; height:6px; background:var(--success); border-radius:50%; animation:pulse 2s ease-in-out infinite; }
+    .hero h1 { font-size:clamp(2.8rem,7vw,5.2rem); font-weight:900; line-height:1.08; letter-spacing:-0.03em; margin-bottom:var(--sp-6); }
+    .hero h1 .gradient { background:var(--gold-gradient); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+    .hero-subtitle { font-size:clamp(1.05rem,2vw,1.35rem); color:var(--text-secondary); max-width:640px; margin:0 auto var(--sp-8); line-height:1.8; }
+    .hero-ctas { display:flex; gap:var(--sp-4); justify-content:center; flex-wrap:wrap; margin-bottom:var(--sp-6); }
+    .hero-scroll-hint { position:absolute; bottom:40px; left:50%; transform:translateX(-50%); z-index:2; display:flex; flex-direction:column; align-items:center; gap:8px; color:var(--text-muted); font-size:0.75rem; letter-spacing:1px; animation:float 3s ease-in-out infinite; }
+    .scroll-line { width:1px; height:40px; background:linear-gradient(to bottom,var(--gold-300),transparent); }
+    .hero-byok { display:inline-flex; align-items:center; gap:8px; padding:10px 22px; border-radius:var(--radius-full); background:rgba(255,255,255,0.03); border:1px solid var(--border-subtle); font-size:0.85rem; color:var(--text-muted); }
+    .hero-byok code { color:var(--gold-200); font-family:var(--font-mono); font-weight:700; font-size:0.8rem; }
 
-    /* ── Stats Section ── */
-    .stats-section {
-      position: relative;
-      padding: var(--sp-20) 0;
-      background: var(--bg-secondary);
-      border-top: 1px solid var(--border-subtle);
-      border-bottom: 1px solid var(--border-subtle);
-    }
-    .stats-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: var(--sp-6);
-    }
-    .stat-card {
-      text-align: center;
-      padding: var(--sp-8) var(--sp-4);
-    }
-    .stat-number {
-      font-size: clamp(2rem, 4vw, 3rem);
-      font-weight: 900;
-      background: var(--gold-gradient);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      line-height: 1.2;
-      margin-bottom: var(--sp-2);
-    }
-    .stat-label {
-      font-size: 0.9rem;
-      color: var(--text-muted);
-      font-weight: 500;
-    }
-
-    /* ── Global Reach (Sci-Fi) ── */
-    .global-section {
-      position: relative;
-      overflow: hidden;
-      padding: 120px 0;
-    }
-    .global-bg {
-      position: absolute;
-      inset: 0;
-      overflow: hidden;
-    }
-    .radar-ring {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      border-radius: 50%;
-      border: 1px solid rgba(232,133,12,0.06);
-      animation: radarExpand 4s ease-out infinite;
-    }
-    .radar-ring:nth-child(1) { width: 300px; height: 300px; animation-delay: 0s; }
-    .radar-ring:nth-child(2) { width: 500px; height: 500px; animation-delay: 1s; }
-    .radar-ring:nth-child(3) { width: 700px; height: 700px; animation-delay: 2s; }
-    .radar-ring:nth-child(4) { width: 900px; height: 900px; animation-delay: 3s; }
-    @keyframes radarExpand {
-      0% { opacity: 0.5; transform: translate(-50%, -50%) scale(0.8); }
-      100% { opacity: 0; transform: translate(-50%, -50%) scale(1.2); }
-    }
-    .scan-line {
-      position: absolute;
-      top: 0;
-      left: -100%;
-      width: 100%;
-      height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(232,133,12,0.4), transparent);
-      animation: scanSweep 5s linear infinite;
-    }
-    @keyframes scanSweep {
-      0% { left: -100%; top: 20%; }
-      100% { left: 100%; top: 80%; }
-    }
-    .global-live-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 6px 16px;
-      border-radius: var(--radius-full);
-      background: rgba(52,208,88,0.08);
-      border: 1px solid rgba(52,208,88,0.2);
-      font-size: 0.75rem;
-      font-weight: 700;
-      color: var(--success);
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
-      margin-bottom: var(--sp-4);
-    }
-    .global-live-badge .live-dot {
-      width: 6px; height: 6px;
-      border-radius: 50%;
-      background: var(--success);
-      animation: pulse 1.5s ease-in-out infinite;
-    }
-    .country-grid {
-      display: grid;
-      grid-template-columns: repeat(5, 1fr);
-      gap: var(--sp-4);
-      margin-top: var(--sp-12);
-    }
-    .country-tile {
-      position: relative;
-      background: var(--bg-card);
-      border: 1px solid var(--border-subtle);
-      border-radius: var(--radius-md);
-      padding: var(--sp-5) var(--sp-4);
-      text-align: center;
-      transition: all var(--duration-normal) var(--ease-out);
-      overflow: hidden;
-    }
-    .country-tile::after {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: -100%;
-      width: 50%;
-      height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(232,133,12,0.05), transparent);
-      animation: tileSweep 6s linear infinite;
-    }
-    @keyframes tileSweep {
-      0% { left: -100%; }
-      100% { left: 200%; }
-    }
-    .country-tile:hover {
-      border-color: var(--border-hover);
-      transform: translateY(-3px);
-      box-shadow: var(--shadow-gold);
-    }
-    .country-tile.active {
-      border-color: rgba(52,208,88,0.2);
-    }
-    .country-flag {
-      font-size: 2rem;
-      margin-bottom: var(--sp-2);
-      display: block;
-    }
-    .country-name {
-      font-size: 0.92rem;
-      font-weight: 700;
-      color: var(--text-primary);
-      margin-bottom: var(--sp-1);
-    }
-    .country-status {
-      display: inline-flex;
-      align-items: center;
-      gap: 5px;
-      font-size: 0.72rem;
-      font-weight: 600;
-      letter-spacing: 0.5px;
-    }
-    .country-status .status-dot {
-      width: 5px; height: 5px;
-      border-radius: 50%;
-    }
-    .country-status.live .status-dot {
-      background: var(--success);
-      animation: pulse 1.5s ease-in-out infinite;
-    }
-    .country-status.live { color: var(--success); }
-    .country-status.soon .status-dot { background: var(--warning); }
-    .country-status.soon { color: var(--warning); }
-    .global-ticker {
-      margin-top: var(--sp-12);
-      display: flex;
-      justify-content: center;
-      gap: var(--sp-10);
-      flex-wrap: wrap;
-    }
-    .ticker-item {
-      display: flex;
-      align-items: center;
-      gap: var(--sp-2);
-      font-size: 0.85rem;
-      color: var(--text-muted);
-    }
-    .ticker-value {
-      font-weight: 800;
-      color: var(--gold-200);
-      text-shadow: 0 0 12px rgba(232,133,12,0.3);
-    }
+    /* ── Trust / Social Proof ── */
+    .trust-section { position:relative; padding:var(--sp-16) 0; background:var(--bg-secondary); border-top:1px solid var(--border-subtle); border-bottom:1px solid var(--border-subtle); }
+    .trust-inner { text-align:center; }
+    .trust-label { font-size:0.78rem; font-weight:600; color:var(--text-muted); letter-spacing:2px; text-transform:uppercase; margin-bottom:var(--sp-8); }
+    .trust-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:var(--sp-6); max-width:900px; margin:0 auto; }
+    .trust-item { text-align:center; padding:var(--sp-6) var(--sp-4); }
+    .trust-icon { font-size:1.6rem; margin-bottom:var(--sp-3); display:block; line-height:1; }
+    .trust-value { font-size:clamp(1.5rem,3vw,2.2rem); font-weight:900; background:var(--gold-gradient); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; line-height:1.2; margin-bottom:var(--sp-1); }
+    .trust-desc { font-size:0.85rem; color:var(--text-muted); font-weight:500; line-height:1.4; }
 
     /* ── How It Works ── */
-    .steps-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: var(--sp-8);
-      position: relative;
-    }
-    .steps-grid::before {
-      content: '';
-      position: absolute;
-      top: 60px;
-      left: 16.67%;
-      right: 16.67%;
-      height: 2px;
-      background: linear-gradient(90deg, rgba(232,133,12,0.1), rgba(232,133,12,0.3), rgba(232,133,12,0.1));
-      z-index: 0;
-    }
-    .step-card {
-      position: relative;
-      z-index: 1;
-      text-align: center;
-      padding: var(--sp-8);
-    }
-    .step-number {
-      width: 56px;
-      height: 56px;
-      border-radius: 50%;
-      background: var(--bg-card);
-      border: 2px solid rgba(232,133,12,0.3);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.3rem;
-      font-weight: 900;
-      color: var(--gold-200);
-      margin: 0 auto var(--sp-6);
-      position: relative;
-    }
-    .step-number::after {
-      content: '';
-      position: absolute;
-      inset: -4px;
-      border-radius: 50%;
-      border: 1px solid rgba(232,133,12,0.1);
-    }
-    .step-icon {
-      font-size: 2.5rem;
-      margin-bottom: var(--sp-4);
-      display: block;
-    }
-    .step-card h3 {
-      margin-bottom: var(--sp-3);
-    }
-    .step-card p {
-      font-size: 0.9rem;
-      color: var(--text-muted);
-    }
+    .steps-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:var(--sp-8); position:relative; }
+    .steps-grid::before { content:''; position:absolute; top:60px; left:16.67%; right:16.67%; height:2px; background:linear-gradient(90deg,rgba(232,133,12,0.1),rgba(232,133,12,0.3),rgba(232,133,12,0.1)); z-index:0; }
+    .step-card { position:relative; z-index:1; text-align:center; padding:var(--sp-8); }
+    .step-number { width:56px; height:56px; border-radius:50%; background:var(--bg-card); border:2px solid rgba(232,133,12,0.3); display:flex; align-items:center; justify-content:center; font-size:1.3rem; font-weight:900; color:var(--gold-200); margin:0 auto var(--sp-6); position:relative; }
+    .step-number::after { content:''; position:absolute; inset:-4px; border-radius:50%; border:1px solid rgba(232,133,12,0.1); }
+    .step-icon { font-size:2.5rem; margin-bottom:var(--sp-4); display:block; }
+    .step-card h3 { margin-bottom:var(--sp-3); }
+    .step-card p { font-size:0.9rem; color:var(--text-muted); line-height:1.7; }
 
-    /* ── Demo Section ── */
-    .demo-section {
-      position: relative;
-      padding: 120px 0;
-      background: var(--bg-secondary);
-    }
-    .demo-container {
-      max-width: 900px;
-      margin: 0 auto;
-      padding: 0 var(--sp-6);
-    }
-    .demo-terminal {
-      background: rgba(6,6,15,0.95);
-      border: 1px solid var(--border-default);
-      border-radius: var(--radius-lg);
-      overflow: hidden;
-      box-shadow: var(--shadow-lg);
-    }
-    .demo-terminal-bar {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      padding: 12px 18px;
-      background: rgba(255,255,255,0.03);
-      border-bottom: 1px solid var(--border-subtle);
-    }
-    .demo-dot {
-      width: 10px; height: 10px;
-      border-radius: 50%;
-    }
-    .demo-dot-red { background: #ff5f57; }
-    .demo-dot-yellow { background: #febc2e; }
-    .demo-dot-green { background: #28c840; }
-    .demo-terminal-title {
-      flex: 1;
-      text-align: center;
-      font-size: 0.78rem;
-      color: var(--text-muted);
-      font-family: var(--font-mono);
-    }
-    .demo-body {
-      padding: var(--sp-8);
-      font-family: var(--font-mono);
-      font-size: 0.88rem;
-      line-height: 1.8;
-      min-height: 280px;
-    }
-    .demo-line {
-      margin-bottom: var(--sp-2);
-      opacity: 0;
-      transform: translateY(8px);
-      animation: demoLineIn 0.5s forwards;
-    }
-    .demo-line .prompt {
-      color: var(--gold-200);
-      margin-right: 8px;
-    }
-    .demo-line .cmd { color: var(--text-primary); }
-    .demo-line .output { color: var(--text-muted); }
-    .demo-line .success { color: var(--success); }
-    .demo-line .highlight { color: var(--gold-100); }
-    @keyframes demoLineIn {
-      to { opacity: 1; transform: translateY(0); }
-    }
-    .demo-line:nth-child(1) { animation-delay: 0.3s; }
-    .demo-line:nth-child(2) { animation-delay: 0.8s; }
-    .demo-line:nth-child(3) { animation-delay: 1.4s; }
-    .demo-line:nth-child(4) { animation-delay: 2.0s; }
-    .demo-line:nth-child(5) { animation-delay: 2.6s; }
-    .demo-line:nth-child(6) { animation-delay: 3.2s; }
-    .demo-line:nth-child(7) { animation-delay: 3.8s; }
-    .demo-line:nth-child(8) { animation-delay: 4.4s; }
-    .demo-cursor {
-      display: inline-block;
-      width: 8px;
-      height: 16px;
-      background: var(--gold-200);
-      animation: blink 1s step-end infinite;
-      vertical-align: middle;
-      margin-left: 2px;
-    }
-    @keyframes blink {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0; }
-    }
+    /* ── Pillars ── */
+    .pillars-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:var(--sp-8); }
+    .pillar-card { position:relative; background:var(--bg-card); border:1px solid var(--border-subtle); border-radius:var(--radius-xl); padding:var(--sp-10) var(--sp-8); text-align:center; transition:all var(--duration-normal) var(--ease-out); overflow:hidden; }
+    .pillar-card::before { content:''; position:absolute; top:0; left:20%; right:20%; height:2px; background:linear-gradient(90deg,transparent,rgba(232,133,12,0.3),transparent); opacity:0; transition:opacity var(--duration-normal); }
+    .pillar-card:hover { border-color:var(--border-hover); transform:translateY(-4px); box-shadow:var(--shadow-gold); }
+    .pillar-card:hover::before { opacity:1; }
+    .pillar-icon { width:72px; height:72px; border-radius:var(--radius-lg); background:rgba(232,133,12,0.06); border:1px solid rgba(232,133,12,0.1); display:flex; align-items:center; justify-content:center; font-size:2rem; margin:0 auto var(--sp-6); }
+    .pillar-card h3 { margin-bottom:var(--sp-3); font-size:1.2rem; }
+    .pillar-card p { font-size:0.9rem; color:var(--text-muted); line-height:1.7; }
 
-    /* ── Pillars Section ── */
-    .pillars-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: var(--sp-8);
-    }
-    .pillar-card {
-      position: relative;
-      background: var(--bg-card);
-      border: 1px solid var(--border-subtle);
-      border-radius: var(--radius-xl);
-      padding: var(--sp-10) var(--sp-8);
-      text-align: center;
-      transition: all var(--duration-normal) var(--ease-out);
-      overflow: hidden;
-    }
-    .pillar-card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 20%;
-      right: 20%;
-      height: 2px;
-      background: linear-gradient(90deg, transparent, rgba(232,133,12,0.3), transparent);
-      opacity: 0;
-      transition: opacity var(--duration-normal);
-    }
-    .pillar-card:hover {
-      border-color: var(--border-hover);
-      transform: translateY(-4px);
-      box-shadow: var(--shadow-gold);
-    }
-    .pillar-card:hover::before { opacity: 1; }
-    .pillar-icon {
-      width: 72px;
-      height: 72px;
-      border-radius: var(--radius-lg);
-      background: rgba(232,133,12,0.06);
-      border: 1px solid rgba(232,133,12,0.1);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 2rem;
-      margin: 0 auto var(--sp-6);
-    }
-    .pillar-card h3 {
-      margin-bottom: var(--sp-3);
-      font-size: 1.2rem;
-    }
-    .pillar-card p {
-      font-size: 0.9rem;
-      color: var(--text-muted);
-      line-height: 1.7;
-    }
+    /* ── Demo ── */
+    .demo-section { position:relative; padding:120px 0; background:var(--bg-secondary); }
+    .demo-container { max-width:900px; margin:0 auto; padding:0 var(--sp-6); }
+    .demo-terminal { background:rgba(6,6,15,0.95); border:1px solid var(--border-default); border-radius:var(--radius-lg); overflow:hidden; box-shadow:var(--shadow-lg); }
+    .demo-terminal-bar { display:flex; align-items:center; gap:8px; padding:12px 18px; background:rgba(255,255,255,0.03); border-bottom:1px solid var(--border-subtle); }
+    .demo-dot { width:10px; height:10px; border-radius:50%; }
+    .demo-dot-red { background:#ff5f57; } .demo-dot-yellow { background:#febc2e; } .demo-dot-green { background:#28c840; }
+    .demo-terminal-title { flex:1; text-align:center; font-size:0.78rem; color:var(--text-muted); font-family:var(--font-mono); }
+    .demo-body { padding:var(--sp-8); font-family:var(--font-mono); font-size:0.88rem; line-height:1.8; min-height:280px; }
+    .demo-line { margin-bottom:var(--sp-2); opacity:0; transform:translateY(8px); animation:demoLineIn 0.5s forwards; }
+    .demo-line .prompt { color:var(--gold-200); margin-right:8px; }
+    .demo-line .cmd { color:var(--text-primary); } .demo-line .output { color:var(--text-muted); } .demo-line .success { color:var(--success); } .demo-line .highlight { color:var(--gold-100); }
+    @keyframes demoLineIn { to { opacity:1; transform:translateY(0); } }
+    .demo-line:nth-child(1){animation-delay:0.3s;} .demo-line:nth-child(2){animation-delay:0.8s;} .demo-line:nth-child(3){animation-delay:1.4s;} .demo-line:nth-child(4){animation-delay:2.0s;} .demo-line:nth-child(5){animation-delay:2.6s;} .demo-line:nth-child(6){animation-delay:3.2s;} .demo-line:nth-child(7){animation-delay:3.8s;} .demo-line:nth-child(8){animation-delay:4.4s;}
+    .demo-cursor { display:inline-block; width:8px; height:16px; background:var(--gold-200); animation:blink 1s step-end infinite; vertical-align:middle; margin-left:2px; }
+    @keyframes blink { 0%,100%{opacity:1;} 50%{opacity:0;} }
 
-    /* ── Capabilities ── */
-    .capabilities-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: var(--sp-5);
-    }
-    .cap-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border-subtle);
-      border-radius: var(--radius-md);
-      padding: var(--sp-6);
-      transition: all var(--duration-normal) var(--ease-out);
-      position: relative;
-      overflow: hidden;
-    }
-    .cap-card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 20%;
-      right: 20%;
-      height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(232,133,12,0.25), transparent);
-      opacity: 0;
-      transition: opacity var(--duration-normal);
-    }
-    .cap-card:hover {
-      border-color: var(--border-hover);
-      transform: translateY(-2px);
-      box-shadow: var(--shadow-gold);
-    }
-    .cap-card:hover::before { opacity: 1; }
-    .cap-icon {
-      width: 44px;
-      height: 44px;
-      border-radius: var(--radius-sm);
-      background: rgba(232,133,12,0.06);
-      border: 1px solid rgba(232,133,12,0.08);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.3rem;
-      margin-bottom: var(--sp-4);
-    }
-    .cap-card h4 {
-      font-size: 0.95rem;
-      margin-bottom: var(--sp-2);
-      color: var(--text-primary);
-    }
-    .cap-card p {
-      font-size: 0.8rem;
-      color: var(--text-muted);
-      line-height: 1.6;
-    }
-
-    /* ── CTA Section ── */
-    .cta-section {
-      position: relative;
-      padding: 120px 0;
-      text-align: center;
-      overflow: hidden;
-    }
-    .cta-glow {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 600px;
-      height: 600px;
-      background: radial-gradient(circle, rgba(232,133,12,0.1), transparent 70%);
-      pointer-events: none;
-    }
-    .cta-content {
-      position: relative;
-      z-index: 1;
-    }
-    .cta-content h2 {
-      font-size: clamp(1.8rem, 4vw, 2.8rem);
-      font-weight: 900;
-      margin-bottom: var(--sp-4);
-    }
-    .cta-content p {
-      font-size: 1.1rem;
-      color: var(--text-muted);
-      margin-bottom: var(--sp-10);
-      max-width: 500px;
-      margin-left: auto;
-      margin-right: auto;
-    }
+    /* ── CTA ── */
+    .cta-section { position:relative; padding:120px 0; text-align:center; overflow:hidden; }
+    .cta-glow { position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); width:600px; height:600px; background:radial-gradient(circle,rgba(232,133,12,0.1),transparent 70%); pointer-events:none; }
+    .cta-content { position:relative; z-index:1; }
+    .cta-content h2 { font-size:clamp(1.8rem,4vw,2.8rem); font-weight:900; margin-bottom:var(--sp-4); }
+    .cta-content p { font-size:1.1rem; color:var(--text-muted); margin-bottom:var(--sp-10); max-width:500px; margin-left:auto; margin-right:auto; }
 
     /* ── Language Switcher ── */
-    .lang-switcher {
-      display: flex;
-      gap: 4px;
-      align-items: center;
-    }
-    .lang-btn {
-      padding: 4px 10px;
-      border: 1px solid transparent;
-      border-radius: var(--radius-full);
-      background: transparent;
-      color: var(--text-muted);
-      font-size: 0.72rem;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all var(--duration-fast);
-      font-family: var(--font-sans);
-    }
-    .lang-btn:hover {
-      color: var(--text-secondary);
-    }
-    .lang-btn.active {
-      background: rgba(232,133,12,0.1);
-      border-color: rgba(232,133,12,0.2);
-      color: var(--gold-200);
-    }
+    .lang-switcher { display:flex; gap:4px; align-items:center; }
+    .lang-btn { padding:4px 10px; border:1px solid transparent; border-radius:var(--radius-full); background:transparent; color:var(--text-muted); font-size:0.72rem; font-weight:600; cursor:pointer; transition:all var(--duration-fast); font-family:var(--font-sans); }
+    .lang-btn:hover { color:var(--text-secondary); }
+    .lang-btn.active { background:rgba(232,133,12,0.1); border-color:rgba(232,133,12,0.2); color:var(--gold-200); }
 
-    /* ── Responsive Overrides ── */
-    @media (max-width: 1024px) {
-      .capabilities-grid { grid-template-columns: repeat(2, 1fr); }
-      .country-grid { grid-template-columns: repeat(3, 1fr); }
-      .pillars-grid { grid-template-columns: repeat(3, 1fr); }
-      .stats-grid { grid-template-columns: repeat(2, 1fr); }
+    /* ── Responsive ── */
+    @media (max-width:1024px) {
+      .pillars-grid { grid-template-columns:repeat(3,1fr); }
+      .trust-grid { grid-template-columns:repeat(2,1fr); }
     }
-    @media (max-width: 768px) {
-      .hero h1 { font-size: clamp(2rem, 8vw, 3rem); }
-      .hero-subtitle { font-size: 1rem; }
-      .steps-grid { grid-template-columns: 1fr; gap: var(--sp-6); }
-      .steps-grid::before { display: none; }
-      .pillars-grid { grid-template-columns: 1fr; }
-      .capabilities-grid { grid-template-columns: 1fr; }
-      .country-grid { grid-template-columns: repeat(2, 1fr); }
-      .stats-grid { grid-template-columns: repeat(2, 1fr); }
-      .global-ticker { gap: var(--sp-6); }
-      .hero-scroll-hint { display: none; }
-      .lang-switcher { gap: 2px; }
-      .demo-body { padding: var(--sp-4); font-size: 0.78rem; }
+    @media (max-width:768px) {
+      .hero h1 { font-size:clamp(2rem,8vw,3rem); }
+      .hero-subtitle { font-size:1rem; }
+      .steps-grid { grid-template-columns:1fr; gap:var(--sp-6); }
+      .steps-grid::before { display:none; }
+      .pillars-grid { grid-template-columns:1fr; }
+      .trust-grid { grid-template-columns:repeat(2,1fr); }
+      .hero-scroll-hint { display:none; }
+      .lang-switcher { gap:2px; }
+      .demo-body { padding:var(--sp-4); font-size:0.78rem; }
     }
-    @media (max-width: 480px) {
-      .country-grid { grid-template-columns: repeat(2, 1fr); }
-      .stats-grid { grid-template-columns: 1fr; }
-      .hero-ctas { flex-direction: column; align-items: center; }
-      .hero-ctas .btn { width: 100%; max-width: 280px; }
+    @media (max-width:480px) {
+      .trust-grid { grid-template-columns:repeat(2,1fr); }
+      .hero-ctas { flex-direction:column; align-items:center; }
+      .hero-ctas .btn { width:100%; max-width:280px; }
     }
   </style>
 </head>
@@ -817,20 +262,24 @@
     <div class="hero-content">
       <div class="hero-eyebrow fade-up">
         <span class="dot"></span>
-        <span>SEOBAIKE Global Marketplace</span>
+        <span>AI 界的 App Store</span>
       </div>
 
-      <h1 class="fade-up volcanic-title" data-i18n-html="hero.title.prefix,hero.title.highlight,hero.title.suffix">
-        <span class="gradient">AI 驅動的</span><br>全球市集
+      <h1 class="fade-up volcanic-title">
+        一個平台<br><span class="gradient">接通所有 AI 服務</span>
       </h1>
 
-      <p class="hero-subtitle fade-up" data-i18n="hero.subtitle">
-        你的產品，全世界都能買到。上架商品，AI 自動翻譯、行銷、配對買家。
+      <p class="hero-subtitle fade-up">
+        不用在工具之間切換。SEOBAIKE 把 SEO 分析、AI 對話、圖片生成、內容創作整合在同一個平台。用你自己的 API Key，掌握成本與資料。
       </p>
 
       <div class="hero-ctas fade-up">
-        <a href="/marketplace" class="btn btn-primary btn-lg seismic-shake" data-i18n="hero.cta1">逛市集</a>
-        <a href="/marketplace#earn" class="btn btn-secondary btn-lg seismic-shake" data-i18n="hero.cta2">我要上架</a>
+        <a href="/start" class="btn btn-primary btn-lg seismic-shake">開始使用</a>
+        <a href="/features" class="btn btn-secondary btn-lg seismic-shake">探索功能</a>
+      </div>
+
+      <div class="hero-byok fade-up">
+        <code>BYOK</code> 用你自己的 API Key，資料完全掌控
       </div>
     </div>
 
@@ -841,149 +290,95 @@
   </section>
 
 
-  <!-- ═══════════ 2. Stats ═══════════ -->
-  <section class="stats-section" id="stats">
+  <!-- ═══════════ 2. Trust / Social Proof ═══════════ -->
+  <section class="trust-section" id="trust">
     <div class="container">
-      <div class="stats-grid">
-        <div class="stat-card fade-up lava-glow">
-          <div class="stat-number" data-count="6">0</div>
-          <div class="stat-label">商品類別</div>
-        </div>
-        <div class="stat-card fade-up lava-glow">
-          <div class="stat-number" data-count="10" data-suffix="+">0</div>
-          <div class="stat-label">佈局國家</div>
-        </div>
-        <div class="stat-card fade-up lava-glow">
-          <div class="stat-number" data-count="24" data-suffix="hr">0</div>
-          <div class="stat-label">全天候運作</div>
-        </div>
-        <div class="stat-card fade-up lava-glow">
-          <div class="stat-number" data-count="15">0</div>
-          <div class="stat-label">AI 引擎</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-
-  <!-- ═══════════ 3. Global Reach (Sci-Fi) ═══════════ -->
-  <section class="global-section section-lg" id="global">
-    <div class="global-bg">
-      <div class="radar-ring"></div>
-      <div class="radar-ring"></div>
-      <div class="radar-ring"></div>
-      <div class="radar-ring"></div>
-      <div class="scan-line"></div>
-    </div>
-
-    <div class="container" style="position:relative;z-index:1;">
-      <div class="section-header fade-up">
-        <div class="global-live-badge">
-          <span class="live-dot"></span>
-          LIVE NETWORK
-        </div>
-        <h2>全球節點<span class="text-gold">即時連線</span></h2>
-        <p>從亞洲到全球，SEOBAIKE 市集正在擴展中</p>
-      </div>
-
-      <div class="country-grid">
-        <!-- Active Markets -->
-        <div class="country-tile active fade-up">
-          <span class="country-flag">🇹🇼</span>
-          <div class="country-name">台灣</div>
-          <div class="country-status live"><span class="status-dot"></span> 營運中</div>
-        </div>
-        <div class="country-tile active fade-up">
-          <span class="country-flag">🇰🇷</span>
-          <div class="country-name">韓國</div>
-          <div class="country-status live"><span class="status-dot"></span> 營運中</div>
-        </div>
-        <div class="country-tile active fade-up">
-          <span class="country-flag">🇯🇵</span>
-          <div class="country-name">日本</div>
-          <div class="country-status live"><span class="status-dot"></span> 營運中</div>
-        </div>
-        <div class="country-tile active fade-up">
-          <span class="country-flag">🇸🇬</span>
-          <div class="country-name">新加坡</div>
-          <div class="country-status live"><span class="status-dot"></span> 營運中</div>
-        </div>
-        <!-- Coming Soon -->
-        <div class="country-tile fade-up">
-          <span class="country-flag">🇺🇸</span>
-          <div class="country-name">美國</div>
-          <div class="country-status soon"><span class="status-dot"></span> 即將開放</div>
-        </div>
-        <div class="country-tile fade-up">
-          <span class="country-flag">🇦🇺</span>
-          <div class="country-name">澳洲</div>
-          <div class="country-status soon"><span class="status-dot"></span> 即將開放</div>
-        </div>
-        <div class="country-tile fade-up">
-          <span class="country-flag">🇬🇧</span>
-          <div class="country-name">英國</div>
-          <div class="country-status soon"><span class="status-dot"></span> 即將開放</div>
-        </div>
-        <div class="country-tile fade-up">
-          <span class="country-flag">🇹🇭</span>
-          <div class="country-name">泰國</div>
-          <div class="country-status soon"><span class="status-dot"></span> 即將開放</div>
-        </div>
-        <div class="country-tile fade-up">
-          <span class="country-flag">🇻🇳</span>
-          <div class="country-name">越南</div>
-          <div class="country-status soon"><span class="status-dot"></span> 即將開放</div>
-        </div>
-        <div class="country-tile fade-up">
-          <span class="country-flag">🇮🇩</span>
-          <div class="country-name">印尼</div>
-          <div class="country-status soon"><span class="status-dot"></span> 即將開放</div>
-        </div>
-      </div>
-
-      <!-- Ticker Stats -->
-      <div class="global-ticker fade-up">
-        <div class="ticker-item">
-          <span class="ticker-value">4</span> 市場營運中
-        </div>
-        <div class="ticker-item">
-          <span class="ticker-value">6</span> 市場準備中
-        </div>
-        <div class="ticker-item">
-          <span class="ticker-value">10</span> 全球節點
+      <div class="trust-inner">
+        <div class="trust-label fade-up">台灣在地團隊，服務台灣企業</div>
+        <div class="trust-grid stagger">
+          <div class="trust-item fade-up lava-glow">
+            <span class="trust-icon">&#9881;</span>
+            <div class="trust-value">插拔式</div>
+            <div class="trust-desc">服務架構隨需擴展</div>
+          </div>
+          <div class="trust-item fade-up lava-glow">
+            <span class="trust-icon">&#128273;</span>
+            <div class="trust-value">BYOK</div>
+            <div class="trust-desc">自帶 Key，資料自主</div>
+          </div>
+          <div class="trust-item fade-up lava-glow">
+            <span class="trust-icon">&#127758;</span>
+            <div class="trust-value">全球佈局</div>
+            <div class="trust-desc">台灣出發，國際接軌</div>
+          </div>
+          <div class="trust-item fade-up lava-glow">
+            <span class="trust-icon">&#128736;</span>
+            <div class="trust-value">24hr</div>
+            <div class="trust-desc">全天候系統運作中</div>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
 
-  <!-- ═══════════ 4. How It Works ═══════════ -->
+  <!-- ═══════════ 3. How It Works ═══════════ -->
   <section class="section-lg" id="how-it-works" style="background:var(--bg-secondary);">
     <div class="container">
       <div class="section-header fade-up">
         <div class="section-badge">HOW IT WORKS</div>
-        <h2>如何開始</h2>
-        <p>從上架到成交，AI 全程協助</p>
+        <h2>三步驟，<span class="text-gold">立即上手</span></h2>
+        <p>從註冊到使用 AI 服務，簡單到不需要教學</p>
       </div>
 
       <div class="steps-grid">
-        <div class="step-card fade-up">
+        <div class="step-card fade-up magma-border">
           <div class="step-number">1</div>
-          <span class="step-icon">📦</span>
-          <h3>上架商品</h3>
-          <p>填寫商品資訊，上傳圖片。支援數位商品與實體商品。</p>
+          <span class="step-icon">&#128100;</span>
+          <h3>建立帳號</h3>
+          <p>一鍵註冊，輸入你的 API Key。BYOK 架構，資料和成本由你自己掌控。</p>
         </div>
-        <div class="step-card fade-up">
+        <div class="step-card fade-up magma-border">
           <div class="step-number">2</div>
-          <span class="step-icon">🤖</span>
-          <h3>AI 翻譯行銷</h3>
-          <p>AI 自動翻譯商品描述、生成多語言行銷文案，觸及全球買家。</p>
+          <span class="step-icon">&#128268;</span>
+          <h3>選擇 AI 服務</h3>
+          <p>從平台市集挑選你需要的 AI 工具 — SEO 分析、內容生成、圖片製作、多語翻譯等。</p>
         </div>
-        <div class="step-card fade-up">
+        <div class="step-card fade-up magma-border">
           <div class="step-number">3</div>
-          <span class="step-icon">🌍</span>
-          <h3>全球買家下單</h3>
-          <p>來自各國的買家瀏覽你的商品，直接下單購買。</p>
+          <span class="step-icon">&#9889;</span>
+          <h3>開始使用</h3>
+          <p>所有 AI 服務透過 SEOBAIKE 統一介面操作。一個平台，完成所有工作。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════ 4. Why SEOBAIKE ═══════════ -->
+  <section class="section-lg" id="pillars">
+    <div class="container">
+      <div class="section-header fade-up">
+        <div class="section-badge">WHY SEOBAIKE</div>
+        <h2>為什麼選 <span class="text-gold">SEOBAIKE</span></h2>
+        <p>不只是工具，是讓 AI 服務跑起來的平台</p>
+      </div>
+
+      <div class="pillars-grid stagger">
+        <div class="pillar-card fade-up hover-lift">
+          <div class="pillar-icon">&#128640;</div>
+          <h3>一站式 AI 平台</h3>
+          <p>SEO、對話、翻譯、圖片、內容 — 所有 AI 能力集中在同一個平台，不再為了不同工具開一堆帳號。</p>
+        </div>
+        <div class="pillar-card fade-up hover-lift">
+          <div class="pillar-icon">&#128273;</div>
+          <h3>BYOK 架構</h3>
+          <p>用你自己的 API Key 呼叫 AI 服務。費用透明，資料不經第三方，隱私與成本完全掌控。</p>
+        </div>
+        <div class="pillar-card fade-up hover-lift">
+          <div class="pillar-icon">&#127987;</div>
+          <h3>台灣在地團隊</h3>
+          <p>小路光有限公司出品。台灣註冊公司（統編 60475510），中文客服，在地法規合規。</p>
         </div>
       </div>
     </div>
@@ -996,7 +391,7 @@
       <div class="section-header fade-up">
         <div class="section-badge">LIVE DEMO</div>
         <h2>AI <span class="text-gold">即時運作</span></h2>
-        <p>看 SEOBAIKE 的 AI 引擎如何處理你的商品</p>
+        <p>看 SEOBAIKE 平台如何呼叫 AI 服務</p>
       </div>
 
       <div class="demo-terminal fade-up" id="demoTerminal">
@@ -1004,35 +399,35 @@
           <span class="demo-dot demo-dot-red"></span>
           <span class="demo-dot demo-dot-yellow"></span>
           <span class="demo-dot demo-dot-green"></span>
-          <span class="demo-terminal-title">seobaike-ai-engine v3.0</span>
+          <span class="demo-terminal-title">seobaike-platform v3.0</span>
         </div>
         <div class="demo-body" id="demoBody">
           <div class="demo-line">
             <span class="prompt">&gt;</span>
-            <span class="cmd">seobaike upload --product "台灣烏龍茶禮盒"</span>
+            <span class="cmd">seobaike connect --api-key YOUR_KEY</span>
           </div>
           <div class="demo-line">
-            <span class="output">[SCAN] 分析商品資訊中...</span>
-          </div>
-          <div class="demo-line">
-            <span class="success">[DONE] 商品分類：食品飲料 / 茶葉禮盒</span>
+            <span class="success">[OK] API Key 已驗證，BYOK 模式啟動</span>
           </div>
           <div class="demo-line">
             <span class="prompt">&gt;</span>
-            <span class="cmd">seobaike translate --target ja,ko,en</span>
+            <span class="cmd">seobaike seo --analyze "aiforseo.vip"</span>
           </div>
           <div class="demo-line">
-            <span class="output">[AI] 翻譯生成中... ja: 台湾烏龍茶ギフト | ko: 대만 우롱차 선물세트 | en: Taiwan Oolong Gift Set</span>
+            <span class="output">[AI] 掃描中... 發現 12 項優化機會</span>
           </div>
           <div class="demo-line">
-            <span class="success">[DONE] 3 語言版本已生成</span>
+            <span class="success">[DONE] SEO 報告已生成，分數提升建議已列出</span>
           </div>
           <div class="demo-line">
             <span class="prompt">&gt;</span>
-            <span class="cmd">seobaike publish --market global</span>
+            <span class="cmd">seobaike content --generate "AI 平台趨勢分析"</span>
           </div>
           <div class="demo-line">
-            <span class="highlight">[LIVE] 商品已上架至 4 個市場 ■</span>
+            <span class="output">[AI] 生成中... 1,200 字文章 + SEO 標題 + Meta</span>
+          </div>
+          <div class="demo-line">
+            <span class="highlight">[LIVE] 內容已生成，可直接發布 &#9632;</span>
             <span class="demo-cursor"></span>
           </div>
         </div>
@@ -1041,102 +436,17 @@
   </section>
 
 
-  <!-- ═══════════ 6. Three Pillars ═══════════ -->
-  <section class="section-lg" id="pillars">
-    <div class="container">
-      <div class="section-header fade-up">
-        <div class="section-badge">WHY SEOBAIKE</div>
-        <h2>為什麼選 <span class="text-gold">SEOBAIKE</span></h2>
-        <p>三大核心優勢，讓你的商品走向世界</p>
-      </div>
-
-      <div class="pillars-grid">
-        <div class="pillar-card fade-up">
-          <div class="pillar-icon">🌐</div>
-          <h3>全球市集</h3>
-          <p>多國市場同步上架，AI 自動適配各地語言與消費習慣。從亞洲到歐美，一站式觸及全球買家。</p>
-        </div>
-        <div class="pillar-card fade-up">
-          <div class="pillar-icon">⚡</div>
-          <h3>AI 全自動</h3>
-          <p>從翻譯、SEO 優化、行銷文案到客服回覆，AI 引擎全程自動化運作，賣家專注做好產品。</p>
-        </div>
-        <div class="pillar-card fade-up">
-          <div class="pillar-icon">🔒</div>
-          <h3>安全收款</h3>
-          <p>多幣種結算，安全支付通道。資金流向透明，交易記錄完整可查。</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-
-  <!-- ═══════════ 7. Capabilities ═══════════ -->
-  <section class="section-lg" id="capabilities" style="background:var(--bg-secondary);">
-    <div class="container">
-      <div class="section-header fade-up">
-        <div class="section-badge">AI CAPABILITIES</div>
-        <h2>AI <span class="text-gold">能力矩陣</span></h2>
-        <p>內建多種 AI 引擎，覆蓋電商營運全流程</p>
-      </div>
-
-      <div class="capabilities-grid">
-        <div class="cap-card fade-up">
-          <div class="cap-icon">📊</div>
-          <h4>SEO 分析</h4>
-          <p>自動分析關鍵字、競品排名，產出最佳化建議。</p>
-        </div>
-        <div class="cap-card fade-up">
-          <div class="cap-icon">💬</div>
-          <h4>AI 對話</h4>
-          <p>智能客服，多語言即時回覆買家問題。</p>
-        </div>
-        <div class="cap-card fade-up">
-          <div class="cap-icon">🎨</div>
-          <h4>圖片生成</h4>
-          <p>AI 生成商品展示圖、行銷素材、社群貼文圖。</p>
-        </div>
-        <div class="cap-card fade-up">
-          <div class="cap-icon">🌏</div>
-          <h4>多語翻譯</h4>
-          <p>商品描述、評論、客服對話，即時翻譯多國語言。</p>
-        </div>
-        <div class="cap-card fade-up">
-          <div class="cap-icon">📈</div>
-          <h4>數據分析</h4>
-          <p>銷售趨勢、買家行為、市場洞察，數據一目了然。</p>
-        </div>
-        <div class="cap-card fade-up">
-          <div class="cap-icon">🎧</div>
-          <h4>智能客服</h4>
-          <p>全天候 AI 客服，處理訂單查詢、退換貨、常見問題。</p>
-        </div>
-        <div class="cap-card fade-up">
-          <div class="cap-icon">✍️</div>
-          <h4>內容生成</h4>
-          <p>自動生成商品文案、部落格文章、社群行銷內容。</p>
-        </div>
-        <div class="cap-card fade-up">
-          <div class="cap-icon">🔍</div>
-          <h4>市場研究</h4>
-          <p>AI 分析各國市場趨勢、消費偏好、定價策略。</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-
-  <!-- ═══════════ 8. CTA ═══════════ -->
+  <!-- ═══════════ 6. CTA ═══════════ -->
   <section class="cta-section heat-wave" id="cta">
     <div class="cta-glow"></div>
     <div class="cta-content container-narrow">
       <div class="fade-up">
         <div class="section-badge" style="margin-bottom:var(--sp-6);">GET STARTED</div>
-        <h2>讓你的產品<br><span class="text-gold">被全世界看見</span></h2>
-        <p>加入 SEOBAIKE 全球市集，AI 幫你打開國際市場。</p>
+        <h2>準備好了嗎？<br><span class="text-gold">開始你的 AI 旅程</span></h2>
+        <p>一個平台，接通所有 AI 服務。台灣在地團隊打造，全球佈局。</p>
         <div class="hero-ctas">
-          <a href="/marketplace" class="btn btn-primary btn-lg seismic-shake">立即開始</a>
-          <a href="/about" class="btn btn-secondary btn-lg seismic-shake">了解更多</a>
+          <a href="/start" class="btn btn-primary btn-lg seismic-shake">立即開始</a>
+          <a href="/pricing" class="btn btn-secondary btn-lg seismic-shake">查看方案</a>
         </div>
       </div>
     </div>
@@ -1152,7 +462,7 @@
             <img src="/favicon.svg" alt="SEOBAIKE" width="28" height="28">
             <span><span class="seo">SEO</span><span class="baike">BAIKE</span></span>
           </a>
-          <p>AI 驅動的全球市集。小路光有限公司出品。</p>
+          <p>AI 界的 App Store。小路光有限公司出品。</p>
           <p style="font-size:0.75rem;color:var(--text-muted);margin-top:4px;">統編 60475510 | 台灣專利 115100981</p>
         </div>
 
@@ -1228,42 +538,34 @@
       document.getElementById('mobileMenu').classList.toggle('open');
     }
 
-    /* ── Counter animation ── */
+    /* ── Counter animation (for any data-count elements) ── */
     (function() {
       var counted = false;
+      var trustSection = document.getElementById('trust');
+      if (!trustSection) return;
       var statsObs = new IntersectionObserver(function(entries) {
         entries.forEach(function(e) {
           if (e.isIntersecting && !counted) {
             counted = true;
-            animateCounters();
+            var counters = document.querySelectorAll('[data-count]');
+            counters.forEach(function(el) {
+              var target = parseInt(el.getAttribute('data-count'), 10);
+              var suffix = el.getAttribute('data-suffix') || '';
+              var current = 0;
+              var duration = 1500;
+              var step = target / (duration / 16);
+              function tick() {
+                current += step;
+                if (current >= target) { el.textContent = target + suffix; return; }
+                el.textContent = Math.floor(current) + suffix;
+                requestAnimationFrame(tick);
+              }
+              tick();
+            });
           }
         });
       }, { threshold: 0.3 });
-
-      var statsSection = document.getElementById('stats');
-      if (statsSection) statsObs.observe(statsSection);
-
-      function animateCounters() {
-        var counters = document.querySelectorAll('[data-count]');
-        counters.forEach(function(el) {
-          var target = parseInt(el.getAttribute('data-count'), 10);
-          var suffix = el.getAttribute('data-suffix') || '';
-          var current = 0;
-          var duration = 1500;
-          var step = target / (duration / 16);
-
-          function tick() {
-            current += step;
-            if (current >= target) {
-              el.textContent = target + suffix;
-              return;
-            }
-            el.textContent = Math.floor(current) + suffix;
-            requestAnimationFrame(tick);
-          }
-          tick();
-        });
-      }
+      statsObs.observe(trustSection);
     })();
 
     /* ── Demo terminal replay ── */
@@ -1310,9 +612,11 @@
     })();
   </script>
 
+  <script src="/assets/analytics.js" defer></script>
   <script src="/seobaike-widget.js"></script>
   <script src="/assets/i18n.js"></script>
   <script>SEOBAIKE_I18N.init();</script>
   <script src="/assets/premium-fx.js"></script>
+  <script src="/assets/cookie-consent.js"></script>
 </body>
 </html>
