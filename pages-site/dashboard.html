@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>SEOBAIKE — 我的儀表板</title>
-<meta name="description" content="SEOBAIKE 用戶儀表板：管理商品、查看訂單、SEO Points 餘額一覽">
+<meta name="description" content="SEOBAIKE 用戶儀表板：AI 服務管理、SEO Points 餘額、使用紀錄一覽">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <link rel="stylesheet" href="/assets/design-system.css">
 <link rel="stylesheet" href="/assets/premium-fx.css">
@@ -24,6 +24,11 @@
   }
   .dash-greeting h1 {
     font-size: clamp(1.6rem, 3vw, 2.2rem);
+  }
+  .dash-greeting .subtitle {
+    margin-top: var(--sp-2);
+    color: var(--text-secondary);
+    font-size: 0.95rem;
   }
   .user-chip {
     display: inline-flex;
@@ -47,6 +52,15 @@
     font-size: 0.75rem;
     font-weight: 800;
     color: #000;
+  }
+  .user-chip .account-badge {
+    padding: 2px 8px;
+    border-radius: var(--radius-full);
+    font-size: 0.7rem;
+    font-weight: 700;
+    background: rgba(52,208,88,0.12);
+    color: var(--success);
+    border: 1px solid rgba(52,208,88,0.2);
   }
 
   /* ── Stat Cards Row ── */
@@ -121,9 +135,9 @@
     color: var(--success);
     background: rgba(52,208,88,0.1);
   }
-  .stat-change.down {
-    color: var(--danger);
-    background: rgba(248,81,73,0.1);
+  .stat-change.neutral {
+    color: var(--text-muted);
+    background: rgba(255,255,255,0.04);
   }
 
   /* ── Dashboard Grid ── */
@@ -156,138 +170,60 @@
     padding: var(--sp-6);
   }
 
-  /* ── Product Table ── */
-  .product-table {
-    width: 100%;
-    border-collapse: collapse;
-  }
-  .product-table th {
-    text-align: left;
-    font-size: 0.72rem;
-    font-weight: 700;
-    color: var(--text-muted);
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    padding: var(--sp-3) var(--sp-4);
+  /* ── Recent Activity List ── */
+  .activity-item {
+    display: flex;
+    align-items: center;
+    gap: var(--sp-4);
+    padding: var(--sp-4) 0;
     border-bottom: 1px solid var(--border-subtle);
   }
-  .product-table td {
-    padding: var(--sp-4);
-    font-size: 0.88rem;
-    border-bottom: 1px solid var(--border-subtle);
-    vertical-align: middle;
-  }
-  .product-table tr:last-child td {
-    border-bottom: none;
-  }
-  .product-table tr:hover td {
-    background: rgba(255,255,255,0.01);
-  }
-  .product-name {
-    font-weight: 600;
-    color: var(--text-primary);
-  }
-  .product-thumb {
+  .activity-item:last-child { border-bottom: none; }
+  .activity-icon {
     width: 36px;
     height: 36px;
-    border-radius: var(--radius-sm);
-    background: var(--bg-elevated);
+    border-radius: var(--radius-md);
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 1rem;
+    flex-shrink: 0;
   }
-  .product-cell {
-    display: flex;
-    align-items: center;
-    gap: var(--sp-3);
+  .activity-icon.ai { background: rgba(232,133,12,0.1); }
+  .activity-icon.seo { background: rgba(88,166,255,0.1); }
+  .activity-icon.content { background: rgba(160,110,240,0.1); }
+  .activity-icon.data { background: rgba(52,208,88,0.1); }
+  .activity-details {
+    flex: 1;
+    min-width: 0;
   }
-  .status-dot {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    display: inline-block;
-    margin-right: 6px;
-  }
-  .status-dot.live { background: var(--success); }
-  .status-dot.review { background: var(--warning); }
-  .status-dot.draft { background: var(--text-muted); }
-
-  /* ── Order List ── */
-  .order-item {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: var(--sp-4) 0;
-    border-bottom: 1px solid var(--border-subtle);
-  }
-  .order-item:last-child { border-bottom: none; }
-  .order-info {
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
-  }
-  .order-id {
-    font-size: 0.85rem;
+  .activity-title {
+    font-size: 0.88rem;
     font-weight: 600;
     color: var(--text-primary);
-    font-family: var(--font-mono);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
-  .order-date {
+  .activity-meta {
     font-size: 0.75rem;
     color: var(--text-muted);
-  }
-  .order-amount {
-    font-weight: 700;
-    color: var(--gold-200);
-    font-size: 0.92rem;
-  }
-
-  /* ── SEO Points ── */
-  .points-balance {
-    text-align: center;
-    padding: var(--sp-8) 0;
-    margin-bottom: var(--sp-6);
-    border-bottom: 1px solid var(--border-subtle);
-  }
-  .points-value {
-    font-size: 2.4rem;
-    font-weight: 900;
-    background: var(--gold-gradient);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    line-height: 1.2;
-  }
-  .points-label {
-    font-size: 0.82rem;
-    color: var(--text-muted);
-    margin-top: var(--sp-1);
-  }
-  .points-tx {
+    margin-top: 2px;
     display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: var(--sp-3) 0;
+    gap: var(--sp-3);
+  }
+  .activity-cost {
     font-size: 0.82rem;
-  }
-  .points-tx:not(:last-child) {
-    border-bottom: 1px solid var(--border-subtle);
-  }
-  .points-tx .tx-desc {
-    color: var(--text-secondary);
-  }
-  .points-tx .tx-amount {
     font-weight: 700;
     font-family: var(--font-mono);
+    color: var(--gold-200);
+    white-space: nowrap;
   }
-  .points-tx .tx-amount.credit { color: var(--success); }
-  .points-tx .tx-amount.debit { color: var(--danger); }
 
-  /* ── Quick Actions ── */
+  /* ── Quick Actions Grid ── */
   .quick-actions {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     gap: var(--sp-4);
     margin-bottom: var(--sp-10);
   }
@@ -330,8 +266,156 @@
     color: var(--text-muted);
   }
 
-  /* ── Commission Note ── */
-  .commission-note {
+  /* ── Active Services Cards ── */
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--sp-4);
+  }
+  .service-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-lg);
+    padding: var(--sp-6);
+    transition: all var(--duration-normal) var(--ease-out);
+    position: relative;
+    overflow: hidden;
+  }
+  .service-card:hover {
+    border-color: var(--border-hover);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-gold);
+  }
+  .service-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: var(--gold-gradient);
+    opacity: 0;
+    transition: opacity var(--duration-normal);
+  }
+  .service-card:hover::before { opacity: 1; }
+  .service-card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: var(--sp-4);
+  }
+  .service-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: var(--radius-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    background: rgba(232,133,12,0.08);
+  }
+  .service-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 2px 10px;
+    border-radius: var(--radius-full);
+    font-size: 0.7rem;
+    font-weight: 700;
+  }
+  .service-status.active {
+    background: rgba(52,208,88,0.1);
+    color: var(--success);
+  }
+  .service-status.paused {
+    background: rgba(240,180,41,0.1);
+    color: var(--warning);
+  }
+  .service-card-name {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: var(--sp-1);
+  }
+  .service-card-desc {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    margin-bottom: var(--sp-4);
+    line-height: 1.5;
+  }
+  .service-card-usage {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    padding-top: var(--sp-3);
+    border-top: 1px solid var(--border-subtle);
+  }
+  .service-card-usage .usage-val {
+    font-weight: 700;
+    font-family: var(--font-mono);
+    color: var(--text-secondary);
+  }
+
+  /* ── SP Balance Card (sidebar) ── */
+  .sp-balance-card {
+    text-align: center;
+    padding: var(--sp-8) 0;
+    margin-bottom: var(--sp-6);
+    border-bottom: 1px solid var(--border-subtle);
+  }
+  .sp-value {
+    font-size: 2.6rem;
+    font-weight: 900;
+    background: var(--gold-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1.2;
+  }
+  .sp-label {
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    margin-top: var(--sp-1);
+  }
+  .sp-sublabel {
+    font-size: 0.72rem;
+    color: var(--text-muted);
+    margin-top: var(--sp-2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--sp-2);
+  }
+  .sp-sublabel .trend-up {
+    color: var(--success);
+    font-weight: 700;
+  }
+
+  /* ── Points Transaction List ── */
+  .points-tx {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--sp-3) 0;
+    font-size: 0.82rem;
+  }
+  .points-tx:not(:last-child) {
+    border-bottom: 1px solid var(--border-subtle);
+  }
+  .points-tx .tx-desc {
+    color: var(--text-secondary);
+  }
+  .points-tx .tx-amount {
+    font-weight: 700;
+    font-family: var(--font-mono);
+  }
+  .points-tx .tx-amount.credit { color: var(--success); }
+  .points-tx .tx-amount.debit { color: var(--danger); }
+
+  /* ── Demo Note ── */
+  .demo-note {
     display: flex;
     align-items: center;
     gap: var(--sp-3);
@@ -342,6 +426,8 @@
     font-size: 0.82rem;
     color: var(--text-muted);
     margin-bottom: var(--sp-8);
+    text-align: center;
+    justify-content: center;
   }
 
   /* ── Footer Minimal ── */
@@ -363,18 +449,19 @@
     .stats-row { grid-template-columns: repeat(2, 1fr); }
     .dash-grid { grid-template-columns: 1fr; }
     .quick-actions { grid-template-columns: repeat(2, 1fr); }
+    .services-grid { grid-template-columns: repeat(2, 1fr); }
   }
   @media (max-width: 768px) {
     .stats-row { grid-template-columns: 1fr 1fr; }
-    .quick-actions { grid-template-columns: 1fr; }
+    .quick-actions { grid-template-columns: 1fr 1fr; }
+    .services-grid { grid-template-columns: 1fr; }
     .dash-greeting { flex-direction: column; align-items: flex-start; }
-    .product-table th:nth-child(4),
-    .product-table td:nth-child(4) { display: none; }
   }
   @media (max-width: 480px) {
     .stats-row { grid-template-columns: 1fr; }
     .stat-card { text-align: center; }
     .stat-card .stat-icon { margin: 0 auto var(--sp-4); }
+    .quick-actions { grid-template-columns: 1fr; }
   }
 </style>
 </head>
@@ -417,303 +504,256 @@
   <div class="dash-header fade-up">
     <div class="dash-greeting">
       <div>
-        <h1>我的<span class="text-gold">儀表板</span></h1>
-        <p style="margin-top:var(--sp-2);">歡迎回來，管理您的商品與訂單</p>
+        <h1><span class="text-gold">歡迎回來</span></h1>
+        <p class="subtitle">這是您的 AI 服務管理中心。隨時掌握使用狀況與點數餘額。</p>
       </div>
       <div class="user-chip">
-        <span class="avatar">W</span>
-        <span>Wang Store</span>
+        <span class="avatar">U</span>
+        <span>使用者</span>
+        <span class="account-badge">免費方案</span>
       </div>
     </div>
   </div>
 
-  <!-- ═══ Stats Row ═══ -->
+  <!-- ═══ Stats Row (4 cards) ═══ -->
   <div class="stats-row fade-up">
     <div class="stat-card">
-      <div class="stat-icon gold">&#128230;</div>
-      <div class="stat-value">12</div>
-      <div class="stat-label">我的商品</div>
-      <div class="stat-change up">&#9650; 2 本月新增</div>
-    </div>
-    <div class="stat-card">
-      <div class="stat-icon green">&#128176;</div>
-      <div class="stat-value">NT$ 84,200</div>
-      <div class="stat-label">總銷售額</div>
-      <div class="stat-change up">&#9650; 本月成長</div>
-    </div>
-    <div class="stat-card">
-      <div class="stat-icon blue">&#11088;</div>
+      <div class="stat-icon gold">&#11088;</div>
       <div class="stat-value">3,580</div>
-      <div class="stat-label">SEO Points 餘額</div>
+      <div class="stat-label">SP 餘額（SEO Points）</div>
       <div class="stat-change up">&#9650; 420 本月獲得</div>
     </div>
     <div class="stat-card">
-      <div class="stat-icon purple">&#128203;</div>
-      <div class="stat-value">47</div>
-      <div class="stat-label">訂單數</div>
-      <div class="stat-change up">&#9650; 8 本月新增</div>
+      <div class="stat-icon blue">&#128202;</div>
+      <div class="stat-value">128</div>
+      <div class="stat-label">本月使用量（次）</div>
+      <div class="stat-change up">&#9650; 較上月增加 15%</div>
     </div>
-  </div>
-
-  <!-- ═══ Commission Note ═══ -->
-  <div class="commission-note fade-up">
-    <span>&#128712;</span>
-    <span>佣金比例：依合約約定。如需調整，請聯繫客服團隊。</span>
+    <div class="stat-card">
+      <div class="stat-icon purple">&#9881;</div>
+      <div class="stat-value">5</div>
+      <div class="stat-label">已啟用服務數</div>
+      <div class="stat-change neutral">共 12 項可用</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-icon green">&#9989;</div>
+      <div class="stat-value">啟用中</div>
+      <div class="stat-label">帳戶狀態</div>
+      <div class="stat-change up">免費方案</div>
+    </div>
   </div>
 
   <!-- ═══ Main Dashboard Grid ═══ -->
   <div class="dash-grid">
 
-    <!-- Left Column -->
+    <!-- Left Column: Recent Activity -->
     <div>
-      <!-- My Products -->
-      <div class="dash-section fade-up" style="margin-bottom:var(--sp-8);">
-        <div class="dash-section-header">
-          <h3>&#128230; 我的商品</h3>
-          <a href="#" class="btn btn-sm btn-secondary">查看全部</a>
-        </div>
-        <div class="dash-section-body" style="padding:0;">
-          <table class="product-table">
-            <thead>
-              <tr>
-                <th>商品</th>
-                <th>狀態</th>
-                <th>價格</th>
-                <th>銷量</th>
-                <th>操作</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>
-                  <div class="product-cell">
-                    <div class="product-thumb">&#128196;</div>
-                    <div>
-                      <div class="product-name">AI 內容優化工具包</div>
-                      <div class="text-muted" style="font-size:0.75rem;">SEO 工具</div>
-                    </div>
-                  </div>
-                </td>
-                <td><span class="status-dot live"></span>上架中</td>
-                <td style="color:var(--gold-200);font-weight:600;">NT$ 2,980</td>
-                <td>18</td>
-                <td><a href="#" class="btn btn-sm btn-ghost">編輯</a></td>
-              </tr>
-              <tr>
-                <td>
-                  <div class="product-cell">
-                    <div class="product-thumb">&#127912;</div>
-                    <div>
-                      <div class="product-name">品牌識別設計模板</div>
-                      <div class="text-muted" style="font-size:0.75rem;">設計素材</div>
-                    </div>
-                  </div>
-                </td>
-                <td><span class="status-dot live"></span>上架中</td>
-                <td style="color:var(--gold-200);font-weight:600;">NT$ 1,500</td>
-                <td>12</td>
-                <td><a href="#" class="btn btn-sm btn-ghost">編輯</a></td>
-              </tr>
-              <tr>
-                <td>
-                  <div class="product-cell">
-                    <div class="product-thumb">&#128218;</div>
-                    <div>
-                      <div class="product-name">電商 SEO 實戰指南</div>
-                      <div class="text-muted" style="font-size:0.75rem;">電子書</div>
-                    </div>
-                  </div>
-                </td>
-                <td><span class="status-dot review"></span>審核中</td>
-                <td style="color:var(--gold-200);font-weight:600;">NT$ 890</td>
-                <td>-</td>
-                <td><a href="#" class="btn btn-sm btn-ghost">編輯</a></td>
-              </tr>
-              <tr>
-                <td>
-                  <div class="product-cell">
-                    <div class="product-thumb">&#128187;</div>
-                    <div>
-                      <div class="product-name">網站速度優化服務</div>
-                      <div class="text-muted" style="font-size:0.75rem;">技術服務</div>
-                    </div>
-                  </div>
-                </td>
-                <td><span class="status-dot live"></span>上架中</td>
-                <td style="color:var(--gold-200);font-weight:600;">NT$ 5,800</td>
-                <td>7</td>
-                <td><a href="#" class="btn btn-sm btn-ghost">編輯</a></td>
-              </tr>
-              <tr>
-                <td>
-                  <div class="product-cell">
-                    <div class="product-thumb">&#128202;</div>
-                    <div>
-                      <div class="product-name">關鍵字研究報告</div>
-                      <div class="text-muted" style="font-size:0.75rem;">數據分析</div>
-                    </div>
-                  </div>
-                </td>
-                <td><span class="status-dot draft"></span>草稿</td>
-                <td style="color:var(--text-muted);">待定</td>
-                <td>-</td>
-                <td><a href="#" class="btn btn-sm btn-ghost">編輯</a></td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-
-      <!-- Recent Orders -->
       <div class="dash-section fade-up">
         <div class="dash-section-header">
-          <h3>&#128203; 近期訂單</h3>
-          <a href="#" class="btn btn-sm btn-secondary">全部訂單</a>
+          <h3>&#128337; 近期活動紀錄</h3>
+          <a href="#" class="btn btn-sm btn-secondary">查看全部</a>
         </div>
         <div class="dash-section-body">
-          <div class="order-item">
-            <div class="order-info">
-              <span class="order-id">#ORD-20260215-001</span>
-              <span class="order-date">2026/02/15 14:23 — AI 內容優化工具包</span>
+          <div class="activity-item">
+            <div class="activity-icon ai">&#129302;</div>
+            <div class="activity-details">
+              <div class="activity-title">AI 文案產生器 — 產品描述撰寫</div>
+              <div class="activity-meta">
+                <span>2026/02/16 14:32</span>
+                <span>&#183; 產出 850 字</span>
+              </div>
             </div>
-            <div>
-              <span class="order-amount">NT$ 2,980</span>
-              <span class="badge badge-green" style="margin-left:8px;">已完成</span>
-            </div>
+            <div class="activity-cost">-15 SP</div>
           </div>
-          <div class="order-item">
-            <div class="order-info">
-              <span class="order-id">#ORD-20260214-003</span>
-              <span class="order-date">2026/02/14 09:11 — 品牌識別設計模板</span>
+          <div class="activity-item">
+            <div class="activity-icon seo">&#128269;</div>
+            <div class="activity-details">
+              <div class="activity-title">SEO 關鍵字分析 — 競品比較報告</div>
+              <div class="activity-meta">
+                <span>2026/02/16 11:08</span>
+                <span>&#183; 分析 30 組關鍵字</span>
+              </div>
             </div>
-            <div>
-              <span class="order-amount">NT$ 1,500</span>
-              <span class="badge badge-green" style="margin-left:8px;">已完成</span>
-            </div>
+            <div class="activity-cost">-25 SP</div>
           </div>
-          <div class="order-item">
-            <div class="order-info">
-              <span class="order-id">#ORD-20260213-007</span>
-              <span class="order-date">2026/02/13 18:45 — 網站速度優化服務</span>
+          <div class="activity-item">
+            <div class="activity-icon content">&#128221;</div>
+            <div class="activity-details">
+              <div class="activity-title">智慧內容改寫 — 部落格文章優化</div>
+              <div class="activity-meta">
+                <span>2026/02/15 17:45</span>
+                <span>&#183; 改寫 1,200 字</span>
+              </div>
             </div>
-            <div>
-              <span class="order-amount">NT$ 5,800</span>
-              <span class="badge badge-gold" style="margin-left:8px;">處理中</span>
-            </div>
+            <div class="activity-cost">-20 SP</div>
           </div>
-          <div class="order-item">
-            <div class="order-info">
-              <span class="order-id">#ORD-20260212-002</span>
-              <span class="order-date">2026/02/12 11:30 — AI 內容優化工具包</span>
+          <div class="activity-item">
+            <div class="activity-icon data">&#128200;</div>
+            <div class="activity-details">
+              <div class="activity-title">網站流量預測 — 月度趨勢分析</div>
+              <div class="activity-meta">
+                <span>2026/02/14 09:22</span>
+                <span>&#183; 30 天預測模型</span>
+              </div>
             </div>
-            <div>
-              <span class="order-amount">NT$ 2,980</span>
-              <span class="badge badge-green" style="margin-left:8px;">已完成</span>
-            </div>
+            <div class="activity-cost">-30 SP</div>
           </div>
-          <div class="order-item">
-            <div class="order-info">
-              <span class="order-id">#ORD-20260210-005</span>
-              <span class="order-date">2026/02/10 16:02 — 品牌識別設計模板</span>
+          <div class="activity-item">
+            <div class="activity-icon ai">&#129302;</div>
+            <div class="activity-details">
+              <div class="activity-title">AI 圖片描述生成 — 電商商品圖標註</div>
+              <div class="activity-meta">
+                <span>2026/02/13 16:10</span>
+                <span>&#183; 處理 8 張圖片</span>
+              </div>
             </div>
-            <div>
-              <span class="order-amount">NT$ 1,500</span>
-              <span class="badge badge-green" style="margin-left:8px;">已完成</span>
-            </div>
+            <div class="activity-cost">-10 SP</div>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- Right Column -->
+    <!-- Right Column: SP Balance + Recent Transactions -->
     <div>
-      <!-- SEO Points -->
-      <div class="dash-section fade-up" style="margin-bottom:var(--sp-8);">
+      <div class="dash-section fade-up">
         <div class="dash-section-header">
           <h3>&#11088; SEO Points</h3>
-          <a href="#" class="btn btn-sm btn-primary">儲值</a>
+          <a href="/billing" class="btn btn-sm btn-primary">充值</a>
         </div>
         <div class="dash-section-body">
-          <div class="points-balance">
-            <div class="points-value">3,580</div>
-            <div class="points-label">可用 SEO Points</div>
+          <div class="sp-balance-card">
+            <div class="sp-value">3,580</div>
+            <div class="sp-label">可用 SEO Points</div>
+            <div class="sp-sublabel">
+              <span>本月消耗 420 SP</span>
+              <span>&#183;</span>
+              <span class="trend-up">&#9650; 獲得 840 SP</span>
+            </div>
           </div>
-          <div style="font-size:0.78rem;color:var(--text-muted);margin-bottom:var(--sp-4);font-weight:600;">近期交易</div>
+          <div style="font-size:0.78rem;color:var(--text-muted);margin-bottom:var(--sp-4);font-weight:600;">近期點數異動</div>
           <div class="points-tx">
-            <span class="tx-desc">商品銷售獎勵</span>
-            <span class="tx-amount credit">+120</span>
-          </div>
-          <div class="points-tx">
-            <span class="tx-desc">SEO 分析消耗</span>
-            <span class="tx-amount debit">-50</span>
-          </div>
-          <div class="points-tx">
-            <span class="tx-desc">每月獎勵發放</span>
-            <span class="tx-amount credit">+200</span>
+            <span class="tx-desc">每日登入獎勵</span>
+            <span class="tx-amount credit">+10</span>
           </div>
           <div class="points-tx">
-            <span class="tx-desc">AI 工具使用</span>
-            <span class="tx-amount debit">-80</span>
+            <span class="tx-desc">AI 文案產生器</span>
+            <span class="tx-amount debit">-15</span>
           </div>
           <div class="points-tx">
-            <span class="tx-desc">儲值</span>
-            <span class="tx-amount credit">+500</span>
+            <span class="tx-desc">SEO 關鍵字分析</span>
+            <span class="tx-amount debit">-25</span>
           </div>
           <div class="points-tx">
             <span class="tx-desc">推薦好友獎勵</span>
             <span class="tx-amount credit">+100</span>
           </div>
-        </div>
-      </div>
-
-      <!-- Account Settings -->
-      <div class="dash-section fade-up">
-        <div class="dash-section-header">
-          <h3>&#9881; 帳戶設定</h3>
-        </div>
-        <div class="dash-section-body">
-          <div style="display:flex;flex-direction:column;gap:var(--sp-3);">
-            <a href="#" style="display:flex;align-items:center;gap:var(--sp-3);padding:var(--sp-3) 0;color:var(--text-secondary);font-size:0.88rem;border-bottom:1px solid var(--border-subtle);">
-              <span>&#128100;</span> 個人資料
-            </a>
-            <a href="#" style="display:flex;align-items:center;gap:var(--sp-3);padding:var(--sp-3) 0;color:var(--text-secondary);font-size:0.88rem;border-bottom:1px solid var(--border-subtle);">
-              <span>&#128274;</span> 安全設定
-            </a>
-            <a href="#" style="display:flex;align-items:center;gap:var(--sp-3);padding:var(--sp-3) 0;color:var(--text-secondary);font-size:0.88rem;border-bottom:1px solid var(--border-subtle);">
-              <span>&#128179;</span> 付款方式
-            </a>
-            <a href="#" style="display:flex;align-items:center;gap:var(--sp-3);padding:var(--sp-3) 0;color:var(--text-secondary);font-size:0.88rem;border-bottom:1px solid var(--border-subtle);">
-              <span>&#128276;</span> 通知偏好
-            </a>
-            <a href="#" style="display:flex;align-items:center;gap:var(--sp-3);padding:var(--sp-3) 0;color:var(--text-secondary);font-size:0.88rem;">
-              <span>&#128279;</span> API 金鑰
-            </a>
+          <div class="points-tx">
+            <span class="tx-desc">手動儲值</span>
+            <span class="tx-amount credit">+500</span>
           </div>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- ═══ Quick Actions ═══ -->
+  <!-- ═══ Quick Actions (4 items) ═══ -->
   <div class="fade-up">
     <h3 style="margin-bottom:var(--sp-6);">&#9889; 快速操作</h3>
     <div class="quick-actions">
-      <a href="#" class="quick-action">
-        <div class="qa-icon">&#10133;</div>
-        <div class="qa-title">上架新商品</div>
-        <div class="qa-desc">將您的產品或服務上架到市集</div>
-      </a>
       <a href="/marketplace.html" class="quick-action">
         <div class="qa-icon">&#128722;</div>
-        <div class="qa-title">查看市集</div>
-        <div class="qa-desc">瀏覽市集中的所有商品</div>
+        <div class="qa-title">瀏覽市集</div>
+        <div class="qa-desc">探索所有可用的 AI 服務</div>
+      </a>
+      <a href="/billing" class="quick-action">
+        <div class="qa-icon">&#11088;</div>
+        <div class="qa-title">充值點數</div>
+        <div class="qa-desc">購買 SEO Points 解鎖更多功能</div>
       </a>
       <a href="#" class="quick-action">
-        <div class="qa-icon">&#11088;</div>
-        <div class="qa-title">購買 SEO Points</div>
-        <div class="qa-desc">儲值 Points 以使用進階功能</div>
+        <div class="qa-icon">&#9881;</div>
+        <div class="qa-title">帳號設定</div>
+        <div class="qa-desc">管理個人資料與安全選項</div>
+      </a>
+      <a href="#" class="quick-action">
+        <div class="qa-icon">&#128203;</div>
+        <div class="qa-title">使用紀錄</div>
+        <div class="qa-desc">查看完整的服務使用歷史</div>
       </a>
     </div>
+  </div>
+
+  <!-- ═══ Active Services ═══ -->
+  <div class="fade-up" style="margin-bottom:var(--sp-10);">
+    <h3 style="margin-bottom:var(--sp-6);">&#128279; 已啟用服務</h3>
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="service-card-header">
+          <div class="service-icon">&#129302;</div>
+          <div class="service-status active">&#9679; 啟用中</div>
+        </div>
+        <div class="service-card-name">AI 文案產生器</div>
+        <div class="service-card-desc">根據關鍵字與語境自動產生高品質行銷文案與產品描述</div>
+        <div class="service-card-usage">
+          <span>本月使用</span>
+          <span class="usage-val">42 次</span>
+        </div>
+      </div>
+      <div class="service-card">
+        <div class="service-card-header">
+          <div class="service-icon">&#128269;</div>
+          <div class="service-status active">&#9679; 啟用中</div>
+        </div>
+        <div class="service-card-name">SEO 關鍵字分析</div>
+        <div class="service-card-desc">深度分析搜尋趨勢、競品關鍵字策略與排名機會</div>
+        <div class="service-card-usage">
+          <span>本月使用</span>
+          <span class="usage-val">28 次</span>
+        </div>
+      </div>
+      <div class="service-card">
+        <div class="service-card-header">
+          <div class="service-icon">&#128221;</div>
+          <div class="service-status active">&#9679; 啟用中</div>
+        </div>
+        <div class="service-card-name">智慧內容改寫</div>
+        <div class="service-card-desc">將既有文章重新改寫，提升可讀性與 SEO 表現</div>
+        <div class="service-card-usage">
+          <span>本月使用</span>
+          <span class="usage-val">35 次</span>
+        </div>
+      </div>
+      <div class="service-card">
+        <div class="service-card-header">
+          <div class="service-icon">&#128200;</div>
+          <div class="service-status active">&#9679; 啟用中</div>
+        </div>
+        <div class="service-card-name">網站流量預測</div>
+        <div class="service-card-desc">運用 AI 模型預測未來 30 天的網站流量走勢</div>
+        <div class="service-card-usage">
+          <span>本月使用</span>
+          <span class="usage-val">15 次</span>
+        </div>
+      </div>
+      <div class="service-card">
+        <div class="service-card-header">
+          <div class="service-icon">&#128248;</div>
+          <div class="service-status paused">&#9679; 暫停中</div>
+        </div>
+        <div class="service-card-name">AI 圖片描述生成</div>
+        <div class="service-card-desc">自動為電商商品圖片產生 ALT 文字與結構化描述</div>
+        <div class="service-card-usage">
+          <span>本月使用</span>
+          <span class="usage-val">8 次</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ Demo Note ═══ -->
+  <div class="demo-note fade-up">
+    <span>&#128712;</span>
+    <span>此為展示版本。登入後將顯示您的真實數據。</span>
   </div>
 </div>
 

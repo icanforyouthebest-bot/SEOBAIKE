@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>SEOBAIKE 生態系統 — AI 驅動的完整商業生態</title>
-<meta name="description" content="SEOBAIKE 生態系統：市集、AI 引擎、金流、開發者 API，打造完整的 AI 商業閉環">
+<meta name="description" content="SEOBAIKE 生態系統：插拔式 AI 服務平台、BYOK 架構、RESTful API、數據儀表板，打造完整的 AI 商業閉環">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <link rel="stylesheet" href="/assets/design-system.css">
 <link rel="stylesheet" href="/assets/premium-fx.css">
@@ -30,224 +30,266 @@
   .eco-hero h1 {
     margin-bottom: var(--sp-4);
   }
-  .eco-hero p {
-    max-width: 560px;
+  .eco-hero .hero-desc {
+    max-width: 620px;
     margin: 0 auto;
     font-size: 1.08rem;
     color: var(--text-muted);
+    line-height: 1.7;
   }
 
-  /* ── Ecosystem Diagram ── */
-  .eco-diagram {
+  /* ── Hub-and-Spoke Architecture Diagram ── */
+  .arch-diagram {
     position: relative;
-    max-width: 720px;
-    margin: var(--sp-16) auto;
+    width: 100%;
+    max-width: 640px;
+    height: 480px;
+    margin: 0 auto;
   }
-  .eco-center {
-    width: 140px;
-    height: 140px;
+
+  /* Center hub */
+  .arch-hub {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 150px;
+    height: 150px;
     border-radius: 50%;
     background: var(--gold-gradient);
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    margin: 0 auto;
-    position: relative;
-    z-index: 2;
-    box-shadow: 0 0 60px rgba(232,133,12,0.2);
+    z-index: 10;
+    box-shadow: 0 0 60px rgba(232,133,12,0.25), 0 0 120px rgba(232,133,12,0.08);
   }
-  .eco-center .logo-text {
-    font-size: 1rem;
+  .arch-hub .hub-name {
+    font-size: 1.05rem;
     font-weight: 900;
     color: #000;
     letter-spacing: -0.5px;
   }
-  .eco-center .logo-sub {
-    font-size: 0.6rem;
+  .arch-hub .hub-sub {
+    font-size: 0.62rem;
     font-weight: 700;
-    color: rgba(0,0,0,0.6);
+    color: rgba(0,0,0,0.55);
     text-transform: uppercase;
-    letter-spacing: 1px;
+    letter-spacing: 1.5px;
+    margin-top: 2px;
   }
-  .eco-ring {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: var(--sp-4);
-    margin-top: calc(-20px);
-    position: relative;
+
+  /* Orbit ring (decorative) */
+  .arch-orbit {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 360px;
+    height: 360px;
+    border-radius: 50%;
+    border: 1px dashed rgba(232,133,12,0.12);
+    pointer-events: none;
+  }
+
+  /* Spoke nodes */
+  .arch-spoke {
+    position: absolute;
+    width: 120px;
+    text-align: center;
+    z-index: 5;
+  }
+  .arch-spoke .spoke-dot {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    background: var(--bg-card);
+    border: 2px solid rgba(232,133,12,0.25);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto var(--sp-2);
+    font-size: 1.4rem;
+    transition: all var(--duration-normal) var(--ease-out);
+  }
+  .arch-spoke:hover .spoke-dot {
+    border-color: var(--gold-300);
+    box-shadow: 0 0 20px rgba(232,133,12,0.2);
+    transform: scale(1.1);
+  }
+  .arch-spoke .spoke-label {
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    line-height: 1.3;
+  }
+
+  /* Connector lines from hub to spokes */
+  .arch-line {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    height: 1px;
+    transform-origin: 0 0;
     z-index: 1;
+    background: linear-gradient(90deg, rgba(232,133,12,0.35), rgba(232,133,12,0.05));
   }
-  .eco-node {
+
+  /* Spoke positions (5 nodes around the hub) */
+  .arch-spoke:nth-child(1) { top: 20px; left: 50%; transform: translateX(-50%); }     /* top */
+  .arch-spoke:nth-child(2) { top: 100px; right: 10px; }                                 /* top-right */
+  .arch-spoke:nth-child(3) { bottom: 60px; right: 20px; }                              /* bottom-right */
+  .arch-spoke:nth-child(4) { bottom: 60px; left: 20px; }                               /* bottom-left */
+  .arch-spoke:nth-child(5) { top: 100px; left: 10px; }                                  /* top-left */
+
+  /* Line positions (from center to each spoke) */
+  .arch-line:nth-child(7)  { width: 140px; transform: rotate(-90deg); }
+  .arch-line:nth-child(8)  { width: 165px; transform: rotate(-25deg); }
+  .arch-line:nth-child(9)  { width: 165px; transform: rotate(35deg); }
+  .arch-line:nth-child(10) { width: 165px; transform: rotate(145deg); }
+  .arch-line:nth-child(11) { width: 165px; transform: rotate(205deg); }
+
+  /* ── Integration Cards (6) ── */
+  .integ-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--sp-6);
+  }
+  .integ-card {
+    padding: var(--sp-8);
     background: var(--bg-card);
     border: 1px solid var(--border-subtle);
     border-radius: var(--radius-lg);
-    padding: var(--sp-6) var(--sp-4);
-    text-align: center;
     transition: all var(--duration-normal) var(--ease-out);
+    position: relative;
+    overflow: hidden;
   }
-  .eco-node:hover {
+  .integ-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: var(--gold-gradient);
+    opacity: 0;
+    transition: opacity var(--duration-normal);
+  }
+  .integ-card:hover {
     border-color: var(--border-hover);
     transform: translateY(-4px);
     box-shadow: var(--shadow-gold);
   }
-  .eco-node .node-icon {
-    font-size: 1.6rem;
-    margin-bottom: var(--sp-3);
-    display: block;
+  .integ-card:hover::before {
+    opacity: 1;
   }
-  .eco-node .node-name {
-    font-size: 0.88rem;
-    font-weight: 700;
-    color: var(--text-primary);
-    margin-bottom: var(--sp-1);
-  }
-  .eco-node .node-desc {
-    font-size: 0.72rem;
-    color: var(--text-muted);
-    line-height: 1.4;
-  }
-  /* Connector lines (CSS only) */
-  .eco-connectors {
-    display: flex;
-    justify-content: center;
-    gap: var(--sp-10);
-    margin: var(--sp-3) 0;
-  }
-  .connector-line {
-    width: 1px;
-    height: 40px;
-    background: linear-gradient(to bottom, var(--gold-300), transparent);
-  }
-
-  /* ── Flow Section ── */
-  .flow-steps {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: var(--sp-6);
-    counter-reset: step;
-  }
-  .flow-step {
-    position: relative;
-    padding: var(--sp-8) var(--sp-6);
-    background: var(--bg-card);
-    border: 1px solid var(--border-subtle);
-    border-radius: var(--radius-lg);
-    text-align: center;
-    counter-increment: step;
-  }
-  .flow-step::before {
-    content: counter(step);
-    position: absolute;
-    top: -14px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 28px;
-    height: 28px;
-    border-radius: 50%;
-    background: var(--gold-gradient);
-    color: #000;
-    font-size: 0.78rem;
-    font-weight: 800;
+  .integ-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: var(--radius-md);
+    background: rgba(232,133,12,0.08);
+    border: 1px solid rgba(232,133,12,0.12);
     display: flex;
     align-items: center;
     justify-content: center;
+    font-size: 1.4rem;
+    margin-bottom: var(--sp-5);
   }
-  .flow-step h4 {
-    margin-top: var(--sp-2);
+  .integ-card h4 {
     margin-bottom: var(--sp-2);
-    font-size: 0.95rem;
+    font-size: 1.05rem;
   }
-  .flow-step p {
-    font-size: 0.82rem;
+  .integ-card .integ-sub {
+    font-size: 0.78rem;
+    color: var(--gold-200);
+    font-weight: 600;
+    margin-bottom: var(--sp-3);
+    letter-spacing: 0.3px;
+  }
+  .integ-card p {
+    font-size: 0.85rem;
     color: var(--text-muted);
-    line-height: 1.5;
+    line-height: 1.6;
   }
 
   /* ── Dev Section ── */
+  .dev-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--sp-12);
+    align-items: start;
+  }
+  .dev-info h3 {
+    margin-bottom: var(--sp-4);
+  }
+  .dev-info > p {
+    color: var(--text-muted);
+    margin-bottom: var(--sp-8);
+    line-height: 1.7;
+  }
+  .dev-steps {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-5);
+  }
+  .dev-step {
+    display: flex;
+    gap: var(--sp-4);
+    align-items: flex-start;
+  }
+  .dev-step-num {
+    width: 32px;
+    height: 32px;
+    min-width: 32px;
+    border-radius: 50%;
+    background: rgba(232,133,12,0.1);
+    border: 1px solid rgba(232,133,12,0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.78rem;
+    font-weight: 800;
+    color: var(--gold-200);
+  }
+  .dev-step-text h4 {
+    font-size: 0.92rem;
+    margin-bottom: 2px;
+  }
+  .dev-step-text p {
+    font-size: 0.82rem;
+    color: var(--text-muted);
+  }
+
   .code-block {
     background: rgba(0,0,0,0.4);
     border: 1px solid var(--border-subtle);
     border-radius: var(--radius-md);
     padding: var(--sp-6);
     font-family: var(--font-mono);
-    font-size: 0.82rem;
-    line-height: 1.7;
+    font-size: 0.8rem;
+    line-height: 1.75;
     color: var(--text-secondary);
     overflow-x: auto;
+    position: relative;
+  }
+  .code-block .code-label {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 4px 12px;
+    font-size: 0.65rem;
+    font-weight: 700;
+    color: var(--text-muted);
+    background: rgba(255,255,255,0.04);
+    border-radius: 0 var(--radius-md) 0 var(--radius-sm);
+    letter-spacing: 1px;
+    text-transform: uppercase;
   }
   .code-block .kw { color: var(--gold-200); }
   .code-block .str { color: var(--success); }
   .code-block .cmt { color: var(--text-muted); }
-
-  /* ── Feature Grid ── */
-  .feature-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: var(--sp-6);
-  }
-  .feature-item {
-    padding: var(--sp-8);
-    background: var(--bg-card);
-    border: 1px solid var(--border-subtle);
-    border-radius: var(--radius-lg);
-    transition: all var(--duration-normal) var(--ease-out);
-  }
-  .feature-item:hover {
-    border-color: var(--border-hover);
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-gold);
-  }
-  .feature-icon {
-    font-size: 1.6rem;
-    margin-bottom: var(--sp-4);
-    display: block;
-  }
-  .feature-item h4 { margin-bottom: var(--sp-2); }
-  .feature-item p { font-size: 0.85rem; color: var(--text-muted); line-height: 1.6; }
-
-  /* ── Partner Cards ── */
-  .partner-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: var(--sp-8);
-  }
-  .partner-card {
-    padding: var(--sp-10) var(--sp-8);
-    background: var(--bg-card);
-    border: 1px solid var(--border-subtle);
-    border-radius: var(--radius-lg);
-    transition: all var(--duration-normal) var(--ease-out);
-  }
-  .partner-card:hover {
-    border-color: var(--border-hover);
-    box-shadow: var(--shadow-gold);
-  }
-  .partner-card h3 { margin-bottom: var(--sp-3); }
-  .partner-card p { font-size: 0.88rem; color: var(--text-muted); line-height: 1.6; margin-bottom: var(--sp-6); }
-  .partner-card ul {
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    gap: var(--sp-2);
-    margin-bottom: var(--sp-6);
-  }
-  .partner-card li {
-    font-size: 0.85rem;
-    color: var(--text-secondary);
-    padding-left: 20px;
-    position: relative;
-  }
-  .partner-card li::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 8px;
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background: var(--gold-300);
-  }
+  .code-block .fn { color: var(--info); }
+  .code-block .num { color: #f0b429; }
 
   /* ── CTA Section ── */
   .cta-section {
@@ -273,23 +315,71 @@
     color: var(--text-muted);
     font-size: 1.02rem;
   }
+  .cta-btns {
+    display: flex;
+    gap: var(--sp-4);
+    justify-content: center;
+    flex-wrap: wrap;
+  }
 
   /* ── Responsive ── */
   @media (max-width: 1024px) {
-    .eco-ring { grid-template-columns: repeat(3, 1fr); }
-    .flow-steps { grid-template-columns: repeat(2, 1fr); }
-    .feature-grid { grid-template-columns: repeat(2, 1fr); }
+    .integ-grid { grid-template-columns: repeat(2, 1fr); }
+    .dev-layout { grid-template-columns: 1fr; gap: var(--sp-8); }
   }
   @media (max-width: 768px) {
     .eco-hero { padding: 100px 0 var(--sp-10); }
-    .eco-ring { grid-template-columns: repeat(2, 1fr); }
-    .flow-steps { grid-template-columns: 1fr; }
-    .feature-grid { grid-template-columns: 1fr; }
-    .partner-grid { grid-template-columns: 1fr; }
-    .eco-center { width: 110px; height: 110px; }
+    .integ-grid { grid-template-columns: 1fr; }
+    .arch-diagram { height: auto; min-height: 420px; }
+    .arch-hub { width: 120px; height: 120px; }
+    .arch-hub .hub-name { font-size: 0.9rem; }
+    .arch-orbit { width: 280px; height: 280px; }
+    .arch-spoke { width: 100px; }
+    .arch-spoke .spoke-dot { width: 44px; height: 44px; font-size: 1.2rem; }
+    .arch-spoke .spoke-label { font-size: 0.75rem; }
+    .arch-spoke:nth-child(2) { right: 0; }
+    .arch-spoke:nth-child(3) { right: 5px; }
+    .arch-spoke:nth-child(4) { left: 5px; }
+    .arch-spoke:nth-child(5) { left: 0; }
   }
   @media (max-width: 480px) {
-    .eco-ring { grid-template-columns: 1fr; }
+    .arch-diagram {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: var(--sp-4);
+      height: auto;
+      min-height: unset;
+      padding: var(--sp-4) 0;
+    }
+    .arch-hub {
+      position: relative;
+      top: auto; left: auto;
+      transform: none;
+    }
+    .arch-orbit { display: none; }
+    .arch-line { display: none; }
+    .arch-spoke {
+      position: relative;
+      top: auto !important;
+      left: auto !important;
+      right: auto !important;
+      bottom: auto !important;
+      transform: none !important;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      gap: var(--sp-3);
+      text-align: left;
+      padding: var(--sp-3) var(--sp-4);
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+    }
+    .arch-spoke .spoke-dot {
+      margin: 0;
+      min-width: 44px;
+    }
   }
 </style>
 </head>
@@ -332,82 +422,119 @@
   <div class="container">
     <div class="section-badge fade-up">ECOSYSTEM</div>
     <h1 class="fade-up">SEOBAIKE <span class="text-gold">生態系統</span></h1>
-    <p class="fade-up">市集、AI 引擎、金流、開發者工具 — 一個完整串連的商業生態，讓每個角色都能創造價值。</p>
+    <p class="hero-desc fade-up">一個以平台為核心的完整 AI 商業生態 — 串連服務、使用者、開發者與數據，讓每個節點都能創造價值。</p>
   </div>
 </section>
 
-<!-- ═══ Ecosystem Overview Diagram ═══ -->
+<!-- ═══ Architecture Diagram (Hub & Spoke) ═══ -->
 <section class="section-sm">
   <div class="container">
-    <div class="eco-diagram fade-up">
+    <div class="section-header fade-up">
+      <div class="section-badge">ARCHITECTURE</div>
+      <h2>平台<span class="text-gold">架構</span></h2>
+      <p>SEOBAIKE 是所有 AI 服務的中樞，串連五大核心模組</p>
+    </div>
+
+    <div class="arch-diagram fade-up">
+      <!-- Spoke nodes (5 around the hub) -->
+      <div class="arch-spoke">
+        <div class="spoke-dot">&#129302;</div>
+        <div class="spoke-label">AI 服務</div>
+      </div>
+      <div class="arch-spoke">
+        <div class="spoke-dot">&#128100;</div>
+        <div class="spoke-label">使用者</div>
+      </div>
+      <div class="arch-spoke">
+        <div class="spoke-dot">&#128268;</div>
+        <div class="spoke-label">API</div>
+      </div>
+      <div class="arch-spoke">
+        <div class="spoke-dot">&#128722;</div>
+        <div class="spoke-label">市集</div>
+      </div>
+      <div class="arch-spoke">
+        <div class="spoke-dot">&#128200;</div>
+        <div class="spoke-label">數據分析</div>
+      </div>
+
+      <!-- Decorative orbit ring -->
+      <div class="arch-orbit"></div>
+
       <!-- Center Hub -->
-      <div class="eco-center animate-glow">
-        <div class="logo-text">SEOBAIKE</div>
-        <div class="logo-sub">AI Platform</div>
+      <div class="arch-hub animate-glow">
+        <div class="hub-name">SEOBAIKE</div>
+        <div class="hub-sub">平台核心</div>
       </div>
 
-      <!-- Connectors -->
-      <div class="eco-connectors">
-        <div class="connector-line"></div>
-        <div class="connector-line"></div>
-        <div class="connector-line"></div>
-        <div class="connector-line"></div>
-        <div class="connector-line"></div>
-      </div>
+      <!-- Connector lines (CSS positioned) -->
+      <div class="arch-line"></div>
+      <div class="arch-line"></div>
+      <div class="arch-line"></div>
+      <div class="arch-line"></div>
+      <div class="arch-line"></div>
+    </div>
+  </div>
+</section>
 
-      <!-- Nodes Ring -->
-      <div class="eco-ring">
-        <div class="eco-node">
-          <span class="node-icon">&#128722;</span>
-          <div class="node-name">市集</div>
-          <div class="node-desc">AI 商品與服務交易平台</div>
-        </div>
-        <div class="eco-node">
-          <span class="node-icon">&#129302;</span>
-          <div class="node-name">AI 引擎</div>
-          <div class="node-desc">SEO 分析、內容生成、數據洞察</div>
-        </div>
-        <div class="eco-node">
-          <span class="node-icon">&#128179;</span>
-          <div class="node-name">金流</div>
-          <div class="node-desc">安全支付、分潤、SEO Points</div>
-        </div>
-        <div class="eco-node">
-          <span class="node-icon">&#127979;</span>
-          <div class="node-name">賣家</div>
-          <div class="node-desc">上架商品、管理訂單、獲取收益</div>
-        </div>
-        <div class="eco-node">
-          <span class="node-icon">&#128100;</span>
-          <div class="node-name">買家</div>
-          <div class="node-desc">發現工具、購買服務、成長事業</div>
-        </div>
-      </div>
+<hr class="divider">
+
+<!-- ═══ Integration Points (6 Cards) ═══ -->
+<section class="section" id="integration">
+  <div class="container">
+    <div class="section-header fade-up">
+      <div class="section-badge">INTEGRATION</div>
+      <h2>整合<span class="text-gold">能力</span></h2>
+      <p>六大核心整合模組，打造無縫 AI 商業體驗</p>
     </div>
 
-    <!-- Data Flow -->
-    <div class="section-header fade-up" style="margin-top:var(--sp-16);">
-      <div class="section-badge">HOW IT WORKS</div>
-      <h2>運作<span class="text-gold">流程</span></h2>
-      <p>從上架到交付，每一步都在生態系統內完成</p>
-    </div>
+    <div class="integ-grid fade-up">
+      <!-- 1. API 接入 -->
+      <div class="integ-card">
+        <div class="integ-icon">&#128268;</div>
+        <div class="integ-sub">RESTful API</div>
+        <h4>API 接入</h4>
+        <p>提供完整的 RESTful API 介面，開發者可直接串接 SEOBAIKE 的所有核心功能，包含服務查詢、訂單管理、數據分析等端點。</p>
+      </div>
 
-    <div class="flow-steps fade-up">
-      <div class="flow-step">
-        <h4>賣家上架</h4>
-        <p>將 AI 工具、模板、服務上架到 SEOBAIKE 市集，設定價格與說明</p>
+      <!-- 2. BYOK 架構 -->
+      <div class="integ-card">
+        <div class="integ-icon">&#128272;</div>
+        <div class="integ-sub">Bring Your Own Key</div>
+        <h4>BYOK 架構</h4>
+        <p>自帶 API 金鑰架構，使用者可使用自己的 AI 服務金鑰接入平台，資料不經過第三方，確保完整的隱私與控制權。</p>
       </div>
-      <div class="flow-step">
-        <h4>AI 引擎優化</h4>
-        <p>平台 AI 自動優化商品曝光度，智慧匹配潛在買家需求</p>
+
+      <!-- 3. 插拔式服務 -->
+      <div class="integ-card">
+        <div class="integ-icon">&#128257;</div>
+        <div class="integ-sub">Plug & Play</div>
+        <h4>插拔式服務</h4>
+        <p>所有 AI 服務皆採用插拔式架構設計，可隨時啟用或停用，無需修改程式碼。如同為 AI 服務打造的應用程式商店。</p>
       </div>
-      <div class="flow-step">
-        <h4>買家購買</h4>
-        <p>買家透過市集搜尋、比較並購買所需工具，安全金流處理</p>
+
+      <!-- 4. 數據儀表板 -->
+      <div class="integ-card">
+        <div class="integ-icon">&#128200;</div>
+        <div class="integ-sub">Real-time Dashboard</div>
+        <h4>數據儀表板</h4>
+        <p>即時監控面板，追蹤 API 使用量、服務健康狀態、效能指標與用量趨勢，所有數據一目了然。</p>
       </div>
-      <div class="flow-step">
-        <h4>價值交付</h4>
-        <p>自動交付商品、分潤結算，雙方皆獲得 SEO Points 回饋</p>
+
+      <!-- 5. 多語言支援 -->
+      <div class="integ-card">
+        <div class="integ-icon">&#127760;</div>
+        <div class="integ-sub">4 Languages</div>
+        <h4>多語言支援</h4>
+        <p>支援繁體中文、English、日本語、Bahasa Indonesia 四種語言，覆蓋亞太主要市場，讓服務觸及更廣的使用者群。</p>
+      </div>
+
+      <!-- 6. 安全合規 -->
+      <div class="integ-card">
+        <div class="integ-icon">&#128737;</div>
+        <div class="integ-sub">Taiwan PDPA Compliant</div>
+        <h4>安全合規</h4>
+        <p>遵循台灣個人資料保護法（PDPA）規範，所有資料傳輸採用加密通道，並提供完整的存取日誌與權限控管機制。</p>
       </div>
     </div>
   </div>
@@ -424,44 +551,68 @@
       <p>透過 API 串接 SEOBAIKE 生態系統，將 AI 能力嵌入你的產品</p>
     </div>
 
-    <div class="grid-2 fade-up">
-      <div>
-        <div class="feature-grid" style="grid-template-columns:1fr;">
-          <div class="feature-item">
-            <span class="feature-icon">&#128268;</span>
-            <h4>RESTful API</h4>
-            <p>完整的 REST API 文件，支援商品查詢、訂單建立、Points 管理等所有核心功能。</p>
+    <div class="dev-layout fade-up">
+      <div class="dev-info">
+        <h3>快速整合，立即上線</h3>
+        <p>SEOBAIKE API 基於 REST 設計，搭配清晰的端點命名與 JSON 回應格式，讓開發者可以在最短時間內完成串接。</p>
+
+        <div class="dev-steps">
+          <div class="dev-step">
+            <div class="dev-step-num">1</div>
+            <div class="dev-step-text">
+              <h4>取得 API 金鑰</h4>
+              <p>在儀表板建立專案並取得專屬金鑰</p>
+            </div>
           </div>
-          <div class="feature-item">
-            <span class="feature-icon">&#128272;</span>
-            <h4>API 金鑰認證</h4>
-            <p>安全的 API Key 機制，每個開發者專屬金鑰，支援速率限制與權限控管。</p>
+          <div class="dev-step">
+            <div class="dev-step-num">2</div>
+            <div class="dev-step-text">
+              <h4>呼叫 API 端點</h4>
+              <p>使用標準 HTTP 請求存取所有服務功能</p>
+            </div>
           </div>
-          <div class="feature-item">
-            <span class="feature-icon">&#128214;</span>
-            <h4>開發者文件</h4>
-            <p>詳細的技術文件、範例程式碼、SDK 指南，協助你快速完成整合。</p>
+          <div class="dev-step">
+            <div class="dev-step-num">3</div>
+            <div class="dev-step-text">
+              <h4>處理回應資料</h4>
+              <p>解析 JSON 回應並整合至你的應用程式</p>
+            </div>
+          </div>
+          <div class="dev-step">
+            <div class="dev-step-num">4</div>
+            <div class="dev-step-text">
+              <h4>監控與優化</h4>
+              <p>透過儀表板追蹤用量與效能指標</p>
+            </div>
           </div>
         </div>
       </div>
+
       <div>
         <div class="code-block">
-          <span class="cmt">// SEOBAIKE API 範例</span><br><br>
-          <span class="kw">const</span> response = <span class="kw">await</span> fetch(<br>
-          &nbsp;&nbsp;<span class="str">'https://aiforseo.vip/api/v1/products'</span>,<br>
-          &nbsp;&nbsp;{<br>
-          &nbsp;&nbsp;&nbsp;&nbsp;headers: {<br>
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="str">'Authorization'</span>: <span class="str">'Bearer YOUR_API_KEY'</span>,<br>
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="str">'Content-Type'</span>: <span class="str">'application/json'</span><br>
+          <span class="code-label">JavaScript</span>
+          <span class="cmt">// SEOBAIKE API &#8212; &#26381;&#21209;&#26597;&#35426;&#31684;&#20363;</span><br><br>
+          <span class="kw">const</span> <span class="fn">SEOBAIKE_API</span> = <span class="str">'https://aiforseo.vip/api/v1'</span>;<br><br>
+          <span class="kw">async function</span> <span class="fn">queryServices</span>(<span class="fn">category</span>) {<br>
+          &nbsp;&nbsp;<span class="kw">const</span> res = <span class="kw">await</span> <span class="fn">fetch</span>(<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;<span class="str">`${SEOBAIKE_API}/services?cat=${category}`</span>,<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;{<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;headers: {<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="str">'Authorization'</span>: <span class="str">'Bearer YOUR_API_KEY'</span>,<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="str">'Content-Type'</span>: <span class="str">'application/json'</span><br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
           &nbsp;&nbsp;&nbsp;&nbsp;}<br>
-          &nbsp;&nbsp;}<br>
-          );<br><br>
-          <span class="kw">const</span> data = <span class="kw">await</span> response.json();<br><br>
-          <span class="cmt">// 回傳商品列表</span><br>
+          &nbsp;&nbsp;);<br><br>
+          &nbsp;&nbsp;<span class="kw">const</span> data = <span class="kw">await</span> res.<span class="fn">json</span>();<br>
+          &nbsp;&nbsp;<span class="kw">return</span> data;<br>
+          }<br><br>
+          <span class="cmt">// &#22238;&#20659;&#26684;&#24335;</span><br>
           <span class="cmt">// {</span><br>
-          <span class="cmt">//   "products": [...],</span><br>
-          <span class="cmt">//   "total": 128,</span><br>
-          <span class="cmt">//   "page": 1</span><br>
+          <span class="cmt">//   "services": [</span><br>
+          <span class="cmt">//     { "id": "...", "name": "...", "status": "active" }</span><br>
+          <span class="cmt">//   ],</span><br>
+          <span class="cmt">//   "total": <span class="num">42</span>,</span><br>
+          <span class="cmt">//   "page": <span class="num">1</span></span><br>
           <span class="cmt">// }</span>
         </div>
         <div style="margin-top:var(--sp-6);display:flex;gap:var(--sp-4);">
@@ -475,95 +626,13 @@
 
 <hr class="divider">
 
-<!-- ═══ For Partners ═══ -->
-<section class="section" id="partners">
-  <div class="container">
-    <div class="section-header fade-up">
-      <div class="section-badge">PARTNERS</div>
-      <h2>合作<span class="text-gold">夥伴</span></h2>
-      <p>加入 SEOBAIKE 生態系統，與我們共同成長</p>
-    </div>
-
-    <div class="partner-grid fade-up">
-      <div class="partner-card">
-        <h3>&#128188; 商業合作</h3>
-        <p>將您的 AI 工具或服務帶進 SEOBAIKE 市集，觸及更多潛在客戶。</p>
-        <ul>
-          <li>專屬賣家後台管理</li>
-          <li>AI 智慧曝光優化</li>
-          <li>自動化分潤結算</li>
-          <li>品牌共同行銷機會</li>
-        </ul>
-        <a href="#" class="btn btn-primary">申請成為夥伴</a>
-      </div>
-      <div class="partner-card">
-        <h3>&#128736; 技術合作</h3>
-        <p>透過 API 或外掛機制，將 SEOBAIKE 的 AI 能力整合到您的平台。</p>
-        <ul>
-          <li>API 串接支援</li>
-          <li>客製化整合方案</li>
-          <li>技術文件與 SDK</li>
-          <li>專屬技術支援窗口</li>
-        </ul>
-        <a href="#" class="btn btn-secondary">技術合作洽詢</a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<hr class="divider">
-
-<!-- ═══ Integration ═══ -->
-<section class="section" id="integration">
-  <div class="container">
-    <div class="section-header fade-up">
-      <div class="section-badge">INTEGRATION</div>
-      <h2>整合<span class="text-gold">方式</span></h2>
-      <p>多種方式將 SEOBAIKE 接入您的工作流程</p>
-    </div>
-
-    <div class="feature-grid fade-up">
-      <div class="feature-item">
-        <span class="feature-icon">&#127760;</span>
-        <h4>網站嵌入</h4>
-        <p>一行程式碼即可在您的網站嵌入 SEOBAIKE AI Widget，提供即時 SEO 建議。</p>
-      </div>
-      <div class="feature-item">
-        <span class="feature-icon">&#128640;</span>
-        <h4>API 直接呼叫</h4>
-        <p>透過 RESTful API 直接呼叫 SEOBAIKE 的分析引擎與市集功能。</p>
-      </div>
-      <div class="feature-item">
-        <span class="feature-icon">&#128257;</span>
-        <h4>Webhook 通知</h4>
-        <p>訂單成立、商品更新等事件即時推送到您的系統，保持數據同步。</p>
-      </div>
-      <div class="feature-item">
-        <span class="feature-icon">&#128230;</span>
-        <h4>批量資料匯入</h4>
-        <p>支援 CSV / JSON 格式批量匯入商品，快速完成大量上架。</p>
-      </div>
-      <div class="feature-item">
-        <span class="feature-icon">&#128274;</span>
-        <h4>OAuth 2.0 授權</h4>
-        <p>標準 OAuth 2.0 流程，讓用戶安全授權您的應用存取其 SEOBAIKE 資料。</p>
-      </div>
-      <div class="feature-item">
-        <span class="feature-icon">&#128200;</span>
-        <h4>數據分析 API</h4>
-        <p>取得銷售數據、流量分析、SEO 評分等報表資料，驅動您的決策。</p>
-      </div>
-    </div>
-  </div>
-</section>
-
 <!-- ═══ CTA ═══ -->
 <section class="cta-section">
   <div class="container">
     <h2 class="fade-up">加入 SEOBAIKE <span class="text-gold">生態系統</span></h2>
-    <p class="fade-up">無論您是開發者、賣家或合作夥伴，SEOBAIKE 都為您準備了最佳位置。</p>
-    <div class="fade-up" style="display:flex;gap:var(--sp-4);justify-content:center;flex-wrap:wrap;">
-      <a href="/pricing.html" class="btn btn-primary btn-lg">立即開始</a>
+    <p class="fade-up">無論你是開發者、企業用戶或服務提供者，SEOBAIKE 都為你準備了最佳入口。</p>
+    <div class="cta-btns fade-up">
+      <a href="/start" class="btn btn-primary btn-lg">加入生態系統</a>
       <a href="/marketplace.html" class="btn btn-secondary btn-lg">探索市集</a>
     </div>
   </div>
@@ -591,8 +660,7 @@
       <div class="footer-col">
         <h4>生態系統</h4>
         <a href="#developers">開發者</a>
-        <a href="#partners">合作夥伴</a>
-        <a href="#integration">整合方式</a>
+        <a href="#integration">整合能力</a>
       </div>
       <div class="footer-col">
         <h4>公司</h4>

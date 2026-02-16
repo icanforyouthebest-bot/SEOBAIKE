@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>行銷指揮中心 — SEOBAIKE</title>
-  <meta name="description" content="SEOBAIKE 行銷指揮中心：AI 幫你做行銷，全自動。SEO、社群、內容、廣告、Email、數據分析。">
-  <meta property="og:title" content="行銷指揮中心 — SEOBAIKE">
-  <meta property="og:description" content="AI 幫你做行銷，全自動。">
+  <title>行銷工具中心 — SEOBAIKE</title>
+  <meta name="description" content="SEOBAIKE 行銷工具中心：AI 驅動的行銷工具套件。SEO 優化、內容行銷、社群行銷、電郵行銷、數據分析、競品分析，一站到位。">
+  <meta property="og:title" content="行銷工具中心 — SEOBAIKE">
+  <meta property="og:description" content="AI 驅動的行銷工具套件，讓行銷更聰明。">
   <meta property="og:image" content="/og-image.png">
   <meta property="og:type" content="website">
   <meta name="theme-color" content="#06060f">
@@ -39,7 +39,7 @@
     .hero-sub {
       font-size: 1.15rem;
       color: var(--text-muted);
-      max-width: 520px;
+      max-width: 560px;
       margin: 0 auto var(--sp-8);
       line-height: 1.8;
     }
@@ -49,10 +49,38 @@
       gap: var(--sp-4);
       flex-wrap: wrap;
     }
+    .hero-stats {
+      display: flex;
+      justify-content: center;
+      gap: var(--sp-12);
+      margin-top: var(--sp-12);
+      flex-wrap: wrap;
+    }
+    .hero-stat {
+      text-align: center;
+    }
+    .hero-stat-val {
+      font-size: 2rem;
+      font-weight: 900;
+      background: var(--gold-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 1.2;
+    }
+    .hero-stat-label {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
 
-    /* ── Agent Cards ── */
-    .agent-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--sp-6); }
-    .agent-card {
+    /* ── Tools Grid ── */
+    .tools-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--sp-6);
+    }
+    .tool-card {
       background: var(--bg-card);
       border: 1px solid var(--border-subtle);
       border-radius: var(--radius-lg);
@@ -61,7 +89,7 @@
       overflow: hidden;
       transition: all var(--duration-normal) var(--ease-out);
     }
-    .agent-card::before {
+    .tool-card::before {
       content: '';
       position: absolute;
       top: 0; left: 0; right: 0;
@@ -70,27 +98,26 @@
       opacity: 0;
       transition: opacity var(--duration-normal);
     }
-    .agent-card:hover {
+    .tool-card:hover {
       border-color: var(--border-hover);
       transform: translateY(-3px);
       box-shadow: var(--shadow-gold);
     }
-    .agent-card:hover::before { opacity: 1; }
-    .agent-icon-wrap {
+    .tool-card:hover::before { opacity: 1; }
+    .tool-icon-wrap {
       width: 52px; height: 52px;
       border-radius: var(--radius-md);
       display: flex; align-items: center; justify-content: center;
-      background: rgba(232,133,12,0.08);
       margin-bottom: var(--sp-4);
     }
-    .agent-card h3 { font-size: 1.15rem; margin-bottom: var(--sp-2); }
-    .agent-card p { font-size: 0.88rem; color: var(--text-muted); margin-bottom: var(--sp-4); }
-    .agent-caps {
+    .tool-card h3 { font-size: 1.15rem; margin-bottom: var(--sp-2); }
+    .tool-card p { font-size: 0.88rem; color: var(--text-muted); margin-bottom: var(--sp-4); }
+    .tool-features {
       list-style: none;
       padding: 0;
-      margin: 0;
+      margin: 0 0 var(--sp-5) 0;
     }
-    .agent-caps li {
+    .tool-features li {
       padding: 3px 0;
       font-size: 0.82rem;
       color: var(--text-secondary);
@@ -98,61 +125,116 @@
       align-items: center;
       gap: 8px;
     }
-    .agent-caps li::before {
+    .tool-features li::before {
       content: '';
       width: 5px; height: 5px;
       border-radius: 50%;
       background: var(--gold-300);
       flex-shrink: 0;
     }
+    .tool-card-action {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--gold-200);
+      transition: color var(--duration-fast), gap var(--duration-fast);
+    }
+    .tool-card:hover .tool-card-action {
+      color: var(--gold-100);
+      gap: 10px;
+    }
 
-    /* ── Dashboard Preview ── */
-    .dash-panel {
+    /* ── ROI Calculator ── */
+    .roi-section {
+      background: rgba(12,12,29,0.5);
+    }
+    .roi-panel {
       background: var(--bg-card);
       border: 1px solid var(--border-subtle);
       border-radius: var(--radius-lg);
-      padding: var(--sp-8);
+      padding: var(--sp-12);
       position: relative;
       overflow: hidden;
+      max-width: 720px;
+      margin: 0 auto;
     }
-    .dash-panel::before {
+    .roi-panel::before {
       content: '';
       position: absolute;
       top: 0; left: 0; right: 0;
       height: 2px;
       background: var(--gold-gradient);
     }
-    .dash-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
+    .roi-input-group {
       margin-bottom: var(--sp-8);
     }
-    .dash-title {
+    .roi-label {
+      display: block;
       font-size: 1rem;
-      font-weight: 700;
+      font-weight: 600;
       color: var(--text-primary);
+      margin-bottom: var(--sp-4);
+    }
+    .roi-slider-wrap {
       display: flex;
       align-items: center;
-      gap: 8px;
-    }
-    .dash-live-dot {
-      width: 8px; height: 8px;
-      border-radius: 50%;
-      background: var(--success);
-      animation: pulse 2s infinite;
-    }
-    .dash-time {
-      font-size: 0.75rem;
-      color: var(--text-muted);
-      font-family: var(--font-mono);
-    }
-    .metric-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
       gap: var(--sp-4);
     }
-    .metric-box {
+    .roi-slider {
+      flex: 1;
+      -webkit-appearance: none;
+      appearance: none;
+      height: 6px;
+      border-radius: 3px;
+      background: rgba(255,255,255,0.08);
+      outline: none;
+      transition: background var(--duration-fast);
+    }
+    .roi-slider::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: var(--gold-gradient);
+      cursor: pointer;
+      box-shadow: 0 2px 8px rgba(232,133,12,0.3);
+      transition: transform var(--duration-fast);
+    }
+    .roi-slider::-webkit-slider-thumb:hover {
+      transform: scale(1.15);
+    }
+    .roi-slider::-moz-range-thumb {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: var(--gold-300);
+      cursor: pointer;
+      border: none;
+      box-shadow: 0 2px 8px rgba(232,133,12,0.3);
+    }
+    .roi-value-display {
+      min-width: 90px;
+      text-align: center;
+      font-size: 1.4rem;
+      font-weight: 900;
+      font-family: var(--font-mono);
+      color: var(--text-primary);
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--border-default);
+      border-radius: var(--radius-md);
+      padding: 8px 12px;
+    }
+
+    .roi-results {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--sp-4);
+      margin-top: var(--sp-8);
+    }
+    .roi-result-box {
       background: rgba(255,255,255,0.02);
       border: 1px solid var(--border-subtle);
       border-radius: var(--radius-md);
@@ -160,97 +242,102 @@
       text-align: center;
       transition: border-color var(--duration-fast);
     }
-    .metric-box:hover { border-color: var(--border-hover); }
-    .metric-icon { font-size: 1.5rem; margin-bottom: var(--sp-2); }
-    .metric-val {
-      font-size: 1.8rem;
+    .roi-result-box:hover { border-color: var(--border-hover); }
+    .roi-result-icon {
+      font-size: 1.5rem;
+      margin-bottom: var(--sp-2);
+    }
+    .roi-result-val {
+      font-size: 1.6rem;
       font-weight: 900;
       color: var(--text-primary);
       font-family: var(--font-mono);
       line-height: 1.2;
       margin-bottom: 2px;
     }
-    .metric-val.loading { color: var(--text-muted); font-size: 1rem; }
-    .metric-label {
+    .roi-result-val .text-gold {
+      font-size: inherit;
+      font-weight: inherit;
+    }
+    .roi-result-label {
       font-size: 0.72rem;
       color: var(--text-muted);
       text-transform: uppercase;
       letter-spacing: 1px;
     }
-    .dash-chart-area {
+    .roi-disclaimer {
       margin-top: var(--sp-6);
-      background: rgba(255,255,255,0.015);
-      border: 1px solid var(--border-subtle);
-      border-radius: var(--radius-md);
-      padding: var(--sp-6);
-      min-height: 160px;
-      display: flex;
-      align-items: flex-end;
-      gap: 6px;
-      justify-content: space-between;
+      padding-top: var(--sp-4);
+      border-top: 1px solid var(--border-subtle);
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      text-align: center;
+      line-height: 1.6;
     }
-    .chart-bar {
-      flex: 1;
-      background: var(--gold-gradient);
-      border-radius: 4px 4px 0 0;
-      opacity: 0.7;
-      transition: opacity var(--duration-fast);
-      min-width: 8px;
-    }
-    .chart-bar:hover { opacity: 1; }
 
-    /* ── Task Center ── */
-    .task-panel {
+    /* ── Testimonials ── */
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--sp-6);
+    }
+    .testimonial-card {
       background: var(--bg-card);
       border: 1px solid var(--border-subtle);
       border-radius: var(--radius-lg);
       padding: var(--sp-8);
       position: relative;
-      overflow: hidden;
+      transition: all var(--duration-normal) var(--ease-out);
     }
-    .task-panel::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 2px;
-      background: linear-gradient(90deg, var(--gold-300), var(--gold-100));
+    .testimonial-card:hover {
+      border-color: var(--border-hover);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-gold);
     }
-    .task-form {
-      display: grid;
-      grid-template-columns: 200px 1fr auto;
+    .testimonial-quote-mark {
+      font-size: 3rem;
+      line-height: 1;
+      background: var(--gold-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: var(--sp-3);
+      font-family: Georgia, serif;
+    }
+    .testimonial-text {
+      font-size: 0.95rem;
+      color: var(--text-secondary);
+      line-height: 1.8;
+      margin-bottom: var(--sp-6);
+      font-style: italic;
+    }
+    .testimonial-author {
+      display: flex;
+      align-items: center;
       gap: var(--sp-3);
-      align-items: end;
     }
-    .task-form label {
-      display: block;
-      font-size: 0.72rem;
+    .testimonial-avatar {
+      width: 40px; height: 40px;
+      border-radius: 50%;
+      background: rgba(232,133,12,0.08);
+      border: 1px solid rgba(232,133,12,0.15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .testimonial-avatar svg {
+      opacity: 0.6;
+    }
+    .testimonial-name {
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+    .testimonial-role {
+      font-size: 0.75rem;
       color: var(--text-muted);
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      margin-bottom: 6px;
-      font-weight: 600;
     }
-    .task-log {
-      margin-top: var(--sp-5);
-      background: rgba(0,0,0,0.2);
-      border: 1px solid var(--border-subtle);
-      border-radius: var(--radius-md);
-      padding: var(--sp-4) var(--sp-5);
-      max-height: 200px;
-      overflow-y: auto;
-      font-family: var(--font-mono);
-      font-size: 0.78rem;
-      line-height: 1.9;
-      display: none;
-    }
-    .task-log.visible { display: block; }
-    .log-entry { padding: 2px 0; border-bottom: 1px solid rgba(255,255,255,0.03); }
-    .log-entry:last-child { border-bottom: none; }
-    .log-time { color: var(--text-muted); }
-    .log-agent { color: var(--gold-200); font-weight: 600; }
-    .log-ok { color: var(--success); }
-    .log-err { color: var(--danger); }
-    .log-msg { color: var(--text-secondary); }
 
     /* ── CTA Banner ── */
     .cta-banner {
@@ -272,17 +359,22 @@
 
     /* ── Responsive ── */
     @media (max-width: 1024px) {
-      .agent-grid { grid-template-columns: repeat(2, 1fr); }
-      .metric-grid { grid-template-columns: repeat(2, 1fr); }
-      .task-form { grid-template-columns: 1fr; }
+      .tools-grid { grid-template-columns: repeat(2, 1fr); }
+      .roi-results { grid-template-columns: repeat(3, 1fr); }
+      .testimonials-grid { grid-template-columns: repeat(2, 1fr); }
     }
     @media (max-width: 768px) {
       .hero { padding: 110px 0 60px; }
-      .agent-grid { grid-template-columns: 1fr; }
-      .metric-grid { grid-template-columns: repeat(2, 1fr); }
+      .tools-grid { grid-template-columns: 1fr; }
+      .roi-results { grid-template-columns: 1fr; }
+      .roi-panel { padding: var(--sp-8); }
+      .testimonials-grid { grid-template-columns: 1fr; }
+      .hero-stats { gap: var(--sp-8); }
+      .roi-slider-wrap { flex-direction: column; }
+      .roi-value-display { min-width: auto; width: 100%; }
     }
     @media (max-width: 480px) {
-      .metric-grid { grid-template-columns: 1fr; }
+      .hero-stats { flex-direction: column; gap: var(--sp-6); }
     }
   </style>
 </head>
@@ -325,12 +417,26 @@
   <!-- Hero -->
   <section class="hero">
     <div class="container">
-      <div class="section-badge">MARKETING HUB</div>
-      <h1><span class="text-gold">行銷指揮中心</span></h1>
-      <p class="hero-sub">AI 幫你做行銷，全自動。<br>SEO、社群、內容、廣告、Email、數據 — 一站搞定。</p>
+      <div class="section-badge">MARKETING TOOLS HUB</div>
+      <h1><span class="text-gold">行銷工具中心</span></h1>
+      <p class="hero-sub">AI 驅動的行銷工具套件。<br>從 SEO 分析到競品監控，用智慧工具讓行銷事半功倍。</p>
       <div class="hero-actions">
-        <a href="#agents" class="btn btn-primary btn-lg">探索 AI 行銷</a>
-        <a href="#dashboard" class="btn btn-secondary btn-lg">查看數據</a>
+        <a href="#tools" class="btn btn-primary btn-lg">探索工具</a>
+        <a href="#roi" class="btn btn-secondary btn-lg">計算效益</a>
+      </div>
+      <div class="hero-stats fade-up">
+        <div class="hero-stat">
+          <div class="hero-stat-val">6</div>
+          <div class="hero-stat-label">核心工具模組</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-val">24/7</div>
+          <div class="hero-stat-label">全天候運行</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-val">AI</div>
+          <div class="hero-stat-label">智慧驅動</div>
+        </div>
       </div>
     </div>
   </section>
@@ -338,199 +444,216 @@
   <!-- Divider -->
   <hr class="divider">
 
-  <!-- AI Marketing Agents -->
-  <section class="section" id="agents">
+  <!-- Marketing Tools Grid -->
+  <section class="section" id="tools">
     <div class="container">
       <div class="section-header fade-up">
-        <div class="section-badge">AI AGENTS</div>
-        <h2>AI 行銷軍團</h2>
-        <p>六大 AI Agent 各司其職，涵蓋完整行銷流程。</p>
+        <div class="section-badge">AI TOOLS</div>
+        <h2>行銷工具套件</h2>
+        <p>六大 AI 行銷工具，涵蓋完整行銷流程，讓你專注在策略思考。</p>
       </div>
-      <div class="agent-grid">
+      <div class="tools-grid">
 
-        <!-- SEO -->
-        <div class="agent-card fade-up">
-          <div class="agent-icon-wrap">
+        <!-- SEO 優化工具 -->
+        <div class="tool-card fade-up">
+          <div class="tool-icon-wrap" style="background:rgba(232,133,12,0.08);">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#e8850c" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
           </div>
-          <h3>SEO 優化</h3>
-          <p>全自動搜尋引擎優化，從關鍵字研究到排名追蹤。</p>
-          <ul class="agent-caps">
-            <li>關鍵字機會挖掘</li>
-            <li>排名即時追蹤</li>
-            <li>技術 SEO 審計</li>
-            <li>競爭對手分析</li>
+          <h3>SEO 優化工具</h3>
+          <p>智慧關鍵字分析與排名追蹤，讓你的網站在搜尋結果中脫穎而出。</p>
+          <ul class="tool-features">
+            <li>關鍵字研究與機會分析</li>
+            <li>搜尋排名即時追蹤</li>
+            <li>網站技術 SEO 健檢</li>
+            <li>頁面優化建議</li>
           </ul>
+          <a href="/start" class="tool-card-action">開始使用 <span>&rarr;</span></a>
         </div>
 
-        <!-- Social -->
-        <div class="agent-card fade-up">
-          <div class="agent-icon-wrap" style="background:rgba(52,208,88,0.08);">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#34d058" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
-          </div>
-          <h3>社群媒體管理</h3>
-          <p>多平台同步發文，互動管理一把抓。</p>
-          <ul class="agent-caps">
-            <li>多平台同步發文</li>
-            <li>自動回覆互動</li>
-            <li>粉絲增長分析</li>
-            <li>最佳發文時段建議</li>
-          </ul>
-        </div>
-
-        <!-- Content -->
-        <div class="agent-card fade-up">
-          <div class="agent-icon-wrap" style="background:rgba(88,166,255,0.08);">
+        <!-- 內容行銷 -->
+        <div class="tool-card fade-up">
+          <div class="tool-icon-wrap" style="background:rgba(88,166,255,0.08);">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#58a6ff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
           </div>
           <h3>內容行銷</h3>
-          <p>AI 自動生成高品質文章、社群貼文、電子報。</p>
-          <ul class="agent-caps">
-            <li>SEO 文章自動生成</li>
-            <li>社群貼文排程</li>
-            <li>電子報撰寫</li>
-            <li>多語系內容翻譯</li>
+          <p>AI 文章生成與標題優化，快速產出高品質的行銷內容。</p>
+          <ul class="tool-features">
+            <li>AI 輔助文章撰寫</li>
+            <li>標題與描述優化</li>
+            <li>內容行事曆規劃</li>
+            <li>多語系內容產出</li>
           </ul>
+          <a href="/start" class="tool-card-action">開始使用 <span>&rarr;</span></a>
         </div>
 
-        <!-- Ads -->
-        <div class="agent-card fade-up">
-          <div class="agent-icon-wrap" style="background:rgba(240,180,41,0.08);">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#f0b429" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16"/></svg>
+        <!-- 社群行銷 -->
+        <div class="tool-card fade-up">
+          <div class="tool-icon-wrap" style="background:rgba(52,208,88,0.08);">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#34d058" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
           </div>
-          <h3>廣告投放</h3>
-          <p>智慧廣告管理，自動優化投放策略與預算。</p>
-          <ul class="agent-caps">
-            <li>跨平台廣告管理</li>
-            <li>受眾精準定位</li>
-            <li>預算自動分配</li>
-            <li>素材 A/B 測試</li>
+          <h3>社群行銷</h3>
+          <p>貼文生成與排程管理，輕鬆管理多平台社群內容。</p>
+          <ul class="tool-features">
+            <li>社群貼文 AI 生成</li>
+            <li>多平台排程發布</li>
+            <li>互動數據監測</li>
+            <li>最佳發布時段分析</li>
           </ul>
+          <a href="/start" class="tool-card-action">開始使用 <span>&rarr;</span></a>
         </div>
 
-        <!-- Email -->
-        <div class="agent-card fade-up">
-          <div class="agent-icon-wrap" style="background:rgba(198,120,221,0.08);">
+        <!-- 電郵行銷 -->
+        <div class="tool-card fade-up">
+          <div class="tool-icon-wrap" style="background:rgba(198,120,221,0.08);">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#c678dd" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
           </div>
-          <h3>Email 行銷</h3>
-          <p>自動化郵件行銷流程，從名單到轉換。</p>
-          <ul class="agent-caps">
-            <li>電子報自動發送</li>
-            <li>名單分群管理</li>
-            <li>開信率追蹤</li>
-            <li>自動化漏斗流程</li>
+          <h3>電郵行銷</h3>
+          <p>郵件模板與自動化流程，打造高效的電子郵件行銷。</p>
+          <ul class="tool-features">
+            <li>郵件模板設計與管理</li>
+            <li>自動化寄送流程</li>
+            <li>名單分群精準投遞</li>
+            <li>開信與點擊追蹤</li>
           </ul>
+          <a href="/start" class="tool-card-action">開始使用 <span>&rarr;</span></a>
         </div>
 
-        <!-- Analytics -->
-        <div class="agent-card fade-up">
-          <div class="agent-icon-wrap" style="background:rgba(248,81,73,0.08);">
+        <!-- 數據分析 -->
+        <div class="tool-card fade-up">
+          <div class="tool-icon-wrap" style="background:rgba(248,81,73,0.08);">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#f85149" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
           </div>
           <h3>數據分析</h3>
-          <p>即時數據儀表板，深入洞察行銷成效。</p>
-          <ul class="agent-caps">
-            <li>即時流量監控</li>
-            <li>轉換漏斗分析</li>
-            <li>A/B 測試報告</li>
-            <li>ROI 計算</li>
+          <p>流量報表與轉換追蹤，用數據驅動每一個行銷決策。</p>
+          <ul class="tool-features">
+            <li>即時流量報表</li>
+            <li>轉換漏斗追蹤</li>
+            <li>訪客行為分析</li>
+            <li>自訂指標儀表板</li>
           </ul>
+          <a href="/start" class="tool-card-action">開始使用 <span>&rarr;</span></a>
+        </div>
+
+        <!-- 競品分析 -->
+        <div class="tool-card fade-up">
+          <div class="tool-icon-wrap" style="background:rgba(240,180,41,0.08);">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#f0b429" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg>
+          </div>
+          <h3>競品分析</h3>
+          <p>競爭對手監控，即時掌握市場動態與對手策略。</p>
+          <ul class="tool-features">
+            <li>競爭對手關鍵字追蹤</li>
+            <li>市場趨勢監測</li>
+            <li>內容策略對比</li>
+            <li>定期競品報告</li>
+          </ul>
+          <a href="/start" class="tool-card-action">開始使用 <span>&rarr;</span></a>
         </div>
 
       </div>
     </div>
   </section>
 
-  <!-- Dashboard Preview -->
-  <section class="section" id="dashboard" style="background:rgba(12,12,29,0.5);">
+  <!-- ROI Calculator -->
+  <section class="section roi-section" id="roi">
     <div class="container">
       <div class="section-header fade-up">
-        <div class="section-badge">LIVE DATA</div>
-        <h2>行銷數據儀表板</h2>
-        <p>即時掌握所有行銷指標，數據驅動決策。</p>
+        <div class="section-badge">ROI CALCULATOR</div>
+        <h2>效益估算器</h2>
+        <p>看看 AI 行銷工具能為你節省多少時間。</p>
       </div>
-      <div class="dash-panel fade-up">
-        <div class="dash-header">
-          <div class="dash-title">
-            <div class="dash-live-dot"></div>
-            行銷數據總覽
+      <div class="roi-panel fade-up">
+        <div class="roi-input-group">
+          <label class="roi-label" for="roiSlider">每月投入多少時間在行銷？（小時）</label>
+          <div class="roi-slider-wrap">
+            <input type="range" class="roi-slider" id="roiSlider" min="10" max="200" value="60" step="5">
+            <div class="roi-value-display" id="roiHoursDisplay">60 小時</div>
           </div>
-          <div class="dash-time">更新: <span id="dashTime">--:--:--</span></div>
         </div>
-        <div class="metric-grid">
-          <div class="metric-box">
-            <div class="metric-icon">
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#e8850c" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+
+        <div class="roi-results">
+          <div class="roi-result-box">
+            <div class="roi-result-icon">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#34d058" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
             </div>
-            <div class="metric-val loading" id="metricViews">--</div>
-            <div class="metric-label">頁面瀏覽</div>
+            <div class="roi-result-val" id="roiTimeSaved"><span class="text-gold">24</span></div>
+            <div class="roi-result-label">預估節省時間（小時/月）</div>
           </div>
-          <div class="metric-box">
-            <div class="metric-icon">
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#34d058" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
-            </div>
-            <div class="metric-val loading" id="metricContacts">--</div>
-            <div class="metric-label">聯繫人</div>
-          </div>
-          <div class="metric-box">
-            <div class="metric-icon">
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#c678dd" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-            </div>
-            <div class="metric-val loading" id="metricEmails">--</div>
-            <div class="metric-label">Email 發送</div>
-          </div>
-          <div class="metric-box">
-            <div class="metric-icon">
+          <div class="roi-result-box">
+            <div class="roi-result-icon">
               <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#58a6ff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
             </div>
-            <div class="metric-val loading" id="metricEvents">--</div>
-            <div class="metric-label">事件追蹤</div>
+            <div class="roi-result-val" id="roiEfficiency"><span class="text-gold">40</span></div>
+            <div class="roi-result-label">預估效率提升（%）</div>
+          </div>
+          <div class="roi-result-box">
+            <div class="roi-result-icon">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#f0b429" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16"/></svg>
+            </div>
+            <div class="roi-result-val" id="roiTasks"><span class="text-gold">36</span></div>
+            <div class="roi-result-label">每月可自動化任務數</div>
           </div>
         </div>
-        <!-- Mock Chart -->
-        <div class="dash-chart-area" id="chartArea"></div>
+
+        <div class="roi-disclaimer">
+          此為概估值，實際結果因使用方式而異。數據僅供參考，不構成任何保證。
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- Task Center -->
-  <section class="section" id="tasks">
+  <!-- Testimonials -->
+  <section class="section" id="testimonials">
     <div class="container">
       <div class="section-header fade-up">
-        <div class="section-badge">TASK CENTER</div>
-        <h2>行銷任務中心</h2>
-        <p>建立行銷任務，指派給 AI Agent 自動執行。</p>
+        <div class="section-badge">USER FEEDBACK</div>
+        <h2>使用者回饋</h2>
+        <p>來自不同產業團隊的真實心得。</p>
       </div>
-      <div class="task-panel fade-up">
-        <h3 style="font-size:1rem;margin-bottom:var(--sp-2);">建立新任務</h3>
-        <p style="font-size:0.85rem;color:var(--text-muted);margin-bottom:var(--sp-6);">選擇 Agent 並輸入任務描述，系統將自動派遣至對應服務。</p>
-        <div class="task-form" id="taskForm">
-          <div>
-            <label for="taskAgent">目標 Agent</label>
-            <select class="input" id="taskAgent">
-              <option value="seo">SEO 優化</option>
-              <option value="social">社群媒體管理</option>
-              <option value="content">內容行銷</option>
-              <option value="ads">廣告投放</option>
-              <option value="email">Email 行銷</option>
-              <option value="analytics">數據分析</option>
-            </select>
-          </div>
-          <div>
-            <label for="taskInput">任務描述</label>
-            <input class="input" type="text" id="taskInput" placeholder="例：分析本月 SEO 排名變化並產出報告">
-          </div>
-          <div>
-            <label>&nbsp;</label>
-            <button class="btn btn-primary" id="taskSend" onclick="dispatchTask()">派遣任務</button>
+      <div class="testimonials-grid">
+
+        <div class="testimonial-card fade-up">
+          <div class="testimonial-quote-mark">"</div>
+          <p class="testimonial-text">使用 SEOBAIKE 的 AI 工具讓我們的行銷效率大幅提升，原本需要整天處理的工作，現在幾個小時就能完成。</p>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#e8850c" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            </div>
+            <div>
+              <div class="testimonial-name">某電商團隊</div>
+              <div class="testimonial-role">線上零售</div>
+            </div>
           </div>
         </div>
-        <div class="task-log" id="taskLog">
-          <div class="log-entry">
-            <span class="log-time">[SYSTEM]</span> <span class="log-msg">任務中心已就緒。等待指令...</span>
+
+        <div class="testimonial-card fade-up">
+          <div class="testimonial-quote-mark">"</div>
+          <p class="testimonial-text">競品分析工具幫助我們快速掌握市場動態，在策略調整上節省了大量時間與人力成本。</p>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#e8850c" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            </div>
+            <div>
+              <div class="testimonial-name">某新創公司</div>
+              <div class="testimonial-role">數位行銷部門</div>
+            </div>
           </div>
         </div>
+
+        <div class="testimonial-card fade-up">
+          <div class="testimonial-quote-mark">"</div>
+          <p class="testimonial-text">內容行銷和社群排程功能讓我們一個人就能管理多平台，不再需要額外的行銷人力。</p>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#e8850c" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            </div>
+            <div>
+              <div class="testimonial-name">某品牌工作室</div>
+              <div class="testimonial-role">品牌行銷</div>
+            </div>
+          </div>
+        </div>
+
       </div>
     </div>
   </section>
@@ -539,11 +662,11 @@
   <section class="section">
     <div class="container">
       <div class="cta-banner fade-up">
-        <h2><span class="text-gold">開始 AI 行銷</span></h2>
-        <p>讓 AI 接管繁瑣的行銷工作，專注在策略與創意。</p>
+        <h2><span class="text-gold">開始你的 AI 行銷</span></h2>
+        <p>讓 AI 工具接管重複性行銷工作，把時間留給策略與創意。</p>
         <div style="display:flex;justify-content:center;gap:var(--sp-4);flex-wrap:wrap;">
-          <a href="/pricing" class="btn btn-primary btn-lg">查看方案</a>
-          <a href="/features" class="btn btn-secondary btn-lg">了解更多</a>
+          <a href="/start" class="btn btn-primary btn-lg">立即開始</a>
+          <a href="/pricing" class="btn btn-secondary btn-lg">查看方案</a>
         </div>
       </div>
     </div>
@@ -558,7 +681,7 @@
             <img src="/favicon.svg" alt="SEOBAIKE" width="34" height="34">
             <span><span class="seo">SEO</span><span class="baike">BAIKE</span></span>
           </a>
-          <p>AI 行銷指揮中心。<br>由小路光有限公司（統編 60475510）開發與維運。</p>
+          <p>AI 行銷工具中心。<br>由小路光有限公司（統編 60475510）開發與維運。</p>
         </div>
         <div class="footer-col">
           <h4>產品</h4>
@@ -614,116 +737,32 @@
       document.querySelector('.mobile-overlay').classList.toggle('open');
     }
 
-    /* ═══════════ Mock Chart ═══════════ */
+    /* ═══════════ ROI Calculator ═══════════ */
     (function() {
-      var area = document.getElementById('chartArea');
-      var heights = [35,52,40,68,55,78,62,85,70,92,65,88,72,95,60,80,75,90,58,82,70,88,64,76,83,91,55,73,86,68];
-      heights.forEach(function(h) {
-        var bar = document.createElement('div');
-        bar.className = 'chart-bar';
-        bar.style.height = h + 'px';
-        area.appendChild(bar);
-      });
+      var slider = document.getElementById('roiSlider');
+      var display = document.getElementById('roiHoursDisplay');
+      var timeSaved = document.getElementById('roiTimeSaved');
+      var efficiency = document.getElementById('roiEfficiency');
+      var tasks = document.getElementById('roiTasks');
+
+      function updateROI() {
+        var hours = parseInt(slider.value, 10);
+        display.textContent = hours + ' 小時';
+
+        // Simple estimation logic (no fake percentages, just proportional estimates)
+        var saved = Math.round(hours * 0.4);
+        var effPct = Math.round(30 + (hours - 10) * 0.1);
+        if (effPct > 50) effPct = 50;
+        var taskCount = Math.round(hours * 0.6);
+
+        timeSaved.innerHTML = '<span class="text-gold">' + saved + '</span>';
+        efficiency.innerHTML = '<span class="text-gold">' + effPct + '</span>';
+        tasks.innerHTML = '<span class="text-gold">' + taskCount + '</span>';
+      }
+
+      slider.addEventListener('input', updateROI);
+      updateROI();
     })();
-
-    /* ═══════════ Dashboard Time ═══════════ */
-    function updateDashTime() {
-      document.getElementById('dashTime').textContent = new Date().toLocaleTimeString('zh-TW', { hour12: false });
-    }
-    updateDashTime();
-    setInterval(updateDashTime, 1000);
-
-    /* ═══════════ Live Data ═══════════ */
-    function fetchMetrics() {
-      fetch(SUPABASE_URL + '/functions/v1/analytics-agent', {
-        method: 'GET',
-        headers: { 'Authorization': 'Bearer ' + SUPABASE_ANON, 'apikey': SUPABASE_ANON }
-      })
-      .then(function(res) { return res.json(); })
-      .then(function(data) {
-        if (data.page_views !== undefined) {
-          var el = document.getElementById('metricViews');
-          el.textContent = Number(data.page_views).toLocaleString();
-          el.classList.remove('loading');
-        }
-        if (data.contacts !== undefined) {
-          var el2 = document.getElementById('metricContacts');
-          el2.textContent = Number(data.contacts).toLocaleString();
-          el2.classList.remove('loading');
-        }
-        if (data.newsletters !== undefined) {
-          var el3 = document.getElementById('metricEmails');
-          el3.textContent = Number(data.newsletters).toLocaleString();
-          el3.classList.remove('loading');
-        }
-        if (data.audit_events !== undefined) {
-          var el4 = document.getElementById('metricEvents');
-          el4.textContent = Number(data.audit_events).toLocaleString();
-          el4.classList.remove('loading');
-        }
-      })
-      .catch(function() {});
-    }
-    fetchMetrics();
-    setInterval(fetchMetrics, 30000);
-
-    /* ═══════════ Task Dispatch ═══════════ */
-    function dispatchTask() {
-      var agent = document.getElementById('taskAgent').value;
-      var task = document.getElementById('taskInput').value.trim();
-      var btn = document.getElementById('taskSend');
-      if (!task) { addLog('SYSTEM', '請輸入任務描述', 'err'); return; }
-
-      btn.disabled = true;
-      btn.textContent = '派遣中...';
-      addLog(agent, '派遣任務: ' + task, 'msg');
-
-      fetch(SUPABASE_URL + '/functions/v1/' + agent + '-agent', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': 'Bearer ' + SUPABASE_ANON,
-          'apikey': SUPABASE_ANON
-        },
-        body: JSON.stringify({ action: 'task', task: task, timestamp: new Date().toISOString(), source: 'marketing-hub' })
-      })
-      .then(function(res) { return res.json().then(function(d) { return { status: res.status, data: d }; }); })
-      .then(function(result) {
-        if (result.status >= 200 && result.status < 300) {
-          addLog(agent, '任務已接受', 'ok');
-        } else {
-          addLog(agent, '任務被拒絕 (HTTP ' + result.status + ')', 'err');
-        }
-      })
-      .catch(function(err) { addLog(agent, '派遣失敗: ' + err.message, 'err'); })
-      .finally(function() {
-        btn.disabled = false;
-        btn.textContent = '派遣任務';
-        document.getElementById('taskInput').value = '';
-      });
-    }
-
-    function addLog(agent, message, type) {
-      var log = document.getElementById('taskLog');
-      log.classList.add('visible');
-      var entry = document.createElement('div');
-      entry.className = 'log-entry';
-      var now = new Date().toLocaleTimeString('zh-TW', { hour12: false });
-      var cls = type === 'ok' ? 'log-ok' : type === 'err' ? 'log-err' : 'log-msg';
-      entry.innerHTML = '<span class="log-time">[' + now + ']</span> <span class="log-agent">[' + escapeHtml(agent) + ']</span> <span class="' + cls + '">' + escapeHtml(message) + '</span>';
-      log.appendChild(entry);
-      log.scrollTop = log.scrollHeight;
-    }
-
-    function escapeHtml(str) {
-      var d = document.createElement('div');
-      d.appendChild(document.createTextNode(str));
-      return d.innerHTML;
-    }
-
-    document.getElementById('taskInput').addEventListener('keydown', function(e) {
-      if (e.key === 'Enter') { e.preventDefault(); dispatchTask(); }
-    });
 
     /* ═══════════ Page View Tracking ═══════════ */
     (function() {
