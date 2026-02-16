@@ -515,31 +515,39 @@
     </div>
   </div>
 
-  <!-- ═══ Stats Row (4 cards) ═══ -->
+  <!-- ═══ Stats Row (4 cards) — LIVE DATA ═══ -->
   <div class="stats-row fade-up">
     <div class="stat-card">
       <div class="stat-icon gold">&#11088;</div>
-      <div class="stat-value">3,580</div>
-      <div class="stat-label">SP 餘額（SEO Points）</div>
-      <div class="stat-change up">&#9650; 420 本月獲得</div>
+      <div class="stat-value" id="stat-providers">--</div>
+      <div class="stat-label">AI Providers 在線</div>
+      <div class="stat-change up" id="stat-providers-sub">載入中...</div>
     </div>
     <div class="stat-card">
       <div class="stat-icon blue">&#128202;</div>
-      <div class="stat-value">128</div>
-      <div class="stat-label">本月使用量（次）</div>
-      <div class="stat-change up">&#9650; 較上月增加 15%</div>
+      <div class="stat-value" id="stat-calls">--</div>
+      <div class="stat-label">API 呼叫總次數</div>
+      <div class="stat-change up" id="stat-calls-sub">載入中...</div>
     </div>
     <div class="stat-card">
       <div class="stat-icon purple">&#9881;</div>
-      <div class="stat-value">5</div>
-      <div class="stat-label">已啟用服務數</div>
-      <div class="stat-change neutral">共 12 項可用</div>
+      <div class="stat-value" id="stat-keys">--</div>
+      <div class="stat-label">已安裝 API Keys</div>
+      <div class="stat-change neutral" id="stat-keys-sub">載入中...</div>
     </div>
     <div class="stat-card">
       <div class="stat-icon green">&#9989;</div>
-      <div class="stat-value">啟用中</div>
-      <div class="stat-label">帳戶狀態</div>
-      <div class="stat-change up">免費方案</div>
+      <div class="stat-value" id="stat-status">--</div>
+      <div class="stat-label">系統狀態</div>
+      <div class="stat-change up" id="stat-status-sub">檢測中...</div>
+    </div>
+  </div>
+
+  <!-- ═══ Live AI Provider Status Grid ═══ -->
+  <div class="fade-up" style="margin-bottom:var(--sp-8);">
+    <h3 style="margin-bottom:var(--sp-4);">AI Provider 即時狀態</h3>
+    <div id="provider-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px;">
+      <div style="color:var(--text-muted);padding:20px;">載入中...</div>
     </div>
   </div>
 
@@ -801,7 +809,7 @@ function toggleMenu() {
 (function(){
   try {
     const endpoint = 'https://vmyrivxxibqydccurxug.supabase.co/rest/v1/page_views';
-    const apiKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZteXJpdnh4aWJxeWRjY3VyeHVnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDcwMTcyMDAsImV4cCI6MjA2MjU5MzIwMH0.ItEkER45F6kInS0jMD6p7UfJbJV8CEkBYPBbIl2R6FI';
+    const apiKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZteXJpdnh4aWJxeWRjY3VyeHVnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzAwNDAwMjksImV4cCI6MjA4NTYxNjAyOX0.iBV-23LGdm_uKffAExgqSV34-NWoAyv8_-M_cJQZ8Gg';
     fetch(endpoint, {
       method: 'POST',
       headers: {
@@ -820,6 +828,70 @@ function toggleMenu() {
 })();
 </script>
 
+<!-- ═══ LIVE Dashboard Data Loader ═══ -->
+<script>
+(function(){
+  var BASE = 'https://vmyrivxxibqydccurxug.supabase.co/rest/v1';
+  var KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZteXJpdnh4aWJxeWRjY3VyeHVnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzAwNDAwMjksImV4cCI6MjA4NTYxNjAyOX0.iBV-23LGdm_uKffAExgqSV34-NWoAyv8_-M_cJQZ8Gg';
+  var H = {'apikey':KEY,'Authorization':'Bearer '+KEY};
+
+  // Fetch AI Providers
+  fetch(BASE+'/ai_providers?select=name,status,total_calls,updated_at&order=name',{headers:H})
+  .then(function(r){return r.json()})
+  .then(function(data){
+    var online = data.filter(function(d){return d.status==='online'}).length;
+    var total = data.length;
+    var calls = data.reduce(function(s,d){return s+(d.total_calls||0)},0);
+    document.getElementById('stat-providers').textContent = online+'/'+total;
+    document.getElementById('stat-providers-sub').textContent = online === total ? 'ALL GREEN' : (total-online)+' offline';
+    document.getElementById('stat-providers-sub').className = 'stat-change '+(online===total?'up':'');
+    document.getElementById('stat-calls').textContent = calls;
+    document.getElementById('stat-calls-sub').textContent = 'across '+total+' providers';
+    document.getElementById('stat-status').textContent = online === total ? 'ALL GREEN' : online+' online';
+    document.getElementById('stat-status-sub').textContent = new Date().toLocaleTimeString('zh-TW');
+    document.getElementById('stat-status-sub').className = 'stat-change up';
+
+    // Render provider grid
+    var grid = document.getElementById('provider-grid');
+    grid.innerHTML = '';
+    data.forEach(function(p){
+      var isOn = p.status === 'online';
+      var card = document.createElement('div');
+      card.style.cssText = 'padding:12px 16px;border-radius:10px;border:1px solid '+(isOn?'#22c55e33':'#ef444433')+';background:'+(isOn?'#22c55e08':'#ef444408');
+      card.innerHTML = '<div style="display:flex;align-items:center;gap:8px;margin-bottom:4px;">'
+        +'<span style="width:10px;height:10px;border-radius:50%;background:'+(isOn?'#22c55e':'#ef4444')+';display:inline-block;"></span>'
+        +'<strong style="font-size:0.85rem;">'+p.name+'</strong></div>'
+        +'<div style="font-size:0.75rem;color:var(--text-muted);">calls: '+(p.total_calls||0)+' | '+p.status+'</div>';
+      grid.appendChild(card);
+    });
+  }).catch(function(e){
+    document.getElementById('stat-providers').textContent = 'ERR';
+    document.getElementById('provider-grid').innerHTML = '<div style="color:red;">'+e.message+'</div>';
+  });
+
+  // Fetch API Keys count
+  fetch(BASE+'/app_secrets?select=key',{headers:H})
+  .then(function(r){return r.json()})
+  .then(function(data){
+    document.getElementById('stat-keys').textContent = data.length;
+    document.getElementById('stat-keys-sub').textContent = data.length+' keys installed';
+    document.getElementById('stat-keys-sub').className = 'stat-change up';
+  }).catch(function(){
+    document.getElementById('stat-keys').textContent = '?';
+  });
+
+  // Fetch Usage Logs count
+  fetch(BASE+'/boss_api_usage_logs?select=id&limit=1',{headers:H, method:'HEAD'})
+  .then(function(r){
+    var ct = r.headers.get('content-range');
+    if(ct){
+      var total = ct.split('/')[1];
+      var el = document.getElementById('stat-calls-sub');
+      if(el) el.textContent = total+' total log entries';
+    }
+  }).catch(function(){});
+})();
+</script>
 <script src="/assets/analytics.js" defer></script>
 <!-- SEOBAIKE Widget -->
 <script src="https://vmyrivxxibqydccurxug.supabase.co/functions/v1/seobaike-widget" defer></script>
