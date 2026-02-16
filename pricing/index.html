@@ -1,0 +1,1240 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>方案與定價 — SEOBAIKE | SEO Points 彈性點數制</title>
+  <meta name="description" content="SEOBAIKE 採用 SEO Points 點數制，彈性又透明。免費方案、專業方案、企業方案三種選擇，滿足不同階段需求。價格以新台幣顯示。">
+  <meta name="keywords" content="SEOBAIKE,定價,SEO Points,AI 平台定價,點數制,台灣 AI 服務,AI 方案,企業 AI">
+  <link rel="canonical" href="https://aiforseo.vip/pricing">
+  <meta property="og:title" content="方案與定價 — SEOBAIKE | SEO Points 點數制">
+  <meta property="og:description" content="用 SEO Points 點數交易，彈性又透明。三種方案，從免費到企業級。">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://aiforseo.vip/pricing">
+  <meta property="og:image" content="/og-image.png">
+  <meta property="og:site_name" content="SEOBAIKE">
+  <meta property="og:locale" content="zh_TW">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="方案與定價 — SEOBAIKE | SEO Points 點數制">
+  <meta name="twitter:description" content="用 SEO Points 點數交易，彈性又透明。三種方案，從免費到企業級。">
+  <meta name="theme-color" content="#06060f">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/og-image.png">
+  <link rel="manifest" href="/manifest.json">
+
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": "SEOBAIKE AI 平台",
+    "description": "SEO Points 點數制 AI 平台，彈性透明",
+    "brand": { "@type": "Brand", "name": "SEOBAIKE" },
+    "offers": [
+      { "@type": "Offer", "name": "免費方案", "price": "0", "priceCurrency": "TWD", "description": "每月 100 SEO Points，基本 AI 服務", "availability": "https://schema.org/InStock" },
+      { "@type": "Offer", "name": "專業方案", "price": "499", "priceCurrency": "TWD", "description": "每月 2,000 SEO Points，全部 AI 服務，優先技術支援", "availability": "https://schema.org/InStock" },
+      { "@type": "Offer", "name": "企業方案", "priceCurrency": "TWD", "description": "客製報價，無限 SEO Points，專屬客服，SLA 協議", "availability": "https://schema.org/InStock" }
+    ]
+  }
+  </script>
+
+  <!-- Design System -->
+  <link rel="stylesheet" href="/assets/design-system.css">
+  <link rel="stylesheet" href="/assets/premium-fx.css">
+
+  <style>
+    /* ══════════════════════════════════════════
+       Pricing Page — Premium Overrides
+       ══════════════════════════════════════════ */
+
+    /* Hero */
+    .pricing-hero {
+      padding: 140px 0 80px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .pricing-hero::before {
+      content: '';
+      position: absolute;
+      top: -200px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 1000px;
+      height: 1000px;
+      background: radial-gradient(ellipse, rgba(232,133,12,0.06) 0%, transparent 65%);
+      pointer-events: none;
+    }
+    .pricing-hero h1 {
+      margin-bottom: var(--sp-4);
+    }
+    .pricing-hero .subtitle {
+      font-size: 1.15rem;
+      color: var(--text-muted);
+      max-width: 560px;
+      margin: 0 auto;
+      line-height: 1.8;
+    }
+
+    /* SEO Points Explainer */
+    .points-explainer {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--sp-6);
+      margin-top: var(--sp-10);
+    }
+    .point-card {
+      text-align: center;
+      padding: var(--sp-8) var(--sp-6);
+    }
+    .point-card-icon {
+      width: 56px;
+      height: 56px;
+      border-radius: var(--radius-lg);
+      background: rgba(232,133,12,0.08);
+      border: 1px solid rgba(232,133,12,0.15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto var(--sp-4);
+      font-size: 1.5rem;
+    }
+    .point-card h4 {
+      margin-bottom: var(--sp-2);
+    }
+    .point-card p {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      line-height: 1.7;
+    }
+
+    /* Pricing Cards */
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.08fr 1fr;
+      gap: var(--sp-6);
+      align-items: center;
+    }
+    .pricing-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-xl);
+      padding: var(--sp-10) var(--sp-8);
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      transition: all var(--duration-normal) var(--ease-out);
+      overflow: hidden;
+    }
+    .pricing-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 15%;
+      right: 15%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(232,133,12,0.15), transparent);
+      opacity: 0;
+      transition: opacity var(--duration-normal);
+    }
+    .pricing-card:hover {
+      border-color: var(--border-hover);
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-gold);
+    }
+    .pricing-card:hover::before {
+      opacity: 1;
+    }
+
+    /* Featured (Professional) card — visually highlighted */
+    .pricing-card.featured {
+      border-color: rgba(232,133,12,0.4);
+      box-shadow: 0 0 0 1px rgba(232,133,12,0.15), var(--shadow-gold);
+      background: var(--bg-card-hover);
+      padding: var(--sp-12) var(--sp-8);
+      z-index: 2;
+    }
+    .pricing-card.featured::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: var(--gold-gradient);
+    }
+
+    .recommend-badge {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      background: var(--gold-gradient);
+      color: #000;
+      padding: 4px 14px;
+      border-radius: var(--radius-full);
+      font-size: 0.72rem;
+      font-weight: 800;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+
+    .pricing-tier-name {
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--gold-200);
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      margin-bottom: var(--sp-2);
+    }
+    .pricing-card h3 {
+      font-size: 1.5rem;
+      margin-bottom: var(--sp-2);
+    }
+    .pricing-desc {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      margin-bottom: var(--sp-6);
+      line-height: 1.6;
+    }
+
+    .pricing-price {
+      margin-bottom: var(--sp-6);
+      padding-bottom: var(--sp-6);
+      border-bottom: 1px solid var(--border-subtle);
+    }
+    .pricing-price .amount {
+      font-size: 3rem;
+      font-weight: 900;
+      letter-spacing: -2px;
+      line-height: 1;
+    }
+    .pricing-price .currency {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      vertical-align: super;
+    }
+    .pricing-price .period {
+      font-size: 0.92rem;
+      color: var(--text-muted);
+      margin-left: 2px;
+    }
+    .pricing-price .price-note {
+      display: block;
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      margin-top: var(--sp-2);
+    }
+
+    .pricing-points {
+      display: flex;
+      align-items: center;
+      gap: var(--sp-2);
+      padding: var(--sp-3) var(--sp-4);
+      background: rgba(232,133,12,0.06);
+      border: 1px solid rgba(232,133,12,0.1);
+      border-radius: var(--radius-md);
+      margin-bottom: var(--sp-6);
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: var(--gold-200);
+    }
+    .pricing-points svg {
+      flex-shrink: 0;
+    }
+
+    .pricing-features {
+      list-style: none;
+      flex: 1;
+      margin-bottom: var(--sp-8);
+    }
+    .pricing-features li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 7px 0;
+      font-size: 0.88rem;
+      color: var(--text-secondary);
+      line-height: 1.5;
+    }
+    .pricing-features .ck {
+      color: var(--success);
+      font-size: 0.82rem;
+      font-weight: 700;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .btn-plan {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      padding: 14px 24px;
+      border-radius: var(--radius-full);
+      font-size: 0.95rem;
+      font-weight: 700;
+      cursor: pointer;
+      border: none;
+      transition: all var(--duration-normal) var(--ease-out);
+      text-decoration: none;
+      font-family: var(--font-sans);
+    }
+    .btn-plan.primary {
+      background: var(--gold-gradient);
+      color: #000;
+      box-shadow: 0 2px 16px rgba(232,133,12,0.25);
+    }
+    .btn-plan.primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 28px rgba(232,133,12,0.4);
+      color: #000;
+    }
+    .btn-plan.outline {
+      background: transparent;
+      color: var(--text-primary);
+      border: 1px solid var(--border-default);
+    }
+    .btn-plan.outline:hover {
+      border-color: var(--border-hover);
+      background: rgba(232,133,12,0.04);
+      color: var(--text-primary);
+    }
+
+    /* ══════════════════════════════════════════
+       Feature Comparison Table
+       ══════════════════════════════════════════ */
+    .comparison-table-wrap {
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      margin-top: var(--sp-10);
+    }
+    .comparison-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.9rem;
+      min-width: 640px;
+    }
+    .comparison-table thead th {
+      padding: var(--sp-4) var(--sp-5);
+      text-align: center;
+      font-weight: 800;
+      color: var(--text-primary);
+      border-bottom: 2px solid var(--border-default);
+      font-size: 0.95rem;
+    }
+    .comparison-table thead th:first-child {
+      text-align: left;
+    }
+    .comparison-table thead th.th-featured {
+      background: rgba(232,133,12,0.06);
+      color: var(--gold-200);
+      position: relative;
+    }
+    .comparison-table thead th.th-featured::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: var(--gold-gradient);
+    }
+    .comparison-table tbody td {
+      padding: var(--sp-3) var(--sp-5);
+      border-bottom: 1px solid var(--border-subtle);
+      text-align: center;
+      color: var(--text-secondary);
+      vertical-align: middle;
+    }
+    .comparison-table tbody td:first-child {
+      text-align: left;
+      font-weight: 600;
+      color: var(--text-primary);
+      white-space: nowrap;
+    }
+    .comparison-table tbody td.td-featured {
+      background: rgba(232,133,12,0.03);
+    }
+    .comparison-table tbody tr:hover td {
+      background: rgba(255,255,255,0.02);
+    }
+    .comparison-table tbody tr:hover td.td-featured {
+      background: rgba(232,133,12,0.06);
+    }
+    .comparison-table .check-icon {
+      color: var(--success);
+      font-weight: 700;
+      font-size: 1rem;
+    }
+    .comparison-table .dash-icon {
+      color: var(--text-muted);
+      font-size: 1.2rem;
+    }
+    .comparison-table .category-row td {
+      padding: var(--sp-4) var(--sp-5);
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--gold-200);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      border-bottom: 1px solid rgba(232,133,12,0.15);
+      background: rgba(232,133,12,0.03);
+    }
+    .comparison-table .category-row td.td-featured {
+      background: rgba(232,133,12,0.06);
+    }
+
+    /* FAQ Accordion */
+    .faq-item {
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      margin-bottom: 10px;
+      background: var(--bg-card);
+      overflow: hidden;
+      transition: border-color var(--duration-fast);
+    }
+    .faq-item:hover {
+      border-color: var(--border-hover);
+    }
+    .faq-question {
+      width: 100%;
+      background: none;
+      border: none;
+      color: var(--text-primary);
+      padding: 18px 22px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      text-align: left;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: background var(--duration-fast);
+      font-family: var(--font-sans);
+      line-height: 1.5;
+      gap: var(--sp-4);
+    }
+    .faq-question:hover {
+      background: rgba(232,133,12,0.03);
+    }
+    .faq-arrow {
+      color: var(--gold-300);
+      font-size: 0.85rem;
+      flex-shrink: 0;
+      transition: transform var(--duration-normal) var(--ease-out);
+    }
+    .faq-item.open .faq-arrow {
+      transform: rotate(180deg);
+    }
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s var(--ease-out), padding 0.4s var(--ease-out);
+    }
+    .faq-item.open .faq-answer {
+      max-height: 400px;
+      padding: 0 22px 18px;
+    }
+    .faq-answer p {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      line-height: 1.8;
+    }
+
+    /* Payment Methods */
+    .payment-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: var(--sp-4);
+    }
+    .payment-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: var(--sp-2);
+      padding: var(--sp-6) var(--sp-4);
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      transition: all var(--duration-fast);
+    }
+    .payment-item:hover {
+      border-color: var(--border-hover);
+      background: var(--bg-card-hover);
+    }
+    .payment-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: var(--radius-sm);
+      background: rgba(255,255,255,0.04);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.3rem;
+    }
+    .payment-item span {
+      font-size: 0.82rem;
+      color: var(--text-secondary);
+      font-weight: 600;
+      text-align: center;
+    }
+
+    /* CTA Section */
+    .cta-box {
+      background: linear-gradient(135deg, rgba(232,133,12,0.06), rgba(245,166,35,0.03));
+      border: 1px solid rgba(232,133,12,0.15);
+      border-radius: var(--radius-xl);
+      padding: var(--sp-20) var(--sp-8);
+      text-align: center;
+      max-width: 720px;
+      margin: 0 auto;
+      position: relative;
+      overflow: hidden;
+    }
+    .cta-box::before {
+      content: '';
+      position: absolute;
+      top: -100px;
+      right: -100px;
+      width: 300px;
+      height: 300px;
+      background: radial-gradient(circle, rgba(232,133,12,0.06), transparent);
+      pointer-events: none;
+    }
+    .cta-box::after {
+      content: '';
+      position: absolute;
+      bottom: -80px;
+      left: -80px;
+      width: 250px;
+      height: 250px;
+      background: radial-gradient(circle, rgba(245,166,35,0.04), transparent);
+      pointer-events: none;
+    }
+    .cta-box h2 {
+      margin-bottom: var(--sp-3);
+      position: relative;
+    }
+    .cta-box p {
+      color: var(--text-muted);
+      margin-bottom: var(--sp-8);
+      font-size: 1.05rem;
+      max-width: 480px;
+      margin-left: auto;
+      margin-right: auto;
+      position: relative;
+    }
+
+    /* ══════ Responsive ══════ */
+    @media (max-width: 1024px) {
+      .pricing-grid {
+        grid-template-columns: 1fr;
+        max-width: 480px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      .pricing-card.featured {
+        padding: var(--sp-10) var(--sp-8);
+      }
+      .points-explainer {
+        grid-template-columns: 1fr;
+        max-width: 400px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      .payment-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+    @media (max-width: 768px) {
+      .pricing-hero {
+        padding: 110px 0 50px;
+      }
+      .pricing-hero .subtitle {
+        font-size: 1rem;
+      }
+      .pricing-card {
+        padding: var(--sp-8) var(--sp-6);
+      }
+      .pricing-card.featured {
+        padding: var(--sp-8) var(--sp-6);
+      }
+      .pricing-price .amount {
+        font-size: 2.4rem;
+      }
+      .btn-plan {
+        min-height: 52px;
+        font-size: 1rem;
+      }
+      .faq-question {
+        padding: 14px 16px;
+        font-size: 0.9rem;
+      }
+      .faq-item.open .faq-answer {
+        padding: 0 16px 14px;
+      }
+      .cta-box {
+        padding: var(--sp-12) var(--sp-6);
+      }
+      .comparison-table {
+        font-size: 0.82rem;
+      }
+    }
+    @media (max-width: 480px) {
+      .pricing-card {
+        padding: var(--sp-6) var(--sp-5);
+        border-radius: var(--radius-lg);
+      }
+      .pricing-card.featured {
+        padding: var(--sp-6) var(--sp-5);
+      }
+      .pricing-price .amount {
+        font-size: 2rem;
+      }
+      .payment-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: var(--sp-3);
+      }
+    }
+  </style>
+</head>
+<body class="page-top">
+
+  <!-- ═══════ Navigation ═══════ -->
+  <nav class="nav">
+    <a href="/" class="nav-brand">
+      <img src="/favicon.svg" alt="SEOBAIKE" width="34" height="34">
+      <span class="seo">SEO</span><span class="baike">BAIKE</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="/">首頁</a></li>
+      <li><a href="/features">功能</a></li>
+      <li><a href="/marketplace">市集</a></li>
+      <li><a href="/pricing" class="active">方案</a></li>
+      <li><a href="/about">關於</a></li>
+      <li><a href="/docs">文件</a></li>
+      <li><a href="/billing" class="nav-link">帳單</a></li>
+      <li><a href="/login" class="nav-cta">登入</a></li>
+    </ul>
+    <button class="nav-hamburger" onclick="toggleMenu()" aria-label="選單">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- Mobile Overlay -->
+  <div class="mobile-overlay" id="mobileOverlay">
+    <button class="mobile-close" onclick="toggleMenu()" aria-label="關閉選單">&times;</button>
+    <a href="/" onclick="toggleMenu()">首頁</a>
+    <a href="/features" onclick="toggleMenu()">功能</a>
+    <a href="/marketplace" onclick="toggleMenu()">市集</a>
+    <a href="/pricing" onclick="toggleMenu()">方案</a>
+    <a href="/about" onclick="toggleMenu()">關於</a>
+    <a href="/docs" onclick="toggleMenu()">文件</a>
+    <a href="/billing" onclick="toggleMenu()">帳單</a>
+    <a href="/login" onclick="toggleMenu()">登入</a>
+  </div>
+
+
+  <!-- ═══════ Hero ═══════ -->
+  <section class="pricing-hero">
+    <div class="container fade-up">
+      <div class="section-badge">PRICING</div>
+      <h1 class="volcanic-title">方案與<span class="text-gold">定價</span></h1>
+      <p class="subtitle">用 SEO Points 點數交易，彈性又透明。<br>不綁約、不浪費，用多少算多少。</p>
+    </div>
+  </section>
+
+
+  <!-- ═══════ SEO Points Explainer ═══════ -->
+  <section class="section-sm">
+    <div class="container">
+      <div class="section-header fade-up">
+        <div class="section-badge">SEO POINTS</div>
+        <h2>什麼是 <span class="text-gold">SEO Points</span>？</h2>
+        <p>SEOBAIKE 平台上的統一交易貨幣。購買點數，按需使用，簡單透明。</p>
+      </div>
+
+      <div class="points-explainer">
+        <div class="card point-card fade-up">
+          <div class="point-card-icon">
+            <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" style="color:var(--gold-200)"><circle cx="12" cy="12" r="10"/><path d="M12 6v12M8 10l4-4 4 4M8 14l4 4 4-4"/></svg>
+          </div>
+          <h4>儲值點數</h4>
+          <p>選擇適合你的方案，取得 SEO Points。點數存入帳戶，隨時可用。</p>
+        </div>
+        <div class="card point-card fade-up">
+          <div class="point-card-icon">
+            <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" style="color:var(--gold-200)"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+          </div>
+          <h4>按需扣點</h4>
+          <p>使用 AI 服務、市集工具時自動扣除對應點數。用多少扣多少，不浪費。</p>
+        </div>
+        <div class="card point-card fade-up">
+          <div class="point-card-icon">
+            <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" style="color:var(--gold-200)"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/><path d="M12 6v6l4 2"/></svg>
+          </div>
+          <h4>帳戶持續有效</h4>
+          <p>帳戶內的 SEO Points 於帳戶存續期間持續有效，從容使用不趕時間。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- ═══════ Pricing Tiers ═══════ -->
+  <section class="section" id="pricing">
+    <div class="container">
+      <div class="section-header fade-up">
+        <div class="section-badge">PLANS</div>
+        <h2>選擇適合你的<span class="text-gold">方案</span></h2>
+        <p>從免費體驗到企業級，滿足每個階段的需求</p>
+      </div>
+
+      <div class="pricing-grid">
+
+        <!-- 免費方案 -->
+        <div class="pricing-card fade-up">
+          <div class="pricing-tier-name">FREE</div>
+          <h3>免費方案</h3>
+          <p class="pricing-desc">零門檻開始，感受 SEOBAIKE 的能力</p>
+
+          <div class="pricing-price">
+            <span class="currency">NT$</span><span class="amount text-gold">0</span>
+            <span class="period">/月</span>
+            <span class="price-note">免費方案，不需信用卡</span>
+          </div>
+
+          <div class="pricing-points">
+            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l2 2"/></svg>
+            每月 100 SP（SEO Points）
+          </div>
+
+          <ul class="pricing-features">
+            <li><span class="ck">&#10003;</span>基本 AI 服務</li>
+            <li><span class="ck">&#10003;</span>市集瀏覽</li>
+            <li><span class="ck">&#10003;</span>社群支援</li>
+            <li><span class="ck">&#10003;</span>基本數據報表</li>
+          </ul>
+
+          <a href="/login" class="btn-plan outline seismic-shake" onclick="trackPlanClick('free')">開始使用</a>
+        </div>
+
+        <!-- 專業方案 (推薦) -->
+        <div class="pricing-card featured fade-up magma-border lava-glow">
+          <div class="recommend-badge">推薦</div>
+          <div class="pricing-tier-name">PROFESSIONAL</div>
+          <h3>專業方案</h3>
+          <p class="pricing-desc">適合個人創作者、自由工作者、中小企業</p>
+
+          <div class="pricing-price">
+            <span class="currency">NT$</span><span class="amount text-gold">499</span>
+            <span class="period">/月</span>
+            <span class="price-note">每月自動續約，可隨時取消</span>
+          </div>
+
+          <div class="pricing-points">
+            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l2 2"/></svg>
+            每月 2,000 SP（SEO Points）
+          </div>
+
+          <ul class="pricing-features">
+            <li><span class="ck">&#10003;</span>全部 AI 服務</li>
+            <li><span class="ck">&#10003;</span>進階 AI 能力全開</li>
+            <li><span class="ck">&#10003;</span>API 存取權限</li>
+            <li><span class="ck">&#10003;</span>市集工具使用</li>
+            <li><span class="ck">&#10003;</span>優先技術支援</li>
+            <li><span class="ck">&#10003;</span>進階數據分析</li>
+            <li><span class="ck">&#10003;</span>Email 專屬客服</li>
+          </ul>
+
+          <a href="https://lin.ee/seobaike" target="_blank" rel="noopener" class="btn-plan primary seismic-shake" onclick="trackPlanClick('professional')">升級方案</a>
+        </div>
+
+        <!-- 企業方案 -->
+        <div class="pricing-card fade-up">
+          <div class="pricing-tier-name">ENTERPRISE</div>
+          <h3>企業方案</h3>
+          <p class="pricing-desc">量身打造，滿足大型團隊與企業需求</p>
+
+          <div class="pricing-price">
+            <span class="amount text-gold" style="font-size:2rem;">客製報價</span>
+            <span class="price-note">依企業規模客製化方案</span>
+          </div>
+
+          <div class="pricing-points">
+            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l2 2"/></svg>
+            無限 SP（SEO Points）
+          </div>
+
+          <ul class="pricing-features">
+            <li><span class="ck">&#10003;</span>專業方案所有功能</li>
+            <li><span class="ck">&#10003;</span>專屬客服</li>
+            <li><span class="ck">&#10003;</span>SLA 服務等級協議</li>
+            <li><span class="ck">&#10003;</span>API 整合</li>
+            <li><span class="ck">&#10003;</span>客製化整合與部署</li>
+            <li><span class="ck">&#10003;</span>白標方案（使用你的品牌）</li>
+            <li><span class="ck">&#10003;</span>L1-L4 約束引擎授權</li>
+          </ul>
+
+          <a href="/contact" class="btn-plan outline seismic-shake" onclick="trackPlanClick('enterprise')">聯繫我們</a>
+        </div>
+
+      </div>
+
+      <p style="text-align:center;color:var(--text-muted);font-size:0.82rem;margin-top:var(--sp-8);line-height:1.8;">
+        所有價格以新台幣（NT$）顯示。額外點數可隨時加購。<br>
+        市集賣家分潤比例依合約約定。
+      </p>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- ═══════ Feature Comparison Table ═══════ -->
+  <section class="section" id="comparison">
+    <div class="container">
+      <div class="section-header fade-up">
+        <div class="section-badge">COMPARE</div>
+        <h2>功能<span class="text-gold">比較</span></h2>
+        <p>一目瞭然，選擇最適合你的方案</p>
+      </div>
+
+      <div class="comparison-table-wrap fade-up">
+        <table class="comparison-table">
+          <thead>
+            <tr>
+              <th>功能項目</th>
+              <th>免費方案</th>
+              <th class="th-featured">專業方案</th>
+              <th>企業方案</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- 基本 -->
+            <tr class="category-row">
+              <td colspan="1">點數與定價</td>
+              <td></td>
+              <td class="td-featured"></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>月費</td>
+              <td>NT$0</td>
+              <td class="td-featured">NT$499</td>
+              <td>客製報價</td>
+            </tr>
+            <tr>
+              <td>每月 SEO Points</td>
+              <td>100 SP</td>
+              <td class="td-featured">2,000 SP</td>
+              <td>無限制</td>
+            </tr>
+            <tr>
+              <td>額外加購點數</td>
+              <td><span class="check-icon">&#10003;</span></td>
+              <td class="td-featured"><span class="check-icon">&#10003;</span></td>
+              <td><span class="check-icon">&#10003;</span></td>
+            </tr>
+
+            <!-- AI 服務 -->
+            <tr class="category-row">
+              <td colspan="1">AI 服務</td>
+              <td></td>
+              <td class="td-featured"></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>基本 AI 對話</td>
+              <td><span class="check-icon">&#10003;</span></td>
+              <td class="td-featured"><span class="check-icon">&#10003;</span></td>
+              <td><span class="check-icon">&#10003;</span></td>
+            </tr>
+            <tr>
+              <td>進階 AI 能力</td>
+              <td><span class="dash-icon">&mdash;</span></td>
+              <td class="td-featured"><span class="check-icon">&#10003;</span></td>
+              <td><span class="check-icon">&#10003;</span></td>
+            </tr>
+            <tr>
+              <td>API 存取權限</td>
+              <td><span class="dash-icon">&mdash;</span></td>
+              <td class="td-featured"><span class="check-icon">&#10003;</span></td>
+              <td><span class="check-icon">&#10003;</span></td>
+            </tr>
+            <tr>
+              <td>市集工具使用</td>
+              <td>瀏覽</td>
+              <td class="td-featured"><span class="check-icon">&#10003;</span></td>
+              <td><span class="check-icon">&#10003;</span></td>
+            </tr>
+            <tr>
+              <td>優先處理佇列</td>
+              <td><span class="dash-icon">&mdash;</span></td>
+              <td class="td-featured"><span class="check-icon">&#10003;</span></td>
+              <td><span class="check-icon">&#10003;</span></td>
+            </tr>
+
+            <!-- 數據與報表 -->
+            <tr class="category-row">
+              <td colspan="1">數據與報表</td>
+              <td></td>
+              <td class="td-featured"></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>基本數據報表</td>
+              <td><span class="check-icon">&#10003;</span></td>
+              <td class="td-featured"><span class="check-icon">&#10003;</span></td>
+              <td><span class="check-icon">&#10003;</span></td>
+            </tr>
+            <tr>
+              <td>進階數據分析</td>
+              <td><span class="dash-icon">&mdash;</span></td>
+              <td class="td-featured"><span class="check-icon">&#10003;</span></td>
+              <td><span class="check-icon">&#10003;</span></td>
+            </tr>
+            <tr>
+              <td>客製化報表</td>
+              <td><span class="dash-icon">&mdash;</span></td>
+              <td class="td-featured"><span class="dash-icon">&mdash;</span></td>
+              <td><span class="check-icon">&#10003;</span></td>
+            </tr>
+
+            <!-- 支援 -->
+            <tr class="category-row">
+              <td colspan="1">客戶支援</td>
+              <td></td>
+              <td class="td-featured"></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>社群支援</td>
+              <td><span class="check-icon">&#10003;</span></td>
+              <td class="td-featured"><span class="check-icon">&#10003;</span></td>
+              <td><span class="check-icon">&#10003;</span></td>
+            </tr>
+            <tr>
+              <td>優先技術支援</td>
+              <td><span class="dash-icon">&mdash;</span></td>
+              <td class="td-featured"><span class="check-icon">&#10003;</span></td>
+              <td><span class="check-icon">&#10003;</span></td>
+            </tr>
+            <tr>
+              <td>Email 專屬客服</td>
+              <td><span class="dash-icon">&mdash;</span></td>
+              <td class="td-featured"><span class="check-icon">&#10003;</span></td>
+              <td><span class="check-icon">&#10003;</span></td>
+            </tr>
+            <tr>
+              <td>專屬客服經理</td>
+              <td><span class="dash-icon">&mdash;</span></td>
+              <td class="td-featured"><span class="dash-icon">&mdash;</span></td>
+              <td><span class="check-icon">&#10003;</span></td>
+            </tr>
+            <tr>
+              <td>SLA 服務等級協議</td>
+              <td><span class="dash-icon">&mdash;</span></td>
+              <td class="td-featured"><span class="dash-icon">&mdash;</span></td>
+              <td><span class="check-icon">&#10003;</span></td>
+            </tr>
+
+            <!-- 進階 -->
+            <tr class="category-row">
+              <td colspan="1">企業進階</td>
+              <td></td>
+              <td class="td-featured"></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>API 整合</td>
+              <td><span class="dash-icon">&mdash;</span></td>
+              <td class="td-featured"><span class="dash-icon">&mdash;</span></td>
+              <td><span class="check-icon">&#10003;</span></td>
+            </tr>
+            <tr>
+              <td>白標方案</td>
+              <td><span class="dash-icon">&mdash;</span></td>
+              <td class="td-featured"><span class="dash-icon">&mdash;</span></td>
+              <td><span class="check-icon">&#10003;</span></td>
+            </tr>
+            <tr>
+              <td>L1-L4 約束引擎授權</td>
+              <td><span class="dash-icon">&mdash;</span></td>
+              <td class="td-featured"><span class="dash-icon">&mdash;</span></td>
+              <td><span class="check-icon">&#10003;</span></td>
+            </tr>
+            <tr>
+              <td>客製化整合與部署</td>
+              <td><span class="dash-icon">&mdash;</span></td>
+              <td class="td-featured"><span class="dash-icon">&mdash;</span></td>
+              <td><span class="check-icon">&#10003;</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- ═══════ FAQ ═══════ -->
+  <section class="section" id="faq">
+    <div class="container-narrow">
+      <div class="section-header fade-up">
+        <div class="section-badge">FAQ</div>
+        <h2>常見問題</h2>
+        <p>關於定價、SEO Points、退款的疑問</p>
+      </div>
+
+      <div class="fade-up">
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <span>可以隨時取消嗎？</span>
+            <span class="faq-arrow">&#9660;</span>
+          </button>
+          <div class="faq-answer">
+            <p>是的，隨時可以取消或更換方案。所有方案都不綁約，你可以隨時在帳戶設定中取消。取消後，在當期計費週期結束前仍可繼續使用所有功能。帳戶內剩餘的 SEO Points 不會消失，你可以繼續使用。</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <span>SEO Points 是什麼？</span>
+            <span class="faq-arrow">&#9660;</span>
+          </button>
+          <div class="faq-answer">
+            <p>SEO Points（簡稱 SP）是 SEOBAIKE 平台的統一交易貨幣。當你使用 AI 服務、購買市集工具、或啟用進階功能時，系統會自動從你的帳戶扣除對應點數。不同服務消耗的點數不同，你可以在使用前查看每項服務的點數消耗說明。SP 可透過方案取得，也可以隨時額外加購。</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <span>什麼是後付制？</span>
+            <span class="faq-arrow">&#9660;</span>
+          </button>
+          <div class="faq-answer">
+            <p>後付制是指先使用、後結算的付費模式。在 SEOBAIKE 平台上，免費方案用戶每月可獲得固定的 SEO Points；若點數用完，可隨時加購。專業方案與企業方案的月費在每月固定日期自動扣款，方案包含的 SEO Points 會在扣款成功後立即發放至帳戶。超額使用的部分會在下一個計費週期統一結算。</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <span>有退款政策嗎？</span>
+            <span class="faq-arrow">&#9660;</span>
+          </button>
+          <div class="faq-answer">
+            <p>未使用的點數可在購買後 7 天內申請退款。退款將退回原付款方式。已使用的 SEO Points 將按比例扣除。企業方案的退款政策依合約約定。詳細退款政策請參閱服務條款。</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <span>點數用完了怎麼辦？</span>
+            <span class="faq-arrow">&#9660;</span>
+          </button>
+          <div class="faq-answer">
+            <p>你可以隨時加購 SEO Points，不需要升級方案。加購的點數會立即存入你的帳戶，和方案內含的點數合併使用。如果你經常需要更多點數，建議考慮升級到更高階的方案，會更划算。</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <span>SEO Points 會過期嗎？</span>
+            <span class="faq-arrow">&#9660;</span>
+          </button>
+          <div class="faq-answer">
+            <p>你帳戶中的 SEO Points 於帳戶存續期間持續有效，不論是方案內含的還是額外加購的點數，都不設使用期限。即使取消訂閱，剩餘點數仍然保留。詳情請參閱服務條款。</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <span>企業方案有什麼特別的？</span>
+            <span class="faq-arrow">&#9660;</span>
+          </button>
+          <div class="faq-answer">
+            <p>企業方案提供完整的客製化能力，包括：白標方案（使用你自己的品牌）、L1-L4 約束引擎技術授權、SLA 服務等級協議、專屬客服經理、API 整合、以及客製化整合與部署。方案內容與定價根據企業需求量身打造，請聯繫我們的團隊了解詳情。</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <span>支援哪些地區？</span>
+            <span class="faq-arrow">&#9660;</span>
+          </button>
+          <div class="faq-answer">
+            <p>SEOBAIKE 全球適用，不限制任何國家或地區。台灣、日本、韓國、美國、歐洲、東南亞 — 在哪都能用。價格以新台幣顯示，支援多種付款方式。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- ═══════ Payment Methods ═══════ -->
+  <section class="section-sm">
+    <div class="container">
+      <div class="section-header fade-up">
+        <div class="section-badge">PAYMENT</div>
+        <h2>付款方式</h2>
+        <p>多種付款管道，方便你選擇</p>
+      </div>
+
+      <div class="payment-grid fade-up" style="max-width:640px;margin:0 auto;">
+        <div class="payment-item">
+          <div class="payment-icon">
+            <svg width="24" height="24" fill="none" stroke="var(--success)" stroke-width="2" viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+          </div>
+          <span>LINE Pay</span>
+        </div>
+        <div class="payment-item">
+          <div class="payment-icon">
+            <svg width="24" height="24" fill="none" stroke="var(--gold-200)" stroke-width="2" viewBox="0 0 24 24"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+          </div>
+          <span>信用卡</span>
+        </div>
+        <div class="payment-item">
+          <div class="payment-icon">
+            <svg width="24" height="24" fill="none" stroke="var(--info)" stroke-width="2" viewBox="0 0 24 24"><path d="M3 3h18v4H3zM3 10h18v4H3zM3 17h18v4H3z"/></svg>
+          </div>
+          <span>銀行轉帳</span>
+        </div>
+        <div class="payment-item">
+          <div class="payment-icon">
+            <svg width="24" height="24" fill="none" stroke="var(--gold-300)" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+          </div>
+          <span>超商代碼</span>
+        </div>
+      </div>
+
+      <p style="text-align:center;color:var(--text-muted);font-size:0.82rem;margin-top:var(--sp-6);">
+        所有付款均由第三方支付平台安全處理，SEOBAIKE 不儲存您的付款資訊。
+      </p>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- ═══════ CTA ═══════ -->
+  <section class="section">
+    <div class="container fade-up">
+      <div class="cta-box">
+        <h2>開始免費<span class="text-gold">體驗</span></h2>
+        <p>每月 100 SEO Points 免費用，不需信用卡。<br>感受 SEOBAIKE 的能力，再決定要不要升級。</p>
+        <a href="/login" class="btn btn-primary btn-lg seismic-shake" style="position:relative;">開始使用</a>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════ Footer ═══════ -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="/" class="nav-brand" style="margin-bottom:var(--sp-3)">
+            <img src="/favicon.svg" alt="SEOBAIKE" width="28" height="28">
+            <span class="seo">SEO</span><span class="baike">BAIKE</span>
+          </a>
+          <p>小路光有限公司（統編 60475510）<br>AI 平台 — AI 界的 App Store</p>
+        </div>
+        <div class="footer-col">
+          <h4>產品</h4>
+          <a href="/features">平台功能</a>
+          <a href="/pricing">方案定價</a>
+          <a href="/marketplace">市集</a>
+          <a href="/billing">帳單管理</a>
+          <a href="/docs">技術文件</a>
+        </div>
+        <div class="footer-col">
+          <h4>公司</h4>
+          <a href="/about">關於我們</a>
+          <a href="/contact">聯繫我們</a>
+          <a href="/privacy">隱私權政策</a>
+          <a href="/terms">服務條款</a>
+        </div>
+        <div class="footer-col">
+          <h4>資源</h4>
+          <a href="/docs">快速開始</a>
+          <a href="/blog">部落格</a>
+          <a href="/docs">常見問題</a>
+          <a href="/status">系統狀態</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2025-2026 小路光有限公司（統編 60475510）</p>
+        <p>aiforseo.vip</p>
+      </div>
+      <div class="footer-disclaimer">
+        本平台由小路光有限公司（統編 60475510）營運。AI 服務結果僅供參考，不構成任何形式之保證或承諾。使用本服務即表示同意<a href="/terms">服務條款</a>及<a href="/privacy">隱私權政策</a>。台灣專利申請案號 115100981。
+      </div>
+    </div>
+  </footer>
+
+
+  <!-- ═══════ Scripts ═══════ -->
+  <script>
+    /* Scroll fade-in observer */
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.08 });
+    document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
+
+    /* Nav scroll effect */
+    window.addEventListener('scroll', () => {
+      const nav = document.querySelector('.nav');
+      if (nav) nav.classList.toggle('scrolled', window.scrollY > 20);
+    });
+
+    /* Hamburger menu */
+    function toggleMenu() {
+      document.querySelector('.nav-hamburger')?.classList.toggle('active');
+      document.querySelector('.mobile-overlay')?.classList.toggle('open');
+      document.body.style.overflow = document.querySelector('.mobile-overlay.open') ? 'hidden' : '';
+    }
+
+    /* FAQ accordion */
+    function toggleFaq(button) {
+      const item = button.parentElement;
+      const wasOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(el => el.classList.remove('open'));
+      if (!wasOpen) item.classList.add('open');
+    }
+
+    /* Plan click tracking */
+    function trackPlanClick(plan) {
+      try {
+        if (window.localStorage) {
+          localStorage.setItem('seobaike_selected_plan', plan);
+          localStorage.setItem('seobaike_plan_time', new Date().toISOString());
+        }
+      } catch(e) {}
+    }
+  </script>
+
+  <!-- Page View Tracking -->
+  <script>
+  (function(){
+    try {
+      var cfg = window.__SEOBAIKE__ || {};
+      var sUrl = cfg.supabaseUrl || 'https://vmyrivxxibqydccurxug.supabase.co';
+      var sKey = cfg.anonKey || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZteXJpdnh4aWJxeWRjY3VyeHVnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzAwNDAwMjksImV4cCI6MjA4NTYxNjAyOX0.iBV-23LGdm_uKffAExgqSV34-NWoAyv8_-M_cJQZ8Gg';
+      fetch(sUrl + '/rest/v1/page_views', {
+        method: 'POST',
+        headers: { 'Content-Type':'application/json', 'apikey':sKey, 'Authorization':'Bearer '+sKey, 'Prefer':'return=minimal' },
+        body: JSON.stringify({ path: location.pathname, referrer: document.referrer || null, user_agent: navigator.userAgent })
+      }).catch(function(){});
+    } catch(e){}
+  })();
+  </script>
+
+  <script src="/assets/analytics.js" defer></script>
+  <script src="/seobaike-widget.js"></script>
+  <script src="/assets/premium-fx.js"></script>
+  <script src="/assets/i18n.js"></script>
+  <script src="/assets/cookie-consent.js"></script>
+</body>
+</html>

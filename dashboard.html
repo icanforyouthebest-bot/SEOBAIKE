@@ -338,9 +338,10 @@ body { font-family: 'Segoe UI', sans-serif; background: #0a0a1a; color: #eee; mi
 
 <script src="seobaike-config.js"></script>
 <script>
-const EP = (window.__SEOBAIKE__ && window.__SEOBAIKE__.supabaseUrl || "") + "/functions/v1/nvidia-boss";
-const GW = (window.__SEOBAIKE__ && window.__SEOBAIKE__.supabaseUrl || "") + "/functions/v1/ai-gateway";
-const KEY = (window.__SEOBAIKE__ && window.__SEOBAIKE__.anonKey) || "";
+const _cfg = window.__SEOBAIKE__ || {};
+const EP = (_cfg.supabaseUrl || "https://vmyrivxxibqydccurxug.supabase.co") + "/functions/v1/nvidia-boss";
+const GW = (_cfg.supabaseUrl || "https://vmyrivxxibqydccurxug.supabase.co") + "/functions/v1/ai-gateway";
+const KEY = _cfg.anonKey || "";
 const HDR = { "Authorization": "Bearer " + KEY, "Content-Type": "application/json" };
 
 let nvOk=0, nvFail=0, gwOk=0, gwFail=0, round=0;
@@ -429,17 +430,17 @@ async function tick() {
 
   document.getElementById("nv-ok").textContent = nvOk;
   document.getElementById("nv-fail").textContent = nvFail;
-  document.getElementById("nv-bar").style.width = (nvOk / (nvOk + nvFail) * 100) + "%";
+  document.getElementById("nv-bar").style.width = ((nvOk + nvFail) > 0 ? (nvOk / (nvOk + nvFail) * 100) : 0) + "%";
   document.getElementById("gw-ok").textContent = gwOk;
   document.getElementById("gw-fail").textContent = gwFail;
-  document.getElementById("gw-bar").style.width = (gwOk / (gwOk + gwFail) * 100) + "%";
+  document.getElementById("gw-bar").style.width = ((gwOk + gwFail) > 0 ? (gwOk / (gwOk + gwFail) * 100) : 0) + "%";
 
   document.getElementById("status").textContent = "同步運行中 | 第 " + round + " 輪";
 }
 
-/* AUTO-POLL REMOVED: tick() and setInterval(tick, 5000) disabled to stop API credit burn */
-/* tick(); */
-/* setInterval(tick, 5000); */
+// 首次載入執行一次，之後每 30 秒自動更新（降低 API 消耗）
+tick();
+setInterval(tick, 30000);
 
 /* ===== AI 主動歡迎面板邏輯 ===== */
 (function() {

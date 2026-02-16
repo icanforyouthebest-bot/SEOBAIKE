@@ -1,0 +1,32 @@
+{
+  "name": "SEOBAIKE — AI 就該這麼簡單",
+  "short_name": "SEOBAIKE",
+  "description": "1,000+ AI 引擎智慧路由平台",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#06060f",
+  "theme_color": "#e8850c",
+  "orientation": "portrait-primary",
+  "lang": "zh-TW",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["productivity", "business", "utilities"],
+  "shortcuts": [
+    {
+      "name": "AI 對話",
+      "url": "/ai.html",
+      "description": "開始 AI 對話"
+    },
+    {
+      "name": "功能市集",
+      "url": "/marketplace.html",
+      "description": "探索 AI 工具市集"
+    }
+  ]
+}

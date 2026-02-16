@@ -1,0 +1,811 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SEOBAIKE 動態 — 最新消息與平台公告 | AI 全球市集</title>
+  <meta name="description" content="SEOBAIKE 最新消息：平台上線公告、AI 市集趨勢、賣家指南、功能更新。掌握 AI 全球市集的最新動態。">
+  <meta name="keywords" content="SEOBAIKE,最新消息,AI 動態,平台公告,AI 市集趨勢,賣家指南,功能更新">
+  <link rel="canonical" href="https://aiforseo.vip/blog.html">
+  <meta property="og:title" content="SEOBAIKE 動態 — 最新消息與平台公告">
+  <meta property="og:description" content="SEOBAIKE 最新消息：平台上線公告、AI 市集趨勢、賣家指南、功能更新。">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://aiforseo.vip/blog.html">
+  <meta property="og:image" content="/og-image.png">
+  <meta property="og:site_name" content="SEOBAIKE">
+  <meta property="og:locale" content="zh_TW">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="SEOBAIKE 動態 — 最新消息與平台公告">
+  <meta name="twitter:description" content="SEOBAIKE 最新消息：平台上線公告、AI 市集趨勢、賣家指南、功能更新。">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <script type="application/ld+json">
+  [
+    {
+      "@context": "https://schema.org",
+      "@type": "Blog",
+      "name": "SEOBAIKE 動態",
+      "description": "SEOBAIKE AI 全球市集的最新消息與平台公告",
+      "url": "https://aiforseo.vip/blog.html",
+      "publisher": {
+        "@type": "Organization",
+        "name": "小路光有限公司",
+        "url": "https://aiforseo.vip"
+      },
+      "blogPost": [
+        {
+          "@type": "BlogPosting",
+          "headline": "SEOBAIKE 正式上線：AI 界的 App Store 來了",
+          "datePublished": "2026-02-16",
+          "author": { "@type": "Person", "name": "許竣翔" },
+          "publisher": { "@type": "Organization", "name": "小路光有限公司" },
+          "description": "SEOBAIKE 正式上線。一個讓所有 AI 服務都能上架、被發現、被使用的開放平台，專為台灣與全球市場打造。"
+        },
+        {
+          "@type": "BlogPosting",
+          "headline": "什麼是 BYOK？為什麼它很重要",
+          "datePublished": "2026-02-13",
+          "publisher": { "@type": "Organization", "name": "小路光有限公司" },
+          "description": "BYOK（Bring Your Own Key）讓你用自己的 API 金鑰使用 AI 服務，不被平台綁定，完全掌控成本與資料隱私。"
+        },
+        {
+          "@type": "BlogPosting",
+          "headline": "SEO Points 後付制：用多少付多少",
+          "datePublished": "2026-02-10",
+          "publisher": { "@type": "Organization", "name": "小路光有限公司" },
+          "description": "告別固定月費，SEOBAIKE 的 SEO Points 計量後付制讓你真正做到用多少、付多少，降低 AI 使用門檻。"
+        },
+        {
+          "@type": "BlogPosting",
+          "headline": "台灣 AI 產業的機會與挑戰",
+          "datePublished": "2026-02-06",
+          "publisher": { "@type": "Organization", "name": "小路光有限公司" },
+          "description": "台灣在 AI 產業鏈中具備獨特優勢。從半導體到應用層，台灣企業如何在全球 AI 浪潮中找到自己的定位？"
+        },
+        {
+          "@type": "BlogPosting",
+          "headline": "如何用 AI 提升你的 SEO 排名",
+          "datePublished": "2026-02-02",
+          "publisher": { "@type": "Organization", "name": "小路光有限公司" },
+          "description": "AI 正在改變 SEO 的遊戲規則。從關鍵字分析到內容生成，學習如何善用 AI 工具讓你的網站排名大幅提升。"
+        }
+      ]
+    }
+  ]
+  </script>
+  <link rel="stylesheet" href="/assets/design-system.css">
+  <link rel="stylesheet" href="/assets/premium-fx.css">
+  <style>
+    /* ── Hero ── */
+    .blog-hero {
+      padding: 140px 0 80px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(180deg, #0c0c20 0%, var(--bg-primary) 100%);
+    }
+    .blog-hero::before {
+      content: "";
+      position: absolute;
+      top: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 700px;
+      height: 700px;
+      background: radial-gradient(circle, rgba(232,133,12,0.07) 0%, transparent 65%);
+      pointer-events: none;
+    }
+    .blog-hero h1 {
+      margin-bottom: var(--sp-5);
+    }
+    .blog-hero p {
+      font-size: 1.15rem;
+      color: var(--text-muted);
+      max-width: 520px;
+      margin: 0 auto;
+    }
+
+    /* ── Category Filter ── */
+    .category-filter {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--sp-3);
+      flex-wrap: wrap;
+      margin-bottom: var(--sp-12);
+    }
+    .filter-btn {
+      padding: 8px 20px;
+      border-radius: var(--radius-full);
+      font-size: 0.85rem;
+      font-weight: 600;
+      font-family: var(--font-sans);
+      cursor: pointer;
+      transition: all var(--duration-normal) var(--ease-out);
+      border: 1px solid var(--border-default);
+      background: transparent;
+      color: var(--text-secondary);
+      white-space: nowrap;
+    }
+    .filter-btn:hover {
+      border-color: var(--border-hover);
+      color: var(--text-primary);
+      background: rgba(232,133,12,0.05);
+    }
+    .filter-btn.active {
+      background: var(--gold-gradient);
+      color: #000;
+      border-color: transparent;
+      font-weight: 700;
+      box-shadow: 0 2px 12px rgba(232,133,12,0.2);
+    }
+
+    /* ── Blog Grid ── */
+    .blog-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--sp-8);
+    }
+
+    /* ── Blog Card ── */
+    .blog-card {
+      display: flex;
+      flex-direction: column;
+    }
+    .blog-card.hidden {
+      display: none;
+    }
+    .blog-card-img {
+      height: 180px;
+      border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .blog-card-img .card-icon {
+      width: 64px;
+      height: 64px;
+      border-radius: var(--radius-md);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: var(--text-primary);
+      position: relative;
+      z-index: 1;
+    }
+    .blog-card-img .card-icon-ring {
+      position: absolute;
+      width: 96px;
+      height: 96px;
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,0.06);
+      animation: float 6s ease-in-out infinite;
+    }
+    .blog-card-img.img-launch {
+      background: linear-gradient(135deg, rgba(232,133,12,0.18), rgba(245,166,35,0.06));
+    }
+    .blog-card-img.img-launch .card-icon {
+      background: rgba(232,133,12,0.15);
+      border: 1px solid rgba(232,133,12,0.25);
+    }
+    .blog-card-img.img-education {
+      background: linear-gradient(135deg, rgba(88,166,255,0.15), rgba(52,208,88,0.06));
+    }
+    .blog-card-img.img-education .card-icon {
+      background: rgba(88,166,255,0.15);
+      border: 1px solid rgba(88,166,255,0.25);
+    }
+    .blog-card-img.img-product {
+      background: linear-gradient(135deg, rgba(245,166,35,0.15), rgba(232,133,12,0.06));
+    }
+    .blog-card-img.img-product .card-icon {
+      background: rgba(245,166,35,0.15);
+      border: 1px solid rgba(245,166,35,0.25);
+    }
+    .blog-card-img.img-industry {
+      background: linear-gradient(135deg, rgba(52,208,88,0.12), rgba(88,166,255,0.08));
+    }
+    .blog-card-img.img-industry .card-icon {
+      background: rgba(52,208,88,0.12);
+      border: 1px solid rgba(52,208,88,0.25);
+    }
+    .blog-card-img.img-howto {
+      background: linear-gradient(135deg, rgba(232,133,12,0.12), rgba(245,166,35,0.08));
+    }
+    .blog-card-img.img-howto .card-icon {
+      background: rgba(232,133,12,0.12);
+      border: 1px solid rgba(232,133,12,0.2);
+    }
+    .blog-card-body {
+      padding: var(--sp-6) var(--sp-6) var(--sp-8);
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    .blog-meta {
+      display: flex;
+      align-items: center;
+      gap: var(--sp-3);
+      margin-bottom: var(--sp-3);
+      flex-wrap: wrap;
+    }
+    .blog-date {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+    .blog-tag {
+      display: inline-block;
+      padding: 3px 10px;
+      border-radius: var(--radius-full);
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+    }
+    .tag-product-update {
+      background: rgba(232,133,12,0.1);
+      color: var(--gold-200);
+      border: 1px solid rgba(232,133,12,0.2);
+    }
+    .tag-education {
+      background: rgba(88,166,255,0.08);
+      color: var(--info);
+      border: 1px solid rgba(88,166,255,0.2);
+    }
+    .tag-industry {
+      background: rgba(52,208,88,0.08);
+      color: var(--success);
+      border: 1px solid rgba(52,208,88,0.2);
+    }
+    .blog-card-body h3 {
+      font-size: 1.15rem;
+      margin-bottom: var(--sp-3);
+      line-height: 1.4;
+    }
+    .blog-card-body h3 a {
+      color: var(--text-primary);
+      transition: color var(--duration-fast);
+    }
+    .blog-card-body h3 a:hover {
+      color: var(--gold-200);
+    }
+    .blog-excerpt {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      line-height: 1.75;
+      flex: 1;
+      margin-bottom: var(--sp-4);
+    }
+    .read-more {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--gold-200);
+      transition: gap var(--duration-fast);
+    }
+    .read-more:hover {
+      gap: 10px;
+      color: var(--gold-100);
+    }
+
+    /* Featured card */
+    .blog-card.featured {
+      grid-column: 1 / -1;
+    }
+    .blog-card.featured .blog-card-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
+    .blog-card.featured .blog-card-img {
+      height: 100%;
+      min-height: 260px;
+      border-radius: var(--radius-lg) 0 0 var(--radius-lg);
+    }
+    .blog-card.featured .blog-card-body {
+      padding: var(--sp-8);
+      justify-content: center;
+    }
+    .blog-card.featured .blog-card-body h3 {
+      font-size: 1.5rem;
+    }
+    .blog-card.featured .blog-excerpt {
+      font-size: 0.95rem;
+    }
+    .featured-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 12px;
+      border-radius: var(--radius-full);
+      background: var(--gold-gradient);
+      color: #000;
+      font-size: 0.7rem;
+      font-weight: 800;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      margin-bottom: var(--sp-4);
+      width: fit-content;
+    }
+
+    /* ── Newsletter ── */
+    .newsletter-section {
+      max-width: 640px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .newsletter-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      padding: var(--sp-10) var(--sp-8);
+    }
+    .newsletter-card h2 {
+      font-size: 1.4rem;
+      margin-bottom: var(--sp-2);
+    }
+    .newsletter-card p {
+      margin-bottom: var(--sp-6);
+      font-size: 0.95rem;
+    }
+    .newsletter-form {
+      display: flex;
+      gap: var(--sp-3);
+      max-width: 440px;
+      margin: 0 auto;
+    }
+    .newsletter-form .input {
+      flex: 1;
+    }
+    #newsletter-msg {
+      margin-top: var(--sp-3);
+      font-size: 0.85rem;
+      display: none;
+    }
+
+    /* ── Empty state ── */
+    .blog-empty {
+      grid-column: 1 / -1;
+      text-align: center;
+      padding: var(--sp-16) var(--sp-8);
+      color: var(--text-muted);
+    }
+    .blog-empty p {
+      font-size: 1.1rem;
+    }
+
+    /* ── Article count ── */
+    .article-count {
+      text-align: center;
+      margin-bottom: var(--sp-8);
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+    .article-count span {
+      color: var(--gold-200);
+      font-weight: 700;
+    }
+
+    @media (max-width: 768px) {
+      .blog-grid {
+        grid-template-columns: 1fr;
+      }
+      .blog-card.featured {
+        grid-column: 1;
+      }
+      .blog-card.featured .blog-card-inner {
+        grid-template-columns: 1fr;
+      }
+      .blog-card.featured .blog-card-img {
+        height: 200px;
+        min-height: auto;
+        border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+      }
+      .newsletter-form {
+        flex-direction: column;
+      }
+      .category-filter {
+        gap: var(--sp-2);
+      }
+      .filter-btn {
+        padding: 6px 14px;
+        font-size: 0.8rem;
+      }
+    }
+  </style>
+</head>
+<body class="page-top">
+
+  <!-- ════ Navigation ════ -->
+  <nav class="nav">
+    <a href="/" class="nav-brand">
+      <img src="/favicon.svg" alt="SEOBAIKE" width="34" height="34">
+      <span><span class="seo">SEO</span><span class="baike">BAIKE</span></span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="/">首頁</a></li>
+      <li><a href="/features">功能</a></li>
+      <li><a href="/marketplace">市集</a></li>
+      <li><a href="/pricing">方案</a></li>
+      <li><a href="/about">關於</a></li>
+      <li><a href="/blog" class="active">動態</a></li>
+      <li><a href="/billing" class="nav-link">帳單</a></li>
+      <li><a href="/contact" class="nav-cta">聯繫我們</a></li>
+    </ul>
+    <button class="nav-hamburger" onclick="toggleMenu()" aria-label="選單">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- Mobile Overlay -->
+  <div class="mobile-overlay">
+    <button class="mobile-close" onclick="toggleMenu()">&times;</button>
+    <a href="/" onclick="toggleMenu()">首頁</a>
+    <a href="/features" onclick="toggleMenu()">功能</a>
+    <a href="/marketplace" onclick="toggleMenu()">市集</a>
+    <a href="/pricing" onclick="toggleMenu()">方案</a>
+    <a href="/about" onclick="toggleMenu()">關於</a>
+    <a href="/blog" onclick="toggleMenu()">動態</a>
+    <a href="/billing" onclick="toggleMenu()">帳單</a>
+    <a href="/contact" onclick="toggleMenu()">聯繫我們</a>
+  </div>
+
+  <!-- ════ Hero ════ -->
+  <section class="blog-hero">
+    <div class="container">
+      <h1 class="fade-up"><span class="text-gold">SEOBAIKE 動態</span></h1>
+      <p class="fade-up">產品更新、技術教學、產業觀察 — 掌握 AI 市集的最新脈動</p>
+    </div>
+  </section>
+
+  <!-- ════ Blog Posts ════ -->
+  <section class="section">
+    <div class="container">
+
+      <!-- Category Filter -->
+      <div class="category-filter fade-up">
+        <button class="filter-btn active" data-category="all" onclick="filterArticles('all', this)">全部</button>
+        <button class="filter-btn" data-category="product-update" onclick="filterArticles('product-update', this)">產品更新</button>
+        <button class="filter-btn" data-category="education" onclick="filterArticles('education', this)">教學</button>
+        <button class="filter-btn" data-category="industry" onclick="filterArticles('industry', this)">產業觀察</button>
+      </div>
+
+      <!-- Article count -->
+      <div class="article-count fade-up" id="article-count">
+        共 <span>5</span> 篇文章
+      </div>
+
+      <div class="blog-grid" id="blog-grid">
+
+        <!-- ═══ Post 1: Launch Announcement (Featured) ═══ -->
+        <article class="card blog-card featured fade-up" data-category="product-update" style="padding:0;">
+          <div class="blog-card-inner">
+            <div class="blog-card-img img-launch">
+              <span class="card-icon-ring"></span>
+              <div class="card-icon">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/>
+                  <path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/>
+                  <path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/>
+                  <path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/>
+                </svg>
+              </div>
+            </div>
+            <div class="blog-card-body">
+              <div class="featured-label">精選文章</div>
+              <div class="blog-meta">
+                <span class="blog-date">2026 年 2 月 16 日</span>
+                <span class="blog-tag tag-product-update">產品更新</span>
+              </div>
+              <h3><a href="#">SEOBAIKE 正式上線：AI 界的 App Store 來了</a></h3>
+              <p class="blog-excerpt">
+                SEOBAIKE 今天正式對外開放。我們打造了一個讓所有 AI 服務都能上架、被發現、被使用的開放平台。就像手機有 App Store，AI 生態系也需要一個讓使用者輕鬆找到、比較、使用各種 AI 工具的市集。SEOBAIKE 就是這個市集，專為台灣與全球市場打造。
+              </p>
+              <a href="#" class="read-more">閱讀更多 &rarr;</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- ═══ Post 2: BYOK Education ═══ -->
+        <article class="card blog-card fade-up" data-category="education" style="padding:0;">
+          <div class="blog-card-img img-education">
+            <span class="card-icon-ring"></span>
+            <div class="card-icon">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect width="18" height="11" x="3" y="11" rx="2" ry="2"/>
+                <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                <circle cx="12" cy="16" r="1"/>
+              </svg>
+            </div>
+          </div>
+          <div class="blog-card-body">
+            <div class="blog-meta">
+              <span class="blog-date">2026 年 2 月 13 日</span>
+              <span class="blog-tag tag-education">教學</span>
+            </div>
+            <h3><a href="#">什麼是 BYOK？為什麼它很重要</a></h3>
+            <p class="blog-excerpt">
+              BYOK（Bring Your Own Key）讓你用自己的 API 金鑰使用 AI 服務。這代表你不會被任何單一平台綁定，能完全掌控使用成本與資料隱私。本文深入解析 BYOK 的運作原理、優勢，以及它如何改變 AI 服務的消費方式。
+            </p>
+            <a href="#" class="read-more">閱讀更多 &rarr;</a>
+          </div>
+        </article>
+
+        <!-- ═══ Post 3: SEO Points ═══ -->
+        <article class="card blog-card fade-up" data-category="product-update" style="padding:0;">
+          <div class="blog-card-img img-product">
+            <span class="card-icon-ring"></span>
+            <div class="card-icon">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"/>
+                <path d="M16 8h-6a2 2 0 1 0 0 4h4a2 2 0 1 1 0 4H8"/>
+                <path d="M12 18V6"/>
+              </svg>
+            </div>
+          </div>
+          <div class="blog-card-body">
+            <div class="blog-meta">
+              <span class="blog-date">2026 年 2 月 10 日</span>
+              <span class="blog-tag tag-product-update">產品更新</span>
+            </div>
+            <h3><a href="#">SEO Points 後付制：用多少付多少</a></h3>
+            <p class="blog-excerpt">
+              告別固定月費的束縛。SEOBAIKE 推出 SEO Points 計量後付制 — 你只需要為實際使用的 AI 服務付費。每次呼叫都透明計價，帳單清楚明瞭，真正做到用多少、付多少，大幅降低中小企業與個人開發者的 AI 使用門檻。
+            </p>
+            <a href="#" class="read-more">閱讀更多 &rarr;</a>
+          </div>
+        </article>
+
+        <!-- ═══ Post 4: Industry Insight ═══ -->
+        <article class="card blog-card fade-up" data-category="industry" style="padding:0;">
+          <div class="blog-card-img img-industry">
+            <span class="card-icon-ring"></span>
+            <div class="card-icon">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"/>
+                <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/>
+                <path d="M2 12h20"/>
+              </svg>
+            </div>
+          </div>
+          <div class="blog-card-body">
+            <div class="blog-meta">
+              <span class="blog-date">2026 年 2 月 6 日</span>
+              <span class="blog-tag tag-industry">產業觀察</span>
+            </div>
+            <h3><a href="#">台灣 AI 產業的機會與挑戰</a></h3>
+            <p class="blog-excerpt">
+              台灣在全球 AI 產業鏈中佔有獨特位置。從半導體製造的硬體優勢，到應用層的軟體創新，台灣企業正面臨前所未有的機會。但人才競爭、市場規模、法規環境等挑戰也同時存在。本文分析台灣 AI 產業的現況與未來發展方向。
+            </p>
+            <a href="#" class="read-more">閱讀更多 &rarr;</a>
+          </div>
+        </article>
+
+        <!-- ═══ Post 5: How-to Guide ═══ -->
+        <article class="card blog-card fade-up" data-category="education" style="padding:0;">
+          <div class="blog-card-img img-howto">
+            <span class="card-icon-ring"></span>
+            <div class="card-icon">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="12" x2="12" y1="20" y2="10"/>
+                <line x1="18" x2="18" y1="20" y2="4"/>
+                <line x1="6" x2="6" y1="20" y2="16"/>
+              </svg>
+            </div>
+          </div>
+          <div class="blog-card-body">
+            <div class="blog-meta">
+              <span class="blog-date">2026 年 2 月 2 日</span>
+              <span class="blog-tag tag-education">教學</span>
+            </div>
+            <h3><a href="#">如何用 AI 提升你的 SEO 排名</a></h3>
+            <p class="blog-excerpt">
+              AI 正在改變 SEO 的遊戲規則。從關鍵字研究、內容結構最佳化到技術 SEO 的自動化檢測，AI 工具能大幅提升效率與成效。本文分享實用步驟，教你如何善用 AI 工具系統性地提升網站在搜尋引擎中的排名表現。
+            </p>
+            <a href="#" class="read-more">閱讀更多 &rarr;</a>
+          </div>
+        </article>
+
+        <!-- Empty state (hidden by default) -->
+        <div class="blog-empty" id="blog-empty" style="display:none;">
+          <p>此分類目前沒有文章。</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- ════ Newsletter ════ -->
+  <section class="section-sm">
+    <div class="container">
+      <div class="newsletter-section fade-up">
+        <div class="newsletter-card">
+          <h2>訂閱最新消息</h2>
+          <p>輸入您的 Email，第一時間接收 SEOBAIKE 平台公告與最新動態。</p>
+          <div class="newsletter-form">
+            <input type="email" class="input" id="newsletter-email" placeholder="your@email.com" aria-label="電子郵件">
+            <button class="btn btn-primary" onclick="subscribeNewsletter()">訂閱</button>
+          </div>
+          <p id="newsletter-msg"></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════ Footer ════ -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="/" class="nav-brand" style="font-size:1.3rem;">
+            <span class="seo">SEO</span><span class="baike">BAIKE</span>
+          </a>
+          <p>小路光有限公司（統編 60475510）<br>AI 驅動的全球市集<br>讓每個人都能用 AI 把產品賣到全世界。</p>
+        </div>
+        <div class="footer-col">
+          <h4>平台</h4>
+          <a href="/features">功能介紹</a>
+          <a href="/marketplace">全球市集</a>
+          <a href="/pricing">方案價格</a>
+          <a href="/billing">帳單管理</a>
+        </div>
+        <div class="footer-col">
+          <h4>資源</h4>
+          <a href="/blog">最新動態</a>
+          <a href="/docs">常見問題</a>
+        </div>
+        <div class="footer-col">
+          <h4>公司</h4>
+          <a href="/about">關於我們</a>
+          <a href="/contact">聯繫我們</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>&copy; 2024-2026 小路光有限公司. All rights reserved.</span>
+        <span>aiforseo.vip</span>
+      </div>
+      <div class="footer-disclaimer">
+        本平台由小路光有限公司（統編 60475510）營運。AI 服務結果僅供參考，不構成任何形式之保證或承諾。使用本服務即表示同意<a href="/terms">服務條款</a>及<a href="/privacy">隱私權政策</a>。台灣專利申請案號 115100981。
+      </div>
+    </div>
+  </footer>
+
+  <!-- ════ Scripts ════ -->
+  <script>
+  (function(){
+    try {
+      var cfg = window.__SEOBAIKE__ || {};
+      var sUrl = cfg.supabaseUrl || 'https://vmyrivxxibqydccurxug.supabase.co';
+      var sKey = cfg.anonKey || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZteXJpdnh4aWJxeWRjY3VyeHVnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzAwNDAwMjksImV4cCI6MjA4NTYxNjAyOX0.iBV-23LGdm_uKffAExgqSV34-NWoAyv8_-M_cJQZ8Gg';
+      fetch(sUrl + '/rest/v1/page_views', {
+        method: 'POST',
+        headers: { 'Content-Type':'application/json', 'apikey':sKey, 'Authorization':'Bearer '+sKey, 'Prefer':'return=minimal' },
+        body: JSON.stringify({ path: location.pathname, referrer: document.referrer || null, user_agent: navigator.userAgent })
+      }).catch(function(){});
+    } catch(e){}
+  })();
+  </script>
+  <script>
+  // Intersection Observer for fade-up animations
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
+
+  // Nav scroll effect
+  window.addEventListener('scroll', () => {
+    const nav = document.querySelector('.nav');
+    if (nav) nav.classList.toggle('scrolled', window.scrollY > 20);
+  });
+
+  // Hamburger menu
+  function toggleMenu() {
+    document.querySelector('.nav-hamburger')?.classList.toggle('active');
+    document.querySelector('.mobile-overlay')?.classList.toggle('open');
+  }
+
+  // ── Category Filter ──
+  function filterArticles(category, btn) {
+    // Update active button
+    document.querySelectorAll('.filter-btn').forEach(function(b) {
+      b.classList.remove('active');
+    });
+    btn.classList.add('active');
+
+    var cards = document.querySelectorAll('.blog-card[data-category]');
+    var visibleCount = 0;
+
+    cards.forEach(function(card) {
+      if (category === 'all' || card.getAttribute('data-category') === category) {
+        card.classList.remove('hidden');
+        card.style.display = '';
+        visibleCount++;
+      } else {
+        card.classList.add('hidden');
+        card.style.display = 'none';
+      }
+    });
+
+    // Show/hide empty state
+    var emptyEl = document.getElementById('blog-empty');
+    if (emptyEl) {
+      emptyEl.style.display = visibleCount === 0 ? 'block' : 'none';
+    }
+
+    // Update article count
+    var countEl = document.getElementById('article-count');
+    if (countEl) {
+      countEl.innerHTML = '共 <span>' + visibleCount + '</span> 篇文章';
+    }
+
+    // Re-observe for animations
+    document.querySelectorAll('.blog-card:not(.hidden)').forEach(function(el) {
+      if (!el.classList.contains('visible')) {
+        el.classList.remove('visible');
+        obs.observe(el);
+        // Trigger re-animation
+        setTimeout(function() { el.classList.add('visible'); }, 50);
+      }
+    });
+  }
+
+  // Newsletter subscription
+  async function subscribeNewsletter() {
+    var email = document.getElementById('newsletter-email').value.trim();
+    var msg = document.getElementById('newsletter-msg');
+    if (!email || !email.includes('@')) {
+      msg.style.display = 'block';
+      msg.style.color = 'var(--gold-200)';
+      msg.textContent = '請輸入有效的電子郵件地址';
+      return;
+    }
+
+    var SUPA_URL = 'https://vmyrivxxibqydccurxug.supabase.co';
+    var SUPA_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZteXJpdnh4aWJxeWRjY3VyeHVnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzAwNDAwMjksImV4cCI6MjA4NTYxNjAyOX0.iBV-23LGdm_uKffAExgqSV34-NWoAyv8_-M_cJQZ8Gg';
+
+    try {
+      var res = await fetch(SUPA_URL + '/rest/v1/newsletter_subscriptions', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'apikey': SUPA_KEY,
+          'Authorization': 'Bearer ' + SUPA_KEY,
+          'Prefer': 'return=minimal'
+        },
+        body: JSON.stringify({ email: email, source: 'blog' })
+      });
+
+      if (res.ok || res.status === 201) {
+        msg.style.display = 'block';
+        msg.style.color = 'var(--success)';
+        msg.textContent = '感謝訂閱！您將收到 SEOBAIKE 的最新消息。';
+        document.getElementById('newsletter-email').value = '';
+      } else if (res.status === 409) {
+        msg.style.display = 'block';
+        msg.style.color = 'var(--gold-200)';
+        msg.textContent = '此信箱已訂閱過了！';
+      } else {
+        msg.style.display = 'block';
+        msg.style.color = 'var(--gold-200)';
+        msg.textContent = '訂閱失敗，請稍後再試';
+      }
+    } catch (err) {
+      msg.style.display = 'block';
+      msg.style.color = 'var(--gold-200)';
+      msg.textContent = '網路錯誤，請稍後再試';
+    }
+  }
+  </script>
+  <script src="/assets/analytics.js" defer></script>
+  <script src="/seobaike-widget.js"></script>
+  <script src="/assets/premium-fx.js"></script>
+  <script src="/assets/i18n.js"></script>
+  <script src="/assets/cookie-consent.js"></script>
+</body>
+</html>

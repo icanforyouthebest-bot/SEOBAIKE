@@ -1,0 +1,839 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>功能介紹 — SEOBAIKE | BYOK 插拔式 AI 平台</title>
+  <meta name="description" content="SEOBAIKE 平台核心功能：BYOK 自帶金鑰、AI 市集、多語言支援、後付制點數、即時監控儀表板、安全合規、插拔式架構、全球佈局。一個入口，所有 AI 服務。">
+  <meta name="keywords" content="SEOBAIKE,AI平台,BYOK,AI市集,多語言,後付制,即時監控,安全合規,插拔式架構,全球AI">
+  <link rel="canonical" href="https://aiforseo.vip/features.html">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="功能介紹 — SEOBAIKE | BYOK 插拔式 AI 平台">
+  <meta property="og:description" content="SEOBAIKE 平台核心功能：BYOK 自帶金鑰、AI 市集、多語言支援、後付制點數、即時監控、安全合規。一個入口，所有 AI。">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://aiforseo.vip/features.html">
+  <meta property="og:image" content="/og-image.png">
+  <meta property="og:site_name" content="SEOBAIKE">
+  <meta property="og:locale" content="zh_TW">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="功能介紹 — SEOBAIKE | BYOK 插拔式 AI 平台">
+  <meta name="twitter:description" content="SEOBAIKE 平台核心功能：BYOK 自帶金鑰、AI 市集、多語言支援、後付制點數、即時監控、安全合規。一個入口，所有 AI。">
+
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  [{
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "SEOBAIKE",
+    "applicationCategory": "BusinessApplication",
+    "operatingSystem": "Web",
+    "url": "https://aiforseo.vip/features.html",
+    "description": "SEOBAIKE BYOK 插拔式 AI 平台：自帶金鑰、AI 市集、多語言支援、後付制點數、即時監控、安全合規、全球佈局",
+    "featureList": "BYOK 自帶金鑰, AI 市集, 多語言支援, 後付制點數, 即時監控儀表板, 安全合規, 插拔式架構, 全球佈局",
+    "author": {
+      "@type": "Organization",
+      "name": "小路光有限公司"
+    }
+  }]
+  </script>
+
+  <!-- Design System -->
+  <link rel="stylesheet" href="/assets/design-system.css">
+  <link rel="stylesheet" href="/assets/premium-fx.css">
+
+  <!-- Page-Specific Styles -->
+  <style>
+    /* ── Hero ── */
+    .features-hero {
+      padding: 140px 0 100px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .features-hero::before {
+      content: '';
+      position: absolute;
+      top: -40%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 800px;
+      height: 800px;
+      background: radial-gradient(circle, rgba(232,133,12,0.08) 0%, transparent 65%);
+      pointer-events: none;
+    }
+    .features-hero::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 120px;
+      background: linear-gradient(to bottom, transparent, var(--bg-primary));
+      pointer-events: none;
+    }
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 20px;
+      border-radius: var(--radius-full);
+      background: rgba(232,133,12,0.06);
+      border: 1px solid rgba(232,133,12,0.12);
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--gold-200);
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      margin-bottom: var(--sp-6);
+    }
+    .hero-title {
+      margin-bottom: var(--sp-5);
+      position: relative;
+      z-index: 1;
+    }
+    .hero-subtitle {
+      font-size: clamp(1.05rem, 2.2vw, 1.25rem);
+      color: var(--text-secondary);
+      max-width: 620px;
+      margin: 0 auto var(--sp-10);
+      line-height: 1.8;
+      position: relative;
+      z-index: 1;
+    }
+    .hero-actions {
+      display: flex;
+      gap: var(--sp-4);
+      justify-content: center;
+      flex-wrap: wrap;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ── Category Label ── */
+    .category-label {
+      display: flex;
+      align-items: center;
+      gap: var(--sp-3);
+      margin-bottom: var(--sp-8);
+    }
+    .category-label span {
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--gold-200);
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+    .category-label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, rgba(232,133,12,0.25), transparent);
+    }
+
+    /* ── Feature Grid ── */
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--sp-6);
+    }
+    .feature-card {
+      padding: var(--sp-8) var(--sp-8) var(--sp-8);
+      display: flex;
+      gap: var(--sp-6);
+      align-items: flex-start;
+    }
+    .feature-icon-wrap {
+      width: 64px;
+      height: 64px;
+      min-width: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: var(--radius-lg);
+      background: rgba(232,133,12,0.06);
+      border: 1px solid rgba(232,133,12,0.1);
+      font-size: 1.8rem;
+      color: var(--gold-200);
+      transition: all var(--duration-normal) var(--ease-out);
+    }
+    .card:hover .feature-icon-wrap {
+      background: rgba(232,133,12,0.12);
+      border-color: rgba(232,133,12,0.3);
+      transform: scale(1.08);
+      box-shadow: 0 0 24px rgba(232,133,12,0.15);
+    }
+    .feature-body {
+      flex: 1;
+      min-width: 0;
+    }
+    .feature-card h3 {
+      margin-bottom: var(--sp-2);
+      font-size: 1.15rem;
+    }
+    .feature-card p {
+      font-size: 0.9rem;
+      line-height: 1.7;
+      color: var(--text-secondary);
+    }
+    .feature-tag {
+      display: inline-block;
+      margin-top: var(--sp-3);
+      padding: 4px 14px;
+      border-radius: var(--radius-full);
+      background: rgba(232,133,12,0.06);
+      border: 1px solid rgba(232,133,12,0.1);
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: var(--gold-200);
+      letter-spacing: 0.5px;
+    }
+
+    /* ── Highlight Card (full-width) ── */
+    .feature-highlight {
+      grid-column: 1 / -1;
+      display: flex;
+      gap: var(--sp-10);
+      padding: var(--sp-12) var(--sp-10);
+      align-items: center;
+      background: linear-gradient(135deg, rgba(232,133,12,0.04) 0%, var(--bg-card) 100%);
+    }
+    .feature-highlight .feature-icon-wrap {
+      width: 88px;
+      height: 88px;
+      min-width: 88px;
+      font-size: 2.2rem;
+      border-radius: var(--radius-xl);
+    }
+    .feature-highlight h3 {
+      font-size: 1.35rem;
+    }
+    .feature-highlight p {
+      font-size: 1rem;
+      max-width: 520px;
+    }
+
+    /* ── How It Works Pipeline ── */
+    .pipeline-wrap {
+      display: flex;
+      align-items: stretch;
+      gap: 0;
+      position: relative;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+    .pipeline-step {
+      flex: 1;
+      text-align: center;
+      padding: var(--sp-8) var(--sp-4);
+      position: relative;
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      transition: all var(--duration-normal) var(--ease-out);
+    }
+    .pipeline-step:first-child {
+      border-radius: var(--radius-lg) 0 0 var(--radius-lg);
+    }
+    .pipeline-step:last-child {
+      border-radius: 0 var(--radius-lg) var(--radius-lg) 0;
+    }
+    .pipeline-step:hover {
+      background: var(--bg-card-hover);
+      border-color: var(--border-hover);
+      z-index: 2;
+    }
+    .pipeline-num {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: var(--gold-gradient);
+      color: #000;
+      font-weight: 800;
+      font-size: 0.85rem;
+      margin-bottom: var(--sp-4);
+    }
+    .pipeline-step h4 {
+      margin-bottom: var(--sp-2);
+      font-size: 1rem;
+    }
+    .pipeline-step p {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+    .pipeline-arrow {
+      position: absolute;
+      right: -14px;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 3;
+      width: 28px;
+      height: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--bg-primary);
+      border: 1px solid var(--border-subtle);
+      border-radius: 50%;
+      color: var(--gold-200);
+      font-size: 0.9rem;
+    }
+
+    /* ── Comparison Table ── */
+    .compare-table-wrap {
+      overflow-x: auto;
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border-subtle);
+    }
+    .compare-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.9rem;
+    }
+    .compare-table th {
+      padding: var(--sp-4) var(--sp-6);
+      text-align: left;
+      font-weight: 700;
+      font-size: 0.78rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--gold-200);
+      background: rgba(232,133,12,0.04);
+      border-bottom: 1px solid var(--border-subtle);
+    }
+    .compare-table td {
+      padding: var(--sp-4) var(--sp-6);
+      border-bottom: 1px solid var(--border-subtle);
+      color: var(--text-secondary);
+    }
+    .compare-table tr:last-child td {
+      border-bottom: none;
+    }
+    .compare-table tr:hover td {
+      background: rgba(232,133,12,0.02);
+    }
+    .compare-table .check-mark {
+      color: var(--success);
+      font-weight: 700;
+    }
+    .compare-table .seobaike-col {
+      color: var(--text-primary);
+      font-weight: 600;
+      background: rgba(232,133,12,0.03);
+    }
+
+    /* ── CTA Section ── */
+    .cta-section {
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .cta-section::before {
+      content: '';
+      position: absolute;
+      bottom: -200px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 700px;
+      height: 700px;
+      background: radial-gradient(circle, rgba(232,133,12,0.06) 0%, transparent 65%);
+      pointer-events: none;
+    }
+    .cta-box {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: var(--sp-16) var(--sp-8);
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-xl);
+      position: relative;
+      overflow: hidden;
+    }
+    .cta-box::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 10%;
+      right: 10%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(232,133,12,0.3), transparent);
+    }
+    .cta-box h2 {
+      margin-bottom: var(--sp-4);
+    }
+    .cta-box p {
+      margin-bottom: var(--sp-8);
+      font-size: 1.05rem;
+    }
+    .cta-actions {
+      display: flex;
+      gap: var(--sp-4);
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .cta-subtext {
+      margin-top: var(--sp-5);
+      font-size: 0.82rem;
+      color: var(--text-muted);
+    }
+
+    /* ── Responsive Overrides ── */
+    @media (max-width: 1024px) {
+      .features-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .feature-highlight {
+        grid-column: 1 / -1;
+      }
+      .pipeline-wrap {
+        flex-wrap: wrap;
+      }
+      .pipeline-step {
+        flex: 1 1 45%;
+        border-radius: var(--radius-md) !important;
+      }
+      .pipeline-arrow {
+        display: none;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .features-hero {
+        padding: 120px 0 80px;
+      }
+      .features-grid {
+        grid-template-columns: 1fr;
+      }
+      .feature-card {
+        flex-direction: column;
+        text-align: center;
+        align-items: center;
+      }
+      .feature-highlight {
+        flex-direction: column;
+        text-align: center;
+        align-items: center;
+        padding: var(--sp-8) var(--sp-6);
+      }
+      .pipeline-step {
+        flex: 1 1 100%;
+      }
+      .cta-box {
+        padding: var(--sp-10) var(--sp-5);
+      }
+      .compare-table th,
+      .compare-table td {
+        padding: var(--sp-3) var(--sp-4);
+        font-size: 0.82rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .features-hero {
+        padding: 110px 0 60px;
+      }
+    }
+  </style>
+</head>
+<body class="page-top">
+
+  <!-- ════════════ NAV ════════════ -->
+  <nav class="nav">
+    <a href="/" class="nav-brand">
+      <img src="/favicon.svg" alt="SEOBAIKE" width="34" height="34">
+      <span><span class="seo">SEO</span><span class="baike">BAIKE</span></span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="/">首頁</a></li>
+      <li><a href="/features" class="active">功能</a></li>
+      <li><a href="/marketplace">市集</a></li>
+      <li><a href="/pricing">方案</a></li>
+      <li><a href="/about">關於</a></li>
+      <li><a href="/docs">常見問題</a></li>
+      <li><a href="/billing" class="nav-link">帳單</a></li>
+      <li><a href="/login" class="nav-cta">登入</a></li>
+    </ul>
+    <button class="nav-hamburger" onclick="toggleMenu()" aria-label="選單">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- Mobile Menu Overlay -->
+  <div class="mobile-overlay">
+    <button class="mobile-close" onclick="toggleMenu()">&times;</button>
+    <a href="/" onclick="toggleMenu()">首頁</a>
+    <a href="/features" onclick="toggleMenu()">功能</a>
+    <a href="/marketplace" onclick="toggleMenu()">市集</a>
+    <a href="/pricing" onclick="toggleMenu()">方案</a>
+    <a href="/about" onclick="toggleMenu()">關於</a>
+    <a href="/docs" onclick="toggleMenu()">常見問題</a>
+    <a href="/billing" onclick="toggleMenu()">帳單</a>
+    <a href="/login" onclick="toggleMenu()">登入</a>
+  </div>
+
+  <!-- ════════════ HERO ════════════ -->
+  <section class="features-hero eruption-bg">
+    <div class="container text-center">
+      <div class="fade-up">
+        <div class="hero-badge">&#9670; 平台能力總覽</div>
+        <h1 class="hero-title volcanic-title">為什麼選擇 <span class="text-gold">SEOBAIKE</span>？</h1>
+        <p class="hero-subtitle">
+          自帶金鑰、後付制點數、插拔式 AI 市集。<br>
+          台灣公司營運，合規透明，一個入口串接所有 AI 服務。
+        </p>
+        <div class="hero-actions">
+          <a href="/start" class="btn btn-primary btn-lg seismic-shake">立即開始</a>
+          <a href="/pricing" class="btn btn-secondary btn-lg seismic-shake">查看方案</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════ CORE ADVANTAGE: BYOK HIGHLIGHT ════════════ -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header fade-up">
+        <div class="section-badge">&#9733; Core Advantage</div>
+        <h2>平台<span class="text-gold">核心優勢</span></h2>
+        <p>不只是工具，而是讓 AI 為你工作的完整生態系</p>
+      </div>
+
+      <div class="features-grid stagger">
+
+        <!-- ★ BYOK Highlight -->
+        <div class="card feature-card feature-highlight fade-up magma-border lava-glow">
+          <div class="feature-icon-wrap">&#128273;</div>
+          <div class="feature-body">
+            <h3>BYOK &#8212; 自帶金鑰</h3>
+            <p>帶入你自己的 API 金鑰，直接透過 SEOBAIKE 平台使用各種 AI 服務。費用透明，金鑰存放於你的帳號內，平台不代儲、不加價。你掌握成本，我們提供通路。</p>
+            <span class="feature-tag">&#9670; 核心架構</span>
+          </div>
+        </div>
+
+        <!-- AI 市集 -->
+        <div class="card feature-card fade-up magma-border hover-lift">
+          <div class="feature-icon-wrap">&#9749;</div>
+          <div class="feature-body">
+            <h3>AI 市集</h3>
+            <p>像逛商店一樣瀏覽、試用各種 AI 服務。從文案生成到圖片製作，從數據分析到客服機器人，一站挑選、即裝即用。</p>
+            <span class="feature-tag">服務商城</span>
+          </div>
+        </div>
+
+        <!-- 插拔式架構 -->
+        <div class="card feature-card fade-up magma-border hover-lift">
+          <div class="feature-icon-wrap">&#9881;</div>
+          <div class="feature-body">
+            <h3>插拔式架構</h3>
+            <p>所有 AI 服務採用模組化設計，需要時掛載、不用時卸除。不被單一供應商綁定，隨時切換最適合的方案。</p>
+            <span class="feature-tag">靈活擴充</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════ USER EXPERIENCE FEATURES ════════════ -->
+  <section class="section section-glow" style="background: var(--bg-secondary);">
+    <div class="container">
+      <div class="section-header fade-up">
+        <div class="section-badge">&#9672; User Experience</div>
+        <h2>為使用者<span class="text-gold">設計的體驗</span></h2>
+        <p>從註冊到上手，每個環節都經過打磨</p>
+      </div>
+
+      <div class="features-grid stagger">
+
+        <!-- 後付制 -->
+        <div class="card feature-card fade-up hover-lift">
+          <div class="feature-icon-wrap">&#9733;</div>
+          <div class="feature-body">
+            <h3>後付制 &#8212; SEO Points</h3>
+            <p>先使用、後付款。以 SEO Points 點數計費，用多少扣多少，無需預繳大筆費用，降低嘗試門檻。</p>
+            <span class="feature-tag">彈性計費</span>
+          </div>
+        </div>
+
+        <!-- 即時監控 -->
+        <div class="card feature-card fade-up hover-lift">
+          <div class="feature-icon-wrap">&#9632;</div>
+          <div class="feature-body">
+            <h3>即時監控儀表板</h3>
+            <p>登入後台即可查看所有 AI 服務的使用量、點數消耗、API 呼叫紀錄。一目了然，完全掌握。</p>
+            <span class="feature-tag">數據透明</span>
+          </div>
+        </div>
+
+        <!-- 多語言支援 -->
+        <div class="card feature-card fade-up hover-lift">
+          <div class="feature-icon-wrap">&#9398;</div>
+          <div class="feature-body">
+            <h3>多語言支援</h3>
+            <p>平台介面支援繁體中文、English、日本語、&#54620;&#44397;&#50612;。不論你在哪裡，都能以熟悉的語言操作。</p>
+            <span class="feature-tag">zh-TW / en / ja / ko</span>
+          </div>
+        </div>
+
+        <!-- 安全合規 -->
+        <div class="card feature-card fade-up hover-lift">
+          <div class="feature-icon-wrap">&#9888;</div>
+          <div class="feature-body">
+            <h3>安全合規</h3>
+            <p>台灣公司合法營運（統編 60475510），遵循個資保護法規。資料傳輸全程加密，金鑰獨立儲存，不共用、不外洩。</p>
+            <span class="feature-tag">PDPA &#183; 台灣法遵</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════ GLOBAL + ARCHITECTURE ════════════ -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header fade-up">
+        <div class="section-badge">&#9670; Infrastructure</div>
+        <h2>全球佈局，<span class="text-gold">在地服務</span></h2>
+        <p>台灣總部營運，服務覆蓋全球市場</p>
+      </div>
+
+      <div class="features-grid stagger">
+
+        <!-- 全球佈局 (highlight) -->
+        <div class="card feature-card feature-highlight fade-up magma-border">
+          <div class="feature-icon-wrap">&#9672;</div>
+          <div class="feature-body">
+            <h3>全球佈局 &#8212; 台灣出發</h3>
+            <p>總部設於台灣，透過全球 CDN 節點提供低延遲的 AI 服務。亞太區優先，逐步覆蓋全球。每一筆 API 呼叫都經過最近節點路由，確保回應速度與穩定性。</p>
+            <span class="feature-tag">&#9670; 亞太優先</span>
+          </div>
+        </div>
+
+        <!-- 一個入口 -->
+        <div class="card feature-card fade-up hover-lift">
+          <div class="feature-icon-wrap">&#8853;</div>
+          <div class="feature-body">
+            <h3>統一入口</h3>
+            <p>不用在多個平台之間切換帳號和介面。SEOBAIKE 統一整合，一組帳號、一個儀表板、所有 AI 服務觸手可及。</p>
+            <span class="feature-tag">一站式</span>
+          </div>
+        </div>
+
+        <!-- 開發者友善 -->
+        <div class="card feature-card fade-up hover-lift">
+          <div class="feature-icon-wrap">&#9002;</div>
+          <div class="feature-body">
+            <h3>開發者友善</h3>
+            <p>提供 RESTful API 與文件，讓開發者可以將 SEOBAIKE 的 AI 能力整合到自己的應用程式與工作流程中。</p>
+            <span class="feature-tag">API 整合</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════ HOW IT WORKS ════════════ -->
+  <section class="section section-glow" style="background: var(--bg-secondary);">
+    <div class="container">
+      <div class="section-header fade-up">
+        <div class="section-badge">&#9654; How It Works</div>
+        <h2>四步驟<span class="text-gold">快速上手</span></h2>
+        <p>從註冊到完成第一個 AI 任務，只需要幾分鐘</p>
+      </div>
+
+      <div class="pipeline-wrap fade-up">
+        <div class="pipeline-step">
+          <div class="pipeline-num">1</div>
+          <h4>註冊帳號</h4>
+          <p>填入信箱，建立你的 SEOBAIKE 帳號</p>
+          <div class="pipeline-arrow">&#8594;</div>
+        </div>
+        <div class="pipeline-step">
+          <div class="pipeline-num">2</div>
+          <h4>設定金鑰</h4>
+          <p>輸入你的 API 金鑰，或購買 SEO Points</p>
+          <div class="pipeline-arrow">&#8594;</div>
+        </div>
+        <div class="pipeline-step">
+          <div class="pipeline-num">3</div>
+          <h4>挑選服務</h4>
+          <p>在 AI 市集選擇你需要的功能模組</p>
+          <div class="pipeline-arrow">&#8594;</div>
+        </div>
+        <div class="pipeline-step">
+          <div class="pipeline-num">4</div>
+          <h4>開始使用</h4>
+          <p>即時取得 AI 產出，在儀表板追蹤用量</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════ COMPARISON TABLE ════════════ -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header fade-up">
+        <div class="section-badge">&#9733; Comparison</div>
+        <h2>為什麼選 <span class="text-gold">SEOBAIKE</span>？</h2>
+        <p>與傳統做法相比，平台的核心差異一目了然</p>
+      </div>
+
+      <div class="compare-table-wrap fade-up">
+        <table class="compare-table">
+          <thead>
+            <tr>
+              <th>功能</th>
+              <th class="seobaike-col">SEOBAIKE</th>
+              <th>傳統做法</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>金鑰管理</td>
+              <td class="seobaike-col"><span class="check-mark">&#10003;</span> BYOK 自帶金鑰</td>
+              <td>平台代管，加價轉售</td>
+            </tr>
+            <tr>
+              <td>計費方式</td>
+              <td class="seobaike-col"><span class="check-mark">&#10003;</span> 後付制，用多少付多少</td>
+              <td>預繳月費或年費</td>
+            </tr>
+            <tr>
+              <td>AI 服務數量</td>
+              <td class="seobaike-col"><span class="check-mark">&#10003;</span> 市集持續擴充中</td>
+              <td>單一供應商功能</td>
+            </tr>
+            <tr>
+              <td>架構彈性</td>
+              <td class="seobaike-col"><span class="check-mark">&#10003;</span> 插拔式，隨時增減</td>
+              <td>固定方案，無法客製</td>
+            </tr>
+            <tr>
+              <td>多語言</td>
+              <td class="seobaike-col"><span class="check-mark">&#10003;</span> 中 / 英 / 日 / 韓</td>
+              <td>多數僅支援英文</td>
+            </tr>
+            <tr>
+              <td>法規合規</td>
+              <td class="seobaike-col"><span class="check-mark">&#10003;</span> 台灣公司，在地法遵</td>
+              <td>海外公司，法規模糊</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════ CTA ════════════ -->
+  <section class="section cta-section" style="background: var(--bg-secondary);">
+    <div class="container">
+      <div class="cta-box fade-up magma-border">
+        <div class="section-badge" style="margin-bottom:var(--sp-6)">&#9733; Get Started</div>
+        <h2 class="volcanic-title">準備好了嗎？</h2>
+        <p>帶上你的 API 金鑰，或用 SEO Points 開始體驗。<br>一個帳號，所有 AI 服務。</p>
+        <div class="cta-actions">
+          <a href="/start" class="btn btn-primary btn-lg seismic-shake">立即開始</a>
+          <a href="/pricing" class="btn btn-secondary btn-lg seismic-shake">查看方案定價</a>
+        </div>
+        <p class="cta-subtext">台灣公司營運 &#183; 統編 60475510 &#183; 小路光有限公司</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════ FOOTER ════════════ -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="/" class="nav-brand" style="margin-bottom:var(--sp-3)">
+            <img src="/favicon.svg" alt="SEOBAIKE" width="34" height="34">
+            <span><span class="seo">SEO</span><span class="baike">BAIKE</span></span>
+          </a>
+          <p>小路光有限公司（統編 60475510）<br>AI 驅動的服務平台，一個入口串接所有 AI。</p>
+        </div>
+        <div class="footer-col">
+          <h4>產品</h4>
+          <a href="/features">功能介紹</a>
+          <a href="/pricing">方案定價</a>
+          <a href="/marketplace">市集</a>
+          <a href="/billing">帳單管理</a>
+        </div>
+        <div class="footer-col">
+          <h4>公司</h4>
+          <a href="/about">關於我們</a>
+          <a href="/contact">聯繫我們</a>
+          <a href="/about#careers">加入團隊</a>
+        </div>
+        <div class="footer-col">
+          <h4>支援</h4>
+          <a href="/docs">常見問題</a>
+          <a href="/contact">聯絡客服</a>
+          <a href="/status">系統狀態</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2025-2026 小路光有限公司。保留所有權利。</p>
+        <p>aiforseo.vip</p>
+      </div>
+      <div class="footer-disclaimer">
+        本平台由小路光有限公司（統編 60475510）營運。AI 服務結果僅供參考，不構成任何形式之保證或承諾。使用本服務即表示同意<a href="/terms">服務條款</a>及<a href="/privacy">隱私權政策</a>。台灣專利申請案號 115100981。
+      </div>
+    </div>
+  </footer>
+
+  <!-- ════════════ SCRIPTS ════════════ -->
+
+  <!-- Scroll Animations + Nav Scroll + Hamburger -->
+  <script>
+    /* IntersectionObserver for .fade-up */
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.08 });
+    document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
+
+    /* Nav scroll effect */
+    window.addEventListener('scroll', () => {
+      const nav = document.querySelector('.nav');
+      if (nav) nav.classList.toggle('scrolled', window.scrollY > 20);
+    });
+
+    /* Hamburger toggle */
+    function toggleMenu() {
+      document.querySelector('.nav-hamburger')?.classList.toggle('active');
+      document.querySelector('.mobile-overlay')?.classList.toggle('open');
+    }
+  </script>
+
+  <!-- Analytics: page_views tracking -->
+  <script>
+  (function(){
+    try {
+      var cfg = window.__SEOBAIKE__ || {};
+      var sUrl = cfg.supabaseUrl || 'https://vmyrivxxibqydccurxug.supabase.co';
+      var sKey = cfg.anonKey || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZteXJpdnh4aWJxeWRjY3VyeHVnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzAwNDAwMjksImV4cCI6MjA4NTYxNjAyOX0.iBV-23LGdm_uKffAExgqSV34-NWoAyv8_-M_cJQZ8Gg';
+      fetch(sUrl + '/rest/v1/page_views', {
+        method: 'POST',
+        headers: { 'Content-Type':'application/json', 'apikey':sKey, 'Authorization':'Bearer '+sKey, 'Prefer':'return=minimal' },
+        body: JSON.stringify({ path: location.pathname, referrer: document.referrer || null, user_agent: navigator.userAgent })
+      }).catch(function(){});
+    } catch(e){}
+  })();
+  </script>
+
+  <script src="/assets/analytics.js" defer></script>
+  <script src="/seobaike-widget.js"></script>
+  <script src="/assets/premium-fx.js"></script>
+  <script src="/assets/i18n.js"></script>
+  <script src="/assets/cookie-consent.js"></script>
+</body>
+</html>

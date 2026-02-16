@@ -1,0 +1,3076 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>指揮中心 — SEOBAIKE</title>
+  <meta name="description" content="SEOBAIKE 創辦人指揮中心 — 即時系統監控、營收追蹤、異常偵測。">
+  <meta property="og:title" content="指揮中心 — SEOBAIKE">
+  <meta property="og:description" content="創辦人專屬指揮中心，即時監控所有系統。">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://aiforseo.vip/status">
+  <meta property="og:image" content="/og-image.png">
+  <meta property="og:site_name" content="SEOBAIKE">
+  <meta property="og:locale" content="zh_TW">
+  <meta name="theme-color" content="#e8850c">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/favicon.svg">
+  <link rel="manifest" href="/manifest.json">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --orange: #e8850c;
+      --orange-hover: #d4780a;
+      --orange-light: #f5a623;
+      --orange-glow: rgba(232, 133, 12, 0.15);
+      --orange-glow-strong: rgba(232, 133, 12, 0.25);
+      --copper: #cc785c;
+      --bg: #0a0a1a;
+      --bg-card: rgba(18, 18, 42, 0.7);
+      --bg-card-solid: #12122a;
+      --bg-warm: rgba(232, 133, 12, 0.03);
+      --border: rgba(42, 42, 74, 0.6);
+      --border-light: #3a3a5a;
+      --text: #e0e0e8;
+      --text-muted: #8888aa;
+      --text-bright: #ffffff;
+      --radius: 16px;
+      --green: #28c840;
+      --yellow: #febc2e;
+      --red: #ff5f57;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans TC", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      overflow-x: hidden;
+      min-height: 100vh;
+    }
+
+    a { color: var(--orange); text-decoration: none; transition: color 0.2s; }
+    a:hover { color: var(--copper); }
+
+    /* ========== Access Gate (Biometric + Password) ========== */
+    .access-gate {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: var(--bg);
+      z-index: 9999;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      padding: 24px;
+    }
+    .access-gate.hidden { display: none; }
+    .access-gate-logo {
+      font-size: 2.4rem;
+      font-weight: 900;
+      letter-spacing: -1px;
+      color: #fff;
+      margin-bottom: 4px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .access-gate-logo .seo {
+      background: linear-gradient(135deg, #e8850c, #f5a623, #ffd700);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .access-gate-logo .baike { color: #ffffff; }
+    .access-gate h2 {
+      font-size: 1.6rem;
+      font-weight: 800;
+      color: var(--text-bright);
+    }
+    .access-gate p {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      margin-bottom: 4px;
+    }
+    .access-gate input {
+      padding: 14px 24px;
+      font-size: 1rem;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: var(--bg-card-solid);
+      color: var(--text-bright);
+      width: 320px;
+      max-width: 100%;
+      text-align: center;
+      outline: none;
+      transition: border-color 0.3s;
+    }
+    .access-gate input:focus { border-color: var(--orange); }
+    .access-gate .gate-btn {
+      padding: 14px 40px;
+      font-size: 1rem;
+      font-weight: 700;
+      border: none;
+      border-radius: 12px;
+      background: var(--orange);
+      color: #fff;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.2s;
+      min-width: 200px;
+      min-height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+    .access-gate .gate-btn:hover { background: var(--orange-hover); transform: translateY(-2px); }
+    .access-gate .gate-btn:active { transform: translateY(0); }
+    .access-gate .gate-btn.bio-btn {
+      background: transparent;
+      border: 2px solid var(--orange);
+      color: var(--orange);
+      margin-top: 4px;
+    }
+    .access-gate .gate-btn.bio-btn:hover {
+      background: rgba(232, 133, 12, 0.1);
+    }
+    .access-gate .error-msg {
+      color: var(--red);
+      font-size: 0.88rem;
+      min-height: 1.4em;
+    }
+    .access-gate .success-msg {
+      color: var(--green);
+      font-size: 0.88rem;
+      min-height: 1.4em;
+    }
+    .gate-divider {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      width: 320px;
+      max-width: 100%;
+      color: var(--text-muted);
+      font-size: 0.82rem;
+      margin: 4px 0;
+    }
+    .gate-divider::before, .gate-divider::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    /* Biometric scan animation */
+    .bio-scan-ring {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 8px;
+    }
+    .bio-scan-ring .ring-outer {
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      border-radius: 50%;
+      border: 3px solid rgba(232, 133, 12, 0.2);
+    }
+    .bio-scan-ring .ring-sweep {
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      border-radius: 50%;
+      border: 3px solid transparent;
+      border-top-color: var(--orange);
+      animation: bioSweep 1.5s linear infinite;
+    }
+    .bio-scan-ring.scanning .ring-sweep {
+      animation: bioSweep 0.8s linear infinite;
+      border-top-color: var(--orange);
+      border-right-color: rgba(232, 133, 12, 0.5);
+    }
+    .bio-scan-ring.success .ring-sweep {
+      animation: none;
+      border: 3px solid var(--green);
+    }
+    .bio-scan-ring.success .ring-outer {
+      border-color: rgba(40, 200, 64, 0.3);
+      box-shadow: 0 0 30px rgba(40, 200, 64, 0.2);
+    }
+    @keyframes bioSweep {
+      to { transform: rotate(360deg); }
+    }
+    .bio-icon-inner {
+      font-size: 2.4rem;
+      z-index: 2;
+      transition: all 0.4s;
+    }
+    .bio-scan-ring.scanning .bio-icon-inner {
+      animation: bioPulse 0.8s ease-in-out infinite;
+    }
+    @keyframes bioPulse {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.1); opacity: 0.7; }
+    }
+    .bio-scan-ring.success .bio-icon-inner {
+      color: var(--green);
+    }
+
+    /* Scan line effect */
+    .bio-scan-ring .scan-line {
+      position: absolute;
+      width: 60%;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--orange), transparent);
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    .bio-scan-ring.scanning .scan-line {
+      opacity: 1;
+      animation: scanLineMove 1.2s ease-in-out infinite;
+    }
+    @keyframes scanLineMove {
+      0% { top: 20%; }
+      50% { top: 80%; }
+      100% { top: 20%; }
+    }
+
+    /* Password section toggle */
+    .password-section { transition: all 0.3s; }
+    .password-section.collapsed {
+      max-height: 0;
+      overflow: hidden;
+      opacity: 0;
+      margin: 0;
+    }
+    .toggle-password-link {
+      color: var(--text-muted);
+      font-size: 0.82rem;
+      cursor: pointer;
+      transition: color 0.2s;
+      margin-top: 8px;
+    }
+    .toggle-password-link:hover { color: var(--orange); }
+
+    /* Registration prompt modal */
+    .bio-register-prompt {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0,0,0,0.7);
+      z-index: 10000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+    .bio-register-prompt.hidden { display: none; }
+    .bio-register-card {
+      background: var(--bg-card-solid);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 40px;
+      max-width: 400px;
+      width: 100%;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+    }
+    .bio-register-card h3 {
+      color: var(--text-bright);
+      font-size: 1.3rem;
+      font-weight: 800;
+    }
+    .bio-register-card p {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+    .bio-register-card .gate-btn {
+      width: 100%;
+    }
+    .bio-register-card .skip-link {
+      color: var(--text-muted);
+      font-size: 0.82rem;
+      cursor: pointer;
+      transition: color 0.2s;
+    }
+    .bio-register-card .skip-link:hover { color: var(--text); }
+
+    /* ========== Main Dashboard ========== */
+    #mainContent { display: none; }
+
+    .dashboard-header {
+      padding: 20px 32px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--border);
+      background: rgba(10, 10, 26, 0.95);
+      backdrop-filter: blur(20px);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .header-logo {
+      font-size: 1.5rem;
+      font-weight: 900;
+      color: #fff;
+      letter-spacing: -1px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .header-logo .seo {
+      background: linear-gradient(135deg, #e8850c, #f5a623, #ffd700);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .header-logo .baike { color: #ffffff; }
+    .header-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      padding-left: 16px;
+      border-left: 1px solid var(--border);
+    }
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .live-badge {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 14px;
+      background: rgba(40, 200, 64, 0.1);
+      border: 1px solid rgba(40, 200, 64, 0.3);
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--green);
+    }
+    .live-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--green);
+      animation: livePulse 1.5s ease-in-out infinite;
+    }
+    @keyframes livePulse {
+      0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(40, 200, 64, 0.5); }
+      50% { opacity: 0.6; box-shadow: 0 0 0 6px rgba(40, 200, 64, 0); }
+    }
+    .refresh-badge {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .refresh-badge .countdown {
+      color: var(--orange);
+      font-weight: 700;
+      font-variant-numeric: tabular-nums;
+    }
+    .btn-logout {
+      padding: 6px 14px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: transparent;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: all 0.2s;
+      min-height: 44px;
+      min-width: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .btn-logout:hover {
+      border-color: var(--red);
+      color: var(--red);
+    }
+
+    /* Hamburger menu (mobile) */
+    .hamburger-btn {
+      display: none;
+      width: 44px;
+      height: 44px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: transparent;
+      cursor: pointer;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+      padding: 0;
+    }
+    .hamburger-btn span {
+      display: block;
+      width: 20px;
+      height: 2px;
+      background: var(--text);
+      border-radius: 1px;
+      transition: all 0.3s;
+    }
+    .hamburger-btn.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+    .hamburger-btn.active span:nth-child(2) { opacity: 0; }
+    .hamburger-btn.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      top: 70px;
+      left: 0; right: 0;
+      background: rgba(10, 10, 26, 0.98);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+      padding: 16px 24px;
+      z-index: 99;
+      flex-direction: column;
+      gap: 12px;
+      align-items: stretch;
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu .mobile-menu-item {
+      padding: 12px 16px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: transparent;
+      color: var(--text);
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      text-align: center;
+      transition: all 0.2s;
+      min-height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .mobile-menu .mobile-menu-item:hover {
+      border-color: var(--orange);
+      color: var(--orange);
+    }
+    .mobile-menu .mobile-menu-item.danger:hover {
+      border-color: var(--red);
+      color: var(--red);
+    }
+
+    /* ========== Dashboard Grid ========== */
+    .dashboard-body {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 24px;
+    }
+    .section-title {
+      font-size: 1.1rem;
+      font-weight: 800;
+      color: var(--text-bright);
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .section-title .icon {
+      width: 28px;
+      height: 28px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.9rem;
+    }
+    .section-title .icon.health { background: rgba(40, 200, 64, 0.15); }
+    .section-title .icon.revenue { background: rgba(232, 133, 12, 0.15); }
+    .section-title .icon.users { background: rgba(88, 130, 255, 0.15); }
+    .section-title .icon.alert { background: rgba(255, 95, 87, 0.15); }
+    .section-title .icon.market { background: rgba(172, 130, 255, 0.15); }
+
+    /* Glass card */
+    .glass-card {
+      background: var(--bg-card);
+      backdrop-filter: blur(20px);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px;
+      transition: border-color 0.3s, transform 0.2s;
+    }
+    .glass-card:hover {
+      border-color: var(--border-light);
+    }
+
+    .section-block {
+      margin-bottom: 32px;
+    }
+
+    /* ======================== */
+    /* SECTION 1: SYSTEM HEALTH */
+    /* ======================== */
+    .health-top {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 20px;
+      margin-bottom: 20px;
+    }
+
+    /* Circular Gauge */
+    .gauge-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+    }
+    .gauge-wrap {
+      position: relative;
+      width: 140px;
+      height: 140px;
+    }
+    .gauge-svg {
+      width: 140px;
+      height: 140px;
+      transform: rotate(-90deg);
+    }
+    .gauge-bg {
+      fill: none;
+      stroke: rgba(255, 255, 255, 0.06);
+      stroke-width: 10;
+    }
+    .gauge-fill {
+      fill: none;
+      stroke-width: 10;
+      stroke-linecap: round;
+      transition: stroke-dashoffset 1.5s ease, stroke 0.5s;
+      filter: drop-shadow(0 0 6px currentColor);
+    }
+    .gauge-center {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+    }
+    .gauge-value {
+      font-size: 1.8rem;
+      font-weight: 900;
+      color: var(--text-bright);
+      line-height: 1;
+    }
+    .gauge-unit {
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+    .gauge-label {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text-muted);
+    }
+
+    /* Engine dots */
+    .engine-dots-card {
+      margin-bottom: 20px;
+    }
+    .engine-dots-row {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+      padding: 8px 0;
+    }
+    .engine-dot-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+    }
+    .engine-dot {
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      transition: all 0.4s;
+      cursor: default;
+      position: relative;
+    }
+    .engine-dot.online {
+      background: var(--green);
+      box-shadow: 0 0 10px rgba(40, 200, 64, 0.5);
+    }
+    .engine-dot.degraded {
+      background: var(--yellow);
+      box-shadow: 0 0 10px rgba(254, 188, 46, 0.5);
+    }
+    .engine-dot.offline {
+      background: var(--red);
+      box-shadow: 0 0 10px rgba(255, 95, 87, 0.5);
+      animation: dotPulseRed 1.5s ease-in-out infinite;
+    }
+    @keyframes dotPulseRed {
+      0%, 100% { box-shadow: 0 0 10px rgba(255, 95, 87, 0.5); }
+      50% { box-shadow: 0 0 20px rgba(255, 95, 87, 0.8); }
+    }
+    .engine-dot-label {
+      font-size: 0.62rem;
+      color: var(--text-muted);
+      font-weight: 600;
+      font-variant-numeric: tabular-nums;
+    }
+    .engine-dot::after {
+      content: attr(data-tip);
+      position: absolute;
+      bottom: calc(100% + 22px);
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--bg-card-solid);
+      border: 1px solid var(--border-light);
+      color: var(--text);
+      font-size: 0.72rem;
+      padding: 4px 10px;
+      border-radius: 6px;
+      white-space: nowrap;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s;
+      z-index: 10;
+    }
+    .engine-dot:hover::after { opacity: 1; }
+
+    .dots-legend {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+      margin-top: 12px;
+      font-size: 0.78rem;
+      color: var(--text-muted);
+    }
+    .dots-legend-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .dots-legend-color {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+    }
+
+    .timestamp-bar {
+      text-align: center;
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      margin-top: 8px;
+    }
+
+    /* ==================== */
+    /* SECTION 2: REVENUE   */
+    /* ==================== */
+    .revenue-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin-bottom: 20px;
+    }
+    .revenue-big {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .revenue-label {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      font-weight: 500;
+      margin-bottom: 4px;
+    }
+    .revenue-number {
+      font-size: 2.8rem;
+      font-weight: 900;
+      color: var(--orange);
+      line-height: 1.1;
+      font-variant-numeric: tabular-nums;
+    }
+    .revenue-number .currency {
+      font-size: 1.4rem;
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+    .revenue-sub {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+    .revenue-sub .up { color: var(--green); font-weight: 700; }
+
+    /* Canvas chart container */
+    .chart-canvas-wrap {
+      position: relative;
+      width: 100%;
+      height: 200px;
+    }
+    .chart-canvas-wrap canvas {
+      width: 100%;
+      height: 100%;
+    }
+
+    /* Top sellers table */
+    .sellers-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    .sellers-table th {
+      text-align: left;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      padding: 8px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .sellers-table td {
+      padding: 10px 0;
+      font-size: 0.88rem;
+      border-bottom: 1px solid rgba(42, 42, 74, 0.3);
+    }
+    .sellers-table tr:last-child td { border-bottom: none; }
+    .rank-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 24px;
+      height: 24px;
+      border-radius: 6px;
+      font-size: 0.75rem;
+      font-weight: 800;
+      color: #fff;
+    }
+    .rank-badge.r1 { background: linear-gradient(135deg, #FFD700, #e8850c); }
+    .rank-badge.r2 { background: linear-gradient(135deg, #C0C0C0, #888); }
+    .rank-badge.r3 { background: linear-gradient(135deg, #cd7f32, #a0522d); }
+    .rank-badge.r4, .rank-badge.r5 { background: var(--border-light); }
+    .seller-amount {
+      color: var(--orange);
+      font-weight: 700;
+      font-variant-numeric: tabular-nums;
+    }
+
+    /* ========================= */
+    /* SECTION 3: USER ACTIVITY  */
+    /* ========================= */
+    .users-stats-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-bottom: 20px;
+    }
+    .user-stat-card {
+      text-align: center;
+      padding: 20px;
+    }
+    .user-stat-num {
+      font-size: 2rem;
+      font-weight: 900;
+      color: var(--text-bright);
+      font-variant-numeric: tabular-nums;
+    }
+    .user-stat-label {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+
+    .users-detail-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    /* Recent signups */
+    .signup-list {
+      list-style: none;
+      max-height: 300px;
+      overflow-y: auto;
+    }
+    .signup-list li {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 0;
+      border-bottom: 1px solid rgba(42, 42, 74, 0.3);
+      font-size: 0.85rem;
+    }
+    .signup-list li:last-child { border-bottom: none; }
+    .signup-avatar {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: var(--orange-glow);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--orange);
+      flex-shrink: 0;
+    }
+    .signup-info { flex: 1; }
+    .signup-name { color: var(--text-bright); font-weight: 600; font-size: 0.85rem; }
+    .signup-time { color: var(--text-muted); font-size: 0.72rem; }
+
+    /* Country traffic bars */
+    .country-list { list-style: none; }
+    .country-item {
+      display: grid;
+      grid-template-columns: 80px 1fr 60px;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 0;
+    }
+    .country-name {
+      font-size: 0.88rem;
+      color: var(--text-bright);
+      font-weight: 600;
+    }
+    .country-bar-wrap {
+      height: 10px;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 5px;
+      overflow: hidden;
+    }
+    .country-bar-fill {
+      height: 100%;
+      border-radius: 5px;
+      transition: width 1.5s ease;
+    }
+    .country-pct {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      text-align: right;
+      font-weight: 600;
+      font-variant-numeric: tabular-nums;
+    }
+
+    /* ================================ */
+    /* SECTION 4: CHEATER DETECTION     */
+    /* ================================ */
+    .alert-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .alert-card {
+      display: grid;
+      grid-template-columns: 6px 1fr auto;
+      gap: 16px;
+      padding: 16px 20px;
+      border-radius: 12px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      transition: transform 0.2s, border-color 0.3s;
+    }
+    .alert-card:hover {
+      transform: translateX(4px);
+      border-color: var(--border-light);
+    }
+    .alert-severity {
+      width: 6px;
+      border-radius: 3px;
+      align-self: stretch;
+    }
+    .alert-severity.critical { background: var(--red); box-shadow: 0 0 8px rgba(255, 95, 87, 0.4); }
+    .alert-severity.warning { background: var(--yellow); box-shadow: 0 0 8px rgba(254, 188, 46, 0.4); }
+    .alert-severity.info { background: var(--green); box-shadow: 0 0 8px rgba(40, 200, 64, 0.4); }
+    .alert-body {}
+    .alert-title {
+      font-weight: 700;
+      color: var(--text-bright);
+      font-size: 0.92rem;
+      margin-bottom: 4px;
+    }
+    .alert-desc {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+    .alert-time {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      margin-top: 6px;
+    }
+    .alert-actions {
+      display: flex;
+      align-items: center;
+    }
+    .btn-handle {
+      padding: 8px 16px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: transparent;
+      color: var(--text);
+      cursor: pointer;
+      transition: all 0.2s;
+      white-space: nowrap;
+      min-height: 44px;
+      min-width: 44px;
+    }
+    .btn-handle:hover {
+      border-color: var(--orange);
+      color: var(--orange);
+      background: rgba(232, 133, 12, 0.08);
+    }
+
+    /* ============================== */
+    /* SECTION 5: MARKETPLACE STATS   */
+    /* ============================== */
+    .market-top-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-bottom: 20px;
+    }
+    .market-stat {
+      text-align: center;
+      padding: 20px;
+    }
+    .market-stat-num {
+      font-size: 1.8rem;
+      font-weight: 900;
+      color: var(--text-bright);
+    }
+    .market-stat-label {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+    .market-detail-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    /* Pie chart via conic-gradient */
+    .pie-wrap {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+    }
+    .pie-chart {
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      flex-shrink: 0;
+      position: relative;
+      transition: transform 0.6s;
+    }
+    .pie-chart:hover { transform: scale(1.05); }
+    .pie-chart::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      background: var(--bg-card-solid);
+    }
+    .pie-legend {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .pie-legend li {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.82rem;
+      color: var(--text);
+    }
+    .pie-legend-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 3px;
+      flex-shrink: 0;
+    }
+    .pie-legend-pct {
+      color: var(--text-muted);
+      margin-left: auto;
+      font-weight: 600;
+      font-variant-numeric: tabular-nums;
+    }
+
+    /* Recent transactions */
+    .tx-list { list-style: none; max-height: 260px; overflow-y: auto; }
+    .tx-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 0;
+      border-bottom: 1px solid rgba(42, 42, 74, 0.3);
+      font-size: 0.85rem;
+    }
+    .tx-item:last-child { border-bottom: none; }
+    .tx-left { display: flex; align-items: center; gap: 10px; }
+    .tx-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      background: rgba(232, 133, 12, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.85rem;
+    }
+    .tx-name { color: var(--text-bright); font-weight: 600; }
+    .tx-time { color: var(--text-muted); font-size: 0.72rem; }
+    .tx-amount {
+      color: var(--green);
+      font-weight: 700;
+      font-variant-numeric: tabular-nums;
+    }
+
+    /* ========== Boss Quick Actions ========== */
+    .boss-actions-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+    }
+    .boss-action-card {
+      text-align: center;
+      padding: 24px 16px 20px;
+      position: relative;
+    }
+    .boss-action-card h4 {
+      color: var(--text-bright);
+      font-size: 1rem;
+      margin: 10px 0 4px;
+    }
+    .boss-action-card > p {
+      color: var(--text-muted);
+      font-size: 0.78rem;
+      margin-bottom: 14px;
+    }
+    .boss-action-icon {
+      width: 52px;
+      height: 52px;
+      border-radius: 14px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.6rem;
+    }
+    .boss-form {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 12px;
+      text-align: left;
+    }
+    .boss-input {
+      width: 100%;
+      padding: 10px 14px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      color: var(--text);
+      font-size: 0.88rem;
+      font-family: inherit;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .boss-input:focus {
+      border-color: var(--orange);
+    }
+    .boss-input::placeholder {
+      color: var(--text-muted);
+    }
+    .boss-amount-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .boss-unit {
+      color: var(--orange);
+      font-weight: 700;
+      font-size: 0.85rem;
+      white-space: nowrap;
+    }
+    .boss-btn {
+      padding: 10px 20px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.04);
+      color: var(--text);
+      font-size: 0.88rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+      font-family: inherit;
+    }
+    .boss-btn:hover {
+      background: rgba(255,255,255,0.08);
+      border-color: var(--orange);
+      color: var(--text-bright);
+    }
+    .boss-btn.green {
+      background: rgba(40,200,64,0.12);
+      border-color: rgba(40,200,64,0.4);
+      color: var(--green);
+    }
+    .boss-btn.green:hover {
+      background: rgba(40,200,64,0.2);
+    }
+    .boss-btn.orange {
+      background: rgba(232,133,12,0.12);
+      border-color: rgba(232,133,12,0.4);
+      color: var(--orange);
+    }
+    .boss-btn.orange:hover {
+      background: rgba(232,133,12,0.2);
+    }
+    .boss-btn.red {
+      background: rgba(255,95,87,0.12);
+      border-color: rgba(255,95,87,0.4);
+      color: var(--red);
+    }
+    .boss-btn.red:hover {
+      background: rgba(255,95,87,0.2);
+    }
+    .boss-nav-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      justify-content: center;
+    }
+    .boss-nav-link {
+      display: inline-block;
+      padding: 8px 16px;
+      border-radius: 10px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--border);
+      color: var(--text) !important;
+      font-size: 0.82rem;
+      font-weight: 500;
+      transition: all 0.2s;
+    }
+    .boss-nav-link:hover {
+      background: rgba(232,133,12,0.1);
+      border-color: var(--orange);
+      color: var(--orange) !important;
+    }
+    .boss-action-toast {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      padding: 14px 24px;
+      border-radius: 12px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      z-index: 10000;
+      opacity: 0;
+      transform: translateY(-10px);
+      transition: all 0.3s;
+      pointer-events: none;
+    }
+    .boss-action-toast.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .boss-action-toast.success {
+      background: rgba(40,200,64,0.15);
+      border: 1px solid rgba(40,200,64,0.4);
+      color: var(--green);
+    }
+    .boss-action-toast.error {
+      background: rgba(255,95,87,0.15);
+      border: 1px solid rgba(255,95,87,0.4);
+      color: var(--red);
+    }
+
+    /* ========== Login Social Buttons ========== */
+    .social-login-group {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      width: 320px;
+    }
+    .social-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 13px 20px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.04);
+      color: var(--text);
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+      font-family: inherit;
+      width: 100%;
+    }
+    .social-btn:hover {
+      background: rgba(255,255,255,0.08);
+      border-color: var(--orange);
+    }
+    .social-btn svg {
+      width: 20px;
+      height: 20px;
+    }
+    .login-attempts-warn {
+      color: var(--red);
+      font-size: 0.82rem;
+      margin-top: 4px;
+    }
+    .email-verify-section {
+      width: 320px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      align-items: center;
+    }
+
+    /* ========== Footer ========== */
+    .dashboard-footer {
+      text-align: center;
+      padding: 24px;
+      margin-top: 20px;
+      border-top: 1px solid var(--border);
+      font-size: 0.78rem;
+      color: var(--text-muted);
+    }
+    .dashboard-footer .orange { color: var(--orange); }
+
+    /* ========== Animations ========== */
+    .fade-in {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @keyframes countUp {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .count-animated {
+      animation: countUp 0.5s ease forwards;
+    }
+
+    /* Scrollbar styling */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+    ::-webkit-scrollbar-thumb:hover { background: var(--border-light); }
+
+    /* ========== Responsive ========== */
+    @media (max-width: 1024px) {
+      .health-top { grid-template-columns: 1fr 1fr 1fr; }
+      .revenue-grid { grid-template-columns: 1fr; }
+      .users-detail-grid { grid-template-columns: 1fr; }
+      .market-detail-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 768px) {
+      .dashboard-header { padding: 14px 16px; }
+      .header-title { display: none; }
+      .header-right .live-badge,
+      .header-right .refresh-badge,
+      .header-right .btn-logout { display: none; }
+      .hamburger-btn { display: flex; }
+      .dashboard-body { padding: 16px; }
+      .health-top { grid-template-columns: 1fr; }
+      .users-stats-row { grid-template-columns: 1fr; }
+      .market-top-row { grid-template-columns: 1fr; }
+      .gauge-wrap { width: 120px; height: 120px; }
+      .gauge-svg { width: 120px; height: 120px; }
+      .gauge-value { font-size: 1.4rem; }
+      .revenue-number { font-size: 2rem; }
+      .alert-card { grid-template-columns: 4px 1fr; }
+      .alert-actions { display: none; }
+      .pie-wrap { flex-direction: column; }
+      .chart-canvas-wrap { height: 180px; }
+      .boss-actions-grid { grid-template-columns: 1fr 1fr; }
+      .social-login-group, .email-verify-section { width: 280px; }
+    }
+    @media (max-width: 480px) {
+      .engine-dot { width: 14px; height: 14px; }
+      .engine-dots-row { gap: 7px; }
+      .access-gate input { width: 280px; }
+      .gate-divider { width: 280px; }
+      .bio-register-card { padding: 24px 20px; }
+      .boss-actions-grid { grid-template-columns: 1fr; }
+      .social-login-group, .email-verify-section { width: 100%; padding: 0 16px; }
+    }
+
+    /* Touch & Mobile */
+    * { -webkit-tap-highlight-color: transparent; }
+    select, button, a { touch-action: manipulation; }
+  </style>
+</head>
+<body>
+
+  <!-- ========== Access Gate (Multi-Method Auth) ========== -->
+  <div class="access-gate" id="accessGate">
+    <div class="bio-scan-ring" id="bioScanRing">
+      <div class="ring-outer"></div>
+      <div class="ring-sweep"></div>
+      <div class="scan-line"></div>
+      <div class="bio-icon-inner" id="bioIconInner">&#128274;</div>
+    </div>
+    <div class="access-gate-logo"><img src="/favicon.svg" alt="S" width="44" height="44" style="border-radius:10px;"><span class="seo">SEO</span><span class="baike">BAIKE</span></div>
+    <h2>指揮中心</h2>
+    <p>僅限創辦人存取 &mdash; 三重驗證保護</p>
+
+    <!-- Method 1: Biometric (fastest for founder) -->
+    <div id="bioSection" style="display:none; text-align:center; width:320px; max-width:100%;">
+      <button class="gate-btn" id="bioLoginBtn" onclick="doBiometricLogin()">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 11c0-1.1.9-2 2-2s2 .9 2 2c0 1.5-1 2.5-2 3.5"/><path d="M8 15c-1.5-1.5-2-3.5-2-5.5C6 5.9 8.7 3 12 3s6 2.9 6 6.5c0 1-.2 2-.6 3"/><path d="M12 11v4"/><path d="M2 12c0-4.5 3.1-8.3 7.2-9.5"/><path d="M22 12c0-4.5-3.1-8.3-7.2-9.5"/><path d="M7 20.7c1.5.8 3.2 1.3 5 1.3s3.5-.5 5-1.3"/></svg>
+        指紋 / 臉部辨識 一鍵進入
+      </button>
+      <div class="success-msg" id="bioStatus"></div>
+    </div>
+
+    <div class="gate-divider" id="gateDivider" style="display:none;">或選擇其他方式</div>
+
+    <!-- Method 2: Password -->
+    <div class="password-section" id="passwordSection">
+      <div style="display:flex; flex-direction:column; align-items:center; gap:12px;">
+        <input type="password" id="accessCode" placeholder="請輸入存取碼" autocomplete="off">
+        <button class="gate-btn" onclick="checkAccess()">密碼登入</button>
+        <p style="color:var(--text-muted);font-size:0.75rem;margin-top:8px;">提示：seobaike2026 / boss / 1234</p>
+      </div>
+    </div>
+
+    <div class="error-msg" id="accessError"></div>
+    <div class="login-attempts-warn" id="attemptsWarn" style="display:none;"></div>
+
+    <!-- Lockout Screen (hidden until 3 failures) -->
+    <div id="lockoutScreen" style="display:none; text-align:center;">
+      <p style="color:var(--red); font-size:1rem; font-weight:700;">&#128683; 帳號已鎖定</p>
+      <p style="color:var(--text-muted); font-size:0.85rem;">連續 3 次輸入錯誤，請等待 <span id="lockoutTimer">60</span> 秒後重試</p>
+      <p style="color:var(--text-muted); font-size:0.78rem; margin-top:8px;">或使用其他方式登入</p>
+    </div>
+
+    <!-- Method 3 & 4: Social Login -->
+    <div class="social-login-group" id="socialLoginGroup">
+      <button class="social-btn" onclick="loginWithApple()">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.05 20.28c-.98.95-2.05.88-3.08.4-1.09-.5-2.08-.48-3.24 0-1.44.62-2.2.44-3.06-.4C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.38 5.98.48 7.13-.57 1.5-1.31 2.99-2.54 4.09zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z"/></svg>
+        Apple 帳號登入
+      </button>
+      <button class="social-btn" onclick="loginWithGoogle()">
+        <svg viewBox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 01-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+        Google 帳號登入
+      </button>
+    </div>
+
+    <!-- Method 5: Email Verification -->
+    <div class="email-verify-section" id="emailVerifySection" style="display:none;">
+      <input type="email" id="verifyEmail" placeholder="創辦人 Email" class="boss-input" style="width:100%;">
+      <button class="gate-btn" onclick="sendEmailCode()" id="sendEmailBtn">發送驗證碼</button>
+      <input type="text" id="emailCode" placeholder="輸入 6 位驗證碼" class="boss-input" style="width:100%; display:none;">
+      <button class="gate-btn" onclick="verifyEmailCode()" id="verifyEmailBtn" style="display:none;">驗證登入</button>
+      <div class="success-msg" id="emailVerifyStatus"></div>
+    </div>
+    <button style="background:none;border:none;color:var(--text-muted);font-size:0.82rem;cursor:pointer;margin-top:4px;" onclick="toggleEmailVerify()">
+      &#128231; 改用 Email 驗證
+    </button>
+  </div>
+
+  <!-- ========== Biometric Registration Prompt ========== -->
+  <div class="bio-register-prompt hidden" id="bioRegisterPrompt">
+    <div class="bio-register-card">
+      <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="var(--orange)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 11c0-1.1.9-2 2-2s2 .9 2 2c0 1.5-1 2.5-2 3.5"/><path d="M8 15c-1.5-1.5-2-3.5-2-5.5C6 5.9 8.7 3 12 3s6 2.9 6 6.5c0 1-.2 2-.6 3"/><path d="M12 11v4"/><path d="M2 12c0-4.5 3.1-8.3 7.2-9.5"/><path d="M22 12c0-4.5-3.1-8.3-7.2-9.5"/><path d="M7 20.7c1.5.8 3.2 1.3 5 1.3s3.5-.5 5-1.3"/></svg>
+      <h3>啟用生物辨識登入</h3>
+      <p>下次可使用指紋或臉部辨識一鍵進入指揮中心，無需密碼。</p>
+      <button class="gate-btn" onclick="registerBiometric()">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 11c0-1.1.9-2 2-2s2 .9 2 2c0 1.5-1 2.5-2 3.5"/><path d="M8 15c-1.5-1.5-2-3.5-2-5.5C6 5.9 8.7 3 12 3s6 2.9 6 6.5c0 1-.2 2-.6 3"/><path d="M12 11v4"/></svg>
+        註冊生物辨識
+      </button>
+      <div class="skip-link" onclick="skipBioRegister()">稍後再說</div>
+      <div class="success-msg" id="bioRegisterStatus"></div>
+    </div>
+  </div>
+
+  <!-- ========== Main Dashboard ========== -->
+  <div id="mainContent">
+
+    <!-- Header -->
+    <div class="dashboard-header">
+      <div class="header-left">
+        <a href="/" class="header-logo" style="text-decoration:none;"><img src="/favicon.svg" alt="S" width="28" height="28" style="border-radius:6px;"><span class="seo">SEO</span><span class="baike">BAIKE</span></a>
+        <div class="header-title">指揮中心</div>
+      </div>
+      <div class="header-right">
+        <div class="live-badge"><div class="live-dot"></div> 即時監控中</div>
+        <div class="refresh-badge">每 <span class="countdown" id="countdown">30</span> 秒自動更新</div>
+        <button class="btn-logout" onclick="doLogout()">登出</button>
+        <button class="hamburger-btn" id="hamburgerBtn" onclick="toggleMobileMenu()">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+      <div class="mobile-menu-item" style="color:var(--green); border-color:rgba(40,200,64,0.3);">
+        即時監控中 &mdash; 每 <span id="countdownMobile">30</span> 秒更新
+      </div>
+      <div class="mobile-menu-item" onclick="refreshDashboard(); toggleMobileMenu();">手動更新數據</div>
+      <div class="mobile-menu-item danger" onclick="doLogout()">登出指揮中心</div>
+    </div>
+
+    <div class="dashboard-body">
+
+      <!-- ======================== -->
+      <!-- SECTION 1: SYSTEM HEALTH -->
+      <!-- ======================== -->
+      <div class="section-block fade-in">
+        <div class="section-title">
+          <div class="icon health">&#9889;</div>
+          系統健康度
+        </div>
+
+        <!-- 3 Gauges -->
+        <div class="health-top">
+          <div class="glass-card gauge-card">
+            <div class="gauge-wrap">
+              <svg class="gauge-svg" viewBox="0 0 140 140">
+                <circle class="gauge-bg" cx="70" cy="70" r="58"/>
+                <circle class="gauge-fill" id="gaugeCPU" cx="70" cy="70" r="58"
+                  stroke="var(--orange)" stroke-dasharray="364.42" stroke-dashoffset="364.42"/>
+              </svg>
+              <div class="gauge-center">
+                <div class="gauge-value" id="cpuValue">0</div>
+                <div class="gauge-unit">%</div>
+              </div>
+            </div>
+            <div class="gauge-label">CPU 使用率</div>
+          </div>
+
+          <div class="glass-card gauge-card">
+            <div class="gauge-wrap">
+              <svg class="gauge-svg" viewBox="0 0 140 140">
+                <circle class="gauge-bg" cx="70" cy="70" r="58"/>
+                <circle class="gauge-fill" id="gaugeMEM" cx="70" cy="70" r="58"
+                  stroke="#5882ff" stroke-dasharray="364.42" stroke-dashoffset="364.42"/>
+              </svg>
+              <div class="gauge-center">
+                <div class="gauge-value" id="memValue">0</div>
+                <div class="gauge-unit">%</div>
+              </div>
+            </div>
+            <div class="gauge-label">記憶體使用率</div>
+          </div>
+
+          <div class="glass-card gauge-card">
+            <div class="gauge-wrap">
+              <svg class="gauge-svg" viewBox="0 0 140 140">
+                <circle class="gauge-bg" cx="70" cy="70" r="58"/>
+                <circle class="gauge-fill" id="gaugeUP" cx="70" cy="70" r="58"
+                  stroke="var(--green)" stroke-dasharray="364.42" stroke-dashoffset="364.42"/>
+              </svg>
+              <div class="gauge-center">
+                <div class="gauge-value" id="upValue">0</div>
+                <div class="gauge-unit">%</div>
+              </div>
+            </div>
+            <div class="gauge-label">運行時間</div>
+          </div>
+        </div>
+
+        <!-- Engine dots -->
+        <div class="glass-card engine-dots-card">
+          <div style="text-align:center; margin-bottom:8px; font-size:0.85rem; color:var(--text-muted); font-weight:600;">引擎狀態一覽（15 個引擎）</div>
+          <div class="engine-dots-row" id="engineDots">
+            <!-- JS rendered -->
+          </div>
+          <div class="dots-legend">
+            <div class="dots-legend-item"><div class="dots-legend-color" style="background:var(--green);"></div>正常</div>
+            <div class="dots-legend-item"><div class="dots-legend-color" style="background:var(--yellow);"></div>緩慢</div>
+            <div class="dots-legend-item"><div class="dots-legend-color" style="background:var(--red);"></div>離線</div>
+          </div>
+          <div class="timestamp-bar">最後更新：<span id="lastUpdated">--</span></div>
+        </div>
+      </div>
+
+      <!-- ==================== -->
+      <!-- SECTION 2: REVENUE   -->
+      <!-- ==================== -->
+      <div class="section-block fade-in">
+        <div class="section-title">
+          <div class="icon revenue">&#128176;</div>
+          營收即時看板
+        </div>
+
+        <div class="revenue-grid">
+          <div class="glass-card revenue-big">
+            <div class="revenue-label">今日營收</div>
+            <div class="revenue-number"><span class="currency">NT$</span> <span id="revenueToday">0</span></div>
+            <div class="revenue-sub">較昨日 <span class="up" id="revenueTodayGrowth">+0%</span></div>
+            <div style="height:20px;"></div>
+            <div class="revenue-label">本月累計營收</div>
+            <div class="revenue-number" style="font-size:1.8rem;"><span class="currency">NT$</span> <span id="revenueMonth">0</span></div>
+            <div class="revenue-sub">目標達成率 <span class="up" id="revenueMonthPct">0%</span></div>
+          </div>
+
+          <div class="glass-card">
+            <div style="font-size:0.85rem; color:var(--text-muted); font-weight:600; margin-bottom:8px;">7 日營收趨勢</div>
+            <div class="chart-canvas-wrap">
+              <canvas id="revenueLineChart"></canvas>
+            </div>
+          </div>
+        </div>
+
+        <div class="glass-card" style="margin-top:20px;">
+          <div style="font-size:0.85rem; color:var(--text-muted); font-weight:600; margin-bottom:12px;">本月 Top 5 賣家排行</div>
+          <table class="sellers-table">
+            <thead>
+              <tr>
+                <th style="width:40px;">排名</th>
+                <th>賣家</th>
+                <th style="text-align:right;">營收額</th>
+                <th style="text-align:right;">交易數</th>
+              </tr>
+            </thead>
+            <tbody id="sellersBody">
+              <!-- JS rendered -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- ========================= -->
+      <!-- SECTION 3: USER ACTIVITY  -->
+      <!-- ========================= -->
+      <div class="section-block fade-in">
+        <div class="section-title">
+          <div class="icon users">&#128101;</div>
+          使用者活動
+        </div>
+
+        <div class="users-stats-row">
+          <div class="glass-card user-stat-card">
+            <div class="user-stat-num" id="totalUsers">0</div>
+            <div class="user-stat-label">總使用者</div>
+          </div>
+          <div class="glass-card user-stat-card">
+            <div class="user-stat-num" id="newToday">0</div>
+            <div class="user-stat-label">今日新增</div>
+          </div>
+          <div class="glass-card user-stat-card">
+            <div class="user-stat-num" id="activeNow" style="color:var(--green);">0</div>
+            <div class="user-stat-label">目前在線</div>
+          </div>
+        </div>
+
+        <div class="users-detail-grid">
+          <div class="glass-card">
+            <div style="font-size:0.85rem; color:var(--text-muted); font-weight:600; margin-bottom:12px;">最近註冊（最新 10 位）</div>
+            <ul class="signup-list" id="signupList">
+              <!-- JS rendered -->
+            </ul>
+          </div>
+
+          <div class="glass-card">
+            <div style="font-size:0.85rem; color:var(--text-muted); font-weight:600; margin-bottom:12px;">流量來源國家</div>
+            <ul class="country-list" id="countryList">
+              <!-- JS rendered -->
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- ================================ -->
+      <!-- SECTION 4: CHEATER DETECTION     -->
+      <!-- ================================ -->
+      <div class="section-block fade-in">
+        <div class="section-title">
+          <div class="icon alert">&#9888;&#65039;</div>
+          異常偵測
+        </div>
+
+        <div class="alert-grid" id="alertGrid">
+          <!-- JS rendered -->
+        </div>
+      </div>
+
+      <!-- ============================== -->
+      <!-- SECTION 5: MARKETPLACE STATS   -->
+      <!-- ============================== -->
+      <div class="section-block fade-in">
+        <div class="section-title">
+          <div class="icon market">&#128722;</div>
+          市集統計
+        </div>
+
+        <div class="market-top-row">
+          <div class="glass-card market-stat">
+            <div class="market-stat-num" id="totalListings">0</div>
+            <div class="market-stat-label">上架商品數</div>
+          </div>
+          <div class="glass-card market-stat">
+            <div class="market-stat-num" id="pendingReview" style="color:var(--yellow);">0</div>
+            <div class="market-stat-label">待審核</div>
+          </div>
+          <div class="glass-card market-stat">
+            <div class="market-stat-num" id="salesToday" style="color:var(--green);">0</div>
+            <div class="market-stat-label">今日成交</div>
+          </div>
+        </div>
+
+        <div class="market-detail-grid">
+          <div class="glass-card">
+            <div style="font-size:0.85rem; color:var(--text-muted); font-weight:600; margin-bottom:16px;">類別佔比</div>
+            <div class="pie-wrap">
+              <div class="pie-chart" id="pieChart"></div>
+              <ul class="pie-legend" id="pieLegend">
+                <!-- JS rendered -->
+              </ul>
+            </div>
+          </div>
+
+          <div class="glass-card">
+            <div style="font-size:0.85rem; color:var(--text-muted); font-weight:600; margin-bottom:12px;">最近交易</div>
+            <ul class="tx-list" id="txList">
+              <!-- JS rendered -->
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- ============================== -->
+      <!-- BOSS QUICK ACTIONS -->
+      <!-- ============================== -->
+      <div class="section-block fade-in">
+        <div class="section-title">
+          <div class="icon" style="background:rgba(255,215,0,0.15);">&#9889;</div>
+          創辦人快捷指令
+        </div>
+
+        <div class="boss-actions-grid">
+          <!-- 發獎金 -->
+          <div class="glass-card boss-action-card" id="bonusCard">
+            <div class="boss-action-icon" style="background:rgba(40,200,64,0.1);color:var(--green);">&#128176;</div>
+            <h4>發獎金</h4>
+            <p>一鍵發放 SEO Points 給指定用戶</p>
+            <div class="boss-form" id="bonusForm" style="display:none;">
+              <input type="text" id="bonusUser" placeholder="用戶 Email 或 ID" class="boss-input">
+              <div class="boss-amount-row">
+                <input type="number" id="bonusAmount" placeholder="點數" class="boss-input" min="1" style="flex:1;">
+                <span class="boss-unit">SP</span>
+              </div>
+              <select id="bonusReason" class="boss-input">
+                <option value="performance">表現優異</option>
+                <option value="referral">推薦獎勵</option>
+                <option value="compensation">補償</option>
+                <option value="event">活動獎品</option>
+                <option value="other">其他</option>
+              </select>
+              <button class="boss-btn green" onclick="sendBonus()">確認發放</button>
+            </div>
+            <button class="boss-btn" onclick="toggleBonusForm()">發獎金</button>
+          </div>
+
+          <!-- 全站公告 -->
+          <div class="glass-card boss-action-card">
+            <div class="boss-action-icon" style="background:rgba(232,133,12,0.1);color:var(--orange);">&#128227;</div>
+            <h4>全站公告</h4>
+            <p>一鍵推送訊息給所有用戶</p>
+            <div class="boss-form" id="announceForm" style="display:none;">
+              <input type="text" id="announceTitle" placeholder="公告標題" class="boss-input">
+              <textarea id="announceBody" placeholder="公告內容" class="boss-input" rows="3" style="resize:vertical;"></textarea>
+              <button class="boss-btn orange" onclick="sendAnnounce()">發布公告</button>
+            </div>
+            <button class="boss-btn" onclick="toggleForm('announceForm',this)">發公告</button>
+          </div>
+
+          <!-- 凍結帳號 -->
+          <div class="glass-card boss-action-card">
+            <div class="boss-action-icon" style="background:rgba(255,95,87,0.1);color:var(--red);">&#128683;</div>
+            <h4>凍結帳號</h4>
+            <p>立即停權可疑或違規帳號</p>
+            <div class="boss-form" id="freezeForm" style="display:none;">
+              <input type="text" id="freezeUser" placeholder="用戶 Email 或 ID" class="boss-input">
+              <select id="freezeReason" class="boss-input">
+                <option value="abuse">濫用 API</option>
+                <option value="fraud">詐騙行為</option>
+                <option value="unpaid">逾期未付款</option>
+                <option value="bot">機器人帳號</option>
+                <option value="other">其他</option>
+              </select>
+              <button class="boss-btn red" onclick="sendFreeze()">確認凍結</button>
+            </div>
+            <button class="boss-btn" onclick="toggleForm('freezeForm',this)">凍結</button>
+          </div>
+
+          <!-- 快速導航 -->
+          <div class="glass-card boss-action-card">
+            <div class="boss-action-icon" style="background:rgba(88,130,255,0.1);color:#5882ff;">&#128640;</div>
+            <h4>快速前往</h4>
+            <p>不用跑來跑去，一鍵到位</p>
+            <div class="boss-nav-links">
+              <a href="/dashboard" class="boss-nav-link">用戶儀表板</a>
+              <a href="/marketplace" class="boss-nav-link">市集</a>
+              <a href="/pricing" class="boss-nav-link">定價</a>
+              <a href="/compliance" class="boss-nav-link">合規中心</a>
+              <a href="/" class="boss-nav-link">首頁</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- 最近操作記錄 -->
+        <div class="glass-card" style="margin-top:16px;">
+          <div style="font-size:0.85rem;color:var(--text-muted);font-weight:600;margin-bottom:12px;">最近操作記錄</div>
+          <ul class="tx-list" id="bossActionLog">
+            <li style="color:var(--text-muted);font-size:0.85rem;padding:12px 0;">尚無操作記錄</li>
+          </ul>
+        </div>
+      </div>
+
+    </div><!-- /dashboard-body -->
+
+    <!-- Footer -->
+    <div class="dashboard-footer">
+      僅限創辦人存取 &mdash; <span class="orange">小路光有限公司</span>（統編 60475510）
+    </div>
+
+  </div><!-- /mainContent -->
+
+  <script>
+    /* ======================================================= */
+    /* CONSTANTS & KEYS                                         */
+    /* ======================================================= */
+    var AUTH_KEY = 'seobaike_boss_auth';
+    var WEBAUTHN_CRED_KEY = 'seobaike_webauthn_cred';
+    var ACCESS_CODE = 'seobaike2026';
+    var BOSS_EMAIL = 'icanforyouthebest@gmail.com';
+    var BOSS_CODES = ['seobaike2026', 'boss', '1234', 'seobaike', '竣翔'];
+    var MAX_ATTEMPTS = 99;
+    var LOCKOUT_SECONDS = 5;
+    var loginAttempts = 0;
+    var isLockedOut = false;
+
+    /* ======================================================= */
+    /* WEBAUTHN / BIOMETRIC AUTH                                */
+    /* ======================================================= */
+
+    function isWebAuthnAvailable() {
+      return window.PublicKeyCredential !== undefined &&
+             typeof window.PublicKeyCredential === 'function';
+    }
+
+    function hasSavedCredential() {
+      return !!localStorage.getItem(WEBAUTHN_CRED_KEY);
+    }
+
+    /* Generate random bytes for challenge */
+    function getRandomBytes(len) {
+      var arr = new Uint8Array(len);
+      window.crypto.getRandomValues(arr);
+      return arr;
+    }
+
+    /* ArrayBuffer to Base64 */
+    function bufferToBase64(buffer) {
+      var bytes = new Uint8Array(buffer);
+      var str = '';
+      for (var i = 0; i < bytes.length; i++) {
+        str += String.fromCharCode(bytes[i]);
+      }
+      return btoa(str);
+    }
+
+    /* Base64 to ArrayBuffer */
+    function base64ToBuffer(b64) {
+      var str = atob(b64);
+      var arr = new Uint8Array(str.length);
+      for (var i = 0; i < str.length; i++) {
+        arr[i] = str.charCodeAt(i);
+      }
+      return arr.buffer;
+    }
+
+    /* Register a new WebAuthn credential */
+    async function registerBiometric() {
+      var statusEl = document.getElementById('bioRegisterStatus');
+      statusEl.textContent = '正在註冊...';
+
+      try {
+        var userId = getRandomBytes(16);
+        var challenge = getRandomBytes(32);
+
+        var publicKeyOptions = {
+          challenge: challenge,
+          rp: {
+            name: 'SEOBAIKE 指揮中心',
+            id: location.hostname
+          },
+          user: {
+            id: userId,
+            name: 'boss@seobaike.com',
+            displayName: '創辦人'
+          },
+          pubKeyCredParams: [
+            { type: 'public-key', alg: -7 },   /* ES256 */
+            { type: 'public-key', alg: -257 }  /* RS256 */
+          ],
+          authenticatorSelection: {
+            authenticatorAttachment: 'platform',
+            userVerification: 'required',
+            residentKey: 'preferred'
+          },
+          timeout: 60000,
+          attestation: 'none'
+        };
+
+        var credential = await navigator.credentials.create({
+          publicKey: publicKeyOptions
+        });
+
+        /* Store credential ID for future login */
+        var credData = {
+          id: credential.id,
+          rawId: bufferToBase64(credential.rawId),
+          type: credential.type,
+          registered: new Date().toISOString()
+        };
+        localStorage.setItem(WEBAUTHN_CRED_KEY, JSON.stringify(credData));
+
+        statusEl.textContent = '生物辨識註冊成功！';
+        statusEl.style.color = 'var(--green)';
+
+        setTimeout(function() {
+          document.getElementById('bioRegisterPrompt').classList.add('hidden');
+          showMainContent();
+        }, 1000);
+
+      } catch (err) {
+        console.error('WebAuthn registration error:', err);
+        if (err.name === 'NotAllowedError') {
+          statusEl.textContent = '操作已取消';
+        } else {
+          statusEl.textContent = '註冊失敗：' + (err.message || '未知錯誤');
+        }
+        statusEl.style.color = 'var(--red)';
+      }
+    }
+
+    /* Authenticate with existing WebAuthn credential */
+    async function doBiometricLogin() {
+      var ring = document.getElementById('bioScanRing');
+      var statusEl = document.getElementById('bioStatus');
+      var iconEl = document.getElementById('bioIconInner');
+
+      ring.classList.add('scanning');
+      statusEl.textContent = '請驗證您的身份...';
+      statusEl.style.color = 'var(--orange)';
+
+      try {
+        var credData = JSON.parse(localStorage.getItem(WEBAUTHN_CRED_KEY));
+        var challenge = getRandomBytes(32);
+
+        var assertionOptions = {
+          challenge: challenge,
+          rpId: location.hostname,
+          allowCredentials: [{
+            type: 'public-key',
+            id: base64ToBuffer(credData.rawId),
+            transports: ['internal']
+          }],
+          userVerification: 'required',
+          timeout: 60000
+        };
+
+        var assertion = await navigator.credentials.get({
+          publicKey: assertionOptions
+        });
+
+        /* Success */
+        ring.classList.remove('scanning');
+        ring.classList.add('success');
+        iconEl.innerHTML = '&#10003;';
+        statusEl.textContent = '驗證成功！';
+        statusEl.style.color = 'var(--green)';
+
+        localStorage.setItem(AUTH_KEY, JSON.stringify({
+          verified: true,
+          method: 'biometric',
+          timestamp: new Date().toISOString()
+        }));
+
+        setTimeout(function() {
+          showMainContent();
+        }, 800);
+
+      } catch (err) {
+        ring.classList.remove('scanning');
+        console.error('WebAuthn auth error:', err);
+        if (err.name === 'NotAllowedError') {
+          statusEl.textContent = '驗證已取消';
+        } else {
+          statusEl.textContent = '驗證失敗，請使用密碼登入';
+        }
+        statusEl.style.color = 'var(--red)';
+      }
+    }
+
+    function skipBioRegister() {
+      document.getElementById('bioRegisterPrompt').classList.add('hidden');
+      showMainContent();
+    }
+
+    /* Setup login UI based on device capability */
+    function setupLoginUI() {
+      var bioSection = document.getElementById('bioSection');
+      var divider = document.getElementById('gateDivider');
+      var passwordSection = document.getElementById('passwordSection');
+      var ring = document.getElementById('bioScanRing');
+      var iconEl = document.getElementById('bioIconInner');
+
+      if (isWebAuthnAvailable() && hasSavedCredential()) {
+        /* Has credential: show biometric as primary */
+        bioSection.style.display = 'block';
+        divider.style.display = 'flex';
+        iconEl.innerHTML = '&#128275;'; /* fingerprint-like icon */
+        /* Attempt auto-trigger is too aggressive; let user click */
+      } else if (isWebAuthnAvailable()) {
+        /* No credential yet: just show password, biometric offered after first login */
+        bioSection.style.display = 'none';
+        divider.style.display = 'none';
+      } else {
+        /* No WebAuthn support: password only */
+        bioSection.style.display = 'none';
+        divider.style.display = 'none';
+      }
+    }
+
+    /* ======================================================= */
+    /* PASSWORD ACCESS GATE                                     */
+    /* ======================================================= */
+    function checkAccess() {
+      if (isLockedOut) return;
+
+      var code = document.getElementById('accessCode').value.trim();
+      if (code === ACCESS_CODE || BOSS_CODES.indexOf(code) !== -1) {
+        loginAttempts = 0;
+        localStorage.setItem(AUTH_KEY, JSON.stringify({
+          verified: true,
+          method: 'password',
+          timestamp: new Date().toISOString()
+        }));
+
+        /* If WebAuthn available but no credential yet, prompt registration */
+        if (isWebAuthnAvailable() && !hasSavedCredential()) {
+          document.getElementById('accessGate').classList.add('hidden');
+          document.getElementById('bioRegisterPrompt').classList.remove('hidden');
+        } else {
+          showMainContent();
+        }
+      } else {
+        loginAttempts++;
+        var remaining = MAX_ATTEMPTS - loginAttempts;
+
+        if (remaining <= 0) {
+          /* LOCKOUT */
+          triggerLockout();
+        } else {
+          document.getElementById('accessError').textContent = '存取碼錯誤';
+          var warn = document.getElementById('attemptsWarn');
+          warn.style.display = 'block';
+          warn.textContent = '剩餘 ' + remaining + ' 次機會，' + MAX_ATTEMPTS + ' 次失敗將鎖定帳號';
+        }
+        document.getElementById('accessCode').value = '';
+        document.getElementById('accessCode').focus();
+      }
+    }
+
+    function triggerLockout() {
+      isLockedOut = true;
+      document.getElementById('passwordSection').style.display = 'none';
+      document.getElementById('attemptsWarn').style.display = 'none';
+      document.getElementById('accessError').textContent = '';
+      document.getElementById('lockoutScreen').style.display = 'block';
+
+      var seconds = LOCKOUT_SECONDS;
+      var timerEl = document.getElementById('lockoutTimer');
+      var lockInterval = setInterval(function() {
+        seconds--;
+        timerEl.textContent = seconds;
+        if (seconds <= 0) {
+          clearInterval(lockInterval);
+          isLockedOut = false;
+          loginAttempts = 0;
+          document.getElementById('lockoutScreen').style.display = 'none';
+          document.getElementById('passwordSection').style.display = 'block';
+          document.getElementById('attemptsWarn').style.display = 'none';
+        }
+      }, 1000);
+
+      /* Log lockout event */
+      logSecurityEvent('lockout', '連續 ' + MAX_ATTEMPTS + ' 次密碼錯誤，帳號鎖定 ' + LOCKOUT_SECONDS + ' 秒');
+    }
+
+    function logSecurityEvent(type, detail) {
+      try {
+        var sUrl = 'https://vmyrivxxibqydccurxug.supabase.co';
+        var sKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZteXJpdnh4aWJxeWRjY3VyeHVnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzAwNDAwMjksImV4cCI6MjA4NTYxNjAyOX0.iBV-23LGdm_uKffAExgqSV34-NWoAyv8_-M_cJQZ8Gg';
+        fetch(sUrl + '/rest/v1/page_views', {
+          method: 'POST',
+          headers: { 'Content-Type':'application/json', 'apikey':sKey, 'Authorization':'Bearer '+sKey, 'Prefer':'return=minimal' },
+          body: JSON.stringify({ path: '/status/security/' + type, referrer: detail, user_agent: navigator.userAgent })
+        }).catch(function(){});
+      } catch(e){}
+    }
+
+    /* Social Login: Apple */
+    function loginWithApple() {
+      var sUrl = 'https://vmyrivxxibqydccurxug.supabase.co';
+      var sKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZteXJpdnh4aWJxeWRjY3VyeHVnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzAwNDAwMjksImV4cCI6MjA4NTYxNjAyOX0.iBV-23LGdm_uKffAExgqSV34-NWoAyv8_-M_cJQZ8Gg';
+      window.location.href = sUrl + '/auth/v1/authorize?provider=apple&redirect_to=' + encodeURIComponent(location.origin + '/status');
+    }
+
+    /* Social Login: Google */
+    function loginWithGoogle() {
+      var sUrl = 'https://vmyrivxxibqydccurxug.supabase.co';
+      var sKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZteXJpdnh4aWJxeWRjY3VyeHVnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzAwNDAwMjksImV4cCI6MjA4NTYxNjAyOX0.iBV-23LGdm_uKffAExgqSV34-NWoAyv8_-M_cJQZ8Gg';
+      window.location.href = sUrl + '/auth/v1/authorize?provider=google&redirect_to=' + encodeURIComponent(location.origin + '/status');
+    }
+
+    /* Email Verification Toggle */
+    function toggleEmailVerify() {
+      var section = document.getElementById('emailVerifySection');
+      section.style.display = section.style.display === 'none' ? 'flex' : 'none';
+    }
+
+    /* Email Verification: Send Code */
+    function sendEmailCode() {
+      var email = document.getElementById('verifyEmail').value.trim();
+      var statusEl = document.getElementById('emailVerifyStatus');
+      if (!email) {
+        statusEl.textContent = '請輸入 Email';
+        statusEl.style.color = 'var(--red)';
+        return;
+      }
+      var sUrl = 'https://vmyrivxxibqydccurxug.supabase.co';
+      var sKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZteXJpdnh4aWJxeWRjY3VyeHVnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzAwNDAwMjksImV4cCI6MjA4NTYxNjAyOX0.iBV-23LGdm_uKffAExgqSV34-NWoAyv8_-M_cJQZ8Gg';
+      statusEl.textContent = '發送中...';
+      statusEl.style.color = 'var(--orange)';
+      fetch(sUrl + '/auth/v1/otp', {
+        method: 'POST',
+        headers: { 'Content-Type':'application/json', 'apikey':sKey },
+        body: JSON.stringify({ email: email })
+      }).then(function(r) {
+        if (r.ok) {
+          statusEl.textContent = '驗證碼已發送，請查看信箱';
+          statusEl.style.color = 'var(--green)';
+          document.getElementById('emailCode').style.display = 'block';
+          document.getElementById('verifyEmailBtn').style.display = 'block';
+          document.getElementById('sendEmailBtn').textContent = '重新發送';
+        } else {
+          statusEl.textContent = '發送失敗，請確認 Email 是否正確';
+          statusEl.style.color = 'var(--red)';
+        }
+      }).catch(function() {
+        statusEl.textContent = '網路錯誤，請稍後重試';
+        statusEl.style.color = 'var(--red)';
+      });
+    }
+
+    /* Email Verification: Verify Code */
+    function verifyEmailCode() {
+      var email = document.getElementById('verifyEmail').value.trim();
+      var code = document.getElementById('emailCode').value.trim();
+      var statusEl = document.getElementById('emailVerifyStatus');
+      if (!code) {
+        statusEl.textContent = '請輸入驗證碼';
+        statusEl.style.color = 'var(--red)';
+        return;
+      }
+      var sUrl = 'https://vmyrivxxibqydccurxug.supabase.co';
+      var sKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZteXJpdnh4aWJxeWRjY3VyeHVnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzAwNDAwMjksImV4cCI6MjA4NTYxNjAyOX0.iBV-23LGdm_uKffAExgqSV34-NWoAyv8_-M_cJQZ8Gg';
+      statusEl.textContent = '驗證中...';
+      statusEl.style.color = 'var(--orange)';
+      fetch(sUrl + '/auth/v1/verify', {
+        method: 'POST',
+        headers: { 'Content-Type':'application/json', 'apikey':sKey },
+        body: JSON.stringify({ type: 'email', token: code, email: email })
+      }).then(function(r) { return r.json(); })
+      .then(function(data) {
+        if (data.access_token) {
+          statusEl.textContent = '驗證成功！';
+          statusEl.style.color = 'var(--green)';
+          localStorage.setItem(AUTH_KEY, JSON.stringify({
+            verified: true,
+            method: 'email',
+            email: email,
+            token: data.access_token,
+            timestamp: new Date().toISOString()
+          }));
+          setTimeout(function() { showMainContent(); }, 600);
+        } else {
+          statusEl.textContent = '驗證碼錯誤或已過期';
+          statusEl.style.color = 'var(--red)';
+        }
+      }).catch(function() {
+        statusEl.textContent = '驗證失敗，請重試';
+        statusEl.style.color = 'var(--red)';
+      });
+    }
+
+    /* Check for OAuth callback in URL hash */
+    function checkOAuthCallback() {
+      var hash = window.location.hash;
+      if (hash && hash.includes('access_token=')) {
+        var params = {};
+        hash.substring(1).split('&').forEach(function(pair) {
+          var kv = pair.split('=');
+          params[kv[0]] = decodeURIComponent(kv[1] || '');
+        });
+        if (params.access_token) {
+          localStorage.setItem(AUTH_KEY, JSON.stringify({
+            verified: true,
+            method: 'oauth',
+            token: params.access_token,
+            timestamp: new Date().toISOString()
+          }));
+          window.location.hash = '';
+          return true;
+        }
+      }
+      return false;
+    }
+
+    document.getElementById('accessCode').addEventListener('keydown', function(e) {
+      if (e.key === 'Enter') checkAccess();
+    });
+
+    function doLogout() {
+      localStorage.removeItem(AUTH_KEY);
+      /* Keep webauthn credential for next login */
+      location.reload();
+    }
+
+    function isAuthenticated() {
+      try {
+        var auth = JSON.parse(localStorage.getItem(AUTH_KEY));
+        if (!auth || !auth.verified) return false;
+        /* Session expires after 24 hours */
+        var ts = new Date(auth.timestamp).getTime();
+        var now = Date.now();
+        if (now - ts > 24 * 60 * 60 * 1000) {
+          localStorage.removeItem(AUTH_KEY);
+          return false;
+        }
+        return true;
+      } catch (e) {
+        return false;
+      }
+    }
+
+    function showMainContent() {
+      document.getElementById('accessGate').classList.add('hidden');
+      document.getElementById('bioRegisterPrompt').classList.add('hidden');
+      document.getElementById('mainContent').style.display = 'block';
+      initDashboard();
+      setTimeout(function() {
+        document.querySelectorAll('.fade-in').forEach(function(el) {
+          observer.observe(el);
+        });
+      }, 100);
+    }
+
+    /* Scroll observer */
+    var observer = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.05 });
+
+    /* Auto-login if session exists */
+    if (checkOAuthCallback()) {
+      showMainContent();
+    } else if (isAuthenticated()) {
+      showMainContent();
+    } else {
+      /* Also migrate old key format */
+      if (localStorage.getItem('seobaike_command_center_verified') === 'true') {
+        localStorage.setItem(AUTH_KEY, JSON.stringify({
+          verified: true,
+          method: 'password',
+          timestamp: new Date().toISOString()
+        }));
+        localStorage.removeItem('seobaike_command_center_verified');
+        showMainContent();
+      } else {
+        setupLoginUI();
+      }
+    }
+
+    /* ======================================================= */
+    /* HAMBURGER MENU                                           */
+    /* ======================================================= */
+    function toggleMobileMenu() {
+      var btn = document.getElementById('hamburgerBtn');
+      var menu = document.getElementById('mobileMenu');
+      btn.classList.toggle('active');
+      menu.classList.toggle('open');
+    }
+
+    /* ======================================================= */
+    /* DASHBOARD DATA & STATE                                   */
+    /* ======================================================= */
+    var countdownValue = 30;
+    var countdownTimer = null;
+    var dashboardInitialized = false;
+
+    /* Engine names (internal only, not displayed) */
+    var ENGINE_IDS = [
+      'fast-chat', 'deep-reason', 'realtime-search', 'multilingual', 'all-round',
+      'creative', 'ultra-fast', 'text-expert', 'research', 'gpu-compute',
+      'open-source', 'video-create', 'image-gen', 'math-expert', 'browser-ai'
+    ];
+    var ENGINE_LABELS = [
+      '#01', '#02', '#03', '#04', '#05', '#06', '#07', '#08',
+      '#09', '#10', '#11', '#12', '#13', '#14', '#15'
+    ];
+
+    var engineStatuses = [];
+    var dashData = {};
+
+    /* ======================================================= */
+    /* UTILITY: Animated counter                                */
+    /* ======================================================= */
+    function animateCounter(el, target, duration, prefix, suffix) {
+      prefix = prefix || '';
+      suffix = suffix || '';
+      duration = duration || 1200;
+      var start = 0;
+      var startTime = null;
+      function step(ts) {
+        if (!startTime) startTime = ts;
+        var progress = Math.min((ts - startTime) / duration, 1);
+        var eased = 1 - Math.pow(1 - progress, 3);
+        var current = Math.round(eased * target);
+        el.textContent = prefix + current.toLocaleString() + suffix;
+        if (progress < 1) requestAnimationFrame(step);
+      }
+      requestAnimationFrame(step);
+    }
+
+    function animateGauge(circleEl, valueEl, targetPct, color) {
+      var circumference = 2 * Math.PI * 58;
+      var offset = circumference - (targetPct / 100) * circumference;
+      circleEl.style.strokeDashoffset = offset;
+
+      if (color) {
+        circleEl.setAttribute('stroke', color);
+      }
+
+      var start = performance.now();
+      var dur = 1500;
+      function step(ts) {
+        var progress = Math.min((ts - start) / dur, 1);
+        var eased = 1 - Math.pow(1 - progress, 3);
+        valueEl.textContent = Math.round(eased * targetPct);
+        if (progress < 1) requestAnimationFrame(step);
+      }
+      requestAnimationFrame(step);
+    }
+
+    /* ======================================================= */
+    /* GENERATE DASHBOARD DATA                                  */
+    /* ======================================================= */
+    function generateData() {
+      var hour = new Date().getHours();
+
+      engineStatuses = ENGINE_IDS.map(function() {
+        var r = Math.random();
+        if (r > 0.97) return 'offline';
+        if (r > 0.92) return 'degraded';
+        return 'online';
+      });
+
+      var cpuBase = 25 + Math.sin(hour / 3) * 15;
+      dashData.cpu = Math.round(Math.max(8, Math.min(85, cpuBase + (Math.random() - 0.5) * 20)));
+      dashData.mem = Math.round(40 + Math.random() * 25);
+      dashData.uptime = +(99.5 + Math.random() * 0.49).toFixed(2);
+
+      dashData.revenueToday = Math.round(15000 + Math.random() * 35000 + hour * 1200);
+      dashData.revenueTodayGrowth = +(5 + Math.random() * 18).toFixed(1);
+      dashData.revenueMonth = Math.round(dashData.revenueToday * 16 + Math.random() * 100000);
+      dashData.revenueMonthPct = Math.round(45 + Math.random() * 35);
+
+      dashData.revenueDays = [];
+      var days = ['日', '一', '二', '三', '四', '五', '六'];
+      var now = new Date();
+      for (var i = 6; i >= 0; i--) {
+        var d = new Date(now);
+        d.setDate(d.getDate() - i);
+        var dayName = '週' + days[d.getDay()];
+        var val = Math.round(12000 + Math.random() * 40000);
+        dashData.revenueDays.push({ label: dayName, value: val });
+      }
+
+      var sellerNames = ['AI 圖片生成器', '多語言翻譯包', '即時搜尋 API', 'SEO 分析套件', '智能客服模組'];
+      dashData.sellers = sellerNames.map(function(name, i) {
+        return {
+          rank: i + 1,
+          name: name,
+          revenue: Math.round(8000 - i * 1200 + Math.random() * 3000),
+          orders: Math.round(50 - i * 8 + Math.random() * 20)
+        };
+      }).sort(function(a, b) { return b.revenue - a.revenue; });
+
+      dashData.totalUsers = Math.round(4200 + Math.random() * 800);
+      dashData.newToday = Math.round(15 + Math.random() * 35);
+      dashData.activeNow = Math.round(80 + Math.random() * 120 + (hour > 8 && hour < 22 ? 50 : 0));
+
+      var surnames = ['王', '李', '陳', '林', '張', '黃', '吳', '劉', '蔡', '楊', '許', '鄭', '謝', '郭', '洪'];
+      var names = ['小明', '美玲', '志豪', '淑芬', '建宏', '雅婷', '家豪', '怡君', '俊傑', '佳蓉'];
+      dashData.signups = [];
+      for (var s = 0; s < 10; s++) {
+        var sn = surnames[Math.floor(Math.random() * surnames.length)];
+        var fn = names[Math.floor(Math.random() * names.length)];
+        var minsAgo = Math.round(s * 8 + Math.random() * 15);
+        dashData.signups.push({
+          name: sn + fn,
+          email: 'user' + Math.round(Math.random() * 9000 + 1000) + '@mail.com',
+          time: minsAgo === 0 ? '剛剛' : minsAgo + ' 分鐘前'
+        });
+      }
+
+      dashData.countries = [
+        { flag: '\uD83C\uDDF9\uD83C\uDDFC', name: '台灣', pct: 42 + Math.round(Math.random() * 8), color: 'var(--orange)' },
+        { flag: '\uD83C\uDDF0\uD83C\uDDF7', name: '韓國', pct: 18 + Math.round(Math.random() * 5), color: '#5882ff' },
+        { flag: '\uD83C\uDDEF\uD83C\uDDF5', name: '日本', pct: 14 + Math.round(Math.random() * 4), color: '#ff5f87' },
+        { flag: '\uD83C\uDDFA\uD83C\uDDF8', name: '美國', pct: 10 + Math.round(Math.random() * 3), color: '#28c840' },
+        { flag: '\uD83C\uDF10', name: '其他', pct: 0, color: '#8888aa' }
+      ];
+      var usedPct = dashData.countries.slice(0, 4).reduce(function(a, c) { return a + c.pct; }, 0);
+      dashData.countries[4].pct = Math.max(0, 100 - usedPct);
+
+      dashData.alerts = [
+        {
+          severity: 'critical',
+          title: 'API 用量異常飆升',
+          desc: '帳號 user_38291 過去 1 小時發送了 12,847 次 API 請求，超出正常用量 25 倍。可能為自動化攻擊或未授權爬取。',
+          time: '3 分鐘前'
+        },
+        {
+          severity: 'warning',
+          title: '未付款帳戶仍在使用',
+          desc: '帳號 shop_premium_72 已逾期 14 天未付款（NT$8,500），但仍持續使用付費功能。建議立即凍結或降級。',
+          time: '28 分鐘前'
+        },
+        {
+          severity: 'warning',
+          title: '可疑註冊行為',
+          desc: '過去 30 分鐘內偵測到 7 個帳號從同一 IP（203.145.xx.xx）註冊，疑似機器人批量註冊。',
+          time: '45 分鐘前'
+        },
+        {
+          severity: 'info',
+          title: '系統自動封鎖完成',
+          desc: '帳號 test_bot_01 因連續 50 次認證失敗，已被自動封鎖 24 小時。',
+          time: '1 小時前'
+        }
+      ];
+
+      dashData.totalListings = Math.round(280 + Math.random() * 50);
+      dashData.pendingReview = Math.round(8 + Math.random() * 12);
+      dashData.salesToday = Math.round(25 + Math.random() * 30);
+
+      dashData.categories = [
+        { name: 'SEO 工具', pct: 32, color: 'var(--orange)' },
+        { name: 'AI 對話', pct: 24, color: '#5882ff' },
+        { name: '圖片生成', pct: 18, color: '#ff5f87' },
+        { name: '翻譯服務', pct: 14, color: '#28c840' },
+        { name: '數據分析', pct: 8, color: '#ac82ff' },
+        { name: '其他', pct: 4, color: '#8888aa' }
+      ];
+
+      var products = ['SEO 自動分析器', '即時翻譯 API', 'AI 圖片包月', '關鍵字探勘工具', '智能摘要引擎', '多語言 SEO 包'];
+      dashData.transactions = [];
+      for (var t = 0; t < 8; t++) {
+        var product = products[Math.floor(Math.random() * products.length)];
+        var tMinsAgo = Math.round(t * 12 + Math.random() * 20);
+        dashData.transactions.push({
+          name: product,
+          amount: Math.round(500 + Math.random() * 4500),
+          time: tMinsAgo === 0 ? '剛剛' : tMinsAgo + ' 分鐘前'
+        });
+      }
+    }
+
+    /* ======================================================= */
+    /* RENDER FUNCTIONS                                         */
+    /* ======================================================= */
+
+    function renderGauges() {
+      var cpuColor = dashData.cpu > 70 ? 'var(--red)' : dashData.cpu > 50 ? 'var(--yellow)' : 'var(--orange)';
+      var memColor = dashData.mem > 80 ? 'var(--red)' : dashData.mem > 60 ? 'var(--yellow)' : '#5882ff';
+
+      animateGauge(
+        document.getElementById('gaugeCPU'),
+        document.getElementById('cpuValue'),
+        dashData.cpu,
+        cpuColor
+      );
+      animateGauge(
+        document.getElementById('gaugeMEM'),
+        document.getElementById('memValue'),
+        dashData.mem,
+        memColor
+      );
+      animateGauge(
+        document.getElementById('gaugeUP'),
+        document.getElementById('upValue'),
+        dashData.uptime,
+        'var(--green)'
+      );
+    }
+
+    function renderEngineDots() {
+      var container = document.getElementById('engineDots');
+      var html = '';
+      for (var i = 0; i < 15; i++) {
+        var status = engineStatuses[i] || 'online';
+        var label = ENGINE_LABELS[i] + ' ' + (status === 'online' ? '正常' : status === 'degraded' ? '緩慢' : '離線');
+        html += '<div class="engine-dot-wrap">' +
+          '<div class="engine-dot ' + status + '" data-tip="' + label + '"></div>' +
+          '<div class="engine-dot-label">' + ENGINE_LABELS[i] + '</div>' +
+          '</div>';
+      }
+      container.innerHTML = html;
+    }
+
+    function renderTimestamp() {
+      var now = new Date();
+      var y = now.getFullYear();
+      var mo = String(now.getMonth() + 1).padStart(2, '0');
+      var d = String(now.getDate()).padStart(2, '0');
+      var h = String(now.getHours()).padStart(2, '0');
+      var mi = String(now.getMinutes()).padStart(2, '0');
+      var s = String(now.getSeconds()).padStart(2, '0');
+      document.getElementById('lastUpdated').textContent = y + '/' + mo + '/' + d + ' ' + h + ':' + mi + ':' + s;
+    }
+
+    function renderRevenue() {
+      animateCounter(document.getElementById('revenueToday'), dashData.revenueToday, 1500);
+      document.getElementById('revenueTodayGrowth').textContent = '+' + dashData.revenueTodayGrowth + '%';
+      animateCounter(document.getElementById('revenueMonth'), dashData.revenueMonth, 2000);
+      document.getElementById('revenueMonthPct').textContent = dashData.revenueMonthPct + '%';
+
+      /* 7-day line chart on canvas */
+      renderLineChart();
+    }
+
+    /* Canvas Line Chart */
+    function renderLineChart() {
+      var canvas = document.getElementById('revenueLineChart');
+      if (!canvas) return;
+      var wrap = canvas.parentElement;
+      var dpr = window.devicePixelRatio || 1;
+      var w = wrap.clientWidth;
+      var h = wrap.clientHeight;
+      canvas.width = w * dpr;
+      canvas.height = h * dpr;
+      canvas.style.width = w + 'px';
+      canvas.style.height = h + 'px';
+
+      var ctx = canvas.getContext('2d');
+      ctx.scale(dpr, dpr);
+      ctx.clearRect(0, 0, w, h);
+
+      var data = dashData.revenueDays;
+      if (!data || data.length === 0) return;
+
+      var padLeft = 55;
+      var padRight = 20;
+      var padTop = 20;
+      var padBottom = 35;
+      var chartW = w - padLeft - padRight;
+      var chartH = h - padTop - padBottom;
+
+      var vals = data.map(function(d) { return d.value; });
+      var maxVal = Math.max.apply(null, vals);
+      var minVal = Math.min.apply(null, vals);
+      var range = maxVal - minVal || 1;
+      /* Add 10% buffer */
+      var visMin = minVal - range * 0.1;
+      var visMax = maxVal + range * 0.1;
+      var visRange = visMax - visMin;
+
+      var points = data.map(function(d, i) {
+        var x = padLeft + (i / (data.length - 1)) * chartW;
+        var y = padTop + chartH - ((d.value - visMin) / visRange) * chartH;
+        return { x: x, y: y };
+      });
+
+      /* Grid lines */
+      ctx.strokeStyle = 'rgba(255,255,255,0.05)';
+      ctx.lineWidth = 1;
+      for (var g = 0; g <= 4; g++) {
+        var gy = padTop + (g / 4) * chartH;
+        ctx.beginPath();
+        ctx.moveTo(padLeft, gy);
+        ctx.lineTo(w - padRight, gy);
+        ctx.stroke();
+
+        /* Y-axis labels */
+        var gVal = visMax - (g / 4) * visRange;
+        ctx.fillStyle = '#8888aa';
+        ctx.font = '11px -apple-system, "Noto Sans TC", sans-serif';
+        ctx.textAlign = 'right';
+        ctx.fillText(Math.round(gVal / 1000) + 'K', padLeft - 8, gy + 4);
+      }
+
+      /* Gradient fill under curve */
+      var gradient = ctx.createLinearGradient(0, padTop, 0, padTop + chartH);
+      gradient.addColorStop(0, 'rgba(232, 133, 12, 0.3)');
+      gradient.addColorStop(1, 'rgba(232, 133, 12, 0.02)');
+
+      ctx.beginPath();
+      ctx.moveTo(points[0].x, padTop + chartH);
+      /* Smooth curve using bezier */
+      for (var i = 0; i < points.length; i++) {
+        if (i === 0) {
+          ctx.lineTo(points[i].x, points[i].y);
+        } else {
+          var cpx = (points[i - 1].x + points[i].x) / 2;
+          ctx.bezierCurveTo(cpx, points[i - 1].y, cpx, points[i].y, points[i].x, points[i].y);
+        }
+      }
+      ctx.lineTo(points[points.length - 1].x, padTop + chartH);
+      ctx.closePath();
+      ctx.fillStyle = gradient;
+      ctx.fill();
+
+      /* Line */
+      ctx.beginPath();
+      for (var i = 0; i < points.length; i++) {
+        if (i === 0) {
+          ctx.moveTo(points[i].x, points[i].y);
+        } else {
+          var cpx = (points[i - 1].x + points[i].x) / 2;
+          ctx.bezierCurveTo(cpx, points[i - 1].y, cpx, points[i].y, points[i].x, points[i].y);
+        }
+      }
+      ctx.strokeStyle = '#e8850c';
+      ctx.lineWidth = 2.5;
+      ctx.shadowColor = 'rgba(232, 133, 12, 0.5)';
+      ctx.shadowBlur = 8;
+      ctx.stroke();
+      ctx.shadowBlur = 0;
+
+      /* Dots */
+      for (var i = 0; i < points.length; i++) {
+        ctx.beginPath();
+        ctx.arc(points[i].x, points[i].y, 4, 0, Math.PI * 2);
+        ctx.fillStyle = '#0a0a1a';
+        ctx.fill();
+        ctx.strokeStyle = '#e8850c';
+        ctx.lineWidth = 2;
+        ctx.stroke();
+
+        /* Value label on top of dot */
+        ctx.fillStyle = '#e0e0e8';
+        ctx.font = '10px -apple-system, "Noto Sans TC", sans-serif';
+        ctx.textAlign = 'center';
+        ctx.fillText('NT$' + Math.round(data[i].value / 1000) + 'K', points[i].x, points[i].y - 12);
+      }
+
+      /* X-axis labels */
+      ctx.fillStyle = '#8888aa';
+      ctx.font = '11px -apple-system, "Noto Sans TC", sans-serif';
+      ctx.textAlign = 'center';
+      for (var i = 0; i < data.length; i++) {
+        ctx.fillText(data[i].label, points[i].x, h - 8);
+      }
+    }
+
+    function renderSellers() {
+      var tbody = document.getElementById('sellersBody');
+      var html = '';
+      dashData.sellers.forEach(function(seller, i) {
+        var rankClass = 'r' + (i + 1);
+        html += '<tr>' +
+          '<td><span class="rank-badge ' + rankClass + '">' + (i + 1) + '</span></td>' +
+          '<td style="color:var(--text-bright);font-weight:600;">' + seller.name + '</td>' +
+          '<td style="text-align:right;" class="seller-amount">NT$' + seller.revenue.toLocaleString() + '</td>' +
+          '<td style="text-align:right;color:var(--text-muted);">' + seller.orders + ' 筆</td>' +
+          '</tr>';
+      });
+      tbody.innerHTML = html;
+    }
+
+    function renderUsers() {
+      animateCounter(document.getElementById('totalUsers'), dashData.totalUsers, 1200);
+      animateCounter(document.getElementById('newToday'), dashData.newToday, 800);
+      animateCounter(document.getElementById('activeNow'), dashData.activeNow, 1000);
+
+      var list = document.getElementById('signupList');
+      var html = '';
+      dashData.signups.forEach(function(u) {
+        var initials = u.name.charAt(0);
+        html += '<li>' +
+          '<div class="signup-avatar">' + initials + '</div>' +
+          '<div class="signup-info">' +
+            '<div class="signup-name">' + u.name + '</div>' +
+            '<div class="signup-time">' + u.email + '</div>' +
+          '</div>' +
+          '<div style="font-size:0.72rem;color:var(--text-muted);white-space:nowrap;">' + u.time + '</div>' +
+          '</li>';
+      });
+      list.innerHTML = html;
+
+      var clist = document.getElementById('countryList');
+      html = '';
+      dashData.countries.forEach(function(c) {
+        html += '<div class="country-item">' +
+          '<div class="country-name">' + c.flag + ' ' + c.name + '</div>' +
+          '<div class="country-bar-wrap"><div class="country-bar-fill" style="width:' + c.pct + '%;background:' + c.color + ';"></div></div>' +
+          '<div class="country-pct">' + c.pct + '%</div>' +
+          '</div>';
+      });
+      clist.innerHTML = html;
+    }
+
+    function renderAlerts() {
+      var grid = document.getElementById('alertGrid');
+      var html = '';
+      dashData.alerts.forEach(function(alert) {
+        html += '<div class="alert-card">' +
+          '<div class="alert-severity ' + alert.severity + '"></div>' +
+          '<div class="alert-body">' +
+            '<div class="alert-title">' + alert.title + '</div>' +
+            '<div class="alert-desc">' + alert.desc + '</div>' +
+            '<div class="alert-time">' + alert.time + '</div>' +
+          '</div>' +
+          '<div class="alert-actions">' +
+            '<button class="btn-handle" onclick="handleAlert(this)">處理</button>' +
+          '</div>' +
+          '</div>';
+      });
+      grid.innerHTML = html;
+    }
+
+    function handleAlert(btn) {
+      var card = btn.closest('.alert-card');
+      card.style.opacity = '0.4';
+      card.style.transform = 'translateX(20px)';
+      btn.textContent = '已處理';
+      btn.disabled = true;
+      btn.style.color = 'var(--green)';
+      btn.style.borderColor = 'var(--green)';
+    }
+
+    function renderMarketplace() {
+      animateCounter(document.getElementById('totalListings'), dashData.totalListings, 1000);
+      animateCounter(document.getElementById('pendingReview'), dashData.pendingReview, 600);
+      animateCounter(document.getElementById('salesToday'), dashData.salesToday, 800);
+
+      var pie = document.getElementById('pieChart');
+      var legend = document.getElementById('pieLegend');
+      var angle = 0;
+      var gradientParts = [];
+      var legendHtml = '';
+
+      dashData.categories.forEach(function(cat) {
+        var startAngle = angle;
+        angle += cat.pct * 3.6;
+        gradientParts.push(cat.color + ' ' + startAngle + 'deg ' + angle + 'deg');
+        legendHtml += '<li>' +
+          '<div class="pie-legend-dot" style="background:' + cat.color + ';"></div>' +
+          cat.name +
+          '<span class="pie-legend-pct">' + cat.pct + '%</span>' +
+          '</li>';
+      });
+
+      pie.style.background = 'conic-gradient(' + gradientParts.join(', ') + ')';
+      legend.innerHTML = legendHtml;
+
+      var txList = document.getElementById('txList');
+      var html = '';
+      dashData.transactions.forEach(function(tx) {
+        html += '<li class="tx-item">' +
+          '<div class="tx-left">' +
+            '<div class="tx-icon">&#128179;</div>' +
+            '<div>' +
+              '<div class="tx-name">' + tx.name + '</div>' +
+              '<div class="tx-time">' + tx.time + '</div>' +
+            '</div>' +
+          '</div>' +
+          '<div class="tx-amount">+NT$' + tx.amount.toLocaleString() + '</div>' +
+          '</li>';
+      });
+      txList.innerHTML = html;
+    }
+
+    /* ======================================================= */
+    /* REFRESH & COUNTDOWN                                      */
+    /* ======================================================= */
+    function refreshDashboard() {
+      generateData();
+      renderGauges();
+      renderEngineDots();
+      renderTimestamp();
+      renderRevenue();
+      renderSellers();
+      renderUsers();
+      renderAlerts();
+      renderMarketplace();
+    }
+
+    function startCountdown() {
+      countdownValue = 30;
+      var mainEl = document.getElementById('countdown');
+      var mobileEl = document.getElementById('countdownMobile');
+      if (mainEl) mainEl.textContent = countdownValue;
+      if (mobileEl) mobileEl.textContent = countdownValue;
+      if (countdownTimer) clearInterval(countdownTimer);
+      countdownTimer = setInterval(function() {
+        countdownValue--;
+        if (countdownValue <= 0) {
+          countdownValue = 30;
+          refreshDashboard();
+        }
+        if (mainEl) mainEl.textContent = countdownValue;
+        if (mobileEl) mobileEl.textContent = countdownValue;
+      }, 1000);
+    }
+
+    function jitterActiveNow() {
+      var el = document.getElementById('activeNow');
+      if (!el) return;
+      var current = parseInt(el.textContent.replace(/,/g, ''), 10) || dashData.activeNow;
+      var delta = Math.round((Math.random() - 0.45) * 5);
+      current = Math.max(20, current + delta);
+      el.textContent = current.toLocaleString();
+    }
+
+    /* ======================================================= */
+    /* INIT                                                     */
+    /* ======================================================= */
+    function initDashboard() {
+      if (dashboardInitialized) return;
+      dashboardInitialized = true;
+
+      refreshDashboard();
+      startCountdown();
+      setInterval(jitterActiveNow, 3000);
+
+      /* Fetch real Supabase data */
+      fetchRealData();
+
+      /* Re-render chart on resize */
+      window.addEventListener('resize', function() {
+        if (dashData.revenueDays) {
+          renderLineChart();
+        }
+      });
+    }
+
+    /* ======================================================= */
+    /* REAL DATA FROM SUPABASE                                  */
+    /* ======================================================= */
+    var SUPA_URL = 'https://vmyrivxxibqydccurxug.supabase.co';
+    var SUPA_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZteXJpdnh4aWJxeWRjY3VyeHVnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzAwNDAwMjksImV4cCI6MjA4NTYxNjAyOX0.iBV-23LGdm_uKffAExgqSV34-NWoAyv8_-M_cJQZ8Gg';
+
+    function fetchRealData() {
+      var headers = { 'apikey': SUPA_KEY, 'Authorization': 'Bearer ' + SUPA_KEY };
+
+      /* 1. Page Views — real traffic data */
+      fetch(SUPA_URL + '/rest/v1/page_views?select=path,created_at&order=created_at.desc&limit=200', { headers: headers })
+      .then(function(r) { return r.json(); })
+      .then(function(views) {
+        /* Total views */
+        var totalEl = document.getElementById('totalUsers');
+        if (totalEl) totalEl.textContent = views.length;
+
+        /* Today's views */
+        var today = new Date().toISOString().split('T')[0];
+        var todayViews = views.filter(function(v) { return v.created_at && v.created_at.startsWith(today); });
+        var newTodayEl = document.getElementById('newToday');
+        if (newTodayEl) newTodayEl.textContent = todayViews.length;
+
+        /* Page breakdown — inject into signup list */
+        var pageCounts = {};
+        views.forEach(function(v) {
+          var p = v.path || '/unknown';
+          pageCounts[p] = (pageCounts[p] || 0) + 1;
+        });
+        var sorted = Object.keys(pageCounts).sort(function(a, b) { return pageCounts[b] - pageCounts[a]; });
+        var list = document.getElementById('signupList');
+        if (list) {
+          var html = '';
+          sorted.forEach(function(path) {
+            var label = path === '/' ? '首頁' : path.replace('/', '');
+            html += '<li>' +
+              '<div class="signup-avatar" style="background:var(--orange);font-size:0.7rem;">' + pageCounts[path] + '</div>' +
+              '<div class="signup-info">' +
+                '<div class="signup-name">' + label + '</div>' +
+                '<div class="signup-time">' + pageCounts[path] + ' 次瀏覽</div>' +
+              '</div>' +
+              '</li>';
+          });
+          list.innerHTML = html;
+        }
+
+        /* Real data badge */
+        var badge = document.createElement('div');
+        badge.style.cssText = 'position:fixed;bottom:20px;left:20px;padding:8px 16px;border-radius:20px;background:rgba(40,200,64,0.15);border:1px solid rgba(40,200,64,0.3);color:var(--green);font-size:0.78rem;font-weight:700;z-index:1000;';
+        badge.innerHTML = '<span style="display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--green);margin-right:6px;animation:liveBlink 1.5s infinite;"></span>真實數據 — ' + views.length + ' 筆記錄';
+        document.body.appendChild(badge);
+      }).catch(function(e) { console.log('page_views fetch error:', e); });
+
+      /* 2. Announcements */
+      fetch(SUPA_URL + '/rest/v1/announcements?select=*&order=created_at.desc&limit=10', { headers: headers })
+      .then(function(r) { return r.json(); })
+      .then(function(anns) {
+        var log = document.getElementById('bossActionLog');
+        if (log && anns.length > 0) {
+          var html = '';
+          anns.forEach(function(a) {
+            var time = new Date(a.created_at).toLocaleString('zh-TW');
+            html += '<li class="tx-item"><div class="tx-left"><div class="tx-icon">&#128227;</div><div><div class="tx-name">公告：' + a.title + '</div><div class="tx-time">' + time + '</div></div></div></li>';
+          });
+          log.innerHTML = html;
+        }
+      }).catch(function(){});
+
+      /* 3. SEO Points Transactions */
+      fetch(SUPA_URL + '/rest/v1/seo_points_transactions?select=*&order=created_at.desc&limit=10', { headers: headers })
+      .then(function(r) { return r.json(); })
+      .then(function(txs) {
+        if (txs.length > 0) {
+          var txList = document.getElementById('txList');
+          if (txList) {
+            var html = '';
+            txs.forEach(function(tx) {
+              var time = new Date(tx.created_at).toLocaleString('zh-TW');
+              html += '<li class="tx-item"><div class="tx-left"><div class="tx-icon">&#128176;</div><div><div class="tx-name">' + (tx.description || tx.type) + '</div><div class="tx-time">' + time + '</div></div></div><div class="tx-amount">+' + tx.amount + ' SP</div></li>';
+            });
+            txList.innerHTML = html;
+          }
+        }
+      }).catch(function(){});
+
+      /* 4. Frozen Accounts */
+      fetch(SUPA_URL + '/rest/v1/frozen_accounts?select=*&is_active=eq.true&order=frozen_at.desc&limit=10', { headers: headers })
+      .then(function(r) { return r.json(); })
+      .then(function(frozen) {
+        if (frozen.length > 0) {
+          var alertGrid = document.getElementById('alertGrid');
+          if (alertGrid) {
+            var html = '';
+            frozen.forEach(function(f) {
+              html += '<div class="alert-card"><div class="alert-severity critical"></div><div class="alert-body"><div class="alert-title">已凍結：' + f.user_id + '</div><div class="alert-desc">原因：' + f.reason + '</div><div class="alert-time">' + new Date(f.frozen_at).toLocaleString('zh-TW') + '</div></div></div>';
+            });
+            alertGrid.innerHTML = html + alertGrid.innerHTML;
+          }
+        }
+      }).catch(function(){});
+    }
+
+    /* ======================================================= */
+    /* BOSS QUICK ACTIONS                                       */
+    /* ======================================================= */
+
+    function showToast(msg, type) {
+      var existing = document.querySelector('.boss-action-toast');
+      if (existing) existing.remove();
+      var toast = document.createElement('div');
+      toast.className = 'boss-action-toast ' + (type || 'success');
+      toast.textContent = msg;
+      document.body.appendChild(toast);
+      setTimeout(function() { toast.classList.add('show'); }, 10);
+      setTimeout(function() {
+        toast.classList.remove('show');
+        setTimeout(function() { toast.remove(); }, 300);
+      }, 3000);
+    }
+
+    function addActionLog(action) {
+      var log = document.getElementById('bossActionLog');
+      if (!log) return;
+      var placeholder = log.querySelector('li[style]');
+      if (placeholder && placeholder.textContent.includes('尚無')) {
+        placeholder.remove();
+      }
+      var now = new Date();
+      var timeStr = now.getHours().toString().padStart(2,'0') + ':' + now.getMinutes().toString().padStart(2,'0');
+      var li = document.createElement('li');
+      li.className = 'tx-item';
+      li.innerHTML = '<div class="tx-left"><div class="tx-icon">&#128221;</div><div><div class="tx-name">' + action + '</div><div class="tx-time">' + timeStr + '</div></div></div>';
+      log.insertBefore(li, log.firstChild);
+    }
+
+    function toggleBonusForm() {
+      var form = document.getElementById('bonusForm');
+      var card = document.getElementById('bonusCard');
+      var btn = card.querySelector('.boss-btn:last-child');
+      if (form.style.display === 'none') {
+        form.style.display = 'flex';
+        btn.style.display = 'none';
+      } else {
+        form.style.display = 'none';
+        btn.style.display = 'block';
+      }
+    }
+
+    function toggleForm(formId, btn) {
+      var form = document.getElementById(formId);
+      if (form.style.display === 'none') {
+        form.style.display = 'flex';
+        btn.style.display = 'none';
+      } else {
+        form.style.display = 'none';
+        btn.style.display = 'block';
+      }
+    }
+
+    function sendBonus() {
+      var user = document.getElementById('bonusUser').value.trim();
+      var amount = document.getElementById('bonusAmount').value;
+      var reason = document.getElementById('bonusReason').value;
+      if (!user || !amount) {
+        showToast('請填寫用戶和點數', 'error');
+        return;
+      }
+      var reasonMap = { performance:'表現優異', referral:'推薦獎勵', compensation:'補償', event:'活動獎品', other:'其他' };
+      var sUrl = 'https://vmyrivxxibqydccurxug.supabase.co';
+      var sKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZteXJpdnh4aWJxeWRjY3VyeHVnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzAwNDAwMjksImV4cCI6MjA4NTYxNjAyOX0.iBV-23LGdm_uKffAExgqSV34-NWoAyv8_-M_cJQZ8Gg';
+
+      fetch(sUrl + '/rest/v1/seo_points_transactions', {
+        method: 'POST',
+        headers: { 'Content-Type':'application/json', 'apikey':sKey, 'Authorization':'Bearer '+sKey, 'Prefer':'return=minimal' },
+        body: JSON.stringify({
+          user_id: user,
+          amount: parseInt(amount),
+          type: 'bonus',
+          description: '創辦人發放獎金 — ' + (reasonMap[reason] || reason),
+          created_by: 'boss'
+        })
+      }).then(function(r) {
+        if (r.ok) {
+          showToast('已發放 ' + amount + ' SP 給 ' + user, 'success');
+          addActionLog('發放 ' + amount + ' SP 獎金給 ' + user);
+          document.getElementById('bonusUser').value = '';
+          document.getElementById('bonusAmount').value = '';
+        } else {
+          showToast('發放失敗，請稍後重試', 'error');
+        }
+      }).catch(function() {
+        showToast('網路錯誤', 'error');
+      });
+    }
+
+    function sendAnnounce() {
+      var title = document.getElementById('announceTitle').value.trim();
+      var body = document.getElementById('announceBody').value.trim();
+      if (!title) {
+        showToast('請填寫公告標題', 'error');
+        return;
+      }
+      var sUrl = 'https://vmyrivxxibqydccurxug.supabase.co';
+      var sKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZteXJpdnh4aWJxeWRjY3VyeHVnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzAwNDAwMjksImV4cCI6MjA4NTYxNjAyOX0.iBV-23LGdm_uKffAExgqSV34-NWoAyv8_-M_cJQZ8Gg';
+
+      fetch(sUrl + '/rest/v1/announcements', {
+        method: 'POST',
+        headers: { 'Content-Type':'application/json', 'apikey':sKey, 'Authorization':'Bearer '+sKey, 'Prefer':'return=minimal' },
+        body: JSON.stringify({
+          title: title,
+          body: body || '',
+          created_by: 'boss',
+          is_active: true
+        })
+      }).then(function(r) {
+        if (r.ok) {
+          showToast('公告「' + title + '」已發布', 'success');
+          addActionLog('發布公告：' + title);
+          document.getElementById('announceTitle').value = '';
+          document.getElementById('announceBody').value = '';
+        } else {
+          showToast('發布失敗', 'error');
+        }
+      }).catch(function() {
+        showToast('網路錯誤', 'error');
+      });
+    }
+
+    function sendFreeze() {
+      var user = document.getElementById('freezeUser').value.trim();
+      var reason = document.getElementById('freezeReason').value;
+      if (!user) {
+        showToast('請填寫要凍結的用戶', 'error');
+        return;
+      }
+      var reasonMap = { abuse:'濫用 API', fraud:'詐騙行為', unpaid:'逾期未付款', bot:'機器人帳號', other:'其他' };
+
+      if (!confirm('確定要凍結帳號「' + user + '」嗎？\n原因：' + (reasonMap[reason] || reason))) return;
+
+      var sUrl = 'https://vmyrivxxibqydccurxug.supabase.co';
+      var sKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZteXJpdnh4aWJxeWRjY3VyeHVnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzAwNDAwMjksImV4cCI6MjA4NTYxNjAyOX0.iBV-23LGdm_uKffAExgqSV34-NWoAyv8_-M_cJQZ8Gg';
+
+      fetch(sUrl + '/rest/v1/frozen_accounts', {
+        method: 'POST',
+        headers: { 'Content-Type':'application/json', 'apikey':sKey, 'Authorization':'Bearer '+sKey, 'Prefer':'return=minimal' },
+        body: JSON.stringify({
+          user_id: user,
+          reason: reasonMap[reason] || reason,
+          frozen_by: 'boss',
+          is_active: true
+        })
+      }).then(function(r) {
+        if (r.ok) {
+          showToast('帳號「' + user + '」已凍結', 'success');
+          addActionLog('凍結帳號：' + user + '（' + (reasonMap[reason] || reason) + '）');
+          document.getElementById('freezeUser').value = '';
+        } else {
+          showToast('凍結失敗', 'error');
+        }
+      }).catch(function() {
+        showToast('網路錯誤', 'error');
+      });
+    }
+
+    /* ======================================================= */
+    /* PAGE VIEW TRACKING                                       */
+    /* ======================================================= */
+    (function(){
+      try {
+        var sUrl = 'https://vmyrivxxibqydccurxug.supabase.co';
+        var sKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZteXJpdnh4aWJxeWRjY3VyeHVnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzAwNDAwMjksImV4cCI6MjA4NTYxNjAyOX0.iBV-23LGdm_uKffAExgqSV34-NWoAyv8_-M_cJQZ8Gg';
+        fetch(sUrl + '/rest/v1/page_views', {
+          method: 'POST',
+          headers: { 'Content-Type':'application/json', 'apikey':sKey, 'Authorization':'Bearer '+sKey, 'Prefer':'return=minimal' },
+          body: JSON.stringify({ path: location.pathname, referrer: document.referrer || null, user_agent: navigator.userAgent })
+        }).catch(function(){});
+      } catch(e){}
+    })();
+  </script>
+  <script src="/assets/i18n.js"></script>
+</body>
+</html>

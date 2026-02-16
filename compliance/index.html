@@ -1,0 +1,1025 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>合規中心 — SEOBAIKE | 小路光有限公司</title>
+  <meta name="description" content="SEOBAIKE 合規中心：個資保護、AI 治理、消費者保護、資訊安全四大合規領域全面覆蓋，保障平台使用者權益。">
+  <meta property="og:title" content="合規中心 — SEOBAIKE">
+  <meta property="og:description" content="法律先行，安全至上。SEOBAIKE 合規中心。">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://aiforseo.vip/compliance">
+  <meta property="og:image" content="/og-image.png">
+  <meta property="og:site_name" content="SEOBAIKE">
+  <meta property="og:locale" content="zh_TW">
+  <meta name="theme-color" content="#e8850c">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/favicon.svg">
+  <link rel="manifest" href="/manifest.json">
+  <link rel="stylesheet" href="/assets/design-system.css">
+  <link rel="stylesheet" href="/assets/premium-fx.css">
+  <style>
+    /* ── Compliance Hero ── */
+    .compliance-hero {
+      padding: 140px 0 80px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(180deg, var(--bg-secondary) 0%, var(--bg-primary) 100%);
+    }
+    .compliance-hero::before {
+      content: '';
+      position: absolute;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 800px;
+      height: 800px;
+      background: radial-gradient(circle, rgba(232,133,12,0.06) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    .compliance-hero h1 { margin-bottom: var(--sp-3); }
+    .compliance-hero .subtitle {
+      font-size: 1.15rem;
+      color: var(--text-muted);
+      max-width: 600px;
+      margin: 0 auto var(--sp-6);
+      line-height: 1.8;
+    }
+    .hero-shield {
+      width: 80px;
+      height: 80px;
+      margin: 0 auto var(--sp-6);
+      border-radius: var(--radius-lg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.5rem;
+      background: rgba(232,133,12,0.08);
+      border: 1px solid rgba(232,133,12,0.15);
+      box-shadow: var(--shadow-gold);
+    }
+
+    /* ── Status Badges ── */
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 5px 14px;
+      border-radius: var(--radius-full);
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+    }
+    .status-badge--compliant {
+      background: rgba(52,208,88,0.1);
+      color: var(--success);
+      border: 1px solid rgba(52,208,88,0.2);
+    }
+    .status-badge--progress {
+      background: rgba(240,180,41,0.1);
+      color: var(--warning);
+      border: 1px solid rgba(240,180,41,0.2);
+    }
+    .status-badge__dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: currentColor;
+    }
+
+    /* ── Compliance Framework Cards ── */
+    .framework-card {
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+    .framework-card .card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: var(--sp-4);
+      flex-wrap: wrap;
+      gap: var(--sp-3);
+    }
+    .framework-card .card-icon-wrap {
+      display: flex;
+      align-items: center;
+      gap: var(--sp-3);
+    }
+    .framework-card .card-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: var(--radius-md);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      flex-shrink: 0;
+    }
+    .framework-card .card-icon.icon-pdpa {
+      background: rgba(52,208,88,0.08);
+      border: 1px solid rgba(52,208,88,0.15);
+    }
+    .framework-card .card-icon.icon-ai {
+      background: rgba(88,166,255,0.08);
+      border: 1px solid rgba(88,166,255,0.15);
+    }
+    .framework-card .card-icon.icon-consumer {
+      background: rgba(232,133,12,0.08);
+      border: 1px solid rgba(232,133,12,0.15);
+    }
+    .framework-card .card-icon.icon-security {
+      background: rgba(248,81,73,0.08);
+      border: 1px solid rgba(248,81,73,0.15);
+    }
+    .framework-card h3 {
+      margin-bottom: var(--sp-2);
+      font-size: 1.15rem;
+    }
+    .framework-card .card-subtitle {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      margin-bottom: var(--sp-4);
+      font-weight: 600;
+      letter-spacing: 0.3px;
+    }
+    .framework-card .card-desc {
+      font-size: 0.9rem;
+      line-height: 1.75;
+      color: var(--text-secondary);
+      margin-bottom: var(--sp-5);
+    }
+    .framework-card .law-ref {
+      padding: var(--sp-3) var(--sp-4);
+      background: rgba(255,255,255,0.02);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-sm);
+      margin-bottom: var(--sp-4);
+    }
+    .framework-card .law-ref-label {
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 1.2px;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+    .framework-card .law-ref-text {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+    .framework-card .measures-title {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      font-weight: 700;
+      margin-bottom: var(--sp-3);
+    }
+    .framework-card .card-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      flex-grow: 1;
+    }
+    .framework-card .card-list li {
+      padding: 7px 0;
+      font-size: 0.88rem;
+      color: var(--text-secondary);
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      line-height: 1.5;
+    }
+    .framework-card .card-list li::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--gold-300);
+      flex-shrink: 0;
+      margin-top: 7px;
+    }
+
+    /* ── Company Transparency Section ── */
+    .transparency-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: var(--sp-5);
+    }
+    .transparency-item {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      padding: var(--sp-8);
+      text-align: center;
+      transition: all var(--duration-normal) var(--ease-out);
+    }
+    .transparency-item:hover {
+      border-color: var(--border-hover);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-gold);
+    }
+    .transparency-item .ti-icon {
+      width: 48px;
+      height: 48px;
+      margin: 0 auto var(--sp-4);
+      border-radius: var(--radius-md);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      background: rgba(232,133,12,0.06);
+      border: 1px solid rgba(232,133,12,0.1);
+    }
+    .transparency-item .ti-label {
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+    .transparency-item .ti-value {
+      font-size: 1.05rem;
+      font-weight: 800;
+      color: var(--text-primary);
+      word-break: break-all;
+    }
+    .transparency-item .ti-value.gold {
+      color: var(--gold-200);
+    }
+
+    /* ── User Rights Section ── */
+    .rights-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--sp-5);
+    }
+    .right-item {
+      display: flex;
+      align-items: flex-start;
+      gap: var(--sp-5);
+      padding: var(--sp-6);
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      transition: all var(--duration-normal) var(--ease-out);
+    }
+    .right-item:hover {
+      border-color: var(--border-hover);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-gold);
+    }
+    .right-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      flex-shrink: 0;
+      background: rgba(232,133,12,0.08);
+      border: 1px solid rgba(232,133,12,0.12);
+    }
+    .right-info h4 {
+      font-size: 1rem;
+      margin-bottom: 4px;
+    }
+    .right-info p {
+      font-size: 0.88rem;
+      line-height: 1.7;
+    }
+
+    /* ── Technical Measures ── */
+    .measure-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--sp-5);
+    }
+    .measure-item {
+      display: flex;
+      align-items: flex-start;
+      gap: var(--sp-5);
+      padding: var(--sp-6);
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      transition: all var(--duration-normal) var(--ease-out);
+    }
+    .measure-item:hover {
+      border-color: var(--border-hover);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-gold);
+    }
+    .measure-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      flex-shrink: 0;
+    }
+    .measure-icon.green { background: rgba(52,208,88,0.1); color: var(--success); }
+    .measure-icon.gold { background: rgba(232,133,12,0.1); color: var(--gold-200); }
+    .measure-icon.blue { background: rgba(88,166,255,0.1); color: var(--info); }
+    .measure-info h4 { font-size: 1rem; margin-bottom: 4px; }
+    .measure-info p { font-size: 0.88rem; line-height: 1.7; }
+
+    /* ── Contact Section ── */
+    .contact-section {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-xl);
+      padding: var(--sp-12) var(--sp-10);
+      text-align: center;
+    }
+    .contact-section h3 { margin-bottom: var(--sp-2); }
+    .contact-section .contact-desc {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      margin-bottom: var(--sp-6);
+      max-width: 540px;
+      margin-left: auto;
+      margin-right: auto;
+      line-height: 1.8;
+    }
+    .contact-methods {
+      display: flex;
+      flex-direction: column;
+      gap: var(--sp-4);
+      max-width: 440px;
+      margin: 0 auto var(--sp-8);
+    }
+    .contact-meta {
+      text-align: left;
+      max-width: 480px;
+      margin: 0 auto;
+    }
+    .contact-meta-title {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      margin-bottom: var(--sp-3);
+    }
+    .contact-meta-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .contact-meta-list li {
+      padding: 8px 0;
+      font-size: 0.88rem;
+      color: var(--text-secondary);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .contact-meta-list li .dot {
+      color: var(--gold-200);
+    }
+
+    /* ── Timeline / Process ── */
+    .process-steps {
+      display: flex;
+      gap: var(--sp-6);
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: var(--sp-8);
+    }
+    .process-step {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: var(--sp-3);
+      max-width: 180px;
+      text-align: center;
+    }
+    .process-step .step-number {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.85rem;
+      font-weight: 800;
+      background: rgba(232,133,12,0.1);
+      border: 1px solid rgba(232,133,12,0.2);
+      color: var(--gold-200);
+    }
+    .process-step .step-label {
+      font-size: 0.88rem;
+      color: var(--text-secondary);
+      font-weight: 600;
+    }
+    .process-step .step-desc {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+    .process-arrow {
+      display: flex;
+      align-items: center;
+      color: var(--text-muted);
+      font-size: 1.2rem;
+      padding-top: var(--sp-3);
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 1024px) {
+      .transparency-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 768px) {
+      .compliance-hero { padding: 110px 0 50px; }
+      .hero-shield { width: 64px; height: 64px; font-size: 2rem; }
+      .transparency-grid { grid-template-columns: 1fr; }
+      .rights-grid { grid-template-columns: 1fr; }
+      .measure-grid { grid-template-columns: 1fr; }
+      .right-item { flex-direction: column; gap: var(--sp-3); }
+      .measure-item { flex-direction: column; gap: var(--sp-3); }
+      .contact-section { padding: var(--sp-8) var(--sp-5); }
+      .process-arrow { display: none; }
+      .process-steps { flex-direction: column; align-items: center; }
+    }
+    @media (max-width: 480px) {
+      .transparency-item { padding: var(--sp-5); }
+    }
+  </style>
+</head>
+<body class="page-top">
+
+  <!-- Nav -->
+  <nav class="nav">
+    <a href="/" class="nav-brand">
+      <img src="/favicon.svg" alt="SEOBAIKE" width="34" height="34">
+      <span><span class="seo">SEO</span><span class="baike">BAIKE</span></span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="/">首頁</a></li>
+      <li><a href="/features">功能</a></li>
+      <li><a href="/marketplace">市集</a></li>
+      <li><a href="/pricing">方案</a></li>
+      <li><a href="/about">關於</a></li>
+      <li><a href="/docs">常見問題</a></li>
+      <li><a href="/billing" class="nav-link">帳單</a></li>
+      <li><a href="/login" class="nav-cta">登入</a></li>
+    </ul>
+    <button class="nav-hamburger" onclick="toggleMenu()" aria-label="選單">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- Mobile Overlay -->
+  <div class="mobile-overlay">
+    <button class="mobile-close" onclick="toggleMenu()">&times;</button>
+    <a href="/" onclick="toggleMenu()">首頁</a>
+    <a href="/features" onclick="toggleMenu()">功能</a>
+    <a href="/marketplace" onclick="toggleMenu()">市集</a>
+    <a href="/pricing" onclick="toggleMenu()">方案</a>
+    <a href="/about" onclick="toggleMenu()">關於</a>
+    <a href="/docs" onclick="toggleMenu()">常見問題</a>
+    <a href="/billing" onclick="toggleMenu()">帳單</a>
+    <a href="/login" onclick="toggleMenu()">登入</a>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════ -->
+  <!-- Hero -->
+  <!-- ═══════════════════════════════════════════════ -->
+  <section class="compliance-hero">
+    <div class="container">
+      <div class="section-badge fade-up">COMPLIANCE CENTER</div>
+      <div class="hero-shield fade-up">&#x1F6E1;&#xFE0F;</div>
+      <h1 class="text-gold fade-up">合規中心</h1>
+      <p class="subtitle fade-up">
+        SEOBAIKE 嚴肅看待合規義務。我們以台灣法律為基礎，<br>
+        從個資保護、AI 治理、消費者權益到資訊安全，<br>
+        建立完整的合規框架，保障每一位使用者的權益。
+      </p>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════ -->
+  <!-- 合規框架概覽：四大領域 -->
+  <!-- ═══════════════════════════════════════════════ -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header fade-up">
+        <div class="section-badge">COMPLIANCE FRAMEWORK</div>
+        <h2>四大合規領域</h2>
+        <p>SEOBAIKE 全面遵循台灣法規與國際標準，以下為我們持續執行的四大合規核心。</p>
+      </div>
+
+      <div class="grid-2" style="gap: var(--sp-8);">
+
+        <!-- 1. 個人資料保護 -->
+        <div class="card framework-card fade-up">
+          <div class="card-header">
+            <div class="card-icon-wrap">
+              <div class="card-icon icon-pdpa">&#x1F512;</div>
+              <h3>個人資料保護</h3>
+            </div>
+            <div class="status-badge status-badge--compliant">
+              <span class="status-badge__dot"></span>
+              已合規
+            </div>
+          </div>
+          <div class="card-subtitle">Personal Data Protection</div>
+
+          <div class="law-ref">
+            <div class="law-ref-label">適用法規</div>
+            <div class="law-ref-text">
+              台灣《個人資料保護法》（PDPA）— 規範個人資料之蒐集、處理及利用，保護人民隱私權。本平台作為資料處理者，依法履行告知、同意取得、安全維護等義務。
+            </div>
+          </div>
+
+          <div class="measures-title">SEOBAIKE 合規措施</div>
+          <ul class="card-list">
+            <li>使用者註冊時明確告知資料蒐集目的與範圍</li>
+            <li>取得使用者書面或電子同意後始得處理個資</li>
+            <li>實施資料最小化原則，僅蒐集必要資料</li>
+            <li>建立個資外洩通報機制，於 72 小時內通知主管機關</li>
+            <li>跨境傳輸符合 PDPA 第 21 條規定</li>
+            <li>定期進行個資影響評估（PIA）</li>
+          </ul>
+        </div>
+
+        <!-- 2. AI 治理 -->
+        <div class="card framework-card fade-up">
+          <div class="card-header">
+            <div class="card-icon-wrap">
+              <div class="card-icon icon-ai">&#x1F916;</div>
+              <h3>AI 治理</h3>
+            </div>
+            <div class="status-badge status-badge--compliant">
+              <span class="status-badge__dot"></span>
+              已合規
+            </div>
+          </div>
+          <div class="card-subtitle">AI Governance</div>
+
+          <div class="law-ref">
+            <div class="law-ref-label">適用法規</div>
+            <div class="law-ref-text">
+              台灣《人工智慧基本法》— 規範 AI 系統之開發與應用應遵循透明、可解釋、公平、安全等基本原則，促進負責任的 AI 發展與使用。
+            </div>
+          </div>
+
+          <div class="measures-title">SEOBAIKE 合規措施</div>
+          <ul class="card-list">
+            <li>AI 推理路徑受專利 115100981 L1-L4 約束層管控</li>
+            <li>所有 AI 決策均可追溯，確保透明度與可解釋性</li>
+            <li>人類決策為主（CaaS 架構），AI 僅為輔助執行者</li>
+            <li>建立 AI 偏見檢測與公平性驗證機制</li>
+            <li>定期審計 AI 模型輸出，確保無歧視性結果</li>
+            <li>AI 生成內容均標示為機器生成</li>
+          </ul>
+        </div>
+
+        <!-- 3. 消費者保護 -->
+        <div class="card framework-card fade-up">
+          <div class="card-header">
+            <div class="card-icon-wrap">
+              <div class="card-icon icon-consumer">&#x2696;&#xFE0F;</div>
+              <h3>消費者保護</h3>
+            </div>
+            <div class="status-badge status-badge--compliant">
+              <span class="status-badge__dot"></span>
+              已合規
+            </div>
+          </div>
+          <div class="card-subtitle">Consumer Protection</div>
+
+          <div class="law-ref">
+            <div class="law-ref-label">適用法規</div>
+            <div class="law-ref-text">
+              台灣《消費者保護法》及《公平交易法》— 保障消費者知情權、選擇權及公平交易權。網路平台業者應確保資訊透明、提供合理退換機制、禁止不實廣告。
+            </div>
+          </div>
+
+          <div class="measures-title">SEOBAIKE 合規措施</div>
+          <ul class="card-list">
+            <li>服務定價完全透明，無隱藏費用</li>
+            <li>提供 7 天猶豫期退費機制（依消保法第 19 條）</li>
+            <li>市集商品上架前經審核，杜絕不實或誇大描述</li>
+            <li>建立消費爭議調解機制與申訴管道</li>
+            <li>服務條款以清楚易懂之中文撰寫</li>
+            <li>禁止不公平競爭行為與綁定銷售</li>
+          </ul>
+        </div>
+
+        <!-- 4. 資訊安全 -->
+        <div class="card framework-card fade-up">
+          <div class="card-header">
+            <div class="card-icon-wrap">
+              <div class="card-icon icon-security">&#x1F510;</div>
+              <h3>資訊安全</h3>
+            </div>
+            <div class="status-badge status-badge--progress">
+              <span class="status-badge__dot"></span>
+              持續強化中
+            </div>
+          </div>
+          <div class="card-subtitle">Information Security</div>
+
+          <div class="law-ref">
+            <div class="law-ref-label">適用法規</div>
+            <div class="law-ref-text">
+              台灣《資通安全管理法》— 規範關鍵基礎設施及資通系統之安全管理，要求建立資安防護體系、風險評估機制及事件通報程序。
+            </div>
+          </div>
+
+          <div class="measures-title">SEOBAIKE 合規措施</div>
+          <ul class="card-list">
+            <li>全站 TLS/SSL 加密傳輸，杜絕中間人攻擊</li>
+            <li>資料庫實施 Row Level Security（RLS）列級安全策略</li>
+            <li>使用者密碼經 bcrypt 雜湊處理，不儲存明文</li>
+            <li>建立資安事件應變計畫與通報流程</li>
+            <li>定期進行弱點掃描與安全稽核</li>
+            <li>人員存取採最小權限原則，受保密協議約束</li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider divider-gold">
+
+  <!-- ═══════════════════════════════════════════════ -->
+  <!-- 公司透明度 -->
+  <!-- ═══════════════════════════════════════════════ -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header fade-up">
+        <div class="section-badge">TRANSPARENCY</div>
+        <h2>公司透明度</h2>
+        <p>SEOBAIKE 承諾公開透明，以下為本公司之基本登記資訊與技術架構。</p>
+      </div>
+
+      <div class="transparency-grid stagger">
+        <div class="transparency-item fade-up">
+          <div class="ti-icon">&#x1F3E2;</div>
+          <div class="ti-label">公司名稱</div>
+          <div class="ti-value">小路光有限公司</div>
+        </div>
+        <div class="transparency-item fade-up">
+          <div class="ti-icon">&#x1F4CB;</div>
+          <div class="ti-label">統一編號</div>
+          <div class="ti-value gold">60475510</div>
+        </div>
+        <div class="transparency-item fade-up">
+          <div class="ti-icon">&#x1F4DC;</div>
+          <div class="ti-label">台灣專利</div>
+          <div class="ti-value gold">115100981</div>
+        </div>
+        <div class="transparency-item fade-up">
+          <div class="ti-icon">&#x1F5C4;&#xFE0F;</div>
+          <div class="ti-label">資料存放</div>
+          <div class="ti-value">東京機房</div>
+        </div>
+      </div>
+
+      <div style="margin-top: var(--sp-8);">
+        <div class="measure-grid stagger">
+          <div class="measure-item fade-up">
+            <div class="measure-icon gold">&#x1F310;</div>
+            <div class="measure-info">
+              <h4>營運網址</h4>
+              <p>aiforseo.vip — 透過全球 CDN 提供服務，確保穩定性與效能。靜態資源不快取個人資料。</p>
+            </div>
+          </div>
+          <div class="measure-item fade-up">
+            <div class="measure-icon green">&#x1F512;</div>
+            <div class="measure-info">
+              <h4>專利技術保護</h4>
+              <p>台灣專利 115100981「世界定義約束法用於 AI 推理」— 所有 AI 推理路徑均受 L1-L4 約束層保護，確保可控與可追溯。</p>
+            </div>
+          </div>
+          <div class="measure-item fade-up">
+            <div class="measure-icon blue">&#x1F3E6;</div>
+            <div class="measure-info">
+              <h4>資料存放地點</h4>
+              <p>所有使用者資料儲存於東京機房，符合亞太區資料在地化要求。資料傳輸全程加密。</p>
+            </div>
+          </div>
+          <div class="measure-item fade-up">
+            <div class="measure-icon gold">&#x2696;&#xFE0F;</div>
+            <div class="measure-info">
+              <h4>準據法與管轄</h4>
+              <p>本平台以台灣法律為準據法，如有爭議以台灣台北地方法院為第一審管轄法院。</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- ═══════════════════════════════════════════════ -->
+  <!-- 使用者資料權利 -->
+  <!-- ═══════════════════════════════════════════════ -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header fade-up">
+        <div class="section-badge">YOUR RIGHTS</div>
+        <h2>使用者資料權利</h2>
+        <p>依據台灣《個人資料保護法》第 3 條，您對自身個人資料享有以下權利。<br>您可隨時透過電子郵件行使這些權利。</p>
+      </div>
+
+      <div class="rights-grid stagger">
+        <div class="right-item fade-up">
+          <div class="right-icon">&#x1F50D;</div>
+          <div class="right-info">
+            <h4>查詢與閱覽權</h4>
+            <p>您有權查詢本公司是否持有您的個人資料，並請求閱覽該資料之內容。我們將於收到請求後 15 個工作日內回覆。</p>
+          </div>
+        </div>
+        <div class="right-item fade-up">
+          <div class="right-icon">&#x270F;&#xFE0F;</div>
+          <div class="right-info">
+            <h4>更正與補充權</h4>
+            <p>若您發現我們持有的個人資料有誤或不完整，您有權請求更正或補充。您也可直接於帳號設定頁面自行修改。</p>
+          </div>
+        </div>
+        <div class="right-item fade-up">
+          <div class="right-icon">&#x23F9;&#xFE0F;</div>
+          <div class="right-info">
+            <h4>停止蒐集、處理或利用</h4>
+            <p>您有權要求我們停止蒐集、處理或利用您的個人資料。但若涉及法律義務或契約必要性，我們可能需保留部分資料。</p>
+          </div>
+        </div>
+        <div class="right-item fade-up">
+          <div class="right-icon">&#x1F5D1;&#xFE0F;</div>
+          <div class="right-info">
+            <h4>刪除權</h4>
+            <p>您有權請求刪除您的個人資料。一旦確認刪除，該操作不可復原。法律要求保留之資料（如交易紀錄）將於法定期限屆滿後刪除。</p>
+          </div>
+        </div>
+        <div class="right-item fade-up">
+          <div class="right-icon">&#x1F4E6;</div>
+          <div class="right-info">
+            <h4>資料可攜權</h4>
+            <p>您有權請求以結構化、常用且機器可讀的格式（如 JSON 或 CSV）匯出您的個人資料，以便轉移至其他服務。</p>
+          </div>
+        </div>
+        <div class="right-item fade-up">
+          <div class="right-icon">&#x1F6AB;</div>
+          <div class="right-info">
+            <h4>撤回同意權</h4>
+            <p>您有權隨時撤回先前對個人資料蒐集、處理或利用的同意。撤回同意不影響撤回前已合法進行之處理。</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 行使流程 -->
+      <div class="text-center fade-up" style="margin-top: var(--sp-12);">
+        <h3 style="margin-bottom: var(--sp-2);">如何行使您的權利</h3>
+        <p style="color: var(--text-muted); font-size: 0.95rem;">請依以下步驟提出資料權利請求</p>
+
+        <div class="process-steps">
+          <div class="process-step">
+            <div class="step-number">1</div>
+            <div class="step-label">發送郵件</div>
+            <div class="step-desc">寄信至 support@aiforseo.vip，主旨註明「資料權利請求」</div>
+          </div>
+          <div class="process-arrow">&rarr;</div>
+          <div class="process-step">
+            <div class="step-number">2</div>
+            <div class="step-label">身份驗證</div>
+            <div class="step-desc">我們將核實您的身份，確認為資料當事人本人</div>
+          </div>
+          <div class="process-arrow">&rarr;</div>
+          <div class="process-step">
+            <div class="step-number">3</div>
+            <div class="step-label">受理確認</div>
+            <div class="step-desc">5 個工作日內回覆確認信，告知預計處理時間</div>
+          </div>
+          <div class="process-arrow">&rarr;</div>
+          <div class="process-step">
+            <div class="step-number">4</div>
+            <div class="step-label">完成處理</div>
+            <div class="step-desc">最遲 30 日內完成處理並回覆結果</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider divider-gold">
+
+  <!-- ═══════════════════════════════════════════════ -->
+  <!-- 技術安全措施 -->
+  <!-- ═══════════════════════════════════════════════ -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header fade-up">
+        <div class="section-badge">SECURITY MEASURES</div>
+        <h2>技術安全措施</h2>
+        <p>SEOBAIKE 採用業界最佳實踐，保護平台及使用者資料之安全性。</p>
+      </div>
+
+      <div class="measure-grid stagger">
+        <div class="measure-item fade-up">
+          <div class="measure-icon green">&#x1F510;</div>
+          <div class="measure-info">
+            <h4>TLS/SSL 全站加密</h4>
+            <p>所有網路通訊均透過 TLS 加密傳輸，確保資料在傳輸過程中的完整性與機密性。</p>
+          </div>
+        </div>
+        <div class="measure-item fade-up">
+          <div class="measure-icon gold">&#x1F5C4;&#xFE0F;</div>
+          <div class="measure-info">
+            <h4>Row Level Security</h4>
+            <p>資料庫層級之列級安全策略（RLS），確保使用者僅能存取自己的資料，防止越權存取。</p>
+          </div>
+        </div>
+        <div class="measure-item fade-up">
+          <div class="measure-icon blue">&#x1F511;</div>
+          <div class="measure-info">
+            <h4>bcrypt 密碼雜湊</h4>
+            <p>使用者密碼經 bcrypt 雜湊處理後儲存，本公司無法還原明文密碼，即使資料外洩也無法被逆向破解。</p>
+          </div>
+        </div>
+        <div class="measure-item fade-up">
+          <div class="measure-icon green">&#x1F4CB;</div>
+          <div class="measure-info">
+            <h4>定期安全稽核</h4>
+            <p>定期進行安全稽核與弱點掃描，並持續監控異常行為，強化平台之安全防護能力。</p>
+          </div>
+        </div>
+        <div class="measure-item fade-up">
+          <div class="measure-icon gold">&#x1F6A8;</div>
+          <div class="measure-info">
+            <h4>資料外洩應變計畫</h4>
+            <p>備有完整之資料外洩事件應變流程（Incident Response Plan），確保於法定時限內通知受影響使用者及主管機關。</p>
+          </div>
+        </div>
+        <div class="measure-item fade-up">
+          <div class="measure-icon blue">&#x1F310;</div>
+          <div class="measure-info">
+            <h4>CDN 安全防護</h4>
+            <p>透過全球 CDN 網路提供 DDoS 防護及效能優化。個人資料不於邊緣節點快取，確保資料隱私。</p>
+          </div>
+        </div>
+        <div class="measure-item fade-up">
+          <div class="measure-icon green">&#x1F4DC;</div>
+          <div class="measure-info">
+            <h4>隱私權政策透明公開</h4>
+            <p>完整之隱私權政策、服務條款公開於網站，使用者可隨時查閱。重大變更時主動通知。</p>
+          </div>
+        </div>
+        <div class="measure-item fade-up">
+          <div class="measure-icon gold">&#x1F46E;</div>
+          <div class="measure-info">
+            <h4>人員存取管控</h4>
+            <p>僅經授權之人員得於業務必要時存取個人資料，採最小權限原則，並受保密協議約束。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- ═══════════════════════════════════════════════ -->
+  <!-- 合規聯繫 / 通報 -->
+  <!-- ═══════════════════════════════════════════════ -->
+  <section class="section">
+    <div class="container">
+      <div class="container-narrow">
+        <div class="contact-section fade-up">
+          <div class="section-badge" style="margin-bottom: var(--sp-4);">CONTACT</div>
+          <h3>合規問題聯繫</h3>
+          <p class="contact-desc">
+            若您對本平台之合規措施有任何疑問，或需通報安全漏洞、隱私問題，請透過以下管道聯繫我們。我們承諾認真對待每一份通報。
+          </p>
+
+          <div class="contact-methods">
+            <a href="mailto:support@aiforseo.vip" class="btn btn-primary btn-lg" style="width: 100%;">
+              合規聯繫信箱 support@aiforseo.vip
+            </a>
+          </div>
+
+          <div class="contact-meta">
+            <p class="contact-meta-title">可通報的事項類型：</p>
+            <ul class="contact-meta-list">
+              <li><span class="dot">&#9679;</span> 個人資料外洩或隱私侵害</li>
+              <li><span class="dot">&#9679;</span> 平台安全漏洞</li>
+              <li><span class="dot">&#9679;</span> AI 系統異常或偏見輸出</li>
+              <li><span class="dot">&#9679;</span> 市集詐欺或不實商品</li>
+              <li><span class="dot">&#9679;</span> 消費者權益爭議</li>
+              <li><span class="dot">&#9679;</span> 智慧財產權侵害</li>
+              <li><span class="dot">&#9679;</span> 其他違規行為</li>
+            </ul>
+          </div>
+
+          <div style="margin-top: var(--sp-8); padding-top: var(--sp-6); border-top: 1px solid var(--border-subtle);">
+            <p style="font-size: 0.82rem; color: var(--text-muted);">
+              <strong>小路光有限公司</strong>（統一編號：60475510）<br>
+              本公司將於收到通報後 <strong>5 個工作日內</strong>回覆確認，並於 <strong>30 日內</strong>提供處理結果。<br>
+              涉及資安事件者，將依法於 <strong>72 小時內</strong>通報主管機關。
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="text-center mt-8 fade-up">
+        <a href="/privacy" class="btn btn-secondary btn-sm">隱私權政策</a>
+        <a href="/terms" class="btn btn-secondary btn-sm" style="margin-left: 8px;">服務條款</a>
+        <a href="/contact" class="btn btn-secondary btn-sm" style="margin-left: 8px;">聯繫我們</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="/" class="nav-brand" style="font-size: 1.3rem;">
+            <span class="seo">SEO</span><span class="baike">BAIKE</span>
+          </a>
+          <p>
+            小路光有限公司（統編 60475510）<br>
+            AI 全球市集平台<br>
+            讓全球 AI 服務自由流通。
+          </p>
+        </div>
+        <div class="footer-col">
+          <h4>產品</h4>
+          <a href="/features">功能總覽</a>
+          <a href="/pricing">方案與定價</a>
+          <a href="/marketplace">市集</a>
+          <a href="/docs">技術文件</a>
+          <a href="/billing">帳單管理</a>
+        </div>
+        <div class="footer-col">
+          <h4>公司</h4>
+          <a href="/about">關於我們</a>
+          <a href="/contact">聯繫我們</a>
+          <a href="/privacy">隱私權政策</a>
+          <a href="/terms">服務條款</a>
+        </div>
+        <div class="footer-col">
+          <h4>支援</h4>
+          <a href="/docs">快速開始</a>
+          <a href="/compliance">合規中心</a>
+          <a href="/contact">聯繫客服</a>
+          <a href="/status">服務狀態</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>&copy; 2024-2026 小路光有限公司. All rights reserved.</span>
+        <span>aiforseo.vip</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Page Views Tracking -->
+  <script>
+  (function(){
+    try {
+      var cfg = window.__SEOBAIKE__ || {};
+      var sUrl = cfg.supabaseUrl || 'https://vmyrivxxibqydccurxug.supabase.co';
+      var sKey = cfg.anonKey || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZteXJpdnh4aWJxeWRjY3VyeHVnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzAwNDAwMjksImV4cCI6MjA4NTYxNjAyOX0.iBV-23LGdm_uKffAExgqSV34-NWoAyv8_-M_cJQZ8Gg';
+      fetch(sUrl + '/rest/v1/page_views', {
+        method: 'POST',
+        headers: { 'Content-Type':'application/json', 'apikey':sKey, 'Authorization':'Bearer '+sKey, 'Prefer':'return=minimal' },
+        body: JSON.stringify({ path: location.pathname, referrer: document.referrer || null, user_agent: navigator.userAgent })
+      }).catch(function(){});
+    } catch(e){}
+  })();
+  </script>
+  <script src="/seobaike-widget.js"></script>
+
+  <!-- Design System Scripts -->
+  <script>
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
+
+  window.addEventListener('scroll', () => {
+    const nav = document.querySelector('.nav');
+    if (nav) nav.classList.toggle('scrolled', window.scrollY > 20);
+  });
+
+  function toggleMenu() {
+    document.querySelector('.nav-hamburger')?.classList.toggle('active');
+    document.querySelector('.mobile-overlay')?.classList.toggle('open');
+  }
+  </script>
+  <script src="/assets/analytics.js" defer></script>
+  <script src="/assets/premium-fx.js"></script>
+  <script src="/assets/i18n.js"></script>
+  <script src="/assets/cookie-consent.js"></script>
+</body>
+</html>

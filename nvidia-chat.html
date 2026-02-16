@@ -94,8 +94,9 @@ body { font-family: 'Segoe UI', sans-serif; background: #1a1a2e; color: #eee; he
 
 <script src="seobaike-config.js"></script>
 <script>
-const ENDPOINT = window.__SEOBAIKE__.supabaseUrl + "/functions/v1/nvidia-boss";
-const ANON_KEY = window.__SEOBAIKE__.anonKey;
+const _cfg = window.__SEOBAIKE__ || {};
+const ENDPOINT = (_cfg.supabaseUrl || 'https://vmyrivxxibqydccurxug.supabase.co') + "/functions/v1/nvidia-boss";
+const ANON_KEY = _cfg.anonKey || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZteXJpdnh4aWJxeWRjY3VyeHVnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzAwNDAwMjksImV4cCI6MjA4NTYxNjAyOX0.iBV-23LGdm_uKffAExgqSV34-NWoAyv8_-M_cJQZ8Gg';
 
 const chat = document.getElementById("chat");
 const input = document.getElementById("input");
@@ -189,18 +190,8 @@ function escapeHtml(str) {
   return str.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/\n/g,"<br>");
 }
 
-// Auto-load dashboard on page load
-(async function() {
-  try {
-    const res = await fetch(ENDPOINT, {
-      method: "POST",
-      headers: { "Authorization": "Bearer " + ANON_KEY, "Content-Type": "application/json" },
-      body: JSON.stringify({ message: "初始化" })
-    });
-    const data = await res.json();
-    if (data.real_data) updateDashboard(data.real_data);
-  } catch(e) {}
-})();
+// Auto-init POST removed: 不再於頁面載入時自動發送請求，避免浪費 API credits
+// 使用者第一次送出訊息後，儀表板會透過 real_data 自動更新
 </script>
 </body>
 </html>

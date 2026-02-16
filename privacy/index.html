@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>隱私權政策 — SEOBAIKE | 小路光有限公司</title>
+  <meta name="description" content="SEOBAIKE 隱私權政策：了解我們如何收集、使用及保護您的個人資料。符合台灣個資法、GDPR 國際隱私法規。">
+  <meta property="og:title" content="隱私權政策 — SEOBAIKE">
+  <meta property="og:description" content="了解 SEOBAIKE 如何收集、使用及保護您的個人資料。">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://aiforseo.vip/privacy">
+  <meta property="og:image" content="/og-image.png">
+  <meta property="og:site_name" content="SEOBAIKE">
+  <meta property="og:locale" content="zh_TW">
+  <meta name="theme-color" content="#e8850c">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/favicon.svg">
+  <link rel="manifest" href="/manifest.json">
+  <link rel="stylesheet" href="/assets/design-system.css">
+  <link rel="stylesheet" href="/assets/premium-fx.css">
+  <style>
+    /* ── Legal Page Specific ── */
+    .legal-hero {
+      padding: 140px 0 60px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(180deg, var(--bg-secondary) 0%, var(--bg-primary) 100%);
+    }
+    .legal-hero::before {
+      content: '';
+      position: absolute;
+      top: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 700px;
+      height: 700px;
+      background: radial-gradient(circle, rgba(232,133,12,0.06) 0%, transparent 65%);
+      pointer-events: none;
+    }
+    .legal-hero h1 { margin-bottom: var(--sp-4); }
+    .legal-hero .subtitle {
+      font-size: 1.05rem;
+      color: var(--text-muted);
+      max-width: 600px;
+      margin: 0 auto var(--sp-3);
+    }
+    .legal-hero .last-updated {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      opacity: 0.7;
+    }
+
+    /* Company Header */
+    .company-header {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      padding: var(--sp-6) var(--sp-8);
+      margin-bottom: var(--sp-10);
+      display: flex;
+      align-items: center;
+      gap: var(--sp-5);
+      flex-wrap: wrap;
+    }
+    .company-header-logo {
+      width: 48px;
+      height: 48px;
+      background: var(--gold-gradient);
+      border-radius: var(--radius-md);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+      font-size: 1.1rem;
+      color: #06060f;
+      flex-shrink: 0;
+    }
+    .company-header-info h3 {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 2px;
+    }
+    .company-header-info p {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin: 0;
+    }
+
+    /* Table of Contents */
+    .toc {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      padding: var(--sp-8);
+      margin-bottom: var(--sp-12);
+    }
+    .toc h2 {
+      font-size: 1.15rem;
+      color: var(--text-gold);
+      margin-bottom: var(--sp-5);
+      padding-bottom: var(--sp-3);
+      border-bottom: 1px solid var(--border-subtle);
+    }
+    .toc ol {
+      list-style: none;
+      counter-reset: toc-counter;
+      margin: 0;
+      padding: 0;
+      columns: 2;
+      column-gap: var(--sp-8);
+    }
+    .toc li {
+      counter-increment: toc-counter;
+      margin-bottom: var(--sp-3);
+      break-inside: avoid;
+    }
+    .toc li::before {
+      content: counter(toc-counter, cjk-ideographic) "、";
+      color: var(--gold-300);
+      font-weight: 700;
+      margin-right: 4px;
+    }
+    .toc a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 0.92rem;
+      transition: color var(--duration-fast) var(--ease-out);
+    }
+    .toc a:hover {
+      color: var(--text-gold);
+    }
+
+    /* Legal Content Sections */
+    .legal-content { padding: var(--sp-16) 0 var(--sp-20); }
+    .legal-section {
+      margin-bottom: var(--sp-12);
+      scroll-margin-top: 100px;
+    }
+    .legal-section-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 14px;
+      border-radius: var(--radius-full);
+      background: rgba(232,133,12,0.08);
+      border: 1px solid rgba(232,133,12,0.15);
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: var(--gold-200);
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      margin-bottom: var(--sp-3);
+    }
+    .legal-section h2 {
+      font-size: clamp(1.3rem, 2.5vw, 1.6rem);
+      margin-bottom: var(--sp-5);
+      padding-bottom: var(--sp-3);
+      border-bottom: 1px solid var(--border-subtle);
+    }
+    .legal-section h3 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--text-gold);
+      margin: var(--sp-6) 0 var(--sp-3);
+    }
+    .legal-section p {
+      font-size: 0.95rem;
+      line-height: 1.85;
+      margin-bottom: var(--sp-3);
+    }
+    .legal-section ul, .legal-section ol {
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+      line-height: 1.85;
+      margin: var(--sp-3) 0 var(--sp-4) var(--sp-6);
+    }
+    .legal-section li { margin-bottom: var(--sp-2); }
+    .legal-section li strong { color: var(--text-primary); }
+
+    .legal-highlight {
+      background: rgba(232,133,12,0.06);
+      border-left: 3px solid var(--gold-300);
+      padding: var(--sp-4) var(--sp-5);
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+      margin: var(--sp-4) 0;
+    }
+    .legal-highlight p { color: var(--text-primary); margin-bottom: 0; }
+
+    .legal-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: var(--sp-4) 0;
+      font-size: 0.9rem;
+    }
+    .legal-table th {
+      background: var(--bg-elevated);
+      color: var(--gold-200);
+      text-align: left;
+      padding: 12px 16px;
+      border: 1px solid var(--border-subtle);
+      font-weight: 700;
+      font-size: 0.85rem;
+    }
+    .legal-table td {
+      padding: 12px 16px;
+      border: 1px solid var(--border-subtle);
+      color: var(--text-secondary);
+    }
+    .legal-table td strong { color: var(--text-primary); }
+
+    .contact-box {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      padding: var(--sp-10) var(--sp-8);
+      text-align: center;
+      margin-top: var(--sp-12);
+    }
+    .contact-box h3 { margin-bottom: var(--sp-3); }
+    .contact-box p { font-size: 0.95rem; margin-bottom: var(--sp-1); }
+    .contact-box a { font-weight: 700; }
+
+    /* Back to top link in each section */
+    .back-to-toc {
+      display: inline-block;
+      margin-top: var(--sp-4);
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color var(--duration-fast) var(--ease-out);
+    }
+    .back-to-toc:hover { color: var(--text-gold); }
+
+    @media (max-width: 768px) {
+      .legal-hero { padding: 110px 0 40px; }
+      .legal-table { font-size: 0.82rem; }
+      .legal-table th, .legal-table td { padding: 8px 10px; }
+      .contact-box { padding: var(--sp-8) var(--sp-5); }
+      .toc ol { columns: 1; }
+      .company-header { flex-direction: column; text-align: center; }
+    }
+  </style>
+</head>
+<body class="page-top">
+
+  <!-- Nav -->
+  <nav class="nav">
+    <a href="/" class="nav-brand">
+      <img src="/favicon.svg" alt="SEOBAIKE" width="34" height="34">
+      <span><span class="seo">SEO</span><span class="baike">BAIKE</span></span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="/">首頁</a></li>
+      <li><a href="/features">功能</a></li>
+      <li><a href="/marketplace">市集</a></li>
+      <li><a href="/pricing">方案</a></li>
+      <li><a href="/about">關於</a></li>
+      <li><a href="/docs">常見問題</a></li>
+      <li><a href="/billing" class="nav-link">帳單</a></li>
+      <li><a href="/login" class="nav-cta">登入</a></li>
+    </ul>
+    <button class="nav-hamburger" onclick="toggleMenu()" aria-label="選單">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- Mobile Overlay -->
+  <div class="mobile-overlay">
+    <button class="mobile-close" onclick="toggleMenu()">&times;</button>
+    <a href="/" onclick="toggleMenu()">首頁</a>
+    <a href="/features" onclick="toggleMenu()">功能</a>
+    <a href="/marketplace" onclick="toggleMenu()">市集</a>
+    <a href="/pricing" onclick="toggleMenu()">方案</a>
+    <a href="/about" onclick="toggleMenu()">關於</a>
+    <a href="/docs" onclick="toggleMenu()">常見問題</a>
+    <a href="/billing" onclick="toggleMenu()">帳單</a>
+    <a href="/login" onclick="toggleMenu()">登入</a>
+  </div>
+
+  <!-- Hero -->
+  <section class="legal-hero">
+    <div class="container-narrow">
+      <h1 class="text-gold fade-up">隱私權政策</h1>
+      <p class="subtitle fade-up">Privacy Policy — 了解 SEOBAIKE 如何收集、使用、儲存及保護您的個人資料。</p>
+      <div class="last-updated fade-up">最後更新日期：2026 年 2 月 16 日</div>
+    </div>
+  </section>
+
+  <!-- Legal Content -->
+  <div class="legal-content">
+    <div class="container-narrow">
+
+      <!-- Section 1: 資料收集範圍 -->
+      <div class="legal-section fade-up">
+        <div class="legal-section-label">Section 1</div>
+        <h2>一、前言與資料收集範圍</h2>
+        <p>
+          歡迎使用 SEOBAIKE 平台（以下簡稱「本平台」）。本平台由<strong>小路光有限公司</strong>（統一編號：60475510，以下簡稱「本公司」）營運。本公司致力於保護您的個人資料及隱私權。
+        </p>
+        <p>
+          本隱私權政策說明當您造訪 <strong>aiforseo.vip</strong> 網站及使用本平台服務時，本公司如何收集、處理、利用、儲存及保護您的個人資料。本政策適用於全球所有使用者。
+        </p>
+        <div class="legal-highlight">
+          <p><strong>核心承諾：</strong>本公司僅收集提供服務所必要之最少量資料。本公司<strong>不出售</strong>您的個人資料予任何第三方。</p>
+        </div>
+
+        <h3>1.1 您主動提供之資料</h3>
+        <ul>
+          <li><strong>帳號註冊資料</strong>：電子信箱、使用者名稱、密碼（經加密儲存）</li>
+          <li><strong>個人檔案資料</strong>：顯示名稱、國家/地區（選填）、語言偏好</li>
+          <li><strong>聯絡資訊</strong>：姓名、公司名稱（僅於您主動聯繫時收集）</li>
+          <li><strong>市集資料</strong>：賣家之商品描述、服務內容、定價資訊</li>
+          <li><strong>API 使用資料</strong>：API 金鑰、呼叫記錄</li>
+        </ul>
+
+        <h3>1.2 自動收集之資料</h3>
+        <ul>
+          <li><strong>頁面瀏覽記錄</strong>：造訪頁面路徑、來源網址、瀏覽器資訊</li>
+          <li><strong>裝置資訊</strong>：作業系統類型、螢幕解析度、瀏覽器類型及版本</li>
+          <li><strong>網路資訊</strong>：IP 位址（經處理後僅保留國家/城市層級）</li>
+          <li><strong>使用行為</strong>：功能使用頻率、API 呼叫次數、錯誤記錄</li>
+        </ul>
+
+        <h3>1.3 我們不收集的資料</h3>
+        <ul>
+          <li><strong>信用卡號碼或銀行帳號</strong>：所有金融支付資訊由第三方金流服務商處理</li>
+          <li><strong>身分證字號或護照號碼</strong>：本公司不要求亦不收集政府核發之身分證明文件</li>
+          <li><strong>生物辨識資料</strong>：不收集指紋、臉部辨識或其他生物辨識資訊</li>
+          <li><strong>健康或醫療資料</strong>：不收集任何健康或醫療相關資訊</li>
+        </ul>
+      </div>
+
+      <!-- Section 2: 資料使用方式 -->
+      <div class="legal-section fade-up">
+        <div class="legal-section-label">Section 2</div>
+        <h2>二、資料使用方式</h2>
+        <p>本公司收集之個人資料僅用於以下明確之目的：</p>
+
+        <table class="legal-table">
+          <tr>
+            <th>使用目的</th>
+            <th>法律依據 (GDPR)</th>
+            <th>說明</th>
+          </tr>
+          <tr>
+            <td>服務提供與維護</td>
+            <td>契約之履行</td>
+            <td>處理帳號註冊、管理帳號、提供平台功能、處理市集交易</td>
+          </tr>
+          <tr>
+            <td>安全防護</td>
+            <td>合法利益</td>
+            <td>偵測及防止未經授權之存取、濫用行為、詐欺或安全威脅</td>
+          </tr>
+          <tr>
+            <td>服務改善</td>
+            <td>合法利益</td>
+            <td>分析匿名化使用行為以優化平台效能與使用者體驗</td>
+          </tr>
+          <tr>
+            <td>法律遵循</td>
+            <td>法律義務</td>
+            <td>遵守適用法規之要求，回應司法機關合法之資料調取要求</td>
+          </tr>
+          <tr>
+            <td>客戶溝通</td>
+            <td>契約之履行 / 同意</td>
+            <td>寄送服務更新通知、安全警告（行銷資訊僅於您同意時寄送）</td>
+          </tr>
+        </table>
+
+        <p>
+          本公司<strong>不會</strong>將您的個人資料用於上述目的以外之用途。若未來有新增使用目的之需要，將事先通知並取得同意。
+        </p>
+      </div>
+
+      <!-- Section 3: 資料保護措施 -->
+      <div class="legal-section fade-up">
+        <div class="legal-section-label">Section 3</div>
+        <h2>三、資料保護措施</h2>
+
+        <h3>3.1 資料儲存位置</h3>
+        <p>您的帳號資料、交易記錄及平台使用資料儲存於本公司之雲端資料庫，伺服器位於<strong>日本東京</strong>。本平台採用企業級關聯式資料庫，提供列級安全策略 (Row Level Security, RLS) 保護。</p>
+
+        <h3>3.2 安全措施</h3>
+        <ul>
+          <li><strong>傳輸加密</strong>：所有網路通訊均透過 TLS/SSL 加密傳輸</li>
+          <li><strong>密碼保護</strong>：密碼經 bcrypt 雜湊處理，不以明文儲存</li>
+          <li><strong>API 金鑰安全</strong>：API 金鑰採用安全亂數生成，並支援金鑰輪換</li>
+          <li><strong>存取控管</strong>：資料庫存取透過 RLS 策略控管，確保使用者僅能存取自己的資料</li>
+          <li><strong>安全稽核</strong>：定期進行安全稽核與弱點掃描</li>
+          <li><strong>人員管控</strong>：僅經授權之人員得在業務必要時存取個人資料</li>
+          <li><strong>事件應變</strong>：備有資料外洩事件應變計畫，確保於法定時限內通知受影響之使用者</li>
+        </ul>
+
+        <h3>3.3 資料保存期限</h3>
+        <table class="legal-table">
+          <tr><th>資料類型</th><th>保存期限</th><th>說明</th></tr>
+          <tr><td>帳號資料</td><td>帳號存續期間 + 刪除後 30 日</td><td>期滿後永久刪除</td></tr>
+          <tr><td>交易記錄</td><td>依稅法規定（至少 5 年）</td><td>配合台灣稅務法規</td></tr>
+          <tr><td>分析資料</td><td>2 年</td><td>經匿名化處理</td></tr>
+          <tr><td>安全日誌</td><td>1 年</td><td>登入記錄、安全事件</td></tr>
+          <tr><td>API 呼叫記錄</td><td>90 日</td><td>用於除錯及服務品質監控</td></tr>
+        </table>
+      </div>
+
+      <!-- Section 4: Cookie 政策 -->
+      <div class="legal-section fade-up">
+        <div class="legal-section-label">Section 4</div>
+        <h2>四、Cookie 政策</h2>
+        <p>本平台使用以下 Cookie 及類似追蹤技術：</p>
+
+        <table class="legal-table">
+          <tr><th>類型</th><th>用途</th><th>保存期限</th><th>可否停用</th></tr>
+          <tr>
+            <td><strong>必要性 Cookie</strong></td>
+            <td>維持登入狀態、安全驗證、CSRF 防護</td>
+            <td>工作階段</td>
+            <td>否（服務必需）</td>
+          </tr>
+          <tr>
+            <td><strong>功能性 Cookie</strong></td>
+            <td>記住語言偏好、介面設定、時區</td>
+            <td>1 年</td>
+            <td>是</td>
+          </tr>
+          <tr>
+            <td><strong>分析性 Cookie</strong></td>
+            <td>頁面瀏覽統計、使用行為分析（匿名化）</td>
+            <td>2 年</td>
+            <td>是</td>
+          </tr>
+        </table>
+
+        <div class="legal-highlight">
+          <p><strong>Cookie 管理：</strong>您可透過瀏覽器設定管理或停用非必要性 Cookie。本平台<strong>不使用</strong>廣告追蹤 Cookie，亦不使用跨網站追蹤技術。</p>
+        </div>
+      </div>
+
+      <!-- Section 5: 第三方服務 -->
+      <div class="legal-section fade-up">
+        <div class="legal-section-label">Section 5</div>
+        <h2>五、第三方服務與資料共享</h2>
+
+        <div class="legal-highlight">
+          <p><strong>本公司不出售您的個人資料。</strong>本公司不會為行銷、廣告或任何商業目的出售、出租或交換您的個人資料予任何第三方。</p>
+        </div>
+
+        <h3>5.1 服務提供所必要之資料共享</h3>
+        <table class="legal-table">
+          <tr><th>服務類型</th><th>共享資料範圍</th><th>共享目的</th></tr>
+          <tr><td>CDN 及安全防護</td><td>IP 位址、連線資訊</td><td>DDoS 防護、效能優化</td></tr>
+          <tr><td>國際金流服務商</td><td>交易金額（不含完整金融憑證）</td><td>付款處理</td></tr>
+          <tr><td>電子郵件服務</td><td>電子信箱</td><td>寄送服務通知、安全警告</td></tr>
+        </table>
+
+        <h3>5.2 法律要求之資料揭露</h3>
+        <ul>
+          <li>依據法院命令、傳票或其他合法之司法程序</li>
+          <li>依據政府主管機關之合法調取要求</li>
+          <li>為保護本公司、使用者或公眾之權利、財產或安全所必要</li>
+          <li>於公司合併、收購或資產轉讓時（將事先通知使用者）</li>
+        </ul>
+      </div>
+
+      <!-- Section 6: 用戶權利 -->
+      <div class="legal-section fade-up">
+        <div class="legal-section-label">Section 6</div>
+        <h2>六、用戶權利（存取 / 修正 / 刪除）</h2>
+
+        <h3>6.1 所有使用者之權利</h3>
+        <ol>
+          <li><strong>查詢權</strong> (Right of Access)：查詢本公司是否持有您的個人資料，並請求閱覽</li>
+          <li><strong>複本權</strong> (Right to Copy)：請求本公司提供您個人資料之副本</li>
+          <li><strong>更正權</strong> (Right to Rectification)：要求更正不正確或不完整之資料</li>
+          <li><strong>刪除權</strong> (Right to Erasure)：要求刪除您的個人資料及帳號</li>
+          <li><strong>限制處理權</strong> (Right to Restrict Processing)：要求停止處理您的個人資料</li>
+          <li><strong>撤回同意權</strong> (Right to Withdraw Consent)：隨時撤回先前給予之同意</li>
+        </ol>
+
+        <h3>6.2 台灣使用者之權利（個資法）</h3>
+        <ul>
+          <li>請求查詢或閱覽本公司所持有之您的個人資料</li>
+          <li>請求製給複本（本公司得酌收必要費用）</li>
+          <li>請求補充或更正個人資料</li>
+          <li>請求停止蒐集、處理或利用個人資料</li>
+          <li>請求刪除個人資料</li>
+        </ul>
+
+        <h3>6.3 帳號刪除</h3>
+        <ul>
+          <li>帳號內剩餘之 SEO Points 點數將永久失效且不予退還</li>
+          <li>您上傳之市集商品及服務將自平台下架</li>
+          <li>帳號資料將於確認後 30 日內永久刪除</li>
+          <li>帳號刪除後 30 日內可申請復原，逾期無法復原</li>
+        </ul>
+
+        <div class="legal-highlight">
+          <p><strong>行使您的權利：</strong>請寄送電子郵件至 <a href="mailto:legal@aiforseo.vip">legal@aiforseo.vip</a>。本公司將於 <strong>30 日內</strong>回覆。行使上述權利無需支付費用。</p>
+        </div>
+      </div>
+
+      <!-- Section 7: GDPR / 個資法合規 -->
+      <div class="legal-section fade-up">
+        <div class="legal-section-label">Section 7</div>
+        <h2>七、GDPR / 個資法合規</h2>
+
+        <h3>7.1 適用法規</h3>
+        <table class="legal-table">
+          <tr><th>法規</th><th>適用範圍</th><th>本公司角色</th></tr>
+          <tr><td><strong>台灣個人資料保護法</strong></td><td>所有使用者（主要適用）</td><td>資料蒐集者</td></tr>
+          <tr><td><strong>歐盟 GDPR</strong></td><td>EEA 使用者</td><td>資料控管者</td></tr>
+          <tr><td><strong>美國 CCPA/CPRA</strong></td><td>加州居民</td><td>企業</td></tr>
+        </table>
+
+        <h3>7.2 GDPR 額外權利（歐盟使用者）</h3>
+        <ul>
+          <li><strong>資料可攜權</strong>：以 JSON/CSV 格式取得您的資料</li>
+          <li><strong>反對權</strong>：反對基於合法利益之資料處理</li>
+          <li><strong>自動化決策相關權利</strong>：不受僅基於自動化處理之決策影響</li>
+          <li><strong>向監管機關申訴之權利</strong>：向您所在國家之資料保護機關提出申訴</li>
+        </ul>
+
+        <h3>7.3 跨境資料傳輸</h3>
+        <p>
+          您的資料可能傳輸至您所在國家以外之地區。本公司確保所有跨境傳輸均符合適用法律，對於自歐盟傳輸至第三國之資料，依據標準契約條款 (SCCs) 提供保障。所有跨境傳輸均透過 TLS 加密通道進行。
+        </p>
+
+        <h3>7.4 兒童隱私</h3>
+        <p>
+          本平台僅向年滿 18 歲之個人提供服務。本公司不會故意收集未滿 18 歲之未成年人之個人資料。若發現意外收集了未成年人之資料，將立即刪除。
+        </p>
+      </div>
+
+      <!-- Section 8: 聯繫方式 -->
+      <div class="legal-section fade-up">
+        <div class="legal-section-label">Section 8</div>
+        <h2>八、政策變更與聯繫方式</h2>
+        <p>
+          本公司保留隨時修改本政策之權利。若有重大變更，將透過平台公告或電子郵件於至少 <strong>30 日前</strong>通知。修改後繼續使用本平台即視為同意修改後之政策。
+        </p>
+
+        <div class="contact-box">
+          <h3>隱私權與個人資料保護相關問題</h3>
+          <p><strong>小路光有限公司</strong>（統一編號：60475510）</p>
+          <p style="margin-top: var(--sp-3);">法務及隱私權信箱：</p>
+          <p><a href="mailto:legal@aiforseo.vip">legal@aiforseo.vip</a></p>
+          <p style="margin-top: var(--sp-2);">一般聯絡：</p>
+          <p><a href="mailto:contact@aiforseo.vip">contact@aiforseo.vip</a></p>
+          <p style="margin-top: var(--sp-4); color: var(--text-muted); font-size: 0.85rem;">
+            本公司將於收到您的申請後 30 日內回覆。
+          </p>
+          <div style="margin-top: var(--sp-4);">
+            <a href="/terms" class="btn btn-secondary btn-sm">服務條款</a>
+            <a href="/compliance" class="btn btn-secondary btn-sm" style="margin-left: 8px;">合規中心</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="/" class="nav-brand" style="font-size: 1.3rem;">
+            <span class="seo">SEO</span><span class="baike">BAIKE</span>
+          </a>
+          <p>
+            小路光有限公司（統編 60475510）<br>
+            AI 全球市集平台<br>
+            讓全球 AI 服務自由流通。
+          </p>
+        </div>
+        <div class="footer-col">
+          <h4>產品</h4>
+          <a href="/features">功能總覽</a>
+          <a href="/pricing">方案與定價</a>
+          <a href="/marketplace">市集</a>
+          <a href="/docs">技術文件</a>
+          <a href="/billing">帳單管理</a>
+        </div>
+        <div class="footer-col">
+          <h4>公司</h4>
+          <a href="/about">關於我們</a>
+          <a href="/contact">聯繫我們</a>
+          <a href="/privacy">隱私權政策</a>
+          <a href="/terms">服務條款</a>
+        </div>
+        <div class="footer-col">
+          <h4>支援</h4>
+          <a href="/docs">快速開始</a>
+          <a href="/compliance">合規中心</a>
+          <a href="/contact">聯繫客服</a>
+          <a href="/status">服務狀態</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>&copy; 2024-2026 小路光有限公司. All rights reserved.</span>
+        <span>aiforseo.vip</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Page Views Tracking -->
+  <script>
+  (function(){
+    try {
+      var cfg = window.__SEOBAIKE__ || {};
+      var sUrl = cfg.supabaseUrl || 'https://vmyrivxxibqydccurxug.supabase.co';
+      var sKey = cfg.anonKey || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZteXJpdnh4aWJxeWRjY3VyeHVnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzAwNDAwMjksImV4cCI6MjA4NTYxNjAyOX0.iBV-23LGdm_uKffAExgqSV34-NWoAyv8_-M_cJQZ8Gg';
+      fetch(sUrl + '/rest/v1/page_views', {
+        method: 'POST',
+        headers: { 'Content-Type':'application/json', 'apikey':sKey, 'Authorization':'Bearer '+sKey, 'Prefer':'return=minimal' },
+        body: JSON.stringify({ path: location.pathname, referrer: document.referrer || null, user_agent: navigator.userAgent })
+      }).catch(function(){});
+    } catch(e){}
+  })();
+  </script>
+  <script src="/seobaike-widget.js"></script>
+
+  <!-- Design System Scripts -->
+  <script>
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
+
+  window.addEventListener('scroll', () => {
+    const nav = document.querySelector('.nav');
+    if (nav) nav.classList.toggle('scrolled', window.scrollY > 20);
+  });
+
+  function toggleMenu() {
+    document.querySelector('.nav-hamburger')?.classList.toggle('active');
+    document.querySelector('.mobile-overlay')?.classList.toggle('open');
+  }
+  </script>
+  <script src="/assets/analytics.js" defer></script>
+  <script src="/assets/premium-fx.js"></script>
+  <script src="/assets/i18n.js"></script>
+  <script src="/assets/cookie-consent.js"></script>
+</body>
+</html>

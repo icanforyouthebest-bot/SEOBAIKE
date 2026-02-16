@@ -115,11 +115,55 @@ html, body { width:100%; height:100%; overflow:hidden; background:#050510; font-
   </div>
   <div class="panel">
     <div class="panel-header"><span class="spinner"></span> SEOBAIKE 系統監控 <span style="margin-left:auto;">AUTO 6s</span></div>
-    <div class="panel-body"><iframe src="http://localhost:7870"></iframe></div>
+    <div class="panel-body" id="monitor-panel" style="padding:16px;overflow-y:auto;font-family:Consolas,monospace;font-size:12px;color:#ccc;">
+      <div style="color:#e8850c;font-size:14px;font-weight:bold;margin-bottom:12px;">Supabase 系統狀態</div>
+      <div id="sb-status">載入中...</div>
+      <script>
+      (async function(){
+        try{
+          const _c=window.__SEOBAIKE__||{};
+          const u=_c.supabaseUrl||'https://vmyrivxxibqydccurxug.supabase.co';
+          const k=_c.anonKey||'';
+          const h={"apikey":k,"Authorization":"Bearer "+k};
+          const r=await fetch(u+"/rest/v1/system_health?select=component,status,last_check",{headers:h});
+          const d=await r.json();
+          const el=document.getElementById("sb-status");
+          if(Array.isArray(d)&&d.length>0){
+            el.innerHTML=d.map(function(c){
+              var color=c.status==='healthy'?'#76b900':'#ff6b6b';
+              return '<div style="padding:6px 0;border-bottom:1px solid #1a1200;"><span style="color:'+color+';">&#9679;</span> '+c.component+' — <span style="color:'+color+';">'+c.status+'</span></div>';
+            }).join("");
+          }else{el.textContent="無系統元件資料";}
+        }catch(e){document.getElementById("sb-status").textContent="連線失敗: "+e.message;}
+      })();
+      </script>
+    </div>
   </div>
   <div class="panel">
     <div class="panel-header"><span class="spinner"></span> SEOBAIKE 即時儀表板 <span style="margin-left:auto;">AUTO 3s</span></div>
-    <div class="panel-body"><iframe src="http://localhost:8501"></iframe></div>
+    <div class="panel-body" id="eco-panel" style="padding:16px;overflow-y:auto;font-family:Consolas,monospace;font-size:12px;color:#ccc;">
+      <div style="color:#cc785c;font-size:14px;font-weight:bold;margin-bottom:12px;">生態系統狀態</div>
+      <div id="eco-status">載入中...</div>
+      <script>
+      (async function(){
+        try{
+          const _c=window.__SEOBAIKE__||{};
+          const u=_c.supabaseUrl||'https://vmyrivxxibqydccurxug.supabase.co';
+          const k=_c.anonKey||'';
+          const h={"apikey":k,"Authorization":"Bearer "+k};
+          const r=await fetch(u+"/rest/v1/ai_providers?select=name,is_active,provider_type&order=name",{headers:h});
+          const d=await r.json();
+          const el=document.getElementById("eco-status");
+          if(Array.isArray(d)&&d.length>0){
+            el.innerHTML=d.map(function(p){
+              var color=p.is_active?'#76b900':'#555';
+              return '<div style="padding:4px 0;border-bottom:1px solid #1a1200;"><span style="color:'+color+';">&#9679;</span> '+p.name+' <span style="color:#666;font-size:10px;">['+( p.provider_type||'--')+']</span></div>';
+            }).join("");
+          }else{el.textContent="無供應商資料";}
+        }catch(e){document.getElementById("eco-status").textContent="連線失敗: "+e.message;}
+      })();
+      </script>
+    </div>
   </div>
   <div class="panel">
     <div class="panel-header"><span class="spinner"></span> SEOBAIKE AI 對話 <span style="margin-left:auto;">互動式</span></div>
@@ -140,9 +184,10 @@ html, body { width:100%; height:100%; overflow:hidden; background:#050510; font-
 
 <script src="seobaike-config.js"></script>
 <script>
-const EP=(window.__SEOBAIKE__ && window.__SEOBAIKE__.supabaseUrl || "") + "/functions/v1/nvidia-boss";
-const GW=(window.__SEOBAIKE__ && window.__SEOBAIKE__.supabaseUrl || "") + "/functions/v1/ai-gateway";
-const KEY=(window.__SEOBAIKE__ && window.__SEOBAIKE__.anonKey) || "";
+const _cfg=window.__SEOBAIKE__||{};
+const EP=(_cfg.supabaseUrl || "https://vmyrivxxibqydccurxug.supabase.co") + "/functions/v1/nvidia-boss";
+const GW=(_cfg.supabaseUrl || "https://vmyrivxxibqydccurxug.supabase.co") + "/functions/v1/ai-gateway";
+const KEY=_cfg.anonKey || "";
 const HDR={"Authorization":"Bearer "+KEY,"Content-Type":"application/json"};
 const msgs=["system status","patent check","L1 L2 L3 L4 count","constraint rules","audit report","binding list","allow industries","path check stats","performance report","health check"];
 let round=0,e1Ok=0,e1Fail=0,e2Ok=0,e2Fail=0,totalMs=0;
@@ -168,9 +213,9 @@ async function tick(){
   document.getElementById("e1-pct").textContent=p1+"%";document.getElementById("e2-pct").textContent=p2+"%";
   document.getElementById("bottomStatus").textContent="運行中 | #"+round+" | 主:"+e1Ok+" 約束:"+e2Ok+" | "+avg+"ms";
 }
-/* AUTO-POLL REMOVED: tick() and setInterval(tick,5000) disabled to stop API credit burn */
-/* tick(); */
-/* setInterval(tick, 5000); */
+// 首次載入執行一次，之後每 30 秒自動更新（降低 API 消耗）
+tick();
+setInterval(tick, 30000);
 </script>
 </body>
 </html>

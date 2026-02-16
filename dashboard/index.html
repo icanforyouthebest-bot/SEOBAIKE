@@ -532,7 +532,7 @@
     <div class="stat-card">
       <div class="stat-icon purple">&#9881;</div>
       <div class="stat-value" id="stat-keys">--</div>
-      <div class="stat-label">API Keys 狀態</div>
+      <div class="stat-label">已安裝 API Keys</div>
       <div class="stat-change neutral" id="stat-keys-sub">載入中...</div>
     </div>
     <div class="stat-card">
@@ -839,7 +839,6 @@ function toggleMenu() {
   fetch(BASE+'/ai_providers?select=name,status,total_calls,updated_at&order=name',{headers:H})
   .then(function(r){return r.json()})
   .then(function(data){
-    if (!Array.isArray(data)) return;
     var online = data.filter(function(d){return d.status==='online'}).length;
     var total = data.length;
     var calls = data.reduce(function(s,d){return s+(d.total_calls||0)},0);
@@ -865,14 +864,20 @@ function toggleMenu() {
         +'<div style="font-size:0.75rem;color:var(--text-muted);">calls: '+(p.total_calls||0)+' | '+p.status+'</div>';
       grid.appendChild(card);
     });
-
-    // Keys stat: show provider count as secured (no longer querying app_secrets)
-    document.getElementById('stat-keys').textContent = 'Secured';
-    document.getElementById('stat-keys-sub').textContent = total+' providers configured';
-    document.getElementById('stat-keys-sub').className = 'stat-change up';
   }).catch(function(e){
     document.getElementById('stat-providers').textContent = 'ERR';
     document.getElementById('provider-grid').innerHTML = '<div style="color:red;">'+e.message+'</div>';
+  });
+
+  // Fetch API Keys count
+  fetch(BASE+'/app_secrets?select=key',{headers:H})
+  .then(function(r){return r.json()})
+  .then(function(data){
+    document.getElementById('stat-keys').textContent = data.length;
+    document.getElementById('stat-keys-sub').textContent = data.length+' keys installed';
+    document.getElementById('stat-keys-sub').className = 'stat-change up';
+  }).catch(function(){
+    document.getElementById('stat-keys').textContent = '?';
   });
 
   // Fetch Usage Logs count

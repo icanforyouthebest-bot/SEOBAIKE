@@ -1,0 +1,1108 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>開始使用 — SEOBAIKE</title>
+  <meta name="description" content="SEOBAIKE 新手引導精靈：選擇你的 AI 需求、設定 API Key，一步步帶你開始使用 AI 智能平台。">
+  <meta name="theme-color" content="#e8850c">
+  <link rel="canonical" href="https://aiforseo.vip/start">
+  <meta property="og:title" content="開始使用 — SEOBAIKE">
+  <meta property="og:description" content="SEOBAIKE 新手引導精靈：選擇你的 AI 需求、設定 API Key，一步步帶你開始使用 AI 智能平台。">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://aiforseo.vip/start">
+  <meta property="og:image" content="/og-image.png">
+  <meta property="og:site_name" content="SEOBAIKE">
+  <meta property="og:locale" content="zh_TW">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/og-image.png">
+  <link rel="manifest" href="/manifest.json">
+  <link rel="stylesheet" href="/assets/design-system.css">
+  <link rel="stylesheet" href="/assets/premium-fx.css">
+  <style>
+    /* ── Onboarding Wizard ── */
+
+    .wizard-section {
+      padding: 140px 0 80px;
+      min-height: 80vh;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+    }
+
+    .wizard-container {
+      max-width: 680px;
+      width: 100%;
+      margin: 0 auto;
+    }
+
+    /* ── Progress Bar ── */
+    .wizard-progress {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0;
+      margin-bottom: var(--sp-10, 2.5rem);
+      padding: 0 var(--sp-4, 1rem);
+    }
+
+    .progress-step {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+      z-index: 1;
+      flex-shrink: 0;
+    }
+
+    .progress-dot {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      border: 2px solid var(--border-default, #333);
+      background: var(--bg-secondary, #1a1a1a);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.9rem;
+      font-weight: 800;
+      color: var(--text-muted, #888);
+      transition: all 0.4s ease;
+    }
+
+    .progress-step.active .progress-dot {
+      border-color: var(--gold-300, #e8850c);
+      color: var(--gold-200, #f5a623);
+      box-shadow: 0 0 20px rgba(232, 133, 12, 0.3);
+      background: var(--bg-secondary, #1a1a1a);
+    }
+
+    .progress-step.completed .progress-dot {
+      border-color: var(--gold-300, #e8850c);
+      background: var(--gold-300, #e8850c);
+      color: #fff;
+    }
+
+    .progress-label {
+      font-size: 0.72rem;
+      color: var(--text-muted, #888);
+      margin-top: var(--sp-2, 0.5rem);
+      white-space: nowrap;
+      transition: color 0.4s ease;
+    }
+
+    .progress-step.active .progress-label {
+      color: var(--gold-200, #f5a623);
+      font-weight: 700;
+    }
+
+    .progress-step.completed .progress-label {
+      color: var(--text-secondary, #aaa);
+    }
+
+    .progress-line {
+      flex: 1;
+      height: 2px;
+      background: var(--border-default, #333);
+      margin: 0 -2px;
+      margin-bottom: 22px;
+      transition: background 0.4s ease;
+      min-width: 40px;
+    }
+
+    .progress-line.filled {
+      background: linear-gradient(90deg, var(--gold-300, #e8850c), var(--gold-200, #f5a623));
+    }
+
+    /* ── Wizard Card ── */
+    .wizard-card {
+      background: var(--bg-card, #1e1e1e);
+      border: 1px solid var(--border-subtle, #2a2a2a);
+      border-radius: var(--radius-lg, 12px);
+      padding: var(--sp-10, 2.5rem) var(--sp-8, 2rem);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .wizard-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 600px;
+      height: 400px;
+      background: radial-gradient(ellipse, rgba(232, 133, 12, 0.04) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    /* ── Step Panels ── */
+    .wizard-step {
+      display: none;
+      animation: wizardFadeIn 0.45s ease;
+      position: relative;
+    }
+
+    .wizard-step.active {
+      display: block;
+    }
+
+    @keyframes wizardFadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(16px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .step-icon {
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      background: rgba(232, 133, 12, 0.08);
+      border: 2px solid rgba(232, 133, 12, 0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      margin: 0 auto var(--sp-6, 1.5rem);
+    }
+
+    .step-title {
+      text-align: center;
+      font-size: 1.6rem;
+      font-weight: 800;
+      margin-bottom: var(--sp-2, 0.5rem);
+      color: var(--text-primary, #fff);
+    }
+
+    .step-subtitle {
+      text-align: center;
+      font-size: 1rem;
+      color: var(--text-muted, #888);
+      margin-bottom: var(--sp-8, 2rem);
+      line-height: 1.7;
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* ── Step 1: Welcome Features ── */
+    .welcome-features {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--sp-4, 1rem);
+      margin-top: var(--sp-6, 1.5rem);
+    }
+
+    .welcome-feature {
+      background: var(--bg-secondary, #1a1a1a);
+      border: 1px solid var(--border-subtle, #2a2a2a);
+      border-radius: var(--radius-md, 8px);
+      padding: var(--sp-4, 1rem) var(--sp-5, 1.25rem);
+      display: flex;
+      align-items: flex-start;
+      gap: var(--sp-3, 0.75rem);
+      transition: all 0.3s ease;
+    }
+
+    .welcome-feature:hover {
+      border-color: var(--border-hover, #444);
+      background: var(--bg-card-hover, #252525);
+    }
+
+    .welcome-feature-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: var(--radius-sm, 6px);
+      background: rgba(232, 133, 12, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .welcome-feature h4 {
+      font-size: 0.9rem;
+      color: var(--text-primary, #fff);
+      margin-bottom: 2px;
+    }
+
+    .welcome-feature p {
+      font-size: 0.8rem;
+      color: var(--text-muted, #888);
+      line-height: 1.5;
+    }
+
+    /* ── Step 2: Need Checkboxes ── */
+    .needs-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--sp-3, 0.75rem);
+    }
+
+    .need-option {
+      position: relative;
+    }
+
+    .need-option input[type="checkbox"] {
+      position: absolute;
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    .need-option label {
+      display: flex;
+      align-items: center;
+      gap: var(--sp-3, 0.75rem);
+      padding: var(--sp-4, 1rem) var(--sp-5, 1.25rem);
+      background: var(--bg-secondary, #1a1a1a);
+      border: 2px solid var(--border-subtle, #2a2a2a);
+      border-radius: var(--radius-md, 8px);
+      cursor: pointer;
+      transition: all 0.3s ease;
+      user-select: none;
+    }
+
+    .need-option label:hover {
+      border-color: var(--border-hover, #444);
+      background: var(--bg-card-hover, #252525);
+    }
+
+    .need-option input:checked + label {
+      border-color: var(--gold-300, #e8850c);
+      background: rgba(232, 133, 12, 0.06);
+      box-shadow: 0 0 16px rgba(232, 133, 12, 0.1);
+    }
+
+    .need-check {
+      width: 22px;
+      height: 22px;
+      border-radius: 4px;
+      border: 2px solid var(--border-default, #333);
+      background: transparent;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: all 0.25s ease;
+      font-size: 0.75rem;
+      color: transparent;
+    }
+
+    .need-option input:checked + label .need-check {
+      border-color: var(--gold-300, #e8850c);
+      background: var(--gold-300, #e8850c);
+      color: #fff;
+    }
+
+    .need-icon {
+      font-size: 1.3rem;
+      flex-shrink: 0;
+    }
+
+    .need-text {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--text-primary, #fff);
+    }
+
+    /* ── Step 3: API Key Input ── */
+    .byok-explain {
+      background: var(--bg-secondary, #1a1a1a);
+      border: 1px solid var(--border-subtle, #2a2a2a);
+      border-radius: var(--radius-md, 8px);
+      padding: var(--sp-5, 1.25rem) var(--sp-6, 1.5rem);
+      margin-bottom: var(--sp-6, 1.5rem);
+    }
+
+    .byok-explain h4 {
+      font-size: 0.95rem;
+      color: var(--gold-200, #f5a623);
+      margin-bottom: var(--sp-2, 0.5rem);
+    }
+
+    .byok-explain p {
+      font-size: 0.88rem;
+      color: var(--text-muted, #888);
+      line-height: 1.7;
+    }
+
+    .byok-explain ul {
+      list-style: none;
+      padding: 0;
+      margin: var(--sp-3, 0.75rem) 0 0;
+    }
+
+    .byok-explain ul li {
+      font-size: 0.85rem;
+      color: var(--text-secondary, #aaa);
+      padding: var(--sp-1, 0.25rem) 0;
+      padding-left: var(--sp-4, 1rem);
+      position: relative;
+    }
+
+    .byok-explain ul li::before {
+      content: '\2713';
+      position: absolute;
+      left: 0;
+      color: var(--gold-300, #e8850c);
+      font-weight: 700;
+    }
+
+    .api-input-group {
+      margin-bottom: var(--sp-4, 1rem);
+    }
+
+    .api-input-group label {
+      display: block;
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: var(--text-secondary, #aaa);
+      margin-bottom: var(--sp-2, 0.5rem);
+    }
+
+    .api-input-wrapper {
+      position: relative;
+    }
+
+    .api-input-wrapper input {
+      width: 100%;
+      padding: var(--sp-3, 0.75rem) var(--sp-4, 1rem);
+      padding-right: 48px;
+      background: var(--bg-secondary, #1a1a1a);
+      border: 2px solid var(--border-default, #333);
+      border-radius: var(--radius-md, 8px);
+      color: var(--text-primary, #fff);
+      font-size: 0.95rem;
+      font-family: monospace;
+      transition: border-color 0.3s ease;
+      box-sizing: border-box;
+    }
+
+    .api-input-wrapper input:focus {
+      outline: none;
+      border-color: var(--gold-300, #e8850c);
+      box-shadow: 0 0 12px rgba(232, 133, 12, 0.15);
+    }
+
+    .api-input-wrapper input::placeholder {
+      color: var(--text-muted, #888);
+      font-family: inherit;
+    }
+
+    .toggle-visibility {
+      position: absolute;
+      right: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      color: var(--text-muted, #888);
+      cursor: pointer;
+      font-size: 1.1rem;
+      padding: 4px;
+      transition: color 0.2s ease;
+    }
+
+    .toggle-visibility:hover {
+      color: var(--gold-200, #f5a623);
+    }
+
+    .api-hint {
+      font-size: 0.78rem;
+      color: var(--text-muted, #888);
+      margin-top: var(--sp-2, 0.5rem);
+      line-height: 1.5;
+    }
+
+    .skip-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: var(--sp-4, 1rem);
+      font-size: 0.88rem;
+      color: var(--text-muted, #888);
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 0;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      transition: color 0.2s ease;
+    }
+
+    .skip-link:hover {
+      color: var(--gold-200, #f5a623);
+    }
+
+    /* ── Step 4: Success ── */
+    .success-icon {
+      width: 88px;
+      height: 88px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, rgba(232, 133, 12, 0.15), rgba(245, 166, 35, 0.1));
+      border: 2px solid var(--gold-300, #e8850c);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.5rem;
+      margin: 0 auto var(--sp-6, 1.5rem);
+      box-shadow: 0 0 30px rgba(232, 133, 12, 0.2);
+      animation: successPulse 2s ease-in-out infinite;
+    }
+
+    @keyframes successPulse {
+      0%, 100% {
+        box-shadow: 0 0 20px rgba(232, 133, 12, 0.2);
+      }
+      50% {
+        box-shadow: 0 0 40px rgba(232, 133, 12, 0.35);
+      }
+    }
+
+    .success-summary {
+      background: var(--bg-secondary, #1a1a1a);
+      border: 1px solid var(--border-subtle, #2a2a2a);
+      border-radius: var(--radius-md, 8px);
+      padding: var(--sp-5, 1.25rem) var(--sp-6, 1.5rem);
+      margin: var(--sp-6, 1.5rem) 0;
+      text-align: left;
+    }
+
+    .success-summary h4 {
+      font-size: 0.9rem;
+      color: var(--gold-200, #f5a623);
+      margin-bottom: var(--sp-3, 0.75rem);
+    }
+
+    .summary-item {
+      display: flex;
+      align-items: center;
+      gap: var(--sp-3, 0.75rem);
+      padding: var(--sp-2, 0.5rem) 0;
+      font-size: 0.88rem;
+      color: var(--text-secondary, #aaa);
+    }
+
+    .summary-item .check {
+      color: var(--gold-300, #e8850c);
+      font-weight: 700;
+    }
+
+    .success-cta {
+      display: flex;
+      gap: var(--sp-4, 1rem);
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: var(--sp-6, 1.5rem);
+    }
+
+    /* ── Nav Buttons ── */
+    .wizard-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: var(--sp-8, 2rem);
+      padding-top: var(--sp-6, 1.5rem);
+      border-top: 1px solid var(--border-subtle, #2a2a2a);
+      position: relative;
+    }
+
+    .wizard-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: var(--sp-3, 0.75rem) var(--sp-6, 1.5rem);
+      border-radius: var(--radius-md, 8px);
+      font-size: 0.95rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      border: none;
+      text-decoration: none;
+    }
+
+    .wizard-btn-back {
+      background: transparent;
+      border: 1px solid var(--border-default, #333);
+      color: var(--text-secondary, #aaa);
+    }
+
+    .wizard-btn-back:hover {
+      border-color: var(--border-hover, #444);
+      color: var(--text-primary, #fff);
+      background: var(--bg-secondary, #1a1a1a);
+    }
+
+    .wizard-btn-next {
+      background: linear-gradient(135deg, var(--gold-300, #e8850c), #d4760a);
+      color: #fff;
+      box-shadow: 0 4px 16px rgba(232, 133, 12, 0.3);
+    }
+
+    .wizard-btn-next:hover {
+      box-shadow: 0 6px 24px rgba(232, 133, 12, 0.45);
+      transform: translateY(-1px);
+    }
+
+    .wizard-btn-next:active {
+      transform: translateY(0);
+    }
+
+    .wizard-btn:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+      transform: none !important;
+    }
+
+    .wizard-btn-hidden {
+      visibility: hidden;
+      pointer-events: none;
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 768px) {
+      .wizard-section {
+        padding: 100px 0 60px;
+      }
+
+      .wizard-card {
+        padding: var(--sp-6, 1.5rem) var(--sp-5, 1.25rem);
+        margin: 0 var(--sp-4, 1rem);
+      }
+
+      .wizard-container {
+        padding: 0;
+      }
+
+      .wizard-progress {
+        margin-bottom: var(--sp-6, 1.5rem);
+        padding: 0 var(--sp-2, 0.5rem);
+      }
+
+      .progress-dot {
+        width: 32px;
+        height: 32px;
+        font-size: 0.78rem;
+      }
+
+      .progress-label {
+        font-size: 0.65rem;
+      }
+
+      .progress-line {
+        min-width: 20px;
+      }
+
+      .step-title {
+        font-size: 1.3rem;
+      }
+
+      .step-subtitle {
+        font-size: 0.9rem;
+      }
+
+      .welcome-features {
+        grid-template-columns: 1fr;
+      }
+
+      .needs-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .step-icon {
+        width: 60px;
+        height: 60px;
+        font-size: 1.6rem;
+      }
+
+      .success-icon {
+        width: 72px;
+        height: 72px;
+        font-size: 2rem;
+      }
+    }
+
+    @media (max-width: 380px) {
+      .wizard-nav {
+        flex-direction: column;
+        gap: var(--sp-3, 0.75rem);
+      }
+
+      .wizard-btn {
+        width: 100%;
+        justify-content: center;
+      }
+
+      .wizard-btn-hidden {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body class="page-top">
+
+  <!-- Navigation -->
+  <nav class="nav">
+    <a href="/" class="nav-brand">
+      <img src="/favicon.svg" alt="SEOBAIKE" width="34" height="34">
+      <span class="seo">SEO</span><span class="baike">BAIKE</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="/">首頁</a></li>
+      <li><a href="/features">功能</a></li>
+      <li><a href="/pricing">方案</a></li>
+      <li><a href="/ai">AI 技術</a></li>
+      <li><a href="/start" class="active">開始使用</a></li>
+      <li><a href="/billing" class="nav-link">帳單</a></li>
+      <li><a href="/login" class="nav-cta">登入</a></li>
+    </ul>
+    <button class="nav-hamburger" onclick="toggleMenu()" aria-label="選單">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- Mobile Overlay -->
+  <div class="mobile-overlay">
+    <button class="mobile-close" onclick="toggleMenu()" aria-label="關閉選單">&times;</button>
+    <a href="/" onclick="toggleMenu()">首頁</a>
+    <a href="/features" onclick="toggleMenu()">功能</a>
+    <a href="/pricing" onclick="toggleMenu()">方案</a>
+    <a href="/ai" onclick="toggleMenu()">AI 技術</a>
+    <a href="/start" onclick="toggleMenu()">開始使用</a>
+    <a href="/billing" onclick="toggleMenu()">帳單</a>
+    <a href="/login" onclick="toggleMenu()">登入</a>
+  </div>
+
+  <!-- Onboarding Wizard -->
+  <section class="wizard-section">
+    <div class="container wizard-container">
+
+      <!-- Progress Bar -->
+      <div class="wizard-progress" role="progressbar" aria-valuenow="1" aria-valuemin="1" aria-valuemax="4">
+        <div class="progress-step active" data-step="1">
+          <div class="progress-dot">1</div>
+          <span class="progress-label">歡迎</span>
+        </div>
+        <div class="progress-line" data-line="1"></div>
+        <div class="progress-step" data-step="2">
+          <div class="progress-dot">2</div>
+          <span class="progress-label">AI 需求</span>
+        </div>
+        <div class="progress-line" data-line="2"></div>
+        <div class="progress-step" data-step="3">
+          <div class="progress-dot">3</div>
+          <span class="progress-label">API Key</span>
+        </div>
+        <div class="progress-line" data-line="3"></div>
+        <div class="progress-step" data-step="4">
+          <div class="progress-dot">4</div>
+          <span class="progress-label">完成</span>
+        </div>
+      </div>
+
+      <!-- Wizard Card -->
+      <div class="wizard-card magma-border lava-glow">
+
+        <!-- Step 1: Welcome -->
+        <div class="wizard-step active" data-step="1">
+          <div class="step-icon">&#127755;</div>
+          <h2 class="step-title">歡迎來到 <span class="text-gold">SEOBAIKE</span></h2>
+          <p class="step-subtitle">
+            SEOBAIKE 是 AI 智能服務平台 — 您的一站式 AI 工具中心。<br>
+            用最簡單的方式，取用最強大的 AI 能力。
+          </p>
+
+          <div class="welcome-features">
+            <div class="welcome-feature">
+              <div class="welcome-feature-icon">&#128270;</div>
+              <div>
+                <h4>SEO 智能分析</h4>
+                <p>AI 驅動的關鍵字研究與排名優化</p>
+              </div>
+            </div>
+            <div class="welcome-feature">
+              <div class="welcome-feature-icon">&#9997;&#65039;</div>
+              <div>
+                <h4>AI 內容生成</h4>
+                <p>多語言文案、部落格、產品描述</p>
+              </div>
+            </div>
+            <div class="welcome-feature">
+              <div class="welcome-feature-icon">&#128202;</div>
+              <div>
+                <h4>數據儀表板</h4>
+                <p>即時流量分析與轉換追蹤</p>
+              </div>
+            </div>
+            <div class="welcome-feature">
+              <div class="welcome-feature-icon">&#128274;</div>
+              <div>
+                <h4>BYOK 架構</h4>
+                <p>自帶金鑰，資料完全掌控</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="wizard-nav">
+            <button class="wizard-btn wizard-btn-back wizard-btn-hidden" disabled>&#8592; 上一步</button>
+            <button class="wizard-btn wizard-btn-next" onclick="wizardNext()">開始設定 &#8594;</button>
+          </div>
+        </div>
+
+        <!-- Step 2: Choose AI Needs -->
+        <div class="wizard-step" data-step="2">
+          <div class="step-icon">&#127919;</div>
+          <h2 class="step-title">選擇你的 <span class="text-gold">AI 需求</span></h2>
+          <p class="step-subtitle">
+            告訴我們您最需要哪些 AI 功能，我們會為您推薦最適合的工具組合。<br>
+            （可複選，之後也能隨時調整）
+          </p>
+
+          <div class="needs-grid">
+            <div class="need-option">
+              <input type="checkbox" id="need-seo" name="needs" value="seo">
+              <label for="need-seo">
+                <span class="need-check">&#10003;</span>
+                <span class="need-icon">&#128270;</span>
+                <span class="need-text">SEO 分析</span>
+              </label>
+            </div>
+            <div class="need-option">
+              <input type="checkbox" id="need-writing" name="needs" value="writing">
+              <label for="need-writing">
+                <span class="need-check">&#10003;</span>
+                <span class="need-icon">&#9997;&#65039;</span>
+                <span class="need-text">AI 寫作</span>
+              </label>
+            </div>
+            <div class="need-option">
+              <input type="checkbox" id="need-image" name="needs" value="image">
+              <label for="need-image">
+                <span class="need-check">&#10003;</span>
+                <span class="need-icon">&#127912;</span>
+                <span class="need-text">圖片生成</span>
+              </label>
+            </div>
+            <div class="need-option">
+              <input type="checkbox" id="need-chatbot" name="needs" value="chatbot">
+              <label for="need-chatbot">
+                <span class="need-check">&#10003;</span>
+                <span class="need-icon">&#129302;</span>
+                <span class="need-text">聊天機器人</span>
+              </label>
+            </div>
+            <div class="need-option">
+              <input type="checkbox" id="need-data" name="needs" value="data">
+              <label for="need-data">
+                <span class="need-check">&#10003;</span>
+                <span class="need-icon">&#128202;</span>
+                <span class="need-text">數據分析</span>
+              </label>
+            </div>
+            <div class="need-option">
+              <input type="checkbox" id="need-other" name="needs" value="other">
+              <label for="need-other">
+                <span class="need-check">&#10003;</span>
+                <span class="need-icon">&#128161;</span>
+                <span class="need-text">其他</span>
+              </label>
+            </div>
+          </div>
+
+          <div class="wizard-nav">
+            <button class="wizard-btn wizard-btn-back" onclick="wizardBack()">&#8592; 上一步</button>
+            <button class="wizard-btn wizard-btn-next" onclick="wizardNext()">下一步 &#8594;</button>
+          </div>
+        </div>
+
+        <!-- Step 3: API Key (BYOK) -->
+        <div class="wizard-step" data-step="3">
+          <div class="step-icon">&#128273;</div>
+          <h2 class="step-title">設定 <span class="text-gold">API Key</span></h2>
+          <p class="step-subtitle">
+            SEOBAIKE 採用 BYOK（自帶金鑰）架構，您的 API Key 只存放在您的裝置上，我們不會儲存。
+          </p>
+
+          <div class="byok-explain">
+            <h4>什麼是 BYOK？</h4>
+            <p>BYOK（Bring Your Own Key）讓您使用自己的 AI 服務金鑰，享有以下優勢：</p>
+            <ul>
+              <li>完全掌控 — 金鑰僅存於您的裝置</li>
+              <li>直接計費 — 費用由 AI 服務商直接向您收取</li>
+              <li>無中間加價 — 以原始價格使用 AI 服務</li>
+              <li>隨時更換 — 可隨時更新或移除金鑰</li>
+            </ul>
+          </div>
+
+          <div class="api-input-group">
+            <label for="api-key-input">您的 API Key</label>
+            <div class="api-input-wrapper">
+              <input
+                type="password"
+                id="api-key-input"
+                placeholder="sk-xxxxxxxxxxxxxxxxxxxxxxxx"
+                autocomplete="off"
+                spellcheck="false"
+              >
+              <button class="toggle-visibility" onclick="toggleApiVisibility()" aria-label="切換顯示/隱藏" type="button">&#128065;</button>
+            </div>
+            <p class="api-hint">您的金鑰將安全地存放在本地瀏覽器中，不會上傳到伺服器。</p>
+          </div>
+
+          <button class="skip-link" onclick="wizardNext()">&#8594; 之後再設定，先跳過</button>
+
+          <div class="wizard-nav">
+            <button class="wizard-btn wizard-btn-back" onclick="wizardBack()">&#8592; 上一步</button>
+            <button class="wizard-btn wizard-btn-next" onclick="saveApiKeyAndNext()">下一步 &#8594;</button>
+          </div>
+        </div>
+
+        <!-- Step 4: Complete -->
+        <div class="wizard-step" data-step="4">
+          <div class="success-icon">&#10004;&#65039;</div>
+          <h2 class="step-title">設定<span class="text-gold">完成！</span></h2>
+          <p class="step-subtitle">
+            您已準備好開始使用 SEOBAIKE 的 AI 智能服務。<br>
+            以下是您的設定摘要：
+          </p>
+
+          <div class="success-summary">
+            <h4>設定摘要</h4>
+            <div class="summary-item">
+              <span class="check">&#10003;</span>
+              <span>帳號：已準備就緒</span>
+            </div>
+            <div class="summary-item" id="summary-needs">
+              <span class="check">&#10003;</span>
+              <span>AI 需求：載入中...</span>
+            </div>
+            <div class="summary-item" id="summary-apikey">
+              <span class="check">&#10003;</span>
+              <span>API Key：載入中...</span>
+            </div>
+          </div>
+
+          <div class="success-cta">
+            <a href="/dashboard" class="wizard-btn wizard-btn-next">前往控制台 &#8594;</a>
+            <a href="/marketplace" class="wizard-btn wizard-btn-back" style="visibility:visible">瀏覽功能市集</a>
+          </div>
+        </div>
+
+      </div><!-- /wizard-card -->
+    </div><!-- /wizard-container -->
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="/" class="nav-brand" style="margin-bottom:var(--sp-3)">
+            <img src="/favicon.svg" alt="SEOBAIKE" width="34" height="34">
+            <span class="seo">SEO</span><span class="baike">BAIKE</span>
+          </a>
+          <p>小路光有限公司（統編 60475510）<br>AI 智能平台 — 讓 AI 為您的事業服務</p>
+        </div>
+        <div class="footer-col">
+          <h4>產品</h4>
+          <a href="/features">平台功能</a>
+          <a href="/pricing">方案定價</a>
+          <a href="/ai">AI 技術</a>
+          <a href="/start">開始使用</a>
+          <a href="/billing">帳單管理</a>
+        </div>
+        <div class="footer-col">
+          <h4>公司</h4>
+          <a href="/about">關於我們</a>
+          <a href="/contact">聯繫我們</a>
+          <a href="/privacy">隱私權政策</a>
+          <a href="/terms">服務條款</a>
+        </div>
+        <div class="footer-col">
+          <h4>資源</h4>
+          <a href="/docs">技術文件</a>
+          <a href="/blog">部落格</a>
+          <a href="/docs">常見問題</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2025-2026 <span style="color:var(--gold-200)">小路光有限公司</span>（統編 60475510）</p>
+        <p><a href="https://aiforseo.vip" style="color:var(--gold-200)">aiforseo.vip</a></p>
+      </div>
+      <div class="footer-disclaimer">
+        本平台由小路光有限公司（統編 60475510）營運。AI 服務結果僅供參考，不構成任何形式之保證或承諾。使用本服務即表示同意<a href="/terms">服務條款</a>及<a href="/privacy">隱私權政策</a>。台灣專利申請案號 115100981。
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script>
+    // ── Design System JS ──
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.08 });
+    document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
+
+    window.addEventListener('scroll', () => {
+      const nav = document.querySelector('.nav');
+      if (nav) nav.classList.toggle('scrolled', window.scrollY > 20);
+    });
+
+    function toggleMenu() {
+      document.querySelector('.nav-hamburger').classList.toggle('active');
+      document.querySelector('.mobile-overlay').classList.toggle('open');
+    }
+  </script>
+
+  <!-- Onboarding Wizard Logic -->
+  <script>
+    (function () {
+      var currentStep = 1;
+      var totalSteps = 4;
+
+      function getSteps() { return document.querySelectorAll('.wizard-step'); }
+      function getProgressSteps() { return document.querySelectorAll('.progress-step'); }
+      function getProgressLines() { return document.querySelectorAll('.progress-line'); }
+
+      function updateUI() {
+        // Update step panels
+        getSteps().forEach(function (el) {
+          var s = parseInt(el.getAttribute('data-step'));
+          el.classList.toggle('active', s === currentStep);
+        });
+
+        // Update progress bar
+        getProgressSteps().forEach(function (el) {
+          var s = parseInt(el.getAttribute('data-step'));
+          el.classList.remove('active', 'completed');
+          if (s === currentStep) el.classList.add('active');
+          else if (s < currentStep) el.classList.add('completed');
+        });
+
+        getProgressLines().forEach(function (el) {
+          var l = parseInt(el.getAttribute('data-line'));
+          el.classList.toggle('filled', l < currentStep);
+        });
+
+        // Update aria
+        var bar = document.querySelector('.wizard-progress');
+        if (bar) bar.setAttribute('aria-valuenow', currentStep);
+
+        // Scroll to top of wizard on step change
+        var section = document.querySelector('.wizard-section');
+        if (section) section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+
+      window.wizardNext = function () {
+        if (currentStep < totalSteps) {
+          // Before leaving step 2, no validation required (optional checkboxes)
+          currentStep++;
+          updateUI();
+
+          // On reaching step 4, populate summary
+          if (currentStep === 4) {
+            populateSummary();
+          }
+        }
+      };
+
+      window.wizardBack = function () {
+        if (currentStep > 1) {
+          currentStep--;
+          updateUI();
+        }
+      };
+
+      window.toggleApiVisibility = function () {
+        var input = document.getElementById('api-key-input');
+        if (!input) return;
+        if (input.type === 'password') {
+          input.type = 'text';
+        } else {
+          input.type = 'password';
+        }
+      };
+
+      window.saveApiKeyAndNext = function () {
+        var input = document.getElementById('api-key-input');
+        if (input && input.value.trim()) {
+          try {
+            localStorage.setItem('seobaike_api_key', input.value.trim());
+          } catch (e) {
+            // localStorage not available
+          }
+        }
+        wizardNext();
+      };
+
+      function populateSummary() {
+        // Gather selected needs
+        var checked = document.querySelectorAll('input[name="needs"]:checked');
+        var needLabels = {
+          seo: 'SEO 分析',
+          writing: 'AI 寫作',
+          image: '圖片生成',
+          chatbot: '聊天機器人',
+          data: '數據分析',
+          other: '其他'
+        };
+        var names = [];
+        checked.forEach(function (cb) {
+          var label = needLabels[cb.value] || cb.value;
+          names.push(label);
+        });
+
+        var needsEl = document.getElementById('summary-needs');
+        if (needsEl) {
+          var needsText = names.length > 0 ? names.join('、') : '尚未選擇（可稍後設定）';
+          needsEl.innerHTML = '<span class="check">&#10003;</span><span>AI 需求：' + needsText + '</span>';
+        }
+
+        // API Key status
+        var apiInput = document.getElementById('api-key-input');
+        var hasKey = false;
+        try {
+          hasKey = (apiInput && apiInput.value.trim()) || localStorage.getItem('seobaike_api_key');
+        } catch (e) {}
+
+        var apiEl = document.getElementById('summary-apikey');
+        if (apiEl) {
+          var apiText = hasKey ? '已設定' : '尚未設定（可稍後於設定頁新增）';
+          apiEl.innerHTML = '<span class="check">&#10003;</span><span>API Key：' + apiText + '</span>';
+        }
+      }
+
+      // Initialize
+      updateUI();
+    })();
+  </script>
+
+  <!-- Page Views Tracking -->
+  <script>
+  (function(){
+    try {
+      var sUrl = 'https://vmyrivxxibqydccurxug.supabase.co';
+      var sKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZteXJpdnh4aWJxeWRjY3VyeHVnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzAwNDAwMjksImV4cCI6MjA4NTYxNjAyOX0.iBV-23LGdm_uKffAExgqSV34-NWoAyv8_-M_cJQZ8Gg';
+      fetch(sUrl + '/rest/v1/page_views', {
+        method: 'POST',
+        headers: { 'Content-Type':'application/json', 'apikey':sKey, 'Authorization':'Bearer '+sKey, 'Prefer':'return=minimal' },
+        body: JSON.stringify({ path: location.pathname, referrer: document.referrer || null, user_agent: navigator.userAgent })
+      }).catch(function(){});
+    } catch(e){}
+  })();
+  </script>
+  <script src="/assets/analytics.js" defer></script>
+  <script src="/seobaike-widget.js"></script>
+  <script src="/assets/premium-fx.js"></script>
+  <script src="/assets/i18n.js"></script>
+  <script src="/assets/cookie-consent.js"></script>
+</body>
+</html>

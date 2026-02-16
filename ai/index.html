@@ -1,0 +1,932 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI 服務中心 — SEOBAIKE</title>
+  <meta name="description" content="SEOBAIKE AI 服務中心：互動式 AI 對話、SEO 分析、AI 寫作、圖片生成、數據分析、翻譯引擎、智能客服。自帶金鑰，安全便利。">
+  <meta name="theme-color" content="#e8850c">
+  <link rel="canonical" href="https://aiforseo.vip/ai">
+  <meta property="og:title" content="AI 服務中心 — SEOBAIKE">
+  <meta property="og:description" content="與 AI 互動的起點。SEO 分析、AI 寫作、圖片生成、數據分析，一站搞定。">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://aiforseo.vip/ai">
+  <meta property="og:image" content="/og-image.png">
+  <meta property="og:site_name" content="SEOBAIKE">
+  <meta property="og:locale" content="zh_TW">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/og-image.png">
+  <link rel="manifest" href="/manifest.json">
+  <link rel="stylesheet" href="/assets/design-system.css">
+  <link rel="stylesheet" href="/assets/premium-fx.css">
+  <style>
+    /* ── AI Service Center — Page Specific ── */
+
+    /* Hero */
+    .ai-hero {
+      padding: 140px 0 80px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .ai-hero::before {
+      content: '';
+      position: absolute;
+      top: -120px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 1000px;
+      height: 800px;
+      background: radial-gradient(ellipse, rgba(232,133,12,0.08) 0%, rgba(245,166,35,0.04) 30%, transparent 65%);
+      pointer-events: none;
+      animation: heroPulse 6s ease-in-out infinite;
+    }
+
+    @keyframes heroPulse {
+      0%, 100% { opacity: 0.7; transform: translateX(-50%) scale(1); }
+      50% { opacity: 1; transform: translateX(-50%) scale(1.05); }
+    }
+
+    .ai-hero h1 {
+      margin-bottom: var(--sp-4);
+      position: relative;
+    }
+
+    .ai-hero .hero-desc {
+      font-size: 1.15rem;
+      color: var(--text-muted);
+      max-width: 640px;
+      margin: 0 auto;
+      position: relative;
+    }
+
+    /* ── Chat Demo Section ── */
+    .chat-demo-section {
+      padding: var(--sp-24) 0;
+      position: relative;
+    }
+
+    .chat-window {
+      max-width: 720px;
+      margin: 0 auto;
+      background: #0a0a1a;
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+      box-shadow:
+        0 8px 60px rgba(0,0,0,0.6),
+        0 0 80px rgba(232,133,12,0.06),
+        inset 0 1px 0 rgba(255,255,255,0.04);
+      position: relative;
+    }
+
+    .chat-window::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 10%;
+      right: 10%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(232,133,12,0.4), transparent);
+    }
+
+    .chat-titlebar {
+      display: flex;
+      align-items: center;
+      gap: var(--sp-3);
+      padding: var(--sp-4) var(--sp-5);
+      background: rgba(14,14,32,0.9);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .chat-titlebar-dots {
+      display: flex;
+      gap: 6px;
+    }
+
+    .chat-titlebar-dots span {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+    }
+
+    .chat-titlebar-dots span:nth-child(1) { background: #f85149; }
+    .chat-titlebar-dots span:nth-child(2) { background: #f0b429; }
+    .chat-titlebar-dots span:nth-child(3) { background: #34d058; }
+
+    .chat-titlebar-text {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+
+    .chat-status-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--success);
+      margin-left: auto;
+      animation: statusPulse 2s ease-in-out infinite;
+    }
+
+    @keyframes statusPulse {
+      0%, 100% { opacity: 1; box-shadow: 0 0 4px rgba(52,208,88,0.4); }
+      50% { opacity: 0.5; box-shadow: 0 0 8px rgba(52,208,88,0.6); }
+    }
+
+    .chat-messages {
+      padding: var(--sp-6) var(--sp-5);
+      min-height: 340px;
+      display: flex;
+      flex-direction: column;
+      gap: var(--sp-5);
+    }
+
+    .chat-msg {
+      display: flex;
+      gap: var(--sp-3);
+      max-width: 85%;
+      opacity: 0;
+      transform: translateY(12px);
+      animation: msgAppear 0.5s ease-out forwards;
+    }
+
+    .chat-msg.user {
+      align-self: flex-end;
+      flex-direction: row-reverse;
+    }
+
+    .chat-msg:nth-child(1) { animation-delay: 0.3s; }
+    .chat-msg:nth-child(2) { animation-delay: 1.0s; }
+    .chat-msg:nth-child(3) { animation-delay: 1.8s; }
+    .chat-msg:nth-child(4) { animation-delay: 2.6s; }
+
+    @keyframes msgAppear {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .chat-avatar {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.85rem;
+      font-weight: 700;
+    }
+
+    .chat-avatar.ai-avatar {
+      background: linear-gradient(135deg, rgba(232,133,12,0.3), rgba(245,166,35,0.2));
+      border: 1px solid rgba(232,133,12,0.3);
+      color: var(--gold-200);
+    }
+
+    .chat-avatar.user-avatar {
+      background: rgba(88,166,255,0.15);
+      border: 1px solid rgba(88,166,255,0.3);
+      color: var(--info);
+    }
+
+    .chat-bubble {
+      padding: var(--sp-3) var(--sp-4);
+      border-radius: var(--radius-md);
+      font-size: 0.9rem;
+      line-height: 1.65;
+    }
+
+    .chat-msg.ai .chat-bubble {
+      background: rgba(22,22,48,0.9);
+      border: 1px solid rgba(255,255,255,0.06);
+      color: var(--text-secondary);
+    }
+
+    .chat-msg.user .chat-bubble {
+      background: linear-gradient(135deg, rgba(232,133,12,0.15), rgba(245,166,35,0.1));
+      border: 1px solid rgba(232,133,12,0.2);
+      color: var(--text-primary);
+    }
+
+    .chat-input-bar {
+      display: flex;
+      align-items: center;
+      gap: var(--sp-3);
+      padding: var(--sp-4) var(--sp-5);
+      background: rgba(14,14,32,0.6);
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .chat-input-field {
+      flex: 1;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: var(--radius-full);
+      padding: 10px 18px;
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      font-family: var(--font-sans);
+      outline: none;
+      cursor: not-allowed;
+    }
+
+    .chat-input-field::placeholder {
+      color: var(--text-muted);
+      opacity: 0.7;
+    }
+
+    .chat-send-btn {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: rgba(232,133,12,0.15);
+      border: 1px solid rgba(232,133,12,0.25);
+      color: var(--gold-200);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      cursor: not-allowed;
+      opacity: 0.5;
+    }
+
+    .chat-cta-wrap {
+      text-align: center;
+      margin-top: var(--sp-8);
+    }
+
+    /* ── Capabilities Grid ── */
+    .cap-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--sp-6);
+    }
+
+    .cap-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      padding: var(--sp-8);
+      transition: all var(--duration-normal) var(--ease-out);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cap-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 20%;
+      right: 20%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(232,133,12,0.25), transparent);
+      opacity: 0;
+      transition: opacity var(--duration-normal);
+    }
+
+    .cap-card::after {
+      content: '';
+      position: absolute;
+      bottom: -60px;
+      right: -60px;
+      width: 120px;
+      height: 120px;
+      background: radial-gradient(circle, rgba(232,133,12,0.04) 0%, transparent 70%);
+      pointer-events: none;
+      transition: all var(--duration-slow);
+    }
+
+    .cap-card:hover {
+      border-color: var(--border-hover);
+      background: var(--bg-card-hover);
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-gold);
+    }
+
+    .cap-card:hover::before {
+      opacity: 1;
+    }
+
+    .cap-card:hover::after {
+      bottom: -40px;
+      right: -40px;
+      width: 160px;
+      height: 160px;
+      background: radial-gradient(circle, rgba(232,133,12,0.08) 0%, transparent 70%);
+    }
+
+    .cap-card-icon {
+      width: 56px;
+      height: 56px;
+      border-radius: var(--radius-md);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.6rem;
+      margin-bottom: var(--sp-5);
+      position: relative;
+    }
+
+    .cap-card-icon.icon-seo {
+      background: rgba(88,166,255,0.08);
+      border: 1px solid rgba(88,166,255,0.2);
+    }
+    .cap-card-icon.icon-write {
+      background: rgba(232,133,12,0.08);
+      border: 1px solid rgba(232,133,12,0.2);
+    }
+    .cap-card-icon.icon-image {
+      background: rgba(168,85,247,0.08);
+      border: 1px solid rgba(168,85,247,0.2);
+    }
+    .cap-card-icon.icon-data {
+      background: rgba(52,208,88,0.08);
+      border: 1px solid rgba(52,208,88,0.2);
+    }
+    .cap-card-icon.icon-translate {
+      background: rgba(245,166,35,0.08);
+      border: 1px solid rgba(245,166,35,0.2);
+    }
+    .cap-card-icon.icon-bot {
+      background: rgba(240,80,100,0.08);
+      border: 1px solid rgba(240,80,100,0.2);
+    }
+
+    .cap-card h3 {
+      font-size: 1.1rem;
+      margin-bottom: var(--sp-2);
+    }
+
+    .cap-card .cap-subtitle {
+      font-size: 0.8rem;
+      color: var(--gold-200);
+      font-weight: 600;
+      margin-bottom: var(--sp-3);
+      letter-spacing: 0.3px;
+    }
+
+    .cap-card p {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      line-height: 1.7;
+    }
+
+    /* ── BYOK Section ── */
+    .byok-section {
+      padding: var(--sp-24) 0;
+      position: relative;
+    }
+
+    .byok-card {
+      max-width: 860px;
+      margin: 0 auto;
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-xl);
+      padding: var(--sp-12) var(--sp-10);
+      display: grid;
+      grid-template-columns: 140px 1fr;
+      gap: var(--sp-10);
+      align-items: start;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .byok-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 15%;
+      right: 15%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(232,133,12,0.35), transparent);
+    }
+
+    .byok-card::after {
+      content: '';
+      position: absolute;
+      bottom: -80px;
+      left: -80px;
+      width: 260px;
+      height: 260px;
+      background: radial-gradient(circle, rgba(232,133,12,0.04) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .byok-visual {
+      width: 120px;
+      height: 120px;
+      border-radius: var(--radius-lg);
+      background: rgba(232,133,12,0.06);
+      border: 1px solid rgba(232,133,12,0.15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3rem;
+      position: relative;
+    }
+
+    .byok-visual::after {
+      content: '';
+      position: absolute;
+      inset: -1px;
+      border-radius: inherit;
+      background: linear-gradient(135deg, rgba(232,133,12,0.15), transparent 60%);
+      z-index: -1;
+      filter: blur(8px);
+    }
+
+    .byok-text h3 {
+      font-size: 1.3rem;
+      margin-bottom: var(--sp-3);
+    }
+
+    .byok-text p {
+      font-size: 0.95rem;
+      color: var(--text-secondary);
+      line-height: 1.7;
+      margin-bottom: var(--sp-5);
+    }
+
+    .byok-steps {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--sp-4);
+      margin-bottom: var(--sp-5);
+    }
+
+    .byok-step {
+      display: flex;
+      flex-direction: column;
+      gap: var(--sp-2);
+      padding: var(--sp-4);
+      background: rgba(232,133,12,0.04);
+      border: 1px solid rgba(232,133,12,0.1);
+      border-radius: var(--radius-md);
+    }
+
+    .byok-step-num {
+      font-size: 0.72rem;
+      font-weight: 800;
+      color: var(--gold-300);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .byok-step-label {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      font-weight: 600;
+    }
+
+    .byok-features {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--sp-3);
+    }
+
+    .byok-feature-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 14px;
+      border-radius: var(--radius-full);
+      background: rgba(232,133,12,0.08);
+      border: 1px solid rgba(232,133,12,0.15);
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--gold-200);
+    }
+
+    /* ── CTA Section ── */
+    .ai-cta {
+      text-align: center;
+      padding: var(--sp-24) 0 120px;
+      position: relative;
+    }
+
+    .ai-cta::before {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 700px;
+      height: 500px;
+      background: radial-gradient(ellipse, rgba(232,133,12,0.05) 0%, transparent 65%);
+      pointer-events: none;
+    }
+
+    .ai-cta h2 {
+      margin-bottom: var(--sp-4);
+      position: relative;
+    }
+
+    .ai-cta p {
+      font-size: 1.05rem;
+      color: var(--text-muted);
+      max-width: 500px;
+      margin: 0 auto var(--sp-8);
+      position: relative;
+    }
+
+    .ai-cta-buttons {
+      display: flex;
+      gap: var(--sp-4);
+      justify-content: center;
+      flex-wrap: wrap;
+      position: relative;
+    }
+
+    /* ── Volcanic Lava Line ── */
+    .lava-divider {
+      height: 2px;
+      border: none;
+      background: linear-gradient(90deg,
+        transparent 0%,
+        rgba(232,133,12,0.05) 15%,
+        rgba(232,133,12,0.3) 40%,
+        rgba(245,166,35,0.5) 50%,
+        rgba(232,133,12,0.3) 60%,
+        rgba(232,133,12,0.05) 85%,
+        transparent 100%
+      );
+      margin: 0;
+      position: relative;
+    }
+
+    .lava-divider::after {
+      content: '';
+      position: absolute;
+      top: -4px;
+      left: 30%;
+      right: 30%;
+      height: 10px;
+      background: linear-gradient(90deg, transparent, rgba(232,133,12,0.08), transparent);
+      filter: blur(4px);
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 1024px) {
+      .cap-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .byok-steps {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .ai-hero {
+        padding: 100px 0 60px;
+      }
+
+      .cap-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .chat-messages {
+        min-height: 280px;
+        padding: var(--sp-4) var(--sp-4);
+      }
+
+      .chat-msg {
+        max-width: 92%;
+      }
+
+      .byok-card {
+        grid-template-columns: 1fr;
+        text-align: center;
+        padding: var(--sp-8) var(--sp-5);
+        justify-items: center;
+      }
+
+      .byok-features {
+        justify-content: center;
+      }
+
+      .byok-steps {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .chat-window {
+        border-radius: var(--radius-lg);
+      }
+
+      .chat-bubble {
+        font-size: 0.84rem;
+        padding: var(--sp-2) var(--sp-3);
+      }
+
+      .chat-avatar {
+        width: 28px;
+        height: 28px;
+        font-size: 0.75rem;
+      }
+    }
+  </style>
+</head>
+<body class="page-top">
+
+  <!-- Navigation -->
+  <nav class="nav">
+    <a href="/" class="nav-brand">
+      <img src="/favicon.svg" alt="SEOBAIKE" width="34" height="34">
+      <span class="seo">SEO</span><span class="baike">BAIKE</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="/">首頁</a></li>
+      <li><a href="/features">功能</a></li>
+      <li><a href="/pricing">方案</a></li>
+      <li><a href="/ai" class="active">AI 技術</a></li>
+      <li><a href="/start">開始使用</a></li>
+      <li><a href="/billing" class="nav-link">帳單</a></li>
+      <li><a href="/login" class="nav-cta">登入</a></li>
+    </ul>
+    <button class="nav-hamburger" onclick="toggleMenu()" aria-label="選單">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- Mobile Overlay -->
+  <div class="mobile-overlay">
+    <button class="mobile-close" onclick="toggleMenu()" aria-label="關閉選單">&times;</button>
+    <a href="/" onclick="toggleMenu()">首頁</a>
+    <a href="/features" onclick="toggleMenu()">功能</a>
+    <a href="/pricing" onclick="toggleMenu()">方案</a>
+    <a href="/ai" onclick="toggleMenu()">AI 技術</a>
+    <a href="/start" onclick="toggleMenu()">開始使用</a>
+    <a href="/billing" onclick="toggleMenu()">帳單</a>
+    <a href="/login" onclick="toggleMenu()">登入</a>
+  </div>
+
+  <!-- Hero -->
+  <section class="ai-hero eruption-bg">
+    <div class="container">
+      <div class="fade-up">
+        <span class="section-badge">AI 服務中心</span>
+        <h1 class="volcanic-title"><span class="text-gold">AI 服務中心</span></h1>
+        <p class="hero-desc">這裡是您與 AI 互動的起點。從 SEO 分析到智能寫作，從圖片生成到數據洞察 —— 所有 AI 能力都在這裡，等待為您的事業加速。</p>
+      </div>
+    </div>
+  </section>
+
+  <hr class="lava-divider">
+
+  <!-- Interactive Chat Demo -->
+  <section class="chat-demo-section">
+    <div class="container">
+      <div class="section-header fade-up">
+        <span class="section-badge">互動體驗</span>
+        <h2>AI 對話是什麼感覺？</h2>
+        <p>以下是一段真實的 AI 對話示範，讓您了解如何與 AI 協作</p>
+      </div>
+
+      <div class="chat-window fade-up">
+        <!-- Title Bar -->
+        <div class="chat-titlebar">
+          <div class="chat-titlebar-dots">
+            <span></span><span></span><span></span>
+          </div>
+          <span class="chat-titlebar-text">SEOBAIKE AI 對話</span>
+          <div class="chat-status-dot"></div>
+        </div>
+
+        <!-- Messages -->
+        <div class="chat-messages">
+          <div class="chat-msg user">
+            <div class="chat-avatar user-avatar">你</div>
+            <div class="chat-bubble">我的網站流量最近下降了，可以幫我分析一下可能的原因嗎？</div>
+          </div>
+
+          <div class="chat-msg ai">
+            <div class="chat-avatar ai-avatar">AI</div>
+            <div class="chat-bubble">好的，我來幫您分析。網站流量下降常見的原因有幾個方向：<br><br>1. <strong>技術面</strong> — 頁面載入速度變慢、行動裝置適配問題<br>2. <strong>內容面</strong> — 關鍵字排名變動、內容新鮮度不足<br>3. <strong>外部因素</strong> — 搜尋引擎演算法更新、季節性波動<br><br>您方便提供網站網址嗎？我可以做更精確的診斷。</div>
+          </div>
+
+          <div class="chat-msg user">
+            <div class="chat-avatar user-avatar">你</div>
+            <div class="chat-bubble">主要是自然搜尋的流量減少了，付費的沒有變化。</div>
+          </div>
+
+          <div class="chat-msg ai">
+            <div class="chat-avatar ai-avatar">AI</div>
+            <div class="chat-bubble">自然搜尋流量下降，重點要看幾個指標：<br><br>&#8226; 檢查核心關鍵字的排名是否有位移<br>&#8226; 確認網站是否有新的索引問題<br>&#8226; 比對競爭對手近期的內容策略<br><br>建議您先使用我們的 <strong>SEO 分析工具</strong>做一次全面健檢，我會為您產出完整報告和改善建議。</div>
+          </div>
+        </div>
+
+        <!-- Input Bar -->
+        <div class="chat-input-bar">
+          <input type="text" class="chat-input-field" placeholder="登入後即可使用 AI 對話..." disabled>
+          <div class="chat-send-btn">&#9654;</div>
+        </div>
+      </div>
+
+      <div class="chat-cta-wrap fade-up">
+        <a href="/login" class="btn btn-primary btn-lg btn-magnetic">開始對話</a>
+      </div>
+    </div>
+  </section>
+
+  <hr class="lava-divider">
+
+  <!-- AI Capabilities Grid -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header fade-up">
+        <span class="section-badge">AI 能力</span>
+        <h2>六大 AI 服務</h2>
+        <p>涵蓋 SEO、寫作、設計、分析等核心領域，滿足您的各種需求</p>
+      </div>
+
+      <div class="cap-grid stagger">
+        <div class="cap-card fade-up card-3d">
+          <div class="cap-card-icon icon-seo">&#128269;</div>
+          <h3>SEO 分析</h3>
+          <div class="cap-subtitle">網站優化建議</div>
+          <p>全面掃描您的網站，分析關鍵字排名、頁面結構、載入速度、行動裝置適配等指標，產出可執行的優化建議清單。</p>
+        </div>
+
+        <div class="cap-card fade-up card-3d">
+          <div class="cap-card-icon icon-write">&#9999;&#65039;</div>
+          <h3>AI 寫作</h3>
+          <div class="cap-subtitle">文章、標題、描述生成</div>
+          <p>根據您的產業和目標受眾，自動生成高品質的文章內容、吸引人的標題和精準的 SEO 描述，節省大量寫作時間。</p>
+        </div>
+
+        <div class="cap-card fade-up card-3d">
+          <div class="cap-card-icon icon-image">&#127912;</div>
+          <h3>圖片生成</h3>
+          <div class="cap-subtitle">AI 圖片創作</div>
+          <p>透過文字描述生成專業級圖片，適用於部落格配圖、社群貼文、產品展示等場景，讓您的內容更具視覺吸引力。</p>
+        </div>
+
+        <div class="cap-card fade-up card-3d">
+          <div class="cap-card-icon icon-data">&#128200;</div>
+          <h3>數據分析</h3>
+          <div class="cap-subtitle">流量和排名分析</div>
+          <p>自動追蹤並分析您的網站流量趨勢、關鍵字排名變化，產出清晰的可視化報告，幫助您做出數據驅動的決策。</p>
+        </div>
+
+        <div class="cap-card fade-up card-3d">
+          <div class="cap-card-icon icon-translate">&#127760;</div>
+          <h3>翻譯引擎</h3>
+          <div class="cap-subtitle">多語言內容轉換</div>
+          <p>支援數十種語言的高品質翻譯，不只是字面翻譯，更能理解語境和文化差異，讓您的內容自然地觸及全球市場。</p>
+        </div>
+
+        <div class="cap-card fade-up card-3d">
+          <div class="cap-card-icon icon-bot">&#128172;</div>
+          <h3>聊天機器人</h3>
+          <div class="cap-subtitle">智能客服助手</div>
+          <p>全天候自動回覆客戶問題，理解上下文語意並提供精準答案。處理諮詢、導購、售後，大幅降低客服人力成本。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="lava-divider">
+
+  <!-- BYOK Section -->
+  <section class="byok-section">
+    <div class="container">
+      <div class="section-header fade-up">
+        <span class="section-badge">進階功能</span>
+        <h2>自帶金鑰（BYOK）</h2>
+        <p>使用您自己的 API 金鑰，完全掌控成本與用量</p>
+      </div>
+
+      <div class="byok-card fade-up magma-border">
+        <div class="byok-visual">&#128273;</div>
+        <div class="byok-text">
+          <h3>Bring Your Own Key</h3>
+          <p>SEOBAIKE 支援自帶金鑰功能。您可以在設定頁面輸入自己的 AI 引擎 API 金鑰，平台會直接使用您的金鑰呼叫服務。金鑰經過加密處理，安全存儲在您的帳戶中，我們不會用於任何其他用途。</p>
+
+          <div class="byok-steps">
+            <div class="byok-step">
+              <span class="byok-step-num">步驟 1</span>
+              <span class="byok-step-label">在設定中輸入您的 API 金鑰</span>
+            </div>
+            <div class="byok-step">
+              <span class="byok-step-num">步驟 2</span>
+              <span class="byok-step-label">選擇要使用的 AI 服務</span>
+            </div>
+            <div class="byok-step">
+              <span class="byok-step-num">步驟 3</span>
+              <span class="byok-step-label">直接使用，費用走您的帳戶</span>
+            </div>
+          </div>
+
+          <div class="byok-features">
+            <span class="byok-feature-tag">&#128274; 金鑰加密儲存</span>
+            <span class="byok-feature-tag">&#9889; 即時生效</span>
+            <span class="byok-feature-tag">&#128260; 多引擎切換</span>
+            <span class="byok-feature-tag">&#128176; 直連省費用</span>
+            <span class="byok-feature-tag">&#128736; 完全掌控用量</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="lava-divider">
+
+  <!-- CTA Section -->
+  <section class="ai-cta">
+    <div class="container fade-up">
+      <h2>立即體驗 <span class="text-gold">AI 的力量</span></h2>
+      <p>從對話開始，讓 AI 成為您事業的最強助手。免費註冊，立即體驗所有功能。</p>
+      <div class="ai-cta-buttons">
+        <a href="/start" class="btn btn-primary btn-lg btn-magnetic">立即體驗</a>
+        <a href="/pricing" class="btn btn-secondary btn-lg btn-magnetic">查看方案</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="/" class="nav-brand" style="margin-bottom:var(--sp-3)">
+            <img src="/favicon.svg" alt="SEOBAIKE" width="34" height="34">
+            <span class="seo">SEO</span><span class="baike">BAIKE</span>
+          </a>
+          <p>小路光有限公司（統編 60475510）<br>AI 智能平台 — 讓 AI 為您的事業服務</p>
+        </div>
+        <div class="footer-col">
+          <h4>產品</h4>
+          <a href="/features">平台功能</a>
+          <a href="/pricing">方案定價</a>
+          <a href="/ai">AI 技術</a>
+          <a href="/start">開始使用</a>
+          <a href="/billing">帳單管理</a>
+        </div>
+        <div class="footer-col">
+          <h4>公司</h4>
+          <a href="/about">關於我們</a>
+          <a href="/contact">聯繫我們</a>
+          <a href="/privacy">隱私權政策</a>
+          <a href="/terms">服務條款</a>
+        </div>
+        <div class="footer-col">
+          <h4>資源</h4>
+          <a href="/docs">技術文件</a>
+          <a href="/blog">部落格</a>
+          <a href="/docs">常見問題</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2025-2026 <span style="color:var(--gold-200)">小路光有限公司</span>（統編 60475510）</p>
+        <p><a href="https://aiforseo.vip" style="color:var(--gold-200)">aiforseo.vip</a></p>
+      </div>
+      <div class="footer-disclaimer">
+        本平台由小路光有限公司（統編 60475510）營運。AI 服務結果僅供參考，不構成任何形式之保證或承諾。使用本服務即表示同意<a href="/terms">服務條款</a>及<a href="/privacy">隱私權政策</a>。台灣專利申請案號 115100981。
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script>
+    // ── Design System JS ──
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.08 });
+    document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
+
+    window.addEventListener('scroll', () => {
+      const nav = document.querySelector('.nav');
+      if (nav) nav.classList.toggle('scrolled', window.scrollY > 20);
+    });
+
+    function toggleMenu() {
+      document.querySelector('.nav-hamburger').classList.toggle('active');
+      document.querySelector('.mobile-overlay').classList.toggle('open');
+    }
+  </script>
+
+  <!-- Page Views Tracking -->
+  <script>
+  (function(){
+    try {
+      var sUrl = 'https://vmyrivxxibqydccurxug.supabase.co';
+      var sKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZteXJpdnh4aWJxeWRjY3VyeHVnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzAwNDAwMjksImV4cCI6MjA4NTYxNjAyOX0.iBV-23LGdm_uKffAExgqSV34-NWoAyv8_-M_cJQZ8Gg';
+      fetch(sUrl + '/rest/v1/page_views', {
+        method: 'POST',
+        headers: { 'Content-Type':'application/json', 'apikey':sKey, 'Authorization':'Bearer '+sKey, 'Prefer':'return=minimal' },
+        body: JSON.stringify({ path: location.pathname, referrer: document.referrer || null, user_agent: navigator.userAgent })
+      }).catch(function(){});
+    } catch(e){}
+  })();
+  </script>
+  <script src="/assets/analytics.js" defer></script>
+  <script src="/seobaike-widget.js"></script>
+  <script src="/assets/premium-fx.js"></script>
+  <script src="/assets/i18n.js"></script>
+  <script src="/assets/cookie-consent.js"></script>
+</body>
+</html>
