@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /status
+Disallow: /dashboard
+Sitemap: https://aiforseo.vip/sitemap.xml

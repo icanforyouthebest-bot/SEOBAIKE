@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+
+  <!-- Homepage -->
+  <url>
+    <loc>https://aiforseo.vip/</loc>
+    <lastmod>2026-02-16</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://aiforseo.vip/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://aiforseo.vip/en/" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://aiforseo.vip/ja/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://aiforseo.vip/" />
+  </url>
+
+  <!-- Features -->
+  <url>
+    <loc>https://aiforseo.vip/features</loc>
+    <lastmod>2026-02-16</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://aiforseo.vip/features" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://aiforseo.vip/en/features" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://aiforseo.vip/ja/features" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://aiforseo.vip/features" />
+  </url>
+
+  <!-- Pricing -->
+  <url>
+    <loc>https://aiforseo.vip/pricing</loc>
+    <lastmod>2026-02-16</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://aiforseo.vip/pricing" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://aiforseo.vip/en/pricing" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://aiforseo.vip/ja/pricing" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://aiforseo.vip/pricing" />
+  </url>
+
+  <!-- Marketplace -->
+  <url>
+    <loc>https://aiforseo.vip/marketplace</loc>
+    <lastmod>2026-02-16</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://aiforseo.vip/marketplace" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://aiforseo.vip/en/marketplace" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://aiforseo.vip/ja/marketplace" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://aiforseo.vip/marketplace" />
+  </url>
+
+  <!-- Docs -->
+  <url>
+    <loc>https://aiforseo.vip/docs</loc>
+    <lastmod>2026-02-16</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://aiforseo.vip/docs" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://aiforseo.vip/en/docs" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://aiforseo.vip/ja/docs" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://aiforseo.vip/docs" />
+  </url>
+
+  <!-- About -->
+  <url>
+    <loc>https://aiforseo.vip/about</loc>
+    <lastmod>2026-02-16</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://aiforseo.vip/about" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://aiforseo.vip/en/about" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://aiforseo.vip/ja/about" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://aiforseo.vip/about" />
+  </url>
+
+  <!-- Contact -->
+  <url>
+    <loc>https://aiforseo.vip/contact</loc>
+    <lastmod>2026-02-16</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://aiforseo.vip/contact" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://aiforseo.vip/en/contact" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://aiforseo.vip/ja/contact" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://aiforseo.vip/contact" />
+  </url>
+
+  <!-- Blog -->
+  <url>
+    <loc>https://aiforseo.vip/blog</loc>
+    <lastmod>2026-02-16</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://aiforseo.vip/blog" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://aiforseo.vip/en/blog" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://aiforseo.vip/ja/blog" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://aiforseo.vip/blog" />
+  </url>
+
+  <!-- Login -->
+  <url>
+    <loc>https://aiforseo.vip/login</loc>
+    <lastmod>2026-02-16</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://aiforseo.vip/login" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://aiforseo.vip/en/login" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://aiforseo.vip/ja/login" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://aiforseo.vip/login" />
+  </url>
+
+  <!-- Start -->
+  <url>
+    <loc>https://aiforseo.vip/start</loc>
+    <lastmod>2026-02-16</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://aiforseo.vip/start" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://aiforseo.vip/en/start" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://aiforseo.vip/ja/start" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://aiforseo.vip/start" />
+  </url>
+
+  <!-- AI -->
+  <url>
+    <loc>https://aiforseo.vip/ai</loc>
+    <lastmod>2026-02-16</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://aiforseo.vip/ai" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://aiforseo.vip/en/ai" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://aiforseo.vip/ja/ai" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://aiforseo.vip/ai" />
+  </url>
+
+  <!-- Billing -->
+  <url>
+    <loc>https://aiforseo.vip/billing</loc>
+    <lastmod>2026-02-16</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://aiforseo.vip/billing" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://aiforseo.vip/en/billing" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://aiforseo.vip/ja/billing" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://aiforseo.vip/billing" />
+  </url>
+
+  <!-- Dashboard -->
+  <url>
+    <loc>https://aiforseo.vip/dashboard</loc>
+    <lastmod>2026-02-16</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://aiforseo.vip/dashboard" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://aiforseo.vip/en/dashboard" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://aiforseo.vip/ja/dashboard" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://aiforseo.vip/dashboard" />
+  </url>
+
+  <!-- Ecosystem -->
+  <url>
+    <loc>https://aiforseo.vip/ecosystem</loc>
+    <lastmod>2026-02-16</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://aiforseo.vip/ecosystem" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://aiforseo.vip/en/ecosystem" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://aiforseo.vip/ja/ecosystem" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://aiforseo.vip/ecosystem" />
+  </url>
+
+  <!-- Marketing -->
+  <url>
+    <loc>https://aiforseo.vip/marketing</loc>
+    <lastmod>2026-02-16</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://aiforseo.vip/marketing" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://aiforseo.vip/en/marketing" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://aiforseo.vip/ja/marketing" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://aiforseo.vip/marketing" />
+  </url>
+
+  <!-- Bots -->
+  <url>
+    <loc>https://aiforseo.vip/bots</loc>
+    <lastmod>2026-02-16</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://aiforseo.vip/bots" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://aiforseo.vip/en/bots" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://aiforseo.vip/ja/bots" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://aiforseo.vip/bots" />
+  </url>
+
+  <!-- Privacy -->
+  <url>
+    <loc>https://aiforseo.vip/privacy</loc>
+    <lastmod>2026-02-16</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://aiforseo.vip/privacy" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://aiforseo.vip/en/privacy" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://aiforseo.vip/ja/privacy" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://aiforseo.vip/privacy" />
+  </url>
+
+  <!-- Terms -->
+  <url>
+    <loc>https://aiforseo.vip/terms</loc>
+    <lastmod>2026-02-16</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://aiforseo.vip/terms" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://aiforseo.vip/en/terms" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://aiforseo.vip/ja/terms" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://aiforseo.vip/terms" />
+  </url>
+
+  <!-- Compliance -->
+  <url>
+    <loc>https://aiforseo.vip/compliance</loc>
+    <lastmod>2026-02-16</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://aiforseo.vip/compliance" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://aiforseo.vip/en/compliance" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://aiforseo.vip/ja/compliance" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://aiforseo.vip/compliance" />
+  </url>
+
+</urlset>
