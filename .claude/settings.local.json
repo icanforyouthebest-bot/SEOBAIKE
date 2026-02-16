@@ -151,7 +151,20 @@
       "Bash(AUTH=\"Authorization: Bearer $KEY\")",
       "WebFetch(domain:openrouter.ai)",
       "WebFetch(domain:docs.together.ai)",
-      "WebFetch(domain:docs.fireworks.ai)"
+      "WebFetch(domain:docs.fireworks.ai)",
+      "Bash(wc:*)",
+      "Bash(CF_TOKEN=\"BMWTqHr5WdtN-rliDnWHd4NI7Mrt-du4FiuQn6t0jlI.DBJzCM2rS7qSKA9EZQAWRmWXh5AxKARvWZ3LESh_JOY\")",
+      "Bash(npx --yes wrangler:*)",
+      "WebFetch(domain:who.is)",
+      "WebFetch(domain:docs.api.nvidia.com)",
+      "Bash(NGC_KEY=\"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\":*)",
+      "Bash(for model in \"meta/llama-3.1-70b-instruct\" \"meta/llama-3.1-405b-instruct\" \"nvidia/nemotron-mini-4b-instruct\" \"meta/llama-3.2-90b-vision-instruct\" \"nvidia/llama-3.3-nemotron-super-49b-v1\" \"meta/llama-3.2-3b-instruct\")",
+      "Bash(do echo -n \"TEST $model: \")",
+      "Bash(for model in \"nvidia/llama-3.1-nemoguard-8b-content-safety\" \"nvidia/llama-3.1-nemoguard-8b-topic-control\" \"nvidia/cosmos-reason2-8b\" \"nvidia/usdcode-llama3.1-70b-instruct\" \"meta/llama-3.2-1b-instruct\" \"meta/llama-3.2-11b-vision-instruct\")",
+      "Bash(for model in \"nvidia/nv-rerankqa-mistral-4b-v3\" \"nvidia/nv-embedqa-mistral-7b-v2\")",
+      "Bash(do echo -n \"TEST $model \\(ranking\\): \")",
+      "Bash(test:*)",
+      "Bash(powershell -ExecutionPolicy Bypass -File \"C:\\\\SEOBAIKE\\\\founder_monitor.ps1\")"
     ]
   },
   "enableAllProjectMcpServers": true,

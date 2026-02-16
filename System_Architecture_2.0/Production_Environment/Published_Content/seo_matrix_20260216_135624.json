@@ -1,0 +1,18 @@
+{
+  "task_id": "TASK-2026-SEO-001",
+  "agent": "Marketing Agent",
+  "content": [
+    {
+      "title": "台北手沖咖啡 - 推薦懶人包 (2026最新版)",
+      "slug": "taipei-drip-coffee-recommend"
+    },
+    {
+      "title": "台北手沖咖啡 - 價格懶人包 (2026最新版)",
+      "slug": "taipei-drip-coffee-price"
+    },
+    {
+      "title": "台北手沖咖啡 - 教學懶人包 (2026最新版)",
+      "slug": "taipei-drip-coffee-tutorial"
+    }
+  ]
+}

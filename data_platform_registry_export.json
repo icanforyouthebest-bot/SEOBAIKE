@@ -1,0 +1,4016 @@
+[
+  {
+    "model_id": "formlabs-api",
+    "display_name": "Formlabs 3D列印",
+    "provider": "additive_mfg",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:18:57.498401+00"
+  },
+  {
+    "model_id": "materialise-api",
+    "display_name": "Materialise 3D軟體",
+    "provider": "additive_mfg",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:18:57.498401+00"
+  },
+  {
+    "model_id": "stratasys-api",
+    "display_name": "Stratasys 3D列印",
+    "provider": "additive_mfg",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:18:57.498401+00"
+  },
+  {
+    "model_id": "arable-api",
+    "display_name": "Arable 農業感測器",
+    "provider": "agritech",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 05:56:37.119683+00"
+  },
+  {
+    "model_id": "climate-fieldview",
+    "display_name": "Climate FieldView 農業數據",
+    "provider": "agritech",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 05:56:37.119683+00"
+  },
+  {
+    "model_id": "john-deere-api",
+    "display_name": "John Deere 精準農業",
+    "provider": "agritech",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 05:56:37.119683+00"
+  },
+  {
+    "model_id": "aws-bedrock",
+    "display_name": "AWS Bedrock AI",
+    "provider": "ai_platform",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 05:50:50.83628+00"
+  },
+  {
+    "model_id": "azure-openai",
+    "display_name": "Azure OpenAI Service",
+    "provider": "ai_platform",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 05:50:50.83628+00"
+  },
+  {
+    "model_id": "gemini-cli",
+    "display_name": "Google Gemini CLI",
+    "provider": "ai_platform",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 05:50:50.83628+00"
+  },
+  {
+    "model_id": "google-vertex-ai",
+    "display_name": "Google Vertex AI",
+    "provider": "ai_platform",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 05:50:50.83628+00"
+  },
+  {
+    "model_id": "huggingface-sdk",
+    "display_name": "HuggingFace ML平台",
+    "provider": "ai_platform",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 05:50:50.83628+00"
+  },
+  {
+    "model_id": "openai-codex-cli",
+    "display_name": "OpenAI Codex CLI",
+    "provider": "ai_platform",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 05:50:50.83628+00"
+  },
+  {
+    "model_id": "algolia-sdk",
+    "display_name": "Algolia 搜尋即服務",
+    "provider": "analytics",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 05:50:50.83628+00"
+  },
+  {
+    "model_id": "amplitude-sdk",
+    "display_name": "Amplitude 產品分析",
+    "provider": "analytics",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 05:50:50.83628+00"
+  },
+  {
+    "model_id": "databricks-sdk",
+    "display_name": "Databricks 數據+AI平台",
+    "provider": "analytics",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 05:50:50.83628+00"
+  },
+  {
+    "model_id": "datadog-sdk",
+    "display_name": "Datadog 監控分析",
+    "provider": "analytics",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 05:50:50.83628+00"
+  },
+  {
+    "model_id": "elasticsearch-sdk",
+    "display_name": "Elasticsearch 搜尋引擎",
+    "provider": "analytics",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 05:50:50.83628+00"
+  },
+  {
+    "model_id": "bigquery-sdk",
+    "display_name": "Google BigQuery",
+    "provider": "analytics",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 05:50:50.83628+00"
+  },
+  {
+    "model_id": "grafana-sdk",
+    "display_name": "Grafana 儀表板",
+    "provider": "analytics",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 05:50:50.83628+00"
+  },
+  {
+    "model_id": "mixpanel-sdk",
+    "display_name": "Mixpanel 用戶分析",
+    "provider": "analytics",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 05:50:50.83628+00"
+  },
+  {
+    "model_id": "newrelic-sdk",
+    "display_name": "New Relic 效能監控",
+    "provider": "analytics",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 05:50:50.83628+00"
+  },
+  {
+    "model_id": "posthog-sdk",
+    "display_name": "PostHog 產品分析",
+    "provider": "analytics",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 05:50:50.83628+00"
+  },
+  {
+    "model_id": "snowflake-sdk",
+    "display_name": "Snowflake 數據雲",
+    "provider": "analytics",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 05:50:50.83628+00"
+  },
+  {
+    "model_id": "claude-haiku-4-5",
+    "display_name": "Claude Haiku 4.5",
+    "provider": "anthropic",
+    "tier": "fast",
+    "locked_by": "fired",
+    "is_available": false,
+    "created_at": "2026-02-14 21:44:09.071759+00"
+  },
+  {
+    "model_id": "claude-opus-4-6",
+    "display_name": "Claude Opus 4.6",
+    "provider": "anthropic",
+    "tier": "flagship",
+    "locked_by": "fired",
+    "is_available": false,
+    "created_at": "2026-02-14 21:44:09.071759+00"
+  },
+  {
+    "model_id": "claude-sonnet-4-5",
+    "display_name": "Claude Sonnet 4.5",
+    "provider": "anthropic",
+    "tier": "flagship",
+    "locked_by": "fired",
+    "is_available": false,
+    "created_at": "2026-02-14 21:44:09.071759+00"
+  },
+  {
+    "model_id": "apollo-graphql",
+    "display_name": "Apollo GraphQL",
+    "provider": "api_mgmt",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:14:44.133162+00"
+  },
+  {
+    "model_id": "apigee-sdk",
+    "display_name": "Google Apigee API管理",
+    "provider": "api_mgmt",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:14:44.133162+00"
+  },
+  {
+    "model_id": "graphql-sdk",
+    "display_name": "GraphQL 查詢語言",
+    "provider": "api_mgmt",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:14:44.133162+00"
+  },
+  {
+    "model_id": "hasura-sdk",
+    "display_name": "Hasura GraphQL 引擎",
+    "provider": "api_mgmt",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:14:44.133162+00"
+  },
+  {
+    "model_id": "kong-gateway",
+    "display_name": "Kong API 閘道",
+    "provider": "api_mgmt",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:14:44.133162+00"
+  },
+  {
+    "model_id": "mulesoft-sdk",
+    "display_name": "MuleSoft 整合平台",
+    "provider": "api_mgmt",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:14:44.133162+00"
+  },
+  {
+    "model_id": "postman-api",
+    "display_name": "Postman API 平台",
+    "provider": "api_mgmt",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:14:44.133162+00"
+  },
+  {
+    "model_id": "gojek-api",
+    "display_name": "Gojek 印尼超級APP",
+    "provider": "asia_pacific",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:18:57.498401+00"
+  },
+  {
+    "model_id": "grab-api",
+    "display_name": "Grab 東南亞超級APP",
+    "provider": "asia_pacific",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:18:57.498401+00"
+  },
+  {
+    "model_id": "kakao-sdk",
+    "display_name": "Kakao 韓國超級APP",
+    "provider": "asia_pacific",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:18:57.498401+00"
+  },
+  {
+    "model_id": "line-sdk",
+    "display_name": "LINE 通訊+支付",
+    "provider": "asia_pacific",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:18:57.498401+00"
+  },
+  {
+    "model_id": "paypay-api",
+    "display_name": "PayPay 日本支付",
+    "provider": "asia_pacific",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:18:57.498401+00"
+  },
+  {
+    "model_id": "wechat-sdk",
+    "display_name": "WeChat 微信生態",
+    "provider": "asia_pacific",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:18:57.498401+00"
+  },
+  {
+    "model_id": "pxpay-api",
+    "display_name": "全聯 PX Pay",
+    "provider": "asia_pacific",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:18:57.498401+00"
+  },
+  {
+    "model_id": "taiwan-pay-api",
+    "display_name": "台灣Pay",
+    "provider": "asia_pacific",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:18:57.498401+00"
+  },
+  {
+    "model_id": "alipay-sdk",
+    "display_name": "支付寶 Alipay",
+    "provider": "asia_pacific",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:18:57.498401+00"
+  },
+  {
+    "model_id": "jkopay-api",
+    "display_name": "街口支付 JKOPay",
+    "provider": "asia_pacific",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:18:57.498401+00"
+  },
+  {
+    "model_id": "autoware-sdk",
+    "display_name": "Autoware 開源自駕",
+    "provider": "autonomous",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:10:11.388035+00"
+  },
+  {
+    "model_id": "apollo-sdk",
+    "display_name": "Baidu Apollo 自駕",
+    "provider": "autonomous",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:10:11.388035+00"
+  },
+  {
+    "model_id": "nvidia-drive-sdk",
+    "display_name": "NVIDIA DRIVE 自駕平台",
+    "provider": "autonomous",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:10:11.388035+00"
+  },
+  {
+    "model_id": "amadeus-flight-api",
+    "display_name": "Amadeus 航班搜尋",
+    "provider": "aviation",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:25:07.850442+00"
+  },
+  {
+    "model_id": "cirium-api",
+    "display_name": "Cirium 航空數據",
+    "provider": "aviation",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:25:07.850442+00"
+  },
+  {
+    "model_id": "flightaware-api",
+    "display_name": "FlightAware 航班追蹤",
+    "provider": "aviation",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:25:07.850442+00"
+  },
+  {
+    "model_id": "perfect-corp-api",
+    "display_name": "Perfect Corp 美妝AI",
+    "provider": "beautytech",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:22:20.796973+00"
+  },
+  {
+    "model_id": "revieve-api",
+    "display_name": "Revieve AI美容顧問",
+    "provider": "beautytech",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:22:20.796973+00"
+  },
+  {
+    "model_id": "alphafold-api",
+    "display_name": "AlphaFold 蛋白質預測",
+    "provider": "biotech",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:10:11.388035+00"
+  },
+  {
+    "model_id": "biopython-sdk",
+    "display_name": "BioPython 生物資訊",
+    "provider": "biotech",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:10:11.388035+00"
+  },
+  {
+    "model_id": "deepchem-sdk",
+    "display_name": "DeepChem 藥物發現",
+    "provider": "biotech",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:10:11.388035+00"
+  },
+  {
+    "model_id": "ncbi-api",
+    "display_name": "NCBI 基因資料庫",
+    "provider": "biotech",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:10:11.388035+00"
+  },
+  {
+    "model_id": "nvidia-bionemo-sdk",
+    "display_name": "NVIDIA BioNeMo 生醫AI",
+    "provider": "biotech",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:10:11.388035+00"
+  },
+  {
+    "model_id": "openmm-sdk",
+    "display_name": "OpenMM 分子動力學",
+    "provider": "biotech",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:10:11.388035+00"
+  },
+  {
+    "model_id": "rdkit-sdk",
+    "display_name": "RDKit 分子模擬",
+    "provider": "biotech",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:10:11.388035+00"
+  },
+  {
+    "model_id": "alchemy-sdk",
+    "display_name": "Alchemy Web3 平台",
+    "provider": "blockchain",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:10:11.388035+00"
+  },
+  {
+    "model_id": "chainlink-sdk",
+    "display_name": "Chainlink 預言機",
+    "provider": "blockchain",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:10:11.388035+00"
+  },
+  {
+    "model_id": "ethereum-sdk",
+    "display_name": "Ethereum 以太坊",
+    "provider": "blockchain",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:10:11.388035+00"
+  },
+  {
+    "model_id": "hardhat-sdk",
+    "display_name": "Hardhat 開發工具",
+    "provider": "blockchain",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:10:11.388035+00"
+  },
+  {
+    "model_id": "hyperledger-fabric",
+    "display_name": "Hyperledger Fabric 企業鏈",
+    "provider": "blockchain",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:10:11.388035+00"
+  },
+  {
+    "model_id": "openzeppelin-sdk",
+    "display_name": "OpenZeppelin 安全合約",
+    "provider": "blockchain",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:10:11.388035+00"
+  },
+  {
+    "model_id": "polygon-sdk",
+    "display_name": "Polygon L2 擴展",
+    "provider": "blockchain",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:10:11.388035+00"
+  },
+  {
+    "model_id": "solana-sdk",
+    "display_name": "Solana 高速鏈",
+    "provider": "blockchain",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:10:11.388035+00"
+  },
+  {
+    "model_id": "uniswap-sdk",
+    "display_name": "Uniswap DEX 協議",
+    "provider": "blockchain",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:10:11.388035+00"
+  },
+  {
+    "model_id": "web3js-sdk",
+    "display_name": "Web3.js SDK",
+    "provider": "blockchain",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:10:11.388035+00"
+  },
+  {
+    "model_id": "brightwheel-api",
+    "display_name": "Brightwheel 托育管理",
+    "provider": "childcare",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:24:23.06087+00"
+  },
+  {
+    "model_id": "himama-api",
+    "display_name": "HiMama 幼教平台",
+    "provider": "childcare",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:24:23.06087+00"
+  },
+  {
+    "model_id": "procare-api",
+    "display_name": "Procare 兒童照護",
+    "provider": "childcare",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:24:23.06087+00"
+  },
+  {
+    "model_id": "climatiq-api",
+    "display_name": "Climatiq 碳排計算",
+    "provider": "climate",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:18:57.498401+00"
+  },
+  {
+    "model_id": "pachama-api",
+    "display_name": "Pachama 碳信用",
+    "provider": "climate",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:18:57.498401+00"
+  },
+  {
+    "model_id": "sinai-api",
+    "display_name": "Sinai 碳管理",
+    "provider": "climate",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:18:57.498401+00"
+  },
+  {
+    "model_id": "watershed-api",
+    "display_name": "Watershed ESG報告",
+    "provider": "climate",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:18:57.498401+00"
+  },
+  {
+    "model_id": "aws-sdk",
+    "display_name": "AWS 亞馬遜雲",
+    "provider": "cloud",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 05:50:50.83628+00"
+  },
+  {
+    "model_id": "cloudflare-sdk",
+    "display_name": "Cloudflare 邊緣雲",
+    "provider": "cloud",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 05:50:50.83628+00"
+  },
+  {
+    "model_id": "digitalocean-sdk",
+    "display_name": "DigitalOcean 雲端",
+    "provider": "cloud",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 05:50:50.83628+00"
+  },
+  {
+    "model_id": "fly-io-sdk",
+    "display_name": "Fly.io 邊緣部署",
+    "provider": "cloud",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 05:50:50.83628+00"
+  },
+  {
+    "model_id": "gcp-sdk",
+    "display_name": "Google Cloud Platform",
+    "provider": "cloud",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 05:50:50.83628+00"
+  },
+  {
+    "model_id": "azure-sdk",
+    "display_name": "Microsoft Azure",
+    "provider": "cloud",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 05:50:50.83628+00"
+  },
+  {
+    "model_id": "netlify-sdk",
+    "display_name": "Netlify 前端雲",
+    "provider": "cloud",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 05:50:50.83628+00"
+  },
+  {
+    "model_id": "pulumi-sdk",
+    "display_name": "Pulumi IaC 平台",
+    "provider": "cloud",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 05:50:50.83628+00"
+  },
+  {
+    "model_id": "railway-sdk",
+    "display_name": "Railway 雲端部署",
+    "provider": "cloud",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 05:50:50.83628+00"
+  },
+  {
+    "model_id": "terraform-sdk",
+    "display_name": "Terraform 基礎設施即代碼",
+    "provider": "cloud",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 05:50:50.83628+00"
+  },
+  {
+    "model_id": "vercel-sdk",
+    "display_name": "Vercel 前端雲",
+    "provider": "cloud",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 05:50:50.83628+00"
+  },
+  {
+    "model_id": "contentful-cli",
+    "display_name": "Contentful CMS",
+    "provider": "cms",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 05:50:50.83628+00"
+  },
+  {
+    "model_id": "directus-cli",
+    "display_name": "Directus 開源 CMS",
+    "provider": "cms",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 05:50:50.83628+00"
+  },
+  {
+    "model_id": "ghost-cli",
+    "display_name": "Ghost CMS",
+    "provider": "cms",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 05:50:50.83628+00"
+  },
+  {
+    "model_id": "sanity-cli",
+    "display_name": "Sanity CMS",
+    "provider": "cms",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 05:50:50.83628+00"
+  },
+  {
+    "model_id": "strapi-cli",
+    "display_name": "Strapi 開源 CMS",
+    "provider": "cms",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 05:50:50.83628+00"
+  },
+  {
+    "model_id": "discord-sdk",
+    "display_name": "Discord 社群通訊",
+    "provider": "communication",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 05:50:50.83628+00"
+  },
+  {
+    "model_id": "teams-sdk",
+    "display_name": "Microsoft Teams",
+    "provider": "communication",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 05:50:50.83628+00"
+  },
+  {
+    "model_id": "sendgrid-sdk",
+    "display_name": "SendGrid 電郵服務",
+    "provider": "communication",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 05:50:50.83628+00"
+  },
+  {
+    "model_id": "slack-sdk",
+    "display_name": "Slack 企業通訊",
+    "provider": "communication",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 05:50:50.83628+00"
+  },
+  {
+    "model_id": "twilio-sdk",
+    "display_name": "Twilio 通訊 API",
+    "provider": "communication",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 05:50:50.83628+00"
+  },
+  {
+    "model_id": "zoom-sdk",
+    "display_name": "Zoom 視訊會議",
+    "provider": "communication",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 05:50:50.83628+00"
+  },
+  {
+    "model_id": "autodesk-forge",
+    "display_name": "Autodesk Forge/APS",
+    "provider": "contech",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:14:44.133162+00"
+  },
+  {
+    "model_id": "bim360-api",
+    "display_name": "BIM 360 建築資訊",
+    "provider": "contech",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:14:44.133162+00"
+  },
+  {
+    "model_id": "nvidia-omniverse-aec",
+    "display_name": "NVIDIA Omniverse AEC",
+    "provider": "contech",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:14:44.133162+00"
+  },
+  {
+    "model_id": "plangrid-api",
+    "display_name": "PlanGrid 工地管理",
+    "provider": "contech",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:14:44.133162+00"
+  },
+  {
+    "model_id": "procore-api",
+    "display_name": "Procore 營建管理",
+    "provider": "contech",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:14:44.133162+00"
+  },
+  {
+    "model_id": "rocket-x-free",
+    "display_name": "Rocket X (Free Beta)",
+    "provider": "cutting_edge_lab",
+    "tier": "flagship",
+    "locked_by": null,
+    "is_available": true,
+    "created_at": "2026-02-13 17:58:48.315967+00"
+  },
+  {
+    "model_id": "cloudflare-zero-trust",
+    "display_name": "Cloudflare Zero Trust",
+    "provider": "cybersecurity",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:10:11.388035+00"
+  },
+  {
+    "model_id": "crowdstrike-api",
+    "display_name": "CrowdStrike 端點安全",
+    "provider": "cybersecurity",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:10:11.388035+00"
+  },
+  {
+    "model_id": "hashicorp-vault",
+    "display_name": "HashiCorp Vault 密鑰管理",
+    "provider": "cybersecurity",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:10:11.388035+00"
+  },
+  {
+    "model_id": "palo-alto-api",
+    "display_name": "Palo Alto Networks",
+    "provider": "cybersecurity",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:10:11.388035+00"
+  },
+  {
+    "model_id": "snyk-cli",
+    "display_name": "Snyk 漏洞掃描",
+    "provider": "cybersecurity",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:10:11.388035+00"
+  },
+  {
+    "model_id": "sonarqube-sdk",
+    "display_name": "SonarQube 代碼品質",
+    "provider": "cybersecurity",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:10:11.388035+00"
+  },
+  {
+    "model_id": "splunk-sdk",
+    "display_name": "Splunk 安全分析",
+    "provider": "cybersecurity",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:10:11.388035+00"
+  },
+  {
+    "model_id": "kafka-sdk",
+    "display_name": "Apache Kafka 串流",
+    "provider": "database",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 05:50:50.83628+00"
+  },
+  {
+    "model_id": "convex-sdk",
+    "display_name": "Convex 即時資料庫",
+    "provider": "database",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 05:50:50.83628+00"
+  },
+  {
+    "model_id": "mongodb-sdk",
+    "display_name": "MongoDB 文件資料庫",
+    "provider": "database",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 05:50:50.83628+00"
+  },
+  {
+    "model_id": "neon-sdk",
+    "display_name": "Neon Serverless Postgres",
+    "provider": "database",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 05:50:50.83628+00"
+  },
+  {
+    "model_id": "planetscale-sdk",
+    "display_name": "PlanetScale MySQL雲",
+    "provider": "database",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 05:50:50.83628+00"
+  },
+  {
+    "model_id": "redis-sdk",
+    "display_name": "Redis 快取資料庫",
+    "provider": "database",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 05:50:50.83628+00"
+  },
+  {
+    "model_id": "supabase-sdk",
+    "display_name": "Supabase 資料庫雲",
+    "provider": "database",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 05:50:50.83628+00"
+  },
+  {
+    "model_id": "upstash-sdk",
+    "display_name": "Upstash Serverless Redis",
+    "provider": "database",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 05:50:50.83628+00"
+  },
+  {
+    "model_id": "deepseek-r1",
+    "display_name": "DeepSeek R1",
+    "provider": "deepseek",
+    "tier": "flagship",
+    "locked_by": "founder",
+    "is_available": true,
+    "created_at": "2026-02-14 10:36:29.928282+00"
+  },
+  {
+    "model_id": "deepseek-v3",
+    "display_name": "DeepSeek V3",
+    "provider": "deepseek",
+    "tier": "standard",
+    "locked_by": "founder",
+    "is_available": true,
+    "created_at": "2026-02-14 10:36:29.928282+00"
+  },
+  {
+    "model_id": "anduril-api",
+    "display_name": "Anduril 自主防禦",
+    "provider": "defense",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:20:26.640018+00"
+  },
+  {
+    "model_id": "bae-systems-api",
+    "display_name": "BAE Systems 國防電子",
+    "provider": "defense",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:20:26.640018+00"
+  },
+  {
+    "model_id": "lockheed-martin-api",
+    "display_name": "Lockheed Martin 國防科技",
+    "provider": "defense",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:20:26.640018+00"
+  },
+  {
+    "model_id": "northrop-grumman-api",
+    "display_name": "Northrop Grumman 航太",
+    "provider": "defense",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:20:26.640018+00"
+  },
+  {
+    "model_id": "nvidia-clara-defense",
+    "display_name": "NVIDIA Clara 國防AI",
+    "provider": "defense",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:20:26.640018+00"
+  },
+  {
+    "model_id": "palantir-gotham",
+    "display_name": "Palantir Gotham 情報分析",
+    "provider": "defense",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:20:26.640018+00"
+  },
+  {
+    "model_id": "raytheon-api",
+    "display_name": "Raytheon 防禦系統",
+    "provider": "defense",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:20:26.640018+00"
+  },
+  {
+    "model_id": "shield-ai-api",
+    "display_name": "Shield AI 自主飛行",
+    "provider": "defense",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:20:26.640018+00"
+  },
+  {
+    "model_id": "firebase-cli",
+    "display_name": "Firebase 全端平台",
+    "provider": "devops",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 05:50:50.83628+00"
+  },
+  {
+    "model_id": "gitlab-cli",
+    "display_name": "GitLab CI/CD",
+    "provider": "devops",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 05:50:50.83628+00"
+  },
+  {
+    "model_id": "n8n-cli",
+    "display_name": "n8n 自動化工作流",
+    "provider": "devops",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 05:50:50.83628+00"
+  },
+  {
+    "model_id": "pagerduty-cli",
+    "display_name": "PagerDuty 事件管理",
+    "provider": "devops",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 05:50:50.83628+00"
+  },
+  {
+    "model_id": "sentry-cli",
+    "display_name": "Sentry 錯誤監控",
+    "provider": "devops",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 05:50:50.83628+00"
+  },
+  {
+    "model_id": "turbo-cli",
+    "display_name": "Turborepo 單體倉庫",
+    "provider": "devops",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 05:50:50.83628+00"
+  },
+  {
+    "model_id": "zapier-cli",
+    "display_name": "Zapier 自動化",
+    "provider": "devops",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 05:50:50.83628+00"
+  },
+  {
+    "model_id": "airmap-api",
+    "display_name": "AirMap 空域管理",
+    "provider": "drone",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:18:57.498401+00"
+  },
+  {
+    "model_id": "dji-sdk",
+    "display_name": "DJI 大疆無人機SDK",
+    "provider": "drone",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:18:57.498401+00"
+  },
+  {
+    "model_id": "skydio-api",
+    "display_name": "Skydio 自主無人機",
+    "provider": "drone",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:18:57.498401+00"
+  },
+  {
+    "model_id": "wing-api",
+    "display_name": "Wing 無人機配送",
+    "provider": "drone",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:18:57.498401+00"
+  },
+  {
+    "model_id": "bigcommerce-api",
+    "display_name": "BigCommerce 企業電商",
+    "provider": "ecommerce",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 05:56:37.119683+00"
+  },
+  {
+    "model_id": "magento-api",
+    "display_name": "Magento/Adobe Commerce",
+    "provider": "ecommerce",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 05:56:37.119683+00"
+  },
+  {
+    "model_id": "shopify-sdk",
+    "display_name": "Shopify 電商平台",
+    "provider": "ecommerce",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 05:56:37.119683+00"
+  },
+  {
+    "model_id": "woocommerce-api",
+    "display_name": "WooCommerce 電商",
+    "provider": "ecommerce",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 05:56:37.119683+00"
+  },
+  {
+    "model_id": "blackboard-api",
+    "display_name": "Blackboard 教育平台",
+    "provider": "edtech",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 05:56:37.119683+00"
+  },
+  {
+    "model_id": "canvas-lms-api",
+    "display_name": "Canvas LMS 學習管理",
+    "provider": "edtech",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 05:56:37.119683+00"
+  },
+  {
+    "model_id": "coursera-api",
+    "display_name": "Coursera 線上教育",
+    "provider": "edtech",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 05:56:37.119683+00"
+  },
+  {
+    "model_id": "google-classroom",
+    "display_name": "Google Classroom API",
+    "provider": "edtech",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 05:56:37.119683+00"
+  },
+  {
+    "model_id": "khan-academy-api",
+    "display_name": "Khan Academy 教育API",
+    "provider": "edtech",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 05:56:37.119683+00"
+  },
+  {
+    "model_id": "moodle-api",
+    "display_name": "Moodle 開源教育平台",
+    "provider": "edtech",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 05:56:37.119683+00"
+  },
+  {
+    "model_id": "d2l-brightspace-api",
+    "display_name": "D2L Brightspace LMS",
+    "provider": "education",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:24:23.06087+00"
+  },
+  {
+    "model_id": "docebo-api",
+    "display_name": "Docebo AI學習平台",
+    "provider": "education",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:24:23.06087+00"
+  },
+  {
+    "model_id": "moodle-lms-api",
+    "display_name": "Moodle LMS 開源教育",
+    "provider": "education",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:24:23.06087+00"
+  },
+  {
+    "model_id": "skillshare-api",
+    "display_name": "Skillshare 創意學習",
+    "provider": "education",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:24:23.06087+00"
+  },
+  {
+    "model_id": "teachable-api",
+    "display_name": "Teachable 線上課程",
+    "provider": "education",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:24:23.06087+00"
+  },
+  {
+    "model_id": "udemy-api",
+    "display_name": "Udemy 企業學習",
+    "provider": "education",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:24:23.06087+00"
+  },
+  {
+    "model_id": "caremerge-api",
+    "display_name": "CarePredict AI長照",
+    "provider": "eldercare",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:24:23.06087+00"
+  },
+  {
+    "model_id": "pointclickcare-api",
+    "display_name": "PointClickCare 長照EHR",
+    "provider": "eldercare",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:24:23.06087+00"
+  },
+  {
+    "model_id": "yardi-senior-api",
+    "display_name": "Yardi Senior Living",
+    "provider": "eldercare",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:24:23.06087+00"
+  },
+  {
+    "model_id": "autogrid-api",
+    "display_name": "AutoGrid 能源AI",
+    "provider": "energy",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 05:56:37.119683+00"
+  },
+  {
+    "model_id": "enphase-api",
+    "display_name": "Enphase 太陽能API",
+    "provider": "energy",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 05:56:37.119683+00"
+  },
+  {
+    "model_id": "opower-api",
+    "display_name": "Oracle Opower 能源分析",
+    "provider": "energy",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 05:56:37.119683+00"
+  },
+  {
+    "model_id": "schneider-ecostruxure",
+    "display_name": "Schneider EcoStruxure",
+    "provider": "energy",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 05:56:37.119683+00"
+  },
+  {
+    "model_id": "siemens-energy-sdk",
+    "display_name": "Siemens Energy 數位化",
+    "provider": "energy",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 05:56:37.119683+00"
+  },
+  {
+    "model_id": "tesla-energy-api",
+    "display_name": "Tesla Energy API",
+    "provider": "energy",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 05:56:37.119683+00"
+  },
+  {
+    "model_id": "auth0-sdk",
+    "display_name": "Auth0 認證平台",
+    "provider": "enterprise",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 05:50:50.83628+00"
+  },
+  {
+    "model_id": "hubspot-sdk",
+    "display_name": "HubSpot 行銷+CRM",
+    "provider": "enterprise",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 05:50:50.83628+00"
+  },
+  {
+    "model_id": "dynamics-365",
+    "display_name": "Microsoft Dynamics 365",
+    "provider": "enterprise",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 05:50:50.83628+00"
+  },
+  {
+    "model_id": "microsoft-graph",
+    "display_name": "Microsoft Graph API",
+    "provider": "enterprise",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 05:50:50.83628+00"
+  },
+  {
+    "model_id": "okta-sdk",
+    "display_name": "Okta 身份驗證",
+    "provider": "enterprise",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 05:50:50.83628+00"
+  },
+  {
+    "model_id": "oracle-oci",
+    "display_name": "Oracle OCI 雲端",
+    "provider": "enterprise",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 05:50:50.83628+00"
+  },
+  {
+    "model_id": "palantir-foundry",
+    "display_name": "Palantir Foundry 數據平台",
+    "provider": "enterprise",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 05:50:50.83628+00"
+  },
+  {
+    "model_id": "salesforce-sdk",
+    "display_name": "Salesforce CRM",
+    "provider": "enterprise",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 05:50:50.83628+00"
+  },
+  {
+    "model_id": "sap-cloud-sdk",
+    "display_name": "SAP Cloud SDK",
+    "provider": "enterprise",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 05:50:50.83628+00"
+  },
+  {
+    "model_id": "servicenow-api",
+    "display_name": "ServiceNow ITSM",
+    "provider": "enterprise",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 05:50:50.83628+00"
+  },
+  {
+    "model_id": "workday-api",
+    "display_name": "Workday 人資管理",
+    "provider": "enterprise",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 05:50:50.83628+00"
+  },
+  {
+    "model_id": "apple-music-api",
+    "display_name": "Apple Music API",
+    "provider": "entertainment",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:14:44.133162+00"
+  },
+  {
+    "model_id": "disney-api",
+    "display_name": "Disney+ 串流API",
+    "provider": "entertainment",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:14:44.133162+00"
+  },
+  {
+    "model_id": "netflix-api",
+    "display_name": "Netflix 內容平台",
+    "provider": "entertainment",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:14:44.133162+00"
+  },
+  {
+    "model_id": "spotify-web-api",
+    "display_name": "Spotify Web API",
+    "provider": "entertainment",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:14:44.133162+00"
+  },
+  {
+    "model_id": "adobe-sign-api",
+    "display_name": "Adobe Sign",
+    "provider": "esign",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:18:57.498401+00"
+  },
+  {
+    "model_id": "docusign-esign-api",
+    "display_name": "DocuSign 電子簽名",
+    "provider": "esign",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:18:57.498401+00"
+  },
+  {
+    "model_id": "hellosign-api",
+    "display_name": "Dropbox Sign",
+    "provider": "esign",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:18:57.498401+00"
+  },
+  {
+    "model_id": "planning-center-api",
+    "display_name": "Planning Center 教會管理",
+    "provider": "faith",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:24:23.06087+00"
+  },
+  {
+    "model_id": "pushpay-api",
+    "display_name": "Pushpay 教會捐款",
+    "provider": "faith",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:24:23.06087+00"
+  },
+  {
+    "model_id": "shopify-fashion",
+    "display_name": "Shopify Fashion SDK",
+    "provider": "fashiontech",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:22:20.796973+00"
+  },
+  {
+    "model_id": "stitch-fix-api",
+    "display_name": "Stitch Fix AI穿搭",
+    "provider": "fashiontech",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:22:20.796973+00"
+  },
+  {
+    "model_id": "bloomberg-api",
+    "display_name": "Bloomberg 金融終端",
+    "provider": "fintech",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 05:50:50.83628+00"
+  },
+  {
+    "model_id": "docusign-sdk",
+    "display_name": "DocuSign 電子簽名",
+    "provider": "fintech",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 05:50:50.83628+00"
+  },
+  {
+    "model_id": "freshbooks-sdk",
+    "display_name": "FreshBooks 發票管理",
+    "provider": "fintech",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 05:50:50.83628+00"
+  },
+  {
+    "model_id": "plaid-sdk",
+    "display_name": "Plaid 金融數據",
+    "provider": "fintech",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 05:50:50.83628+00"
+  },
+  {
+    "model_id": "quickbooks-sdk",
+    "display_name": "QuickBooks 企業會計",
+    "provider": "fintech",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 05:50:50.83628+00"
+  },
+  {
+    "model_id": "refinitiv-api",
+    "display_name": "Refinitiv 金融數據",
+    "provider": "fintech",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 05:50:50.83628+00"
+  },
+  {
+    "model_id": "stripe-sdk",
+    "display_name": "Stripe 支付平台",
+    "provider": "fintech",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 05:50:50.83628+00"
+  },
+  {
+    "model_id": "xero-sdk",
+    "display_name": "Xero 會計平台",
+    "provider": "fintech",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 05:50:50.83628+00"
+  },
+  {
+    "model_id": "doordash-api",
+    "display_name": "DoorDash 外送API",
+    "provider": "foodtech",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:14:44.133162+00"
+  },
+  {
+    "model_id": "folio3-foodtech",
+    "display_name": "Folio3 食品供應鏈",
+    "provider": "foodtech",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:14:44.133162+00"
+  },
+  {
+    "model_id": "toast-api",
+    "display_name": "Toast 餐飲POS",
+    "provider": "foodtech",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:14:44.133162+00"
+  },
+  {
+    "model_id": "uber-eats-api",
+    "display_name": "Uber Eats 外送API",
+    "provider": "foodtech",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:14:44.133162+00"
+  },
+  {
+    "model_id": "angular-cli",
+    "display_name": "Angular 框架",
+    "provider": "framework",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 05:50:50.83628+00"
+  },
+  {
+    "model_id": "drizzle-cli",
+    "display_name": "Drizzle ORM",
+    "provider": "framework",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 05:50:50.83628+00"
+  },
+  {
+    "model_id": "expo-cli",
+    "display_name": "Expo React Native 行動端",
+    "provider": "framework",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 05:50:50.83628+00"
+  },
+  {
+    "model_id": "ionic-cli",
+    "display_name": "Ionic 跨平台框架",
+    "provider": "framework",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 05:50:50.83628+00"
+  },
+  {
+    "model_id": "nestjs-cli",
+    "display_name": "NestJS 後端框架",
+    "provider": "framework",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 05:50:50.83628+00"
+  },
+  {
+    "model_id": "nextjs-cli",
+    "display_name": "Next.js React 框架",
+    "provider": "framework",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 05:50:50.83628+00"
+  },
+  {
+    "model_id": "nuxt-cli",
+    "display_name": "Nuxt.js Vue 框架",
+    "provider": "framework",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 05:50:50.83628+00"
+  },
+  {
+    "model_id": "prisma-cli",
+    "display_name": "Prisma ORM",
+    "provider": "framework",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 05:50:50.83628+00"
+  },
+  {
+    "model_id": "remix-cli",
+    "display_name": "Remix 全端框架",
+    "provider": "framework",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 05:50:50.83628+00"
+  },
+  {
+    "model_id": "svelte-cli",
+    "display_name": "SvelteKit 框架",
+    "provider": "framework",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 05:50:50.83628+00"
+  },
+  {
+    "model_id": "godot-sdk",
+    "display_name": "Godot 開源引擎",
+    "provider": "gamedev",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:10:11.388035+00"
+  },
+  {
+    "model_id": "steamworks-api",
+    "display_name": "Steamworks API",
+    "provider": "gamedev",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:10:11.388035+00"
+  },
+  {
+    "model_id": "unity-sdk",
+    "display_name": "Unity 遊戲引擎",
+    "provider": "gamedev",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:10:11.388035+00"
+  },
+  {
+    "model_id": "unreal-sdk",
+    "display_name": "Unreal Engine",
+    "provider": "gamedev",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:10:11.388035+00"
+  },
+  {
+    "model_id": "gemini-3-flash",
+    "display_name": "Gemini 3 Flash",
+    "provider": "google",
+    "tier": "fast",
+    "locked_by": "founder",
+    "is_available": true,
+    "created_at": "2026-02-14 10:36:29.928282+00"
+  },
+  {
+    "model_id": "gemini-3-pro",
+    "display_name": "Gemini 3 Pro",
+    "provider": "google",
+    "tier": "flagship",
+    "locked_by": "founder",
+    "is_available": true,
+    "created_at": "2026-02-14 10:36:29.928282+00"
+  },
+  {
+    "model_id": "govcloud-aws",
+    "display_name": "AWS GovCloud 政府雲",
+    "provider": "govtech",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 05:56:37.119683+00"
+  },
+  {
+    "model_id": "azure-government",
+    "display_name": "Azure Government 政府雲",
+    "provider": "govtech",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 05:56:37.119683+00"
+  },
+  {
+    "model_id": "digitalgov-api",
+    "display_name": "DigitalGov 數位政府",
+    "provider": "govtech",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 05:56:37.119683+00"
+  },
+  {
+    "model_id": "gcp-public-sector",
+    "display_name": "GCP 公部門解決方案",
+    "provider": "govtech",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 05:56:37.119683+00"
+  },
+  {
+    "model_id": "twgov-api",
+    "display_name": "台灣政府開放資料 API",
+    "provider": "govtech",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 05:56:37.119683+00"
+  },
+  {
+    "model_id": "cerner-api",
+    "display_name": "Cerner 醫療系統 API",
+    "provider": "healthtech",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 05:50:50.83628+00"
+  },
+  {
+    "model_id": "dicom-api",
+    "display_name": "DICOM 醫學影像標準",
+    "provider": "healthtech",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 05:50:50.83628+00"
+  },
+  {
+    "model_id": "epic-fhir",
+    "display_name": "Epic FHIR 電子病歷",
+    "provider": "healthtech",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 05:50:50.83628+00"
+  },
+  {
+    "model_id": "fhir-sdk",
+    "display_name": "FHIR 醫療資料標準",
+    "provider": "healthtech",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 05:50:50.83628+00"
+  },
+  {
+    "model_id": "google-healthcare-api",
+    "display_name": "Google Cloud Healthcare API",
+    "provider": "healthtech",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 05:50:50.83628+00"
+  },
+  {
+    "model_id": "hl7-v2",
+    "display_name": "HL7 v2 醫療通訊標準",
+    "provider": "healthtech",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 05:50:50.83628+00"
+  },
+  {
+    "model_id": "redox-engine",
+    "display_name": "Redox 醫療整合引擎",
+    "provider": "healthtech",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 05:50:50.83628+00"
+  },
+  {
+    "model_id": "airbnb-api",
+    "display_name": "Airbnb API",
+    "provider": "hospitality",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:22:20.796973+00"
+  },
+  {
+    "model_id": "booking-api",
+    "display_name": "Booking.com API",
+    "provider": "hospitality",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:22:20.796973+00"
+  },
+  {
+    "model_id": "cloudbeds-api",
+    "display_name": "Cloudbeds 雲端飯店",
+    "provider": "hospitality",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:22:20.796973+00"
+  },
+  {
+    "model_id": "mews-api",
+    "display_name": "Mews PMS 飯店管理",
+    "provider": "hospitality",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:22:20.796973+00"
+  },
+  {
+    "model_id": "oracle-hospitality-api",
+    "display_name": "Oracle Hospitality OPERA",
+    "provider": "hospitality",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:22:20.796973+00"
+  },
+  {
+    "model_id": "adp-api",
+    "display_name": "ADP 企業人資",
+    "provider": "hrtech",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:14:44.133162+00"
+  },
+  {
+    "model_id": "bamboohr-api",
+    "display_name": "BambooHR 人資管理",
+    "provider": "hrtech",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:14:44.133162+00"
+  },
+  {
+    "model_id": "finch-api",
+    "display_name": "Finch 人資薪資統一API",
+    "provider": "hrtech",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:14:44.133162+00"
+  },
+  {
+    "model_id": "greenhouse-api",
+    "display_name": "Greenhouse 招募系統",
+    "provider": "hrtech",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:14:44.133162+00"
+  },
+  {
+    "model_id": "gusto-api",
+    "display_name": "Gusto 薪資管理",
+    "provider": "hrtech",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:14:44.133162+00"
+  },
+  {
+    "model_id": "lever-api",
+    "display_name": "Lever 招募平台",
+    "provider": "hrtech",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:14:44.133162+00"
+  },
+  {
+    "model_id": "paycor-api",
+    "display_name": "Paycor 薪資HR",
+    "provider": "hrtech",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:14:44.133162+00"
+  },
+  {
+    "model_id": "jumio-api",
+    "display_name": "Jumio KYC",
+    "provider": "identity",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:18:57.498401+00"
+  },
+  {
+    "model_id": "onfido-api",
+    "display_name": "Onfido AI身份驗證",
+    "provider": "identity",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:18:57.498401+00"
+  },
+  {
+    "model_id": "persona-api",
+    "display_name": "Persona KYC",
+    "provider": "identity",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:18:57.498401+00"
+  },
+  {
+    "model_id": "sumsub-api",
+    "display_name": "Sumsub KYC/AML",
+    "provider": "identity",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:18:57.498401+00"
+  },
+  {
+    "model_id": "betfair-api",
+    "display_name": "Betfair 博弈交易所",
+    "provider": "igaming",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:25:07.850442+00"
+  },
+  {
+    "model_id": "draftkings-api",
+    "display_name": "DraftKings 運動博弈",
+    "provider": "igaming",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:25:07.850442+00"
+  },
+  {
+    "model_id": "evolution-api",
+    "display_name": "Evolution 真人荷官",
+    "provider": "igaming",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:25:07.850442+00"
+  },
+  {
+    "model_id": "fanduel-api",
+    "display_name": "FanDuel 運動博弈",
+    "provider": "igaming",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:25:07.850442+00"
+  },
+  {
+    "model_id": "sportradar-api",
+    "display_name": "Sportradar 體育數據",
+    "provider": "igaming",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:25:07.850442+00"
+  },
+  {
+    "model_id": "duck-creek-api",
+    "display_name": "Duck Creek 保險平台",
+    "provider": "insurtech",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 05:56:37.119683+00"
+  },
+  {
+    "model_id": "guidewire-sdk",
+    "display_name": "Guidewire 保險核心系統",
+    "provider": "insurtech",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 05:56:37.119683+00"
+  },
+  {
+    "model_id": "lemonade-api",
+    "display_name": "Lemonade 保險科技",
+    "provider": "insurtech",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 05:56:37.119683+00"
+  },
+  {
+    "model_id": "terminal-telematics",
+    "display_name": "Terminal 車隊保險數據",
+    "provider": "insurtech",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 05:56:37.119683+00"
+  },
+  {
+    "model_id": "arduino-cli",
+    "display_name": "Arduino CLI",
+    "provider": "iot",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:10:11.388035+00"
+  },
+  {
+    "model_id": "aws-iot-sdk",
+    "display_name": "AWS IoT Core",
+    "provider": "iot",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:10:11.388035+00"
+  },
+  {
+    "model_id": "azure-iot-sdk",
+    "display_name": "Azure IoT Hub",
+    "provider": "iot",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:10:11.388035+00"
+  },
+  {
+    "model_id": "gcp-iot-sdk",
+    "display_name": "Google Cloud IoT",
+    "provider": "iot",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:10:11.388035+00"
+  },
+  {
+    "model_id": "mqtt-sdk",
+    "display_name": "MQTT 物聯網協議",
+    "provider": "iot",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:10:11.388035+00"
+  },
+  {
+    "model_id": "nvidia-jetson-sdk",
+    "display_name": "NVIDIA Jetson 邊緣AI",
+    "provider": "iot",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:10:11.388035+00"
+  },
+  {
+    "model_id": "particle-sdk",
+    "display_name": "Particle IoT 平台",
+    "provider": "iot",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:10:11.388035+00"
+  },
+  {
+    "model_id": "clio-api",
+    "display_name": "Clio 法律事務所管理",
+    "provider": "legaltech",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 05:56:37.119683+00"
+  },
+  {
+    "model_id": "docassemble-sdk",
+    "display_name": "Docassemble 法律文件自動化",
+    "provider": "legaltech",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 05:56:37.119683+00"
+  },
+  {
+    "model_id": "lexi-ai",
+    "display_name": "Lexi AI 企業法務",
+    "provider": "legaltech",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 05:56:37.119683+00"
+  },
+  {
+    "model_id": "lexisnexis-api",
+    "display_name": "LexisNexis 法律資料庫",
+    "provider": "legaltech",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 05:56:37.119683+00"
+  },
+  {
+    "model_id": "westlaw-api",
+    "display_name": "Westlaw 法律搜尋引擎",
+    "provider": "legaltech",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 05:56:37.119683+00"
+  },
+  {
+    "model_id": "easypost-api",
+    "display_name": "EasyPost 物流API",
+    "provider": "logistics",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 05:56:37.119683+00"
+  },
+  {
+    "model_id": "flexport-api",
+    "display_name": "Flexport 全球供應鏈",
+    "provider": "logistics",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 05:56:37.119683+00"
+  },
+  {
+    "model_id": "oracle-logistics",
+    "display_name": "Oracle 物流雲",
+    "provider": "logistics",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 05:56:37.119683+00"
+  },
+  {
+    "model_id": "project44-api",
+    "display_name": "project44 供應鏈可視化",
+    "provider": "logistics",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 05:56:37.119683+00"
+  },
+  {
+    "model_id": "sap-tm",
+    "display_name": "SAP TM 運輸管理",
+    "provider": "logistics",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 05:56:37.119683+00"
+  },
+  {
+    "model_id": "shippo-api",
+    "display_name": "Shippo 物流寄送",
+    "provider": "logistics",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 05:56:37.119683+00"
+  },
+  {
+    "model_id": "farfetch-api",
+    "display_name": "Farfetch 奢侈品電商",
+    "provider": "luxury",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:22:20.796973+00"
+  },
+  {
+    "model_id": "mytheresa-api",
+    "display_name": "Mytheresa 精品平台",
+    "provider": "luxury",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:22:20.796973+00"
+  },
+  {
+    "model_id": "ge-predix",
+    "display_name": "GE Predix 工業平台",
+    "provider": "manufacturing",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 05:56:37.119683+00"
+  },
+  {
+    "model_id": "nvidia-omniverse-mfg",
+    "display_name": "NVIDIA Omniverse 製造數位雙生",
+    "provider": "manufacturing",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 05:56:37.119683+00"
+  },
+  {
+    "model_id": "ptc-thingworx",
+    "display_name": "PTC ThingWorx 工業IoT",
+    "provider": "manufacturing",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 05:56:37.119683+00"
+  },
+  {
+    "model_id": "rockwell-factorytalk",
+    "display_name": "Rockwell FactoryTalk",
+    "provider": "manufacturing",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 05:56:37.119683+00"
+  },
+  {
+    "model_id": "sap-me",
+    "display_name": "SAP ME 製造執行",
+    "provider": "manufacturing",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 05:56:37.119683+00"
+  },
+  {
+    "model_id": "siemens-mindsphere",
+    "display_name": "Siemens MindSphere IoT",
+    "provider": "manufacturing",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 05:56:37.119683+00"
+  },
+  {
+    "model_id": "google-maps-platform",
+    "display_name": "Google Maps Platform",
+    "provider": "mapping",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:22:20.796973+00"
+  },
+  {
+    "model_id": "here-platform",
+    "display_name": "HERE 地圖平台",
+    "provider": "mapping",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:22:20.796973+00"
+  },
+  {
+    "model_id": "mapbox-platform",
+    "display_name": "Mapbox 地圖平台",
+    "provider": "mapping",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:22:20.796973+00"
+  },
+  {
+    "model_id": "tomtom-api",
+    "display_name": "TomTom 導航API",
+    "provider": "mapping",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:22:20.796973+00"
+  },
+  {
+    "model_id": "cosco-api",
+    "display_name": "COSCO 中遠海運",
+    "provider": "maritime",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:25:07.850442+00"
+  },
+  {
+    "model_id": "maersk-api",
+    "display_name": "Maersk 馬士基海運",
+    "provider": "maritime",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:25:07.850442+00"
+  },
+  {
+    "model_id": "msc-api",
+    "display_name": "MSC 地中海航運",
+    "provider": "maritime",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:25:07.850442+00"
+  },
+  {
+    "model_id": "portchain-api",
+    "display_name": "Portchain 港口AI",
+    "provider": "maritime",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:25:07.850442+00"
+  },
+  {
+    "model_id": "windward-api",
+    "display_name": "Windward 海事AI",
+    "provider": "maritime",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:25:07.850442+00"
+  },
+  {
+    "model_id": "browserbase-mcp",
+    "display_name": "Browserbase MCP Server",
+    "provider": "mcp",
+    "tier": "platform",
+    "locked_by": "system",
+    "is_available": true,
+    "created_at": "2026-02-14 03:12:43.567692+00"
+  },
+  {
+    "model_id": "cloudflare-mcp",
+    "display_name": "Cloudflare MCP Server",
+    "provider": "mcp",
+    "tier": "platform",
+    "locked_by": "system",
+    "is_available": true,
+    "created_at": "2026-02-14 03:12:43.567692+00"
+  },
+  {
+    "model_id": "composio",
+    "display_name": "Composio MCP",
+    "provider": "mcp",
+    "tier": "platform",
+    "locked_by": "system",
+    "is_available": true,
+    "created_at": "2026-02-14 03:12:43.567692+00"
+  },
+  {
+    "model_id": "firecrawl-mcp",
+    "display_name": "Firecrawl MCP Server",
+    "provider": "mcp",
+    "tier": "platform",
+    "locked_by": "system",
+    "is_available": true,
+    "created_at": "2026-02-14 03:12:43.567692+00"
+  },
+  {
+    "model_id": "github-mcp",
+    "display_name": "GitHub MCP Server",
+    "provider": "mcp",
+    "tier": "platform",
+    "locked_by": "founder",
+    "is_available": true,
+    "created_at": "2026-02-14 03:12:43.567692+00"
+  },
+  {
+    "model_id": "postgres-mcp",
+    "display_name": "PostgreSQL MCP Server",
+    "provider": "mcp",
+    "tier": "platform",
+    "locked_by": "founder",
+    "is_available": true,
+    "created_at": "2026-02-14 03:12:43.567692+00"
+  },
+  {
+    "model_id": "puppeteer-mcp",
+    "display_name": "Puppeteer MCP Server",
+    "provider": "mcp",
+    "tier": "platform",
+    "locked_by": "system",
+    "is_available": true,
+    "created_at": "2026-02-14 03:12:43.567692+00"
+  },
+  {
+    "model_id": "smithery",
+    "display_name": "Smithery MCP Hub",
+    "provider": "mcp",
+    "tier": "platform",
+    "locked_by": "system",
+    "is_available": true,
+    "created_at": "2026-02-14 03:12:43.567692+00"
+  },
+  {
+    "model_id": "stripe-mcp",
+    "display_name": "Stripe MCP Server",
+    "provider": "mcp",
+    "tier": "platform",
+    "locked_by": "system",
+    "is_available": true,
+    "created_at": "2026-02-14 03:12:43.567692+00"
+  },
+  {
+    "model_id": "supabase-mcp",
+    "display_name": "Supabase MCP Server",
+    "provider": "mcp",
+    "tier": "platform",
+    "locked_by": "founder",
+    "is_available": true,
+    "created_at": "2026-02-14 03:12:43.567692+00"
+  },
+  {
+    "model_id": "agora-sdk",
+    "display_name": "Agora 即時互動",
+    "provider": "media",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:18:57.498401+00"
+  },
+  {
+    "model_id": "cloudinary-sdk",
+    "display_name": "Cloudinary 影像",
+    "provider": "media",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:18:57.498401+00"
+  },
+  {
+    "model_id": "livekit-sdk",
+    "display_name": "LiveKit 影音",
+    "provider": "media",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:18:57.498401+00"
+  },
+  {
+    "model_id": "mux-api",
+    "display_name": "Mux 影音串流",
+    "provider": "media",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:18:57.498401+00"
+  },
+  {
+    "model_id": "spotify-api",
+    "display_name": "Spotify 音樂串流",
+    "provider": "mediatech",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 05:56:37.119683+00"
+  },
+  {
+    "model_id": "tiktok-api",
+    "display_name": "TikTok 開發者平台",
+    "provider": "mediatech",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 05:56:37.119683+00"
+  },
+  {
+    "model_id": "twitch-api",
+    "display_name": "Twitch 直播平台",
+    "provider": "mediatech",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 05:56:37.119683+00"
+  },
+  {
+    "model_id": "youtube-data-api",
+    "display_name": "YouTube Data API",
+    "provider": "mediatech",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 05:56:37.119683+00"
+  },
+  {
+    "model_id": "llama-3.1-8b",
+    "display_name": "Llama 3.1 8B (CF Free)",
+    "provider": "meta",
+    "tier": "edge",
+    "locked_by": "founder",
+    "is_available": true,
+    "created_at": "2026-02-14 10:36:29.928282+00"
+  },
+  {
+    "model_id": "llama-3.3-70b",
+    "display_name": "Llama 3.3 70B (CF Free)",
+    "provider": "meta",
+    "tier": "standard",
+    "locked_by": "founder",
+    "is_available": true,
+    "created_at": "2026-02-14 10:36:29.928282+00"
+  },
+  {
+    "model_id": "llama-4-maverick",
+    "display_name": "Llama 4 Maverick",
+    "provider": "meta",
+    "tier": "standard",
+    "locked_by": "founder",
+    "is_available": true,
+    "created_at": "2026-02-14 10:36:29.928282+00"
+  },
+  {
+    "model_id": "llama-4-scout",
+    "display_name": "Llama 4 Scout",
+    "provider": "meta",
+    "tier": "fast",
+    "locked_by": "founder",
+    "is_available": true,
+    "created_at": "2026-02-14 10:36:29.928282+00"
+  },
+  {
+    "model_id": "caterpillar-api",
+    "display_name": "Caterpillar 智慧礦業",
+    "provider": "mining",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:20:26.640018+00"
+  },
+  {
+    "model_id": "komatsu-api",
+    "display_name": "Komatsu 自動化礦業",
+    "provider": "mining",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:20:26.640018+00"
+  },
+  {
+    "model_id": "nvidia-mining-ai",
+    "display_name": "NVIDIA 礦業AI",
+    "provider": "mining",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:20:26.640018+00"
+  },
+  {
+    "model_id": "mistral-large-3",
+    "display_name": "Mistral Large 3",
+    "provider": "mistral",
+    "tier": "standard",
+    "locked_by": "founder",
+    "is_available": true,
+    "created_at": "2026-02-14 10:36:29.928282+00"
+  },
+  {
+    "model_id": "bloomerang-api",
+    "display_name": "Bloomerang 捐款管理",
+    "provider": "nonprofit",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:24:23.06087+00"
+  },
+  {
+    "model_id": "donorperfect-api",
+    "display_name": "DonorPerfect 募款",
+    "provider": "nonprofit",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:24:23.06087+00"
+  },
+  {
+    "model_id": "givebutter-api",
+    "display_name": "Givebutter 募款平台",
+    "provider": "nonprofit",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:24:23.06087+00"
+  },
+  {
+    "model_id": "salesforce-npsp",
+    "display_name": "Salesforce NPSP 非營利",
+    "provider": "nonprofit",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:24:23.06087+00"
+  },
+  {
+    "model_id": "ably-sdk",
+    "display_name": "Ably 即時通訊",
+    "provider": "notification",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:22:20.796973+00"
+  },
+  {
+    "model_id": "firebase-fcm",
+    "display_name": "Firebase Cloud Messaging",
+    "provider": "notification",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:22:20.796973+00"
+  },
+  {
+    "model_id": "onesignal-sdk",
+    "display_name": "OneSignal 推播",
+    "provider": "notification",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:22:20.796973+00"
+  },
+  {
+    "model_id": "pusher-sdk",
+    "display_name": "Pusher 即時推播",
+    "provider": "notification",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:22:20.796973+00"
+  },
+  {
+    "model_id": "iaea-api",
+    "display_name": "IAEA 國際原子能",
+    "provider": "nuclear",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:20:26.640018+00"
+  },
+  {
+    "model_id": "kairos-power-api",
+    "display_name": "Kairos Power 先進核能",
+    "provider": "nuclear",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:20:26.640018+00"
+  },
+  {
+    "model_id": "nrc-api",
+    "display_name": "NRC 核能管制數據",
+    "provider": "nuclear",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:20:26.640018+00"
+  },
+  {
+    "model_id": "content-safety-nim",
+    "display_name": "Content Safety NIM",
+    "provider": "nvidia",
+    "tier": "safety",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-14 03:12:43.567692+00"
+  },
+  {
+    "model_id": "jailbreak-detect-nim",
+    "display_name": "Jailbreak Detect NIM",
+    "provider": "nvidia",
+    "tier": "safety",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-14 03:12:43.567692+00"
+  },
+  {
+    "model_id": "llama-3.3-70b-nim",
+    "display_name": "Llama 3.3 70B (NVIDIA NIM)",
+    "provider": "nvidia",
+    "tier": "flagship",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-14 20:57:46.221199+00"
+  },
+  {
+    "model_id": "llama-3-taiwan-70b",
+    "display_name": "Llama-3 Taiwan 70B",
+    "provider": "nvidia",
+    "tier": "flagship",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-14 03:12:43.567692+00"
+  },
+  {
+    "model_id": "nemo-agent-toolkit",
+    "display_name": "NeMo Agent Toolkit",
+    "provider": "nvidia",
+    "tier": "platform",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-14 03:12:43.567692+00"
+  },
+  {
+    "model_id": "nemo-customizer",
+    "display_name": "NeMo Customizer",
+    "provider": "nvidia",
+    "tier": "platform",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-14 03:12:43.567692+00"
+  },
+  {
+    "model_id": "nemo-guardrails",
+    "display_name": "NeMo Guardrails",
+    "provider": "nvidia",
+    "tier": "safety",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-14 03:12:43.567692+00"
+  },
+  {
+    "model_id": "nemotron-4-340b-instruct",
+    "display_name": "Nemotron-4 340B Instruct",
+    "provider": "nvidia",
+    "tier": "flagship",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-14 03:12:43.567692+00"
+  },
+  {
+    "model_id": "blueprints",
+    "display_name": "NVIDIA AI Blueprints",
+    "provider": "nvidia",
+    "tier": "platform",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-14 03:12:43.567692+00"
+  },
+  {
+    "model_id": "bionemo",
+    "display_name": "NVIDIA BioNeMo",
+    "provider": "nvidia",
+    "tier": "platform",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-14 03:12:43.567692+00"
+  },
+  {
+    "model_id": "cuopt",
+    "display_name": "NVIDIA cuOpt",
+    "provider": "nvidia",
+    "tier": "platform",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-14 03:12:43.567692+00"
+  },
+  {
+    "model_id": "dgx-cloud",
+    "display_name": "NVIDIA DGX Cloud",
+    "provider": "nvidia",
+    "tier": "infra",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-14 03:12:43.567692+00"
+  },
+  {
+    "model_id": "metropolis",
+    "display_name": "NVIDIA Metropolis",
+    "provider": "nvidia",
+    "tier": "platform",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-14 03:12:43.567692+00"
+  },
+  {
+    "model_id": "omniverse",
+    "display_name": "NVIDIA Omniverse",
+    "provider": "nvidia",
+    "tier": "platform",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-14 03:12:43.567692+00"
+  },
+  {
+    "model_id": "tokkio",
+    "display_name": "NVIDIA Tokkio",
+    "provider": "nvidia",
+    "tier": "platform",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-14 03:12:43.567692+00"
+  },
+  {
+    "model_id": "riva-asr-zh",
+    "display_name": "Riva ASR 中文語音辨識",
+    "provider": "nvidia",
+    "tier": "platform",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-14 03:12:43.567692+00"
+  },
+  {
+    "model_id": "tensorrt-llm",
+    "display_name": "TensorRT-LLM",
+    "provider": "nvidia",
+    "tier": "infra",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-14 03:12:43.567692+00"
+  },
+  {
+    "model_id": "topic-control-nim",
+    "display_name": "Topic Control NIM",
+    "provider": "nvidia",
+    "tier": "safety",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-14 03:12:43.567692+00"
+  },
+  {
+    "model_id": "baker-hughes-api",
+    "display_name": "Baker Hughes 能源科技",
+    "provider": "oil_gas",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:20:26.640018+00"
+  },
+  {
+    "model_id": "halliburton-api",
+    "display_name": "Halliburton 油田服務",
+    "provider": "oil_gas",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:20:26.640018+00"
+  },
+  {
+    "model_id": "schlumberger-api",
+    "display_name": "SLB 油氣數位化",
+    "provider": "oil_gas",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:20:26.640018+00"
+  },
+  {
+    "model_id": "dall-e-3",
+    "display_name": "DALL-E 3",
+    "provider": "openai",
+    "tier": "platform",
+    "locked_by": "secretary",
+    "is_available": true,
+    "created_at": "2026-02-15 04:30:56.078505+00"
+  },
+  {
+    "model_id": "gpt-4-turbo",
+    "display_name": "GPT-4 Turbo",
+    "provider": "openai",
+    "tier": "standard",
+    "locked_by": "secretary",
+    "is_available": true,
+    "created_at": "2026-02-15 04:30:56.078505+00"
+  },
+  {
+    "model_id": "gpt-4.5-preview",
+    "display_name": "GPT-4.5",
+    "provider": "openai",
+    "tier": "flagship",
+    "locked_by": "founder",
+    "is_available": true,
+    "created_at": "2026-02-14 10:36:29.928282+00"
+  },
+  {
+    "model_id": "gpt-4o",
+    "display_name": "GPT-4o",
+    "provider": "openai",
+    "tier": "flagship",
+    "locked_by": "secretary",
+    "is_available": true,
+    "created_at": "2026-02-13 17:05:55.136878+00"
+  },
+  {
+    "model_id": "gpt-4o-mini",
+    "display_name": "GPT-4o Mini",
+    "provider": "openai",
+    "tier": "fast",
+    "locked_by": "secretary",
+    "is_available": true,
+    "created_at": "2026-02-14 10:36:29.928282+00"
+  },
+  {
+    "model_id": "o1",
+    "display_name": "o1 推理模型",
+    "provider": "openai",
+    "tier": "flagship",
+    "locked_by": "secretary",
+    "is_available": true,
+    "created_at": "2026-02-15 04:30:56.078505+00"
+  },
+  {
+    "model_id": "o3-mini",
+    "display_name": "o3-mini",
+    "provider": "openai",
+    "tier": "fast",
+    "locked_by": "secretary",
+    "is_available": true,
+    "created_at": "2026-02-15 04:30:56.078505+00"
+  },
+  {
+    "model_id": "tts-1-hd",
+    "display_name": "TTS-1 HD 語音合成",
+    "provider": "openai",
+    "tier": "platform",
+    "locked_by": "secretary",
+    "is_available": true,
+    "created_at": "2026-02-15 04:30:56.078505+00"
+  },
+  {
+    "model_id": "whisper-1",
+    "display_name": "Whisper 語音",
+    "provider": "openai",
+    "tier": "platform",
+    "locked_by": "secretary",
+    "is_available": true,
+    "created_at": "2026-02-15 04:30:56.078505+00"
+  },
+  {
+    "model_id": "adyen-api",
+    "display_name": "Adyen 全球支付",
+    "provider": "payment",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:18:57.498401+00"
+  },
+  {
+    "model_id": "linepay-api",
+    "display_name": "LINE Pay 行動支付",
+    "provider": "payment",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:18:57.498401+00"
+  },
+  {
+    "model_id": "paypal-sdk",
+    "display_name": "PayPal 支付平台",
+    "provider": "payment",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:18:57.498401+00"
+  },
+  {
+    "model_id": "square-sdk",
+    "display_name": "Square 支付+POS",
+    "provider": "payment",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:18:57.498401+00"
+  },
+  {
+    "model_id": "tappay-api",
+    "display_name": "TapPay 台灣支付",
+    "provider": "payment",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:18:57.498401+00"
+  },
+  {
+    "model_id": "wise-api",
+    "display_name": "Wise 跨境匯款",
+    "provider": "payment",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:18:57.498401+00"
+  },
+  {
+    "model_id": "ecpay-api",
+    "display_name": "綠界 ECPay 台灣支付",
+    "provider": "payment",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:18:57.498401+00"
+  },
+  {
+    "model_id": "sonar",
+    "display_name": "Sonar",
+    "provider": "perplexity",
+    "tier": "fast",
+    "locked_by": "founder",
+    "is_available": true,
+    "created_at": "2026-02-14 10:36:29.928282+00"
+  },
+  {
+    "model_id": "sonar-pro",
+    "display_name": "Sonar Pro",
+    "provider": "perplexity",
+    "tier": "standard",
+    "locked_by": "founder",
+    "is_available": true,
+    "created_at": "2026-02-14 10:36:29.928282+00"
+  },
+  {
+    "model_id": "sonar-reasoning-pro",
+    "display_name": "Sonar Reasoning Pro",
+    "provider": "perplexity",
+    "tier": "flagship",
+    "locked_by": "founder",
+    "is_available": true,
+    "created_at": "2026-02-13 17:05:55.136878+00"
+  },
+  {
+    "model_id": "petdesk-api",
+    "display_name": "PetDesk 寵物醫療",
+    "provider": "pettech",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:22:20.796973+00"
+  },
+  {
+    "model_id": "vetspire-api",
+    "display_name": "Vetspire 獸醫管理",
+    "provider": "pettech",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:22:20.796973+00"
+  },
+  {
+    "model_id": "whistle-api",
+    "display_name": "Whistle 寵物追蹤",
+    "provider": "pettech",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:22:20.796973+00"
+  },
+  {
+    "model_id": "agworld-api",
+    "display_name": "Agworld 農場管理",
+    "provider": "precision_ag",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:20:26.640018+00"
+  },
+  {
+    "model_id": "cnhi-api",
+    "display_name": "CNH Industrial 農機",
+    "provider": "precision_ag",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:20:26.640018+00"
+  },
+  {
+    "model_id": "trimble-ag-api",
+    "display_name": "Trimble 精準農業",
+    "provider": "precision_ag",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:20:26.640018+00"
+  },
+  {
+    "model_id": "costar-api",
+    "display_name": "CoStar 商業不動產",
+    "provider": "proptech",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 05:56:37.119683+00"
+  },
+  {
+    "model_id": "propexo-api",
+    "display_name": "Propexo 不動產整合",
+    "provider": "proptech",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 05:56:37.119683+00"
+  },
+  {
+    "model_id": "realpage-api",
+    "display_name": "RealPage 不動產平台",
+    "provider": "proptech",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 05:56:37.119683+00"
+  },
+  {
+    "model_id": "yardi-api",
+    "display_name": "Yardi 物業管理系統",
+    "provider": "proptech",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 05:56:37.119683+00"
+  },
+  {
+    "model_id": "zillow-api",
+    "display_name": "Zillow 不動產數據",
+    "provider": "proptech",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 05:56:37.119683+00"
+  },
+  {
+    "model_id": "aws-braket",
+    "display_name": "AWS Braket 量子雲",
+    "provider": "quantum",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:10:11.388035+00"
+  },
+  {
+    "model_id": "azure-quantum",
+    "display_name": "Azure Quantum 量子雲",
+    "provider": "quantum",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:10:11.388035+00"
+  },
+  {
+    "model_id": "google-cirq",
+    "display_name": "Google Cirq 量子",
+    "provider": "quantum",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:10:11.388035+00"
+  },
+  {
+    "model_id": "ibm-qiskit",
+    "display_name": "IBM Qiskit 量子SDK",
+    "provider": "quantum",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:10:11.388035+00"
+  },
+  {
+    "model_id": "pennylane-sdk",
+    "display_name": "PennyLane 量子ML",
+    "provider": "quantum",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:10:11.388035+00"
+  },
+  {
+    "model_id": "chainalysis-api",
+    "display_name": "Chainalysis 區塊鏈合規",
+    "provider": "regtech",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:18:57.498401+00"
+  },
+  {
+    "model_id": "comply-advantage-api",
+    "display_name": "ComplyAdvantage AML",
+    "provider": "regtech",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:18:57.498401+00"
+  },
+  {
+    "model_id": "lightspeed-api",
+    "display_name": "Lightspeed 餐飲POS",
+    "provider": "restaurant",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:22:20.796973+00"
+  },
+  {
+    "model_id": "revel-api",
+    "display_name": "Revel 餐飲管理",
+    "provider": "restaurant",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:22:20.796973+00"
+  },
+  {
+    "model_id": "square-pos-api",
+    "display_name": "Square 餐飲POS",
+    "provider": "restaurant",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:22:20.796973+00"
+  },
+  {
+    "model_id": "commercetools-api",
+    "display_name": "Commercetools 無頭電商",
+    "provider": "retail",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:22:20.796973+00"
+  },
+  {
+    "model_id": "lightspeed-retail",
+    "display_name": "Lightspeed Retail",
+    "provider": "retail",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:22:20.796973+00"
+  },
+  {
+    "model_id": "shopify-retail-api",
+    "display_name": "Shopify 零售POS",
+    "provider": "retail",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:22:20.796973+00"
+  },
+  {
+    "model_id": "vend-api",
+    "display_name": "Vend 零售POS",
+    "provider": "retail",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:22:20.796973+00"
+  },
+  {
+    "model_id": "boston-dynamics-api",
+    "display_name": "Boston Dynamics API",
+    "provider": "robotics",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:10:11.388035+00"
+  },
+  {
+    "model_id": "nvidia-isaac-sdk",
+    "display_name": "NVIDIA Isaac 機器人",
+    "provider": "robotics",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:10:11.388035+00"
+  },
+  {
+    "model_id": "open-robotics",
+    "display_name": "Open Robotics 開源",
+    "provider": "robotics",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:10:11.388035+00"
+  },
+  {
+    "model_id": "ros2-sdk",
+    "display_name": "ROS 2 機器人作業系統",
+    "provider": "robotics",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:10:11.388035+00"
+  },
+  {
+    "model_id": "maxar-api",
+    "display_name": "Maxar 衛星影像",
+    "provider": "satellite",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:20:26.640018+00"
+  },
+  {
+    "model_id": "oneweb-api",
+    "display_name": "OneWeb 衛星網路",
+    "provider": "satellite",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:20:26.640018+00"
+  },
+  {
+    "model_id": "starlink-api",
+    "display_name": "SpaceX Starlink",
+    "provider": "satellite",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:20:26.640018+00"
+  },
+  {
+    "model_id": "spire-api",
+    "display_name": "Spire Global 衛星數據",
+    "provider": "satellite",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:20:26.640018+00"
+  },
+  {
+    "model_id": "citymapper-api",
+    "display_name": "Citymapper 城市交通",
+    "provider": "smartcity",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:14:44.133162+00"
+  },
+  {
+    "model_id": "google-maps-api",
+    "display_name": "Google Maps Platform",
+    "provider": "smartcity",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:14:44.133162+00"
+  },
+  {
+    "model_id": "here-maps-api",
+    "display_name": "HERE Maps 地圖平台",
+    "provider": "smartcity",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:14:44.133162+00"
+  },
+  {
+    "model_id": "mapbox-sdk",
+    "display_name": "Mapbox 地圖SDK",
+    "provider": "smartcity",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:14:44.133162+00"
+  },
+  {
+    "model_id": "nvidia-metropolis-city",
+    "display_name": "NVIDIA Metropolis 智慧城市",
+    "provider": "smartcity",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:14:44.133162+00"
+  },
+  {
+    "model_id": "sidewalk-labs-api",
+    "display_name": "Sidewalk Labs 城市數據",
+    "provider": "smartcity",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:14:44.133162+00"
+  },
+  {
+    "model_id": "esa-api",
+    "display_name": "ESA 歐洲太空總署 API",
+    "provider": "spacetech",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:10:11.388035+00"
+  },
+  {
+    "model_id": "nasa-api",
+    "display_name": "NASA 開放 API",
+    "provider": "spacetech",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:10:11.388035+00"
+  },
+  {
+    "model_id": "planet-labs-api",
+    "display_name": "Planet Labs 衛星影像",
+    "provider": "spacetech",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:10:11.388035+00"
+  },
+  {
+    "model_id": "spacex-api",
+    "display_name": "SpaceX 開放 API",
+    "provider": "spacetech",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:10:11.388035+00"
+  },
+  {
+    "model_id": "espn-api",
+    "display_name": "ESPN 體育數據",
+    "provider": "sports",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:25:07.850442+00"
+  },
+  {
+    "model_id": "fifa-api",
+    "display_name": "FIFA 足球數據",
+    "provider": "sports",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:25:07.850442+00"
+  },
+  {
+    "model_id": "mlb-api",
+    "display_name": "MLB 棒球數據",
+    "provider": "sports",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:25:07.850442+00"
+  },
+  {
+    "model_id": "nba-api",
+    "display_name": "NBA 官方API",
+    "provider": "sports",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:25:07.850442+00"
+  },
+  {
+    "model_id": "freshdesk-api",
+    "display_name": "Freshdesk 客服",
+    "provider": "support",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:18:57.498401+00"
+  },
+  {
+    "model_id": "intercom-sdk",
+    "display_name": "Intercom 通訊",
+    "provider": "support",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:18:57.498401+00"
+  },
+  {
+    "model_id": "zendesk-sdk",
+    "display_name": "Zendesk 客服",
+    "provider": "support",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:18:57.498401+00"
+  },
+  {
+    "model_id": "bandwidth-api",
+    "display_name": "Bandwidth 電信 API",
+    "provider": "telecom",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:10:11.388035+00"
+  },
+  {
+    "model_id": "twilio-programmable",
+    "display_name": "Twilio Programmable API",
+    "provider": "telecom",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:10:11.388035+00"
+  },
+  {
+    "model_id": "vonage-api",
+    "display_name": "Vonage 通訊 API",
+    "provider": "telecom",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:10:11.388035+00"
+  },
+  {
+    "model_id": "ericsson-5g-api",
+    "display_name": "Ericsson 5G 平台",
+    "provider": "telecom_5g",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:20:26.640018+00"
+  },
+  {
+    "model_id": "huawei-5g-api",
+    "display_name": "Huawei 5G 平台",
+    "provider": "telecom_5g",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:20:26.640018+00"
+  },
+  {
+    "model_id": "nokia-5g-api",
+    "display_name": "Nokia 5G 網路",
+    "provider": "telecom_5g",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:20:26.640018+00"
+  },
+  {
+    "model_id": "nvidia-aerial-5g",
+    "display_name": "NVIDIA Aerial 5G",
+    "provider": "telecom_5g",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:20:26.640018+00"
+  },
+  {
+    "model_id": "qualcomm-5g-sdk",
+    "display_name": "Qualcomm 5G SDK",
+    "provider": "telecom_5g",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:20:26.640018+00"
+  },
+  {
+    "model_id": "samsung-5g-sdk",
+    "display_name": "Samsung 5G SDK",
+    "provider": "telecom_5g",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:20:26.640018+00"
+  },
+  {
+    "model_id": "deepl-api",
+    "display_name": "DeepL 翻譯",
+    "provider": "translation",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:18:57.498401+00"
+  },
+  {
+    "model_id": "google-translate-api",
+    "display_name": "Google Translate",
+    "provider": "translation",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:18:57.498401+00"
+  },
+  {
+    "model_id": "amadeus-api",
+    "display_name": "Amadeus 全球旅遊分銷",
+    "provider": "traveltech",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 05:56:37.119683+00"
+  },
+  {
+    "model_id": "sabre-api",
+    "display_name": "Sabre 旅遊科技",
+    "provider": "traveltech",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 05:56:37.119683+00"
+  },
+  {
+    "model_id": "travelport-api",
+    "display_name": "Travelport 旅遊平台",
+    "provider": "traveltech",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 05:56:37.119683+00"
+  },
+  {
+    "model_id": "itron-api",
+    "display_name": "Itron 智慧公用事業",
+    "provider": "utility",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:20:26.640018+00"
+  },
+  {
+    "model_id": "landis-gyr-api",
+    "display_name": "Landis+Gyr 智慧電表",
+    "provider": "utility",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:20:26.640018+00"
+  },
+  {
+    "model_id": "oracle-utilities-api",
+    "display_name": "Oracle Utilities",
+    "provider": "utility",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:20:26.640018+00"
+  },
+  {
+    "model_id": "aquasuite-api",
+    "display_name": "AquaSuite 水管理",
+    "provider": "water",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:20:26.640018+00"
+  },
+  {
+    "model_id": "xylem-api",
+    "display_name": "Xylem 水技術",
+    "provider": "water",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:20:26.640018+00"
+  },
+  {
+    "model_id": "apple-healthkit",
+    "display_name": "Apple HealthKit",
+    "provider": "wearable",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:14:44.133162+00"
+  },
+  {
+    "model_id": "fitbit-api",
+    "display_name": "Fitbit 健康數據",
+    "provider": "wearable",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:14:44.133162+00"
+  },
+  {
+    "model_id": "garmin-api",
+    "display_name": "Garmin Connect API",
+    "provider": "wearable",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:14:44.133162+00"
+  },
+  {
+    "model_id": "google-fit-api",
+    "display_name": "Google Fit API",
+    "provider": "wearable",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:14:44.133162+00"
+  },
+  {
+    "model_id": "strava-api",
+    "display_name": "Strava 運動社群",
+    "provider": "wearable",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:14:44.133162+00"
+  },
+  {
+    "model_id": "whoop-api",
+    "display_name": "WHOOP 運動恢復",
+    "provider": "wearable",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:14:44.133162+00"
+  },
+  {
+    "model_id": "openweather-api",
+    "display_name": "OpenWeather 氣象API",
+    "provider": "weather",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:22:20.796973+00"
+  },
+  {
+    "model_id": "tomorrow-io-api",
+    "display_name": "Tomorrow.io 天氣AI",
+    "provider": "weather",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:22:20.796973+00"
+  },
+  {
+    "model_id": "cwb-api",
+    "display_name": "中央氣象署 API",
+    "provider": "weather",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:22:20.796973+00"
+  },
+  {
+    "model_id": "grok-3",
+    "display_name": "Grok 3",
+    "provider": "xai",
+    "tier": "flagship",
+    "locked_by": "founder",
+    "is_available": true,
+    "created_at": "2026-02-14 10:36:29.928282+00"
+  },
+  {
+    "model_id": "grok-3-mini",
+    "display_name": "Grok 3 Mini",
+    "provider": "xai",
+    "tier": "fast",
+    "locked_by": "founder",
+    "is_available": true,
+    "created_at": "2026-02-14 10:36:29.928282+00"
+  },
+  {
+    "model_id": "apple-visionpro-sdk",
+    "display_name": "Apple Vision Pro SDK",
+    "provider": "xr",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:10:11.388035+00"
+  },
+  {
+    "model_id": "meta-quest-sdk",
+    "display_name": "Meta Quest SDK",
+    "provider": "xr",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:10:11.388035+00"
+  },
+  {
+    "model_id": "nvidia-cloudxr",
+    "display_name": "NVIDIA CloudXR",
+    "provider": "xr",
+    "tier": "enterprise",
+    "locked_by": "commander",
+    "is_available": true,
+    "created_at": "2026-02-15 06:10:11.388035+00"
+  }
+]

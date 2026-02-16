@@ -1,0 +1,1568 @@
+[
+  {
+    "path": ".\\.gitignore",
+    "size": 137,
+    "modified": "2026-02-15 14:32:09",
+    "sha256_prefix": "024ba706ef5204b1"
+  },
+  {
+    "path": ".\\.mcp.json",
+    "size": 298,
+    "modified": "2026-02-11 23:00:46",
+    "sha256_prefix": "eb2b483cca00e16b"
+  },
+  {
+    "path": ".\\.mcp.json.bak",
+    "size": 298,
+    "modified": "2026-02-11 23:00:46",
+    "sha256_prefix": "eb2b483cca00e16b"
+  },
+  {
+    "path": ".\\=5.29.6",
+    "size": 1598,
+    "modified": "2026-02-15 07:06:43",
+    "sha256_prefix": "876e1caa2f593499"
+  },
+  {
+    "path": ".\\assign_tasks.py",
+    "size": 6383,
+    "modified": "2026-02-15 14:24:54",
+    "sha256_prefix": "42e1891677fd5368"
+  },
+  {
+    "path": ".\\assign_tasks.py.bak",
+    "size": 6383,
+    "modified": "2026-02-15 14:24:54",
+    "sha256_prefix": "42e1891677fd5368"
+  },
+  {
+    "path": ".\\cf_dns.json",
+    "size": 77,
+    "modified": "2026-02-15 11:05:17",
+    "sha256_prefix": "a67632b190e27db4"
+  },
+  {
+    "path": ".\\chat.html",
+    "size": 9602,
+    "modified": "2026-02-15 06:47:58",
+    "sha256_prefix": "8df88ca4a7bee76e"
+  },
+  {
+    "path": ".\\CLAUDE.md",
+    "size": 3352,
+    "modified": "2026-02-13 00:57:56",
+    "sha256_prefix": "50ccb355977645b9"
+  },
+  {
+    "path": ".\\CLAUDE.md.bak",
+    "size": 3352,
+    "modified": "2026-02-13 00:57:56",
+    "sha256_prefix": "50ccb355977645b9"
+  },
+  {
+    "path": ".\\clone_checker.py",
+    "size": 8088,
+    "modified": "2026-02-15 14:29:36",
+    "sha256_prefix": "f42de21f6c8b5feb"
+  },
+  {
+    "path": ".\\clone_checker.py.bak",
+    "size": 8088,
+    "modified": "2026-02-15 14:29:36",
+    "sha256_prefix": "f42de21f6c8b5feb"
+  },
+  {
+    "path": ".\\command-center.html",
+    "size": 12192,
+    "modified": "2026-02-15 06:46:05",
+    "sha256_prefix": "27674cd0add24324"
+  },
+  {
+    "path": ".\\dashboard.html",
+    "size": 11939,
+    "modified": "2026-02-15 06:47:18",
+    "sha256_prefix": "37ef7b0de84f98a8"
+  },
+  {
+    "path": ".\\doctl.zip",
+    "size": 9,
+    "modified": "2026-02-15 13:14:56",
+    "sha256_prefix": "0019dfc4b32d63c1"
+  },
+  {
+    "path": ".\\dual-dashboard.html",
+    "size": 11775,
+    "modified": "2026-02-15 05:52:52",
+    "sha256_prefix": "ff507c8c1ec96d18"
+  },
+  {
+    "path": ".\\dual-engine-report.log",
+    "size": 675062,
+    "modified": "2026-02-15 16:15:16",
+    "sha256_prefix": "d12ce8061bf49eef"
+  },
+  {
+    "path": ".\\dual-engine-stress.sh",
+    "size": 2015,
+    "modified": "2026-02-15 05:48:09",
+    "sha256_prefix": "57ef1d398960f269"
+  },
+  {
+    "path": ".\\favicon.svg",
+    "size": 514,
+    "modified": "2026-02-15 06:44:55",
+    "sha256_prefix": "b104a817c5741eec"
+  },
+  {
+    "path": ".\\flyctl.exe",
+    "size": 9,
+    "modified": "2026-02-15 13:14:58",
+    "sha256_prefix": "0019dfc4b32d63c1"
+  },
+  {
+    "path": ".\\glab.exe",
+    "size": 2679,
+    "modified": "2026-02-15 12:59:00",
+    "sha256_prefix": "2ba728b935e2d017"
+  },
+  {
+    "path": ".\\gradio.log",
+    "size": 253980,
+    "modified": "2026-02-15 16:10:21",
+    "sha256_prefix": "d0b28a39d019392f"
+  },
+  {
+    "path": ".\\httpserver.log",
+    "size": 3059,
+    "modified": "2026-02-15 07:05:23",
+    "sha256_prefix": "c481c1f5162a78b5"
+  },
+  {
+    "path": ".\\index.html",
+    "size": 6419,
+    "modified": "2026-02-15 06:27:11",
+    "sha256_prefix": "65bb4a96e6a3415c"
+  },
+  {
+    "path": ".\\jupyter.log",
+    "size": 90040,
+    "modified": "2026-02-15 16:14:21",
+    "sha256_prefix": "e5abe7632d5002d3"
+  },
+  {
+    "path": ".\\logo.svg",
+    "size": 1032,
+    "modified": "2026-02-15 06:44:53",
+    "sha256_prefix": "ca1f5448bb722737"
+  },
+  {
+    "path": ".\\monitor_tasks.py",
+    "size": 5152,
+    "modified": "2026-02-15 14:27:58",
+    "sha256_prefix": "27fb76d50df1f753"
+  },
+  {
+    "path": ".\\monitor_tasks.py.bak",
+    "size": 5152,
+    "modified": "2026-02-15 14:27:58",
+    "sha256_prefix": "27fb76d50df1f753"
+  },
+  {
+    "path": ".\\ngccli_win_amd64.exe",
+    "size": 47641552,
+    "modified": "2026-02-15 05:22:18",
+    "sha256_prefix": "TOO_LARGE"
+  },
+  {
+    "path": ".\\nul",
+    "size": 0,
+    "modified": "1970-01-01 08:00:00",
+    "sha256_prefix": "e3b0c44298fc1c14"
+  },
+  {
+    "path": ".\\NVIDIA-AI-Workbench-Setup.exe",
+    "size": 148355544,
+    "modified": "2026-02-15 12:56:27",
+    "sha256_prefix": "TOO_LARGE"
+  },
+  {
+    "path": ".\\nvidia-chat.html",
+    "size": 9724,
+    "modified": "2026-02-15 12:13:14",
+    "sha256_prefix": "8effb76df77f8136"
+  },
+  {
+    "path": ".\\optimize_scheduler.py",
+    "size": 7932,
+    "modified": "2026-02-15 14:28:34",
+    "sha256_prefix": "c7a68a9b3e9c323e"
+  },
+  {
+    "path": ".\\optimize_scheduler.py.bak",
+    "size": 7932,
+    "modified": "2026-02-15 14:28:34",
+    "sha256_prefix": "c7a68a9b3e9c323e"
+  },
+  {
+    "path": ".\\package-lock.json",
+    "size": 40657,
+    "modified": "2026-02-14 17:22:58",
+    "sha256_prefix": "28af749853c7ebc7"
+  },
+  {
+    "path": ".\\package.json",
+    "size": 56,
+    "modified": "2026-02-14 17:22:58",
+    "sha256_prefix": "2ce64f23502bb243"
+  },
+  {
+    "path": ".\\README.md",
+    "size": 2346,
+    "modified": "2026-02-14 13:09:01",
+    "sha256_prefix": "a7a1545313cdcfd9"
+  },
+  {
+    "path": ".\\self_audit.py",
+    "size": 8756,
+    "modified": "2026-02-15 14:30:08",
+    "sha256_prefix": "ca72b807eeec66de"
+  },
+  {
+    "path": ".\\self_audit.py.bak",
+    "size": 8756,
+    "modified": "2026-02-15 14:30:08",
+    "sha256_prefix": "ca72b807eeec66de"
+  },
+  {
+    "path": ".\\SEOBAIKE_AI_Security_Compliance_Report_2026-02-14.pdf",
+    "size": 307027,
+    "modified": "2026-02-14 17:23:14",
+    "sha256_prefix": "2284d56b6f94819c"
+  },
+  {
+    "path": ".\\streamlit-dashboard.py",
+    "size": 5099,
+    "modified": "2026-02-15 06:51:50",
+    "sha256_prefix": "54ff5f2627135b5c"
+  },
+  {
+    "path": ".\\streamlit-dashboard.py.bak",
+    "size": 5099,
+    "modified": "2026-02-15 06:51:50",
+    "sha256_prefix": "54ff5f2627135b5c"
+  },
+  {
+    "path": ".\\streamlit.log",
+    "size": 272,
+    "modified": "2026-02-15 06:49:15",
+    "sha256_prefix": "41e6d4d3eecd6b09"
+  },
+  {
+    "path": ".\\supabase-cli.exe",
+    "size": 9,
+    "modified": "2026-02-15 12:58:57",
+    "sha256_prefix": "0019dfc4b32d63c1"
+  },
+  {
+    "path": ".\\system-monitor.py",
+    "size": 7044,
+    "modified": "2026-02-15 06:51:44",
+    "sha256_prefix": "139fdc2efff1dc3e"
+  },
+  {
+    "path": ".\\system-monitor.py.bak",
+    "size": 7044,
+    "modified": "2026-02-15 06:51:44",
+    "sha256_prefix": "139fdc2efff1dc3e"
+  },
+  {
+    "path": ".\\task_generator.py",
+    "size": 5194,
+    "modified": "2026-02-15 14:23:10",
+    "sha256_prefix": "4ffe05c0b8b7d990"
+  },
+  {
+    "path": ".\\task_generator.py.bak",
+    "size": 5194,
+    "modified": "2026-02-15 14:23:10",
+    "sha256_prefix": "4ffe05c0b8b7d990"
+  },
+  {
+    "path": ".\\terraform.zip",
+    "size": 27365272,
+    "modified": "2026-02-15 13:00:39",
+    "sha256_prefix": "TOO_LARGE"
+  },
+  {
+    "path": ".\\workers-dev.log",
+    "size": 788,
+    "modified": "2026-02-15 06:14:12",
+    "sha256_prefix": "e95e1590febe283c"
+  },
+  {
+    "path": ".\\設備安裝報告.md",
+    "size": 16721,
+    "modified": "2026-02-15 06:20:15",
+    "sha256_prefix": "26542bcbfa834f83"
+  },
+  {
+    "path": ".\\.github\\workflows\\security-gate.yml",
+    "size": 5753,
+    "modified": "2026-02-14 21:11:04",
+    "sha256_prefix": "72de3b9dd3c90480"
+  },
+  {
+    "path": ".\\avatar-3d\\index.html",
+    "size": 22495,
+    "modified": "2026-02-14 14:51:04",
+    "sha256_prefix": "32c7fd93bc1f22f7"
+  },
+  {
+    "path": ".\\avatar-3d\\wrangler.toml",
+    "size": 80,
+    "modified": "2026-02-14 14:33:47",
+    "sha256_prefix": "7613734b699c980c"
+  },
+  {
+    "path": ".\\docs\\comparative_analysis.md",
+    "size": 12708,
+    "modified": "2026-02-15 14:33:37",
+    "sha256_prefix": "871039f0c885e2e6"
+  },
+  {
+    "path": ".\\docs\\defense_strategy.md",
+    "size": 24608,
+    "modified": "2026-02-15 14:50:31",
+    "sha256_prefix": "3da83637f2317876"
+  },
+  {
+    "path": ".\\docs\\final_summary.md",
+    "size": 13344,
+    "modified": "2026-02-15 14:54:22",
+    "sha256_prefix": "7fcbd79bcb0317cd"
+  },
+  {
+    "path": ".\\docs\\future_roadmap.md",
+    "size": 14405,
+    "modified": "2026-02-15 14:56:14",
+    "sha256_prefix": "bae5ea78e1afe903"
+  },
+  {
+    "path": ".\\docs\\release_notes.md",
+    "size": 10419,
+    "modified": "2026-02-15 14:57:31",
+    "sha256_prefix": "cb1613edf4d8e192"
+  },
+  {
+    "path": ".\\docs\\security_audit_self.md",
+    "size": 18163,
+    "modified": "2026-02-15 14:52:41",
+    "sha256_prefix": "6f49d8ac13b3d5ae"
+  },
+  {
+    "path": ".\\docs\\self_replication_plan.md",
+    "size": 12766,
+    "modified": "2026-02-15 14:35:10",
+    "sha256_prefix": "4a97c11ee46823d3"
+  },
+  {
+    "path": ".\\docs\\tutorial_script.txt",
+    "size": 11476,
+    "modified": "2026-02-15 14:32:00",
+    "sha256_prefix": "ee13204594097a73"
+  },
+  {
+    "path": ".\\docs\\white_paper.md",
+    "size": 14499,
+    "modified": "2026-02-15 14:30:42",
+    "sha256_prefix": "7234e7325aaaa4fa"
+  },
+  {
+    "path": ".\\pages-proxy\\_headers",
+    "size": 579,
+    "modified": "2026-02-15 07:32:13",
+    "sha256_prefix": "1687af04ec11e0d6"
+  },
+  {
+    "path": ".\\pages-site\\ecosystem.html",
+    "size": 16906,
+    "modified": "2026-02-15 10:39:19",
+    "sha256_prefix": "757c16339f3d91c6"
+  },
+  {
+    "path": ".\\pages-site\\favicon.ico",
+    "size": 20373,
+    "modified": "2026-02-15 07:42:30",
+    "sha256_prefix": "dd821076a9b03adc"
+  },
+  {
+    "path": ".\\pages-site\\favicon.svg",
+    "size": 822,
+    "modified": "2026-02-15 07:42:30",
+    "sha256_prefix": "c00d91e8e4bb3fdb"
+  },
+  {
+    "path": ".\\pages-site\\index.html",
+    "size": 6236,
+    "modified": "2026-02-15 10:52:43",
+    "sha256_prefix": "51fb98f6878544c1"
+  },
+  {
+    "path": ".\\pages-site\\manifest.json",
+    "size": 591,
+    "modified": "2026-02-15 07:42:30",
+    "sha256_prefix": "5131ec6293aeb3a7"
+  },
+  {
+    "path": ".\\pages-site\\og-image.png",
+    "size": 41118,
+    "modified": "2026-02-15 07:42:31",
+    "sha256_prefix": "f0d20fe30206f6c2"
+  },
+  {
+    "path": ".\\pages-site\\seobaike-widget.js",
+    "size": 15100,
+    "modified": "2026-02-15 10:52:34",
+    "sha256_prefix": "ea7986397f6b6c81"
+  },
+  {
+    "path": ".\\pages-site\\_headers",
+    "size": 579,
+    "modified": "2026-02-15 07:42:16",
+    "sha256_prefix": "1687af04ec11e0d6"
+  },
+  {
+    "path": ".\\pages-site\\_redirects",
+    "size": 0,
+    "modified": "2026-02-15 10:56:11",
+    "sha256_prefix": "e3b0c44298fc1c14"
+  },
+  {
+    "path": ".\\pages-site\\assets\\index-BdzPbUDD.css",
+    "size": 176351,
+    "modified": "2026-02-15 07:42:02",
+    "sha256_prefix": "aa8b3c74a840d31f"
+  },
+  {
+    "path": ".\\pages-site\\assets\\index-BedVsTGe.js",
+    "size": 3280616,
+    "modified": "2026-02-15 07:42:01",
+    "sha256_prefix": "861099d1969bcdff"
+  },
+  {
+    "path": ".\\py_backup\\assign_tasks.py",
+    "size": 6383,
+    "modified": "2026-02-15 14:24:54",
+    "sha256_prefix": "42e1891677fd5368"
+  },
+  {
+    "path": ".\\py_backup\\clone_checker.py",
+    "size": 8088,
+    "modified": "2026-02-15 14:29:36",
+    "sha256_prefix": "f42de21f6c8b5feb"
+  },
+  {
+    "path": ".\\py_backup\\monitor_tasks.py",
+    "size": 5152,
+    "modified": "2026-02-15 14:27:58",
+    "sha256_prefix": "27fb76d50df1f753"
+  },
+  {
+    "path": ".\\py_backup\\optimize_scheduler.py",
+    "size": 7932,
+    "modified": "2026-02-15 14:28:34",
+    "sha256_prefix": "c7a68a9b3e9c323e"
+  },
+  {
+    "path": ".\\py_backup\\self_audit.py",
+    "size": 8756,
+    "modified": "2026-02-15 14:30:08",
+    "sha256_prefix": "ca72b807eeec66de"
+  },
+  {
+    "path": ".\\py_backup\\streamlit-dashboard.py",
+    "size": 5099,
+    "modified": "2026-02-15 06:51:50",
+    "sha256_prefix": "54ff5f2627135b5c"
+  },
+  {
+    "path": ".\\py_backup\\system-monitor.py",
+    "size": 7044,
+    "modified": "2026-02-15 06:51:44",
+    "sha256_prefix": "139fdc2efff1dc3e"
+  },
+  {
+    "path": ".\\py_backup\\task_generator.py",
+    "size": 5194,
+    "modified": "2026-02-15 14:23:10",
+    "sha256_prefix": "4ffe05c0b8b7d990"
+  },
+  {
+    "path": ".\\scripts\\ci-compliance-check.sh",
+    "size": 3871,
+    "modified": "2026-02-15 02:51:33",
+    "sha256_prefix": "03c222de6ced900f"
+  },
+  {
+    "path": ".\\scripts\\ci-headers-check.sh",
+    "size": 2321,
+    "modified": "2026-02-14 18:05:36",
+    "sha256_prefix": "96ce6e7c1456329a"
+  },
+  {
+    "path": ".\\scripts\\launch-sequence.sh",
+    "size": 4011,
+    "modified": "2026-02-14 11:51:27",
+    "sha256_prefix": "6303dd77bb02488e"
+  },
+  {
+    "path": ".\\scripts\\load-test.ts",
+    "size": 7011,
+    "modified": "2026-02-14 11:48:34",
+    "sha256_prefix": "a50ec5615f0d31b7"
+  },
+  {
+    "path": ".\\scripts\\test-ai-quality.sh",
+    "size": 4318,
+    "modified": "2026-02-15 02:53:05",
+    "sha256_prefix": "24ffd61cf895107d"
+  },
+  {
+    "path": ".\\scripts\\test-multi-platform.sh",
+    "size": 3938,
+    "modified": "2026-02-15 02:52:45",
+    "sha256_prefix": "299c5b772ca50890"
+  },
+  {
+    "path": ".\\scripts\\test-product-features.sh",
+    "size": 7081,
+    "modified": "2026-02-15 02:52:29",
+    "sha256_prefix": "aba01dd9b782de73"
+  },
+  {
+    "path": ".\\supabase\\.temp\\cli-latest",
+    "size": 7,
+    "modified": "2026-02-14 20:58:43",
+    "sha256_prefix": "5fbac14cdc9efe39"
+  },
+  {
+    "path": ".\\supabase\\.temp\\gotrue-version",
+    "size": 8,
+    "modified": "2026-02-14 10:58:40",
+    "sha256_prefix": "db57fadc554eb168"
+  },
+  {
+    "path": ".\\supabase\\.temp\\pooler-url",
+    "size": 97,
+    "modified": "2026-02-14 10:58:39",
+    "sha256_prefix": "d80b7a671c56a324"
+  },
+  {
+    "path": ".\\supabase\\.temp\\postgres-version",
+    "size": 10,
+    "modified": "2026-02-14 10:58:39",
+    "sha256_prefix": "c4a0260c55e7ee46"
+  },
+  {
+    "path": ".\\supabase\\.temp\\project-ref",
+    "size": 20,
+    "modified": "2026-02-14 10:58:40",
+    "sha256_prefix": "4a245b9f7466294d"
+  },
+  {
+    "path": ".\\supabase\\.temp\\rest-version",
+    "size": 5,
+    "modified": "2026-02-14 10:58:40",
+    "sha256_prefix": "e11097a0744cbed5"
+  },
+  {
+    "path": ".\\supabase\\.temp\\storage-migration",
+    "size": 29,
+    "modified": "2026-02-14 10:58:39",
+    "sha256_prefix": "7bb944cc973a24ce"
+  },
+  {
+    "path": ".\\supabase\\.temp\\storage-version",
+    "size": 7,
+    "modified": "2026-02-14 10:58:40",
+    "sha256_prefix": "a48cafe6d819563a"
+  },
+  {
+    "path": ".\\supabase\\docs\\audit_00_master.md",
+    "size": 3003,
+    "modified": "2026-02-12 01:37:04",
+    "sha256_prefix": "bff84b6e7676d65b"
+  },
+  {
+    "path": ".\\supabase\\docs\\audit_01_policy_pdf.md",
+    "size": 2644,
+    "modified": "2026-02-12 01:33:21",
+    "sha256_prefix": "9850f3124c2a412f"
+  },
+  {
+    "path": ".\\supabase\\docs\\audit_02_technical.md",
+    "size": 3039,
+    "modified": "2026-02-12 01:33:37",
+    "sha256_prefix": "6f144b8af1813142"
+  },
+  {
+    "path": ".\\supabase\\docs\\audit_03_fsc_aml_kyc.md",
+    "size": 4300,
+    "modified": "2026-02-12 01:34:07",
+    "sha256_prefix": "c1df8806856bd0b5"
+  },
+  {
+    "path": ".\\supabase\\docs\\audit_04_brand_wall.md",
+    "size": 686,
+    "modified": "2026-02-12 01:34:12",
+    "sha256_prefix": "4bd9e32a598fa08e"
+  },
+  {
+    "path": ".\\supabase\\docs\\audit_05_brand_wall_a1.md",
+    "size": 2287,
+    "modified": "2026-02-12 01:39:11",
+    "sha256_prefix": "78e52df0d4d64b53"
+  },
+  {
+    "path": ".\\supabase\\docs\\audit_06_dataflow_wall_a1.md",
+    "size": 2015,
+    "modified": "2026-02-12 01:41:12",
+    "sha256_prefix": "b0cb8f33204c9f0c"
+  },
+  {
+    "path": ".\\supabase\\docs\\audit_07_prohibited_paths_wall_a1.md",
+    "size": 1687,
+    "modified": "2026-02-12 01:44:29",
+    "sha256_prefix": "edd07ab2eb3043ad"
+  },
+  {
+    "path": ".\\supabase\\docs\\audit_08_philosophy_wall_a1.md",
+    "size": 736,
+    "modified": "2026-02-12 01:46:20",
+    "sha256_prefix": "b1f34c50cee4da8d"
+  },
+  {
+    "path": ".\\supabase\\docs\\audit_09_manifesto_wall_a1.md",
+    "size": 2001,
+    "modified": "2026-02-12 01:47:49",
+    "sha256_prefix": "015fd121fc56746d"
+  },
+  {
+    "path": ".\\supabase\\docs\\audit_10_master_map_wall_a1.md",
+    "size": 1573,
+    "modified": "2026-02-12 01:50:02",
+    "sha256_prefix": "d7adb6ec0cd0f2b1"
+  },
+  {
+    "path": ".\\supabase\\docs\\audit_11_mission_wall_a1.md",
+    "size": 1825,
+    "modified": "2026-02-12 01:51:17",
+    "sha256_prefix": "6a341c9c1ebaf572"
+  },
+  {
+    "path": ".\\supabase\\docs\\audit_12_owner_credential_root_wall_a1.md",
+    "size": 2331,
+    "modified": "2026-02-12 01:55:40",
+    "sha256_prefix": "77ef07bdfd0b60de"
+  },
+  {
+    "path": ".\\supabase\\docs\\audit_13_semantic_layer_4_8_wall_a1.md",
+    "size": 1666,
+    "modified": "2026-02-12 01:57:34",
+    "sha256_prefix": "d71c490f0ac95c92"
+  },
+  {
+    "path": ".\\supabase\\docs\\audit_14_identity_layer_wall_a1.md",
+    "size": 2617,
+    "modified": "2026-02-12 01:59:39",
+    "sha256_prefix": "fe329eabafdf6dbd"
+  },
+  {
+    "path": ".\\supabase\\docs\\audit_15_war_room_wall_a1.md",
+    "size": 2456,
+    "modified": "2026-02-12 02:02:54",
+    "sha256_prefix": "7d01ff3f649d664b"
+  },
+  {
+    "path": ".\\supabase\\docs\\audit_16_century_manifesto_wall_a1.md",
+    "size": 2300,
+    "modified": "2026-02-12 02:04:49",
+    "sha256_prefix": "871d06719ded95c0"
+  },
+  {
+    "path": ".\\supabase\\docs\\audit_17_war_room_extended_wall_a1.md",
+    "size": 2707,
+    "modified": "2026-02-12 02:08:44",
+    "sha256_prefix": "007040401244c83e"
+  },
+  {
+    "path": ".\\supabase\\docs\\audit_18_government_wall_a1.md",
+    "size": 2728,
+    "modified": "2026-02-12 02:17:08",
+    "sha256_prefix": "c4de189e6c5fc88b"
+  },
+  {
+    "path": ".\\supabase\\docs\\audit_19_enterprise_wall_a1.md",
+    "size": 2764,
+    "modified": "2026-02-12 02:18:19",
+    "sha256_prefix": "909b53e08bfc9af2"
+  },
+  {
+    "path": ".\\supabase\\docs\\audit_20_vendor_governance_wall_a1.md",
+    "size": 2830,
+    "modified": "2026-02-12 02:19:49",
+    "sha256_prefix": "869b1b1c59377821"
+  },
+  {
+    "path": ".\\supabase\\docs\\audit_21_risk_matrix_wall_a1.md",
+    "size": 2827,
+    "modified": "2026-02-12 02:21:08",
+    "sha256_prefix": "21de85b02804ec09"
+  },
+  {
+    "path": ".\\supabase\\docs\\audit_22_audit_matrix_wall_a1.md",
+    "size": 2645,
+    "modified": "2026-02-12 02:23:20",
+    "sha256_prefix": "cd72c619d1a7b68f"
+  },
+  {
+    "path": ".\\supabase\\docs\\audit_23_century_architecture_wall_a1.md",
+    "size": 3086,
+    "modified": "2026-02-12 02:24:55",
+    "sha256_prefix": "f2962c823a164efe"
+  },
+  {
+    "path": ".\\supabase\\docs\\audit_24_master_wall_a1.md",
+    "size": 2809,
+    "modified": "2026-02-12 02:26:18",
+    "sha256_prefix": "2e0c6205e64a4365"
+  },
+  {
+    "path": ".\\supabase\\docs\\audit_25_core_12_wall_a1.md",
+    "size": 1405,
+    "modified": "2026-02-12 02:27:29",
+    "sha256_prefix": "29b7513db37a5b82"
+  },
+  {
+    "path": ".\\supabase\\docs\\audit_26_brand_wall_a1.md",
+    "size": 1643,
+    "modified": "2026-02-12 02:28:42",
+    "sha256_prefix": "2731da465f1d9f65"
+  },
+  {
+    "path": ".\\supabase\\docs\\audit_27_entrance_wall_a1.md",
+    "size": 1595,
+    "modified": "2026-02-12 02:29:48",
+    "sha256_prefix": "de061df745b7d757"
+  },
+  {
+    "path": ".\\supabase\\docs\\audit_28_century_oath_wall_a1.md",
+    "size": 2127,
+    "modified": "2026-02-12 02:31:06",
+    "sha256_prefix": "658cf66a801ff226"
+  },
+  {
+    "path": ".\\supabase\\docs\\audit_29_module_boundary_wall_a1.md",
+    "size": 2348,
+    "modified": "2026-02-12 02:31:50",
+    "sha256_prefix": "644b1975162a5bf9"
+  },
+  {
+    "path": ".\\supabase\\docs\\audit_30_semantic_wall_a1.md",
+    "size": 2245,
+    "modified": "2026-02-12 02:33:09",
+    "sha256_prefix": "629df9bc10017f14"
+  },
+  {
+    "path": ".\\supabase\\docs\\audit_31_owner_room_wall_a1.md",
+    "size": 2239,
+    "modified": "2026-02-12 02:34:23",
+    "sha256_prefix": "a87d22bb9898f5cb"
+  },
+  {
+    "path": ".\\supabase\\docs\\audit_32_entrance_ritual_wall_a1.md",
+    "size": 1979,
+    "modified": "2026-02-12 02:36:13",
+    "sha256_prefix": "2a23405afd2b138e"
+  },
+  {
+    "path": ".\\supabase\\docs\\formal_01_audit_report_pdf.md",
+    "size": 3237,
+    "modified": "2026-02-12 02:38:53",
+    "sha256_prefix": "01ead115aed40c41"
+  },
+  {
+    "path": ".\\supabase\\docs\\formal_02_technical_audit_spec.md",
+    "size": 4435,
+    "modified": "2026-02-12 02:40:32",
+    "sha256_prefix": "385fc84abc0a4af1"
+  },
+  {
+    "path": ".\\supabase\\docs\\formal_03_fsc_examination.md",
+    "size": 4788,
+    "modified": "2026-02-12 02:42:23",
+    "sha256_prefix": "6c9c2d5646c19eba"
+  },
+  {
+    "path": ".\\supabase\\docs\\formal_04_iso27001_mapping.md",
+    "size": 7968,
+    "modified": "2026-02-12 02:45:50",
+    "sha256_prefix": "920d425d3c979bc5"
+  },
+  {
+    "path": ".\\supabase\\docs\\l2_compliance_policy_template.md",
+    "size": 626,
+    "modified": "2026-02-12 00:55:00",
+    "sha256_prefix": "c7a07fbef0834282"
+  },
+  {
+    "path": ".\\supabase\\docs\\l4_sop_aml_kyc_operations.md",
+    "size": 664,
+    "modified": "2026-02-12 00:55:35",
+    "sha256_prefix": "45dacd2abc21eefd"
+  },
+  {
+    "path": ".\\supabase\\docs\\mcp_l1_l4_audit_ready.md",
+    "size": 4165,
+    "modified": "2026-02-12 01:27:42",
+    "sha256_prefix": "7e69c075176704d3"
+  },
+  {
+    "path": ".\\supabase\\docs\\mcp_l1_l4_mapping.md",
+    "size": 1898,
+    "modified": "2026-02-12 01:24:32",
+    "sha256_prefix": "9e1b9eb9486ef83c"
+  },
+  {
+    "path": ".\\supabase\\docs\\system_status_20250212.md",
+    "size": 7194,
+    "modified": "2026-02-12 03:00:46",
+    "sha256_prefix": "5971f9394326ff87"
+  },
+  {
+    "path": ".\\supabase\\functions\\ai-gateway\\index.ts",
+    "size": 5028,
+    "modified": "2026-02-14 14:32:47",
+    "sha256_prefix": "3cf15ec12b50a587"
+  },
+  {
+    "path": ".\\supabase\\functions\\boss-approval\\index.ts",
+    "size": 3300,
+    "modified": "2026-02-14 20:53:27",
+    "sha256_prefix": "4bebdb384d2900d5"
+  },
+  {
+    "path": ".\\supabase\\functions\\order-created\\index.ts",
+    "size": 2477,
+    "modified": "2026-02-12 00:03:59",
+    "sha256_prefix": "fb8d1e4b3c8ab0fa"
+  },
+  {
+    "path": ".\\supabase\\functions\\payment-captured\\index.ts",
+    "size": 4472,
+    "modified": "2026-02-12 00:05:22",
+    "sha256_prefix": "3fba79751848ff9e"
+  },
+  {
+    "path": ".\\supabase\\functions\\remote-command\\index.ts",
+    "size": 2218,
+    "modified": "2026-02-14 20:53:34",
+    "sha256_prefix": "8dc5c993aa391b05"
+  },
+  {
+    "path": ".\\supabase\\functions\\_shared\\aml_engine.ts",
+    "size": 893,
+    "modified": "2026-02-12 00:15:03",
+    "sha256_prefix": "81848a183234e3ba"
+  },
+  {
+    "path": ".\\supabase\\functions\\_shared\\aml_monitoring.ts",
+    "size": 783,
+    "modified": "2026-02-12 00:46:56",
+    "sha256_prefix": "23d4783c57ba7964"
+  },
+  {
+    "path": ".\\supabase\\functions\\_shared\\compliance_tw.ts",
+    "size": 1455,
+    "modified": "2026-02-12 00:06:10",
+    "sha256_prefix": "64cea490d0718f92"
+  },
+  {
+    "path": ".\\supabase\\functions\\_shared\\kyc_engine.ts",
+    "size": 858,
+    "modified": "2026-02-12 00:16:14",
+    "sha256_prefix": "b13e6a0e9dcbc2bc"
+  },
+  {
+    "path": ".\\supabase\\functions\\_shared\\kyc_risk_scoring.ts",
+    "size": 753,
+    "modified": "2026-02-12 00:47:37",
+    "sha256_prefix": "f951f37db2e9cbee"
+  },
+  {
+    "path": ".\\supabase\\functions\\_shared\\kyc_verification.ts",
+    "size": 1480,
+    "modified": "2026-02-12 00:43:36",
+    "sha256_prefix": "de45e5442da8cfd8"
+  },
+  {
+    "path": ".\\supabase\\migrations\\001_l1_l4_constraint_layers.sql",
+    "size": 7200,
+    "modified": "2026-02-11 22:47:14",
+    "sha256_prefix": "4da09f36f644ec8e"
+  },
+  {
+    "path": ".\\supabase\\migrations\\002_l1_l4_rls_and_function_security.sql",
+    "size": 3674,
+    "modified": "2026-02-11 23:44:05",
+    "sha256_prefix": "ad13834542282e19"
+  },
+  {
+    "path": ".\\supabase\\migrations\\003_business_logic_alter_and_create.sql",
+    "size": 6240,
+    "modified": "2026-02-11 23:57:22",
+    "sha256_prefix": "1b1dbc7341100e94"
+  },
+  {
+    "path": ".\\supabase\\migrations\\004_business_kyc_aml_risk_compliance.sql",
+    "size": 2245,
+    "modified": "2026-02-11 23:58:51",
+    "sha256_prefix": "7221be6e0af1d639"
+  },
+  {
+    "path": ".\\supabase\\migrations\\005_business_commission_clawback_antikickback.sql",
+    "size": 2596,
+    "modified": "2026-02-12 00:00:36",
+    "sha256_prefix": "33e4dc8094ca9b8c"
+  },
+  {
+    "path": ".\\supabase\\migrations\\006_business_aml_rules_alerts_cases.sql",
+    "size": 1692,
+    "modified": "2026-02-12 00:14:13",
+    "sha256_prefix": "df95c8d749b9fea2"
+  },
+  {
+    "path": ".\\supabase\\migrations\\007_business_kyc_documents_verification.sql",
+    "size": 1238,
+    "modified": "2026-02-12 00:15:43",
+    "sha256_prefix": "7e956ea0f27a421b"
+  },
+  {
+    "path": ".\\supabase\\migrations\\008_business_tables_rls_policies.sql",
+    "size": 9739,
+    "modified": "2026-02-12 00:33:33",
+    "sha256_prefix": "5237f1e55fe8a4a5"
+  },
+  {
+    "path": ".\\supabase\\migrations\\009_fix_all_security_warnings.sql",
+    "size": 2357,
+    "modified": "2026-02-12 17:48:39",
+    "sha256_prefix": "f2be7d6d7b7c3f99"
+  },
+  {
+    "path": ".\\supabase\\migrations\\010_patent_constraint_paths_inference_drift.sql",
+    "size": 15786,
+    "modified": "2026-02-12 17:48:20",
+    "sha256_prefix": "b95add65dfa116b0"
+  },
+  {
+    "path": ".\\supabase\\migrations\\011_fix_patent_tables_security_warnings.sql",
+    "size": 1242,
+    "modified": "2026-02-12 17:48:20",
+    "sha256_prefix": "ef4ad3ec04b20ebb"
+  },
+  {
+    "path": ".\\supabase\\migrations\\012_fix_check_inference_path_search_path.sql",
+    "size": 6898,
+    "modified": "2026-02-12 17:48:20",
+    "sha256_prefix": "4d91e8a6ef6ec373"
+  },
+  {
+    "path": ".\\supabase\\migrations\\013_fix_check_inference_path_v_matched_bug.sql",
+    "size": 7219,
+    "modified": "2026-02-12 17:48:20",
+    "sha256_prefix": "3020e839efd692cc"
+  },
+  {
+    "path": ".\\supabase\\migrations\\014_patent_claim7_claim10_locks_audit_trail.sql",
+    "size": 14927,
+    "modified": "2026-02-12 18:53:58",
+    "sha256_prefix": "fd576e9a608b63de"
+  },
+  {
+    "path": ".\\supabase\\migrations\\015_fix_patent_performance_warnings.sql",
+    "size": 3291,
+    "modified": "2026-02-12 19:00:41",
+    "sha256_prefix": "6e53c9fd3530fef7"
+  },
+  {
+    "path": ".\\supabase\\migrations\\016_fix_multiple_permissive_policies.sql",
+    "size": 2942,
+    "modified": "2026-02-12 19:00:48",
+    "sha256_prefix": "c2800544e15912d6"
+  },
+  {
+    "path": ".\\supabase\\migrations\\017_patent_compliance_audit_table.sql",
+    "size": 1720,
+    "modified": "2026-02-12 19:23:52",
+    "sha256_prefix": "1c6e9321c90edc2d"
+  },
+  {
+    "path": ".\\supabase\\migrations\\018_add_regulator_role.sql",
+    "size": 357,
+    "modified": "2026-02-12 21:48:00",
+    "sha256_prefix": "ad8b13c5320dae37"
+  },
+  {
+    "path": ".\\supabase\\migrations\\019_government_grade_rule_lockdown.sql",
+    "size": 4798,
+    "modified": "2026-02-12 21:48:17",
+    "sha256_prefix": "e32ccd19faff13dc"
+  },
+  {
+    "path": ".\\supabase\\migrations\\020_government_ddl_lockdown.sql",
+    "size": 3273,
+    "modified": "2026-02-12 21:55:04",
+    "sha256_prefix": "37e19d728c939076"
+  },
+  {
+    "path": ".\\supabase\\migrations\\021_lock_all_engineers.sql",
+    "size": 4493,
+    "modified": "2026-02-12 22:21:31",
+    "sha256_prefix": "a0c9105fe1ca28cc"
+  },
+  {
+    "path": ".\\supabase\\migrations\\022_remote_control_system.sql",
+    "size": 11271,
+    "modified": "2026-02-13 17:07:44",
+    "sha256_prefix": "8ccbf0a22003de08"
+  },
+  {
+    "path": ".\\supabase\\migrations\\023_execute_remote_command_function.sql",
+    "size": 20670,
+    "modified": "2026-02-13 18:10:10",
+    "sha256_prefix": "140a52a34a014dac"
+  },
+  {
+    "path": ".\\supabase\\migrations\\024_compliance_gate_integration.sql",
+    "size": 10158,
+    "modified": "2026-02-13 21:45:04",
+    "sha256_prefix": "9b0ba9f0c2f1d18d"
+  },
+  {
+    "path": ".\\supabase\\migrations\\025_align_rpc_signature.sql",
+    "size": 9576,
+    "modified": "2026-02-13 22:22:01",
+    "sha256_prefix": "14fc7c7e009d524e"
+  },
+  {
+    "path": ".\\supabase\\migrations\\026_platform_tokens.sql",
+    "size": 3446,
+    "modified": "2026-02-13 23:52:17",
+    "sha256_prefix": "e730839c43e095b0"
+  },
+  {
+    "path": ".\\supabase\\migrations\\027_global_ai_platform_lockdown.sql",
+    "size": 21836,
+    "modified": "2026-02-14 00:58:32",
+    "sha256_prefix": "5e8d8216bb68b76b"
+  },
+  {
+    "path": ".\\supabase\\migrations\\028_global_platforms_and_models.sql",
+    "size": 4015,
+    "modified": "2026-02-14 03:19:31",
+    "sha256_prefix": "0a795b5324ca2e53"
+  },
+  {
+    "path": ".\\supabase\\migrations\\029_nvidia_mcp_full_registration.sql",
+    "size": 9545,
+    "modified": "2026-02-14 11:12:34",
+    "sha256_prefix": "7daf5882d953dddf"
+  },
+  {
+    "path": ".\\supabase\\migrations\\030_boss_approval_system.sql",
+    "size": 28826,
+    "modified": "2026-02-14 11:29:16",
+    "sha256_prefix": "c1b0fd443dc68e5b"
+  },
+  {
+    "path": ".\\supabase\\migrations\\031_founder_lock_critical_approval.sql",
+    "size": 8796,
+    "modified": "2026-02-14 11:42:47",
+    "sha256_prefix": "3e8ed283991798c9"
+  },
+  {
+    "path": ".\\supabase\\migrations\\032_monitoring_and_rollout.sql",
+    "size": 16892,
+    "modified": "2026-02-14 11:49:55",
+    "sha256_prefix": "08aa15f9dc89d171"
+  },
+  {
+    "path": ".\\supabase\\migrations\\033_security_audit_qrl_compliance.sql",
+    "size": 14794,
+    "modified": "2026-02-14 11:51:03",
+    "sha256_prefix": "1f6b6732fd20ff56"
+  },
+  {
+    "path": ".\\supabase\\migrations\\034_fix_security_scan_exclusions.sql",
+    "size": 9337,
+    "modified": "2026-02-14 11:53:29",
+    "sha256_prefix": "85e69d92cd0302dd"
+  },
+  {
+    "path": ".\\supabase\\migrations\\035_diagnose_scan.sql",
+    "size": 1143,
+    "modified": "2026-02-14 11:57:23",
+    "sha256_prefix": "6e939f4f76c23e78"
+  },
+  {
+    "path": ".\\supabase\\migrations\\036_enable_rls_all_business_tables.sql",
+    "size": 1385,
+    "modified": "2026-02-14 11:57:48",
+    "sha256_prefix": "aca18537e8ae0778"
+  },
+  {
+    "path": ".\\supabase\\migrations\\037_fix_log_event_types.sql",
+    "size": 1333,
+    "modified": "2026-02-14 12:26:34",
+    "sha256_prefix": "1b2f875423947d73"
+  },
+  {
+    "path": ".\\supabase\\migrations\\038_production_safety_hardening.sql",
+    "size": 13406,
+    "modified": "2026-02-14 12:55:11",
+    "sha256_prefix": "4bfae8f2b49c81b7"
+  },
+  {
+    "path": ".\\supabase\\migrations\\039_customer_industry_binding.sql",
+    "size": 24623,
+    "modified": "2026-02-14 14:32:13",
+    "sha256_prefix": "afa7cf23b65f3876"
+  },
+  {
+    "path": ".\\supabase\\migrations\\040_global_ai_compliance_scan.sql",
+    "size": 62894,
+    "modified": "2026-02-14 15:14:52",
+    "sha256_prefix": "4d072e7d538f4f34"
+  },
+  {
+    "path": ".\\supabase\\migrations\\041_cicd_iso42001_certification.sql",
+    "size": 13508,
+    "modified": "2026-02-14 20:55:13",
+    "sha256_prefix": "17df7d6e1ef87d77"
+  },
+  {
+    "path": ".\\supabase\\migrations\\042_security_hardening_and_rls.sql",
+    "size": 9824,
+    "modified": "2026-02-14 20:54:23",
+    "sha256_prefix": "ebdcf5150d78adf3"
+  },
+  {
+    "path": ".\\supabase\\migrations\\043_fix_execute_remote_command_overload.sql",
+    "size": 5962,
+    "modified": "2026-02-14 20:57:05",
+    "sha256_prefix": "0ae08e1a9a5eda47"
+  },
+  {
+    "path": ".\\supabase\\migrations\\044_notify_pgrst_reload.sql",
+    "size": 106,
+    "modified": "2026-02-14 21:11:09",
+    "sha256_prefix": "64fbb7ffbcfa90b5"
+  },
+  {
+    "path": ".\\supabase\\migrations\\045_lock_engineer_global_standards_2026.sql",
+    "size": 7861,
+    "modified": "2026-02-15 01:42:48",
+    "sha256_prefix": "c40e6bcd1db602f5"
+  },
+  {
+    "path": ".\\supabase\\migrations\\046_ai_token_log_and_call_opus_gpu.sql",
+    "size": 4686,
+    "modified": "2026-02-15 02:17:25",
+    "sha256_prefix": "547ace1ed72d8d7c"
+  },
+  {
+    "path": ".\\supabase\\migrations\\047_fix_045_046_missing_tables.sql",
+    "size": 12659,
+    "modified": "2026-02-15 02:23:44",
+    "sha256_prefix": "f165ab3b0453c493"
+  },
+  {
+    "path": ".\\supabase\\migrations\\048_final_fix_all.sql",
+    "size": 12032,
+    "modified": "2026-02-15 02:30:24",
+    "sha256_prefix": "62c705a2d0e3061e"
+  },
+  {
+    "path": ".\\supabase\\seeds\\001_l1_seed.sql",
+    "size": 2879,
+    "modified": "2026-02-11 23:10:20",
+    "sha256_prefix": "edc9ee7b46a7dc70"
+  },
+  {
+    "path": ".\\supabase\\seeds\\002_l2_seed.sql",
+    "size": 14177,
+    "modified": "2026-02-11 23:14:25",
+    "sha256_prefix": "4a7931c4c3927e51"
+  },
+  {
+    "path": ".\\supabase\\seeds\\003_l3_seed.sql",
+    "size": 34645,
+    "modified": "2026-02-11 23:22:10",
+    "sha256_prefix": "10326b239ade83ef"
+  },
+  {
+    "path": ".\\supabase\\seeds\\004_l4_seed.sql",
+    "size": 63854,
+    "modified": "2026-02-11 23:41:01",
+    "sha256_prefix": "5e0e7704603bcae9"
+  },
+  {
+    "path": ".\\supabase\\seeds\\005_legal_references_tw_seed.sql",
+    "size": 3591,
+    "modified": "2026-02-12 00:40:51",
+    "sha256_prefix": "e037bf092f8ad4a4"
+  },
+  {
+    "path": ".\\supabase\\seeds\\006_aml_rules_seed.sql",
+    "size": 2020,
+    "modified": "2026-02-12 00:42:15",
+    "sha256_prefix": "9149c58c59dda147"
+  },
+  {
+    "path": ".\\supabase\\seeds\\007_anti_kickback_contract_seed.sql",
+    "size": 1205,
+    "modified": "2026-02-12 00:44:21",
+    "sha256_prefix": "22ed6c105ec2ad58"
+  },
+  {
+    "path": ".\\supabase\\tests\\audit_log_script_l4.py",
+    "size": 830,
+    "modified": "2026-02-12 00:49:57",
+    "sha256_prefix": "ccee6ceb186ffaef"
+  },
+  {
+    "path": ".\\supabase\\tests\\ci_cd_pipeline_l4.yml",
+    "size": 3065,
+    "modified": "2026-02-12 00:53:34",
+    "sha256_prefix": "38930adbb162a8d0"
+  },
+  {
+    "path": ".\\supabase\\tests\\incident_report_l4.py",
+    "size": 1115,
+    "modified": "2026-02-12 00:56:13",
+    "sha256_prefix": "9c0f27d5a5e7376b"
+  },
+  {
+    "path": ".\\supabase\\tests\\oauth_mcp_example_l4.py",
+    "size": 1309,
+    "modified": "2026-02-12 00:50:46",
+    "sha256_prefix": "f9f6e309aa2c2b4a"
+  },
+  {
+    "path": ".\\supabase\\tests\\sca_sbom_scan_l4.py",
+    "size": 475,
+    "modified": "2026-02-12 00:54:17",
+    "sha256_prefix": "051f449e0be080f5"
+  },
+  {
+    "path": ".\\supabase\\tests\\test_aml_kyc_l4.py",
+    "size": 1478,
+    "modified": "2026-02-12 00:49:15",
+    "sha256_prefix": "25ac38c405694eb1"
+  },
+  {
+    "path": ".\\tasks\\assignment_report.json",
+    "size": 32116,
+    "modified": "2026-02-15 14:45:28",
+    "sha256_prefix": "5d351914b35ac8a3"
+  },
+  {
+    "path": ".\\tasks\\clone_check_report.json",
+    "size": 4569,
+    "modified": "2026-02-15 14:45:28",
+    "sha256_prefix": "7e257c6512f84612"
+  },
+  {
+    "path": ".\\tasks\\execution_report.json",
+    "size": 37424,
+    "modified": "2026-02-15 14:45:28",
+    "sha256_prefix": "29f2686586dffb52"
+  },
+  {
+    "path": ".\\tasks\\optimization_data.json",
+    "size": 7055,
+    "modified": "2026-02-15 14:45:28",
+    "sha256_prefix": "8b0bd11a0a83814b"
+  },
+  {
+    "path": ".\\tasks\\optimization_report.md",
+    "size": 3549,
+    "modified": "2026-02-15 14:45:28",
+    "sha256_prefix": "30a2964629184f6e"
+  },
+  {
+    "path": ".\\tasks\\security_audit_report.json",
+    "size": 7048,
+    "modified": "2026-02-15 14:45:28",
+    "sha256_prefix": "d938550c20916084"
+  },
+  {
+    "path": ".\\tasks\\task_list.json",
+    "size": 41664,
+    "modified": "2026-02-15 14:45:27",
+    "sha256_prefix": "e2dc6802ac658a11"
+  },
+  {
+    "path": ".\\workers\\package-lock.json",
+    "size": 83394,
+    "modified": "2026-02-15 06:00:28",
+    "sha256_prefix": "2f60f3da4fb89e7e"
+  },
+  {
+    "path": ".\\workers\\package.json",
+    "size": 451,
+    "modified": "2026-02-15 03:02:41",
+    "sha256_prefix": "410ffcca6a090b85"
+  },
+  {
+    "path": ".\\workers\\tsconfig.json",
+    "size": 322,
+    "modified": "2026-02-13 18:57:46",
+    "sha256_prefix": "f40b7d87cd27af66"
+  },
+  {
+    "path": ".\\workers\\vitest.config.ts",
+    "size": 173,
+    "modified": "2026-02-15 03:02:47",
+    "sha256_prefix": "7421e011b3d189dc"
+  },
+  {
+    "path": ".\\workers\\wrangler.toml",
+    "size": 941,
+    "modified": "2026-02-15 11:32:15",
+    "sha256_prefix": "419dfe263f7fd29d"
+  },
+  {
+    "path": ".\\workers\\src\\index.ts",
+    "size": 49838,
+    "modified": "2026-02-15 11:32:07",
+    "sha256_prefix": "17419eb2641265e9"
+  },
+  {
+    "path": ".\\workers\\src\\types.ts",
+    "size": 3317,
+    "modified": "2026-02-15 07:56:37",
+    "sha256_prefix": "2f207d3c092fef77"
+  },
+  {
+    "path": ".\\workers\\src\\ai\\brain.ts",
+    "size": 3271,
+    "modified": "2026-02-14 14:33:07",
+    "sha256_prefix": "a0e625c67c4a2ba8"
+  },
+  {
+    "path": ".\\workers\\src\\ai\\sonar.ts",
+    "size": 2084,
+    "modified": "2026-02-14 01:21:09",
+    "sha256_prefix": "0f80e0b14a053926"
+  },
+  {
+    "path": ".\\workers\\src\\middleware\\auth.test.ts",
+    "size": 1764,
+    "modified": "2026-02-15 03:03:15",
+    "sha256_prefix": "a71df2ff6ee97ed7"
+  },
+  {
+    "path": ".\\workers\\src\\middleware\\auth.ts",
+    "size": 1139,
+    "modified": "2026-02-13 18:24:36",
+    "sha256_prefix": "ee0a65b66743a6f8"
+  },
+  {
+    "path": ".\\workers\\src\\middleware\\command-parser.test.ts",
+    "size": 1783,
+    "modified": "2026-02-15 03:02:56",
+    "sha256_prefix": "5153b1c8954e3bde"
+  },
+  {
+    "path": ".\\workers\\src\\middleware\\command-parser.ts",
+    "size": 4414,
+    "modified": "2026-02-15 03:15:48",
+    "sha256_prefix": "c1d9e92ff8380f90"
+  },
+  {
+    "path": ".\\workers\\src\\middleware\\normalizer-discord.ts",
+    "size": 2960,
+    "modified": "2026-02-15 07:26:48",
+    "sha256_prefix": "6f30b2871f19d0ea"
+  },
+  {
+    "path": ".\\workers\\src\\middleware\\normalizer-email.ts",
+    "size": 2063,
+    "modified": "2026-02-15 07:27:00",
+    "sha256_prefix": "60c7dbbdd3d5ad07"
+  },
+  {
+    "path": ".\\workers\\src\\middleware\\normalizer-google-chat.ts",
+    "size": 1218,
+    "modified": "2026-02-15 07:27:08",
+    "sha256_prefix": "63ac200f6415c5cc"
+  },
+  {
+    "path": ".\\workers\\src\\middleware\\normalizer-signal.ts",
+    "size": 1760,
+    "modified": "2026-02-15 07:57:03",
+    "sha256_prefix": "0a26ac6e170ab4ca"
+  },
+  {
+    "path": ".\\workers\\src\\middleware\\normalizer-slack.ts",
+    "size": 1699,
+    "modified": "2026-02-15 07:27:00",
+    "sha256_prefix": "1ee7a695d8fa088d"
+  },
+  {
+    "path": ".\\workers\\src\\middleware\\normalizer-sms.ts",
+    "size": 2386,
+    "modified": "2026-02-15 07:57:27",
+    "sha256_prefix": "80d1a0f41392d64b"
+  },
+  {
+    "path": ".\\workers\\src\\middleware\\normalizer-teams.ts",
+    "size": 1198,
+    "modified": "2026-02-15 07:26:49",
+    "sha256_prefix": "f11aed9c9fe8a3c4"
+  },
+  {
+    "path": ".\\workers\\src\\middleware\\normalizer-viber.ts",
+    "size": 1937,
+    "modified": "2026-02-15 07:57:13",
+    "sha256_prefix": "c4a6e3ab0a2ecc91"
+  },
+  {
+    "path": ".\\workers\\src\\middleware\\normalizer-web-widget.ts",
+    "size": 1626,
+    "modified": "2026-02-15 07:57:37",
+    "sha256_prefix": "a0e94a932b5505c8"
+  },
+  {
+    "path": ".\\workers\\src\\middleware\\normalizer-wechat.ts",
+    "size": 1984,
+    "modified": "2026-02-15 07:56:49",
+    "sha256_prefix": "e0914744fbbbe770"
+  },
+  {
+    "path": ".\\workers\\src\\middleware\\normalizer.test.ts",
+    "size": 2991,
+    "modified": "2026-02-15 03:16:02",
+    "sha256_prefix": "e62952af03bfd2fc"
+  },
+  {
+    "path": ".\\workers\\src\\middleware\\normalizer.ts",
+    "size": 2030,
+    "modified": "2026-02-13 18:17:38",
+    "sha256_prefix": "85daeef0e1623a71"
+  },
+  {
+    "path": ".\\workers\\src\\middleware\\rate-limiter.test.ts",
+    "size": 1587,
+    "modified": "2026-02-15 03:03:22",
+    "sha256_prefix": "c3df2682028e819f"
+  },
+  {
+    "path": ".\\workers\\src\\middleware\\rate-limiter.ts",
+    "size": 792,
+    "modified": "2026-02-13 18:26:41",
+    "sha256_prefix": "0c90d60f35d41697"
+  },
+  {
+    "path": ".\\workers\\src\\middleware\\signature-verify.ts",
+    "size": 5876,
+    "modified": "2026-02-15 07:28:06",
+    "sha256_prefix": "520becfffef23921"
+  },
+  {
+    "path": ".\\workers\\src\\reply\\discord-reply.ts",
+    "size": 1891,
+    "modified": "2026-02-15 07:27:10",
+    "sha256_prefix": "247974ad983895d1"
+  },
+  {
+    "path": ".\\workers\\src\\reply\\email-reply.ts",
+    "size": 841,
+    "modified": "2026-02-15 07:27:03",
+    "sha256_prefix": "ee95cf1ffc54d43f"
+  },
+  {
+    "path": ".\\workers\\src\\reply\\google-chat-reply.ts",
+    "size": 548,
+    "modified": "2026-02-15 07:27:09",
+    "sha256_prefix": "0720ef2b99908398"
+  },
+  {
+    "path": ".\\workers\\src\\reply\\line-reply.ts",
+    "size": 931,
+    "modified": "2026-02-14 11:31:49",
+    "sha256_prefix": "6eb65d0dae02ed8f"
+  },
+  {
+    "path": ".\\workers\\src\\reply\\messenger-reply.ts",
+    "size": 464,
+    "modified": "2026-02-15 02:51:30",
+    "sha256_prefix": "3a13eb8795954f69"
+  },
+  {
+    "path": ".\\workers\\src\\reply\\signal-reply.ts",
+    "size": 913,
+    "modified": "2026-02-15 07:57:07",
+    "sha256_prefix": "51ddc81d1735a6f0"
+  },
+  {
+    "path": ".\\workers\\src\\reply\\slack-reply.ts",
+    "size": 1887,
+    "modified": "2026-02-15 07:27:19",
+    "sha256_prefix": "963566942bf9121e"
+  },
+  {
+    "path": ".\\workers\\src\\reply\\sms-reply.ts",
+    "size": 1165,
+    "modified": "2026-02-15 07:57:31",
+    "sha256_prefix": "e2aaef0501c39580"
+  },
+  {
+    "path": ".\\workers\\src\\reply\\teams-reply.ts",
+    "size": 604,
+    "modified": "2026-02-15 07:26:51",
+    "sha256_prefix": "46513934bb67a92e"
+  },
+  {
+    "path": ".\\workers\\src\\reply\\telegram-reply.ts",
+    "size": 1154,
+    "modified": "2026-02-14 00:31:18",
+    "sha256_prefix": "9e1765ddcf50b3bb"
+  },
+  {
+    "path": ".\\workers\\src\\reply\\viber-reply.ts",
+    "size": 847,
+    "modified": "2026-02-15 07:57:17",
+    "sha256_prefix": "20c48fd29acc4362"
+  },
+  {
+    "path": ".\\workers\\src\\reply\\web-widget-reply.ts",
+    "size": 1708,
+    "modified": "2026-02-15 07:57:45",
+    "sha256_prefix": "336374d5e532d197"
+  },
+  {
+    "path": ".\\workers\\src\\reply\\wechat-reply.ts",
+    "size": 1427,
+    "modified": "2026-02-15 07:56:55",
+    "sha256_prefix": "bf3190a18d4830ed"
+  },
+  {
+    "path": ".\\workers\\src\\reply\\whatsapp-reply.ts",
+    "size": 539,
+    "modified": "2026-02-13 18:34:27",
+    "sha256_prefix": "6387299ecb2a533c"
+  }
+]

@@ -1,0 +1,559 @@
+{
+  "check_timestamp": "2026-02-15T23:57:16.130274",
+  "checker": "data_integrity_check.py",
+  "patent": "TW-115100981",
+  "company": "小路光有限公司",
+  "ceo": "許竣翔",
+  "summary": {
+    "total_checks": 28,
+    "passed": 27,
+    "failed": 0,
+    "warnings": 1,
+    "overall_result": "PASS_WITH_WARNINGS"
+  },
+  "layer_results": {
+    "layer_1": {
+      "description": "任務生成 (Task Generation)",
+      "files": [
+        {
+          "path": "C:\\SEOBAIKE\\task_generator.py",
+          "exists": true,
+          "readable": true,
+          "size_bytes": 5497,
+          "sha256": "e791d3708adb68ab3f500017dff479eb3f1f0ead846249ece3e2ccde88e7e76c",
+          "modified": "2026-02-15T23:31:17.741172",
+          "issues": [],
+          "timestamp_check": {
+            "reasonable": true,
+            "issues": []
+          },
+          "line_check": {
+            "line_count": 144,
+            "meets_minimum": true,
+            "issues": []
+          }
+        },
+        {
+          "path": "C:\\SEOBAIKE\\tasks\\task_list.json",
+          "exists": true,
+          "readable": true,
+          "size_bytes": 42087,
+          "sha256": "bc12385b6ef4fae2b0c93e46497f9a7fc66d4ce3c9975f0f5a54aba60017f38e",
+          "modified": "2026-02-15T23:57:07.726345",
+          "issues": [],
+          "timestamp_check": {
+            "reasonable": true,
+            "issues": []
+          },
+          "json_check": {
+            "valid_json": true,
+            "record_count": null,
+            "has_expected_key": null,
+            "issues": []
+          }
+        }
+      ],
+      "layer_pass": true
+    },
+    "layer_2": {
+      "description": "任務分配 (Task Assignment)",
+      "files": [
+        {
+          "path": "C:\\SEOBAIKE\\assign_tasks.py",
+          "exists": true,
+          "readable": true,
+          "size_bytes": 6554,
+          "sha256": "30525950b8bd0ce2005a4ee0be37f0f92c2d80188c6650c3357d9ab58276ca45",
+          "modified": "2026-02-15T23:32:12.316102",
+          "issues": [],
+          "timestamp_check": {
+            "reasonable": true,
+            "issues": []
+          },
+          "line_check": {
+            "line_count": 181,
+            "meets_minimum": true,
+            "issues": []
+          }
+        },
+        {
+          "path": "C:\\SEOBAIKE\\tasks\\assignment_report.json",
+          "exists": true,
+          "readable": true,
+          "size_bytes": 33564,
+          "sha256": "86b8d7c22e4b741f1af8aaba4bf87161c740fa02d35fb65bf5b448b00785613e",
+          "modified": "2026-02-15T23:57:08.602080",
+          "issues": [],
+          "timestamp_check": {
+            "reasonable": true,
+            "issues": []
+          },
+          "json_check": {
+            "valid_json": true,
+            "record_count": null,
+            "has_expected_key": true,
+            "issues": []
+          }
+        }
+      ],
+      "layer_pass": true
+    },
+    "layer_3": {
+      "description": "執行監控 (Execution Monitoring)",
+      "files": [
+        {
+          "path": "C:\\SEOBAIKE\\monitor_tasks.py",
+          "exists": true,
+          "readable": true,
+          "size_bytes": 5398,
+          "sha256": "2be1ef4fde6975b6c1ff8a529ff6625bb4c77e5027df8b6447956d27460acdfe",
+          "modified": "2026-02-15T23:32:23.001343",
+          "issues": [],
+          "timestamp_check": {
+            "reasonable": true,
+            "issues": []
+          },
+          "line_check": {
+            "line_count": 151,
+            "meets_minimum": true,
+            "issues": []
+          }
+        },
+        {
+          "path": "C:\\SEOBAIKE\\tasks\\execution_report.json",
+          "exists": true,
+          "readable": true,
+          "size_bytes": 37531,
+          "sha256": "8fff3899880ba6817b5f890976debb788e5ab052c56e5bdd0baadc943718415d",
+          "modified": "2026-02-15T23:57:13.210517",
+          "issues": [],
+          "timestamp_check": {
+            "reasonable": true,
+            "issues": []
+          },
+          "json_check": {
+            "valid_json": true,
+            "record_count": 100,
+            "has_expected_key": true,
+            "issues": []
+          }
+        }
+      ],
+      "layer_pass": true
+    },
+    "layer_4": {
+      "description": "優化演算法 (Optimization Algorithm)",
+      "files": [
+        {
+          "path": "C:\\SEOBAIKE\\optimize_scheduler.py",
+          "exists": true,
+          "readable": true,
+          "size_bytes": 7934,
+          "sha256": "8a5578471b675ae0be764d5a9ea105c2b9377b91ed30e10b7ff67ba3df721c77",
+          "modified": "2026-02-15T23:32:27.376934",
+          "issues": [],
+          "timestamp_check": {
+            "reasonable": true,
+            "issues": []
+          },
+          "line_check": {
+            "line_count": 223,
+            "meets_minimum": true,
+            "issues": []
+          }
+        },
+        {
+          "path": "C:\\SEOBAIKE\\tasks\\optimization_report.md",
+          "exists": true,
+          "readable": true,
+          "size_bytes": 3843,
+          "sha256": "b31c8769a1e09999bda528912a6fe9ec1beafa0014608d5b08acbbbe9579a9eb",
+          "modified": "2026-02-15T23:57:13.973983",
+          "issues": [],
+          "timestamp_check": {
+            "reasonable": true,
+            "issues": []
+          },
+          "line_check": {
+            "line_count": 102,
+            "meets_minimum": true,
+            "issues": []
+          }
+        },
+        {
+          "path": "C:\\SEOBAIKE\\tasks\\optimization_data.json",
+          "exists": true,
+          "readable": true,
+          "size_bytes": 7550,
+          "sha256": "175a8c3d24e91f678641544026f93def8b67cac7b008ea30d67ce03a04452f74",
+          "modified": "2026-02-15T23:57:13.976183",
+          "issues": [],
+          "timestamp_check": {
+            "reasonable": true,
+            "issues": []
+          },
+          "json_check": {
+            "valid_json": true,
+            "record_count": null,
+            "has_expected_key": null,
+            "issues": []
+          }
+        }
+      ],
+      "layer_pass": true
+    },
+    "layer_5": {
+      "description": "技術文件 (Technical Documentation)",
+      "files": [
+        {
+          "path": "C:\\SEOBAIKE\\docs\\white_paper.md",
+          "exists": true,
+          "readable": true,
+          "size_bytes": 14499,
+          "sha256": "7234e7325aaaa4fa05f02f276280441725f249abbd6c5ffbc2cd6d4d768808df",
+          "modified": "2026-02-15T14:30:42.268687",
+          "issues": [],
+          "timestamp_check": {
+            "reasonable": true,
+            "issues": []
+          },
+          "line_check": {
+            "line_count": 480,
+            "meets_minimum": true,
+            "issues": []
+          }
+        },
+        {
+          "path": "C:\\SEOBAIKE\\docs\\tutorial_script.txt",
+          "exists": true,
+          "readable": true,
+          "size_bytes": 11476,
+          "sha256": "ee13204594097a73a1b578615794590fc54cd7b860f13fbfe8ec1dc48cd8e895",
+          "modified": "2026-02-15T14:32:00.437055",
+          "issues": [],
+          "timestamp_check": {
+            "reasonable": true,
+            "issues": []
+          },
+          "line_check": {
+            "line_count": 342,
+            "meets_minimum": true,
+            "issues": []
+          }
+        }
+      ],
+      "layer_pass": true
+    },
+    "layer_6": {
+      "description": "跨時代比較 (Cross-Era Comparison)",
+      "files": [
+        {
+          "path": "C:\\SEOBAIKE\\docs\\comparative_analysis.md",
+          "exists": true,
+          "readable": true,
+          "size_bytes": 12708,
+          "sha256": "871039f0c885e2e69ac488ef0f6385796202a9cdd9709d0fd89c9effa4d4b60e",
+          "modified": "2026-02-15T14:33:37.173784",
+          "issues": [],
+          "timestamp_check": {
+            "reasonable": true,
+            "issues": []
+          },
+          "line_check": {
+            "line_count": 292,
+            "meets_minimum": true,
+            "issues": []
+          }
+        }
+      ],
+      "layer_pass": true
+    },
+    "layer_7": {
+      "description": "自我複製 (Self-Replication)",
+      "files": [
+        {
+          "path": "C:\\SEOBAIKE\\clone_checker.py",
+          "exists": true,
+          "readable": true,
+          "size_bytes": 8067,
+          "sha256": "5133c3f5d562ff379f51232154dd826595ef2fb6f7d4497371fd8dbda0e3af9a",
+          "modified": "2026-02-15T23:33:15.744416",
+          "issues": [],
+          "timestamp_check": {
+            "reasonable": true,
+            "issues": []
+          },
+          "line_check": {
+            "line_count": 212,
+            "meets_minimum": true,
+            "issues": []
+          }
+        },
+        {
+          "path": "C:\\SEOBAIKE\\docs\\self_replication_plan.md",
+          "exists": true,
+          "readable": true,
+          "size_bytes": 12766,
+          "sha256": "4a97c11ee46823d356dc1ae64a7061008e97d7a73a0793ca41dbb0ee322bee49",
+          "modified": "2026-02-15T14:35:10.816411",
+          "issues": [],
+          "timestamp_check": {
+            "reasonable": true,
+            "issues": []
+          },
+          "line_check": {
+            "line_count": 392,
+            "meets_minimum": true,
+            "issues": []
+          }
+        },
+        {
+          "path": "C:\\SEOBAIKE\\tasks\\clone_check_report.json",
+          "exists": true,
+          "readable": true,
+          "size_bytes": 4569,
+          "sha256": "f8ddfda8791c1905aee49d1620b622ec8eede8a0e80be59d3442ac2987f9e6b6",
+          "modified": "2026-02-15T23:24:19.804721",
+          "issues": [],
+          "timestamp_check": {
+            "reasonable": true,
+            "issues": []
+          },
+          "json_check": {
+            "valid_json": true,
+            "record_count": null,
+            "has_expected_key": null,
+            "issues": []
+          }
+        }
+      ],
+      "layer_pass": true
+    },
+    "layer_8": {
+      "description": "霸主防禦戰 (Global Defense Strategy)",
+      "files": [
+        {
+          "path": "C:\\SEOBAIKE\\docs\\defense_strategy.md",
+          "exists": true,
+          "readable": true,
+          "size_bytes": 25110,
+          "sha256": "1047fdd88bd398a3f6597db2fd9ed482e7692bdcfc2334d0650e34625182cea1",
+          "modified": "2026-02-15T19:40:11.784343",
+          "issues": [],
+          "timestamp_check": {
+            "reasonable": true,
+            "issues": []
+          },
+          "line_check": {
+            "line_count": 502,
+            "meets_minimum": true,
+            "issues": []
+          }
+        }
+      ],
+      "layer_pass": true
+    },
+    "layer_9": {
+      "description": "安全檢測 (Security Audit)",
+      "files": [
+        {
+          "path": "C:\\SEOBAIKE\\self_audit.py",
+          "exists": true,
+          "readable": true,
+          "size_bytes": 35910,
+          "sha256": "7050fbbec2bd287d555fb429a8b79cc04d7d19eed9b25688c9d21415bfe77ba3",
+          "modified": "2026-02-15T23:33:31.081345",
+          "issues": [],
+          "timestamp_check": {
+            "reasonable": true,
+            "issues": []
+          },
+          "line_check": {
+            "line_count": 826,
+            "meets_minimum": true,
+            "issues": []
+          }
+        },
+        {
+          "path": "C:\\SEOBAIKE\\docs\\security_audit_self.md",
+          "exists": true,
+          "readable": true,
+          "size_bytes": 18652,
+          "sha256": "ffecdfca7ff9406e157400ca593832bd451091cbbfa680e0ff911dcf43d5591e",
+          "modified": "2026-02-15T19:40:11.788813",
+          "issues": [],
+          "timestamp_check": {
+            "reasonable": true,
+            "issues": []
+          },
+          "line_check": {
+            "line_count": 489,
+            "meets_minimum": true,
+            "issues": []
+          }
+        },
+        {
+          "path": "C:\\SEOBAIKE\\tasks\\security_audit_report.json",
+          "exists": true,
+          "readable": true,
+          "size_bytes": 12972,
+          "sha256": "baae18ba12fc37a9f21e7065372002d8fc860df6ebcf1ffbac4afc6dee549ed2",
+          "modified": "2026-02-15T23:57:15.651336",
+          "issues": [],
+          "timestamp_check": {
+            "reasonable": true,
+            "issues": []
+          },
+          "json_check": {
+            "valid_json": true,
+            "record_count": 10,
+            "has_expected_key": true,
+            "issues": []
+          }
+        }
+      ],
+      "layer_pass": true
+    },
+    "layer_10": {
+      "description": "最終總結 (Final Summary)",
+      "files": [
+        {
+          "path": "C:\\SEOBAIKE\\docs\\final_summary.md",
+          "exists": true,
+          "readable": true,
+          "size_bytes": 13647,
+          "sha256": "309d8a6d93b06f2209e52401a9b6c469a27330d375d325817f67927569e83a18",
+          "modified": "2026-02-15T19:40:11.784343",
+          "issues": [],
+          "timestamp_check": {
+            "reasonable": true,
+            "issues": []
+          },
+          "line_check": {
+            "line_count": 303,
+            "meets_minimum": true,
+            "issues": []
+          }
+        },
+        {
+          "path": "C:\\SEOBAIKE\\docs\\future_roadmap.md",
+          "exists": true,
+          "readable": true,
+          "size_bytes": 14835,
+          "sha256": "99b38f7bb6c7a94d1f3e8ef6d9094923120f7374cbe986692a0350e8d7118385",
+          "modified": "2026-02-15T19:40:11.784343",
+          "issues": [],
+          "timestamp_check": {
+            "reasonable": true,
+            "issues": []
+          },
+          "line_check": {
+            "line_count": 430,
+            "meets_minimum": true,
+            "issues": []
+          }
+        },
+        {
+          "path": "C:\\SEOBAIKE\\docs\\release_notes.md",
+          "exists": true,
+          "readable": true,
+          "size_bytes": 10789,
+          "sha256": "00583a05fdae9729535f918f66336e33e895cc35992852a8ad78f76538f1fc68",
+          "modified": "2026-02-15T19:40:11.788813",
+          "issues": [],
+          "timestamp_check": {
+            "reasonable": true,
+            "issues": []
+          },
+          "line_check": {
+            "line_count": 370,
+            "meets_minimum": true,
+            "issues": []
+          }
+        }
+      ],
+      "layer_pass": true
+    }
+  },
+  "supporting_file_results": [
+    {
+      "path": "C:\\SEOBAIKE\\data_inventory_complete.json",
+      "exists": true,
+      "readable": true,
+      "size_bytes": 10701,
+      "sha256": "64b2e8d82c6e82389900189647d33cbd0d161c54d90df580a18827f10dcdcafe",
+      "modified": "2026-02-15T16:17:02.430382",
+      "issues": [],
+      "description": "資料盤點清單",
+      "json_check": {
+        "valid_json": true,
+        "record_count": null,
+        "has_expected_key": null,
+        "issues": []
+      }
+    },
+    {
+      "path": "C:\\SEOBAIKE\\data_inventory_files.json",
+      "exists": true,
+      "readable": true,
+      "size_bytes": 43681,
+      "sha256": "4bfdfe5359621553fe87525b0c9f14a99523e027b0103b3135482c98e7c410c1",
+      "modified": "2026-02-15T16:15:21.956685",
+      "issues": [],
+      "description": "本地檔案清單",
+      "json_check": {
+        "valid_json": true,
+        "record_count": 261,
+        "has_expected_key": null,
+        "issues": []
+      }
+    },
+    {
+      "path": "C:\\SEOBAIKE\\data_platform_registry_export.json",
+      "exists": true,
+      "readable": true,
+      "size_bytes": 112659,
+      "sha256": "817f4e0a4f60b324151e90ad3c79292e4a83c94cd85a35e053eadedc642c982e",
+      "modified": "2026-02-15T16:21:30.467629",
+      "issues": [],
+      "description": "446 平台匯出資料",
+      "json_check": {
+        "valid_json": true,
+        "record_count": 446,
+        "has_expected_key": null,
+        "issues": []
+      }
+    }
+  ],
+  "security_audit_honesty": {
+    "total_checks": 10,
+    "implemented_checks": 10,
+    "unimplemented_checks": 0,
+    "vulnerable_count": 2,
+    "honesty_score": 100.0,
+    "issues": []
+  },
+  "platform_registry_check": {
+    "total_platforms": 446,
+    "unique_providers": 91,
+    "all_have_model_id": true,
+    "all_have_display_name": true,
+    "all_have_provider": true,
+    "missing_fields": [],
+    "issues": [
+      "HONEST_DISCLOSURE: 平台資料是透過 SQL INSERT 匯入 Supabase，並非實際向 446 個平台各自註冊帳號。每個平台的 model_id、display_name、provider、tier 皆為根據公開資料手動填寫。"
+    ]
+  },
+  "all_issues": [],
+  "git_verification": {
+    "recent_commits": [
+      "03bfdf1 世界級 API 路由 + 機器人指揮官 + 5 大引擎上線",
+      "eec895b 全面安全修復 + 品牌合規 + 團隊協作引擎",
+      "48bc3ea Stripe 收款 + Resend 寄信 串接代碼就緒",
+      "3688f49 小百接真的 AI：Workers AI (Llama 3.1) 直接回話",
+      "8d49ed1 全站 AI 客服 widget：13 頁面全部加入小百即時對話"
+    ],
+    "has_layer_commit": false,
+    "has_release_commit": false
+  }
+}
