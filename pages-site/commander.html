@@ -2,296 +2,549 @@
 <html lang="zh-TW">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SEOBAIKE 指揮官戰情室 | Patent 115100981</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>SEOBAIKE Command Center | Patent 115100981</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
+:root{
+  --bg:#05060f;--card:rgba(12,14,28,0.85);--border:rgba(255,255,255,0.06);
+  --red:#ff3b3b;--green:#00e676;--gold:#ffd740;--blue:#448aff;--orange:#ff9100;
+  --cyan:#00e5ff;--purple:#b388ff;--pink:#ff80ab;
+  --glass:rgba(255,255,255,0.03);--glow:0 0 40px rgba(255,59,59,0.15);
+}
 *{margin:0;padding:0;box-sizing:border-box}
-body{background:#080810;color:#ccc;font-family:'Courier New',monospace;min-height:100vh;overflow-x:hidden}
-::-webkit-scrollbar{width:6px}::-webkit-scrollbar-track{background:#111}::-webkit-scrollbar-thumb{background:#ff4444;border-radius:3px}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:#e0e0e0;font-family:'Inter',system-ui,-apple-system,sans-serif;min-height:100vh;overflow-x:hidden}
+::-webkit-scrollbar{width:5px}::-webkit-scrollbar-track{background:transparent}::-webkit-scrollbar-thumb{background:rgba(255,59,59,0.4);border-radius:10px}
 
-.top-bar{background:#0a0a0a;border-bottom:2px solid #ff4444;padding:12px 20px;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:100}
-.top-bar .logo{color:#ff4444;font-size:16px;font-weight:bold;letter-spacing:2px}
-.top-bar .live{display:flex;align-items:center;gap:8px}
-.top-bar .dot{width:8px;height:8px;border-radius:50%;background:#44ff44;animation:blink 1s infinite}
-@keyframes blink{0%,100%{opacity:1}50%{opacity:0.3}}
-.top-bar .time{color:#888;font-size:12px}
+/* Animated background */
+body::before{content:'';position:fixed;top:0;left:0;width:100%;height:100%;background:radial-gradient(ellipse at 20% 50%,rgba(255,59,59,0.04) 0%,transparent 50%),radial-gradient(ellipse at 80% 20%,rgba(68,138,255,0.04) 0%,transparent 50%),radial-gradient(ellipse at 50% 80%,rgba(0,230,118,0.03) 0%,transparent 50%);z-index:0;pointer-events:none}
 
-.commander-banner{background:linear-gradient(135deg,#1a0505,#0a0a1a);padding:20px;text-align:center;border-bottom:1px solid #222}
-.commander-banner h1{color:#ffcc00;font-size:20px;margin-bottom:5px}
-.commander-banner .info{color:#888;font-size:11px}
-.commander-banner .patent{color:#ff8800;font-size:13px;margin-top:5px}
+/* Grid pattern overlay */
+body::after{content:'';position:fixed;top:0;left:0;width:100%;height:100%;background-image:linear-gradient(rgba(255,255,255,0.015) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.015) 1px,transparent 1px);background-size:60px 60px;z-index:0;pointer-events:none}
 
-.progress-section{background:#0d0d15;padding:15px 20px}
-.progress-section .label{display:flex;justify-content:space-between;margin-bottom:6px;font-size:13px}
-.bar-outer{background:#1a1a2e;border-radius:8px;height:24px;overflow:hidden;position:relative}
-.bar-inner{height:100%;transition:width 0.8s ease;border-radius:8px}
-.bar-pct{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-weight:bold;font-size:14px;color:#fff;text-shadow:0 0 8px #000}
+.container{position:relative;z-index:1;max-width:1600px;margin:0 auto}
 
-.grok-bar{background:#111;border-bottom:1px solid #333;padding:12px 20px;display:flex;gap:10px;align-items:center;justify-content:center}
-.grok-btn{background:linear-gradient(135deg,#ff4444,#cc0000);color:#fff;border:none;padding:10px 24px;border-radius:6px;font-size:14px;cursor:pointer;font-family:'Courier New',monospace;font-weight:bold;text-decoration:none;display:inline-block}
-.grok-btn:hover{background:linear-gradient(135deg,#ff6666,#ee2222)}
-.grok-btn.tg{background:linear-gradient(135deg,#0088cc,#006699)}
-.grok-btn.tg:hover{background:linear-gradient(135deg,#00aaee,#0088cc)}
-.grok-btn.sb{background:linear-gradient(135deg,#3ecf8e,#2b9a66)}
-.grok-btn.sb:hover{background:linear-gradient(135deg,#50e0a0,#3ecf8e)}
+/* === TOP BAR === */
+.topbar{background:rgba(5,6,15,0.95);backdrop-filter:blur(20px);border-bottom:1px solid rgba(255,59,59,0.3);padding:0 24px;height:56px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:1000}
+.topbar-left{display:flex;align-items:center;gap:16px}
+.logo-mark{width:32px;height:32px;background:linear-gradient(135deg,var(--red),#ff6b3b);border-radius:8px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:14px;color:#fff;box-shadow:0 0 20px rgba(255,59,59,0.3)}
+.logo-text{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:14px;color:#fff;letter-spacing:1px}
+.logo-text span{color:var(--red)}
+.topbar-right{display:flex;align-items:center;gap:16px}
+.live-dot{width:8px;height:8px;border-radius:50%;background:var(--green);box-shadow:0 0 12px var(--green);animation:livePulse 2s ease-in-out infinite}
+@keyframes livePulse{0%,100%{box-shadow:0 0 12px var(--green)}50%{box-shadow:0 0 24px var(--green),0 0 48px rgba(0,230,118,0.3)}}
+.live-label{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--green);font-weight:600;letter-spacing:2px}
+.clock{font-family:'JetBrains Mono',monospace;font-size:12px;color:rgba(255,255,255,0.5)}
 
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:10px;padding:12px}
+/* === COMMANDER HEADER === */
+.cmd-header{background:linear-gradient(180deg,rgba(255,59,59,0.08) 0%,transparent 100%);padding:32px 24px 24px;text-align:center;position:relative}
+.cmd-header::after{content:'';position:absolute;bottom:0;left:10%;right:10%;height:1px;background:linear-gradient(90deg,transparent,rgba(255,59,59,0.3),transparent)}
+.cmd-title{font-size:28px;font-weight:900;letter-spacing:4px;background:linear-gradient(135deg,#fff,#ffd740,#ff9100);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:8px}
+.cmd-sub{font-size:13px;color:rgba(255,255,255,0.5);font-weight:400;letter-spacing:1px}
+.cmd-patent{display:inline-block;margin-top:10px;padding:4px 16px;border:1px solid rgba(255,215,64,0.3);border-radius:20px;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--gold);letter-spacing:1px;background:rgba(255,215,64,0.05)}
 
-.card{background:#0c0c14;border:1px solid #1a1a2e;border-radius:8px;padding:14px;transition:border-color 0.3s}
-.card:hover{border-color:#444}
-.card.full{grid-column:1/-1}
-.card.danger{border-color:#ff4444;background:#0f0808}
-.card.ok{border-color:#1a3a1a}
-.card h2{color:#ff8800;font-size:13px;margin-bottom:10px;padding-bottom:6px;border-bottom:1px solid #1a1a2e;display:flex;justify-content:space-between;align-items:center}
-.card h2 .badge{font-size:11px;padding:2px 8px;border-radius:4px}
-.badge.green{background:#0a2a0a;color:#44ff44}
-.badge.red{background:#2a0a0a;color:#ff4444}
-.badge.yellow{background:#2a2a0a;color:#ffcc00}
+/* === PROGRESS === */
+.progress-wrap{padding:20px 24px;background:rgba(0,0,0,0.2)}
+.progress-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+.progress-label{font-size:12px;font-weight:600;letter-spacing:2px;color:rgba(255,255,255,0.4);text-transform:uppercase}
+.progress-value{font-family:'JetBrains Mono',monospace;font-size:24px;font-weight:800;color:#fff}
+.progress-bar{height:6px;background:rgba(255,255,255,0.06);border-radius:3px;overflow:hidden;position:relative}
+.progress-fill{height:100%;border-radius:3px;transition:width 1s cubic-bezier(0.4,0,0.2,1);position:relative}
+.progress-fill::after{content:'';position:absolute;top:0;right:0;width:40px;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.4));animation:shimmer 2s infinite}
+@keyframes shimmer{0%{opacity:0}50%{opacity:1}100%{opacity:0}}
 
-.row{display:flex;justify-content:space-between;padding:5px 0;font-size:12px;border-bottom:1px solid #0f0f18}
-.row:last-child{border:none}
-.row .label{color:#888}
-.g{color:#44ff44}.r{color:#ff4444}.y{color:#ffcc00}.w{color:#fff}
+/* === NAV TABS === */
+.nav-tabs{display:flex;gap:4px;padding:12px 24px;background:rgba(0,0,0,0.3);border-bottom:1px solid var(--border);overflow-x:auto;-webkit-overflow-scrolling:touch}
+.nav-tabs::-webkit-scrollbar{display:none}
+.tab{padding:8px 20px;border-radius:8px;font-size:12px;font-weight:600;letter-spacing:1px;color:rgba(255,255,255,0.4);background:transparent;border:1px solid transparent;cursor:pointer;transition:all 0.3s;white-space:nowrap;font-family:'Inter',sans-serif}
+.tab:hover{color:rgba(255,255,255,0.7);background:rgba(255,255,255,0.03)}
+.tab.active{color:#fff;background:rgba(255,59,59,0.15);border-color:rgba(255,59,59,0.3);box-shadow:0 0 20px rgba(255,59,59,0.1)}
 
-.soldier-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:8px;margin-top:8px}
-.soldier{background:#08081a;border:1px solid #1a1a2e;border-radius:6px;padding:10px;display:grid;grid-template-columns:1fr auto;gap:8px;align-items:center;transition:all 0.3s}
-.soldier:hover{border-color:#444;background:#0c0c20}
-.soldier.dead{border-color:#ff4444;background:#120808}
-.soldier .name{font-weight:bold;font-size:13px;color:#ddd}
-.soldier .detail{font-size:11px;color:#666;margin-top:2px}
-.soldier .right{text-align:right}
-.tag{display:inline-block;padding:2px 8px;border-radius:4px;font-size:10px;font-weight:bold;letter-spacing:1px}
-.tag.on{background:#0a2a0a;color:#44ff44;border:1px solid #1a4a1a}
-.tag.off{background:#2a0a0a;color:#ff4444;border:1px solid #4a1a1a;animation:pulse 2s infinite}
-@keyframes pulse{0%,100%{box-shadow:none}50%{box-shadow:0 0 10px rgba(255,68,68,0.4)}}
-.cost-tag{font-size:10px;margin-top:4px}
-.cost-tag.low{color:#44ff44}.cost-tag.medium{color:#ffcc00}.cost-tag.high{color:#ff8800}.cost-tag.very_high{color:#ff4444}
-.ms-bar{background:#1a1a2e;height:4px;border-radius:2px;margin-top:4px;overflow:hidden}
-.ms-bar .fill{height:100%;border-radius:2px;transition:width 0.5s}
+/* === QUICK LINKS === */
+.quick-links{display:flex;gap:8px;padding:12px 24px;flex-wrap:wrap}
+.qlink{display:flex;align-items:center;gap:6px;padding:8px 16px;border-radius:8px;font-size:12px;font-weight:600;color:#fff;text-decoration:none;transition:all 0.3s;border:1px solid transparent}
+.qlink:hover{transform:translateY(-1px);box-shadow:0 4px 16px rgba(0,0,0,0.3)}
+.qlink.grok{background:linear-gradient(135deg,rgba(255,59,59,0.2),rgba(255,59,59,0.1));border-color:rgba(255,59,59,0.3)}
+.qlink.grok:hover{background:linear-gradient(135deg,rgba(255,59,59,0.3),rgba(255,59,59,0.15))}
+.qlink.sb{background:linear-gradient(135deg,rgba(62,207,142,0.2),rgba(62,207,142,0.1));border-color:rgba(62,207,142,0.3)}
+.qlink.tg{background:linear-gradient(135deg,rgba(0,136,204,0.2),rgba(0,136,204,0.1));border-color:rgba(0,136,204,0.3)}
+.qlink.az{background:linear-gradient(135deg,rgba(0,120,212,0.2),rgba(0,120,212,0.1));border-color:rgba(0,120,212,0.3)}
+.qlink-dot{width:6px;height:6px;border-radius:50%}
+.qlink.grok .qlink-dot{background:var(--red)}.qlink.sb .qlink-dot{background:#3ecf8e}.qlink.tg .qlink-dot{background:#0088cc}.qlink.az .qlink-dot{background:#0078d4}
 
-.app-row{display:grid;grid-template-columns:1fr 80px 80px 100px;gap:8px;padding:8px;background:#08081a;border-radius:4px;margin-bottom:4px;font-size:12px;align-items:center}
-.app-row:hover{background:#0c0c20}
+/* === ALERT BANNER === */
+.alert{display:none;margin:12px 24px;padding:12px 20px;border-radius:10px;border:1px solid rgba(255,59,59,0.4);background:rgba(255,59,59,0.08);color:var(--red);font-size:13px;font-weight:600;text-align:center;animation:alertGlow 3s ease-in-out infinite}
+.alert.show{display:block}
+@keyframes alertGlow{0%,100%{box-shadow:0 0 0 rgba(255,59,59,0)}50%{box-shadow:0 0 30px rgba(255,59,59,0.15)}}
 
-.hb-row{display:grid;grid-template-columns:1fr 80px 1fr;gap:8px;padding:4px 0;font-size:11px;border-bottom:1px solid #0f0f18}
+/* === MAIN GRID === */
+.main{padding:16px 24px;display:grid;grid-template-columns:repeat(12,1fr);gap:16px}
 
-.dept{background:#08081a;border:1px solid #1a1a2e;border-radius:6px;padding:10px;margin-bottom:6px}
-.dept h3{color:#ffcc00;font-size:12px;margin-bottom:6px}
-.dept .item{font-size:11px;padding:2px 0;color:#aaa}
+/* === CARDS === */
+.card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:20px;backdrop-filter:blur(10px);transition:all 0.3s}
+.card:hover{border-color:rgba(255,255,255,0.1);box-shadow:0 8px 32px rgba(0,0,0,0.3)}
+.card.danger{border-color:rgba(255,59,59,0.3);box-shadow:var(--glow)}
+.card.ok{border-color:rgba(0,230,118,0.15)}
+.c-4{grid-column:span 4}.c-6{grid-column:span 6}.c-8{grid-column:span 8}.c-12{grid-column:span 12}
+@media(max-width:1200px){.c-4,.c-6,.c-8{grid-column:span 6}}
+@media(max-width:768px){.c-4,.c-6,.c-8,.c-12{grid-column:span 12}}
 
-.footer{text-align:center;padding:15px;color:#333;font-size:10px;border-top:1px solid #111}
+.card-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px}
+.card-title{font-size:11px;font-weight:700;letter-spacing:2px;color:rgba(255,255,255,0.4);text-transform:uppercase}
+.badge{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;padding:3px 10px;border-radius:6px;letter-spacing:1px}
+.badge.g{background:rgba(0,230,118,0.1);color:var(--green);border:1px solid rgba(0,230,118,0.2)}
+.badge.r{background:rgba(255,59,59,0.1);color:var(--red);border:1px solid rgba(255,59,59,0.2)}
+.badge.y{background:rgba(255,215,64,0.1);color:var(--gold);border:1px solid rgba(255,215,64,0.2)}
+.badge.b{background:rgba(68,138,255,0.1);color:var(--blue);border:1px solid rgba(68,138,255,0.2)}
 
-.loading{text-align:center;padding:80px 20px;font-size:16px;color:#ff8800}
-.loading .spin{display:inline-block;animation:spin 1s linear infinite}
-@keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+/* Stat rows */
+.stat-row{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid rgba(255,255,255,0.03)}
+.stat-row:last-child{border:none}
+.stat-label{font-size:13px;color:rgba(255,255,255,0.45);font-weight:400}
+.stat-val{font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:600}
+.stat-val.g{color:var(--green)}.stat-val.r{color:var(--red)}.stat-val.y{color:var(--gold)}.stat-val.w{color:#fff}
 
-.alert-banner{background:#2a0a0a;border:1px solid #ff4444;border-radius:6px;padding:10px;margin:10px 12px;text-align:center;color:#ff4444;font-size:13px;display:none}
-.alert-banner.show{display:block;animation:pulse 2s infinite}
+/* === PHYSICAL AI SECTION === */
+.pai-section{grid-column:span 12;background:linear-gradient(135deg,rgba(12,14,28,0.9),rgba(20,10,40,0.9));border:1px solid rgba(179,136,255,0.2);border-radius:14px;padding:24px;position:relative;overflow:hidden}
+.pai-section::before{content:'';position:absolute;top:-50%;right:-20%;width:300px;height:300px;background:radial-gradient(circle,rgba(179,136,255,0.08),transparent 70%);pointer-events:none}
+.pai-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}
+.pai-title{font-size:18px;font-weight:800;background:linear-gradient(135deg,#b388ff,#7c4dff,#448aff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;letter-spacing:1px}
+.pai-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+@media(max-width:900px){.pai-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:500px){.pai-grid{grid-template-columns:1fr}}
+.pai-card{background:rgba(179,136,255,0.05);border:1px solid rgba(179,136,255,0.1);border-radius:10px;padding:16px;text-align:center;transition:all 0.3s}
+.pai-card:hover{border-color:rgba(179,136,255,0.3);transform:translateY(-2px)}
+.pai-layer{font-family:'JetBrains Mono',monospace;font-size:20px;font-weight:800;margin-bottom:6px}
+.pai-layer.l1{color:#00e5ff}.pai-layer.l2{color:var(--green)}.pai-layer.l3{color:var(--gold)}.pai-layer.l4{color:var(--red)}
+.pai-name{font-size:12px;font-weight:600;color:rgba(255,255,255,0.7);margin-bottom:8px}
+.pai-desc{font-size:11px;color:rgba(255,255,255,0.35);line-height:1.5}
+.pai-status{margin-top:8px;font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;padding:3px 8px;border-radius:4px;display:inline-block}
+.pai-status.live{background:rgba(0,230,118,0.1);color:var(--green);border:1px solid rgba(0,230,118,0.2)}
+.pai-status.dev{background:rgba(255,215,64,0.1);color:var(--gold);border:1px solid rgba(255,215,64,0.2)}
+
+/* Constraint flow visualization */
+.constraint-flow{margin-top:20px;padding:16px;background:rgba(0,0,0,0.2);border-radius:10px;border:1px solid rgba(255,255,255,0.03)}
+.flow-title{font-size:11px;font-weight:700;letter-spacing:2px;color:rgba(255,255,255,0.3);margin-bottom:12px;text-transform:uppercase}
+.flow-line{display:flex;align-items:center;gap:8px;padding:6px 0;font-size:12px}
+.flow-arrow{color:rgba(179,136,255,0.5);font-family:'JetBrains Mono',monospace}
+.flow-node{padding:4px 12px;border-radius:6px;font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:600}
+.flow-node.input{background:rgba(0,229,255,0.1);color:var(--cyan);border:1px solid rgba(0,229,255,0.2)}
+.flow-node.process{background:rgba(179,136,255,0.1);color:var(--purple);border:1px solid rgba(179,136,255,0.2)}
+.flow-node.output{background:rgba(0,230,118,0.1);color:var(--green);border:1px solid rgba(0,230,118,0.2)}
+.flow-node.constraint{background:rgba(255,59,59,0.1);color:var(--red);border:1px solid rgba(255,59,59,0.2)}
+
+/* === SOLDIER CARDS === */
+.soldier-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:10px}
+.soldier{background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.05);border-radius:10px;padding:14px;transition:all 0.3s;position:relative;overflow:hidden}
+.soldier:hover{border-color:rgba(255,255,255,0.1);transform:translateY(-1px)}
+.soldier.dead{border-color:rgba(255,59,59,0.3);background:rgba(255,59,59,0.03)}
+.soldier.dead::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--red);animation:pulse2 2s infinite}
+@keyframes pulse2{0%,100%{opacity:0.3}50%{opacity:1}}
+.s-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px}
+.s-name{font-size:13px;font-weight:700;color:#fff}
+.s-model{font-size:10px;color:rgba(255,255,255,0.3);margin-top:2px;font-family:'JetBrains Mono',monospace}
+.s-tag{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;padding:2px 8px;border-radius:4px;letter-spacing:1px}
+.s-tag.on{background:rgba(0,230,118,0.1);color:var(--green);border:1px solid rgba(0,230,118,0.2)}
+.s-tag.off{background:rgba(255,59,59,0.1);color:var(--red);border:1px solid rgba(255,59,59,0.2)}
+.s-bar{height:3px;background:rgba(255,255,255,0.04);border-radius:2px;margin-top:8px;overflow:hidden}
+.s-bar-fill{height:100%;border-radius:2px;transition:width 0.8s}
+.s-meta{display:flex;justify-content:space-between;margin-top:6px;font-size:10px;color:rgba(255,255,255,0.3);font-family:'JetBrains Mono',monospace}
+.s-meta .cost{font-weight:600}
+.cost-low{color:var(--green)}.cost-medium{color:var(--gold)}.cost-high{color:var(--orange)}.cost-very_high{color:var(--red)}
+
+/* === APP ROWS === */
+.app-item{display:flex;align-items:center;gap:12px;padding:12px;background:rgba(255,255,255,0.02);border-radius:8px;margin-bottom:6px;transition:background 0.3s}
+.app-item:hover{background:rgba(255,255,255,0.04)}
+.app-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.app-dot.on{background:var(--green);box-shadow:0 0 8px var(--green)}
+.app-dot.off{background:var(--red);box-shadow:0 0 8px var(--red)}
+.app-name{flex:1;font-size:13px;font-weight:600;color:#fff}
+.app-ms{font-family:'JetBrains Mono',monospace;font-size:12px;min-width:60px;text-align:right}
+.app-cost{font-size:11px;color:rgba(255,255,255,0.3);min-width:80px;text-align:right}
+
+/* === HEARTBEAT === */
+.hb-item{display:flex;align-items:center;gap:8px;padding:6px 0;font-size:12px;border-bottom:1px solid rgba(255,255,255,0.03)}
+.hb-item:last-child{border:none}
+.hb-dot{width:6px;height:6px;border-radius:50%}
+.hb-name{flex:1;color:rgba(255,255,255,0.6)}
+.hb-time{font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(255,255,255,0.25)}
+
+/* === ENDPOINTS === */
+.ep-item{display:flex;align-items:center;gap:12px;padding:10px;background:rgba(255,255,255,0.02);border-radius:8px;margin-bottom:6px}
+.ep-item:hover{background:rgba(255,255,255,0.04)}
+.ep-name{font-size:12px;font-weight:600;color:rgba(255,255,255,0.7);min-width:140px}
+.ep-url{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--blue);text-decoration:none;word-break:break-all}
+.ep-url:hover{color:var(--cyan);text-decoration:underline}
+
+/* === MEETING === */
+.meeting-box{padding:20px;text-align:center}
+.meeting-btn{background:linear-gradient(135deg,var(--red),#ff6b3b);color:#fff;border:none;padding:14px 32px;border-radius:10px;font-size:14px;font-weight:700;cursor:pointer;letter-spacing:1px;transition:all 0.3s;font-family:'Inter',sans-serif}
+.meeting-btn:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(255,59,59,0.3)}
+.meeting-result{margin-top:20px;text-align:left;font-size:13px;line-height:1.8;white-space:pre-wrap;color:rgba(255,255,255,0.7)}
+
+/* === LOADING === */
+.loading{text-align:center;padding:80px 24px}
+.loading-ring{width:40px;height:40px;border:3px solid rgba(255,59,59,0.1);border-top-color:var(--red);border-radius:50%;animation:spin 1s linear infinite;margin:0 auto 16px}
+@keyframes spin{to{transform:rotate(360deg)}}
+.loading-text{font-size:13px;color:rgba(255,255,255,0.3);letter-spacing:2px}
+
+/* === FOOTER === */
+.footer{text-align:center;padding:24px;color:rgba(255,255,255,0.15);font-size:11px;letter-spacing:1px}
+
+/* === VIEWS === */
+.view{display:none}.view.show{display:grid}
+.view-block{display:none}.view-block.show{display:block}
+
+/* Metric ring */
+.metric-ring{position:relative;width:80px;height:80px;margin:0 auto 12px}
+.metric-ring svg{transform:rotate(-90deg)}
+.metric-ring circle{fill:none;stroke-width:4}
+.metric-ring .bg{stroke:rgba(255,255,255,0.05)}
+.metric-ring .fg{stroke-linecap:round;transition:stroke-dashoffset 1s}
+.metric-num{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-family:'JetBrains Mono',monospace;font-size:18px;font-weight:800;color:#fff}
+.metric-label{text-align:center;font-size:11px;color:rgba(255,255,255,0.35);font-weight:500}
+.metrics-row{display:flex;gap:16px;justify-content:space-around;margin-bottom:20px;flex-wrap:wrap}
 </style>
 </head>
 <body>
 
-<div class="top-bar">
-<div class="logo">SEOBAIKE WAR ROOM</div>
-<div class="live"><div class="dot"></div><span class="g" style="font-size:12px">LIVE</span><span class="time" id="clock"></span></div>
+<div class="container">
+
+<!-- TOP BAR -->
+<div class="topbar">
+  <div class="topbar-left">
+    <div class="logo-mark">S</div>
+    <div class="logo-text">SEO<span>BAIKE</span> COMMAND CENTER</div>
+  </div>
+  <div class="topbar-right">
+    <div class="live-dot"></div>
+    <span class="live-label">LIVE</span>
+    <span class="clock" id="clock"></span>
+  </div>
 </div>
 
-<div class="commander-banner">
-<h1>指揮官：許竣翔</h1>
-<div class="info">CEO 小路光有限公司 | 統編 60475510</div>
-<div class="patent">Patent 115100981 | 世界定義約束法用於AI推理 | CaaS</div>
+<!-- COMMANDER HEADER -->
+<div class="cmd-header">
+  <div class="cmd-title">指揮官：許竣翔</div>
+  <div class="cmd-sub">CEO, 小路光有限公司 &bull; 統編 60475510 &bull; SEOBAIKE AI Platform</div>
+  <div class="cmd-patent">Patent 115100981 &mdash; 世界定義約束法用於AI推理 &mdash; CaaS</div>
 </div>
 
-<div class="progress-section">
-<div class="label"><span>OVERALL PROGRESS</span><span id="pct-text" class="w">--</span></div>
-<div class="bar-outer"><div class="bar-inner" id="pbar" style="width:0%"></div><div class="bar-pct" id="pbar-text">--</div></div>
+<!-- PROGRESS -->
+<div class="progress-wrap">
+  <div class="progress-top">
+    <span class="progress-label">System Progress</span>
+    <span class="progress-value" id="pctVal">--</span>
+  </div>
+  <div class="progress-bar">
+    <div class="progress-fill" id="pbar" style="width:0%"></div>
+  </div>
 </div>
 
-<div class="switch-bar" style="background:#0a0a0a;border-bottom:1px solid #333;padding:8px 20px;display:flex;gap:6px;align-items:center;justify-content:center;flex-wrap:wrap">
-<button class="sw active" onclick="switchView('war')">WAR ROOM</button>
-<button class="sw" onclick="switchView('models')">AI SOLDIERS</button>
-<button class="sw" onclick="switchView('azure')">AZURE</button>
-<button class="sw" onclick="switchView('meeting')">MEETING</button>
-<button class="sw" onclick="switchView('endpoints')">ENDPOINTS</button>
-</div>
-<style>
-.sw{background:#1a1a2e;color:#888;border:1px solid #333;padding:8px 16px;border-radius:6px;font-size:12px;cursor:pointer;font-family:'Courier New',monospace;transition:all 0.2s}
-.sw:hover{border-color:#ff8800;color:#ff8800}
-.sw.active{background:#ff4444;color:#fff;border-color:#ff4444}
-.view{display:none}.view.show{display:block}
-</style>
-
-<div class="grok-bar">
-<a href="https://grok.com" target="_blank" class="grok-btn">GROK AI</a>
-<a href="https://supabase.com/dashboard/project/vmyrivxxibqydccurxug" target="_blank" class="grok-btn sb">SUPABASE</a>
-<a href="https://t.me/seobaike_bot" target="_blank" class="grok-btn tg">TELEGRAM</a>
-<a href="https://portal.azure.com" target="_blank" class="grok-btn" style="background:linear-gradient(135deg,#0078d4,#004e8c)">AZURE</a>
+<!-- NAV TABS -->
+<div class="nav-tabs">
+  <button class="tab active" onclick="switchView('war',this)">WAR ROOM</button>
+  <button class="tab" onclick="switchView('physics',this)">PHYSICAL AI</button>
+  <button class="tab" onclick="switchView('models',this)">AI SOLDIERS</button>
+  <button class="tab" onclick="switchView('azure',this)">AZURE</button>
+  <button class="tab" onclick="switchView('meeting',this)">MEETING</button>
+  <button class="tab" onclick="switchView('endpoints',this)">ENDPOINTS</button>
 </div>
 
-<div class="alert-banner" id="alertBanner"></div>
+<!-- QUICK LINKS -->
+<div class="quick-links">
+  <a href="https://grok.com" target="_blank" class="qlink grok"><span class="qlink-dot"></span>GROK AI</a>
+  <a href="https://supabase.com/dashboard/project/vmyrivxxibqydccurxug" target="_blank" class="qlink sb"><span class="qlink-dot"></span>SUPABASE</a>
+  <a href="https://t.me/seobaike_bot" target="_blank" class="qlink tg"><span class="qlink-dot"></span>TELEGRAM</a>
+  <a href="https://portal.azure.com" target="_blank" class="qlink az"><span class="qlink-dot"></span>AZURE</a>
+</div>
 
-<div id="content"><div class="loading"><span class="spin">/</span> 載入戰情資料中...</div></div>
+<!-- ALERT -->
+<div class="alert" id="alertBanner"></div>
 
-<div class="footer">SEOBAIKE AI Platform | Patent 115100981 | aiforseo.vip | Auto refresh 30s</div>
+<!-- CONTENT -->
+<div id="content"><div class="loading"><div class="loading-ring"></div><div class="loading-text">LOADING WAR ROOM DATA...</div></div></div>
+
+<!-- FOOTER -->
+<div class="footer">SEOBAIKE AI Platform &bull; Patent 115100981 &bull; aiforseo.vip &bull; Auto-refresh 30s</div>
+
+</div>
 
 <script>
 const API='https://grok-takeover-app.azurewebsites.net/api/commander';
+let currentView='war';
+let cachedData=null;
 
 function updateClock(){
-  const now=new Date();
-  const tw=now.toLocaleString('zh-TW',{timeZone:'Asia/Taipei',hour12:false});
-  document.getElementById('clock').textContent='TW '+tw;
+  const n=new Date();
+  document.getElementById('clock').textContent=n.toLocaleString('zh-TW',{timeZone:'Asia/Taipei',hour12:false,year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit',second:'2-digit'});
 }
 setInterval(updateClock,1000);updateClock();
 
 async function load(){
   try{
     const r=await fetch(API);
-    const d=await r.json();
-    render(d);
+    cachedData=await r.json();
+    render(cachedData);
   }catch(e){
-    document.getElementById('content').innerHTML='<div class="loading" style="color:#ff4444">CONNECTION FAILED - RETRYING...</div>';
+    document.getElementById('content').innerHTML='<div class="loading"><div class="loading-text" style="color:var(--red)">CONNECTION LOST - RETRYING...</div></div>';
   }
 }
 
 function msColor(ms){
-  if(ms<500)return '#44ff44';
-  if(ms<1500)return '#ffcc00';
-  if(ms<3000)return '#ff8800';
-  return '#ff4444';
+  if(ms<500)return 'var(--green)';
+  if(ms<1500)return 'var(--gold)';
+  if(ms<3000)return 'var(--orange)';
+  return 'var(--red)';
 }
-function msWidth(ms){return Math.min(ms/5000*100,100)}
+
+function ringSVG(pct,color,size=80){
+  const r=34,c=2*Math.PI*r,off=c*(1-pct/100);
+  return `<svg width="${size}" height="${size}" viewBox="0 0 80 80"><circle class="bg" cx="40" cy="40" r="${r}"/><circle class="fg" cx="40" cy="40" r="${r}" stroke="${color}" stroke-dasharray="${c}" stroke-dashoffset="${off}"/></svg>`;
+}
+
+function switchView(v,el){
+  currentView=v;
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  if(el)el.classList.add('active');
+  if(cachedData)render(cachedData);else load();
+}
 
 function render(d){
-  const pct=parseInt(d.overall_progress);
+  // Progress bar
+  const pct=parseInt(d.overall_progress)||0;
   const pbar=document.getElementById('pbar');
   pbar.style.width=pct+'%';
-  if(pct>=90)pbar.style.background='linear-gradient(90deg,#44ff44,#00cc00)';
-  else if(pct>=70)pbar.style.background='linear-gradient(90deg,#ffcc00,#ff8800)';
-  else pbar.style.background='linear-gradient(90deg,#ff4444,#cc0000)';
-  document.getElementById('pbar-text').textContent=d.overall_progress;
-  document.getElementById('pct-text').textContent=d.overall_progress;
+  if(pct>=90)pbar.style.background='linear-gradient(90deg,var(--green),#00c853)';
+  else if(pct>=70)pbar.style.background='linear-gradient(90deg,var(--gold),var(--orange))';
+  else pbar.style.background='linear-gradient(90deg,var(--red),#ff6b3b)';
+  document.getElementById('pctVal').textContent=d.overall_progress;
 
+  // Alerts
+  const slackers=Array.isArray(d.slackers)?d.slackers:[];
+  const waste=Array.isArray(d.waste_alert)?d.waste_alert:[];
+  const ab=document.getElementById('alertBanner');
+  if(slackers.length||waste.length){
+    ab.className='alert show';
+    ab.textContent='⚠ ALERT: '+(slackers.length?slackers.length+' SLACKERS ':'')+(waste.length?waste.length+' WASTE ITEMS':'');
+  }else{ab.className='alert'}
+
+  // Render current view
+  if(currentView==='war')renderWar(d);
+  else if(currentView==='physics')renderPhysics(d);
+  else if(currentView==='models')renderModels(d);
+  else if(currentView==='azure')renderAzure(d);
+  else if(currentView==='meeting')renderMeeting(d);
+  else if(currentView==='endpoints')renderEndpoints(d);
+}
+
+function renderWar(d){
+  const online=d.soldiers?d.soldiers.filter(s=>s.status==='ONLINE').length:0;
+  const apps=d.azure_apps?d.azure_apps.filter(a=>a.status==='RUNNING').length:0;
   const slackers=Array.isArray(d.slackers)?d.slackers:[];
   const waste=Array.isArray(d.waste_alert)?d.waste_alert:[];
 
-  const ab=document.getElementById('alertBanner');
-  if(slackers.length||waste.length){
-    ab.className='alert-banner show';
-    ab.textContent='WARNING: '+(slackers.length?slackers.length+' SLACKERS ':'')+(waste.length?waste.length+' WASTE ITEMS':'');
-  }else{ab.className='alert-banner'}
+  let h='<div class="main">';
 
-  if(currentView==='meeting'){document.getElementById('content').innerHTML=renderMeeting();return}
-  if(currentView==='endpoints'){document.getElementById('content').innerHTML=renderEndpoints();return}
+  // Metrics rings
+  h+=`<div class="card c-12" style="padding:24px"><div class="metrics-row">
+    <div><div class="metric-ring">${ringSVG(online*10,online>=10?'var(--green)':'var(--red)')}<div class="metric-num">${online}</div></div><div class="metric-label">AI MODELS</div></div>
+    <div><div class="metric-ring">${ringSVG(apps/3*100,apps>=3?'var(--green)':'var(--red)')}<div class="metric-num">${apps}</div></div><div class="metric-label">AZURE APPS</div></div>
+    <div><div class="metric-ring">${ringSVG(d.progress_detail?.supabase==='connected'?100:0,d.progress_detail?.supabase==='connected'?'var(--green)':'var(--red)')}<div class="metric-num">${d.progress_detail?.supabase==='connected'?'OK':'!'}</div></div><div class="metric-label">SUPABASE</div></div>
+    <div><div class="metric-ring">${ringSVG(d.telegram==='ONLINE'?100:0,d.telegram==='ONLINE'?'var(--green)':'var(--red)')}<div class="metric-num">${d.telegram==='ONLINE'?'OK':'!'}</div></div><div class="metric-label">TELEGRAM</div></div>
+    <div><div class="metric-ring">${ringSVG(d.progress_detail?.cloudflare==='ONLINE'?100:0,'var(--cyan)')}<div class="metric-num">${d.progress_detail?.cloudflare==='ONLINE'?'OK':'!'}</div></div><div class="metric-label">CLOUDFLARE</div></div>
+  </div></div>`;
 
-  let h='<div class="grid">';
-
-  // Overview
-  h+=`<div class="card ${pct>=90?'ok':'danger'}">
-    <h2>SYSTEM OVERVIEW <span class="badge ${pct>=90?'green':'red'}">${pct}%</span></h2>
-    <div class="row"><span class="label">AI Models</span><span class="${d.progress_detail.models==='10/10'?'g':'r'}">${d.progress_detail.models}</span></div>
-    <div class="row"><span class="label">Azure Functions</span><span class="${d.progress_detail.azure_apps==='3/3'?'g':'r'}">${d.progress_detail.azure_apps}</span></div>
-    <div class="row"><span class="label">Supabase</span><span class="${d.progress_detail.supabase==='connected'?'g':'r'}">${d.progress_detail.supabase}</span></div>
-    <div class="row"><span class="label">Cloudflare</span><span class="${d.progress_detail.cloudflare==='ONLINE'?'g':'y'}">${d.progress_detail.cloudflare}</span></div>
-    <div class="row"><span class="label">Telegram</span><span class="${d.telegram==='ONLINE'?'g':'r'}">${d.telegram}</span></div>
-    <div class="row"><span class="label">Heartbeat Timer</span><span class="g">${d.progress_detail.heartbeat_timer}</span></div>
-    <div class="row"><span class="label">Sovereignty</span><span class="g">${d.progress_detail.sovereignty}</span></div>
+  // System overview
+  h+=`<div class="card c-6">
+    <div class="card-head"><span class="card-title">System Overview</span><span class="badge ${parseInt(d.overall_progress)>=90?'g':'r'}">${d.overall_progress}</span></div>
+    <div class="stat-row"><span class="stat-label">AI Models</span><span class="stat-val ${d.progress_detail?.models==='10/10'?'g':'r'}">${d.progress_detail?.models}</span></div>
+    <div class="stat-row"><span class="stat-label">Azure Functions</span><span class="stat-val ${d.progress_detail?.azure_apps==='3/3'?'g':'r'}">${d.progress_detail?.azure_apps}</span></div>
+    <div class="stat-row"><span class="stat-label">Supabase</span><span class="stat-val ${d.progress_detail?.supabase==='connected'?'g':'r'}">${d.progress_detail?.supabase}</span></div>
+    <div class="stat-row"><span class="stat-label">Cloudflare</span><span class="stat-val ${d.progress_detail?.cloudflare==='ONLINE'?'g':'y'}">${d.progress_detail?.cloudflare}</span></div>
+    <div class="stat-row"><span class="stat-label">Telegram</span><span class="stat-val ${d.telegram==='ONLINE'?'g':'r'}">${d.telegram}</span></div>
+    <div class="stat-row"><span class="stat-label">Heartbeat</span><span class="stat-val g">${d.progress_detail?.heartbeat_timer}</span></div>
+    <div class="stat-row"><span class="stat-label">Sovereignty</span><span class="stat-val g">${d.progress_detail?.sovereignty}</span></div>
   </div>`;
 
-  // Alerts & Orders
-  h+=`<div class="card ${slackers.length||waste.length?'danger':'ok'}">
-    <h2>COMMANDER ORDERS <span class="badge ${slackers.length?'red':'green'}">${slackers.length?'ACTION':'CLEAR'}</span></h2>
-    <div class="row"><span class="label">Dead Models</span><span class="${slackers.length?'r':'g'}">${d.orders.dead_models}</span></div>
-    <div class="row"><span class="label">Slow Response</span><span class="${d.orders.slow_response!=='All fast'?'y':'g'}">${d.orders.slow_response}</span></div>
-    <div class="row"><span class="label">Cost Waste</span><span class="${d.orders.cost_waste!=='No waste'?'r':'g'}">${d.orders.cost_waste}</span></div>
-    <div class="row"><span class="label">Slackers</span><span class="${slackers.length?'r':'g'}">${slackers.length?slackers.join(', '):'NONE'}</span></div>
-    <div class="row"><span class="label">Waste Items</span><span class="${waste.length?'r':'g'}">${waste.length||'NONE'}</span></div>`;
-  if(waste.length)waste.forEach(w=>{h+=`<div class="row"><span class="r">${w.item}</span><span class="y">${w.action}</span></div>`});
+  // Orders
+  h+=`<div class="card c-6 ${slackers.length||waste.length?'danger':'ok'}">
+    <div class="card-head"><span class="card-title">Commander Orders</span><span class="badge ${slackers.length?'r':'g'}">${slackers.length?'ACTION':'ALL CLEAR'}</span></div>
+    <div class="stat-row"><span class="stat-label">Dead Models</span><span class="stat-val ${slackers.length?'r':'g'}">${d.orders?.dead_models||'--'}</span></div>
+    <div class="stat-row"><span class="stat-label">Slow Response</span><span class="stat-val ${d.orders?.slow_response!=='All fast'?'y':'g'}">${d.orders?.slow_response||'--'}</span></div>
+    <div class="stat-row"><span class="stat-label">Cost Waste</span><span class="stat-val ${d.orders?.cost_waste!=='No waste'?'r':'g'}">${d.orders?.cost_waste||'--'}</span></div>
+    <div class="stat-row"><span class="stat-label">Slackers</span><span class="stat-val ${slackers.length?'r':'g'}">${slackers.length?slackers.join(', '):'NONE'}</span></div>`;
+  if(waste.length)waste.forEach(w=>{h+=`<div class="stat-row"><span class="stat-val r">${w.item}</span><span class="stat-val y">${w.action}</span></div>`});
   h+=`</div>`;
 
-  // Soldiers
-  h+=`<div class="card full"><h2>AI SOLDIERS <span class="badge green">${d.soldiers.filter(s=>s.status==='ONLINE').length}/10</span></h2><div class="soldier-grid">`;
-  d.soldiers.forEach(s=>{
+  // Top soldiers (compact)
+  h+=`<div class="card c-12"><div class="card-head"><span class="card-title">AI Soldiers Status</span><span class="badge g">${online}/10 ONLINE</span></div><div class="soldier-grid">`;
+  (d.soldiers||[]).slice(0,10).forEach(s=>{
     const dead=s.status==='DEAD';
-    const mc=msColor(s.response_ms);
     h+=`<div class="soldier ${dead?'dead':''}">
-      <div>
-        <div class="name">${s.slot}</div>
-        <div class="detail">${s.model.split('/').pop()} | ${s.size}</div>
-        <div class="ms-bar"><div class="fill" style="width:${msWidth(s.response_ms)}%;background:${mc}"></div></div>
-      </div>
-      <div class="right">
-        <span class="tag ${dead?'off':'on'}">${s.status}</span>
-        <div class="cost-tag ${s.cost}">${s.cost} | ${s.response_ms>0?s.response_ms+'ms':'--'}</div>
-      </div>
+      <div class="s-top"><div><div class="s-name">${s.slot}</div><div class="s-model">${(s.model||'').split('/').pop()} | ${s.size}</div></div><span class="s-tag ${dead?'off':'on'}">${s.status}</span></div>
+      <div class="s-bar"><div class="s-bar-fill" style="width:${Math.min((s.response_ms||0)/5000*100,100)}%;background:${msColor(s.response_ms)}"></div></div>
+      <div class="s-meta"><span class="cost cost-${s.cost}">${s.cost}</span><span>${s.response_ms>0?s.response_ms+'ms':'--'}</span></div>
     </div>`;
   });
   h+=`</div></div>`;
-
-  // Azure Apps
-  h+=`<div class="card"><h2>AZURE FUNCTIONS <span class="badge green">${d.azure_apps.filter(a=>a.status==='RUNNING').length}/3</span></h2>`;
-  d.azure_apps.forEach(a=>{
-    h+=`<div class="app-row">
-      <span class="w">${a.name}</span>
-      <span class="${a.status==='RUNNING'?'g':'r'}">${a.status}</span>
-      <span style="color:${msColor(a.response_ms)}">${a.response_ms}ms</span>
-      <span class="y">${a.cost}</span>
-    </div>`;
-  });
-  h+=`</div>`;
 
   // Heartbeats
-  h+=`<div class="card"><h2>HEARTBEATS <span class="badge green">LIVE</span></h2>`;
-  (d.supabase_heartbeats||[]).slice(0,8).forEach(hb=>{
-    const t=new Date(hb.last_heartbeat).toLocaleString('zh-TW',{timeZone:'Asia/Taipei',hour12:false});
-    h+=`<div class="hb-row"><span class="${hb.status==='healthy'?'g':'r'}">${hb.component}</span><span class="${hb.status==='healthy'?'g':'r'}">${hb.status}</span><span style="color:#555">${t}</span></div>`;
+  h+=`<div class="card c-12"><div class="card-head"><span class="card-title">Recent Heartbeats</span><span class="badge b">LIVE</span></div>`;
+  (d.supabase_heartbeats||[]).slice(0,6).forEach(hb=>{
+    const t=hb.last_heartbeat?new Date(hb.last_heartbeat).toLocaleString('zh-TW',{timeZone:'Asia/Taipei',hour12:false}):'--';
+    const ok=hb.status==='healthy';
+    h+=`<div class="hb-item"><div class="hb-dot" style="background:${ok?'var(--green)':'var(--red)'}"></div><span class="hb-name">${hb.component}</span><span style="color:${ok?'var(--green)':'var(--red)'};font-size:11px">${hb.status}</span><span class="hb-time">${t}</span></div>`;
   });
   h+=`</div>`;
-
-  // Departments
-  h+=`<div class="card full"><h2>ALL DEPARTMENTS</h2><div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:8px">`;
-
-  const depts=[
-    {name:'NVIDIA NIM',items:['10 model slots','integrate.api.nvidia.com','USB plug/unplug architecture','Real-time inference']},
-    {name:'Azure Cloud',items:['3 Function Apps (East Asia)','Key Vault (seobaike-vault)','Storage (groktakeoverstorage)','Consumption Plan ($0)']},
-    {name:'Supabase DB',items:['Project: vmyrivxxibqydccurxug','Region: Tokyo','48 migrations','Tables: system_health, ai_logs, nim_models, platform_tokens']},
-    {name:'Cloudflare',items:['Domain: aiforseo.vip','Workers: API + Webhook','Pages: commander.html','14 platform connectors']},
-    {name:'Telegram',items:['Bot: 8449292496','Chat: 5372713163','Heartbeat: 5min auto','Commander notifications']},
-    {name:'Security',items:['Key Vault secrets','Storage keys rotated','Master key renewed','Sovereignty declared']},
-    {name:'Patent 115100981',items:['世界定義約束法用於AI推理','L1-L4 constraint layers','CaaS architecture','Boss approval required']},
-    {name:'Endpoints',items:['GET /api/commander','GET /api/dashboard','GET /api/alive_check','GET /api/takeover_func']}
-  ];
-  depts.forEach(dp=>{
-    h+=`<div class="dept"><h3>${dp.name}</h3>`;
-    dp.items.forEach(i=>{h+=`<div class="item">. ${i}</div>`});
-    h+=`</div>`;
-  });
-  h+=`</div></div>`;
 
   h+=`</div>`;
   document.getElementById('content').innerHTML=h;
 }
 
-let currentView='war';
-function switchView(v){
-  currentView=v;
-  document.querySelectorAll('.sw').forEach(b=>{b.classList.remove('active')});
-  event.target.classList.add('active');
-  load();
+function renderPhysics(d){
+  let h='<div class="main">';
+
+  // Physical AI Hero Section
+  h+=`<div class="pai-section">
+    <div class="pai-head">
+      <div class="pai-title">PHYSICAL AI &mdash; 世界定義約束法</div>
+      <span class="badge b">Patent 115100981</span>
+    </div>
+    <p style="color:rgba(255,255,255,0.4);font-size:13px;margin-bottom:20px;line-height:1.6">Constraint-as-a-Service (CaaS) 架構：透過 L1-L4 約束層，將物理世界的法則、商業規則、安全邊界注入 AI 推理過程，實現可控、可驗證、可追溯的 AI 行為。</p>
+
+    <div class="pai-grid">
+      <div class="pai-card">
+        <div class="pai-layer l1">L1</div>
+        <div class="pai-name">Physical Laws</div>
+        <div class="pai-desc">物理定律約束層<br>重力、能量守恆、因果律<br>不可違反的基礎物理法則</div>
+        <div class="pai-status live">ENFORCED</div>
+      </div>
+      <div class="pai-card">
+        <div class="pai-layer l2">L2</div>
+        <div class="pai-name">Business Rules</div>
+        <div class="pai-desc">商業規則約束層<br>價格邊界、庫存限制、合規要求<br>可配置的業務邏輯</div>
+        <div class="pai-status live">ACTIVE</div>
+      </div>
+      <div class="pai-card">
+        <div class="pai-layer l3">L3</div>
+        <div class="pai-name">Safety Bounds</div>
+        <div class="pai-desc">安全邊界約束層<br>輸出過濾、風險控制、異常檢測<br>即時安全保障</div>
+        <div class="pai-status live">MONITORING</div>
+      </div>
+      <div class="pai-card">
+        <div class="pai-layer l4">L4</div>
+        <div class="pai-name">Boss Override</div>
+        <div class="pai-desc">指揮官覆寫約束層<br>最高權限、緊急介入、策略調整<br>許竣翔 CEO 專屬</div>
+        <div class="pai-status live">ARMED</div>
+      </div>
+    </div>
+
+    <div class="constraint-flow">
+      <div class="flow-title">Inference Pipeline</div>
+      <div class="flow-line">
+        <span class="flow-node input">User Input</span>
+        <span class="flow-arrow">→</span>
+        <span class="flow-node constraint">L1 Filter</span>
+        <span class="flow-arrow">→</span>
+        <span class="flow-node constraint">L2 Validate</span>
+        <span class="flow-arrow">→</span>
+        <span class="flow-node process">NIM Inference</span>
+        <span class="flow-arrow">→</span>
+        <span class="flow-node constraint">L3 Safety</span>
+        <span class="flow-arrow">→</span>
+        <span class="flow-node constraint">L4 Check</span>
+        <span class="flow-arrow">→</span>
+        <span class="flow-node output">Response</span>
+      </div>
+    </div>
+  </div>`;
+
+  // CaaS Architecture
+  h+=`<div class="card c-6">
+    <div class="card-head"><span class="card-title">CaaS Architecture</span><span class="badge b">LIVE</span></div>
+    <div class="stat-row"><span class="stat-label">Constraint Engine</span><span class="stat-val g">seobaike-l1l4-pipeline</span></div>
+    <div class="stat-row"><span class="stat-label">AI Router</span><span class="stat-val g">seobaike-ai-router</span></div>
+    <div class="stat-row"><span class="stat-label">Model Slots</span><span class="stat-val w">10 NIM Models</span></div>
+    <div class="stat-row"><span class="stat-label">Region</span><span class="stat-val w">East Asia + Tokyo</span></div>
+    <div class="stat-row"><span class="stat-label">Patent</span><span class="stat-val y">115100981</span></div>
+    <div class="stat-row"><span class="stat-label">Architecture</span><span class="stat-val w">USB Plug/Unplug</span></div>
+    <div class="stat-row"><span class="stat-label">Constraint Types</span><span class="stat-val w">4 Layers (L1-L4)</span></div>
+  </div>`;
+
+  // Physical AI Applications
+  h+=`<div class="card c-6">
+    <div class="card-head"><span class="card-title">Applications</span><span class="badge y">DEPLOYED</span></div>
+    <div class="stat-row"><span class="stat-label">AI App Store</span><span class="stat-val g">14 Platforms Connected</span></div>
+    <div class="stat-row"><span class="stat-label">SEO AI</span><span class="stat-val g">Keyword + Content</span></div>
+    <div class="stat-row"><span class="stat-label">Smart Retail</span><span class="stat-val g">即時定價 + 庫存</span></div>
+    <div class="stat-row"><span class="stat-label">IoT Integration</span><span class="stat-val g">感測器 → AI → 行動</span></div>
+    <div class="stat-row"><span class="stat-label">Autonomous Agent</span><span class="stat-val g">自主決策 + 約束</span></div>
+    <div class="stat-row"><span class="stat-label">Safety Monitor</span><span class="stat-val g">異常偵測 + 即時告警</span></div>
+    <div class="stat-row"><span class="stat-label">Boss Dashboard</span><span class="stat-val g">指揮官戰情室</span></div>
+  </div>`;
+
+  h+=`</div>`;
+  document.getElementById('content').innerHTML=h;
 }
 
-function renderMeeting(){
-  return `<div class="grid"><div class="card full">
-    <h2>MEETING - FORCE OUTPUT</h2>
-    <div style="padding:10px">
-      <button onclick="forceMeeting()" style="background:#ff4444;color:#fff;border:none;padding:12px 24px;border-radius:6px;cursor:pointer;font-family:'Courier New',monospace;font-size:14px">FORCE ALL DEPARTMENTS MEETING NOW</button>
-      <div id="meetingResult" style="margin-top:15px;font-size:12px;white-space:pre-wrap"></div>
+function renderModels(d){
+  let h='<div class="main">';
+  const online=d.soldiers?d.soldiers.filter(s=>s.status==='ONLINE').length:0;
+  h+=`<div class="card c-12"><div class="card-head"><span class="card-title">AI Soldiers - Full Report</span><span class="badge ${online>=10?'g':'r'}">${online}/10</span></div><div class="soldier-grid">`;
+  (d.soldiers||[]).forEach(s=>{
+    const dead=s.status==='DEAD';
+    h+=`<div class="soldier ${dead?'dead':''}">
+      <div class="s-top"><div><div class="s-name">${s.slot}</div><div class="s-model">${(s.model||'').split('/').pop()}</div><div class="s-model">${s.size}</div></div><span class="s-tag ${dead?'off':'on'}">${s.status}</span></div>
+      <div class="s-bar"><div class="s-bar-fill" style="width:${Math.min((s.response_ms||0)/5000*100,100)}%;background:${msColor(s.response_ms)}"></div></div>
+      <div class="s-meta"><span class="cost cost-${s.cost}">${s.cost}</span><span>${s.response_ms>0?s.response_ms+'ms':'--'}</span></div>
+      <div style="margin-top:6px;font-size:10px;color:rgba(255,255,255,0.2)">${s.slacking?'SLACKING':'WORKING'} | ${s.waste?'WASTE':'EFFICIENT'}</div>
+    </div>`;
+  });
+  h+=`</div></div></div>`;
+  document.getElementById('content').innerHTML=h;
+}
+
+function renderAzure(d){
+  let h='<div class="main">';
+  const apps=d.azure_apps||[];
+  const running=apps.filter(a=>a.status==='RUNNING').length;
+  h+=`<div class="card c-12"><div class="card-head"><span class="card-title">Azure Function Apps</span><span class="badge ${running>=3?'g':'r'}">${running}/3 RUNNING</span></div>`;
+  apps.forEach(a=>{
+    const on=a.status==='RUNNING';
+    h+=`<div class="app-item"><div class="app-dot ${on?'on':'off'}"></div><span class="app-name">${a.name}</span><span class="app-ms" style="color:${msColor(a.response_ms)}">${a.response_ms>0?a.response_ms+'ms':'--'}</span><span class="app-cost">${a.cost}</span></div>`;
+  });
+  h+=`</div>`;
+
+  // Heartbeats
+  h+=`<div class="card c-12"><div class="card-head"><span class="card-title">Supabase Heartbeats</span><span class="badge b">LIVE</span></div>`;
+  (d.supabase_heartbeats||[]).forEach(hb=>{
+    const t=hb.last_heartbeat?new Date(hb.last_heartbeat).toLocaleString('zh-TW',{timeZone:'Asia/Taipei',hour12:false}):'--';
+    const ok=hb.status==='healthy';
+    h+=`<div class="hb-item"><div class="hb-dot" style="background:${ok?'var(--green)':'var(--red)'}"></div><span class="hb-name">${hb.component}</span><span style="color:${ok?'var(--green)':'var(--red)'};font-size:11px">${hb.status}</span><span class="hb-time">${t}</span></div>`;
+  });
+  h+=`</div>`;
+
+  h+=`</div>`;
+  document.getElementById('content').innerHTML=h;
+}
+
+function renderMeeting(d){
+  let h=`<div class="main"><div class="card c-12">
+    <div class="card-head"><span class="card-title">Department Meeting</span><span class="badge r">FORCE OUTPUT</span></div>
+    <div class="meeting-box">
+      <button class="meeting-btn" onclick="forceMeeting()">FORCE ALL DEPARTMENTS REPORT NOW</button>
+      <div class="meeting-result" id="meetingResult"></div>
     </div>
   </div></div>`;
+  document.getElementById('content').innerHTML=h;
 }
 
-function renderEndpoints(){
+function renderEndpoints(d){
   const eps=[
-    {name:'Commander War Room',url:'https://grok-takeover-app.azurewebsites.net/api/commander'},
+    {name:'Commander',url:'https://grok-takeover-app.azurewebsites.net/api/commander'},
     {name:'Dashboard',url:'https://grok-takeover-app.azurewebsites.net/api/dashboard'},
     {name:'Alive Check',url:'https://grok-takeover-app.azurewebsites.net/api/alive_check'},
     {name:'Takeover',url:'https://grok-takeover-app.azurewebsites.net/api/takeover_func'},
@@ -301,23 +554,25 @@ function renderEndpoints(){
     {name:'L1L4 Pipeline',url:'https://seobaike-l1l4-pipeline.azurewebsites.net/api/health'},
     {name:'Cloudflare API',url:'https://api.aiforseo.vip/api/health'},
     {name:'Bot Status',url:'https://api.aiforseo.vip/api/bots/status'},
-    {name:'Supabase',url:'https://supabase.com/dashboard/project/vmyrivxxibqydccurxug'}
+    {name:'Supabase',url:'https://supabase.com/dashboard/project/vmyrivxxibqydccurxug'},
+    {name:'War Room',url:'https://www.aiforseo.vip/commander'}
   ];
-  let h='<div class="grid"><div class="card full"><h2>ALL ENDPOINTS</h2>';
+  let h='<div class="main"><div class="card c-12"><div class="card-head"><span class="card-title">All Endpoints</span><span class="badge b">'+eps.length+'</span></div>';
   eps.forEach(e=>{
-    h+=`<div class="row" style="padding:8px 0"><span class="w">${e.name}</span><a href="${e.url}" target="_blank" style="color:#ff8800;text-decoration:none;font-size:11px;word-break:break-all">${e.url}</a></div>`;
+    h+=`<div class="ep-item"><span class="ep-name">${e.name}</span><a href="${e.url}" target="_blank" class="ep-url">${e.url}</a></div>`;
   });
-  h+='</div></div>';
-  return h;
+  h+=`</div></div>`;
+  document.getElementById('content').innerHTML=h;
 }
 
 async function forceMeeting(){
-  document.getElementById('meetingResult').textContent='Calling all departments...';
+  const el=document.getElementById('meetingResult');
+  el.textContent='Calling all departments...';
   try{
     const r=await fetch('https://seobaike-ai-router.azurewebsites.net/api/route',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({messages:[{role:'user',content:'全部門報到，各報告一句話狀態'}],provider:'gemma',max_tokens:200})});
     const d=await r.json();
-    document.getElementById('meetingResult').textContent=d.result?.content||JSON.stringify(d);
-  }catch(e){document.getElementById('meetingResult').textContent='Error: '+e.message}
+    el.textContent=d.result?.content||JSON.stringify(d,null,2);
+  }catch(e){el.textContent='Error: '+e.message}
 }
 
 load();
