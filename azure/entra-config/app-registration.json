@@ -1,0 +1,74 @@
+{
+  "$schema": "Microsoft Entra ID App Registration — SEOBAIKE Owner Root",
+  "displayName": "SEOBAIKE-AI-Platform",
+  "description": "SEOBAIKE AI 推論平台 — 專利 115100981 — 小路光有限公司",
+  "signInAudience": "AzureADMyOrg",
+
+  "appRoles": [
+    {
+      "id": "00000001-0000-0000-0000-000000000001",
+      "displayName": "AI Inference",
+      "description": "允許呼叫 AI 推論 Pipeline",
+      "value": "AI.Inference",
+      "allowedMemberTypes": ["User", "Application"],
+      "isEnabled": true
+    },
+    {
+      "id": "00000001-0000-0000-0000-000000000002",
+      "displayName": "Admin Full Control",
+      "description": "完整管理權限（僅限指揮官）",
+      "value": "Admin.Full",
+      "allowedMemberTypes": ["User"],
+      "isEnabled": true
+    },
+    {
+      "id": "00000001-0000-0000-0000-000000000003",
+      "displayName": "Model Readonly",
+      "description": "模型只能讀取指令，不能修改任何東西",
+      "value": "Model.Readonly",
+      "allowedMemberTypes": ["Application"],
+      "isEnabled": true
+    }
+  ],
+
+  "requiredResourceAccess": [
+    {
+      "resourceAppId": "00000003-0000-0000-c000-000000000000",
+      "comment": "Microsoft Graph",
+      "resourceAccess": [
+        { "id": "e1fe6dd8-ba31-4d61-89e7-88639da4683d", "type": "Scope", "comment": "User.Read" },
+        { "id": "570282fd-fa5c-430d-a7fd-fc8dc98a9dca", "type": "Scope", "comment": "openid" }
+      ]
+    }
+  ],
+
+  "api": {
+    "oauth2PermissionScopes": [
+      {
+        "id": "00000002-0000-0000-0000-000000000001",
+        "value": "inference.execute",
+        "type": "User",
+        "adminConsentDisplayName": "Execute AI Inference",
+        "adminConsentDescription": "允許透過 SEOBAIKE Pipeline 執行 AI 推論",
+        "userConsentDisplayName": "Execute AI Inference",
+        "userConsentDescription": "允許執行 AI 推論",
+        "isEnabled": true
+      }
+    ]
+  },
+
+  "web": {
+    "redirectUris": [
+      "https://aiforseo.vip/auth/callback",
+      "https://seobaike.framer.website/auth/callback",
+      "http://localhost:9999/auth/callback"
+    ]
+  },
+
+  "_seobaike": {
+    "owner": "許竣翔",
+    "company": "小路光有限公司",
+    "taxId": "60475510",
+    "patent": "115100981"
+  }
+}

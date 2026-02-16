@@ -1,0 +1,82 @@
+{
+  "$schema": "SEOBAIKE Copilot Studio 入口設定",
+  "botName": "SEOBAIKE AI Assistant",
+  "description": "所有使用者輸入的唯一入口 — 先經過微軟再進模型",
+  "language": "zh-TW",
+  "fallbackLanguages": ["en-US", "ja-JP"],
+
+  "authentication": {
+    "type": "EntraID",
+    "tenantId": "{{ENTRA_TENANT_ID}}",
+    "clientId": "{{SEOBAIKE_APP_ID}}",
+    "scopes": ["inference.execute"]
+  },
+
+  "topics": [
+    {
+      "name": "AI 推論",
+      "description": "使用者輸入問題 → Pipeline 處理 → 回傳結果",
+      "trigger": {
+        "type": "intent",
+        "phrases": ["問問題", "AI", "幫我", "查詢", "分析"]
+      },
+      "actions": [
+        {
+          "type": "httpRequest",
+          "method": "POST",
+          "url": "{{APIM_GATEWAY_URL}}/inference",
+          "headers": {
+            "Authorization": "Bearer {{USER_TOKEN}}",
+            "Content-Type": "application/json"
+          },
+          "body": {
+            "prompt": "{{USER_INPUT}}",
+            "model": "auto",
+            "provider": "auto"
+          }
+        }
+      ]
+    },
+    {
+      "name": "模型狀態",
+      "description": "查看目前可用的 AI 推論引擎",
+      "trigger": {
+        "type": "intent",
+        "phrases": ["模型狀態", "引擎狀態", "有哪些AI", "slot"]
+      },
+      "actions": [
+        {
+          "type": "httpRequest",
+          "method": "GET",
+          "url": "{{APIM_GATEWAY_URL}}/slots"
+        }
+      ]
+    },
+    {
+      "name": "指揮官面板",
+      "description": "指揮官專用：系統管理功能",
+      "trigger": {
+        "type": "intent",
+        "phrases": ["指揮中心", "系統狀態", "dashboard"]
+      },
+      "actions": [
+        {
+          "type": "redirect",
+          "url": "https://aiforseo.vip/dashboard"
+        }
+      ]
+    }
+  ],
+
+  "channels": [
+    { "type": "web", "enabled": true, "url": "https://aiforseo.vip" },
+    { "type": "teams", "enabled": true },
+    { "type": "telegram", "enabled": true },
+    { "type": "line", "enabled": true }
+  ],
+
+  "_seobaike": {
+    "patent": "115100981",
+    "owner": "小路光有限公司"
+  }
+}

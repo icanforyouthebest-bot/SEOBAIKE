@@ -1,0 +1,104 @@
+{
+  "$schema": "SEOBAIKE A-檔案：權威規則（存放於 OneDrive/SharePoint）",
+  "version": "1.0.0",
+  "lastUpdated": "2026-02-16",
+  "owner": {
+    "name": "許竣翔",
+    "role": "CEO / Commander",
+    "company": "小路光有限公司",
+    "taxId": "60475510",
+    "patent": "115100981"
+  },
+
+  "hierarchy": {
+    "level_1_owner_root": {
+      "identity": "Microsoft Entra ID",
+      "description": "唯一的 Owner Root，所有認證從這裡開始",
+      "authority": "absolute"
+    },
+    "level_2_pipeline": {
+      "identity": "Azure Functions (L1→L4 Pipeline)",
+      "description": "專利約束層，驗證推論路徑",
+      "authority": "enforcement"
+    },
+    "level_3_router": {
+      "identity": "Azure API Management",
+      "description": "AI 模型路由器（USB 插槽）",
+      "authority": "routing"
+    },
+    "level_4_entry": {
+      "identity": "Copilot Studio",
+      "description": "使用者入口，所有輸入先經過微軟",
+      "authority": "gateway"
+    },
+    "level_5_engines": {
+      "identity": "AI Models (NVIDIA, Groq, Anthropic, etc.)",
+      "description": "推論引擎，無主控權，只負責回答",
+      "authority": "none — inference only"
+    }
+  },
+
+  "flow": {
+    "description": "所有輸入 → 先進微軟 → 再進模型 → 再回微軟 → 再回使用者",
+    "steps": [
+      "1. User input → Copilot Studio",
+      "2. Copilot Studio → Azure API Management (Entra ID 驗證)",
+      "3. APIM → Azure Functions L1→L4 Pipeline (專利驗證)",
+      "4. Pipeline → AI Router (選擇推論引擎)",
+      "5. AI Router → Model (推論引擎執行)",
+      "6. Model response → AI Router (收集結果)",
+      "7. AI Router → Pipeline (記錄審計)",
+      "8. Pipeline → APIM (最終包裝)",
+      "9. APIM → Copilot Studio (回傳使用者)"
+    ]
+  },
+
+  "model_rules": {
+    "description": "模型降級為推論引擎的規則",
+    "rules": [
+      {
+        "id": "MR-001",
+        "rule": "模型不可自行決定執行動作",
+        "enforcement": "Azure Functions 外層驗證"
+      },
+      {
+        "id": "MR-002",
+        "rule": "模型不可存取系統資源（資料庫、檔案、網路）",
+        "enforcement": "APIM Policy 限制"
+      },
+      {
+        "id": "MR-003",
+        "rule": "模型不可修改自身行為或規則",
+        "enforcement": "規則檔存放於 SharePoint，模型無寫入權"
+      },
+      {
+        "id": "MR-004",
+        "rule": "模型回應必須經過微軟層再回傳",
+        "enforcement": "APIM outbound policy"
+      },
+      {
+        "id": "MR-005",
+        "rule": "模型 API key 由 Azure Key Vault 管理，模型本身不持有",
+        "enforcement": "Azure Key Vault + Managed Identity"
+      },
+      {
+        "id": "MR-006",
+        "rule": "任何模型可隨時被拔除（USB 插槽設計）",
+        "enforcement": "AI Router config"
+      }
+    ]
+  },
+
+  "patent_constraints": {
+    "id": "115100981",
+    "name": "世界定義約束法用於AI推理",
+    "layers": {
+      "L1": "l1_categories — 宏觀產業類別",
+      "L2": "l2_subcategories — 次產業分類",
+      "L3": "l3_processes — 製程/作業類型",
+      "L4": "l4_nodes — 原子級工業節點"
+    },
+    "enforcement": "Azure Functions check_inference_path()",
+    "data_source": "Supabase Tokyo (vmyrivxxibqydccurxug)"
+  }
+}
