@@ -4,11 +4,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>關於 SEOBAIKE — 小路光有限公司 | AI 全球市集</title>
-  <meta name="description" content="SEOBAIKE 由台灣新創小路光有限公司打造，讓每個人都能用 AI 把產品賣到全世界。創辦人許竣翔，統編 60475510。">
-  <meta name="keywords" content="SEOBAIKE,關於我們,小路光有限公司,台灣 AI 新創,AI 全球市集,許竣翔,跨國銷售,AI 平台">
+  <meta name="description" content="SEOBAIKE 由台灣新創小路光有限公司打造，讓每個人都能輕鬆使用 AI 技術。創辦人許竣翔，統編 60475510。">
+  <meta name="keywords" content="SEOBAIKE,關於我們,小路光有限公司,台灣 AI 新創,AI 平台,許竣翔,AI App Store">
   <link rel="canonical" href="https://aiforseo.vip/about.html">
   <meta property="og:title" content="關於 SEOBAIKE — 小路光有限公司 | AI 全球市集">
-  <meta property="og:description" content="台灣新創小路光有限公司打造的 AI 全球市集，讓每個人都能用 AI 把產品賣到全世界。">
+  <meta property="og:description" content="台灣新創小路光有限公司打造的 AI 平台，讓每個人都能輕鬆使用 AI 技術。">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://aiforseo.vip/about.html">
   <meta property="og:image" content="/og-image.png">
@@ -16,7 +16,7 @@
   <meta property="og:locale" content="zh_TW">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="關於 SEOBAIKE — 小路光有限公司 | AI 全球市集">
-  <meta name="twitter:description" content="台灣新創打造的 AI 全球市集平台，降低跨國銷售門檻。">
+  <meta name="twitter:description" content="台灣新創打造的 AI 平台，讓每個人都能輕鬆使用 AI 技術。">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <script type="application/ld+json">
   [
@@ -24,19 +24,19 @@
       "@context": "https://schema.org",
       "@type": "AboutPage",
       "name": "關於 SEOBAIKE",
-      "description": "SEOBAIKE 由小路光有限公司打造，AI 驅動的全球市集",
+      "description": "SEOBAIKE 由小路光有限公司打造，AI 界的 App Store",
       "url": "https://aiforseo.vip/about.html",
       "mainEntity": {
         "@type": "Organization",
         "name": "SEOBAIKE",
         "legalName": "小路光有限公司",
         "url": "https://aiforseo.vip",
-        "description": "AI 驅動的全球市集 — 讓每個人都能用 AI 把產品賣到全世界",
-        "foundingDate": "2025",
+        "description": "AI 界的 App Store — 讓每個人都能輕鬆使用 AI 技術",
+        "foundingDate": "2026",
         "founder": {
           "@type": "Person",
           "name": "許竣翔",
-          "jobTitle": "CEO"
+          "jobTitle": "CEO & Founder"
         },
         "address": {
           "@type": "PostalAddress",
@@ -53,7 +53,7 @@
   <style>
     /* ── Hero ── */
     .about-hero {
-      padding: 140px 0 80px;
+      padding: 160px 0 100px;
       text-align: center;
       position: relative;
       overflow: hidden;
@@ -62,122 +62,275 @@
     .about-hero::before {
       content: "";
       position: absolute;
-      top: 40px;
+      top: 20px;
       left: 50%;
       transform: translateX(-50%);
-      width: 700px;
-      height: 700px;
-      background: radial-gradient(circle, rgba(232,133,12,0.07) 0%, transparent 65%);
+      width: 800px;
+      height: 800px;
+      background: radial-gradient(circle, rgba(232,133,12,0.09) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    .about-hero::after {
+      content: "";
+      position: absolute;
+      bottom: -200px;
+      right: -100px;
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, rgba(245,166,35,0.04) 0%, transparent 70%);
       pointer-events: none;
     }
     .about-hero h1 {
-      margin-bottom: var(--sp-5);
-    }
-    .about-hero p {
-      font-size: 1.15rem;
-      color: var(--text-muted);
-      max-width: 600px;
-      margin: 0 auto;
-    }
-
-    /* ── Mission ── */
-    .mission-quote {
-      font-size: clamp(1.4rem, 3vw, 2rem);
-      font-weight: 800;
-      text-align: center;
       margin-bottom: var(--sp-6);
-      line-height: 1.4;
+      font-size: clamp(2.4rem, 5.5vw, 4rem);
     }
-    .mission-desc {
-      font-size: 1.05rem;
+    .about-hero .hero-subtitle {
+      font-size: clamp(1.1rem, 2.5vw, 1.35rem);
       color: var(--text-secondary);
-      max-width: 720px;
-      margin: 0 auto;
-      text-align: center;
-      line-height: 1.85;
-    }
-
-    /* ── Team ── */
-    .team-card {
-      display: flex;
-      align-items: center;
-      gap: var(--sp-10);
-      max-width: 800px;
-      margin: 0 auto;
-    }
-    .team-avatar {
-      min-width: 160px;
-      height: 160px;
-      border-radius: var(--radius-xl);
-      background: var(--bg-card);
-      border: 1px solid var(--border-subtle);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 4rem;
-      flex-shrink: 0;
-    }
-    .team-info h3 {
-      font-size: 1.5rem;
-      margin-bottom: var(--sp-2);
-    }
-    .team-info .role {
-      color: var(--text-gold);
-      font-weight: 700;
-      font-size: 0.92rem;
-      margin-bottom: var(--sp-4);
-    }
-    .team-info .company-tag {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      padding: 6px 14px;
-      border-radius: var(--radius-full);
-      background: rgba(232,133,12,0.08);
-      border: 1px solid rgba(232,133,12,0.15);
-      font-size: 0.8rem;
-      font-weight: 600;
-      color: var(--gold-200);
-      margin-bottom: var(--sp-4);
-    }
-    .team-info p {
-      font-size: 0.95rem;
+      max-width: 680px;
+      margin: 0 auto var(--sp-8);
       line-height: 1.8;
     }
+    .about-hero .hero-mission {
+      display: inline-block;
+      font-size: clamp(1.3rem, 3vw, 1.8rem);
+      font-weight: 800;
+      padding: var(--sp-4) var(--sp-8);
+      border-radius: var(--radius-lg);
+      background: rgba(232,133,12,0.06);
+      border: 1px solid rgba(232,133,12,0.15);
+      line-height: 1.5;
+    }
 
-    /* ── Technology ── */
-    .tech-grid {
+    /* ── Company Info ── */
+    .company-info-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
       gap: var(--sp-6);
       max-width: 900px;
       margin: 0 auto;
     }
-    .tech-card .icon {
-      font-size: 2rem;
-      margin-bottom: var(--sp-3);
+    .info-item {
+      display: flex;
+      align-items: flex-start;
+      gap: var(--sp-4);
+      padding: var(--sp-6);
+      border-radius: var(--radius-lg);
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      transition: all var(--duration-normal) var(--ease-out);
     }
-    .tech-card h3 {
-      font-size: 1.05rem;
-      margin-bottom: var(--sp-2);
+    .info-item:hover {
+      border-color: var(--border-hover);
+      background: var(--bg-card-hover);
     }
-    .tech-card p {
-      font-size: 0.9rem;
-      line-height: 1.75;
-    }
-
-    /* ── Values ── */
-    .values-icon {
-      width: 56px;
-      height: 56px;
+    .info-icon {
+      width: 48px;
+      height: 48px;
+      min-width: 48px;
       border-radius: var(--radius-md);
       background: rgba(232,133,12,0.08);
-      border: 1px solid rgba(232,133,12,0.15);
+      border: 1px solid rgba(232,133,12,0.12);
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 1.5rem;
+      font-size: 1.4rem;
+    }
+    .info-label {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      margin-bottom: 4px;
+    }
+    .info-value {
+      font-size: 1.1rem;
+      color: var(--text-primary);
+      font-weight: 700;
+    }
+    .info-desc {
+      font-size: 0.88rem;
+      color: var(--text-secondary);
+      margin-top: 4px;
+      line-height: 1.6;
+    }
+
+    /* ── Story / Mission ── */
+    .story-block {
+      max-width: 780px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .story-block .story-lead {
+      font-size: clamp(1.3rem, 2.8vw, 1.7rem);
+      font-weight: 800;
+      color: var(--text-primary);
+      margin-bottom: var(--sp-8);
+      line-height: 1.5;
+    }
+    .story-block .story-body {
+      font-size: 1.05rem;
+      color: var(--text-secondary);
+      line-height: 2;
+      text-align: left;
+    }
+    .story-block .story-body + .story-body {
+      margin-top: var(--sp-6);
+    }
+
+    /* ── Timeline ── */
+    .timeline {
+      position: relative;
+      max-width: 700px;
+      margin: 0 auto;
+      padding-left: 40px;
+    }
+    .timeline::before {
+      content: "";
+      position: absolute;
+      left: 15px;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: linear-gradient(180deg, rgba(232,133,12,0.4) 0%, rgba(232,133,12,0.05) 100%);
+    }
+    .timeline-item {
+      position: relative;
+      padding-bottom: var(--sp-10);
+    }
+    .timeline-item:last-child {
+      padding-bottom: 0;
+    }
+    .timeline-dot {
+      position: absolute;
+      left: -33px;
+      top: 4px;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: var(--bg-primary);
+      border: 3px solid var(--gold-300);
+      box-shadow: 0 0 12px rgba(232,133,12,0.25);
+    }
+    .timeline-item.active .timeline-dot {
+      background: var(--gold-300);
+      box-shadow: 0 0 20px rgba(232,133,12,0.4);
+    }
+    .timeline-year {
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--gold-200);
+      letter-spacing: 1px;
+      margin-bottom: var(--sp-2);
+    }
+    .timeline-title {
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: var(--text-primary);
+      margin-bottom: var(--sp-2);
+    }
+    .timeline-desc {
+      font-size: 0.92rem;
+      color: var(--text-secondary);
+      line-height: 1.75;
+    }
+
+    /* ── Core Values ── */
+    .values-card {
+      text-align: center;
+      padding: var(--sp-8) var(--sp-6);
+    }
+    .values-icon-wrap {
+      width: 72px;
+      height: 72px;
+      border-radius: var(--radius-lg);
+      background: rgba(232,133,12,0.06);
+      border: 1px solid rgba(232,133,12,0.12);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.8rem;
+      margin: 0 auto var(--sp-5);
+      transition: all var(--duration-normal) var(--ease-out);
+    }
+    .values-card:hover .values-icon-wrap {
+      background: rgba(232,133,12,0.1);
+      border-color: rgba(232,133,12,0.25);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(232,133,12,0.1);
+    }
+    .values-card h3 {
+      font-size: 1.2rem;
+      margin-bottom: var(--sp-3);
+    }
+    .values-card p {
+      font-size: 0.92rem;
+      line-height: 1.8;
+    }
+
+    /* ── Team ── */
+    .founder-card {
+      display: flex;
+      align-items: center;
+      gap: var(--sp-12);
+      max-width: 850px;
+      margin: 0 auto;
+      padding: var(--sp-10);
+      border-radius: var(--radius-xl);
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      transition: border-color var(--duration-normal) var(--ease-out);
+    }
+    .founder-card:hover {
+      border-color: var(--border-hover);
+    }
+    .founder-avatar {
+      min-width: 180px;
+      height: 180px;
+      border-radius: var(--radius-xl);
+      background: linear-gradient(135deg, rgba(232,133,12,0.08) 0%, rgba(14,14,32,0.9) 100%);
+      border: 2px solid rgba(232,133,12,0.15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 4.5rem;
+      flex-shrink: 0;
+      position: relative;
+      overflow: hidden;
+    }
+    .founder-avatar::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, transparent 50%, rgba(232,133,12,0.05) 100%);
+      pointer-events: none;
+    }
+    .founder-info h3 {
+      font-size: 1.6rem;
+      margin-bottom: var(--sp-2);
+    }
+    .founder-info .role {
+      color: var(--text-gold);
+      font-weight: 700;
+      font-size: 0.95rem;
       margin-bottom: var(--sp-4);
+    }
+    .founder-info .company-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 16px;
+      border-radius: var(--radius-full);
+      background: rgba(232,133,12,0.06);
+      border: 1px solid rgba(232,133,12,0.12);
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--gold-200);
+      margin-bottom: var(--sp-5);
+    }
+    .founder-info p {
+      font-size: 0.95rem;
+      line-height: 1.85;
     }
 
     /* ── CTA ── */
@@ -189,30 +342,56 @@
       padding: var(--sp-16) var(--sp-8);
       max-width: 800px;
       margin: 0 auto;
+      position: relative;
+      overflow: hidden;
+    }
+    .cta-section::before {
+      content: "";
+      position: absolute;
+      top: -80px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 500px;
+      height: 300px;
+      background: radial-gradient(ellipse, rgba(232,133,12,0.06) 0%, transparent 70%);
+      pointer-events: none;
     }
     .cta-section h2 {
       margin-bottom: var(--sp-4);
     }
     .cta-section p {
       margin-bottom: var(--sp-8);
-      max-width: 480px;
+      max-width: 500px;
       margin-left: auto;
       margin-right: auto;
-    }
-    .cta-buttons {
-      display: flex;
-      gap: var(--sp-4);
-      justify-content: center;
-      flex-wrap: wrap;
+      font-size: 1.05rem;
+      line-height: 1.8;
     }
 
+    /* ── Responsive ── */
     @media (max-width: 768px) {
-      .team-card {
+      .company-info-grid {
+        grid-template-columns: 1fr;
+      }
+      .founder-card {
         flex-direction: column;
         text-align: center;
+        padding: var(--sp-8) var(--sp-6);
+        gap: var(--sp-8);
       }
-      .tech-grid {
-        grid-template-columns: 1fr;
+      .founder-avatar {
+        min-width: 140px;
+        height: 140px;
+        font-size: 3.5rem;
+      }
+      .timeline {
+        padding-left: 36px;
+      }
+      .timeline::before {
+        left: 12px;
+      }
+      .timeline-dot {
+        left: -30px;
       }
     }
   </style>
@@ -256,28 +435,87 @@
   <!-- ════ Hero ════ -->
   <section class="about-hero">
     <div class="container">
-      <h1 class="fade-up"><span class="text-gold">關於 SEOBAIKE</span></h1>
-      <p class="fade-up">讓每個人都能用 AI 把產品賣到全世界</p>
+      <div class="fade-up">
+        <h1><span class="text-gold">我們的故事</span></h1>
+        <p class="hero-subtitle">
+          一家來自台灣的新創公司，懷抱讓 AI 技術普及化的信念，<br>
+          正在打造 AI 界的 App Store。
+        </p>
+        <div class="hero-mission">
+          <span class="text-gold">「讓每個人都能輕鬆使用 AI 技術」</span>
+        </div>
+      </div>
     </div>
   </section>
 
-  <!-- ════ Mission ════ -->
+  <!-- ════ Company Info ════ -->
   <section class="section">
     <div class="container">
       <div class="section-header fade-up">
-        <span class="section-badge">OUR MISSION</span>
-        <h2>我們的使命</h2>
-        <p>降低跨國銷售門檻</p>
+        <span class="section-badge">COMPANY</span>
+        <h2>公司資訊</h2>
+        <p>台灣在地、放眼全球的 AI 平台</p>
       </div>
-      <div class="fade-up">
-        <div class="mission-quote text-gold">
-          「讓每個人都能用 AI 把產品賣到全世界」
+      <div class="company-info-grid stagger">
+        <div class="info-item fade-up">
+          <div class="info-icon">&#x1F3E2;</div>
+          <div>
+            <div class="info-label">公司名稱</div>
+            <div class="info-value">小路光有限公司</div>
+            <div class="info-desc">SEOBAIKE 品牌營運母公司</div>
+          </div>
         </div>
-        <p class="mission-desc">
-          在全球化的時代，許多優秀的台灣產品因為語言障礙、行銷資源不足、跨境流程繁瑣而無法走向國際市場。SEOBAIKE 的使命就是打破這些障礙。
+        <div class="info-item fade-up">
+          <div class="info-icon">&#x1F4CB;</div>
+          <div>
+            <div class="info-label">統一編號</div>
+            <div class="info-value">60475510</div>
+            <div class="info-desc">台灣合法登記之有限公司</div>
+          </div>
+        </div>
+        <div class="info-item fade-up">
+          <div class="info-icon">&#x1F468;&#x200D;&#x1F4BC;</div>
+          <div>
+            <div class="info-label">創辦人</div>
+            <div class="info-value">許竣翔</div>
+            <div class="info-desc">CEO & Founder</div>
+          </div>
+        </div>
+        <div class="info-item fade-up">
+          <div class="info-icon">&#x1F4A1;</div>
+          <div>
+            <div class="info-label">平台定位</div>
+            <div class="info-value">AI 界的 App Store</div>
+            <div class="info-desc">插拔式架構，一站整合所有 AI 服務</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- ════ Our Story ════ -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header fade-up">
+        <span class="section-badge">OUR STORY</span>
+        <h2>品牌故事</h2>
+        <p>從一個簡單的想法開始</p>
+      </div>
+      <div class="story-block fade-up">
+        <div class="story-lead text-gold">
+          AI 技術不應該只屬於大企業和技術菁英，<br>
+          它應該像手機裡的 App 一樣，人人都能使用。
+        </div>
+        <p class="story-body">
+          在 AI 快速發展的時代，我們發現一個問題：雖然 AI 工具越來越多，但對一般人和中小企業來說，要找到適合自己的 AI 服務、正確地使用它們，仍然是一件困難的事。每個平台各自為政，介面複雜，學習成本高昂。
         </p>
-        <p class="mission-desc" style="margin-top: var(--sp-4);">
-          我們透過 AI 技術，自動化處理翻譯、行銷文案、客服溝通等跨國銷售環節，讓台灣的中小企業和個人賣家，不需要龐大的行銷團隊，也能將產品銷售到全世界。
+        <p class="story-body">
+          SEOBAIKE 的誕生，正是為了解決這個問題。我們的創辦人許竣翔觀察到，就像智慧型手機需要 App Store 來讓使用者輕鬆取用各種應用程式一樣，AI 產業也需要一個統一的平台，讓使用者可以自由選擇、輕鬆上手各種 AI 服務。
+        </p>
+        <p class="story-body">
+          於是，小路光有限公司成立了。我們以「讓每個人都能輕鬆使用 AI 技術」為使命，打造一個開放、安全、易用的 AI 服務市集。透過獨家的插拔式架構和四層安全約束系統，我們確保每一位使用者都能在安全可控的環境中，享受 AI 帶來的便利。
         </p>
       </div>
     </div>
@@ -285,91 +523,101 @@
 
   <hr class="divider">
 
-  <!-- ════ Team ════ -->
+  <!-- ════ Timeline ════ -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header fade-up">
+        <span class="section-badge">MILESTONES</span>
+        <h2>發展里程碑</h2>
+        <p>一步一腳印，穩健成長</p>
+      </div>
+      <div class="timeline stagger">
+        <div class="timeline-item fade-up active">
+          <div class="timeline-dot"></div>
+          <div class="timeline-year">2026</div>
+          <div class="timeline-title">公司成立</div>
+          <div class="timeline-desc">小路光有限公司正式登記成立，品牌名稱 SEOBAIKE 確立，開始打造 AI 界的 App Store。</div>
+        </div>
+        <div class="timeline-item fade-up">
+          <div class="timeline-dot"></div>
+          <div class="timeline-year">2026</div>
+          <div class="timeline-title">核心架構完成</div>
+          <div class="timeline-desc">完成 L1-L4 四層安全約束架構開發，確立插拔式平台設計，申請台灣專利保護核心技術。</div>
+        </div>
+        <div class="timeline-item fade-up">
+          <div class="timeline-dot"></div>
+          <div class="timeline-year">2026</div>
+          <div class="timeline-title">平台上線</div>
+          <div class="timeline-desc">SEOBAIKE 平台正式上線於 aiforseo.vip，開放 AI 服務市集供使用者自由選用。</div>
+        </div>
+        <div class="timeline-item fade-up">
+          <div class="timeline-dot"></div>
+          <div class="timeline-year">未來展望</div>
+          <div class="timeline-title">持續擴展生態系</div>
+          <div class="timeline-desc">持續整合更多 AI 服務，拓展國際市場，讓全球使用者都能透過 SEOBAIKE 輕鬆使用 AI。</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- ════ Core Values ════ -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header fade-up">
+        <span class="section-badge">CORE VALUES</span>
+        <h2>核心價值</h2>
+        <p>驅動我們每一個決策的信念</p>
+      </div>
+      <div class="grid-4 stagger">
+        <div class="card values-card fade-up glow-border">
+          <div class="values-icon-wrap">&#x1F50D;</div>
+          <h3>透明</h3>
+          <p>所有服務流程公開透明，費用清楚可查。信任來自坦誠，不搞隱藏收費，不做模糊承諾。</p>
+        </div>
+        <div class="card values-card fade-up glow-border">
+          <div class="values-icon-wrap">&#x1F680;</div>
+          <h3>創新</h3>
+          <p>持續探索 AI 技術的可能性，將前沿技術轉化為實用工具。不為炫技，只為解決真實問題。</p>
+        </div>
+        <div class="card values-card fade-up glow-border">
+          <div class="values-icon-wrap">&#x1F465;</div>
+          <h3>用戶至上</h3>
+          <p>使用者的需求永遠是第一優先。我們的每一項設計，都從「使用者能否輕鬆上手」出發。</p>
+        </div>
+        <div class="card values-card fade-up glow-border">
+          <div class="values-icon-wrap">&#x1F3E0;</div>
+          <h3>台灣在地</h3>
+          <p>根植台灣、放眼國際。我們以台灣為基地，打造具有在地溫度的全球化 AI 平台。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- ════ Founder ════ -->
   <section class="section">
     <div class="container">
       <div class="section-header fade-up">
         <span class="section-badge">FOUNDER</span>
         <h2>創辦人</h2>
+        <p>認識 SEOBAIKE 背後的推手</p>
       </div>
-      <div class="team-card fade-up">
-        <div class="team-avatar">
+      <div class="founder-card fade-up card-3d">
+        <div class="founder-avatar">
           &#x1F468;&#x200D;&#x1F4BB;
         </div>
-        <div class="team-info">
+        <div class="founder-info">
           <h3>許竣翔</h3>
-          <div class="role">CEO / 創辦人</div>
+          <div class="role">CEO & Founder</div>
           <span class="company-tag">
             &#x1F3E2; 小路光有限公司（統編 60475510）
           </span>
           <p>
-            台灣彰化出身。觀察到全球 AI 產業的巨大潛力後，創立 SEOBAIKE，以「讓每個人都能用 AI 把產品賣到全世界」為願景，致力於打造 AI 驅動的全球市集平台。公司定位為 AI 界的 App Store，透過插拔式架構，讓各種 AI 服務無縫整合。
+            來自台灣彰化。在觀察到全球 AI 產業的巨大潛力、以及一般使用者難以輕鬆取用 AI 工具的困境後，決定創立 SEOBAIKE。以「讓每個人都能輕鬆使用 AI 技術」為核心願景，帶領團隊打造 AI 界的 App Store — 一個開放、安全、人人可用的 AI 服務平台。
           </p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <hr class="divider">
-
-  <!-- ════ Technology ════ -->
-  <section class="section">
-    <div class="container">
-      <div class="section-header fade-up">
-        <span class="section-badge">TECHNOLOGY</span>
-        <h2>AI 技術堆疊</h2>
-        <p>自研核心架構，確保安全與效能</p>
-      </div>
-      <div class="tech-grid">
-        <div class="card tech-card fade-up">
-          <div class="icon">&#x1F9E0;</div>
-          <h3>智慧引擎匹配</h3>
-          <p>平台整合多種 AI 引擎，根據使用者需求自動匹配最適合的引擎，無需手動選擇，真正做到「你說，它做」。</p>
-        </div>
-        <div class="card tech-card fade-up">
-          <div class="icon">&#x1F310;</div>
-          <h3>多語言翻譯</h3>
-          <p>AI 驅動的即時翻譯系統，支援中、英、日、韓、東南亞等多國語言，讓商品資訊跨越語言藩籬。</p>
-        </div>
-        <div class="card tech-card fade-up">
-          <div class="icon">&#x1F6E1;</div>
-          <h3>安全約束框架</h3>
-          <p>獨家 L1-L4 四層約束架構，確保每一次 AI 推理都在安全可控的範圍內運行，杜絕越權與幻覺問題。</p>
-        </div>
-        <div class="card tech-card fade-up">
-          <div class="icon">&#x1F50C;</div>
-          <h3>插拔式架構</h3>
-          <p>採用模組化設計，不綁定任何單一供應商。企業可自由接入不同 AI 服務，保持最大靈活性與可擴展性。</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <hr class="divider">
-
-  <!-- ════ Values ════ -->
-  <section class="section">
-    <div class="container">
-      <div class="section-header fade-up">
-        <span class="section-badge">VALUES</span>
-        <h2>核心價值</h2>
-        <p>引領我們每一個決策的信念</p>
-      </div>
-      <div class="grid-3">
-        <div class="card fade-up">
-          <div class="values-icon">&#x1F50D;</div>
-          <h3>透明</h3>
-          <p>所有服務流程公開透明，費用清楚可查。我們相信信任來自於坦誠，不搞隱藏收費，不做模糊承諾。</p>
-        </div>
-        <div class="card fade-up">
-          <div class="values-icon">&#x1F512;</div>
-          <h3>安全</h3>
-          <p>資料安全是我們的底線。從架構設計到日常營運，每一個環節都有嚴格的安全機制保護使用者的資料與隱私。</p>
-        </div>
-        <div class="card fade-up">
-          <div class="values-icon">&#x1F680;</div>
-          <h3>創新</h3>
-          <p>持續探索 AI 技術的可能性，將前沿技術轉化為實用工具。不為炫技而創新，只為解決真實問題而前進。</p>
         </div>
       </div>
     </div>
@@ -379,11 +627,11 @@
   <section class="section">
     <div class="container">
       <div class="cta-section fade-up">
-        <h2><span class="text-gold">加入我們</span></h2>
-        <p>無論你是賣家、開發者、還是合作夥伴，SEOBAIKE 歡迎你成為全球市集的一份子。</p>
-        <div class="cta-buttons">
-          <a href="/contact" class="btn btn-primary btn-lg">聯繫我們</a>
-          <a href="/marketplace" class="btn btn-secondary btn-lg">探索市集</a>
+        <h2><span class="text-shimmer">加入我們的旅程</span></h2>
+        <p>無論你是使用者、開發者、還是合作夥伴，SEOBAIKE 歡迎你一同參與 AI 技術普及化的旅程。</p>
+        <div style="display:flex;gap:var(--sp-4);justify-content:center;flex-wrap:wrap;">
+          <a href="/start" class="btn btn-primary btn-lg btn-magnetic">立即開始</a>
+          <a href="/contact" class="btn btn-secondary btn-lg btn-magnetic">聯繫我們</a>
         </div>
       </div>
     </div>
@@ -397,7 +645,7 @@
           <a href="/" class="nav-brand" style="font-size:1.3rem;">
             <span class="seo">SEO</span><span class="baike">BAIKE</span>
           </a>
-          <p>小路光有限公司（統編 60475510）<br>AI 驅動的全球市集<br>讓每個人都能用 AI 把產品賣到全世界。</p>
+          <p>小路光有限公司（統編 60475510）<br>AI 界的 App Store<br>讓每個人都能輕鬆使用 AI 技術。</p>
         </div>
         <div class="footer-col">
           <h4>平台</h4>

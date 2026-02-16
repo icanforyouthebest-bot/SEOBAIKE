@@ -4,11 +4,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>方案與定價 — SEOBAIKE | SEO Points 彈性點數制</title>
-  <meta name="description" content="SEOBAIKE 採用 SEO Points 點數制，彈性又透明。免費體驗、專業版、企業版三種方案，滿足不同階段需求。價格以新台幣顯示。">
+  <meta name="description" content="SEOBAIKE 採用 SEO Points 點數制，彈性又透明。免費方案、專業方案、企業方案三種選擇，滿足不同階段需求。價格以新台幣顯示。">
   <meta name="keywords" content="SEOBAIKE,定價,SEO Points,AI 平台定價,點數制,台灣 AI 服務,AI 方案,企業 AI">
   <link rel="canonical" href="https://aiforseo.vip/pricing">
   <meta property="og:title" content="方案與定價 — SEOBAIKE | SEO Points 點數制">
-  <meta property="og:description" content="用 SEO Points 點數交易，彈性又透明。三種方案，從免費體驗到企業級。">
+  <meta property="og:description" content="用 SEO Points 點數交易，彈性又透明。三種方案，從免費到企業級。">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://aiforseo.vip/pricing">
   <meta property="og:image" content="/og-image.png">
@@ -16,7 +16,7 @@
   <meta property="og:locale" content="zh_TW">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="方案與定價 — SEOBAIKE | SEO Points 點數制">
-  <meta name="twitter:description" content="用 SEO Points 點數交易，彈性又透明。三種方案，從免費體驗到企業級。">
+  <meta name="twitter:description" content="用 SEO Points 點數交易，彈性又透明。三種方案，從免費到企業級。">
   <meta name="theme-color" content="#06060f">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="/og-image.png">
@@ -31,9 +31,9 @@
     "description": "SEO Points 點數制 AI 平台，彈性透明",
     "brand": { "@type": "Brand", "name": "SEOBAIKE" },
     "offers": [
-      { "@type": "Offer", "name": "免費體驗", "price": "0", "priceCurrency": "TWD", "description": "每月 100 SEO Points，體驗核心功能", "availability": "https://schema.org/InStock" },
-      { "@type": "Offer", "name": "專業版", "price": "899", "priceCurrency": "TWD", "description": "每月 2,000 SEO Points，API 存取，優先處理", "availability": "https://schema.org/InStock" },
-      { "@type": "Offer", "name": "企業版", "priceCurrency": "TWD", "description": "客製化點數方案，白標授權，SLA 服務等級承諾", "availability": "https://schema.org/InStock" }
+      { "@type": "Offer", "name": "免費方案", "price": "0", "priceCurrency": "TWD", "description": "每月 100 SEO Points，基本 AI 服務", "availability": "https://schema.org/InStock" },
+      { "@type": "Offer", "name": "專業方案", "price": "499", "priceCurrency": "TWD", "description": "每月 2,000 SEO Points，全部 AI 服務，優先技術支援", "availability": "https://schema.org/InStock" },
+      { "@type": "Offer", "name": "企業方案", "priceCurrency": "TWD", "description": "客製報價，無限 SEO Points，專屬客服，SLA 協議", "availability": "https://schema.org/InStock" }
     ]
   }
   </script>
@@ -111,9 +111,9 @@
     /* Pricing Cards */
     .pricing-grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: 1fr 1.08fr 1fr;
       gap: var(--sp-6);
-      align-items: stretch;
+      align-items: center;
     }
     .pricing-card {
       background: var(--bg-card);
@@ -145,10 +145,14 @@
     .pricing-card:hover::before {
       opacity: 1;
     }
+
+    /* Featured (Professional) card — visually highlighted */
     .pricing-card.featured {
       border-color: rgba(232,133,12,0.4);
       box-shadow: 0 0 0 1px rgba(232,133,12,0.15), var(--shadow-gold);
       background: var(--bg-card-hover);
+      padding: var(--sp-12) var(--sp-8);
+      z-index: 2;
     }
     .pricing-card.featured::after {
       content: '';
@@ -295,6 +299,90 @@
       border-color: var(--border-hover);
       background: rgba(232,133,12,0.04);
       color: var(--text-primary);
+    }
+
+    /* ══════════════════════════════════════════
+       Feature Comparison Table
+       ══════════════════════════════════════════ */
+    .comparison-table-wrap {
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      margin-top: var(--sp-10);
+    }
+    .comparison-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.9rem;
+      min-width: 640px;
+    }
+    .comparison-table thead th {
+      padding: var(--sp-4) var(--sp-5);
+      text-align: center;
+      font-weight: 800;
+      color: var(--text-primary);
+      border-bottom: 2px solid var(--border-default);
+      font-size: 0.95rem;
+    }
+    .comparison-table thead th:first-child {
+      text-align: left;
+    }
+    .comparison-table thead th.th-featured {
+      background: rgba(232,133,12,0.06);
+      color: var(--gold-200);
+      position: relative;
+    }
+    .comparison-table thead th.th-featured::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: var(--gold-gradient);
+    }
+    .comparison-table tbody td {
+      padding: var(--sp-3) var(--sp-5);
+      border-bottom: 1px solid var(--border-subtle);
+      text-align: center;
+      color: var(--text-secondary);
+      vertical-align: middle;
+    }
+    .comparison-table tbody td:first-child {
+      text-align: left;
+      font-weight: 600;
+      color: var(--text-primary);
+      white-space: nowrap;
+    }
+    .comparison-table tbody td.td-featured {
+      background: rgba(232,133,12,0.03);
+    }
+    .comparison-table tbody tr:hover td {
+      background: rgba(255,255,255,0.02);
+    }
+    .comparison-table tbody tr:hover td.td-featured {
+      background: rgba(232,133,12,0.06);
+    }
+    .comparison-table .check-icon {
+      color: var(--success);
+      font-weight: 700;
+      font-size: 1rem;
+    }
+    .comparison-table .dash-icon {
+      color: var(--text-muted);
+      font-size: 1.2rem;
+    }
+    .comparison-table .category-row td {
+      padding: var(--sp-4) var(--sp-5);
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--gold-200);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      border-bottom: 1px solid rgba(232,133,12,0.15);
+      background: rgba(232,133,12,0.03);
+    }
+    .comparison-table .category-row td.td-featured {
+      background: rgba(232,133,12,0.06);
     }
 
     /* FAQ Accordion */
@@ -446,6 +534,9 @@
         margin-left: auto;
         margin-right: auto;
       }
+      .pricing-card.featured {
+        padding: var(--sp-10) var(--sp-8);
+      }
       .points-explainer {
         grid-template-columns: 1fr;
         max-width: 400px;
@@ -466,6 +557,9 @@
       .pricing-card {
         padding: var(--sp-8) var(--sp-6);
       }
+      .pricing-card.featured {
+        padding: var(--sp-8) var(--sp-6);
+      }
       .pricing-price .amount {
         font-size: 2.4rem;
       }
@@ -483,11 +577,17 @@
       .cta-box {
         padding: var(--sp-12) var(--sp-6);
       }
+      .comparison-table {
+        font-size: 0.82rem;
+      }
     }
     @media (max-width: 480px) {
       .pricing-card {
         padding: var(--sp-6) var(--sp-5);
         border-radius: var(--radius-lg);
+      }
+      .pricing-card.featured {
+        padding: var(--sp-6) var(--sp-5);
       }
       .pricing-price .amount {
         font-size: 2rem;
@@ -574,7 +674,7 @@
           <div class="point-card-icon">
             <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" style="color:var(--gold-200)"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/><path d="M12 6v6l4 2"/></svg>
           </div>
-          <h4>永不過期</h4>
+          <h4>帳戶持續有效</h4>
           <p>帳戶內的 SEO Points 於帳戶存續期間持續有效，從容使用不趕時間。</p>
         </div>
       </div>
@@ -594,11 +694,11 @@
 
       <div class="pricing-grid">
 
-        <!-- 免費體驗 -->
+        <!-- 免費方案 -->
         <div class="pricing-card fade-up">
           <div class="pricing-tier-name">FREE</div>
-          <h3>免費體驗</h3>
-          <p class="pricing-desc">先試試看，感受 SEOBAIKE 的能力</p>
+          <h3>免費方案</h3>
+          <p class="pricing-desc">零門檻開始，感受 SEOBAIKE 的能力</p>
 
           <div class="pricing-price">
             <span class="currency">NT$</span><span class="amount text-gold">0</span>
@@ -608,85 +708,272 @@
 
           <div class="pricing-points">
             <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l2 2"/></svg>
-            每月 100 SEO Points
+            每月 100 SP（SEO Points）
           </div>
 
           <ul class="pricing-features">
-            <li><span class="ck">&#10003;</span>基礎 AI 對話服務</li>
+            <li><span class="ck">&#10003;</span>基本 AI 服務</li>
             <li><span class="ck">&#10003;</span>市集瀏覽</li>
             <li><span class="ck">&#10003;</span>社群支援</li>
             <li><span class="ck">&#10003;</span>基本數據報表</li>
           </ul>
 
-          <a href="/login" class="btn-plan outline seismic-shake">開始免費體驗</a>
+          <a href="/login" class="btn-plan outline seismic-shake" onclick="trackPlanClick('free')">開始使用</a>
         </div>
 
-        <!-- 專業版 -->
+        <!-- 專業方案 (推薦) -->
         <div class="pricing-card featured fade-up magma-border lava-glow">
-          <div class="recommend-badge">推薦方案</div>
+          <div class="recommend-badge">推薦</div>
           <div class="pricing-tier-name">PROFESSIONAL</div>
-          <h3>專業版</h3>
+          <h3>專業方案</h3>
           <p class="pricing-desc">適合個人創作者、自由工作者、中小企業</p>
 
           <div class="pricing-price">
-            <span class="currency">NT$</span><span class="amount text-gold">899</span>
+            <span class="currency">NT$</span><span class="amount text-gold">499</span>
             <span class="period">/月</span>
             <span class="price-note">每月自動續約，可隨時取消</span>
           </div>
 
           <div class="pricing-points">
             <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l2 2"/></svg>
-            每月 2,000 SEO Points
+            每月 2,000 SP（SEO Points）
           </div>
 
           <ul class="pricing-features">
-            <li><span class="ck">&#10003;</span>免費體驗版所有功能</li>
+            <li><span class="ck">&#10003;</span>全部 AI 服務</li>
             <li><span class="ck">&#10003;</span>進階 AI 能力全開</li>
             <li><span class="ck">&#10003;</span>API 存取權限</li>
             <li><span class="ck">&#10003;</span>市集工具使用</li>
-            <li><span class="ck">&#10003;</span>優先處理佇列</li>
+            <li><span class="ck">&#10003;</span>優先技術支援</li>
             <li><span class="ck">&#10003;</span>進階數據分析</li>
             <li><span class="ck">&#10003;</span>Email 專屬客服</li>
           </ul>
 
-          <a href="https://lin.ee/seobaike" target="_blank" rel="noopener" class="btn-plan primary seismic-shake" onclick="trackPlanClick('professional')">選擇專業版</a>
+          <a href="https://lin.ee/seobaike" target="_blank" rel="noopener" class="btn-plan primary seismic-shake" onclick="trackPlanClick('professional')">升級方案</a>
         </div>
 
-        <!-- 企業版 -->
+        <!-- 企業方案 -->
         <div class="pricing-card fade-up">
           <div class="pricing-tier-name">ENTERPRISE</div>
-          <h3>企業版</h3>
+          <h3>企業方案</h3>
           <p class="pricing-desc">量身打造，滿足大型團隊與企業需求</p>
 
           <div class="pricing-price">
-            <span class="amount text-gold" style="font-size:2rem;">洽詢報價</span>
+            <span class="amount text-gold" style="font-size:2rem;">客製報價</span>
             <span class="price-note">依企業規模客製化方案</span>
           </div>
 
           <div class="pricing-points">
             <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l2 2"/></svg>
-            客製化 SEO Points 額度
+            無限 SP（SEO Points）
           </div>
 
           <ul class="pricing-features">
-            <li><span class="ck">&#10003;</span>專業版所有功能</li>
-            <li><span class="ck">&#10003;</span>白標方案（使用你的品牌）</li>
-            <li><span class="ck">&#10003;</span>L1-L4 約束引擎技術授權</li>
+            <li><span class="ck">&#10003;</span>專業方案所有功能</li>
+            <li><span class="ck">&#10003;</span>專屬客服</li>
             <li><span class="ck">&#10003;</span>SLA 服務等級協議</li>
-            <li><span class="ck">&#10003;</span>優先技術支援</li>
+            <li><span class="ck">&#10003;</span>API 整合</li>
             <li><span class="ck">&#10003;</span>客製化整合與部署</li>
-            <li><span class="ck">&#10003;</span>賣家分潤依合約約定</li>
+            <li><span class="ck">&#10003;</span>白標方案（使用你的品牌）</li>
+            <li><span class="ck">&#10003;</span>L1-L4 約束引擎授權</li>
           </ul>
 
-          <a href="/contact" class="btn-plan outline seismic-shake">聯繫銷售團隊</a>
+          <a href="/contact" class="btn-plan outline seismic-shake" onclick="trackPlanClick('enterprise')">聯繫我們</a>
         </div>
 
       </div>
 
       <p style="text-align:center;color:var(--text-muted);font-size:0.82rem;margin-top:var(--sp-8);line-height:1.8;">
-        所有價格以新台幣（TWD）顯示。額外點數可隨時加購。<br>
-        市集賣家分潤比例依合約約定，具競爭力的賣家分潤。
+        所有價格以新台幣（NT$）顯示。額外點數可隨時加購。<br>
+        市集賣家分潤比例依合約約定。
       </p>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- ═══════ Feature Comparison Table ═══════ -->
+  <section class="section" id="comparison">
+    <div class="container">
+      <div class="section-header fade-up">
+        <div class="section-badge">COMPARE</div>
+        <h2>功能<span class="text-gold">比較</span></h2>
+        <p>一目瞭然，選擇最適合你的方案</p>
+      </div>
+
+      <div class="comparison-table-wrap fade-up">
+        <table class="comparison-table">
+          <thead>
+            <tr>
+              <th>功能項目</th>
+              <th>免費方案</th>
+              <th class="th-featured">專業方案</th>
+              <th>企業方案</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- 基本 -->
+            <tr class="category-row">
+              <td colspan="1">點數與定價</td>
+              <td></td>
+              <td class="td-featured"></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>月費</td>
+              <td>NT$0</td>
+              <td class="td-featured">NT$499</td>
+              <td>客製報價</td>
+            </tr>
+            <tr>
+              <td>每月 SEO Points</td>
+              <td>100 SP</td>
+              <td class="td-featured">2,000 SP</td>
+              <td>無限制</td>
+            </tr>
+            <tr>
+              <td>額外加購點數</td>
+              <td><span class="check-icon">&#10003;</span></td>
+              <td class="td-featured"><span class="check-icon">&#10003;</span></td>
+              <td><span class="check-icon">&#10003;</span></td>
+            </tr>
+
+            <!-- AI 服務 -->
+            <tr class="category-row">
+              <td colspan="1">AI 服務</td>
+              <td></td>
+              <td class="td-featured"></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>基本 AI 對話</td>
+              <td><span class="check-icon">&#10003;</span></td>
+              <td class="td-featured"><span class="check-icon">&#10003;</span></td>
+              <td><span class="check-icon">&#10003;</span></td>
+            </tr>
+            <tr>
+              <td>進階 AI 能力</td>
+              <td><span class="dash-icon">&mdash;</span></td>
+              <td class="td-featured"><span class="check-icon">&#10003;</span></td>
+              <td><span class="check-icon">&#10003;</span></td>
+            </tr>
+            <tr>
+              <td>API 存取權限</td>
+              <td><span class="dash-icon">&mdash;</span></td>
+              <td class="td-featured"><span class="check-icon">&#10003;</span></td>
+              <td><span class="check-icon">&#10003;</span></td>
+            </tr>
+            <tr>
+              <td>市集工具使用</td>
+              <td>瀏覽</td>
+              <td class="td-featured"><span class="check-icon">&#10003;</span></td>
+              <td><span class="check-icon">&#10003;</span></td>
+            </tr>
+            <tr>
+              <td>優先處理佇列</td>
+              <td><span class="dash-icon">&mdash;</span></td>
+              <td class="td-featured"><span class="check-icon">&#10003;</span></td>
+              <td><span class="check-icon">&#10003;</span></td>
+            </tr>
+
+            <!-- 數據與報表 -->
+            <tr class="category-row">
+              <td colspan="1">數據與報表</td>
+              <td></td>
+              <td class="td-featured"></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>基本數據報表</td>
+              <td><span class="check-icon">&#10003;</span></td>
+              <td class="td-featured"><span class="check-icon">&#10003;</span></td>
+              <td><span class="check-icon">&#10003;</span></td>
+            </tr>
+            <tr>
+              <td>進階數據分析</td>
+              <td><span class="dash-icon">&mdash;</span></td>
+              <td class="td-featured"><span class="check-icon">&#10003;</span></td>
+              <td><span class="check-icon">&#10003;</span></td>
+            </tr>
+            <tr>
+              <td>客製化報表</td>
+              <td><span class="dash-icon">&mdash;</span></td>
+              <td class="td-featured"><span class="dash-icon">&mdash;</span></td>
+              <td><span class="check-icon">&#10003;</span></td>
+            </tr>
+
+            <!-- 支援 -->
+            <tr class="category-row">
+              <td colspan="1">客戶支援</td>
+              <td></td>
+              <td class="td-featured"></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>社群支援</td>
+              <td><span class="check-icon">&#10003;</span></td>
+              <td class="td-featured"><span class="check-icon">&#10003;</span></td>
+              <td><span class="check-icon">&#10003;</span></td>
+            </tr>
+            <tr>
+              <td>優先技術支援</td>
+              <td><span class="dash-icon">&mdash;</span></td>
+              <td class="td-featured"><span class="check-icon">&#10003;</span></td>
+              <td><span class="check-icon">&#10003;</span></td>
+            </tr>
+            <tr>
+              <td>Email 專屬客服</td>
+              <td><span class="dash-icon">&mdash;</span></td>
+              <td class="td-featured"><span class="check-icon">&#10003;</span></td>
+              <td><span class="check-icon">&#10003;</span></td>
+            </tr>
+            <tr>
+              <td>專屬客服經理</td>
+              <td><span class="dash-icon">&mdash;</span></td>
+              <td class="td-featured"><span class="dash-icon">&mdash;</span></td>
+              <td><span class="check-icon">&#10003;</span></td>
+            </tr>
+            <tr>
+              <td>SLA 服務等級協議</td>
+              <td><span class="dash-icon">&mdash;</span></td>
+              <td class="td-featured"><span class="dash-icon">&mdash;</span></td>
+              <td><span class="check-icon">&#10003;</span></td>
+            </tr>
+
+            <!-- 進階 -->
+            <tr class="category-row">
+              <td colspan="1">企業進階</td>
+              <td></td>
+              <td class="td-featured"></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>API 整合</td>
+              <td><span class="dash-icon">&mdash;</span></td>
+              <td class="td-featured"><span class="dash-icon">&mdash;</span></td>
+              <td><span class="check-icon">&#10003;</span></td>
+            </tr>
+            <tr>
+              <td>白標方案</td>
+              <td><span class="dash-icon">&mdash;</span></td>
+              <td class="td-featured"><span class="dash-icon">&mdash;</span></td>
+              <td><span class="check-icon">&#10003;</span></td>
+            </tr>
+            <tr>
+              <td>L1-L4 約束引擎授權</td>
+              <td><span class="dash-icon">&mdash;</span></td>
+              <td class="td-featured"><span class="dash-icon">&mdash;</span></td>
+              <td><span class="check-icon">&#10003;</span></td>
+            </tr>
+            <tr>
+              <td>客製化整合與部署</td>
+              <td><span class="dash-icon">&mdash;</span></td>
+              <td class="td-featured"><span class="dash-icon">&mdash;</span></td>
+              <td><span class="check-icon">&#10003;</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
   </section>
 
@@ -704,11 +991,41 @@
       <div class="fade-up">
         <div class="faq-item">
           <button class="faq-question" onclick="toggleFaq(this)">
-            <span>SEO Points 怎麼使用？</span>
+            <span>可以隨時取消嗎？</span>
             <span class="faq-arrow">&#9660;</span>
           </button>
           <div class="faq-answer">
-            <p>SEO Points 是 SEOBAIKE 平台的統一交易貨幣。當你使用 AI 服務、購買市集工具、或啟用進階功能時，系統會自動從你的帳戶扣除對應點數。不同服務消耗的點數不同，你可以在使用前查看每項服務的點數消耗說明。</p>
+            <p>是的，隨時可以取消或更換方案。所有方案都不綁約，你可以隨時在帳戶設定中取消。取消後，在當期計費週期結束前仍可繼續使用所有功能。帳戶內剩餘的 SEO Points 不會消失，你可以繼續使用。</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <span>SEO Points 是什麼？</span>
+            <span class="faq-arrow">&#9660;</span>
+          </button>
+          <div class="faq-answer">
+            <p>SEO Points（簡稱 SP）是 SEOBAIKE 平台的統一交易貨幣。當你使用 AI 服務、購買市集工具、或啟用進階功能時，系統會自動從你的帳戶扣除對應點數。不同服務消耗的點數不同，你可以在使用前查看每項服務的點數消耗說明。SP 可透過方案取得，也可以隨時額外加購。</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <span>什麼是後付制？</span>
+            <span class="faq-arrow">&#9660;</span>
+          </button>
+          <div class="faq-answer">
+            <p>後付制是指先使用、後結算的付費模式。在 SEOBAIKE 平台上，免費方案用戶每月可獲得固定的 SEO Points；若點數用完，可隨時加購。專業方案與企業方案的月費在每月固定日期自動扣款，方案包含的 SEO Points 會在扣款成功後立即發放至帳戶。超額使用的部分會在下一個計費週期統一結算。</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <span>有退款政策嗎？</span>
+            <span class="faq-arrow">&#9660;</span>
+          </button>
+          <div class="faq-answer">
+            <p>未使用的點數可在購買後 7 天內申請退款。退款將退回原付款方式。已使用的 SEO Points 將按比例扣除。企業方案的退款政策依合約約定。詳細退款政策請參閱服務條款。</p>
           </div>
         </div>
 
@@ -724,16 +1041,6 @@
 
         <div class="faq-item">
           <button class="faq-question" onclick="toggleFaq(this)">
-            <span>可以隨時取消訂閱嗎？</span>
-            <span class="faq-arrow">&#9660;</span>
-          </button>
-          <div class="faq-answer">
-            <p>可以。所有方案都不綁約，你可以隨時在帳戶設定中取消。取消後，在當期計費週期結束前仍可繼續使用所有功能。帳戶內剩餘的 SEO Points 不會消失，你可以繼續使用。</p>
-          </div>
-        </div>
-
-        <div class="faq-item">
-          <button class="faq-question" onclick="toggleFaq(this)">
             <span>SEO Points 會過期嗎？</span>
             <span class="faq-arrow">&#9660;</span>
           </button>
@@ -744,31 +1051,11 @@
 
         <div class="faq-item">
           <button class="faq-question" onclick="toggleFaq(this)">
-            <span>退款政策是什麼？</span>
+            <span>企業方案有什麼特別的？</span>
             <span class="faq-arrow">&#9660;</span>
           </button>
           <div class="faq-answer">
-            <p>如果你對服務不滿意，可以在購買後 7 天內申請退款。退款將退回原付款方式。已使用的 SEO Points 將按比例扣除。企業版方案的退款政策依合約約定。詳細退款政策請參閱服務條款。</p>
-          </div>
-        </div>
-
-        <div class="faq-item">
-          <button class="faq-question" onclick="toggleFaq(this)">
-            <span>我在市集上架工具，分潤比例是多少？</span>
-            <span class="faq-arrow">&#9660;</span>
-          </button>
-          <div class="faq-answer">
-            <p>SEOBAIKE 提供具競爭力的賣家分潤。具體分潤比例依合約約定，會在你上架前明確告知。我們致力於讓賣家獲得合理回報，同時確保平台能持續提供優質服務。</p>
-          </div>
-        </div>
-
-        <div class="faq-item">
-          <button class="faq-question" onclick="toggleFaq(this)">
-            <span>企業版有什麼特別的？</span>
-            <span class="faq-arrow">&#9660;</span>
-          </button>
-          <div class="faq-answer">
-            <p>企業版提供完整的客製化能力，包括：白標方案（使用你自己的品牌）、L1-L4 約束引擎技術授權、SLA 服務等級協議、優先技術支援、以及客製化整合與部署。方案內容與定價根據企業需求量身打造，請聯繫我們的團隊了解詳情。</p>
+            <p>企業方案提供完整的客製化能力，包括：白標方案（使用你自己的品牌）、L1-L4 約束引擎技術授權、SLA 服務等級協議、專屬客服經理、API 整合、以及客製化整合與部署。方案內容與定價根據企業需求量身打造，請聯繫我們的團隊了解詳情。</p>
           </div>
         </div>
 
@@ -837,7 +1124,7 @@
       <div class="cta-box">
         <h2>開始免費<span class="text-gold">體驗</span></h2>
         <p>每月 100 SEO Points 免費用，不需信用卡。<br>感受 SEOBAIKE 的能力，再決定要不要升級。</p>
-        <a href="/login" class="btn btn-primary btn-lg seismic-shake" style="position:relative;">開始免費體驗</a>
+        <a href="/login" class="btn btn-primary btn-lg seismic-shake" style="position:relative;">開始使用</a>
       </div>
     </div>
   </section>

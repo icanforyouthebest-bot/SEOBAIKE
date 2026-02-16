@@ -20,10 +20,16 @@
   <link rel="icon" type="image/svg+xml" href="/favicon.svg">
   <script type="application/ld+json">
   [{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
-    {"@type":"Question","name":"SEOBAIKE 是什麼？","acceptedAnswer":{"@type":"Answer","text":"SEOBAIKE 是由小路光有限公司打造的 AI 約束即服務（CaaS）平台，透過 L1-L4 四層約束架構，讓 AI 在安全可控的框架下運行。定位為 AI 界的 App Store。"}},
-    {"@type":"Question","name":"什麼是 SEO Points？","acceptedAnswer":{"@type":"Answer","text":"SEO Points 是 SEOBAIKE 平台的通用點數，可用於購買 AI 服務、市集商品及 API 呼叫等。透過平台儲值頁面即可購買。"}},
-    {"@type":"Question","name":"如何成為賣家？","acceptedAnswer":{"@type":"Answer","text":"註冊帳號後，進入賣家中心提交申請，通過審核即可上架商品。平台分潤依合約約定。"}},
-    {"@type":"Question","name":"SEOBAIKE 的資料安全嗎？","acceptedAnswer":{"@type":"Answer","text":"SEOBAIKE 採用全程加密傳輸、嚴格的資料保護機制，符合台灣個資法規定，並定期進行安全稽核。"}}
+    {"@type":"Question","name":"什麼是 SEOBAIKE？","acceptedAnswer":{"@type":"Answer","text":"SEOBAIKE 是由小路光有限公司打造的 AI 約束即服務（CaaS）平台，透過 L1-L4 四層約束架構，讓 AI 在安全可控的框架下運行。定位為 AI 界的 App Store。"}},
+    {"@type":"Question","name":"如何註冊 SEOBAIKE？","acceptedAnswer":{"@type":"Answer","text":"前往登入頁面選擇建立帳號，填寫電子郵件與密碼，驗證信箱後即可開始使用。註冊完全免費。"}},
+    {"@type":"Question","name":"什麼是 BYOK？","acceptedAnswer":{"@type":"Answer","text":"BYOK（Bring Your Own Key）是指您可以使用自己的 API 金鑰連接 AI 服務，金鑰僅存於您的裝置，平台不儲存也不代理。"}},
+    {"@type":"Question","name":"如何充值 SEO Points？","acceptedAnswer":{"@type":"Answer","text":"登入帳號後前往方案頁面選擇適合的方案，支援信用卡及多種國際付款方式，購買後點數即時入帳。"}},
+    {"@type":"Question","name":"有哪些 AI 服務？","acceptedAnswer":{"@type":"Answer","text":"SEOBAIKE 市集提供多種 AI 工具，包含文案生成、SEO 分析、圖片處理、數據分析等，所有服務皆通過 L1-L4 約束驗證。"}},
+    {"@type":"Question","name":"什麼是插拔式架構？","acceptedAnswer":{"@type":"Answer","text":"插拔式架構允許多種 AI 模型自由接入平台，企業可根據需求選擇最適合的引擎，所有模型必須通過約束驗證才能執行推理。"}},
+    {"@type":"Question","name":"SEOBAIKE 的資料安全嗎？","acceptedAnswer":{"@type":"Answer","text":"SEOBAIKE 採用全程 TLS 加密傳輸、角色分層權限管理（RLS）、符合台灣個資法，並定期進行安全稽核。"}},
+    {"@type":"Question","name":"BYOK 如何保護我的資料？","acceptedAnswer":{"@type":"Answer","text":"BYOK 模式下，您的 API 金鑰僅存於本地裝置，平台不經手、不儲存、不代理，從源頭杜絕金鑰外洩風險。"}},
+    {"@type":"Question","name":"遇到問題怎麼辦？","acceptedAnswer":{"@type":"Answer","text":"您可以透過聯絡頁面提交工單，或參閱本頁常見問題。平台客服團隊將於工作時段內回覆您的問題。"}},
+    {"@type":"Question","name":"API 文件在哪裡？","acceptedAnswer":{"@type":"Answer","text":"SEOBAIKE 提供完整的 RESTful API，包含約束驗證 API、市集 API、數據 API 等，文件持續更新中。"}}
   ],"publisher":{"@type":"Organization","name":"SEOBAIKE","legalName":"小路光有限公司"},"url":"https://aiforseo.vip/docs.html","inLanguage":"zh-TW"}]
   </script>
   <link rel="stylesheet" href="/assets/design-system.css">
@@ -32,25 +38,34 @@
     .docs-hero { padding: 140px 0 80px; text-align: center; position: relative; overflow: hidden; }
     .docs-hero::before { content:''; position:absolute; top:-40%; left:50%; transform:translateX(-50%); width:800px; height:800px; background:radial-gradient(circle,rgba(232,133,12,0.06) 0%,transparent 70%); pointer-events:none; }
     .docs-hero h1 { margin-bottom: var(--sp-4); }
-    .docs-hero .subtitle { font-size:1.1rem; color:var(--text-muted); max-width:480px; margin:0 auto; }
+    .docs-hero .subtitle { font-size:1.1rem; color:var(--text-muted); max-width:520px; margin:0 auto; line-height:1.7; }
     .docs-search { max-width:520px; margin:var(--sp-8) auto 0; position:relative; }
     .docs-search input { width:100%; padding:14px 20px 14px 48px; background:var(--bg-card); border:1px solid var(--border-default); border-radius:var(--radius-full); color:var(--text-primary); font-size:0.95rem; font-family:var(--font-sans); outline:none; transition:border-color var(--duration-fast),box-shadow var(--duration-fast); }
     .docs-search input:focus { border-color:var(--gold-300); box-shadow:0 0 0 3px rgba(232,133,12,0.1); }
     .docs-search input::placeholder { color:var(--text-muted); }
     .docs-search-icon { position:absolute; left:18px; top:50%; transform:translateY(-50%); width:18px; height:18px; color:var(--text-muted); pointer-events:none; }
+    .docs-search-clear { position:absolute; right:16px; top:50%; transform:translateY(-50%); width:20px; height:20px; background:rgba(255,255,255,0.1); border:none; border-radius:50%; color:var(--text-muted); font-size:0.7rem; cursor:pointer; display:none; align-items:center; justify-content:center; transition:background var(--duration-fast),color var(--duration-fast); line-height:1; }
+    .docs-search-clear:hover { background:rgba(255,255,255,0.15); color:var(--text-primary); }
+    .docs-search-clear.show { display:flex; }
+    .search-result-count { text-align:center; margin-bottom:var(--sp-6); font-size:0.85rem; color:var(--text-muted); display:none; }
+    .search-result-count span { color:var(--gold-200); font-weight:700; }
     .faq-tabs { display:flex; justify-content:center; flex-wrap:wrap; gap:var(--sp-3); margin-bottom:var(--sp-12); }
     .faq-tab { display:inline-flex; align-items:center; gap:6px; padding:10px 22px; border-radius:var(--radius-full); background:var(--bg-card); border:1px solid var(--border-subtle); color:var(--text-secondary); font-size:0.88rem; font-weight:600; cursor:pointer; transition:all var(--duration-normal) var(--ease-out); user-select:none; }
     .faq-tab:hover { border-color:var(--border-hover); color:var(--text-primary); }
     .faq-tab.active { background:rgba(232,133,12,0.1); border-color:rgba(232,133,12,0.3); color:var(--gold-200); }
     .faq-tab svg { width:16px; height:16px; flex-shrink:0; }
+    .faq-tab .tab-count { display:inline-flex; align-items:center; justify-content:center; min-width:18px; height:18px; padding:0 5px; border-radius:var(--radius-full); background:rgba(255,255,255,0.06); font-size:0.7rem; font-weight:700; color:var(--text-muted); margin-left:2px; }
+    .faq-tab.active .tab-count { background:rgba(232,133,12,0.2); color:var(--gold-200); }
     .faq-group { display:none; max-width:760px; margin:0 auto; }
     .faq-group.active { display:block; }
     .faq-group-header { display:flex; align-items:center; gap:var(--sp-3); margin-bottom:var(--sp-6); padding-bottom:var(--sp-3); border-bottom:1px solid var(--border-subtle); }
     .faq-group-header svg { width:22px; height:22px; color:var(--gold-200); flex-shrink:0; }
     .faq-group-header h2 { font-size:1.3rem; font-weight:700; }
+    .faq-group-header .group-desc { font-size:0.85rem; color:var(--text-muted); margin-left:auto; }
     .faq-item { background:var(--bg-card); border:1px solid var(--border-subtle); border-radius:var(--radius-md); margin-bottom:var(--sp-3); overflow:hidden; transition:border-color var(--duration-normal) var(--ease-out),box-shadow var(--duration-normal) var(--ease-out); }
     .faq-item:hover { border-color:var(--border-hover); }
     .faq-item.open { border-color:rgba(232,133,12,0.25); box-shadow:var(--shadow-gold); }
+    .faq-item.search-highlight { border-color:rgba(232,133,12,0.2); }
     .faq-q { display:flex; align-items:center; justify-content:space-between; gap:var(--sp-4); padding:18px 22px; cursor:pointer; user-select:none; }
     .faq-q h3 { font-size:0.98rem; font-weight:600; line-height:1.5; flex:1; color:var(--text-primary); }
     .faq-chevron { width:32px; height:32px; border-radius:50%; background:rgba(232,133,12,0.08); display:flex; align-items:center; justify-content:center; flex-shrink:0; transition:transform var(--duration-normal) var(--ease-out),background var(--duration-normal) var(--ease-out); }
@@ -63,7 +78,9 @@
     .faq-a-inner ul { margin:10px 0 10px 20px; list-style:none; }
     .faq-a-inner li { margin-bottom:6px; position:relative; padding-left:16px; }
     .faq-a-inner li::before { content:''; position:absolute; left:0; top:10px; width:5px; height:5px; border-radius:50%; background:var(--gold-300); }
-    .faq-item.open .faq-a { max-height:600px; }
+    .faq-a-inner a { color:var(--gold-200); text-decoration:underline; text-underline-offset:2px; text-decoration-color:rgba(245,166,35,0.3); }
+    .faq-a-inner a:hover { text-decoration-color:var(--gold-200); }
+    .faq-item.open .faq-a { max-height:800px; }
     .contact-cta { max-width:680px; margin:0 auto; text-align:center; padding:var(--sp-12) var(--sp-8); background:var(--bg-card); border:1px solid var(--border-subtle); border-radius:var(--radius-xl); position:relative; overflow:hidden; }
     .contact-cta::before { content:''; position:absolute; top:0; left:15%; right:15%; height:1px; background:linear-gradient(90deg,transparent,rgba(232,133,12,0.3),transparent); }
     .contact-cta h2 { font-size:1.5rem; margin-bottom:var(--sp-2); }
@@ -74,10 +91,11 @@
     @media(max-width:768px){
       .docs-hero{padding:110px 0 50px} .faq-tabs{gap:var(--sp-2)} .faq-tab{padding:8px 16px;font-size:0.82rem}
       .faq-q{padding:16px 18px} .faq-q h3{font-size:0.92rem} .faq-a-inner{padding:0 18px 18px;font-size:0.88rem}
-      .contact-cta{padding:var(--sp-8) var(--sp-5)}
+      .contact-cta{padding:var(--sp-8) var(--sp-5)} .faq-group-header .group-desc{display:none}
     }
     @media(max-width:480px){
       .faq-tab{padding:7px 12px;font-size:0.78rem} .docs-search input{font-size:0.88rem;padding:12px 16px 12px 42px}
+      .faq-tab .tab-count{display:none}
     }
   </style>
 </head>
@@ -110,12 +128,13 @@
   <!-- Hero -->
   <section class="docs-hero">
     <div class="container fade-up">
-      <div class="section-badge">Help Center</div>
+      <div class="section-badge">Knowledge Base</div>
       <h1>常見<span class="text-gold">問題</span></h1>
-      <p class="subtitle">找不到答案？直接問 AI</p>
+      <p class="subtitle">關於平台功能、帳號帳單、AI 服務、安全隱私與技術支援，一次解答您的疑問</p>
       <div class="docs-search">
         <svg class="docs-search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
-        <input type="text" id="faqSearch" placeholder="搜尋問題，例如「SEO Points」「上架」..." autocomplete="off">
+        <input type="text" id="faqSearch" placeholder="搜尋問題，例如「BYOK」「充值」「API」..." autocomplete="off">
+        <button class="docs-search-clear" id="searchClear" aria-label="清除搜尋">&times;</button>
       </div>
     </div>
   </section>
@@ -123,205 +142,227 @@
   <!-- FAQ Section -->
   <section class="section">
     <div class="container">
+      <!-- Search result count -->
+      <div class="search-result-count" id="searchResultCount">找到 <span id="resultNum">0</span> 個相關問題</div>
+
       <!-- Tabs -->
       <div class="faq-tabs fade-up" role="tablist">
         <button class="faq-tab active" data-tab="getting-started" role="tab">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>入門</button>
-        <button class="faq-tab" data-tab="seo-points" role="tab">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>SEO Points</button>
-        <button class="faq-tab" data-tab="seller" role="tab">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>賣家</button>
-        <button class="faq-tab" data-tab="buyer" role="tab">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 002-1.61L23 6H6"/></svg>買家</button>
-        <button class="faq-tab" data-tab="tech" role="tab">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>技術</button>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>入門指南<span class="tab-count">3</span></button>
+        <button class="faq-tab" data-tab="billing" role="tab">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>帳號與帳單<span class="tab-count">3</span></button>
+        <button class="faq-tab" data-tab="ai-services" role="tab">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>AI 服務<span class="tab-count">3</span></button>
+        <button class="faq-tab" data-tab="security" role="tab">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>安全與隱私<span class="tab-count">3</span></button>
+        <button class="faq-tab" data-tab="support" role="tab">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>技術支援<span class="tab-count">3</span></button>
       </div>
 
-      <!-- Getting Started -->
+      <!-- 入門指南 (Getting Started) -->
       <div class="faq-group active" data-group="getting-started">
         <div class="faq-group-header fade-up">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+          <h2>入門指南</h2>
+          <span class="group-desc">快速了解平台基礎</span>
+        </div>
+        <div class="faq-item fade-up" data-keywords="SEOBAIKE 什麼 平台 介紹 CaaS 約束">
+          <div class="faq-q" onclick="toggleFaq(this)">
+            <h3>什麼是 SEOBAIKE？</h3>
+            <div class="faq-chevron"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg></div>
+          </div>
+          <div class="faq-a"><div class="faq-a-inner">
+            <strong>SEOBAIKE</strong> 是由小路光有限公司打造的 AI 約束即服務（Constraint-as-a-Service, CaaS）平台。我們的定位是「AI 界的 App Store」——不製造 AI 模型，而是打造讓 AI 安全運行的容器。
+            <ul><li>透過 <strong>L1-L4 四層約束架構</strong>控制 AI 推理路徑，確保輸出可控</li><li>插拔式設計，支援多種 AI 模型自由接入</li><li>所有 AI 服務透過 aiforseo.vip 通路統一管理</li><li>商業模式：過路費 + 分潤，讓開發者與企業共同受益</li></ul>
+          </div></div>
+        </div>
+        <div class="faq-item fade-up" data-keywords="註冊 帳號 開始 免費 建立 登入">
+          <div class="faq-q" onclick="toggleFaq(this)">
+            <h3>如何註冊？</h3>
+            <div class="faq-chevron"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg></div>
+          </div>
+          <div class="faq-a"><div class="faq-a-inner">
+            註冊流程簡單快速：
+            <ul><li>前往 <a href="/login">登入頁面</a>，選擇「建立帳號」</li><li>填寫電子郵件與密碼</li><li>前往信箱點擊驗證連結</li><li>驗證完成後即可開始使用所有功能</li></ul>
+            註冊完全免費，瀏覽平台與市集不收取任何費用。
+          </div></div>
+        </div>
+        <div class="faq-item fade-up" data-keywords="BYOK Bring Your Own Key 自帶金鑰 API key">
+          <div class="faq-q" onclick="toggleFaq(this)">
+            <h3>什麼是 BYOK？</h3>
+            <div class="faq-chevron"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg></div>
+          </div>
+          <div class="faq-a"><div class="faq-a-inner">
+            <strong>BYOK（Bring Your Own Key）</strong>是 SEOBAIKE 的核心安全機制之一。它允許您使用自己的 API 金鑰來連接 AI 服務：
+            <ul><li><strong>金鑰自主</strong> — 您的 API 金鑰僅存於您的裝置或瀏覽器中</li><li><strong>平台不經手</strong> — SEOBAIKE 不儲存、不代理、不記錄您的金鑰</li><li><strong>直接連線</strong> — 請求直接從您的裝置發送至 AI 服務提供者</li><li><strong>零洩漏風險</strong> — 從源頭杜絕金鑰外洩的可能性</li></ul>
+            BYOK 讓您完全掌控自己的 AI 使用方式與成本。
+          </div></div>
+        </div>
+      </div>
+
+      <!-- 帳號與帳單 (Billing) -->
+      <div class="faq-group" data-group="billing">
+        <div class="faq-group-header fade-up">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+          <h2>帳號與帳單</h2>
+          <span class="group-desc">充值、付款與帳務管理</span>
+        </div>
+        <div class="faq-item fade-up" data-keywords="充值 SEO Points 點數 購買 儲值 買點數 方案">
+          <div class="faq-q" onclick="toggleFaq(this)">
+            <h3>如何充值 SEO Points？</h3>
+            <div class="faq-chevron"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg></div>
+          </div>
+          <div class="faq-a"><div class="faq-a-inner">
+            <strong>SEO Points</strong> 是平台的通用點數，用於購買市集商品、AI 服務及 API 呼叫。充值方式：
+            <ul><li>登入帳號後，前往 <a href="/pricing">方案頁面</a> 選擇適合的方案</li><li>支援信用卡及多種國際付款方式</li><li>購買後點數即時入帳，可在儀表板查看餘額</li><li>企業用戶可聯繫客服洽談大量採購優惠</li></ul>
+          </div></div>
+        </div>
+        <div class="faq-item fade-up" data-keywords="後付制 後付 信用額度 先用後付 月結">
+          <div class="faq-q" onclick="toggleFaq(this)">
+            <h3>後付制如何運作？</h3>
+            <div class="faq-chevron"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg></div>
+          </div>
+          <div class="faq-a"><div class="faq-a-inner">
+            SEOBAIKE 為符合資格的企業用戶提供<strong>後付制（Post-pay）</strong>方案：
+            <ul><li><strong>先使用、後結算</strong> — 不需預先充值，月底統一結帳</li><li><strong>信用額度</strong> — 根據企業規模與使用狀況核定額度</li><li><strong>月結帳單</strong> — 每月初自動產生上月帳單，支援對公匯款</li><li><strong>透明紀錄</strong> — 所有使用明細即時顯示在 <a href="/billing">帳單管理</a> 頁面</li></ul>
+            如需申請後付制，請透過 <a href="/contact">聯繫我們</a> 提出申請。
+          </div></div>
+        </div>
+        <div class="faq-item fade-up" data-keywords="帳單 查看 紀錄 明細 消費 儀表板 餘額">
+          <div class="faq-q" onclick="toggleFaq(this)">
+            <h3>如何查看帳單？</h3>
+            <div class="faq-chevron"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg></div>
+          </div>
+          <div class="faq-a"><div class="faq-a-inner">
+            SEOBAIKE 提供完整的帳務管理功能：
+            <ul><li>登入後前往 <a href="/billing">帳單管理</a> 頁面</li><li>即時查看 SEO Points 餘額與消費紀錄</li><li>每筆交易皆記錄時間、項目、扣點數量</li><li>支援匯出帳單明細（CSV 格式）供內部核銷使用</li></ul>
+            所有帳務資料保留完整歷史紀錄，方便您隨時查閱。
+          </div></div>
+        </div>
+      </div>
+
+      <!-- AI 服務 -->
+      <div class="faq-group" data-group="ai-services">
+        <div class="faq-group-header fade-up">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
-          <h2>入門</h2>
+          <h2>AI 服務</h2>
+          <span class="group-desc">工具、模型與架構說明</span>
         </div>
-        <div class="faq-item fade-up" data-keywords="SEOBAIKE 什麼 平台 介紹">
+        <div class="faq-item fade-up" data-keywords="AI 服務 工具 有哪些 市集 功能 文案 SEO 分析">
           <div class="faq-q" onclick="toggleFaq(this)">
-            <h3>SEOBAIKE 是什麼？</h3>
+            <h3>有哪些 AI 服務？</h3>
             <div class="faq-chevron"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg></div>
           </div>
           <div class="faq-a"><div class="faq-a-inner">
-            <strong>SEOBAIKE</strong> 是由小路光有限公司打造的 AI 約束即服務（CaaS）平台。我們的定位是「AI 界的 App Store」——不製造 AI 模型，而是打造讓 AI 安全運行的容器。
-            <ul><li>透過 L1-L4 四層約束架構控制 AI 推理路徑</li><li>插拔式設計，支援多種 AI 模型自由接入</li><li>所有 AI 服務透過 aiforseo.vip 通路統一管理</li></ul>
+            SEOBAIKE <a href="/marketplace">市集</a> 持續擴充各類 AI 工具與服務，目前涵蓋：
+            <ul><li><strong>文案生成</strong> — 行銷文案、社群貼文、產品描述等自動撰寫</li><li><strong>SEO 分析</strong> — 關鍵字研究、競品分析、排名追蹤</li><li><strong>圖片處理</strong> — AI 圖片生成、背景移除、圖片優化</li><li><strong>數據分析</strong> — 結構化數據處理、報表生成、趨勢預測</li><li><strong>顧問服務</strong> — 專業顧問提供 AI 策略諮詢</li></ul>
+            所有服務皆通過 L1-L4 約束驗證，確保輸出品質與安全性。
           </div></div>
         </div>
-        <div class="faq-item fade-up" data-keywords="註冊 帳號 開始 免費">
+        <div class="faq-item fade-up" data-keywords="如何使用 AI 工具 操作 步驟 教學">
           <div class="faq-q" onclick="toggleFaq(this)">
-            <h3>如何註冊 SEOBAIKE？</h3>
+            <h3>如何使用 AI 工具？</h3>
             <div class="faq-chevron"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg></div>
           </div>
           <div class="faq-a"><div class="faq-a-inner">
-            註冊流程：
-            <ul><li>前往 <a href="/login">登入頁面</a>，選擇「建立帳號」</li><li>填寫電子郵件與密碼</li><li>驗證信箱後即可開始使用</li></ul>
-            註冊完全免費，瀏覽平台不收費。
+            使用 AI 工具的步驟：
+            <ul><li><strong>選擇工具</strong> — 在 <a href="/marketplace">市集</a> 找到您需要的 AI 工具</li><li><strong>確認費用</strong> — 查看工具每次呼叫所需的 SEO Points</li><li><strong>輸入內容</strong> — 依工具介面輸入您的需求或資料</li><li><strong>取得結果</strong> — AI 在約束框架下運算，回傳結果</li><li><strong>反覆調整</strong> — 視需要調整參數，優化輸出品質</li></ul>
+            不需要任何程式背景即可使用。進階用戶也可透過 API 進行批次操作。
           </div></div>
         </div>
-        <div class="faq-item fade-up" data-keywords="上架 商品 服務 發佈">
+        <div class="faq-item fade-up" data-keywords="插拔式架構 模型 引擎 接入 切換 多模型">
           <div class="faq-q" onclick="toggleFaq(this)">
-            <h3>如何在平台上架商品或服務？</h3>
+            <h3>什麼是插拔式架構？</h3>
             <div class="faq-chevron"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg></div>
           </div>
           <div class="faq-a"><div class="faq-a-inner">
-            上架流程：
-            <ul><li>登入後進入 <a href="/marketplace">市集頁面</a>，點選「我要上架」</li><li>填寫商品名稱、說明、定價等基本資訊</li><li>提交後經平台審核，通過即上架</li></ul>
-            不需要寫程式、不需要架設伺服器。支援數位商品、AI 工具、設計素材、教學課程、顧問服務等。
-          </div></div>
-        </div>
-      </div>
-
-      <!-- SEO Points -->
-      <div class="faq-group" data-group="seo-points">
-        <div class="faq-group-header fade-up">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
-          <h2>SEO Points</h2>
-        </div>
-        <div class="faq-item fade-up" data-keywords="SEO Points 點數 什麼 介紹">
-          <div class="faq-q" onclick="toggleFaq(this)">
-            <h3>什麼是 SEO Points？</h3>
-            <div class="faq-chevron"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg></div>
-          </div>
-          <div class="faq-a"><div class="faq-a-inner">
-            <strong>SEO Points</strong> 是 SEOBAIKE 平台的通用點數，作為平台內所有交易與服務的計價單位。
-            <ul><li>購買市集商品與 AI 服務</li><li>支付 API 呼叫費用</li><li>解鎖進階功能</li></ul>
-          </div></div>
-        </div>
-        <div class="faq-item fade-up" data-keywords="購買 儲值 充值 買點數">
-          <div class="faq-q" onclick="toggleFaq(this)">
-            <h3>如何購買 SEO Points？</h3>
-            <div class="faq-chevron"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg></div>
-          </div>
-          <div class="faq-a"><div class="faq-a-inner">
-            購買方式：
-            <ul><li>登入帳號後，前往 <a href="/pricing">方案頁面</a> 選擇適合的方案</li><li>支援信用卡及多種國際付款方式</li><li>購買後點數即時入帳，可在儀表板查看餘額</li></ul>
-          </div></div>
-        </div>
-        <div class="faq-item fade-up" data-keywords="使用 消耗 扣點 用途">
-          <div class="faq-q" onclick="toggleFaq(this)">
-            <h3>SEO Points 怎麼使用？</h3>
-            <div class="faq-chevron"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg></div>
-          </div>
-          <div class="faq-a"><div class="faq-a-inner">
-            SEO Points 用途涵蓋平台所有服務：
-            <ul><li><strong>市集購買</strong> — 購買 AI 工具、模板、素材等商品</li><li><strong>API 呼叫</strong> — 依使用量自動扣點</li><li><strong>進階功能</strong> — 解鎖高階數據分析、批量操作等</li></ul>
-            所有消耗明細皆可在儀表板即時查看。
+            <strong>插拔式架構（Pluggable Architecture）</strong>是 SEOBAIKE 的核心技術理念：
+            <ul><li><strong>不綁定單一 AI 模型</strong> — 平台支援多種大型語言模型自由接入</li><li><strong>約束層與模型層分離</strong> — L1-L4 約束框架獨立於 AI 模型運作</li><li><strong>自由選擇</strong> — 企業可根據任務需求選擇最適合的 AI 引擎</li><li><strong>統一管理</strong> — 無論使用哪種模型，皆透過同一套約束驗證機制</li></ul>
+            核心理念：我們不製造 AI，我們讓 AI 安全運行。
           </div></div>
         </div>
       </div>
 
-      <!-- Seller -->
-      <div class="faq-group" data-group="seller">
+      <!-- 安全與隱私 -->
+      <div class="faq-group" data-group="security">
         <div class="faq-group-header fade-up">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-          <h2>賣家</h2>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          <h2>安全與隱私</h2>
+          <span class="group-desc">資料保護與法規合規</span>
         </div>
-        <div class="faq-item fade-up" data-keywords="賣家 成為 申請 開店">
+        <div class="faq-item fade-up" data-keywords="安全 資料 加密 隱私 保護 TLS">
           <div class="faq-q" onclick="toggleFaq(this)">
-            <h3>如何成為賣家？</h3>
+            <h3>資料安全嗎？</h3>
             <div class="faq-chevron"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg></div>
           </div>
           <div class="faq-a"><div class="faq-a-inner">
-            成為賣家的流程：
-            <ul><li>註冊並登入 SEOBAIKE 帳號</li><li>進入賣家中心，填寫賣家基本資料</li><li>提交申請，平台審核通過後即可開始上架</li></ul>
-            審核重點包含商品品質、服務描述的準確性，確保買家獲得良好體驗。
+            安全是 SEOBAIKE 的最高優先。平台多層防護機制包含：
+            <ul><li><strong>全程 TLS 加密傳輸</strong> — 所有資料傳輸均經加密保護</li><li><strong>嚴格存取控制</strong> — 角色分層權限管理（Row Level Security）</li><li><strong>L1-L4 約束驗證</strong> — AI 推理路徑受四層約束控管，防止越權操作</li><li><strong>定期安全稽核</strong> — 持續性安全檢測與漏洞修補</li></ul>
+            您的資料在平台上受到企業級安全標準的保護。
           </div></div>
         </div>
-        <div class="faq-item fade-up" data-keywords="分潤 收入 抽成 比例">
+        <div class="faq-item fade-up" data-keywords="法規 合規 個資法 台灣 GDPR 隱私權">
           <div class="faq-q" onclick="toggleFaq(this)">
-            <h3>分潤制度如何運作？</h3>
+            <h3>符合哪些法規？</h3>
             <div class="faq-chevron"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg></div>
           </div>
           <div class="faq-a"><div class="faq-a-inner">
-            分潤<strong>依合約約定</strong>。所有交易紀錄透明可查，即時顯示在賣家儀表板。具體分潤比例請參閱您的賣家合約，或聯繫我們取得詳細說明。
+            SEOBAIKE 嚴格遵循各項法規與標準：
+            <ul><li><strong>台灣個人資料保護法</strong> — 完全符合個資法對資料蒐集、處理、利用的規範</li><li><strong>台灣專利保護</strong> — 核心約束架構受台灣專利（申請案號 115100981）保護</li><li><strong>資料最小化原則</strong> — 僅蒐集提供服務所必需的最少資料</li><li><strong>透明告知</strong> — 所有資料使用方式皆在 <a href="/privacy">隱私權政策</a> 中明確說明</li></ul>
+            詳細法律聲明請參閱 <a href="/compliance">合規聲明</a> 頁面。
           </div></div>
         </div>
-        <div class="faq-item fade-up" data-keywords="審核 商品 上架 規範 標準">
+        <div class="faq-item fade-up" data-keywords="BYOK 保護 金鑰 安全 零信任 資料">
           <div class="faq-q" onclick="toggleFaq(this)">
-            <h3>商品審核標準是什麼？</h3>
+            <h3>BYOK 如何保護我的資料？</h3>
             <div class="faq-chevron"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg></div>
           </div>
           <div class="faq-a"><div class="faq-a-inner">
-            平台審核關注以下面向：
-            <ul><li><strong>內容品質</strong> — 商品描述清楚、功能符合宣稱</li><li><strong>合規性</strong> — 不得包含違法、侵權或有害內容</li><li><strong>技術規範</strong> — API 服務需符合平台技術標準</li><li><strong>使用者體驗</strong> — 介面友善、文件完整</li></ul>
-            審核結果會透過電子郵件通知。未通過時會附上具體改善建議。
+            BYOK（Bring Your Own Key）從架構層面保障您的資料安全：
+            <ul><li><strong>金鑰零儲存</strong> — 平台完全不儲存您的 API 金鑰，即使資料庫被入侵也不影響</li><li><strong>本地加密</strong> — 金鑰僅在您的裝置或瀏覽器內加密保存</li><li><strong>端對端通訊</strong> — AI 請求直接從您的裝置發送至服務提供者，平台不作為中間代理</li><li><strong>隨時撤銷</strong> — 您可以隨時更換或撤銷金鑰，立即生效</li></ul>
+            BYOK 確保您擁有對 AI 服務存取的完全控制權。
           </div></div>
         </div>
       </div>
 
-      <!-- Buyer -->
-      <div class="faq-group" data-group="buyer">
+      <!-- 技術支援 -->
+      <div class="faq-group" data-group="support">
         <div class="faq-group-header fade-up">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 002-1.61L23 6H6"/></svg>
-          <h2>買家</h2>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+          <h2>技術支援</h2>
+          <span class="group-desc">遇到問題？我們來幫您</span>
         </div>
-        <div class="faq-item fade-up" data-keywords="購買 買 如何 流程">
+        <div class="faq-item fade-up" data-keywords="問題 錯誤 故障 不能用 怎麼辦 排除">
           <div class="faq-q" onclick="toggleFaq(this)">
-            <h3>如何購買市集商品？</h3>
+            <h3>遇到問題怎麼辦？</h3>
             <div class="faq-chevron"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg></div>
           </div>
           <div class="faq-a"><div class="faq-a-inner">
-            購買流程：
-            <ul><li>瀏覽 <a href="/marketplace">市集</a>，找到想要的商品</li><li>查看商品詳情與評價</li><li>使用 SEO Points 完成購買</li><li>購買後可在儀表板管理已購商品</li></ul>
-            平台 AI 也會根據您的需求提供商品推薦。
+            遇到問題時，建議依以下步驟排除：
+            <ul><li><strong>查閱本頁 FAQ</strong> — 大多數常見問題都已收錄在此</li><li><strong>檢查服務狀態</strong> — 確認平台是否正在進行維護</li><li><strong>清除瀏覽器快取</strong> — 部分顯示問題可透過清除快取解決</li><li><strong>提交工單</strong> — 若問題持續存在，請透過 <a href="/contact">聯繫我們</a> 提交工單</li></ul>
+            提交工單時，請附上問題截圖與操作步驟描述，以利客服團隊快速處理。
           </div></div>
         </div>
-        <div class="faq-item fade-up" data-keywords="退款 退費 取消 不滿意">
+        <div class="faq-item fade-up" data-keywords="聯繫 客服 聯絡 聯繫方式 email 電話 工單">
           <div class="faq-q" onclick="toggleFaq(this)">
-            <h3>退款政策是什麼？</h3>
+            <h3>如何聯繫客服？</h3>
             <div class="faq-chevron"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg></div>
           </div>
           <div class="faq-a"><div class="faq-a-inner">
-            SEOBAIKE 重視買家權益：
-            <ul><li>數位商品依平台退款條款處理</li><li>如商品與描述嚴重不符，可提出爭議申請</li><li>爭議由平台客服團隊審核處理</li></ul>
-            詳細退款條款請參閱 <a href="/terms">服務條款</a>。如有任何問題，歡迎 <a href="/contact">聯繫我們</a>。
+            SEOBAIKE 提供多種聯繫管道：
+            <ul><li><strong>線上工單</strong> — 前往 <a href="/contact">聯絡頁面</a> 填寫表單，客服團隊將於工作時段內回覆</li><li><strong>電子郵件</strong> — 直接寄信至平台客服信箱</li><li><strong>常見問題</strong> — 本頁已收錄最常被詢問的問題與解答</li></ul>
+            我們致力於提供快速、專業的支援服務，協助您順利使用平台功能。
           </div></div>
         </div>
-      </div>
-
-      <!-- Tech -->
-      <div class="faq-group" data-group="tech">
-        <div class="faq-group-header fade-up">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-          <h2>技術</h2>
-        </div>
-        <div class="faq-item fade-up" data-keywords="API 串接 開發 整合">
+        <div class="faq-item fade-up" data-keywords="API 文件 開發 串接 整合 RESTful 技術文件">
           <div class="faq-q" onclick="toggleFaq(this)">
-            <h3>SEOBAIKE 提供 API 嗎？</h3>
+            <h3>API 文件在哪裡？</h3>
             <div class="faq-chevron"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg></div>
           </div>
           <div class="faq-a"><div class="faq-a-inner">
-            是的，SEOBAIKE 提供完整的 RESTful API：
-            <ul><li><strong>約束驗證 API</strong> — 呼叫 check_inference_path() 驗證 L1-L4 推理路徑</li><li><strong>市集 API</strong> — 商品查詢、購買、管理</li><li><strong>數據 API</strong> — 銷售分析、使用統計</li></ul>
-            API 文件持續更新中。開發者可透過 SEO Points 支付 API 使用費用。
-          </div></div>
-        </div>
-        <div class="faq-item fade-up" data-keywords="AI 引擎 模型 推理">
-          <div class="faq-q" onclick="toggleFaq(this)">
-            <h3>平台使用什麼 AI 引擎？</h3>
-            <div class="faq-chevron"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg></div>
-          </div>
-          <div class="faq-a"><div class="faq-a-inner">
-            SEOBAIKE 採用<strong>插拔式架構</strong>，不綁定單一 AI 模型：
-            <ul><li>支援多種大型語言模型接入</li><li>所有模型必須通過 L1-L4 約束驗證才能執行推理</li><li>企業可根據需求自由選擇最適合的 AI 引擎</li></ul>
-            核心理念是：我們不製造 AI，我們讓 AI 安全運行。
-          </div></div>
-        </div>
-        <div class="faq-item fade-up" data-keywords="安全 資料 加密 隱私 個資">
-          <div class="faq-q" onclick="toggleFaq(this)">
-            <h3>平台資料安全嗎？</h3>
-            <div class="faq-chevron"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg></div>
-          </div>
-          <div class="faq-a"><div class="faq-a-inner">
-            安全是 SEOBAIKE 的最高優先。平台採用：
-            <ul><li><strong>全程加密傳輸</strong> — 所有資料傳輸經 TLS 加密</li><li><strong>嚴格存取控制</strong> — 角色分層權限管理（RLS）</li><li><strong>符合法規</strong> — 遵循台灣個資法規定</li><li><strong>定期稽核</strong> — 持續性安全檢測與漏洞修補</li></ul>
-            詳細資訊請參閱 <a href="/privacy">隱私權政策</a>。
+            SEOBAIKE 提供完整的 RESTful API，供開發者整合使用：
+            <ul><li><strong>約束驗證 API</strong> — 呼叫 check_inference_path() 驗證 L1-L4 推理路徑</li><li><strong>市集 API</strong> — 商品查詢、購買、管理</li><li><strong>數據 API</strong> — 銷售分析、使用統計、報表匯出</li><li><strong>認證方式</strong> — 支援 API Key 與 JWT Token 雙重認證</li></ul>
+            API 文件持續更新中。開發者可透過 SEO Points 支付 API 使用費用。如需技術協助，歡迎 <a href="/contact">聯繫我們</a>。
           </div></div>
         </div>
       </div>
@@ -339,11 +380,11 @@
   <section class="section-sm">
     <div class="container fade-up">
       <div class="contact-cta">
-        <h2>還有<span class="text-gold">問題</span>？</h2>
-        <p>找不到答案也沒關係，我們的團隊隨時為您服務。</p>
+        <h2>還有<span class="text-gold">問題</span>？聯繫我們</h2>
+        <p>找不到答案也沒關係，我們的團隊隨時為您服務。無論是技術問題、帳務疑問或合作洽談，歡迎隨時來信。</p>
         <div class="contact-actions">
           <a href="/contact" class="btn btn-primary">聯繫我們</a>
-          <a href="/about" class="btn btn-secondary">了解更多</a>
+          <a href="/about" class="btn btn-secondary">了解 SEOBAIKE</a>
         </div>
       </div>
     </div>
@@ -392,11 +433,15 @@
 
   /* Tabs */
   var tabs=document.querySelectorAll('.faq-tab'),groups=document.querySelectorAll('.faq-group');
-  tabs.forEach(function(tab){tab.addEventListener('click',function(){var t=this.getAttribute('data-tab');tabs.forEach(function(t){t.classList.remove('active')});this.classList.add('active');groups.forEach(function(g){g.classList.toggle('active',g.getAttribute('data-group')===t)});document.querySelectorAll('.faq-group.active .fade-up').forEach(function(el){obs.observe(el)});var s=document.getElementById('faqSearch');if(s)s.value='';document.getElementById('faqNoResults').style.display='none'})});
+  tabs.forEach(function(tab){tab.addEventListener('click',function(){var t=this.getAttribute('data-tab');tabs.forEach(function(t){t.classList.remove('active')});this.classList.add('active');groups.forEach(function(g){g.classList.toggle('active',g.getAttribute('data-group')===t)});document.querySelectorAll('.faq-group.active .fade-up').forEach(function(el){obs.observe(el)});var s=document.getElementById('faqSearch');if(s)s.value='';var cb=document.getElementById('searchClear');if(cb)cb.classList.remove('show');document.getElementById('faqNoResults').style.display='none';document.getElementById('searchResultCount').style.display='none';document.querySelectorAll('.faq-item').forEach(function(i){i.classList.remove('search-highlight')})})});
+
+  /* Search Clear Button */
+  var searchClearBtn=document.getElementById('searchClear');
+  if(searchClearBtn){searchClearBtn.addEventListener('click',function(){var s=document.getElementById('faqSearch');if(s){s.value='';s.dispatchEvent(new Event('input'));s.focus()}this.classList.remove('show')})}
 
   /* Search */
-  var searchInput=document.getElementById('faqSearch'),noResults=document.getElementById('faqNoResults');
-  searchInput.addEventListener('input',function(){var q=this.value.trim().toLowerCase();if(!q){groups.forEach(function(g){g.style.display=''});document.querySelectorAll('.faq-item').forEach(function(i){i.style.display=''});noResults.style.display='none';var at=document.querySelector('.faq-tab.active');if(at){var t=at.getAttribute('data-tab');groups.forEach(function(g){g.classList.toggle('active',g.getAttribute('data-group')===t)})}return}var found=0;tabs.forEach(function(t){t.classList.remove('active')});groups.forEach(function(g){g.classList.add('active');g.style.display='';var gf=0;g.querySelectorAll('.faq-item').forEach(function(item){var kw=(item.getAttribute('data-keywords')||'').toLowerCase();var qt=(item.querySelector('h3')?item.querySelector('h3').textContent:'').toLowerCase();var at=(item.querySelector('.faq-a-inner')?item.querySelector('.faq-a-inner').textContent:'').toLowerCase();var m=kw.indexOf(q)!==-1||qt.indexOf(q)!==-1||at.indexOf(q)!==-1;item.style.display=m?'':'none';if(m){found++;gf++}});if(gf===0){g.style.display='none';g.classList.remove('active')}});noResults.style.display=found===0?'block':'none'});
+  var searchInput=document.getElementById('faqSearch'),noResults=document.getElementById('faqNoResults'),resultCount=document.getElementById('searchResultCount'),resultNum=document.getElementById('resultNum');
+  searchInput.addEventListener('input',function(){var q=this.value.trim().toLowerCase();var cb=document.getElementById('searchClear');if(cb)cb.classList.toggle('show',q.length>0);if(!q){groups.forEach(function(g){g.style.display=''});document.querySelectorAll('.faq-item').forEach(function(i){i.style.display='';i.classList.remove('search-highlight')});noResults.style.display='none';resultCount.style.display='none';var at=document.querySelector('.faq-tab.active');if(at){var t=at.getAttribute('data-tab');groups.forEach(function(g){g.classList.toggle('active',g.getAttribute('data-group')===t)})}return}var found=0;tabs.forEach(function(t){t.classList.remove('active')});groups.forEach(function(g){g.classList.add('active');g.style.display='';var gf=0;g.querySelectorAll('.faq-item').forEach(function(item){var kw=(item.getAttribute('data-keywords')||'').toLowerCase();var qt=(item.querySelector('h3')?item.querySelector('h3').textContent:'').toLowerCase();var at=(item.querySelector('.faq-a-inner')?item.querySelector('.faq-a-inner').textContent:'').toLowerCase();var m=kw.indexOf(q)!==-1||qt.indexOf(q)!==-1||at.indexOf(q)!==-1;item.style.display=m?'':'none';item.classList.toggle('search-highlight',m);if(m){found++;gf++}});if(gf===0){g.style.display='none';g.classList.remove('active')}});noResults.style.display=found===0?'block':'none';if(found>0){resultNum.textContent=found;resultCount.style.display='block'}else{resultCount.style.display='none'}});
 
   /* Page View */
   (function(){try{var c=window.__SEOBAIKE__||{};var u=c.supabaseUrl||'https://vmyrivxxibqydccurxug.supabase.co';var k=c.anonKey||'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZteXJpdnh4aWJxeWRjY3VyeHVnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzAwNDAwMjksImV4cCI6MjA4NTYxNjAyOX0.iBV-23LGdm_uKffAExgqSV34-NWoAyv8_-M_cJQZ8Gg';fetch(u+'/rest/v1/page_views',{method:'POST',headers:{'Content-Type':'application/json','apikey':k,'Authorization':'Bearer '+k,'Prefer':'return=minimal'},body:JSON.stringify({path:'/docs',referrer:document.referrer||null,user_agent:navigator.userAgent})}).catch(function(){})}catch(e){}})();
