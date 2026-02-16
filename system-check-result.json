@@ -1,0 +1,42 @@
+{
+  "results": [
+    {
+      "name": "L1-L4 Pipeline",
+      "status": "OK"
+    },
+    {
+      "name": "AI Router",
+      "status": "OK"
+    },
+    {
+      "name": "NVIDIA NIM",
+      "status": "OK"
+    },
+    {
+      "name": "Supabase:l1_categories",
+      "status": "OK"
+    },
+    {
+      "name": "Supabase:l2_subcategories",
+      "status": "OK"
+    },
+    {
+      "name": "Supabase:ai_providers",
+      "status": "OK"
+    },
+    {
+      "name": "Supabase:app_secrets",
+      "status": "OK"
+    },
+    {
+      "name": "CF:aiforseo.vip",
+      "status": "OK"
+    },
+    {
+      "name": "CF:API",
+      "status": "OK"
+    }
+  ],
+  "ok": 9,
+  "fail": 0
+}
