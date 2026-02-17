@@ -348,7 +348,7 @@ Deno.serve(async (req) => {
     // ============================================================
     // Step 3.5: 寫入 ai_customer_logs（老闆戰情室用）
     // ============================================================
-    await supabase.from('ai_customer_logs').insert({
+    const logRow = {
       session_id: constraint.session_id,
       user_id: user_id || null,
       role: 'chat',
@@ -358,14 +358,26 @@ Deno.serve(async (req) => {
       status: 'success',
       ip_address: clientIp,
       response: { provider: result.provider, model: result.model, latencyMs: result.latencyMs },
+    }
+    await supabase.from('ai_customer_logs').insert(logRow)
+
+    // ============================================================
+    // Step 3.5b: Broadcast 推送到 CEO 戰情室 (不依賴 WAL replication)
+    // ============================================================
+    const broadcastChannel = supabase.channel('ceo-realtime')
+    await broadcastChannel.send({
+      type: 'broadcast',
+      event: 'new_log',
+      payload: { ...logRow, provider: result.provider, model: result.model, latencyMs: result.latencyMs, created_at: new Date().toISOString() },
     })
+    supabase.removeChannel(broadcastChannel)
 
     // ============================================================
     // Step 3.6: Fallback 發生時 → 寫入 system_health_checks
     // ============================================================
     if (usedFallback) {
       console.warn(`[ai-gateway] Fallback triggered: tried ${attempts.map(a => a.provider).join(' → ')} → landed on ${result.provider}`)
-      const { error: healthErr } = await supabase.from('system_health_checks').insert({
+      const healthRow = {
         check_type: 'ai_fallback',
         component: 'ai-gateway',
         status: 'degraded',
@@ -378,11 +390,20 @@ Deno.serve(async (req) => {
           session_id: constraint.session_id,
         },
         checked_at: new Date().toISOString(),
-      })
+      }
+      const { error: healthErr } = await supabase.from('system_health_checks').insert(healthRow)
       if (healthErr) {
-        // system_health_checks 寫入失敗不影響主流程
         console.error('[ai-gateway] Failed to log health check:', healthErr.message)
       }
+
+      // Broadcast fallback alert to CEO 戰情室
+      const fallbackChannel = supabase.channel('ceo-realtime')
+      await fallbackChannel.send({
+        type: 'broadcast',
+        event: 'fallback_alert',
+        payload: healthRow,
+      })
+      supabase.removeChannel(fallbackChannel)
     }
 
     // ============================================================

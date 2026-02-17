@@ -229,22 +229,27 @@ async function api(action){
 function setupRealtime() {
   const badge = document.getElementById('rtBadge');
 
-  // 訂閱 ai_customer_logs — 即時客戶動態
-  const logsChannel = sb
-    .channel('ceo-logs')
-    .on(
-      'postgres_changes',
-      { event: 'INSERT', schema: 'public', table: 'ai_customer_logs' },
-      (payload) => {
-        const row = payload.new;
-        // 加到 live feed 頂部
-        liveFeedData.unshift(row);
-        if (liveFeedData.length > 20) liveFeedData.pop();
-        renderLiveFeed(row.id);
-        // 更新 KPI 計數器（如果 KPI tab 已載入）
-        updateKPICounter(row.status);
-      }
-    )
+  // ============================================================
+  // 使用 Broadcast Channel（不依賴 WAL replication）
+  // ai-gateway 主動推送事件到 ceo-realtime channel
+  // ============================================================
+  const realtimeChannel = sb
+    .channel('ceo-realtime')
+    .on('broadcast', { event: 'new_log' }, (payload) => {
+      const row = payload.payload;
+      // 加到 live feed 頂部
+      liveFeedData.unshift(row);
+      if (liveFeedData.length > 20) liveFeedData.pop();
+      renderLiveFeed(row.session_id || 'new');
+      // 更新 KPI 計數器
+      updateKPICounter(row.status);
+    })
+    .on('broadcast', { event: 'fallback_alert' }, (payload) => {
+      const row = payload.payload;
+      fallbackAlerts.unshift(row);
+      if (fallbackAlerts.length > 10) fallbackAlerts.pop();
+      renderFallbackAlerts();
+    })
     .subscribe((status) => {
       if (status === 'SUBSCRIBED') {
         rtConnected = true;
@@ -258,23 +263,6 @@ function setupRealtime() {
         setTimeout(setupRealtime, 5000);
       }
     });
-
-  // 訂閱 system_health_checks — fallback 警報
-  const healthChannel = sb
-    .channel('ceo-health')
-    .on(
-      'postgres_changes',
-      { event: 'INSERT', schema: 'public', table: 'system_health_checks' },
-      (payload) => {
-        const row = payload.new;
-        if (row.check_type === 'ai_fallback') {
-          fallbackAlerts.unshift(row);
-          if (fallbackAlerts.length > 10) fallbackAlerts.pop();
-          renderFallbackAlerts();
-        }
-      }
-    )
-    .subscribe();
 }
 
 // ============================================================
