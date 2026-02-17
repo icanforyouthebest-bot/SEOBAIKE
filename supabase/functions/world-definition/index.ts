@@ -17,11 +17,28 @@ Deno.serve(async (req) => {
   }
 
   try {
-    // 驗證：必須攜帶 Authorization Bearer token
-    // 實際金鑰驗證由 Supabase Gateway 或 INTERNAL_API_KEY 處理
+    // 驗證：必須攜帶合法 Authorization Bearer token (JWT)
+    // 解析 JWT payload 驗證 role 為 service_role 或 anon
     const auth = req.headers.get('Authorization')
     if (!auth || !auth.startsWith('Bearer ')) {
       return jsonResponse(401, { error: 'Unauthorized: Bearer token required' })
+    }
+    const token = auth.replace('Bearer ', '')
+    try {
+      const parts = token.split('.')
+      if (parts.length !== 3) throw new Error('not a JWT')
+      const payload = JSON.parse(atob(parts[1]))
+      const validRoles = ['service_role', 'anon']
+      if (!payload.role || !validRoles.includes(payload.role)) {
+        return jsonResponse(403, { error: 'Forbidden: invalid role' })
+      }
+      // 驗證 JWT 是否為此 project 的 token
+      const projectRef = Deno.env.get('SUPABASE_URL')?.match(/\/\/([^.]+)/)?.[1]
+      if (projectRef && payload.ref !== projectRef) {
+        return jsonResponse(403, { error: 'Forbidden: token project mismatch' })
+      }
+    } catch {
+      return jsonResponse(403, { error: 'Forbidden: invalid token format' })
     }
 
     const supabase = createClient(
@@ -119,8 +136,25 @@ Deno.serve(async (req) => {
       const body = await req.json()
       const { keyword, country, level } = body
 
-      if (!keyword) {
-        return jsonResponse(400, { error: 'keyword required' })
+      if (!keyword || typeof keyword !== 'string') {
+        return jsonResponse(400, { error: 'keyword required (string)' })
+      }
+
+      // V-008: 驗證國家代碼
+      const countryField: Record<string, string> = {
+        tw: 'name_tw',
+        us: 'name_us',
+        eu: 'name_eu',
+        jp: 'name_jp',
+      }
+      if (country && !countryField[country]) {
+        return jsonResponse(400, { error: `Invalid country. Valid: ${Object.keys(countryField).join(', ')}` })
+      }
+
+      // V-002: 過濾 ILIKE 特殊字元，防止萬用字元枚舉
+      const sanitized = keyword.replace(/[%_\\]/g, '\\$&')
+      if (sanitized.length < 1) {
+        return jsonResponse(400, { error: 'keyword too short after sanitization' })
       }
 
       let query = supabase
@@ -128,16 +162,8 @@ Deno.serve(async (req) => {
         .select('*')
         .eq('is_active', true)
 
-      // 根據國家搜尋對應名稱欄位
-      const countryField: Record<string, string> = {
-        tw: 'name_tw',
-        us: 'name_us',
-        eu: 'name_eu',
-        jp: 'name_jp',
-      }
-
       const field = countryField[country || 'tw'] || 'name_tw'
-      query = query.ilike(field, `%${keyword}%`)
+      query = query.ilike(field, `%${sanitized}%`)
 
       if (level) {
         query = query.eq('level', level)
