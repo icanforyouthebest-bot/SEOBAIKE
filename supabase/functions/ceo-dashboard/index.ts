@@ -142,21 +142,36 @@ async function getArsenal() {
       if (key.endpoint) {
         try {
           const headers: Record<string, string> = { 'Content-Type': 'application/json' }
+          let method = 'GET'
+
           if (key.provider === 'Anthropic') {
             headers['x-api-key'] = apiKey
             headers['anthropic-version'] = '2023-06-01'
+            method = 'POST'
           } else if (key.provider === 'Replicate') {
             headers['Authorization'] = `Token ${apiKey}`
           } else {
             headers['Authorization'] = `Bearer ${apiKey}`
           }
 
-          const res = await fetch(key.endpoint, {
-            method: 'GET',
+          const fetchOpts: RequestInit = {
+            method,
             headers,
             signal: AbortSignal.timeout(6000),
-          })
+          }
 
+          // Anthropic /v1/messages 只接受 POST，發一個最小請求觸發 auth 驗證
+          if (key.provider === 'Anthropic') {
+            fetchOpts.body = JSON.stringify({
+              model: 'claude-sonnet-4-20250514',
+              max_tokens: 1,
+              messages: [{ role: 'user', content: 'ping' }],
+            })
+          }
+
+          const res = await fetch(key.endpoint, fetchOpts)
+
+          // Anthropic 回 200 = key 有效；回 401/403 = key 無效
           const ok = res.status < 400
           return {
             provider: key.provider,
