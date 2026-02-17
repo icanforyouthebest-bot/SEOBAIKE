@@ -38,6 +38,14 @@ const ARSENAL_KEYS = [
   { provider: 'DeepSeek', env: 'DEEPSEEK_API_KEY', endpoint: 'https://api.deepseek.com/models', type: 'llm' },
   { provider: 'Replicate', env: 'REPLICATE_API_TOKEN', endpoint: 'https://api.replicate.com/v1/account', type: 'llm' },
   { provider: 'HuggingFace', env: 'HF_API_KEY', endpoint: null, type: 'llm' },
+  // === 特種部隊 ===
+  { provider: 'ElevenLabs', env: 'ELEVENLABS_API_KEY', endpoint: 'https://api.elevenlabs.io/v1/user', type: 'voice' },
+  { provider: 'Shotstack', env: 'SHOTSTACK_API_KEY', endpoint: 'https://api.shotstack.io/v1/', type: 'video' },
+  { provider: 'RemoveBG', env: 'REMOVEBG_API_KEY', endpoint: null, type: 'image' },
+  { provider: 'DataForSEO', env: 'DATAFORSEO_LOGIN', endpoint: null, type: 'search' },
+  { provider: 'PageSpeed', env: 'GOOGLE_PAGESPEED_API_KEY', endpoint: null, type: 'search' },
+  { provider: 'Perplexity', env: 'PERPLEXITY_API_KEY', endpoint: 'https://api.perplexity.ai/chat/completions', type: 'search' },
+  { provider: 'DashScope', env: 'DASHSCOPE_API_KEY', endpoint: null, type: 'llm' },
 ]
 
 // ============================================================
@@ -150,8 +158,15 @@ async function getArsenal() {
             headers['x-api-key'] = apiKey
             headers['anthropic-version'] = '2023-06-01'
             method = 'POST'
+          } else if (key.provider === 'ElevenLabs') {
+            headers['xi-api-key'] = apiKey
           } else if (key.provider === 'Replicate') {
             headers['Authorization'] = `Token ${apiKey}`
+          } else if (key.provider === 'Perplexity') {
+            headers['Authorization'] = `Bearer ${apiKey}`
+            method = 'POST'
+          } else if (key.provider === 'Shotstack') {
+            headers['x-api-key'] = apiKey
           } else {
             headers['Authorization'] = `Bearer ${apiKey}`
           }
@@ -162,12 +177,18 @@ async function getArsenal() {
             signal: AbortSignal.timeout(6000),
           }
 
-          // Anthropic /v1/messages 只接受 POST，發一個最小請求觸發 auth 驗證
+          // POST-only endpoints 需要帶 body 觸發 auth 驗證
           if (key.provider === 'Anthropic') {
             fetchOpts.body = JSON.stringify({
               model: 'claude-sonnet-4-20250514',
               max_tokens: 1,
               messages: [{ role: 'user', content: 'ping' }],
+            })
+          } else if (key.provider === 'Perplexity') {
+            fetchOpts.body = JSON.stringify({
+              model: 'sonar',
+              messages: [{ role: 'user', content: 'ping' }],
+              max_tokens: 1,
             })
           }
 
