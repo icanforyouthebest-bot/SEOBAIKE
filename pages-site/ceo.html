@@ -18,10 +18,13 @@ body{background:var(--bg);color:var(--text);font-family:'Noto Sans TC',sans-seri
 .header h1{font-family:'Orbitron',sans-serif;font-size:18px;color:var(--green);letter-spacing:2px}
 .header .commander{color:var(--gold);font-size:14px;margin-top:4px}
 .header .time{color:#666;font-size:11px;margin-top:2px}
+.rt-badge{display:inline-block;font-size:9px;padding:2px 6px;border-radius:8px;margin-left:6px;vertical-align:middle;font-family:'Orbitron',sans-serif;letter-spacing:1px}
+.rt-badge.connected{background:#002a11;color:var(--green);border:1px solid var(--green);animation:pulse 2s infinite}
+.rt-badge.disconnected{background:#2a0011;color:var(--red);border:1px solid var(--red)}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.5}}
 .section{margin:12px;background:var(--card);border-radius:12px;padding:16px;border:1px solid #222}
 .section-title{font-family:'Orbitron',sans-serif;font-size:13px;color:var(--blue);margin-bottom:12px;display:flex;align-items:center;gap:8px}
 .section-title::before{content:'';width:4px;height:16px;background:var(--blue);border-radius:2px}
-/* Status Cards */
 .site-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}
 .site-card{background:#1a1a1a;border-radius:8px;padding:12px 8px;text-align:center;border:1px solid #333}
 .site-card .light{width:20px;height:20px;border-radius:50%;margin:0 auto 6px;box-shadow:0 0 8px currentColor}
@@ -32,19 +35,37 @@ body{background:var(--bg);color:var(--text);font-family:'Noto Sans TC',sans-seri
 .yellow{color:var(--yellow);background:var(--yellow)}
 /* Arsenal */
 .arsenal-list{display:flex;flex-direction:column;gap:6px}
-.arsenal-item{display:flex;align-items:center;gap:10px;background:#1a1a1a;border-radius:8px;padding:10px 12px}
+.arsenal-item{display:flex;align-items:center;gap:10px;background:#1a1a1a;border-radius:8px;padding:10px 12px;transition:background .3s}
+.arsenal-item.flash{background:#1a2a1a;border:1px solid var(--green)}
 .arsenal-item .dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
 .arsenal-item .provider{flex:1;font-size:13px}
 .arsenal-item .status{font-size:11px;color:#888}
+.arsenal-item .avail{font-size:11px;font-family:'Orbitron',sans-serif;margin-left:auto}
 .arsenal-summary{background:linear-gradient(135deg,#1a2a1a,#111);border-radius:8px;padding:14px;text-align:center;margin-bottom:10px;border:1px solid #2a3a2a}
 .arsenal-summary .big{font-family:'Orbitron',sans-serif;font-size:28px;color:var(--green)}
 .arsenal-summary .label{font-size:11px;color:#888;margin-top:2px}
+/* Fallback Alert */
+.fallback-section{margin:12px;background:#1a1111;border-radius:12px;padding:16px;border:1px solid #442222;display:none}
+.fallback-section.show{display:block}
+.fallback-title{font-family:'Orbitron',sans-serif;font-size:13px;color:var(--red);margin-bottom:12px;display:flex;align-items:center;gap:8px}
+.fallback-title::before{content:'';width:4px;height:16px;background:var(--red);border-radius:2px}
+.fallback-item{background:#1a1a1a;border-radius:8px;padding:10px 12px;margin-bottom:6px;font-size:12px;border-left:3px solid var(--red)}
+.fallback-item .fb-time{color:var(--red);font-weight:700}
+.fallback-item .fb-detail{color:#aaa;margin-top:4px}
 /* KPI */
 .kpi-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
 .kpi-card{background:#1a1a1a;border-radius:8px;padding:14px;text-align:center}
 .kpi-card .num{font-family:'Orbitron',sans-serif;font-size:24px;color:var(--green)}
 .kpi-card .label{font-size:11px;color:#888;margin-top:4px}
 .kpi-card.error .num{color:var(--red)}
+/* Provider Stats */
+.provider-stats{margin-top:10px}
+.pstat-item{display:flex;align-items:center;gap:8px;padding:6px 0;border-bottom:1px solid #222;font-size:12px}
+.pstat-item:last-child{border-bottom:none}
+.pstat-name{width:70px;color:var(--blue)}
+.pstat-bar{flex:1;height:6px;background:#222;border-radius:3px;overflow:hidden}
+.pstat-bar-fill{height:100%;border-radius:3px;transition:width .5s}
+.pstat-val{width:50px;text-align:right;font-family:'Orbitron',sans-serif;font-size:11px}
 /* Buttons */
 .btn-grid{display:flex;flex-direction:column;gap:10px}
 .action-btn{border:none;border-radius:12px;padding:18px;font-size:15px;font-weight:700;color:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:10px;transition:transform .1s}
@@ -54,7 +75,6 @@ body{background:var(--bg);color:var(--text);font-family:'Noto Sans TC',sans-seri
 .btn-defense{background:linear-gradient(135deg,#ffcc00,#cc9900);color:#000}
 .action-btn .icon{font-size:22px}
 .action-btn.loading{opacity:.6;pointer-events:none}
-/* Action result */
 .action-result{background:#1a2a1a;border:1px solid var(--green);border-radius:8px;padding:10px;margin-top:8px;font-size:12px;color:var(--green);display:none}
 .action-result.show{display:block}
 .action-result.err{border-color:var(--red);color:var(--red);background:#2a1a1a}
@@ -63,23 +83,22 @@ body{background:var(--bg);color:var(--text);font-family:'Noto Sans TC',sans-seri
 .bottom-bar button{background:none;border:none;color:#666;font-size:10px;display:flex;flex-direction:column;align-items:center;gap:2px;cursor:pointer;padding:4px 12px}
 .bottom-bar button.active{color:var(--green)}
 .bottom-bar button .ico{font-size:20px}
-/* Tab content */
 .tab{display:none}.tab.active{display:block}
-/* Loading */
 .spinner{display:inline-block;width:14px;height:14px;border:2px solid #333;border-top-color:var(--green);border-radius:50%;animation:spin .6s linear infinite}
 @keyframes spin{to{transform:rotate(360deg)}}
 .loading-overlay{text-align:center;padding:40px;color:#666}
-/* Live feed */
-.feed-item{background:#1a1a1a;border-radius:8px;padding:10px 12px;margin-bottom:6px;font-size:12px}
+.feed-item{background:#1a1a1a;border-radius:8px;padding:10px 12px;margin-bottom:6px;font-size:12px;transition:background .3s}
+.feed-item.new{background:#112211;border:1px solid #334433}
 .feed-item .time{color:var(--blue);font-weight:700}
 .feed-item .q{color:#ccc;margin-top:4px}
 .feed-item .a{color:#888;margin-top:2px;font-size:11px}
+.feed-item .provider-tag{display:inline-block;font-size:9px;padding:1px 5px;border-radius:4px;background:#222;color:var(--green);margin-left:6px}
 </style>
 </head>
 <body>
 
 <div class="header">
-  <h1>CEO DASHBOARD</h1>
+  <h1>CEO DASHBOARD <span class="rt-badge disconnected" id="rtBadge">OFFLINE</span></h1>
   <div class="commander">指揮官：許竣翔</div>
   <div class="time" id="headerTime">Loading...</div>
 </div>
@@ -102,6 +121,11 @@ body{background:var(--bg);color:var(--text);font-family:'Noto Sans TC',sans-seri
       <div class="loading-overlay"><div class="spinner"></div></div>
     </div>
   </div>
+  <!-- Fallback Alerts (hidden by default, shown when events exist) -->
+  <div class="fallback-section" id="fallbackSection">
+    <div class="fallback-title">FALLBACK ALERTS</div>
+    <div id="fallbackList"></div>
+  </div>
 </div>
 
 <!-- Tab: KPI -->
@@ -113,7 +137,13 @@ body{background:var(--bg);color:var(--text);font-family:'Noto Sans TC',sans-seri
     </div>
   </div>
   <div class="section">
-    <div class="section-title">即時客戶動態</div>
+    <div class="section-title">Provider 可用度（今日）</div>
+    <div class="provider-stats" id="providerStats">
+      <div class="loading-overlay"><div class="spinner"></div></div>
+    </div>
+  </div>
+  <div class="section">
+    <div class="section-title">即時客戶動態 <span class="rt-badge connected" style="font-size:8px">LIVE</span></div>
     <div id="liveFeed">
       <div class="loading-overlay"><div class="spinner"></div></div>
     </div>
@@ -156,10 +186,21 @@ body{background:var(--bg);color:var(--text);font-family:'Noto Sans TC',sans-seri
   <button onclick="switchTab('actions',this)"><span class="ico">🔴</span>核按鈕</button>
 </div>
 
+<!-- Supabase JS for Realtime -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+
 <script>
 const SB_URL='https://vmyrivxxibqydccurxug.supabase.co';
 const FUNC_URL=SB_URL+'/functions/v1/ceo-dashboard';
 const SK='%%SUPABASE_KEY%%';
+
+// ===== Supabase Client (for Realtime) =====
+const sb = window.supabase.createClient(SB_URL, SK);
+
+// ===== Realtime State =====
+let rtConnected = false;
+let liveFeedData = [];
+let fallbackAlerts = [];
 
 function switchTab(name,btn){
   document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
@@ -182,7 +223,63 @@ async function api(action){
   return r.json();
 }
 
-// ===== A 全球狀態 =====
+// ============================================================
+// Realtime 訂閱
+// ============================================================
+function setupRealtime() {
+  const badge = document.getElementById('rtBadge');
+
+  // 訂閱 ai_customer_logs — 即時客戶動態
+  const logsChannel = sb
+    .channel('ceo-logs')
+    .on(
+      'postgres_changes',
+      { event: 'INSERT', schema: 'public', table: 'ai_customer_logs' },
+      (payload) => {
+        const row = payload.new;
+        // 加到 live feed 頂部
+        liveFeedData.unshift(row);
+        if (liveFeedData.length > 20) liveFeedData.pop();
+        renderLiveFeed(row.id);
+        // 更新 KPI 計數器（如果 KPI tab 已載入）
+        updateKPICounter(row.status);
+      }
+    )
+    .subscribe((status) => {
+      if (status === 'SUBSCRIBED') {
+        rtConnected = true;
+        badge.className = 'rt-badge connected';
+        badge.textContent = 'LIVE';
+      } else if (status === 'CHANNEL_ERROR' || status === 'TIMED_OUT') {
+        rtConnected = false;
+        badge.className = 'rt-badge disconnected';
+        badge.textContent = 'OFFLINE';
+        // 5秒後重試
+        setTimeout(setupRealtime, 5000);
+      }
+    });
+
+  // 訂閱 system_health_checks — fallback 警報
+  const healthChannel = sb
+    .channel('ceo-health')
+    .on(
+      'postgres_changes',
+      { event: 'INSERT', schema: 'public', table: 'system_health_checks' },
+      (payload) => {
+        const row = payload.new;
+        if (row.check_type === 'ai_fallback') {
+          fallbackAlerts.unshift(row);
+          if (fallbackAlerts.length > 10) fallbackAlerts.pop();
+          renderFallbackAlerts();
+        }
+      }
+    )
+    .subscribe();
+}
+
+// ============================================================
+// A 全球狀態
+// ============================================================
 async function loadGlobal(){
   try{
     const d=await api('global-status');
@@ -197,7 +294,9 @@ async function loadGlobal(){
   }catch(e){document.getElementById('siteGrid').innerHTML='<div style="color:red">載入失敗</div>'}
 }
 
-// ===== B 軍火庫 =====
+// ============================================================
+// B 軍火庫
+// ============================================================
 async function loadArsenal(){
   try{
     const d=await api('arsenal');
@@ -207,7 +306,7 @@ async function loadArsenal(){
     `;
     const list=document.getElementById('arsenalList');
     list.innerHTML=d.keys.map(k=>`
-      <div class="arsenal-item">
+      <div class="arsenal-item" id="arsenal-${k.provider.replace(/[^a-zA-Z]/g,'')}">
         <div class="dot" style="background:${k.color==='green'?'var(--green)':k.color==='red'?'var(--red)':'var(--yellow)'}"></div>
         <div class="provider">${k.provider}</div>
         <div class="status">${k.status==='active'?'🟢':''}${k.status==='missing'?'❌ 未設定':k.status}</div>
@@ -216,33 +315,180 @@ async function loadArsenal(){
   }catch(e){document.getElementById('arsenalList').innerHTML='<div style="color:red">載入失敗</div>'}
 }
 
-// ===== KPI =====
+// ============================================================
+// Fallback Alerts (Realtime)
+// ============================================================
+async function loadFallbackAlerts() {
+  try {
+    const { data } = await sb
+      .from('system_health_checks')
+      .select('*')
+      .eq('check_type', 'ai_fallback')
+      .order('checked_at', { ascending: false })
+      .limit(10);
+    fallbackAlerts = data || [];
+    renderFallbackAlerts();
+  } catch(e) { console.error('loadFallbackAlerts:', e); }
+}
+
+function renderFallbackAlerts() {
+  const section = document.getElementById('fallbackSection');
+  const list = document.getElementById('fallbackList');
+  if (!fallbackAlerts.length) {
+    section.classList.remove('show');
+    return;
+  }
+  section.classList.add('show');
+  list.innerHTML = fallbackAlerts.map(a => {
+    const d = a.details || {};
+    const failed = (d.failed_providers || []).map(p => p.provider).join(' → ');
+    const t = a.checked_at ? new Date(a.checked_at).toLocaleTimeString('zh-TW',{hour:'2-digit',minute:'2-digit',second:'2-digit'}) : '--';
+    return `
+      <div class="fallback-item">
+        <span class="fb-time">${t}</span>
+        <span style="margin-left:8px;color:var(--yellow)">${failed}</span>
+        <span style="color:var(--green)"> → ${d.landed_on || '?'}</span>
+        <span style="color:#666;margin-left:8px">${d.latencyMs || 0}ms</span>
+        <div class="fb-detail">model: ${d.landed_model || '?'}</div>
+      </div>`;
+  }).join('');
+}
+
+// ============================================================
+// KPI + Provider 可用度
+// ============================================================
+let kpiCounters = { total: 0, success: 0, errors: 0, blocked: 0 };
+
+function updateKPICounter(status) {
+  kpiCounters.total++;
+  if (status === 'success') kpiCounters.success++;
+  else if (status === 'error') kpiCounters.errors++;
+  else if (status === 'blocked') kpiCounters.blocked++;
+  // 如果 KPI tab 可見，即時更新數字
+  const grid = document.getElementById('kpiGrid');
+  if (grid && grid.dataset.loaded === '1') renderKPI();
+}
+
+function renderKPI() {
+  const k = kpiCounters;
+  const rate = k.total > 0 ? ((k.errors / k.total) * 100).toFixed(1) + '%' : '0%';
+  document.getElementById('kpiGrid').innerHTML = `
+    <div class="kpi-card"><div class="num">${k.total}</div><div class="label">今日對話數</div></div>
+    <div class="kpi-card"><div class="num">${k.success}</div><div class="label">成功</div></div>
+    <div class="kpi-card error"><div class="num">${k.errors}</div><div class="label">錯誤</div></div>
+    <div class="kpi-card"><div class="num">${rate}</div><div class="label">故障率</div></div>
+  `;
+  document.getElementById('kpiGrid').dataset.loaded = '1';
+}
+
 async function loadKPI(){
   try{
     const d=await api('daily-report');
-    document.getElementById('kpiGrid').innerHTML=`
-      <div class="kpi-card"><div class="num">${d.kpi.total_conversations}</div><div class="label">今日對話數</div></div>
-      <div class="kpi-card"><div class="num">${d.kpi.success}</div><div class="label">成功</div></div>
-      <div class="kpi-card error"><div class="num">${d.kpi.errors}</div><div class="label">錯誤</div></div>
-      <div class="kpi-card"><div class="num">${d.kpi.error_rate}</div><div class="label">故障率</div></div>
-    `;
-    // Live feed
-    const r2=await fetch(SB_URL+'/rest/v1/ai_customer_logs?select=created_at,input_text,output_text,status&order=created_at.desc&limit=10',{
-      headers:{'apikey':SK,'Authorization':'Bearer '+SK}
-    });
-    const logs=await r2.json();
-    document.getElementById('liveFeed').innerHTML=logs.length?logs.map(l=>`
-      <div class="feed-item">
-        <span class="time">${l.created_at?new Date(l.created_at).toLocaleTimeString('zh-TW',{hour:'2-digit',minute:'2-digit'}):'--'}</span>
-        <span style="margin-left:8px;color:${l.status==='success'?'var(--green)':l.status==='error'?'var(--red)':'var(--yellow)'}">[${l.status||'--'}]</span>
-        <div class="q">📩 ${(l.input_text||'').substring(0,40)||'(無)'}</div>
-        <div class="a">💬 ${(l.output_text||'').substring(0,40)||'(無)'}</div>
-      </div>
-    `).join(''):'<div style="color:#666;text-align:center;padding:20px">今天暫無客戶對話</div>';
+    kpiCounters = {
+      total: d.kpi.total_conversations,
+      success: d.kpi.success,
+      errors: d.kpi.errors,
+      blocked: d.kpi.blocked,
+    };
+    renderKPI();
+
+    // Provider 可用度 — 從 ai_customer_logs.response 統計
+    await loadProviderStats();
+
+    // 初始載入 live feed
+    await loadInitialFeed();
   }catch(e){document.getElementById('kpiGrid').innerHTML='<div style="color:red">載入失敗</div>'}
 }
 
-// ===== 核按鈕 =====
+async function loadProviderStats() {
+  try {
+    const today = new Date().toISOString().split('T')[0];
+    const { data } = await sb
+      .from('ai_customer_logs')
+      .select('status, response')
+      .gte('created_at', today);
+
+    if (!data || !data.length) {
+      document.getElementById('providerStats').innerHTML = '<div style="color:#666;text-align:center;padding:10px">今日暫無數據</div>';
+      return;
+    }
+
+    // 統計每個 provider 的成功/失敗次數
+    const stats = {};
+    data.forEach(row => {
+      const provider = row.response?.provider || 'unknown';
+      if (!stats[provider]) stats[provider] = { ok: 0, fail: 0 };
+      if (row.status === 'success') stats[provider].ok++;
+      else if (row.status === 'error') stats[provider].fail++;
+    });
+
+    const el = document.getElementById('providerStats');
+    el.innerHTML = Object.entries(stats)
+      .sort((a, b) => (b[1].ok + b[1].fail) - (a[1].ok + a[1].fail))
+      .map(([name, s]) => {
+        const total = s.ok + s.fail;
+        const pct = total > 0 ? Math.round((s.ok / total) * 100) : 0;
+        const color = pct >= 95 ? 'var(--green)' : pct >= 80 ? 'var(--yellow)' : 'var(--red)';
+        return `
+          <div class="pstat-item">
+            <span class="pstat-name">${name}</span>
+            <div class="pstat-bar"><div class="pstat-bar-fill" style="width:${pct}%;background:${color}"></div></div>
+            <span class="pstat-val" style="color:${color}">${pct}%</span>
+          </div>`;
+      }).join('');
+  } catch(e) {
+    document.getElementById('providerStats').innerHTML = '<div style="color:red">載入失敗</div>';
+  }
+}
+
+// ============================================================
+// Live Feed (初始載入 + Realtime 更新)
+// ============================================================
+async function loadInitialFeed() {
+  try {
+    const { data } = await sb
+      .from('ai_customer_logs')
+      .select('id, created_at, input_text, output_text, status, response')
+      .order('created_at', { ascending: false })
+      .limit(15);
+    liveFeedData = data || [];
+    renderLiveFeed(null);
+  } catch(e) { console.error('loadInitialFeed:', e); }
+}
+
+function renderLiveFeed(newId) {
+  const el = document.getElementById('liveFeed');
+  if (!liveFeedData.length) {
+    el.innerHTML = '<div style="color:#666;text-align:center;padding:20px">今天暫無客戶對話</div>';
+    return;
+  }
+  el.innerHTML = liveFeedData.map(l => {
+    const isNew = l.id === newId;
+    const t = l.created_at ? new Date(l.created_at).toLocaleTimeString('zh-TW',{hour:'2-digit',minute:'2-digit',second:'2-digit'}) : '--';
+    const provider = l.response?.provider || '';
+    const latency = l.response?.latencyMs ? `${l.response.latencyMs}ms` : '';
+    const statusColor = l.status==='success'?'var(--green)':l.status==='error'?'var(--red)':'var(--yellow)';
+    return `
+      <div class="feed-item ${isNew?'new':''}">
+        <span class="time">${t}</span>
+        <span style="margin-left:8px;color:${statusColor}">[${l.status||'--'}]</span>
+        ${provider ? `<span class="provider-tag">${provider} ${latency}</span>` : ''}
+        <div class="q">📩 ${(l.input_text||'').substring(0,50)||'(無)'}</div>
+        <div class="a">💬 ${(l.output_text||'').substring(0,50)||'(無)'}</div>
+      </div>`;
+  }).join('');
+
+  // 新訊息閃爍效果
+  if (newId) {
+    setTimeout(() => {
+      document.querySelectorAll('.feed-item.new').forEach(el => el.classList.remove('new'));
+    }, 2000);
+  }
+}
+
+// ============================================================
+// 核按鈕
+// ============================================================
 async function fireAction(action,btn){
   btn.classList.add('loading');
   btn.innerHTML='<div class="spinner"></div> 執行中...';
@@ -261,7 +507,9 @@ async function fireAction(action,btn){
     '<span class="icon">🛡️</span> 防禦模式';
 }
 
-// ===== Action Log =====
+// ============================================================
+// Action Log
+// ============================================================
 async function loadActionLog(){
   try{
     const r=await fetch(SB_URL+'/rest/v1/configs?service=eq.ceo-dashboard&order=created_at.desc&limit=10',{
@@ -278,10 +526,15 @@ async function loadActionLog(){
   }catch(e){document.getElementById('actionLog').innerHTML='<div style="color:red">載入失敗</div>'}
 }
 
-// ===== 初始載入 =====
+// ============================================================
+// 初始載入 + 啟動 Realtime
+// ============================================================
 loadGlobal();
 loadArsenal();
-// 30秒自動刷新
+loadFallbackAlerts();
+setupRealtime();
+
+// 30秒自動刷新全球狀態和軍火庫（靜態數據備援）
 setInterval(()=>{loadGlobal();loadArsenal()},30000);
 </script>
 </body>
