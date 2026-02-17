@@ -14,8 +14,9 @@ const supabase = createClient(
 const TG_BOT_TOKEN = Deno.env.get('TELEGRAM_BOT_TOKEN') || ''
 const TG_CHAT_ID = Deno.env.get('TELEGRAM_CHAT_ID') || ''
 
-// Line Notify config
-const LINE_TOKEN = Deno.env.get('LINE_NOTIFY_TOKEN') || ''
+// Line Messaging API config (Line Notify 已於 2025/3 停用)
+const LINE_CHANNEL_ID = Deno.env.get('LINE_CHANNEL_ID') || ''
+const LINE_CHANNEL_SECRET = Deno.env.get('LINE_CHANNEL_SECRET') || ''
 
 Deno.serve(async (req) => {
   if (req.method === 'OPTIONS') {
@@ -117,18 +118,32 @@ Deno.serve(async (req) => {
       results.telegram = 'NOT_CONFIGURED'
     }
 
-    // Line Notify
-    if (LINE_TOKEN) {
+    // Line Messaging API (push message to boss)
+    if (LINE_CHANNEL_ID && LINE_CHANNEL_SECRET) {
       try {
-        const lineRes = await fetch('https://notify-api.line.me/api/notify', {
+        // Get channel access token
+        const tokenRes = await fetch('https://api.line.me/v2/oauth/accessToken', {
           method: 'POST',
-          headers: {
-            'Authorization': `Bearer ${LINE_TOKEN}`,
-            'Content-Type': 'application/x-www-form-urlencoded',
-          },
-          body: `message=${encodeURIComponent(reportText)}`,
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body: `grant_type=client_credentials&client_id=${LINE_CHANNEL_ID}&client_secret=${LINE_CHANNEL_SECRET}`,
         })
-        results.line = lineRes.ok ? 'SENT' : `FAILED_${lineRes.status}`
+        if (tokenRes.ok) {
+          const { access_token } = await tokenRes.json()
+          // Push to all followers via broadcast
+          const pushRes = await fetch('https://api.line.me/v2/bot/message/broadcast', {
+            method: 'POST',
+            headers: {
+              'Authorization': `Bearer ${access_token}`,
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              messages: [{ type: 'text', text: reportText }],
+            }),
+          })
+          results.line = pushRes.ok ? 'SENT' : `FAILED_${pushRes.status}`
+        } else {
+          results.line = `TOKEN_FAILED_${tokenRes.status}`
+        }
       } catch (e) {
         results.line = `ERROR: ${e.message}`
       }
