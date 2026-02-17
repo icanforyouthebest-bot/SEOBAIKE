@@ -224,9 +224,163 @@ Deno.serve(async (req) => {
       })
     }
 
+    // ============================================================
+    // get-graph — D3.js 相容的節點/連結圖資料
+    // ============================================================
+    if (action === 'get-graph') {
+      const { data: nodes } = await supabase
+        .from('world_definition')
+        .select('id, level, code, name_tw, name_us, parent_id')
+        .eq('is_active', true)
+        .order('level')
+        .order('code')
+
+      const { data: allowed } = await supabase
+        .from('allowed_inference_paths')
+        .select('from_node_id, to_node_id, max_hops')
+        .eq('is_active', true)
+
+      const { data: forbidden } = await supabase
+        .from('forbidden_inference_paths')
+        .select('from_node_id, to_node_id, reason')
+        .eq('is_active', true)
+
+      // D3 format: nodes + links
+      const d3Nodes = (nodes || []).map(n => ({
+        id: n.id,
+        label: n.name_tw,
+        code: n.code,
+        level: n.level,
+        parent: n.parent_id,
+        group: n.level,
+      }))
+
+      const d3Links = [
+        // Parent-child hierarchy links
+        ...(nodes || []).filter(n => n.parent_id).map(n => ({
+          source: n.parent_id,
+          target: n.id,
+          type: 'hierarchy',
+        })),
+        // Allowed paths (green)
+        ...(allowed || []).map(a => ({
+          source: a.from_node_id,
+          target: a.to_node_id,
+          type: 'allowed',
+          max_hops: a.max_hops,
+        })),
+        // Forbidden paths (red)
+        ...(forbidden || []).map(f => ({
+          source: f.from_node_id,
+          target: f.to_node_id,
+          type: 'forbidden',
+          reason: f.reason,
+        })),
+      ]
+
+      return jsonResponse(200, {
+        nodes: d3Nodes,
+        links: d3Links,
+        stats: {
+          total_nodes: d3Nodes.length,
+          l1: d3Nodes.filter(n => n.level === 1).length,
+          l2: d3Nodes.filter(n => n.level === 2).length,
+          l3: d3Nodes.filter(n => n.level === 3).length,
+          l4: d3Nodes.filter(n => n.level === 4).length,
+          allowed_paths: (allowed || []).length,
+          forbidden_paths: (forbidden || []).length,
+        },
+      })
+    }
+
+    // ============================================================
+    // stats — 系統統計儀表板
+    // ============================================================
+    if (action === 'stats') {
+      const { count: totalNodes } = await supabase.from('world_definition').select('*', { count: 'exact', head: true }).eq('is_active', true)
+      const { count: l1 } = await supabase.from('world_definition').select('*', { count: 'exact', head: true }).eq('level', 1).eq('is_active', true)
+      const { count: l2 } = await supabase.from('world_definition').select('*', { count: 'exact', head: true }).eq('level', 2).eq('is_active', true)
+      const { count: l3 } = await supabase.from('world_definition').select('*', { count: 'exact', head: true }).eq('level', 3).eq('is_active', true)
+      const { count: l4 } = await supabase.from('world_definition').select('*', { count: 'exact', head: true }).eq('level', 4).eq('is_active', true)
+      const { count: allowedPaths } = await supabase.from('allowed_inference_paths').select('*', { count: 'exact', head: true }).eq('is_active', true)
+      const { count: forbiddenPaths } = await supabase.from('forbidden_inference_paths').select('*', { count: 'exact', head: true }).eq('is_active', true)
+      const { count: violations } = await supabase.from('inference_violations').select('*', { count: 'exact', head: true })
+
+      return jsonResponse(200, {
+        total_nodes: totalNodes,
+        levels: { l1, l2, l3, l4 },
+        paths: { allowed: allowedPaths, forbidden: forbiddenPaths },
+        violations,
+        countries: ['TW', 'US', 'EU', 'JP'],
+        classification_systems: {
+          TW: '行業標準分類',
+          US: 'NAICS 2022',
+          EU: 'NACE Rev.2',
+          JP: 'JSIC Rev.14',
+        },
+      })
+    }
+
+    // ============================================================
+    // latency-monitor — 全球延遲監控儀表板
+    // ============================================================
+    if (action === 'latency-monitor') {
+      const hours = parseInt(url.searchParams.get('hours') || '24')
+      const since = new Date(Date.now() - hours * 3600_000).toISOString()
+
+      const { data: stats } = await supabase
+        .from('inference_path_stats')
+        .select('provider, region, latency_ms, success, created_at')
+        .gte('created_at', since)
+        .order('created_at', { ascending: false })
+        .limit(500)
+
+      // 按 region 聚合
+      const byRegion: Record<string, { count: number; avg_ms: number; p95_ms: number; providers: Record<string, number> }> = {}
+      const byProvider: Record<string, { count: number; avg_ms: number; failures: number }> = {}
+
+      for (const s of (stats || [])) {
+        // Region aggregation
+        if (!byRegion[s.region]) byRegion[s.region] = { count: 0, avg_ms: 0, p95_ms: 0, providers: {} }
+        const r = byRegion[s.region]
+        r.avg_ms = (r.avg_ms * r.count + (s.latency_ms || 0)) / (r.count + 1)
+        r.count++
+        r.providers[s.provider] = (r.providers[s.provider] || 0) + 1
+
+        // Provider aggregation
+        if (!byProvider[s.provider]) byProvider[s.provider] = { count: 0, avg_ms: 0, failures: 0 }
+        const p = byProvider[s.provider]
+        p.avg_ms = (p.avg_ms * p.count + (s.latency_ms || 0)) / (p.count + 1)
+        p.count++
+        if (!s.success) p.failures++
+      }
+
+      // Calculate P95 per region
+      for (const region of Object.keys(byRegion)) {
+        const regionLatencies = (stats || [])
+          .filter(s => s.region === region)
+          .map(s => s.latency_ms || 0)
+          .sort((a, b) => a - b)
+        const idx = Math.floor(regionLatencies.length * 0.95)
+        byRegion[region].p95_ms = regionLatencies[idx] || 0
+        byRegion[region].avg_ms = Math.round(byRegion[region].avg_ms)
+      }
+      for (const p of Object.keys(byProvider)) {
+        byProvider[p].avg_ms = Math.round(byProvider[p].avg_ms)
+      }
+
+      return jsonResponse(200, {
+        period_hours: hours,
+        since,
+        total_requests: (stats || []).length,
+        by_region: byRegion,
+        by_provider: byProvider,
+      })
+    }
+
     return jsonResponse(404, {
       error: 'Unknown action',
-      available_actions: ['validate-path', 'get-node', 'search-nodes', 'get-tree', 'list-paths', 'violations'],
+      available_actions: ['validate-path', 'get-node', 'search-nodes', 'get-tree', 'list-paths', 'violations', 'get-graph', 'stats', 'latency-monitor'],
     })
 
   } catch (error) {

@@ -60,6 +60,23 @@ body{background:var(--bg);color:var(--text);font-family:'Noto Sans TC',sans-seri
 .violation-item .time{color:#666;font-size:10px;margin-top:2px}
 .violation-count{font-family:'Orbitron',sans-serif;font-size:24px;color:#ff44ff;text-align:center;margin-bottom:8px}
 @keyframes violationFlash{0%{background:#4a1a4a}100%{background:#2a1a2a}}
+/* Latency Monitor */
+.latency-section{margin:12px;background:#0a1a1a;border-radius:12px;padding:16px;border:1px solid #224444}
+.latency-title{font-family:'Orbitron',sans-serif;font-size:13px;color:#00dddd;margin-bottom:12px;display:flex;align-items:center;gap:8px}
+.latency-title::before{content:'';width:4px;height:16px;background:#00dddd;border-radius:2px}
+.latency-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.latency-card{background:#1a2a2a;border-radius:8px;padding:12px;text-align:center;border:1px solid #334444}
+.latency-card .region{font-family:'Orbitron',sans-serif;font-size:11px;color:#00dddd;margin-bottom:6px}
+.latency-card .avg{font-family:'Orbitron',sans-serif;font-size:22px}
+.latency-card .p95{font-size:10px;color:#888;margin-top:4px}
+.latency-card .count{font-size:10px;color:#666;margin-top:2px}
+.provider-latency{margin-top:10px}
+.plat-item{display:flex;align-items:center;gap:8px;padding:6px 0;border-bottom:1px solid #223;font-size:12px}
+.plat-item:last-child{border-bottom:none}
+.plat-name{width:80px;color:#00dddd;font-size:11px}
+.plat-bar{flex:1;height:6px;background:#222;border-radius:3px;overflow:hidden}
+.plat-bar-fill{height:100%;border-radius:3px;transition:width .5s}
+.plat-val{width:60px;text-align:right;font-family:'Orbitron',sans-serif;font-size:11px}
 .fallback-item{background:#1a1a1a;border-radius:8px;padding:10px 12px;margin-bottom:6px;font-size:12px;border-left:3px solid var(--red)}
 .fallback-item .fb-time{color:var(--red);font-weight:700}
 .fallback-item .fb-detail{color:#aaa;margin-top:4px}
@@ -143,6 +160,14 @@ body{background:var(--bg);color:var(--text);font-family:'Noto Sans TC',sans-seri
     <div class="violation-count" id="violationCount">0</div>
     <div style="text-align:center;font-size:10px;color:#888;margin-bottom:10px">推理路徑違規即時監控</div>
     <div id="violationList"></div>
+  </div>
+  <!-- Global Latency Monitor -->
+  <div class="latency-section">
+    <div class="latency-title">GLOBAL LATENCY MONITOR</div>
+    <div class="latency-grid" id="latencyGrid">
+      <div style="grid-column:1/3;text-align:center;padding:10px;color:#666"><div class="spinner"></div></div>
+    </div>
+    <div class="provider-latency" id="providerLatency"></div>
   </div>
 </div>
 
@@ -576,16 +601,62 @@ async function loadActionLog(){
 }
 
 // ============================================================
+// Global Latency Monitor
+// ============================================================
+async function loadLatencyMonitor() {
+  try {
+    const r = await fetch(SB_URL+'/functions/v1/world-definition?action=latency-monitor&hours=24', {headers:{'Authorization':'Bearer '+SK}});
+    const d = await r.json();
+    const grid = document.getElementById('latencyGrid');
+    const regions = Object.entries(d.by_region || {});
+    if (!regions.length) {
+      grid.innerHTML = '<div style="grid-column:1/3;text-align:center;padding:10px;color:#666">暫無延遲數據（需有 AI 對話流量）</div>';
+    } else {
+      grid.innerHTML = regions.map(([region, s]) => {
+        const color = s.avg_ms < 2000 ? 'var(--green)' : s.avg_ms < 4000 ? 'var(--yellow)' : 'var(--red)';
+        return `
+          <div class="latency-card">
+            <div class="region">${region.toUpperCase()}</div>
+            <div class="avg" style="color:${color}">${s.avg_ms}ms</div>
+            <div class="p95">P95: ${s.p95_ms}ms</div>
+            <div class="count">${s.count} requests</div>
+          </div>`;
+      }).join('');
+    }
+    // Provider latency breakdown
+    const providers = Object.entries(d.by_provider || {});
+    const plEl = document.getElementById('providerLatency');
+    if (providers.length) {
+      const maxMs = Math.max(...providers.map(([,s]) => s.avg_ms), 1);
+      plEl.innerHTML = '<div style="font-size:11px;color:#00dddd;margin-bottom:6px;font-family:Orbitron">Provider Avg Latency</div>' +
+        providers.sort((a,b) => a[1].avg_ms - b[1].avg_ms).map(([name, s]) => {
+          const pct = Math.round((s.avg_ms / maxMs) * 100);
+          const color = s.avg_ms < 2000 ? 'var(--green)' : s.avg_ms < 4000 ? 'var(--yellow)' : 'var(--red)';
+          return `
+            <div class="plat-item">
+              <span class="plat-name">${name}</span>
+              <div class="plat-bar"><div class="plat-bar-fill" style="width:${pct}%;background:${color}"></div></div>
+              <span class="plat-val" style="color:${color}">${s.avg_ms}ms</span>
+            </div>`;
+        }).join('');
+    }
+  } catch(e) { console.warn('Failed to load latency:', e); }
+}
+
+// ============================================================
 // 初始載入 + 啟動 Realtime
 // ============================================================
 loadGlobal();
 loadArsenal();
 loadFallbackAlerts();
 loadViolations();
+loadLatencyMonitor();
 setupRealtime();
 
 // 30秒自動刷新全球狀態和軍火庫（靜態數據備援）
 setInterval(()=>{loadGlobal();loadArsenal()},30000);
+// 60秒自動刷新延遲監控
+setInterval(loadLatencyMonitor,60000);
 </script>
 </body>
 </html>

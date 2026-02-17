@@ -267,10 +267,25 @@ Deno.serve(async (req) => {
     }
 
     // ============================================================
-    // Step 1.5: 世界定義路徑檢查 (專利核心)
+    // Step 1.5: 世界定義路徑檢查 (專利核心) + 推理追蹤
     // 如果有綁定行業節點，檢查推理路徑是否允許
     // ============================================================
     const fromNodeId = constraint.bound_industry_node_id || null
+    const trace: {
+      world_definition: { node_id: string | null; path_status: string; violation?: string } | null
+      constraint: { industry: string; session_id: string; allowed: boolean }
+      routing: { providers_tried: string[]; latencies_ms: number[]; landed_on: string; total_ms: number }
+    } = {
+      world_definition: null,
+      constraint: {
+        industry: constraint.industry_name_zh || constraint.bound_industry || 'unknown',
+        session_id: constraint.session_id,
+        allowed: !!constraint.allowed,
+      },
+      routing: { providers_tried: [], latencies_ms: [], landed_on: '', total_ms: 0 },
+    }
+    const routingStart = Date.now()
+
     if (fromNodeId) {
       try {
         const pathCheck = await supabase
@@ -282,6 +297,8 @@ Deno.serve(async (req) => {
           .maybeSingle()
 
         if (pathCheck.data) {
+          trace.world_definition = { node_id: fromNodeId, path_status: 'forbidden', violation: pathCheck.data.reason }
+
           // 記錄違規
           await supabase.from('inference_violations').insert({
             from_node: fromNodeId,
@@ -305,9 +322,11 @@ Deno.serve(async (req) => {
           supabase.removeChannel(violationChannel)
 
           console.warn(`[ai-gateway] World Definition violation: ${pathCheck.data.reason}`)
+        } else {
+          trace.world_definition = { node_id: fromNodeId, path_status: 'allowed' }
         }
       } catch (wdErr) {
-        // 世界定義檢查失敗不阻塞主流程
+        trace.world_definition = { node_id: fromNodeId, path_status: 'check_error' }
         console.error('[ai-gateway] World Definition check error:', (wdErr as Error).message)
       }
     }
@@ -332,8 +351,11 @@ Deno.serve(async (req) => {
 
     for (const provider of providers) {
       const r = await callProvider(provider, messages, DEADLINE)
+      trace.routing.providers_tried.push(provider.name)
+      trace.routing.latencies_ms.push(r.latencyMs)
       if (r.ok) {
         result = r
+        trace.routing.landed_on = provider.name
         break
       }
       console.error(`[ai-gateway] ${provider.name} failed: ${r.error} (${r.latencyMs}ms)`)
@@ -342,6 +364,7 @@ Deno.serve(async (req) => {
       // deadline 已到就不再嘗試
       if (Date.now() >= DEADLINE - 500) break
     }
+    trace.routing.total_ms = Date.now() - routingStart
 
     const clientIp = req.headers.get('x-forwarded-for') || req.headers.get('cf-connecting-ip') || null
     const usedFallback = attempts.length > 0
@@ -455,6 +478,21 @@ Deno.serve(async (req) => {
     // ============================================================
     // Step 4: 回傳（向下相容 + 新增 provider/fallback 欄位）
     // ============================================================
+    // ============================================================
+    // Step 3.7: 記錄延遲到 inference_path_stats (全球延遲監控)
+    // ============================================================
+    try {
+      await supabase.from('inference_path_stats').insert({
+        provider: result.provider,
+        model: result.model,
+        latency_ms: result.latencyMs,
+        region: req.headers.get('cf-ipcountry') || 'unknown',
+        success: true,
+        fallback_chain: trace.routing.providers_tried,
+        session_id: constraint.session_id,
+      })
+    } catch (_e) { /* non-blocking */ }
+
     return jsonResponse(200, {
       allowed: true,
       constrained: true,
@@ -465,6 +503,7 @@ Deno.serve(async (req) => {
       provider: result.provider,
       fallback: usedFallback,
       ...(usedFallback ? { failed_providers: attempts.map(a => a.provider) } : {}),
+      trace,
     })
 
   } catch (error) {
