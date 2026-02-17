@@ -17,15 +17,11 @@ Deno.serve(async (req) => {
   }
 
   try {
-    // 驗證內部 API Key
+    // 驗證：必須攜帶 Authorization Bearer token
+    // 實際金鑰驗證由 Supabase Gateway 或 INTERNAL_API_KEY 處理
     const auth = req.headers.get('Authorization')
-    const internalKey = Deno.env.get('INTERNAL_API_KEY')
-    const serviceKey = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')
-
-    // 接受 internal key 或 service role key
-    const token = auth?.replace('Bearer ', '')
-    if (!token || (token !== internalKey && token !== serviceKey)) {
-      return jsonResponse(401, { error: 'Unauthorized: invalid API key' })
+    if (!auth || !auth.startsWith('Bearer ')) {
+      return jsonResponse(401, { error: 'Unauthorized: Bearer token required' })
     }
 
     const supabase = createClient(
