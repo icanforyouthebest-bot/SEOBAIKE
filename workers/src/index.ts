@@ -63,12 +63,13 @@ export default {
       '/compliance': 'compliance.html',
       '/billing': 'billing.html',
       '/commander': 'commander.html',
+      '/ceo': 'ceo.html',
     }
     const cleanPath = path.endsWith('/') && path !== '/' ? path.slice(0, -1) : path
     const pageFile = SITE_PAGES[cleanPath]
     if (pageFile) {
-      // ── 戰情室 commander 不快取，永遠取最新版 ──
-      const isCommander = cleanPath === '/commander'
+      // ── 戰情室 commander / CEO 不快取，永遠取最新版 ──
+      const isCommander = cleanPath === '/commander' || cleanPath === '/ceo'
       if (!isCommander) {
         const cache = caches.default
         const cacheKey = new Request(url.toString(), request)
@@ -82,7 +83,11 @@ export default {
       const body = await rawRes.text()
       // ── 國家偵測：注入 data-cf-country 屬性供 i18n 自動切換語言 ──
       const country = (request as any).cf?.country || 'US'
-      const injectedBody = body.replace('<html ', `<html data-cf-country="${country}" `)
+      let injectedBody = body.replace('<html ', `<html data-cf-country="${country}" `)
+      // CEO 頁面：注入 service key
+      if (cleanPath === '/ceo') {
+        injectedBody = injectedBody.replace('%%SUPABASE_KEY%%', env.SUPABASE_SERVICE_ROLE_KEY || '')
+      }
       if (isCommander) {
         // 戰情室：永不快取，老闆永遠看到最新
         return new Response(injectedBody, {
