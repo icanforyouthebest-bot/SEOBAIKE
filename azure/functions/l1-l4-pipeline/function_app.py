@@ -31,25 +31,25 @@ def supabase_get(path):
 
 
 def check_inference_path(l1_id, l2_id, l3_id, l4_id):
-    l1 = supabase_get(f"l1_categories?id=eq.{l1_id}&select=id,name")
+    l1 = supabase_get(f"l1_categories?id=eq.{l1_id}&select=id,name_en")
     if not l1:
         return {"status": "denied", "reason": f"L1 '{l1_id}' not found"}
 
-    l2 = supabase_get(f"l2_subcategories?id=eq.{l2_id}&l1_id=eq.{l1_id}&select=id,name")
+    l2 = supabase_get(f"l2_subcategories?id=eq.{l2_id}&l1_id=eq.{l1_id}&select=id,name_en")
     if not l2:
         return {"status": "denied", "reason": f"L2 '{l2_id}' not under L1 '{l1_id}'"}
 
-    l3 = supabase_get(f"l3_processes?id=eq.{l3_id}&l2_id=eq.{l2_id}&select=id,name")
+    l3 = supabase_get(f"l3_processes?id=eq.{l3_id}&l2_id=eq.{l2_id}&select=id,name_en")
     if not l3:
         return {"status": "denied", "reason": f"L3 '{l3_id}' not under L2 '{l2_id}'"}
 
-    l4 = supabase_get(f"l4_nodes?id=eq.{l4_id}&l3_id=eq.{l3_id}&select=id,name")
+    l4 = supabase_get(f"l4_nodes?id=eq.{l4_id}&l3_id=eq.{l3_id}&select=id,name_en")
     if not l4:
         return {"status": "denied", "reason": f"L4 '{l4_id}' not under L3 '{l3_id}'"}
 
     return {
         "status": "allowed",
-        "path": f"{l1[0]['name']} → {l2[0]['name']} → {l3[0]['name']} → {l4[0]['name']}"
+        "path": f"{l1[0]['name_en']} → {l2[0]['name_en']} → {l3[0]['name_en']} → {l4[0]['name_en']}"
     }
 
 
@@ -104,5 +104,5 @@ def health_check(req: func.HttpRequest) -> func.HttpResponse:
 
 @app.route(route="paths", methods=["GET"])
 def list_paths(req: func.HttpRequest) -> func.HttpResponse:
-    l1 = supabase_get("l1_categories?select=id,name&order=id&limit=50")
+    l1 = supabase_get("l1_categories?select=id,name_en,code&order=code&limit=50")
     return func.HttpResponse(json.dumps({"l1_categories": l1}), mimetype="application/json")

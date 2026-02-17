@@ -16,17 +16,19 @@ NVIDIA_KEY = os.environ.get("NVIDIA_API_KEY", "")
 SUPABASE_URL = os.environ.get("SUPABASE_URL", "")
 SUPABASE_KEY = os.environ.get("SUPABASE_KEY", "")
 
+NIM_URL = "https://integrate.api.nvidia.com/v1/chat/completions"
+
 MODEL_SLOTS = {
-    "nvidia": {"url": "https://integrate.api.nvidia.com/v1/chat/completions", "key_env": "NVIDIA_API_KEY", "model": "meta/llama-3.1-8b-instruct", "active": True},
-    "groq": {"url": "https://api.groq.com/openai/v1/chat/completions", "key_env": "GROQ_API_KEY", "model": "llama-3.1-8b-instant", "active": True},
-    "anthropic": {"url": "https://api.anthropic.com/v1/messages", "key_env": "ANTHROPIC_API_KEY", "model": "claude-sonnet-4-20250514", "active": True},
-    "mistral": {"url": "https://api.mistral.ai/v1/chat/completions", "key_env": "MISTRAL_API_KEY", "model": "mistral-small-latest", "active": True},
-    "together": {"url": "https://api.together.xyz/v1/chat/completions", "key_env": "TOGETHER_API_KEY", "model": "meta-llama/Llama-3-8b-chat-hf", "active": True},
-    "fireworks": {"url": "https://api.fireworks.ai/inference/v1/chat/completions", "key_env": "FIREWORKS_API_KEY", "model": "accounts/fireworks/models/llama-v3p1-8b-instruct", "active": True},
-    "xai": {"url": "https://api.x.ai/v1/chat/completions", "key_env": "XAI_API_KEY", "model": "grok-2", "active": True},
-    "openrouter": {"url": "https://openrouter.ai/api/v1/chat/completions", "key_env": "OPENROUTER_API_KEY", "model": "meta-llama/llama-3.1-8b-instruct", "active": True},
-    "cohere": {"url": "https://api.cohere.ai/v1/chat", "key_env": "COHERE_API_KEY", "model": "command-r", "active": True},
-    "ai21": {"url": "https://api.ai21.com/studio/v1/chat/completions", "key_env": "AI21_API_KEY", "model": "jamba-1.5-mini", "active": True},
+    "llama-main": {"url": NIM_URL, "key_env": "NVIDIA_API_KEY", "model": "meta/llama-3.1-8b-instruct", "active": True},
+    "llama-70b": {"url": NIM_URL, "key_env": "NVIDIA_API_KEY", "model": "meta/llama-3.1-70b-instruct", "active": True},
+    "mistral": {"url": NIM_URL, "key_env": "NVIDIA_API_KEY", "model": "mistralai/mistral-7b-instruct-v0.3", "active": True},
+    "mixtral": {"url": NIM_URL, "key_env": "NVIDIA_API_KEY", "model": "mistralai/mixtral-8x7b-instruct-v0.1", "active": True},
+    "gemma": {"url": NIM_URL, "key_env": "NVIDIA_API_KEY", "model": "google/gemma-2-9b-it", "active": True},
+    "nemotron": {"url": NIM_URL, "key_env": "NVIDIA_API_KEY", "model": "nvidia/llama-3.3-nemotron-super-49b-v1", "active": True},
+    "phi3": {"url": NIM_URL, "key_env": "NVIDIA_API_KEY", "model": "microsoft/phi-3-mini-128k-instruct", "active": True},
+    "qwen": {"url": NIM_URL, "key_env": "NVIDIA_API_KEY", "model": "qwen/qwen2-7b-instruct", "active": True},
+    "nemotron-mini": {"url": NIM_URL, "key_env": "NVIDIA_API_KEY", "model": "nvidia/nemotron-mini-4b-instruct", "active": True},
+    "llama-guard": {"url": NIM_URL, "key_env": "NVIDIA_API_KEY", "model": "meta/llama-3.1-405b-instruct", "active": True},
 }
 
 

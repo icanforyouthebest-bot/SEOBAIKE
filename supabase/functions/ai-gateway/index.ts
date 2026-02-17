@@ -53,8 +53,19 @@ Deno.serve(async (req) => {
       })
     }
 
-    // 約束拒絕 → 直接回傳，不呼叫 NVIDIA
+    // 約束拒絕 → 寫入 ai_customer_logs 後直接回傳，不呼叫 NVIDIA
     if (!constraint.allowed) {
+      await supabase.from('ai_customer_logs').insert({
+        session_id: constraint.session_id,
+        user_id: user_id || null,
+        role: 'chat',
+        message: message.substring(0, 200),
+        input_text: message.substring(0, 500),
+        output_text: constraint.reason || 'blocked by constraint',
+        status: 'blocked',
+        ip_address: req.headers.get('x-forwarded-for') || req.headers.get('cf-connecting-ip') || null,
+      })
+
       return jsonResponse(200, {
         allowed: false,
         constrained: true,
@@ -100,6 +111,18 @@ Deno.serve(async (req) => {
         })
       }
 
+      // 寫入 ai_customer_logs（失敗紀錄）
+      await supabase.from('ai_customer_logs').insert({
+        session_id: constraint.session_id,
+        user_id: user_id || null,
+        role: 'chat',
+        message: message.substring(0, 200),
+        input_text: message.substring(0, 500),
+        output_text: `NVIDIA API error: ${nvidiaRes.status}`,
+        status: 'error',
+        ip_address: req.headers.get('x-forwarded-for') || req.headers.get('cf-connecting-ip') || null,
+      })
+
       return jsonResponse(502, {
         error: 'NVIDIA API error',
         status: nvidiaRes.status,
@@ -122,6 +145,20 @@ Deno.serve(async (req) => {
         p_status: 'success',
       })
     }
+
+    // ============================================================
+    // Step 3.5: 寫入 ai_customer_logs（老闆戰情室用）
+    // ============================================================
+    await supabase.from('ai_customer_logs').insert({
+      session_id: constraint.session_id,
+      user_id: user_id || null,
+      role: 'chat',
+      message: message.substring(0, 200),
+      input_text: message.substring(0, 500),
+      output_text: reply.substring(0, 500),
+      status: 'success',
+      ip_address: req.headers.get('x-forwarded-for') || req.headers.get('cf-connecting-ip') || null,
+    })
 
     // ============================================================
     // Step 4: 回傳
