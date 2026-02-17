@@ -49,6 +49,17 @@ body{background:var(--bg);color:var(--text);font-family:'Noto Sans TC',sans-seri
 .fallback-section.show{display:block}
 .fallback-title{font-family:'Orbitron',sans-serif;font-size:13px;color:var(--red);margin-bottom:12px;display:flex;align-items:center;gap:8px}
 .fallback-title::before{content:'';width:4px;height:16px;background:var(--red);border-radius:2px}
+/* Violation Monitor */
+.violation-section{margin:12px;background:#1a0a1a;border-radius:12px;padding:16px;border:1px solid #442244;display:none}
+.violation-section.show{display:block}
+.violation-title{font-family:'Orbitron',sans-serif;font-size:13px;color:#ff44ff;margin-bottom:12px;display:flex;align-items:center;gap:8px}
+.violation-title::before{content:'';width:4px;height:16px;background:#ff44ff;border-radius:2px}
+.violation-item{background:#2a1a2a;border-left:3px solid #ff44ff;padding:10px 12px;margin-bottom:6px;border-radius:0 8px 8px 0;font-size:12px;animation:violationFlash .5s}
+.violation-item .path{font-family:'Orbitron',sans-serif;color:#ff88ff;font-size:11px}
+.violation-item .reason{color:#ffaaff;margin-top:4px}
+.violation-item .time{color:#666;font-size:10px;margin-top:2px}
+.violation-count{font-family:'Orbitron',sans-serif;font-size:24px;color:#ff44ff;text-align:center;margin-bottom:8px}
+@keyframes violationFlash{0%{background:#4a1a4a}100%{background:#2a1a2a}}
 .fallback-item{background:#1a1a1a;border-radius:8px;padding:10px 12px;margin-bottom:6px;font-size:12px;border-left:3px solid var(--red)}
 .fallback-item .fb-time{color:var(--red);font-weight:700}
 .fallback-item .fb-detail{color:#aaa;margin-top:4px}
@@ -126,6 +137,13 @@ body{background:var(--bg);color:var(--text);font-family:'Noto Sans TC',sans-seri
     <div class="fallback-title">FALLBACK ALERTS</div>
     <div id="fallbackList"></div>
   </div>
+  <!-- Inference Violation Monitor (hidden by default) -->
+  <div class="violation-section" id="violationSection">
+    <div class="violation-title">INFERENCE VIOLATIONS</div>
+    <div class="violation-count" id="violationCount">0</div>
+    <div style="text-align:center;font-size:10px;color:#888;margin-bottom:10px">推理路徑違規即時監控</div>
+    <div id="violationList"></div>
+  </div>
 </div>
 
 <!-- Tab: KPI -->
@@ -201,6 +219,7 @@ const sb = window.supabase.createClient(SB_URL, SK);
 let rtConnected = false;
 let liveFeedData = [];
 let fallbackAlerts = [];
+let violationData = [];
 
 function switchTab(name,btn){
   document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
@@ -249,6 +268,12 @@ function setupRealtime() {
       fallbackAlerts.unshift(row);
       if (fallbackAlerts.length > 10) fallbackAlerts.pop();
       renderFallbackAlerts();
+    })
+    .on('broadcast', { event: 'violation_alert' }, (payload) => {
+      const row = payload.payload;
+      violationData.unshift(row);
+      if (violationData.length > 20) violationData.pop();
+      renderViolations();
     })
     .subscribe((status) => {
       if (status === 'SUBSCRIBED') {
@@ -340,6 +365,42 @@ function renderFallbackAlerts() {
         <div class="fb-detail">model: ${d.landed_model || '?'}</div>
       </div>`;
   }).join('');
+}
+
+// ============================================================
+// Violation Monitor 渲染
+// ============================================================
+function renderViolations() {
+  const section = document.getElementById('violationSection');
+  const list = document.getElementById('violationList');
+  const countEl = document.getElementById('violationCount');
+  if (!violationData.length) {
+    section.classList.remove('show');
+    return;
+  }
+  section.classList.add('show');
+  countEl.textContent = violationData.length;
+  list.innerHTML = violationData.map(v => {
+    const t = v.timestamp ? new Date(v.timestamp).toLocaleTimeString('zh-TW',{hour:'2-digit',minute:'2-digit',second:'2-digit'}) : '--';
+    return `
+      <div class="violation-item">
+        <div class="path">${(v.from_node||'?').substring(0,8)}... → AI inference</div>
+        <div class="reason">${v.reason || 'unknown violation'}</div>
+        <div class="time">${t}</div>
+      </div>`;
+  }).join('');
+}
+
+// Load existing violations on startup
+async function loadViolations() {
+  try {
+    const r = await fetch(SB_URL+'/functions/v1/world-definition?action=violations&limit=10', {headers:{'Authorization':'Bearer '+SK}});
+    const d = await r.json();
+    if (d.violations && d.violations.length) {
+      violationData = d.violations.map(v => ({from_node:v.from_node, reason:v.reason, timestamp:v.created_at}));
+      renderViolations();
+    }
+  } catch(e) { console.warn('Failed to load violations:', e); }
 }
 
 // ============================================================
@@ -520,6 +581,7 @@ async function loadActionLog(){
 loadGlobal();
 loadArsenal();
 loadFallbackAlerts();
+loadViolations();
 setupRealtime();
 
 // 30秒自動刷新全球狀態和軍火庫（靜態數據備援）

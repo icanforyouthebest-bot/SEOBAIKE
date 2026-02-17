@@ -267,6 +267,52 @@ Deno.serve(async (req) => {
     }
 
     // ============================================================
+    // Step 1.5: 世界定義路徑檢查 (專利核心)
+    // 如果有綁定行業節點，檢查推理路徑是否允許
+    // ============================================================
+    const fromNodeId = constraint.bound_industry_node_id || null
+    if (fromNodeId) {
+      try {
+        const pathCheck = await supabase
+          .from('forbidden_inference_paths')
+          .select('reason')
+          .eq('from_node_id', fromNodeId)
+          .eq('is_active', true)
+          .limit(1)
+          .maybeSingle()
+
+        if (pathCheck.data) {
+          // 記錄違規
+          await supabase.from('inference_violations').insert({
+            from_node: fromNodeId,
+            to_node: 'ai-gateway-inference',
+            reason: pathCheck.data.reason || 'forbidden inference path',
+            context: { platform, platform_user_id, message: message.substring(0, 100) },
+            source: 'ai-gateway',
+          })
+
+          // Broadcast 違規警報
+          const violationChannel = supabase.channel('ceo-realtime')
+          await violationChannel.send({
+            type: 'broadcast',
+            event: 'violation_alert',
+            payload: {
+              from_node: fromNodeId,
+              reason: pathCheck.data.reason,
+              timestamp: new Date().toISOString(),
+            },
+          })
+          supabase.removeChannel(violationChannel)
+
+          console.warn(`[ai-gateway] World Definition violation: ${pathCheck.data.reason}`)
+        }
+      } catch (wdErr) {
+        // 世界定義檢查失敗不阻塞主流程
+        console.error('[ai-gateway] World Definition check error:', (wdErr as Error).message)
+      }
+    }
+
+    // ============================================================
     // Step 2: Smart Routing — Fallback 迴圈
     // ============================================================
     const systemPrompt = BASE_SYSTEM_PROMPT + '\n\n' + constraint.system_prompt_addon
