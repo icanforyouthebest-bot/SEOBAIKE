@@ -15,8 +15,8 @@ const supabase = createClient(
 // ============================================================
 const GLOBAL_SITES = [
   { name: 'aiforseo.vip', url: 'https://aiforseo.vip', region: 'Global (CF)' },
-  { name: 'indexjapan.jp', url: 'https://indexjapan.jp', region: 'Japan' },
-  { name: 'indexusmap.com', url: 'https://indexusmap.com', region: 'USA' },
+  { name: 'Supabase DB', url: 'https://vmyrivxxibqydccurxug.supabase.co/rest/v1/', region: 'AWS Tokyo' },
+  { name: 'Supabase Auth', url: 'https://vmyrivxxibqydccurxug.supabase.co/auth/v1/health', region: 'AWS Tokyo' },
 ]
 
 // ============================================================
@@ -92,13 +92,15 @@ async function getGlobalStatus() {
           method: 'HEAD',
           signal: AbortSignal.timeout(8000),
         })
+        // 非 5xx 都算 online（401/403 代表伺服器活著，只是需要 auth）
+        const isUp = res.status < 500
         return {
           name: site.name,
           region: site.region,
-          status: res.ok ? 'online' : 'degraded',
+          status: isUp ? 'online' : 'degraded',
           http_code: res.status,
           latency_ms: Date.now() - start,
-          color: res.ok ? 'green' : 'yellow',
+          color: isUp ? 'green' : 'yellow',
         }
       } catch {
         return {
