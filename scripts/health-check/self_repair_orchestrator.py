@@ -4,8 +4,10 @@ AI Empire Self-Repair Orchestrator — AI 自主營運長
 
 Stage 1: 診斷（分析健康檢查報告，列出所有安全問題 + 難度 + 與上次比較）
 Stage 2: 開工單（生成修復清單，按難度分級）
-Stage 3: 執行修復（Claude function calling: SQL修復/Cloudflare WAF/GitHub Issues/Azure唯讀）
+Stage 3: 執行修復（AI function calling: SQL修復/Cloudflare WAF/GitHub Issues/Azure唯讀）
 Stage 4: 驗證歸檔（報告寫入 GitHub + 本地）
+
+AI 引擎優先順序：XAI_API_KEY (Grok) → ANTHROPIC_API_KEY → rule-based
 
 用法:
   python self_repair_orchestrator.py              # 全自動修復
@@ -13,13 +15,6 @@ Stage 4: 驗證歸檔（報告寫入 GitHub + 本地）
   python self_repair_orchestrator.py --cto-report # 生成完整營運長週報
 """
 import os, sys, json, datetime, glob, base64, requests
-
-# Optional Anthropic SDK
-try:
-    import anthropic
-    HAS_ANTHROPIC = True
-except ImportError:
-    HAS_ANTHROPIC = False
 
 # ─────────────────────────────────────────────────────────────
 # Config from environment
@@ -32,9 +27,23 @@ SUPABASE_PROJECT_REF  = os.environ.get("SUPABASE_PROJECT_REF", "")
 CF_API_TOKEN          = os.environ.get("CLOUDFLARE_API_TOKEN", "")
 CF_ACCOUNT_ID         = os.environ.get("CLOUDFLARE_ACCOUNT_ID", "")
 CF_ZONE_ID            = os.environ.get("CLOUDFLARE_ZONE_ID", "")
-ANTHROPIC_API_KEY     = os.environ.get("ANTHROPIC_API_KEY", "")
+XAI_API_KEY           = os.environ.get("XAI_API_KEY", "")          # xAI Grok (優先)
+ANTHROPIC_API_KEY     = os.environ.get("ANTHROPIC_API_KEY", "")    # Anthropic (備用)
 GITHUB_TOKEN          = os.environ.get("GITHUB_TOKEN", os.environ.get("GITHUB_PAT", ""))
 GITHUB_REPOSITORY     = os.environ.get("GITHUB_REPOSITORY", "icanforyouthebest-bot/SEOBAIKE")
+
+# ─────────────────────────────────────────────────────────────
+# AI engine detection: prefer XAI → Anthropic → rule-based
+# ─────────────────────────────────────────────────────────────
+AI_ENGINE = "none"
+if XAI_API_KEY:
+    AI_ENGINE = "xai"
+elif ANTHROPIC_API_KEY:
+    try:
+        import anthropic as _anthropic_mod
+        AI_ENGINE = "anthropic"
+    except ImportError:
+        pass
 
 MGMT_BASE      = "https://api.supabase.com/v1"
 CF_BASE        = "https://api.cloudflare.com/client/v4"
@@ -576,15 +585,157 @@ def _generate_cto_weekly_report(all_reports: list, tracker: list) -> str:
 
 
 # ─────────────────────────────────────────────────────────────
-# Stage 2+3: AI-driven repair with Claude function calling
+# Stage 2+3: AI-driven repair (xAI / Anthropic / rule-based)
 # ─────────────────────────────────────────────────────────────
 
-def _run_ai_repair(report: dict, risks: list) -> list:
-    if not HAS_ANTHROPIC or not ANTHROPIC_API_KEY:
-        print("  [AI Repair] No ANTHROPIC_API_KEY — using rule-based fallback")
+# Convert Anthropic-style tool schema to OpenAI-compatible format (used by xAI)
+def _tools_to_openai_format() -> list:
+    result = []
+    for t in TOOLS:
+        result.append({
+            "type": "function",
+            "function": {
+                "name":        t["name"],
+                "description": t["description"] if isinstance(t["description"], str) else str(t["description"]),
+                "parameters":  t["input_schema"]
+            }
+        })
+    return result
+
+
+def _run_xai_repair(report: dict, risks: list) -> list:
+    """Drive repair using xAI Grok API (OpenAI-compatible endpoint)."""
+    import importlib
+    # xAI uses OpenAI-compatible API
+    try:
+        openai = importlib.import_module("openai")
+    except ImportError:
+        print("  [xAI] openai package not installed — pip install openai")
         return _run_rule_based_repair(risks)
 
-    client = anthropic.Anthropic(api_key=ANTHROPIC_API_KEY)
+    client = openai.OpenAI(
+        api_key=XAI_API_KEY,
+        base_url="https://api.x.ai/v1"
+    )
+
+    # Load knowledge base
+    kb_content = ""
+    try:
+        with open(KNOWLEDGE_BASE, encoding="utf-8") as f:
+            kb_content = f.read()[:3000]
+    except Exception:
+        kb_content = "(knowledge base not found)"
+
+    all_rpts = _load_all_reports()
+    delta = _delta_analysis(report, all_rpts)
+    supabase_info = {
+        "project_ref":      SUPABASE_PROJECT_REF or "not_set",
+        "has_access_token": bool(SUPABASE_ACCESS_TOKEN),
+        "tables_count":     report.get("modules", {}).get("supabase", {}).get("tables_count", 0),
+    }
+
+    system_msg = f"""你是 AI Empire 的「自主營運長」（AI CTO）。你擁有對 Supabase、Cloudflare、GitHub、Azure 的操作工具。
+
+## 知識庫（優先參考）
+{kb_content}
+
+---
+修復策略：
+- low 難度：立即呼叫工具修復
+- medium 難度：謹慎評估，有把握才執行
+- high 難度：不執行，呼叫 github_create_issue 建立追蹤工單
+
+Supabase：function_search_path_mutable 先 fetch_supabase_lint，再批次 ALTER FUNCTION ... SET search_path = '';
+Cloudflare：CF-003 直接 set_cloudflare_ssl_strict；CF-004 create_cloudflare_waf_rule
+每個動作後必須呼叫 mark_repair 記錄。完成後呼叫 update_knowledge_base 追加本次經驗。
+
+安全底線：禁止 DROP TABLE / TRUNCATE。Azure CLI 只允許唯讀。"""
+
+    user_msg = f"""分析以下安全風險並執行修復：
+
+## 風險（{len(risks)} 項）
+{json.dumps(risks, ensure_ascii=False, indent=2)}
+
+## Delta
+新增: {len(delta['new_risks'])} 項
+
+## 環境
+Supabase: {json.dumps(supabase_info, ensure_ascii=False)}
+Cloudflare Zone: {CF_ZONE_ID or 'not_set'}
+dry_run: {DRY_RUN}"""
+
+    messages = [
+        {"role": "system", "content": system_msg},
+        {"role": "user",   "content": user_msg}
+    ]
+    tools_oai = _tools_to_openai_format()
+    repair_log = []
+    max_iterations = 30
+
+    for iteration in range(max_iterations):
+        response = client.chat.completions.create(
+            model="grok-3",
+            messages=messages,
+            tools=tools_oai,
+            tool_choice="auto",
+            max_tokens=8192
+        )
+
+        msg = response.choices[0].message
+
+        # Print text
+        if msg.content:
+            for line in (msg.content or "").strip().split("\n")[:5]:
+                print(f"  [Grok] {line}")
+
+        if response.choices[0].finish_reason == "stop":
+            break
+
+        if response.choices[0].finish_reason == "tool_calls" and msg.tool_calls:
+            tool_results_msgs = []
+            for tc in msg.tool_calls:
+                fn_name = tc.function.name
+                try:
+                    fn_input = json.loads(tc.function.arguments)
+                except Exception:
+                    fn_input = {}
+                print(f"  [Tool] {fn_name}({json.dumps(fn_input, ensure_ascii=False)[:100]})")
+                raw_result = _dispatch_tool(fn_name, fn_input)
+                result_data = json.loads(raw_result)
+                is_ok = result_data.get("success", True) if "success" in result_data else True
+                print(f"  [Tool] -> {'OK' if is_ok else 'FAIL'}")
+                repair_log.append({
+                    "iteration": iteration, "tool": fn_name,
+                    "input": fn_input, "result": result_data, "ok": is_ok
+                })
+                tool_results_msgs.append({
+                    "role": "tool",
+                    "tool_call_id": tc.id,
+                    "content": raw_result
+                })
+
+            messages.append({"role": "assistant", "content": msg.content,
+                             "tool_calls": [tc.model_dump() for tc in msg.tool_calls]})
+            messages.extend(tool_results_msgs)
+        else:
+            break
+
+    return repair_log
+
+
+def _run_ai_repair(report: dict, risks: list) -> list:
+    if AI_ENGINE == "none":
+        print("  [AI Repair] No AI API key — using rule-based fallback")
+        return _run_rule_based_repair(risks)
+
+    if AI_ENGINE == "xai":
+        print("  [AI Repair] Using xAI Grok API...")
+        return _run_xai_repair(report, risks)
+
+    # Anthropic fallback
+    print("  [AI Repair] Using Anthropic API...")
+    import anthropic as _anthropic_mod
+    client = _anthropic_mod.Anthropic(api_key=ANTHROPIC_API_KEY)
 
     supabase_info = {
         "project_ref":       SUPABASE_PROJECT_REF or "not_set",
