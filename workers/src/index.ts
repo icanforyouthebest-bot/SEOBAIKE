@@ -160,16 +160,23 @@ export default {
       })
     }
 
-    // ── 其他非 /api/ 路徑 → 從 GitHub 取 404.html ──
+    // ── 其他非 /api/ 路徑 → SPA fallback，回傳 index.html 讓 React Router 處理 ──
+    // /merchant、/merchant/editor、/dashboard/seo 等所有 SPA 路由都從這裡服務
     if (!path.startsWith('/api/') && path !== '/api') {
-      const raw404 = await fetch(`https://raw.githubusercontent.com/icanforyouthebest-bot/SEOBAIKE/master/pages-site/404.html`)
-      const body404 = await raw404.text()
+      const cache = caches.default
+      const spaCacheKey = new Request('https://aiforseo.vip/__spa_index__', request)
+      const spaCached = await cache.match(spaCacheKey)
+      if (spaCached) return spaCached
+      const rawRes = await fetch(`https://raw.githubusercontent.com/icanforyouthebest-bot/SEOBAIKE/refs/heads/master/pages-site/index.html`)
+      const body = await rawRes.text()
       const country = (request as any).cf?.country || 'US'
-      const injected404 = body404.replace('<html ', `<html data-cf-country="${country}" `)
-      return new Response(injected404, {
-        status: 404,
-        headers: { ...SITE_SECURITY_HEADERS, 'Content-Type': 'text/html; charset=utf-8' },
+      const injectedBody = body.replace('<html ', `<html data-cf-country="${country}" `)
+      const resp = new Response(injectedBody, {
+        status: 200,
+        headers: { ...SITE_SECURITY_HEADERS, 'Content-Type': 'text/html; charset=utf-8', 'Cache-Control': 'public, max-age=300, s-maxage=600' },
       })
+      cache.put(spaCacheKey, resp.clone())
+      return resp
     }
 
     // CORS preflight — API 路徑統一處理
