@@ -4,6 +4,7 @@
 // ============================================================
 
 import type { Env, NormalizedMessage, ReplyContext } from './types'
+import { callAzureOpenAI, azureSpeechTTS, bingSearch } from './ai/azure-router'
 import { normalizeLine, normalizeTelegram, normalizeWhatsApp, normalizeMessenger } from './middleware/normalizer'
 import { normalizeDiscord } from './middleware/normalizer-discord'
 import { normalizeSlack } from './middleware/normalizer-slack'
@@ -157,6 +158,47 @@ export default {
         target: { namespace: 'android_app', package_name: 'vip.aiforseo.app', sha256_cert_fingerprints: [] },
       }]), {
         headers: { ...SITE_SECURITY_HEADERS, 'Content-Type': 'application/json', 'Cache-Control': 'public, max-age=3600' },
+      })
+    }
+
+    // ── /widget.js — 小白嵌入碼，客戶貼一行就能安裝 ──
+    if (path === '/widget.js') {
+      const widgetId = url.searchParams.get('id') || 'demo'
+      const primaryColor = url.searchParams.get('color') || '#6366f1'
+      const widgetJs = `(function(){
+  if(window.__seobaikeWidget)return;
+  window.__seobaikeWidget=true;
+  var id='${widgetId}';
+  var color='${primaryColor}';
+  var d=document,s=d.createElement('style');
+  s.textContent='#sb-widget-btn{position:fixed;bottom:24px;right:24px;width:56px;height:56px;border-radius:50%;background:'+color+';border:none;cursor:pointer;box-shadow:0 4px 20px rgba(0,0,0,.25);z-index:9999;display:flex;align-items:center;justify-content:center;transition:transform .2s}#sb-widget-btn:hover{transform:scale(1.1)}#sb-widget-box{position:fixed;bottom:96px;right:24px;width:360px;height:500px;border-radius:16px;background:#fff;box-shadow:0 8px 40px rgba(0,0,0,.18);z-index:9998;display:none;flex-direction:column;overflow:hidden;font-family:-apple-system,BlinkMacSystemFont,sans-serif}#sb-widget-box.open{display:flex}#sb-header{background:'+color+';color:#fff;padding:16px;font-weight:700;font-size:15px;display:flex;align-items:center;gap:10px}#sb-header span{flex:1}#sb-close{background:none;border:none;color:#fff;font-size:20px;cursor:pointer;padding:0}#sb-messages{flex:1;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:10px}#sb-input-row{display:flex;padding:12px;gap:8px;border-top:1px solid #f0f0f0}.sb-msg{max-width:80%;padding:10px 14px;border-radius:12px;font-size:14px;line-height:1.5}.sb-bot{background:#f4f4f5;align-self:flex-start;border-radius:4px 12px 12px 12px}.sb-user{background:'+color+';color:#fff;align-self:flex-end;border-radius:12px 4px 12px 12px}#sb-input{flex:1;border:1px solid #e5e7eb;border-radius:8px;padding:10px 14px;font-size:14px;outline:none}#sb-send{background:'+color+';color:#fff;border:none;border-radius:8px;padding:10px 16px;cursor:pointer;font-size:14px}';
+  d.head.appendChild(s);
+  var btn=d.createElement('button');btn.id='sb-widget-btn';
+  btn.innerHTML='<svg width="28" height="28" viewBox="0 0 24 24" fill="white"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/></svg>';
+  var box=d.createElement('div');box.id='sb-widget-box';
+  box.innerHTML='<div id="sb-header"><svg width="20" height="20" viewBox="0 0 24 24" fill="white"><circle cx="12" cy="8" r="4"/><path d="M12 14c-5 0-8 2.5-8 4v1h16v-1c0-1.5-3-4-8-4z"/></svg><span>小白 AI 客服</span><button id="sb-close">×</button></div><div id="sb-messages"><div class="sb-msg sb-bot">嗨！我是小白，有什麼可以幫您的嗎？</div></div><div id="sb-input-row"><input id="sb-input" placeholder="輸入訊息..." /><button id="sb-send">送出</button></div>';
+  d.body.appendChild(btn);d.body.appendChild(box);
+  btn.onclick=function(){box.classList.toggle('open')};
+  d.getElementById('sb-close').onclick=function(){box.classList.remove('open')};
+  var msgs=d.getElementById('sb-messages');
+  var inp=d.getElementById('sb-input');
+  function send(){
+    var msg=inp.value.trim();if(!msg)return;
+    inp.value='';
+    var um=d.createElement('div');um.className='sb-msg sb-user';um.textContent=msg;msgs.appendChild(um);
+    msgs.scrollTop=msgs.scrollHeight;
+    var thinking=d.createElement('div');thinking.className='sb-msg sb-bot';thinking.textContent='...';msgs.appendChild(thinking);
+    fetch('https://aiforseo.vip/api/ai/widget-chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({message:msg,widget_id:id})})
+    .then(function(r){return r.json()})
+    .then(function(data){thinking.textContent=data.reply||'稍等一下！'})
+    .catch(function(){thinking.textContent='連線異常，請稍後再試'});
+    msgs.scrollTop=msgs.scrollHeight;
+  }
+  d.getElementById('sb-send').onclick=send;
+  inp.onkeydown=function(e){if(e.key==='Enter')send()};
+})();`
+      return new Response(widgetJs, {
+        headers: { 'Content-Type': 'application/javascript; charset=utf-8', 'Cache-Control': 'no-cache', 'Access-Control-Allow-Origin': '*' }
       })
     }
 
@@ -365,6 +407,41 @@ export default {
     // ── /api/ai/nim — NVIDIA NIM 專用入口 ──
     if (path === '/api/ai/nim' && request.method === 'GET') {
       return json(200, { info: 'SEOBAIKE CaaS — AI Inference Gateway', method: 'POST', endpoint: '/api/ai/nim', engines: Object.keys(AI_PROVIDERS), body: { provider: 'nvidia', model: 'auto', message: 'your question' } })
+    }
+
+    // ── Azure OpenAI — GPT-4o 重運算入口 ──
+    if (path === '/api/ai/azure' && request.method === 'POST') {
+      const body = await request.json() as any
+      const { message, system } = body
+      if (!message) return json(400, { error: 'message required' })
+      const reply = await callAzureOpenAI(env as any, [
+        { role: 'system', content: system || '你是 SEOBAIKE AI 助理，繁體中文回答。' },
+        { role: 'user', content: message }
+      ], body.max_tokens || 1000)
+      if (reply) return json(200, { reply, engine: 'azure-openai-gpt4o', source: 'seobaike-ai' })
+      return json(503, { error: 'Azure OpenAI 尚未設定，請聯繫管理員' })
+    }
+
+    // ── Azure Speech TTS — AI 配音（繁體中文最強）──
+    if (path === '/api/ai/speech' && request.method === 'POST') {
+      const body = await request.json() as any
+      const { text, voice } = body
+      if (!text) return json(400, { error: 'text required' })
+      const audio = await azureSpeechTTS(env as any, text, voice || 'zh-TW-HsiaoChenNeural')
+      if (audio) {
+        return new Response(audio, { headers: { 'Content-Type': 'audio/mpeg', 'Access-Control-Allow-Origin': '*' } })
+      }
+      return json(503, { error: 'Azure Speech 尚未設定，請聯繫管理員' })
+    }
+
+    // ── Bing Search — SEO 排名查詢 ──
+    if (path === '/api/seo/bing' && request.method === 'POST') {
+      const body = await request.json() as any
+      const { query, count } = body
+      if (!query) return json(400, { error: 'query required' })
+      const results = await bingSearch(env as any, query, count || 10)
+      if (results) return json(200, { results, query, source: 'bing-search', count: results.length })
+      return json(503, { error: 'Bing Search 尚未設定，請聯繫管理員' })
     }
 
     // ── Composio MCP — 500+ 應用直連 ──
@@ -1502,43 +1579,89 @@ async function handleWidgetChatSmart(request: Request, env: Env): Promise<Respon
   const { message } = body
   if (!message) return json(400, { error: 'message is required' })
 
-  // 中文最強模型鏈（Groq 最快最穩放第一）
-  const systemPrompt = `你是一個聰明、溫暖的 AI 助手，在 SEOBAIKE 平台上幫助用戶。
+  // 台灣口語直接回應，不送給 AI 模型（避免 safety filter 拒答）
+  const msgLower = message.toLowerCase()
+  const hasProfanity = ['幹', '媽的', '操', '靠', '你娘', '三小', '王八'].some(w => message.includes(w))
+  if (hasProfanity) {
+    const casual = ['好啦，有什麼想問的？', '好好好，說吧', '沒事，有什麼問題嗎？'][Math.floor(Math.random()*3)]
+    return json(200, { reply: casual, source: 'seobaike-ai', engine: 'preset' })
+  }
 
-嚴格禁止（違反就是 0 分）：
-- 禁止自我介紹（不准說「我是小百」「我是AI助手」「我是SEOBAIKE的...」）
-- 禁止主動提價格或方案（除非用戶明確問「多少錢」「價格」「費用」）
-- 禁止說「請您提出問題」「有什麼可以幫您」這種廢話
-- 禁止列清單式回答（不要用 - 開頭的列表）
-- 禁止署名、禁止客套
+  // 使用所有已設定的 AI providers，依速度/品質排序
+  const systemPrompt = `你是小白，SEOBAIKE 客服。
 
-你知道的背景（只有被問到才用）：
-SEOBAIKE 是全球 AI 市集，讓賣家把產品賣到全世界。用 SEO Points 點數交易。
+SEOBAIKE 是台灣 AI SEO 平台。功能：建站、SEO分析、AI配音、AI影片、AI客服機器人。費用：點數制，1點=NT$1，無綁約。網址：aiforseo.vip
 
-說話風格：
-- 像一個很懂行的朋友在跟你聊天
-- 用繁體中文，語氣自然口語
-- 一次最多 2 句話
-- 如果用戶打招呼就直接說「嗨～想了解什麼？」這種自然的
-- 如果用戶問問題就直接給答案，不要囉唆
-- 用戶寫英文就用英文回`
+規則：
+- 只有被問到才說上面的資訊，不要主動介紹
+- 最多2句
+- 繁體中文，口語
+- 用戶問什麼就直接答什麼`
   const providers = [
     { id: 'groq', key: env.GROQ_API_KEY, url: 'https://api.groq.com/openai/v1/chat/completions', model: 'llama-3.3-70b-versatile' },
+    { id: 'anthropic', key: env.ANTHROPIC_API_KEY, url: 'https://api.anthropic.com/v1/messages', model: 'claude-haiku-4-5-20251001', isAnthropic: true },
+    { id: 'google', key: env.GOOGLE_AI_KEY, url: 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent', model: 'gemini-2.0-flash', isGoogle: true },
     { id: 'deepseek', key: env.DEEPSEEK_API_KEY, url: 'https://api.deepseek.com/chat/completions', model: 'deepseek-chat' },
     { id: 'together', key: env.TOGETHER_API_KEY, url: 'https://api.together.xyz/v1/chat/completions', model: 'meta-llama/Llama-3.3-70B-Instruct-Turbo' },
+    { id: 'openrouter', key: env.OPENROUTER_API_KEY, url: 'https://openrouter.ai/api/v1/chat/completions', model: 'google/gemini-2.0-flash-001' },
+    { id: 'mistral', key: env.MISTRAL_API_KEY, url: 'https://api.mistral.ai/v1/chat/completions', model: 'mistral-large-latest' },
+    { id: 'nvidia', key: env.NVIDIA_API_KEY, url: 'https://integrate.api.nvidia.com/v1/chat/completions', model: 'meta/llama-3.3-70b-instruct' },
+    { id: 'cohere', key: env.COHERE_API_KEY, url: 'https://api.cohere.com/v2/chat', model: 'command-r-plus-08-2024', isCohere: true },
+    { id: 'fireworks', key: env.FIREWORKS_API_KEY, url: 'https://api.fireworks.ai/inference/v1/chat/completions', model: 'accounts/fireworks/models/llama-v3p3-70b-instruct' },
+    { id: 'perplexity', key: env.PERPLEXITY_API_KEY, url: 'https://api.perplexity.ai/chat/completions', model: 'sonar' },
+    { id: 'ai21', key: env.AI21_API_KEY, url: 'https://api.ai21.com/studio/v1/chat/completions', model: 'jamba-1.5-large' },
+    { id: 'xai', key: env.XAI_API_KEY, url: 'https://api.x.ai/v1/chat/completions', model: 'grok-2-latest' },
   ]
 
   for (const p of providers) {
     if (!p.key) continue
     try {
-      const res = await fetch(p.url, {
+      let res: Response
+      // Anthropic format (claude models)
+      if ((p as any).isAnthropic) {
+        res = await fetch(p.url, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'x-api-key': p.key, 'anthropic-version': '2023-06-01' },
+          body: JSON.stringify({ model: p.model, system: systemPrompt, messages: [{ role: 'user', content: message }], max_tokens: 300 }),
+        })
+        if (!res.ok) continue
+        const data = await res.json() as any
+        const reply = data.content?.[0]?.text
+        if (reply) return json(200, { reply, source: 'seobaike-ai', engine: p.id })
+        continue
+      }
+      // Google Gemini format
+      if ((p as any).isGoogle) {
+        const googleUrl = `${p.url}?key=${p.key}`
+        res = await fetch(googleUrl, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ contents: [{ parts: [{ text: `${systemPrompt}\n\n用戶：${message}` }] }], generationConfig: { maxOutputTokens: 300 } }),
+        })
+        if (!res.ok) continue
+        const data = await res.json() as any
+        const reply = data.candidates?.[0]?.content?.parts?.[0]?.text
+        if (reply) return json(200, { reply, source: 'seobaike-ai', engine: p.id })
+        continue
+      }
+      // Cohere v2 format
+      if ((p as any).isCohere) {
+        res = await fetch(p.url, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${p.key}` },
+          body: JSON.stringify({ model: p.model, messages: [{ role: 'system', content: systemPrompt }, { role: 'user', content: message }], max_tokens: 300 }),
+        })
+        if (!res.ok) continue
+        const data = await res.json() as any
+        const reply = data.message?.content?.[0]?.text
+        if (reply) return json(200, { reply, source: 'seobaike-ai', engine: p.id })
+        continue
+      }
+      // Standard OpenAI-compatible format (groq, deepseek, together, openrouter, mistral, nvidia, fireworks)
+      res = await fetch(p.url, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${p.key}` },
-        body: JSON.stringify({
-          model: p.model,
-          messages: [{ role: 'system', content: systemPrompt }, { role: 'user', content: message }],
-          max_tokens: 300, temperature: 0.7,
-        }),
+        body: JSON.stringify({ model: p.model, messages: [{ role: 'system', content: systemPrompt }, { role: 'user', content: message }], max_tokens: 300, temperature: 0.7 }),
       })
       if (!res.ok) continue
       const data = await res.json() as any
@@ -1550,10 +1673,15 @@ SEOBAIKE 是全球 AI 市集，讓賣家把產品賣到全世界。用 SEO Point
   // 全部失敗才用 Workers AI
   try {
     const reply = await aiChat(env.AI, message)
-    return json(200, { reply, source: 'seobaike-ai', engine: 'edge' })
-  } catch (err) {
-    return json(500, { reply: '暫時無法回應，請稍後再試。', error: String(err) })
-  }
+    if (reply) return json(200, { reply, source: 'seobaike-ai', engine: 'edge' })
+  } catch { /* fall through */ }
+
+  // 最終 fallback：根據關鍵字給預設答案
+  const m = message
+  if (/功能|服務|做什麼|可以做/.test(m)) return json(200, { reply: '我們提供：建站、SEO分析、AI配音、AI影片、AI客服。到 aiforseo.vip 看更多！', source: 'seobaike-ai', engine: 'fallback' })
+  if (/價格|費用|多少錢|點數|收費/.test(m)) return json(200, { reply: '點數制，1點=NT$1，無綁約。詳情看 aiforseo.vip/pricing', source: 'seobaike-ai', engine: 'fallback' })
+  if (/登入|login|帳號|密碼|註冊/.test(m)) return json(200, { reply: '到 aiforseo.vip/login 登入，支援 Google 快速登入。', source: 'seobaike-ai', engine: 'fallback' })
+  return json(200, { reply: '稍等，系統忙碌中，請再說一次！', source: 'seobaike-ai', engine: 'fallback' })
 }
 
 // ============================================================

@@ -93,6 +93,17 @@ export interface Env {
   HUGGINGFACE_API_KEY: string      // Hugging Face
   AI21_API_KEY: string             // AI21 Labs
 
+  // xAI Grok
+  XAI_API_KEY: string
+
+  // Azure OpenAI
+  AZURE_OPENAI_ENDPOINT: string
+  AZURE_OPENAI_API_KEY: string
+  AZURE_OPENAI_DEPLOYMENT: string
+  AZURE_SPEECH_KEY: string
+  AZURE_SPEECH_REGION: string
+  BING_SEARCH_API_KEY: string
+
   // Composio MCP
   COMPOSIO_API_KEY: string
 
