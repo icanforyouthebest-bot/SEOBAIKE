@@ -36,9 +36,10 @@ ANTHROPIC_API_KEY     = os.environ.get("ANTHROPIC_API_KEY", "")
 GITHUB_TOKEN          = os.environ.get("GITHUB_TOKEN", os.environ.get("GITHUB_PAT", ""))
 GITHUB_REPOSITORY     = os.environ.get("GITHUB_REPOSITORY", "icanforyouthebest-bot/SEOBAIKE")
 
-MGMT_BASE    = "https://api.supabase.com/v1"
-CF_BASE      = "https://api.cloudflare.com/client/v4"
-TRACKER_FILE = "repairs_tracker.json"
+MGMT_BASE      = "https://api.supabase.com/v1"
+CF_BASE        = "https://api.cloudflare.com/client/v4"
+TRACKER_FILE   = "repairs_tracker.json"
+KNOWLEDGE_BASE = os.path.join(os.path.dirname(__file__), "..", "..", "knowledge_base", "supabase_issues.md")
 
 DRY_RUN    = "--dry-run" in sys.argv
 CTO_REPORT = "--cto-report" in sys.argv
@@ -150,6 +151,22 @@ TOOLS = [
                 "description": {"type": "string", "description": "查詢目的說明"}
             },
             "required": ["command", "description"]
+        }
+    },
+    {
+        "name": "update_knowledge_base",
+        "description": (
+            "將本次修復的經驗、根因分析、成功/失敗案例追加到知識庫文件。"
+            "每次修復完成後應呼叫此工具，確保知識庫持續成長。"
+        ),
+        "input_schema": {
+            "type": "object",
+            "properties": {
+                "section":   {"type": "string", "description": "知識庫章節名稱"},
+                "content":   {"type": "string", "description": "要追加的 Markdown 內容"},
+                "issue_ids": {"type": "array", "items": {"type": "string"}, "description": "相關問題 ID 清單"}
+            },
+            "required": ["section", "content"]
         }
     }
 ]
@@ -304,6 +321,22 @@ def _mark_repair(issue_id: str, desc: str, fix_command: str, status: str,
     return entry
 
 
+def _update_knowledge_base(section: str, content: str, issue_ids: list = None) -> dict:
+    """Append a new section to the knowledge base."""
+    if DRY_RUN:
+        return {"success": True, "dry_run": True, "section": section}
+    try:
+        with open(KNOWLEDGE_BASE, "a", encoding="utf-8") as f:
+            f.write(f"\n\n---\n\n## {section}\n\n")
+            f.write(f"_Updated: {datetime.datetime.utcnow().isoformat()}_\n\n")
+            if issue_ids:
+                f.write(f"**Related issues:** {', '.join(issue_ids)}\n\n")
+            f.write(content)
+        return {"success": True, "section": section}
+    except Exception as e:
+        return {"success": False, "error": str(e)}
+
+
 def _github_create_issue(title: str, body: str, labels: list = None, issue_id: str = "") -> dict:
     if DRY_RUN:
         return {"success": True, "dry_run": True, "title": title}
@@ -394,6 +427,12 @@ def _dispatch_tool(tool_name: str, tool_input: dict) -> str:
         result = _azure_run_cli(
             tool_input["command"],
             tool_input.get("description", "")
+        )
+    elif tool_name == "update_knowledge_base":
+        result = _update_knowledge_base(
+            tool_input["section"],
+            tool_input["content"],
+            tool_input.get("issue_ids", [])
         )
     else:
         result = {"error": f"Unknown tool: {tool_name}"}
@@ -555,7 +594,20 @@ def _run_ai_repair(report: dict, risks: list) -> list:
         "functions_count":   report.get("modules", {}).get("supabase", {}).get("functions_count", 0),
     }
 
-    system_prompt = """你是 AI Empire 的「自主營運長」（AI CTO）。你擁有對 Supabase、Cloudflare、GitHub、Azure 的操作工具。
+    # Load knowledge base for context
+    kb_content = ""
+    try:
+        with open(KNOWLEDGE_BASE, encoding="utf-8") as f:
+            kb_content = f.read()[:3000]  # First 3000 chars as context
+    except Exception:
+        kb_content = "(knowledge base not found)"
+
+    system_prompt = f"""你是 AI Empire 的「自主營運長」（AI CTO）。你擁有對 Supabase、Cloudflare、GitHub、Azure 的操作工具。
+
+## 知識庫（優先參考）
+{kb_content}
+
+---
 
 你的核心使命：
 1. 分析健康檢查報告，識別所有安全風險
