@@ -57,12 +57,19 @@ async function runCheck(env) {
     const lines = warnings.map(w => `⚠️ ${w.name}: ${w.days} 天後到期 (${w.expires})`).join('\n');
     const msg = `🚨 AI EMPIRE KEY 警報\n${new Date().toLocaleString('zh-TW',{timeZone:'Asia/Taipei'})}\n\n${lines}\n\n請立即更新！`;
 
-    // Telegram
+    // Telegram — 直接發或透過主 Worker 轉發
     if (env.TELEGRAM_BOT_TOKEN && env.TELEGRAM_CHAT_ID) {
       await fetch(`https://api.telegram.org/bot${env.TELEGRAM_BOT_TOKEN}/sendMessage`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ chat_id: env.TELEGRAM_CHAT_ID, text: msg })
+      });
+    } else {
+      // 透過主 Worker 轉發通知 (已有 TELEGRAM_BOT_TOKEN)
+      await fetch('https://aiforseo.vip/api/bots/telegram/test', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ chat_id: '5372713163', message: msg })
       });
     }
 

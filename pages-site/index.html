@@ -238,5 +238,19 @@
     <!-- SEOBAIKE AI Widget -->
     <script src="/seobaike-widget.js" defer></script>
 
+    <!-- 全部放行：3秒 fallback 移除 loading shell -->
+    <script>
+      (function(){
+        function dismissShell(){
+          var s=document.getElementById('sb-shell');
+          if(s){s.style.transition='opacity 0.4s';s.style.opacity='0';setTimeout(function(){if(s.parentNode)s.parentNode.removeChild(s);},400);}
+        }
+        // 3秒後強制移除
+        setTimeout(dismissShell, 3000);
+        // React 掛載後立刻移除
+        document.addEventListener('DOMContentLoaded', function(){setTimeout(dismissShell, 500);});
+      })();
+    </script>
+
   </body>
 </html>
