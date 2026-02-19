@@ -1,622 +1,150 @@
-<!DOCTYPE html>
-<html lang="zh-Hant">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SEOBAIKE — AI 界的 App Store | 一個平台，接通所有 AI 服務</title>
-  <meta name="description" content="SEOBAIKE 是 AI 界的 App Store。一個平台接通所有 AI 服務，用你自己的 API Key（BYOK），台灣在地團隊打造，全球佈局。">
-  <meta name="keywords" content="SEOBAIKE,AI平台,AI服務,BYOK,API Key,AI App Store,AI工具,小路光,台灣AI,aiforseo">
-  <link rel="canonical" href="https://aiforseo.vip/">
-  <meta property="og:title" content="SEOBAIKE — AI 界的 App Store | 一個平台，接通所有 AI 服務">
-  <meta property="og:description" content="SEOBAIKE 是 AI 界的 App Store。一個平台接通所有 AI 服務，BYOK 架構，台灣在地團隊打造。">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://aiforseo.vip/">
-  <meta property="og:image" content="/og-image.png">
-  <meta property="og:site_name" content="SEOBAIKE">
-  <meta property="og:locale" content="zh_TW">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="SEOBAIKE — AI 界的 App Store | 一個平台，接通所有 AI 服務">
-  <meta name="twitter:description" content="SEOBAIKE 是 AI 界的 App Store。一個平台接通所有 AI 服務，BYOK 架構，台灣在地團隊打造。">
-  <meta name="theme-color" content="#e8850c">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="apple-mobile-web-app-title" content="SEOBAIKE">
-  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
-  <link rel="apple-touch-icon" href="/favicon.svg">
-  <link rel="manifest" href="/manifest.json">
-  <link rel="preconnect" href="https://vmyrivxxibqydccurxug.supabase.co">
+<!doctype html>
+<html lang="zh-TW">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
+    
+    <!-- Primary Meta Tags -->
+    <title>SEOBAIKE - AI 驅動的 SEO 自動化平台</title>
+    <meta name="title" content="SEOBAIKE - AI FOR SEO" />
+    <meta name="description" content="SEOBAIKE 提供一站式 AI SEO 工具：自動建站、AI 配音、AI 影片、SEO 健檢。點數制計費，無綁約。" />
+    <meta name="keywords" content="AI SEO,自動建站,AI配音,AI影片,SEO健檢,網站優化,SEOBAIKE" />
+    <meta name="author" content="SEOBAIKE" />
+    <meta name="robots" content="index, follow" />
+    <meta name="language" content="zh-TW" />
+    <meta name="geo.region" content="TW" />
+    <meta name="geo.placename" content="Taiwan" />
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://www.aiforseo.vip/" />
+    
+    <!-- Open Graph / LINE / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://www.aiforseo.vip/" />
+    <meta property="og:site_name" content="SEOBAIKE" />
+    <meta property="og:title" content="SEOBAIKE - AI FOR SEO" />
+    <meta property="og:description" content="30秒自動部署網站，AI 生成內容，一站式 SEO 解決方案" />
+    <meta property="og:image" content="https://www.aiforseo.vip/og-image.png" />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="SEOBAIKE AI FOR SEO 平台" />
+    <meta property="og:locale" content="zh_TW" />
 
-  <!-- Structured Data -->
-  <script type="application/ld+json">
-  [
-    {
-      "@context": "https://schema.org",
-      "@type": "Organization",
-      "name": "SEOBAIKE",
-      "legalName": "小路光有限公司",
-      "url": "https://aiforseo.vip",
-      "description": "AI 界的 App Store — 一個平台，接通所有 AI 服務",
-      "foundingDate": "2025",
-      "founder": {
-        "@type": "Person",
-        "name": "許竣翔"
-      },
-      "address": {
-        "@type": "PostalAddress",
-        "addressCountry": "TW",
-        "addressRegion": "彰化縣"
-      },
-      "taxID": "60475510"
-    },
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="https://www.aiforseo.vip/" />
+    <meta name="twitter:title" content="SEOBAIKE - AI FOR SEO" />
+    <meta name="twitter:description" content="30秒自動部署網站，AI 生成內容，一站式 SEO 解決方案" />
+    <meta name="twitter:image" content="https://www.aiforseo.vip/og-image.png" />
+
+    <!-- Favicon - SEOBAIKE Brand -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicon.svg" />
+    
+    <!-- Preconnect to external domains for performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    
+    <!-- Theme Color for mobile browsers -->
+    <meta name="theme-color" content="#667eea" />
+    <meta name="msapplication-TileColor" content="#667eea" />
+
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "WebSite",
       "name": "SEOBAIKE",
-      "url": "https://aiforseo.vip",
-      "description": "AI 界的 App Store — 一個平台接通所有 AI 服務",
-      "publisher": {
-        "@type": "Organization",
-        "name": "小路光有限公司"
-      },
+      "alternateName": "SEOBAIKE AI-SEO Platform",
+      "url": "https://www.aiforseo.vip",
+      "description": "AI 驅動的 SEO 自動化平台，一站式 AI SEO 工具",
+      "inLanguage": "zh-TW",
       "potentialAction": {
         "@type": "SearchAction",
-        "target": "https://aiforseo.vip/search?q={search_term_string}",
+        "target": "https://www.aiforseo.vip/search?q={search_term_string}",
         "query-input": "required name=search_term_string"
       }
-    },
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "SEOBAIKE",
+      "alternateName": "SEOBAIKE AI-SEO Platform",
+      "url": "https://www.aiforseo.vip",
+      "logo": "https://www.aiforseo.vip/og-image.png",
+      "image": "https://www.aiforseo.vip/og-image.png",
+      "description": "AI 驅動的 SEO 自動化平台",
+      "foundingDate": "2024",
+      "sameAs": [
+        "https://line.me/R/ti/p/@729zaaaq"
+      ],
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "telephone": "04-7776342",
+        "contactType": "customer service",
+        "availableLanguage": ["Chinese", "English"]
+      }
+    }
+    </script>
+    <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "SoftwareApplication",
-      "name": "SEOBAIKE",
-      "applicationCategory": "BusinessApplication",
+      "name": "SEOBAIKE AI SEO 平台",
+      "applicationCategory": "WebApplication",
       "operatingSystem": "Web",
-      "description": "AI 界的 App Store。一個平台接通所有 AI 服務，BYOK 架構，台灣在地團隊打造。",
-      "url": "https://aiforseo.vip",
-      "author": {
-        "@type": "Organization",
-        "name": "小路光有限公司",
-        "taxID": "60475510",
-        "url": "https://aiforseo.vip/about"
-      },
       "offers": {
         "@type": "Offer",
         "price": "0",
         "priceCurrency": "TWD",
-        "description": "體驗方案"
+        "description": "免費試用 AI SEO 工具"
+      },
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.9",
+        "ratingCount": "150"
       }
     }
-  ]
-  </script>
-
-  <!-- Design System -->
-  <link rel="stylesheet" href="/assets/design-system.css">
-  <link rel="stylesheet" href="/assets/premium-fx.css">
-
-  <!-- Page-Specific Styles -->
-  <style>
-    /* ── Hero ── */
-    .hero { position:relative; min-height:100vh; display:flex; align-items:center; justify-content:center; overflow:hidden; padding-top:64px; }
-    .hero-bg { position:absolute; inset:0; z-index:0; overflow:hidden; }
-    .hero-orb { position:absolute; border-radius:50%; filter:blur(100px); opacity:0.35; animation:orbFloat 12s ease-in-out infinite; }
-    .hero-orb-1 { width:600px; height:600px; background:radial-gradient(circle,rgba(232,133,12,0.4),transparent 70%); top:-15%; left:-10%; }
-    .hero-orb-2 { width:500px; height:500px; background:radial-gradient(circle,rgba(245,166,35,0.3),transparent 70%); bottom:-20%; right:-10%; animation-delay:-4s; }
-    .hero-orb-3 { width:350px; height:350px; background:radial-gradient(circle,rgba(255,215,0,0.2),transparent 70%); top:40%; left:50%; transform:translateX(-50%); animation-delay:-8s; }
-    @keyframes orbFloat { 0%,100%{transform:translate(0,0)scale(1);} 33%{transform:translate(30px,-20px)scale(1.05);} 66%{transform:translate(-20px,15px)scale(0.95);} }
-    .hero-grid-overlay { position:absolute; inset:0; background-image:linear-gradient(rgba(232,133,12,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(232,133,12,0.03) 1px,transparent 1px); background-size:60px 60px; mask-image:radial-gradient(ellipse 60% 50% at 50% 50%,black,transparent); -webkit-mask-image:radial-gradient(ellipse 60% 50% at 50% 50%,black,transparent); }
-    .hero-content { position:relative; z-index:2; text-align:center; max-width:960px; padding:0 var(--sp-6); }
-    .hero-eyebrow { display:inline-flex; align-items:center; gap:8px; padding:8px 20px; border-radius:var(--radius-full); background:rgba(232,133,12,0.06); border:1px solid rgba(232,133,12,0.12); font-size:0.82rem; font-weight:600; color:var(--gold-200); letter-spacing:1px; margin-bottom:var(--sp-8); }
-    .hero-eyebrow .dot { width:6px; height:6px; background:var(--success); border-radius:50%; animation:pulse 2s ease-in-out infinite; }
-    .hero h1 { font-size:clamp(2.8rem,7vw,5.2rem); font-weight:900; line-height:1.08; letter-spacing:-0.03em; margin-bottom:var(--sp-6); }
-    .hero h1 .gradient { background:var(--gold-gradient); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
-    .hero-subtitle { font-size:clamp(1.05rem,2vw,1.35rem); color:var(--text-secondary); max-width:640px; margin:0 auto var(--sp-8); line-height:1.8; }
-    .hero-ctas { display:flex; gap:var(--sp-4); justify-content:center; flex-wrap:wrap; margin-bottom:var(--sp-6); }
-    .hero-scroll-hint { position:absolute; bottom:40px; left:50%; transform:translateX(-50%); z-index:2; display:flex; flex-direction:column; align-items:center; gap:8px; color:var(--text-muted); font-size:0.75rem; letter-spacing:1px; animation:float 3s ease-in-out infinite; }
-    .scroll-line { width:1px; height:40px; background:linear-gradient(to bottom,var(--gold-300),transparent); }
-    .hero-byok { display:inline-flex; align-items:center; gap:8px; padding:10px 22px; border-radius:var(--radius-full); background:rgba(255,255,255,0.03); border:1px solid var(--border-subtle); font-size:0.85rem; color:var(--text-muted); }
-    .hero-byok code { color:var(--gold-200); font-family:var(--font-mono); font-weight:700; font-size:0.8rem; }
-
-    /* ── Trust / Social Proof ── */
-    .trust-section { position:relative; padding:var(--sp-16) 0; background:var(--bg-secondary); border-top:1px solid var(--border-subtle); border-bottom:1px solid var(--border-subtle); }
-    .trust-inner { text-align:center; }
-    .trust-label { font-size:0.78rem; font-weight:600; color:var(--text-muted); letter-spacing:2px; text-transform:uppercase; margin-bottom:var(--sp-8); }
-    .trust-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:var(--sp-6); max-width:900px; margin:0 auto; }
-    .trust-item { text-align:center; padding:var(--sp-6) var(--sp-4); }
-    .trust-icon { font-size:1.6rem; margin-bottom:var(--sp-3); display:block; line-height:1; }
-    .trust-value { font-size:clamp(1.5rem,3vw,2.2rem); font-weight:900; background:var(--gold-gradient); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; line-height:1.2; margin-bottom:var(--sp-1); }
-    .trust-desc { font-size:0.85rem; color:var(--text-muted); font-weight:500; line-height:1.4; }
-
-    /* ── How It Works ── */
-    .steps-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:var(--sp-8); position:relative; }
-    .steps-grid::before { content:''; position:absolute; top:60px; left:16.67%; right:16.67%; height:2px; background:linear-gradient(90deg,rgba(232,133,12,0.1),rgba(232,133,12,0.3),rgba(232,133,12,0.1)); z-index:0; }
-    .step-card { position:relative; z-index:1; text-align:center; padding:var(--sp-8); }
-    .step-number { width:56px; height:56px; border-radius:50%; background:var(--bg-card); border:2px solid rgba(232,133,12,0.3); display:flex; align-items:center; justify-content:center; font-size:1.3rem; font-weight:900; color:var(--gold-200); margin:0 auto var(--sp-6); position:relative; }
-    .step-number::after { content:''; position:absolute; inset:-4px; border-radius:50%; border:1px solid rgba(232,133,12,0.1); }
-    .step-icon { font-size:2.5rem; margin-bottom:var(--sp-4); display:block; }
-    .step-card h3 { margin-bottom:var(--sp-3); }
-    .step-card p { font-size:0.9rem; color:var(--text-muted); line-height:1.7; }
-
-    /* ── Pillars ── */
-    .pillars-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:var(--sp-8); }
-    .pillar-card { position:relative; background:var(--bg-card); border:1px solid var(--border-subtle); border-radius:var(--radius-xl); padding:var(--sp-10) var(--sp-8); text-align:center; transition:all var(--duration-normal) var(--ease-out); overflow:hidden; }
-    .pillar-card::before { content:''; position:absolute; top:0; left:20%; right:20%; height:2px; background:linear-gradient(90deg,transparent,rgba(232,133,12,0.3),transparent); opacity:0; transition:opacity var(--duration-normal); }
-    .pillar-card:hover { border-color:var(--border-hover); transform:translateY(-4px); box-shadow:var(--shadow-gold); }
-    .pillar-card:hover::before { opacity:1; }
-    .pillar-icon { width:72px; height:72px; border-radius:var(--radius-lg); background:rgba(232,133,12,0.06); border:1px solid rgba(232,133,12,0.1); display:flex; align-items:center; justify-content:center; font-size:2rem; margin:0 auto var(--sp-6); }
-    .pillar-card h3 { margin-bottom:var(--sp-3); font-size:1.2rem; }
-    .pillar-card p { font-size:0.9rem; color:var(--text-muted); line-height:1.7; }
-
-    /* ── Demo ── */
-    .demo-section { position:relative; padding:120px 0; background:var(--bg-secondary); }
-    .demo-container { max-width:900px; margin:0 auto; padding:0 var(--sp-6); }
-    .demo-terminal { background:rgba(6,6,15,0.95); border:1px solid var(--border-default); border-radius:var(--radius-lg); overflow:hidden; box-shadow:var(--shadow-lg); }
-    .demo-terminal-bar { display:flex; align-items:center; gap:8px; padding:12px 18px; background:rgba(255,255,255,0.03); border-bottom:1px solid var(--border-subtle); }
-    .demo-dot { width:10px; height:10px; border-radius:50%; }
-    .demo-dot-red { background:#ff5f57; } .demo-dot-yellow { background:#febc2e; } .demo-dot-green { background:#28c840; }
-    .demo-terminal-title { flex:1; text-align:center; font-size:0.78rem; color:var(--text-muted); font-family:var(--font-mono); }
-    .demo-body { padding:var(--sp-8); font-family:var(--font-mono); font-size:0.88rem; line-height:1.8; min-height:280px; }
-    .demo-line { margin-bottom:var(--sp-2); opacity:0; transform:translateY(8px); animation:demoLineIn 0.5s forwards; }
-    .demo-line .prompt { color:var(--gold-200); margin-right:8px; }
-    .demo-line .cmd { color:var(--text-primary); } .demo-line .output { color:var(--text-muted); } .demo-line .success { color:var(--success); } .demo-line .highlight { color:var(--gold-100); }
-    @keyframes demoLineIn { to { opacity:1; transform:translateY(0); } }
-    .demo-line:nth-child(1){animation-delay:0.3s;} .demo-line:nth-child(2){animation-delay:0.8s;} .demo-line:nth-child(3){animation-delay:1.4s;} .demo-line:nth-child(4){animation-delay:2.0s;} .demo-line:nth-child(5){animation-delay:2.6s;} .demo-line:nth-child(6){animation-delay:3.2s;} .demo-line:nth-child(7){animation-delay:3.8s;} .demo-line:nth-child(8){animation-delay:4.4s;}
-    .demo-cursor { display:inline-block; width:8px; height:16px; background:var(--gold-200); animation:blink 1s step-end infinite; vertical-align:middle; margin-left:2px; }
-    @keyframes blink { 0%,100%{opacity:1;} 50%{opacity:0;} }
-
-    /* ── CTA ── */
-    .cta-section { position:relative; padding:120px 0; text-align:center; overflow:hidden; }
-    .cta-glow { position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); width:600px; height:600px; background:radial-gradient(circle,rgba(232,133,12,0.1),transparent 70%); pointer-events:none; }
-    .cta-content { position:relative; z-index:1; }
-    .cta-content h2 { font-size:clamp(1.8rem,4vw,2.8rem); font-weight:900; margin-bottom:var(--sp-4); }
-    .cta-content p { font-size:1.1rem; color:var(--text-muted); margin-bottom:var(--sp-10); max-width:500px; margin-left:auto; margin-right:auto; }
-
-    /* ── Language Switcher ── */
-    .lang-switcher { display:flex; gap:4px; align-items:center; }
-    .lang-btn { padding:4px 10px; border:1px solid transparent; border-radius:var(--radius-full); background:transparent; color:var(--text-muted); font-size:0.72rem; font-weight:600; cursor:pointer; transition:all var(--duration-fast); font-family:var(--font-sans); }
-    .lang-btn:hover { color:var(--text-secondary); }
-    .lang-btn.active { background:rgba(232,133,12,0.1); border-color:rgba(232,133,12,0.2); color:var(--gold-200); }
-
-    /* ── Responsive ── */
-    @media (max-width:1024px) {
-      .pillars-grid { grid-template-columns:repeat(3,1fr); }
-      .trust-grid { grid-template-columns:repeat(2,1fr); }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "LocalBusiness",
+      "name": "小路光有限公司",
+      "alternateName": "SEOBAIKE",
+      "telephone": ["04-7776342", "0980-434-242"],
+      "email": "seobaike@aiforseo.vip",
+      "url": "https://aiforseo.vip",
+      "image": "https://aiforseo.vip/og-image.jpg",
+      "priceRange": "$$",
+      "taxID": "60475510",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "埔菜路67號",
+        "addressLocality": "埔鹽鄉埔南村",
+        "addressRegion": "彰化縣",
+        "addressCountry": "TW"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": "23.9",
+        "longitude": "120.4"
+      },
+      "openingHours": "Mo-Fr 09:00-18:00",
+      "sameAs": [
+        "https://line.me/R/ti/p/@729zaaaq"
+      ]
     }
-    @media (max-width:768px) {
-      .hero h1 { font-size:clamp(2rem,8vw,3rem); }
-      .hero-subtitle { font-size:1rem; }
-      .steps-grid { grid-template-columns:1fr; gap:var(--sp-6); }
-      .steps-grid::before { display:none; }
-      .pillars-grid { grid-template-columns:1fr; }
-      .trust-grid { grid-template-columns:repeat(2,1fr); }
-      .hero-scroll-hint { display:none; }
-      .lang-switcher { gap:2px; }
-      .demo-body { padding:var(--sp-4); font-size:0.78rem; }
-    }
-    @media (max-width:480px) {
-      .trust-grid { grid-template-columns:repeat(2,1fr); }
-      .hero-ctas { flex-direction:column; align-items:center; }
-      .hero-ctas .btn { width:100%; max-width:280px; }
-    }
-  </style>
-</head>
-<body>
+    </script>
+    <script type="module" crossorigin src="/assets/index-DVgcqk7Y.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-CpzrRl_r.css">
+  </head>
 
-  <!-- ═══════════ Navigation ═══════════ -->
-  <nav class="nav" id="mainNav">
-    <a href="/" class="nav-brand">
-      <img src="/favicon.svg" alt="SEOBAIKE" width="34" height="34">
-      <span><span class="seo">SEO</span><span class="baike">BAIKE</span></span>
-    </a>
-
-    <ul class="nav-links">
-      <li><a href="/" class="active" data-i18n="nav.home">首頁</a></li>
-      <li><a href="/features" data-i18n="nav.features">功能</a></li>
-      <li><a href="/marketplace" data-i18n="nav.marketplace">市集</a></li>
-      <li><a href="/pricing" data-i18n="nav.pricing">方案</a></li>
-      <li><a href="/about" data-i18n="nav.about">關於</a></li>
-    </ul>
-
-    <div class="flex gap-4" style="align-items:center;">
-      <div class="lang-switcher">
-        <button class="lang-btn active" data-lang="zh-TW" onclick="SEOBAIKE_I18N.switchLang('zh-TW',{manual:true})">中文</button>
-        <button class="lang-btn" data-lang="en" onclick="SEOBAIKE_I18N.switchLang('en',{manual:true})">EN</button>
-        <button class="lang-btn" data-lang="ja" onclick="SEOBAIKE_I18N.switchLang('ja',{manual:true})">日本語</button>
-        <button class="lang-btn" data-lang="ko" onclick="SEOBAIKE_I18N.switchLang('ko',{manual:true})">한국어</button>
-      </div>
-      <a href="/billing" class="nav-link">帳單</a>
-      <a href="/login" class="nav-cta" data-i18n="nav.login">登入</a>
-    </div>
-
-    <button class="nav-hamburger" onclick="toggleMenu()" aria-label="選單">
-      <span></span><span></span><span></span>
-    </button>
-  </nav>
-
-  <!-- Mobile Menu -->
-  <div class="mobile-overlay" id="mobileMenu">
-    <button class="mobile-close" onclick="toggleMenu()">&times;</button>
-    <a href="/" onclick="toggleMenu()" data-i18n="nav.home">首頁</a>
-    <a href="/features" onclick="toggleMenu()" data-i18n="nav.features">功能</a>
-    <a href="/marketplace" onclick="toggleMenu()" data-i18n="nav.marketplace">市集</a>
-    <a href="/pricing" onclick="toggleMenu()" data-i18n="nav.pricing">方案</a>
-    <a href="/about" onclick="toggleMenu()" data-i18n="nav.about">關於</a>
-    <a href="/billing" onclick="toggleMenu()">帳單</a>
-    <a href="/login" onclick="toggleMenu()" data-i18n="nav.login">登入</a>
-    <div class="lang-switcher" style="margin-top:24px;">
-      <button class="lang-btn active" data-lang="zh-TW" onclick="SEOBAIKE_I18N.switchLang('zh-TW',{manual:true})">中文</button>
-      <button class="lang-btn" data-lang="en" onclick="SEOBAIKE_I18N.switchLang('en',{manual:true})">EN</button>
-      <button class="lang-btn" data-lang="ja" onclick="SEOBAIKE_I18N.switchLang('ja',{manual:true})">日本語</button>
-      <button class="lang-btn" data-lang="ko" onclick="SEOBAIKE_I18N.switchLang('ko',{manual:true})">한국어</button>
-    </div>
-  </div>
-
-
-  <!-- ═══════════ 1. Hero ═══════════ -->
-  <section class="hero eruption-bg" id="hero">
-    <div class="hero-bg">
-      <div class="hero-orb hero-orb-1"></div>
-      <div class="hero-orb hero-orb-2"></div>
-      <div class="hero-orb hero-orb-3"></div>
-      <div class="hero-grid-overlay"></div>
-    </div>
-
-    <div class="hero-content">
-      <div class="hero-eyebrow fade-up">
-        <span class="dot"></span>
-        <span>AI 界的 App Store</span>
-      </div>
-
-      <h1 class="fade-up volcanic-title">
-        一個平台<br><span class="gradient">接通所有 AI 服務</span>
-      </h1>
-
-      <p class="hero-subtitle fade-up">
-        不用在工具之間切換。SEOBAIKE 把 SEO 分析、AI 對話、圖片生成、內容創作整合在同一個平台。用你自己的 API Key，掌握成本與資料。
-      </p>
-
-      <div class="hero-ctas fade-up">
-        <a href="/start" class="btn btn-primary btn-lg seismic-shake">開始使用</a>
-        <a href="/features" class="btn btn-secondary btn-lg seismic-shake">探索功能</a>
-      </div>
-
-      <div class="hero-byok fade-up">
-        <code>BYOK</code> 用你自己的 API Key，資料完全掌控
-      </div>
-    </div>
-
-    <div class="hero-scroll-hint">
-      <span>SCROLL</span>
-      <div class="scroll-line"></div>
-    </div>
-  </section>
-
-
-  <!-- ═══════════ 2. Trust / Social Proof ═══════════ -->
-  <section class="trust-section" id="trust">
-    <div class="container">
-      <div class="trust-inner">
-        <div class="trust-label fade-up">台灣在地團隊，服務台灣企業</div>
-        <div class="trust-grid stagger">
-          <div class="trust-item fade-up lava-glow">
-            <span class="trust-icon">&#9881;</span>
-            <div class="trust-value">插拔式</div>
-            <div class="trust-desc">服務架構隨需擴展</div>
-          </div>
-          <div class="trust-item fade-up lava-glow">
-            <span class="trust-icon">&#128273;</span>
-            <div class="trust-value">BYOK</div>
-            <div class="trust-desc">自帶 Key，資料自主</div>
-          </div>
-          <div class="trust-item fade-up lava-glow">
-            <span class="trust-icon">&#127758;</span>
-            <div class="trust-value">全球佈局</div>
-            <div class="trust-desc">台灣出發，國際接軌</div>
-          </div>
-          <div class="trust-item fade-up lava-glow">
-            <span class="trust-icon">&#128736;</span>
-            <div class="trust-value">24hr</div>
-            <div class="trust-desc">全天候系統運作中</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-
-  <!-- ═══════════ 3. How It Works ═══════════ -->
-  <section class="section-lg" id="how-it-works" style="background:var(--bg-secondary);">
-    <div class="container">
-      <div class="section-header fade-up">
-        <div class="section-badge">HOW IT WORKS</div>
-        <h2>三步驟，<span class="text-gold">立即上手</span></h2>
-        <p>從註冊到使用 AI 服務，簡單到不需要教學</p>
-      </div>
-
-      <div class="steps-grid">
-        <div class="step-card fade-up magma-border">
-          <div class="step-number">1</div>
-          <span class="step-icon">&#128100;</span>
-          <h3>建立帳號</h3>
-          <p>一鍵註冊，輸入你的 API Key。BYOK 架構，資料和成本由你自己掌控。</p>
-        </div>
-        <div class="step-card fade-up magma-border">
-          <div class="step-number">2</div>
-          <span class="step-icon">&#128268;</span>
-          <h3>選擇 AI 服務</h3>
-          <p>從平台市集挑選你需要的 AI 工具 — SEO 分析、內容生成、圖片製作、多語翻譯等。</p>
-        </div>
-        <div class="step-card fade-up magma-border">
-          <div class="step-number">3</div>
-          <span class="step-icon">&#9889;</span>
-          <h3>開始使用</h3>
-          <p>所有 AI 服務透過 SEOBAIKE 統一介面操作。一個平台，完成所有工作。</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-
-  <!-- ═══════════ 4. Why SEOBAIKE ═══════════ -->
-  <section class="section-lg" id="pillars">
-    <div class="container">
-      <div class="section-header fade-up">
-        <div class="section-badge">WHY SEOBAIKE</div>
-        <h2>為什麼選 <span class="text-gold">SEOBAIKE</span></h2>
-        <p>不只是工具，是讓 AI 服務跑起來的平台</p>
-      </div>
-
-      <div class="pillars-grid stagger">
-        <div class="pillar-card fade-up hover-lift">
-          <div class="pillar-icon">&#128640;</div>
-          <h3>一站式 AI 平台</h3>
-          <p>SEO、對話、翻譯、圖片、內容 — 所有 AI 能力集中在同一個平台，不再為了不同工具開一堆帳號。</p>
-        </div>
-        <div class="pillar-card fade-up hover-lift">
-          <div class="pillar-icon">&#128273;</div>
-          <h3>BYOK 架構</h3>
-          <p>用你自己的 API Key 呼叫 AI 服務。費用透明，資料不經第三方，隱私與成本完全掌控。</p>
-        </div>
-        <div class="pillar-card fade-up hover-lift">
-          <div class="pillar-icon">&#127987;</div>
-          <h3>台灣在地團隊</h3>
-          <p>小路光有限公司出品。台灣註冊公司（統編 60475510），中文客服，在地法規合規。</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-
-  <!-- ═══════════ 5. Demo ═══════════ -->
-  <section class="demo-section" id="demo">
-    <div class="demo-container">
-      <div class="section-header fade-up">
-        <div class="section-badge">LIVE DEMO</div>
-        <h2>AI <span class="text-gold">即時運作</span></h2>
-        <p>看 SEOBAIKE 平台如何呼叫 AI 服務</p>
-      </div>
-
-      <div class="demo-terminal fade-up" id="demoTerminal">
-        <div class="demo-terminal-bar">
-          <span class="demo-dot demo-dot-red"></span>
-          <span class="demo-dot demo-dot-yellow"></span>
-          <span class="demo-dot demo-dot-green"></span>
-          <span class="demo-terminal-title">seobaike-platform v3.0</span>
-        </div>
-        <div class="demo-body" id="demoBody">
-          <div class="demo-line">
-            <span class="prompt">&gt;</span>
-            <span class="cmd">seobaike connect --api-key YOUR_KEY</span>
-          </div>
-          <div class="demo-line">
-            <span class="success">[OK] API Key 已驗證，BYOK 模式啟動</span>
-          </div>
-          <div class="demo-line">
-            <span class="prompt">&gt;</span>
-            <span class="cmd">seobaike seo --analyze "aiforseo.vip"</span>
-          </div>
-          <div class="demo-line">
-            <span class="output">[AI] 掃描中... 發現 12 項優化機會</span>
-          </div>
-          <div class="demo-line">
-            <span class="success">[DONE] SEO 報告已生成，分數提升建議已列出</span>
-          </div>
-          <div class="demo-line">
-            <span class="prompt">&gt;</span>
-            <span class="cmd">seobaike content --generate "AI 平台趨勢分析"</span>
-          </div>
-          <div class="demo-line">
-            <span class="output">[AI] 生成中... 1,200 字文章 + SEO 標題 + Meta</span>
-          </div>
-          <div class="demo-line">
-            <span class="highlight">[LIVE] 內容已生成，可直接發布 &#9632;</span>
-            <span class="demo-cursor"></span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-
-  <!-- ═══════════ 6. CTA ═══════════ -->
-  <section class="cta-section heat-wave" id="cta">
-    <div class="cta-glow"></div>
-    <div class="cta-content container-narrow">
-      <div class="fade-up">
-        <div class="section-badge" style="margin-bottom:var(--sp-6);">GET STARTED</div>
-        <h2>準備好了嗎？<br><span class="text-gold">開始你的 AI 旅程</span></h2>
-        <p>一個平台，接通所有 AI 服務。台灣在地團隊打造，全球佈局。</p>
-        <div class="hero-ctas">
-          <a href="/start" class="btn btn-primary btn-lg seismic-shake">立即開始</a>
-          <a href="/pricing" class="btn btn-secondary btn-lg seismic-shake">查看方案</a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-
-  <!-- ═══════════ 9. Footer ═══════════ -->
-  <footer class="footer">
-    <div class="container">
-      <div class="footer-grid">
-        <div class="footer-brand">
-          <a href="/" class="nav-brand" style="font-size:1.3rem;">
-            <img src="/favicon.svg" alt="SEOBAIKE" width="28" height="28">
-            <span><span class="seo">SEO</span><span class="baike">BAIKE</span></span>
-          </a>
-          <p>AI 界的 App Store。小路光有限公司出品。</p>
-          <p style="font-size:0.75rem;color:var(--text-muted);margin-top:4px;">統編 60475510 | 台灣專利 115100981</p>
-        </div>
-
-        <div class="footer-col">
-          <h4>產品</h4>
-          <a href="/marketplace">市集</a>
-          <a href="/features">功能</a>
-          <a href="/pricing">方案</a>
-          <a href="/ecosystem">生態系統</a>
-          <a href="/billing">帳單管理</a>
-        </div>
-
-        <div class="footer-col">
-          <h4>資源</h4>
-          <a href="/docs">文件</a>
-          <a href="/blog">部落格</a>
-          <a href="/changelog">更新日誌</a>
-          <a href="/status">系統狀態</a>
-        </div>
-
-        <div class="footer-col">
-          <h4>公司</h4>
-          <a href="/about">關於我們</a>
-          <a href="/contact">聯絡</a>
-          <a href="/privacy">隱私政策</a>
-          <a href="/terms">服務條款</a>
-        </div>
-      </div>
-
-      <hr class="divider" style="margin:var(--sp-8) 0;">
-
-      <div class="footer-bottom">
-        <span>&copy; 2025 SEOBAIKE. 小路光有限公司 版權所有。</span>
-        <div class="flex gap-4">
-          <a href="/privacy">隱私</a>
-          <a href="/terms">條款</a>
-        </div>
-      </div>
-      <div class="footer-disclaimer">
-        本平台由小路光有限公司（統編 60475510）營運。AI 服務結果僅供參考，不構成任何形式之保證或承諾。使用本服務即表示同意<a href="/terms">服務條款</a>及<a href="/privacy">隱私權政策</a>。台灣專利申請案號 115100981。
-      </div>
-    </div>
-  </footer>
-
-
-  <!-- ═══════════ Scripts ═══════════ -->
-  <script>
-    /* ── Intersection Observer for fade-up ── */
-    (function() {
-      var obs = new IntersectionObserver(function(entries) {
-        entries.forEach(function(e) {
-          if (e.isIntersecting) {
-            e.target.classList.add('visible');
-          }
-        });
-      }, { threshold: 0.08 });
-      document.querySelectorAll('.fade-up').forEach(function(el) {
-        obs.observe(el);
-      });
-    })();
-
-    /* ── Nav scroll effect ── */
-    (function() {
-      var nav = document.getElementById('mainNav');
-      window.addEventListener('scroll', function() {
-        nav.classList.toggle('scrolled', window.scrollY > 20);
-      }, { passive: true });
-    })();
-
-    /* ── Hamburger toggle ── */
-    function toggleMenu() {
-      document.querySelector('.nav-hamburger').classList.toggle('active');
-      document.getElementById('mobileMenu').classList.toggle('open');
-    }
-
-    /* ── Counter animation (for any data-count elements) ── */
-    (function() {
-      var counted = false;
-      var trustSection = document.getElementById('trust');
-      if (!trustSection) return;
-      var statsObs = new IntersectionObserver(function(entries) {
-        entries.forEach(function(e) {
-          if (e.isIntersecting && !counted) {
-            counted = true;
-            var counters = document.querySelectorAll('[data-count]');
-            counters.forEach(function(el) {
-              var target = parseInt(el.getAttribute('data-count'), 10);
-              var suffix = el.getAttribute('data-suffix') || '';
-              var current = 0;
-              var duration = 1500;
-              var step = target / (duration / 16);
-              function tick() {
-                current += step;
-                if (current >= target) { el.textContent = target + suffix; return; }
-                el.textContent = Math.floor(current) + suffix;
-                requestAnimationFrame(tick);
-              }
-              tick();
-            });
-          }
-        });
-      }, { threshold: 0.3 });
-      statsObs.observe(trustSection);
-    })();
-
-    /* ── Demo terminal replay ── */
-    (function() {
-      var demoObs = new IntersectionObserver(function(entries) {
-        entries.forEach(function(e) {
-          if (e.isIntersecting) {
-            var lines = e.target.querySelectorAll('.demo-line');
-            lines.forEach(function(line) {
-              /* Reset animation by cloning */
-              var clone = line.cloneNode(true);
-              line.parentNode.replaceChild(clone, line);
-            });
-          }
-        });
-      }, { threshold: 0.3 });
-      var terminal = document.getElementById('demoTerminal');
-      if (terminal) demoObs.observe(terminal);
-    })();
-
-    /* ── Smooth scroll for anchor links ── */
-    document.querySelectorAll('a[href^="#"]').forEach(function(a) {
-      a.addEventListener('click', function(e) {
-        var target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-          e.preventDefault();
-          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
-      });
-    });
-
-    /* ── Page View Tracking ── */
-    (function(){
-      try {
-        var cfg = window.__SEOBAIKE__ || {};
-        var sUrl = cfg.supabaseUrl || 'https://vmyrivxxibqydccurxug.supabase.co';
-        var sKey = cfg.anonKey || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZteXJpdnh4aWJxeWRjY3VyeHVnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzAwNDAwMjksImV4cCI6MjA4NTYxNjAyOX0.iBV-23LGdm_uKffAExgqSV34-NWoAyv8_-M_cJQZ8Gg';
-        fetch(sUrl + '/rest/v1/page_views', {
-          method: 'POST',
-          headers: { 'Content-Type':'application/json', 'apikey':sKey, 'Authorization':'Bearer '+sKey, 'Prefer':'return=minimal' },
-          body: JSON.stringify({ path: location.pathname, referrer: document.referrer || null, user_agent: navigator.userAgent })
-        }).catch(function(){});
-      } catch(e){}
-    })();
-  </script>
-
-  <script src="/assets/analytics.js" defer></script>
-  <script src="/seobaike-widget.js"></script>
-  <script src="/assets/i18n.js"></script>
-  <script>SEOBAIKE_I18N.init();</script>
-  <script src="/assets/premium-fx.js"></script>
-  <script src="/assets/cookie-consent.js"></script>
-</body>
+  <body>
+    <div id="root"></div>
+  </body>
 </html>
