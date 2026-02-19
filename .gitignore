@@ -19,3 +19,6 @@ __pycache__/
 scripts/health-check/healthcheck_result_*.json
 scripts/health-check/healthcheck_report_*.md
 scripts/health-check/run_healthcheck.ps1
+scripts/health-check/repair_result_*.json
+scripts/health-check/repair_report_*.md
+scripts/health-check/cto_weekly_*.md
