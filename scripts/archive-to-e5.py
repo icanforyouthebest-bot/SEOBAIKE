@@ -10,9 +10,9 @@ import requests
 from msal import ConfidentialClientApplication
 
 # ── 設定 ──────────────────────────────────────────
-TENANT_ID     = os.environ["TENANT_ID"]
-CLIENT_ID     = os.environ["CLIENT_ID"]
-CLIENT_SECRET = os.environ["CLIENT_SECRET"]
+TENANT_ID     = os.environ.get("TENANT_ID", "c1e1278e-c05c-4d00-a4c9-93fbbea01346")
+CLIENT_ID     = os.environ.get("CLIENT_ID", "9dc16b16-952d-4190-b626-692c26f9262e")
+CLIENT_SECRET = os.environ.get("CLIENT_SECRET", "")
 AUTHORITY     = f"https://login.microsoftonline.com/{TENANT_ID}"
 SCOPES        = ["https://graph.microsoft.com/.default"]
 GRAPH_URL     = "https://graph.microsoft.com/v1.0"
@@ -95,9 +95,13 @@ def post_teams_notification(token: str, message: str) -> bool:
 
 
 def main():
-    print("🚀 AI Empire — E5 歸檔開始")
+    print("AI Empire — E5 Archive start")
+    if not CLIENT_SECRET:
+        print("[Archive] SKIP: CLIENT_SECRET not configured in GitHub Secrets")
+        print(f"[Archive] Deploy info: {COMMIT_SHA} by {ACTOR} @ {DEPLOY_TIME}")
+        return
     token = get_token()
-    print(f"✅ Token 取得成功")
+    print(f"Token OK")
 
     now = datetime.datetime.utcnow().strftime("%Y%m%d-%H%M%S")
 
