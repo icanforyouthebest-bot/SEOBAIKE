@@ -119,17 +119,17 @@ def archive_results(version_id: str, full_report: dict, report_md: str) -> dict:
     json_bytes = json.dumps(full_report, ensure_ascii=False, indent=2).encode("utf-8")
     json_ok = _upload_to_onedrive(token, f"healthcheck_{version_id}.json", json_bytes, "application/json")
     archive_result["json_uploaded"] = json_ok
-    print(f"  [Archive] JSON {'✅' if json_ok else '❌'} → OneDrive/{ONEDRIVE_FOLDER}/healthcheck_{version_id}.json")
+    print(f"  [Archive] JSON {'OK' if json_ok else 'FAIL'} -> OneDrive/{ONEDRIVE_FOLDER}/healthcheck_{version_id}.json")
 
     # 上傳 MD
     md_bytes = report_md.encode("utf-8")
     md_ok = _upload_to_onedrive(token, f"healthcheck_{version_id}.md", md_bytes, "text/markdown")
     archive_result["md_uploaded"] = md_ok
-    print(f"  [Archive] MD  {'✅' if md_ok else '❌'} → OneDrive/{ONEDRIVE_FOLDER}/healthcheck_{version_id}.md")
+    print(f"  [Archive] MD  {'OK' if md_ok else 'FAIL'} -> OneDrive/{ONEDRIVE_FOLDER}/healthcheck_{version_id}.md")
 
     # Teams 通知
     teams_ok = _send_teams_notification(token, version_id, full_report.get("summary", {}))
     archive_result["teams_notified"] = teams_ok
-    print(f"  [Archive] Teams 通知 {'✅' if teams_ok else '❌'}")
+    print(f"  [Archive] Teams: {'OK' if teams_ok else 'FAIL'}")
 
     return archive_result
