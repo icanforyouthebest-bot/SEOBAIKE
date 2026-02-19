@@ -2389,6 +2389,7 @@ const SITE_SECURITY_HEADERS: Record<string, string> = {
   'Referrer-Policy': 'strict-origin-when-cross-origin',
   'Permissions-Policy': 'camera=(), microphone=(), geolocation=(), payment=()',
   'X-XSS-Protection': '1; mode=block',
+  'Access-Control-Allow-Origin': '*',
 }
 
 // API 安全標頭 — 針對 JSON API 回應
