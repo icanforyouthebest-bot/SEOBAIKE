@@ -145,7 +145,96 @@
   </head>
 
   <body>
-    <div id="root"><style>#sb-shell{position:fixed;inset:0;background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);display:flex;flex-direction:column;align-items:center;justify-content:center;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:#fff;z-index:9999}.sb-logo{font-size:2.5rem;font-weight:900;letter-spacing:-1px;margin-bottom:.5rem}.sb-sub{font-size:1rem;opacity:.8;margin-bottom:2rem}.sb-dots{display:flex;gap:8px}.sb-dot{width:10px;height:10px;border-radius:50%;background:#fff;opacity:.4;animation:sb-pulse 1.4s ease-in-out infinite}.sb-dot:nth-child(2){animation-delay:.2s}.sb-dot:nth-child(3){animation-delay:.4s}@keyframes sb-pulse{0%,80%,100%{opacity:.4;transform:scale(.8)}40%{opacity:1;transform:scale(1)}}</style><div id="sb-shell"><div class="sb-logo">SEOBAIKE</div><div class="sb-sub">AI 驅動的 SEO 自動化平台</div><div class="sb-dots"><div class="sb-dot"></div><div class="sb-dot"></div><div class="sb-dot"></div></div></div></div>
+    <div id="root"><style>
+*{box-sizing:border-box;margin:0;padding:0}
+#sb-page{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:#0a0a1a;min-height:100vh;color:#fff}
+#sb-nav{display:flex;align-items:center;justify-content:space-between;padding:16px 24px;background:rgba(10,10,26,.9);backdrop-filter:blur(20px);position:sticky;top:0;z-index:100;border-bottom:1px solid rgba(255,255,255,.08)}
+.sb-logo{font-size:1.4rem;font-weight:900;background:linear-gradient(135deg,#667eea,#764ba2);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.sb-nav-btns{display:flex;gap:12px}
+.sb-btn{padding:8px 20px;border-radius:8px;font-size:.9rem;font-weight:600;cursor:pointer;text-decoration:none;transition:.2s}
+.sb-btn-outline{border:1px solid rgba(255,255,255,.3);color:#fff;background:transparent}
+.sb-btn-primary{background:linear-gradient(135deg,#667eea,#764ba2);color:#fff;border:none}
+#sb-hero{text-align:center;padding:80px 24px 60px;background:linear-gradient(135deg,#0a0a2e 0%,#1a0a3e 50%,#0a1a2e 100%)}
+.sb-badge{display:inline-flex;align-items:center;gap:6px;padding:6px 14px;border-radius:20px;background:rgba(102,126,234,.15);border:1px solid rgba(102,126,234,.3);color:#a78bfa;font-size:.8rem;margin:4px;font-weight:500}
+#sb-hero h1{font-size:clamp(2rem,5vw,4rem);font-weight:900;margin:24px 0 16px;line-height:1.1}
+#sb-hero h1 span{background:linear-gradient(135deg,#667eea,#e8850c);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+#sb-hero p{font-size:1.1rem;color:rgba(255,255,255,.7);margin-bottom:40px;max-width:600px;margin-left:auto;margin-right:auto}
+.sb-cta-group{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-bottom:60px}
+.sb-cta-primary{padding:14px 32px;background:linear-gradient(135deg,#667eea,#764ba2);border:none;color:#fff;border-radius:12px;font-size:1rem;font-weight:700;cursor:pointer;text-decoration:none;display:inline-block;box-shadow:0 8px 32px rgba(102,126,234,.4)}
+.sb-cta-secondary{padding:14px 32px;border:2px solid rgba(255,255,255,.2);color:#fff;border-radius:12px;font-size:1rem;font-weight:600;text-decoration:none;display:inline-block}
+.sb-stats{display:flex;gap:32px;justify-content:center;flex-wrap:wrap;padding:32px 0}
+.sb-stat{text-align:center}.sb-stat-num{font-size:2rem;font-weight:900;background:linear-gradient(135deg,#667eea,#e8850c);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.sb-stat-label{font-size:.8rem;color:rgba(255,255,255,.5);margin-top:4px}
+#sb-features{padding:60px 24px;max-width:1100px;margin:0 auto}
+#sb-features h2{text-align:center;font-size:2rem;font-weight:800;margin-bottom:40px}
+.sb-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px}
+.sb-card{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:24px}
+.sb-card-icon{font-size:2rem;margin-bottom:12px}
+.sb-card h3{font-size:1.1rem;font-weight:700;margin-bottom:8px}
+.sb-card p{color:rgba(255,255,255,.6);font-size:.9rem;line-height:1.6}
+#sb-pricing{padding:60px 24px;background:rgba(255,255,255,.02);text-align:center}
+#sb-pricing h2{font-size:2rem;font-weight:800;margin-bottom:8px}
+#sb-pricing p{color:rgba(255,255,255,.6);margin-bottom:40px}
+.sb-price-grid{display:flex;gap:20px;justify-content:center;flex-wrap:wrap}
+.sb-price-card{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:28px;min-width:240px;text-align:center}
+.sb-price-card.featured{border-color:#667eea;background:rgba(102,126,234,.1)}
+.sb-price-name{font-size:1.1rem;font-weight:700;margin-bottom:8px}
+.sb-price-amount{font-size:2.5rem;font-weight:900;color:#667eea;margin:12px 0}
+.sb-price-amount span{font-size:1rem;color:rgba(255,255,255,.5);font-weight:400}
+.sb-price-desc{font-size:.85rem;color:rgba(255,255,255,.6);margin-bottom:20px}
+#sb-footer{text-align:center;padding:32px 24px;border-top:1px solid rgba(255,255,255,.08);color:rgba(255,255,255,.4);font-size:.85rem}
+</style>
+<div id="sb-page">
+<nav id="sb-nav">
+  <div class="sb-logo">SEOBAIKE</div>
+  <div class="sb-nav-btns">
+    <a href="/login" class="sb-btn sb-btn-outline">登入</a>
+    <a href="/login" class="sb-btn sb-btn-primary">免費試用 🎁</a>
+  </div>
+</nav>
+<section id="sb-hero">
+  <div>
+    <span class="sb-badge">🏆 全球首創</span>
+    <span class="sb-badge">📜 專利 115100981</span>
+    <span class="sb-badge">⭐ SEO 90+ 分保證</span>
+  </div>
+  <h1>歡迎來到<br><span>SEOBAIKE</span></h1>
+  <p>全球首創 AI-SEO 專利技術<br>一鍵生成高排名網站，30 秒看到結果</p>
+  <div class="sb-cta-group">
+    <a href="/login" class="sb-cta-primary">免費開始 → 送 50 點</a>
+    <a href="/pricing" class="sb-cta-secondary">查看方案</a>
+  </div>
+  <div class="sb-stats">
+    <div class="sb-stat"><div class="sb-stat-num">30+</div><div class="sb-stat-label">AI 工具</div></div>
+    <div class="sb-stat"><div class="sb-stat-num">190+</div><div class="sb-stat-label">Edge Functions</div></div>
+    <div class="sb-stat"><div class="sb-stat-num">24hr</div><div class="sb-stat-label">AI 客服</div></div>
+    <div class="sb-stat"><div class="sb-stat-num">99.9%</div><div class="sb-stat-label">運行時間</div></div>
+  </div>
+</section>
+<section id="sb-features">
+  <h2>強大功能一次搞定</h2>
+  <div class="sb-grid">
+    <div class="sb-card"><div class="sb-card-icon">🚀</div><h3>AI 自動建站</h3><p>輸入關鍵字，30 秒生成完整 SEO 網站，Lighthouse 90+ 分保證</p></div>
+    <div class="sb-card"><div class="sb-card-icon">🤖</div><h3>AI 客服機器人</h3><p>24小時不間斷，自動回應客戶問題，提升轉換率</p></div>
+    <div class="sb-card"><div class="sb-card-icon">📈</div><h3>SEO 健檢分析</h3><p>深度分析你的網站，找出排名問題，一鍵優化</p></div>
+    <div class="sb-card"><div class="sb-card-icon">🎬</div><h3>AI 影片 & 配音</h3><p>文字轉影片、AI 配音，快速製作行銷素材</p></div>
+    <div class="sb-card"><div class="sb-card-icon">💰</div><h3>點數制計費</h3><p>按使用量付費，無月費無綁約，靈活省錢</p></div>
+    <div class="sb-card"><div class="sb-card-icon">🌏</div><h3>全球市集</h3><p>把你的 AI 工具賣給全世界，三級分潤最高賺 50%</p></div>
+  </div>
+</section>
+<section id="sb-pricing">
+  <h2>簡單透明的定價</h2>
+  <p>點數制計費，用多少買多少</p>
+  <div class="sb-price-grid">
+    <div class="sb-price-card"><div class="sb-price-name">入門</div><div class="sb-price-amount">NT$299<span>/月</span></div><div class="sb-price-desc">100 點 · 適合個人</div><a href="/login" class="sb-btn sb-btn-outline" style="display:block;text-align:center">立即開始</a></div>
+    <div class="sb-price-card featured"><div class="sb-price-name">⭐ 商業</div><div class="sb-price-amount">NT$999<span>/月</span></div><div class="sb-price-desc">500 點 · 適合中小企業</div><a href="/login" class="sb-btn sb-btn-primary" style="display:block;text-align:center">立即開始</a></div>
+    <div class="sb-price-card"><div class="sb-price-name">企業</div><div class="sb-price-amount">NT$2,999<span>/月</span></div><div class="sb-price-desc">2000 點 · 大型企業</div><a href="/login" class="sb-btn sb-btn-outline" style="display:block;text-align:center">聯絡我們</a></div>
+  </div>
+</section>
+<footer id="sb-footer">
+  © 2026 小路光有限公司 (SEOBAIKE) · 專利 115100981 · <a href="mailto:seobaike@aiforseo.vip" style="color:inherit">seobaike@aiforseo.vip</a>
+</footer>
+</div></div>>#sb-shell{position:fixed;inset:0;background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);display:flex;flex-direction:column;align-items:center;justify-content:center;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:#fff;z-index:9999}.sb-logo{font-size:2.5rem;font-weight:900;letter-spacing:-1px;margin-bottom:.5rem}.sb-sub{font-size:1rem;opacity:.8;margin-bottom:2rem}.sb-dots{display:flex;gap:8px}.sb-dot{width:10px;height:10px;border-radius:50%;background:#fff;opacity:.4;animation:sb-pulse 1.4s ease-in-out infinite}.sb-dot:nth-child(2){animation-delay:.2s}.sb-dot:nth-child(3){animation-delay:.4s}@keyframes sb-pulse{0%,80%,100%{opacity:.4;transform:scale(.8)}40%{opacity:1;transform:scale(1)}}</style><div id="sb-shell"><div class="sb-logo">SEOBAIKE</div><div class="sb-sub">AI 驅動的 SEO 自動化平台</div><div class="sb-dots"><div class="sb-dot"></div><div class="sb-dot"></div><div class="sb-dot"></div></div></div></div>
     <!-- SEOBAIKE AI Widget -->
     <script src="/seobaike-widget.js" defer></script>
 
