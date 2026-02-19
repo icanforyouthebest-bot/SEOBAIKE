@@ -1,0 +1,39 @@
+{
+  "version_id": "2026-02-19-19-00",
+  "timestamp": "2026-02-19T19:00:40.531756",
+  "dry_run": false,
+  "total_risks": 3,
+  "repair_log": [],
+  "tracker": [
+    {
+      "issue_id": "AZ-000",
+      "desc": "Azure credentials not configured",
+      "fix_command": "manual_review_required",
+      "status": "pending",
+      "difficulty": "medium",
+      "note": "",
+      "updated_at": "2026-02-19T19:00:40.531062",
+      "found_at": "2026-02-19T19:00:40.531062"
+    },
+    {
+      "issue_id": "GH-001",
+      "desc": "Repo 為 Public（原始碼公開）",
+      "fix_command": "manual_review_required",
+      "status": "pending",
+      "difficulty": "high",
+      "note": "",
+      "updated_at": "2026-02-19T19:00:40.531238",
+      "found_at": "2026-02-19T19:00:40.531238"
+    },
+    {
+      "issue_id": "GH-003",
+      "desc": "最近 1 個 Actions 執行失敗",
+      "fix_command": "manual_review_required",
+      "status": "pending",
+      "difficulty": "medium",
+      "note": "",
+      "updated_at": "2026-02-19T19:00:40.531427",
+      "found_at": "2026-02-19T19:00:40.531427"
+    }
+  ]
+}
