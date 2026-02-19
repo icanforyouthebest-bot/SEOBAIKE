@@ -46,18 +46,33 @@ def archive_to_onedrive(token: str, filename: str, content: str) -> bool:
     """上傳檔案到 OneDrive SEOBAIKE/deployments/ 資料夾"""
     headers = get_headers(token)
     headers["Content-Type"] = "text/plain; charset=utf-8"
-    upload_url = f"{GRAPH_URL}/users/{ACTOR}@AIEmpire.onmicrosoft.com/drive/root:/SEOBAIKE/deployments/{filename}:/content"
-    r = requests.put(upload_url, headers=headers, data=content.encode("utf-8"))
-    if r.status_code in (200, 201):
-        print(f"✅ 歸檔成功: {filename}")
-        return True
-    # fallback: 用管理員帳戶
-    upload_url2 = f"{GRAPH_URL}/users/HsuChunHsiang@AIEmpire.onmicrosoft.com/drive/root:/SEOBAIKE/deployments/{filename}:/content"
-    r2 = requests.put(upload_url2, headers=headers, data=content.encode("utf-8"))
-    if r2.status_code in (200, 201):
-        print(f"✅ 歸檔成功(管理員): {filename}")
-        return True
-    print(f"⚠️ 歸檔失敗 {r2.status_code}: {r2.text[:200]}")
+    data = content.encode("utf-8")
+
+    # 嘗試 1: 管理員帳戶 OneDrive
+    for upn in ["HsuChunHsiang@AIEmpire.onmicrosoft.com", "admin@AIEmpire.onmicrosoft.com"]:
+        url = f"{GRAPH_URL}/users/{upn}/drive/root:/SEOBAIKE/deployments/{filename}:/content"
+        r = requests.put(url, headers=headers, data=data)
+        if r.status_code in (200, 201):
+            print(f"✅ 歸檔成功 ({upn}): {filename}")
+            return True
+        print(f"  嘗試 {upn}: {r.status_code}")
+
+    # 嘗試 2: 從使用者清單找第一個有效使用者
+    try:
+        ur = requests.get(f"{GRAPH_URL}/users?$select=id,userPrincipalName&$top=5",
+                          headers={"Authorization": f"Bearer {token}"})
+        if ur.ok:
+            for u in ur.json().get("value", []):
+                uid = u.get("id")
+                url = f"{GRAPH_URL}/users/{uid}/drive/root:/SEOBAIKE/deployments/{filename}:/content"
+                r = requests.put(url, headers=headers, data=data)
+                if r.status_code in (200, 201):
+                    print(f"✅ 歸檔成功 (user {u.get('userPrincipalName')}): {filename}")
+                    return True
+    except Exception:
+        pass
+
+    print(f"⚠️ 所有上傳嘗試失敗 — 內容記錄到日誌")
     return False
 
 
