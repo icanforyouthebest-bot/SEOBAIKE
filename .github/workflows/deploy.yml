@@ -148,6 +148,8 @@ jobs:
     runs-on: ubuntu-latest
     needs: [deploy-cloudflare-worker, deploy-supabase, archive-to-e5]
     if: always()
+    permissions:
+      contents: write
     steps:
       - uses: actions/checkout@v4
 
@@ -159,7 +161,8 @@ jobs:
         run: pip install msal requests
 
       - name: Run Health Check + Archive to 5 Platforms
-        run: python scripts/health-check/healthcheck_orchestrator.py
+        working-directory: scripts/health-check
+        run: python healthcheck_orchestrator.py
         continue-on-error: true
         env:
           TENANT_ID: ${{ secrets.TENANT_ID }}
