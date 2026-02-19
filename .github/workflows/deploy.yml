@@ -71,7 +71,39 @@ jobs:
             --src deploy.zip
 
   # ─────────────────────────────────────
-  # 3. E5 Graph API 自動歸檔
+  # 3. Supabase Edge Functions 部署
+  # Pipeline C：資料層 → Supabase
+  # ─────────────────────────────────────
+  deploy-supabase:
+    name: Deploy Supabase Edge Functions
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: supabase/setup-cli@v1
+        with:
+          version: latest
+
+      - name: Link Supabase Project
+        run: supabase link --project-ref ${{ secrets.SUPABASE_PROJECT_REF }}
+        env:
+          SUPABASE_ACCESS_TOKEN: ${{ secrets.SUPABASE_ACCESS_TOKEN }}
+
+      - name: Deploy All Edge Functions
+        run: |
+          for fn in supabase/functions/*/; do
+            fname=$(basename "$fn")
+            if [[ "$fname" != "_shared" ]]; then
+              echo "Deploying: $fname"
+              supabase functions deploy "$fname" --no-verify-jwt || echo "Warning: $fname deploy failed, continuing..."
+            fi
+          done
+        env:
+          SUPABASE_ACCESS_TOKEN: ${{ secrets.SUPABASE_ACCESS_TOKEN }}
+
+  # ─────────────────────────────────────
+  # 4. E5 Graph API 自動歸檔
+  # Pipeline D：稽核 → E5
   # ─────────────────────────────────────
   archive-to-e5:
     name: Archive Deploy Record to E5
