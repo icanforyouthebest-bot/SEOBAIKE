@@ -14,3 +14,8 @@ supabase/.temp/
 NVIDIA-AI-Workbench-Setup.exe
 ngccli_win_amd64.exe
 *.exe
+__pycache__/
+*.pyc
+scripts/health-check/healthcheck_result_*.json
+scripts/health-check/healthcheck_report_*.md
+scripts/health-check/run_healthcheck.ps1
