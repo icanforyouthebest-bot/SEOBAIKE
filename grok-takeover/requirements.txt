@@ -1,0 +1,2 @@
+azure-functions
+supabase==2.0.0

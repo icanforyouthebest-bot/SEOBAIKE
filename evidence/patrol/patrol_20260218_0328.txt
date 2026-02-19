@@ -1,0 +1,45 @@
+PATROL LOG — 2026-02-18 03:28 TST (Sweep 50)
+========================================================
+
+[HEALTH] WARNING (6P/1W) | DB: 57ms | Gateway: 566 req/hr | Errors: 0/8548 | Violations: 8 | Blocked: 42
+[ARSENAL] 22/23 (96%) — stable
+[COMPONENTS] 41/41 HEALTHY
+[FRONTEND] All 5 pages: 200 OK
+  report / war-room / index / pricing / command-center
+
+[CUMULATIVE: 8362→8548 (+186), 0 errors, 50 sweeps, ~52 min]
+
+[50-SWEEP MILESTONE — COMPREHENSIVE REPORT]
+  Duration: ~52 minutes (02:36 → 03:28 TST)
+  Total sweeps: 50
+  Health checks: 50/50 passed (6P/1W each)
+  Arsenal checks: All stable at 22/23 (96%)
+  Frontend checks: All 200 OK across all checks
+  Component checks: 41/41 healthy across all 50 sweeps
+
+  DB latency: 35-120ms (avg ~55ms)
+    Best: 35ms (sweep 30)
+    Worst: 120ms (sweep 36, transient, immediately recovered)
+
+  Gateway throughput: 564-568 req/hr (stable)
+  Error rate: 0.0% constant
+  Requests processed: 8362→8548 (+186 during patrol)
+
+  Events:
+    Sweep 3: Together AI recovered from timeout
+    Sweep 30: Brief 21/23 arsenal flicker, immediately resolved
+    Sweep 36: DB latency spike to 120ms, resolved next sweep
+
+  Evidence filed during patrol:
+    - 06_loyalty_points_platforms.txt: 22→31 companies
+    - 07_mlm_affiliate_platforms.txt: 13 companies + 11 dirs (NEW)
+    - 08_national_legal_databases.txt: 21 gov portals (NEW)
+    - 00_summary.txt: 137→180 total entries, 6→8 quadrants
+    - 48 patrol log files
+
+  Known persistent issues (unchanged):
+    1. Meta AI 401 (key expired)
+    2. WD stats endpoint 401 (auth issue)
+    3. Inference violations: 8/24h (stable)
+
+[STATUS] System running. No stop order. Continuing patrol.

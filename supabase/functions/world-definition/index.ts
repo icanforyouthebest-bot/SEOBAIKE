@@ -140,15 +140,19 @@ Deno.serve(async (req) => {
         return jsonResponse(400, { error: 'keyword required (string)' })
       }
 
-      // V-008: 驗證國家代碼
+      // V-008: 全球國家代碼 (不再限制 4 國)
       const countryField: Record<string, string> = {
-        tw: 'name_tw',
-        us: 'name_us',
-        eu: 'name_eu',
-        jp: 'name_jp',
+        tw: 'name_tw', us: 'name_us', eu: 'name_eu', jp: 'name_jp',
+        cn: 'name_cn', kr: 'name_kr', uk: 'name_uk', de: 'name_de',
+        fr: 'name_fr', in: 'name_in', br: 'name_br', au: 'name_au',
+        ca: 'name_ca', sg: 'name_sg', hk: 'name_hk', th: 'name_th',
+        vn: 'name_vn', id: 'name_id', my: 'name_my', ph: 'name_ph',
+        mx: 'name_mx', sa: 'name_sa', ae: 'name_ae', il: 'name_il',
+        intl: 'name_us', // ISIC fallback to English
       }
+      // 未知國家碼 fallback 到 name_tw 搜尋
       if (country && !countryField[country]) {
-        return jsonResponse(400, { error: `Invalid country. Valid: ${Object.keys(countryField).join(', ')}` })
+        // 不拒絕，fallback 全文搜尋
       }
 
       // V-002: 過濾 ILIKE 特殊字元，防止萬用字元枚舉
@@ -337,12 +341,36 @@ Deno.serve(async (req) => {
         levels: { l1, l2, l3, l4 },
         paths: { allowed: allowedPaths, forbidden: forbiddenPaths },
         violations,
-        countries: ['TW', 'US', 'EU', 'JP'],
+        countries: [
+          'TW','US','EU','JP','CN','KR','UK','DE','FR','IN','BR','AU',
+          'CA','SG','HK','TH','VN','ID','MY','PH','MX','SA','AE','IL'
+        ],
         classification_systems: {
-          TW: '行業標準分類',
+          INTL: 'ISIC Rev.4 (UN International Standard)',
+          TW: '行業標準分類 (TSIC)',
           US: 'NAICS 2022',
           EU: 'NACE Rev.2',
-          JP: 'JSIC Rev.14',
+          JP: 'JSIC Rev.14 (日本標準産業分類)',
+          CN: 'GB/T 4754-2017 (國民經濟行業分類)',
+          KR: 'KSIC Rev.10 (한국표준산업분류)',
+          UK: 'UK SIC 2007',
+          DE: 'WZ 2008 (Klassifikation der Wirtschaftszweige)',
+          FR: 'NAF Rev.2 (Nomenclature d\'activités française)',
+          IN: 'NIC 2008 (National Industrial Classification)',
+          BR: 'CNAE 2.0 (Classificação Nacional de Atividades Econômicas)',
+          AU: 'ANZSIC 2006 (Australian and New Zealand Standard)',
+          CA: 'NAICS Canada 2022',
+          SG: 'SSIC 2020 (Singapore Standard)',
+          HK: 'HSIC (Hong Kong Standard)',
+          TH: 'TSIC 2009 (Thailand Standard)',
+          VN: 'VSIC 2018 (Vietnam Standard)',
+          ID: 'KBLI 2020 (Klasifikasi Baku Lapangan Usaha Indonesia)',
+          MY: 'MSIC 2008 (Malaysia Standard)',
+          PH: 'PSIC 2009 (Philippine Standard)',
+          MX: 'SCIAN 2023 (Sistema de Clasificación Industrial)',
+          SA: 'ISIC-SA (Saudi Arabia)',
+          AE: 'ISIC-AE (United Arab Emirates)',
+          IL: 'CBS Classification (Israel)',
         },
       })
     }

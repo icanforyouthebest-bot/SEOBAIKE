@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI 文件分析報告 — SEOBAIKE CaaS</title>
+<meta name="description" content="上傳文件，AI 自動產生結構化分析報告。專利 L1-L4 推理約束，跨國產業對齊。">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+TC:wght@400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#06060f;--surface:#0d0d1a;--card:#12122a;--border:#1e1e3a;
+  --text:#e8e8f0;--dim:#8888aa;--accent:#6c5ce7;--green:#00ff88;
+  --red:#ff4466;--gold:#ffaa00;--cyan:#00eeff;
+}
+body{font-family:'Inter','Noto Sans TC',sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
+a{color:var(--cyan);text-decoration:none}
+button{cursor:pointer;border:none;font-family:inherit}
+.mono{font-family:'JetBrains Mono',monospace}
+
+/* Layout */
+.app{max-width:1100px;margin:0 auto;padding:20px}
+header{display:flex;align-items:center;justify-content:space-between;padding:16px 0;border-bottom:1px solid var(--border);margin-bottom:24px}
+.logo{font-size:18px;font-weight:700;letter-spacing:1px}
+.logo span{color:var(--accent)}
+.user-bar{display:flex;align-items:center;gap:12px}
+.credits-badge{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:6px 16px;font-size:13px;display:flex;align-items:center;gap:6px}
+.credits-badge .pts{color:var(--gold);font-weight:600}
+.btn{padding:8px 20px;border-radius:8px;font-size:14px;font-weight:500;transition:all .2s}
+.btn-primary{background:var(--accent);color:#fff}
+.btn-primary:hover{background:#7c6cf7;transform:translateY(-1px)}
+.btn-outline{background:transparent;border:1px solid var(--border);color:var(--dim)}
+.btn-outline:hover{border-color:var(--accent);color:var(--text)}
+.btn-danger{background:var(--red);color:#fff}
+.btn-sm{padding:5px 12px;font-size:12px}
+
+/* Auth */
+#auth-section{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:70vh}
+.auth-box{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:40px;width:100%;max-width:400px}
+.auth-box h2{text-align:center;margin-bottom:8px}
+.auth-box p{text-align:center;color:var(--dim);font-size:14px;margin-bottom:24px}
+.form-group{margin-bottom:16px}
+.form-group label{display:block;font-size:13px;color:var(--dim);margin-bottom:4px}
+.form-group input{width:100%;padding:10px 14px;background:var(--surface);border:1px solid var(--border);border-radius:8px;color:var(--text);font-size:14px;outline:none}
+.form-group input:focus{border-color:var(--accent)}
+.auth-toggle{text-align:center;margin-top:16px;font-size:13px;color:var(--dim)}
+.auth-toggle a{cursor:pointer}
+.auth-error{color:var(--red);font-size:13px;text-align:center;margin-top:8px;min-height:20px}
+
+/* Main App */
+#app-section{display:none}
+.tabs{display:flex;gap:4px;margin-bottom:24px;border-bottom:1px solid var(--border);padding-bottom:0}
+.tab{padding:10px 20px;font-size:14px;color:var(--dim);background:transparent;border:none;border-bottom:2px solid transparent;transition:all .2s}
+.tab.active{color:var(--text);border-bottom-color:var(--accent)}
+.tab:hover{color:var(--text)}
+.tab-content{display:none}
+.tab-content.active{display:block}
+
+/* Upload Zone */
+.upload-zone{border:2px dashed var(--border);border-radius:16px;padding:60px 40px;text-align:center;transition:all .3s;cursor:pointer;position:relative}
+.upload-zone:hover,.upload-zone.dragover{border-color:var(--accent);background:rgba(108,92,231,0.05)}
+.upload-zone svg{width:48px;height:48px;margin-bottom:16px;color:var(--dim)}
+.upload-zone h3{margin-bottom:8px;font-size:18px}
+.upload-zone p{color:var(--dim);font-size:14px}
+.upload-zone input{position:absolute;inset:0;opacity:0;cursor:pointer}
+.file-info{margin-top:16px;padding:16px;background:var(--surface);border-radius:8px;display:none;text-align:left}
+.file-info.show{display:block}
+.file-meta{display:flex;gap:16px;flex-wrap:wrap;font-size:13px;color:var(--dim)}
+.file-meta span{display:flex;align-items:center;gap:4px}
+
+/* Preview */
+.text-preview{margin-top:16px;background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:16px;max-height:200px;overflow-y:auto;font-size:13px;color:var(--dim);white-space:pre-wrap;word-break:break-all;display:none}
+.text-preview.show{display:block}
+
+/* Analyze Button */
+.analyze-bar{margin-top:20px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.cost-info{font-size:13px;color:var(--dim)}
+.cost-info .pts{color:var(--gold);font-weight:600}
+#btn-analyze{padding:12px 32px;font-size:16px;font-weight:600;border-radius:10px;background:linear-gradient(135deg,var(--accent),#8b5cf6);color:#fff;transition:all .3s}
+#btn-analyze:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(108,92,231,0.4)}
+#btn-analyze:disabled{opacity:0.4;cursor:not-allowed;transform:none;box-shadow:none}
+
+/* Progress */
+.progress-section{display:none;margin-top:24px;text-align:center}
+.progress-section.show{display:block}
+.spinner{width:40px;height:40px;border:3px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:spin 1s linear infinite;margin:0 auto 16px}
+@keyframes spin{to{transform:rotate(360deg)}}
+.progress-text{color:var(--dim);font-size:14px}
+
+/* Report */
+.report-section{display:none;margin-top:24px}
+.report-section.show{display:block}
+.report-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:24px;margin-bottom:16px}
+.report-card h3{font-size:15px;margin-bottom:12px;display:flex;align-items:center;gap:8px}
+.report-card h3 .tag{font-size:11px;padding:2px 8px;border-radius:4px;font-weight:500}
+.tag-l1{background:rgba(0,255,136,0.15);color:var(--green)}
+.tag-l2{background:rgba(0,238,255,0.15);color:var(--cyan)}
+.tag-l3{background:rgba(255,170,0,0.15);color:var(--gold)}
+.tag-l4{background:rgba(108,92,231,0.15);color:var(--accent)}
+.summary-text{font-size:15px;line-height:1.7;color:var(--text)}
+.kv-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+.kv-item{background:var(--surface);border-radius:8px;padding:12px 16px}
+.kv-item .label{font-size:11px;text-transform:uppercase;color:var(--dim);letter-spacing:1px;margin-bottom:4px}
+.kv-item .value{font-size:14px;font-weight:500}
+.risk-bar{height:8px;border-radius:4px;background:var(--surface);overflow:hidden;margin-top:8px}
+.risk-fill{height:100%;border-radius:4px;transition:width .5s}
+.findings-list{list-style:none;padding:0}
+.findings-list li{padding:8px 0;border-bottom:1px solid var(--border);font-size:14px;color:var(--text);display:flex;align-items:flex-start;gap:8px}
+.findings-list li::before{content:'→';color:var(--accent);font-weight:bold;flex-shrink:0}
+.trail-step{display:flex;align-items:flex-start;gap:12px;padding:12px 0;border-bottom:1px solid var(--border)}
+.trail-level{font-size:12px;font-weight:600;padding:4px 10px;border-radius:6px;flex-shrink:0;min-width:36px;text-align:center}
+.trail-content{flex:1}
+.trail-node{font-weight:500;margin-bottom:2px}
+.trail-reasoning{font-size:13px;color:var(--dim)}
+.country-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.country-card{background:var(--surface);border-radius:8px;padding:12px;text-align:center}
+.country-flag{font-size:24px;margin-bottom:4px}
+.country-code{font-size:13px;font-weight:600;color:var(--cyan);font-family:'JetBrains Mono',monospace}
+.country-name{font-size:12px;color:var(--dim);margin-top:2px}
+
+/* History */
+.history-table{width:100%;border-collapse:collapse}
+.history-table th{text-align:left;font-size:12px;text-transform:uppercase;color:var(--dim);letter-spacing:1px;padding:8px 12px;border-bottom:1px solid var(--border)}
+.history-table td{padding:10px 12px;border-bottom:1px solid var(--border);font-size:14px}
+.status-dot{width:8px;height:8px;border-radius:50%;display:inline-block;margin-right:6px}
+.status-completed{background:var(--green)}
+.status-processing{background:var(--gold)}
+.status-failed{background:var(--red)}
+.status-pending{background:var(--dim)}
+.view-btn{color:var(--cyan);cursor:pointer;font-size:13px}
+.view-btn:hover{text-decoration:underline}
+.empty-state{text-align:center;padding:60px 20px;color:var(--dim)}
+
+/* Patent Badge */
+.patent-bar{text-align:center;padding:16px 0;font-size:12px;color:var(--dim);border-top:1px solid var(--border);margin-top:40px}
+.patent-bar span{color:var(--gold)}
+
+/* Responsive */
+@media(max-width:768px){
+  .app{padding:12px}
+  .country-grid{grid-template-columns:repeat(2,1fr)}
+  .kv-grid{grid-template-columns:1fr}
+  .analyze-bar{flex-direction:column}
+  .history-table{font-size:12px}
+  .tabs{overflow-x:auto}
+}
+</style>
+</head>
+<body>
+<div class="app">
+  <header>
+    <div class="logo">SEO<span>BAIKE</span> <span style="font-size:13px;color:var(--dim);font-weight:400">CaaS Report</span></div>
+    <div class="user-bar" id="user-bar" style="display:none">
+      <div class="credits-badge">Points: <span class="pts" id="credits-display">—</span></div>
+      <span id="user-email" style="font-size:13px;color:var(--dim)"></span>
+      <button class="btn btn-outline btn-sm" onclick="logout()">登出</button>
+    </div>
+  </header>
+
+  <!-- Auth -->
+  <div id="auth-section">
+    <div class="auth-box">
+      <h2 id="auth-title">登入</h2>
+      <p>上傳文件，AI 自動產生 L1-L4 結構化分析報告</p>
+      <div class="form-group">
+        <label>Email</label>
+        <input type="email" id="auth-email" placeholder="you@example.com">
+      </div>
+      <div class="form-group">
+        <label>密碼</label>
+        <input type="password" id="auth-password" placeholder="••••••••">
+      </div>
+      <button class="btn btn-primary" style="width:100%;padding:12px" id="auth-btn" onclick="handleAuth()">登入</button>
+      <div class="auth-error" id="auth-error"></div>
+      <div class="auth-toggle">
+        <span id="auth-toggle-text">沒有帳號？</span>
+        <a id="auth-toggle-link" onclick="toggleAuth()">註冊</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main App -->
+  <div id="app-section">
+    <div class="tabs">
+      <button class="tab active" data-tab="upload" onclick="switchTab('upload')">上傳分析</button>
+      <button class="tab" data-tab="history" onclick="switchTab('history')">歷史報告</button>
+    </div>
+
+    <!-- Upload Tab -->
+    <div class="tab-content active" id="tab-upload">
+      <div class="upload-zone" id="upload-zone">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 16V4m0 0L8 8m4-4l4 4M4 17v2a2 2 0 002 2h12a2 2 0 002-2v-2"/></svg>
+        <h3>拖曳檔案到這裡，或點擊選擇</h3>
+        <p>支援 PDF / TXT / CSV / Word (.docx)</p>
+        <input type="file" id="file-input" accept=".pdf,.txt,.csv,.docx,.doc,.xlsx,.xls">
+      </div>
+
+      <div class="file-info" id="file-info">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+          <strong id="file-name-display"></strong>
+          <button class="btn btn-outline btn-sm" onclick="clearFile()">移除</button>
+        </div>
+        <div class="file-meta">
+          <span>類型: <strong id="file-type-display"></strong></span>
+          <span>大小: <strong id="file-size-display"></strong></span>
+          <span>字元: <strong id="file-chars-display"></strong></span>
+        </div>
+      </div>
+
+      <div class="text-preview" id="text-preview"></div>
+
+      <div class="analyze-bar">
+        <div class="cost-info">消耗 <span class="pts" id="cost-display">50</span> SEO Points</div>
+        <button id="btn-analyze" class="btn" disabled onclick="runAnalysis()">開始分析</button>
+      </div>
+
+      <div class="progress-section" id="progress-section">
+        <div class="spinner"></div>
+        <div class="progress-text" id="progress-text">正在分析文件...</div>
+      </div>
+
+      <div class="report-section" id="report-section"></div>
+    </div>
+
+    <!-- History Tab -->
+    <div class="tab-content" id="tab-history">
+      <div id="history-content"><div class="empty-state">載入中...</div></div>
+    </div>
+  </div>
+
+  <div class="patent-bar">
+    <span>Patent 115100981</span> — 世界定義約束法用於AI推理 — 小路光有限公司 統編 60475510
+  </div>
+</div>
+
+<script>
+const SUPABASE_URL = 'https://vmyrivxxibqydccurxug.supabase.co'
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZteXJpdnh4aWJxeWRjY3VyeHVnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzkyNjMxMTIsImV4cCI6MjA1NDgzOTExMn0.Nr5xN2c0vqOKToB2EcEyRHb_FBqcJD3f5NtZ0CZ5nFc'
+const sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY)
+
+let currentUser = null
+let extractedText = ''
+let currentFile = null
+
+// ============================================================
+// Auth
+// ============================================================
+let isLogin = true
+
+async function init() {
+  const { data: { session } } = await sb.auth.getSession()
+  if (session) {
+    currentUser = session.user
+    showApp()
+  }
+  sb.auth.onAuthStateChange((event, session) => {
+    if (session) {
+      currentUser = session.user
+      showApp()
+    } else {
+      currentUser = null
+      showAuth()
+    }
+  })
+}
+
+function toggleAuth() {
+  isLogin = !isLogin
+  document.getElementById('auth-title').textContent = isLogin ? '登入' : '註冊'
+  document.getElementById('auth-btn').textContent = isLogin ? '登入' : '註冊'
+  document.getElementById('auth-toggle-text').textContent = isLogin ? '沒有帳號？' : '已有帳號？'
+  document.getElementById('auth-toggle-link').textContent = isLogin ? '註冊' : '登入'
+  document.getElementById('auth-error').textContent = ''
+}
+
+async function handleAuth() {
+  const email = document.getElementById('auth-email').value.trim()
+  const password = document.getElementById('auth-password').value
+  const errEl = document.getElementById('auth-error')
+  errEl.textContent = ''
+
+  if (!email || !password) { errEl.textContent = '請填入 Email 和密碼'; return }
+  if (password.length < 6) { errEl.textContent = '密碼至少 6 位'; return }
+
+  const btn = document.getElementById('auth-btn')
+  btn.disabled = true
+  btn.textContent = '處理中...'
+
+  try {
+    if (isLogin) {
+      const { error } = await sb.auth.signInWithPassword({ email, password })
+      if (error) throw error
+    } else {
+      const { error } = await sb.auth.signUp({ email, password })
+      if (error) throw error
+      errEl.style.color = 'var(--green)'
+      errEl.textContent = '註冊成功！請查看信箱確認後登入。'
+      btn.disabled = false
+      btn.textContent = '註冊'
+      return
+    }
+  } catch (e) {
+    errEl.style.color = 'var(--red)'
+    errEl.textContent = e.message || '認證失敗'
+  }
+  btn.disabled = false
+  btn.textContent = isLogin ? '登入' : '註冊'
+}
+
+async function logout() {
+  await sb.auth.signOut()
+  showAuth()
+}
+
+function showAuth() {
+  document.getElementById('auth-section').style.display = 'flex'
+  document.getElementById('app-section').style.display = 'none'
+  document.getElementById('user-bar').style.display = 'none'
+}
+
+function showApp() {
+  document.getElementById('auth-section').style.display = 'none'
+  document.getElementById('app-section').style.display = 'block'
+  document.getElementById('user-bar').style.display = 'flex'
+  document.getElementById('user-email').textContent = currentUser.email
+  loadCredits()
+}
+
+async function loadCredits() {
+  try {
+    const { data: { session } } = await sb.auth.getSession()
+    if (!session) return
+    const res = await fetch(`${SUPABASE_URL}/functions/v1/analyze-document?action=credits`, {
+      headers: { 'Authorization': `Bearer ${session.access_token}`, 'Content-Type': 'application/json' }
+    })
+    const d = await res.json()
+    document.getElementById('credits-display').textContent = d.credits?.balance ?? '—'
+  } catch { document.getElementById('credits-display').textContent = '—' }
+}
+
+// ============================================================
+// File Handling
+// ============================================================
+const zone = document.getElementById('upload-zone')
+const fileInput = document.getElementById('file-input')
+
+zone.addEventListener('dragover', e => { e.preventDefault(); zone.classList.add('dragover') })
+zone.addEventListener('dragleave', () => zone.classList.remove('dragover'))
+zone.addEventListener('drop', e => {
+  e.preventDefault()
+  zone.classList.remove('dragover')
+  if (e.dataTransfer.files.length) handleFile(e.dataTransfer.files[0])
+})
+fileInput.addEventListener('change', e => { if (e.target.files.length) handleFile(e.target.files[0]) })
+
+async function handleFile(file) {
+  currentFile = file
+  const ext = file.name.split('.').pop().toLowerCase()
+
+  document.getElementById('file-info').classList.add('show')
+  document.getElementById('file-name-display').textContent = file.name
+  document.getElementById('file-type-display').textContent = ext.toUpperCase()
+  document.getElementById('file-size-display').textContent = formatBytes(file.size)
+
+  extractedText = ''
+
+  try {
+    if (['txt', 'csv'].includes(ext)) {
+      extractedText = await file.text()
+    } else if (ext === 'pdf') {
+      extractedText = await extractPDF(file)
+    } else if (['doc', 'docx'].includes(ext)) {
+      extractedText = await extractDocx(file)
+    } else if (['xls', 'xlsx'].includes(ext)) {
+      extractedText = `[Excel file: ${file.name}, ${formatBytes(file.size)}]\n(Excel text extraction - content will be analyzed by AI)`
+    } else {
+      extractedText = await file.text()
+    }
+  } catch (e) {
+    extractedText = `[File: ${file.name}] Error extracting text: ${e.message}`
+  }
+
+  document.getElementById('file-chars-display').textContent = extractedText.length.toLocaleString()
+
+  const preview = document.getElementById('text-preview')
+  preview.textContent = extractedText.substring(0, 2000) + (extractedText.length > 2000 ? '\n...(truncated)' : '')
+  preview.classList.add('show')
+
+  const cost = extractedText.length > 5000 ? 100 : 50
+  document.getElementById('cost-display').textContent = cost
+  document.getElementById('btn-analyze').disabled = extractedText.length < 10
+
+  document.getElementById('report-section').classList.remove('show')
+  document.getElementById('report-section').innerHTML = ''
+}
+
+async function extractPDF(file) {
+  const arrayBuffer = await file.arrayBuffer()
+  pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js'
+  const pdf = await pdfjsLib.getDocument({ data: arrayBuffer }).promise
+  let text = ''
+  for (let i = 1; i <= Math.min(pdf.numPages, 50); i++) {
+    const page = await pdf.getPage(i)
+    const content = await page.getTextContent()
+    text += content.items.map(item => item.str).join(' ') + '\n'
+  }
+  return text.trim() || '[PDF content could not be extracted as text]'
+}
+
+async function extractDocx(file) {
+  const arrayBuffer = await file.arrayBuffer()
+  const uint8 = new Uint8Array(arrayBuffer)
+  let text = ''
+  let inTag = false
+  for (let i = 0; i < uint8.length; i++) {
+    const c = uint8[i]
+    if (c === 60) { inTag = true; continue }
+    if (c === 62) { inTag = false; continue }
+    if (!inTag && c >= 32 && c < 127) text += String.fromCharCode(c)
+  }
+  return text.trim() || `[DOCX file: ${file.name}]`
+}
+
+function clearFile() {
+  currentFile = null
+  extractedText = ''
+  fileInput.value = ''
+  document.getElementById('file-info').classList.remove('show')
+  document.getElementById('text-preview').classList.remove('show')
+  document.getElementById('btn-analyze').disabled = true
+  document.getElementById('report-section').classList.remove('show')
+  document.getElementById('report-section').innerHTML = ''
+}
+
+// ============================================================
+// Analysis
+// ============================================================
+async function runAnalysis() {
+  if (!extractedText || extractedText.length < 10) return
+
+  const btn = document.getElementById('btn-analyze')
+  btn.disabled = true
+  document.getElementById('progress-section').classList.add('show')
+  document.getElementById('progress-text').textContent = '正在連接 AI 分析引擎 (L1-L4 約束推理)...'
+
+  try {
+    const { data: { session } } = await sb.auth.getSession()
+    if (!session) throw new Error('Not authenticated')
+
+    const res = await fetch(`${SUPABASE_URL}/functions/v1/analyze-document?action=analyze`, {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${session.access_token}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        file_name: currentFile.name,
+        file_type: currentFile.name.split('.').pop().toLowerCase(),
+        file_size: currentFile.size,
+        text_content: extractedText,
+      }),
+    })
+
+    const data = await res.json()
+
+    if (!res.ok) {
+      if (res.status === 402) {
+        alert(`點數不足！餘額: ${data.balance}，需要: ${data.required}\n請購買更多 SEO Points。`)
+      } else {
+        alert(`分析失敗: ${data.error || 'Unknown error'}`)
+      }
+      return
+    }
+
+    document.getElementById('credits-display').textContent = data.credits_remaining ?? '—'
+    renderReport(data.report)
+  } catch (e) {
+    alert('分析失敗: ' + e.message)
+  } finally {
+    document.getElementById('progress-section').classList.remove('show')
+    btn.disabled = false
+  }
+}
+
+function renderReport(r) {
+  const report = r.ai_full_report || {}
+  const section = document.getElementById('report-section')
+
+  const riskColor = (r.risk_score || 0) < 30 ? 'var(--green)' : (r.risk_score || 0) < 60 ? 'var(--gold)' : 'var(--red)'
+
+  let html = `
+    <div class="report-card">
+      <h3>摘要</h3>
+      <div class="summary-text">${esc(r.ai_summary || report.summary || '—')}</div>
+    </div>
+
+    <div class="report-card">
+      <h3>產業分類 (L1-L4 約束層級)</h3>
+      <div class="kv-grid">
+        <div class="kv-item"><div class="label" style="color:var(--green)">L1 實體世界</div><div class="value">${esc(r.industry_l1 || '—')}</div></div>
+        <div class="kv-item"><div class="label" style="color:var(--cyan)">L2 商業邏輯</div><div class="value">${esc(r.industry_l2 || '—')}</div></div>
+        <div class="kv-item"><div class="label" style="color:var(--gold)">L3 安全層</div><div class="value">${esc(r.industry_l3 || '—')}</div></div>
+        <div class="kv-item"><div class="label" style="color:var(--accent)">L4 指揮層</div><div class="value">${esc(r.industry_l4 || '—')}</div></div>
+      </div>
+    </div>
+
+    <div class="report-card">
+      <h3>全球產業對齊 (跨國代碼)</h3>
+      <div class="country-grid" style="grid-template-columns:repeat(auto-fit,minmax(140px,1fr))">
+        ${renderAllCountries(r.cross_country || {})}
+      </div>
+    </div>
+
+    <div class="report-card">
+      <h3>風險評分</h3>
+      <div style="display:flex;align-items:center;gap:16px;margin-bottom:12px">
+        <div style="font-size:32px;font-weight:700;color:${riskColor}" class="mono">${(r.risk_score || 0).toFixed(0)}</div>
+        <div style="flex:1">
+          <div class="risk-bar"><div class="risk-fill" style="width:${r.risk_score || 0}%;background:${riskColor}"></div></div>
+        </div>
+      </div>
+      ${(report.risk_factors || []).length ? `<ul class="findings-list">${(report.risk_factors || []).map(f => `<li>${esc(f)}</li>`).join('')}</ul>` : ''}
+    </div>`
+
+  if ((report.key_findings || []).length) {
+    html += `<div class="report-card"><h3>關鍵發現</h3><ul class="findings-list">${report.key_findings.map(f => `<li>${esc(f)}</li>`).join('')}</ul></div>`
+  }
+
+  // Inference Trail (Patent Core)
+  const trail = r.inference_trail || report.inference_trail || []
+  if (trail.length) {
+    const levelColors = { L1: 'var(--green)', L2: 'var(--cyan)', L3: 'var(--gold)', L4: 'var(--accent)' }
+    const levelBgs = { L1: 'rgba(0,255,136,0.15)', L2: 'rgba(0,238,255,0.15)', L3: 'rgba(255,170,0,0.15)', L4: 'rgba(108,92,231,0.15)' }
+    html += `<div class="report-card"><h3>推理路徑追溯 <span class="tag tag-l4">Patent 115100981</span></h3>`
+    for (const step of trail) {
+      const lvl = step.level || '?'
+      html += `<div class="trail-step">
+        <div class="trail-level" style="background:${levelBgs[lvl] || '#333'};color:${levelColors[lvl] || '#fff'}">${lvl}</div>
+        <div class="trail-content">
+          <div class="trail-node">${esc(step.node || '—')}</div>
+          <div class="trail-reasoning">${esc(step.reasoning || '')}</div>
+        </div>
+      </div>`
+    }
+    html += `</div>`
+  }
+
+  if ((report.compliance_flags || []).length) {
+    html += `<div class="report-card"><h3>合規警示</h3><ul class="findings-list">${report.compliance_flags.map(f => `<li style="color:var(--gold)">${esc(f)}</li>`).join('')}</ul></div>`
+  }
+
+  if ((report.recommendations || []).length) {
+    html += `<div class="report-card"><h3>建議行動</h3><ul class="findings-list">${report.recommendations.map(f => `<li>${esc(f)}</li>`).join('')}</ul></div>`
+  }
+
+  section.innerHTML = html
+  section.classList.add('show')
+  section.scrollIntoView({ behavior: 'smooth', block: 'start' })
+}
+
+const FLAG_MAP = {
+  intl:'🌐',tw:'🇹🇼',us:'🇺🇸',eu:'🇪🇺',jp:'🇯🇵',cn:'🇨🇳',kr:'🇰🇷',
+  uk:'🇬🇧',de:'🇩🇪',fr:'🇫🇷',in:'🇮🇳',br:'🇧🇷',au:'🇦🇺',ca:'🇨🇦',
+  sg:'🇸🇬',hk:'🇭🇰',th:'🇹🇭',vn:'🇻🇳',id:'🇮🇩',my:'🇲🇾',ph:'🇵🇭',
+  mx:'🇲🇽',sa:'🇸🇦',ae:'🇦🇪',il:'🇮🇱',ru:'🇷🇺',za:'🇿🇦',se:'🇸🇪',
+  nl:'🇳🇱',ch:'🇨🇭',es:'🇪🇸',it:'🇮🇹',pl:'🇵🇱',tr:'🇹🇷',ar:'🇦🇷',
+  cl:'🇨🇱',co:'🇨🇴',eg:'🇪🇬',ng:'🇳🇬',ke:'🇰🇪',nz:'🇳🇿',no:'🇳🇴',
+}
+function renderAllCountries(cc) {
+  return Object.entries(cc).filter(([k,v]) => v && typeof v === 'object').map(([k,v]) => {
+    const flag = FLAG_MAP[k.toLowerCase()] || '🏳️'
+    return `<div class="country-card">
+      <div class="country-flag">${flag}</div>
+      <div style="font-weight:600;font-size:13px">${k.toUpperCase()}</div>
+      <div class="country-code">${esc(v.code || '—')}</div>
+      <div class="country-name">${esc(v.name || '—')}</div>
+      ${v.system ? `<div style="font-size:10px;color:var(--dim);margin-top:2px">${esc(v.system)}</div>` : ''}
+    </div>`
+  }).join('')
+}
+
+// ============================================================
+// History
+// ============================================================
+async function loadHistory() {
+  const container = document.getElementById('history-content')
+  try {
+    const { data: { session } } = await sb.auth.getSession()
+    if (!session) return
+
+    const res = await fetch(`${SUPABASE_URL}/functions/v1/analyze-document?action=list`, {
+      headers: { 'Authorization': `Bearer ${session.access_token}` }
+    })
+    const d = await res.json()
+    const reports = d.reports || []
+
+    if (!reports.length) {
+      container.innerHTML = '<div class="empty-state">尚無分析報告。上傳一份文件開始吧！</div>'
+      return
+    }
+
+    let html = `<table class="history-table"><thead><tr><th>狀態</th><th>檔案名稱</th><th>產業分類</th><th>風險</th><th>點數</th><th>時間</th><th></th></tr></thead><tbody>`
+    for (const r of reports) {
+      const statusClass = `status-${r.status}`
+      const riskColor = (r.risk_score || 0) < 30 ? 'var(--green)' : (r.risk_score || 0) < 60 ? 'var(--gold)' : 'var(--red)'
+      html += `<tr>
+        <td><span class="status-dot ${statusClass}"></span>${r.status}</td>
+        <td>${esc(r.file_name)}</td>
+        <td>${esc(r.industry_l1 || '—')}</td>
+        <td style="color:${riskColor}" class="mono">${r.risk_score ? r.risk_score.toFixed(0) : '—'}</td>
+        <td class="mono">${r.points_cost}</td>
+        <td style="color:var(--dim)">${new Date(r.created_at).toLocaleString('zh-TW')}</td>
+        <td>${r.status === 'completed' ? `<span class="view-btn" onclick="viewReport('${r.id}')">查看</span>` : ''}</td>
+      </tr>`
+    }
+    html += '</tbody></table>'
+    container.innerHTML = html
+  } catch (e) {
+    container.innerHTML = `<div class="empty-state">載入失敗: ${e.message}</div>`
+  }
+}
+
+async function viewReport(id) {
+  try {
+    const { data: { session } } = await sb.auth.getSession()
+    const res = await fetch(`${SUPABASE_URL}/functions/v1/analyze-document?action=report&id=${id}`, {
+      headers: { 'Authorization': `Bearer ${session.access_token}` }
+    })
+    const d = await res.json()
+    if (d.report) {
+      switchTab('upload')
+      renderReport(d.report)
+    }
+  } catch (e) { alert('載入報告失敗: ' + e.message) }
+}
+
+// ============================================================
+// Tabs
+// ============================================================
+function switchTab(name) {
+  document.querySelectorAll('.tab').forEach(t => t.classList.toggle('active', t.dataset.tab === name))
+  document.querySelectorAll('.tab-content').forEach(t => t.classList.toggle('active', t.id === `tab-${name}`))
+  if (name === 'history') loadHistory()
+}
+
+// ============================================================
+// Utils
+// ============================================================
+function esc(s) { const d = document.createElement('div'); d.textContent = s || ''; return d.innerHTML }
+function formatBytes(b) { if (b < 1024) return b + ' B'; if (b < 1048576) return (b/1024).toFixed(1) + ' KB'; return (b/1048576).toFixed(1) + ' MB' }
+
+init()
+</script>
+</body>
+</html>

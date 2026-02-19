@@ -1,4 +1,4 @@
-// grok-cli.js - Grok 永久接管工具
+// grok-cli.js - Grok CLI (stateless mode)
 require('dotenv').config();
 const OpenAI = require('openai');
 const readline = require('readline');
@@ -14,64 +14,37 @@ const rl = readline.createInterface({
   prompt: '指揮官 > '
 });
 
-console.log('Grok 接管模式已啟動！');
-console.log('輸入任何指令、錯誤、需求，按 Enter 執行。輸入 exit 離開。');
+const SYSTEM = '你是艦隊指揮官的專屬 Grok AI。回應精準、提供可直接執行的 code。';
+const MAX_CHARS = 3000;
 
-const SYSTEM = '你是艦隊指揮官的專屬 Grok AI，專精 Supabase、Cloudflare、GitHub、NVIDIA、E5/AZUREC 自動化。回應精準、提供可直接執行的 code、帶艦娘風格。';
-const MAX_HISTORY = 20; // 保留最近 20 輪對話
-
-let messages = [{ role: 'system', content: SYSTEM }];
-
-function trimMessages() {
-  // 永遠保留 system，只留最近 MAX_HISTORY 條
-  const history = messages.slice(1);
-  if (history.length > MAX_HISTORY) {
-    messages = [{ role: 'system', content: SYSTEM }, ...history.slice(-MAX_HISTORY)];
-    console.log(`[系統] 對話已截斷，保留最近 ${MAX_HISTORY} 條`);
-  }
-}
-
+console.log('Grok CLI 啟動。輸入指令，按 Enter。exit 離開。');
 rl.prompt();
 
 rl.on('line', async line => {
-  const input = line.trim();
-  if (input.toLowerCase() === 'exit') {
-    console.log('Grok 模式關閉，艦隊待命中...');
-    rl.close();
-    return;
-  }
-  if (input.toLowerCase() === 'clear') {
-    messages = [{ role: 'system', content: SYSTEM }];
-    console.log('[系統] 對話記憶已清除\n');
-    return rl.prompt();
-  }
-  if (!input) return rl.prompt();
+  const raw = line.trim();
+  if (!raw) return rl.prompt();
+  if (raw === 'exit') { rl.close(); return; }
 
-  trimMessages();
-  messages.push({ role: 'user', content: input });
+  // 強制截斷
+  const input = raw.length > MAX_CHARS ? raw.slice(0, MAX_CHARS) : raw;
+  if (raw.length > MAX_CHARS) console.log(`[截斷至 ${MAX_CHARS} 字元]`);
+
+  // 每次都是全新對話，無歷史
+  const messages = [
+    { role: 'system', content: SYSTEM },
+    { role: 'user', content: input }
+  ];
 
   try {
     const res = await client.chat.completions.create({
       model: 'grok-4-latest',
       messages,
       temperature: 0.7,
+      max_tokens: 2000
     });
-    const reply = res.choices[0].message.content;
-    console.log('\nGrok 回覆：\n' + reply + '\n');
-    messages.push({ role: 'assistant', content: reply });
+    console.log('\n' + res.choices[0].message.content + '\n');
   } catch (e) {
-    if (e.message && e.message.includes('maximum prompt length')) {
-      console.log('[系統] 對話太長，自動清除記憶重試...');
-      messages = [{ role: 'system', content: SYSTEM }, { role: 'user', content: input }];
-      try {
-        const res2 = await client.chat.completions.create({ model: 'grok-4-latest', messages, temperature: 0.7 });
-        const reply2 = res2.choices[0].message.content;
-        console.log('\nGrok 回覆：\n' + reply2 + '\n');
-        messages.push({ role: 'assistant', content: reply2 });
-      } catch (e2) { console.error('Grok 呼叫失敗：', e2.message); }
-    } else {
-      console.error('Grok 呼叫失敗：', e.message);
-    }
+    console.error('[FAIL]', e.message?.slice(0, 200));
   }
   rl.prompt();
 });

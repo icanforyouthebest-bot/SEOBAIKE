@@ -1,0 +1,60 @@
+PATROL LOG — 2026-02-18 02:40 TST (Sweep 3)
+========================================================
+
+[HEALTH MONITOR] Overall: WARNING
+  db_connectivity:        PASS  48ms (↑ from 62ms)
+  ai_gateway_activity:    PASS  565 req/hr
+  error_rate_24h:         PASS  0.0% (0/8397)
+  inference_violations:   WARN  8 violations/24h
+  rate_limiter:           PASS  42 blocked/24h
+  world_definition:       PASS  85 nodes, 10+10 paths
+  provider_health:        PASS  All healthy
+
+[DAILY KPI]
+  Total conversations:  1000
+  Success:              972 (97.2%)
+  Errors:               0 (0.0%)
+  Blocked:              28
+
+[SYSTEM COMPONENTS] 41/41 HEALTHY (no change)
+
+[ARSENAL] 22/23 Active (96%)
+  NVIDIA:       200 OK
+  Groq:         200 OK
+  Meta AI:      401 ERROR ← Key expired (known, needs renewal)
+  DeepSeek:     200 OK
+  Together:     200 OK  ← RECOVERED (was TIMEOUT in sweep 1)
+  Fireworks:    200 OK
+  OpenAI:       200 OK
+  Mistral:      200 OK
+  xAI (Grok):   200 OK
+  OpenRouter:   200 OK
+  Anthropic:    200 OK
+  Cohere:       200 OK
+  AI21:         200 OK
+  Replicate:    200 OK
+  HuggingFace:  200 OK
+  DashScope:    200 OK
+  Perplexity:   200 OK
+  Google:       Configured
+  PageSpeed:    Configured
+  DataForSEO:   Configured
+  ElevenLabs:   200 OK
+  Shotstack:    200 OK
+  RemoveBG:     Configured
+
+[GLOBAL STATUS] All Systems Go
+  aiforseo.vip:           ONLINE  98ms (↑ from 254ms, CF Global)
+  Supabase DB:            ONLINE  26ms (AWS Tokyo)
+  Supabase Auth:          ONLINE  27ms (AWS Tokyo)
+
+[WORLD DEFINITION STATS] 401 Invalid JWT — still propagating
+
+[CHANGES SINCE SWEEP 2]
+  ✅ Together AI RECOVERED (timeout → 200 OK)
+  ✅ DB latency improved (62ms → 48ms)
+  ✅ Site latency improved (254ms → 98ms)
+  ⚠️ World Definition stats still 401
+  ⚠️ Meta AI still 401 (key expired)
+
+[STATUS] System running. No stop order received. Continuing patrol.

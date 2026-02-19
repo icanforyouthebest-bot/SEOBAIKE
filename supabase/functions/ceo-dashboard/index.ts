@@ -23,29 +23,33 @@ const GLOBAL_SITES = [
 // API Key 軍火庫監控清單
 // ============================================================
 const ARSENAL_KEYS = [
+  // === AI Gateway 10 Providers ===
   { provider: 'NVIDIA', env: 'NVIDIA_API_KEY', endpoint: 'https://integrate.api.nvidia.com/v1/models', type: 'inference' },
-  { provider: 'Google', env: 'GOOGLE_API_KEY', endpoint: null, type: 'search' },
-  { provider: 'OpenAI', env: 'OPENAI_API_KEY', endpoint: 'https://api.openai.com/v1/models', type: 'llm' },
-  { provider: 'Anthropic', env: 'ANTHROPIC_API_KEY', endpoint: 'https://api.anthropic.com/v1/messages', type: 'llm' },
   { provider: 'Groq', env: 'GROQ_API_KEY', endpoint: 'https://api.groq.com/openai/v1/models', type: 'llm' },
-  { provider: 'Mistral', env: 'MISTRAL_API_KEY', endpoint: 'https://api.mistral.ai/v1/models', type: 'llm' },
+  { provider: 'Meta AI', env: 'META_API_KEY', endpoint: 'https://api.llama.com/v1/chat/completions', type: 'llm' },
+  { provider: 'DeepSeek', env: 'DEEPSEEK_API_KEY', endpoint: 'https://api.deepseek.com/models', type: 'llm' },
   { provider: 'Together', env: 'TOGETHER_API_KEY', endpoint: 'https://api.together.xyz/v1/models', type: 'llm' },
   { provider: 'Fireworks', env: 'FIREWORKS_API_KEY', endpoint: 'https://api.fireworks.ai/inference/v1/models', type: 'llm' },
+  { provider: 'OpenAI', env: 'OPENAI_API_KEY', endpoint: 'https://api.openai.com/v1/models', type: 'llm' },
+  { provider: 'Mistral', env: 'MISTRAL_API_KEY', endpoint: 'https://api.mistral.ai/v1/models', type: 'llm' },
   { provider: 'xAI (Grok)', env: 'XAI_API_KEY', endpoint: 'https://api.x.ai/v1/models', type: 'llm' },
   { provider: 'OpenRouter', env: 'OPENROUTER_API_KEY', endpoint: 'https://openrouter.ai/api/v1/models', type: 'llm' },
+  // === LLM 備援 ===
+  { provider: 'Anthropic', env: 'ANTHROPIC_API_KEY', endpoint: 'https://api.anthropic.com/v1/messages', type: 'llm' },
   { provider: 'Cohere', env: 'COHERE_API_KEY', endpoint: 'https://api.cohere.ai/v1/models', type: 'llm' },
-  { provider: 'AI21', env: 'AI21_API_KEY', endpoint: null, type: 'llm' },
-  { provider: 'DeepSeek', env: 'DEEPSEEK_API_KEY', endpoint: 'https://api.deepseek.com/models', type: 'llm' },
+  { provider: 'AI21', env: 'AI21_API_KEY', endpoint: 'https://api.ai21.com/studio/v1/models', type: 'llm' },
   { provider: 'Replicate', env: 'REPLICATE_API_TOKEN', endpoint: 'https://api.replicate.com/v1/account', type: 'llm' },
-  { provider: 'HuggingFace', env: 'HF_API_KEY', endpoint: null, type: 'llm' },
+  { provider: 'HuggingFace', env: 'HF_API_KEY', endpoint: 'https://huggingface.co/api/whoami-v2', type: 'llm' },
+  { provider: 'DashScope', env: 'DASHSCOPE_API_KEY', endpoint: 'https://dashscope.aliyuncs.com/compatible-mode/v1/models', type: 'llm' },
+  { provider: 'Perplexity', env: 'PERPLEXITY_API_KEY', endpoint: 'https://api.perplexity.ai/chat/completions', type: 'search' },
+  // === 搜尋 & 工具 ===
+  { provider: 'Google', env: 'GOOGLE_API_KEY', endpoint: null, type: 'search' },
+  { provider: 'PageSpeed', env: 'GOOGLE_PAGESPEED_API_KEY', endpoint: null, type: 'search' },
+  { provider: 'DataForSEO', env: 'DATAFORSEO_LOGIN', endpoint: null, type: 'search' },
   // === 特種部隊 ===
   { provider: 'ElevenLabs', env: 'ELEVENLABS_API_KEY', endpoint: 'https://api.elevenlabs.io/v1/user', type: 'voice' },
   { provider: 'Shotstack', env: 'SHOTSTACK_API_KEY', endpoint: 'https://api.shotstack.io/v1/', type: 'video' },
   { provider: 'RemoveBG', env: 'REMOVEBG_API_KEY', endpoint: null, type: 'image' },
-  { provider: 'DataForSEO', env: 'DATAFORSEO_LOGIN', endpoint: null, type: 'search' },
-  { provider: 'PageSpeed', env: 'GOOGLE_PAGESPEED_API_KEY', endpoint: null, type: 'search' },
-  { provider: 'Perplexity', env: 'PERPLEXITY_API_KEY', endpoint: 'https://api.perplexity.ai/chat/completions', type: 'search' },
-  { provider: 'DashScope', env: 'DASHSCOPE_API_KEY', endpoint: null, type: 'llm' },
 ]
 
 // ============================================================
@@ -165,6 +169,9 @@ async function getArsenal() {
           } else if (key.provider === 'Perplexity') {
             headers['Authorization'] = `Bearer ${apiKey}`
             method = 'POST'
+          } else if (key.provider === 'Meta AI') {
+            headers['Authorization'] = `Bearer ${apiKey}`
+            method = 'POST'
           } else if (key.provider === 'Shotstack') {
             headers['x-api-key'] = apiKey
           } else {
@@ -190,12 +197,20 @@ async function getArsenal() {
               messages: [{ role: 'user', content: 'ping' }],
               max_tokens: 1,
             })
+          } else if (key.provider === 'Meta AI') {
+            fetchOpts.body = JSON.stringify({
+              model: 'Llama-4-Maverick-17B-128E-Instruct-FP8',
+              messages: [{ role: 'user', content: 'ping' }],
+              max_tokens: 1,
+            })
           }
 
           const res = await fetch(key.endpoint, fetchOpts)
 
-          // Anthropic 回 200 = key 有效；回 401/403 = key 無效
-          const ok = res.status < 400
+          // 2xx-4xx (除 401/403) = key 有效，provider 可達
+          // 401/403 = key 無效或無權限
+          // 5xx = provider 異常
+          const ok = res.status < 500 && res.status !== 401 && res.status !== 403
           return {
             provider: key.provider,
             type: key.type,

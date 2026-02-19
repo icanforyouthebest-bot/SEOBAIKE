@@ -1,0 +1,1135 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="指揮中心">
+<meta name="theme-color" content="#000000">
+<link rel="icon" href="/favicon.svg">
+<title>六界AI指揮中心 | SEOBAIKE Command Center</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=JetBrains+Mono:wght@400;600;700&family=Noto+Sans+TC:wght@400;700;900&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#000;--card:rgba(8,12,20,0.92);
+  --g1:#00ff88;--g2:#00cc6a;
+  --r1:#ff2244;--r2:#cc1133;
+  --b1:#00aaff;--b2:#0066cc;
+  --gold:#ffaa00;--purple:#aa44ff;--cyan:#00eeff;
+  --white:#e8e8e8;--dim:rgba(255,255,255,0.08);
+}
+html,body{height:100%;overflow:hidden}
+body{background:#000;color:var(--white);font-family:'JetBrains Mono','Noto Sans TC',monospace}
+::-webkit-scrollbar{width:4px}::-webkit-scrollbar-thumb{background:var(--g1);border-radius:4px}
+
+/* MATRIX */
+#matrix{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;opacity:0.05}
+.grid-overlay{position:fixed;top:0;left:0;width:100%;height:100%;z-index:1;pointer-events:none;
+  background-image:linear-gradient(rgba(0,255,136,0.012) 1px,transparent 1px),linear-gradient(90deg,rgba(0,255,136,0.012) 1px,transparent 1px);
+  background-size:60px 60px}
+.hud-border{position:fixed;top:0;left:0;right:0;bottom:0;z-index:2;pointer-events:none;border:1px solid rgba(0,255,136,0.06)}
+.hud-c{position:absolute;width:30px;height:30px}
+.hud-c.tl{top:0;left:0;border-top:2px solid var(--g1);border-left:2px solid var(--g1)}
+.hud-c.tr{top:0;right:0;border-top:2px solid var(--g1);border-right:2px solid var(--g1)}
+.hud-c.bl{bottom:0;left:0;border-bottom:2px solid var(--g1);border-left:2px solid var(--g1)}
+.hud-c.br{bottom:0;right:0;border-bottom:2px solid var(--g1);border-right:2px solid var(--g1)}
+.scanline{position:fixed;top:0;left:0;width:100%;height:2px;background:linear-gradient(90deg,transparent,var(--g1),transparent);z-index:999;pointer-events:none;animation:scan 8s linear infinite;opacity:0.2}
+@keyframes scan{0%{top:-2px}100%{top:100vh}}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+@keyframes glow{0%,100%{text-shadow:0 0 20px rgba(255,170,0,0.3)}50%{text-shadow:0 0 40px rgba(255,170,0,0.6)}}
+@keyframes barGrow{from{width:0}to{}}
+
+/* APP LAYOUT */
+.app{position:relative;z-index:10;height:100vh;display:flex;flex-direction:column;overflow:hidden}
+
+/* TOP BAR */
+.topbar{display:flex;align-items:center;justify-content:space-between;padding:10px 20px;background:rgba(0,0,0,0.95);border-bottom:1px solid rgba(0,255,136,0.15);flex-shrink:0}
+.tb-left{display:flex;align-items:center;gap:14px}
+.brand{font-family:'Orbitron',monospace;font-size:14px;font-weight:900;letter-spacing:3px;color:var(--g1);text-shadow:0 0 20px rgba(0,255,136,0.3)}
+.brand sub{font-size:9px;color:var(--gold);font-weight:400;letter-spacing:1px;margin-left:6px}
+.tb-right{display:flex;align-items:center;gap:16px}
+.live-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.live-on{background:var(--g1);box-shadow:0 0 12px var(--g1);animation:pulse 1.5s infinite}
+.live-off{background:var(--r1);box-shadow:0 0 12px var(--r1)}
+.rt-label{font-size:9px;font-weight:700;letter-spacing:2px}
+.rt-on{color:var(--g1)}.rt-off{color:var(--r1)}
+.clock{font-size:10px;color:rgba(255,255,255,0.35)}
+.cmd-name{font-family:'Noto Sans TC';font-size:11px;font-weight:700;color:var(--gold);text-shadow:0 0 10px rgba(255,170,0,0.2)}
+
+/* PATENT STRIP */
+.patent-strip{display:flex;align-items:center;justify-content:center;padding:6px 16px;background:linear-gradient(180deg,rgba(0,255,136,0.03),transparent);border-bottom:1px solid rgba(0,255,136,0.08);flex-shrink:0;gap:20px}
+.patent-text{font-family:'Orbitron';font-size:9px;letter-spacing:2px;color:var(--gold);animation:glow 4s infinite}
+.patent-sep{color:rgba(255,170,0,0.2)}
+
+/* TAB CONTENT */
+.tab-area{flex:1;overflow-y:auto;overflow-x:hidden;padding:12px}
+.tab{display:none}.tab.active{display:block;animation:fadeIn .3s ease-out}
+
+/* BOTTOM NAV */
+.bottom-nav{display:flex;background:rgba(0,0,0,0.95);border-top:1px solid rgba(0,255,136,0.12);flex-shrink:0;padding-bottom:env(safe-area-inset-bottom,0)}
+.bottom-nav button{flex:1;background:none;border:none;color:rgba(255,255,255,0.3);font-size:9px;font-family:'JetBrains Mono';letter-spacing:1px;padding:10px 4px;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:3px;transition:color .2s;border-top:2px solid transparent}
+.bottom-nav button.active{color:var(--g1);border-top-color:var(--g1)}
+.bottom-nav button .ico{font-size:18px}
+
+/* PANELS & CARDS */
+.panel{background:var(--card);border:1px solid rgba(0,255,136,0.08);border-radius:6px;margin-bottom:12px;overflow:hidden;animation:fadeIn .4s ease-out both}
+.panel-head{display:flex;align-items:center;justify-content:space-between;padding:10px 14px;background:rgba(0,255,136,0.03);border-bottom:1px solid rgba(0,255,136,0.06)}
+.panel-title{font-family:'Orbitron';font-size:10px;font-weight:700;letter-spacing:2px;color:rgba(255,255,255,0.5);text-transform:uppercase}
+.panel-body{padding:12px 14px}
+.badge{font-size:8px;font-weight:700;padding:2px 8px;border-radius:3px;letter-spacing:1px}
+.bg{background:rgba(0,255,136,0.1);color:var(--g1);border:1px solid rgba(0,255,136,0.2)}
+.br{background:rgba(255,34,68,0.1);color:var(--r1);border:1px solid rgba(255,34,68,0.2);animation:pulse 1.5s infinite}
+.bb{background:rgba(0,170,255,0.1);color:var(--b1);border:1px solid rgba(0,170,255,0.2)}
+.by{background:rgba(255,170,0,0.1);color:var(--gold);border:1px solid rgba(255,170,0,0.2)}
+.bp{background:rgba(170,68,255,0.1);color:var(--purple);border:1px solid rgba(170,68,255,0.2)}
+
+/* GRIDS */
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}
+.g4{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:8px}
+@media(max-width:600px){.g3,.g4{grid-template-columns:1fr 1fr}}
+
+/* STAT CARDS */
+.stat{background:rgba(0,0,0,0.4);border-radius:6px;padding:14px 10px;text-align:center;border:1px solid var(--dim)}
+.stat-val{font-family:'Orbitron';font-size:26px;font-weight:900;line-height:1}
+.stat-label{font-size:9px;letter-spacing:2px;color:rgba(255,255,255,0.3);margin-top:6px;text-transform:uppercase}
+.stat-sub{font-size:9px;color:rgba(255,255,255,0.2);margin-top:2px}
+
+/* ROWS */
+.row{display:flex;align-items:center;gap:8px;padding:7px 0;border-bottom:1px solid rgba(255,255,255,0.03);font-size:11px}
+.row:last-child{border:none}
+.dot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
+.dot-g{background:var(--g1);box-shadow:0 0 6px var(--g1)}
+.dot-r{background:var(--r1);box-shadow:0 0 6px var(--r1);animation:pulse 1s infinite}
+.dot-y{background:var(--gold);box-shadow:0 0 6px var(--gold)}
+.row-name{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.row-val{font-family:'Orbitron';font-size:10px;min-width:50px;text-align:right}
+
+/* BARS */
+.bar-wrap{flex:1;height:5px;background:rgba(255,255,255,0.04);border-radius:3px;overflow:hidden}
+.bar-fill{height:100%;border-radius:3px;animation:barGrow .6s ease-out}
+.bar-row{display:flex;align-items:center;gap:8px;padding:5px 0;font-size:11px}
+.bar-label{width:80px;color:rgba(255,255,255,0.4);font-size:10px;flex-shrink:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.bar-val{width:55px;text-align:right;font-family:'Orbitron';font-size:10px}
+
+/* ACTION BUTTONS */
+.act-btn{border:none;border-radius:8px;padding:16px;font-size:14px;font-weight:700;color:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:10px;transition:transform .1s;width:100%;font-family:'Noto Sans TC'}
+.act-btn:active{transform:scale(0.97)}
+.act-btn.loading{opacity:.5;pointer-events:none}
+.act-res{background:rgba(0,255,136,0.05);border:1px solid var(--g1);border-radius:6px;padding:8px 12px;margin-top:6px;font-size:11px;color:var(--g1);display:none}
+.act-res.show{display:block}
+.act-res.err{border-color:var(--r1);color:var(--r1);background:rgba(255,34,68,0.05)}
+
+/* FEED */
+.feed{max-height:300px;overflow-y:auto}
+.feed-item{background:rgba(0,0,0,0.3);border-radius:6px;padding:8px 12px;margin-bottom:5px;font-size:11px;border-left:3px solid var(--dim);animation:fadeIn .3s}
+.feed-item.new{border-left-color:var(--g1);background:rgba(0,255,136,0.03)}
+
+/* SPINNER */
+.spin{display:inline-block;width:14px;height:14px;border:2px solid rgba(255,255,255,0.1);border-top-color:var(--g1);border-radius:50%;animation:sp .6s linear infinite}
+@keyframes sp{to{transform:rotate(360deg)}}
+.loading-box{text-align:center;padding:30px;color:rgba(255,255,255,0.2)}
+
+/* WORLD DEF TREE */
+.wd-node{display:inline-block;padding:3px 8px;border-radius:3px;font-size:9px;font-weight:700;margin:2px}
+.wd-l1{background:rgba(0,238,255,0.1);color:var(--cyan);border:1px solid rgba(0,238,255,0.2)}
+.wd-l2{background:rgba(0,255,136,0.1);color:var(--g1);border:1px solid rgba(0,255,136,0.2)}
+.wd-l3{background:rgba(255,170,0,0.1);color:var(--gold);border:1px solid rgba(255,170,0,0.2)}
+.wd-l4{background:rgba(170,68,255,0.1);color:var(--purple);border:1px solid rgba(170,68,255,0.2)}
+.wd-arrow{color:rgba(0,255,136,0.3);font-size:9px;margin:0 2px}
+
+/* SECURITY SHIELD */
+.shield-ring{width:120px;height:120px;border-radius:50%;border:3px solid var(--g1);display:flex;align-items:center;justify-content:center;margin:0 auto;position:relative;box-shadow:0 0 30px rgba(0,255,136,0.1),inset 0 0 30px rgba(0,255,136,0.05)}
+.shield-score{font-family:'Orbitron';font-size:36px;font-weight:900;color:var(--g1)}
+.shield-label{font-size:8px;color:var(--g1);letter-spacing:2px;position:absolute;bottom:20px}
+</style>
+</head>
+<body>
+<canvas id="matrix"></canvas>
+<div class="grid-overlay"></div>
+<div class="hud-border"><div class="hud-c tl"></div><div class="hud-c tr"></div><div class="hud-c bl"></div><div class="hud-c br"></div></div>
+<div class="scanline"></div>
+
+<div class="app">
+
+<!-- TOP BAR -->
+<div class="topbar">
+  <div class="tb-left">
+    <svg width="28" height="28" viewBox="0 0 36 36" fill="none" style="filter:drop-shadow(0 0 6px rgba(0,255,136,0.4))">
+      <polygon points="18,2 33,10 33,26 18,34 3,26 3,10" fill="none" stroke="url(#lg)" stroke-width="1.5"/>
+      <polygon points="18,7 28,12 28,24 18,29 8,24 8,12" fill="rgba(0,255,136,0.05)" stroke="url(#lg)" stroke-width="0.8"/>
+      <text x="18" y="21" text-anchor="middle" font-family="Orbitron" font-size="9" font-weight="900" fill="url(#lg)">CC</text>
+      <defs><linearGradient id="lg" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#00ff88"/><stop offset="100%" stop-color="#00aaff"/></linearGradient></defs>
+    </svg>
+    <div class="brand">COMMAND CENTER<sub>六界AI指揮中心</sub></div>
+  </div>
+  <div class="tb-right">
+    <div class="cmd-name">指揮官 許竣翔</div>
+    <div style="display:flex;align-items:center;gap:5px"><div class="live-dot live-off" id="liveDot"></div><span class="rt-label rt-off" id="rtLabel">OFFLINE</span></div>
+    <span class="clock" id="clock">--</span>
+  </div>
+</div>
+
+<!-- PATENT STRIP -->
+<div class="patent-strip">
+  <span class="patent-text">Patent 115100981</span>
+  <span class="patent-sep">|</span>
+  <span class="patent-text">世界定義約束法用於AI推理</span>
+  <span class="patent-sep">|</span>
+  <span class="patent-text">CaaS L1-L4</span>
+  <span class="patent-sep">|</span>
+  <span class="patent-text">小路光有限公司 60475510</span>
+</div>
+
+<!-- TAB CONTENT AREA -->
+<div class="tab-area">
+
+  <!-- TAB 1: OVERVIEW -->
+  <div class="tab active" id="tab-overview">
+    <div class="g4" id="overviewStats"><div class="loading-box"><div class="spin"></div></div></div>
+    <div style="height:12px"></div>
+    <div class="g2" style="align-items:start">
+      <div>
+        <div class="panel"><div class="panel-head"><span class="panel-title">GLOBAL SITES</span><span class="badge bg" id="sitesBadge">--</span></div>
+          <div class="panel-body" id="sitesPanel"><div class="loading-box"><div class="spin"></div></div></div></div>
+        <div class="panel"><div class="panel-head"><span class="panel-title">TODAY KPI</span><span class="badge bb">LIVE</span></div>
+          <div class="panel-body" id="kpiPanel"><div class="loading-box"><div class="spin"></div></div></div></div>
+      </div>
+      <div>
+        <div class="panel"><div class="panel-head"><span class="panel-title">LIVE FEED</span><span class="badge bg" id="feedBadge">0</span></div>
+          <div class="panel-body feed" id="liveFeed"><div class="loading-box"><div class="spin"></div></div></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TAB 2: AI ARSENAL -->
+  <div class="tab" id="tab-arsenal">
+    <div class="panel"><div class="panel-head"><span class="panel-title">ARSENAL HEALTH</span><div style="display:flex;gap:6px;align-items:center"><span class="badge bg" id="arsenalBadge">--</span><button onclick="tabLoaded.arsenal=false;loadArsenal()" style="background:rgba(0,255,136,0.1);border:1px solid var(--g1);color:var(--g1);padding:3px 8px;border-radius:4px;font-size:8px;cursor:pointer;font-family:inherit;letter-spacing:1px">REFRESH</button></div></div>
+      <div class="panel-body">
+        <div class="g3" id="arsenalSummary"><div class="loading-box"><div class="spin"></div></div></div>
+      </div></div>
+    <div class="panel"><div class="panel-head"><span class="panel-title">ALL PROVIDERS</span></div>
+      <div class="panel-body" id="arsenalList"><div class="loading-box"><div class="spin"></div></div></div></div>
+    <div class="panel"><div class="panel-head"><span class="panel-title">PROVIDER LATENCY (24H)</span><span class="badge bb">MONITOR</span></div>
+      <div class="panel-body" id="latencyPanel"><div class="loading-box"><div class="spin"></div></div></div></div>
+    <div class="panel" id="fallbackPanel" style="display:none"><div class="panel-head"><span class="panel-title">FALLBACK ALERTS</span><span class="badge br">ALERT</span></div>
+      <div class="panel-body" id="fallbackList"></div></div>
+  </div>
+
+  <!-- TAB 3: WORLD DEFINITION — 物理AI核心 Patent 115100981 -->
+  <div class="tab" id="tab-world">
+    <!-- Top Stats -->
+    <div class="g4" id="worldStats"><div class="loading-box"><div class="spin"></div></div></div>
+    <div style="height:12px"></div>
+
+    <!-- Force Graph + Controls -->
+    <div class="panel">
+      <div class="panel-head">
+        <span class="panel-title">WORLD DEFINITION GRAPH</span>
+        <div style="display:flex;gap:6px;align-items:center">
+          <span class="badge by" id="graphNodeCount">--</span>
+          <span class="badge bp" id="graphLinkCount">--</span>
+        </div>
+      </div>
+      <div class="panel-body" style="padding:0;position:relative">
+        <!-- Legend -->
+        <div id="graphLegend" style="position:absolute;top:8px;left:10px;z-index:5;font-size:9px;display:flex;gap:10px;flex-wrap:wrap">
+          <span><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--cyan);margin-right:3px"></span>L1</span>
+          <span><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--g1);margin-right:3px"></span>L2</span>
+          <span><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--gold);margin-right:3px"></span>L3</span>
+          <span><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--purple);margin-right:3px"></span>L4</span>
+          <span style="margin-left:8px"><span style="display:inline-block;width:12px;height:2px;background:rgba(255,255,255,0.15);margin-right:3px;vertical-align:middle"></span>Hierarchy</span>
+          <span><span style="display:inline-block;width:12px;height:2px;background:var(--g1);margin-right:3px;vertical-align:middle"></span>Allowed</span>
+          <span><span style="display:inline-block;width:12px;height:2px;background:var(--r1);margin-right:3px;vertical-align:middle"></span>Forbidden</span>
+        </div>
+        <!-- Controls -->
+        <div id="graphControls" style="position:absolute;top:8px;right:10px;z-index:5;display:flex;gap:4px">
+          <button onclick="graphZoom(1.2)" style="background:rgba(0,0,0,0.6);border:1px solid var(--dim);color:var(--white);width:28px;height:28px;border-radius:4px;cursor:pointer;font-size:14px">+</button>
+          <button onclick="graphZoom(0.8)" style="background:rgba(0,0,0,0.6);border:1px solid var(--dim);color:var(--white);width:28px;height:28px;border-radius:4px;cursor:pointer;font-size:14px">-</button>
+          <button onclick="graphReset()" style="background:rgba(0,0,0,0.6);border:1px solid var(--dim);color:var(--white);width:28px;height:28px;border-radius:4px;cursor:pointer;font-size:11px">R</button>
+        </div>
+        <!-- Node Tooltip -->
+        <div id="nodeTooltip" style="display:none;position:absolute;z-index:10;background:rgba(0,0,0,0.92);border:1px solid var(--g1);border-radius:6px;padding:10px 14px;font-size:10px;pointer-events:none;max-width:260px;box-shadow:0 0 20px rgba(0,255,136,0.1)"></div>
+        <!-- Canvas -->
+        <canvas id="forceGraph" style="width:100%;height:420px;display:block;cursor:grab"></canvas>
+      </div>
+    </div>
+
+    <div class="g2" style="align-items:start">
+      <!-- LEFT COLUMN -->
+      <div>
+        <!-- CaaS Architecture -->
+        <div class="panel">
+          <div class="panel-head"><span class="panel-title">CaaS ARCHITECTURE</span><span class="badge by">PATENT 115100981</span></div>
+          <div class="panel-body" id="caasPanel">
+            <div style="text-align:center;margin-bottom:12px">
+              <div style="font-size:10px;color:rgba(255,255,255,0.3);letter-spacing:2px;margin-bottom:8px">CONSTRAINT-AS-A-SERVICE HIERARCHY</div>
+              <div id="caasFlow"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Cross-Country Alignment -->
+        <div class="panel">
+          <div class="panel-head"><span class="panel-title">CROSS-COUNTRY ALIGNMENT</span><span class="badge by">4 SYSTEMS</span></div>
+          <div class="panel-body">
+            <div style="font-size:9px;color:rgba(255,255,255,0.3);margin-bottom:8px;letter-spacing:1px">INDUSTRY CLASSIFICATION MAPPING</div>
+            <div id="countryTable" style="overflow-x:auto"><div class="loading-box"><div class="spin"></div></div></div>
+          </div>
+        </div>
+
+        <!-- Classification Systems -->
+        <div class="panel">
+          <div class="panel-head"><span class="panel-title">CLASSIFICATION SYSTEMS</span><span class="badge by">4 COUNTRIES</span></div>
+          <div class="panel-body" id="classPanel"></div>
+        </div>
+      </div>
+
+      <!-- RIGHT COLUMN -->
+      <div>
+        <!-- Path Validator -->
+        <div class="panel">
+          <div class="panel-head"><span class="panel-title">PATH VALIDATOR</span><span class="badge bg">INTERACTIVE</span></div>
+          <div class="panel-body">
+            <div style="font-size:9px;color:rgba(255,255,255,0.3);margin-bottom:8px;letter-spacing:1px">TEST INFERENCE PATH LEGALITY</div>
+            <div style="display:flex;gap:6px;margin-bottom:10px">
+              <select id="pvFrom" style="flex:1;background:#111;border:1px solid var(--dim);color:var(--white);padding:8px;border-radius:4px;font-size:11px;font-family:inherit"></select>
+              <span style="color:var(--gold);align-self:center;font-size:16px">&rarr;</span>
+              <select id="pvTo" style="flex:1;background:#111;border:1px solid var(--dim);color:var(--white);padding:8px;border-radius:4px;font-size:11px;font-family:inherit"></select>
+            </div>
+            <button onclick="validatePath()" style="width:100%;background:linear-gradient(135deg,var(--b1),var(--b2));border:none;color:#fff;padding:10px;border-radius:6px;font-size:12px;font-weight:700;cursor:pointer;font-family:inherit;letter-spacing:1px">VALIDATE PATH</button>
+            <div id="pvResult" style="margin-top:8px;display:none;padding:10px;border-radius:6px;font-size:11px"></div>
+          </div>
+        </div>
+
+        <!-- Inference Paths -->
+        <div class="panel">
+          <div class="panel-head"><span class="panel-title">INFERENCE PATHS</span><span class="badge bg" id="pathsBadge">--</span></div>
+          <div class="panel-body" id="pathsPanel"><div class="loading-box"><div class="spin"></div></div></div>
+        </div>
+
+        <!-- Node Tree -->
+        <div class="panel">
+          <div class="panel-head"><span class="panel-title">NODE TREE (L1-L4)</span><span class="badge bb" id="treeBadge">--</span></div>
+          <div class="panel-body">
+            <input id="treeSearch" type="text" placeholder="Search nodes..." style="width:100%;background:#111;border:1px solid var(--dim);color:var(--white);padding:7px 10px;border-radius:4px;font-size:11px;font-family:inherit;margin-bottom:8px" oninput="filterTree(this.value)">
+            <div id="treePanel" style="max-height:350px;overflow-y:auto"><div class="loading-box"><div class="spin"></div></div></div>
+          </div>
+        </div>
+
+        <!-- Violations -->
+        <div class="panel">
+          <div class="panel-head"><span class="panel-title">VIOLATIONS</span><span class="badge br" id="violBadge">0</span></div>
+          <div class="panel-body feed" id="violPanel"><div class="loading-box"><div class="spin"></div></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TAB 4: SECURITY -->
+  <div class="tab" id="tab-security">
+    <div style="text-align:center;margin-bottom:16px">
+      <div class="shield-ring"><span class="shield-score">99</span><span class="shield-label">SECURITY</span></div>
+      <div style="font-size:10px;color:rgba(255,255,255,0.3);margin-top:8px;letter-spacing:2px">16 VULNERABILITIES PATCHED | 10-LAYER DEFENSE</div>
+    </div>
+    <div class="g2" style="align-items:start">
+      <div>
+        <div class="panel"><div class="panel-head"><span class="panel-title">DEFENSE LAYERS</span><span class="badge bg">10 ACTIVE</span></div>
+          <div class="panel-body" id="defensePanel"></div></div>
+        <div class="panel"><div class="panel-head"><span class="panel-title">RLS COVERAGE</span><span class="badge bg" id="rlsBadge">--</span></div>
+          <div class="panel-body" id="rlsPanel"><div class="loading-box"><div class="spin"></div></div></div></div>
+      </div>
+      <div>
+        <div class="panel"><div class="panel-head"><span class="panel-title">VULNERABILITY TRACKER</span><span class="badge bg">V-001~V-016</span></div>
+          <div class="panel-body" id="vulnPanel"></div></div>
+        <div class="panel"><div class="panel-head"><span class="panel-title">CRYPTO & TLS</span><span class="badge bg">TLS 1.3</span></div>
+          <div class="panel-body" id="cryptoPanel"></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TAB 5: PERFORMANCE -->
+  <div class="tab" id="tab-perf">
+    <div class="g4" id="perfStats"><div class="loading-box"><div class="spin"></div></div></div>
+    <div style="height:12px"></div>
+    <div class="g2" style="align-items:start">
+      <div>
+        <div class="panel"><div class="panel-head"><span class="panel-title">INDEX INVENTORY</span><span class="badge bg" id="idxBadge">--</span></div>
+          <div class="panel-body" id="indexPanel"><div class="loading-box"><div class="spin"></div></div></div></div>
+        <div class="panel"><div class="panel-head"><span class="panel-title">DB SIZE BREAKDOWN</span><span class="badge bb">STORAGE</span></div>
+          <div class="panel-body" id="sizePanel"><div class="loading-box"><div class="spin"></div></div></div></div>
+      </div>
+      <div>
+        <div class="panel"><div class="panel-head"><span class="panel-title">SLOW QUERIES (TOP 10)</span><span class="badge by">MONITOR</span></div>
+          <div class="panel-body" id="slowPanel" style="max-height:400px;overflow-y:auto"><div class="loading-box"><div class="spin"></div></div></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TAB 6: RED BUTTONS -->
+  <div class="tab" id="tab-actions">
+    <div class="panel"><div class="panel-head"><span class="panel-title">ACTION CENTER</span><span class="badge br">NUCLEAR</span></div>
+      <div class="panel-body">
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <button class="act-btn" style="background:linear-gradient(135deg,#ff3344,#cc0022)" onclick="fireAction('action-purge',this)"><span style="font-size:20px">&#128293;</span> 全網清洗 PURGE</button>
+          <div class="act-res" id="res-action-purge"></div>
+          <button class="act-btn" style="background:linear-gradient(135deg,#00aaff,#0066cc)" onclick="fireAction('action-report',this)"><span style="font-size:20px">&#128202;</span> 生成日報 REPORT</button>
+          <div class="act-res" id="res-action-report"></div>
+          <button class="act-btn" style="background:linear-gradient(135deg,#ffcc00,#cc9900);color:#000" onclick="fireAction('action-defense',this)"><span style="font-size:20px">&#128737;&#65039;</span> 防禦模式 DEFENSE</button>
+          <div class="act-res" id="res-action-defense"></div>
+        </div>
+      </div></div>
+    <div class="panel"><div class="panel-head"><span class="panel-title">OPERATION LOG</span><span class="badge bb" id="opLogBadge">--</span></div>
+      <div class="panel-body feed" id="opLogPanel"><div class="loading-box"><div class="spin"></div></div></div></div>
+  </div>
+
+</div>
+
+<!-- BOTTOM NAV (6 TABS) -->
+<div class="bottom-nav">
+  <button class="active" onclick="switchTab('overview',this)"><span class="ico">&#127760;</span>總覽</button>
+  <button onclick="switchTab('arsenal',this)"><span class="ico">&#9876;&#65039;</span>戰力</button>
+  <button onclick="switchTab('world',this)"><span class="ico">&#127758;</span>世界</button>
+  <button onclick="switchTab('security',this)"><span class="ico">&#128274;</span>安全</button>
+  <button onclick="switchTab('perf',this)"><span class="ico">&#9889;</span>效能</button>
+  <button onclick="switchTab('actions',this)"><span class="ico">&#128308;</span>核按鈕</button>
+</div>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script>
+// ============================================================
+// CONFIG
+// ============================================================
+const SB_URL='https://vmyrivxxibqydccurxug.supabase.co';
+const SK='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZteXJpdnh4aWJxeWRjY3VyeHVnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzAwNDAwMjksImV4cCI6MjA4NTYxNjAyOX0.iBV-23LGdm_uKffAExgqSV34-NWoAyv8_-M_cJQZ8Gg';
+const SRK='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZteXJpdnh4aWJxeWRjY3VyeHVnIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3MDA0MDAyOSwiZXhwIjoyMDg1NjE2MDI5fQ.fUSfCNn3hYZiaQt3O6hFG3asyVpWqHOJq_sqwzmUFuA';
+const CEO_URL=SB_URL+'/functions/v1/ceo-dashboard';
+const WD_URL=SB_URL+'/functions/v1/world-definition';
+const sb=window.supabase.createClient(SB_URL,SK);
+
+// ============================================================
+// MATRIX RAIN
+// ============================================================
+const mc=document.getElementById('matrix'),mx=mc.getContext('2d');
+function resizeMC(){mc.width=window.innerWidth;mc.height=window.innerHeight}
+window.addEventListener('resize',resizeMC);resizeMC();
+const cols=Math.floor(mc.width/14),drops=Array(cols).fill(1);
+const mChars='SEOBAIKE01六界指揮物理AI約束CaaS'.split('');
+function drawMatrix(){mx.fillStyle='rgba(0,0,0,0.05)';mx.fillRect(0,0,mc.width,mc.height);mx.font='12px JetBrains Mono';for(let i=0;i<drops.length;i++){mx.fillStyle=`hsl(${140+Math.random()*40},100%,${50+Math.random()*30}%)`;mx.fillText(mChars[Math.floor(Math.random()*mChars.length)],i*14,drops[i]*14);if(drops[i]*14>mc.height&&Math.random()>0.975)drops[i]=0;drops[i]++}}
+setInterval(drawMatrix,50);
+
+// ============================================================
+// CLOCK
+// ============================================================
+function updateClock(){document.getElementById('clock').textContent=new Date().toLocaleString('zh-TW',{timeZone:'Asia/Taipei',hour12:false,month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit',second:'2-digit'})}
+setInterval(updateClock,1000);updateClock();
+
+// ============================================================
+// TAB SWITCHING
+// ============================================================
+const tabLoaded={};
+function switchTab(name,btn){
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('.bottom-nav button').forEach(b=>b.classList.remove('active'));
+  document.getElementById('tab-'+name).classList.add('active');
+  btn.classList.add('active');
+  if(!tabLoaded[name]){tabLoaded[name]=true;loadTab(name)}
+}
+
+function loadTab(name){
+  if(name==='arsenal')loadArsenal();
+  if(name==='world')loadWorld();
+  if(name==='security')loadSecurity();
+  if(name==='perf')loadPerf();
+  if(name==='actions')loadOpLog();
+}
+
+// ============================================================
+// HELPERS
+// ============================================================
+async function ceoApi(action){const r=await fetch(CEO_URL+'?action='+action,{headers:{'Authorization':'Bearer '+SRK}});return r.json()}
+async function wdApi(action,params=''){const r=await fetch(WD_URL+'?action='+action+params,{headers:{'Authorization':'Bearer '+SRK}});return r.json()}
+// DB queries via secure RPC functions (service_role only, no raw SQL in frontend)
+async function rpc(fn){
+  const r=await fetch(SB_URL+'/rest/v1/rpc/'+fn,{method:'POST',headers:{'apikey':SRK,'Authorization':'Bearer '+SRK,'Content-Type':'application/json'}});
+  if(r.ok)return r.json();
+  return null;
+}
+function msColor(ms){return ms<500?'var(--g1)':ms<2000?'var(--gold)':'var(--r1)'}
+function pctColor(p){return p>=95?'var(--g1)':p>=80?'var(--gold)':'var(--r1)'}
+function shortTime(ts){if(!ts)return'--';return new Date(ts).toLocaleTimeString('zh-TW',{timeZone:'Asia/Taipei',hour:'2-digit',minute:'2-digit',second:'2-digit'})}
+
+// ============================================================
+// REALTIME
+// ============================================================
+let liveFeedData=[];
+function setupRealtime(){
+  const dot=document.getElementById('liveDot'),label=document.getElementById('rtLabel');
+  sb.channel('ceo-realtime')
+    .on('broadcast',{event:'new_log'},(p)=>{
+      liveFeedData.unshift(p.payload);if(liveFeedData.length>30)liveFeedData.pop();
+      renderFeed(true);
+    })
+    .on('broadcast',{event:'fallback_alert'},(p)=>{renderFallbackAlert(p.payload)})
+    .on('broadcast',{event:'violation_alert'},(p)=>{renderViolationAlert(p.payload)})
+    .subscribe((st)=>{
+      if(st==='SUBSCRIBED'){dot.className='live-dot live-on';label.className='rt-label rt-on';label.textContent='LIVE'}
+      else if(st==='CHANNEL_ERROR'||st==='TIMED_OUT'){dot.className='live-dot live-off';label.className='rt-label rt-off';label.textContent='OFFLINE';setTimeout(setupRealtime,5000)}
+    });
+}
+
+// ============================================================
+// TAB 1: OVERVIEW
+// ============================================================
+let cachedArsenalPct=null;
+async function loadOverview(fetchArsenal=true){
+  try{
+    const promises=[ceoApi('global-status'),ceoApi('daily-report')];
+    if(fetchArsenal)promises.push(ceoApi('arsenal'));
+    const results=await Promise.all(promises);
+    const gs=results[0],dr=results[1],ar=results[2]||null;
+    if(ar)cachedArsenalPct=ar.health_pct;
+    // Top stats
+    const sitesOnline=gs.sites?gs.sites.filter(s=>s.status==='online').length:0;
+    const totalSites=gs.sites?gs.sites.length:0;
+    const k=dr.kpi||{};
+    const arPct=cachedArsenalPct||0;
+    document.getElementById('overviewStats').innerHTML=`
+      <div class="stat"><div class="stat-val" style="color:${sitesOnline===totalSites?'var(--g1)':'var(--r1)'}">${sitesOnline}/${totalSites}</div><div class="stat-label">SITES ONLINE</div></div>
+      <div class="stat"><div class="stat-val" style="color:${arPct>=95?'var(--g1)':arPct>=80?'var(--gold)':'var(--r1)'}">${arPct}%</div><div class="stat-label">ARSENAL</div></div>
+      <div class="stat"><div class="stat-val" style="color:var(--b1)">${k.total_conversations||0}</div><div class="stat-label">TODAY CHATS</div></div>
+      <div class="stat"><div class="stat-val" style="color:${(k.errors||0)>0?'var(--r1)':'var(--g1)'}">${k.error_rate||'0%'}</div><div class="stat-label">ERROR RATE</div></div>`;
+    // Sites
+    document.getElementById('sitesBadge').textContent=gs.overall_status||'--';
+    document.getElementById('sitesBadge').className='badge '+(sitesOnline===totalSites?'bg':'br');
+    document.getElementById('sitesPanel').innerHTML=(gs.sites||[]).map(s=>`
+      <div class="row"><div class="dot ${s.color==='green'?'dot-g':s.color==='red'?'dot-r':'dot-y'}"></div>
+        <span class="row-name">${s.name}</span><span class="row-val" style="color:${msColor(s.latency_ms)}">${s.latency_ms}ms</span></div>`).join('');
+    // KPI
+    const healthyComps=(dr.system_health||[]).filter(h=>h.status==='healthy').length;
+    const totalComps=(dr.system_health||[]).length;
+    document.getElementById('kpiPanel').innerHTML=`
+      <div class="g2" style="margin-bottom:8px">
+        <div class="stat"><div class="stat-val" style="color:var(--b1);font-size:20px">${k.total_conversations||0}</div><div class="stat-label">TOTAL</div></div>
+        <div class="stat"><div class="stat-val" style="color:var(--g1);font-size:20px">${k.success||0}</div><div class="stat-label">SUCCESS</div></div>
+        <div class="stat"><div class="stat-val" style="color:var(--r1);font-size:20px">${k.errors||0}</div><div class="stat-label">ERRORS</div></div>
+        <div class="stat"><div class="stat-val" style="color:var(--gold);font-size:20px">${k.blocked||0}</div><div class="stat-label">BLOCKED</div></div>
+      </div>
+      <div style="border-top:1px solid var(--dim);padding-top:8px;display:flex;align-items:center;gap:8px">
+        <div class="dot ${healthyComps===totalComps?'dot-g':'dot-y'}"></div>
+        <span style="font-size:10px;color:rgba(255,255,255,0.4)">${healthyComps}/${totalComps} COMPONENTS HEALTHY</span>
+      </div>`;
+    // Feed
+    await loadInitialFeed();
+  }catch(e){document.getElementById('overviewStats').innerHTML='<div style="color:var(--r1)">Failed to load overview</div>'}
+}
+
+async function loadInitialFeed(){
+  try{
+    const{data}=await sb.from('ai_customer_logs').select('id,created_at,input_text,output_text,status,response').order('created_at',{ascending:false}).limit(20);
+    liveFeedData=data||[];renderFeed(false);
+  }catch(e){console.warn('feed:',e)}
+}
+
+function renderFeed(isNew){
+  const el=document.getElementById('liveFeed');
+  document.getElementById('feedBadge').textContent=liveFeedData.length;
+  if(!liveFeedData.length){el.innerHTML='<div style="color:rgba(255,255,255,0.2);text-align:center;padding:20px">No conversations yet</div>';return}
+  el.innerHTML=liveFeedData.slice(0,20).map((l,i)=>{
+    const t=shortTime(l.created_at);const p=l.response?.provider||'';const ms=l.response?.latencyMs?l.response.latencyMs+'ms':'';
+    const sc=l.status==='success'?'var(--g1)':l.status==='error'?'var(--r1)':'var(--gold)';
+    return`<div class="feed-item ${i===0&&isNew?'new':''}">
+      <span style="color:var(--b1);font-weight:700">${t}</span> <span style="color:${sc}">[${l.status||'--'}]</span>${p?` <span style="font-size:9px;background:rgba(0,255,136,0.1);color:var(--g1);padding:1px 5px;border-radius:3px">${p} ${ms}</span>`:''}
+      <div style="color:rgba(255,255,255,0.5);margin-top:3px">${(l.input_text||'').substring(0,60)||'(empty)'}</div>
+    </div>`}).join('');
+}
+
+// ============================================================
+// TAB 2: ARSENAL
+// ============================================================
+async function loadArsenal(){
+  try{
+    const[d,lat]=await Promise.all([ceoApi('arsenal'),wdApi('latency-monitor','&hours=24')]);
+    // Update cached arsenal health for overview
+    cachedArsenalPct=d.health_pct;
+    // Summary
+    document.getElementById('arsenalBadge').textContent=d.health_pct+'%';
+    document.getElementById('arsenalBadge').className='badge '+(d.health_pct>80?'bg':d.health_pct>50?'by':'br');
+    const green=d.keys?d.keys.filter(k=>k.color==='green').length:0;
+    const total=d.keys?d.keys.length:0;
+    const errors=d.keys?d.keys.filter(k=>k.color==='red').length:0;
+    document.getElementById('arsenalSummary').innerHTML=`
+      <div class="stat"><div class="stat-val" style="color:${d.health_pct>=95?'var(--g1)':d.health_pct>=80?'var(--gold)':'var(--r1)'}">${d.health_pct}%</div><div class="stat-label">HEALTH</div></div>
+      <div class="stat"><div class="stat-val" style="color:var(--g1)">${green}/${total}</div><div class="stat-label">OPERATIONAL</div></div>
+      <div class="stat"><div class="stat-val" style="color:${errors?'var(--r1)':'var(--g1)'}">${errors}</div><div class="stat-label">ERRORS</div></div>`;
+    // Provider list — grouped by category
+    const typeLabels={'inference':'AI GATEWAY','llm':'LLM','search':'SEARCH & TOOLS','voice':'SPECIAL FORCES','video':'SPECIAL FORCES','image':'SPECIAL FORCES'};
+    const typeOrder=['inference','llm','search','voice','video','image'];
+    const grouped={};
+    (d.keys||[]).forEach(k=>{const cat=typeLabels[k.type]||k.type;if(!grouped[cat])grouped[cat]=[];grouped[cat].push(k)});
+    let arsenalHtml='';
+    for(const cat of [...new Set(Object.values(typeLabels))]){
+      const items=grouped[cat];if(!items)continue;
+      const catActive=items.filter(k=>k.color==='green').length;
+      arsenalHtml+=`<div style="font-size:9px;color:rgba(255,255,255,0.25);letter-spacing:2px;padding:8px 0 4px;border-bottom:1px solid var(--dim)">${cat} (${catActive}/${items.length})</div>`;
+      items.forEach(k=>{
+        const ok=k.color==='green';
+        const statusLabel=k.status==='active'?'ACTIVE':k.status==='configured'?'CONFIGURED':k.status==='error'?'ERROR':k.status==='timeout'?'TIMEOUT':'MISSING';
+        const statusColor=ok?'var(--g1)':k.status==='timeout'?'var(--gold)':'var(--r1)';
+        arsenalHtml+=`<div class="row"><div class="dot ${ok?'dot-g':k.status==='timeout'?'dot-y':'dot-r'}"></div>
+          <span class="row-name">${k.provider}</span>
+          ${k.http_code?`<span style="font-size:8px;color:rgba(255,255,255,0.2)">${k.http_code}</span>`:''}
+          <span class="row-val" style="color:${statusColor};font-size:9px">${statusLabel}</span></div>`;
+      });
+    }
+    document.getElementById('arsenalList').innerHTML=arsenalHtml;
+    // Latency
+    const providers=Object.entries(lat.by_provider||{});
+    if(providers.length){
+      const maxMs=Math.max(...providers.map(([,s])=>s.avg_ms),1);
+      document.getElementById('latencyPanel').innerHTML=`<div style="font-size:9px;color:rgba(255,255,255,0.3);margin-bottom:8px">${lat.total_requests||0} requests in ${lat.period_hours||24}h</div>`+
+        providers.sort((a,b)=>a[1].avg_ms-b[1].avg_ms).map(([name,s])=>{
+          const pct=Math.round(s.avg_ms/maxMs*100);const c=msColor(s.avg_ms);
+          return`<div class="bar-row"><span class="bar-label">${name}</span><div class="bar-wrap"><div class="bar-fill" style="width:${pct}%;background:${c}"></div></div><span class="bar-val" style="color:${c}">${s.avg_ms}ms</span></div>`}).join('');
+    }else{document.getElementById('latencyPanel').innerHTML='<div style="color:rgba(255,255,255,0.2);text-align:center;padding:15px">No latency data yet</div>'}
+  }catch(e){document.getElementById('arsenalList').innerHTML='<div style="color:var(--r1)">Failed to load</div>'}
+}
+
+function renderFallbackAlert(a){
+  const panel=document.getElementById('fallbackPanel');panel.style.display='block';
+  const list=document.getElementById('fallbackList');
+  const d=a.details||a;const failed=(d.failed_providers||[]).map(p=>p.provider).join(' > ');
+  list.innerHTML=`<div class="feed-item new"><span style="color:var(--r1);font-weight:700">${shortTime(a.checked_at||new Date())}</span> <span style="color:var(--gold)">${failed}</span> <span style="color:var(--g1)"> &rarr; ${d.landed_on||'?'}</span><div style="color:rgba(255,255,255,0.3);margin-top:3px">${d.landed_model||''} | ${d.latencyMs||0}ms</div></div>`+list.innerHTML;
+}
+
+// ============================================================
+// TAB 3: WORLD DEFINITION — 物理AI核心
+// ============================================================
+let graphNodes=[],graphLinks=[],graphData=null,allWdNodes=[];
+let gScale=1,gOffX=0,gOffY=0,gDrag=null,gHover=null;
+let graphAnimFrame=null;
+
+async function loadWorld(){
+  try{
+    const[stats,graph,viols,tree]=await Promise.all([wdApi('stats'),wdApi('get-graph'),wdApi('violations','&limit=15'),wdApi('get-tree')]);
+    graphData=graph;
+    allWdNodes=tree.nodes||[];
+    // Stats
+    document.getElementById('worldStats').innerHTML=`
+      <div class="stat"><div class="stat-val" style="color:var(--cyan)">${stats.total_nodes||0}</div><div class="stat-label">TOTAL NODES</div></div>
+      <div class="stat"><div class="stat-val" style="color:var(--g1)">${stats.paths?.allowed||0}</div><div class="stat-label">ALLOWED PATHS</div></div>
+      <div class="stat"><div class="stat-val" style="color:var(--r1)">${stats.paths?.forbidden||0}</div><div class="stat-label">FORBIDDEN PATHS</div></div>
+      <div class="stat"><div class="stat-val" style="color:var(--gold)">${stats.violations||0}</div><div class="stat-label">TOTAL VIOLATIONS</div></div>`;
+
+    // Classification
+    const cs=stats.classification_systems||{};
+    document.getElementById('classPanel').innerHTML=Object.entries(cs).map(([k,v])=>
+      `<div class="row"><div class="dot dot-g"></div><span class="row-name"><strong>${k}</strong> ${v}</span></div>`).join('');
+
+    // CaaS Architecture Flow
+    buildCaaSFlow(graph.stats||{});
+
+    // Cross-Country Alignment Table
+    buildCountryTable(allWdNodes);
+
+    // Paths
+    const gs=graph.stats||{};
+    document.getElementById('pathsBadge').textContent=(gs.allowed_paths||0)+' A / '+(gs.forbidden_paths||0)+' F';
+    document.getElementById('pathsPanel').innerHTML=`
+      <div class="g4">
+        <div class="stat"><div class="stat-val" style="color:var(--cyan);font-size:18px">${gs.l1||0}</div><div class="stat-label">L1</div></div>
+        <div class="stat"><div class="stat-val" style="color:var(--g1);font-size:18px">${gs.l2||0}</div><div class="stat-label">L2</div></div>
+        <div class="stat"><div class="stat-val" style="color:var(--gold);font-size:18px">${gs.l3||0}</div><div class="stat-label">L3</div></div>
+        <div class="stat"><div class="stat-val" style="color:var(--purple);font-size:18px">${gs.l4||0}</div><div class="stat-label">L4</div></div>
+      </div>
+      <div style="margin-top:10px;font-size:10px;color:rgba(255,255,255,0.3)">
+        ${graph.links?.length||0} total links = ${(graph.links||[]).filter(l=>l.type==='hierarchy').length} hierarchy + ${gs.allowed_paths||0} allowed + ${gs.forbidden_paths||0} forbidden
+      </div>`;
+
+    // Node Tree
+    const nodes=graph.nodes||[];
+    document.getElementById('treeBadge').textContent=nodes.length+' nodes';
+    buildTree(nodes);
+
+    // Path Validator dropdowns
+    populatePathSelectors(allWdNodes);
+
+    // Violations
+    const vs=viols.violations||[];
+    document.getElementById('violBadge').textContent=vs.length;
+    document.getElementById('violPanel').innerHTML=vs.length?vs.map(v=>`
+      <div class="feed-item"><span style="color:var(--purple);font-weight:700">${shortTime(v.created_at)}</span>
+        <span style="color:var(--r1);margin-left:8px">${(v.from_node||'?').substring(0,12)} &rarr; ${(v.to_node||'?').substring(0,12)}</span>
+        <div style="color:rgba(255,255,255,0.4);margin-top:2px">${v.reason||'unknown'}</div></div>`).join('')
+      :'<div style="color:rgba(255,255,255,0.2);text-align:center;padding:15px">No violations recorded</div>';
+
+    // Force Graph
+    document.getElementById('graphNodeCount').textContent=nodes.length+' nodes';
+    document.getElementById('graphLinkCount').textContent=(graph.links?.length||0)+' links';
+    initForceGraph(graph);
+  }catch(e){console.error('loadWorld:',e);document.getElementById('worldStats').innerHTML='<div style="color:var(--r1)">Failed to load: '+e.message+'</div>'}
+}
+
+// ============================================================
+// CaaS Architecture Flow (L1 → L2 → L3 → L4)
+// ============================================================
+function buildCaaSFlow(stats){
+  const levels=[
+    {l:1,label:'L1 PHYSICAL WORLD',desc:'物理世界',count:stats.l1||0,color:'var(--cyan)'},
+    {l:2,label:'L2 BUSINESS LOGIC',desc:'商業邏輯',count:stats.l2||0,color:'var(--g1)'},
+    {l:3,label:'L3 SAFETY LAYER',desc:'安全層',count:stats.l3||0,color:'var(--gold)'},
+    {l:4,label:'L4 COMMAND',desc:'指揮層',count:stats.l4||0,color:'var(--purple)'},
+  ];
+  document.getElementById('caasFlow').innerHTML=`
+    <div style="display:flex;align-items:center;justify-content:center;gap:4px;flex-wrap:wrap">
+      ${levels.map((lv,i)=>`
+        <div style="background:rgba(0,0,0,0.4);border:1px solid ${lv.color};border-radius:6px;padding:10px 14px;text-align:center;min-width:100px;position:relative">
+          <div style="font-family:Orbitron;font-size:20px;font-weight:900;color:${lv.color}">${lv.count}</div>
+          <div style="font-size:8px;letter-spacing:2px;color:${lv.color};margin-top:2px">${lv.label}</div>
+          <div style="font-size:9px;color:rgba(255,255,255,0.3);margin-top:2px">${lv.desc}</div>
+        </div>
+        ${i<3?'<span style="color:rgba(0,255,136,0.4);font-size:18px;animation:pulse 1.5s infinite">&#9656;</span>':''}
+      `).join('')}
+    </div>
+    <div style="margin-top:12px;font-size:9px;color:rgba(255,255,255,0.2);letter-spacing:1px">
+      CONSTRAINT FLOW: Physical Laws &rarr; Business Rules &rarr; Safety Guards &rarr; Commander Override
+    </div>`;
+}
+
+// ============================================================
+// Cross-Country Alignment Table
+// ============================================================
+function buildCountryTable(nodes){
+  // Group L1 nodes that have multi-country names
+  const l1=nodes.filter(n=>n.level===1);
+  if(!l1.length){document.getElementById('countryTable').innerHTML='<div style="color:rgba(255,255,255,0.2)">No L1 nodes</div>';return}
+  let html='<table style="width:100%;border-collapse:collapse;font-size:10px"><thead><tr>';
+  html+='<th style="text-align:left;padding:6px 8px;border-bottom:1px solid var(--dim);color:var(--cyan);letter-spacing:1px">CODE</th>';
+  html+='<th style="text-align:left;padding:6px 8px;border-bottom:1px solid var(--dim);color:var(--g1)">TW</th>';
+  html+='<th style="text-align:left;padding:6px 8px;border-bottom:1px solid var(--dim);color:var(--b1)">US</th>';
+  html+='<th style="text-align:left;padding:6px 8px;border-bottom:1px solid var(--dim);color:var(--gold)">EU</th>';
+  html+='<th style="text-align:left;padding:6px 8px;border-bottom:1px solid var(--dim);color:var(--r1)">JP</th>';
+  html+='</tr></thead><tbody>';
+  l1.forEach(n=>{
+    html+=`<tr style="border-bottom:1px solid rgba(255,255,255,0.02)">
+      <td style="padding:5px 8px;font-family:Orbitron;color:var(--cyan);font-size:9px">${n.code||'--'}</td>
+      <td style="padding:5px 8px;color:var(--g1)">${n.name_tw||'--'}</td>
+      <td style="padding:5px 8px;color:var(--b1)">${n.name_us||'--'}</td>
+      <td style="padding:5px 8px;color:var(--gold)">${n.name_eu||'--'}</td>
+      <td style="padding:5px 8px;color:var(--r1)">${n.name_jp||'--'}</td>
+    </tr>`;
+  });
+  html+='</tbody></table>';
+  document.getElementById('countryTable').innerHTML=html;
+}
+
+// ============================================================
+// Path Validator
+// ============================================================
+function populatePathSelectors(nodes){
+  const fromSel=document.getElementById('pvFrom');
+  const toSel=document.getElementById('pvTo');
+  const opts=nodes.map(n=>`<option value="${n.id}">[L${n.level}] ${n.name_tw||n.code}</option>`).join('');
+  fromSel.innerHTML='<option value="">-- FROM --</option>'+opts;
+  toSel.innerHTML='<option value="">-- TO --</option>'+opts;
+}
+
+async function validatePath(){
+  const from=document.getElementById('pvFrom').value;
+  const to=document.getElementById('pvTo').value;
+  const res=document.getElementById('pvResult');
+  if(!from||!to){res.style.display='block';res.style.background='rgba(255,170,0,0.1)';res.style.borderColor='var(--gold)';res.style.color='var(--gold)';res.textContent='Please select both FROM and TO nodes';return}
+  res.style.display='block';res.style.background='rgba(0,170,255,0.1)';res.style.borderColor='var(--b1)';res.style.color='var(--b1)';res.textContent='Validating...';
+  try{
+    const r=await fetch(WD_URL+'?action=validate-path',{method:'POST',headers:{'Authorization':'Bearer '+SRK,'Content-Type':'application/json'},body:JSON.stringify({from_node_id:from,to_node_id:to})});
+    const d=await r.json();
+    if(d.allowed){
+      res.style.background='rgba(0,255,136,0.1)';res.style.borderColor='var(--g1)';res.style.color='var(--g1)';
+      res.innerHTML=`<strong>ALLOWED</strong> | Max hops: ${d.max_hops||'N/A'} | Path: ${d.path}`;
+      highlightGraphPath(from,to,'allowed');
+    }else if(d.path==='forbidden'){
+      res.style.background='rgba(255,34,68,0.1)';res.style.borderColor='var(--r1)';res.style.color='var(--r1)';
+      res.innerHTML=`<strong>FORBIDDEN</strong> | ${d.reason||'Explicitly forbidden path'}`;
+      highlightGraphPath(from,to,'forbidden');
+    }else{
+      res.style.background='rgba(255,170,0,0.1)';res.style.borderColor='var(--gold)';res.style.color='var(--gold)';
+      res.innerHTML=`<strong>UNKNOWN</strong> | No explicit rule found for this path`;
+    }
+  }catch(e){res.style.background='rgba(255,34,68,0.1)';res.style.borderColor='var(--r1)';res.style.color='var(--r1)';res.textContent='Validation failed: '+e.message}
+}
+
+// ============================================================
+// Node Tree (with search)
+// ============================================================
+let treeNodesCache=[];
+function buildTree(nodes){
+  treeNodesCache=nodes;
+  renderTree(nodes);
+}
+
+function renderTree(nodes){
+  const byLevel={1:[],2:[],3:[],4:[]};
+  nodes.forEach(n=>{if(byLevel[n.level])byLevel[n.level].push(n)});
+  let html='';
+  for(const[lv,ns]of Object.entries(byLevel)){
+    if(!ns.length)continue;
+    const cls=['','wd-l1','wd-l2','wd-l3','wd-l4'][lv];
+    html+=`<div style="margin-bottom:10px"><div style="font-size:10px;color:rgba(255,255,255,0.3);margin-bottom:4px;letter-spacing:2px">LEVEL ${lv} (${ns.length})</div><div style="display:flex;flex-wrap:wrap;gap:3px">`;
+    ns.forEach(n=>{html+=`<span class="wd-node ${cls}" title="${n.code}: ${n.label}" style="cursor:pointer" onclick="focusGraphNode('${n.id}')">${n.label||n.code}</span>`});
+    html+='</div></div>';
+  }
+  document.getElementById('treePanel').innerHTML=html||'<div style="color:rgba(255,255,255,0.2)">No matching nodes</div>';
+}
+
+function filterTree(q){
+  if(!q){renderTree(treeNodesCache);return}
+  const lower=q.toLowerCase();
+  const filtered=treeNodesCache.filter(n=>(n.label||'').toLowerCase().includes(lower)||(n.code||'').toLowerCase().includes(lower));
+  renderTree(filtered);
+}
+
+// ============================================================
+// FORCE-DIRECTED GRAPH (Canvas)
+// ============================================================
+function initForceGraph(graph){
+  const canvas=document.getElementById('forceGraph');
+  const ctx=canvas.getContext('2d');
+  const rect=canvas.parentElement.getBoundingClientRect();
+  canvas.width=rect.width*2;canvas.height=420*2;
+  canvas.style.width=rect.width+'px';canvas.style.height='420px';
+
+  const W=canvas.width,H=canvas.height;
+  const levelColors={1:'#00eeff',2:'#00ff88',3:'#ffaa00',4:'#aa44ff'};
+  const levelRadius={1:12,2:8,3:6,4:5};
+
+  // Build node map
+  const nodeMap={};
+  graphNodes=(graph.nodes||[]).map(n=>{
+    const angle=Math.random()*Math.PI*2;
+    const dist=80+n.level*60+Math.random()*100;
+    const node={
+      id:n.id,label:n.label||n.code,code:n.code,level:n.level,parent:n.parent,
+      x:W/2+Math.cos(angle)*dist,y:H/2+Math.sin(angle)*dist,
+      vx:0,vy:0,
+      color:levelColors[n.level]||'#fff',
+      r:levelRadius[n.level]||5,
+    };
+    nodeMap[n.id]=node;
+    return node;
+  });
+
+  graphLinks=(graph.links||[]).map(l=>({
+    source:nodeMap[l.source],target:nodeMap[l.target],
+    type:l.type,reason:l.reason,max_hops:l.max_hops,
+  })).filter(l=>l.source&&l.target);
+
+  gScale=1;gOffX=0;gOffY=0;gHover=null;
+
+  // Physics simulation
+  function simulate(){
+    const alpha=0.15,repulse=800,attract=0.005,damping=0.88,centerForce=0.002;
+    // Repulsion
+    for(let i=0;i<graphNodes.length;i++){
+      for(let j=i+1;j<graphNodes.length;j++){
+        const a=graphNodes[i],b=graphNodes[j];
+        let dx=a.x-b.x,dy=a.y-b.y;
+        let dist=Math.sqrt(dx*dx+dy*dy)||1;
+        if(dist>400)continue;
+        const f=repulse/(dist*dist);
+        const fx=dx/dist*f*alpha,fy=dy/dist*f*alpha;
+        a.vx+=fx;a.vy+=fy;b.vx-=fx;b.vy-=fy;
+      }
+    }
+    // Attraction (links)
+    for(const l of graphLinks){
+      const dx=l.target.x-l.source.x,dy=l.target.y-l.source.y;
+      const dist=Math.sqrt(dx*dx+dy*dy)||1;
+      const idealDist=l.type==='hierarchy'?80:150;
+      const f=(dist-idealDist)*attract*alpha;
+      const fx=dx/dist*f,fy=dy/dist*f;
+      l.source.vx+=fx;l.source.vy+=fy;l.target.vx-=fx;l.target.vy-=fy;
+    }
+    // Center gravity
+    for(const n of graphNodes){
+      n.vx+=(W/2-n.x)*centerForce;
+      n.vy+=(H/2-n.y)*centerForce;
+      n.vx*=damping;n.vy*=damping;
+      n.x+=n.vx;n.y+=n.vy;
+      n.x=Math.max(20,Math.min(W-20,n.x));
+      n.y=Math.max(20,Math.min(H-20,n.y));
+    }
+  }
+
+  // Render
+  let highlightPath=null;
+  function render(){
+    ctx.clearRect(0,0,W,H);
+    ctx.save();
+    ctx.translate(gOffX,gOffY);ctx.scale(gScale,gScale);
+
+    // Links
+    for(const l of graphLinks){
+      ctx.beginPath();
+      ctx.moveTo(l.source.x,l.source.y);ctx.lineTo(l.target.x,l.target.y);
+      if(l.type==='hierarchy'){ctx.strokeStyle='rgba(255,255,255,0.06)';ctx.lineWidth=0.5}
+      else if(l.type==='allowed'){ctx.strokeStyle='rgba(0,255,136,0.25)';ctx.lineWidth=1.5}
+      else if(l.type==='forbidden'){ctx.strokeStyle='rgba(255,34,68,0.3)';ctx.lineWidth=1.5;ctx.setLineDash([4,4])}
+      // Highlight
+      if(highlightPath&&((l.source.id===highlightPath.from&&l.target.id===highlightPath.to)||(l.source.id===highlightPath.to&&l.target.id===highlightPath.from))){
+        ctx.strokeStyle=highlightPath.type==='allowed'?'#00ff88':'#ff2244';ctx.lineWidth=4;ctx.setLineDash([])
+      }
+      ctx.stroke();ctx.setLineDash([]);
+    }
+
+    // Nodes
+    for(const n of graphNodes){
+      const isHovered=gHover&&gHover.id===n.id;
+      const isFocused=highlightPath&&(n.id===highlightPath.from||n.id===highlightPath.to);
+      ctx.beginPath();
+      ctx.arc(n.x,n.y,n.r*(isHovered?1.8:isFocused?1.5:1),0,Math.PI*2);
+      ctx.fillStyle=n.color;
+      if(isHovered||isFocused){ctx.shadowColor=n.color;ctx.shadowBlur=20}
+      ctx.fill();ctx.shadowBlur=0;
+
+      // Label for L1 and L2 nodes (always) and hovered nodes
+      if(n.level<=2||isHovered||isFocused){
+        ctx.font=`${isHovered?'bold 14':'11'}px JetBrains Mono`;
+        ctx.fillStyle=isHovered?'#fff':'rgba(255,255,255,0.5)';
+        ctx.textAlign='center';ctx.textBaseline='top';
+        ctx.fillText(n.label,n.x,n.y+n.r+4);
+      }
+    }
+    ctx.restore();
+  }
+
+  // Animation loop
+  let ticks=0;
+  function frame(){
+    if(ticks<300)simulate();
+    render();
+    ticks++;
+    graphAnimFrame=requestAnimationFrame(frame);
+  }
+  if(graphAnimFrame)cancelAnimationFrame(graphAnimFrame);
+  frame();
+
+  // Interactions
+  canvas.onmousemove=function(e){
+    const r=canvas.getBoundingClientRect();
+    const mx=(e.clientX-r.left)*2/gScale-gOffX/gScale;
+    const my=(e.clientY-r.top)*2/gScale-gOffY/gScale;
+    let found=null;
+    for(const n of graphNodes){
+      const dx=n.x-mx,dy=n.y-my;
+      if(Math.sqrt(dx*dx+dy*dy)<n.r*2.5){found=n;break}
+    }
+    gHover=found;
+    canvas.style.cursor=found?'pointer':'grab';
+    const tip=document.getElementById('nodeTooltip');
+    if(found){
+      const wdNode=allWdNodes.find(w=>w.id===found.id);
+      tip.style.display='block';
+      tip.style.left=(e.clientX-canvas.parentElement.getBoundingClientRect().left+15)+'px';
+      tip.style.top=(e.clientY-canvas.parentElement.getBoundingClientRect().top-10)+'px';
+      tip.innerHTML=`<div style="color:${found.color};font-family:Orbitron;font-weight:700;margin-bottom:4px">[L${found.level}] ${found.label}</div>
+        <div style="color:rgba(255,255,255,0.4)">Code: ${found.code||'--'}</div>
+        ${wdNode?`<div style="color:var(--g1);margin-top:3px">TW: ${wdNode.name_tw||'--'}</div>
+        <div style="color:var(--b1)">US: ${wdNode.name_us||'--'}</div>
+        <div style="color:var(--gold)">EU: ${wdNode.name_eu||'--'}</div>
+        <div style="color:var(--r1)">JP: ${wdNode.name_jp||'--'}</div>`:''}`;
+    }else{tip.style.display='none'}
+  };
+
+  canvas.onmouseleave=function(){gHover=null;document.getElementById('nodeTooltip').style.display='none'};
+
+  // Expose highlight function
+  window.highlightGraphPath=function(from,to,type){
+    highlightPath={from,to,type};
+    setTimeout(()=>{highlightPath=null},5000);
+  };
+
+  // Focus on a node (from tree click)
+  window.focusGraphNode=function(id){
+    const n=graphNodes.find(n=>n.id===id);
+    if(!n)return;
+    gOffX=canvas.width/2-n.x*gScale;gOffY=canvas.height/2-n.y*gScale;
+    gHover=n;
+  };
+}
+
+// Graph controls
+function graphZoom(factor){gScale*=factor}
+function graphReset(){gScale=1;gOffX=0;gOffY=0}
+
+// ============================================================
+// Violation realtime alert
+// ============================================================
+function renderViolationAlert(v){
+  const el=document.getElementById('violPanel');
+  const badge=document.getElementById('violBadge');
+  badge.textContent=parseInt(badge.textContent||0)+1;
+  el.innerHTML=`<div class="feed-item new"><span style="color:var(--purple);font-weight:700">${shortTime(v.timestamp||new Date())}</span> <span style="color:var(--r1)">${(v.from_node||'?').substring(0,12)} &rarr; AI</span><div style="color:rgba(255,255,255,0.4);margin-top:2px">${v.reason||'violation'}</div></div>`+el.innerHTML;
+}
+
+// ============================================================
+// TAB 4: SECURITY
+// ============================================================
+function loadSecurity(){
+  // Defense layers (static - based on our actual 10-layer architecture)
+  const layers=[
+    {n:'Cloudflare WAF',c:'var(--b1)',s:'ACTIVE'},
+    {n:'TLS 1.3 + HSTS + PFS',c:'var(--g1)',s:'ACTIVE'},
+    {n:'JWT Validation (role + ref)',c:'var(--g1)',s:'ACTIVE'},
+    {n:'RLS + REVOKE (100% tables)',c:'var(--g1)',s:'ACTIVE'},
+    {n:'Rate Limiting (10/min)',c:'var(--gold)',s:'ACTIVE'},
+    {n:'Input Sanitization (ILIKE)',c:'var(--g1)',s:'ACTIVE'},
+    {n:'AI Security Rules (6 rules)',c:'var(--cyan)',s:'ACTIVE'},
+    {n:'Business Constraints (CaaS)',c:'var(--purple)',s:'ACTIVE'},
+    {n:'CHECK Constraints (3)',c:'var(--g1)',s:'ACTIVE'},
+    {n:'IP Hash + Audit Immutability',c:'var(--gold)',s:'ACTIVE'},
+  ];
+  document.getElementById('defensePanel').innerHTML=layers.map((l,i)=>`
+    <div class="row" style="animation:fadeIn ${0.1+i*0.05}s ease-out both"><div class="dot dot-g"></div>
+      <span class="row-name" style="color:${l.c}">${l.n}</span>
+      <span class="badge bg" style="font-size:7px">${l.s}</span></div>`).join('');
+
+  // Vulnerability tracker (static - all 16 fixed)
+  const vulns=[
+    {id:'V-001',d:'ILIKE wildcard injection',f:'Fixed'},
+    {id:'V-002',d:'Search keyword sanitization',f:'Fixed'},
+    {id:'V-003',d:'Missing input validation',f:'Fixed'},
+    {id:'V-004',d:'Prompt injection vectors',f:'Fixed'},
+    {id:'V-005',d:'XSS in response output',f:'Fixed'},
+    {id:'V-006',d:'Rate limit bypass',f:'Fixed'},
+    {id:'V-007',d:'JWT validation incomplete',f:'Fixed'},
+    {id:'V-008',d:'Country code validation',f:'Fixed'},
+    {id:'V-009',d:'RLS not enabled (4 tables)',f:'Fixed'},
+    {id:'V-010',d:'REVOKE not applied',f:'Fixed'},
+    {id:'V-011',d:'Self-parent allowed',f:'Fixed'},
+    {id:'V-012',d:'IP not anonymized',f:'Fixed'},
+    {id:'V-013',d:'Audit log tamperable',f:'Fixed'},
+    {id:'V-014',d:'Rate limit session mismatch',f:'Fixed'},
+    {id:'V-015',d:'Self-referencing paths',f:'Fixed'},
+    {id:'V-016',d:'Nullable created_at',f:'Fixed'},
+  ];
+  document.getElementById('vulnPanel').innerHTML=vulns.map(v=>`
+    <div class="row"><span style="font-family:Orbitron;font-size:9px;color:var(--g1);width:45px">${v.id}</span>
+      <span class="row-name" style="color:rgba(255,255,255,0.5)">${v.d}</span>
+      <span class="badge bg" style="font-size:7px">PATCHED</span></div>`).join('');
+
+  // Crypto
+  document.getElementById('cryptoPanel').innerHTML=`
+    <div class="row"><div class="dot dot-g"></div><span class="row-name">TLS Version</span><span class="row-val" style="color:var(--g1)">1.3</span></div>
+    <div class="row"><div class="dot dot-g"></div><span class="row-name">HSTS</span><span class="row-val" style="color:var(--g1)">ON</span></div>
+    <div class="row"><div class="dot dot-g"></div><span class="row-name">Perfect Forward Secrecy</span><span class="row-val" style="color:var(--g1)">YES</span></div>
+    <div class="row"><div class="dot dot-g"></div><span class="row-name">JWT Algorithm</span><span class="row-val" style="color:var(--g1)">HS256</span></div>
+    <div class="row"><div class="dot dot-g"></div><span class="row-name">PostgreSQL SSL</span><span class="row-val" style="color:var(--g1)">ON</span></div>
+    <div class="row"><div class="dot dot-g"></div><span class="row-name">Deno Sandbox</span><span class="row-val" style="color:var(--g1)">ACTIVE</span></div>`;
+
+  // RLS
+  loadRLSData();
+}
+
+async function loadRLSData(){
+  try{
+    const h=await rpc('get_db_health');
+    if(!h){document.getElementById('rlsPanel').innerHTML='<div style="color:var(--r1)">RPC unavailable</div>';return}
+    const enabled=h.rls_enabled||0;const disabled=h.rls_disabled||0;
+    document.getElementById('rlsBadge').textContent=enabled+'/'+(enabled+disabled);
+    document.getElementById('rlsBadge').className='badge '+(disabled===0?'bg':'br');
+    document.getElementById('rlsPanel').innerHTML=`
+      <div class="g2">
+        <div class="stat"><div class="stat-val" style="color:var(--g1);font-size:22px">${enabled}</div><div class="stat-label">RLS ENABLED</div></div>
+        <div class="stat"><div class="stat-val" style="color:${disabled?'var(--r1)':'var(--g1)'};font-size:22px">${disabled}</div><div class="stat-label">UNPROTECTED</div></div>
+      </div>
+      <div style="margin-top:10px;font-size:10px;color:${disabled?'var(--r1)':'var(--g1)'}">Coverage: ${((enabled/(enabled+disabled||1))*100).toFixed(1)}%</div>`;
+  }catch(e){document.getElementById('rlsPanel').innerHTML='<div style="color:var(--r1)">Query failed</div>'}
+}
+
+// ============================================================
+// TAB 5: PERFORMANCE
+// ============================================================
+async function loadPerf(){
+  try{
+    const[health,sizes,indexes]=await Promise.all([rpc('get_db_health'),rpc('get_table_sizes'),rpc('get_index_counts')]);
+    if(!health){document.getElementById('perfStats').innerHTML='<div style="color:var(--r1)">RPC functions unavailable</div>';return}
+    const cache=health.cache_hit_rate||0;
+    const conn=health.active_connections||0;
+    const dbSize=health.db_size||'--';
+    const idxCount=health.total_indexes||0;
+    // Top stats
+    document.getElementById('perfStats').innerHTML=`
+      <div class="stat"><div class="stat-val" style="color:${cache>=99?'var(--g1)':'var(--gold)'}">${cache}%</div><div class="stat-label">CACHE HIT</div></div>
+      <div class="stat"><div class="stat-val" style="color:var(--b1)">${conn}</div><div class="stat-label">ACTIVE CONN</div></div>
+      <div class="stat"><div class="stat-val" style="color:var(--cyan);font-size:20px">${dbSize}</div><div class="stat-label">DB SIZE</div></div>
+      <div class="stat"><div class="stat-val" style="color:var(--gold)">${idxCount}</div><div class="stat-label">INDEXES</div></div>`;
+    document.getElementById('idxBadge').textContent=idxCount+' total';
+    // Index panel
+    if(indexes&&indexes.length){
+      const maxIdx=Math.max(...indexes.map(x=>x.cnt),1);
+      document.getElementById('indexPanel').innerHTML=indexes.map(r=>{
+        const pct=Math.round(r.cnt/maxIdx*100);
+        return`<div class="bar-row"><span class="bar-label">${r.name}</span><div class="bar-wrap"><div class="bar-fill" style="width:${pct}%;background:var(--b1)"></div></div><span class="bar-val" style="color:var(--b1)">${r.cnt}</span></div>`}).join('');
+    }else{document.getElementById('indexPanel').innerHTML='<div style="color:rgba(255,255,255,0.2)">No index data</div>'}
+    // DB size breakdown
+    if(sizes&&sizes.length){
+      const maxBytes=Math.max(...sizes.map(r=>r.bytes),1);
+      document.getElementById('sizePanel').innerHTML=sizes.map(r=>{
+        const pct=Math.round(r.bytes/maxBytes*100);const c=r.bytes>50000000?'var(--r1)':r.bytes>10000000?'var(--gold)':'var(--g1)';
+        return`<div class="bar-row"><span class="bar-label">${r.name}</span><div class="bar-wrap"><div class="bar-fill" style="width:${pct}%;background:${c}"></div></div><span class="bar-val" style="color:${c}">${r.size}</span></div>`}).join('');
+    }else{document.getElementById('sizePanel').innerHTML='<div style="color:rgba(255,255,255,0.2)">No size data</div>'}
+    // Slow queries panel — show summary from available data
+    document.getElementById('slowPanel').innerHTML=`
+      <div style="text-align:center;padding:15px">
+        <div style="font-family:Orbitron;font-size:20px;color:var(--g1);margin-bottom:8px">${cache}%</div>
+        <div style="font-size:9px;color:rgba(255,255,255,0.3);letter-spacing:2px;margin-bottom:12px">CACHE HIT RATE</div>
+        <div style="font-size:10px;color:rgba(255,255,255,0.4);text-align:left">
+          <div class="row"><div class="dot dot-g"></div><span class="row-name">RLS Coverage</span><span class="row-val" style="color:var(--g1)">${health.rls_enabled}/${health.rls_enabled+health.rls_disabled}</span></div>
+          <div class="row"><div class="dot dot-g"></div><span class="row-name">Total Indexes</span><span class="row-val" style="color:var(--b1)">${idxCount}</span></div>
+          <div class="row"><div class="dot ${conn>50?'dot-r':'dot-g'}"></div><span class="row-name">Active Connections</span><span class="row-val" style="color:${conn>50?'var(--r1)':'var(--g1)'}">${conn}</span></div>
+          <div class="row"><div class="dot dot-g"></div><span class="row-name">Database Size</span><span class="row-val" style="color:var(--cyan)">${dbSize}</span></div>
+          <div class="row"><div class="dot dot-g"></div><span class="row-name">Unprotected Tables</span><span class="row-val" style="color:${health.rls_disabled?'var(--r1)':'var(--g1)'}">${health.rls_disabled}</span></div>
+        </div>
+      </div>`;
+  }catch(e){document.getElementById('perfStats').innerHTML='<div style="color:var(--r1)">Failed to load: '+e.message+'</div>'}
+}
+
+// ============================================================
+// TAB 6: RED BUTTONS
+// ============================================================
+async function fireAction(action,btn){
+  btn.classList.add('loading');btn.innerHTML='<div class="spin"></div> EXECUTING...';
+  const res=document.getElementById('res-'+action);
+  try{const d=await ceoApi(action);res.className='act-res show';res.textContent='OK: '+JSON.stringify(d.message||d.action||'done')}
+  catch(e){res.className='act-res show err';res.textContent='FAIL: '+e.message}
+  btn.classList.remove('loading');
+  btn.innerHTML=action==='action-purge'?'&#128293; 全網清洗 PURGE':action==='action-report'?'&#128202; 生成日報 REPORT':'&#128737;&#65039; 防禦模式 DEFENSE';
+}
+
+async function loadOpLog(){
+  try{
+    const{data}=await sb.from('configs').select('*').eq('service','ceo-dashboard').order('created_at',{ascending:false}).limit(15);
+    document.getElementById('opLogBadge').textContent=(data||[]).length;
+    document.getElementById('opLogPanel').innerHTML=(data||[]).length?(data||[]).map(l=>`
+      <div class="feed-item"><span style="color:var(--b1);font-weight:700">${shortTime(l.created_at)}</span> <span style="color:var(--gold)">${l.key}</span>
+        <div style="color:var(--g1);margin-top:2px">${l.value}</div></div>`).join('')
+      :'<div style="color:rgba(255,255,255,0.2);text-align:center;padding:15px">No operations logged</div>';
+  }catch(e){document.getElementById('opLogPanel').innerHTML='<div style="color:var(--r1)">Failed to load</div>'}
+}
+
+// ============================================================
+// INIT
+// ============================================================
+tabLoaded.overview=true;
+loadOverview(true); // Initial load: fetch arsenal + global + daily
+setupRealtime();
+// Auto-refresh overview every 30s (skip arsenal — only refresh on Arsenal tab)
+setInterval(()=>{if(document.getElementById('tab-overview').classList.contains('active'))loadOverview(false)},30000);
+</script>
+</body>
+</html>

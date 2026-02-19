@@ -1,0 +1,55 @@
+PATROL LOG — 2026-02-18 02:36 TST
+========================================================
+
+[HEALTH MONITOR] Overall: WARNING
+  db_connectivity:        PASS  62ms
+  ai_gateway_activity:    PASS  567 req/hr
+  error_rate_24h:         PASS  0.0% (0/8362)
+  inference_violations:   WARN  8 violations/24h
+  rate_limiter:           PASS  42 blocked/24h
+  world_definition:       PASS  85 nodes, 10+10 paths
+  provider_health:        PASS  All healthy
+
+[GLOBAL STATUS] All Systems Go
+  aiforseo.vip:           ONLINE  254ms (CF Global)
+  Supabase DB:            ONLINE  30ms (AWS Tokyo)
+  Supabase Auth:          ONLINE  29ms (AWS Tokyo)
+
+[ARSENAL] 21/23 Active (91%)
+  NVIDIA:       200 OK
+  Groq:         200 OK
+  Meta AI:      401 ERROR ← Key expired (known)
+  DeepSeek:     200 OK
+  Together:     TIMEOUT   ← NEW ISSUE
+  Fireworks:    200 OK
+  OpenAI:       200 OK
+  Mistral:      200 OK
+  xAI (Grok):   200 OK
+  OpenRouter:   200 OK
+  Anthropic:    200 OK
+  Cohere:       200 OK
+  AI21:         200 OK
+  Replicate:    200 OK
+  HuggingFace:  200 OK
+  DashScope:    200 OK
+  Perplexity:   200 OK
+  Google:       Configured
+  PageSpeed:    Configured
+  DataForSEO:   Configured
+  ElevenLabs:   200 OK
+  Shotstack:    200 OK
+  RemoveBG:     Configured
+
+[WORLD DEFINITION] 401 on stats endpoint — possible deployment propagation delay
+
+[ALERTS]
+  1. Meta AI 401 — key expired, needs renewal
+  2. Together TIMEOUT — new, was active 45min ago, monitoring
+  3. World Definition stats 401 — redeployed, checking propagation
+
+[DEPLOYED THIS SESSION]
+  - analyze-document Edge Function (GLOBAL)
+  - world-definition Edge Function (GLOBAL - 24 countries + ISIC)
+  - report.html frontend (GLOBAL country rendering)
+  - 3 DB tables (analysis_reports, user_credits, credit_transactions)
+  - 6 evidence files (137 companies, 6 quadrants)

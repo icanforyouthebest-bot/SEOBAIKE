@@ -1,0 +1,15 @@
+
+ ⛅️ wrangler 4.65.0
+───────────────────
+Your Worker has access to the following bindings:
+Binding        Resource      Mode
+env.AI         AI            remote
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mFailed to fetch auth token: 400 Bad Request[0m
+
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mIn a non-interactive environment, it's necessary to set a CLOUDFLARE_API_TOKEN environment variable for wrangler to work. Please go to https://developers.cloudflare.com/fundamentals/api/get-started/create-token/ for instructions on how to create an api token, and assign its value to CLOUDFLARE_API_TOKEN.[0m
+
+
+🪵  Logs were written to "C:\Users\icanf\AppData\Roaming\xdg.config\.wrangler\logs\wrangler-2026-02-14_22-14-06_857.log"

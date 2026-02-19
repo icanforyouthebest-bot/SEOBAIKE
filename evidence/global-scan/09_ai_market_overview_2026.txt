@@ -1,0 +1,83 @@
+SEOBAIKE Global Scan — AI Market Overview & Industry Outlook 2026-2030
+Scan Date: 2026-02-18
+Source: CEO Research Compilation
+========================================================
+
+=== 1. MARKET SIZE ===
+  2023: ~$190B (USD)
+  2030 Forecast: ~$1.8T (USD)
+  CAGR: 30-36%
+  GenAI + Enterprise Automation = primary growth drivers
+
+=== 2. ACTIVE SEGMENTS (Most Active AI Company Types) ===
+  A. Foundation Models / Cloud Giants
+     OpenAI, Anthropic, Google, Microsoft, Amazon, Meta
+     Control: compute, models, platforms (upstream)
+
+  B. Enterprise AI / Automation Platforms
+     UiPath, Automation Anywhere, C3.ai, DataRobot
+     Focus: embedding AI into enterprise workflows
+
+  C. Vertical AI (Domain-Specific)
+     Healthcare, Finance, Legal, Customer Service, Education, Manufacturing
+     Take general models → industry-specific solutions
+     Currently receiving most VC funding & customer adoption
+
+  D. Physical / Embodied AI
+     Robotics, autonomous vehicles, warehouse logistics, factory automation
+     Humanoid robots, factory robots, physical agents
+     Viewed as "next wave" growth frontier
+
+=== 3. FUTURE OUTLOOK 2026-2030 ===
+  Market: Multi-trillion dollar by 2030, 30-35% CAGR
+  Business Model Evolution:
+    - Tool → Platform → Ecosystem (single tools will be disrupted)
+    - One-time project → Long-term subscription + revenue share
+    - Outcome-based pricing (cost savings / revenue share)
+  Tech Direction:
+    - Single model → Composite systems + Agentic AI
+    - Multi-model, multi-tool orchestration for complete workflows
+    - Physical AI & robotics as next major investment wave
+  Risks:
+    - Regulation, privacy, cybersecurity, ethics (especially finance/healthcare/gov)
+    - Talent gap: "AI-in-process" system designers still scarce
+
+=== 4. WHAT AN AI COMPANY NEEDS TO SURVIVE ===
+  Product:
+    - Clear product packaging: defined customer, I/O, measurable ROI
+  Engineering & Data:
+    - MLOps/DataOps teams: deploy, monitor, update models
+    - Security & Privacy: GDPR, data law compliance, encryption, permissions
+  Business & Domain:
+    - Deep vertical industry expertise (healthcare/legal/manufacturing)
+    - Customer Success: ongoing adjustment, not just license sales
+  Governance & Risk:
+    - AI governance team
+    - Liability, copyright, data source management
+
+=== 5. VALUATION BENCHMARKS ===
+  Legal/Contract/Compliance/Developer Tools/Agentic AI:
+    Revenue multiples: 30-50x (vs typical SaaS: 10-20x)
+
+=== KEY REPORTS REFERENCED ===
+  - Deloitte: "State of AI in the Enterprise 2026"
+  - IBM: "Beyond models: The rise of AI tech trends 2026"
+  - MIT Sloan Review: "Five Trends in AI and Data Science 2026"
+  - Moody's: "Outlooks 2026: AI, Digital Finance, Cyber Risk"
+  - Forbes: "2025 AI 50 List"
+  - Statista: "Global AI Market Size 2030"
+
+Sources:
+- https://arensic.international/global-ai-market-outlook-2025-2030-growth-vendors-regional-dynamics-2030-forcast/
+- https://www.faistgroup.com/news/global-ai-market-2030/
+- https://www.statista.com/forecasts/1474143/global-ai-market-size
+- https://www.statista.com/outlook/tmo/artificial-intelligence/worldwide
+- https://www.france-epargne.fr/research/en/state-of-ai-entering-2026
+- https://www.deloitte.com/us/en/what-we-do/capabilities/applied-artificial-intelligence/content/state-of-ai-in-the-enterprise.html
+- https://www.deloitte.com/global/en/issues/generative-ai/state-of-ai-in-enterprise.html
+- https://www.ibm.com/think/news/ai-tech-trends-predictions-2026
+- https://sloanreview.mit.edu/article/five-trends-in-ai-and-data-science-for-2026/
+- https://www.deloitte.com/us/en/insights/topics/technology-management/tech-trends.html
+- https://www.moodys.com/web/en/us/insights/credit-risk/outlooks/artificial-intelligence-2026.html
+- https://www.forbes.com/lists/ai50/
+- https://www.crn.com/news/ai/2025/the-25-hottest-ai-companies-for-data-center-and-edge-the-2025-crn-ai-100

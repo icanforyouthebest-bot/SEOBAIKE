@@ -1,0 +1,38 @@
+SEOBAIKE Global Scan — Document AI Companies
+Scan Date: 2026-02-18
+Total: 26 companies
+========================================================
+
+=== Document Parsing ===
+1  | Invofox              | 發票/收據/薪資單AI解析輸出JSON                   | ES
+2  | Parsio               | GPT+Mistral OCR文件郵件解析                      | EE
+3  | Rossum               | AI發票/PO/提單解析直送SAP/NetSuite                | CZ
+4  | LlamaParse           | GenAI原生雲端文件解析(LlamaIndex)                | US
+5  | Docling              | 開源文件處理解析(IBM)                             | US
+6  | Unstructured         | 企業PDF/DOCX/HTML提取轉換OCR+NLP                 | US
+7  | Reducto              | API文件解析提取轉LLM結構化資料                   | US
+8  | Nanonets             | OCR+AI發票/收據/郵件結構化提取                   | US
+9  | Docsumo              | AI發票/銀行對帳單/帳單PDF解析                    | US
+10 | Unstract             | LLM物流文件提取(報關單/裝箱單/海關)              | US
+11 | AnyParser            | AI文件解析自動化資料提取                          | US
+
+=== Document Analysis ===
+12 | Google Document AI   | 文件解析+OCR+結構化提取                          | US
+13 | Amazon Textract      | AWS文件OCR+表格提取                              | US
+14 | Azure AI Doc Intel   | 文件解析+表單辨識                                | US
+15 | Insight7             | 自動定性資料分析+AI主題提取                      | US
+16 | NVivo (Lumivero)     | 定性資料分析(文字/音訊/影片)                     | AU
+17 | ATLAS.ti             | 定性混合方法研究+AI自動編碼                      | DE
+18 | Dedoose              | 雲端混合方法研究定性+定量                        | US
+19 | MAXQDA (VERBI)       | 定性定量資料分析+註解+視覺化                     | DE
+20 | Quirkos              | 視覺定性資料分析+主題聚類                        | UK
+21 | IBM Watson Discovery | AI企業搜尋+文件分析大規模資料探索                | US
+22 | Docugami             | AI文件工程+商業文件洞察摘要                      | US
+23 | Elicit               | AI學術文獻分析研究助手(LLM+Semantic Scholar)     | US
+24 | Consensus            | AI科學問答跨研究綜合共識答案                     | US
+25 | Affinda              | 合約/帳單AI結構化分析                            | AU
+26 | Specter Systems      | 貸款文件AI分析                                   | US
+
+Sources:
+- https://dev.to/anmolbaranwal/top-11-document-parsing-ai-tools-for-developers-in-2025-4m6a
+- https://insight7.io/best-ai-document-analysis-tools-for-research

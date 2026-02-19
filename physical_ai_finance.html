@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<title>SEOBAIKE Physical AI - Finance</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { background: #0a0a1a; color: #fff; font-family: 'Segoe UI', sans-serif; overflow-x: hidden; }
+
+.hero { text-align: center; padding: 60px 20px 30px; background: linear-gradient(135deg, #0a0a2e, #1a0a3e); }
+.hero h1 { font-size: 48px; background: linear-gradient(90deg, #00f0ff, #8b5cf6, #f472b6); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+.hero .sub { font-size: 20px; color: #94a3b8; margin-top: 10px; }
+.hero .patent { display: inline-block; margin-top: 15px; padding: 8px 24px; border: 1px solid #8b5cf6; border-radius: 20px; color: #c4b5fd; font-size: 14px; }
+
+.flow-section { padding: 40px 20px; max-width: 1200px; margin: 0 auto; }
+.flow-section h2 { font-size: 28px; color: #00f0ff; margin-bottom: 30px; text-align: center; }
+
+/* Main Flow */
+.main-flow { display: flex; justify-content: center; align-items: center; gap: 0; flex-wrap: wrap; margin-bottom: 50px; }
+.flow-node { background: linear-gradient(145deg, #1e1e3a, #2a2a4a); border: 2px solid #3b3b6b; border-radius: 16px; padding: 24px 20px; width: 180px; text-align: center; position: relative; transition: all 0.3s; }
+.flow-node:hover { border-color: #8b5cf6; transform: translateY(-5px); box-shadow: 0 10px 40px rgba(139,92,246,0.3); }
+.flow-node .icon { font-size: 48px; margin-bottom: 10px; }
+.flow-node .label { font-size: 16px; font-weight: bold; color: #e2e8f0; }
+.flow-node .desc { font-size: 12px; color: #94a3b8; margin-top: 6px; }
+.flow-arrow { font-size: 32px; color: #8b5cf6; padding: 0 5px; }
+
+/* Zone Grid */
+.zones { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 24px; padding: 0 20px; max-width: 1200px; margin: 0 auto 40px; }
+.zone { background: linear-gradient(145deg, #111128, #1a1a3a); border: 1px solid #2a2a5a; border-radius: 20px; padding: 30px; transition: all 0.3s; }
+.zone:hover { border-color: #00f0ff; box-shadow: 0 0 30px rgba(0,240,255,0.1); }
+.zone .zone-header { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
+.zone .zone-icon { font-size: 40px; }
+.zone .zone-title { font-size: 22px; font-weight: bold; }
+.zone .zone-title.blue { color: #00f0ff; }
+.zone .zone-title.purple { color: #a78bfa; }
+.zone .zone-title.pink { color: #f472b6; }
+.zone .zone-title.green { color: #34d399; }
+.zone .zone-title.orange { color: #fb923c; }
+.zone .zone-title.red { color: #f87171; }
+
+.device-list { list-style: none; }
+.device-list li { display: flex; align-items: center; gap: 10px; padding: 10px 0; border-bottom: 1px solid #1e1e3e; }
+.device-list li:last-child { border: none; }
+.device-list .d-icon { font-size: 24px; width: 36px; text-align: center; }
+.device-list .d-name { font-weight: bold; color: #e2e8f0; font-size: 14px; }
+.device-list .d-desc { color: #94a3b8; font-size: 12px; }
+
+/* L1-L4 Path */
+.path-section { background: linear-gradient(135deg, #0f0f2e, #1a0a3e); padding: 50px 20px; margin: 40px 0; }
+.path-section h2 { text-align: center; font-size: 28px; color: #f472b6; margin-bottom: 30px; }
+.path-visual { display: flex; justify-content: center; align-items: center; gap: 0; flex-wrap: wrap; }
+.path-box { width: 220px; padding: 24px; border-radius: 16px; text-align: center; position: relative; }
+.path-box.l1 { background: linear-gradient(135deg, #1e3a5f, #1e5a8f); border: 2px solid #3b82f6; }
+.path-box.l2 { background: linear-gradient(135deg, #2d1b69, #4c1d95); border: 2px solid #8b5cf6; }
+.path-box.l3 { background: linear-gradient(135deg, #4a1942, #7c2d5a); border: 2px solid #ec4899; }
+.path-box.l4 { background: linear-gradient(135deg, #1a3a2a, #166534); border: 2px solid #22c55e; }
+.path-box .p-level { font-size: 32px; font-weight: 900; opacity: 0.3; }
+.path-box .p-name { font-size: 18px; font-weight: bold; margin: 8px 0; }
+.path-box .p-example { font-size: 12px; color: #cbd5e1; }
+.path-arrow { font-size: 36px; color: #f472b6; padding: 0 8px; }
+
+/* CaaS Banner */
+.caas { text-align: center; padding: 40px 20px; margin: 20px auto; max-width: 800px; }
+.caas .big { font-size: 64px; margin-bottom: 10px; }
+.caas h3 { font-size: 24px; color: #fbbf24; margin-bottom: 10px; }
+.caas p { font-size: 16px; color: #94a3b8; line-height: 1.8; }
+.caas .highlight { display: inline-block; margin-top: 15px; padding: 12px 32px; background: linear-gradient(90deg, #8b5cf6, #ec4899); border-radius: 30px; font-size: 18px; font-weight: bold; }
+
+/* Scoreboard */
+.scoreboard { max-width: 900px; margin: 40px auto; padding: 0 20px; }
+.scoreboard h2 { text-align: center; color: #34d399; font-size: 28px; margin-bottom: 24px; }
+.score-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 16px; }
+.score-card { background: #111128; border: 1px solid #2a2a5a; border-radius: 12px; padding: 20px; text-align: center; }
+.score-card .s-icon { font-size: 36px; }
+.score-card .s-value { font-size: 36px; font-weight: 900; margin: 8px 0; }
+.score-card .s-value.green { color: #34d399; }
+.score-card .s-value.blue { color: #3b82f6; }
+.score-card .s-value.yellow { color: #fbbf24; }
+.score-card .s-label { font-size: 14px; color: #94a3b8; }
+
+/* Footer */
+.footer { text-align: center; padding: 40px; color: #475569; font-size: 14px; border-top: 1px solid #1e1e3e; margin-top: 40px; }
+.footer .commander { color: #8b5cf6; font-size: 16px; font-weight: bold; }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <h1>SEOBAIKE Physical AI</h1>
+  <div class="sub">金融機構 &#x2715; 物理 AI &#x2715; 全場景落地</div>
+  <div class="patent">Patent 115100981 | CaaS Architecture</div>
+</div>
+
+<!-- Main Flow -->
+<div class="flow-section">
+  <h2>&#x1F3E6; 智慧分行全流程</h2>
+  <div class="main-flow">
+    <div class="flow-node"><div class="icon">&#x1F6B6;</div><div class="label">客戶進門</div><div class="desc">人臉辨識<br>VIP / 黑名單</div></div>
+    <div class="flow-arrow">&#x27A1;</div>
+    <div class="flow-node"><div class="icon">&#x1F916;</div><div class="label">AI 迎賓</div><div class="desc">機器人引導<br>智能分流取號</div></div>
+    <div class="flow-arrow">&#x27A1;</div>
+    <div class="flow-node"><div class="icon">&#x1F4BB;</div><div class="label">智能櫃台</div><div class="desc">無人開戶<br>視訊行員</div></div>
+    <div class="flow-arrow">&#x27A1;</div>
+    <div class="flow-node"><div class="icon">&#x1F9BE;</div><div class="label">機械手臂</div><div class="desc">文件掃描<br>現金清點</div></div>
+    <div class="flow-arrow">&#x27A1;</div>
+    <div class="flow-node"><div class="icon">&#x1F6E1;</div><div class="label">AI 風控</div><div class="desc">反詐騙<br>反洗錢</div></div>
+  </div>
+</div>
+
+<!-- 6 Zones -->
+<div class="zones">
+
+  <div class="zone">
+    <div class="zone-header"><span class="zone-icon">&#x1F916;</span><span class="zone-title blue">迎賓 + 分流</span></div>
+    <ul class="device-list">
+      <li><span class="d-icon">&#x1F464;</span><div><div class="d-name">人臉辨識閘門</div><div class="d-desc">VIP 自動通知理專 / 黑名單即時警報</div></div></li>
+      <li><span class="d-icon">&#x1F5E3;</span><div><div class="d-name">語音 AI 分流</div><div class="d-desc">SEOBAIKE Router → Gemma 理解業務意圖</div></div></li>
+      <li><span class="d-icon">&#x1F4F1;</span><div><div class="d-name">智能叫號</div><div class="d-desc">AI 預判等候時間，動態調配窗口</div></div></li>
+    </ul>
+  </div>
+
+  <div class="zone">
+    <div class="zone-header"><span class="zone-icon">&#x1F4BB;</span><span class="zone-title purple">無人智能櫃台</span></div>
+    <ul class="device-list">
+      <li><span class="d-icon">&#x1F4B3;</span><div><div class="d-name">ITM 自助機</div><div class="d-desc">開戶 / 換卡 / 轉帳 / 列印</div></div></li>
+      <li><span class="d-icon">&#x1F4F9;</span><div><div class="d-name">遠端視訊行員</div><div class="d-desc">大額交易連線真人覆核</div></div></li>
+      <li><span class="d-icon">&#x270D;</span><div><div class="d-name">電子簽名板</div><div class="d-desc">合約即簽即存，區塊鏈存證</div></div></li>
+    </ul>
+  </div>
+
+  <div class="zone">
+    <div class="zone-header"><span class="zone-icon">&#x1F9BE;</span><span class="zone-title pink">機械手臂區</span></div>
+    <ul class="device-list">
+      <li><span class="d-icon">&#x1F4C4;</span><div><div class="d-name">文件取件 + 掃描</div><div class="d-desc">UR 協作手臂 → 高速 OCR → 自動歸檔</div></div></li>
+      <li><span class="d-icon">&#x1F4B5;</span><div><div class="d-name">現金清點機器人</div><div class="d-desc">Glory 點鈔機 + 手臂分裝 + AI 驗偽鈔</div></div></li>
+      <li><span class="d-icon">&#x1F4E6;</span><div><div class="d-name">金庫 AGV 搬運</div><div class="d-desc">自動搬運現金箱 / 保管箱取送</div></div></li>
+    </ul>
+  </div>
+
+  <div class="zone">
+    <div class="zone-header"><span class="zone-icon">&#x1F6E1;</span><span class="zone-title green">AI 風控中心</span></div>
+    <ul class="device-list">
+      <li><span class="d-icon">&#x26A0;</span><div><div class="d-name">即時反詐騙</div><div class="d-desc">毫秒級攔截異常交易（Llama 70B 分析）</div></div></li>
+      <li><span class="d-icon">&#x1F578;</span><div><div class="d-name">反洗錢圖譜</div><div class="d-desc">知識圖譜追蹤資金流向（Mixtral 推理）</div></div></li>
+      <li><span class="d-icon">&#x1F4CA;</span><div><div class="d-name">動態信用評分</div><div class="d-desc">AI 秒算信用分 → 即時授信額度</div></div></li>
+    </ul>
+  </div>
+
+  <div class="zone">
+    <div class="zone-header"><span class="zone-icon">&#x1F4F7;</span><span class="zone-title orange">物理安防 AI</span></div>
+    <ul class="device-list">
+      <li><span class="d-icon">&#x1F441;</span><div><div class="d-name">AI 攝影機</div><div class="d-desc">異常行為偵測：徘徊 / 遮臉 / 暴力</div></div></li>
+      <li><span class="d-icon">&#x1F512;</span><div><div class="d-name">三重門禁</div><div class="d-desc">虹膜 + 指紋 + 人臉 → 金庫通行</div></div></li>
+      <li><span class="d-icon">&#x1F6F8;</span><div><div class="d-name">巡邏機器人</div><div class="d-desc">夜間自主巡邏 + 即時回傳異常</div></div></li>
+    </ul>
+  </div>
+
+  <div class="zone">
+    <div class="zone-header"><span class="zone-icon">&#x1F4A1;</span><span class="zone-title red">SEOBAIKE 接入</span></div>
+    <ul class="device-list">
+      <li><span class="d-icon">&#x1F500;</span><div><div class="d-name">AI Router (10 模型)</div><div class="d-desc">語音/風控/OCR 各用最適合的模型</div></div></li>
+      <li><span class="d-icon">&#x1F4CE;</span><div><div class="d-name">L1-L4 審計軌跡</div><div class="d-desc">金管會合規：每筆 AI 判斷可追溯</div></div></li>
+      <li><span class="d-icon">&#x1F451;</span><div><div class="d-name">CaaS 人類優先</div><div class="d-desc">AI 建議，人類決策，專利保護</div></div></li>
+    </ul>
+  </div>
+
+</div>
+
+<!-- L1-L4 Path -->
+<div class="path-section">
+  <h2>&#x1F9EC; Patent 115100981 — L1&#x2192;L4 金融約束路徑</h2>
+  <div class="path-visual">
+    <div class="path-box l1"><div class="p-level">L1</div><div class="p-name">金融服務</div><div class="p-example">Banking &amp; Finance</div></div>
+    <div class="path-arrow">&#x27A1;</div>
+    <div class="path-box l2"><div class="p-level">L2</div><div class="p-name">風控 AI</div><div class="p-example">Risk Management AI</div></div>
+    <div class="path-arrow">&#x27A1;</div>
+    <div class="path-box l3"><div class="p-level">L3</div><div class="p-name">交易監控</div><div class="p-example">Transaction Monitoring</div></div>
+    <div class="path-arrow">&#x27A1;</div>
+    <div class="path-box l4"><div class="p-level">L4</div><div class="p-name">即時攔截</div><div class="p-example">Real-time Blocking</div></div>
+  </div>
+</div>
+
+<!-- CaaS -->
+<div class="caas">
+  <div class="big">&#x1F451;</div>
+  <h3>CaaS = AI 建議，人類決策</h3>
+  <p>AI 說「這筆交易 95% 可疑」<br>但最終凍結帳戶的決定 = 人類行員<br>每個決策都有 L1&#x2192;L4 路徑追溯</p>
+  <div class="highlight">&#x1F6E1; 金管會合規的天然解決方案</div>
+</div>
+
+<!-- Scoreboard -->
+<div class="scoreboard">
+  <h2>&#x1F4CA; SEOBAIKE 金融 AI 戰力</h2>
+  <div class="score-grid">
+    <div class="score-card"><div class="s-icon">&#x1F916;</div><div class="s-value green">10</div><div class="s-label">AI 模型插槽 (NVIDIA NIM)</div></div>
+    <div class="score-card"><div class="s-icon">&#x26A1;</div><div class="s-value blue">7</div><div class="s-label">已驗證可用模型</div></div>
+    <div class="score-card"><div class="s-icon">&#x1F3AF;</div><div class="s-value yellow">75%</div><div class="s-label">軍團清醒度</div></div>
+    <div class="score-card"><div class="s-icon">&#x1F4DC;</div><div class="s-value green">115100981</div><div class="s-label">台灣專利 (護城河)</div></div>
+    <div class="score-card"><div class="s-icon">&#x1F310;</div><div class="s-value blue">3</div><div class="s-label">Azure Functions 端點</div></div>
+    <div class="score-card"><div class="s-icon">&#x1F4BE;</div><div class="s-value yellow">Supabase</div><div class="s-label">即時數據庫 (Tokyo)</div></div>
+  </div>
+</div>
+
+<div class="footer">
+  <div class="commander">Commander: Hsu Chun-Hsiang | SEOBAIKE | Patent 115100981</div>
+  <p style="margin-top:8px;">Generated by SEOBAIKE AI War Room | Claude OPUS</p>
+</div>
+
+</body>
+</html>

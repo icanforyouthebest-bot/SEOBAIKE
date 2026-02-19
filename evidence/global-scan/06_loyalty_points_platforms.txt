@@ -1,0 +1,67 @@
+SEOBAIKE Global Scan — Loyalty / Points Platform Companies
+Scan Date: 2026-02-18 (Updated: Wave 2)
+Total: 31 companies + 9 directories/rankings
+========================================================
+
+=== API / Headless / Multi-Tenant (最接近 SEOBAIKE 點數架構) ===
+1  | Open Loyalty           | API型可做多租戶複雜規則headless        | PL  | https://www.openloyalty.io
+2  | White Label Loyalty    | 模組化點數白標方案多品牌多通路          | UK  | https://whitelabel-loyalty.com
+3  | Talon.One              | 行銷規則引擎點數/優惠券/促銷           | DE  | https://talon.one
+4  | Voucherify             | API型活動/優惠/點數平台                | PL  | https://www.voucherify.io
+5  | Reward Loyalty         | Shared Wallet多租戶點數錢包             | --  | https://rewardloyalty.co
+
+=== Enterprise (企業級多國多品牌) ===
+6  | Salesforce Loyalty Mgmt| CRM整合忠誠度管理                      | US  | https://www.salesforce.com/products/loyalty-management/
+7  | Comarch Loyalty Mgmt   | 企業級忠誠度行銷管理                   | PL  | https://www.comarch.com/trade-and-services/loyalty-marketing/
+8  | Mastercard SessionM    | Mastercard忠誠度平台                   | US  | https://www.mastercardservices.com/en/solutions/sessionm
+9  | Epsilon Loyalty        | 點數+行銷企業方案                      | US  | https://www.epsilon.com/us/products-services/loyalty
+10 | Annex Cloud            | 企業級Loyalty Experience Platform      | US  | https://www.annexcloud.com
+11 | Capillary Loyalty+     | 多國點數+CRM                           | SG  | https://www.capillarytech.com
+12 | Ascenda Loyalty        | 金融業/旅遊點數                        | SG  | https://www.ascendaloyalty.com
+13 | Kognitiv               | 企業忠誠度軟體                         | CA  | https://www.kognitiv.com
+14 | TrueLoyal              | 企業級忠誠度平台                       | US  | https://trueloyal.com
+15 | Antavo Loyalty Cloud   | 企業級忠誠度雲端(體驗型忠誠度專家)     | HU  | https://antavo.com
+16 | Oracle CrowdTwist      | Oracle收購,企業級忠誠度平台            | US  | https://www.oracle.com/cx/marketing/crowdtwist-loyalty/
+17 | Loymax                 | 企業級忠誠度管理系統                   | RU  | https://www.loymax.com
+
+=== eCommerce / SMB (電商/中小企業點數) ===
+18 | Smile.io               | 電商點數+VIP+推薦                      | CA  | https://smile.io
+19 | LoyaltyLion            | 電商忠誠度                             | UK  | https://loyaltylion.com
+20 | Yotpo Loyalty          | 電商忠誠度+推薦+評論                   | US  | https://www.yotpo.com/loyalty-referrals/
+21 | Fivestars              | 實體店小商家點數/簡訊行銷              | US  | https://www.fivestars.com
+22 | Marsello               | 電商+實體店忠誠度行銷自動化            | NZ  | https://www.marsello.com
+23 | TapMango               | 中小商家忠誠度+行銷平台                | CA  | https://www.tapmango.com
+24 | Kangaroo Rewards       | 中小企業全通路忠誠度獎勵               | CA  | https://kangaroorewards.com
+25 | Zinrelo                | 忠誠度SaaS+數據驅動獎勵                | US  | https://www.zinrelo.com
+26 | Loyalty Gator          | 中小企業忠誠度+禮品卡                  | CA  | https://www.loyaltygator.com
+
+=== Other ===
+27 | m-wise Loyalty Cloud   | 忠誠度雲端平台                         | NL  | https://www.m-wise.eu
+28 | NeoDay                 | 忠誠度平台                             | NL  | https://www.neoday.com
+29 | Poket                  | 數位忠誠度平台                         | MY  | https://poket.com
+30 | Klaviyo                | 行銷自動化+忠誠度B2C                   | US  | https://www.klaviyo.com
+31 | Loyalty Gator          | 忠誠度+禮品卡平台                      | CA  | https://www.loyaltygator.com
+
+=== Directories / Rankings (排行榜入口) ===
+D1 | Loyalty Central                              | https://www.loyaltycentral.works/platforms/platform-search
+D2 | F6S White-Label Loyalty                      | https://www.f6s.com/software/category/white-label-loyalty-program
+D3 | Opia 33 Best List                            | https://www.opia.com/insights/best-customer-loyalty-software/
+D4 | TrueLoyal 25 Best Providers                  | https://www.trueloyal.com/blog/best-loyalty-program-software-providers/
+D5 | LoyaltyRewardCo 17 Best Platforms            | https://loyaltyrewardco.com/customer-loyalty-management-platforms-guide/
+D6 | Open Loyalty Top 12                          | https://www.openloyalty.io/insider/best-loyalty-software-comparison-guide
+D7 | Kognitiv Top 12 World                        | https://www.kognitiv.com/articles-post/top-12-best-loyalty-program-software-solutions-in-the-world
+D8 | Poket Top 15 Providers                       | https://poket.com/top-15-customer-loyalty-platform-providers-for-2025/
+D9 | Klaviyo 19 Best B2C                          | https://www.klaviyo.com/blog/best-loyalty-program-software
+
+Sources:
+- https://www.openloyalty.io/insider/best-loyalty-software-comparison-guide
+- https://www.trueloyal.com/blog/best-loyalty-program-software-providers/
+- https://loyaltyrewardco.com/customer-loyalty-management-platforms-guide/
+- https://www.kognitiv.com/articles-post/top-12-best-loyalty-program-software-solutions-in-the-world
+- https://www.klaviyo.com/blog/best-loyalty-program-software
+- https://www.voucherify.io/blog/best-enterprise-loyalty-software
+- https://rewardloyalty.co/docs/getting-started/shared-wallet-concept
+- https://www.opia.com/insights/best-customer-loyalty-software/
+- https://poket.com/top-15-customer-loyalty-platform-providers-for-2025/
+- https://learn.g2.com/best-customer-loyalty-software
+- https://www.yotpo.com/blog/enterprise-loyalty-program/

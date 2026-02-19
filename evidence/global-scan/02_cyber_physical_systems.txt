@@ -1,0 +1,39 @@
+SEOBAIKE Global Scan — Cyber-Physical Systems (CPS) Companies
+Scan Date: 2026-02-18
+Total: 30 companies
+========================================================
+
+1  | ABB                   | 工業自動化+機器人+IoT CPS資產管理               | CH
+2  | Honeywell             | 航太+建築+工業安全+CPS                           | US
+3  | Hitachi               | IT+OT+工業設備+數位基礎設施+智慧製造             | JP
+4  | Schneider Electric    | 能源管理+工業自動化                               | FR
+5  | Siemens               | 數位工業+智慧基礎設施+AI優化+工業CPS             | DE
+6  | Rockwell Automation   | 工業自動化+數位轉型+智慧製造                     | US
+7  | Continental AG        | 汽車科技+輪胎+連網移動CPS                        | DE
+8  | General Electric (GE) | 工業IoT+發電+航空+醫療CPS                        | US
+9  | Toshiba               | 電子設備+能源系統+基礎設施CPS                    | JP
+10 | Robert Bosch          | 嵌入式系統+工業網路+IoT+汽車CPS                  | DE
+11 | Cisco Systems         | 網路+資安+IoT連接CPS通訊安全                     | US
+12 | Emerson Electric      | 自動化+商業/住宅技術+流程CPS                     | US
+13 | Intel Corporation     | 處理器+邊緣運算+AI晶片驅動CPS                    | US
+14 | IBM Corporation       | 企業AI+雲端+IoT+數位孿生CPS                     | US
+15 | Dassault Systemes     | 3D設計+模擬+數位孿生軟體平台                     | FR
+16 | Microsoft             | Azure IoT+AI+邊緣運算CPS連接分析                 | US
+17 | Johnson Controls      | 智慧建築+HVAC+消防安全CPS                        | IE
+18 | Oracle                | 企業雲端+資料庫+IoT平台CPS資料管理               | US
+19 | SAP SE                | ERP+供應鏈+Industry 4.0數位物理連接               | DE
+20 | John Deere            | 農業/建築設備+自動駕駛+GPS精準農業CPS            | US
+21 | Trimble               | 定位+建模+數據分析(農業/建築/運輸CPS)            | US
+22 | AGCO Corporation      | 農業設備+精準農業+連網機器CPS                    | US
+23 | Mitsubishi Electric   | 工廠自動化+電力系統+CPS智慧製造                  | JP
+24 | Itron                 | 智慧電網+智慧城市+公用事業基礎設施CPS            | US
+25 | Fuji Electric         | 電力電子+工業系統+能源CPS工廠自動化              | JP
+26 | YASKAWA Electric      | 工業機器人+運動控制+驅動器CPS智慧製造            | JP
+27 | FANUC Corporation     | 工業機器人+CNC+工廠自動化CPS智慧製造             | JP
+28 | Indurex               | AI+CPS安全保護關鍵基礎設施                       | US
+29 | IN40S                 | 隨選智慧工廠平台 i-Optimus CPS                   | US
+30 | NQMCyber              | 硬體安全CPS完整性檢查+AI+IoT+邊緣               | IE
+
+Sources:
+- https://www.marketsandmarkets.com/ResearchInsight/cyber-physical-systems-cps-companies.asp
+- https://www.restack.io/p/ai-for-cyber-physical-systems-answer-cps-companies-cat-ai

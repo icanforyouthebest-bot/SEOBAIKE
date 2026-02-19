@@ -1,0 +1,43 @@
+SEOBAIKE Global Scan — National Legal Databases (Official Government Law Portals)
+Scan Date: 2026-02-18
+Total: 20 countries/regions
+========================================================
+
+=== North America 北美 ===
+1  | US  | GovInfo                    | 聯邦三權官方文件                    | https://www.govinfo.gov
+2  | US  | Congress.gov               | 聯邦立法資訊                        | https://www.congress.gov
+3  | CA  | Justice Laws Website       | 聯邦法規匯編                        | https://laws-lois.justice.gc.ca
+
+=== Europe 歐洲 ===
+4  | EU  | EUR-Lex                    | 歐盟法規與判例(24語)                | https://eur-lex.europa.eu
+5  | UK  | legislation.gov.uk         | 英國官方法規資料庫                  | https://www.legislation.gov.uk
+6  | DE  | Gesetze im Internet        | 德國聯邦法律                        | https://www.gesetze-im-internet.de
+7  | FR  | Légifrance                 | 法國官方法律網站                    | https://www.legifrance.gouv.fr
+8  | IT  | Normattiva                 | 義大利現行法規資料庫                | https://www.normattiva.it
+9  | ES  | BOE (Boletín Oficial)      | 西班牙官方公報與法規                | https://www.boe.es
+10 | NL  | Wetten.nl                  | 荷蘭法規                            | https://wetten.overheid.nl
+11 | SE  | Svensk författningssamling | 瑞典法規                            | https://lagen.nu
+
+=== Asia Pacific 亞太 ===
+12 | JP  | e-Gov 法令検索             | 日本法令檢索                        | https://elaws.e-gov.go.jp
+13 | CN  | 全國法律法規資料庫          | 全國人大官方                        | https://flk.npc.gov.cn
+14 | TW  | 全國法規資料庫              | 法務部                              | https://law.moj.gov.tw
+15 | KR  | 國家法令資訊中心            | 韓國法令資訊                        | https://www.law.go.kr
+16 | IN  | India Code                 | 中央立法匯編                        | https://www.indiacode.nic.in
+17 | AU  | Federal Register of Legislation | 聯邦法規登錄                   | https://www.legislation.gov.au
+18 | NZ  | New Zealand Legislation    | 紐西蘭法規                          | https://www.legislation.govt.nz
+
+=== Middle East & Latin America 中東與拉美 ===
+19 | BR  | Planalto Legislação        | 巴西聯邦法律                        | https://www.planalto.gov.br/ccivil_03/leis/leis_1.htm
+20 | MX  | Cámara de Diputados        | 墨西哥聯邦法律                      | http://www.diputados.gob.mx/LeyesBiblio/
+21 | SA  | Saudi Laws                 | 沙烏地阿拉伯官方法律門戶            | https://laws.boe.gov.sa
+
+Sources:
+- https://library.doc.gov/govlegal
+- https://en.wikipedia.org/wiki/EUR-Lex
+- https://en.wikipedia.org/wiki/Legislation.gov.uk
+- https://de.wikipedia.org/wiki/Gesetze_im_Internet
+- https://en.wikipedia.org/wiki/L%C3%A9gifrance
+- https://www.e-gov.go.jp/en
+- https://www.loc.gov/item/global-legal-monitor/2021-04-26/china-national-database-of-laws-and-regulations-launched/
+- https://www.library.gov.au/research/research-guides-0/australian-legislation-research-guide/commonwealth-legislation

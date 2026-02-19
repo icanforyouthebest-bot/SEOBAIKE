@@ -1,0 +1,51 @@
+SEOBAIKE Global Scan — Legal AI Companies
+Scan Date: 2026-02-18
+Total: 25 companies
+========================================================
+
+=== Legal Research / Full Platform ===
+1  | Harvey AI             | 法律專用LLM平台                                  | US
+2  | CoCounsel (Thomson R) | Westlaw AI法律研究+起草                          | US
+3  | Lexis+ AI (LexisNexis)| AI法律研究+分析                                  | US
+4  | Casetext              | AI法律研究助手                                   | US
+5  | Cicerai               | 深度法律研究引擎                                 | US
+6  | Westlaw Precision     | AI強化法律檢索                                   | US
+
+=== Contract Review / CLM ===
+7  | LEGALFLY              | AI合約審閱+CLM                                   | BE
+8  | Legartis              | 多語言合約審閱分析                               | CH
+9  | Spellbook             | AI合約生成+審閱(Word整合)                        | CA
+10 | Kira Systems          | ML合約分析                                       | CA
+11 | Wordsmith             | AI合約審閱+翻譯                                  | US
+12 | DocJuris              | 合約談判AI                                       | US
+13 | ContractPodAi         | CLM+AI合約管理                                   | US
+14 | HyperStart            | AI CLM合約管理平台                               | US
+
+=== Litigation / Case Analysis ===
+15 | Darrow                | AI案件發掘+價值預測                              | IL
+16 | NexLaw                | AI訴訟Copilot                                    | MY
+17 | Relativity            | AI電子證據/eDiscovery                            | US
+
+=== Legal Operations ===
+18 | Brightflag            | AI法務運營+費用管理                              | IE
+19 | Paxton AI             | 文件分析+法律問答                                | US
+20 | Whisperit             | AI法律文件寫作                                   | AT
+
+=== Legal Tech Directories (入口網站) ===
+21 | Global Legal Tech Dir | https://www.globallegaltechdirectory.com          | --
+22 | F6S LegalTech 100     | https://www.f6s.com/companies/legaltech/mo       | --
+23 | Legal Operators Dir   | https://www.legaloperators.com/tech-directory     | --
+
+=== Additional (from boss research wave 2) ===
+24 | Callidus Legal AI     | AI法律分析(F6S listed)                           | --
+25 | Smith.ai              | AI法律接聽/虛擬接待                              | US
+
+Sources:
+- https://whisperit.ai/blog/legal-ai-companies
+- https://www.cicerai.com/blogs/top-10-legal-ai-companies
+- https://www.darrow.ai/resources/ai-tools-for-lawyers
+- https://www.legalfly.com/post/9-best-ai-contract-review-software-tools-for-2025
+- https://brightflag.com/resources/top-legal-ai-companies/
+- https://www.hyperstart.com/blog/legal-ai-tools/
+- https://www.spellbook.legal/learn/legal-ai-tools
+- https://www.globallegaltechdirectory.com

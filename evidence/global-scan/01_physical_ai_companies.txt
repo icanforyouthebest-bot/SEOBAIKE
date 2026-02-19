@@ -1,0 +1,26 @@
+SEOBAIKE Global Scan — Physical / Embodied AI Companies
+Scan Date: 2026-02-18
+Total: 15 companies
+========================================================
+
+1  | NVIDIA Isaac          | 機器人 AI 模擬平台 + Omniverse                    | US
+2  | Boston Dynamics       | 四足/人形機器人 (Spot, Atlas)                      | US
+3  | Figure AI             | 人形機器人 (Figure 02)                             | US
+4  | 1X Technologies       | 人形機器人 EVE/NEO                                 | NO
+5  | Apptronik             | 人形機器人 Apollo                                  | US
+6  | Unitree               | 四足/人形機器人 (G1, H1)                           | CN
+7  | Tesla Optimus         | 人形機器人量產                                     | US
+8  | Sanctuary AI          | 通用人形機器人 Phoenix                             | CA
+9  | Agility Robotics      | 物流倉儲機器人 Digit                               | US
+10 | Symbotic              | 倉儲自動化 AI 系統                                 | US
+11 | Starship Technologies | 自動送餐/送貨機器人                                | EE
+12 | Hanson Robotics       | 社交人形機器人 Sophia                              | HK
+13 | Covariant             | 倉儲揀貨 AI 機器人                                 | US
+14 | RoboForce             | Physical AI Robo-Labor 平台                        | US
+15 | Techman Robot (達明)  | 協作機器人                                         | TW
+
+Sources:
+- https://www.seedtable.com/best-physical-ai-startups
+- https://ensun.io/search/embodied-ai
+- https://www.f6s.com/companies/physical-ai/mo
+- https://www.f6s.com/companies/robotics-hardware/mo

@@ -1,0 +1,28 @@
+PATROL LOG — 2026-02-18 02:44 TST (Sweep 6)
+========================================================
+
+[HEALTH MONITOR] Overall: WARNING
+  db_connectivity:        PASS  53ms (back down from 91ms)
+  ai_gateway_activity:    PASS  567 req/hr
+  error_rate_24h:         PASS  0.0% (0/8424)
+  inference_violations:   WARN  8 violations/24h
+  rate_limiter:           PASS  42 blocked/24h
+  world_definition:       PASS  85 nodes, 10+10 paths
+  provider_health:        PASS  All healthy
+
+[ARSENAL] 22/23 Active (96%) — Meta AI 401 only alert
+[COMPONENTS] 41/41 HEALTHY
+
+[TREND SINCE SWEEP 1]
+  Requests processed: 8362 → 8397 → 8412 → 8419 → 8424
+    (+62 requests processed during patrol period)
+  DB latency: 62 → 48 → 68 → 91 → 53ms (normal fluctuation)
+  Error rate: 0.0% constant
+  Violations: 8 constant
+  Together AI: timeout → recovered → stable (3 sweeps green)
+
+[EVIDENCE FILE COUNT]
+  global-scan/:  7 files (146 companies across 6 quadrants)
+  patrol/:       6 logs (sweeps 1-6)
+
+[STATUS] System running. No stop order. Continuing patrol.

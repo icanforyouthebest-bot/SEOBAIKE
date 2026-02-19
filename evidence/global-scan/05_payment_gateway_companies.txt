@@ -1,0 +1,28 @@
+SEOBAIKE Global Scan — Payment Gateway Companies
+Scan Date: 2026-02-18
+Total: 19 companies
+========================================================
+
+1  | Stripe               | 全球135+幣種46國API強                | US  | 2.9%+$0.30
+2  | PayPal (Payflow)     | 202國25幣種42%美國市佔               | US  | $0.10+2.5%FX+1%跨境
+3  | Square               | 線上+實體POS一體化                    | US  | 2.9%+$0.30
+4  | FIS/Worldpay         | 126+幣種50市場300+支付方式           | US/UK| 1.5% V/MC
+5  | Adyen                | 企業級45國DCC 36幣種                 | NL  | $0.13+變動
+6  | 2Checkout (Verifone) | 200國45+支付方式100+幣種無月費       | US  | 3.5%+$0.35
+7  | Braintree            | PayPal子公司45+國130+幣種訂閱強      | US  | 2.59%+$0.49
+8  | Checkout.com         | 高成長企業45+國150+幣種              | UK  | 報價制
+9  | Sage Pay             | 支付+會計+ERP一體化                  | UK  | 方案制
+10 | Amazon Pay           | Amazon帳號付款12幣種18國             | US  | 3.9%+$0.30跨境
+11 | Authorize.Net        | 美國老牌虛擬終端CIM                  | US  | --
+12 | Shopify Payments     | Shopify原生Shop Pay加速結帳          | CA  | --
+13 | WooCommerce Payments | Stripe驅動WordPress原生支付          | US  | --
+14 | Klarna               | BNPL先買後付                         | SE  | --
+15 | Afterpay             | BNPL先買後付                         | AU  | --
+16 | Apple Pay            | 數位錢包快速結帳                     | US  | 通過閘道
+17 | Google Pay           | 數位錢包快速結帳                     | US  | 通過閘道
+18 | 綠界 ECPay           | 台灣在地超商/ATM/信用卡              | TW  | 2.75%
+19 | 藍新 NewebPay        | 台灣多元支付                         | TW  | 2.8%
+
+Sources:
+- https://wise.com/us/blog/international-payment-gateway
+- https://isitdev.com/best-payment-gateways-2025-ecommerce

@@ -1,0 +1,46 @@
+SEOBAIKE Global Scan — MLM / Affiliate / Revenue Share Platforms
+Scan Date: 2026-02-18
+Total: 13 companies + 11 directories/rankings
+========================================================
+
+=== MLM / Multi-Level / Network Marketing 上下線分潤系統 ===
+1  | Epixel MLM Software    | MLM軟體多計劃類型支援                  | --  | https://www.epixelmlmsoftware.com
+2  | Infinite MLM Software  | MLM軟體多計劃/電商/錢包整合            | IN  | https://infinitemlmsoftware.com
+3  | MarketPowerPRO (MultiSoft) | 直銷MLM管理平台                    | US  | https://www.multisoft.com/marketpowerpro
+4  | Global MLM Software    | 全球MLM解決方案                        | --  | https://globalmlmsolution.com
+5  | Cloud MLM Software     | 雲端MLM管理系統                        | --  | https://cloudmlmsoftware.com
+6  | DirectScale (Exigo)    | 直銷/MLM SaaS平台                      | US  | https://www.directscale.com
+
+=== Affiliate / Referral / Revenue Share 推薦分潤平台 ===
+7  | Rewardful              | SaaS recurring commission, Stripe/Paddle整合 | --  | https://www.rewardful.com
+8  | Impact.com             | 大型聯盟/合作夥伴績效平台              | US  | https://impact.com
+9  | ShareASale             | 大型聯盟網路                           | US  | https://www.shareasale.com
+10 | Everflow               | 聯盟/合作夥伴績效追蹤平台              | US  | https://everflow.io
+11 | Tapfiliate             | 聯盟行銷追蹤軟體                       | NL  | https://tapfiliate.com
+12 | Scaleo                 | 聯盟行銷績效追蹤                       | --  | https://www.scaleo.io
+13 | AffiliateWP            | WordPress聯盟外掛                      | US  | https://affiliatewp.com
+
+=== MLM Directories / Rankings (MLM 排行榜) ===
+D1  | Appvizer 14 Best MLM Software 2026           | https://www.appvizer.com/marketing/multi-level-marketing
+D2  | GetApp Best MLM Software (54+ tools)          | https://www.getapp.com/marketing-software/mlm/
+D3  | G2 Best MLM Software                          | https://www.g2.com/categories/multi-level-marketing-mlm
+D4  | SoftwareAdvice Best MLM                       | https://www.softwareadvice.com/mlm/
+D5  | The CMO 25 Best MLM Software 2026             | https://thecmo.com/tools/best-mlm-software/
+D6  | LinkedIn Top 10 MLM Platforms Compared         | https://www.linkedin.com/pulse/top-10-mlm-software-platforms-compared-features-pricing-rodrigez-axpdc
+D7  | Infinite MLM Top 5 USA                        | https://infinitemlmsoftware.com/blog/top-mlm-software-platforms-in-usa/
+
+=== Affiliate Directories / Rankings (推薦分潤排行榜) ===
+D8  | Loyally Ultimate List Affiliate Software       | https://blog.loyally.ai/posts/top-10-affiliate-referral-program-software-2025
+D9  | Tolt 12 Best SaaS Affiliate Software           | https://tolt.com/blog/best-saas-affiliate-marketing-software
+D10 | PartnerStack 30 AI Affiliate Programs           | https://partnerstack.com/articles/ai-affiliate-programs-2025
+D11 | lemlist 10 Best Software Affiliate Programs     | https://www.lemlist.com/blog/software-affiliate-programs
+
+Sources:
+- https://www.appvizer.com/marketing/multi-level-marketing
+- https://www.getapp.com/marketing-software/mlm/
+- https://www.g2.com/categories/multi-level-marketing-mlm
+- https://www.softwareadvice.com/mlm/
+- https://thecmo.com/tools/best-mlm-software/
+- https://blog.loyally.ai/posts/top-10-affiliate-referral-program-software-2025
+- https://tolt.com/blog/best-saas-affiliate-marketing-software
+- https://partnerstack.com/articles/ai-affiliate-programs-2025

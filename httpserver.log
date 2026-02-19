@@ -1,0 +1,43 @@
+Starting up http-server, serving C:/SEOBAIKE
+
+http-server version: 14.1.1
+
+http-server settings: 
+CORS: true
+Cache: -1 seconds
+Connection Timeout: 120 seconds
+Directory Listings: visible
+AutoIndex: visible
+Serve GZIP Files: false
+Serve Brotli Files: false
+Default File Extension: none
+
+Available on:
+  http://192.168.224.1:9000
+  http://192.168.0.102:9000
+  http://127.0.0.1:9000
+Hit CTRL-C to stop the server
+
+[2026-02-14T22:27:23.468Z]  "GET /" "curl/8.17.0"
+[2026-02-14T22:27:27.409Z]  "GET /" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36"
+[2026-02-14T22:27:27.469Z]  "GET /dual-dashboard.html" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36"
+[2026-02-14T22:27:27.481Z]  "GET /nvidia-chat.html" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36"
+[2026-02-14T22:27:28.790Z]  "GET /favicon.ico" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36"
+[2026-02-14T22:27:28.793Z]  "GET /favicon.ico" Error (404): "Not found"
+[2026-02-14T22:27:49.773Z]  "GET /" "curl/8.17.0"
+[2026-02-14T22:32:19.024Z]  "GET /command-center.html" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36"
+[2026-02-14T22:32:19.048Z]  "GET /dual-dashboard.html" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36"
+[2026-02-14T22:32:19.051Z]  "GET /nvidia-chat.html" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36"
+[2026-02-14T22:33:03.597Z]  "GET /" "curl/8.17.0"
+[2026-02-14T22:39:29.780Z]  "GET /" "curl/8.17.0"
+[2026-02-14T22:42:48.544Z]  "GET /" "curl/8.17.0"
+[2026-02-14T22:50:48.279Z]  "GET /command-center.html" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36"
+[2026-02-14T22:50:48.280Z]  "GET /dashboard.html" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36"
+[2026-02-14T22:50:48.354Z]  "GET /dashboard.html" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36"
+[2026-02-14T22:50:48.355Z]  "GET /chat.html" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36"
+[2026-02-14T22:50:48.547Z]  "GET /favicon.svg" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36"
+[2026-02-14T22:50:48.703Z]  "GET /chat.html" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36"
+[2026-02-14T22:51:20.656Z]  "GET /" "curl/8.17.0"
+[2026-02-14T22:59:00.549Z]  "GET /" "curl/8.17.0"
+[2026-02-14T23:02:35.145Z]  "GET /" "curl/8.17.0"
+[2026-02-14T23:05:23.869Z]  "GET /" "curl/8.17.0"

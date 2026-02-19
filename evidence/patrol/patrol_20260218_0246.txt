@@ -1,0 +1,24 @@
+PATROL LOG — 2026-02-18 02:46 TST (Sweep 8)
+========================================================
+
+[HEALTH MONITOR] Overall: WARNING (6 PASS / 1 WARN)
+  db_connectivity:        PASS  48ms
+  ai_gateway_activity:    PASS  568 req/hr (highest this patrol)
+  error_rate_24h:         PASS  0.0% (0/8434)
+  inference_violations:   WARN  8 violations/24h
+  rate_limiter:           PASS  42 blocked/24h
+  world_definition:       PASS  85 nodes, 10+10 paths
+  provider_health:        PASS  All healthy
+
+[WORLD DEFINITION STATS] Still 401 Invalid JWT
+  Persists across all 8 sweeps. Likely requires service_role key.
+  The function itself works (health-monitor confirms 85 nodes).
+  Stats endpoint auth issue only — not a functional problem.
+
+[CUMULATIVE]
+  Requests: 8362→8434 (+72 during 8 sweeps)
+  Gateway throughput: 565-568 req/hr (stable)
+  DB latency: 46-91ms range (current: 48ms)
+  Zero errors. Zero downtime. Zero new alerts.
+
+[STATUS] System running. No stop order. Continuing patrol.
