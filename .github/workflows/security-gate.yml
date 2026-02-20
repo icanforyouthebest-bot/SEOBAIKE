@@ -172,7 +172,7 @@ jobs:
           supabase functions deploy n8n-governance-webhook --project-ref vmyrivxxibqydccurxug
           supabase functions deploy mcp-governance-proxy --project-ref vmyrivxxibqydccurxug
           supabase functions deploy switch-agent --project-ref vmyrivxxibqydccurxug
-          supabase functions deploy secretary-bot --project-ref vmyrivxxibqydccurxug
+          supabase functions deploy secretary-bot --project-ref vmyrivxxibqydccurxug --no-verify-jwt
 
       - name: Deploy Workers
         continue-on-error: true
