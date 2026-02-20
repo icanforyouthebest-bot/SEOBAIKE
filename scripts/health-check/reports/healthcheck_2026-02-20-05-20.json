@@ -1,6 +1,6 @@
 {
   "version_id": "2026-02-20-05-20",
-  "timestamp": "2026-02-20T05:20:23.862219",
+  "timestamp": "2026-02-20T05:20:36.519674",
   "modules": {
     "azure": {
       "status": "rbac_missing",
