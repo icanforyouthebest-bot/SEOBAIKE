@@ -975,7 +975,8 @@ setInterval(fetchLive, 30000)
 
 // ── 小白秘書 CHAT WIDGET ──
 ;(function(){
-  const SEC_URL = 'https://vmyrivxxibqydccurxug.supabase.co/functions/v1/secretary-bot'
+  const SEC_URL  = 'https://vmyrivxxibqydccurxug.supabase.co/functions/v1/secretary-bot'
+  const SEC_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZteXJpdnh4aWJxeWRjY3VyeHVnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzAwNDAwMjksImV4cCI6MjA4NTYxNjAyOX0.iBV-23LGdm_uKffAExgqSV34-NWoAyv8_-M_cJQZ8Gg'
   const secBtn      = document.getElementById('secretary-btn')
   const secPanel    = document.getElementById('secretary-panel')
   const secClose    = document.getElementById('secretary-close')
@@ -1019,7 +1020,11 @@ setInterval(fetchLive, 30000)
     try {
       const r = await fetch(SEC_URL, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+          'Content-Type': 'application/json',
+          'apikey': SEC_ANON,
+          'Authorization': 'Bearer ' + SEC_ANON
+        },
         body: JSON.stringify({ question: q })
       })
       if (!r.ok) throw new Error('HTTP ' + r.status)
