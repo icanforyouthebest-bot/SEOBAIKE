@@ -9,8 +9,6 @@
 <meta name="keywords" content="AI SEO,自動建站,AI配音,AI影片,SEO健檢,網站優化,SEOBAIKE"/>
 <meta name="author" content="SEOBAIKE"/>
 <meta name="robots" content="index,follow"/>
-<meta name="language" content="zh-TW"/>
-<meta name="geo.region" content="TW"/>
 <link rel="canonical" href="https://www.aiforseo.vip/"/>
 <meta property="og:type" content="website"/>
 <meta property="og:url" content="https://www.aiforseo.vip/"/>
@@ -25,7 +23,7 @@
 <link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
 <link rel="icon" type="image/x-icon" href="/favicon.ico"/>
 <link rel="apple-touch-icon" sizes="180x180" href="/favicon.svg"/>
-<meta name="theme-color" content="#0a0a0a"/>
+<meta name="theme-color" content="#050510"/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Noto+Sans+TC:wght@400;500;700&family=Share+Tech+Mono&display=swap" rel="stylesheet"/>
@@ -34,30 +32,53 @@
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 :root{
-  --bg:#060608;--card:#0d0d12;--border:#1a1a28;
-  --g:#00ff88;--b:#00aaff;--p:#bb44ff;--gold:#ffd700;
-  --r:#ff3344;--y:#ffcc00;--text:#e8e8f0;--dim:#666;
-  --glow:rgba(0,255,136,.12)
+  --bg:#050510;--card:rgba(12,12,28,0.75);--border:rgba(120,80,255,0.15);
+  --g:#00ffaa;--b:#4488ff;--p:#cc55ff;--gold:#ffcc44;
+  --r:#ff4466;--text:#e8e8ff;--dim:#6677aa;
+  --glow-g:rgba(0,255,170,.18);--glow-b:rgba(68,136,255,.18);--glow-p:rgba(204,85,255,.18)
 }
 html{scroll-behavior:smooth}
 body{background:var(--bg);color:var(--text);font-family:'Noto Sans TC',sans-serif;overflow-x:hidden;line-height:1.6}
 
-/* ── CANVAS BG ── */
-#bg-canvas{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;opacity:.5}
+/* ── AURORA BACKGROUND ── */
+#aurora{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;overflow:hidden;pointer-events:none}
+.orb{position:absolute;border-radius:50%;filter:blur(80px);animation:orbFloat linear infinite;opacity:0}
+.orb1{width:600px;height:600px;background:radial-gradient(circle,rgba(100,50,255,.35),transparent 70%);top:-10%;left:-10%;animation-duration:18s;animation-delay:0s}
+.orb2{width:500px;height:500px;background:radial-gradient(circle,rgba(0,200,255,.25),transparent 70%);top:30%;right:-10%;animation-duration:22s;animation-delay:-5s}
+.orb3{width:700px;height:700px;background:radial-gradient(circle,rgba(200,50,255,.2),transparent 70%);bottom:-20%;left:20%;animation-duration:26s;animation-delay:-10s}
+.orb4{width:400px;height:400px;background:radial-gradient(circle,rgba(0,255,150,.2),transparent 70%);top:60%;right:30%;animation-duration:20s;animation-delay:-8s}
+.orb5{width:350px;height:350px;background:radial-gradient(circle,rgba(255,180,0,.15),transparent 70%);top:10%;right:40%;animation-duration:30s;animation-delay:-15s}
+@keyframes orbFloat{
+  0%{opacity:0;transform:translateY(0) scale(1)}
+  10%{opacity:1}
+  90%{opacity:1}
+  100%{opacity:0;transform:translateY(-60px) scale(1.1)}
+}
 
-/* ── SCANLINES ── */
-body::after{content:'';position:fixed;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 3px,rgba(0,255,136,.01) 3px,rgba(0,255,136,.01) 4px);pointer-events:none;z-index:1}
+/* ── CANVAS ── */
+#bg-canvas{position:fixed;top:0;left:0;width:100%;height:100%;z-index:1;opacity:.7}
+
+/* ── CURSOR SPARKLE ── */
+#cursor-fx{position:fixed;pointer-events:none;z-index:9999}
+.spark{position:absolute;width:4px;height:4px;border-radius:50%;pointer-events:none;animation:sparkFade .8s ease-out forwards}
+@keyframes sparkFade{0%{opacity:1;transform:scale(1) translate(0,0)}100%{opacity:0;transform:scale(0) translate(var(--tx),var(--ty))}}
 
 /* ── NAV ── */
 nav{
-  position:fixed;top:0;left:0;right:0;z-index:100;
+  position:fixed;top:0;left:0;right:0;z-index:200;
   display:flex;align-items:center;gap:16px;
-  padding:0 24px;height:56px;
-  background:rgba(6,6,8,.85);backdrop-filter:blur(20px);
-  border-bottom:1px solid var(--border)
+  padding:0 28px;height:58px;
+  background:rgba(5,5,16,.7);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);
+  border-bottom:1px solid rgba(120,80,255,.2);
 }
-.nav-logo{font-family:'Orbitron',sans-serif;font-size:16px;color:var(--g);letter-spacing:3px;text-decoration:none;white-space:nowrap}
-.nav-logo span{color:var(--b)}
+nav::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(120,80,255,.5),rgba(0,255,170,.4),transparent)}
+.nav-logo{
+  font-family:'Orbitron',sans-serif;font-size:17px;letter-spacing:3px;text-decoration:none;white-space:nowrap;
+  background:linear-gradient(135deg,var(--g),var(--b),var(--p));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  filter:drop-shadow(0 0 8px rgba(0,255,170,.4));
+  animation:logoShimmer 4s ease-in-out infinite
+}
+@keyframes logoShimmer{0%,100%{filter:drop-shadow(0 0 8px rgba(0,255,170,.4))}50%{filter:drop-shadow(0 0 16px rgba(130,80,255,.7))}}
 .nav-ticker{flex:1;overflow:hidden;height:20px;position:relative;margin:0 16px}
 .nav-ticker-inner{
   display:flex;gap:32px;white-space:nowrap;
@@ -66,311 +87,397 @@ nav{
 }
 @keyframes ticker{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 .tk-green{color:var(--g)}.tk-blue{color:var(--b)}.tk-gold{color:var(--gold)}
-.nav-live{display:flex;align-items:center;gap:6px;font-family:'Share Tech Mono',monospace;font-size:10px;color:var(--g);border:1px solid #1a3a1a;border-radius:20px;padding:3px 10px;background:#040a04;white-space:nowrap}
-.live-dot{width:6px;height:6px;border-radius:50%;background:var(--g);animation:blink 1.4s ease-in-out infinite}
-@keyframes blink{0%,100%{opacity:1;box-shadow:0 0 6px var(--g)}50%{opacity:.3;box-shadow:none}}
+.nav-live{display:flex;align-items:center;gap:6px;font-family:'Share Tech Mono',monospace;font-size:10px;color:var(--g);border:1px solid rgba(0,255,170,.2);border-radius:20px;padding:4px 12px;background:rgba(0,255,170,.05);white-space:nowrap}
+.live-dot{width:6px;height:6px;border-radius:50%;background:var(--g);box-shadow:0 0 8px var(--g);animation:blink 1.4s ease-in-out infinite}
+@keyframes blink{0%,100%{opacity:1;box-shadow:0 0 8px var(--g)}50%{opacity:.2;box-shadow:none}}
 .nav-btns{display:flex;gap:8px}
-.btn-ghost{padding:6px 16px;border:1px solid var(--border);border-radius:4px;color:var(--dim);font-size:12px;text-decoration:none;transition:all .2s}
-.btn-ghost:hover{border-color:var(--g);color:var(--g)}
-.btn-cta{padding:6px 18px;background:linear-gradient(135deg,#003322,#001a11);border:1px solid var(--g);border-radius:4px;color:var(--g);font-size:12px;text-decoration:none;font-family:'Orbitron',sans-serif;letter-spacing:1px;transition:all .2s;white-space:nowrap}
-.btn-cta:hover{background:var(--g);color:#000;box-shadow:0 0 16px var(--g)}
+.btn-ghost{padding:7px 18px;border:1px solid rgba(120,80,255,.25);border-radius:6px;color:var(--dim);font-size:12px;text-decoration:none;transition:all .25s;backdrop-filter:blur(8px)}
+.btn-ghost:hover{border-color:var(--g);color:var(--g);box-shadow:0 0 12px var(--glow-g)}
+.btn-cta{
+  padding:7px 20px;
+  background:linear-gradient(135deg,rgba(100,50,255,.3),rgba(0,200,255,.2));
+  border:1px solid rgba(130,80,255,.5);border-radius:6px;
+  color:#fff;font-size:12px;text-decoration:none;font-family:'Orbitron',sans-serif;letter-spacing:1px;
+  transition:all .25s;white-space:nowrap;
+  box-shadow:0 0 16px rgba(100,50,255,.2),inset 0 1px 0 rgba(255,255,255,.05)
+}
+.btn-cta:hover{background:linear-gradient(135deg,rgba(130,80,255,.6),rgba(0,220,255,.4));box-shadow:0 0 28px rgba(130,80,255,.5);transform:translateY(-1px)}
 
 /* ── HERO ── */
 #hero{
   position:relative;z-index:2;
   min-height:100vh;display:flex;align-items:center;justify-content:center;
-  text-align:center;padding:80px 24px 40px
+  text-align:center;padding:90px 24px 60px
 }
-.hero-inner{max-width:900px}
+.hero-inner{max-width:920px;position:relative}
 .hero-tag{
-  display:inline-flex;align-items:center;gap:8px;
+  display:inline-flex;align-items:center;gap:10px;
   font-family:'Share Tech Mono',monospace;font-size:11px;
-  color:var(--g);border:1px solid #1a3a1a;border-radius:4px;
-  padding:6px 14px;background:#040a04;margin-bottom:24px;letter-spacing:2px
+  color:var(--g);border:1px solid rgba(0,255,170,.25);border-radius:30px;
+  padding:7px 20px;background:rgba(0,255,170,.06);margin-bottom:32px;letter-spacing:2px;
+  box-shadow:0 0 20px rgba(0,255,170,.1);
+  animation:tagPulse 3s ease-in-out infinite
 }
-.hero-tag::before{content:'▶';font-size:8px}
+@keyframes tagPulse{0%,100%{box-shadow:0 0 20px rgba(0,255,170,.1)}50%{box-shadow:0 0 32px rgba(0,255,170,.25)}}
+.hero-tag::before{content:'◈';color:var(--g);animation:spin 4s linear infinite;display:inline-block}
+@keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+
 h1.hero-title{
   font-family:'Orbitron',sans-serif;
-  font-size:clamp(2.4rem,6vw,5.5rem);
+  font-size:clamp(2.6rem,7vw,6rem);
   font-weight:900;line-height:1.05;
-  margin-bottom:16px;letter-spacing:-1px
+  margin-bottom:20px;letter-spacing:-2px
 }
-.hero-title .t-g{color:var(--g);text-shadow:0 0 40px rgba(0,255,136,.4)}
-.hero-title .t-w{color:#fff}
+.hero-title .t-w{color:#fff;text-shadow:0 0 30px rgba(255,255,255,.2)}
+.hero-title .t-grad{
+  background:linear-gradient(135deg,var(--g) 0%,var(--b) 40%,var(--p) 80%,var(--gold) 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  background-size:300% 300%;animation:gradShift 5s ease infinite;
+  filter:drop-shadow(0 0 20px rgba(100,80,255,.4))
+}
+@keyframes gradShift{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+
 .hero-sub{
-  font-size:clamp(1rem,2.5vw,1.3rem);
-  color:rgba(255,255,255,.55);margin-bottom:40px;
+  font-size:clamp(1rem,2.5vw,1.25rem);
+  color:rgba(200,200,255,.6);margin-bottom:48px;
   font-family:'Share Tech Mono',monospace;letter-spacing:1px
 }
-.hero-sub span{color:var(--b)}
+.hero-sub em{color:var(--b);font-style:normal}
 
-/* live counter row */
-.hero-counters{display:flex;justify-content:center;gap:0;margin-bottom:48px;flex-wrap:wrap}
+/* counter cards */
+.hero-counters{display:flex;justify-content:center;gap:12px;margin-bottom:52px;flex-wrap:wrap}
 .hc{
-  padding:20px 32px;border:1px solid var(--border);
-  text-align:center;position:relative;background:rgba(13,13,18,.8)
+  padding:20px 28px;border-radius:12px;text-align:center;position:relative;
+  background:rgba(12,12,30,.6);
+  border:1px solid rgba(120,80,255,.2);
+  backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  box-shadow:0 8px 32px rgba(0,0,0,.3),inset 0 1px 0 rgba(255,255,255,.06);
+  transition:all .3s;cursor:default;overflow:hidden
 }
-.hc:first-child{border-radius:6px 0 0 6px}
-.hc:last-child{border-radius:0 6px 6px 0}
-.hc+.hc{border-left:none}
+.hc::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(100,50,255,.05),rgba(0,200,255,.03));pointer-events:none}
+.hc:hover{transform:translateY(-4px) scale(1.03);box-shadow:0 16px 48px rgba(0,0,0,.4),0 0 24px var(--glow-p)}
 .hc-num{
-  font-family:'Orbitron',sans-serif;font-size:clamp(1.6rem,3vw,2.4rem);
+  font-family:'Orbitron',sans-serif;font-size:clamp(1.8rem,3.5vw,2.6rem);
   font-weight:900;color:var(--g);display:block;
-  text-shadow:0 0 20px rgba(0,255,136,.3)
+  text-shadow:0 0 24px rgba(0,255,170,.5)
 }
-.hc-num.blue{color:var(--b);text-shadow:0 0 20px rgba(0,170,255,.3)}
-.hc-num.gold{color:var(--gold);text-shadow:0 0 20px rgba(255,215,0,.3)}
-.hc-num.purple{color:var(--p);text-shadow:0 0 20px rgba(187,68,255,.3)}
-.hc-label{font-family:'Share Tech Mono',monospace;font-size:10px;color:var(--dim);letter-spacing:2px;margin-top:4px}
-.hc-live{position:absolute;top:6px;right:8px;font-size:8px;color:var(--g);font-family:'Share Tech Mono',monospace;opacity:.6}
+.hc-num.blue{color:var(--b);text-shadow:0 0 24px rgba(68,136,255,.5)}
+.hc-num.gold{color:var(--gold);text-shadow:0 0 24px rgba(255,204,68,.5)}
+.hc-num.purple{color:var(--p);text-shadow:0 0 24px rgba(204,85,255,.5)}
+.hc-label{font-family:'Share Tech Mono',monospace;font-size:9px;color:var(--dim);letter-spacing:3px;margin-top:4px}
+.hc-live{position:absolute;top:7px;right:9px;font-size:8px;color:var(--g);font-family:'Share Tech Mono',monospace;opacity:.5}
 
-.hero-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.hero-btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
 .btn-primary{
-  padding:14px 36px;background:linear-gradient(135deg,var(--g),#00cc66);
-  border:none;border-radius:4px;color:#000;font-weight:900;font-size:1rem;
+  padding:15px 40px;
+  background:linear-gradient(135deg,var(--g),#00ccaa,var(--b));
+  background-size:200% 200%;animation:btnGrad 4s ease infinite;
+  border:none;border-radius:8px;color:#050510;font-weight:900;font-size:1rem;
   cursor:pointer;text-decoration:none;display:inline-block;
-  box-shadow:0 0 32px rgba(0,255,136,.3);transition:all .2s;font-family:'Orbitron',sans-serif;letter-spacing:1px
+  box-shadow:0 0 40px rgba(0,255,170,.35),0 4px 20px rgba(0,0,0,.4);
+  transition:all .25s;font-family:'Orbitron',sans-serif;letter-spacing:1px
 }
-.btn-primary:hover{box-shadow:0 0 48px rgba(0,255,136,.6);transform:translateY(-2px)}
+@keyframes btnGrad{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+.btn-primary:hover{box-shadow:0 0 60px rgba(0,255,170,.6),0 8px 32px rgba(0,0,0,.5);transform:translateY(-3px) scale(1.03)}
 .btn-secondary{
-  padding:14px 36px;border:1px solid rgba(255,255,255,.2);
-  border-radius:4px;color:rgba(255,255,255,.7);font-size:1rem;
-  text-decoration:none;display:inline-block;transition:all .2s
+  padding:15px 40px;
+  border:1px solid rgba(120,80,255,.4);border-radius:8px;
+  color:rgba(200,200,255,.8);font-size:1rem;
+  text-decoration:none;display:inline-block;transition:all .25s;
+  background:rgba(12,12,30,.5);backdrop-filter:blur(8px);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.05)
 }
-.btn-secondary:hover{border-color:var(--b);color:var(--b)}
+.btn-secondary:hover{border-color:var(--p);color:var(--p);box-shadow:0 0 24px var(--glow-p);transform:translateY(-2px)}
 
 /* ── SECTION BASE ── */
-section{position:relative;z-index:2;padding:80px 24px}
-.sec-title{
-  font-family:'Orbitron',sans-serif;font-size:clamp(1.2rem,2.5vw,1.6rem);
-  letter-spacing:3px;margin-bottom:8px;text-align:center
+section{position:relative;z-index:2;padding:90px 24px}
+.sec-badge{
+  display:inline-block;font-family:'Share Tech Mono',monospace;font-size:10px;letter-spacing:3px;
+  padding:4px 14px;border-radius:20px;margin-bottom:14px;
+  background:rgba(100,50,255,.1);border:1px solid rgba(100,50,255,.2);color:var(--p)
 }
-.sec-sub{font-size:.9rem;color:var(--dim);text-align:center;margin-bottom:48px;font-family:'Share Tech Mono',monospace}
+.sec-title{
+  font-family:'Orbitron',sans-serif;font-size:clamp(1.4rem,3vw,2rem);
+  font-weight:900;letter-spacing:2px;margin-bottom:10px;text-align:center;
+  background:linear-gradient(135deg,#fff 0%,rgba(200,180,255,.8) 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text
+}
+.sec-sub{font-size:.9rem;color:var(--dim);text-align:center;margin-bottom:56px;font-family:'Share Tech Mono',monospace;letter-spacing:.5px}
 .container{max-width:1200px;margin:0 auto}
 
-/* ── DIVIDER ── */
-.divider{height:1px;background:linear-gradient(90deg,transparent,var(--border),transparent);margin:0 24px}
+/* reveal animation */
+.reveal{opacity:0;transform:translateY(32px);transition:opacity .7s ease,transform .7s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
 
-/* ── ARSENAL SECTION ── */
-#arsenal{background:rgba(4,10,4,.6)}
-.arsenal-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:10px}
-.ai-chip{
-  display:flex;align-items:center;gap:8px;
-  padding:10px 12px;border-radius:4px;
-  background:rgba(13,13,18,.9);border:1px solid var(--border);
-  font-size:12px;transition:all .2s;cursor:default
-}
-.ai-chip:hover{border-color:var(--g);background:rgba(0,255,136,.04)}
-.ai-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0;animation:aiPulse 2s ease-in-out infinite}
-@keyframes aiPulse{0%,100%{opacity:1}50%{opacity:.4}}
-.ai-type{font-family:'Share Tech Mono',monospace;font-size:9px;color:var(--dim);margin-left:auto}
-.arsenal-summary{
-  display:flex;justify-content:center;gap:32px;margin-top:32px;flex-wrap:wrap;
-  padding:20px;background:rgba(0,255,136,.04);border:1px solid #1a3a1a;border-radius:6px
-}
-.as-item{text-align:center;font-family:'Share Tech Mono',monospace}
-.as-num{font-size:1.8rem;font-weight:900;color:var(--g);display:block}
-.as-label{font-size:10px;color:var(--dim)}
-
-/* ── CHANNELS SECTION ── */
-#channels{background:rgba(3,8,14,.6)}
-.channels-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:12px}
-.ch-card{
-  display:flex;flex-direction:column;align-items:center;gap:8px;
-  padding:20px 12px;border-radius:6px;
-  background:rgba(13,13,18,.9);border:1px solid var(--border);
-  transition:all .3s;cursor:default
-}
-.ch-card:hover{transform:translateY(-3px);box-shadow:0 8px 24px rgba(0,0,0,.4)}
-.ch-icon{font-size:28px}
-.ch-name{font-size:12px;font-weight:700}
-.ch-status{font-family:'Share Tech Mono',monospace;font-size:9px;padding:2px 8px;border-radius:10px}
-.ch-active{color:var(--g);background:rgba(0,255,136,.1);border:1px solid rgba(0,255,136,.2)}
-.ch-ready{color:var(--b);background:rgba(0,170,255,.1);border:1px solid rgba(0,170,255,.2)}
-.ch-count{font-family:'Orbitron',monospace;font-size:11px;color:var(--dim)}
-
-/* ── LIVE STATUS BAR ── */
+/* ── LIVE BAR ── */
 #live-bar{
-  background:rgba(4,10,4,.8);
-  border-top:1px solid var(--border);border-bottom:1px solid var(--border);
-  padding:0
+  position:relative;z-index:2;
+  background:rgba(8,8,20,.8);
+  border-top:1px solid rgba(120,80,255,.15);border-bottom:1px solid rgba(120,80,255,.15);
 }
-.live-bar-inner{
-  display:flex;overflow:hidden;
-  font-family:'Share Tech Mono',monospace;font-size:11px;
-}
+.live-bar-inner{display:flex;overflow:hidden;font-family:'Share Tech Mono',monospace;font-size:11px}
 .lb-label{
-  padding:12px 20px;background:rgba(0,255,136,.08);
-  border-right:1px solid var(--border);color:var(--g);
+  padding:12px 20px;
+  background:linear-gradient(135deg,rgba(0,255,170,.08),rgba(100,50,255,.08));
+  border-right:1px solid rgba(120,80,255,.15);color:var(--g);
   white-space:nowrap;letter-spacing:2px;font-weight:700
 }
-.lb-scroll{flex:1;overflow:hidden;position:relative}
-.lb-track{
-  display:flex;gap:0;animation:lbScroll 30s linear infinite;
-  white-space:nowrap
-}
+.lb-scroll{flex:1;overflow:hidden}
+.lb-track{display:flex;animation:lbScroll 28s linear infinite;white-space:nowrap}
 @keyframes lbScroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
-.lb-item{padding:12px 24px;border-right:1px solid var(--border);color:var(--dim)}
+.lb-item{padding:12px 28px;border-right:1px solid rgba(120,80,255,.08);color:var(--dim)}
 .lb-item .lbv{color:var(--g);font-weight:700}
+
+/* ── ARSENAL ── */
+#arsenal{background:linear-gradient(180deg,transparent,rgba(5,3,20,.5),transparent)}
+.arsenal-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(145px,1fr));gap:10px}
+.ai-chip{
+  display:flex;align-items:center;gap:8px;
+  padding:11px 13px;border-radius:8px;
+  background:rgba(12,12,28,.7);border:1px solid rgba(120,80,255,.12);
+  font-size:12px;transition:all .25s;cursor:default;
+  backdrop-filter:blur(8px);position:relative;overflow:hidden
+}
+.ai-chip::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(100,50,255,.04),transparent);opacity:0;transition:opacity .25s}
+.ai-chip:hover{border-color:rgba(0,255,170,.35);transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,0,0,.3),0 0 12px var(--glow-g)}
+.ai-chip:hover::before{opacity:1}
+.ai-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0;animation:aiPulse 2.5s ease-in-out infinite}
+@keyframes aiPulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.3;transform:scale(.7)}}
+.ai-type{font-family:'Share Tech Mono',monospace;font-size:9px;color:var(--dim);margin-left:auto;opacity:.7}
+
+.arsenal-summary{
+  display:flex;justify-content:center;gap:40px;margin-top:40px;flex-wrap:wrap;
+  padding:24px;
+  background:rgba(100,50,255,.04);
+  border:1px solid rgba(100,50,255,.15);border-radius:12px;
+  backdrop-filter:blur(12px);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.04)
+}
+.as-item{text-align:center;font-family:'Share Tech Mono',monospace}
+.as-num{font-size:2rem;font-weight:900;color:var(--g);display:block;text-shadow:0 0 16px rgba(0,255,170,.4)}
+.as-label{font-size:10px;color:var(--dim);letter-spacing:2px}
+
+/* ── CHANNELS ── */
+#channels{background:linear-gradient(180deg,transparent,rgba(3,5,18,.6),transparent)}
+.channels-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(155px,1fr));gap:14px}
+.ch-card{
+  display:flex;flex-direction:column;align-items:center;gap:10px;
+  padding:24px 14px;border-radius:12px;
+  background:rgba(10,10,28,.65);border:1px solid rgba(120,80,255,.12);
+  transition:all .3s;cursor:default;
+  backdrop-filter:blur(12px);position:relative;overflow:hidden
+}
+.ch-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--border-c,rgba(120,80,255,.5)),transparent);opacity:0;transition:opacity .3s}
+.ch-card:hover{transform:translateY(-5px);box-shadow:0 12px 36px rgba(0,0,0,.4),0 0 20px rgba(120,80,255,.12)}
+.ch-card:hover::after{opacity:1}
+.ch-icon{font-size:32px;filter:drop-shadow(0 0 8px rgba(255,255,255,.15))}
+.ch-name{font-size:13px;font-weight:700;letter-spacing:.5px}
+.ch-status{font-family:'Share Tech Mono',monospace;font-size:9px;padding:3px 10px;border-radius:12px;letter-spacing:1px}
+.ch-active{color:var(--g);background:rgba(0,255,170,.08);border:1px solid rgba(0,255,170,.2)}
+.ch-ready{color:var(--b);background:rgba(68,136,255,.08);border:1px solid rgba(68,136,255,.2)}
 
 /* ── FEATURES ── */
 #features{}
-.feat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
+.feat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:18px}
 .feat-card{
-  padding:24px;border-radius:6px;
-  background:rgba(13,13,18,.7);border:1px solid var(--border);
-  transition:all .2s;position:relative;overflow:hidden
+  padding:28px;border-radius:14px;
+  background:rgba(10,10,26,.65);border:1px solid rgba(120,80,255,.1);
+  transition:all .3s;position:relative;overflow:hidden;
+  backdrop-filter:blur(16px);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.04)
 }
 .feat-card::before{
   content:'';position:absolute;top:0;left:0;right:0;height:2px;
-  background:linear-gradient(90deg,transparent,var(--fc,var(--g)),transparent)
+  background:linear-gradient(90deg,transparent,var(--fc,var(--p)),transparent);
+  opacity:.8
 }
-.feat-card:hover{border-color:var(--fc,var(--g));transform:translateY(-2px)}
-.feat-icon{font-size:2rem;margin-bottom:12px}
-.feat-title{font-family:'Orbitron',sans-serif;font-size:13px;letter-spacing:1px;margin-bottom:10px;color:var(--fc,var(--g))}
-.feat-desc{font-size:.9rem;color:rgba(255,255,255,.55);line-height:1.7}
+.feat-card::after{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse at top,var(--fc-glow,rgba(120,80,255,.06)),transparent 70%);
+  opacity:0;transition:opacity .3s;pointer-events:none
+}
+.feat-card:hover{border-color:var(--fc,var(--p));transform:translateY(-4px) scale(1.01);box-shadow:0 16px 48px rgba(0,0,0,.4),0 0 28px var(--fc-glow,rgba(120,80,255,.12))}
+.feat-card:hover::after{opacity:1}
+.feat-icon{font-size:2.2rem;margin-bottom:14px;display:block;filter:drop-shadow(0 0 10px rgba(255,255,255,.2))}
+.feat-title{font-family:'Orbitron',sans-serif;font-size:13px;letter-spacing:1px;margin-bottom:12px;color:var(--fc,var(--p))}
+.feat-desc{font-size:.88rem;color:rgba(200,200,240,.5);line-height:1.75}
 
 /* ── PRICING ── */
-#pricing{background:rgba(4,4,10,.6);text-align:center}
-.price-grid{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin-top:0}
+#pricing{background:linear-gradient(180deg,transparent,rgba(8,4,28,.6),transparent);text-align:center}
+.price-grid{display:flex;gap:18px;justify-content:center;flex-wrap:wrap}
 .price-card{
-  padding:32px 28px;border-radius:6px;min-width:220px;
-  background:rgba(13,13,18,.9);border:1px solid var(--border);
-  text-align:center;transition:all .2s;position:relative
+  padding:36px 30px;border-radius:16px;min-width:230px;
+  background:rgba(10,10,26,.7);border:1px solid rgba(120,80,255,.12);
+  text-align:center;transition:all .3s;position:relative;overflow:hidden;
+  backdrop-filter:blur(16px);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.05)
 }
-.price-card:hover{transform:translateY(-4px)}
-.price-card.featured{border-color:var(--g);background:rgba(0,255,136,.04);box-shadow:0 0 40px rgba(0,255,136,.1)}
+.price-card:hover{transform:translateY(-6px);box-shadow:0 20px 56px rgba(0,0,0,.5)}
+.price-card.featured{
+  border-color:rgba(0,255,170,.3);
+  background:rgba(0,255,170,.04);
+  box-shadow:0 0 60px rgba(0,255,170,.08),inset 0 1px 0 rgba(0,255,170,.1)
+}
+.price-card.featured::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(180deg,rgba(0,255,170,.04),transparent);pointer-events:none
+}
 .price-card.featured::after{
-  content:'推薦';position:absolute;top:-1px;right:20px;
+  content:'推薦';position:absolute;top:-1px;right:22px;
   font-family:'Orbitron',sans-serif;font-size:9px;letter-spacing:2px;
-  padding:4px 12px;background:var(--g);color:#000;border-radius:0 0 4px 4px
+  padding:5px 14px;background:linear-gradient(135deg,var(--g),#00cc88);color:#050510;
+  border-radius:0 0 8px 8px;font-weight:900
 }
-.price-name{font-family:'Orbitron',sans-serif;font-size:12px;letter-spacing:2px;color:var(--dim);margin-bottom:12px}
-.price-amt{font-family:'Orbitron',sans-serif;font-size:2.4rem;font-weight:900;color:var(--g);margin:8px 0}
-.price-amt span{font-size:.9rem;color:var(--dim);font-family:'Noto Sans TC'}
-.price-desc{font-size:.85rem;color:var(--dim);margin-bottom:20px}
-.price-list{list-style:none;text-align:left;font-size:.85rem;color:rgba(255,255,255,.7);margin-bottom:24px}
-.price-list li{padding:5px 0;border-bottom:1px solid var(--border)}
-.price-list li::before{content:'✓ ';color:var(--g)}
+.price-name{font-family:'Orbitron',sans-serif;font-size:11px;letter-spacing:3px;color:var(--dim);margin-bottom:14px}
+.price-amt{
+  font-family:'Orbitron',sans-serif;font-size:2.8rem;font-weight:900;
+  background:linear-gradient(135deg,var(--g),var(--b));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  margin:10px 0;text-shadow:none;
+}
+.price-amt span{font-size:.85rem;color:var(--dim);font-family:'Noto Sans TC';-webkit-text-fill-color:var(--dim)}
+.price-desc{font-size:.85rem;color:var(--dim);margin-bottom:22px}
+.price-list{list-style:none;text-align:left;font-size:.85rem;color:rgba(200,200,240,.6);margin-bottom:28px}
+.price-list li{padding:6px 0;border-bottom:1px solid rgba(120,80,255,.08)}
+.price-list li::before{content:'✦ ';color:var(--g);font-size:.7rem}
 
-/* ── INFRA BELT ── */
-#infra{padding:60px 24px;background:rgba(3,8,14,.7)}
-.infra-grid{display:flex;gap:20px;justify-content:center;flex-wrap:wrap}
+/* ── INFRA ── */
+#infra{padding:60px 24px}
+.infra-grid{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
 .infra-chip{
   display:flex;align-items:center;gap:10px;
-  padding:12px 20px;border-radius:4px;
-  background:rgba(13,13,18,.8);border:1px solid var(--border);
-  font-size:12px;font-family:'Share Tech Mono',monospace;color:var(--dim)
+  padding:12px 22px;border-radius:8px;
+  background:rgba(10,10,26,.6);border:1px solid rgba(120,80,255,.12);
+  font-size:12px;font-family:'Share Tech Mono',monospace;color:var(--dim);
+  backdrop-filter:blur(8px);transition:all .25s
 }
-.infra-dot{width:8px;height:8px;border-radius:50%}
+.infra-chip:hover{border-color:rgba(0,255,170,.3);color:var(--g);box-shadow:0 0 16px var(--glow-g)}
+.infra-dot{width:8px;height:8px;border-radius:50%;box-shadow:0 0 6px currentColor}
 
 /* ── FOOTER ── */
 footer{
   position:relative;z-index:2;
-  border-top:1px solid var(--border);
-  background:rgba(6,6,8,.95);
-  padding:40px 24px 24px
+  border-top:1px solid rgba(120,80,255,.12);
+  background:rgba(5,5,14,.97);
+  padding:48px 24px 28px
 }
-.footer-inner{max-width:1000px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr 1fr;gap:32px}
-@media(max-width:640px){.footer-inner{grid-template-columns:1fr}}
-.footer-brand{font-family:'Orbitron',sans-serif;font-size:16px;color:var(--g);margin-bottom:8px}
-.footer-tagline{font-size:11px;color:var(--dim);font-family:'Share Tech Mono',monospace}
-.footer-col h4{font-size:11px;letter-spacing:2px;color:var(--dim);margin-bottom:12px;font-family:'Orbitron',sans-serif}
-.footer-col a{display:block;font-size:12px;color:rgba(255,255,255,.5);text-decoration:none;padding:3px 0;transition:color .2s}
+footer::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(130,80,255,.4),rgba(0,255,170,.3),transparent)}
+.footer-inner{max-width:1000px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr 1fr;gap:40px}
+.footer-brand{
+  font-family:'Orbitron',sans-serif;font-size:18px;margin-bottom:10px;
+  background:linear-gradient(135deg,var(--g),var(--b));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text
+}
+.footer-tagline{font-size:11px;color:var(--dim);font-family:'Share Tech Mono',monospace;line-height:1.8}
+.footer-col h4{font-size:10px;letter-spacing:3px;color:rgba(100,80,200,.6);margin-bottom:14px;font-family:'Orbitron',sans-serif}
+.footer-col a{display:block;font-size:12px;color:rgba(200,200,240,.35);text-decoration:none;padding:4px 0;transition:color .2s}
 .footer-col a:hover{color:var(--g)}
 .footer-bottom{
-  max-width:1000px;margin:32px auto 0;
-  padding-top:16px;border-top:1px solid var(--border);
-  display:flex;justify-content:space-between;align-items:center;flex-wrap:gap;
+  max-width:1000px;margin:36px auto 0;
+  padding-top:18px;border-top:1px solid rgba(120,80,255,.08);
+  display:flex;justify-content:space-between;align-items:center;
   font-size:11px;color:var(--dim);font-family:'Share Tech Mono',monospace;gap:12px;flex-wrap:wrap
 }
-.patent{color:var(--gold)}
+.patent{color:var(--gold);text-shadow:0 0 8px rgba(255,204,68,.3)}
 
-/* ── SCROLL INDICATOR ── */
 .scroll-hint{
-  position:absolute;bottom:32px;left:50%;transform:translateX(-50%);
-  font-family:'Share Tech Mono',monospace;font-size:10px;color:var(--dim);letter-spacing:2px;
-  display:flex;flex-direction:column;align-items:center;gap:6px;animation:fadeUpDown 2s ease-in-out infinite
+  position:absolute;bottom:36px;left:50%;transform:translateX(-50%);
+  font-family:'Share Tech Mono',monospace;font-size:10px;color:var(--dim);letter-spacing:3px;
+  display:flex;flex-direction:column;align-items:center;gap:8px;animation:fadeUpDown 2.5s ease-in-out infinite
 }
-.scroll-hint::after{content:'▼';font-size:12px;color:var(--g)}
-@keyframes fadeUpDown{0%,100%{opacity:.4;transform:translateX(-50%) translateY(0)}50%{opacity:1;transform:translateX(-50%) translateY(-6px)}}
+.scroll-hint::after{content:'⬇';font-size:14px;color:var(--p);animation:bounce .8s ease-in-out infinite alternate}
+@keyframes bounce{from{transform:translateY(0)}to{transform:translateY(4px)}}
+@keyframes fadeUpDown{0%,100%{opacity:.3;transform:translateX(-50%) translateY(0)}50%{opacity:.8;transform:translateX(-50%) translateY(-5px)}}
+
+/* ── SHOOTING STARS ── */
+.star{position:fixed;width:2px;height:2px;background:#fff;border-radius:50%;pointer-events:none;z-index:1;animation:starMove linear forwards}
+@keyframes starMove{0%{opacity:0}5%{opacity:1}95%{opacity:1}100%{opacity:0;transform:translate(var(--sx),var(--sy))}}
 
 /* ── RESPONSIVE ── */
 @media(max-width:768px){
-  .hc{padding:14px 18px}.hero-counters{gap:0}
+  .hc{padding:16px 20px}.hero-counters{gap:10px}
   .nav-ticker{display:none}
   .footer-inner{grid-template-columns:1fr 1fr}
+  .feat-grid{grid-template-columns:1fr}
 }
 @media(max-width:480px){
-  .hc{flex:1;min-width:80px}
-  nav{padding:0 12px}
+  nav{padding:0 14px}
   .btn-cta{display:none}
+  .footer-inner{grid-template-columns:1fr}
+  .hero-title{letter-spacing:-1px}
 }
 </style>
 </head>
 <body>
 
-<!-- ── NEURAL NETWORK BACKGROUND ── -->
+<!-- ── AURORA ORBS ── -->
+<div id="aurora">
+  <div class="orb orb1"></div>
+  <div class="orb orb2"></div>
+  <div class="orb orb3"></div>
+  <div class="orb orb4"></div>
+  <div class="orb orb5"></div>
+</div>
+
+<!-- ── PARTICLE CANVAS ── -->
 <canvas id="bg-canvas"></canvas>
+
+<!-- ── CURSOR FX ── -->
+<div id="cursor-fx"></div>
 
 <!-- ── NAV ── -->
 <nav>
-  <a href="/" class="nav-logo">SEO<span>BAIKE</span></a>
+  <a href="/" class="nav-logo">SEO BAIKE</a>
   <div class="nav-ticker">
-    <div class="nav-ticker-inner" id="nav-ticker">
-      <span class="tk-green">● AI引擎 23/23 ONLINE</span>
-      <span>⬝</span>
-      <span class="tk-blue">● Cloudflare Workers 全球活躍</span>
-      <span>⬝</span>
-      <span class="tk-gold">● 專利 115100981 已取得</span>
-      <span>⬝</span>
-      <span class="tk-green">● LINE / WhatsApp / Telegram / Discord / WeChat 已接通</span>
-      <span>⬝</span>
-      <span class="tk-blue">● Supabase 東京節點 ONLINE</span>
-      <span>⬝</span>
-      <span class="tk-green">● CI/CD Deploy Pipeline 6/6 PASS</span>
-      <span>⬝</span>
-      <span class="tk-gold">● Azure East Asia 活躍</span>
-      <span>⬝</span>
-      <span><!-- duplicate for seamless loop --></span>
-      <span class="tk-green">● AI引擎 23/23 ONLINE</span>
-      <span>⬝</span>
-      <span class="tk-blue">● Cloudflare Workers 全球活躍</span>
-      <span>⬝</span>
-      <span class="tk-gold">● 專利 115100981 已取得</span>
-      <span>⬝</span>
-      <span class="tk-green">● LINE / WhatsApp / Telegram / Discord / WeChat 已接通</span>
-      <span>⬝</span>
-      <span class="tk-blue">● Supabase 東京節點 ONLINE</span>
-      <span>⬝</span>
-      <span class="tk-green">● CI/CD Deploy Pipeline 6/6 PASS</span>
-      <span>⬝</span>
-      <span class="tk-gold">● Azure East Asia 活躍</span>
+    <div class="nav-ticker-inner">
+      <span class="tk-green">◈ AI引擎 23/23 ONLINE</span>
+      <span style="color:#333">│</span>
+      <span class="tk-blue">◈ Cloudflare Workers 全球活躍</span>
+      <span style="color:#333">│</span>
+      <span class="tk-gold">◈ 專利 115100981 已取得</span>
+      <span style="color:#333">│</span>
+      <span class="tk-green">◈ LINE / WhatsApp / Telegram / Discord 已接通</span>
+      <span style="color:#333">│</span>
+      <span class="tk-blue">◈ Supabase 東京節點 ONLINE</span>
+      <span style="color:#333">│</span>
+      <span class="tk-green">◈ CI/CD 6/6 全綠通過</span>
+      <span style="color:#333">│</span>
+      <span class="tk-gold">◈ Azure East Asia 活躍</span>
+      <span style="color:#333">│</span>
+      <span class="tk-green">◈ AI引擎 23/23 ONLINE</span>
+      <span style="color:#333">│</span>
+      <span class="tk-blue">◈ Cloudflare Workers 全球活躍</span>
+      <span style="color:#333">│</span>
+      <span class="tk-gold">◈ 專利 115100981 已取得</span>
+      <span style="color:#333">│</span>
+      <span class="tk-green">◈ LINE / WhatsApp / Telegram / Discord 已接通</span>
+      <span style="color:#333">│</span>
+      <span class="tk-blue">◈ Supabase 東京節點 ONLINE</span>
+      <span style="color:#333">│</span>
+      <span class="tk-green">◈ CI/CD 6/6 全綠通過</span>
+      <span style="color:#333">│</span>
+      <span class="tk-gold">◈ Azure East Asia 活躍</span>
     </div>
   </div>
   <div class="nav-live"><span class="live-dot"></span>LIVE</div>
   <div class="nav-btns">
     <a href="/login" class="btn-ghost">登入</a>
-    <a href="/admin" class="btn-cta">CEO</a>
+    <a href="/admin" class="btn-cta">CEO ◈</a>
   </div>
 </nav>
 
 <!-- ── HERO ── -->
 <section id="hero">
   <div class="hero-inner">
-    <div class="hero-tag">GLOBAL AI COMMAND — aiforseo.vip</div>
+    <div class="hero-tag">◈ GLOBAL AI COMMAND CENTER — aiforseo.vip</div>
     <h1 class="hero-title">
       <span class="t-w">全球首創</span><br>
-      <span class="t-g">AI 帝國總部</span>
+      <span class="t-grad">AI 帝國總部</span>
     </h1>
     <p class="hero-sub">
-      <span id="ai-count">23</span> AI 引擎 &nbsp;·&nbsp;
-      <span>12</span> 頻道全接 &nbsp;·&nbsp;
-      全球邊緣部署 &nbsp;·&nbsp;
-      <span>專利 115100981</span>
+      <em id="ai-count">23</em> AI 引擎 &nbsp;✦&nbsp;
+      <em>12</em> 頻道全接 &nbsp;✦&nbsp;
+      全球邊緣部署 &nbsp;✦&nbsp;
+      <em>專利 115100981</em>
     </p>
-
-    <!-- LIVE COUNTERS -->
     <div class="hero-counters">
       <div class="hc">
         <span class="hc-num" id="cnt-ai">23</span>
@@ -393,10 +500,9 @@ footer{
         <div class="hc-live">SLA</div>
       </div>
     </div>
-
     <div class="hero-btns">
-      <a href="/login" class="btn-primary">免費開始 → 送 50 點</a>
-      <a href="/ceo" class="btn-secondary">CEO 戰情室</a>
+      <a href="/login" class="btn-primary">免費開始 ✦ 送 50 點</a>
+      <a href="/ceo" class="btn-secondary">CEO 戰情室 →</a>
     </div>
   </div>
   <div class="scroll-hint">SCROLL</div>
@@ -407,7 +513,7 @@ footer{
   <div class="live-bar-inner">
     <div class="lb-label">⚡ LIVE</div>
     <div class="lb-scroll">
-      <div class="lb-track" id="lb-track">
+      <div class="lb-track">
         <div class="lb-item">AI 引擎 <span class="lbv" id="lb-ai">23/23</span></div>
         <div class="lb-item">今日對話 <span class="lbv" id="lb-msg">-</span></div>
         <div class="lb-item">成功率 <span class="lbv" id="lb-sr">-</span></div>
@@ -415,8 +521,7 @@ footer{
         <div class="lb-item">Supabase <span class="lbv" style="color:var(--g)">TOKYO</span></div>
         <div class="lb-item">Azure <span class="lbv" style="color:var(--g)">EAST ASIA</span></div>
         <div class="lb-item">CI/CD <span class="lbv" style="color:var(--g)">6/6 PASS</span></div>
-        <div class="lb-item">Patents <span class="lbv" style="color:var(--gold)">115100981</span></div>
-        <!-- dup -->
+        <div class="lb-item">Patent <span class="lbv" style="color:var(--gold)">115100981</span></div>
         <div class="lb-item">AI 引擎 <span class="lbv">23/23</span></div>
         <div class="lb-item">今日對話 <span class="lbv" id="lb-msg2">-</span></div>
         <div class="lb-item">成功率 <span class="lbv" id="lb-sr2">-</span></div>
@@ -424,7 +529,7 @@ footer{
         <div class="lb-item">Supabase <span class="lbv" style="color:var(--g)">TOKYO</span></div>
         <div class="lb-item">Azure <span class="lbv" style="color:var(--g)">EAST ASIA</span></div>
         <div class="lb-item">CI/CD <span class="lbv" style="color:var(--g)">6/6 PASS</span></div>
-        <div class="lb-item">Patents <span class="lbv" style="color:var(--gold)">115100981</span></div>
+        <div class="lb-item">Patent <span class="lbv" style="color:var(--gold)">115100981</span></div>
       </div>
     </div>
   </div>
@@ -433,143 +538,146 @@ footer{
 <!-- ── AI ARSENAL ── -->
 <section id="arsenal">
   <div class="container">
-    <div class="sec-title" style="color:var(--g)">AI 武器庫</div>
-    <div class="sec-sub">23 個 AI 引擎即時在線 · 全球頂級模型全接入</div>
-    <div class="arsenal-grid">
-      <!-- LLM -->
-      <div class="ai-chip"><div class="ai-dot" style="background:var(--g);box-shadow:0 0 6px var(--g)"></div>OpenAI GPT-4o<span class="ai-type">LLM</span></div>
-      <div class="ai-chip"><div class="ai-dot" style="background:var(--g);box-shadow:0 0 6px var(--g)"></div>Anthropic Claude<span class="ai-type">LLM</span></div>
-      <div class="ai-chip"><div class="ai-dot" style="background:var(--g);box-shadow:0 0 6px var(--g)"></div>NVIDIA NIM<span class="ai-type">GPU</span></div>
-      <div class="ai-chip"><div class="ai-dot" style="background:var(--g);box-shadow:0 0 6px var(--g)"></div>xAI Grok<span class="ai-type">LLM</span></div>
-      <div class="ai-chip"><div class="ai-dot" style="background:var(--g);box-shadow:0 0 6px var(--g)"></div>DeepSeek R1<span class="ai-type">LLM</span></div>
-      <div class="ai-chip"><div class="ai-dot" style="background:var(--g);box-shadow:0 0 6px var(--g)"></div>Groq LPU<span class="ai-type">FAST</span></div>
-      <div class="ai-chip"><div class="ai-dot" style="background:var(--g);box-shadow:0 0 6px var(--g)"></div>Meta Llama 4<span class="ai-type">LLM</span></div>
-      <div class="ai-chip"><div class="ai-dot" style="background:var(--g);box-shadow:0 0 6px var(--g)"></div>Mistral<span class="ai-type">LLM</span></div>
-      <div class="ai-chip"><div class="ai-dot" style="background:var(--g);box-shadow:0 0 6px var(--g)"></div>Together AI<span class="ai-type">LLM</span></div>
-      <div class="ai-chip"><div class="ai-dot" style="background:var(--g);box-shadow:0 0 6px var(--g)"></div>Fireworks AI<span class="ai-type">LLM</span></div>
-      <div class="ai-chip"><div class="ai-dot" style="background:var(--g);box-shadow:0 0 6px var(--g)"></div>OpenRouter<span class="ai-type">PROXY</span></div>
-      <div class="ai-chip"><div class="ai-dot" style="background:var(--g);box-shadow:0 0 6px var(--g)"></div>Cohere<span class="ai-type">LLM</span></div>
-      <div class="ai-chip"><div class="ai-dot" style="background:var(--g);box-shadow:0 0 6px var(--g)"></div>AI21 Labs<span class="ai-type">LLM</span></div>
-      <div class="ai-chip"><div class="ai-dot" style="background:var(--g);box-shadow:0 0 6px var(--g)"></div>Replicate<span class="ai-type">IMG</span></div>
-      <div class="ai-chip"><div class="ai-dot" style="background:var(--g);box-shadow:0 0 6px var(--g)"></div>HuggingFace<span class="ai-type">ML</span></div>
-      <div class="ai-chip"><div class="ai-dot" style="background:var(--g);box-shadow:0 0 6px var(--g)"></div>DashScope<span class="ai-type">CN</span></div>
-      <div class="ai-chip"><div class="ai-dot" style="background:var(--b);box-shadow:0 0 6px var(--b)"></div>Perplexity<span class="ai-type">SEARCH</span></div>
-      <div class="ai-chip"><div class="ai-dot" style="background:var(--b);box-shadow:0 0 6px var(--b)"></div>Google Search<span class="ai-type">SEARCH</span></div>
-      <div class="ai-chip"><div class="ai-dot" style="background:var(--b);box-shadow:0 0 6px var(--b)"></div>DataForSEO<span class="ai-type">SEO</span></div>
-      <div class="ai-chip"><div class="ai-dot" style="background:var(--p);box-shadow:0 0 6px var(--p)"></div>ElevenLabs<span class="ai-type">VOICE</span></div>
-      <div class="ai-chip"><div class="ai-dot" style="background:var(--p);box-shadow:0 0 6px var(--p)"></div>Shotstack<span class="ai-type">VIDEO</span></div>
-      <div class="ai-chip"><div class="ai-dot" style="background:var(--p);box-shadow:0 0 6px var(--p)"></div>RemoveBG<span class="ai-type">IMG</span></div>
-      <div class="ai-chip"><div class="ai-dot" style="background:var(--gold);box-shadow:0 0 6px var(--gold)"></div>Azure OpenAI<span class="ai-type">ENT</span></div>
+    <div class="reveal" style="text-align:center">
+      <div class="sec-badge">AI ARSENAL</div>
+      <div class="sec-title">AI 武器庫</div>
+      <div class="sec-sub">23 個頂級 AI 引擎即時在線 · 全球最強模型全接入</div>
     </div>
-    <div class="arsenal-summary">
+    <div class="arsenal-grid reveal">
+      <div class="ai-chip"><div class="ai-dot" style="background:var(--g);box-shadow:0 0 8px var(--g)"></div>OpenAI GPT-4o<span class="ai-type">LLM</span></div>
+      <div class="ai-chip"><div class="ai-dot" style="background:var(--g);box-shadow:0 0 8px var(--g)"></div>Anthropic Claude<span class="ai-type">LLM</span></div>
+      <div class="ai-chip"><div class="ai-dot" style="background:var(--gold);box-shadow:0 0 8px var(--gold)"></div>NVIDIA NIM<span class="ai-type">GPU</span></div>
+      <div class="ai-chip"><div class="ai-dot" style="background:var(--g);box-shadow:0 0 8px var(--g)"></div>xAI Grok<span class="ai-type">LLM</span></div>
+      <div class="ai-chip"><div class="ai-dot" style="background:var(--b);box-shadow:0 0 8px var(--b)"></div>DeepSeek R1<span class="ai-type">LLM</span></div>
+      <div class="ai-chip"><div class="ai-dot" style="background:var(--g);box-shadow:0 0 8px var(--g)"></div>Groq LPU<span class="ai-type">FAST</span></div>
+      <div class="ai-chip"><div class="ai-dot" style="background:var(--g);box-shadow:0 0 8px var(--g)"></div>Meta Llama 4<span class="ai-type">LLM</span></div>
+      <div class="ai-chip"><div class="ai-dot" style="background:var(--b);box-shadow:0 0 8px var(--b)"></div>Mistral<span class="ai-type">LLM</span></div>
+      <div class="ai-chip"><div class="ai-dot" style="background:var(--g);box-shadow:0 0 8px var(--g)"></div>Together AI<span class="ai-type">LLM</span></div>
+      <div class="ai-chip"><div class="ai-dot" style="background:var(--g);box-shadow:0 0 8px var(--g)"></div>Fireworks AI<span class="ai-type">LLM</span></div>
+      <div class="ai-chip"><div class="ai-dot" style="background:var(--p);box-shadow:0 0 8px var(--p)"></div>OpenRouter<span class="ai-type">PROXY</span></div>
+      <div class="ai-chip"><div class="ai-dot" style="background:var(--b);box-shadow:0 0 8px var(--b)"></div>Cohere<span class="ai-type">LLM</span></div>
+      <div class="ai-chip"><div class="ai-dot" style="background:var(--b);box-shadow:0 0 8px var(--b)"></div>AI21 Labs<span class="ai-type">LLM</span></div>
+      <div class="ai-chip"><div class="ai-dot" style="background:var(--p);box-shadow:0 0 8px var(--p)"></div>Replicate<span class="ai-type">IMG</span></div>
+      <div class="ai-chip"><div class="ai-dot" style="background:var(--p);box-shadow:0 0 8px var(--p)"></div>HuggingFace<span class="ai-type">ML</span></div>
+      <div class="ai-chip"><div class="ai-dot" style="background:var(--b);box-shadow:0 0 8px var(--b)"></div>DashScope<span class="ai-type">CN</span></div>
+      <div class="ai-chip"><div class="ai-dot" style="background:var(--b);box-shadow:0 0 8px var(--b)"></div>Perplexity<span class="ai-type">SEARCH</span></div>
+      <div class="ai-chip"><div class="ai-dot" style="background:var(--b);box-shadow:0 0 8px var(--b)"></div>Google Search<span class="ai-type">SEARCH</span></div>
+      <div class="ai-chip"><div class="ai-dot" style="background:var(--b);box-shadow:0 0 8px var(--b)"></div>DataForSEO<span class="ai-type">SEO</span></div>
+      <div class="ai-chip"><div class="ai-dot" style="background:var(--p);box-shadow:0 0 8px var(--p)"></div>ElevenLabs<span class="ai-type">VOICE</span></div>
+      <div class="ai-chip"><div class="ai-dot" style="background:var(--p);box-shadow:0 0 8px var(--p)"></div>Shotstack<span class="ai-type">VIDEO</span></div>
+      <div class="ai-chip"><div class="ai-dot" style="background:var(--p);box-shadow:0 0 8px var(--p)"></div>RemoveBG<span class="ai-type">IMG</span></div>
+      <div class="ai-chip"><div class="ai-dot" style="background:var(--gold);box-shadow:0 0 8px var(--gold)"></div>Azure OpenAI<span class="ai-type">ENT</span></div>
+    </div>
+    <div class="arsenal-summary reveal">
       <div class="as-item"><span class="as-num" id="as-active">23</span><span class="as-label">ACTIVE</span></div>
-      <div class="as-item"><span class="as-num" style="color:var(--b)">17</span><span class="as-label">LLM</span></div>
-      <div class="as-item"><span class="as-num" style="color:var(--p)">3</span><span class="as-label">CREATIVE</span></div>
-      <div class="as-item"><span class="as-num" style="color:var(--gold)">3</span><span class="as-label">SEARCH</span></div>
+      <div class="as-item"><span class="as-num" style="color:var(--b);text-shadow:0 0 16px rgba(68,136,255,.4)">17</span><span class="as-label">LLM</span></div>
+      <div class="as-item"><span class="as-num" style="color:var(--p);text-shadow:0 0 16px rgba(204,85,255,.4)">3</span><span class="as-label">CREATIVE</span></div>
+      <div class="as-item"><span class="as-num" style="color:var(--gold);text-shadow:0 0 16px rgba(255,204,68,.4)">3</span><span class="as-label">SEARCH</span></div>
     </div>
   </div>
 </section>
-
-<div class="divider"></div>
 
 <!-- ── CHANNELS ── -->
 <section id="channels">
   <div class="container">
-    <div class="sec-title" style="color:var(--b)">全頻道覆蓋</div>
-    <div class="sec-sub">12 個通訊頻道全部接通 · 一個後台統一管理</div>
-    <div class="channels-grid">
-      <div class="ch-card" style="border-color:rgba(0,195,0,.3)"><div class="ch-icon">💬</div><div class="ch-name">LINE</div><div class="ch-status ch-active">ACTIVE</div></div>
-      <div class="ch-card" style="border-color:rgba(37,211,102,.3)"><div class="ch-icon">📱</div><div class="ch-name">WhatsApp</div><div class="ch-status ch-active">ACTIVE</div></div>
-      <div class="ch-card" style="border-color:rgba(0,136,204,.3)"><div class="ch-icon">✈️</div><div class="ch-name">Telegram</div><div class="ch-status ch-active">ACTIVE</div></div>
-      <div class="ch-card" style="border-color:rgba(88,101,242,.3)"><div class="ch-icon">🎮</div><div class="ch-name">Discord</div><div class="ch-status ch-active">ACTIVE</div></div>
-      <div class="ch-card" style="border-color:rgba(0,120,212,.3)"><div class="ch-icon">👥</div><div class="ch-name">Facebook</div><div class="ch-status ch-active">ACTIVE</div></div>
-      <div class="ch-card" style="border-color:rgba(0,120,212,.3)"><div class="ch-icon">💼</div><div class="ch-name">Teams</div><div class="ch-status ch-ready">READY</div></div>
-      <div class="ch-card" style="border-color:rgba(58,160,80,.3)"><div class="ch-icon">💬</div><div class="ch-name">WeChat</div><div class="ch-status ch-ready">READY</div></div>
-      <div class="ch-card" style="border-color:rgba(115,75,195,.3)"><div class="ch-icon">📶</div><div class="ch-name">Viber</div><div class="ch-status ch-ready">READY</div></div>
-      <div class="ch-card" style="border-color:rgba(0,214,148,.3)"><div class="ch-icon">🔵</div><div class="ch-name">Signal</div><div class="ch-status ch-ready">READY</div></div>
-      <div class="ch-card" style="border-color:rgba(0,170,255,.3)"><div class="ch-icon">📱</div><div class="ch-name">Slack</div><div class="ch-status ch-active">ACTIVE</div></div>
-      <div class="ch-card" style="border-color:rgba(234,67,53,.3)"><div class="ch-icon">📧</div><div class="ch-name">Gmail API</div><div class="ch-status ch-ready">READY</div></div>
-      <div class="ch-card" style="border-color:rgba(255,204,0,.3)"><div class="ch-icon">🌐</div><div class="ch-name">Web Widget</div><div class="ch-status ch-active">ACTIVE</div></div>
+    <div class="reveal" style="text-align:center">
+      <div class="sec-badge" style="color:var(--b);border-color:rgba(68,136,255,.2);background:rgba(68,136,255,.06)">OMNICHANNEL</div>
+      <div class="sec-title">全頻道覆蓋</div>
+      <div class="sec-sub">12 個通訊頻道全部接通 · 一個後台統一管理</div>
+    </div>
+    <div class="channels-grid reveal">
+      <div class="ch-card"><div class="ch-icon">💬</div><div class="ch-name">LINE</div><div class="ch-status ch-active">ACTIVE</div></div>
+      <div class="ch-card"><div class="ch-icon">📱</div><div class="ch-name">WhatsApp</div><div class="ch-status ch-active">ACTIVE</div></div>
+      <div class="ch-card"><div class="ch-icon">✈️</div><div class="ch-name">Telegram</div><div class="ch-status ch-active">ACTIVE</div></div>
+      <div class="ch-card"><div class="ch-icon">🎮</div><div class="ch-name">Discord</div><div class="ch-status ch-active">ACTIVE</div></div>
+      <div class="ch-card"><div class="ch-icon">👥</div><div class="ch-name">Facebook</div><div class="ch-status ch-active">ACTIVE</div></div>
+      <div class="ch-card"><div class="ch-icon">📱</div><div class="ch-name">Slack</div><div class="ch-status ch-active">ACTIVE</div></div>
+      <div class="ch-card"><div class="ch-icon">💼</div><div class="ch-name">Teams</div><div class="ch-status ch-ready">READY</div></div>
+      <div class="ch-card"><div class="ch-icon">💬</div><div class="ch-name">WeChat</div><div class="ch-status ch-ready">READY</div></div>
+      <div class="ch-card"><div class="ch-icon">📶</div><div class="ch-name">Viber</div><div class="ch-status ch-ready">READY</div></div>
+      <div class="ch-card"><div class="ch-icon">🔵</div><div class="ch-name">Signal</div><div class="ch-status ch-ready">READY</div></div>
+      <div class="ch-card"><div class="ch-icon">📧</div><div class="ch-name">Gmail API</div><div class="ch-status ch-ready">READY</div></div>
+      <div class="ch-card"><div class="ch-icon">🌐</div><div class="ch-name">Web Widget</div><div class="ch-status ch-active">ACTIVE</div></div>
     </div>
   </div>
 </section>
-
-<div class="divider"></div>
 
 <!-- ── FEATURES ── -->
 <section id="features">
   <div class="container">
-    <div class="sec-title">核心功能</div>
-    <div class="sec-sub">AI 自動化 · 全球部署 · 企業級架構</div>
+    <div class="reveal" style="text-align:center">
+      <div class="sec-badge" style="color:var(--gold);border-color:rgba(255,204,68,.2);background:rgba(255,204,68,.05)">CORE FEATURES</div>
+      <div class="sec-title">核心功能</div>
+      <div class="sec-sub">AI 自動化 · 全球部署 · 企業級架構</div>
+    </div>
     <div class="feat-grid">
-      <div class="feat-card" style="--fc:var(--g)"><div class="feat-icon">🚀</div><div class="feat-title">AI 自動建站</div><div class="feat-desc">輸入關鍵字，30 秒生成完整 SEO 網站，Lighthouse 90+ 分保證，自動送審 Google Search Console。</div></div>
-      <div class="feat-card" style="--fc:var(--b)"><div class="feat-icon">🤖</div><div class="feat-title">全頻道 AI 客服</div><div class="feat-desc">LINE、WhatsApp、Telegram、Discord 12 個頻道統一後台，24 小時不間斷自動回應。</div></div>
-      <div class="feat-card" style="--fc:var(--p)"><div class="feat-icon">🎬</div><div class="feat-title">AI 影片 & 配音</div><div class="feat-desc">ElevenLabs 語音合成 + Shotstack 影片自動生成，文字秒變行銷影片。</div></div>
-      <div class="feat-card" style="--fc:var(--gold)"><div class="feat-icon">📈</div><div class="feat-title">SEO 深度分析</div><div class="feat-desc">DataForSEO + Google PageSpeed 深度健檢，找出排名瓶頸，一鍵修復方案。</div></div>
-      <div class="feat-card" style="--fc:var(--g)"><div class="feat-icon">🏪</div><div class="feat-title">AI 工具市集</div><div class="feat-desc">把你的 AI 工具上架全球市集，三級分潤制，被動收入最高 50%。</div></div>
-      <div class="feat-card" style="--fc:var(--b)"><div class="feat-icon">⚡</div><div class="feat-title">全球邊緣部署</div><div class="feat-desc">Cloudflare Workers 全球 300+ 節點，零冷啟動，最低延遲，企業 SLA 99.9%。</div></div>
+      <div class="feat-card reveal" style="--fc:var(--g);--fc-glow:rgba(0,255,170,.08)"><span class="feat-icon">🚀</span><div class="feat-title">AI 自動建站</div><div class="feat-desc">輸入關鍵字，30 秒生成完整 SEO 網站，Lighthouse 90+ 分保證，自動送審 Google Search Console。</div></div>
+      <div class="feat-card reveal" style="--fc:var(--b);--fc-glow:rgba(68,136,255,.08)"><span class="feat-icon">🤖</span><div class="feat-title">全頻道 AI 客服</div><div class="feat-desc">LINE、WhatsApp、Telegram、Discord 12 個頻道統一後台，24 小時不間斷自動回應。</div></div>
+      <div class="feat-card reveal" style="--fc:var(--p);--fc-glow:rgba(204,85,255,.08)"><span class="feat-icon">🎬</span><div class="feat-title">AI 影片 & 配音</div><div class="feat-desc">ElevenLabs 語音合成 + Shotstack 影片自動生成，文字秒變行銷影片。</div></div>
+      <div class="feat-card reveal" style="--fc:var(--gold);--fc-glow:rgba(255,204,68,.06)"><span class="feat-icon">📈</span><div class="feat-title">SEO 深度分析</div><div class="feat-desc">DataForSEO + Google PageSpeed 深度健檢，找出排名瓶頸，一鍵修復方案。</div></div>
+      <div class="feat-card reveal" style="--fc:var(--g);--fc-glow:rgba(0,255,170,.08)"><span class="feat-icon">🏪</span><div class="feat-title">AI 工具市集</div><div class="feat-desc">把你的 AI 工具上架全球市集，三級分潤制，被動收入最高 50%。</div></div>
+      <div class="feat-card reveal" style="--fc:var(--b);--fc-glow:rgba(68,136,255,.08)"><span class="feat-icon">⚡</span><div class="feat-title">全球邊緣部署</div><div class="feat-desc">Cloudflare Workers 全球 300+ 節點，零冷啟動，最低延遲，企業 SLA 99.9%。</div></div>
     </div>
   </div>
 </section>
 
-<div class="divider"></div>
-
-<!-- ── INFRA BELT ── -->
+<!-- ── INFRA ── -->
 <section id="infra">
-  <div class="container">
-    <div class="sec-title" style="color:var(--dim);font-size:12px;letter-spacing:4px;margin-bottom:24px">POWERED BY</div>
-    <div class="infra-grid">
-      <div class="infra-chip"><div class="infra-dot" style="background:var(--g)"></div>Cloudflare Workers</div>
-      <div class="infra-chip"><div class="infra-dot" style="background:var(--b)"></div>Supabase (Tokyo)</div>
-      <div class="infra-chip"><div class="infra-dot" style="background:var(--gold)"></div>Azure East Asia</div>
-      <div class="infra-chip"><div class="infra-dot" style="background:var(--p)"></div>GitHub Actions CI/CD</div>
-      <div class="infra-chip"><div class="infra-dot" style="background:var(--g)"></div>NVIDIA GPU Cloud</div>
-      <div class="infra-chip"><div class="infra-dot" style="background:var(--b)"></div>Cosmos DB</div>
-      <div class="infra-chip"><div class="infra-dot" style="background:var(--gold)"></div>Azure Blob Storage</div>
-      <div class="infra-chip"><div class="infra-dot" style="background:var(--g)"></div>Edge AI Runtime</div>
+  <div class="container reveal" style="text-align:center">
+    <div class="sec-badge" style="color:var(--dim);border-color:rgba(100,80,200,.15);background:rgba(100,80,200,.04)">INFRASTRUCTURE</div>
+    <div class="infra-grid" style="margin-top:24px">
+      <div class="infra-chip"><div class="infra-dot" style="background:var(--g);color:var(--g)"></div>Cloudflare Workers</div>
+      <div class="infra-chip"><div class="infra-dot" style="background:var(--b);color:var(--b)"></div>Supabase (Tokyo)</div>
+      <div class="infra-chip"><div class="infra-dot" style="background:var(--gold);color:var(--gold)"></div>Azure East Asia</div>
+      <div class="infra-chip"><div class="infra-dot" style="background:var(--p);color:var(--p)"></div>GitHub Actions CI/CD</div>
+      <div class="infra-chip"><div class="infra-dot" style="background:var(--g);color:var(--g)"></div>NVIDIA GPU Cloud</div>
+      <div class="infra-chip"><div class="infra-dot" style="background:var(--b);color:var(--b)"></div>Cosmos DB</div>
+      <div class="infra-chip"><div class="infra-dot" style="background:var(--gold);color:var(--gold)"></div>Azure Blob Storage</div>
+      <div class="infra-chip"><div class="infra-dot" style="background:var(--g);color:var(--g)"></div>Edge AI Runtime</div>
     </div>
   </div>
 </section>
-
-<div class="divider"></div>
 
 <!-- ── PRICING ── -->
 <section id="pricing">
   <div class="container">
-    <div class="sec-title">透明定價</div>
-    <div class="sec-sub">點數制計費 · 用多少買多少 · 無綁約</div>
-    <div class="price-grid">
+    <div class="reveal" style="text-align:center">
+      <div class="sec-badge" style="color:var(--g);border-color:rgba(0,255,170,.2);background:rgba(0,255,170,.05)">PRICING</div>
+      <div class="sec-title">透明定價</div>
+      <div class="sec-sub">點數制計費 · 用多少買多少 · 無綁約</div>
+    </div>
+    <div class="price-grid reveal">
       <div class="price-card">
         <div class="price-name">STARTER</div>
         <div class="price-amt">299<span>NT$/月</span></div>
         <div class="price-desc">100 點 · 個人創業</div>
         <ul class="price-list"><li>AI 建站 x5</li><li>AI 客服 24hr</li><li>SEO 健檢 x10</li></ul>
-        <a href="/login" class="btn-secondary" style="display:block;text-align:center;padding:10px">開始使用</a>
+        <a href="/login" class="btn-secondary" style="display:block;text-align:center;padding:11px">開始使用</a>
       </div>
       <div class="price-card featured">
         <div class="price-name">BUSINESS</div>
         <div class="price-amt">999<span>NT$/月</span></div>
         <div class="price-desc">500 點 · 中小企業</div>
         <ul class="price-list"><li>AI 建站無限制</li><li>全頻道 AI 客服</li><li>市集分潤 50%</li><li>AI 影片 & 配音</li></ul>
-        <a href="/login" class="btn-primary" style="display:block;text-align:center;padding:10px">立即開始</a>
+        <a href="/login" class="btn-primary" style="display:block;text-align:center;padding:11px">立即開始</a>
       </div>
       <div class="price-card">
         <div class="price-name">ENTERPRISE</div>
         <div class="price-amt">2,999<span>NT$/月</span></div>
         <div class="price-desc">2000 點 · 大型企業</div>
         <ul class="price-list"><li>全功能解鎖</li><li>專屬部署環境</li><li>SLA 99.9%</li><li>專人服務</li></ul>
-        <a href="/contact" class="btn-secondary" style="display:block;text-align:center;padding:10px">聯絡洽談</a>
+        <a href="/contact" class="btn-secondary" style="display:block;text-align:center;padding:11px">聯絡洽談</a>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ── FOOTER ── */
+<!-- ── FOOTER ── -->
 <footer>
   <div class="footer-inner">
     <div>
       <div class="footer-brand">SEOBAIKE</div>
-      <div class="footer-tagline">AI 帝國 · 小路光有限公司<br>統一編號 60475510</div>
+      <div class="footer-tagline">AI 帝國 · 小路光有限公司<br>統一編號 60475510<br>專利 115100981</div>
     </div>
     <div class="footer-col">
       <h4>產品</h4>
@@ -590,17 +698,25 @@ footer{
   </div>
   <div class="footer-bottom">
     <span>© 2026 小路光有限公司 (SEOBAIKE) · <a href="mailto:seobaike@aiforseo.vip" style="color:inherit">seobaike@aiforseo.vip</a> · 04-7776342</span>
-    <span class="patent">專利 115100981</span>
+    <span class="patent">✦ 專利 115100981</span>
     <span id="ft-time" style="color:var(--g)">--:--:--</span>
   </div>
 </footer>
 
 <script>
-// ── NEURAL NETWORK CANVAS ──
+// ── MULTI-COLOR PARTICLE SYSTEM ──
 const canvas = document.getElementById('bg-canvas')
 const ctx = canvas.getContext('2d')
-let W, H, particles = []
-const N = 80, MAX_DIST = 120, COLOR = '0,255,136'
+let W, H
+const COLORS = [
+  [0,255,170],   // green
+  [68,136,255],  // blue
+  [204,85,255],  // purple
+  [255,204,68],  // gold
+  [255,100,150], // pink
+]
+const N = 140
+const particles = []
 
 function resize() {
   W = canvas.width = window.innerWidth
@@ -610,117 +726,129 @@ resize()
 window.addEventListener('resize', resize)
 
 for (let i = 0; i < N; i++) {
+  const c = COLORS[Math.floor(Math.random() * COLORS.length)]
   particles.push({
     x: Math.random() * W, y: Math.random() * H,
-    vx: (Math.random() - 0.5) * 0.4, vy: (Math.random() - 0.5) * 0.4,
-    r: Math.random() * 1.5 + 0.5
+    vx: (Math.random() - .5) * .5, vy: (Math.random() - .5) * .5,
+    r: Math.random() * 1.8 + .4,
+    c, a: Math.random() * .6 + .2,
+    pulse: Math.random() * Math.PI * 2
   })
 }
 
 function drawCanvas() {
   ctx.clearRect(0, 0, W, H)
+  const t = Date.now() / 1000
+
+  // Draw connections
   for (let i = 0; i < N; i++) {
     const p = particles[i]
-    p.x += p.vx; p.y += p.vy
+    p.x += p.vx; p.y += p.vy; p.pulse += .015
     if (p.x < 0 || p.x > W) p.vx *= -1
     if (p.y < 0 || p.y > H) p.vy *= -1
-    ctx.beginPath()
-    ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2)
-    ctx.fillStyle = `rgba(${COLOR},0.6)`
-    ctx.fill()
+
     for (let j = i + 1; j < N; j++) {
       const q = particles[j]
       const dx = p.x - q.x, dy = p.y - q.y
-      const d = Math.sqrt(dx * dx + dy * dy)
-      if (d < MAX_DIST) {
-        ctx.beginPath()
-        ctx.moveTo(p.x, p.y)
-        ctx.lineTo(q.x, q.y)
-        ctx.strokeStyle = `rgba(${COLOR},${0.15 * (1 - d / MAX_DIST)})`
-        ctx.lineWidth = 0.5
-        ctx.stroke()
+      const dist = Math.sqrt(dx * dx + dy * dy)
+      if (dist < 110) {
+        const alpha = (1 - dist / 110) * .12
+        const mc = p.c
+        ctx.strokeStyle = `rgba(${mc[0]},${mc[1]},${mc[2]},${alpha})`
+        ctx.lineWidth = .5
+        ctx.beginPath(); ctx.moveTo(p.x, p.y); ctx.lineTo(q.x, q.y); ctx.stroke()
       }
     }
+
+    // Draw particle with pulse
+    const pa = p.a * (.7 + .3 * Math.sin(p.pulse))
+    const pr = p.r * (.85 + .15 * Math.sin(p.pulse * 1.3))
+    const grd = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, pr * 3)
+    grd.addColorStop(0, `rgba(${p.c[0]},${p.c[1]},${p.c[2]},${pa})`)
+    grd.addColorStop(1, `rgba(${p.c[0]},${p.c[1]},${p.c[2]},0)`)
+    ctx.beginPath(); ctx.arc(p.x, p.y, pr * 3, 0, Math.PI * 2)
+    ctx.fillStyle = grd; ctx.fill()
+    ctx.beginPath(); ctx.arc(p.x, p.y, pr, 0, Math.PI * 2)
+    ctx.fillStyle = `rgba(${p.c[0]},${p.c[1]},${p.c[2]},${pa * 1.5})`; ctx.fill()
   }
   requestAnimationFrame(drawCanvas)
 }
 drawCanvas()
 
-// ── CLOCK ──
-function tick() {
-  const t = new Date().toLocaleTimeString('zh-TW', {hour12:false})
-  const el = document.getElementById('ft-time')
-  if (el) el.textContent = t
+// ── SHOOTING STARS ──
+function spawnStar() {
+  const el = document.createElement('div')
+  el.className = 'star'
+  const x = Math.random() * window.innerWidth
+  const y = Math.random() * window.innerHeight * .5
+  const angle = Math.random() * 60 + 10
+  const dist = Math.random() * 300 + 100
+  const rad = angle * Math.PI / 180
+  const dur = Math.random() * 1.5 + 1
+  el.style.cssText = `left:${x}px;top:${y}px;--sx:${Math.cos(rad)*dist}px;--sy:${Math.sin(rad)*dist}px;animation-duration:${dur}s;width:${Math.random()*2+1}px;height:${Math.random()*2+1}px;background:rgba(255,255,255,${Math.random()*.6+.3});box-shadow:0 0 4px rgba(255,255,255,.6)`
+  document.body.appendChild(el)
+  setTimeout(() => el.remove(), dur * 1000)
 }
-tick()
-setInterval(tick, 1000)
+setInterval(spawnStar, 2200)
 
-// ── COUNT UP ANIMATION ──
-function countUp(el, target, duration = 1200) {
-  if (!el) return
-  const start = Date.now()
-  const step = () => {
-    const p = Math.min((Date.now() - start) / duration, 1)
-    const ease = 1 - Math.pow(1 - p, 3)
-    el.textContent = Math.round(ease * target).toLocaleString()
-    if (p < 1) requestAnimationFrame(step)
-  }
-  step()
-}
+// ── CURSOR SPARKLE ──
+const fxEl = document.getElementById('cursor-fx')
+const sparkColors = ['#00ffaa','#4488ff','#cc55ff','#ffcc44','#ff88aa']
+let lastSpark = 0
+document.addEventListener('mousemove', e => {
+  const now = Date.now()
+  if (now - lastSpark < 40) return
+  lastSpark = now
+  const s = document.createElement('div')
+  s.className = 'spark'
+  const angle = Math.random() * Math.PI * 2
+  const dist = Math.random() * 30 + 10
+  s.style.cssText = `left:${e.clientX}px;top:${e.clientY}px;background:${sparkColors[Math.floor(Math.random()*sparkColors.length)]};--tx:${Math.cos(angle)*dist}px;--ty:${Math.sin(angle)*dist}px;width:${Math.random()*4+2}px;height:${Math.random()*4+2}px;box-shadow:0 0 6px currentColor`
+  fxEl.appendChild(s)
+  setTimeout(() => s.remove(), 800)
+})
 
-// ── FETCH LIVE STATS FROM SUPABASE ──
-const SB_URL = 'https://vmyrivxxibqydccurxug.supabase.co'
-const SB_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZteXJpdnh4aWJxeWRjY3VyeHVnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzAwNDAwMjksImV4cCI6MjA4NTYxNjAyOX0.iBV-23LGdm_uKffAExgqSV34-NWoAyv8_-M_cJQZ8Gg'
+// ── SCROLL REVEAL ──
+const revealEls = document.querySelectorAll('.reveal')
+const obs = new IntersectionObserver(entries => {
+  entries.forEach((e, i) => {
+    if (e.isIntersecting) {
+      setTimeout(() => e.target.classList.add('visible'), i * 60)
+      obs.unobserve(e.target)
+    }
+  })
+}, { threshold: .1 })
+revealEls.forEach(el => obs.observe(el))
 
-async function loadLiveStats() {
+// ── LIVE DATA ──
+async function fetchLive() {
   try {
-    const r = await fetch(`${SB_URL}/functions/v1/ceo-dashboard?action=daily-report`, {
-      headers: { 'Authorization': `Bearer ${SB_ANON}`, 'apikey': SB_ANON }
+    const r = await fetch('https://seobaike.supabase.co/functions/v1/ceo-dashboard', {
+      headers: { 'Content-Type': 'application/json' }
     })
     if (!r.ok) return
     const d = await r.json()
     const kpi = d.kpi || {}
     const msgs = kpi.total_conversations || 0
-    const sr = kpi.total_conversations > 0
-      ? (100 - parseFloat(kpi.error_rate || '0')).toFixed(1) + '%'
-      : '100%'
-
-    countUp(document.getElementById('cnt-msg'), msgs)
-    const lbMsg = document.getElementById('lb-msg')
-    const lbMsg2 = document.getElementById('lb-msg2')
-    const lbSr = document.getElementById('lb-sr')
-    const lbSr2 = document.getElementById('lb-sr2')
-    if (lbMsg) lbMsg.textContent = msgs.toLocaleString()
-    if (lbMsg2) lbMsg2.textContent = msgs.toLocaleString()
-    if (lbSr) lbSr.textContent = sr
-    if (lbSr2) lbSr2.textContent = sr
-  } catch (_) { /* silent fail, show static data */ }
+    const sr = kpi.success_rate || 0
+    document.getElementById('cnt-msg').textContent = msgs
+    document.getElementById('lb-msg').textContent = msgs
+    document.getElementById('lb-msg2').textContent = msgs
+    document.getElementById('lb-sr').textContent = sr + '%'
+    document.getElementById('lb-sr2').textContent = sr + '%'
+  } catch(_) {}
 }
+fetchLive()
+setInterval(fetchLive, 30000)
 
-// ── INITIAL COUNTERS ──
-countUp(document.getElementById('cnt-ai'), 23, 800)
-countUp(document.getElementById('cnt-ch'), 12, 1000)
-
-window.addEventListener('load', () => {
-  setTimeout(loadLiveStats, 800)
-})
-
-// ── INTERSECTION OBSERVER for entrance animations ──
-const io = new IntersectionObserver((entries) => {
-  entries.forEach(e => {
-    if (e.isIntersecting) {
-      e.target.style.opacity = '1'
-      e.target.style.transform = 'translateY(0)'
-    }
-  })
-}, { threshold: 0.1 })
-
-document.querySelectorAll('.feat-card,.price-card,.ch-card,.ai-chip').forEach(el => {
-  el.style.opacity = '0'
-  el.style.transform = 'translateY(20px)'
-  el.style.transition = 'opacity .5s ease, transform .5s ease'
-  io.observe(el)
-})
+// ── CLOCK ──
+function tick() {
+  const t = new Date()
+  const s = [t.getHours(), t.getMinutes(), t.getSeconds()].map(x => String(x).padStart(2,'0')).join(':')
+  const el = document.getElementById('ft-time')
+  if (el) el.textContent = s
+}
+tick(); setInterval(tick, 1000)
 </script>
 </body>
 </html>
