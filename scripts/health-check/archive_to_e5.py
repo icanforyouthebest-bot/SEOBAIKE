@@ -17,9 +17,10 @@ ONEDRIVE_FOLDER = "SEOBAIKE/healthcheck"
 E5_TARGET_USER  = os.environ.get("E5_TARGET_USER", "")
 
 # Azure Blob Storage fallback (用訂閱內的免費 Storage Account)
-AZURE_STORAGE_ACCOUNT    = os.environ.get("AZURE_STORAGE_ACCOUNT", "")
-AZURE_STORAGE_CONTAINER  = os.environ.get("AZURE_STORAGE_CONTAINER", "healthcheck")
-AZURE_STORAGE_SAS_TOKEN  = os.environ.get("AZURE_STORAGE_SAS_TOKEN", "")
+AZURE_STORAGE_ACCOUNT            = os.environ.get("AZURE_STORAGE_ACCOUNT", "seobaikestore")
+AZURE_STORAGE_CONTAINER          = os.environ.get("AZURE_STORAGE_CONTAINER", "healthcheck")
+AZURE_STORAGE_SAS_TOKEN          = os.environ.get("AZURE_STORAGE_SAS_TOKEN", "")
+AZURE_STORAGE_CONNECTION_STRING  = os.environ.get("AZURE_STORAGE_CONNECTION_STRING", "")
 
 
 def _get_token() -> str | None:
@@ -119,11 +120,33 @@ def _send_teams_notification(token: str, version_id: str, summary: dict) -> bool
 
 
 def _upload_to_azure_blob(filename: str, content: bytes, content_type: str = "application/json") -> bool:
-    """Azure Blob Storage fallback — 用 SAS token 上傳"""
-    if not AZURE_STORAGE_ACCOUNT or not AZURE_STORAGE_SAS_TOKEN:
+    """Azure Blob Storage — 支援連接字串（優先）或 SAS token"""
+    if not AZURE_STORAGE_ACCOUNT:
         return False
+
+    # 方法 1：連接字串（推薦，用 azure-storage-blob SDK）
+    if AZURE_STORAGE_CONNECTION_STRING:
+        try:
+            from azure.storage.blob import BlobServiceClient, ContentSettings
+            svc = BlobServiceClient.from_connection_string(AZURE_STORAGE_CONNECTION_STRING)
+            blob = svc.get_blob_client(container=AZURE_STORAGE_CONTAINER, blob=filename)
+            blob.upload_blob(
+                content, overwrite=True,
+                content_settings=ContentSettings(content_type=content_type)
+            )
+            return True
+        except ImportError:
+            print("  [Azure Blob] azure-storage-blob not installed, trying SAS fallback...")
+        except Exception as e:
+            print(f"  [Azure Blob] Connection string upload failed: {e}")
+            return False
+
+    # 方法 2：SAS token
+    if not AZURE_STORAGE_SAS_TOKEN:
+        return False
+    sas = AZURE_STORAGE_SAS_TOKEN.lstrip("?")
     url = (f"https://{AZURE_STORAGE_ACCOUNT}.blob.core.windows.net"
-           f"/{AZURE_STORAGE_CONTAINER}/{filename}?{AZURE_STORAGE_SAS_TOKEN}")
+           f"/{AZURE_STORAGE_CONTAINER}/{filename}?{sas}")
     try:
         r = requests.put(url, data=content, headers={
             "x-ms-blob-type": "BlockBlob",
