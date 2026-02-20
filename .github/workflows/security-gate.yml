@@ -166,13 +166,14 @@ jobs:
           supabase functions deploy payment-captured --project-ref vmyrivxxibqydccurxug
 
       - name: Deploy Workers
+        continue-on-error: true
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
         run: |
           cd workers
           npm ci
-          npx wrangler deploy
+          npx wrangler deploy || echo "Worker deploy failed (non-blocking)"
 
       - name: Post-deploy compliance verification
         env:
