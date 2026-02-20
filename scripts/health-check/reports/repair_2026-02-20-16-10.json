@@ -1,6 +1,6 @@
 {
   "version_id": "2026-02-20-16-10",
-  "timestamp": "2026-02-20T16:11:49.081514",
+  "timestamp": "2026-02-20T16:13:41.075945",
   "dry_run": false,
   "total_risks": 11,
   "repair_log": [
@@ -8,138 +8,34 @@
       "iteration": 0,
       "tool": "azure_run_cli",
       "input": {
-        "command": "az keyvault show --name ai-empire-vault-01",
-        "description": "Confirm network access settings for Key Vault 'ai-empire-vault-01' to verify AZ-003 risk details"
+        "command": "az keyvault show --name ai-empire-vault-01 --query networkAcls",
+        "description": "Verify network access settings for Key Vault 'ai-empire-vault-01' to confirm open network access risk AZ-003"
       },
       "result": {
         "success": false,
-        "error": "Verb 'keyvault' not in allowed read-only list: {'account', 'show', 'get', 'list', 'describe'}"
-      },
-      "ok": false
-    },
-    {
-      "iteration": 0,
-      "tool": "azure_run_cli",
-      "input": {
-        "command": "az keyvault show --name seobaike-vault",
-        "description": "Confirm network access settings for Key Vault 'seobaike-vault' to verify AZ-003 risk details"
-      },
-      "result": {
-        "success": false,
-        "error": "Verb 'keyvault' not in allowed read-only list: {'account', 'show', 'get', 'list', 'describe'}"
-      },
-      "ok": false
-    },
-    {
-      "iteration": 0,
-      "tool": "azure_run_cli",
-      "input": {
-        "command": "az cognitiveservices account show --name ai-empire-openai-australiaeast --resource-group ai-empire",
-        "description": "Confirm public network access for AI service 'ai-empire-openai-australiaeast' to verify AZ-004 risk details (assuming resource group 'ai-empire')"
-      },
-      "result": {
-        "success": false,
-        "error": "Verb 'cognitiveservices' not in allowed read-only list: {'account', 'show', 'get', 'list', 'describe'}"
-      },
-      "ok": false
-    },
-    {
-      "iteration": 0,
-      "tool": "azure_run_cli",
-      "input": {
-        "command": "az cognitiveservices account show --name ai-empire-openai-eastus --resource-group ai-empire",
-        "description": "Confirm public network access for AI service 'ai-empire-openai-eastus' to verify AZ-004 risk details (assuming resource group 'ai-empire')"
-      },
-      "result": {
-        "success": false,
-        "error": "Verb 'cognitiveservices' not in allowed read-only list: {'account', 'show', 'get', 'list', 'describe'}"
-      },
-      "ok": false
-    },
-    {
-      "iteration": 0,
-      "tool": "azure_run_cli",
-      "input": {
-        "command": "az cognitiveservices account show --name ai-empire-openai-japaneast --resource-group ai-empire",
-        "description": "Confirm public network access for AI service 'ai-empire-openai-japaneast' to verify AZ-004 risk details (assuming resource group 'ai-empire')"
-      },
-      "result": {
-        "success": false,
-        "error": "Verb 'cognitiveservices' not in allowed read-only list: {'account', 'show', 'get', 'list', 'describe'}"
-      },
-      "ok": false
-    },
-    {
-      "iteration": 0,
-      "tool": "azure_run_cli",
-      "input": {
-        "command": "az cognitiveservices account show --name ai-empire-openai-southeastasia --resource-group ai-empire",
-        "description": "Confirm public network access for AI service 'ai-empire-openai-southeastasia' to verify AZ-004 risk details (assuming resource group 'ai-empire')"
-      },
-      "result": {
-        "success": false,
-        "error": "Verb 'cognitiveservices' not in allowed read-only list: {'account', 'show', 'get', 'list', 'describe'}"
-      },
-      "ok": false
-    },
-    {
-      "iteration": 0,
-      "tool": "azure_run_cli",
-      "input": {
-        "command": "az cognitiveservices account show --name ai-empire-openai-swedencentral --resource-group ai-empire",
-        "description": "Confirm public network access for AI service 'ai-empire-openai-swedencentral' to verify AZ-004 risk details (assuming resource group 'ai-empire')"
-      },
-      "result": {
-        "success": false,
-        "error": "Verb 'cognitiveservices' not in allowed read-only list: {'account', 'show', 'get', 'list', 'describe'}"
-      },
-      "ok": false
-    },
-    {
-      "iteration": 0,
-      "tool": "azure_run_cli",
-      "input": {
-        "command": "az cognitiveservices account show --name ai-empire-openai-uksouth --resource-group ai-empire",
-        "description": "Confirm public network access for AI service 'ai-empire-openai-uksouth' to verify AZ-004 risk details (assuming resource group 'ai-empire')"
-      },
-      "result": {
-        "success": false,
-        "error": "Verb 'cognitiveservices' not in allowed read-only list: {'account', 'show', 'get', 'list', 'describe'}"
-      },
-      "ok": false
-    },
-    {
-      "iteration": 0,
-      "tool": "azure_run_cli",
-      "input": {
-        "command": "az cognitiveservices account show --name ai-empire-openai-westeurope --resource-group ai-empire",
-        "description": "Confirm public network access for AI service 'ai-empire-openai-westeurope' to verify AZ-004 risk details (assuming resource group 'ai-empire')"
-      },
-      "result": {
-        "success": false,
-        "error": "Verb 'cognitiveservices' not in allowed read-only list: {'account', 'show', 'get', 'list', 'describe'}"
-      },
-      "ok": false
-    },
-    {
-      "iteration": 0,
-      "tool": "azure_run_cli",
-      "input": {
-        "command": "az cognitiveservices account show --name ai-empire-openai-westus --resource-group ai-empire",
-        "description": "Confirm public network access for AI service 'ai-empire-openai-westus' to verify AZ-004 risk details (assuming resource group 'ai-empire')"
-      },
-      "result": {
-        "success": false,
-        "error": "Verb 'cognitiveservices' not in allowed read-only list: {'account', 'show', 'get', 'list', 'describe'}"
+        "error": "Verb 'keyvault' not in allowed read-only list: {'account', 'get', 'list', 'show', 'describe'}"
       },
       "ok": false
     },
     {
       "iteration": 1,
+      "tool": "azure_run_cli",
+      "input": {
+        "command": "az resource list --resource-type \"Microsoft.KeyVault/vaults\" --query \"[?name=='ai-empire-vault-01'].{name:name, networkAcls:properties.networkAcls}\"",
+        "description": "List Key Vault resources to verify network access settings for 'ai-empire-vault-01' regarding AZ-003 risk"
+      },
+      "result": {
+        "success": false,
+        "error": "Verb 'resource' not in allowed read-only list: {'account', 'get', 'list', 'show', 'describe'}"
+      },
+      "ok": false
+    },
+    {
+      "iteration": 2,
       "tool": "github_create_issue",
       "input": {
         "title": "High Risk: Key Vaults with Open Network Access (AZ-003)",
-        "body": "# AZ-003: Key Vaults with Open Network Access\\n\\n## Description\\nMultiple Key Vaults have been identified with open network access, posing a high security risk.\\n\\nAffected Resources:\\n- ai-empire-vault-01\\n- seobaike-vault\\n\\n## Recommended Action\\nRestrict network access to these Key Vaults by configuring private endpoints or firewall rules to allow only trusted IP ranges or VNet integration.\\n\\nPlease assign to Azure admin for manual remediation.",
+        "body": "# AZ-003: Key Vaults with Open Network Access\n\n**Level:** High\n\n**Affected Resources:**\n- ai-empire-vault-01\n- seobaike-vault\n\n**Description:** These Key Vaults have open network access, which poses a significant security risk by allowing unrestricted access.\n\n**Recommended Action:** Restrict network access to these Key Vaults, e.g., enable private endpoints or firewall rules to allow only trusted IPs/subnets.\n\n**Module:** Azure\n\nPlease assign to the Azure admin for manual remediation.",
         "labels": [
           "security",
           "high",
@@ -156,47 +52,330 @@
       "ok": false
     },
     {
-      "iteration": 1,
-      "tool": "github_create_issue",
+      "iteration": 3,
+      "tool": "mark_repair",
       "input": {
-        "title": "Medium Risk: AI Services with Public Network Access (AZ-004)",
-        "body": "# AZ-004: AI Services with Public Network Access\\n\\n## Description\\nSeveral Azure AI services (OpenAI instances) have public network access enabled, which is a medium security risk.\\n\\nAffected Resources:\\n- ai-empire-openai-australiaeast\\n- ai-empire-openai-eastus\\n- ai-empire-openai-japaneast\\n- ai-empire-openai-southeastasia\\n- ai-empire-openai-swedencentral\\n- ai-empire-openai-uksouth\\n- ai-empire-openai-westeurope\\n- ai-empire-openai-westus\\n\\n## Recommended Action\\nDisable public network access and configure private endpoints or VNet service endpoints for these AI services.\\n\\nPlease assign to Azure admin for manual remediation.",
-        "labels": [
-          "security",
-          "medium",
-          "azure",
-          "manual-fix"
-        ],
-        "issue_id": "AZ-004"
+        "issue_id": "AZ-003",
+        "desc": "Key Vault 'ai-empire-vault-01' has open network access",
+        "fix_command": "Manual remediation required: Restrict network access",
+        "status": "skipped",
+        "difficulty": "high",
+        "note": "Unable to automatically fix Azure resources; recommend manual intervention. GitHub issue creation failed due to permissions."
       },
       "result": {
-        "success": false,
-        "error": "{\"message\":\"Resource not accessible by integration\",\"documentation_url\":\"https://docs.github.com/rest/issues/issues#create-an-issue\",\"status\":\"403\"}",
-        "status_code": 403
+        "issue_id": "AZ-003",
+        "desc": "Key Vault 'ai-empire-vault-01' has open network access",
+        "fix_command": "Manual remediation required: Restrict network access",
+        "status": "skipped",
+        "difficulty": "high",
+        "note": "Unable to automatically fix Azure resources; recommend manual intervention. GitHub issue creation failed due to permissions.",
+        "updated_at": "2026-02-20T16:11:50.184357",
+        "found_at": "2026-02-20T16:11:50.184357"
       },
-      "ok": false
+      "ok": true
     },
     {
-      "iteration": 1,
-      "tool": "github_create_issue",
+      "iteration": 4,
+      "tool": "mark_repair",
       "input": {
-        "title": "High Risk: GitHub Repository is Public (GH-001)",
-        "body": "# GH-001: Repository is Public\\n\\n## Description\\nThe GitHub repository is set to public visibility, exposing source code and potentially sensitive information.\\n\\n## Recommended Action\\nChange the repository visibility to private. Review and remove any sensitive data if already exposed.\\n\\nPlease assign to GitHub admin for manual remediation.",
-        "labels": [
-          "security",
-          "high",
-          "github",
-          "manual-fix"
-        ],
-        "issue_id": "GH-001"
+        "issue_id": "AZ-003",
+        "desc": "Key Vault 'ai-empire-vault-01' has open network access",
+        "fix_command": "Manual remediation required: Restrict network access to trusted sources",
+        "status": "skipped",
+        "difficulty": "high",
+        "note": "Azure tools are read-only; cannot automate fix. GitHub issue creation failed due to permissions."
       },
       "result": {
-        "success": false,
-        "error": "{\"message\":\"Resource not accessible by integration\",\"documentation_url\":\"https://docs.github.com/rest/issues/issues#create-an-issue\",\"status\":\"403\"}",
-        "status_code": 403
+        "issue_id": "AZ-003",
+        "desc": "Key Vault 'ai-empire-vault-01' has open network access",
+        "fix_command": "Manual remediation required: Restrict network access to trusted sources",
+        "status": "skipped",
+        "difficulty": "high",
+        "note": "Azure tools are read-only; cannot automate fix. GitHub issue creation failed due to permissions.",
+        "updated_at": "2026-02-20T16:12:48.873112",
+        "found_at": "2026-02-20T16:11:50.184357"
       },
-      "ok": false
+      "ok": true
+    },
+    {
+      "iteration": 4,
+      "tool": "mark_repair",
+      "input": {
+        "issue_id": "AZ-003",
+        "desc": "Key Vault 'seobaike-vault' has open network access",
+        "fix_command": "Manual remediation required: Restrict network access to trusted sources",
+        "status": "skipped",
+        "difficulty": "high",
+        "note": "Azure tools are read-only; cannot automate fix. GitHub issue creation failed due to permissions."
+      },
+      "result": {
+        "issue_id": "AZ-003",
+        "desc": "Key Vault 'seobaike-vault' has open network access",
+        "fix_command": "Manual remediation required: Restrict network access to trusted sources",
+        "status": "skipped",
+        "difficulty": "high",
+        "note": "Azure tools are read-only; cannot automate fix. GitHub issue creation failed due to permissions.",
+        "updated_at": "2026-02-20T16:12:48.873353",
+        "found_at": "2026-02-20T16:11:50.184357"
+      },
+      "ok": true
+    },
+    {
+      "iteration": 4,
+      "tool": "mark_repair",
+      "input": {
+        "issue_id": "AZ-004",
+        "desc": "AI service 'ai-empire-openai-australiaeast' has public network access",
+        "fix_command": "Manual remediation required: Disable public network access or configure private endpoints",
+        "status": "skipped",
+        "difficulty": "medium",
+        "note": "Azure tools are read-only; cannot automate fix. GitHub issue creation failed due to permissions."
+      },
+      "result": {
+        "issue_id": "AZ-004",
+        "desc": "AI service 'ai-empire-openai-australiaeast' has public network access",
+        "fix_command": "Manual remediation required: Disable public network access or configure private endpoints",
+        "status": "skipped",
+        "difficulty": "medium",
+        "note": "Azure tools are read-only; cannot automate fix. GitHub issue creation failed due to permissions.",
+        "updated_at": "2026-02-20T16:12:48.873646",
+        "found_at": "2026-02-20T16:12:48.873646"
+      },
+      "ok": true
+    },
+    {
+      "iteration": 4,
+      "tool": "mark_repair",
+      "input": {
+        "issue_id": "AZ-004",
+        "desc": "AI service 'ai-empire-openai-eastus' has public network access",
+        "fix_command": "Manual remediation required: Disable public network access or configure private endpoints",
+        "status": "skipped",
+        "difficulty": "medium",
+        "note": "Azure tools are read-only; cannot automate fix. GitHub issue creation failed due to permissions."
+      },
+      "result": {
+        "issue_id": "AZ-004",
+        "desc": "AI service 'ai-empire-openai-eastus' has public network access",
+        "fix_command": "Manual remediation required: Disable public network access or configure private endpoints",
+        "status": "skipped",
+        "difficulty": "medium",
+        "note": "Azure tools are read-only; cannot automate fix. GitHub issue creation failed due to permissions.",
+        "updated_at": "2026-02-20T16:12:48.873876",
+        "found_at": "2026-02-20T16:12:48.873646"
+      },
+      "ok": true
+    },
+    {
+      "iteration": 4,
+      "tool": "mark_repair",
+      "input": {
+        "issue_id": "AZ-004",
+        "desc": "AI service 'ai-empire-openai-japaneast' has public network access",
+        "fix_command": "Manual remediation required: Disable public network access or configure private endpoints",
+        "status": "skipped",
+        "difficulty": "medium",
+        "note": "Azure tools are read-only; cannot automate fix. GitHub issue creation failed due to permissions."
+      },
+      "result": {
+        "issue_id": "AZ-004",
+        "desc": "AI service 'ai-empire-openai-japaneast' has public network access",
+        "fix_command": "Manual remediation required: Disable public network access or configure private endpoints",
+        "status": "skipped",
+        "difficulty": "medium",
+        "note": "Azure tools are read-only; cannot automate fix. GitHub issue creation failed due to permissions.",
+        "updated_at": "2026-02-20T16:12:48.874103",
+        "found_at": "2026-02-20T16:12:48.873646"
+      },
+      "ok": true
+    },
+    {
+      "iteration": 4,
+      "tool": "mark_repair",
+      "input": {
+        "issue_id": "AZ-004",
+        "desc": "AI service 'ai-empire-openai-southeastasia' has public network access",
+        "fix_command": "Manual remediation required: Disable public network access or configure private endpoints",
+        "status": "skipped",
+        "difficulty": "medium",
+        "note": "Azure tools are read-only; cannot automate fix. GitHub issue creation failed due to permissions."
+      },
+      "result": {
+        "issue_id": "AZ-004",
+        "desc": "AI service 'ai-empire-openai-southeastasia' has public network access",
+        "fix_command": "Manual remediation required: Disable public network access or configure private endpoints",
+        "status": "skipped",
+        "difficulty": "medium",
+        "note": "Azure tools are read-only; cannot automate fix. GitHub issue creation failed due to permissions.",
+        "updated_at": "2026-02-20T16:12:48.874319",
+        "found_at": "2026-02-20T16:12:48.873646"
+      },
+      "ok": true
+    },
+    {
+      "iteration": 4,
+      "tool": "mark_repair",
+      "input": {
+        "issue_id": "AZ-004",
+        "desc": "AI service 'ai-empire-openai-swedencentral' has public network access",
+        "fix_command": "Manual remediation required: Disable public network access or configure private endpoints",
+        "status": "skipped",
+        "difficulty": "medium",
+        "note": "Azure tools are read-only; cannot automate fix. GitHub issue creation failed due to permissions."
+      },
+      "result": {
+        "issue_id": "AZ-004",
+        "desc": "AI service 'ai-empire-openai-swedencentral' has public network access",
+        "fix_command": "Manual remediation required: Disable public network access or configure private endpoints",
+        "status": "skipped",
+        "difficulty": "medium",
+        "note": "Azure tools are read-only; cannot automate fix. GitHub issue creation failed due to permissions.",
+        "updated_at": "2026-02-20T16:12:48.874581",
+        "found_at": "2026-02-20T16:12:48.873646"
+      },
+      "ok": true
+    },
+    {
+      "iteration": 4,
+      "tool": "mark_repair",
+      "input": {
+        "issue_id": "AZ-004",
+        "desc": "AI service 'ai-empire-openai-uksouth' has public network access",
+        "fix_command": "Manual remediation required: Disable public network access or configure private endpoints",
+        "status": "skipped",
+        "difficulty": "medium",
+        "note": "Azure tools are read-only; cannot automate fix. GitHub issue creation failed due to permissions."
+      },
+      "result": {
+        "issue_id": "AZ-004",
+        "desc": "AI service 'ai-empire-openai-uksouth' has public network access",
+        "fix_command": "Manual remediation required: Disable public network access or configure private endpoints",
+        "status": "skipped",
+        "difficulty": "medium",
+        "note": "Azure tools are read-only; cannot automate fix. GitHub issue creation failed due to permissions.",
+        "updated_at": "2026-02-20T16:12:48.874855",
+        "found_at": "2026-02-20T16:12:48.873646"
+      },
+      "ok": true
+    },
+    {
+      "iteration": 4,
+      "tool": "mark_repair",
+      "input": {
+        "issue_id": "AZ-004",
+        "desc": "AI service 'ai-empire-openai-westeurope' has public network access",
+        "fix_command": "Manual remediation required: Disable public network access or configure private endpoints",
+        "status": "skipped",
+        "difficulty": "medium",
+        "note": "Azure tools are read-only; cannot automate fix. GitHub issue creation failed due to permissions."
+      },
+      "result": {
+        "issue_id": "AZ-004",
+        "desc": "AI service 'ai-empire-openai-westeurope' has public network access",
+        "fix_command": "Manual remediation required: Disable public network access or configure private endpoints",
+        "status": "skipped",
+        "difficulty": "medium",
+        "note": "Azure tools are read-only; cannot automate fix. GitHub issue creation failed due to permissions.",
+        "updated_at": "2026-02-20T16:12:48.875069",
+        "found_at": "2026-02-20T16:12:48.873646"
+      },
+      "ok": true
+    },
+    {
+      "iteration": 4,
+      "tool": "mark_repair",
+      "input": {
+        "issue_id": "AZ-004",
+        "desc": "AI service 'ai-empire-openai-westus' has public network access",
+        "fix_command": "Manual remediation required: Disable public network access or configure private endpoints",
+        "status": "skipped",
+        "difficulty": "medium",
+        "note": "Azure tools are read-only; cannot automate fix. GitHub issue creation failed due to permissions."
+      },
+      "result": {
+        "issue_id": "AZ-004",
+        "desc": "AI service 'ai-empire-openai-westus' has public network access",
+        "fix_command": "Manual remediation required: Disable public network access or configure private endpoints",
+        "status": "skipped",
+        "difficulty": "medium",
+        "note": "Azure tools are read-only; cannot automate fix. GitHub issue creation failed due to permissions.",
+        "updated_at": "2026-02-20T16:12:48.875291",
+        "found_at": "2026-02-20T16:12:48.873646"
+      },
+      "ok": true
+    },
+    {
+      "iteration": 4,
+      "tool": "mark_repair",
+      "input": {
+        "issue_id": "GH-001",
+        "desc": "GitHub Repo is Public (source code exposed)",
+        "fix_command": "Manual remediation required: Change repo visibility to private",
+        "status": "skipped",
+        "difficulty": "high",
+        "note": "No direct tool to modify GitHub repo settings; GitHub issue creation failed due to permissions."
+      },
+      "result": {
+        "issue_id": "GH-001",
+        "desc": "GitHub Repo is Public (source code exposed)",
+        "fix_command": "Manual remediation required: Change repo visibility to private",
+        "status": "skipped",
+        "difficulty": "high",
+        "note": "No direct tool to modify GitHub repo settings; GitHub issue creation failed due to permissions.",
+        "updated_at": "2026-02-20T16:12:48.875669",
+        "found_at": "2026-02-20T16:12:48.875669"
+      },
+      "ok": true
+    },
+    {
+      "iteration": 5,
+      "tool": "update_knowledge_base",
+      "input": {
+        "section": "Azure and GitHub Security Issues",
+        "content": "## Azure and GitHub Security Issues (Added 2026-02-20)\n\n### Overview\nThis section covers security risks identified in Azure and GitHub environments, based on recent scans. These issues could not be automatically remediated due to tool limitations (read-only access for Azure, permission issues for GitHub).\n\n### Problem: AZ-003 - Key Vault Open Network Access (High Severity)\n**Root Cause:** Key Vaults are configured with open network access, allowing connections from any IP, increasing exposure to unauthorized access.\n\n**Affected Resources:** ai-empire-vault-01, seobaike-vault\n\n**Repair Strategy:**\n- **Difficulty: High — Manual intervention required**\n- Use Azure Portal or CLI to update network rules: Enable firewall and restrict to trusted IPs/subnets or use private endpoints.\n- Example CLI: `az keyvault network-rule add --name <vault> --ip-address <trusted-ip>`\n\n**Validation:** Check `az keyvault show --name <vault> --query networkAcls`\n\n**Notes:** Automated fix not possible with current tools. Marked as skipped.\n\n### Problem: AZ-004 - AI Services Public Network Access (Medium Severity)\n**Root Cause:** Azure AI/OpenAI services have public network access enabled, potentially exposing APIs to the internet.\n\n**Affected Resources:** ai-empire-openai-australiaeast, ai-empire-openai-eastus, ai-empire-openai-japaneast, ai-empire-openai-southeastasia, ai-empire-openai-swedencentral, ai-empire-openai-uksouth, ai-empire-openai-westeurope, ai-empire-openai-westus\n\n**Repair Strategy:**\n- **Difficulty: Medium — Manual intervention required**\n- Disable public access and configure private endpoints or VNet integration.\n- Example CLI: `az cognitiveservices account update --name <account> --resource-group <rg> --public-network-access Disabled`\n\n**Validation:** Check `az cognitiveservices account show --name <account> --resource-group <rg> --query properties.publicNetworkAccess`\n\n**Notes:** Automated fix not possible. Marked as skipped.\n\n### Problem: GH-001 - Public GitHub Repository (High Severity)\n**Root Cause:** Repository is set to public visibility, exposing source code to anyone.\n\n**Repair Strategy:**\n- **Difficulty: High — Manual intervention required**\n- Change repository visibility to private via GitHub settings.\n\n**Validation:** Check repository settings on GitHub.\n\n**Notes:** No automated tools available for modification; issue creation failed due to permissions. Marked as skipped.\n\n### General Notes\n- Future improvements: Expand tool permissions for Azure (allow updates) and GitHub (enable issue creation and repo management).\n- All issues marked as skipped in repairs_tracker.json.",
+        "issue_ids": [
+          "AZ-003",
+          "AZ-004",
+          "GH-001"
+        ]
+      },
+      "result": {
+        "success": true,
+        "section": "Azure and GitHub Security Issues"
+      },
+      "ok": true
     }
   ],
-  "tracker": []
+  "tracker": [
+    {
+      "issue_id": "AZ-003",
+      "desc": "Key Vault 'seobaike-vault' has open network access",
+      "fix_command": "Manual remediation required: Restrict network access to trusted sources",
+      "status": "skipped",
+      "difficulty": "high",
+      "note": "Azure tools are read-only; cannot automate fix. GitHub issue creation failed due to permissions.",
+      "updated_at": "2026-02-20T16:12:48.873353",
+      "found_at": "2026-02-20T16:11:50.184357"
+    },
+    {
+      "issue_id": "AZ-004",
+      "desc": "AI service 'ai-empire-openai-westus' has public network access",
+      "fix_command": "Manual remediation required: Disable public network access or configure private endpoints",
+      "status": "skipped",
+      "difficulty": "medium",
+      "note": "Azure tools are read-only; cannot automate fix. GitHub issue creation failed due to permissions.",
+      "updated_at": "2026-02-20T16:12:48.875291",
+      "found_at": "2026-02-20T16:12:48.873646"
+    },
+    {
+      "issue_id": "GH-001",
+      "desc": "GitHub Repo is Public (source code exposed)",
+      "fix_command": "Manual remediation required: Change repo visibility to private",
+      "status": "skipped",
+      "difficulty": "high",
+      "note": "No direct tool to modify GitHub repo settings; GitHub issue creation failed due to permissions.",
+      "updated_at": "2026-02-20T16:12:48.875669",
+      "found_at": "2026-02-20T16:12:48.875669"
+    }
+  ]
 }
