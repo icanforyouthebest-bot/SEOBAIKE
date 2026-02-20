@@ -6,13 +6,16 @@ API: Microsoft Graph
 import os, json, requests
 from msal import ConfidentialClientApplication
 
-TENANT_ID = os.environ.get("TENANT_ID", "c1e1278e-c05c-4d00-a4c9-93fbbea01346")
-CLIENT_ID = os.environ.get("CLIENT_ID", "")
-CLIENT_SECRET = os.environ.get("CLIENT_SECRET", "")
-GRAPH_URL = "https://graph.microsoft.com/v1.0"
-
-# SharePoint / OneDrive 目標路徑
+TENANT_ID       = os.environ.get("TENANT_ID", "c1e1278e-c05c-4d00-a4c9-93fbbea01346")
+CLIENT_ID       = os.environ.get("CLIENT_ID", "")
+CLIENT_SECRET   = os.environ.get("CLIENT_SECRET", "")
+GRAPH_URL       = "https://graph.microsoft.com/v1.0"
 ONEDRIVE_FOLDER = "SEOBAIKE/healthcheck"
+
+# Azure Blob Storage fallback (用訂閱內的免費 Storage Account)
+AZURE_STORAGE_ACCOUNT    = os.environ.get("AZURE_STORAGE_ACCOUNT", "")
+AZURE_STORAGE_CONTAINER  = os.environ.get("AZURE_STORAGE_CONTAINER", "healthcheck")
+AZURE_STORAGE_SAS_TOKEN  = os.environ.get("AZURE_STORAGE_SAS_TOKEN", "")
 
 
 def _get_token() -> str | None:
@@ -103,16 +106,38 @@ def _send_teams_notification(token: str, version_id: str, summary: dict) -> bool
         return False
 
 
+def _upload_to_azure_blob(filename: str, content: bytes, content_type: str = "application/json") -> bool:
+    """Azure Blob Storage fallback — 用 SAS token 上傳"""
+    if not AZURE_STORAGE_ACCOUNT or not AZURE_STORAGE_SAS_TOKEN:
+        return False
+    url = (f"https://{AZURE_STORAGE_ACCOUNT}.blob.core.windows.net"
+           f"/{AZURE_STORAGE_CONTAINER}/{filename}?{AZURE_STORAGE_SAS_TOKEN}")
+    try:
+        r = requests.put(url, data=content, headers={
+            "x-ms-blob-type": "BlockBlob",
+            "Content-Type": content_type
+        }, timeout=15)
+        return r.ok
+    except Exception:
+        return False
+
+
 def archive_results(version_id: str, full_report: dict, report_md: str) -> dict:
     """
-    把 JSON + MD 報告上傳到 E5 OneDrive，並發 Teams 通知
+    把 JSON + MD 報告上傳到 E5 OneDrive（主）或 Azure Blob（備）
     """
     archive_result = {"json_uploaded": False, "md_uploaded": False, "teams_notified": False}
 
     token = _get_token()
     if not token:
-        archive_result["error"] = "E5 credentials not configured — skipped archival"
-        print("  [Archive] E5 credentials missing — 跳過歸檔")
+        # OneDrive 失敗 → 嘗試 Azure Blob Storage fallback
+        print("  [Archive] E5 credentials missing — 嘗試 Azure Blob fallback...")
+        json_bytes = json.dumps(full_report, ensure_ascii=False, indent=2).encode("utf-8")
+        blob_ok = _upload_to_azure_blob(f"healthcheck_{version_id}.json", json_bytes)
+        archive_result["json_uploaded"] = blob_ok
+        archive_result["method"] = "azure_blob" if blob_ok else "none"
+        archive_result["error"] = "E5 credentials not configured"
+        print(f"  [Archive] Azure Blob fallback: {'OK' if blob_ok else 'FAIL (no SAS token)'}")
         return archive_result
 
     # 上傳 JSON
@@ -120,6 +145,14 @@ def archive_results(version_id: str, full_report: dict, report_md: str) -> dict:
     json_ok = _upload_to_onedrive(token, f"healthcheck_{version_id}.json", json_bytes, "application/json")
     archive_result["json_uploaded"] = json_ok
     print(f"  [Archive] JSON {'OK' if json_ok else 'FAIL'} -> OneDrive/{ONEDRIVE_FOLDER}/healthcheck_{version_id}.json")
+
+    if not json_ok:
+        # OneDrive 上傳失敗 → 嘗試 Azure Blob fallback
+        blob_ok = _upload_to_azure_blob(f"healthcheck_{version_id}.json", json_bytes)
+        if blob_ok:
+            archive_result["json_uploaded"] = True
+            archive_result["method"] = "azure_blob"
+            print(f"  [Archive] JSON Azure Blob fallback: OK")
 
     # 上傳 MD
     md_bytes = report_md.encode("utf-8")
