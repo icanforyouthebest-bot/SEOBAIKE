@@ -18,6 +18,8 @@ __pycache__/
 *.pyc
 scripts/health-check/healthcheck_result_*.json
 scripts/health-check/healthcheck_report_*.md
+scripts/.device_code_cache.json
+*/.device_code_cache.json
 scripts/health-check/run_healthcheck.ps1
 scripts/health-check/repair_result_*.json
 scripts/health-check/repair_report_*.md
