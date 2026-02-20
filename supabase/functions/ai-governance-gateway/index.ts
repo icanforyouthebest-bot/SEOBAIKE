@@ -14,19 +14,21 @@ const corsHeaders = {
 }
 
 // ── AI Registry ──────────────────────────────────────────────
-const REGISTERED_AGENTS = new Set([
-  'claude-code',
-  'github-actions',
-  'azure-automation',
-  'supabase-edge',
-  'empire-self-heal',
-  'empire-governance',
-  'e5-automation',
-  'seobaike-deploy',
-  'seobaike-security-gate',
-  'mcp-agent',
-  'n8n-automation',
+// FALLBACK_AGENTS used when Supabase unavailable
+const FALLBACK_AGENTS = new Set([
+  'claude-code', 'github-actions', 'azure-automation', 'supabase-edge',
+  'empire-self-heal', 'empire-governance', 'e5-automation',
+  'seobaike-deploy', 'seobaike-security-gate', 'mcp-agent', 'n8n-automation',
 ])
+
+// Dynamic registry loader — switch agents via Supabase without code deploy
+async function getRegisteredAgents(supabase: ReturnType<typeof createClient>): Promise<Set<string>> {
+  try {
+    const { data } = await supabase.from('ai_agent_registry').select('agent_name').eq('status', 'active')
+    if (data && data.length > 0) return new Set(data.map((r: Record<string, string>) => r.agent_name))
+  } catch { /* use fallback */ }
+  return FALLBACK_AGENTS
+}
 
 // ── Allowed Actions (Whitelist) ──────────────────────────────
 const ALLOWED_ACTIONS = new Set([
@@ -115,6 +117,7 @@ Deno.serve(async (req) => {
   // ══════════════════════════════════════════════════════════
   // GATE 1: AI Registry Check
   // ══════════════════════════════════════════════════════════
+  const REGISTERED_AGENTS = await getRegisteredAgents(supabase)
   if (!REGISTERED_AGENTS.has(aiAgent)) {
     return block(`AI agent '${aiAgent}' is NOT registered. Register in empire-ops AI_GOVERNANCE_FRAMEWORK.md first.`)
   }
