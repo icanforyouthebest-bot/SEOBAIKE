@@ -1,0 +1,29 @@
+{
+  "version_id": "2026-02-20-02-50",
+  "timestamp": "2026-02-20T02:50:14.928897",
+  "dry_run": false,
+  "total_risks": 2,
+  "repair_log": [],
+  "tracker": [
+    {
+      "issue_id": "GH-001",
+      "desc": "Repo 為 Public（原始碼公開）",
+      "fix_command": "manual_review_required",
+      "status": "pending",
+      "difficulty": "high",
+      "note": "",
+      "updated_at": "2026-02-20T02:50:14.928476",
+      "found_at": "2026-02-20T02:50:14.928476"
+    },
+    {
+      "issue_id": "GH-003",
+      "desc": "最近 3 個 Actions 執行失敗",
+      "fix_command": "manual_review_required",
+      "status": "pending",
+      "difficulty": "medium",
+      "note": "",
+      "updated_at": "2026-02-20T02:50:14.928679",
+      "found_at": "2026-02-20T02:50:14.928679"
+    }
+  ]
+}
