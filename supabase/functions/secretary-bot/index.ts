@@ -194,7 +194,9 @@ async function qSEOBAIKE() {
   for (const ep of eps) {
     try {
       const res = await fetch(ep.url, { signal: AbortSignal.timeout(5000) })
-      results.push({ name: ep.name, status: res.ok ? 'online' : 'error', code: res.status })
+      // 401/403 = protected but online (requires auth headers — expected)
+      const isOnline = res.ok || res.status === 401 || res.status === 403
+      results.push({ name: ep.name, status: isOnline ? 'online' : 'error', code: res.status })
     } catch {
       results.push({ name: ep.name, status: 'offline' })
     }
