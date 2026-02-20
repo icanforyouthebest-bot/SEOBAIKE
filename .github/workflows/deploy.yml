@@ -27,10 +27,26 @@ jobs:
         id: cf-refresh
         env:
           CLOUDFLARE_OAUTH_REFRESH: ${{ secrets.CLOUDFLARE_OAUTH_REFRESH }}
-          REPO_PAT: ${{ secrets.REPO_PAT }}
+          GH_TOKEN: ${{ secrets.REPO_PAT }}
         run: |
-          pip install pynacl --quiet
-          python3 scripts/cf-token-refresh.py
+          echo "Refreshing CF OAuth token..."
+          RESP=$(curl -sf -X POST https://dash.cloudflare.com/oauth2/token \
+            --data-urlencode "grant_type=refresh_token" \
+            --data-urlencode "refresh_token=${CLOUDFLARE_OAUTH_REFRESH}" \
+            --data-urlencode "client_id=54d11594-84e4-41aa-b438-e81b8fa78ee7" \
+            --data-urlencode "client_secret=")
+          NEW_TOKEN=$(echo "$RESP" | jq -r '.access_token // ""')
+          NEW_REFRESH=$(echo "$RESP" | jq -r '.refresh_token // ""')
+          if [ -z "$NEW_TOKEN" ]; then
+            echo "ERROR: Token refresh failed: $RESP"
+            exit 1
+          fi
+          echo "CF token refreshed successfully"
+          echo "CF_FRESH_TOKEN=$NEW_TOKEN" >> $GITHUB_ENV
+          if [ -n "$NEW_REFRESH" ]; then
+            echo "$NEW_REFRESH" | gh secret set CLOUDFLARE_OAUTH_REFRESH --repo "$GITHUB_REPOSITORY"
+            echo "Refresh token secret updated"
+          fi
 
       - name: Deploy Worker (wrangler)
         working-directory: workers
