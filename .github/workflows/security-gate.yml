@@ -168,6 +168,7 @@ jobs:
           supabase functions deploy mcp-register --project-ref vmyrivxxibqydccurxug
           supabase functions deploy marketplace-api --project-ref vmyrivxxibqydccurxug
           supabase functions deploy commission-api --project-ref vmyrivxxibqydccurxug
+          supabase functions deploy ai-governance-gateway --project-ref vmyrivxxibqydccurxug
 
       - name: Deploy Workers
         continue-on-error: true
