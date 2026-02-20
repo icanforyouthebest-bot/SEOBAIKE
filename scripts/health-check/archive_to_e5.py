@@ -11,6 +11,10 @@ CLIENT_ID       = os.environ.get("CLIENT_ID", "")
 CLIENT_SECRET   = os.environ.get("CLIENT_SECRET", "")
 GRAPH_URL       = "https://graph.microsoft.com/v1.0"
 ONEDRIVE_FOLDER = "SEOBAIKE/healthcheck"
+# Service principal target user — set to tenant admin UPN, e.g. admin@aiempire.onmicrosoft.com
+# Required when using client_credentials flow (E5-Automation app), because /me/drive is invalid
+# for service principals; must use /users/{upn-or-id}/drive instead.
+E5_TARGET_USER  = os.environ.get("E5_TARGET_USER", "")
 
 # Azure Blob Storage fallback (用訂閱內的免費 Storage Account)
 AZURE_STORAGE_ACCOUNT    = os.environ.get("AZURE_STORAGE_ACCOUNT", "")
@@ -31,9 +35,17 @@ def _get_token() -> str | None:
 
 
 def _upload_to_onedrive(token: str, filename: str, content: bytes, content_type: str = "application/json") -> bool:
-    """上傳檔案到 OneDrive (Drive root)"""
-    url = f"{GRAPH_URL}/me/drive/root:/{ONEDRIVE_FOLDER}/{filename}:/content"
-    # 嘗試 /drive/root 找 service account
+    """上傳檔案到 OneDrive (Drive root)
+
+    Service principal (client_credentials) 必須用 /users/{upn}/drive 而非 /me/drive。
+    E5_TARGET_USER 設為租戶管理員的 UPN（如 admin@aiempire.onmicrosoft.com）。
+    """
+    if E5_TARGET_USER:
+        # Service principal path: requires Files.ReadWrite.All (Application permission)
+        url = f"{GRAPH_URL}/users/{E5_TARGET_USER}/drive/root:/{ONEDRIVE_FOLDER}/{filename}:/content"
+    else:
+        # Delegated flow fallback (only works with user tokens, not service principals)
+        url = f"{GRAPH_URL}/me/drive/root:/{ONEDRIVE_FOLDER}/{filename}:/content"
     r = requests.put(
         url,
         headers={
