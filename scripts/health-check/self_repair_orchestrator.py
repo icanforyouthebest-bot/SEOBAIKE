@@ -672,14 +672,28 @@ dry_run: {DRY_RUN}"""
     repair_log = []
     max_iterations = 30
 
+    # Try grok-3 first, fall back to grok-2 or grok-beta
+    model_candidates = ["grok-3", "grok-2-1212", "grok-beta"]
+
     for iteration in range(max_iterations):
-        response = client.chat.completions.create(
-            model="grok-3",
-            messages=messages,
-            tools=tools_oai,
-            tool_choice="auto",
-            max_tokens=8192
-        )
+        last_err = None
+        response = None
+        for model_name in model_candidates:
+            try:
+                response = client.chat.completions.create(
+                    model=model_name,
+                    messages=messages,
+                    tools=tools_oai,
+                    tool_choice="auto",
+                    max_tokens=8192
+                )
+                break  # success
+            except Exception as e:
+                last_err = e
+                continue
+        if response is None:
+            print(f"  [xAI] All models failed: {last_err} — falling back to rule-based")
+            return _run_rule_based_repair(risks)
 
         msg = response.choices[0].message
 
@@ -730,7 +744,11 @@ def _run_ai_repair(report: dict, risks: list) -> list:
 
     if AI_ENGINE == "xai":
         print("  [AI Repair] Using xAI Grok API...")
-        return _run_xai_repair(report, risks)
+        try:
+            return _run_xai_repair(report, risks)
+        except Exception as e:
+            print(f"  [xAI] Fatal error: {e} — falling back to rule-based")
+            return _run_rule_based_repair(risks)
 
     # Anthropic fallback
     print("  [AI Repair] Using Anthropic API...")
