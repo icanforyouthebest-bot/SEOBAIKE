@@ -1,0 +1,507 @@
+{
+  "version_id": "2026-02-20-16-57",
+  "timestamp": "2026-02-20T16:57:25.659727",
+  "modules": {
+    "azure": {
+      "status": "ok",
+      "resources": [
+        {
+          "name": "cs11003200587968edc",
+          "type": "microsoft.storage/storageaccounts",
+          "resourceGroup": "cloud-shell-storage-southeastasia",
+          "location": "southeastasia"
+        },
+        {
+          "name": "ai-empire-apim",
+          "type": "microsoft.apimanagement/service",
+          "resourceGroup": "ai-empire-rg",
+          "location": "eastasia"
+        },
+        {
+          "name": "seobaike-ai-router",
+          "type": "microsoft.web/sites",
+          "resourceGroup": "seobaike-rg",
+          "location": "eastasia"
+        },
+        {
+          "name": "grok-takeover-pipeline",
+          "type": "microsoft.insights/components",
+          "resourceGroup": "grok-takeover-rg",
+          "location": "eastasia"
+        },
+        {
+          "name": "ai-empire-openai-westeurope",
+          "type": "microsoft.cognitiveservices/accounts",
+          "resourceGroup": "ai-empire-rg",
+          "location": "westeurope"
+        },
+        {
+          "name": "ai-empire-logs",
+          "type": "microsoft.operationalinsights/workspaces",
+          "resourceGroup": "ai-empire-rg",
+          "location": "eastasia"
+        },
+        {
+          "name": "seobaike-vault",
+          "type": "microsoft.keyvault/vaults",
+          "resourceGroup": "seobaike-rg",
+          "location": "japaneast"
+        },
+        {
+          "name": "ai-empire-openai-australiaeast",
+          "type": "microsoft.cognitiveservices/accounts",
+          "resourceGroup": "ai-empire-rg",
+          "location": "australiaeast"
+        },
+        {
+          "name": "seobaike-plan-eastasia",
+          "type": "microsoft.web/serverfarms",
+          "resourceGroup": "seobaike-rg",
+          "location": "eastasia"
+        },
+        {
+          "name": "EastAsiaLinuxDynamicPlan",
+          "type": "microsoft.web/serverfarms",
+          "resourceGroup": "grok-takeover-rg",
+          "location": "eastasia"
+        },
+        {
+          "name": "ai-empire-openai-swedencentral",
+          "type": "microsoft.cognitiveservices/accounts",
+          "resourceGroup": "ai-empire-rg",
+          "location": "swedencentral"
+        },
+        {
+          "name": "ai-empire-openai-uksouth",
+          "type": "microsoft.cognitiveservices/accounts",
+          "resourceGroup": "ai-empire-rg",
+          "location": "uksouth"
+        },
+        {
+          "name": "seobaike-l1l4-pipeline",
+          "type": "microsoft.web/sites",
+          "resourceGroup": "seobaike-rg",
+          "location": "eastasia"
+        },
+        {
+          "name": "ai-empire-appinsights",
+          "type": "microsoft.insights/components",
+          "resourceGroup": "ai-empire-rg",
+          "location": "eastasia"
+        },
+        {
+          "name": "ai-empire-openai-japaneast",
+          "type": "microsoft.cognitiveservices/accounts",
+          "resourceGroup": "ai-empire-rg",
+          "location": "japaneast"
+        },
+        {
+          "name": "aiempirewaf",
+          "type": "microsoft.network/frontdoorwebapplicationfirewallpolicies",
+          "resourceGroup": "ai-empire-rg",
+          "location": "global"
+        },
+        {
+          "name": "seobaikestorage",
+          "type": "microsoft.storage/storageaccounts",
+          "resourceGroup": "seobaike-rg",
+          "location": "japaneast"
+        },
+        {
+          "name": "keyvault-secret-expiry-alert",
+          "type": "microsoft.insights/scheduledqueryrules",
+          "resourceGroup": "ai-empire-rg",
+          "location": "eastasia"
+        },
+        {
+          "name": "grok-takeover-app",
+          "type": "microsoft.insights/components",
+          "resourceGroup": "grok-takeover-rg",
+          "location": "eastasia"
+        },
+        {
+          "name": "grok-takeover-app",
+          "type": "microsoft.web/sites",
+          "resourceGroup": "grok-takeover-rg",
+          "location": "eastasia"
+        },
+        {
+          "name": "seobaike-apim",
+          "type": "microsoft.apimanagement/service",
+          "resourceGroup": "seobaike-rg",
+          "location": "japaneast"
+        },
+        {
+          "name": "Application Insights Smart Detection",
+          "type": "microsoft.insights/actiongroups",
+          "resourceGroup": "grok-takeover-rg",
+          "location": "global"
+        },
+        {
+          "name": "ai-empire-openai-westus",
+          "type": "microsoft.cognitiveservices/accounts",
+          "resourceGroup": "ai-empire-rg",
+          "location": "westus"
+        },
+        {
+          "name": "ai-empire-openai-southeastasia",
+          "type": "microsoft.cognitiveservices/accounts",
+          "resourceGroup": "ai-empire-rg",
+          "location": "southeastasia"
+        },
+        {
+          "name": "ai-empire-ep",
+          "type": "microsoft.cdn/profiles/afdendpoints",
+          "resourceGroup": "ai-empire-rg",
+          "location": "global"
+        },
+        {
+          "name": "keyvault-alerts-ag",
+          "type": "microsoft.insights/actiongroups",
+          "resourceGroup": "ai-empire-rg",
+          "location": "global"
+        },
+        {
+          "name": "grok-takeover-pipeline",
+          "type": "microsoft.web/sites",
+          "resourceGroup": "grok-takeover-rg",
+          "location": "eastasia"
+        },
+        {
+          "name": "ai-empire-dashboard",
+          "type": "microsoft.portal/dashboards",
+          "resourceGroup": "ai-empire-rg",
+          "location": "eastasia"
+        },
+        {
+          "name": "ai-empire-vault-01",
+          "type": "microsoft.keyvault/vaults",
+          "resourceGroup": "ai-empire-rg",
+          "location": "eastasia"
+        },
+        {
+          "name": "ai-agents-identity",
+          "type": "microsoft.managedidentity/userassignedidentities",
+          "resourceGroup": "ai-empire-rg",
+          "location": "eastasia"
+        },
+        {
+          "name": "groktakeoverstorage",
+          "type": "microsoft.storage/storageaccounts",
+          "resourceGroup": "grok-takeover-rg",
+          "location": "eastasia"
+        },
+        {
+          "name": "DefaultWorkspace-fca96658-74df-4d3e-9212-aade3e98ca1f-EA",
+          "type": "microsoft.operationalinsights/workspaces",
+          "resourceGroup": "defaultresourcegroup-ea",
+          "location": "eastasia"
+        },
+        {
+          "name": "ai-empire-frontdoor",
+          "type": "microsoft.cdn/profiles",
+          "resourceGroup": "ai-empire-rg",
+          "location": "global"
+        },
+        {
+          "name": "ai-empire-openai-eastus",
+          "type": "microsoft.cognitiveservices/accounts",
+          "resourceGroup": "ai-empire-rg",
+          "location": "eastus"
+        },
+        {
+          "name": "ai-empire-cosmos",
+          "type": "microsoft.documentdb/databaseaccounts",
+          "resourceGroup": "ai-empire-rg",
+          "location": "eastasia"
+        }
+      ],
+      "security": [],
+      "ai_services": [
+        {
+          "name": "ai-empire-openai-australiaeast",
+          "type": "microsoft.cognitiveservices/accounts",
+          "location": "australiaeast",
+          "properties_publicNetworkAccess": "Enabled"
+        },
+        {
+          "name": "ai-empire-openai-eastus",
+          "type": "microsoft.cognitiveservices/accounts",
+          "location": "eastus",
+          "properties_publicNetworkAccess": "Enabled"
+        },
+        {
+          "name": "ai-empire-openai-japaneast",
+          "type": "microsoft.cognitiveservices/accounts",
+          "location": "japaneast",
+          "properties_publicNetworkAccess": "Enabled"
+        },
+        {
+          "name": "ai-empire-openai-southeastasia",
+          "type": "microsoft.cognitiveservices/accounts",
+          "location": "southeastasia",
+          "properties_publicNetworkAccess": "Enabled"
+        },
+        {
+          "name": "ai-empire-openai-swedencentral",
+          "type": "microsoft.cognitiveservices/accounts",
+          "location": "swedencentral",
+          "properties_publicNetworkAccess": "Enabled"
+        },
+        {
+          "name": "ai-empire-openai-uksouth",
+          "type": "microsoft.cognitiveservices/accounts",
+          "location": "uksouth",
+          "properties_publicNetworkAccess": "Enabled"
+        },
+        {
+          "name": "ai-empire-openai-westeurope",
+          "type": "microsoft.cognitiveservices/accounts",
+          "location": "westeurope",
+          "properties_publicNetworkAccess": "Enabled"
+        },
+        {
+          "name": "ai-empire-openai-westus",
+          "type": "microsoft.cognitiveservices/accounts",
+          "location": "westus",
+          "properties_publicNetworkAccess": "Enabled"
+        }
+      ],
+      "risks": [
+        {
+          "id": "AZ-003",
+          "level": "high",
+          "desc": "Key Vault 'ai-empire-vault-01' has open network access",
+          "module": "azure"
+        },
+        {
+          "id": "AZ-003",
+          "level": "high",
+          "desc": "Key Vault 'seobaike-vault' has open network access",
+          "module": "azure"
+        },
+        {
+          "id": "AZ-004",
+          "level": "medium",
+          "desc": "AI service 'ai-empire-openai-australiaeast' has public network access",
+          "module": "azure"
+        },
+        {
+          "id": "AZ-004",
+          "level": "medium",
+          "desc": "AI service 'ai-empire-openai-eastus' has public network access",
+          "module": "azure"
+        },
+        {
+          "id": "AZ-004",
+          "level": "medium",
+          "desc": "AI service 'ai-empire-openai-japaneast' has public network access",
+          "module": "azure"
+        },
+        {
+          "id": "AZ-004",
+          "level": "medium",
+          "desc": "AI service 'ai-empire-openai-southeastasia' has public network access",
+          "module": "azure"
+        },
+        {
+          "id": "AZ-004",
+          "level": "medium",
+          "desc": "AI service 'ai-empire-openai-swedencentral' has public network access",
+          "module": "azure"
+        },
+        {
+          "id": "AZ-004",
+          "level": "medium",
+          "desc": "AI service 'ai-empire-openai-uksouth' has public network access",
+          "module": "azure"
+        },
+        {
+          "id": "AZ-004",
+          "level": "medium",
+          "desc": "AI service 'ai-empire-openai-westeurope' has public network access",
+          "module": "azure"
+        },
+        {
+          "id": "AZ-004",
+          "level": "medium",
+          "desc": "AI service 'ai-empire-openai-westus' has public network access",
+          "module": "azure"
+        }
+      ],
+      "resources_count": 35,
+      "ai_services_count": 8
+    },
+    "entra_e5": {
+      "status": "ok",
+      "users": [],
+      "security": {},
+      "sharing": {},
+      "risks": []
+    },
+    "cloudflare": {
+      "status": "ok",
+      "workers": [],
+      "dns": [],
+      "security": {},
+      "risks": []
+    },
+    "supabase": {
+      "status": "ok",
+      "functions": [],
+      "tables": [
+        "",
+        "sop_notifications",
+        "system_config_lock",
+        "constraint_paths",
+        "configs",
+        "system_alerts",
+        "email_logs",
+        "mcp_subscriptions",
+        "user_shadow_pilot_config",
+        "billing_invoices",
+        "creator_profiles",
+        "payments",
+        "aml_rules",
+        "ai_cache",
+        "push_subscriptions",
+        "platform_connectors",
+        "module_executions",
+        "ai_providers",
+        "sensitive_word_logs",
+        "neural_sync_stream"
+      ],
+      "security": {},
+      "risks": [],
+      "db_status": "connected",
+      "tables_count": 354
+    },
+    "github": {
+      "status": "ok",
+      "repo": {
+        "name": "SEOBAIKE",
+        "private": false,
+        "default_branch": "master",
+        "open_issues": 0
+      },
+      "actions": [],
+      "secrets": {},
+      "risks": [
+        {
+          "id": "GH-001",
+          "level": "high",
+          "desc": "Repo 為 Public（原始碼公開）",
+          "module": "github"
+        },
+        {
+          "id": "GH-003",
+          "level": "medium",
+          "desc": "最近 2 個 Actions 執行失敗",
+          "module": "github"
+        }
+      ],
+      "actions_recent_count": 10,
+      "last_action": {
+        "name": "AI Empire — Full Deploy Pipeline",
+        "status": "in_progress",
+        "conclusion": null,
+        "created_at": "2026-02-20T16:55:31Z"
+      },
+      "workflows": [
+        "AI Empire — Full Deploy Pipeline",
+        "Fix Azure RBAC — Assign Reader Role to SP",
+        "Security Gate",
+        "Sync CLIENT_SECRET to e5-automation",
+        "Sync Secrets to empire-ops"
+      ],
+      "workflows_count": 5
+    }
+  },
+  "summary": {
+    "total_risks": 12,
+    "high": [
+      {
+        "id": "AZ-003",
+        "level": "high",
+        "desc": "Key Vault 'ai-empire-vault-01' has open network access",
+        "module": "azure"
+      },
+      {
+        "id": "AZ-003",
+        "level": "high",
+        "desc": "Key Vault 'seobaike-vault' has open network access",
+        "module": "azure"
+      },
+      {
+        "id": "GH-001",
+        "level": "high",
+        "desc": "Repo 為 Public（原始碼公開）",
+        "module": "github"
+      }
+    ],
+    "medium": [
+      {
+        "id": "AZ-004",
+        "level": "medium",
+        "desc": "AI service 'ai-empire-openai-australiaeast' has public network access",
+        "module": "azure"
+      },
+      {
+        "id": "AZ-004",
+        "level": "medium",
+        "desc": "AI service 'ai-empire-openai-eastus' has public network access",
+        "module": "azure"
+      },
+      {
+        "id": "AZ-004",
+        "level": "medium",
+        "desc": "AI service 'ai-empire-openai-japaneast' has public network access",
+        "module": "azure"
+      },
+      {
+        "id": "AZ-004",
+        "level": "medium",
+        "desc": "AI service 'ai-empire-openai-southeastasia' has public network access",
+        "module": "azure"
+      },
+      {
+        "id": "AZ-004",
+        "level": "medium",
+        "desc": "AI service 'ai-empire-openai-swedencentral' has public network access",
+        "module": "azure"
+      },
+      {
+        "id": "AZ-004",
+        "level": "medium",
+        "desc": "AI service 'ai-empire-openai-uksouth' has public network access",
+        "module": "azure"
+      },
+      {
+        "id": "AZ-004",
+        "level": "medium",
+        "desc": "AI service 'ai-empire-openai-westeurope' has public network access",
+        "module": "azure"
+      },
+      {
+        "id": "AZ-004",
+        "level": "medium",
+        "desc": "AI service 'ai-empire-openai-westus' has public network access",
+        "module": "azure"
+      },
+      {
+        "id": "GH-003",
+        "level": "medium",
+        "desc": "最近 2 個 Actions 執行失敗",
+        "module": "github"
+      }
+    ],
+    "low": [],
+    "modules_checked": [
+      "azure",
+      "entra_e5",
+      "cloudflare",
+      "supabase",
+      "github"
+    ]
+  }
+}
