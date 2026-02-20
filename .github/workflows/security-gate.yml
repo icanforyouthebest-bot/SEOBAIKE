@@ -172,7 +172,7 @@ jobs:
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
         run: |
           cd workers
-          npm ci --legacy-peer-deps
+          npm install --legacy-peer-deps
           npx wrangler@4 deploy --config wrangler.toml 2>&1 || echo "Worker deploy failed (non-blocking)"
 
       - name: Post-deploy compliance verification
