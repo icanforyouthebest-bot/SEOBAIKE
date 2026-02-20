@@ -1,0 +1,127 @@
+{
+  "version_id": "2026-02-20-03-52",
+  "timestamp": "2026-02-20T03:53:00.948851",
+  "modules": {
+    "azure": {
+      "status": "ok",
+      "resources": [],
+      "security": [],
+      "ai_services": [],
+      "risks": [],
+      "resources_count": 0,
+      "ai_services_count": 0
+    },
+    "entra_e5": {
+      "status": "ok",
+      "users": [],
+      "security": {},
+      "sharing": {},
+      "risks": []
+    },
+    "cloudflare": {
+      "status": "ok",
+      "workers": [
+        "ai-empire-key-monitor",
+        "seobaike-remote-control"
+      ],
+      "dns": [],
+      "security": {},
+      "risks": [],
+      "workers_count": 2
+    },
+    "supabase": {
+      "status": "ok",
+      "functions": [],
+      "tables": [
+        "",
+        "sop_notifications",
+        "system_config_lock",
+        "constraint_paths",
+        "configs",
+        "system_alerts",
+        "email_logs",
+        "mcp_subscriptions",
+        "user_shadow_pilot_config",
+        "billing_invoices",
+        "creator_profiles",
+        "payments",
+        "aml_rules",
+        "ai_cache",
+        "push_subscriptions",
+        "platform_connectors",
+        "module_executions",
+        "ai_providers",
+        "sensitive_word_logs",
+        "neural_sync_stream"
+      ],
+      "security": {},
+      "risks": [],
+      "db_status": "connected",
+      "tables_count": 340
+    },
+    "github": {
+      "status": "ok",
+      "repo": {
+        "name": "SEOBAIKE",
+        "private": false,
+        "default_branch": "master",
+        "open_issues": 1
+      },
+      "actions": [],
+      "secrets": {},
+      "risks": [
+        {
+          "id": "GH-001",
+          "level": "high",
+          "desc": "Repo 為 Public（原始碼公開）",
+          "module": "github"
+        },
+        {
+          "id": "GH-003",
+          "level": "medium",
+          "desc": "最近 3 個 Actions 執行失敗",
+          "module": "github"
+        }
+      ],
+      "actions_recent_count": 10,
+      "last_action": {
+        "name": "Security Gate",
+        "status": "in_progress",
+        "conclusion": null,
+        "created_at": "2026-02-20T03:51:50Z"
+      },
+      "workflows": [
+        "AI Empire — Full Deploy Pipeline",
+        "Security Gate"
+      ],
+      "workflows_count": 2
+    }
+  },
+  "summary": {
+    "total_risks": 2,
+    "high": [
+      {
+        "id": "GH-001",
+        "level": "high",
+        "desc": "Repo 為 Public（原始碼公開）",
+        "module": "github"
+      }
+    ],
+    "medium": [
+      {
+        "id": "GH-003",
+        "level": "medium",
+        "desc": "最近 3 個 Actions 執行失敗",
+        "module": "github"
+      }
+    ],
+    "low": [],
+    "modules_checked": [
+      "azure",
+      "entra_e5",
+      "cloudflare",
+      "supabase",
+      "github"
+    ]
+  }
+}
