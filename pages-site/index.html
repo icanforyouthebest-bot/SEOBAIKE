@@ -404,9 +404,141 @@ footer::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;back
   .footer-inner{grid-template-columns:1fr}
   .hero-title{letter-spacing:-1px}
 }
+
+/* ── 小白秘書 CHAT WIDGET ── */
+#secretary-btn{
+  position:fixed;bottom:28px;right:28px;z-index:9998;
+  width:58px;height:58px;border-radius:50%;
+  background:linear-gradient(135deg,rgba(100,50,255,.9),rgba(0,200,255,.8));
+  border:1px solid rgba(130,80,255,.6);
+  box-shadow:0 0 24px rgba(100,50,255,.5),0 4px 16px rgba(0,0,0,.4);
+  cursor:pointer;display:flex;align-items:center;justify-content:center;
+  font-size:22px;transition:all .25s;
+  animation:secBtnPulse 3s ease-in-out infinite
+}
+#secretary-btn:hover{transform:scale(1.1);box-shadow:0 0 40px rgba(100,50,255,.8)}
+@keyframes secBtnPulse{0%,100%{box-shadow:0 0 24px rgba(100,50,255,.5),0 4px 16px rgba(0,0,0,.4)}50%{box-shadow:0 0 36px rgba(0,200,255,.7),0 4px 16px rgba(0,0,0,.4)}}
+#secretary-label{
+  position:fixed;bottom:38px;right:96px;z-index:9998;
+  font-family:'Share Tech Mono',monospace;font-size:10px;
+  color:var(--g);background:rgba(5,5,16,.9);
+  border:1px solid rgba(0,255,170,.2);border-radius:8px;
+  padding:6px 12px;letter-spacing:2px;pointer-events:none;
+  white-space:nowrap;opacity:0;transition:opacity .25s
+}
+#secretary-btn:hover + #secretary-label{opacity:1}
+#secretary-panel{
+  position:fixed;bottom:100px;right:28px;z-index:9997;
+  width:340px;height:490px;
+  background:rgba(5,5,18,.97);
+  border:1px solid rgba(120,80,255,.3);border-radius:16px;
+  box-shadow:0 0 48px rgba(100,50,255,.25),0 20px 60px rgba(0,0,0,.7);
+  display:flex;flex-direction:column;
+  backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);
+  transform:scale(.95) translateY(12px);opacity:0;
+  transition:all .28s cubic-bezier(.34,1.56,.64,1);
+  pointer-events:none
+}
+#secretary-panel.open{transform:scale(1) translateY(0);opacity:1;pointer-events:auto}
+.sec-panel-header{
+  display:flex;align-items:center;gap:10px;
+  padding:14px 16px;
+  border-bottom:1px solid rgba(120,80,255,.15);
+  background:linear-gradient(135deg,rgba(100,50,255,.1),rgba(0,200,255,.06));
+  border-radius:16px 16px 0 0;flex-shrink:0
+}
+.sec-avatar{
+  width:36px;height:36px;border-radius:50%;
+  background:linear-gradient(135deg,var(--p),var(--b));
+  display:flex;align-items:center;justify-content:center;font-size:18px;
+  box-shadow:0 0 12px rgba(100,50,255,.4);flex-shrink:0
+}
+.sec-hname{font-family:'Orbitron',sans-serif;font-size:11px;color:#fff;letter-spacing:1px}
+.sec-online{display:flex;align-items:center;gap:5px;margin-top:3px}
+.sec-status-dot{width:6px;height:6px;border-radius:50%;background:var(--g);box-shadow:0 0 6px var(--g);animation:blink 1.4s ease-in-out infinite}
+.sec-close{
+  margin-left:auto;width:26px;height:26px;border-radius:50%;
+  background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);
+  cursor:pointer;display:flex;align-items:center;justify-content:center;
+  font-size:14px;color:var(--dim);transition:all .2s;flex-shrink:0
+}
+.sec-close:hover{background:rgba(255,80,80,.15);color:#ff6060;border-color:rgba(255,80,80,.3)}
+.sec-messages{flex:1;overflow-y:auto;padding:14px;display:flex;flex-direction:column;gap:10px}
+.sec-messages::-webkit-scrollbar{width:3px}
+.sec-messages::-webkit-scrollbar-track{background:transparent}
+.sec-messages::-webkit-scrollbar-thumb{background:rgba(120,80,255,.3);border-radius:2px}
+.sec-msg{max-width:86%;padding:10px 13px;border-radius:10px;font-size:13px;line-height:1.6;word-break:break-word}
+.sec-msg.bot{
+  align-self:flex-start;
+  background:rgba(100,50,255,.1);border:1px solid rgba(100,50,255,.18);
+  color:rgba(220,220,255,.9);border-radius:4px 10px 10px 10px
+}
+.sec-msg.user{
+  align-self:flex-end;
+  background:linear-gradient(135deg,rgba(0,180,255,.12),rgba(0,255,170,.07));
+  border:1px solid rgba(0,200,255,.18);
+  color:rgba(220,255,255,.9);border-radius:10px 4px 10px 10px;
+  font-family:'Share Tech Mono',monospace;font-size:12px
+}
+.sec-msg.thinking{
+  align-self:flex-start;font-family:'Share Tech Mono',monospace;
+  font-size:11px;color:var(--dim);
+  background:rgba(120,80,255,.05);border:1px solid rgba(120,80,255,.08);
+  border-radius:4px 10px 10px 10px;animation:thinkPulse 1s ease-in-out infinite
+}
+@keyframes thinkPulse{0%,100%{opacity:.4}50%{opacity:1}}
+.sec-input-row{
+  display:flex;gap:8px;padding:12px;
+  border-top:1px solid rgba(120,80,255,.12);flex-shrink:0
+}
+.sec-input{
+  flex:1;background:rgba(12,12,28,.8);
+  border:1px solid rgba(120,80,255,.2);border-radius:8px;
+  color:#e8e8ff;font-size:13px;font-family:'Noto Sans TC',sans-serif;
+  padding:9px 12px;outline:none;resize:none;line-height:1.4;
+  transition:border-color .2s;max-height:80px;overflow-y:auto
+}
+.sec-input:focus{border-color:rgba(120,80,255,.5);box-shadow:0 0 12px rgba(120,80,255,.1)}
+.sec-input::placeholder{color:var(--dim)}
+.sec-send{
+  width:38px;height:38px;border-radius:8px;flex-shrink:0;align-self:flex-end;
+  background:linear-gradient(135deg,var(--p),var(--b));
+  border:none;cursor:pointer;color:#fff;font-size:16px;
+  transition:all .2s;box-shadow:0 0 12px rgba(100,50,255,.3)
+}
+.sec-send:hover{transform:scale(1.08);box-shadow:0 0 20px rgba(100,50,255,.6)}
+.sec-send:disabled{opacity:.4;cursor:not-allowed;transform:none}
+@media(max-width:480px){
+  #secretary-panel{width:calc(100vw - 24px);right:12px;bottom:90px;height:420px}
+  #secretary-btn{bottom:18px;right:18px;width:50px;height:50px}
+}
 </style>
 </head>
 <body>
+
+<!-- ── 小白秘書 CHAT WIDGET ── -->
+<button id="secretary-btn" title="小白 AI 秘書" aria-label="開啟小白秘書">🤖</button>
+<div id="secretary-label">小白 AI 秘書</div>
+<div id="secretary-panel" role="dialog" aria-label="小白秘書對話">
+  <div class="sec-panel-header">
+    <div class="sec-avatar">🤖</div>
+    <div>
+      <div class="sec-hname">小白 AI 秘書</div>
+      <div class="sec-online">
+        <div class="sec-status-dot"></div>
+        <span style="font-family:'Share Tech Mono',monospace;font-size:9px;color:var(--g);letter-spacing:1px">ONLINE · Empire AI</span>
+      </div>
+    </div>
+    <button class="sec-close" id="secretary-close" aria-label="關閉">✕</button>
+  </div>
+  <div class="sec-messages" id="sec-messages">
+    <div class="sec-msg bot">你好！我是小白，Empire AI 治理系統的專屬秘書。<br><br>可以問我：<br>• 系統狀態如何？<br>• 最新合規分數？<br>• 有沒有被封鎖的 AI？<br>• 切換 AI 代理人</div>
+  </div>
+  <div class="sec-input-row">
+    <textarea class="sec-input" id="sec-input" placeholder="問小白任何事..." rows="1"></textarea>
+    <button class="sec-send" id="sec-send" aria-label="送出">➤</button>
+  </div>
+</div>
 
 <!-- ── AURORA ORBS ── -->
 <div id="aurora">
@@ -823,7 +955,7 @@ revealEls.forEach(el => obs.observe(el))
 // ── LIVE DATA ──
 async function fetchLive() {
   try {
-    const r = await fetch('https://seobaike.supabase.co/functions/v1/ceo-dashboard', {
+    const r = await fetch('https://vmyrivxxibqydccurxug.supabase.co/functions/v1/ceo-dashboard', {
       headers: { 'Content-Type': 'application/json' }
     })
     if (!r.ok) return
@@ -840,6 +972,77 @@ async function fetchLive() {
 }
 fetchLive()
 setInterval(fetchLive, 30000)
+
+// ── 小白秘書 CHAT WIDGET ──
+;(function(){
+  const SEC_URL = 'https://vmyrivxxibqydccurxug.supabase.co/functions/v1/secretary-bot'
+  const secBtn      = document.getElementById('secretary-btn')
+  const secPanel    = document.getElementById('secretary-panel')
+  const secClose    = document.getElementById('secretary-close')
+  const secMessages = document.getElementById('sec-messages')
+  const secInput    = document.getElementById('sec-input')
+  const secSend     = document.getElementById('sec-send')
+  let secOpen = false
+
+  function toggleSec(e) {
+    e.stopPropagation()
+    secOpen = !secOpen
+    secPanel.classList.toggle('open', secOpen)
+    if (secOpen) setTimeout(() => secInput.focus(), 300)
+  }
+  secBtn.addEventListener('click', toggleSec)
+  secClose.addEventListener('click', toggleSec)
+  document.addEventListener('click', e => {
+    if (secOpen && !secPanel.contains(e.target) && e.target !== secBtn) {
+      secOpen = false
+      secPanel.classList.remove('open')
+    }
+  })
+
+  function addMsg(text, type) {
+    const div = document.createElement('div')
+    div.className = 'sec-msg ' + type
+    div.innerHTML = type === 'bot' ? text.replace(/\n/g,'<br>') : text
+    secMessages.appendChild(div)
+    secMessages.scrollTop = secMessages.scrollHeight
+    return div
+  }
+
+  async function sendMsg() {
+    const q = secInput.value.trim()
+    if (!q || secSend.disabled) return
+    secInput.value = ''
+    secInput.style.height = 'auto'
+    secSend.disabled = true
+    addMsg(q, 'user')
+    const thinking = addMsg('◈ 小白思考中...', 'thinking')
+    try {
+      const r = await fetch(SEC_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ question: q })
+      })
+      if (!r.ok) throw new Error('HTTP ' + r.status)
+      const d = await r.json()
+      thinking.remove()
+      addMsg(d.reply || '系統暫時無法回應，請稍後再試。', 'bot')
+    } catch(err) {
+      thinking.remove()
+      addMsg('⚠️ 連線失敗，請稍後再試。\n(' + err.message + ')', 'bot')
+    }
+    secSend.disabled = false
+    secInput.focus()
+  }
+
+  secSend.addEventListener('click', sendMsg)
+  secInput.addEventListener('keydown', e => {
+    if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendMsg() }
+  })
+  secInput.addEventListener('input', () => {
+    secInput.style.height = 'auto'
+    secInput.style.height = Math.min(secInput.scrollHeight, 80) + 'px'
+  })
+})()
 
 // ── CLOCK ──
 function tick() {
