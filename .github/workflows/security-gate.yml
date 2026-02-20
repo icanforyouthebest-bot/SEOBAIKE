@@ -9,7 +9,7 @@ on:
 
 concurrency:
   group: security-gate-${{ github.ref }}
-  cancel-in-progress: true
+  cancel-in-progress: false
 
 env:
   WORKERS_URL: https://seobaike-remote-control.icanforyouthebest.workers.dev
@@ -164,6 +164,10 @@ jobs:
           supabase functions deploy ai-gateway --project-ref vmyrivxxibqydccurxug
           supabase functions deploy order-created --project-ref vmyrivxxibqydccurxug
           supabase functions deploy payment-captured --project-ref vmyrivxxibqydccurxug
+          supabase functions deploy node-verify --project-ref vmyrivxxibqydccurxug
+          supabase functions deploy mcp-register --project-ref vmyrivxxibqydccurxug
+          supabase functions deploy marketplace-api --project-ref vmyrivxxibqydccurxug
+          supabase functions deploy commission-api --project-ref vmyrivxxibqydccurxug
 
       - name: Deploy Workers
         continue-on-error: true
