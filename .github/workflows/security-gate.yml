@@ -173,6 +173,15 @@ jobs:
           supabase functions deploy mcp-governance-proxy --project-ref vmyrivxxibqydccurxug
           supabase functions deploy switch-agent --project-ref vmyrivxxibqydccurxug
           supabase functions deploy secretary-bot --project-ref vmyrivxxibqydccurxug --no-verify-jwt
+          supabase functions deploy ceo-dashboard --project-ref vmyrivxxibqydccurxug --no-verify-jwt
+          supabase functions deploy health-monitor --project-ref vmyrivxxibqydccurxug --no-verify-jwt
+          supabase functions deploy send-boss-report --project-ref vmyrivxxibqydccurxug
+          supabase functions deploy analyze-document --project-ref vmyrivxxibqydccurxug
+          supabase functions deploy embed-knowledge --project-ref vmyrivxxibqydccurxug
+          supabase functions deploy seo-article-gen --project-ref vmyrivxxibqydccurxug
+          supabase functions deploy elevenlabs-voice --project-ref vmyrivxxibqydccurxug
+          supabase functions deploy world-definition --project-ref vmyrivxxibqydccurxug
+          supabase functions deploy x-tweet-bot --project-ref vmyrivxxibqydccurxug
 
       - name: Deploy Workers
         continue-on-error: true
