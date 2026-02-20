@@ -1,0 +1,29 @@
+{
+  "version_id": "2026-02-20-04-26",
+  "timestamp": "2026-02-20T04:26:41.239587",
+  "dry_run": false,
+  "total_risks": 2,
+  "repair_log": [],
+  "tracker": [
+    {
+      "issue_id": "AZ-001",
+      "desc": "Azure SP (9dc16b16…) lacks subscription Reader role — Resource Graph 403. Fix: assign 'Reader' role to the SP on subscription 78da9233-ad83-4b40-99cd-e6ce2058b692",
+      "fix_command": "manual_review_required",
+      "status": "pending",
+      "difficulty": "high",
+      "note": "",
+      "updated_at": "2026-02-20T04:26:41.239134",
+      "found_at": "2026-02-20T04:26:41.239134"
+    },
+    {
+      "issue_id": "GH-001",
+      "desc": "Repo 為 Public（原始碼公開）",
+      "fix_command": "manual_review_required",
+      "status": "pending",
+      "difficulty": "high",
+      "note": "",
+      "updated_at": "2026-02-20T04:26:41.239370",
+      "found_at": "2026-02-20T04:26:41.239370"
+    }
+  ]
+}
