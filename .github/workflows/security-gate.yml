@@ -161,15 +161,15 @@ jobs:
         run: |
           supabase functions deploy boss-approval --project-ref vmyrivxxibqydccurxug
           supabase functions deploy remote-command --project-ref vmyrivxxibqydccurxug
-          supabase functions deploy ai-gateway --project-ref vmyrivxxibqydccurxug
+          supabase functions deploy ai-gateway --project-ref vmyrivxxibqydccurxug --no-verify-jwt
           supabase functions deploy order-created --project-ref vmyrivxxibqydccurxug
           supabase functions deploy payment-captured --project-ref vmyrivxxibqydccurxug
           supabase functions deploy node-verify --project-ref vmyrivxxibqydccurxug
           supabase functions deploy mcp-register --project-ref vmyrivxxibqydccurxug
           supabase functions deploy marketplace-api --project-ref vmyrivxxibqydccurxug
           supabase functions deploy commission-api --project-ref vmyrivxxibqydccurxug
-          supabase functions deploy ai-governance-gateway --project-ref vmyrivxxibqydccurxug
-          supabase functions deploy n8n-governance-webhook --project-ref vmyrivxxibqydccurxug
+          supabase functions deploy ai-governance-gateway --project-ref vmyrivxxibqydccurxug --no-verify-jwt
+          supabase functions deploy n8n-governance-webhook --project-ref vmyrivxxibqydccurxug --no-verify-jwt
           supabase functions deploy mcp-governance-proxy --project-ref vmyrivxxibqydccurxug
           supabase functions deploy switch-agent --project-ref vmyrivxxibqydccurxug
           supabase functions deploy secretary-bot --project-ref vmyrivxxibqydccurxug --no-verify-jwt
