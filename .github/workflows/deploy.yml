@@ -20,18 +20,21 @@ jobs:
         with:
           node-version: '20'
 
-      - name: Install wrangler
-        run: npm install -g wrangler@4.65.0
+      - name: Deploy Worker
         continue-on-error: true
-
-      - name: Deploy Worker (via wrangler-action)
-        uses: cloudflare/wrangler-action@v3
-        continue-on-error: true
-        with:
-          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          workingDirectory: 'workers'
-          command: deploy --config wrangler.toml
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: |
+          cd workers
+          npm ci
+          echo "=== Cloudflare Worker Deploy ==="
+          npx wrangler@4 deploy --config wrangler.toml 2>&1 | tee /tmp/wrangler_out.txt || {
+            echo "=== WRANGLER FAIL DETAILS ==="
+            cat /tmp/wrangler_out.txt
+            echo "=== (non-blocking) ==="
+            exit 0
+          }
 
   # ─────────────────────────────────────
   # 2. Azure Functions 部署

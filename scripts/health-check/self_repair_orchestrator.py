@@ -672,13 +672,15 @@ dry_run: {DRY_RUN}"""
     repair_log = []
     max_iterations = 30
 
-    # Try grok-3 first, fall back to grok-2 or grok-beta
-    model_candidates = ["grok-3", "grok-2-1212", "grok-beta"]
+    # xAI model priority: grok-3 → grok-2-1212 → grok-2 → grok-beta
+    model_candidates = ["grok-3", "grok-2-1212", "grok-2", "grok-beta"]
+    active_model = None  # cache successful model to skip retries
 
     for iteration in range(max_iterations):
         last_err = None
         response = None
-        for model_name in model_candidates:
+        candidates = [active_model] if active_model else model_candidates
+        for model_name in candidates:
             try:
                 response = client.chat.completions.create(
                     model=model_name,
@@ -687,8 +689,12 @@ dry_run: {DRY_RUN}"""
                     tool_choice="auto",
                     max_tokens=8192
                 )
+                if active_model is None:
+                    active_model = model_name
+                    print(f"  [xAI] Using model: {model_name}")
                 break  # success
             except Exception as e:
+                print(f"  [xAI] Model {model_name} failed: {type(e).__name__}: {str(e)[:120]}")
                 last_err = e
                 continue
         if response is None:
@@ -702,10 +708,15 @@ dry_run: {DRY_RUN}"""
             for line in (msg.content or "").strip().split("\n")[:5]:
                 print(f"  [Grok] {line}")
 
-        if response.choices[0].finish_reason == "stop":
+        finish_reason = response.choices[0].finish_reason
+        print(f"  [xAI] iter={iteration} finish_reason={finish_reason} tool_calls={len(msg.tool_calls or [])}")
+
+        # Handle stop without tool calls (Grok answered in text, no tools needed)
+        if finish_reason == "stop" and not msg.tool_calls:
             break
 
-        if response.choices[0].finish_reason == "tool_calls" and msg.tool_calls:
+        # Handle tool calls — finish_reason may be "tool_calls" or "stop" depending on model version
+        if msg.tool_calls:
             tool_results_msgs = []
             for tc in msg.tool_calls:
                 fn_name = tc.function.name

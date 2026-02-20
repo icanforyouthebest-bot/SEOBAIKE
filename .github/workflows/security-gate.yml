@@ -173,7 +173,13 @@ jobs:
         run: |
           cd workers
           npm ci
-          npx wrangler deploy || echo "Worker deploy failed (non-blocking)"
+          echo "=== wrangler deploy output ==="
+          npx wrangler deploy 2>&1 | tee /tmp/wrangler_output.txt || {
+            echo "=== WRANGLER FAIL (non-blocking) ==="
+            cat /tmp/wrangler_output.txt
+            exit 0
+          }
+          echo "=== wrangler deploy SUCCESS ==="
 
       - name: Post-deploy compliance verification
         env:
