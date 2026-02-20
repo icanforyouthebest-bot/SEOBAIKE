@@ -28,55 +28,9 @@ jobs:
         env:
           CLOUDFLARE_OAUTH_REFRESH: ${{ secrets.CLOUDFLARE_OAUTH_REFRESH }}
           REPO_PAT: ${{ secrets.REPO_PAT }}
-          REPO: ${{ github.repository }}
         run: |
           pip install pynacl --quiet
-          python3 << 'PYEOF'
-          import os, json, base64, urllib.request, ssl
-          from nacl.public import PublicKey, SealedBox
-
-          REFRESH = os.environ['CLOUDFLARE_OAUTH_REFRESH']
-          PAT = os.environ['REPO_PAT']
-          REPO = os.environ['REPO']
-          ctx = ssl.create_default_context()
-
-          # 1. Refresh CF OAuth token
-          data = f'grant_type=refresh_token&refresh_token={REFRESH}&client_id=54d11594-84e4-41aa-b438-e81b8fa78ee7&client_secret='
-          req = urllib.request.Request('https://dash.cloudflare.com/oauth2/token', data=data.encode(), method='POST')
-          req.add_header('Content-Type', 'application/x-www-form-urlencoded')
-          with urllib.request.urlopen(req, context=ctx) as r:
-              td = json.loads(r.read())
-
-          new_access = td.get('access_token', '')
-          new_refresh = td.get('refresh_token', '')
-          if not new_access:
-              print('ERROR: Token refresh failed!', td)
-              exit(1)
-          print(f'CF token refreshed (expires_in={td.get("expires_in")}s)')
-
-          # 2. Write token to GITHUB_ENV
-          with open(os.environ['GITHUB_ENV'], 'a') as f:
-              f.write(f'CF_FRESH_TOKEN={new_access}\n')
-
-          # 3. Update CLOUDFLARE_OAUTH_REFRESH secret
-          kr = urllib.request.Request(f'https://api.github.com/repos/{REPO}/actions/secrets/public-key')
-          kr.add_header('Authorization', f'Bearer {PAT}')
-          kr.add_header('User-Agent', 'CI-Refresh')
-          kr.add_header('Accept', 'application/vnd.github.v3+json')
-          with urllib.request.urlopen(kr, context=ctx) as r:
-              kd = json.loads(r.read())
-
-          box = SealedBox(PublicKey(base64.b64decode(kd['key'])))
-          enc = base64.b64encode(box.encrypt(new_refresh.encode())).decode()
-          body = json.dumps({'encrypted_value': enc, 'key_id': kd['key_id']}).encode()
-          sr = urllib.request.Request(f'https://api.github.com/repos/{REPO}/actions/secrets/CLOUDFLARE_OAUTH_REFRESH', data=body, method='PUT')
-          sr.add_header('Authorization', f'Bearer {PAT}')
-          sr.add_header('User-Agent', 'CI-Refresh')
-          sr.add_header('Accept', 'application/vnd.github.v3+json')
-          sr.add_header('Content-Type', 'application/json')
-          with urllib.request.urlopen(sr, context=ctx) as r:
-              print(f'Refresh token secret updated: HTTP {r.status}')
-          PYEOF
+          python3 scripts/cf-token-refresh.py
 
       - name: Deploy Worker (wrangler)
         working-directory: workers
