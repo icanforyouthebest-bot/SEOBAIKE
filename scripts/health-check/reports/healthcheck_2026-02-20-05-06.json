@@ -1,0 +1,128 @@
+{
+  "version_id": "2026-02-20-05-06",
+  "timestamp": "2026-02-20T05:06:22.410518",
+  "modules": {
+    "azure": {
+      "status": "rbac_missing",
+      "resources": [],
+      "security": [],
+      "ai_services": [],
+      "risks": [
+        {
+          "id": "AZ-001",
+          "level": "high",
+          "desc": "Azure SP (9dc16b16…) lacks subscription Reader role — Resource Graph 403. Fix: assign 'Reader' role to the SP on subscription 78da9233-ad83-4b40-99cd-e6ce2058b692",
+          "module": "azure"
+        }
+      ],
+      "resources_count": 0,
+      "ai_services_count": 0
+    },
+    "entra_e5": {
+      "status": "ok",
+      "users": [],
+      "security": {},
+      "sharing": {},
+      "risks": []
+    },
+    "cloudflare": {
+      "status": "ok",
+      "workers": [
+        "ai-empire-key-monitor",
+        "seobaike-remote-control"
+      ],
+      "dns": [],
+      "security": {},
+      "risks": [],
+      "workers_count": 2
+    },
+    "supabase": {
+      "status": "ok",
+      "functions": [],
+      "tables": [
+        "",
+        "sop_notifications",
+        "system_config_lock",
+        "constraint_paths",
+        "configs",
+        "system_alerts",
+        "email_logs",
+        "mcp_subscriptions",
+        "user_shadow_pilot_config",
+        "billing_invoices",
+        "creator_profiles",
+        "payments",
+        "aml_rules",
+        "ai_cache",
+        "push_subscriptions",
+        "platform_connectors",
+        "module_executions",
+        "ai_providers",
+        "sensitive_word_logs",
+        "neural_sync_stream"
+      ],
+      "security": {},
+      "risks": [],
+      "db_status": "connected",
+      "tables_count": 340
+    },
+    "github": {
+      "status": "ok",
+      "repo": {
+        "name": "SEOBAIKE",
+        "private": false,
+        "default_branch": "master",
+        "open_issues": 0
+      },
+      "actions": [],
+      "secrets": {},
+      "risks": [
+        {
+          "id": "GH-001",
+          "level": "high",
+          "desc": "Repo 為 Public（原始碼公開）",
+          "module": "github"
+        }
+      ],
+      "actions_recent_count": 10,
+      "last_action": {
+        "name": "AI Empire — Full Deploy Pipeline",
+        "status": "in_progress",
+        "conclusion": null,
+        "created_at": "2026-02-20T05:04:54Z"
+      },
+      "workflows": [
+        "AI Empire — Full Deploy Pipeline",
+        "Fix Azure RBAC — Assign Reader Role to SP",
+        "Security Gate"
+      ],
+      "workflows_count": 3
+    }
+  },
+  "summary": {
+    "total_risks": 2,
+    "high": [
+      {
+        "id": "AZ-001",
+        "level": "high",
+        "desc": "Azure SP (9dc16b16…) lacks subscription Reader role — Resource Graph 403. Fix: assign 'Reader' role to the SP on subscription 78da9233-ad83-4b40-99cd-e6ce2058b692",
+        "module": "azure"
+      },
+      {
+        "id": "GH-001",
+        "level": "high",
+        "desc": "Repo 為 Public（原始碼公開）",
+        "module": "github"
+      }
+    ],
+    "medium": [],
+    "low": [],
+    "modules_checked": [
+      "azure",
+      "entra_e5",
+      "cloudflare",
+      "supabase",
+      "github"
+    ]
+  }
+}
