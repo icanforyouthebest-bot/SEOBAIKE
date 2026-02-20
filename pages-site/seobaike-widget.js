@@ -1,8 +1,8 @@
 // ============================================================
-// SEOBAIKE 主動式 AI 聊天 Widget — "小百 2.0"
+// SEOBAIKE 主動式 AI 聊天 Widget — "小白 3.0"
 // 自包含嵌入式腳本，純 vanilla JS，零依賴
-// 主動出擊：AI 不等人來問，而是先開口
-// 連接 Workers API: /api/ai/smart
+// 主動出擊：小白不等人來問，而是先開口
+// 直連 secretary-bot (Supabase Edge Function)
 // ============================================================
 
 (function () {
@@ -10,7 +10,8 @@
 
   // ── 設定 ──
   var CONFIG = {
-    apiUrl: '/api/widget-chat',
+    apiUrl: 'https://vmyrivxxibqydccurxug.supabase.co/functions/v1/secretary-bot',
+    apiKey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZteXJpdnh4aWJxeWRjY3VyeHVnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzAwNDAwMjksImV4cCI6MjA4NTYxNjAyOX0.iBV-23LGdm_uKffAExgqSV34-NWoAyv8_-M_cJQZ8Gg',
     fallbackMessage: '系統忙碌中，請稍後再試或到 /contact 留言。',
     greetingDelay: 3000,
     greetingAutoHide: 8000,
@@ -664,10 +665,10 @@
     header.className = 'sb-header';
     header.innerHTML =
       '<div class="sb-header-info">' +
-      '  <div class="sb-header-avatar">\u5C0F</div>' +
+      '  <div class="sb-header-avatar">\u767D</div>' +
       '  <div class="sb-header-text">' +
-      '    <h3>SEOBAIKE \u5C0F\u767E</h3>' +
-      '    <span><span class="sb-online-dot"></span> AI \u52A9\u624B \u00b7 \u96A8\u6642\u70BA\u4F60\u670D\u52D9</span>' +
+      '    <h3>\u5C0F\u767D \u79D8\u66F8</h3>' +
+      '    <span><span class="sb-online-dot"></span> AI \u79D8\u66F8 \u00b7 \u96A8\u6642\u56DE\u5831</span>' +
       '  </div>' +
       '</div>';
 
@@ -715,7 +716,7 @@
     // 底部品牌
     var footer = document.createElement('div');
     footer.className = 'sb-footer';
-    footer.textContent = 'Powered by SEOBAIKE CaaS';
+    footer.textContent = 'Powered by \u5C0F\u767D\u79D8\u66F8 \u00b7 SEOBAIKE';
 
     // 組裝
     els.chatPanel.appendChild(header);
@@ -813,7 +814,7 @@
 
     var time = document.createElement('div');
     time.className = 'sb-msg-time';
-    time.textContent = '\u5C0F\u767E \u00b7 ' + getTimeString();
+    time.textContent = '\u5C0F\u767D \u00b7 ' + getTimeString();
 
     wrapper.appendChild(bubble);
     wrapper.appendChild(time);
@@ -910,7 +911,7 @@
 
   function callAI(message) {
     var body = {
-      message: message,
+      question: message,
       page: getCurrentPath(),
       visitor_id: state.visitorId,
       platform: 'web-widget'
@@ -924,7 +925,11 @@
 
     return fetch(CONFIG.apiUrl, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: {
+        'Content-Type': 'application/json',
+        'apikey': CONFIG.apiKey,
+        'Authorization': 'Bearer ' + CONFIG.apiKey
+      },
       body: JSON.stringify(body)
     })
       .then(function (res) {
