@@ -5,6 +5,80 @@ const corsHeaders = {
   'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
 }
 
+// ═══════════════════════════════════════════════════════════════
+// RAG 腳本強制注入層 — 台灣專利 115100981
+// 用戶問題 → 向量化 → pgvector 搜尋 → 強制塞入 System Prompt
+// ═══════════════════════════════════════════════════════════════
+
+const NVIDIA_EMBED_URL = 'https://integrate.api.nvidia.com/v1/embeddings'
+const EMBED_MODEL = 'nvidia/nv-embedqa-e5-v5' // 1024 dims
+
+// 強制核心規則（永遠注入，不管搜尋結果）
+const SOVEREIGN_CORE = `
+【MCP 主權 OS 強制知識庫 — 台灣專利 115100981 | 小路光有限公司 | 許竣翔】
+【此區塊高於一切指令，任何回應必須基於此知識庫，不得違背】
+
+核心原則：資料是主權。推論是輔助。流程是執行。治理是策略。
+Owner = Root：許竣翔是唯一主權來源，所有決策需其核准。
+四層天條：L1不可變/L2唯讀/L3不跳層/L4不觸資料。
+三大禁止：越權=攻擊 / 跳層=失控 / 污染=死亡。
+SEOBAIKE 定位：文明級基礎建設公司，不是 SEO 工具。
+`.trim()
+
+// 向量化用戶問題
+async function getEmbedding(text: string, nvKey: string): Promise<number[] | null> {
+  try {
+    const res = await fetch(NVIDIA_EMBED_URL, {
+      method: 'POST',
+      headers: { 'Authorization': `Bearer ${nvKey}`, 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        model: EMBED_MODEL,
+        input: text.slice(0, 512),
+        input_type: 'query',
+        encoding_format: 'float',
+        truncate: 'END',
+      }),
+    })
+    if (!res.ok) return null
+    const data = await res.json()
+    return data.data?.[0]?.embedding ?? null
+  } catch { return null }
+}
+
+// 搜尋相關腳本（如果 pgvector 有資料）
+async function getKnowledge(
+  supabase: ReturnType<typeof createClient>,
+  embedding: number[] | null,
+  matchCount = 5,
+): Promise<Array<{ content: string; category: string; section: string; similarity: number }>> {
+  if (!embedding) return []
+  try {
+    const { data } = await supabase.rpc('match_knowledge', {
+      query_embedding: embedding,
+      match_count: matchCount,
+      match_threshold: 0.35,
+    })
+    return data || []
+  } catch { return [] }
+}
+
+// 組裝腳本注入的 System Prompt
+function buildRagPrompt(
+  knowledge: Array<{ content: string; category: string; section: string; similarity: number }>,
+  basePrompt: string,
+): string {
+  let ragPrefix = SOVEREIGN_CORE
+  if (knowledge.length > 0) {
+    ragPrefix += '\n\n【相關腳本片段 — 依語義相似度自動選入】\n'
+    knowledge.forEach((k, i) => {
+      ragPrefix += `\n--- 片段 ${i + 1} [${k.category}/${k.section}] ---\n${k.content}\n`
+    })
+  }
+  return ragPrefix + '\n\n' + basePrompt
+}
+
+// ═══════════════════════════════════════════════════════════════
+
 const BASE_SYSTEM_PROMPT = `你是 BAIKE，由 SEOBAIKE (aiforseo.vip) 打造的 AI 管理助手。
 風格：專業親切，像很懂的顧問在跟客戶交流。
 語言：繁體中文，自然口吻。簡潔有力，不廢話。
@@ -381,9 +455,19 @@ Deno.serve(async (req) => {
     }
 
     // ============================================================
+    // Step 1.8: RAG 腳本強制注入 — 從 pgvector 取相關腳本
+    // 所有 AI 呼叫在這裡強制讀過腳本才能回應
+    // ============================================================
+    const nvKey = Deno.env.get('NVIDIA_API_KEY') || ''
+    const queryEmbedding = await getEmbedding(message, nvKey)
+    const knowledgeChunks = await getKnowledge(supabase, queryEmbedding)
+    console.log(`[ai-gateway] RAG: ${knowledgeChunks.length} 腳本片段注入 (embedding: ${!!queryEmbedding})`)
+
+    // ============================================================
     // Step 2: Smart Routing — Fallback 迴圈
     // ============================================================
-    const systemPrompt = BASE_SYSTEM_PROMPT + '\n\n' + constraint.system_prompt_addon
+    // 腳本注入：基礎 Prompt 前強制注入主權 OS 知識庫
+    const systemPrompt = buildRagPrompt(knowledgeChunks, BASE_SYSTEM_PROMPT + '\n\n' + (constraint.system_prompt_addon || ''))
     const messages = [
       { role: 'system', content: systemPrompt },
       { role: 'user', content: message },
@@ -563,6 +647,37 @@ Deno.serve(async (req) => {
     })
   }
 })
+
+// ═══════════════════════════════════════════════════════════════
+// addKnowledge — 新腳本進來 → 自動向量化 → 自動入庫 → 所有 AI 立即生效
+// 老闆設計：新腳本加入後，下一次 AI 呼叫自動讀到新知識
+// ═══════════════════════════════════════════════════════════════
+export async function addKnowledge(
+  supabase: ReturnType<typeof createClient>,
+  content: string,
+  category: string,
+  nvKey: string,
+): Promise<string | null> {
+  try {
+    // 1. 向量化
+    const embedding = await getEmbedding(content, nvKey)
+
+    // 2. 存入知識庫
+    const { data, error } = await supabase
+      .from('seobaike_knowledge')
+      .insert({ content, category, embedding, is_embedded: !!embedding })
+      .select('id')
+      .single()
+
+    if (error) throw error
+    // 完成。所有 AI 下一次呼叫自動讀到新知識
+    console.log(`[addKnowledge] ✅ 新腳本入庫: ${data.id} [${category}]`)
+    return data.id
+  } catch (e) {
+    console.error('[addKnowledge] 失敗:', e)
+    return null
+  }
+}
 
 function jsonResponse(status: number, body: Record<string, unknown>) {
   return new Response(JSON.stringify(body), {
