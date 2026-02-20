@@ -765,7 +765,7 @@ export default {
       if (!allowed) return json(429, { error: '請求過於頻繁，請稍後再試', retry_after: retryAfter })
     }
     // widget-chat 寬鬆限制（2 秒冷卻，讓客服可以正常對話）
-    if (path === '/api/widget-chat') {
+    if (path === '/api/widget-chat' || path === '/api/ai/widget-chat') {
       const { allowed, retryAfter } = await checkRateLimit(env.RATE_LIMIT, `${clientIp}:widget`, 2)
       if (!allowed) return json(429, { error: '請稍等一下再發送', retry_after: retryAfter })
     }
