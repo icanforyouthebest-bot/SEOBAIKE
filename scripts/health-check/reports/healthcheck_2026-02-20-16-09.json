@@ -1,37 +1,55 @@
 {
   "version_id": "2026-02-20-16-09",
-  "timestamp": "2026-02-20T16:10:01.588968",
+  "timestamp": "2026-02-20T16:10:03.476306",
   "modules": {
     "azure": {
       "status": "ok",
       "resources": [
         {
-          "name": "cs11003200587968edc",
-          "type": "microsoft.storage/storageaccounts",
-          "resourceGroup": "cloud-shell-storage-southeastasia",
+          "name": "keyvault-secret-expiry-alert",
+          "type": "microsoft.insights/scheduledqueryrules",
+          "resourceGroup": "ai-empire-rg",
+          "location": "eastasia"
+        },
+        {
+          "name": "ai-empire-apim",
+          "type": "microsoft.apimanagement/service",
+          "resourceGroup": "ai-empire-rg",
+          "location": "eastasia"
+        },
+        {
+          "name": "ai-empire-openai-southeastasia",
+          "type": "microsoft.cognitiveservices/accounts",
+          "resourceGroup": "ai-empire-rg",
           "location": "southeastasia"
         },
         {
           "name": "grok-takeover-app",
-          "type": "microsoft.web/sites",
+          "type": "microsoft.insights/components",
           "resourceGroup": "grok-takeover-rg",
+          "location": "eastasia"
+        },
+        {
+          "name": "aiempirewaf",
+          "type": "microsoft.network/frontdoorwebapplicationfirewallpolicies",
+          "resourceGroup": "ai-empire-rg",
+          "location": "global"
+        },
+        {
+          "name": "ai-empire-openai-eastus",
+          "type": "microsoft.cognitiveservices/accounts",
+          "resourceGroup": "ai-empire-rg",
+          "location": "eastus"
+        },
+        {
+          "name": "seobaike-ai-router",
+          "type": "microsoft.web/sites",
+          "resourceGroup": "seobaike-rg",
           "location": "eastasia"
         },
         {
           "name": "seobaikestorage",
           "type": "microsoft.storage/storageaccounts",
-          "resourceGroup": "seobaike-rg",
-          "location": "japaneast"
-        },
-        {
-          "name": "grok-takeover-pipeline",
-          "type": "microsoft.web/sites",
-          "resourceGroup": "grok-takeover-rg",
-          "location": "eastasia"
-        },
-        {
-          "name": "seobaike-apim",
-          "type": "microsoft.apimanagement/service",
           "resourceGroup": "seobaike-rg",
           "location": "japaneast"
         },
@@ -42,40 +60,16 @@
           "location": "eastasia"
         },
         {
-          "name": "keyvault-alerts-ag",
-          "type": "microsoft.insights/actiongroups",
-          "resourceGroup": "ai-empire-rg",
-          "location": "global"
-        },
-        {
-          "name": "ai-empire-openai-uksouth",
-          "type": "microsoft.cognitiveservices/accounts",
-          "resourceGroup": "ai-empire-rg",
-          "location": "uksouth"
-        },
-        {
-          "name": "seobaike-plan-eastasia",
-          "type": "microsoft.web/serverfarms",
-          "resourceGroup": "seobaike-rg",
-          "location": "eastasia"
-        },
-        {
-          "name": "aiempirewaf",
-          "type": "microsoft.network/frontdoorwebapplicationfirewallpolicies",
-          "resourceGroup": "ai-empire-rg",
-          "location": "global"
-        },
-        {
-          "name": "seobaike-ai-router",
+          "name": "seobaike-l1l4-pipeline",
           "type": "microsoft.web/sites",
           "resourceGroup": "seobaike-rg",
           "location": "eastasia"
         },
         {
-          "name": "seobaike-vault",
-          "type": "microsoft.keyvault/vaults",
-          "resourceGroup": "seobaike-rg",
-          "location": "japaneast"
+          "name": "ai-empire-frontdoor",
+          "type": "microsoft.cdn/profiles",
+          "resourceGroup": "ai-empire-rg",
+          "location": "global"
         },
         {
           "name": "ai-empire-openai-australiaeast",
@@ -84,8 +78,74 @@
           "location": "australiaeast"
         },
         {
-          "name": "ai-empire-frontdoor",
-          "type": "microsoft.cdn/profiles",
+          "name": "ai-empire-openai-westeurope",
+          "type": "microsoft.cognitiveservices/accounts",
+          "resourceGroup": "ai-empire-rg",
+          "location": "westeurope"
+        },
+        {
+          "name": "grok-takeover-pipeline",
+          "type": "microsoft.insights/components",
+          "resourceGroup": "grok-takeover-rg",
+          "location": "eastasia"
+        },
+        {
+          "name": "ai-empire-vault-01",
+          "type": "microsoft.keyvault/vaults",
+          "resourceGroup": "ai-empire-rg",
+          "location": "eastasia"
+        },
+        {
+          "name": "grok-takeover-app",
+          "type": "microsoft.web/sites",
+          "resourceGroup": "grok-takeover-rg",
+          "location": "eastasia"
+        },
+        {
+          "name": "ai-empire-ep",
+          "type": "microsoft.cdn/profiles/afdendpoints",
+          "resourceGroup": "ai-empire-rg",
+          "location": "global"
+        },
+        {
+          "name": "ai-empire-logs",
+          "type": "microsoft.operationalinsights/workspaces",
+          "resourceGroup": "ai-empire-rg",
+          "location": "eastasia"
+        },
+        {
+          "name": "ai-empire-openai-swedencentral",
+          "type": "microsoft.cognitiveservices/accounts",
+          "resourceGroup": "ai-empire-rg",
+          "location": "swedencentral"
+        },
+        {
+          "name": "DefaultWorkspace-fca96658-74df-4d3e-9212-aade3e98ca1f-EA",
+          "type": "microsoft.operationalinsights/workspaces",
+          "resourceGroup": "defaultresourcegroup-ea",
+          "location": "eastasia"
+        },
+        {
+          "name": "seobaike-plan-eastasia",
+          "type": "microsoft.web/serverfarms",
+          "resourceGroup": "seobaike-rg",
+          "location": "eastasia"
+        },
+        {
+          "name": "ai-empire-openai-uksouth",
+          "type": "microsoft.cognitiveservices/accounts",
+          "resourceGroup": "ai-empire-rg",
+          "location": "uksouth"
+        },
+        {
+          "name": "ai-empire-appinsights",
+          "type": "microsoft.insights/components",
+          "resourceGroup": "ai-empire-rg",
+          "location": "eastasia"
+        },
+        {
+          "name": "keyvault-alerts-ag",
+          "type": "microsoft.insights/actiongroups",
           "resourceGroup": "ai-empire-rg",
           "location": "global"
         },
@@ -96,40 +156,16 @@
           "location": "japaneast"
         },
         {
-          "name": "ai-empire-openai-westeurope",
+          "name": "ai-empire-openai-westus",
           "type": "microsoft.cognitiveservices/accounts",
           "resourceGroup": "ai-empire-rg",
-          "location": "westeurope"
-        },
-        {
-          "name": "ai-empire-vault-01",
-          "type": "microsoft.keyvault/vaults",
-          "resourceGroup": "ai-empire-rg",
-          "location": "eastasia"
-        },
-        {
-          "name": "grok-takeover-app",
-          "type": "microsoft.insights/components",
-          "resourceGroup": "grok-takeover-rg",
-          "location": "eastasia"
+          "location": "westus"
         },
         {
           "name": "grok-takeover-pipeline",
-          "type": "microsoft.insights/components",
+          "type": "microsoft.web/sites",
           "resourceGroup": "grok-takeover-rg",
           "location": "eastasia"
-        },
-        {
-          "name": "DefaultWorkspace-fca96658-74df-4d3e-9212-aade3e98ca1f-EA",
-          "type": "microsoft.operationalinsights/workspaces",
-          "resourceGroup": "defaultresourcegroup-ea",
-          "location": "eastasia"
-        },
-        {
-          "name": "ai-empire-openai-southeastasia",
-          "type": "microsoft.cognitiveservices/accounts",
-          "resourceGroup": "ai-empire-rg",
-          "location": "southeastasia"
         },
         {
           "name": "groktakeoverstorage",
@@ -138,57 +174,15 @@
           "location": "eastasia"
         },
         {
-          "name": "ai-empire-openai-swedencentral",
-          "type": "microsoft.cognitiveservices/accounts",
-          "resourceGroup": "ai-empire-rg",
-          "location": "swedencentral"
-        },
-        {
-          "name": "ai-empire-appinsights",
-          "type": "microsoft.insights/components",
-          "resourceGroup": "ai-empire-rg",
-          "location": "eastasia"
+          "name": "seobaike-vault",
+          "type": "microsoft.keyvault/vaults",
+          "resourceGroup": "seobaike-rg",
+          "location": "japaneast"
         },
         {
           "name": "EastAsiaLinuxDynamicPlan",
           "type": "microsoft.web/serverfarms",
           "resourceGroup": "grok-takeover-rg",
-          "location": "eastasia"
-        },
-        {
-          "name": "ai-empire-apim",
-          "type": "microsoft.apimanagement/service",
-          "resourceGroup": "ai-empire-rg",
-          "location": "eastasia"
-        },
-        {
-          "name": "ai-empire-openai-eastus",
-          "type": "microsoft.cognitiveservices/accounts",
-          "resourceGroup": "ai-empire-rg",
-          "location": "eastus"
-        },
-        {
-          "name": "Application Insights Smart Detection",
-          "type": "microsoft.insights/actiongroups",
-          "resourceGroup": "grok-takeover-rg",
-          "location": "global"
-        },
-        {
-          "name": "ai-empire-ep",
-          "type": "microsoft.cdn/profiles/afdendpoints",
-          "resourceGroup": "ai-empire-rg",
-          "location": "global"
-        },
-        {
-          "name": "ai-empire-openai-westus",
-          "type": "microsoft.cognitiveservices/accounts",
-          "resourceGroup": "ai-empire-rg",
-          "location": "westus"
-        },
-        {
-          "name": "ai-empire-logs",
-          "type": "microsoft.operationalinsights/workspaces",
-          "resourceGroup": "ai-empire-rg",
           "location": "eastasia"
         },
         {
@@ -198,16 +192,22 @@
           "location": "eastasia"
         },
         {
-          "name": "seobaike-l1l4-pipeline",
-          "type": "microsoft.web/sites",
+          "name": "seobaike-apim",
+          "type": "microsoft.apimanagement/service",
           "resourceGroup": "seobaike-rg",
-          "location": "eastasia"
+          "location": "japaneast"
         },
         {
-          "name": "keyvault-secret-expiry-alert",
-          "type": "microsoft.insights/scheduledqueryrules",
-          "resourceGroup": "ai-empire-rg",
-          "location": "eastasia"
+          "name": "Application Insights Smart Detection",
+          "type": "microsoft.insights/actiongroups",
+          "resourceGroup": "grok-takeover-rg",
+          "location": "global"
+        },
+        {
+          "name": "cs11003200587968edc",
+          "type": "microsoft.storage/storageaccounts",
+          "resourceGroup": "cloud-shell-storage-southeastasia",
+          "location": "southeastasia"
         },
         {
           "name": "ai-empire-cosmos",
