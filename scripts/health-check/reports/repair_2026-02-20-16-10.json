@@ -1,0 +1,202 @@
+{
+  "version_id": "2026-02-20-16-10",
+  "timestamp": "2026-02-20T16:11:49.081514",
+  "dry_run": false,
+  "total_risks": 11,
+  "repair_log": [
+    {
+      "iteration": 0,
+      "tool": "azure_run_cli",
+      "input": {
+        "command": "az keyvault show --name ai-empire-vault-01",
+        "description": "Confirm network access settings for Key Vault 'ai-empire-vault-01' to verify AZ-003 risk details"
+      },
+      "result": {
+        "success": false,
+        "error": "Verb 'keyvault' not in allowed read-only list: {'account', 'show', 'get', 'list', 'describe'}"
+      },
+      "ok": false
+    },
+    {
+      "iteration": 0,
+      "tool": "azure_run_cli",
+      "input": {
+        "command": "az keyvault show --name seobaike-vault",
+        "description": "Confirm network access settings for Key Vault 'seobaike-vault' to verify AZ-003 risk details"
+      },
+      "result": {
+        "success": false,
+        "error": "Verb 'keyvault' not in allowed read-only list: {'account', 'show', 'get', 'list', 'describe'}"
+      },
+      "ok": false
+    },
+    {
+      "iteration": 0,
+      "tool": "azure_run_cli",
+      "input": {
+        "command": "az cognitiveservices account show --name ai-empire-openai-australiaeast --resource-group ai-empire",
+        "description": "Confirm public network access for AI service 'ai-empire-openai-australiaeast' to verify AZ-004 risk details (assuming resource group 'ai-empire')"
+      },
+      "result": {
+        "success": false,
+        "error": "Verb 'cognitiveservices' not in allowed read-only list: {'account', 'show', 'get', 'list', 'describe'}"
+      },
+      "ok": false
+    },
+    {
+      "iteration": 0,
+      "tool": "azure_run_cli",
+      "input": {
+        "command": "az cognitiveservices account show --name ai-empire-openai-eastus --resource-group ai-empire",
+        "description": "Confirm public network access for AI service 'ai-empire-openai-eastus' to verify AZ-004 risk details (assuming resource group 'ai-empire')"
+      },
+      "result": {
+        "success": false,
+        "error": "Verb 'cognitiveservices' not in allowed read-only list: {'account', 'show', 'get', 'list', 'describe'}"
+      },
+      "ok": false
+    },
+    {
+      "iteration": 0,
+      "tool": "azure_run_cli",
+      "input": {
+        "command": "az cognitiveservices account show --name ai-empire-openai-japaneast --resource-group ai-empire",
+        "description": "Confirm public network access for AI service 'ai-empire-openai-japaneast' to verify AZ-004 risk details (assuming resource group 'ai-empire')"
+      },
+      "result": {
+        "success": false,
+        "error": "Verb 'cognitiveservices' not in allowed read-only list: {'account', 'show', 'get', 'list', 'describe'}"
+      },
+      "ok": false
+    },
+    {
+      "iteration": 0,
+      "tool": "azure_run_cli",
+      "input": {
+        "command": "az cognitiveservices account show --name ai-empire-openai-southeastasia --resource-group ai-empire",
+        "description": "Confirm public network access for AI service 'ai-empire-openai-southeastasia' to verify AZ-004 risk details (assuming resource group 'ai-empire')"
+      },
+      "result": {
+        "success": false,
+        "error": "Verb 'cognitiveservices' not in allowed read-only list: {'account', 'show', 'get', 'list', 'describe'}"
+      },
+      "ok": false
+    },
+    {
+      "iteration": 0,
+      "tool": "azure_run_cli",
+      "input": {
+        "command": "az cognitiveservices account show --name ai-empire-openai-swedencentral --resource-group ai-empire",
+        "description": "Confirm public network access for AI service 'ai-empire-openai-swedencentral' to verify AZ-004 risk details (assuming resource group 'ai-empire')"
+      },
+      "result": {
+        "success": false,
+        "error": "Verb 'cognitiveservices' not in allowed read-only list: {'account', 'show', 'get', 'list', 'describe'}"
+      },
+      "ok": false
+    },
+    {
+      "iteration": 0,
+      "tool": "azure_run_cli",
+      "input": {
+        "command": "az cognitiveservices account show --name ai-empire-openai-uksouth --resource-group ai-empire",
+        "description": "Confirm public network access for AI service 'ai-empire-openai-uksouth' to verify AZ-004 risk details (assuming resource group 'ai-empire')"
+      },
+      "result": {
+        "success": false,
+        "error": "Verb 'cognitiveservices' not in allowed read-only list: {'account', 'show', 'get', 'list', 'describe'}"
+      },
+      "ok": false
+    },
+    {
+      "iteration": 0,
+      "tool": "azure_run_cli",
+      "input": {
+        "command": "az cognitiveservices account show --name ai-empire-openai-westeurope --resource-group ai-empire",
+        "description": "Confirm public network access for AI service 'ai-empire-openai-westeurope' to verify AZ-004 risk details (assuming resource group 'ai-empire')"
+      },
+      "result": {
+        "success": false,
+        "error": "Verb 'cognitiveservices' not in allowed read-only list: {'account', 'show', 'get', 'list', 'describe'}"
+      },
+      "ok": false
+    },
+    {
+      "iteration": 0,
+      "tool": "azure_run_cli",
+      "input": {
+        "command": "az cognitiveservices account show --name ai-empire-openai-westus --resource-group ai-empire",
+        "description": "Confirm public network access for AI service 'ai-empire-openai-westus' to verify AZ-004 risk details (assuming resource group 'ai-empire')"
+      },
+      "result": {
+        "success": false,
+        "error": "Verb 'cognitiveservices' not in allowed read-only list: {'account', 'show', 'get', 'list', 'describe'}"
+      },
+      "ok": false
+    },
+    {
+      "iteration": 1,
+      "tool": "github_create_issue",
+      "input": {
+        "title": "High Risk: Key Vaults with Open Network Access (AZ-003)",
+        "body": "# AZ-003: Key Vaults with Open Network Access\\n\\n## Description\\nMultiple Key Vaults have been identified with open network access, posing a high security risk.\\n\\nAffected Resources:\\n- ai-empire-vault-01\\n- seobaike-vault\\n\\n## Recommended Action\\nRestrict network access to these Key Vaults by configuring private endpoints or firewall rules to allow only trusted IP ranges or VNet integration.\\n\\nPlease assign to Azure admin for manual remediation.",
+        "labels": [
+          "security",
+          "high",
+          "azure",
+          "manual-fix"
+        ],
+        "issue_id": "AZ-003"
+      },
+      "result": {
+        "success": false,
+        "error": "{\"message\":\"Resource not accessible by integration\",\"documentation_url\":\"https://docs.github.com/rest/issues/issues#create-an-issue\",\"status\":\"403\"}",
+        "status_code": 403
+      },
+      "ok": false
+    },
+    {
+      "iteration": 1,
+      "tool": "github_create_issue",
+      "input": {
+        "title": "Medium Risk: AI Services with Public Network Access (AZ-004)",
+        "body": "# AZ-004: AI Services with Public Network Access\\n\\n## Description\\nSeveral Azure AI services (OpenAI instances) have public network access enabled, which is a medium security risk.\\n\\nAffected Resources:\\n- ai-empire-openai-australiaeast\\n- ai-empire-openai-eastus\\n- ai-empire-openai-japaneast\\n- ai-empire-openai-southeastasia\\n- ai-empire-openai-swedencentral\\n- ai-empire-openai-uksouth\\n- ai-empire-openai-westeurope\\n- ai-empire-openai-westus\\n\\n## Recommended Action\\nDisable public network access and configure private endpoints or VNet service endpoints for these AI services.\\n\\nPlease assign to Azure admin for manual remediation.",
+        "labels": [
+          "security",
+          "medium",
+          "azure",
+          "manual-fix"
+        ],
+        "issue_id": "AZ-004"
+      },
+      "result": {
+        "success": false,
+        "error": "{\"message\":\"Resource not accessible by integration\",\"documentation_url\":\"https://docs.github.com/rest/issues/issues#create-an-issue\",\"status\":\"403\"}",
+        "status_code": 403
+      },
+      "ok": false
+    },
+    {
+      "iteration": 1,
+      "tool": "github_create_issue",
+      "input": {
+        "title": "High Risk: GitHub Repository is Public (GH-001)",
+        "body": "# GH-001: Repository is Public\\n\\n## Description\\nThe GitHub repository is set to public visibility, exposing source code and potentially sensitive information.\\n\\n## Recommended Action\\nChange the repository visibility to private. Review and remove any sensitive data if already exposed.\\n\\nPlease assign to GitHub admin for manual remediation.",
+        "labels": [
+          "security",
+          "high",
+          "github",
+          "manual-fix"
+        ],
+        "issue_id": "GH-001"
+      },
+      "result": {
+        "success": false,
+        "error": "{\"message\":\"Resource not accessible by integration\",\"documentation_url\":\"https://docs.github.com/rest/issues/issues#create-an-issue\",\"status\":\"403\"}",
+        "status_code": 403
+      },
+      "ok": false
+    }
+  ],
+  "tracker": []
+}
