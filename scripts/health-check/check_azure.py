@@ -5,8 +5,8 @@ API: Azure Resource Graph, Management API, Monitor, Cost Management
 """
 import os, requests
 
-SUBSCRIPTION_ID = os.environ.get("AZURE_SUBSCRIPTION_ID", "78da9233-ad83-4b40-99cd-e6ce2058b692")
-TENANT_ID      = os.environ.get("AZURE_TENANT_ID", os.environ.get("TENANT_ID", "c1e1278e-c05c-4d00-a4c9-93fbbea01346"))
+SUBSCRIPTION_ID = os.environ.get("AZURE_SUBSCRIPTION_ID", "fca96658-74df-4d3e-9212-aade3e98ca1f")
+TENANT_ID      = os.environ.get("AZURE_TENANT_ID", os.environ.get("TENANT_ID", "daea71db-b115-4dea-8b51-1b0757fee4b9"))
 CLIENT_ID      = os.environ.get("AZURE_CLIENT_ID", os.environ.get("CLIENT_ID", ""))
 CLIENT_SECRET  = os.environ.get("AZURE_CLIENT_SECRET", os.environ.get("CLIENT_SECRET", ""))
 
