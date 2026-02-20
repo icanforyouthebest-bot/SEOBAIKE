@@ -1,7 +1,7 @@
 // ===============================================================
-// 小白秘書 v4 — 全系統全集團 FINAL
+// 小白秘書 v5 — 全系統全集團 + 輝達 NIM 直連
 // 老闆專屬總部秘書長
-// 整合：Supabase · GitHub · Cloudflare · Azure AD · NVIDIA
+// 整合：Supabase · GitHub · Cloudflare · NVIDIA NIM · Azure AD
 //        SEOBAIKE · empire-ops · L1-L11 · 23 AI · 12 頻道
 // ===============================================================
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2'
@@ -61,6 +61,59 @@ function detectSwitch(text: string): string | null {
     if (lower.includes(alias.toLowerCase())) return id
   }
   return null
+}
+
+// ── 偵測輝達直連意圖 ─────────────────────────────────────────
+function detectNVIDIA(text: string): boolean {
+  const lower = text.toLowerCase()
+  const keywords = ['問輝達', '叫輝達', '輝達回答', '輝達說', '用nvidia', '用nim',
+                    'ask nvidia', 'nvidia answer', '輝達你好', '你好輝達',
+                    'nvidia:', 'nim:', '輝達:']
+  return keywords.some(k => lower.includes(k))
+}
+
+// ── NVIDIA NIM 直連 ──────────────────────────────────────────
+const NV_MODEL = 'meta/llama-3.3-70b-instruct'
+const NV_URL   = 'https://integrate.api.nvidia.com/v1/chat/completions'
+
+const NV_PROMPT = `你是 NVIDIA NIM 智能代理人，代號「輝達」，SEOBAIKE Empire AI 治理系統成員。
+你擅長：GPU 運算、AI 模型推理、技術架構建議、數據分析。
+請用繁體中文簡潔回答，5行內。直接進入重點。`
+
+async function askNVIDIA(msg: string, data?: Record<string, unknown>): Promise<string> {
+  if (!NV_KEY) return '⚠️ NVIDIA_API_KEY 未設定'
+  const ctx = data ? `\n\n系統數據：${JSON.stringify(data, null, 2).slice(0, 800)}` : ''
+  const res = await fetch(NV_URL, {
+    method: 'POST',
+    headers: { 'Authorization': `Bearer ${NV_KEY}`, 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      model: NV_MODEL,
+      messages: [
+        { role: 'system', content: NV_PROMPT },
+        { role: 'user', content: `${msg}${ctx}` }
+      ],
+      max_tokens: 500,
+      temperature: 0.7,
+    })
+  })
+  const d = await res.json()
+  if (!res.ok) return `⚠️ NVIDIA NIM 錯誤：${d.detail || res.status}`
+  return `🟢 [輝達 NIM · ${NV_MODEL}]\n${d.choices?.[0]?.message?.content || '無回應'}`
+}
+
+// ── 查詢 NVIDIA NIM 可用模型 ─────────────────────────────────
+async function qNVIDIAModels(): Promise<Record<string, unknown>> {
+  if (!NV_KEY) return { error: 'no key' }
+  try {
+    const res = await fetch('https://integrate.api.nvidia.com/v1/models', {
+      headers: { Authorization: `Bearer ${NV_KEY}` },
+      signal: AbortSignal.timeout(5000)
+    })
+    if (!res.ok) return { error: res.status }
+    const d = await res.json()
+    const models = (d.data || []).map((m: { id: string }) => m.id)
+    return { total: models.length, sample: models.slice(0, 10) }
+  } catch (e) { return { error: String(e) } }
 }
 
 // ── 執行切換 ──────────────────────────────────────────────────
@@ -212,7 +265,9 @@ async function qNVIDIA() {
       headers: { Authorization: `Bearer ${NV_KEY}` },
       signal: AbortSignal.timeout(5000)
     })
-    return { status: res.ok ? 'online' : 'error', code: res.status }
+    if (!res.ok) return { status: 'error', code: res.status }
+    const d = await res.json()
+    return { status: 'online', models: (d.data || []).length, active_model: NV_MODEL }
   } catch {
     return { status: 'timeout' }
   }
@@ -244,6 +299,7 @@ async function sendTG(chatId: string, text: string) {
 
 // ── 主邏輯 ────────────────────────────────────────────────────
 async function handle(sb: ReturnType<typeof createClient>, text: string): Promise<string> {
+  // 1. 切換代理人
   const sw = detectSwitch(text)
   if (sw) {
     const result = await doSwitch(sb, sw)
@@ -252,6 +308,20 @@ async function handle(sb: ReturnType<typeof createClient>, text: string): Promis
     return `${result}\n✦ 現在活躍：${active}`
   }
 
+  // 2. 輝達直連：直接讓 NVIDIA NIM 回答
+  if (detectNVIDIA(text)) {
+    const nvData = await qNVIDIA()
+    const cleanQ = text.replace(/問輝達|叫輝達|輝達回答|輝達說|用nvidia|用nim|ask nvidia|nvidia:|nim:|輝達:|你好輝達|輝達你好/gi, '').trim()
+    return await askNVIDIA(cleanQ || text, { nvidia_status: nvData })
+  }
+
+  // 3. 查詢輝達模型列表
+  if (text.includes('輝達模型') || text.includes('nvidia模型') || text.includes('nim模型') || text.includes('有哪些模型')) {
+    const models = await qNVIDIAModels()
+    return await askClaude(text, { nvidia_models: models })
+  }
+
+  // 4. 一般系統查詢
   const isAll = text.includes('全部') || text.includes('狀態') || text.includes('總部') || text.length < 6
   const [gov, gh, cf, site, nv] = await Promise.all([
     qSupabase(sb, text),
