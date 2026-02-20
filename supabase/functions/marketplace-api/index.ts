@@ -32,19 +32,17 @@ Deno.serve(async (req) => {
       const search = url.searchParams.get('q')
       const page = parseInt(url.searchParams.get('page') || '1')
       const limit = Math.min(parseInt(url.searchParams.get('limit') || '20'), 100)
-      const sort = url.searchParams.get('sort') || 'created_at'
-      const order = (url.searchParams.get('order') || 'desc') === 'asc'
       const offset = (page - 1) * limit
 
       let query = supabase
         .from('marketplace_products')
-        .select('*, marketplace_reviews(count)', { count: 'exact' })
-        .eq('status', 'active')
+        .select('*', { count: 'exact' })
+        .eq('is_active', true)
         .range(offset, offset + limit - 1)
-        .order(sort, { ascending: order })
+        .order('created_at', { ascending: false })
 
       if (category) query = query.eq('category', category)
-      if (search) query = query.or(`name.ilike.%${search}%,description.ilike.%${search}%`)
+      if (search) query = query.or(`product_name.ilike.%${search}%,description.ilike.%${search}%`)
 
       const { data, error, count } = await query
       if (error) throw error
@@ -63,13 +61,10 @@ Deno.serve(async (req) => {
 
       const [{ data: product, error: pErr }, { data: reviews }] = await Promise.all([
         supabase.from('marketplace_products').select('*').eq('id', id).single(),
-        supabase.from('marketplace_reviews').select('*').eq('product_id', id).order('created_at', { ascending: false }).limit(10),
+        supabase.from('marketplace_reviews').select('*').eq('listing_id', id).order('created_at', { ascending: false }).limit(10),
       ])
 
       if (pErr) throw pErr
-
-      // 瀏覽數 +1
-      await supabase.rpc('increment_product_view', { product_id: id }).catch(() => null)
 
       return new Response(JSON.stringify({
         product,
@@ -78,66 +73,16 @@ Deno.serve(async (req) => {
       }), { headers: { ...corsHeaders, 'Content-Type': 'application/json' } })
     }
 
-    // ── 3. 購買商品 ─────────────────────────────────────────
-    if (action === 'purchase') {
-      const { product_id, user_id, quantity = 1, payment_method } = body
-
-      if (!product_id || !user_id) {
-        return new Response(JSON.stringify({ error: 'product_id 和 user_id 為必填' }), {
-          status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' }
-        })
-      }
-
-      // 查商品價格
-      const { data: product, error: pErr } = await supabase
-        .from('marketplace_products')
-        .select('id, name, price_cents, currency, merchant_id, stock')
-        .eq('id', product_id)
-        .single()
-
-      if (pErr || !product) throw new Error('商品不存在')
-      if (product.stock !== null && product.stock < quantity) throw new Error('庫存不足')
-
-      const total_cents = product.price_cents * quantity
-
-      // 建立訂單
-      const { data: order, error: oErr } = await supabase
-        .from('marketplace_orders')
-        .insert({
-          product_id,
-          buyer_id: user_id,
-          merchant_id: product.merchant_id,
-          quantity,
-          unit_price_cents: product.price_cents,
-          total_cents,
-          currency: product.currency || 'TWD',
-          payment_method: payment_method || 'points',
-          status: 'pending',
-        })
-        .select()
-        .single()
-
-      if (oErr) throw oErr
-
-      console.log(`[marketplace-api] 新訂單：${order.id}，金額：${total_cents}`)
-
-      return new Response(JSON.stringify({
-        success: true,
-        order,
-        total_cents,
-        message: '訂單建立成功，請完成付款',
-      }), { headers: { ...corsHeaders, 'Content-Type': 'application/json' } })
-    }
-
-    // ── 4. 刊登商品 ─────────────────────────────────────────
+    // ── 3. 刊登商品 ─────────────────────────────────────────
     if (action === 'list-product') {
       const {
-        merchant_id, name, description, category,
-        price_cents, currency = 'TWD', stock, images, tags,
+        seller_node_id, product_name, description, category,
+        price_points, stock, commission_to_upline,
+        requires_patent_verify, requires_script_verify,
       } = body
 
-      if (!merchant_id || !name || !price_cents) {
-        return new Response(JSON.stringify({ error: 'merchant_id、name、price_cents 為必填' }), {
+      if (!seller_node_id || !product_name || !price_points) {
+        return new Response(JSON.stringify({ error: 'seller_node_id、product_name、price_points 為必填' }), {
           status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' }
         })
       }
@@ -145,11 +90,16 @@ Deno.serve(async (req) => {
       const { data, error } = await supabase
         .from('marketplace_products')
         .insert({
-          merchant_id, name, description,
+          seller_node_id,
+          product_name,
+          description,
           category: category || 'other',
-          price_cents, currency, stock: stock ?? null,
-          images: images || [], tags: tags || [],
-          status: 'pending_review',
+          price_points,
+          stock: stock ?? null,
+          commission_to_upline: commission_to_upline || 0,
+          requires_patent_verify: requires_patent_verify || false,
+          requires_script_verify: requires_script_verify || false,
+          is_active: false,
         })
         .select()
         .single()
@@ -163,12 +113,12 @@ Deno.serve(async (req) => {
       }), { headers: { ...corsHeaders, 'Content-Type': 'application/json' } })
     }
 
-    // ── 5. 寫評論 ────────────────────────────────────────────
+    // ── 4. 寫評論 ────────────────────────────────────────────
     if (action === 'review') {
-      const { product_id, user_id, rating, comment } = body
+      const { listing_id, reviewer_id, reviewer_name, rating, comment } = body
 
-      if (!product_id || !user_id || !rating) {
-        return new Response(JSON.stringify({ error: 'product_id、user_id、rating 為必填' }), {
+      if (!listing_id || !reviewer_id || !rating) {
+        return new Response(JSON.stringify({ error: 'listing_id、reviewer_id、rating 為必填' }), {
           status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' }
         })
       }
@@ -178,7 +128,9 @@ Deno.serve(async (req) => {
       const { data, error } = await supabase
         .from('marketplace_reviews')
         .upsert({
-          product_id, user_id,
+          listing_id,
+          reviewer_id,
+          reviewer_name: reviewer_name || 'Anonymous',
           rating: Math.round(rating),
           comment: comment || '',
         })
@@ -192,31 +144,9 @@ Deno.serve(async (req) => {
       })
     }
 
-    // ── 6. 我的訂單 ─────────────────────────────────────────
-    if (action === 'my-orders') {
-      const user_id = url.searchParams.get('user_id') || body.user_id
-      const status = url.searchParams.get('status')
-
-      let query = supabase
-        .from('marketplace_orders')
-        .select('*, marketplace_products(name, images)')
-        .eq('buyer_id', user_id)
-        .order('created_at', { ascending: false })
-        .limit(50)
-
-      if (status) query = query.eq('status', status)
-
-      const { data, error } = await query
-      if (error) throw error
-
-      return new Response(JSON.stringify({ orders: data, total: data?.length }), {
-        headers: { ...corsHeaders, 'Content-Type': 'application/json' }
-      })
-    }
-
     return new Response(JSON.stringify({
       error: '未知 action',
-      valid_actions: ['products', 'product', 'purchase', 'list-product', 'review', 'my-orders'],
+      valid_actions: ['products', 'product', 'list-product', 'review'],
     }), { status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' } })
 
   } catch (err: any) {
