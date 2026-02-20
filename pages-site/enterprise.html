@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SEOBAIKE — AI 基礎建設企業方案</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#03030a;
+  --bg2:#080818;
+  --gold:#f0c040;
+  --green:#00ff88;
+  --blue:#4488ff;
+  --red:#ff4455;
+  --text:#e8e8f0;
+  --dim:#7788aa;
+}
+body{background:var(--bg);color:var(--text);font-family:'SF Pro Display','Helvetica Neue',sans-serif;overflow-x:hidden}
+
+/* HERO */
+.hero{
+  min-height:100vh;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  text-align:center;padding:80px 40px;
+  background:radial-gradient(ellipse 80% 60% at 50% 0%,rgba(0,80,40,.35),transparent),
+             radial-gradient(ellipse 60% 40% at 80% 80%,rgba(0,60,140,.25),transparent),
+             var(--bg);
+  position:relative;overflow:hidden;
+}
+.hero::before{
+  content:'';position:absolute;inset:0;
+  background:repeating-linear-gradient(0deg,transparent,transparent 59px,rgba(0,255,136,.04) 60px),
+             repeating-linear-gradient(90deg,transparent,transparent 59px,rgba(0,255,136,.04) 60px);
+  pointer-events:none;
+}
+.badge{
+  display:inline-flex;align-items:center;gap:8px;
+  background:rgba(240,192,64,.12);border:1px solid rgba(240,192,64,.4);
+  color:var(--gold);padding:6px 18px;border-radius:999px;
+  font-size:13px;letter-spacing:.08em;text-transform:uppercase;margin-bottom:32px;
+}
+.badge span{width:8px;height:8px;background:var(--gold);border-radius:50%;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(.8)}}
+h1{font-size:clamp(48px,7vw,96px);font-weight:900;line-height:1;letter-spacing:-.03em;margin-bottom:24px}
+h1 .g{background:linear-gradient(135deg,var(--gold),var(--green));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.sub{font-size:clamp(18px,2.5vw,26px);color:var(--dim);max-width:720px;line-height:1.6;margin-bottom:48px}
+.stats-row{display:flex;gap:40px;flex-wrap:wrap;justify-content:center;margin-bottom:64px}
+.stat{text-align:center}
+.stat .n{font-size:clamp(32px,4vw,52px);font-weight:900;color:var(--green);line-height:1}
+.stat .l{font-size:14px;color:var(--dim);margin-top:4px;letter-spacing:.05em}
+.cta-row{display:flex;gap:16px;flex-wrap:wrap;justify-content:center}
+.btn{padding:14px 32px;border-radius:8px;font-size:16px;font-weight:700;cursor:pointer;border:none;text-decoration:none;transition:.2s}
+.btn-primary{background:var(--gold);color:#000}
+.btn-primary:hover{background:#ffd060}
+.btn-outline{background:transparent;border:1px solid rgba(255,255,255,.2);color:var(--text)}
+.btn-outline:hover{border-color:var(--green);color:var(--green)}
+
+/* PATENT BLOCK */
+.patent{background:rgba(240,192,64,.06);border:1px solid rgba(240,192,64,.25);padding:40px;margin:80px auto;max-width:900px;border-radius:16px;text-align:center}
+.patent .num{font-size:13px;letter-spacing:.15em;color:var(--gold);text-transform:uppercase;margin-bottom:12px}
+.patent h2{font-size:clamp(24px,3vw,36px);font-weight:800;margin-bottom:16px}
+.patent p{color:var(--dim);line-height:1.8;max-width:640px;margin:0 auto}
+
+/* SECTIONS */
+section{padding:100px 40px;max-width:1200px;margin:0 auto}
+.section-label{font-size:12px;letter-spacing:.15em;text-transform:uppercase;color:var(--green);margin-bottom:16px}
+.section-title{font-size:clamp(32px,4vw,52px);font-weight:800;margin-bottom:48px;line-height:1.1}
+
+/* LAYER MAP */
+.layer-map{display:grid;gap:2px;margin-bottom:64px}
+.layer{display:grid;grid-template-columns:100px 1fr 120px;align-items:center;gap:24px;padding:24px 32px;border-radius:12px;transition:.2s}
+.layer:hover{transform:translateX(8px)}
+.layer.l1{background:rgba(255,68,85,.1);border-left:4px solid var(--red)}
+.layer.l2{background:rgba(255,160,50,.1);border-left:4px solid #ff9933}
+.layer.l3{background:rgba(68,136,255,.1);border-left:4px solid var(--blue)}
+.layer.l4{background:rgba(0,255,136,.1);border-left:4px solid var(--green)}
+.layer .tag{font-size:28px;font-weight:900}
+.layer.l1 .tag{color:var(--red)}
+.layer.l2 .tag{color:#ff9933}
+.layer.l3 .tag{color:var(--blue)}
+.layer.l4 .tag{color:var(--green)}
+.layer h3{font-size:20px;font-weight:700;margin-bottom:6px}
+.layer p{font-size:15px;color:var(--dim);line-height:1.6}
+.layer .count{text-align:right}
+.layer .count .n{font-size:32px;font-weight:900}
+.layer.l1 .count .n{color:var(--red)}
+.layer.l2 .count .n{color:#ff9933}
+.layer.l3 .count .n{color:var(--blue)}
+.layer.l4 .count .n{color:var(--green)}
+.layer .count small{font-size:12px;color:var(--dim);display:block}
+
+/* REVENUE TABLE */
+.rev-table{width:100%;border-collapse:collapse;margin-bottom:48px}
+.rev-table th{text-align:left;padding:12px 16px;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);border-bottom:1px solid rgba(255,255,255,.08)}
+.rev-table td{padding:16px;border-bottom:1px solid rgba(255,255,255,.05);font-size:15px}
+.rev-table tr:hover td{background:rgba(255,255,255,.03)}
+.rev-table .price{color:var(--gold);font-weight:700;font-size:17px}
+.rev-table .tier{display:inline-block;padding:3px 10px;border-radius:4px;font-size:12px;font-weight:700;letter-spacing:.05em}
+.t-critical{background:rgba(255,68,85,.2);color:var(--red)}
+.t-high{background:rgba(240,192,64,.15);color:var(--gold)}
+.t-grow{background:rgba(68,136,255,.15);color:var(--blue)}
+
+/* COMPLIANCE GRID */
+.comp-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;margin-bottom:48px}
+.comp-card{background:rgba(0,255,136,.05);border:1px solid rgba(0,255,136,.15);border-radius:12px;padding:24px}
+.comp-card .icon{font-size:24px;margin-bottom:12px}
+.comp-card h4{font-size:16px;font-weight:700;margin-bottom:8px}
+.comp-card p{font-size:13px;color:var(--dim);line-height:1.6}
+.pass{display:inline-block;padding:2px 8px;background:rgba(0,255,136,.15);color:var(--green);border-radius:4px;font-size:11px;font-weight:700;margin-top:8px}
+
+/* PLATFORM GRID */
+.platform-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:12px;margin-bottom:48px}
+.platform-card{background:var(--bg2);border:1px solid rgba(255,255,255,.08);border-radius:10px;padding:16px;text-align:center;transition:.2s}
+.platform-card:hover{border-color:var(--green);transform:translateY(-2px)}
+.platform-card .name{font-size:14px;font-weight:600;margin-bottom:4px}
+.platform-card .status{font-size:11px;padding:2px 8px;border-radius:4px;display:inline-block}
+.s-live{background:rgba(0,255,136,.15);color:var(--green)}
+.s-plan{background:rgba(255,255,255,.06);color:var(--dim)}
+
+/* PRICING */
+.pricing-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px;margin-bottom:48px}
+.price-card{background:var(--bg2);border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:32px;position:relative;overflow:hidden}
+.price-card.featured{border-color:var(--gold);background:rgba(240,192,64,.05)}
+.price-card.featured::before{content:'最受歡迎';position:absolute;top:16px;right:16px;background:var(--gold);color:#000;font-size:11px;font-weight:700;padding:4px 10px;border-radius:4px}
+.price-card h3{font-size:20px;font-weight:700;margin-bottom:8px}
+.price-card .amount{font-size:42px;font-weight:900;color:var(--gold);margin:16px 0 4px}
+.price-card .amount span{font-size:18px;color:var(--dim)}
+.price-card .period{font-size:13px;color:var(--dim);margin-bottom:24px}
+.price-card ul{list-style:none;display:flex;flex-direction:column;gap:10px}
+.price-card ul li{font-size:14px;color:var(--dim);padding-left:20px;position:relative}
+.price-card ul li::before{content:'✓';position:absolute;left:0;color:var(--green);font-weight:700}
+
+/* FOOTER CTA */
+.footer-cta{text-align:center;padding:100px 40px;background:radial-gradient(ellipse 70% 80% at 50% 100%,rgba(0,80,40,.3),transparent)}
+.footer-cta h2{font-size:clamp(36px,5vw,64px);font-weight:900;margin-bottom:24px}
+.footer-cta p{font-size:18px;color:var(--dim);max-width:560px;margin:0 auto 40px}
+
+/* RESPONSIVE */
+@media(max-width:640px){
+  .layer{grid-template-columns:60px 1fr;}.layer .count{display:none}
+  .stats-row{gap:24px}
+}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="badge"><span></span>台灣專利 115100981 受保護</div>
+  <h1>AI 基礎建設<br><span class="g">不可繞過的關口</span></h1>
+  <p class="sub">每一次 AI 推論，每一筆合規交易，每一個行業節點——<br>全部通過 SEOBAIKE L1-L4 約束層。這是收稅，不是競爭。</p>
+  <div class="stats-row">
+    <div class="stat"><div class="n">21</div><div class="l">全球產業類別</div></div>
+    <div class="stat"><div class="n">414</div><div class="l">原子執行節點</div></div>
+    <div class="stat"><div class="n">40+</div><div class="l">AI 模型整合</div></div>
+    <div class="stat"><div class="n">16</div><div class="l">訊息平台</div></div>
+    <div class="stat"><div class="n">176</div><div class="l">資料庫資料表</div></div>
+  </div>
+  <div class="cta-row">
+    <a href="#pricing" class="btn btn-primary">查看企業方案</a>
+    <a href="mailto:enterprise@seobaike.com" class="btn btn-outline">預約諮詢</a>
+  </div>
+</div>
+
+<!-- PATENT -->
+<div class="patent">
+  <div class="num">核心護城河</div>
+  <h2>「世界定義約束法用於AI推理」</h2>
+  <p>專利 115100981 建立了一套不可繞過的四層約束架構，對齊 TSIC / NAICS / NACE / JSIC 四個國際產業標準，覆蓋全球 21 個宏觀產業類別中每一次 AI 推論行為。任何在受監管行業部署 AI 的企業，必須通過本層。</p>
+</div>
+
+<!-- LAYER ARCHITECTURE -->
+<section>
+  <div class="section-label">系統架構</div>
+  <div class="section-title">四層不可逾越的約束</div>
+  <div class="layer-map">
+    <div class="layer l1">
+      <div class="tag">L1</div>
+      <div>
+        <h3>主權資料層（不可變）</h3>
+        <p>21 個全球產業類別定義，凍結後無法修改或刪除。任何 AI 推論的產業歸屬從這裡確定。</p>
+      </div>
+      <div class="count"><div class="n">21</div><small>產業類別</small></div>
+    </div>
+    <div class="layer l2">
+      <div class="tag">L2</div>
+      <div>
+        <h3>推論規則層（唯讀）</h3>
+        <p>85 個次產業分類。AML 反洗錢引擎 + KYC 驗證引擎在此層運行，讀取 L1 資料，不可寫入。</p>
+      </div>
+      <div class="count"><div class="n">85</div><small>合規子類</small></div>
+    </div>
+    <div class="layer l3">
+      <div class="tag">L3</div>
+      <div>
+        <h3>流程執行層（事件驅動）</h3>
+        <p>207 個製程節點。每次訂單建立、支付成功、佣金計算都在此執行，不可跳過 L2 驗證。</p>
+      </div>
+      <div class="count"><div class="n">207</div><small>流程節點</small></div>
+    </div>
+    <div class="layer l4">
+      <div class="tag">L4</div>
+      <div>
+        <h3>治理審計層（原子執行）</h3>
+        <p>414 個原子執行節點。每個動作均有不可竄改的審計軌跡，符合金管會、ISO 27001、NIST CSF。</p>
+      </div>
+      <div class="count"><div class="n">414</div><small>執行節點</small></div>
+    </div>
+  </div>
+</section>
+
+<!-- COMPLIANCE -->
+<section>
+  <div class="section-label">法遵認證</div>
+  <div class="section-title">金融級合規，開箱即用</div>
+  <div class="comp-grid">
+    <div class="comp-card">
+      <div class="icon">🏛️</div>
+      <h4>金管會 FSC</h4>
+      <p>完整金管會查核文件，涵蓋資料治理、模型治理、流程治理、權限治理、供應商治理。</p>
+      <span class="pass">全部 PASS</span>
+    </div>
+    <div class="comp-card">
+      <div class="icon">🔒</div>
+      <h4>AML 反洗錢</h4>
+      <p>基於洗錢防制法的即時交易監控引擎，自動產生警示與案件，符合 FATF 建議。</p>
+      <span class="pass">合規</span>
+    </div>
+    <div class="comp-card">
+      <div class="icon">🪪</div>
+      <h4>KYC 身份驗證</h4>
+      <p>文件驗證、風險評分、持續監控三層機制，符合電子支付機構管理條例。</p>
+      <span class="pass">合規</span>
+    </div>
+    <div class="comp-card">
+      <div class="icon">🌐</div>
+      <h4>ISO 27001</h4>
+      <p>A.8、A.12、A.14 條款對應完整，可直接提交外部稽核。</p>
+      <span class="pass">對應完整</span>
+    </div>
+    <div class="comp-card">
+      <div class="icon">🛡️</div>
+      <h4>NIST CSF</h4>
+      <p>ID.AM、PR.DS、DE.AE 框架完整實作，Zero Trust 架構。</p>
+      <span class="pass">對應完整</span>
+    </div>
+    <div class="comp-card">
+      <div class="icon">📋</div>
+      <h4>個資法 PDPA</h4>
+      <p>資料不可變、存取可追溯、遮罩/代碼化，符合台灣個人資料保護法要求。</p>
+      <span class="pass">合規</span>
+    </div>
+  </div>
+</section>
+
+<!-- REVENUE NODES -->
+<section>
+  <div class="section-label">收費節點</div>
+  <div class="section-title">每個節點都是收入</div>
+  <table class="rev-table">
+    <thead>
+      <tr>
+        <th>節點</th>
+        <th>收費方式</th>
+        <th>單價</th>
+        <th>優先級</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>L1-L4 AI推論驗證</strong><br><small style="color:var(--dim)">每次AI推論通過合規層</small></td>
+        <td>Per call</td>
+        <td class="price">$0.001 / 次</td>
+        <td><span class="tier t-critical">核心</span></td>
+      </tr>
+      <tr>
+        <td><strong>AML 交易掃描</strong><br><small style="color:var(--dim)">每筆交易反洗錢檢查</small></td>
+        <td>Per scan</td>
+        <td class="price">$0.05 / 次</td>
+        <td><span class="tier t-critical">核心</span></td>
+      </tr>
+      <tr>
+        <td><strong>KYC 文件驗證</strong><br><small style="color:var(--dim)">身份文件上傳驗證</small></td>
+        <td>Per document</td>
+        <td class="price">$5–50 / 份</td>
+        <td><span class="tier t-critical">核心</span></td>
+      </tr>
+      <tr>
+        <td><strong>訂單佣金抽成</strong><br><small style="color:var(--dim)">平台上每筆成交訂單</small></td>
+        <td>% of GMV</td>
+        <td class="price">2–5%</td>
+        <td><span class="tier t-high">高</span></td>
+      </tr>
+      <tr>
+        <td><strong>企業合規認證</strong><br><small style="color:var(--dim)">年度FSC/ISO合規包</small></td>
+        <td>Annual</td>
+        <td class="price">$50K–200K / 年</td>
+        <td><span class="tier t-high">高</span></td>
+      </tr>
+      <tr>
+        <td><strong>訊息平台中繼</strong><br><small style="color:var(--dim)">16個平台統一訊息路由</small></td>
+        <td>Per message</td>
+        <td class="price">$0.0001 / 條</td>
+        <td><span class="tier t-grow">擴張</span></td>
+      </tr>
+      <tr>
+        <td><strong>MCP 市集佣金</strong><br><small style="color:var(--dim)">市集上每筆MCP交易</small></td>
+        <td>Revenue share</td>
+        <td class="price">30%</td>
+        <td><span class="tier t-grow">擴張</span></td>
+      </tr>
+      <tr>
+        <td><strong>專利授權費</strong><br><small style="color:var(--dim)">L1-L4技術國際授權</small></td>
+        <td>Per deployment</td>
+        <td class="price">$1–10 / 部署</td>
+        <td><span class="tier t-grow">擴張</span></td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- PLATFORMS -->
+<section>
+  <div class="section-label">訊息覆蓋</div>
+  <div class="section-title">16 個平台，一個接口</div>
+  <div class="platform-grid">
+    <div class="platform-card"><div class="name">Telegram</div><span class="status s-live">上線</span></div>
+    <div class="platform-card"><div class="name">LINE</div><span class="status s-live">上線</span></div>
+    <div class="platform-card"><div class="name">WhatsApp</div><span class="status s-live">上線</span></div>
+    <div class="platform-card"><div class="name">Messenger</div><span class="status s-live">上線</span></div>
+    <div class="platform-card"><div class="name">Discord</div><span class="status s-live">上線</span></div>
+    <div class="platform-card"><div class="name">Slack</div><span class="status s-live">上線</span></div>
+    <div class="platform-card"><div class="name">Teams</div><span class="status s-live">上線</span></div>
+    <div class="platform-card"><div class="name">WeChat</div><span class="status s-live">上線</span></div>
+    <div class="platform-card"><div class="name">Google Chat</div><span class="status s-live">上線</span></div>
+    <div class="platform-card"><div class="name">Signal</div><span class="status s-live">上線</span></div>
+    <div class="platform-card"><div class="name">Viber</div><span class="status s-live">上線</span></div>
+    <div class="platform-card"><div class="name">SMS (Twilio)</div><span class="status s-live">上線</span></div>
+    <div class="platform-card"><div class="name">KakaoTalk</div><span class="status s-plan">規劃中</span></div>
+    <div class="platform-card"><div class="name">Instagram DM</div><span class="status s-plan">規劃中</span></div>
+    <div class="platform-card"><div class="name">X DM</div><span class="status s-plan">規劃中</span></div>
+    <div class="platform-card"><div class="name">iMessage</div><span class="status s-plan">規劃中</span></div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section id="pricing">
+  <div class="section-label">企業方案</div>
+  <div class="section-title">選擇你的節點</div>
+  <div class="pricing-grid">
+    <div class="price-card">
+      <h3>合規入門</h3>
+      <div class="amount">$5K<span>/月</span></div>
+      <div class="period">適合：金融科技新創、中型企業</div>
+      <ul>
+        <li>L1-L4 即時合規驗證</li>
+        <li>AML 反洗錢監控</li>
+        <li>KYC 文件驗證（100份/月）</li>
+        <li>5個訊息平台整合</li>
+        <li>月度合規報告</li>
+        <li>基礎 API 存取</li>
+      </ul>
+    </div>
+    <div class="price-card featured">
+      <h3>金融級基礎建設</h3>
+      <div class="amount">$20K<span>/月</span></div>
+      <div class="period">適合：銀行、保險、證券商</div>
+      <ul>
+        <li>完整 L1-L4 合規層</li>
+        <li>AML + KYC 無限量</li>
+        <li>金管會查核文件包</li>
+        <li>16個訊息平台全接通</li>
+        <li>40+ AI 模型路由</li>
+        <li>即時 CEO 儀表板</li>
+        <li>專屬支援工程師</li>
+        <li>ISO 27001 對應文件</li>
+      </ul>
+    </div>
+    <div class="price-card">
+      <h3>主權 OS 授權</h3>
+      <div class="amount">$100K<span>/年起</span></div>
+      <div class="period">適合：大型集團、政府機構</div>
+      <ul>
+        <li>L1-L4 專利白標授權</li>
+        <li>私有雲部署</li>
+        <li>源碼使用授權</li>
+        <li>專屬合規顧問</li>
+        <li>FSC監理介面</li>
+        <li>無限用量</li>
+        <li>SLA 99.99%</li>
+        <li>24/7 緊急應變</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER CTA -->
+<div class="footer-cta">
+  <h2>準備好讓 AI 合規<br>變成你的護城河？</h2>
+  <p>台灣 AI 基本法已三讀通過。每一天不合規，都是法律風險。每一天合規，都是競爭優勢。</p>
+  <div class="cta-row" style="justify-content:center;display:flex;gap:16px;flex-wrap:wrap">
+    <a href="mailto:enterprise@seobaike.com" class="btn btn-primary">立即預約企業諮詢</a>
+    <a href="/compliance" class="btn btn-outline">查看合規文件</a>
+  </div>
+  <p style="margin-top:40px;font-size:13px;color:var(--dim)">
+    小路光有限公司 統編 60475510 ｜ 台灣專利 115100981
+  </p>
+</div>
+
+</body>
+</html>

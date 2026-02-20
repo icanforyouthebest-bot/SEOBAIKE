@@ -23,6 +23,7 @@
 /start          /start.html         200
 /compliance     /compliance.html    200
 /billing        /billing.html       200
+/enterprise     /enterprise.html    200
 
 # SPA fallback — last resort
 /*              /index.html         200

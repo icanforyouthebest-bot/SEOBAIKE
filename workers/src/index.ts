@@ -63,6 +63,7 @@ export default {
       '/start': 'start.html',
       '/compliance': 'compliance.html',
       '/billing': 'billing.html',
+      '/enterprise': 'enterprise.html',
       '/commander': 'commander.html',
       '/ceo': 'ceo.html',
       '/admin': 'admin.html',
