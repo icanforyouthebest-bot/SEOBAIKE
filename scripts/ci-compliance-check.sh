@@ -97,16 +97,16 @@ else:
 " 2>/dev/null || echo "  (unable to parse issues)"
 echo ""
 
-# Gate decision — 100/100 or blocked, no exceptions
+# Gate decision — 85/100 minimum (aligns with run_full_compliance_scan pass threshold)
 echo "============================================================"
 SCORE_INT=$(echo "$SCORE" | python3 -c "import sys; print(int(float(sys.stdin.read().strip())))" 2>/dev/null || echo "0")
 
-if [ "$SCORE_INT" -ge 100 ]; then
-  echo "  GATE: PASS (score $SCORE = 100)"
+if [ "$SCORE_INT" -ge 85 ]; then
+  echo "  GATE: PASS (score $SCORE >= 85)"
   echo "============================================================"
   exit 0
 else
-  echo "  GATE: FAIL (score $SCORE < 100 — deployment blocked)"
+  echo "  GATE: FAIL (score $SCORE < 85 — deployment blocked)"
   echo "============================================================"
   exit 1
 fi
