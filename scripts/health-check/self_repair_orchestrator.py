@@ -672,8 +672,8 @@ dry_run: {DRY_RUN}"""
     repair_log = []
     max_iterations = 30
 
-    # xAI model priority: grok-3 → grok-2-1212 → grok-2 → grok-beta
-    model_candidates = ["grok-3", "grok-2-1212", "grok-2", "grok-beta"]
+    # xAI model priority: grok-4-0709 → grok-3 → grok-3-mini
+    model_candidates = ["grok-4-0709", "grok-3", "grok-3-mini"]
     active_model = None  # cache successful model to skip retries
 
     for iteration in range(max_iterations):
