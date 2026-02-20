@@ -790,6 +790,7 @@ export default {
         case '/api/ai/chat': return await handleAiChat(request, env)
         case '/api/ai/nim': return await handleNimChat(request, env)
         case '/api/widget-chat': return await handleWidgetChatSmart(request, env)
+        case '/api/ai/widget-chat': return await handleWidgetChatSmart(request, env)
         case '/api/ai/smart': return await handleSmartRouter(request, env)
         // ── SEOBAIKE 世界級 API 路由 ──
         case '/api/ai/router': return await proxyEdge(request, env, 'ai-universal-router')
