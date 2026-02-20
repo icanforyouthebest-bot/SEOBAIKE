@@ -1,0 +1,28 @@
+# Explicit routes — must come before SPA fallback
+/admin          /admin.html         200
+/ceo            /ceo.html           200
+/commander      /commander.html     200
+/war-room       /war-room.html      200
+/command-center /command-center.html 200
+/dashboard      /dashboard.html     200
+/login          /login.html         200
+/about          /about.html         200
+/features       /features.html      200
+/pricing        /pricing.html       200
+/docs           /docs.html          200
+/contact        /contact.html       200
+/blog           /blog.html          200
+/ecosystem      /ecosystem.html     200
+/marketing      /marketing.html     200
+/privacy        /privacy.html       200
+/terms          /terms.html         200
+/marketplace    /marketplace.html   200
+/bots           /bots.html          200
+/ai             /ai.html            200
+/status         /status.html        200
+/start          /start.html         200
+/compliance     /compliance.html    200
+/billing        /billing.html       200
+
+# SPA fallback — last resort
+/*              /index.html         200
