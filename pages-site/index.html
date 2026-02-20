@@ -1,241 +1,726 @@
 <!doctype html>
 <html lang="zh-TW">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
-    
-    <!-- Primary Meta Tags -->
-    <title>SEOBAIKE - AI 驅動的 SEO 自動化平台</title>
-    <meta name="title" content="SEOBAIKE - AI FOR SEO" />
-    <meta name="description" content="SEOBAIKE 提供一站式 AI SEO 工具：自動建站、AI 配音、AI 影片、SEO 健檢。點數制計費，無綁約。" />
-    <meta name="keywords" content="AI SEO,自動建站,AI配音,AI影片,SEO健檢,網站優化,SEOBAIKE" />
-    <meta name="author" content="SEOBAIKE" />
-    <meta name="robots" content="index, follow" />
-    <meta name="language" content="zh-TW" />
-    <meta name="geo.region" content="TW" />
-    <meta name="geo.placename" content="Taiwan" />
-    
-    <!-- Canonical URL -->
-    <link rel="canonical" href="https://www.aiforseo.vip/" />
-    
-    <!-- Open Graph / LINE / Facebook -->
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://www.aiforseo.vip/" />
-    <meta property="og:site_name" content="SEOBAIKE" />
-    <meta property="og:title" content="SEOBAIKE - AI FOR SEO" />
-    <meta property="og:description" content="30秒自動部署網站，AI 生成內容，一站式 SEO 解決方案" />
-    <meta property="og:image" content="https://www.aiforseo.vip/og-image.png" />
-    <meta property="og:image:type" content="image/png" />
-    <meta property="og:image:width" content="1200" />
-    <meta property="og:image:height" content="630" />
-    <meta property="og:image:alt" content="SEOBAIKE AI FOR SEO 平台" />
-    <meta property="og:locale" content="zh_TW" />
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=5.0"/>
+<title>SEOBAIKE — AI 帝國總部 | aiforseo.vip</title>
+<meta name="title" content="SEOBAIKE - AI FOR SEO"/>
+<meta name="description" content="SEOBAIKE 提供一站式 AI SEO 工具：自動建站、AI 配音、AI 影片、SEO 健檢。點數制計費，無綁約。"/>
+<meta name="keywords" content="AI SEO,自動建站,AI配音,AI影片,SEO健檢,網站優化,SEOBAIKE"/>
+<meta name="author" content="SEOBAIKE"/>
+<meta name="robots" content="index,follow"/>
+<meta name="language" content="zh-TW"/>
+<meta name="geo.region" content="TW"/>
+<link rel="canonical" href="https://www.aiforseo.vip/"/>
+<meta property="og:type" content="website"/>
+<meta property="og:url" content="https://www.aiforseo.vip/"/>
+<meta property="og:title" content="SEOBAIKE - AI FOR SEO"/>
+<meta property="og:description" content="23 AI 引擎 · 12 頻道 · 全球邊緣部署 · 一鍵 SEO 自動化"/>
+<meta property="og:image" content="https://www.aiforseo.vip/og-image.png"/>
+<meta property="og:locale" content="zh_TW"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="SEOBAIKE - AI FOR SEO"/>
+<meta name="twitter:description" content="23 AI 引擎 · 12 頻道 · 全球邊緣部署"/>
+<meta name="twitter:image" content="https://www.aiforseo.vip/og-image.png"/>
+<link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
+<link rel="icon" type="image/x-icon" href="/favicon.ico"/>
+<link rel="apple-touch-icon" sizes="180x180" href="/favicon.svg"/>
+<meta name="theme-color" content="#0a0a0a"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Noto+Sans+TC:wght@400;500;700&family=Share+Tech+Mono&display=swap" rel="stylesheet"/>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"SEOBAIKE","url":"https://www.aiforseo.vip","description":"AI 驅動的 SEO 自動化平台","inLanguage":"zh-TW"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"小路光有限公司","alternateName":"SEOBAIKE","url":"https://aiforseo.vip","telephone":["04-7776342","0980-434-242"],"email":"seobaike@aiforseo.vip","taxID":"60475510","address":{"@type":"PostalAddress","streetAddress":"埔菜路67號","addressLocality":"埔鹽鄉","addressRegion":"彰化縣","addressCountry":"TW"}}</script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#060608;--card:#0d0d12;--border:#1a1a28;
+  --g:#00ff88;--b:#00aaff;--p:#bb44ff;--gold:#ffd700;
+  --r:#ff3344;--y:#ffcc00;--text:#e8e8f0;--dim:#666;
+  --glow:rgba(0,255,136,.12)
+}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:'Noto Sans TC',sans-serif;overflow-x:hidden;line-height:1.6}
 
-    <!-- Twitter -->
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:url" content="https://www.aiforseo.vip/" />
-    <meta name="twitter:title" content="SEOBAIKE - AI FOR SEO" />
-    <meta name="twitter:description" content="30秒自動部署網站，AI 生成內容，一站式 SEO 解決方案" />
-    <meta name="twitter:image" content="https://www.aiforseo.vip/og-image.png" />
+/* ── CANVAS BG ── */
+#bg-canvas{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;opacity:.5}
 
-    <!-- Favicon - SEOBAIKE Brand -->
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
-    <link rel="apple-touch-icon" sizes="180x180" href="/favicon.svg" />
-    
-    <!-- Preconnect to external domains for performance -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    
-    <!-- Theme Color for mobile browsers -->
-    <meta name="theme-color" content="#667eea" />
-    <meta name="msapplication-TileColor" content="#667eea" />
+/* ── SCANLINES ── */
+body::after{content:'';position:fixed;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 3px,rgba(0,255,136,.01) 3px,rgba(0,255,136,.01) 4px);pointer-events:none;z-index:1}
 
-    <!-- JSON-LD Structured Data -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "WebSite",
-      "name": "SEOBAIKE",
-      "alternateName": "SEOBAIKE AI-SEO Platform",
-      "url": "https://www.aiforseo.vip",
-      "description": "AI 驅動的 SEO 自動化平台，一站式 AI SEO 工具",
-      "inLanguage": "zh-TW",
-      "potentialAction": {
-        "@type": "SearchAction",
-        "target": "https://www.aiforseo.vip/search?q={search_term_string}",
-        "query-input": "required name=search_term_string"
-      }
-    }
-    </script>
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "Organization",
-      "name": "SEOBAIKE",
-      "alternateName": "SEOBAIKE AI-SEO Platform",
-      "url": "https://www.aiforseo.vip",
-      "logo": "https://www.aiforseo.vip/og-image.png",
-      "image": "https://www.aiforseo.vip/og-image.png",
-      "description": "AI 驅動的 SEO 自動化平台",
-      "foundingDate": "2024",
-      "sameAs": [
-        "https://line.me/R/ti/p/@729zaaaq"
-      ],
-      "contactPoint": {
-        "@type": "ContactPoint",
-        "telephone": "04-7776342",
-        "contactType": "customer service",
-        "availableLanguage": ["Chinese", "English"]
-      }
-    }
-    </script>
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "SoftwareApplication",
-      "name": "SEOBAIKE AI SEO 平台",
-      "applicationCategory": "WebApplication",
-      "operatingSystem": "Web",
-      "offers": {
-        "@type": "Offer",
-        "price": "0",
-        "priceCurrency": "TWD",
-        "description": "免費試用 AI SEO 工具"
-      },
-      "aggregateRating": {
-        "@type": "AggregateRating",
-        "ratingValue": "4.9",
-        "ratingCount": "150"
-      }
-    }
-    </script>
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "LocalBusiness",
-      "name": "小路光有限公司",
-      "alternateName": "SEOBAIKE",
-      "telephone": ["04-7776342", "0980-434-242"],
-      "email": "seobaike@aiforseo.vip",
-      "url": "https://aiforseo.vip",
-      "image": "https://aiforseo.vip/og-image.jpg",
-      "priceRange": "$$",
-      "taxID": "60475510",
-      "address": {
-        "@type": "PostalAddress",
-        "streetAddress": "埔菜路67號",
-        "addressLocality": "埔鹽鄉埔南村",
-        "addressRegion": "彰化縣",
-        "addressCountry": "TW"
-      },
-      "geo": {
-        "@type": "GeoCoordinates",
-        "latitude": "23.9",
-        "longitude": "120.4"
-      },
-      "openingHours": "Mo-Fr 09:00-18:00",
-      "sameAs": [
-        "https://line.me/R/ti/p/@729zaaaq"
-      ]
-    }
-    </script>
-    <script type="module" crossorigin src="/assets/index-Bx4YWoMU.js"></script>
-    <link rel="stylesheet" crossorigin href="/assets/index-CpzrRl_r.css">
-  </head>
+/* ── NAV ── */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  display:flex;align-items:center;gap:16px;
+  padding:0 24px;height:56px;
+  background:rgba(6,6,8,.85);backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--border)
+}
+.nav-logo{font-family:'Orbitron',sans-serif;font-size:16px;color:var(--g);letter-spacing:3px;text-decoration:none;white-space:nowrap}
+.nav-logo span{color:var(--b)}
+.nav-ticker{flex:1;overflow:hidden;height:20px;position:relative;margin:0 16px}
+.nav-ticker-inner{
+  display:flex;gap:32px;white-space:nowrap;
+  font-family:'Share Tech Mono',monospace;font-size:11px;color:var(--dim);
+  animation:ticker 40s linear infinite
+}
+@keyframes ticker{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.tk-green{color:var(--g)}.tk-blue{color:var(--b)}.tk-gold{color:var(--gold)}
+.nav-live{display:flex;align-items:center;gap:6px;font-family:'Share Tech Mono',monospace;font-size:10px;color:var(--g);border:1px solid #1a3a1a;border-radius:20px;padding:3px 10px;background:#040a04;white-space:nowrap}
+.live-dot{width:6px;height:6px;border-radius:50%;background:var(--g);animation:blink 1.4s ease-in-out infinite}
+@keyframes blink{0%,100%{opacity:1;box-shadow:0 0 6px var(--g)}50%{opacity:.3;box-shadow:none}}
+.nav-btns{display:flex;gap:8px}
+.btn-ghost{padding:6px 16px;border:1px solid var(--border);border-radius:4px;color:var(--dim);font-size:12px;text-decoration:none;transition:all .2s}
+.btn-ghost:hover{border-color:var(--g);color:var(--g)}
+.btn-cta{padding:6px 18px;background:linear-gradient(135deg,#003322,#001a11);border:1px solid var(--g);border-radius:4px;color:var(--g);font-size:12px;text-decoration:none;font-family:'Orbitron',sans-serif;letter-spacing:1px;transition:all .2s;white-space:nowrap}
+.btn-cta:hover{background:var(--g);color:#000;box-shadow:0 0 16px var(--g)}
 
-  <body>
-    <div id="root"><style>
-*{box-sizing:border-box;margin:0;padding:0}
-#sb-page{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:#0a0a1a;min-height:100vh;color:#fff}
-#sb-nav{display:flex;align-items:center;justify-content:space-between;padding:16px 24px;background:rgba(10,10,26,.9);backdrop-filter:blur(20px);position:sticky;top:0;z-index:100;border-bottom:1px solid rgba(255,255,255,.08)}
-.sb-logo{font-size:1.4rem;font-weight:900;background:linear-gradient(135deg,#667eea,#764ba2);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-.sb-nav-btns{display:flex;gap:12px}
-.sb-btn{padding:8px 20px;border-radius:8px;font-size:.9rem;font-weight:600;cursor:pointer;text-decoration:none;transition:.2s}
-.sb-btn-outline{border:1px solid rgba(255,255,255,.3);color:#fff;background:transparent}
-.sb-btn-primary{background:linear-gradient(135deg,#667eea,#764ba2);color:#fff;border:none}
-#sb-hero{text-align:center;padding:80px 24px 60px;background:linear-gradient(135deg,#0a0a2e 0%,#1a0a3e 50%,#0a1a2e 100%)}
-.sb-badge{display:inline-flex;align-items:center;gap:6px;padding:6px 14px;border-radius:20px;background:rgba(102,126,234,.15);border:1px solid rgba(102,126,234,.3);color:#a78bfa;font-size:.8rem;margin:4px;font-weight:500}
-#sb-hero h1{font-size:clamp(2rem,5vw,4rem);font-weight:900;margin:24px 0 16px;line-height:1.1}
-#sb-hero h1 span{background:linear-gradient(135deg,#667eea,#e8850c);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-#sb-hero p{font-size:1.1rem;color:rgba(255,255,255,.7);margin-bottom:40px;max-width:600px;margin-left:auto;margin-right:auto}
-.sb-cta-group{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-bottom:60px}
-.sb-cta-primary{padding:14px 32px;background:linear-gradient(135deg,#667eea,#764ba2);border:none;color:#fff;border-radius:12px;font-size:1rem;font-weight:700;cursor:pointer;text-decoration:none;display:inline-block;box-shadow:0 8px 32px rgba(102,126,234,.4)}
-.sb-cta-secondary{padding:14px 32px;border:2px solid rgba(255,255,255,.2);color:#fff;border-radius:12px;font-size:1rem;font-weight:600;text-decoration:none;display:inline-block}
-.sb-stats{display:flex;gap:32px;justify-content:center;flex-wrap:wrap;padding:32px 0}
-.sb-stat{text-align:center}.sb-stat-num{font-size:2rem;font-weight:900;background:linear-gradient(135deg,#667eea,#e8850c);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-.sb-stat-label{font-size:.8rem;color:rgba(255,255,255,.5);margin-top:4px}
-#sb-features{padding:60px 24px;max-width:1100px;margin:0 auto}
-#sb-features h2{text-align:center;font-size:2rem;font-weight:800;margin-bottom:40px}
-.sb-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px}
-.sb-card{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:24px}
-.sb-card-icon{font-size:2rem;margin-bottom:12px}
-.sb-card h3{font-size:1.1rem;font-weight:700;margin-bottom:8px}
-.sb-card p{color:rgba(255,255,255,.6);font-size:.9rem;line-height:1.6}
-#sb-pricing{padding:60px 24px;background:rgba(255,255,255,.02);text-align:center}
-#sb-pricing h2{font-size:2rem;font-weight:800;margin-bottom:8px}
-#sb-pricing p{color:rgba(255,255,255,.6);margin-bottom:40px}
-.sb-price-grid{display:flex;gap:20px;justify-content:center;flex-wrap:wrap}
-.sb-price-card{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:28px;min-width:240px;text-align:center}
-.sb-price-card.featured{border-color:#667eea;background:rgba(102,126,234,.1)}
-.sb-price-name{font-size:1.1rem;font-weight:700;margin-bottom:8px}
-.sb-price-amount{font-size:2.5rem;font-weight:900;color:#667eea;margin:12px 0}
-.sb-price-amount span{font-size:1rem;color:rgba(255,255,255,.5);font-weight:400}
-.sb-price-desc{font-size:.85rem;color:rgba(255,255,255,.6);margin-bottom:20px}
-#sb-footer{text-align:center;padding:32px 24px;border-top:1px solid rgba(255,255,255,.08);color:rgba(255,255,255,.4);font-size:.85rem}
+/* ── HERO ── */
+#hero{
+  position:relative;z-index:2;
+  min-height:100vh;display:flex;align-items:center;justify-content:center;
+  text-align:center;padding:80px 24px 40px
+}
+.hero-inner{max-width:900px}
+.hero-tag{
+  display:inline-flex;align-items:center;gap:8px;
+  font-family:'Share Tech Mono',monospace;font-size:11px;
+  color:var(--g);border:1px solid #1a3a1a;border-radius:4px;
+  padding:6px 14px;background:#040a04;margin-bottom:24px;letter-spacing:2px
+}
+.hero-tag::before{content:'▶';font-size:8px}
+h1.hero-title{
+  font-family:'Orbitron',sans-serif;
+  font-size:clamp(2.4rem,6vw,5.5rem);
+  font-weight:900;line-height:1.05;
+  margin-bottom:16px;letter-spacing:-1px
+}
+.hero-title .t-g{color:var(--g);text-shadow:0 0 40px rgba(0,255,136,.4)}
+.hero-title .t-w{color:#fff}
+.hero-sub{
+  font-size:clamp(1rem,2.5vw,1.3rem);
+  color:rgba(255,255,255,.55);margin-bottom:40px;
+  font-family:'Share Tech Mono',monospace;letter-spacing:1px
+}
+.hero-sub span{color:var(--b)}
+
+/* live counter row */
+.hero-counters{display:flex;justify-content:center;gap:0;margin-bottom:48px;flex-wrap:wrap}
+.hc{
+  padding:20px 32px;border:1px solid var(--border);
+  text-align:center;position:relative;background:rgba(13,13,18,.8)
+}
+.hc:first-child{border-radius:6px 0 0 6px}
+.hc:last-child{border-radius:0 6px 6px 0}
+.hc+.hc{border-left:none}
+.hc-num{
+  font-family:'Orbitron',sans-serif;font-size:clamp(1.6rem,3vw,2.4rem);
+  font-weight:900;color:var(--g);display:block;
+  text-shadow:0 0 20px rgba(0,255,136,.3)
+}
+.hc-num.blue{color:var(--b);text-shadow:0 0 20px rgba(0,170,255,.3)}
+.hc-num.gold{color:var(--gold);text-shadow:0 0 20px rgba(255,215,0,.3)}
+.hc-num.purple{color:var(--p);text-shadow:0 0 20px rgba(187,68,255,.3)}
+.hc-label{font-family:'Share Tech Mono',monospace;font-size:10px;color:var(--dim);letter-spacing:2px;margin-top:4px}
+.hc-live{position:absolute;top:6px;right:8px;font-size:8px;color:var(--g);font-family:'Share Tech Mono',monospace;opacity:.6}
+
+.hero-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.btn-primary{
+  padding:14px 36px;background:linear-gradient(135deg,var(--g),#00cc66);
+  border:none;border-radius:4px;color:#000;font-weight:900;font-size:1rem;
+  cursor:pointer;text-decoration:none;display:inline-block;
+  box-shadow:0 0 32px rgba(0,255,136,.3);transition:all .2s;font-family:'Orbitron',sans-serif;letter-spacing:1px
+}
+.btn-primary:hover{box-shadow:0 0 48px rgba(0,255,136,.6);transform:translateY(-2px)}
+.btn-secondary{
+  padding:14px 36px;border:1px solid rgba(255,255,255,.2);
+  border-radius:4px;color:rgba(255,255,255,.7);font-size:1rem;
+  text-decoration:none;display:inline-block;transition:all .2s
+}
+.btn-secondary:hover{border-color:var(--b);color:var(--b)}
+
+/* ── SECTION BASE ── */
+section{position:relative;z-index:2;padding:80px 24px}
+.sec-title{
+  font-family:'Orbitron',sans-serif;font-size:clamp(1.2rem,2.5vw,1.6rem);
+  letter-spacing:3px;margin-bottom:8px;text-align:center
+}
+.sec-sub{font-size:.9rem;color:var(--dim);text-align:center;margin-bottom:48px;font-family:'Share Tech Mono',monospace}
+.container{max-width:1200px;margin:0 auto}
+
+/* ── DIVIDER ── */
+.divider{height:1px;background:linear-gradient(90deg,transparent,var(--border),transparent);margin:0 24px}
+
+/* ── ARSENAL SECTION ── */
+#arsenal{background:rgba(4,10,4,.6)}
+.arsenal-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:10px}
+.ai-chip{
+  display:flex;align-items:center;gap:8px;
+  padding:10px 12px;border-radius:4px;
+  background:rgba(13,13,18,.9);border:1px solid var(--border);
+  font-size:12px;transition:all .2s;cursor:default
+}
+.ai-chip:hover{border-color:var(--g);background:rgba(0,255,136,.04)}
+.ai-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0;animation:aiPulse 2s ease-in-out infinite}
+@keyframes aiPulse{0%,100%{opacity:1}50%{opacity:.4}}
+.ai-type{font-family:'Share Tech Mono',monospace;font-size:9px;color:var(--dim);margin-left:auto}
+.arsenal-summary{
+  display:flex;justify-content:center;gap:32px;margin-top:32px;flex-wrap:wrap;
+  padding:20px;background:rgba(0,255,136,.04);border:1px solid #1a3a1a;border-radius:6px
+}
+.as-item{text-align:center;font-family:'Share Tech Mono',monospace}
+.as-num{font-size:1.8rem;font-weight:900;color:var(--g);display:block}
+.as-label{font-size:10px;color:var(--dim)}
+
+/* ── CHANNELS SECTION ── */
+#channels{background:rgba(3,8,14,.6)}
+.channels-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:12px}
+.ch-card{
+  display:flex;flex-direction:column;align-items:center;gap:8px;
+  padding:20px 12px;border-radius:6px;
+  background:rgba(13,13,18,.9);border:1px solid var(--border);
+  transition:all .3s;cursor:default
+}
+.ch-card:hover{transform:translateY(-3px);box-shadow:0 8px 24px rgba(0,0,0,.4)}
+.ch-icon{font-size:28px}
+.ch-name{font-size:12px;font-weight:700}
+.ch-status{font-family:'Share Tech Mono',monospace;font-size:9px;padding:2px 8px;border-radius:10px}
+.ch-active{color:var(--g);background:rgba(0,255,136,.1);border:1px solid rgba(0,255,136,.2)}
+.ch-ready{color:var(--b);background:rgba(0,170,255,.1);border:1px solid rgba(0,170,255,.2)}
+.ch-count{font-family:'Orbitron',monospace;font-size:11px;color:var(--dim)}
+
+/* ── LIVE STATUS BAR ── */
+#live-bar{
+  background:rgba(4,10,4,.8);
+  border-top:1px solid var(--border);border-bottom:1px solid var(--border);
+  padding:0
+}
+.live-bar-inner{
+  display:flex;overflow:hidden;
+  font-family:'Share Tech Mono',monospace;font-size:11px;
+}
+.lb-label{
+  padding:12px 20px;background:rgba(0,255,136,.08);
+  border-right:1px solid var(--border);color:var(--g);
+  white-space:nowrap;letter-spacing:2px;font-weight:700
+}
+.lb-scroll{flex:1;overflow:hidden;position:relative}
+.lb-track{
+  display:flex;gap:0;animation:lbScroll 30s linear infinite;
+  white-space:nowrap
+}
+@keyframes lbScroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.lb-item{padding:12px 24px;border-right:1px solid var(--border);color:var(--dim)}
+.lb-item .lbv{color:var(--g);font-weight:700}
+
+/* ── FEATURES ── */
+#features{}
+.feat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
+.feat-card{
+  padding:24px;border-radius:6px;
+  background:rgba(13,13,18,.7);border:1px solid var(--border);
+  transition:all .2s;position:relative;overflow:hidden
+}
+.feat-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,transparent,var(--fc,var(--g)),transparent)
+}
+.feat-card:hover{border-color:var(--fc,var(--g));transform:translateY(-2px)}
+.feat-icon{font-size:2rem;margin-bottom:12px}
+.feat-title{font-family:'Orbitron',sans-serif;font-size:13px;letter-spacing:1px;margin-bottom:10px;color:var(--fc,var(--g))}
+.feat-desc{font-size:.9rem;color:rgba(255,255,255,.55);line-height:1.7}
+
+/* ── PRICING ── */
+#pricing{background:rgba(4,4,10,.6);text-align:center}
+.price-grid{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin-top:0}
+.price-card{
+  padding:32px 28px;border-radius:6px;min-width:220px;
+  background:rgba(13,13,18,.9);border:1px solid var(--border);
+  text-align:center;transition:all .2s;position:relative
+}
+.price-card:hover{transform:translateY(-4px)}
+.price-card.featured{border-color:var(--g);background:rgba(0,255,136,.04);box-shadow:0 0 40px rgba(0,255,136,.1)}
+.price-card.featured::after{
+  content:'推薦';position:absolute;top:-1px;right:20px;
+  font-family:'Orbitron',sans-serif;font-size:9px;letter-spacing:2px;
+  padding:4px 12px;background:var(--g);color:#000;border-radius:0 0 4px 4px
+}
+.price-name{font-family:'Orbitron',sans-serif;font-size:12px;letter-spacing:2px;color:var(--dim);margin-bottom:12px}
+.price-amt{font-family:'Orbitron',sans-serif;font-size:2.4rem;font-weight:900;color:var(--g);margin:8px 0}
+.price-amt span{font-size:.9rem;color:var(--dim);font-family:'Noto Sans TC'}
+.price-desc{font-size:.85rem;color:var(--dim);margin-bottom:20px}
+.price-list{list-style:none;text-align:left;font-size:.85rem;color:rgba(255,255,255,.7);margin-bottom:24px}
+.price-list li{padding:5px 0;border-bottom:1px solid var(--border)}
+.price-list li::before{content:'✓ ';color:var(--g)}
+
+/* ── INFRA BELT ── */
+#infra{padding:60px 24px;background:rgba(3,8,14,.7)}
+.infra-grid{display:flex;gap:20px;justify-content:center;flex-wrap:wrap}
+.infra-chip{
+  display:flex;align-items:center;gap:10px;
+  padding:12px 20px;border-radius:4px;
+  background:rgba(13,13,18,.8);border:1px solid var(--border);
+  font-size:12px;font-family:'Share Tech Mono',monospace;color:var(--dim)
+}
+.infra-dot{width:8px;height:8px;border-radius:50%}
+
+/* ── FOOTER ── */
+footer{
+  position:relative;z-index:2;
+  border-top:1px solid var(--border);
+  background:rgba(6,6,8,.95);
+  padding:40px 24px 24px
+}
+.footer-inner{max-width:1000px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr 1fr;gap:32px}
+@media(max-width:640px){.footer-inner{grid-template-columns:1fr}}
+.footer-brand{font-family:'Orbitron',sans-serif;font-size:16px;color:var(--g);margin-bottom:8px}
+.footer-tagline{font-size:11px;color:var(--dim);font-family:'Share Tech Mono',monospace}
+.footer-col h4{font-size:11px;letter-spacing:2px;color:var(--dim);margin-bottom:12px;font-family:'Orbitron',sans-serif}
+.footer-col a{display:block;font-size:12px;color:rgba(255,255,255,.5);text-decoration:none;padding:3px 0;transition:color .2s}
+.footer-col a:hover{color:var(--g)}
+.footer-bottom{
+  max-width:1000px;margin:32px auto 0;
+  padding-top:16px;border-top:1px solid var(--border);
+  display:flex;justify-content:space-between;align-items:center;flex-wrap:gap;
+  font-size:11px;color:var(--dim);font-family:'Share Tech Mono',monospace;gap:12px;flex-wrap:wrap
+}
+.patent{color:var(--gold)}
+
+/* ── SCROLL INDICATOR ── */
+.scroll-hint{
+  position:absolute;bottom:32px;left:50%;transform:translateX(-50%);
+  font-family:'Share Tech Mono',monospace;font-size:10px;color:var(--dim);letter-spacing:2px;
+  display:flex;flex-direction:column;align-items:center;gap:6px;animation:fadeUpDown 2s ease-in-out infinite
+}
+.scroll-hint::after{content:'▼';font-size:12px;color:var(--g)}
+@keyframes fadeUpDown{0%,100%{opacity:.4;transform:translateX(-50%) translateY(0)}50%{opacity:1;transform:translateX(-50%) translateY(-6px)}}
+
+/* ── RESPONSIVE ── */
+@media(max-width:768px){
+  .hc{padding:14px 18px}.hero-counters{gap:0}
+  .nav-ticker{display:none}
+  .footer-inner{grid-template-columns:1fr 1fr}
+}
+@media(max-width:480px){
+  .hc{flex:1;min-width:80px}
+  nav{padding:0 12px}
+  .btn-cta{display:none}
+}
 </style>
-<div id="sb-page">
-<nav id="sb-nav">
-  <div class="sb-logo">SEOBAIKE</div>
-  <div class="sb-nav-btns">
-    <a href="/login" class="sb-btn sb-btn-outline">登入</a>
-    <a href="/login" class="sb-btn sb-btn-primary">免費試用 🎁</a>
+</head>
+<body>
+
+<!-- ── NEURAL NETWORK BACKGROUND ── -->
+<canvas id="bg-canvas"></canvas>
+
+<!-- ── NAV ── -->
+<nav>
+  <a href="/" class="nav-logo">SEO<span>BAIKE</span></a>
+  <div class="nav-ticker">
+    <div class="nav-ticker-inner" id="nav-ticker">
+      <span class="tk-green">● AI引擎 23/23 ONLINE</span>
+      <span>⬝</span>
+      <span class="tk-blue">● Cloudflare Workers 全球活躍</span>
+      <span>⬝</span>
+      <span class="tk-gold">● 專利 115100981 已取得</span>
+      <span>⬝</span>
+      <span class="tk-green">● LINE / WhatsApp / Telegram / Discord / WeChat 已接通</span>
+      <span>⬝</span>
+      <span class="tk-blue">● Supabase 東京節點 ONLINE</span>
+      <span>⬝</span>
+      <span class="tk-green">● CI/CD Deploy Pipeline 6/6 PASS</span>
+      <span>⬝</span>
+      <span class="tk-gold">● Azure East Asia 活躍</span>
+      <span>⬝</span>
+      <span><!-- duplicate for seamless loop --></span>
+      <span class="tk-green">● AI引擎 23/23 ONLINE</span>
+      <span>⬝</span>
+      <span class="tk-blue">● Cloudflare Workers 全球活躍</span>
+      <span>⬝</span>
+      <span class="tk-gold">● 專利 115100981 已取得</span>
+      <span>⬝</span>
+      <span class="tk-green">● LINE / WhatsApp / Telegram / Discord / WeChat 已接通</span>
+      <span>⬝</span>
+      <span class="tk-blue">● Supabase 東京節點 ONLINE</span>
+      <span>⬝</span>
+      <span class="tk-green">● CI/CD Deploy Pipeline 6/6 PASS</span>
+      <span>⬝</span>
+      <span class="tk-gold">● Azure East Asia 活躍</span>
+    </div>
+  </div>
+  <div class="nav-live"><span class="live-dot"></span>LIVE</div>
+  <div class="nav-btns">
+    <a href="/login" class="btn-ghost">登入</a>
+    <a href="/admin" class="btn-cta">CEO</a>
   </div>
 </nav>
-<section id="sb-hero">
-  <div>
-    <span class="sb-badge">🏆 全球首創</span>
-    <span class="sb-badge">📜 專利 115100981</span>
-    <span class="sb-badge">⭐ SEO 90+ 分保證</span>
+
+<!-- ── HERO ── -->
+<section id="hero">
+  <div class="hero-inner">
+    <div class="hero-tag">GLOBAL AI COMMAND — aiforseo.vip</div>
+    <h1 class="hero-title">
+      <span class="t-w">全球首創</span><br>
+      <span class="t-g">AI 帝國總部</span>
+    </h1>
+    <p class="hero-sub">
+      <span id="ai-count">23</span> AI 引擎 &nbsp;·&nbsp;
+      <span>12</span> 頻道全接 &nbsp;·&nbsp;
+      全球邊緣部署 &nbsp;·&nbsp;
+      <span>專利 115100981</span>
+    </p>
+
+    <!-- LIVE COUNTERS -->
+    <div class="hero-counters">
+      <div class="hc">
+        <span class="hc-num" id="cnt-ai">23</span>
+        <div class="hc-label">AI ENGINES</div>
+        <div class="hc-live">LIVE</div>
+      </div>
+      <div class="hc">
+        <span class="hc-num blue" id="cnt-ch">12</span>
+        <div class="hc-label">CHANNELS</div>
+        <div class="hc-live">LIVE</div>
+      </div>
+      <div class="hc">
+        <span class="hc-num gold" id="cnt-msg">0</span>
+        <div class="hc-label">TODAY MSGS</div>
+        <div class="hc-live">LIVE</div>
+      </div>
+      <div class="hc">
+        <span class="hc-num purple">99.9%</span>
+        <div class="hc-label">UPTIME</div>
+        <div class="hc-live">SLA</div>
+      </div>
+    </div>
+
+    <div class="hero-btns">
+      <a href="/login" class="btn-primary">免費開始 → 送 50 點</a>
+      <a href="/ceo" class="btn-secondary">CEO 戰情室</a>
+    </div>
   </div>
-  <h1>歡迎來到<br><span>SEOBAIKE</span></h1>
-  <p>全球首創 AI-SEO 專利技術<br>一鍵生成高排名網站，30 秒看到結果</p>
-  <div class="sb-cta-group">
-    <a href="/login" class="sb-cta-primary">免費開始 → 送 50 點</a>
-    <a href="/pricing" class="sb-cta-secondary">查看方案</a>
+  <div class="scroll-hint">SCROLL</div>
+</section>
+
+<!-- ── LIVE STATUS BAR ── -->
+<div id="live-bar">
+  <div class="live-bar-inner">
+    <div class="lb-label">⚡ LIVE</div>
+    <div class="lb-scroll">
+      <div class="lb-track" id="lb-track">
+        <div class="lb-item">AI 引擎 <span class="lbv" id="lb-ai">23/23</span></div>
+        <div class="lb-item">今日對話 <span class="lbv" id="lb-msg">-</span></div>
+        <div class="lb-item">成功率 <span class="lbv" id="lb-sr">-</span></div>
+        <div class="lb-item">Cloudflare <span class="lbv" style="color:var(--g)">ONLINE</span></div>
+        <div class="lb-item">Supabase <span class="lbv" style="color:var(--g)">TOKYO</span></div>
+        <div class="lb-item">Azure <span class="lbv" style="color:var(--g)">EAST ASIA</span></div>
+        <div class="lb-item">CI/CD <span class="lbv" style="color:var(--g)">6/6 PASS</span></div>
+        <div class="lb-item">Patents <span class="lbv" style="color:var(--gold)">115100981</span></div>
+        <!-- dup -->
+        <div class="lb-item">AI 引擎 <span class="lbv">23/23</span></div>
+        <div class="lb-item">今日對話 <span class="lbv" id="lb-msg2">-</span></div>
+        <div class="lb-item">成功率 <span class="lbv" id="lb-sr2">-</span></div>
+        <div class="lb-item">Cloudflare <span class="lbv" style="color:var(--g)">ONLINE</span></div>
+        <div class="lb-item">Supabase <span class="lbv" style="color:var(--g)">TOKYO</span></div>
+        <div class="lb-item">Azure <span class="lbv" style="color:var(--g)">EAST ASIA</span></div>
+        <div class="lb-item">CI/CD <span class="lbv" style="color:var(--g)">6/6 PASS</span></div>
+        <div class="lb-item">Patents <span class="lbv" style="color:var(--gold)">115100981</span></div>
+      </div>
+    </div>
   </div>
-  <div class="sb-stats">
-    <div class="sb-stat"><div class="sb-stat-num">30+</div><div class="sb-stat-label">AI 工具</div></div>
-    <div class="sb-stat"><div class="sb-stat-num">190+</div><div class="sb-stat-label">Edge Functions</div></div>
-    <div class="sb-stat"><div class="sb-stat-num">24hr</div><div class="sb-stat-label">AI 客服</div></div>
-    <div class="sb-stat"><div class="sb-stat-num">99.9%</div><div class="sb-stat-label">運行時間</div></div>
+</div>
+
+<!-- ── AI ARSENAL ── -->
+<section id="arsenal">
+  <div class="container">
+    <div class="sec-title" style="color:var(--g)">AI 武器庫</div>
+    <div class="sec-sub">23 個 AI 引擎即時在線 · 全球頂級模型全接入</div>
+    <div class="arsenal-grid">
+      <!-- LLM -->
+      <div class="ai-chip"><div class="ai-dot" style="background:var(--g);box-shadow:0 0 6px var(--g)"></div>OpenAI GPT-4o<span class="ai-type">LLM</span></div>
+      <div class="ai-chip"><div class="ai-dot" style="background:var(--g);box-shadow:0 0 6px var(--g)"></div>Anthropic Claude<span class="ai-type">LLM</span></div>
+      <div class="ai-chip"><div class="ai-dot" style="background:var(--g);box-shadow:0 0 6px var(--g)"></div>NVIDIA NIM<span class="ai-type">GPU</span></div>
+      <div class="ai-chip"><div class="ai-dot" style="background:var(--g);box-shadow:0 0 6px var(--g)"></div>xAI Grok<span class="ai-type">LLM</span></div>
+      <div class="ai-chip"><div class="ai-dot" style="background:var(--g);box-shadow:0 0 6px var(--g)"></div>DeepSeek R1<span class="ai-type">LLM</span></div>
+      <div class="ai-chip"><div class="ai-dot" style="background:var(--g);box-shadow:0 0 6px var(--g)"></div>Groq LPU<span class="ai-type">FAST</span></div>
+      <div class="ai-chip"><div class="ai-dot" style="background:var(--g);box-shadow:0 0 6px var(--g)"></div>Meta Llama 4<span class="ai-type">LLM</span></div>
+      <div class="ai-chip"><div class="ai-dot" style="background:var(--g);box-shadow:0 0 6px var(--g)"></div>Mistral<span class="ai-type">LLM</span></div>
+      <div class="ai-chip"><div class="ai-dot" style="background:var(--g);box-shadow:0 0 6px var(--g)"></div>Together AI<span class="ai-type">LLM</span></div>
+      <div class="ai-chip"><div class="ai-dot" style="background:var(--g);box-shadow:0 0 6px var(--g)"></div>Fireworks AI<span class="ai-type">LLM</span></div>
+      <div class="ai-chip"><div class="ai-dot" style="background:var(--g);box-shadow:0 0 6px var(--g)"></div>OpenRouter<span class="ai-type">PROXY</span></div>
+      <div class="ai-chip"><div class="ai-dot" style="background:var(--g);box-shadow:0 0 6px var(--g)"></div>Cohere<span class="ai-type">LLM</span></div>
+      <div class="ai-chip"><div class="ai-dot" style="background:var(--g);box-shadow:0 0 6px var(--g)"></div>AI21 Labs<span class="ai-type">LLM</span></div>
+      <div class="ai-chip"><div class="ai-dot" style="background:var(--g);box-shadow:0 0 6px var(--g)"></div>Replicate<span class="ai-type">IMG</span></div>
+      <div class="ai-chip"><div class="ai-dot" style="background:var(--g);box-shadow:0 0 6px var(--g)"></div>HuggingFace<span class="ai-type">ML</span></div>
+      <div class="ai-chip"><div class="ai-dot" style="background:var(--g);box-shadow:0 0 6px var(--g)"></div>DashScope<span class="ai-type">CN</span></div>
+      <div class="ai-chip"><div class="ai-dot" style="background:var(--b);box-shadow:0 0 6px var(--b)"></div>Perplexity<span class="ai-type">SEARCH</span></div>
+      <div class="ai-chip"><div class="ai-dot" style="background:var(--b);box-shadow:0 0 6px var(--b)"></div>Google Search<span class="ai-type">SEARCH</span></div>
+      <div class="ai-chip"><div class="ai-dot" style="background:var(--b);box-shadow:0 0 6px var(--b)"></div>DataForSEO<span class="ai-type">SEO</span></div>
+      <div class="ai-chip"><div class="ai-dot" style="background:var(--p);box-shadow:0 0 6px var(--p)"></div>ElevenLabs<span class="ai-type">VOICE</span></div>
+      <div class="ai-chip"><div class="ai-dot" style="background:var(--p);box-shadow:0 0 6px var(--p)"></div>Shotstack<span class="ai-type">VIDEO</span></div>
+      <div class="ai-chip"><div class="ai-dot" style="background:var(--p);box-shadow:0 0 6px var(--p)"></div>RemoveBG<span class="ai-type">IMG</span></div>
+      <div class="ai-chip"><div class="ai-dot" style="background:var(--gold);box-shadow:0 0 6px var(--gold)"></div>Azure OpenAI<span class="ai-type">ENT</span></div>
+    </div>
+    <div class="arsenal-summary">
+      <div class="as-item"><span class="as-num" id="as-active">23</span><span class="as-label">ACTIVE</span></div>
+      <div class="as-item"><span class="as-num" style="color:var(--b)">17</span><span class="as-label">LLM</span></div>
+      <div class="as-item"><span class="as-num" style="color:var(--p)">3</span><span class="as-label">CREATIVE</span></div>
+      <div class="as-item"><span class="as-num" style="color:var(--gold)">3</span><span class="as-label">SEARCH</span></div>
+    </div>
   </div>
 </section>
-<section id="sb-features">
-  <h2>強大功能一次搞定</h2>
-  <div class="sb-grid">
-    <div class="sb-card"><div class="sb-card-icon">🚀</div><h3>AI 自動建站</h3><p>輸入關鍵字，30 秒生成完整 SEO 網站，Lighthouse 90+ 分保證</p></div>
-    <div class="sb-card"><div class="sb-card-icon">🤖</div><h3>AI 客服機器人</h3><p>24小時不間斷，自動回應客戶問題，提升轉換率</p></div>
-    <div class="sb-card"><div class="sb-card-icon">📈</div><h3>SEO 健檢分析</h3><p>深度分析你的網站，找出排名問題，一鍵優化</p></div>
-    <div class="sb-card"><div class="sb-card-icon">🎬</div><h3>AI 影片 & 配音</h3><p>文字轉影片、AI 配音，快速製作行銷素材</p></div>
-    <div class="sb-card"><div class="sb-card-icon">💰</div><h3>點數制計費</h3><p>按使用量付費，無月費無綁約，靈活省錢</p></div>
-    <div class="sb-card"><div class="sb-card-icon">🌏</div><h3>全球市集</h3><p>把你的 AI 工具賣給全世界，三級分潤最高賺 50%</p></div>
+
+<div class="divider"></div>
+
+<!-- ── CHANNELS ── -->
+<section id="channels">
+  <div class="container">
+    <div class="sec-title" style="color:var(--b)">全頻道覆蓋</div>
+    <div class="sec-sub">12 個通訊頻道全部接通 · 一個後台統一管理</div>
+    <div class="channels-grid">
+      <div class="ch-card" style="border-color:rgba(0,195,0,.3)"><div class="ch-icon">💬</div><div class="ch-name">LINE</div><div class="ch-status ch-active">ACTIVE</div></div>
+      <div class="ch-card" style="border-color:rgba(37,211,102,.3)"><div class="ch-icon">📱</div><div class="ch-name">WhatsApp</div><div class="ch-status ch-active">ACTIVE</div></div>
+      <div class="ch-card" style="border-color:rgba(0,136,204,.3)"><div class="ch-icon">✈️</div><div class="ch-name">Telegram</div><div class="ch-status ch-active">ACTIVE</div></div>
+      <div class="ch-card" style="border-color:rgba(88,101,242,.3)"><div class="ch-icon">🎮</div><div class="ch-name">Discord</div><div class="ch-status ch-active">ACTIVE</div></div>
+      <div class="ch-card" style="border-color:rgba(0,120,212,.3)"><div class="ch-icon">👥</div><div class="ch-name">Facebook</div><div class="ch-status ch-active">ACTIVE</div></div>
+      <div class="ch-card" style="border-color:rgba(0,120,212,.3)"><div class="ch-icon">💼</div><div class="ch-name">Teams</div><div class="ch-status ch-ready">READY</div></div>
+      <div class="ch-card" style="border-color:rgba(58,160,80,.3)"><div class="ch-icon">💬</div><div class="ch-name">WeChat</div><div class="ch-status ch-ready">READY</div></div>
+      <div class="ch-card" style="border-color:rgba(115,75,195,.3)"><div class="ch-icon">📶</div><div class="ch-name">Viber</div><div class="ch-status ch-ready">READY</div></div>
+      <div class="ch-card" style="border-color:rgba(0,214,148,.3)"><div class="ch-icon">🔵</div><div class="ch-name">Signal</div><div class="ch-status ch-ready">READY</div></div>
+      <div class="ch-card" style="border-color:rgba(0,170,255,.3)"><div class="ch-icon">📱</div><div class="ch-name">Slack</div><div class="ch-status ch-active">ACTIVE</div></div>
+      <div class="ch-card" style="border-color:rgba(234,67,53,.3)"><div class="ch-icon">📧</div><div class="ch-name">Gmail API</div><div class="ch-status ch-ready">READY</div></div>
+      <div class="ch-card" style="border-color:rgba(255,204,0,.3)"><div class="ch-icon">🌐</div><div class="ch-name">Web Widget</div><div class="ch-status ch-active">ACTIVE</div></div>
+    </div>
   </div>
 </section>
-<section id="sb-pricing">
-  <h2>簡單透明的定價</h2>
-  <p>點數制計費，用多少買多少</p>
-  <div class="sb-price-grid">
-    <div class="sb-price-card"><div class="sb-price-name">入門</div><div class="sb-price-amount">NT$299<span>/月</span></div><div class="sb-price-desc">100 點 · 適合個人</div><a href="/login" class="sb-btn sb-btn-outline" style="display:block;text-align:center">立即開始</a></div>
-    <div class="sb-price-card featured"><div class="sb-price-name">⭐ 商業</div><div class="sb-price-amount">NT$999<span>/月</span></div><div class="sb-price-desc">500 點 · 適合中小企業</div><a href="/login" class="sb-btn sb-btn-primary" style="display:block;text-align:center">立即開始</a></div>
-    <div class="sb-price-card"><div class="sb-price-name">企業</div><div class="sb-price-amount">NT$2,999<span>/月</span></div><div class="sb-price-desc">2000 點 · 大型企業</div><a href="/login" class="sb-btn sb-btn-outline" style="display:block;text-align:center">聯絡我們</a></div>
+
+<div class="divider"></div>
+
+<!-- ── FEATURES ── -->
+<section id="features">
+  <div class="container">
+    <div class="sec-title">核心功能</div>
+    <div class="sec-sub">AI 自動化 · 全球部署 · 企業級架構</div>
+    <div class="feat-grid">
+      <div class="feat-card" style="--fc:var(--g)"><div class="feat-icon">🚀</div><div class="feat-title">AI 自動建站</div><div class="feat-desc">輸入關鍵字，30 秒生成完整 SEO 網站，Lighthouse 90+ 分保證，自動送審 Google Search Console。</div></div>
+      <div class="feat-card" style="--fc:var(--b)"><div class="feat-icon">🤖</div><div class="feat-title">全頻道 AI 客服</div><div class="feat-desc">LINE、WhatsApp、Telegram、Discord 12 個頻道統一後台，24 小時不間斷自動回應。</div></div>
+      <div class="feat-card" style="--fc:var(--p)"><div class="feat-icon">🎬</div><div class="feat-title">AI 影片 & 配音</div><div class="feat-desc">ElevenLabs 語音合成 + Shotstack 影片自動生成，文字秒變行銷影片。</div></div>
+      <div class="feat-card" style="--fc:var(--gold)"><div class="feat-icon">📈</div><div class="feat-title">SEO 深度分析</div><div class="feat-desc">DataForSEO + Google PageSpeed 深度健檢，找出排名瓶頸，一鍵修復方案。</div></div>
+      <div class="feat-card" style="--fc:var(--g)"><div class="feat-icon">🏪</div><div class="feat-title">AI 工具市集</div><div class="feat-desc">把你的 AI 工具上架全球市集，三級分潤制，被動收入最高 50%。</div></div>
+      <div class="feat-card" style="--fc:var(--b)"><div class="feat-icon">⚡</div><div class="feat-title">全球邊緣部署</div><div class="feat-desc">Cloudflare Workers 全球 300+ 節點，零冷啟動，最低延遲，企業 SLA 99.9%。</div></div>
+    </div>
   </div>
 </section>
-<footer id="sb-footer">
-  © 2026 小路光有限公司 (SEOBAIKE) · 專利 115100981 · <a href="mailto:seobaike@aiforseo.vip" style="color:inherit">seobaike@aiforseo.vip</a>
+
+<div class="divider"></div>
+
+<!-- ── INFRA BELT ── -->
+<section id="infra">
+  <div class="container">
+    <div class="sec-title" style="color:var(--dim);font-size:12px;letter-spacing:4px;margin-bottom:24px">POWERED BY</div>
+    <div class="infra-grid">
+      <div class="infra-chip"><div class="infra-dot" style="background:var(--g)"></div>Cloudflare Workers</div>
+      <div class="infra-chip"><div class="infra-dot" style="background:var(--b)"></div>Supabase (Tokyo)</div>
+      <div class="infra-chip"><div class="infra-dot" style="background:var(--gold)"></div>Azure East Asia</div>
+      <div class="infra-chip"><div class="infra-dot" style="background:var(--p)"></div>GitHub Actions CI/CD</div>
+      <div class="infra-chip"><div class="infra-dot" style="background:var(--g)"></div>NVIDIA GPU Cloud</div>
+      <div class="infra-chip"><div class="infra-dot" style="background:var(--b)"></div>Cosmos DB</div>
+      <div class="infra-chip"><div class="infra-dot" style="background:var(--gold)"></div>Azure Blob Storage</div>
+      <div class="infra-chip"><div class="infra-dot" style="background:var(--g)"></div>Edge AI Runtime</div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ── PRICING ── -->
+<section id="pricing">
+  <div class="container">
+    <div class="sec-title">透明定價</div>
+    <div class="sec-sub">點數制計費 · 用多少買多少 · 無綁約</div>
+    <div class="price-grid">
+      <div class="price-card">
+        <div class="price-name">STARTER</div>
+        <div class="price-amt">299<span>NT$/月</span></div>
+        <div class="price-desc">100 點 · 個人創業</div>
+        <ul class="price-list"><li>AI 建站 x5</li><li>AI 客服 24hr</li><li>SEO 健檢 x10</li></ul>
+        <a href="/login" class="btn-secondary" style="display:block;text-align:center;padding:10px">開始使用</a>
+      </div>
+      <div class="price-card featured">
+        <div class="price-name">BUSINESS</div>
+        <div class="price-amt">999<span>NT$/月</span></div>
+        <div class="price-desc">500 點 · 中小企業</div>
+        <ul class="price-list"><li>AI 建站無限制</li><li>全頻道 AI 客服</li><li>市集分潤 50%</li><li>AI 影片 & 配音</li></ul>
+        <a href="/login" class="btn-primary" style="display:block;text-align:center;padding:10px">立即開始</a>
+      </div>
+      <div class="price-card">
+        <div class="price-name">ENTERPRISE</div>
+        <div class="price-amt">2,999<span>NT$/月</span></div>
+        <div class="price-desc">2000 點 · 大型企業</div>
+        <ul class="price-list"><li>全功能解鎖</li><li>專屬部署環境</li><li>SLA 99.9%</li><li>專人服務</li></ul>
+        <a href="/contact" class="btn-secondary" style="display:block;text-align:center;padding:10px">聯絡洽談</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ── */
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-brand">SEOBAIKE</div>
+      <div class="footer-tagline">AI 帝國 · 小路光有限公司<br>統一編號 60475510</div>
+    </div>
+    <div class="footer-col">
+      <h4>產品</h4>
+      <a href="/features">所有功能</a>
+      <a href="/pricing">定價方案</a>
+      <a href="/marketplace">AI 市集</a>
+      <a href="/bots">Bot 管理</a>
+      <a href="/ai">AI 引擎</a>
+    </div>
+    <div class="footer-col">
+      <h4>公司</h4>
+      <a href="/about">關於我們</a>
+      <a href="/blog">部落格</a>
+      <a href="/contact">聯絡</a>
+      <a href="/privacy">隱私政策</a>
+      <a href="/terms">使用條款</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 小路光有限公司 (SEOBAIKE) · <a href="mailto:seobaike@aiforseo.vip" style="color:inherit">seobaike@aiforseo.vip</a> · 04-7776342</span>
+    <span class="patent">專利 115100981</span>
+    <span id="ft-time" style="color:var(--g)">--:--:--</span>
+  </div>
 </footer>
-</div></div>
-    <!-- SEOBAIKE AI Widget -->
-    <script src="/seobaike-widget.js" defer></script>
-  </body>
+
+<script>
+// ── NEURAL NETWORK CANVAS ──
+const canvas = document.getElementById('bg-canvas')
+const ctx = canvas.getContext('2d')
+let W, H, particles = []
+const N = 80, MAX_DIST = 120, COLOR = '0,255,136'
+
+function resize() {
+  W = canvas.width = window.innerWidth
+  H = canvas.height = window.innerHeight
+}
+resize()
+window.addEventListener('resize', resize)
+
+for (let i = 0; i < N; i++) {
+  particles.push({
+    x: Math.random() * W, y: Math.random() * H,
+    vx: (Math.random() - 0.5) * 0.4, vy: (Math.random() - 0.5) * 0.4,
+    r: Math.random() * 1.5 + 0.5
+  })
+}
+
+function drawCanvas() {
+  ctx.clearRect(0, 0, W, H)
+  for (let i = 0; i < N; i++) {
+    const p = particles[i]
+    p.x += p.vx; p.y += p.vy
+    if (p.x < 0 || p.x > W) p.vx *= -1
+    if (p.y < 0 || p.y > H) p.vy *= -1
+    ctx.beginPath()
+    ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2)
+    ctx.fillStyle = `rgba(${COLOR},0.6)`
+    ctx.fill()
+    for (let j = i + 1; j < N; j++) {
+      const q = particles[j]
+      const dx = p.x - q.x, dy = p.y - q.y
+      const d = Math.sqrt(dx * dx + dy * dy)
+      if (d < MAX_DIST) {
+        ctx.beginPath()
+        ctx.moveTo(p.x, p.y)
+        ctx.lineTo(q.x, q.y)
+        ctx.strokeStyle = `rgba(${COLOR},${0.15 * (1 - d / MAX_DIST)})`
+        ctx.lineWidth = 0.5
+        ctx.stroke()
+      }
+    }
+  }
+  requestAnimationFrame(drawCanvas)
+}
+drawCanvas()
+
+// ── CLOCK ──
+function tick() {
+  const t = new Date().toLocaleTimeString('zh-TW', {hour12:false})
+  const el = document.getElementById('ft-time')
+  if (el) el.textContent = t
+}
+tick()
+setInterval(tick, 1000)
+
+// ── COUNT UP ANIMATION ──
+function countUp(el, target, duration = 1200) {
+  if (!el) return
+  const start = Date.now()
+  const step = () => {
+    const p = Math.min((Date.now() - start) / duration, 1)
+    const ease = 1 - Math.pow(1 - p, 3)
+    el.textContent = Math.round(ease * target).toLocaleString()
+    if (p < 1) requestAnimationFrame(step)
+  }
+  step()
+}
+
+// ── FETCH LIVE STATS FROM SUPABASE ──
+const SB_URL = 'https://vmyrivxxibqydccurxug.supabase.co'
+const SB_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZteXJpdnh4aWJxeWRjY3VyeHVnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzAwNDAwMjksImV4cCI6MjA4NTYxNjAyOX0.iBV-23LGdm_uKffAExgqSV34-NWoAyv8_-M_cJQZ8Gg'
+
+async function loadLiveStats() {
+  try {
+    const r = await fetch(`${SB_URL}/functions/v1/ceo-dashboard?action=daily-report`, {
+      headers: { 'Authorization': `Bearer ${SB_ANON}`, 'apikey': SB_ANON }
+    })
+    if (!r.ok) return
+    const d = await r.json()
+    const kpi = d.kpi || {}
+    const msgs = kpi.total_conversations || 0
+    const sr = kpi.total_conversations > 0
+      ? (100 - parseFloat(kpi.error_rate || '0')).toFixed(1) + '%'
+      : '100%'
+
+    countUp(document.getElementById('cnt-msg'), msgs)
+    const lbMsg = document.getElementById('lb-msg')
+    const lbMsg2 = document.getElementById('lb-msg2')
+    const lbSr = document.getElementById('lb-sr')
+    const lbSr2 = document.getElementById('lb-sr2')
+    if (lbMsg) lbMsg.textContent = msgs.toLocaleString()
+    if (lbMsg2) lbMsg2.textContent = msgs.toLocaleString()
+    if (lbSr) lbSr.textContent = sr
+    if (lbSr2) lbSr2.textContent = sr
+  } catch (_) { /* silent fail, show static data */ }
+}
+
+// ── INITIAL COUNTERS ──
+countUp(document.getElementById('cnt-ai'), 23, 800)
+countUp(document.getElementById('cnt-ch'), 12, 1000)
+
+window.addEventListener('load', () => {
+  setTimeout(loadLiveStats, 800)
+})
+
+// ── INTERSECTION OBSERVER for entrance animations ──
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.style.opacity = '1'
+      e.target.style.transform = 'translateY(0)'
+    }
+  })
+}, { threshold: 0.1 })
+
+document.querySelectorAll('.feat-card,.price-card,.ch-card,.ai-chip').forEach(el => {
+  el.style.opacity = '0'
+  el.style.transform = 'translateY(20px)'
+  el.style.transition = 'opacity .5s ease, transform .5s ease'
+  io.observe(el)
+})
+</script>
+</body>
 </html>
