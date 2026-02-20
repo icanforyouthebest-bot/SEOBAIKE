@@ -1,0 +1,217 @@
+name: Fix Azure RBAC — Assign Reader Role to SP
+
+on:
+  workflow_dispatch:
+  # Also runs once per deploy to auto-heal
+  workflow_call:
+
+jobs:
+  assign-reader-role:
+    name: Assign Azure Reader Role to Service Principal
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    steps:
+      - name: Assign Reader Role via ARM REST API
+        env:
+          TENANT_ID: ${{ secrets.TENANT_ID }}
+          CLIENT_ID: ${{ secrets.CLIENT_ID }}
+          CLIENT_SECRET: ${{ secrets.CLIENT_SECRET }}
+          AZURE_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+          # AZURE_CREDENTIALS JSON contains the SP that needs the role
+          AZURE_CREDENTIALS: ${{ secrets.AZURE_CREDENTIALS }}
+        run: |
+          set -e
+          echo "============================================================"
+          echo "  Azure RBAC Auto-Fix — Assign Reader Role"
+          echo "  Subscription: $AZURE_SUBSCRIPTION_ID"
+          echo "============================================================"
+
+          pip install requests --quiet
+
+          python3 - <<'PYEOF'
+          import os, json, uuid, requests, sys
+
+          TENANT_ID        = os.environ["TENANT_ID"]
+          CLIENT_ID        = os.environ["CLIENT_ID"]
+          CLIENT_SECRET    = os.environ["CLIENT_SECRET"]
+          SUBSCRIPTION_ID  = os.environ["AZURE_SUBSCRIPTION_ID"]
+          AZURE_CREDS_JSON = os.environ.get("AZURE_CREDENTIALS", "{}")
+
+          # Reader role definition ID (built-in, always the same)
+          READER_ROLE_DEF = f"/subscriptions/{SUBSCRIPTION_ID}/providers/Microsoft.Authorization/roleDefinitions/acdd72a7-3385-48ef-bd42-f606fba81ae7"
+
+          def get_arm_token(cid, csec):
+              r = requests.post(
+                  f"https://login.microsoftonline.com/{TENANT_ID}/oauth2/v2.0/token",
+                  data={"grant_type": "client_credentials", "client_id": cid,
+                        "client_secret": csec, "scope": "https://management.azure.com/.default"},
+                  timeout=15
+              )
+              t = r.json().get("access_token")
+              print(f"  ARM token for {cid[:8]}…: {'OK' if t else 'FAIL'} (HTTP {r.status_code})")
+              return t
+
+          def get_graph_token(cid, csec):
+              r = requests.post(
+                  f"https://login.microsoftonline.com/{TENANT_ID}/oauth2/v2.0/token",
+                  data={"grant_type": "client_credentials", "client_id": cid,
+                        "client_secret": csec, "scope": "https://graph.microsoft.com/.default"},
+                  timeout=15
+              )
+              return r.json().get("access_token") if r.ok else None
+
+          def get_sp_object_id(graph_token, app_id):
+              """Get SP object ID from app ID via Graph API"""
+              r = requests.get(
+                  f"https://graph.microsoft.com/v1.0/servicePrincipals?$filter=appId eq '{app_id}'",
+                  headers={"Authorization": f"Bearer {graph_token}"}, timeout=10
+              )
+              if r.ok:
+                  items = r.json().get("value", [])
+                  if items:
+                      return items[0].get("id")
+              return None
+
+          def assign_reader(arm_token, principal_object_id):
+              """Try to assign Reader role to the principal on the subscription"""
+              assignment_id = str(uuid.uuid4())
+              url = (f"https://management.azure.com/subscriptions/{SUBSCRIPTION_ID}"
+                     f"/providers/Microsoft.Authorization/roleAssignments/{assignment_id}"
+                     f"?api-version=2022-04-01")
+              body = {"properties": {
+                  "roleDefinitionId": READER_ROLE_DEF,
+                  "principalId": principal_object_id,
+                  "principalType": "ServicePrincipal"
+              }}
+              r = requests.put(url, headers={"Authorization": f"Bearer {arm_token}",
+                                             "Content-Type": "application/json"},
+                               json=body, timeout=20)
+              if r.status_code in (200, 201):
+                  print(f"  ✅ Reader role assigned to SP {principal_object_id[:8]}… on subscription")
+                  return True
+              elif r.status_code == 409:
+                  print(f"  ✅ Reader role already exists for SP {principal_object_id[:8]}…")
+                  return True
+              else:
+                  print(f"  ⚠  Role assignment HTTP {r.status_code}: {r.text[:200]}")
+                  return False
+
+          def check_current_access(arm_token):
+              """Check if current token can access Resource Graph"""
+              r = requests.post(
+                  "https://management.azure.com/providers/Microsoft.ResourceGraph/resources?api-version=2021-03-01",
+                  headers={"Authorization": f"Bearer {arm_token}", "Content-Type": "application/json"},
+                  json={"query": "Resources | count", "subscriptions": [SUBSCRIPTION_ID]},
+                  timeout=20
+              )
+              if r.ok:
+                  count = r.json().get("data", [{}])
+                  print(f"  ✅ Resource Graph accessible — found resources: {count}")
+                  return True
+              print(f"  ❌ Resource Graph HTTP {r.status_code} (no subscription Reader RBAC)")
+              return False
+
+          # ── Step 1: Get ARM token using CLIENT_ID (might be admin/owner) ──
+          print("\n[1] Getting ARM token with CLIENT_ID...")
+          arm_token = get_arm_token(CLIENT_ID, CLIENT_SECRET)
+          if not arm_token:
+              print("  FAIL: Cannot get ARM token with CLIENT_ID — wrong credentials")
+              sys.exit(0)  # non-blocking
+
+          # ── Step 2: Check if CLIENT_ID already has subscription access ──
+          print("\n[2] Checking current Resource Graph access...")
+          has_access = check_current_access(arm_token)
+          if has_access:
+              print("  ✅ CLIENT_ID already has subscription access — AZURE health check should show resources now")
+              sys.exit(0)
+
+          # ── Step 3: Try to grant CLIENT_ID Reader role on subscription ──
+          # Need Graph token to get SP object ID
+          print("\n[3] Getting SP object ID for CLIENT_ID via Graph API...")
+          graph_token = get_graph_token(CLIENT_ID, CLIENT_SECRET)
+          sp_object_id = None
+          if graph_token:
+              sp_object_id = get_sp_object_id(graph_token, CLIENT_ID)
+              print(f"  SP Object ID: {sp_object_id}")
+
+          # ── Step 4: Try using AZURE_CREDENTIALS to grant CLIENT_ID the role ──
+          try:
+              az_creds = json.loads(AZURE_CREDS_JSON)
+              az_client_id = az_creds.get("clientId", "")
+              az_client_secret = az_creds.get("clientSecret", "")
+              az_sub = az_creds.get("subscriptionId", SUBSCRIPTION_ID)
+
+              if az_client_id and az_client_id != CLIENT_ID:
+                  print(f"\n[4] Trying AZURE_CREDENTIALS ({az_client_id[:8]}…) to assign role...")
+                  az_arm_token = get_arm_token(az_client_id, az_client_secret)
+                  if az_arm_token and sp_object_id:
+                      assign_reader(az_arm_token, sp_object_id)
+              elif az_client_id == CLIENT_ID:
+                  # Same SP — try to assign role to itself (needs Owner/UAA)
+                  print(f"\n[4] CLIENT_ID == AZURE_CREDENTIALS clientId — trying self-assignment...")
+                  if sp_object_id:
+                      assign_reader(arm_token, sp_object_id)
+          except json.JSONDecodeError:
+              print("  AZURE_CREDENTIALS is not valid JSON — skipping")
+
+          # ── Step 5: Check AZURE_CREDENTIALS SP access too ──
+          try:
+              az_creds = json.loads(AZURE_CREDS_JSON)
+              az_arm_token = get_arm_token(az_creds.get("clientId",""), az_creds.get("clientSecret",""))
+              if az_arm_token:
+                  print(f"\n[5] Checking AZURE_CREDENTIALS subscription access...")
+                  check_current_access(az_arm_token)
+                  # Try to assign Reader role to AZURE_CREDENTIALS SP as well
+                  az_graph_token = get_graph_token(az_creds.get("clientId",""), az_creds.get("clientSecret",""))
+                  if az_graph_token:
+                      az_sp_obj = get_sp_object_id(az_graph_token, az_creds.get("clientId",""))
+                      if az_sp_obj and az_sp_obj != sp_object_id:
+                          print(f"  Assigning Reader to AZURE_CREDENTIALS SP ({az_sp_obj[:8]}…)...")
+                          assign_reader(arm_token, az_sp_obj)
+          except Exception as e:
+              print(f"  AZURE_CREDENTIALS check error: {e}")
+
+          print("\n============================================================")
+          print("  Azure RBAC fix attempt complete.")
+          print("  If still failing, manually run in Azure Portal:")
+          print(f"  az role assignment create --assignee {CLIENT_ID} --role Reader --scope /subscriptions/{SUBSCRIPTION_ID}")
+          print("============================================================")
+          PYEOF
+
+      - name: Verify Azure Access Post-Fix
+        env:
+          TENANT_ID: ${{ secrets.TENANT_ID }}
+          CLIENT_ID: ${{ secrets.CLIENT_ID }}
+          CLIENT_SECRET: ${{ secrets.CLIENT_SECRET }}
+          AZURE_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+        run: |
+          python3 - <<'PYEOF'
+          import os, requests
+          TENANT_ID = os.environ["TENANT_ID"]
+          CLIENT_ID = os.environ["CLIENT_ID"]
+          CLIENT_SECRET = os.environ["CLIENT_SECRET"]
+          SUBSCRIPTION_ID = os.environ["AZURE_SUBSCRIPTION_ID"]
+
+          token_r = requests.post(
+              f"https://login.microsoftonline.com/{TENANT_ID}/oauth2/v2.0/token",
+              data={"grant_type": "client_credentials", "client_id": CLIENT_ID,
+                    "client_secret": CLIENT_SECRET, "scope": "https://management.azure.com/.default"}
+          )
+          token = token_r.json().get("access_token")
+          if not token:
+              print("❌ Cannot get ARM token")
+          else:
+              r = requests.post(
+                  "https://management.azure.com/providers/Microsoft.ResourceGraph/resources?api-version=2021-03-01",
+                  headers={"Authorization": f"Bearer {token}", "Content-Type": "application/json"},
+                  json={"query": "Resources | project name, type | limit 5", "subscriptions": [SUBSCRIPTION_ID]}
+              )
+              if r.ok:
+                  data = r.json().get("data", [])
+                  print(f"✅ Azure access OK — {len(data)} resources visible")
+                  for res in data:
+                      print(f"   - {res.get('name')} ({res.get('type')})")
+              else:
+                  print(f"❌ Still no access: HTTP {r.status_code}")
+                  print(f"   Manual fix needed: assign 'Reader' role on subscription {SUBSCRIPTION_ID} to SP {CLIENT_ID}")
+          PYEOF

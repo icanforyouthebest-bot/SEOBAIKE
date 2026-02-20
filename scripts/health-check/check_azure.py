@@ -38,10 +38,25 @@ def check_azure() -> dict:
             "https://management.azure.com/providers/Microsoft.ResourceGraph/resources?api-version=2021-03-01",
             headers=headers,
             json={"query": "Resources | project name, type, resourceGroup, location | limit 100",
-                  "subscriptions": [SUBSCRIPTION_ID]}
+                  "subscriptions": [SUBSCRIPTION_ID]},
+            timeout=20
         )
         if r.ok:
             result["resources"] = r.json().get("data", [])
+            print(f"  [Azure] Resource Graph OK — {len(result['resources'])} resources found")
+        elif r.status_code == 403:
+            result["risks"].append({
+                "id": "AZ-001", "level": "high",
+                "desc": f"Azure SP ({CLIENT_ID[:8]}…) lacks subscription Reader role — Resource Graph 403. "
+                        f"Fix: assign 'Reader' role to the SP on subscription {SUBSCRIPTION_ID}"
+            })
+            result["status"] = "rbac_missing"
+            print(f"  [Azure] Resource Graph 403 — SP has no subscription RBAC role! "
+                  f"Run: az role assignment create --assignee {CLIENT_ID} --role Reader --scope /subscriptions/{SUBSCRIPTION_ID}")
+        else:
+            result["risks"].append({"id": "AZ-001", "level": "medium",
+                                    "desc": f"Resource Graph HTTP {r.status_code}: {r.text[:120]}"})
+            print(f"  [Azure] Resource Graph HTTP {r.status_code}: {r.text[:80]}")
     except Exception as e:
         result["risks"].append({"id": "AZ-001", "level": "low", "desc": f"Resource Graph error: {e}"})
 

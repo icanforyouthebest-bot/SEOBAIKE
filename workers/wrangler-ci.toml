@@ -1,0 +1,28 @@
+name = "seobaike-remote-control"
+main = "src/index.ts"
+compatibility_date = "2024-01-01"
+workers_dev = true
+
+# CI deployment config — KV binding removed.
+# rate-limiter.ts already handles `kv: KVNamespace | undefined` gracefully:
+#   if (!kv || cooldownSeconds <= 0) return { allowed: true }
+# So removing KV here causes rate limiting to silently disable (allow all),
+# which is acceptable for CI/test deploys. Production uses wrangler.toml with KV.
+
+# Cloudflare Workers AI (免費、內建)
+[ai]
+binding = "AI"
+
+# Environment variables (set via `wrangler secret put`)
+# SUPABASE_URL
+# SUPABASE_SERVICE_ROLE_KEY
+# LINE_CHANNEL_SECRET
+# LINE_CHANNEL_ACCESS_TOKEN
+# TELEGRAM_BOT_TOKEN
+# TELEGRAM_SECRET_TOKEN
+# WHATSAPP_VERIFY_TOKEN
+# WHATSAPP_ACCESS_TOKEN
+# WHATSAPP_PHONE_NUMBER_ID
+# MESSENGER_VERIFY_TOKEN
+# MESSENGER_APP_SECRET
+# MESSENGER_PAGE_ACCESS_TOKEN

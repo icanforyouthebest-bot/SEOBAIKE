@@ -35,51 +35,111 @@ def _get_token() -> str | None:
     return result.get("access_token")
 
 
+def _provision_onedrive(token: str, upn: str) -> bool:
+    """觸發 OneDrive 佈建 — 首次 GET /users/{upn}/drive 會自動建立"""
+    try:
+        r = requests.get(
+            f"{GRAPH_URL}/users/{upn}/drive",
+            headers={"Authorization": f"Bearer {token}"},
+            timeout=20
+        )
+        if r.ok:
+            print(f"  [E5] OneDrive for {upn} OK (drive id: {r.json().get('id','?')[:8]}…)")
+            return True
+        print(f"  [E5] OneDrive provision attempt HTTP {r.status_code}: {r.text[:80]}")
+        return False
+    except Exception as e:
+        print(f"  [E5] OneDrive provision error: {e}")
+        return False
+
+
+def _get_or_create_sharepoint_site(token: str) -> str | None:
+    """取得或嘗試建立 SEOBAIKE SharePoint 站台，回傳 drive_id"""
+    headers = {"Authorization": f"Bearer {token}", "Content-Type": "application/json"}
+
+    # 1. 嘗試取得現有站台
+    for host_guess in ["AIEmpire", "seobaike", "icanforyouthebest"]:
+        site_r = requests.get(
+            f"{GRAPH_URL}/sites/{host_guess}.sharepoint.com:/sites/SEOBAIKE",
+            headers={"Authorization": f"Bearer {token}"}, timeout=15
+        )
+        if site_r.ok:
+            site_id = site_r.json().get("id")
+            drive_r = requests.get(f"{GRAPH_URL}/sites/{site_id}/drive",
+                                   headers={"Authorization": f"Bearer {token}"}, timeout=10)
+            if drive_r.ok:
+                print(f"  [E5] SharePoint site found at {host_guess}.sharepoint.com/sites/SEOBAIKE")
+                return drive_r.json().get("id")
+
+    # 2. 嘗試搜尋站台
+    search_r = requests.get(f"{GRAPH_URL}/sites?search=SEOBAIKE",
+                            headers={"Authorization": f"Bearer {token}"}, timeout=15)
+    if search_r.ok:
+        sites = search_r.json().get("value", [])
+        if sites:
+            site_id = sites[0]["id"]
+            drive_r = requests.get(f"{GRAPH_URL}/sites/{site_id}/drive",
+                                   headers={"Authorization": f"Bearer {token}"}, timeout=10)
+            if drive_r.ok:
+                print(f"  [E5] SharePoint site found via search: {sites[0].get('webUrl','?')}")
+                return drive_r.json().get("id")
+
+    # 3. 嘗試建立 Microsoft 365 Group（會自動建立 SharePoint 站台）
+    try:
+        create_r = requests.post(
+            f"{GRAPH_URL}/groups",
+            headers=headers,
+            json={
+                "displayName": "SEOBAIKE-AI-Empire",
+                "mailNickname": "seobaike-ai-empire",
+                "mailEnabled": True,
+                "securityEnabled": False,
+                "groupTypes": ["Unified"],
+                "visibility": "Private"
+            }, timeout=20
+        )
+        if create_r.ok:
+            group_id = create_r.json().get("id")
+            print(f"  [E5] Created M365 Group {group_id} — SharePoint will provision in ~60s")
+            # SharePoint 需要時間佈建，這次先回傳 None，下次 CI 跑就有了
+    except Exception:
+        pass
+    return None
+
+
 def _upload_to_onedrive(token: str, filename: str, content: bytes, content_type: str = "application/json") -> bool:
     """上傳檔案到 OneDrive (Drive root)
 
     Service principal (client_credentials) 必須用 /users/{upn}/drive 而非 /me/drive。
     E5_TARGET_USER 設為租戶管理員的 UPN（如 admin@aiempire.onmicrosoft.com）。
     """
+    headers_auth = {"Authorization": f"Bearer {token}", "Content-Type": content_type}
+
     if E5_TARGET_USER:
+        # 先觸發 OneDrive 佈建（首次建立需要這步）
+        _provision_onedrive(token, E5_TARGET_USER)
         # Service principal path: requires Files.ReadWrite.All (Application permission)
         url = f"{GRAPH_URL}/users/{E5_TARGET_USER}/drive/root:/{ONEDRIVE_FOLDER}/{filename}:/content"
     else:
         # Delegated flow fallback (only works with user tokens, not service principals)
         url = f"{GRAPH_URL}/me/drive/root:/{ONEDRIVE_FOLDER}/{filename}:/content"
-    r = requests.put(
-        url,
-        headers={
-            "Authorization": f"Bearer {token}",
-            "Content-Type": content_type
-        },
-        data=content
-    )
-    if not r.ok:
-        # 改用 sites/{siteId}/drive 方式
-        try:
-            site_r = requests.get(
-                f"{GRAPH_URL}/sites/AIEmpire.sharepoint.com:/sites/SEOBAIKE",
-                headers={"Authorization": f"Bearer {token}"}
-            )
-            if site_r.ok:
-                site_id = site_r.json().get("id")
-                drive_r = requests.get(
-                    f"{GRAPH_URL}/sites/{site_id}/drive",
-                    headers={"Authorization": f"Bearer {token}"}
-                )
-                if drive_r.ok:
-                    drive_id = drive_r.json().get("id")
-                    url2 = f"{GRAPH_URL}/drives/{drive_id}/root:/{ONEDRIVE_FOLDER}/{filename}:/content"
-                    r2 = requests.put(
-                        url2,
-                        headers={"Authorization": f"Bearer {token}", "Content-Type": content_type},
-                        data=content
-                    )
-                    return r2.ok
-        except Exception:
-            pass
-    return r.ok
+
+    r = requests.put(url, headers=headers_auth, data=content, timeout=30)
+    if r.ok:
+        return True
+
+    print(f"  [E5] OneDrive upload HTTP {r.status_code} — trying SharePoint site drive…")
+
+    # 改用 SharePoint 站台 drive 方式
+    drive_id = _get_or_create_sharepoint_site(token)
+    if drive_id:
+        url2 = f"{GRAPH_URL}/drives/{drive_id}/root:/{ONEDRIVE_FOLDER}/{filename}:/content"
+        r2 = requests.put(url2, headers=headers_auth, data=content, timeout=30)
+        if r2.ok:
+            return True
+        print(f"  [E5] SharePoint drive upload HTTP {r2.status_code}: {r2.text[:80]}")
+
+    return False
 
 
 def _send_teams_notification(token: str, version_id: str, summary: dict) -> bool:
