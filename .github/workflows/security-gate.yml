@@ -172,14 +172,8 @@ jobs:
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
         run: |
           cd workers
-          npm ci
-          echo "=== wrangler deploy output ==="
-          npx wrangler deploy 2>&1 | tee /tmp/wrangler_output.txt || {
-            echo "=== WRANGLER FAIL (non-blocking) ==="
-            cat /tmp/wrangler_output.txt
-            exit 0
-          }
-          echo "=== wrangler deploy SUCCESS ==="
+          npm ci --legacy-peer-deps
+          npx wrangler@4 deploy --config wrangler.toml 2>&1 || echo "Worker deploy failed (non-blocking)"
 
       - name: Post-deploy compliance verification
         env:

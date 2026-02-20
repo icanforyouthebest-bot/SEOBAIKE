@@ -22,7 +22,7 @@ jobs:
 
       - name: Install Worker deps
         working-directory: workers
-        run: npm ci
+        run: npm ci --legacy-peer-deps
 
       - name: Deploy Worker (wrangler)
         continue-on-error: true
