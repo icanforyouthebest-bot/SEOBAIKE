@@ -4,7 +4,7 @@ Cloudflare OAuth Token Auto-Refresh for CI
 Refreshes CLOUDFLARE_OAUTH_REFRESH and updates GitHub secret.
 Writes new access token to GITHUB_ENV for wrangler deploy.
 """
-import os, json, base64, urllib.request, ssl, sys
+import os, json, base64, urllib.request, urllib.parse, ssl, sys
 
 REFRESH = os.environ.get('CLOUDFLARE_OAUTH_REFRESH', '')
 PAT = os.environ.get('REPO_PAT', '')
@@ -19,12 +19,6 @@ ctx = ssl.create_default_context()
 
 # 1. Refresh CF OAuth token
 print('Refreshing Cloudflare OAuth token...')
-data = (f'grant_type=refresh_token'
-        f'&refresh_token={urllib.parse.quote(REFRESH)}'
-        f'&client_id=54d11594-84e4-41aa-b438-e81b8fa78ee7'
-        f'&client_secret=')
-
-import urllib.parse
 data = urllib.parse.urlencode({
     'grant_type': 'refresh_token',
     'refresh_token': REFRESH,
