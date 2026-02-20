@@ -1,0 +1,19 @@
+{
+  "version_id": "2026-02-20-04-06",
+  "timestamp": "2026-02-20T04:06:46.421138",
+  "dry_run": false,
+  "total_risks": 1,
+  "repair_log": [],
+  "tracker": [
+    {
+      "issue_id": "GH-001",
+      "desc": "Repo 為 Public（原始碼公開）",
+      "fix_command": "manual_review_required",
+      "status": "pending",
+      "difficulty": "high",
+      "note": "",
+      "updated_at": "2026-02-20T04:06:46.420842",
+      "found_at": "2026-02-20T04:06:46.420842"
+    }
+  ]
+}
